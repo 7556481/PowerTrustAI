@@ -1,5 +1,15 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-05 监督审阅91接收与新增候选质量检查（最新）
+
+最终交付为quality-supplement-v3.zip及expansion-quality-dataset-v1.json：独立建议/主任务门控实际落地，原48 task哈希不变，prior_supervision保存。import-pending-v2关闭hold/辅助主训练eligibility，amended-tasks-v2六个新任务仍pending且不继承旧备注；早期包/视图保留。最终检查日志offline-tests-release.txt，具体测试/提交/远端与监督确认范围见本机verification。
+
+扩库da4288b已普通推送并远端回查后开始此任务。用户提供Downloads/PowerTrustAI-support-review-91-v1.zip，声明用户监督审阅；读report/analysis并核对原包4599438d…SHA、91ID/task哈希/依据作用域，33优先/29辅助/29hold原分流保留。附件自身仍pending/confirmed_count0；报告监督与具体样本标签确认分开，已就33标签或仅分流请求澄清，当前未整包确认；最终确认事件见本机verification。33优先28事实＋5原引用，辅助按类型单列，hold不训练，不虚构缺失原proposal/完整输入/执行账本。
+
+新增48逐项独立依据检查36优先/1辅助/11hold，标签仍pending；不按配方判真假。辅助设备省略与in-service直接冲突的建议改为contradicted；MW/MVA门槛定义不足、三设备目标缺输入、工具要求冒充执行状态等先hold。另建6新task/ID/哈希明确条文对象或补Appendix D实际上下文，同原家族/分区，清除旧标签/观察/预测；原48及旧91任务/ZIP/基线保持。原5有效预测仅原91可用，新6为0，不调用API。
+
+evaluation/support_review_quality.py为薄离线导入/选择确认/修订/预测作用域函数，公开tests/test_support_review_quality.py新增8回归。真实失败：首次夹具缺group_id导致1错误；首次导入将所有告警当阻断错误拒绝7个有效不足候选，已区分坏任务与不足原因告警，不靠跳过测试。私有data/runtime_local/support-review-quality-v1/含三个分流、48质量MD/JSON、amended-tasks-v1/v2、amended-review、hold修复需求、33确认模板、quality-supplement-v2.zip、prediction-scope-check、reading-notes/verification。v1/v2六任务相同哈希，只明示withheld监督元数据，不改冻结task。原用户附件不改，最终测试/提交/普通推送与确认范围以本机验证为准。不训练、不重跑模型、不改生产政策/排名、PDF或历史结果；长期推送偏好继续。
+
 ## 2026-10-04 知识库与支持判断样本扩充 v1（最新）
 
 完成检查跨至2026-10-05：最终511项离线回归OK（65.784秒，0跳过），新增9项公开synthetic_fixture；48原文逐字回查/parent分区通过，最终适配重建任务哈希不变。四封面另核对出版/版本元数据，预留文档仅查封面，没有训练候选生成。新ZIP 69,256字节；最终提交/普通推送及远端回查保存本机verification.json。

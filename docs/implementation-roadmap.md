@@ -1,5 +1,7 @@
 # 后续实施清单与实际接入点
 
+2026-10-05更新：91用户监督审阅已接收/校验33优先、29辅助、29hold，具体标签确认必须逐ID明确selection；[质量检查](support-review-quality-v1.md)已落实到48扩充候选，并另建6新任务。下一步是监督确认优先项/新任务、补hold所缺原输入/正确对象/工具或执行账本；不能机械翻转变体标签、用父任务预测评修订任务或把辅助题混入支持训练。未开始训练，原基线不重跑。
+
 2026-10-04最新：[知识/样本扩充v1](knowledge-support-expansion-v1.md)已经实际建立新开发/预留知识快照与48新pending候选，旧91种子及失败基线不动。接入点：evaluation/knowledge_support_expansion的来源锚定→support_dataset的复核/监督合并→support_baseline.training_export。下一步是用户返回两个复核包的监督结果、核对许可、补中国官方全文/设备资料、为预留文档独立构造冻结评测；不能把当前139pending或同资料预分当训练金标准。规划数百条已复核样本但不以数量保证质量。本轮未训练、未重跑旧基线，未来训练不使用预留文档/家族调参。
 
 2026-10-04最新：[证据支持判断数据准备v1](support-judgment-dataset-v1.md)已实现evaluation/support_dataset.py、support_baseline.py的提取、冻结校验、家族预分、AI辅助复核、未微调基线、离线指标及仅确认监督出口。91项全pending；一次基线2请求后结构失败停止，5有效部分预测，不自动重跑。下一阶段接入点是review-labels.json→apply_reviews→training_export的监督JSONL（messages/group_id/split/supervision/origins），保留ResponseDiagnostics与RunStore反馈源。先确认标签、许可、独立家族/跨文档评测和冻结训练配置，再训练支持判断组件；本轮未安装训练框架、训练或替换schema13审核器，不能把模型自评当金标准。此前“尚无数据流水线”仅是当时状态。

@@ -1,5 +1,14 @@
 # 文档索引
 
+## 2026-10-05 91监督审阅接收与新增质量检查
+
+最终本机入口：quality-supplement-v3.zip、expansion-quality-dataset-v1.json及import-pending-v2；hold/辅助实际从主任务eligibility排除，48原task保持、6修订仍pending。旧补充版本留存。
+
+- [选择性监督、实际48项质量检查及新任务身份](support-review-quality-v1.md)：91分流33/29/29，新增48为36/1/11，另建6pending任务；不整包确认或沿parent搬旧预测。
+- evaluation/support_review_quality.py；公开tests/test_support_review_quality.py（synthetic_fixture）。运行仅离线，不改生产协议。
+- 忽略data/runtime_local/support-review-quality-v1/：import-pending-v1三个分流、源审阅报告、expansion-quality-review-48.md/json、amended-tasks-v1/v2及review、priority-confirmation-template-33、hold-repair-requirements-29、quality-supplement-v2.zip、prediction-scope-check、reading-notes.md、verification.json及测试。附件原pending字段与用户当前监督声明分别保留。
+- 来源PDF/私有任务/标签不公开，最终r1手册不改。确认范围和Git/远端证据以本机verification为准。
+
 ## 2026-10-04 知识库与支持判断样本扩充 v1
 
 - [实际官方来源/覆盖缺口、入库快照、pending样本与隔离](knowledge-support-expansion-v1.md)：新4PDF（3开发＋1预留）、48新候选/16家族；不覆盖旧91或重跑基线。
