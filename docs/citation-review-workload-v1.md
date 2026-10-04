@@ -1,5 +1,19 @@
 # 引用审核工作量边界 v1
 
+## 2026-10-04 schema13修正后接线回归（最新验证范围）
+
+冻结代码fb235746a734edc94bd60a93988db15db473e884，经HTTP API原样复用前批问题、回答、两项引用及知识，唯一新run `b4ede2ab53f54ec396f6083e6113aa7c`。输入SHA、配置与提示版本一致，新目录/运行库；旧31459a失败保留。本节接续下文“修后未验证”的历史状态，不改写前批结果。
+
+预期初审提取/独立事实/原引用组/领域各1请求。自然一次Revision后，实际提取2、独立事实2、原引用组2、领域2、Revision初始1+纠正1，共10。初次Revision没有实际修改，被business_revision_needs_an_actual_modification拒绝；既有一次纠正有效，再重提取/双审完成。按消息用途与响应逐项核验，不以总请求数代替完成证据。
+
+独立消息73077/131623字符均实际发出且有效返回，超过原引用64000容量；原引用组10824/10593字符。v1两项绑定各自候选范围有效、均supported；v2自然合成1项、显式绑定2条Evidence，也supported，未跨项借用。Evidence回查一致、重启结果一致且10→10无重发；旧/新各自存储记录保留。
+
+最终独立事实、原引用、领域均执行完成，execution_issues为空、required_stages_complete=true；all_required_checks_assessed=false、review_required。v2独立事实6 supported/2 not_assessable：索引元数据来源未经正文确认、复核建议不是可核实事实。领域缺engineering_context、完整单位检查及实际工程分析；无仿真。这些是业务无法评估/前提缺失，不是容量或结构失败，不宣称语义普遍正确。
+
+输入129505/输出5756/总135261token，cache hit21248/miss108257；HTTP全程51.830秒，适配器2026-10-02价目估算USD0.019755894–0.039511788，非账单、未本轮重查价格。无运行代码/政策/检索变化，无浏览器交互/引用编辑器或PDF重生成，不重跑历史或离线测试，444项为既有证据。8766专用服务已停止。
+
+材料：data/runtime_local/citation-review-workload-v1/schema13-final/reading-notes-final.md、verification-final.json及冻结计划/API结果/trace/逐请求响应SHA/Evidence回查/重启记录。仅相关非敏感文档独立本地提交，不推送、不启动新实验。
+
 更新：2026-10-04。真实服务显式装配schema13 / evidence-verification-v9.5-bounded-citation-groups；schema12/v9.4保留，历史结果不迁移。继续使用原Harness、BM25、固定知识、模型、支持要求和有限修订政策。
 
 ## 诊断与实际调用

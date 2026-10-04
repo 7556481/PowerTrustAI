@@ -188,3 +188,14 @@ origin按授权添加指定地址。只读Git HTTPS连续连接重置，匿名cu
 离线与真实证据、失败日志、冻结源码ZIP、请求/响应、Evidence回查、版本/用量和本地提交记录在data/runtime_local/citation-review-workload-v1/。最终测试数量以verification.json及offline-tests-delivery.txt为准。早期439项1失败、API增强输入名单遗漏、测试字段/响应容量、模块路径与GBK问题均保留，不美化真实容量失败。高级引用输入经HTTP验证，本轮未做浏览器交互检查；旧Web结果结构兼容，中文执行容量/预算解释已增加。手册仅Markdown状态补记，PDF不改。本轮服务8766已停止，原服务/旧结果不操作。
 
 提交前核对明确源码、测试与非敏感文档清单，排除data/凭据/数据库/模型/私有归档；独立本地提交哈希见本机verification.json，不改写前两个提交、不推送。本轮结束不启动新实验；语义、工程和服务端幂等限制仍保留。
+
+
+## 2026-10-04 schema13最终代码真实接线回归（最新验证范围）
+
+冻结fb235746a734edc94bd60a93988db15db473e884，工作区初始干净，复用前批完整冻结输入、问题、两引用与知识，配置/提示版本一致。新run b4ede2ab53f54ec396f6083e6113aa7c，新目录/库data/runtime_local/citation-review-workload-v1/schema13-final；旧31459a失败与旧库/归档SHA保留。运行代码不修改，不合并新旧批次。
+
+预期初审提取/独立事实/引用组/领域各1；自然一次Revision后实际各2，加Revision初始1+纠正1，总10。call5无实际修改，合同business_revision_needs_an_actual_modification拒绝，call6一次纠正有效；随后重提取/双审。独立消息73077/131623字符实际发出有效返回，原引用组10824/10593，容量只限制原引用。v1两绑定各自候选ID有效且supported；v2合并1绑定含2Evidence、supported，逐项范围有效。
+
+最终独立事实、原引用检查、领域审核均执行完成，无execution_issues，required_stages_complete=true；检查未全评估、review_required。v2事实6 supported/2 not_assessable（元数据来源未核实、建议不是事实）；领域缺engineering_context、完整单位检查、已执行工程分析，未仿真。不得把业务前提缺失称作容量/结构失败，也不宣称工程认证。结果、部分发现、Evidence回查和重启相等，10→10无重发，旧/新记录分别存在。
+
+129505输入/5756输出/135261总token，cache hit21248/miss108257，HTTP全程51.830秒；适配器2026-10-02快照估算USD0.019755894–0.039511788，非账单。冻结原始请求/响应、阶段统计、SHA、用量及提交记录见schema13-final/verification-final.json，简明结论reading-notes-final.md。原运行说明新增最新验证范围，不抹去旧失败。无功能/政策/检索/运行代码变化，不扩手册或重生成PDF；本轮未重跑离线/历史实验、未做浏览器交互，444项为之前证据。8766服务已停止；本轮仅明确文档清单独立本地提交，不推送，不启动下一实验。

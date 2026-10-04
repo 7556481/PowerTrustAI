@@ -169,3 +169,11 @@
 - frozen-plan.json、frozen-runtime-source.zip、api-result.json、api-trace.json、real-summary.json、raw-archive-verification.json、evidence-roundtrip.json、restart-verification.json：唯一真实2引用/1组/3调用；执行未完整的真实失败保留，修后未重跑。
 - offline-tests*.txt、targeted*.txt、api-debug.txt：早期失败、schema13输入接线与容量范围修复、最终回归；不以测试数量代替语义正确。
 - 用户手动推送后fetch成功，origin/master核实526bdee；本轮新提交仅本地，不覆盖历史网络记录。手册r1 Markdown只补状态，不重生成PDF。
+
+
+### 2026-10-04 schema13最终接线回归
+
+- citation-review-workload-v1.md最新小节：fb235746真实初审→自然一次Revision→重提取/双审；三审核阶段完成，业务未全部可评估。
+- data/runtime_local/citation-review-workload-v1/schema13-final/reading-notes-final.md、verification-final.json：新run b4ede2ab、10请求/1纠正、逐目的请求/消息容量/每项绑定范围、用量、Git文档提交。
+- 同目录frozen-plan.json、api-result.json、api-trace.json、evidence-roundtrip.json、restart-verification.json：原样输入与固定知识，旧31459a原档SHA不变，新旧独立库存在，重启相等无新增调用；实际消息/响应留service_private对应run并核对SHA。
+- 仅HTTP接线验证，无浏览器检查或PDF重生成；上一批真实失败保持原结果，最新回归独立解释。
