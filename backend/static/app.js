@@ -62,9 +62,7 @@ $('review-form').addEventListener('submit',async e=>{
  finally{feedbackPosting=false;controls();}
  if(saved&&selected===rid){try{renderReviews(await api(`/runs/${encodeURIComponent(rid)}/reviews`));}catch(err){tell('意见已保存，但反馈列表暂时无法查询。'+errorText(err),true);}}
 });
+function renderFactDelivery(r){const d=node("details");d.append(node("summary","事实检索模式、知识版本、逐主张交付与省略（详情）"),jsonBox({mode:r.configuration?.retrieval_mode,strategy:r.configuration?.fact_retrieval_strategy,knowledge_version:r.configuration?.knowledge_version,embedding_profile:r.configuration?.embedding_profile,scoring_method:r.configuration?.scoring_method,records:r.retrieval}));$("usage").append(d);}
 window.addEventListener('pagehide',()=>{stop();token='';});
 health().catch(e=>tell(errorText(e),true));
 })();
-
-
-function renderFactDelivery(r){const d=node("details");d.append(node("summary","事实检索模式、知识版本、逐主张交付与省略（详情）"),jsonBox({mode:r.configuration?.retrieval_mode,strategy:r.configuration?.fact_retrieval_strategy,knowledge_version:r.configuration?.knowledge_version,embedding_profile:r.configuration?.embedding_profile,scoring_method:r.configuration?.scoring_method,records:r.retrieval}));$("usage").append(d);}

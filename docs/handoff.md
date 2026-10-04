@@ -1,5 +1,20 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-04 证据支持判断数据集与未微调基线 v1（最新）
+
+接续已推送8adc7cb、master初始干净。实现evaluation/support_dataset.py与support_baseline.py：显式归档来源/冻结请求/响应哈希→逐组件及原引用候选→去重/谱系/家族预分→AI辅助pending复核MD/JSON→有限纠正基线与离线指标→仅确认标签训练出口。生产Harness/schema13/政策/默认BM25不改，未训练、未安装训练框架、不重建PDF。详见support-judgment-dataset-v1.md；最终提交及普通推送/远端回查以Git和本机verification.json为准，长期默认推送授权继续有效。
+
+实际679原始候选、425去重池、68归档样本＋23受控变体=91项/11关联家族；8反馈保留、3处关联，0确认标签，全pending不是专家金标准。274旧诊断缺冻结请求明确跳过，不猜补输入；30结构无效候选保留但不进基线。预分train16/validation44/test31，22证据片段跨集合共享，历史开发案例不能称独立测试或跨文档泛化。完整原文及私有实际请求仅忽略data。
+
+一次未微调基线冻结12批、按每批一次纠正推导24请求，不加任意付费批次总上限；第一批初始＋纠正均错ID/漏项，立即停止，实际2请求/1纠正，保存5有效同级预测、86未完成，不再付费重跑。138341 token、6.715秒，连接器快照估算USD0.011396604–0.022793208非账单。0监督确认，semantic_metrics=null；用户复核后可离线重算，无需API。baseline-frozen-v1源码/提示/输入保持；其后prepared-review-v2只完善复核建议/监督依据验证/缺请求原因，91个task相同，离线核对通过，未中途改完继续批次。
+
+页面只查旧hybrid run4676b27e，不提交新Harness任务。发现renderFactDelivery在闭包外，ReferenceError被误报网络未知、后续区不渲染；只移入现有闭包，新增实际脚本公开DOM probe。刷新清除内存令牌，修复后真实浏览器完整复查尚待本机重新连接；本轮未完成此项，范围见browser-verification.json，不能把公开DOM probe称实际浏览器验收。原8765未修改，8766临时只读服务结束时停止。
+
+新增27项公开回归，最终根环境502项通过；无原.env/私有data的干净检出结果与27项历史跳过见verification.json。
+
+材料data/runtime_local/support-dataset-v1/：reading-notes.md、verification.json、prepared-review-v2/dataset.json与source-split-report.json、support-review-package-v1.zip、baseline-frozen-v1/、offline-review-v2-metrics.json、根/干净离线测试日志。旧手册r1/PDF保留。下一轮先监督确认、增加独立家族/文档评测，再独立冻结支持组件训练；本轮不自动启动下一轮或新付费实验。
+
+
 ## 2026-10-04 真实服务可选语义检索 v1（本轮最新）
 
 接续已推送0b7a071，fetch确认master与origin/master一致；本轮独立提交与远端回查见Git日志和data/runtime_local/semantic-service-v1/verification.json。按用户长期授权，检查/提交后普通推送已核实origin/master，不强推，不改全局代理/SSL；命令级127.0.0.1:7890代理。旧网络失败记录保留其发生日期含义。

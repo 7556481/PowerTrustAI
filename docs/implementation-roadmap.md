@@ -1,5 +1,7 @@
 # 后续实施清单与实际接入点
 
+2026-10-04最新：[证据支持判断数据准备v1](support-judgment-dataset-v1.md)已实现evaluation/support_dataset.py、support_baseline.py的提取、冻结校验、家族预分、AI辅助复核、未微调基线、离线指标及仅确认监督出口。91项全pending；一次基线2请求后结构失败停止，5有效部分预测，不自动重跑。下一阶段接入点是review-labels.json→apply_reviews→training_export的监督JSONL（messages/group_id/split/supervision/origins），保留ResponseDiagnostics与RunStore反馈源。先确认标签、许可、独立家族/跨文档评测和冻结训练配置，再训练支持判断组件；本轮未安装训练框架、训练或替换schema13审核器，不能把模型自评当金标准。此前“尚无数据流水线”仅是当时状态。
+
 2026-10-04最新：第二项[真实服务可选语义检索v1](semantic-service-v1.md)也已交付，服务三模式/启动核验/资源复用/公开回归/固定对照/单次真实链路完成，BM25仍默认。第一项逐主张已交付。下表为接入前设计记录；当前后续仅为更广的资源匹配对照与证据支持微调准备，不能把已实现项重复列成尚未接入。
 
 微调准备实际接入点：ResponseDiagnostics候选目录/消息/响应→FactRetrievalBinding→RunStore.add_review来源事件。先人工区分模型语义错误、检索未交付与工程前提不足，按问题家族＋文档＋回答修订谱系隔离训练/验证，不以模型自评直接造金标准；schema13解析、fact_delivery范围与validation_diagnostics保持工程回归。尚无训练流水线，另轮明确数据许可、分组规则和独立评测后才能实施。

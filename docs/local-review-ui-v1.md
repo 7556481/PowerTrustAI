@@ -94,3 +94,7 @@ notepad.exe D:\PowerTrustAI\data\runtime_local\access-token
 已知问题：既有safe序列化把部分官方HTTPS来源URI误识别为Windows路径而隐藏；源ID、版本、页码、正文仍回查。为保持本批冻结源码未临时改投影；下一步建议独立修该误判，并明确`partial_only=false`只代表已存终态结果而不代表检查完整。界面首版仅纯文本、无文件上传/多用户/任意路径输入；known模型语义局限和PDF视觉核对缺口仍保留。
 
 当前真实服务在127.0.0.1:8765运行、队列空；不再提交新模型任务。截图在`data/runtime_local/ui-v1-screenshots/`，已检查无令牌、密钥或敏感本机路径；API/浏览器/重启证据见文档索引。
+
+## 2026-10-04 检索配置详情显示修复
+
+只读查看此前semantic-service-v1运行时发现renderFactDelivery在IIFE外引用闭包私有辅助函数，ReferenceError被误显示为网络未知，后续发现/证据/反馈区未完成渲染。本轮仅将该函数移回现有闭包；tests/ui_render_probe.js执行真实页面脚本，校验保存模式/策略/知识/profile、字面脚本文字、后续反馈渲染及全部GET。实际浏览器检查范围、修复后重新连接情况见data/runtime_local/support-dataset-v1/browser-verification.json，公开DOM夹具不代替浏览器实查。未新增付费Harness任务，令牌仍由用户本机输入、只存在内存。

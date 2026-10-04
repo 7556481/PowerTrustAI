@@ -1,5 +1,14 @@
 # 文档索引
 
+## 2026-10-04 证据支持判断数据集与未微调基线 v1
+
+- [任务/标签、实际候选/划分、运行命令与失败基线](support-judgment-dataset-v1.md)：未训练、未改生产审核；pending不计算语义指标。
+- evaluation/support_dataset.py：提取/校验/去重/家族分组/AI辅助复核导出与监督合并；evaluation/support_baseline.py：现有连接器基线、离线四分类指标、仅确认标签JSONL出口。
+- 公开tests/test_support_dataset.py、test_support_baseline.py；实际页面脚本tests/ui_render_probe.js及test_ui_render.py。数据/原文/实际响应不入Git。
+- 本机data/runtime_local/support-dataset-v1/：reading-notes.md、verification.json、prepared-review-v2/、support-review-package-v1.zip、baseline-frozen-v1/、offline-review-v2-metrics.json、offline-tests日志和browser-verification.json。91项全pending，2请求后结构失败停止，仅5有效部分预测；0确认，不宣称语义正确率或完成整批。
+- 来源与划分报告保留22片段跨集合共享、274缺冻结请求跳过；既有私有历史不覆盖，r1/PDF不重建。当前状态与路线已区分数据准备已实现、训练尚未启动。
+
+
 ## 2026-10-04 真实服务可选语义检索 v1
 
 - [运行、配置、生命周期、三模式固定对照与真实结果](semantic-service-v1.md)。bm25默认、事实策略独立；不下载/建索引/退回默认，完整重放开销明确。
