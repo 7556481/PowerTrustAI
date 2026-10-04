@@ -22,7 +22,31 @@ class Bundle:
         for resource in self.resources:resource.close()
 
 class ComponentFactory:
-    def __init__(self,config):self.config=config
+    def __init__(self,config):self.config=config;self.semantic_resource=None;self.retrieval_metrics=None
+    def initialize_retrieval(self,encoder=None):
+        if self.config.profile=='synthetic_fixture' or self.config.retrieval_mode=='bm25':return
+        if self.semantic_resource is not None:return
+        from rag.semantic import AsyncSQLiteSemanticRetriever,VectorIndex
+        from rag.storage import KnowledgeStore
+        try:
+            if encoder is None:
+                from rag.embedding import E5ONNXEncoder
+                encoder=E5ONNXEncoder(self.config.embedding_model_dir)
+            with KnowledgeStore(self.config.index_db,readonly=True) as store, VectorIndex(self.config.vector_db,readonly=True) as index:
+                index.load(store,self.config.knowledge_version,encoder)
+            self.semantic_resource=AsyncSQLiteSemanticRetriever(self.config.index_db,self.config.vector_db,encoder,mode=self.config.retrieval_mode)
+        except Exception:
+            if encoder is not None and hasattr(encoder,'close'):encoder.close()
+            raise ConfigurationError('Semantic model/profile/dimension/index/knowledge configuration unavailable or mismatched') from None
+    async def close(self):
+        resource=self.semantic_resource
+        if resource:
+            await Bundle(None,(resource,)).drain()
+            self.retrieval_metrics={'query_encodings':resource.query_encodings,
+                'validation_replays':resource.validation_replays,'encoding_seconds':resource.encoder.encoding_seconds}
+            resource.close()
+            if hasattr(resource.encoder,'close'):resource.encoder.close()
+            self.semantic_resource=None
     def preflight(self):
         if self.config.profile=='synthetic_fixture':return None
         if not os.environ.get('DEEPSEEK_API_KEY') or not os.environ.get('DEEPSEEK_MODEL_ID'):
@@ -33,6 +57,7 @@ class ComponentFactory:
             with KnowledgeStore(self.config.index_db,readonly=True) as store:
                 store.rows(self.config.knowledge_version)
         except Exception:raise ConfigurationError('Fixed knowledge snapshot unavailable') from None
+        self.initialize_retrieval()
         return self.config.knowledge_version
 
     def manifest(self,knowledge_version):
@@ -61,12 +86,20 @@ class ComponentFactory:
             'source_sha256':hashes,'template_sha256':{'independent':hashlib.sha256(INDEPENDENT.encode()).hexdigest(),
               'original_citation':hashlib.sha256(ORIGINAL.encode()).hexdigest()},
             'model_settings':{'timeout_seconds':90,'max_output_tokens':8000,'max_response_chars':96000}}
+        from rag.bm25 import SCORING_METHOD
+        from rag.semantic import RRF_VERSION
+        manifest.update(retrieval_mode=self.config.retrieval_mode,
+            embedding_profile=None if self.semantic_resource is None else dict(self.semantic_resource.encoder.profile),
+            scoring_method=SCORING_METHOD if self.config.retrieval_mode=='bm25' else RRF_VERSION if self.config.retrieval_mode=='hybrid' else 'Dense-cosine-v1(positive-only)')
+        manifest['retrieval']='fixed-index '+self.config.retrieval_mode+'; full result replay validation'
         if self.config.profile=='synthetic_fixture':
             manifest['available_real_protocols']=manifest.pop('protocols')
             manifest['protocols']={k:'fake-v1' for k in ('generation','claim_extraction','evidence_verification','domain_review','revision')}
             manifest['prompts']={};manifest['contracts']={};manifest['model_settings']=None
             manifest['rules']='offline-rules-v1';manifest['policy']='offline-policy-v1';manifest['unit_tool']=None
             manifest['retrieval']='none: synthetic_fixture only'
+            manifest['configured_retrieval_mode']=manifest['retrieval_mode']
+            manifest['retrieval_mode']='none';manifest['scoring_method']=None
         return manifest
 
     def create(self,rid,observer):
@@ -88,7 +121,10 @@ class ComponentFactory:
         try:
             model=create_adapter(settings);resources.append(model)
             domain_model=create_adapter(settings);resources.append(domain_model)
-            retriever=AsyncSQLiteBM25Retriever(self.config.index_db);resources.append(retriever)
+            if self.config.retrieval_mode=='bm25':
+                retriever=AsyncSQLiteBM25Retriever(self.config.index_db);resources.append(retriever)
+            else:
+                self.initialize_retrieval();retriever=self.semantic_resource;resources.append(RetrieverLease(retriever))
             diag=ROOT/'data/retrieval_local/service_private'/rid
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3),
                 ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload),
@@ -100,4 +136,11 @@ class ComponentFactory:
         except Exception:
             for resource in resources:resource.close()
             raise ConfigurationError('Required component could not be constructed') from None
+
+class RetrieverLease:
+    """Drain per-run work without closing the service-owned encoder."""
+    def __init__(self,resource):self.resource=resource
+    @property
+    def _active(self):return self.resource._active
+    def close(self):pass
 

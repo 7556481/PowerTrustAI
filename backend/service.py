@@ -18,6 +18,7 @@ class ApplicationService:
         self.worker=None;self.active=None;self.active_bundle=None;self.closing=False;self.storage_fault=False
         self.volatile_errors={}
     async def start(self):
+        if hasattr(self.factory,'initialize_retrieval'):self.factory.initialize_retrieval()
         self.store.recover();self.worker=asyncio.create_task(self._worker())
     async def stop(self):
         self.closing=True
@@ -26,6 +27,7 @@ class ApplicationService:
             self.worker.cancel()
             await asyncio.gather(self.worker,return_exceptions=True)
         self.store.recover() # queued/running become interrupted; no auto-enqueue
+        if hasattr(self.factory,'close'):await self.factory.close()
 
     async def submit(self,request,*,answer_requirements=(),indexed_reference_ids=()):
         validate_request(request,self.config.budget)

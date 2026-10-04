@@ -1,5 +1,12 @@
 # 文档索引
 
+## 2026-10-04 真实服务可选语义检索 v1
+
+- [运行、配置、生命周期、三模式固定对照与真实结果](semantic-service-v1.md)。bm25默认、事实策略独立；不下载/建索引/退回默认，完整重放开销明确。
+- 服务backend/config.py、assembly.py、service.py、api.py；rag/semantic.py、embedding.py、harness/retrieval.py；安全页面详情backend/static/app.js。公开固定对照入口evaluation/semantic_service_comparison.py、七项公开tests/test_semantic_service.py。
+- 本机data/runtime_local/semantic-service-v1/：reading-notes.md、verification.json、comparison*.json、resource-*.txt、冻结计划、475项根/干净测试日志、real-summary.json、real-verification.json、Evidence和restart-verification.json。run4676b27e：11请求、一次自然Revision、必需阶段完整/0执行问题，业务仍review_required。实际输入/响应/模型/库保持忽略。
+- 旧手册/PDF、semantic历史报告保留。真实HTTP检查不替代浏览器检查；消息投影不冒充已发送/已验证，计数与资源测量口径见说明。当前提交/普通推送回查在本机verification.json及Git日志。
+
 ## 2026-10-04 逐主张事实检索与证据交付 v1
 
 - 实现提交02c71bd已普通推送master并回查远端同哈希；最终交付说明提交及回查记录在本机verification.json。使用命令级127.0.0.1:7890代理，未改全局代理或SSL。

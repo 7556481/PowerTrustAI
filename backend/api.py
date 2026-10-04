@@ -149,6 +149,8 @@ def create_app(config=None,*,store=None,factory=None,access_token=None):
         except ConfigurationError:ready=False;reason='CONFIGURATION_UNAVAILABLE'
         return {'status':'degraded' if service.storage_fault or not ready else 'ready','health_model_requests':0,
             'profile':config.profile,'configuration_ready':ready,'reason':reason,
+            'retrieval_mode':config.retrieval_mode if config.profile=='real' else 'none',
+            'fact_retrieval_strategy':config.fact_strategy,'knowledge_version':config.knowledge_version if config.profile=='real' else None,
             'storage_healthy':not service.storage_fault,'active_run':service.active is not None,
             'queue_capacity':config.queue_capacity,'queued':service.queue.qsize(),'workers_supported':1}
 

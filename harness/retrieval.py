@@ -89,7 +89,8 @@ class RetrievalSession:
                                          context.allow_cross_page, self.settings.context_options.priority)
             retrieval_request = RetrievalRequest(query, request.scenario_id, purpose, self.knowledge_version,
                                                  self.settings.max_results, context)
-            cache_key = (self.knowledge_version, query, self.settings.max_results, context)
+            identity=getattr(self.retriever,'cache_identity',('bm25',))
+            cache_key = (self.knowledge_version, identity, query, self.settings.max_results, context)
             cached = self.query_cache.get(cache_key) if fact_query else None
             if cached is None:
                 if self.calls >= self.budget.max_retrieval_calls:

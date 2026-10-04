@@ -1,5 +1,7 @@
 # PowerTrustAI v0.1 本机辅助审核原型
 
+当前可选检索模式（2026-10-04）：[真实服务语义接入v1](semantic-service-v1.md)给出bm25/dense/hybrid启动、固定模型/向量索引检查、资源指标及一次真实链路；事实策略独立，BM25/aggregate默认。旧段落按各自日期解释。
+
 新增可选事实策略（2026-10-04）：[逐主张检索与交付v1](per-claim-fact-retrieval-v1.md)含环境启用方式、预算/合同/页面详情、固定对照与真实服务结果。aggregate/BM25仍默认，原引用、领域政策与一次Revision不变；没有逐主张逐次付费调用。
 
 当前入口（2026-10-04）：[README](../README.md)、[当前状态](current-status.md)与[公开复现报告](public-reproducibility-v1.md)。真实schema13最终接线已在fb235746完成，说明提交e1042cdb；本轮仅修复公开复现/并发轨迹，不重复付费验证。用户最新长期授权为检查、提交后默认普通推送到核实origin/当前分支；下两段的526bdee、本地提交与网络等待为此前阶段记录，不代表永久或当前状态。

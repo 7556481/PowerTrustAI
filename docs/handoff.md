@@ -1,5 +1,19 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-04 真实服务可选语义检索 v1（本轮最新）
+
+接续已推送0b7a071，fetch确认master与origin/master一致；本轮独立提交与远端回查见Git日志和data/runtime_local/semantic-service-v1/verification.json。按用户长期授权，检查/提交后普通推送已核实origin/master，不强推，不改全局代理/SSL；命令级127.0.0.1:7890代理。旧网络失败记录保留其发生日期含义。
+
+服务新增POWERTRUST_RETRIEVAL_MODE=bm25/dense/hybrid，与aggregate/per_claim_v1独立；默认不变。E5/SQLite精确向量/RRF原算法复用，启动校验现有模型/profile/维度/快照/索引，不下载/重建或静默回退。服务持有单编码器、有界单工作线程，每任务借用；取消后drain再关闭。完整validate_result重放保留，语义查询通常2次编码；实际计数器与profile隔离缓存已加入，不声称已消除重复索引加载。
+
+475项本机离线测试通过；独立干净检出475项、27项可选依赖/私有历史明确跳过，七项新公开synthetic_fixture接线测试不需要真实模型/data。原Harness demo与node语法检查通过。三模式四例固定对照：必要片段交付BM25 10/10、Dense 4/10、Hybrid 9/10；非独立验收集/语义准确率，BM25默认保留。每模式独立资源测量与消息投影限制见[运行与对照说明](semantic-service-v1.md)。
+
+仅一次真实HTTP run4676b27e75ad4defbc53cfeb4a2f83f8，Hybrid/per_claim，11模型/5检索/2阶段纠正；自然一次Revision，v1/v2完整提取＋双重审。独立事实3、原引用2、领域2、提取2、Revision2请求（后者含纠正），最终执行问题0、必需阶段完整，业务review_required；2事实supported/3证据不足/1无法评估，最终原引用不足。原引用与组件作用域核对通过，Evidence回查/重启相等11→11。总206989 token、54.308秒、估算USD0.023733144–0.047466288。底层编码10次为代码/检索记录推导，原运行计数器快照未保存，不能称独立实测。本轮由HTTP客户端提交，未新增浏览器截图/交互验证。8766验证服务已停止，原8765未改。
+
+准备失败留在本机reading-notes：profile_id参数误用离线失败后修正；消息测量遇到旧夹具嵌套元组和缺stance，投影仅估算、未送模型；一次公开测试命令起初在根目录执行，另在独立检出重新完成；只读进程内存查询沙箱拒绝后使用审批完成。没有付费重跑。普通服务仍有限纠正、一次Revision、超时和40次实际运行保护，历史96014不改变/不推荐。
+
+交付材料data/runtime_local/semantic-service-v1/reading-notes.md、verification.json、comparison*.json、offline-tests-delivery.txt、clean-tests-delivery.txt、real-verification.json、restart-verification.json；实际请求在既有service_private新run目录，不入Git。最终中文学习手册r1要求/旧PDF保留，不扩写/重建。下一阶段只有证据支持微调准备接入点：人工来源、问题家族/文档/版本分组和独立评测，未训练。不要自动启动下一轮。
+
 ## 2026-10-04 最新：逐主张事实检索与证据交付 v1
 
 实现提交02c71bd5f1312695f16d294c25efd510b61c6054已普通推送origin/master，2026-10-04命令级代理ls-remote回查同哈希；bb0b208→02c71bd正常快进，无强推。随后交付说明仅补推送事实，运行源码不变；最终分支/提交以Git日志和本机verification.json为准。检查通过后默认推送的长期偏好继续有效。

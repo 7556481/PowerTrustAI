@@ -54,6 +54,8 @@ def download_model(directory):
 
 
 class E5ONNXEncoder:
+    def close(self):
+        self.session=None;self.tokenizer=None
     def __init__(self, directory, *, threads=4):
         # No network or automatic dependency installation on construction.
         import numpy as np

@@ -17,11 +17,15 @@ class ServiceConfig:
     knowledge_version: str=BASELINE_KNOWLEDGE
     queue_capacity: int=2
     fact_strategy: str='aggregate'
+    retrieval_mode: str='bm25'
+    embedding_model_dir: Path=ROOT/'data/retrieval_local/semantic/e5-small'
+    vector_db: Path=ROOT/'data/retrieval_local/semantic/vectors.sqlite3'
     citation_workload: CitationWorkload=field(default_factory=CitationWorkload)
     budget: RunBudget=field(default_factory=lambda:RunBudget(max_revision_rounds=1,max_model_calls=40,
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.retrieval_mode not in ('bm25','dense','hybrid'):raise ValueError('Unknown retrieval mode')
         if self.fact_strategy not in ('aggregate','per_claim_v1'):raise ValueError('Unknown fact retrieval strategy')
         if self.profile not in ('real','synthetic_fixture') or type(self.queue_capacity) is not int or not 1<=self.queue_capacity<=16:
             raise ValueError('Invalid local service configuration')
@@ -37,6 +41,9 @@ class ServiceConfig:
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
             fact_strategy=strategy,
+            retrieval_mode=os.environ.get('POWERTRUST_RETRIEVAL_MODE','bm25'),
+            embedding_model_dir=Path(os.environ.get('POWERTRUST_EMBEDDING_MODEL_DIR',str(cls().embedding_model_dir))),
+            vector_db=Path(os.environ.get('POWERTRUST_VECTOR_DB',str(cls().vector_db))),
             citation_workload=CitationWorkload(
                 int(os.environ.get('POWERTRUST_CITATION_BATCH_ITEMS','32')),
                 int(os.environ.get('POWERTRUST_REVIEW_MESSAGE_CHARS','64000')),

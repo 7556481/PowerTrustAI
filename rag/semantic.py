@@ -207,7 +207,12 @@ class AsyncSQLiteSemanticRetriever(AsyncSQLiteBM25Retriever):
     """
     def __init__(self, path, vectors_path, encoder, *, mode="dense"):
         super().__init__(path)
-        self.vectors_path, self.encoder, self.mode = vectors_path, encoder, mode
+        self.vectors_path, self.encoder, self.mode = vectors_path, MeteredEncoder(encoder), mode
+        self.cache_identity=(mode,profile_id(encoder))
+        self.validation_replays=0
+
+    @property
+    def query_encodings(self):return self.encoder.query_encodings
 
     def _work(self, request, result, validate):
         if validate == "saved_evidence" or self.mode == "bm25":
@@ -216,6 +221,20 @@ class AsyncSQLiteSemanticRetriever(AsyncSQLiteBM25Retriever):
         with KnowledgeStore(self.path, readonly=True) as store, VectorIndex(self.vectors_path, readonly=True) as index:
             retriever = SemanticRetriever(store, index, self.encoder, mode=self.mode)
             if validate:
+                self.validation_replays+=1
                 retriever._validate_result(request, result)
                 return None
             return retriever._retrieve(request)
+
+class MeteredEncoder:
+    """Count actual encoding attempts, including validation replay; no caching."""
+    def __init__(self,encoder):
+        self.encoder=encoder;self.profile=encoder.profile;self.query_encodings=0;self.encoding_seconds=0
+    def encode(self,texts,kind):
+        from time import perf_counter
+        started=perf_counter()
+        if kind=='query':self.query_encodings+=len(texts)
+        try:return self.encoder.encode(texts,kind)
+        finally:self.encoding_seconds+=perf_counter()-started
+    def close(self):
+        if hasattr(self.encoder,'close'):self.encoder.close()

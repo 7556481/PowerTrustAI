@@ -1,5 +1,7 @@
 # 当前状态
 
+最新（2026-10-04）：[真实服务可选语义检索v1](semantic-service-v1.md)已装配bm25/dense/hybrid，与aggregate/per_claim_v1独立；BM25/aggregate仍默认。固定模型/profile/索引/知识启动核对，单服务编码器与有界工作线程、取消drain与释放，完整排名/原文重放保留。475项本机/干净检出公开回归通过（干净27项可选跳过）；固定四例必要片段交付10/10、4/10、9/10，Hybrid存在退步。一次hybrid真实HTTP自然Revision、11模型请求，0执行问题/必需阶段完整，业务review_required；Evidence与重启保留。微调未实现，未重建PDF。以下较早“未装配语义”描述仅为历史状态；本轮提交/远端回查见Git与本机verification.json。
+
 当前实现02c71bd5f1312695f16d294c25efd510b61c6054已于2026-10-04普通推送origin/master并远端回查同哈希；交付说明后续提交仅记录该事实。较早网络阻断段落保留历史含义，不表示本轮上传失败。
 
 最新（2026-10-04）：基于已推送bb0b208实现可选per_claim_v1，aggregate默认保留；正文技术组件按规范化对象检索，依据类型分流，去重/显式映射/部分失败/版本隔离已接入schema13、服务、SQLite和同源详情。见[实现](per-claim-fact-retrieval-v1.md)与[固定对照](per-claim-fact-comparison-v1.md)。真实run53613803：自然一次Revision、双重提取/审核、10模型/7检索/1纠正，无执行问题，必需阶段完整；业务review_required、工程前提未齐。重启结果相等10→10。后续历史“逐主张未实现”和上传阻断描述仅是当时状态；本轮不重建PDF或改微调/语义装配状态。

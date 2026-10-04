@@ -67,4 +67,4 @@ health().catch(e=>tell(errorText(e),true));
 })();
 
 
-function renderFactDelivery(r){const d=node("details");d.append(node("summary","事实检索查询、逐主张交付与省略（详情）"),jsonBox({strategy:r.configuration?.fact_retrieval_strategy,records:r.retrieval}));$("usage").append(d);}
+function renderFactDelivery(r){const d=node("details");d.append(node("summary","事实检索模式、知识版本、逐主张交付与省略（详情）"),jsonBox({mode:r.configuration?.retrieval_mode,strategy:r.configuration?.fact_retrieval_strategy,knowledge_version:r.configuration?.knowledge_version,embedding_profile:r.configuration?.embedding_profile,scoring_method:r.configuration?.scoring_method,records:r.retrieval}));$("usage").append(d);}

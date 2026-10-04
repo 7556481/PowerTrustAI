@@ -39,7 +39,7 @@ python -m venv .venv
 同源HTML/CSS/JavaScript → HTTP API → `ApplicationService`（单进程、一个活动任务、两个等待位置）→ `ComponentFactory` → 现有 `OfflineHarness`。问答生成或接收已有回答后，提取主张；事实审核与领域审核并行；确定性政策决定最多一次Revision，再完整重提取和双重审。SQLite保存阶段检查点、结果和追加人工反馈；重启将未完成运行标记interrupted，不自动重发。
 
 - **默认检索：BM25**，固定知识版本、Evidence原文定位与ID作用域校验。
-- **Dense/RRF：已有实现，未默认装配**；见 `rag/semantic.py`、`rag/embedding.py`，需要另备固定模型与向量索引。
+- **Dense/RRF：已接入真实服务可选配置，BM25仍默认**；使用 `POWERTRUST_RETRIEVAL_MODE=dense` 或 `hybrid`，需预备匹配的固定模型与向量索引；见[启动、固定对照与资源边界](docs/semantic-service-v1.md)。事实策略aggregate/per_claim_v1独立选择，启动不下载或建索引。
 - **真实服务事实审核：显式schema13**，独立事实请求与按原绑定作用域分组的引用检查；领域协议4、Revision协议2。旧schema与历史结果保留原解释。
 - 执行失败、证据不足和工程前提缺失分别报告；阶段完成与检查无法评估可以同时成立。程序规则仍为演示规则，反馈来源为AI辅助、用户监督。
 - 调用清单按实际请求计数；并行轨迹使用请求编号与阶段调用标识绑定，超时/取消/格式失败也保留记录。
