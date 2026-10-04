@@ -1,5 +1,10 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-05 54复核接收与74候选准备（最新）
+
+详见support-review-merge-v1.md。接续f70fac7，根目录ZIP不存在，按用户附件Downloads读取并安全解压新忽略目录。两原ZIP哈希/54ID与任务核对；74主要、31辅助、40hold，全145 pending/0确认。A05辅助保留父hold，未解决原MW/MVA对象。新视图不覆盖旧91/48/6/5预测；74内只有1条完全同task预测可复用。质量层basis_ids子集丢失已最小修复。冻结74逐样本请求、0调用，不执行包内真实基线要求（用户最新仅准备）；原execute单项失败全局break仍待独立修复，不宣称runner已完成。新公开回归与完整离线日志、准确结果/提交/普通推送回查见data/runtime_local/review-expansion-54-v1/verification.json。未训练/确认/改生产或PDF；长期检查后普通推送偏好继续。
+
+
 ## 2026-10-05 监督审阅91接收与新增候选质量检查（最新）
 
 最终交付为quality-supplement-v3.zip及expansion-quality-dataset-v1.json：独立建议/主任务门控实际落地，原48 task哈希不变，prior_supervision保存。import-pending-v2关闭hold/辅助主训练eligibility，amended-tasks-v2六个新任务仍pending且不继承旧备注；早期包/视图保留。最终检查日志offline-tests-release.txt，具体测试/提交/远端与监督确认范围见本机verification。

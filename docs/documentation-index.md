@@ -1,5 +1,12 @@
 # 文档索引
 
+## 2026-10-05 54复核接收与74候选基线准备
+
+- [合并/依据子集修复/准备范围](support-review-merge-v1.md)：全145保留，74主候选仍pending，尚未运行基线。
+- evaluation/support_review_merge.py及tests/test_support_review_merge.py：无API接收/合并/逐样本冻结；support_review_quality仅保留实际依据子集。
+- 忽略data/runtime_local/review-expansion-54-v1/：received、merged-v1清单/分流/共享关系/请求冻结、合并报告、ZIP、reading-notes/verification与离线日志。原资料及任务保持，不重建PDF。
+
+
 ## 2026-10-05 91监督审阅接收与新增质量检查
 
 最终本机入口：quality-supplement-v3.zip、expansion-quality-dataset-v1.json及import-pending-v2；hold/辅助实际从主任务eligibility排除，48原task保持、6修订仍pending。旧补充版本留存。

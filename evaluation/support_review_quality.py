@@ -166,6 +166,8 @@ def apply_quality_layer(samples, entries):
             raise ValueError('quality basis outside task')
         checked = quality_entry(old, disposition=entry['disposition'], proposed_label=entry['proposed_label'],
                                 flags=entry['quality_flags'], rationale=entry['rationale'])
+        # A reviewer may select a strict subset; do not widen it to every quote.
+        checked['basis_ids'] = list(entry['basis_ids'])
         revised = deepcopy(old)
         revised['prior_supervision'] = deepcopy(old['supervision'])
         revised['quality_review'] = checked
