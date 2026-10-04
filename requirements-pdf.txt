@@ -1,0 +1,2 @@
+# Optional PDF ingestion only. Offline Harness and Markdown require no packages.
+pypdf==6.10.0

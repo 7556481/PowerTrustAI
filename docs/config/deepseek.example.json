@@ -1,0 +1,8 @@
+{
+  "endpoint": "https://api.deepseek.com",
+  "model_id": "deepseek-flash",
+  "credential_env": "DEEPSEEK_API_KEY",
+  "timeout_seconds": 45,
+  "draft_max_output_tokens": 1800,
+  "note": "Reference only; CLI does not load this file. Set the key privately in the local environment."
+}

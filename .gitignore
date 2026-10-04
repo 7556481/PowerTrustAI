@@ -1,0 +1,26 @@
+# Locally collected source documents and extraction diagnostics.
+# Redistribution permission must be reviewed before any public publication.
+/data/knowledge_local/
+/data/retrieval_local/
+# Credentials must be supplied privately through explicit environment settings.
+.env
+.env.*
+!/.env.example
+# Historical prototype has its own Git repository; never expand it into this one.
+/power-system-hallucination-risk-assessor/
+/.venv/
+/data/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+*.sqlite*
+*.db
+*.onnx
+*.safetensors
+*.bin
+*.pem
+*.key
+/models/
+/.cache/
+/logs/

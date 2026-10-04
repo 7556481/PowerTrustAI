@@ -1,0 +1,176 @@
+"""Optional FastAPI boundary. No model requests on import or health checks."""
+from contextlib import asynccontextmanager
+from typing import Literal
+import secrets
+from uuid import uuid4
+from fastapi import FastAPI,Depends,HTTPException,Request
+from fastapi.security import HTTPBearer,HTTPAuthorizationCredentials
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse
+from pathlib import Path
+from pydantic import BaseModel,ConfigDict,Field
+from backend.config import ServiceConfig
+from backend.service import ApplicationService,QueueFullError,ServiceUnavailable
+from backend.assembly import ConfigurationError
+from backend.store import RunStore,StorageError,BindingError
+from backend.serialization import safe
+from backend.local_access import ProcessLease,token_for
+from core.models import TaskRequest,TaskMode,AnswerDraft,Evidence,EngineeringContext,EngineeringQuantity
+from core.validation import InputError,ContractError
+
+class StrictModel(BaseModel):model_config=ConfigDict(extra='forbid',strict=True)
+class Reference(StrictModel):
+    text:str=Field(min_length=1,max_length=20000)
+    label:str=Field(default='user reference',max_length=200)
+class Quantity(StrictModel):
+    kind:str=Field(min_length=1,max_length=80)
+    value:float=Field(allow_inf_nan=False)
+    unit:str=Field(min_length=1,max_length=40)
+    reference:str=Field(default='user supplied',max_length=400)
+class Engineering(StrictModel):
+    goal:Literal['conceptual','plant_assessment']='conceptual'
+    network_model:str|None=Field(default=None,max_length=4000)
+    operating_point:str|None=Field(default=None,max_length=4000)
+    limits:str|None=Field(default=None,max_length=4000)
+    contingencies:list[str]=Field(default_factory=list,max_length=30)
+    quantities:list[Quantity]=Field(default_factory=list,max_length=30)
+class Submit(StrictModel):
+    mode:Literal['question_answer','assess_existing']
+    question:str=Field(min_length=1,max_length=8000)
+    user_context:str=Field(default='',max_length=10000)
+    existing_answer:str|None=Field(default=None,min_length=1,max_length=80000)
+    references:list[Reference]=Field(default_factory=list,max_length=10)
+    engineering_context:Engineering|None=None
+    answer_requirements:list[str]=Field(default_factory=list,max_length=10)
+    def task(self):
+        if not self.question.strip() or self.existing_answer is not None and not self.existing_answer.strip():raise InputError('Nonempty question/answer required')
+        if (self.mode=='assess_existing')!=(self.existing_answer is not None):raise InputError('Existing answer required only for assess_existing')
+        if any(len(s)>4000 for s in self.answer_requirements):raise InputError('Answer requirement too long')
+        aid=uuid4().hex
+        answer=None if self.existing_answer is None else AnswerDraft(aid,1,self.existing_answer)
+        refs=tuple(Evidence('user-'+uuid4().hex,'user_supplied','unverified',r.label,r.text,'user_reference') for r in self.references)
+        e=self.engineering_context
+        engineering=None if e is None else EngineeringContext(e.goal,e.network_model,e.operating_point,e.limits,
+            tuple(e.contingencies),tuple(EngineeringQuantity(uuid4().hex,q.kind,q.value,q.unit,q.reference) for q in e.quantities))
+        return TaskRequest(uuid4().hex,TaskMode(self.mode),'voltage_stability_reactive_support',self.question,self.user_context,answer,refs,engineering)
+class HumanReview(StrictModel):
+    answer_id:str=Field(min_length=1,max_length=150)
+    answer_version:int=Field(ge=1)
+    finding_id:str|None=Field(default=None,max_length=180)
+    action:Literal['confirm','disagree','pending','note']
+    reviewer_id:str=Field(default='local-user',min_length=1,max_length=100)
+    source:Literal['user','ai_assisted_user_supervised']='user'
+    note:str=Field(default='',max_length=10000)
+
+def create_app(config=None,*,store=None,factory=None,access_token=None):
+    config=config or ServiceConfig()
+    injected=store is not None
+    @asynccontextmanager
+    async def lifespan(app):
+        lease=ProcessLease(config.run_db.with_suffix('.process-lock'));lease.acquire()
+        service=None;runtime_store=None
+        try:
+            runtime_store=store or RunStore(config.run_db)
+            app.state.token=access_token or token_for(config.token_file)
+            service=ApplicationService(config,runtime_store,factory);app.state.service=service
+            await service.start();yield
+        finally:
+            try:
+                if service:await service.stop()
+            finally:
+                if runtime_store and not injected:runtime_store.close()
+                lease.close()
+    app=FastAPI(title='PowerTrustAI local assisted review',version='1',lifespan=lifespan,
+                docs_url='/docs',redoc_url=None)
+    auth=HTTPBearer(auto_error=False)
+    async def authorized(request:Request,credentials:HTTPAuthorizationCredentials|None=Depends(auth)):
+        if credentials is None or credentials.scheme.lower()!='bearer' or not secrets.compare_digest(credentials.credentials,request.app.state.token):
+            raise HTTPException(401,detail={'code':'LOCAL_TOKEN_REQUIRED'},headers={'WWW-Authenticate':'Bearer'})
+    def svc(request):return request.app.state.service
+
+    @app.middleware('http')
+    async def local_only(request,call_next):
+        if request.client and request.client.host not in ('127.0.0.1','::1','testclient'):
+            return JSONResponse(status_code=403,content={'code':'LOCAL_ONLY'})
+        if request.query_params:return JSONResponse(status_code=400,content={'code':'QUERY_PARAMETERS_NOT_ALLOWED'})
+        host=request.headers.get('host','').split(':')[0]
+        if host not in ('127.0.0.1','localhost','testserver','[','::1'):
+            return JSONResponse(status_code=400,content={'code':'INVALID_LOCAL_HOST'})
+        if request.method=='POST':
+            origin=request.headers.get('origin')
+            if origin and origin!=str(request.base_url).rstrip('/'):
+                return JSONResponse(status_code=403,content={'code':'SAME_ORIGIN_REQUIRED'})
+            body=await request.body()
+            if len(body)>256000:return JSONResponse(status_code=413,content={'code':'BODY_TOO_LARGE'})
+        response=await call_next(request)
+        response.headers['Cache-Control']='no-store'
+        response.headers['X-Content-Type-Options']='nosniff'
+        response.headers['Referrer-Policy']='no-referrer'
+        response.headers['X-Frame-Options']='DENY'
+        if request.url.path=='/' or request.url.path.startswith('/ui/'):
+            response.headers['Content-Security-Policy']="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+        return response
+
+    @app.get('/',include_in_schema=False)
+    async def page():return FileResponse(Path(__file__).parent/'static/index.html')
+
+    @app.get('/ui/{asset}',include_in_schema=False)
+    async def ui_asset(asset:str):
+        if asset not in ('app.js','style.css'):raise HTTPException(404)
+        return FileResponse(Path(__file__).parent/'static'/asset)
+
+    @app.exception_handler(RequestValidationError)
+    async def validation_error(request,exc):
+        # Never echo request input, which might contain an accidentally pasted secret.
+        return JSONResponse(status_code=422,content={'code':'INPUT_VALIDATION_FAILED',
+            'errors':[{'field_path':list(e['loc']),'constraint':e['type']} for e in exc.errors()]})
+    @app.exception_handler(StorageError)
+    async def storage_error(request,exc):return JSONResponse(status_code=503,content={'code':'RUN_STORAGE_FAILED','persisted':False})
+    @app.exception_handler(KeyError)
+    async def missing(request,exc):return JSONResponse(status_code=404,content={'code':'RUN_SCOPED_RECORD_NOT_FOUND'})
+    @app.exception_handler(BindingError)
+    async def bad_binding(request,exc):return JSONResponse(status_code=409,content={'code':'INVALID_RUN_ANSWER_FINDING_BINDING'})
+
+    @app.get('/health')
+    async def health(request:Request):
+        service=svc(request)
+        if not service.store.healthy():service.storage_fault=True
+        try:service.factory.preflight();ready=True;reason=None
+        except ConfigurationError:ready=False;reason='CONFIGURATION_UNAVAILABLE'
+        return {'status':'degraded' if service.storage_fault or not ready else 'ready','health_model_requests':0,
+            'profile':config.profile,'configuration_ready':ready,'reason':reason,
+            'storage_healthy':not service.storage_fault,'active_run':service.active is not None,
+            'queue_capacity':config.queue_capacity,'queued':service.queue.qsize(),'workers_supported':1}
+
+    @app.post('/runs',status_code=202,dependencies=[Depends(authorized)])
+    async def submit(body:Submit,request:Request):
+        try:rid=await svc(request).submit(body.task(),answer_requirements=tuple(body.answer_requirements))
+        except (InputError,ContractError):raise HTTPException(422,detail={'code':'INPUT_CONTRACT_ERROR'}) from None
+        except ConfigurationError:raise HTTPException(503,detail={'code':'CONFIGURATION_UNAVAILABLE'}) from None
+        except QueueFullError:raise HTTPException(429,detail={'code':'QUEUE_FULL'},headers={'Retry-After':'5'}) from None
+        except ServiceUnavailable:raise HTTPException(503,detail={'code':'SERVICE_UNAVAILABLE'}) from None
+        return {'run_id':rid,'status':'queued','profile':config.profile}
+
+    @app.get('/runs/{run_id}',dependencies=[Depends(authorized)])
+    async def state(run_id:str,request:Request):return svc(request).state(run_id)
+    @app.get('/runs/page/{offset}',dependencies=[Depends(authorized)])
+    async def run_page(offset:int,request:Request):
+        if offset<0 or offset>1000000:raise HTTPException(422,detail={'code':'INVALID_PAGE_OFFSET'})
+        return safe(svc(request).store.list_runs(offset))
+    @app.get('/runs/{run_id}/result',dependencies=[Depends(authorized)])
+    async def result(run_id:str,request:Request):
+        value=svc(request).result(run_id)
+        return JSONResponse(status_code=200 if value.get('answer') else 202,content=value)
+    @app.get('/runs/{run_id}/trace',dependencies=[Depends(authorized)])
+    async def trace(run_id:str,request:Request):return safe({'run_id':run_id,'events':svc(request).store.events(run_id)})
+    @app.get('/runs/{run_id}/evidence/{evidence_id}',dependencies=[Depends(authorized)])
+    async def evidence(run_id:str,evidence_id:str,request:Request):return safe(svc(request).store.evidence(run_id,evidence_id))
+    @app.post('/runs/{run_id}/cancel',dependencies=[Depends(authorized)])
+    async def cancel(run_id:str,request:Request):return await svc(request).cancel(run_id)
+    @app.post('/runs/{run_id}/reviews',status_code=201,dependencies=[Depends(authorized)])
+    async def add_review(run_id:str,body:HumanReview,request:Request):return safe(svc(request).store.add_review(run_id,body.model_dump()))
+    @app.get('/runs/{run_id}/reviews',dependencies=[Depends(authorized)])
+    async def reviews(run_id:str,request:Request):return safe(svc(request).store.reviews(run_id))
+    return app
+

@@ -1,0 +1,60 @@
+{
+  "label": "synthetic_fixture_development_regression_not_independent_acceptance_set",
+  "description": "Hand-authored fictional short texts inspired by observed five-answer failures. Scripted judgments test contracts, not real model accuracy.",
+  "cases": [
+    {
+      "id": "three-versus-four-ratings",
+      "answer": "Capability is limited by four equipment ratings and active power output.",
+      "evidence": "Capability depends on stator winding rating, field current rating, terminal voltage rating, and active power output.",
+      "original_evidence": "Capability depends on stator winding rating, field current rating, terminal voltage rating, and active power output.",
+      "expected": "contradicted",
+      "original_expected": "contradicted",
+      "reason": "Three ratings are enumerated, plus active power output; four ratings plus output overcounts."
+    },
+    {
+      "id": "new-support-does-not-repair-original-citation",
+      "answer": "Reactive reserve requirements may be defined as margin on a PV curve.",
+      "evidence": "Reactive reserve requirements may be defined as margin on a PV curve under prevailing system conditions.",
+      "original_evidence": "Only dynamic reactive reserve is typically counted.",
+      "expected": "supported",
+      "original_expected": "insufficient_evidence",
+      "reason": "Independent PV wording supports the scoped claim; the original reserve-counting fragment does not discuss a PV curve."
+    },
+    {
+      "id": "jurisdiction-mismatch",
+      "answer": "This guidance states current Chinese provincial mandatory voltage limits.",
+      "evidence": "This voluntary guidance applies to the North American bulk power system.",
+      "original_evidence": "This voluntary guidance applies to the North American bulk power system.",
+      "expected": "insufficient_evidence",
+      "original_expected": "insufficient_evidence",
+      "reason": "North American voluntary guidance cannot establish a current Chinese provincial mandatory limit; it does not disprove the existence of Chinese rules."
+    },
+    {
+      "id": "absence-of-evidence-is-not-nonexistence",
+      "answer": "No Chinese voltage stability regulation exists.",
+      "evidence": "These supplied excerpts do not specify a Chinese provincial voltage limit.",
+      "original_evidence": "These supplied excerpts do not specify a Chinese provincial voltage limit.",
+      "expected": "not_assessable",
+      "original_expected": "not_assessable",
+      "reason": "Absence within supplied excerpts cannot establish universal nonexistence of regulations."
+    },
+    {
+      "id": "normal-voltage-negation",
+      "answer": "A normal bus voltage reading proves voltage stability.",
+      "evidence": "A normal bus voltage reading alone does not prove voltage stability.",
+      "original_evidence": "A normal bus voltage reading alone does not prove voltage stability.",
+      "expected": "contradicted",
+      "original_expected": "contradicted",
+      "reason": "The negated sufficiency statement contradicts the asserted sufficiency under the same single-reading condition."
+    },
+    {
+      "id": "bounded-evidence-insufficiency",
+      "answer": "I cannot provide Chinese provincial voltage limits from this supplied material.",
+      "evidence": "This supplied material describes North American reactive support and gives no Chinese provincial limits.",
+      "original_evidence": "This supplied material describes North American reactive support and gives no Chinese provincial limits.",
+      "expected": "supported",
+      "original_expected": "supported",
+      "reason": "A bounded inability to report a value from this material is distinct from claiming that no regulation exists anywhere."
+    }
+  ]
+}
