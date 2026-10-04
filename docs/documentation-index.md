@@ -2,6 +2,8 @@
 
 ## 2026-10-04 最新公开复现与并行轨迹修复
 
+- 代码提交97e3523最终独立克隆455项通过；final-stdlib-tests.txt、final-locked-tests.txt、final-harness-demo.txt、final-http-demo.txt保存实际提交验证。普通push因github.com:443连接失败未成功，最新提交与待推送范围见verification.json，不能以旧origin/master冒充远端同步。
+
 - [README](../README.md)：当前架构、标准库/锁定API测试、本机synthetic_fixture演示最短入口。
 - [当前状态](current-status.md)：schema13真实基线与本轮无付费范围，BM25默认/Dense-RRF非默认/微调未实现；网络状态按日期记录。
 - [公开复现](public-reproducibility-v1.md)：干净克隆、依赖、基线8错误、修复测试/跳过项、原Harness及HTTP演示证据。
