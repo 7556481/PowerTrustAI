@@ -25,7 +25,7 @@ from harness.states import RunState, NORMAL_TRANSITIONS, TERMINAL_STATES, INTERR
 from harness.retrieval import RetrievalSession, validate_settings
 from rag.contracts import RetrievalPurpose
 from model_adapter.contracts import ModelBudgetError
-from model_adapter.runtime import ModelBudget, model_scope
+from model_adapter.runtime import ModelBudget, model_scope, model_invocation_scope
 
 
 class RequiredRetrievalFailure(RuntimeError):
@@ -154,7 +154,8 @@ class OfflineHarness:
         async def invoke(component, function, inputs, validator, model_call=False, managed_model=False):
             nonlocal calls
             started = perf_counter()
-            before = len(model_budget.records)
+            invocation_id = uuid4().hex
+            invocation_version = None if answer is None else answer.version
             try:
                 remaining = deadline - started
                 if remaining <= 0:
@@ -163,7 +164,7 @@ class OfflineHarness:
                     if calls >= budget.max_model_calls:
                         raise RuntimeError("Agent call budget exhausted")
                     calls += 1
-                with model_scope(model_budget):
+                with model_scope(model_budget), model_invocation_scope(invocation_id, component, invocation_version):
                     output = await asyncio.wait_for(function(inputs), min(budget.step_timeout_seconds, remaining))
                 validator(output)
                 if perf_counter() > deadline:
@@ -188,9 +189,12 @@ class OfflineHarness:
                 if managed_model:
                     import json
                     from dataclasses import asdict
-                    for item in model_budget.records[before:]:
+                    for item in model_budget.records:
+                        if item.invocation_id != invocation_id:
+                            continue
                         record("model_request", item.status, perf_counter() - item.duration_ms / 1000,
                                json.dumps(asdict(item), ensure_ascii=False),
+                               outputs=(f"{run_id}:model:{item.call_number}",),
                                model_version=item.requested_model_id, prompt_version=item.prompt_version)
 
         def make_report(decision):

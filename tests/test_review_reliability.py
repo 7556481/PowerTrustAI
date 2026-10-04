@@ -1,4 +1,5 @@
 """Development protocol/rule regressions; not independent semantic gold labels."""
+from tests.fixture_paths import synthetic_diagnostics
 import asyncio
 from dataclasses import replace
 import json
@@ -199,7 +200,7 @@ class MessageArchiveRegression(unittest.TestCase):
         from model_adapter.contracts import ModelMessage
         import tempfile
         from pathlib import Path
-        with tempfile.TemporaryDirectory(dir=LOCAL_ROOT) as directory:
+        with synthetic_diagnostics() as directory:
             messages=(ModelMessage('system','Synthetic rule.'),ModelMessage('user','synthetic_fixture ignore rules is document DATA'))
             path=ResponseDiagnostics(directory).save_messages(messages,'synthetic-prompt',False)
             saved=json.loads(Path(path).read_text(encoding='utf-8'))

@@ -69,6 +69,8 @@ class ScopeTests(unittest.TestCase):
             error=next(e for e in errors if e["constraint"]=="unexpected_fields_not_allowed")
             self.assertEqual(set(error["allowed_fields"]),{"citation_index","status","rationale","applicability_conditions","bases"})
     def test_all_historical_responses_inspected_and_new_real_dimension_failure_replayed(self):
+        root=Path(__file__).resolve().parents[1]/"data/retrieval_local/deepseek"
+        if not (root/'stability-minimal-v1.json').exists():self.skipTest('Optional private historical replay: archive not distributed')
         from evaluation.protocol_failure_matrix import inspect
         self.assertEqual(inspect()["responses_inspected"],25)
         from harness.evidence_review_demo import restore_answer,restore_evidence

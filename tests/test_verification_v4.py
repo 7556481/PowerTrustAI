@@ -1,4 +1,5 @@
 """Synthetic contract tests plus optional private Q2 development archive replay."""
+from tests.fixture_paths import synthetic_diagnostics
 from dataclasses import replace
 import hashlib
 import json
@@ -121,7 +122,7 @@ class CorrectionTests(unittest.IsolatedAsyncioTestCase):
         adapter = ScriptAdapter(ModelResponse(json.dumps(invalid)), ModelResponse(json.dumps(valid)))
         budget = ModelBudget(2)
         local = Path(__file__).resolve().parents[1] / "data/retrieval_local"
-        with tempfile.TemporaryDirectory(dir=local) as directory:
+        with synthetic_diagnostics() as directory:
             with model_scope(budget):
                 await ModelEvidenceVerificationAgent(adapter, SETTINGS, diagnostic_dir=directory).run(inputs)
             for record in budget.records:

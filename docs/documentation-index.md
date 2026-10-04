@@ -1,5 +1,15 @@
 # 文档索引
 
+## 2026-10-04 最新公开复现与并行轨迹修复
+
+- [README](../README.md)：当前架构、标准库/锁定API测试、本机synthetic_fixture演示最短入口。
+- [当前状态](current-status.md)：schema13真实基线与本轮无付费范围，BM25默认/Dense-RRF非默认/微调未实现；网络状态按日期记录。
+- [公开复现](public-reproducibility-v1.md)：干净克隆、依赖、基线8错误、修复测试/跳过项、原Harness及HTTP演示证据。
+- [并发轨迹](model-trace-attribution-v1.md)：稳定请求归属、共享预算、纠正/超时/取消与旧记录兼容。
+- [实施接入点](implementation-roadmap.md)：逐主张证据、可选语义装配、支持判断微调数据与独立评测，均未在本轮实现。
+- 本机材料：data/runtime_local/public-repro-v1/reading-notes.md、verification.json；baseline-*、candidate-*日志、dependency-install.txt、git-audit.json，隔离检出不复制原私有data/.env。
+- 长期偏好见handoff最新节：用户授权检查提交后默认普通推送至核实origin和当前分支；旧不推送/网络失败记录保留历史含义。r1手册及PDF本轮不重建。
+
 更新：2026-10-04。路径相对本文；data 下材料仅本机可用且被 Git 忽略。历史文档保留当时版本，不覆盖；其旧测试数、默认 schema、知识版本或“未实现”描述不代表当前状态。
 
 ## 本轮界面 v1 与真实 API 验证素材

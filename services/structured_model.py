@@ -23,7 +23,7 @@ def strict_json(text):
 
 async def structured_request(client, messages, prompt_version, parser, *, diagnostics=None, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None,max_corrections=1,max_message_chars=None):
     budget = current_budget() or ModelBudget(limit=2)
-    before = len(budget.records)
+    request_numbers = []
     partial=None
     if max_corrections not in (0,1):raise ValueError("At most one format correction allowed")
     for correction in ((False,True) if max_corrections else (False,)):
@@ -38,11 +38,12 @@ async def structured_request(client, messages, prompt_version, parser, *, diagno
             response, number = await client.complete(messages, prompt_version, budget, correction,
                                                     response_contract_version=response_contract_version,
                                                     candidate_catalog_path=candidate_catalog_path,input_snapshot_path=input_snapshot_path)
+            request_numbers.append(number)
         except Exception as exc:
             if partial is not None:exc.partial_output=partial
             response = getattr(exc, "_response_for_diagnostics", None)
             if diagnostics is not None and response is not None:
-                record = budget.records[-1]
+                record = next(r for r in budget.records if r.call_number == exc.model_call_number)
                 diagnostic = {"stage":"model_response", "field_path":"$.finish_reason",
                     "constraint":"complete_bounded_response_required", "finish_reason":response.finish_reason}
                 path = diagnostics.save(response, record, diagnostic,request_messages_path=request_messages_path)
@@ -82,5 +83,5 @@ async def structured_request(client, messages, prompt_version, parser, *, diagno
                 record = next(r for r in budget.records if r.call_number == number)
                 path = diagnostics.save(response, record, None,request_messages_path=request_messages_path)
                 budget.annotate(number, "valid_structure", diagnostic_path=path)
-            return result, tuple(budget.records[before:])
+            return result, tuple(r for r in budget.records if r.call_number in request_numbers)
     raise ModelOutputError()

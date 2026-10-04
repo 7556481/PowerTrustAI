@@ -101,7 +101,22 @@ class PreparationTests(unittest.TestCase):
         data = json.loads((PRIVATE / "acceptance-real-v1.json").read_text(encoding="utf-8"))
         initial = data["runs"][1]["initial"]
         restored = restore(initial, HarnessResult)
-        self.assertEqual(json.loads(json.dumps(asdict(restored))), initial)
+        projected = json.loads(json.dumps(asdict(restored)))
+        # New optional attribution metadata must remain absent/unknown for old
+        # archives. Preserve every historical value and structural assertion.
+        def remove_unset_additions(actual, expected):
+            if isinstance(actual, dict) and isinstance(expected, dict):
+                for key in ('invocation_id', 'component', 'answer_version'):
+                    if key not in expected and key in actual:
+                        self.assertIsNone(actual.pop(key))
+                for key in expected.keys() & actual.keys():
+                    remove_unset_additions(actual[key], expected[key])
+            elif isinstance(actual, list) and isinstance(expected, list):
+                self.assertEqual(len(actual), len(expected))
+                for item, original in zip(actual, expected):
+                    remove_unset_additions(item, original)
+        remove_unset_additions(projected, initial)
+        self.assertEqual(projected, initial)
 
     def test_worst_case_accounts_for_every_original_citation_and_correction(self):
         answer = AnswerDraft("synthetic", 2, "A. B.", citations=(

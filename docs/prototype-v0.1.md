@@ -1,5 +1,7 @@
 # PowerTrustAI v0.1 本机辅助审核原型
 
+当前入口（2026-10-04）：[README](../README.md)、[当前状态](current-status.md)与[公开复现报告](public-reproducibility-v1.md)。真实schema13最终接线已在fb235746完成，说明提交e1042cdb；本轮仅修复公开复现/并发轨迹，不重复付费验证。用户最新长期授权为检查、提交后默认普通推送到核实origin/当前分支；下两段的526bdee、本地提交与网络等待为此前阶段记录，不代表永久或当前状态。
+
 2026-10-04后续状态：用户手动推送前两个提交，fetch核实master/origin/master均为526bdee。当前真实装配schema13有界原引用分组，配置/API边界及真实部分失败见[citation-review-workload-v1.md](citation-review-workload-v1.md)。默认40不变，历史96014不是推荐配置，schema12保留。本轮新代码只作本地提交、不推送。
 
 更新：2026-10-04。统一使用入口。**本机功能与一次真实Revision链路已验证，本地Git基线已提交；GitHub上传待网络恢复。** 用户撤销30次上限后，独立冻结并经浏览器API完成一次真实修订，8次模型请求；不能把这一个构造样例推广为普遍模型能力。

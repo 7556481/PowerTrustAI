@@ -1,5 +1,21 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-04 最新：公开复现与并行轨迹归属
+
+接续master/e1042cdb，初始工作区干净，代码父提交fb235746；读取schema13-final/verification-final.json确认此前真实初审→自然一次Revision→重提取/双重审已完整，本轮不重复付费验证。当前真实schema13与BM25/知识/业务政策不变。旧526bdee外部审查问题在当前代码复核后，修复仍存在的共享records切片和公开测试依赖。
+
+独立无私有data/.env的Git克隆、新Python3.13.2虚拟环境：基线442项/8错误/55跳过；并发探针2真实调用/3轨迹。修复后标准库453项/60跳过，锁定API/PDF453项/27跳过；新增纠正耗尽/SQLite重启绑定后最终锁定完整455项/27跳过，68.266秒，两个环境11项新增公开回归通过。27跳过均为未分发私有历史重放，关键普通测试保留，不以测试数量证明语义正确。
+
+ModelClient新增可选invocation_id/component/answer_version，ContextVar传递阶段归属；Harness逐invocation投影轨迹，稳定引用run_id:model:call_number；structured_request按本次请求编号返回，不跨并行阶段借记录。格式失败、超时、取消仍保存；旧元数据未知保持None，无历史迁移。公开8项轨迹回归及3项公共夹具回归可直接运行。
+
+原Harness demo七场景完成。隔离克隆本机8769 synthetic_fixture真实HTTP服务：页面200、两模式完成、Evidence回查/反馈保存/错误版本409/无令牌401均通过，付费0，服务已停。本轮无新浏览器交互检查、无PDF重建、无真实.env读取。基线失败、路径准备失误、完整日志与最终提交/推送回查在data/runtime_local/public-repro-v1/reading-notes.md、verification.json保留；公开报告见public-reproducibility-v1.md及model-trace-attribution-v1.md。
+
+README改为当前架构/最短入口；current-status.md区分BM25默认、Dense/RRF可选未装配、schema13、人辅政策/执行问题与微调未实现。implementation-roadmap.md只列逐主张检索、可选语义装配、支持判断数据/独立评测的源码接入点，不实施这些功能；最终中文手册r1/PDF保留。
+
+**长期推送偏好（用户2026-10-04明确授权，后续会话继续遵循）：** 正常开发完成、检查通过并创建提交后，默认普通推送至已核实GitHub origin和当前开发分支，无需逐次询问。先核实地址/分支/历史、敏感文件及待推送内容；远端新增正常整合，冲突无法安全处理时报告；不强推、不改写远端历史、不改全局代理或关闭SSL。此最新授权取代以下历史“仅本地提交/不推送”限制。本轮fetch成功，origin=https://github.com/7556481/PowerTrustAI.git，master未分叉，初始领先fb235746/e1042cdb两提交，按最新授权连同本轮提交一并推送。实际结果见本轮验证记录；历史网络失败记录保留原日期与事实。
+
+本轮结束不自动启动实验。秘密/.env/本机令牌/模型/官方全文/数据库/真实响应/私有归档不入Git；旧独立项目边界保持。公开安全回归中的虚构拒绝URL仅作为经复核夹具，不是真实凭据。
+
 更新：2026-10-04。本机辅助审核界面 v1 已完成，并按用户本轮授权完成两个真实 API 运行，共9次模型请求。当前真实服务在127.0.0.1:8765运行，队列空，不再提交新模型任务。阅读入口见 [文档索引](documentation-index.md)，设计依据见 [设计决策](design-decisions.md)。
 
 ## 本轮：本机辅助审核界面 v1

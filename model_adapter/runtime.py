@@ -12,6 +12,17 @@ from model_adapter.contracts import *
 
 
 _scope = ContextVar("powertrust_model_budget", default=None)
+_invocation = ContextVar("powertrust_model_invocation", default=None)
+
+
+@contextmanager
+def model_invocation_scope(invocation_id, component, answer_version):
+    """Inherited by wait_for/child tasks; the shared budget remains run-owned."""
+    token = _invocation.set((invocation_id, component, answer_version))
+    try:
+        yield
+    finally:
+        _invocation.reset(token)
 
 
 class ModelBudget:
@@ -71,6 +82,7 @@ class ModelClient:
         self.adapter, self.settings = adapter, settings
 
     async def complete(self, messages, prompt_version, budget, correction=False, *, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None):
+        owner = _invocation.get() or (None, None, None)
         number = budget.claim()
         started, response = perf_counter(), None
         status, code = ExecutionStatus.SUCCEEDED, None
@@ -118,6 +130,7 @@ class ModelClient:
         except Exception as exc:
             status = ExecutionStatus.TIMED_OUT if isinstance(exc, TimeoutError) else ExecutionStatus.FAILED
             code = getattr(exc, "code", "MODEL_CONNECTION_FAILED")
+            exc.model_call_number = number
             raise
         finally:
             from services.request_metrics import measure
@@ -128,4 +141,4 @@ class ModelClient:
                 None if response is None else response.finish_reason, code,
                 cost_estimate=None if response is None else response.cost_estimate,
                 response_contract_version=response_contract_version,candidate_catalog_path=candidate_catalog_path,input_snapshot_path=input_snapshot_path,
-                request_metrics=measure(messages)))
+                request_metrics=measure(messages),invocation_id=owner[0],component=owner[1],answer_version=owner[2]))

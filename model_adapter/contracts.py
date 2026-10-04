@@ -137,6 +137,9 @@ class ModelCallRecord:
     candidate_catalog_path: str | None = None
     input_snapshot_path: str | None = None
     request_metrics: dict | None = None
+    invocation_id: str | None = None
+    component: str | None = None
+    answer_version: int | None = None
 
 
 class ModelAdapter(Protocol):

@@ -1,4 +1,5 @@
 """synthetic_fixture mechanics and private development replay, not semantic acceptance."""
+from tests.fixture_paths import synthetic_diagnostics
 import hashlib
 import json
 from dataclasses import replace
@@ -122,7 +123,7 @@ class RuntimeTests(unittest.IsolatedAsyncioTestCase):
         inputs=inputs_for();response=ModelResponse('{"findings":[',finish_reason="length")
         adapter=ScriptAdapter(response);budget=ModelBudget(2)
         local=Path(__file__).resolve().parents[1]/"data/retrieval_local"
-        with tempfile.TemporaryDirectory(dir=local) as directory,model_scope(budget):
+        with synthetic_diagnostics() as directory,model_scope(budget):
             with self.assertRaises(ModelOutputError) as caught:
                 await ModelEvidenceVerificationAgent(adapter,SETTINGS,schema_version=6,diagnostic_dir=directory).run(inputs)
             self.assertEqual(budget.used,1)
@@ -136,7 +137,7 @@ class RuntimeTests(unittest.IsolatedAsyncioTestCase):
         inputs=inputs_for();invalid=wire(inputs) # historic literal quote, invalid in v6
         adapter=ScriptAdapter(ModelResponse(json.dumps(invalid)));budget=ModelBudget(2)
         local=Path(__file__).resolve().parents[1]/"data/retrieval_local"
-        with tempfile.TemporaryDirectory(dir=local) as directory,model_scope(budget):
+        with synthetic_diagnostics() as directory,model_scope(budget):
             with self.assertRaises(ModelOutputError):await ModelEvidenceVerificationAgent(adapter,SETTINGS,schema_version=6,diagnostic_dir=directory).run(inputs)
             self.assertEqual(budget.used,2)
             paths={r.candidate_catalog_path for r in budget.records}

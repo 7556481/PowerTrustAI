@@ -1,4 +1,5 @@
 """Offline standalone-protocol development regressions, no API or .env."""
+from tests.fixture_paths import synthetic_diagnostics
 import asyncio
 from copy import deepcopy
 from dataclasses import replace,asdict
@@ -76,7 +77,7 @@ class FactRereviewV3Tests(unittest.TestCase):
             v=response(d)
             if n==1:v['citation_reviews']=[]
             return v
-        with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]/'data/retrieval_local') as diag:
+        with synthetic_diagnostics() as diag:
             out,records,seen=run(inputs(False),build,diag)
             self.assertFalse(out.execution_issues);self.assertEqual(len(records),2)
             self.assertTrue(records[1].correction)

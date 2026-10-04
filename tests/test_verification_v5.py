@@ -1,4 +1,5 @@
 """synthetic_fixture and private development replay; no independent semantic acceptance."""
+from tests.fixture_paths import synthetic_diagnostics
 import asyncio
 from dataclasses import asdict, replace
 import hashlib
@@ -211,7 +212,7 @@ class ModelFlowTests(unittest.IsolatedAsyncioTestCase):
         adapter=ScriptAdapter(ModelResponse(json.dumps(invalid)),ModelResponse(json.dumps(valid)))
         budget=ModelBudget(2)
         local=Path(__file__).resolve().parents[1]/"data/retrieval_local"
-        with tempfile.TemporaryDirectory(dir=local) as tmp,model_scope(budget):
+        with synthetic_diagnostics() as tmp,model_scope(budget):
             out=await ModelEvidenceVerificationAgent(adapter,SETTINGS,diagnostic_dir=tmp,schema_version=5).run(inputs)
             self.assertEqual(out.prompt_version,PROMPT_VERSION)
             for rec in budget.records:

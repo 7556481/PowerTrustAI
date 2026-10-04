@@ -28,7 +28,7 @@ def write_new(path, value):
         handle.write(value if isinstance(value, str) else json.dumps(value, ensure_ascii=False, indent=2) + "\n")
 
 
-def baseline():
+def baseline(*, include_private_history=False):
     files = {}
     # Explicit project sources only: no .env, .git, virtualenv or historical prototype.
     for directory in ("agents", "core", "harness", "model_adapter", "rag", "services", "tools", "evaluation", "tests", "docs"):
@@ -41,8 +41,10 @@ def baseline():
             files[name] = sha(path)
     fingerprint = hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest()
     history = []
-    for name in ("stability-minimal-v2.json", "stability-minimal-v3-rereview.json"):
+    for name in (("stability-minimal-v2.json", "stability-minimal-v3-rereview.json") if include_private_history else ()):
         path = PRIVATE / name
+        if not path.exists():
+            continue
         data = json.loads(path.read_text(encoding="utf-8"))
         records = data["runs"][0]["result"]["model_records"]
         history.append({"file": str(path), "sha256": sha(path),

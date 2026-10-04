@@ -1,4 +1,5 @@
 """synthetic_fixture / archived development regressions, not independent acceptance."""
+from tests.fixture_paths import synthetic_diagnostics
 import asyncio
 from dataclasses import replace,asdict
 import hashlib
@@ -54,7 +55,7 @@ class PreconditionsTests(unittest.TestCase):
         raw=path.read_bytes();data=json.loads(raw);run=data["runs"][0]
         wrapper={"knowledge_version":data["knowledge_version"],"runs":[{"question":run["question"],"result":run["review"]}]}
         local=Path(__file__).resolve().parents[1]/"data/retrieval_local"
-        with tempfile.TemporaryDirectory(dir=local) as tmp:
+        with synthetic_diagnostics() as tmp:
             p=Path(tmp)/"offline_v7_envelope.json";p.write_text(json.dumps(wrapper),encoding="utf-8")
             _,inputs,out,_=replay(p)
             self.assertEqual(out.prompt_version,"evidence-verification-v7-program-preconditions")
@@ -222,7 +223,7 @@ class ExecutionTests(unittest.IsolatedAsyncioTestCase):
         wire_value["citations"]=[{"quote":"This source quote is absent from the answer.","evidence_ids":["synthetic-e1"]}]
         adapter=ScriptAdapter(ModelResponse(json.dumps(wire_value)));budget=ModelBudget(2)
         root=Path(__file__).resolve().parents[1]/"data/retrieval_local"
-        with tempfile.TemporaryDirectory(dir=root) as tmp,model_scope(budget):
+        with synthetic_diagnostics() as tmp,model_scope(budget):
             with self.assertRaises(ModelOutputError):
                 await EvidenceGenerationAgent(adapter,SETTINGS,diagnostic_dir=tmp).run(inputs)
             self.assertEqual(budget.used,2)
@@ -278,7 +279,7 @@ class ExecutionTests(unittest.IsolatedAsyncioTestCase):
         good=generation_response();wire_value=json.loads(good.text);wire_value["citations"][0]["evidence_ids"]=["invented"]
         adapter=ScriptAdapter(ModelResponse(json.dumps(wire_value)),good);budget=ModelBudget(2)
         root=Path(__file__).resolve().parents[1]/"data/retrieval_local"
-        with tempfile.TemporaryDirectory(dir=root) as tmp,model_scope(budget):
+        with synthetic_diagnostics() as tmp,model_scope(budget):
             result=await EvidenceGenerationAgent(adapter,SETTINGS,diagnostic_dir=tmp).run(generation_inputs())
             first=budget.records[0]
             self.assertEqual(first.validation_error["field_path"],"$.citations[0].evidence_ids")

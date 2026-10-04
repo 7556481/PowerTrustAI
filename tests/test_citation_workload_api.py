@@ -4,8 +4,11 @@ from pathlib import Path
 import tempfile
 import time
 import unittest
-from fastapi.testclient import TestClient
-from backend.api import create_app
+try:
+    from fastapi.testclient import TestClient
+    from backend.api import create_app
+except ImportError:
+    TestClient=None
 from backend.config import ServiceConfig
 from backend.assembly import ComponentFactory,Bundle
 from agents.fakes import make_fake_harness
@@ -43,6 +46,7 @@ class Factory(ComponentFactory):
             schema_version=13,citation_workload=self.config.citation_workload)
         return Bundle(h,(retriever,))
 
+@unittest.skipUnless(TestClient is not None,'Optional API test dependencies unavailable; install requirements-api.lock.txt')
 class WorkloadAPITests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();p=Path(self.tmp.name)

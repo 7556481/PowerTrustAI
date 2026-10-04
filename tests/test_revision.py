@@ -123,6 +123,8 @@ class UnitTests(unittest.TestCase):
         self.assertFalse(sufficient);self.assertEqual(len(a.citations),1)
     def test_legacy_archives_remain_failure(self):
         root=Path(__file__).resolve().parents[1]/"data/retrieval_local/deepseek/response-diagnostics"
+        if not all((root/name).exists() for name in ("response-95fd103f39dc4f1ba2b881e3e55a4905.json","response-dadf62eba698484f8f583f13cdd1611f.json")):
+            self.skipTest('Optional private historical replay: response archives not distributed')
         for name in ("response-95fd103f39dc4f1ba2b881e3e55a4905.json","response-dadf62eba698484f8f583f13cdd1611f.json"):
             value=json.loads((root/name).read_text(encoding="utf-8"))
             raw=json.loads(value["response_text"])
