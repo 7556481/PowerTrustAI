@@ -1,6 +1,6 @@
 # PowerTrustAI v0.1 本机辅助审核原型
 
-更新：2026-10-04。统一使用入口。**本机功能与一次真实Revision链路已验证；Git基线提交尚未完成。** 用户撤销30次上限后，独立冻结并经浏览器API完成一次真实修订，8次模型请求；不能把这一个构造样例推广为普遍模型能力。
+更新：2026-10-04。统一使用入口。**本机功能与一次真实Revision链路已验证，本地Git基线已提交；GitHub上传待网络恢复。** 用户撤销30次上限后，独立冻结并经浏览器API完成一次真实修订，8次模型请求；不能把这一个构造样例推广为普遍模型能力。
 
 ## 环境与启动
 
@@ -17,11 +17,11 @@ cd D:\PowerTrustAI
 演示模式 `synthetic_fixture` 使用现有假组件，不加载 `.env`、不请求真实模型或知识索引，页面明显标识。真实模式使用原 Harness、默认 BM25、固定知识快照、事实审核 schema12、领域规则和有限修订政策：
 
 ```powershell
-# 确认本轮付费授权、预算和冻结计划后再启动、提交
+# 日常真实模式，会产生模型费用；冻结实验另行记录计划
 & .\.venv\Scripts\python.exe -m backend --port 8765
 ```
 
-启动与健康查询不调用模型；真实提交会付费。默认服务模型调用上限40，不代表本轮允许30时可以直接沿用40。环境变量优先，真实入口通过既有加载器读取项目根 `.env`；密钥配置见 `.env.example` 的字段说明，勿复制实际密钥到聊天、截图或运行材料。
+启动与健康查询不调用模型；真实提交会付费。日常使用由用户主动提交，默认服务模型调用上限40，不要求每次编写实验授权和冻结计划；对照/验收实验批次才独立冻结输入、配置、上限及停止条件，若实验授权少于40须相应控制。环境变量优先，真实入口通过既有加载器读取项目根 `.env`；密钥配置见 `.env.example` 的字段说明，勿复制实际密钥到聊天、截图或运行材料。
 
 ## 令牌与密钥
 
@@ -71,8 +71,12 @@ notepad.exe D:\PowerTrustAI\data\runtime_local\access-token
 
 ## 基线与材料
 
-Git 当前全项目仍未跟踪，不能把全部文件说成本轮修改。已检查路径级候选及忽略规则，`.env`、令牌、data、数据库、模型、全文、实际请求响应及独立旧项目排除。Git user.name/email 未配置，按要求停止提交，无提交哈希、无标签、无推送；未暂存或设置身份。此时不能声称有 Git 可回退基线。
+后续用户授权新项目本地提交与GitHub推送。本机Git身份现已配置，未由助手设置或输出身份值。Git根D:/PowerTrustAI，分支master；明确审核218个文件、暂存blob及全部提交历史后，创建本地基线 `3d5e0cd842a1039731aafb209fb5444bd1905622`。`.env`、令牌、data、数据库、模型、官方全文、实际请求响应及独立旧项目排除；不使用未经检查的git add .。
 
-本轮验收材料：`data/runtime_local/v0.1-acceptance/reading-notes.md`、`revision-review.md`、`verification.json`、测试日志、浏览器截图、冻结预检和重启对照。后续若用户自行配置 Git 身份，再核对明确文件清单并提交；后续模型语义或更广泛场景验证仍须独立版本和授权，不自动开启下一轮。
+origin已按授权添加为https://github.com/7556481/PowerTrustAI.git。2026-10-04前轮只读Git及无认证HTTPS查询记录连接重置，远端内容当时未知；当时没有尝试推送、设置upstream或打标签。后续需查询当时网络和远端历史，本轮手册修订不访问远端、不推送；不将历史重置当成永久状态。诊断与用户本机步骤见 [github-upload-troubleshooting.md](github-upload-troubleshooting.md)。
 
-最终中文《PowerTrustAI 项目学习与面试手册》仍待项目最终交付，要求见 [final-handbook-requirements.md](final-handbook-requirements.md)，本说明及 README 均不替代它。本轮未编写长手册。
+本轮验收材料：`data/runtime_local/v0.1-acceptance/reading-notes.md`、`revision-review.md`、`verification.json`、测试日志、浏览器截图、冻结预检和重启对照。Git提交与历史审计另存data/runtime_local/github-baseline；后续模型语义或更广泛场景验证仍须独立版本和授权，不自动开启下一轮。
+
+用户随后授权继续最终手册，已交付 [可编辑中文学习与面试手册](PowerTrustAI-project-study-interview-handbook.md)、[图源](handbook-diagrams.md)及output/pdf下31页PDF。PDF实际渲染并检查中文、目录、图表、代码、链接与裁切；验证记录在data/runtime_local/final-handbook。本说明及README均不替代该手册，早期停止/未写状态作为历史保留。
+
+2026-10-04定向修订r1已另存：[新手册源](PowerTrustAI-project-study-interview-handbook-r1.md)、[修改清单](handbook-r1-changes.md)。旧31页版不覆盖。r1解释公式/算例、5段源码、三类架构关系和运行/实验区别。96014为历史临时异常验收预算，引用数量与最坏成本的协议界限尚未修复；默认40保护调用上限，不保证任何合法修订都完整结束。此次不修改应用、不新增调用。

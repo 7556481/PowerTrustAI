@@ -138,3 +138,26 @@
 ## GitHub新项目基线上传素材（2026-10-04）
 
 用户指定新仓库 https://github.com/7556481/PowerTrustAI.git；仅D:/PowerTrustAI，旧独立项目不操作。检查基线明确清单、暂存/历史blob、远端引用和推送回查证据将保存在 data/runtime_local/github-baseline/，不含凭据。提交/推送不会改变最终中文学习与面试手册要求，不替代手册交付。
+
+### 最新本地基线与手册交付
+
+- 本地基线：master / `3d5e0cd842a1039731aafb209fb5444bd1905622`，218个文件；candidate-audit.json、staged-audit.json、history-audit.json证明明确路径和历史blob核对。旧段落的未提交/身份缺失为当时状态，最新提交覆盖其当前状态。
+- [GitHub网络诊断与修复步骤](github-upload-troubleshooting.md)：只读连接重置、未到登录、未推送，代理凭据不输出；远端历史仍未知。
+- [中文项目学习与面试手册源](PowerTrustAI-project-study-interview-handbook.md)：17章，实际代码、真实失败、指标分母与面试追问；README不替代。
+- [图源](handbook-diagrams.md)、`tools/build_handbook_pdf.py`：可编辑Mermaid与PDF矢量图/分页/目录生成。文档工具不修改项目模型/服务环境。
+- `output/pdf/PowerTrustAI_Project_Study_Interview_Handbook_v0.1.pdf`：31页最终交付，中文嵌入字体、目录书签、分页；全部页面实际渲染。
+- `data/runtime_local/final-handbook/build.json`、`pdf-verification.json`、联系表与页面PNG：SHA/页数/55个代码路径/视觉检查。旧桌面PDF正文未读，自动审批拒绝记录见handoff。
+- 本轮新增付费请求0，未重跑历史检索实验；现有428项最终测试证据不宣称本轮重新执行。Git基线之后的手册及交接资料仍未提交，精确清单见github-baseline/final-delivery.json。
+
+### 2026-10-04 学习手册定向修订r1（当前阅读入口）
+
+- [r1可编辑手册](PowerTrustAI-project-study-interview-handbook-r1.md)：六项定向纠正、BM25/E5/RRF与unknown算例、必要组合、5段真实短代码、面试追问。应用仍v0.1，文档r1。
+- [r1修改清单](handbook-r1-changes.md)：逐项依据、实际职责、未修复限制与旧版保留。
+- [r1图源](handbook-diagrams-r1.md)、tools/build_handbook_pdf_r1.py：控制/数据/observer关系，独立构建不覆盖旧文件。
+- output/pdf/PowerTrustAI_Project_Study_Interview_Handbook_v0.1-r1.pdf：38页新PDF，18个目录书签，全部页面重新渲染复核；旧31页PDF保持不变。
+- data/runtime_local/handbook-r1/original-hashes.json、code-excerpts.json、build.json、verification.json：旧SHA、源码行号/摘录SHA、当前HEAD、源码比对、教学算术、全页渲染和排版核验。
+- 当前本地历史仍仅3d5e0cd/master，无基线后文档提交；128个应用源/资源未变。本轮API/模型/历史实验/网络查询/提交/推送均0。前轮网络重置为2026-10-04记录，不作永久现状。旧索引的“当前手册31页”以本节r1入口接续。
+
+### 2026-10-04 手册r1独立本地文档提交
+
+按后续授权提交15个明确文档交付路径，包含旧版与r1源/PDF/图源/构建器、修改清单及相关说明；应用代码不变，不推送。data/runtime_local/handbook-r1/document-commit.json记录实际提交哈希、父提交、逐文件SHA与最终工作区状态。前节无文档提交为修订完成时的历史状态；引用工作量修复尚未开始，本轮不扩写手册、不调用API。

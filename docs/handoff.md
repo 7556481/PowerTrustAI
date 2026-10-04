@@ -144,3 +144,35 @@ Git路径级候选、忽略规则已检查；.env、data（包括令牌/DB/全�
 用户明确授权检查后创建本地基线并推送到 https://github.com/7556481/PowerTrustAI.git，覆盖默认不自动提交/推送规则，仅限新项目。已确认Git根D:/PowerTrustAI、当前分支master；初始没有提交、没有remote，Git user.name/email现已由本机配置（不修改或输出身份值）。仅明确白名单源码、测试、依赖、公开元数据和非敏感文档进入拟提交清单；.env/data/令牌/密钥/模型/全文/运行库/真实请求响应/私有归档及旧独立项目排除。将逐暂存blob及提交历史检查，忽略规则不代替已跟踪检查；不强推、不改分支、不改仓库可见性、不打发布标签。实际推送结果与哈希记在本轮忽略的GitHub交付记录并在完成后补交接。
 
 此上传不启动付费批次，也不改变最终中文手册要求或既有写作授权；此前最终手册尚未交付，不以本次上传、README或运行说明替代。
+
+## 2026-10-04 本地基线与中文手册交付（最新状态）
+
+已完成本地基线提交：`3d5e0cd842a1039731aafb209fb5444bd1905622`，master，Git根D:/PowerTrustAI，218个明确文件。候选、暂存blob及全部历史已核对；仅CRLF/LF转换差异，不修改源码。忽略规则和已跟踪内容分别检查，凭据、data、模型、官方全文、数据库、真实响应、私有归档及旧仓库均排除。Git身份本机已配置，助手未修改/输出身份；没有标签或推送。
+
+origin按授权添加指定地址。只读Git HTTPS连续连接重置，匿名curl亦HTTP000/reset；TCP443一度可连接，不能证明TLS成功。没有发现普通/URL专属Git代理及相关进程环境变量，system sslBackend为schannel；未改全局配置、未关闭SSL验证、0次push。远端为空/非空仍未知。用户要求不等待，已继续本机文档；恢复后先检查refs及历史再按已授权推送master/upstream。详见github-upload-troubleshooting.md，私有安全诊断在data/runtime_local/github-baseline。
+
+用户后续明确继续最终中文学习手册：已独立编写17章可编辑Markdown、Mermaid图源、PDF构建器及31页PDF（output/pdf/PowerTrustAI_Project_Study_Interview_Handbook_v0.1.pdf）。覆盖全部交付主题与面试追问；保留N10/N11/N12、跨claim工具引用、有限修订的5 supported/1 insufficient等真实限制。实际渲染所有页面，检查字体、目录/页码、图表、代码、链接、跨页与裁切，55个代码路径存在；排版核验data/runtime_local/final-handbook。早期39页版发现孤立段和拆表，改为条件分页后31页，不靠空页凑篇幅。
+
+自动审批拒绝读取桌面旧PDF正文，原因是现有文档记录未读状态；没有重试或绕过，手册只依据当前项目代码、说明与归档独立编写。文档更新曾因apply_patch匹配整行错误而原子失败，修正后完成，没有更改项目运行代码。普通测试未重跑，沿用428项最终日志作为既有证据；本轮新增模型请求0。模型协议、默认检索、政策、服务配置、运行库与旧项目均不变。
+
+当前本地基线可回退，具备人工监督的本机原型冻结条件；未获得工程安全认证。基线后的手册、图源、构建器与交接更新暂未提交，精确工作区清单写入github-baseline/final-delivery.json；不把这些说成基线内文件。远端推送唯一外部阻塞，未自动开启新实验或下一轮。
+
+## 2026-10-04 手册定向修订r1（最新文档状态）
+
+用户要求六项纠正和学习内容补充，不新增功能、不调用API、不重跑历史实验、不自动推送。本轮git核对仍只有master/3d5e0cd842a1039731aafb209fb5444bd1905622一个提交，无基线后文档提交；128个应用源码/资源与HEAD一致。已有文档工作区变化来自前轮，不能算成这次业务修改。前轮2026-10-04网络重置记录未本轮复测，不能作为永久当前状态；本轮0次网络查询、提交和推送。
+
+保留旧31页Markdown/PDF及原图源/构建器，SHA核对一致。独立新增PowerTrustAI-project-study-interview-handbook-r1.md、handbook-diagrams-r1.md、handbook-r1-changes.md、build_handbook_pdf_r1.py及output/pdf下v0.1-r1.pdf。r1是文档修订号，应用v0.1与schema12装配不变。
+
+定向纠正：BM25按分数降序，平分才按document_id/version/ordinal/fragment_id升序；图中控制、数据访问、snapshot observer分型，Harness不直接持有运行库；96014是历史临时异常预算，引用单元成本的小型硬边界仍未修复，默认40未改；日常主动真实提交与冻结验收实验分开；“并非230 V”数学上成立，旧insufficient是审核行为限制。E5窗口池化均值合并后一次L2、unknown评测器None与教学上下界明确分开。
+
+新增BM25/E5/RRF/unknown/必要组合教学手算、5段实际源码及输入输出/异常说明；LangChain取舍、受控工作流、线程取消、WAL/单进程、客户端锁非幂等面试追问。摘录直接读取当前源，仅去公共缩进，code-excerpts.json保存行号/SHA。本轮仅文档构建、源码/算术及PDF核验，未重跑428项测试；无模型请求。预算缺口、幂等和语义局限只记录，不实现修复。
+
+本机核验归档data/runtime_local/handbook-r1/：original-hashes.json、code-excerpts.json、build.json、verification.json及全部页面渲染。原图/表孤段问题继续按条件分页处理；目录文字替换曾进入17章正文，修正为仅改目录。重要失败不抹除。最终页数以build/verification为准，修改清单登记职责；后续最新入口优先r1，旧31页仅历史版本。
+
+最终r1为38页，18个目录书签，全部页面实际渲染复核；中文嵌入字体和页面几何无越界，5段源码摘录一致、55个路径存在。固定72字符断行会拆标识符，已仅在新构建器改为优先语法边界并标视觉续行，旧构建器不改。Windows下rg字面requirements*.txt曾报os error123，改为明确枚举根依赖文件后核对，不影响源码或运行；无LangChain依赖。准确文件清单与验证摘要存于本轮verification.json，不修改前轮归档。
+
+## 2026-10-04 手册r1独立文档提交
+
+按用户后续明确授权，独立保存已完成的旧版/r1手册、两版PDF、图源、文档构建脚本、修改清单、运行/网络说明及交接资料，共15个明确路径。先检查工作区与差异、文本及PDF内容、暂存blob，再创建本地文档提交；不改写3d5e0cd基线、不推送。实际提交哈希、文件SHA与剩余工作区状态登记于data/runtime_local/handbook-r1/document-commit.json，旧段落的“无文档提交”是当时记录。
+
+引用审核工作量边界修复留待下一轮，本轮未开始应用代码修改，现有预算契约缺口仍未修复。无API调用、测试重跑或手册扩写；凭据、data和私有归档不进入提交。
