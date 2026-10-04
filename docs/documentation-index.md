@@ -1,5 +1,12 @@
 # 文档索引
 
+## 2026-10-04 知识库与支持判断样本扩充 v1
+
+- [实际官方来源/覆盖缺口、入库快照、pending样本与隔离](knowledge-support-expansion-v1.md)：新4PDF（3开发＋1预留）、48新候选/16家族；不覆盖旧91或重跑基线。
+- evaluation/knowledge_support_expansion.py：离线复制知识历史、来源锚定、原文定位及复用候选/复核出口；tests/test_knowledge_support_expansion.py：公开临时synthetic_fixture。
+- 私有data/runtime_local/knowledge-support-expansion-v1/：source-manifest/acquisition、development.sqlite3/reserved-evaluation.sqlite3、ingestion、parse-summary、curated-families、candidates-v1/v2、support-review-expansion-v1.zip、reading-notes.md、verification.json、offline-tests与选页PNG。全文/候选不入Git，预留文档不进开发库。
+- 最终r1手册继续保留，未扩写或重建PDF。pending不能替代用户监督或独立金标准。
+
 ## 2026-10-04 证据支持判断数据集与未微调基线 v1
 
 - [任务/标签、实际候选/划分、运行命令与失败基线](support-judgment-dataset-v1.md)：未训练、未改生产审核；pending不计算语义指标。

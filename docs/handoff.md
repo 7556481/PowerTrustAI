@@ -1,5 +1,17 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-04 知识库与支持判断样本扩充 v1（最新）
+
+完成检查跨至2026-10-05：最终511项离线回归OK（65.784秒，0跳过），新增9项公开synthetic_fixture；48原文逐字回查/parent分区通过，最终适配重建任务哈希不变。四封面另核对出版/版本元数据，预留文档仅查封面，没有训练候选生成。新ZIP 69,256字节；最终提交/普通推送及远端回查保存本机verification.json。
+
+接续c5bd386，master初始干净，命令级7890代理fetch确认origin/master同哈希；长期检查后普通推送授权继续有效，历史网络失败不改写。详见[扩充记录](knowledge-support-expansion-v1.md)。匿名取得NERC MOD-025-2（20页）、PPMV July2018（141页）、AEMO Stability3.0（33页）及预留Limits Advice（11页）；原URL/重定向/出版主体/版本/地区/版权与SHA保存。NREL两报告下载失败，中国GB38755仅官方元数据，无全文/具体限值依据。
+
+只读复制原SQLite知识历史，另建development.sqlite3与reserved-evaluation.sqlite3；开发6文档618片段，k-8272a6d605b7555e1f34ce12bd6bbb2375372946af44f6fc461755f15713f493；预留4文档435片段，k-f44d40d09985a58223d8d3c92ad49ab2ea920fce510e0fc14fc06ce2ba8fa314。两库旧快照424片段完整回查相同，生产知识/排名/审核政策未改，无语义索引重建。205页仍提取pending，视觉抽查3页文字，不把图表/公式提取当准确原文。
+
+复用support_dataset，48/48新synthetic/pending、16家族；45事实＋3工程前提，建议16支持/17矛盾/12不足/3不可评。预分36/9/3，parent/近重复同组；0相同交付引文跨集合但3同Evidence页及3文档共享，不能宣称独立无泄漏。Limits Advice先分区、未生成训练样本/答案；0已构建独立评测项。旧91种子、旧ZIP、5预测及失败记录关键SHA前后相同，不重跑。AEMO专项署名许可已查，NERC训练许可仍未确认，不开始训练。
+
+新增离线来源适配evaluation/knowledge_support_expansion.py与公开synthetic_fixture回归。首次7个清理错误暴露SQLite未显式关闭，修正后通过；查页编码失败/渲染字体警告保留。本机data/runtime_local/knowledge-support-expansion-v1/含sources、两个库、source-manifest、ingestion、candidates-v1/v2、support-review-expansion-v1.zip、reading-notes、verification、测试与PNG；只代码/测试/说明提交。最终测试、提交/远端哈希见verification与Git；长期普通推送偏好继续。未调用模型、不改手册/PDF、不自动开启新实验。
+
 ## 2026-10-04 证据支持判断数据集与未微调基线 v1（最新）
 
 接续已推送8adc7cb、master初始干净。实现evaluation/support_dataset.py与support_baseline.py：显式归档来源/冻结请求/响应哈希→逐组件及原引用候选→去重/谱系/家族预分→AI辅助pending复核MD/JSON→有限纠正基线与离线指标→仅确认标签训练出口。生产Harness/schema13/政策/默认BM25不改，未训练、未安装训练框架、不重建PDF。详见support-judgment-dataset-v1.md；最终提交及普通推送/远端回查以Git和本机verification.json为准，长期默认推送授权继续有效。
