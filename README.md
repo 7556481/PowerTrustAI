@@ -34,6 +34,8 @@ python -m venv .venv
 
 ## 当前架构
 
+可选[逐主张事实检索与交付v1](docs/per-claim-fact-retrieval-v1.md)已实现；aggregate仍为默认，生成/领域检索及BM25排名不变。新策略通过服务端 `POWERTRUST_FACT_RETRIEVAL_STRATEGY=per_claim_v1` 启用，提供逐组件查询/候选映射；[固定对照](docs/per-claim-fact-comparison-v1.md)同时报告覆盖和额外成本，不据少量案例切换默认。
+
 同源HTML/CSS/JavaScript → HTTP API → `ApplicationService`（单进程、一个活动任务、两个等待位置）→ `ComponentFactory` → 现有 `OfflineHarness`。问答生成或接收已有回答后，提取主张；事实审核与领域审核并行；确定性政策决定最多一次Revision，再完整重提取和双重审。SQLite保存阶段检查点、结果和追加人工反馈；重启将未完成运行标记interrupted，不自动重发。
 
 - **默认检索：BM25**，固定知识版本、Evidence原文定位与ID作用域校验。

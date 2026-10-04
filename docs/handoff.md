@@ -1,5 +1,21 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-04 最新：逐主张事实检索与证据交付 v1
+
+用户确认bb0b208已推送，命令级http.proxy=http://127.0.0.1:7890 fetch核实master/origin/master一致，初始工作区干净。历史网络失败原样保留，不当当前状态。本轮完成可选per_claim_v1；aggregate默认、生成/领域查询、BM25参数、schema13/原引用分组、支持要求、有限修订与政策不变。
+
+复用RetrievalSession，按document_body/technical_content组件proposition+必要限定查询；其他依据类型不强制查文献。相同查询去重/同快照缓存，去重Evidence与逐组件映射进入同一独立模型请求。新fact-evidence-delivery-v1输入/提示后缀显式版本化，逐对象保存回答版本、claim/component、query方法、retrieval_id、核心命中/邻接链接、实际交付/省略原因/复用来源；原引用候选不借用独立召回。新版本重新绑定，失效/容量未交付与业务证据不足分开。单查询失败仍审核有效同级；未完成对象保留not_assessable与执行问题，不能pass。
+
+环境策略POWERTRUST_FACT_RETRIEVAL_STRATEGY=per_claim_v1；环境工厂检索额度默认128（aggregate12），可POWERTRUST_MAX_RETRIEVAL_CALLS显式覆盖，只管本机检索，无新付费批次总上限；步骤/总超时、原40运行模型计数保护、有限纠正/一次Revision仍在。manifest、SQLite、API retrieval及页面安全JSON详情接入。源代码冻结哈希见本机计划，真实执行中不改代码。
+
+固定四组真实资料对照使用完全同一回答/主张/知识、BM25/上下文与明示限制：前三目标覆盖同，四对象aggregate3/4、新路径4/4；查询1→2或4，交付文本与延迟增加，不能归为语义提升或公平同总资源试验，因此不推荐切默认。最终运行驱动及源哈希comparison-final.json；旧对照输出不覆盖、旧30题不重标。
+
+真实run53613803b0a248819bf3d063ce41d5c8经HTTP一次提交：自然一次Revision，提取2/独立事实3含纠正1/原引用组2/领域2/Revision1，共10模型、7实际检索；v1/v2映射与原引用作用域通过，无execution_issues，required_stages_complete=true、all_required_checks_assessed=false，review_required。223532 token，51.573秒，价格快照估算USD0.026815116–0.053630232非账单。Evidence回查相等；重启结果相等10→10无重发，8766服务已停止。三个最终supported不证明质量提升，领域工程前提未齐；新浏览器交互未验收，HTTP与公开投影/安全文本路径已验证。
+
+公开13项新增回归及完整离线日志见data/runtime_local/per-claim-fact-v1/，真实输入/请求/响应/代码冻结/逐主张链路/用量/失败/提交推送记录见reading-notes.md、verification.json与real-verification.json。实现及固定对照两文档是当前入口，手册PDF未重建，不写下一轮实验。本轮已授权检查提交后经命令级代理普通推送并回查；不强推、不改全局代理/SSL，确切结果补记本机验证。
+
+最终离线468项75.028秒全部通过，无skip；另外无原data/.env的独立公开检出13项新回归全部通过。node --check通过。真实运行期间和最终交付runtime源哈希一致，冻结ZIP可回查；测试准备阶段JSON数组/快照/模块路径失败与原文导出审批拒绝均记录，不绕过审批、不并入真实批次。
+
 ## 2026-10-04 最新：公开复现与并行轨迹归属
 
 交付代码提交97e35235e1e30b5cd81a6dd8b1ac6d01e31b568b。提交后的最终干净克隆：标准库455项/60跳过/55.227秒；API/PDF锁定455项/27私有历史跳过/68.130秒；原七场景及两模式HTTP演示通过，付费0。最终日志final-stdlib-tests.txt、final-locked-tests.txt、final-harness-demo.txt、final-http-demo.txt。全可达Git历史240路径/286唯一blob已审，无禁入问题；安全回归虚构拒绝URL作为明确例外保留。

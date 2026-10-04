@@ -3,7 +3,7 @@ from typing import Protocol, Tuple
 
 from core.models import (
     AnswerDraft, AuditDecision, AuditReport, Claim, Evidence, EvidenceBinding,
-    ExecutionIssue, ExecutionStatus, RunTrace, TaskRequest, ClaimExtractionOutput,
+    ExecutionIssue, ExecutionStatus, RunTrace, TaskRequest, ClaimExtractionOutput, FactRetrievalBinding,
 )
 from rag.contracts import ContextOptions, RetrievalHit
 from agents.contracts import EvidenceVerificationOutput, PowerDomainReviewOutput, GenerationOutput, RevisionOutput
@@ -29,6 +29,7 @@ class RunBudget:
 class RetrievalSettings:
     max_results: int = 3
     context_options: ContextOptions | None = ContextOptions()
+    fact_strategy: str = "aggregate"
 
 
 @dataclass(frozen=True)
@@ -52,6 +53,11 @@ class RetrievalRecord:
     duration_ms: int = 0
     reason: str = ""
     context_omissions: Tuple[str, ...] = ()
+    answer_id: str | None = None
+    reused_from_retrieval_id: str | None = None
+    fact_bindings: Tuple["FactRetrievalBinding", ...] = ()
+    omission_reasons: Tuple[Tuple[str, str], ...] = ()
+    offered_context_links: Tuple[Tuple[str, Tuple[str, ...]], ...] = ()
 
 
 @dataclass(frozen=True)

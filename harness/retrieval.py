@@ -1,6 +1,6 @@
 """Per-run retrieval accounting used by the existing Harness, not a scheduler."""
 import asyncio
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from time import perf_counter
 from uuid import uuid4
 
@@ -33,6 +33,7 @@ def validate_settings(settings):
     try:
         validate_types(settings, RetrievalSettings)
         require(settings.max_results > 0, "max_results must be positive")
+        require(settings.fact_strategy in ('aggregate', 'per_claim_v1'), 'Unknown fact retrieval strategy')
         options = settings.context_options
         if options:
             require(options.max_chars >= 0 and options.max_fragments >= 0 and 0 <= options.depth <= 4,
@@ -49,6 +50,7 @@ class Delivery:
     bindings: tuple
     issue: ExecutionIssue | None
     record: RetrievalRecord
+    issues: tuple = ()
 
 
 class RetrievalSession:
@@ -59,25 +61,25 @@ class RetrievalSession:
         self.known_evidence = {e.evidence_id: e for e in user_evidence}
         self.calls = self.chars = 0
         self.records = []
+        self.query_cache = {}
+        self.fact_delivered = set()
 
-    async def retrieve(self, purpose, request, answer, claims):
+    async def retrieve(self, purpose, request, answer, claims, *, query_override=None, fact_query=False):
         started, rid = perf_counter(), uuid4().hex
         version = None if answer is None else answer.version
-        query = query_for(purpose, request, claims)
+        query = query_for(purpose, request, claims) if query_override is None else query_override
+        reused = None
         result, evidence, bindings, omitted = None, (), (), []
         issue, outcome, status, offered, reason = None, "failed", ExecutionStatus.FAILED, 0, ""
         accepted = 0
+        omission_reasons = []
         try:
             remaining = self.deadline - started
             if remaining <= 0:
                 raise TimeoutError("Total run duration exhausted before retrieval")
-            if self.calls >= self.budget.max_retrieval_calls:
-                outcome = "budget_exhausted"
-                raise RuntimeError("Retrieval call budget exhausted")
             if self.chars >= self.budget.max_retrieval_chars_total or self.budget.max_retrieval_chars_per_call == 0:
                 outcome = "budget_exhausted"
                 raise RuntimeError("Retrieval evidence character budget exhausted")
-            self.calls += 1
             context = self.settings.context_options
             if context:
                 context = ContextOptions(min(context.max_chars, self.budget.max_retrieval_chars_per_call,
@@ -87,9 +89,16 @@ class RetrievalSession:
                                          context.allow_cross_page, self.settings.context_options.priority)
             retrieval_request = RetrievalRequest(query, request.scenario_id, purpose, self.knowledge_version,
                                                  self.settings.max_results, context)
+            cache_key = (self.knowledge_version, query, self.settings.max_results, context)
+            cached = self.query_cache.get(cache_key) if fact_query else None
+            if cached is None:
+                if self.calls >= self.budget.max_retrieval_calls:
+                    outcome = 'budget_exhausted'
+                    raise RuntimeError('Retrieval call budget exhausted')
+                self.calls += 1
 
             async def work():
-                output = await self.retriever.retrieve(retrieval_request)
+                output = cached[0] if cached else await self.retriever.retrieve(retrieval_request)
                 validate_types(output, RetrievalResult)
                 require(output.knowledge_version == self.knowledge_version, "Retrieved snapshot mismatch")
                 for reported in output.execution_issues:
@@ -116,34 +125,46 @@ class RetrievalSession:
                 return output
 
             result = await asyncio.wait_for(work(), min(self.budget.step_timeout_seconds, remaining))
+            if fact_query:
+                reused = cached[1] if cached else None
+                self.query_cache.setdefault(cache_key, (result, rid))
             extras = () if result.context is None else result.context.items
             offered = sum(len(e.text) for e in result.evidence) + sum(len(i.evidence.text) for i in extras)
             capacity = min(self.budget.max_retrieval_chars_per_call,
                            self.budget.max_retrieval_chars_total - self.chars)
             chosen, core_ids = [], set()
+            charged = 0
             for e in result.evidence:
-                if len(e.text) <= capacity:
+                cost = 0 if fact_query and (version, e.evidence_id) in self.fact_delivered else len(e.text)
+                if cost <= capacity:
                     chosen.append(e)
                     core_ids.add(e.evidence_id)
-                    capacity -= len(e.text)
+                    capacity -= cost
+                    charged += cost
                     bindings += (EvidenceBinding(e.evidence_id, "index_core_hit", purpose.value, version, rid),)
                 else:
                     omitted.append(e.evidence_id)
+                    omission_reasons.append((e.evidence_id, 'core_fragment_exceeds_delivery_capacity'))
             core_omitted = bool(omitted)
             for item in extras:
                 e = item.evidence
                 linked = tuple(link.core_evidence_id for link in item.links if link.core_evidence_id in core_ids)
-                if linked and len(e.text) <= capacity:
+                cost = 0 if fact_query and (version, e.evidence_id) in self.fact_delivered else len(e.text)
+                if linked and cost <= capacity:
                     chosen.append(e)
-                    capacity -= len(e.text)
+                    capacity -= cost
+                    charged += cost
                     bindings += (EvidenceBinding(e.evidence_id, "index_adjacent_context", purpose.value,
                                                  version, rid, linked),)
                 else:
                     omitted.append(e.evidence_id)
+                    omission_reasons.append((e.evidence_id, 'adjacent_fragment_exceeds_delivery_capacity' if linked else 'linked_core_not_delivered'))
             evidence = tuple(chosen)
             self.known_evidence.update((e.evidence_id, e) for e in evidence)
             accepted = sum(len(e.text) for e in evidence)
-            self.chars += accepted
+            self.chars += charged
+            if fact_query:
+                self.fact_delivered.update((version,e.evidence_id) for e in evidence)
             if core_omitted:
                 outcome = "budget_exhausted"
                 raise RuntimeError("Evidence character budget omitted required core hits; partial evidence retained")
@@ -172,6 +193,9 @@ class RetrievalSession:
                 tuple(b.evidence_id for b in bindings if b.origin == "index_adjacent_context"),
                 tuple(omitted), offered, accepted, self.chars, self.calls,
                 max(0, int((perf_counter() - started) * 1000)), reason,
-                () if result is None or result.context is None else result.context.omitted)
+                () if result is None or result.context is None else result.context.omitted,
+                None if answer is None else answer.answer_id, reused,
+                omission_reasons=tuple(omission_reasons), offered_context_links=() if result is None or result.context is None else
+                tuple((item.evidence.evidence_id, tuple(link.core_evidence_id for link in item.links)) for item in result.context.items))
             self.records.append(record)
         return Delivery(evidence, bindings, issue, record)

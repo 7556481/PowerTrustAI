@@ -101,6 +101,27 @@ class ClaimComponent:
 
 
 @dataclass(frozen=True)
+class FactRetrievalBinding:
+    answer_id: str
+    answer_version: int
+    claim_id: str
+    component_id: str
+    category: str
+    basis_target: str
+    query: str
+    query_method: str
+    retrieval_id: Optional[str]
+    knowledge_version: str
+    outcome: str
+    core_hit_ids: Tuple[str, ...] = ()
+    delivered_evidence_ids: Tuple[str, ...] = ()
+    context_evidence_ids: Tuple[str, ...] = ()
+    omissions: Tuple[Tuple[str, str], ...] = ()
+    reused_from_retrieval_id: Optional[str] = None
+    offered_context_links: Tuple[Tuple[str, Tuple[str, ...]], ...] = ()
+
+
+@dataclass(frozen=True)
 class Claim:
     claim_id: str
     answer_id: str

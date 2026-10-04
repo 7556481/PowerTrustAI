@@ -150,7 +150,7 @@ class ApplicationService:
                 for f in self.store.objects(rid,'finding') if f.get('answer_id') and f.get('answer_version')],
             'budget_usage':{'model_slots_charged':charged.get('model_calls'),
                 'actual_model_request_records':len(raw.get('model_records',[])),
-                'tool_calls':charged.get('tool_calls'),'retrieval_calls':len(retrieval),
+                'tool_calls':charged.get('tool_calls'),'retrieval_calls':retrieval[-1]['calls_used'] if retrieval else 0,
                 'retrieval_chars':retrieval[-1]['cumulative_chars'] if retrieval else 0},
             'configuration':row['config'],'limitations':[
                 'Local single-user prototype; review decisions are not engineering safety certification.',

@@ -210,7 +210,11 @@ class OfflineHarness:
             nonlocal evidence, bindings
             started = perf_counter()
             try:
-                delivery = await retrieval.retrieve(purpose, request, answer, claims)
+                if purpose == RetrievalPurpose.VERIFICATION and self.retrieval_settings.fact_strategy == 'per_claim_v1':
+                    from harness.fact_retrieval import retrieve_facts
+                    delivery = await retrieve_facts(retrieval, request, answer, claims)
+                else:
+                    delivery = await retrieval.retrieve(purpose, request, answer, claims)
                 evidence = merge_evidence(evidence, delivery.evidence)
                 bindings += delivery.bindings
                 return delivery
@@ -365,22 +369,26 @@ class OfflineHarness:
                 from agents.contracts import ReliabilityVerificationInput,ReliabilityDomainInput
                 from dataclasses import fields
                 if getattr(self.verification,'schema_version',None) in (9,10,11,12,13):
-                    v_input=ReliabilityVerificationInput(**{f.name:getattr(v_input,f.name) for f in fields(v_input)},tool_results=tuple(current_tools),delivery_summary=__import__('json').dumps(__import__('dataclasses').asdict(vd.record)) if retrieval else '')
+                    v_input=ReliabilityVerificationInput(**{f.name:getattr(v_input,f.name) for f in fields(v_input)},tool_results=tuple(current_tools),delivery_summary=__import__('json').dumps(__import__('dataclasses').asdict(vd.record)) if retrieval else '',fact_retrieval_bindings=vd.record.fact_bindings if retrieval else ())
                 if getattr(self.domain_review,'protocol_version',None) in (3,4):
                     d_input=ReliabilityDomainInput(**{f.name:getattr(d_input,f.name) for f in fields(d_input)},tool_results=tuple(current_tools),delivery_summary=__import__('json').dumps(__import__('dataclasses').asdict(dd.record)) if retrieval and not evidence_only else '')
 
                 async def review(component, agent, inputs, allowed, is_verification, retrieval_issue):
                     if is_verification and inputs.generation_snapshot is not None:
                         allowed = merge_evidence(allowed, inputs.generation_snapshot.evidence)
-                    if retrieval_issue:
+                    if retrieval_issue and not (is_verification and getattr(inputs, 'fact_retrieval_bindings', ())):
                         return None, retrieval_issue
                     def check(output):
                         guard_agent_evidence(output, allowed)
                         if not is_verification and getattr(output,"prompt_version",None) and output.prompt_version.startswith(("power-domain-review-v1","power-domain-review-v2","power-domain-review-v3")):
                             require(output.engineering_context == request.engineering_context,"Domain review changed engineering inputs")
                         validate_review(output, answer, claims, allowed, is_verification)
-                    return await invoke(component, agent.run, inputs, check, True,
-                                        getattr(agent, "uses_model_adapter", False))
+                    output, issue = await invoke(component, agent.run, inputs, check, True,
+                                                getattr(agent, "uses_model_adapter", False))
+                    if output is not None and retrieval_issue:
+                        from dataclasses import replace
+                        output = replace(output, execution_issues=output.execution_issues + (vd.issues or (retrieval_issue,)))
+                    return output, issue
 
                 if evidence_only:
                     verification, issue = await review("evidence_verification", self.verification, v_input,

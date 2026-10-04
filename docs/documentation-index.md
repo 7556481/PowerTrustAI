@@ -1,5 +1,13 @@
 # 文档索引
 
+## 2026-10-04 逐主张事实检索与证据交付 v1
+
+- [实现与运行](per-claim-fact-retrieval-v1.md)：可选策略、事实对象/依据分流、查询缓存、显式版本/范围、失败与容量、schema13输入v1、预算及安全页面详情。
+- [固定对照](per-claim-fact-comparison-v1.md)：四组相同回答/主张/知识/BM25，目标命中与交付、持平/增益及额外资源/延迟；保留aggregate默认。
+- 源码：harness/fact_retrieval.py、services/fact_delivery.py、evaluation/fact_retrieval_comparison.py；13项新公开synthetic_fixture测试test_fact_retrieval_v1.py。
+- 本机data/runtime_local/per-claim-fact-v1/：comparison-frozen.json、comparison-results.json、comparison-final.json；frozen-real-plan.json、api-result.json、api-trace.json、real-summary.json、real-verification.json、evidence-roundtrip.json、restart-verification.json、offline-tests-delivery.txt、reading-notes.md、verification.json。真实请求/响应仍在data/retrieval_local/service_private/53613803b0a248819bf3d063ce41d5c8。
+- 自然一次Revision，10模型/7检索/1纠正，最终无执行问题、必需阶段完整但业务review_required；重启相等无重发。官方资料/实际响应不入Git；PDF未重建，旧30题未重标。
+
 ## 2026-10-04 最新公开复现与并行轨迹修复
 
 - 代码提交97e3523最终独立克隆455项通过；final-stdlib-tests.txt、final-locked-tests.txt、final-harness-demo.txt、final-http-demo.txt保存实际提交验证。普通push因github.com:443连接失败未成功，最新提交与待推送范围见verification.json，不能以旧origin/master冒充远端同步。

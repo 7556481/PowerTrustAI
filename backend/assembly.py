@@ -7,6 +7,7 @@ import hashlib
 from backend.config import ROOT
 from harness.runtime import OfflineHarness
 from harness.policy import LimitedRepairPolicy
+from harness.contracts import RetrievalSettings
 
 class ConfigurationError(RuntimeError):
     code='CONFIGURATION_UNAVAILABLE'
@@ -38,6 +39,7 @@ class ComponentFactory:
         from agents.review_templates_v3 import INDEPENDENT
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
         ORIGINAL=original_template()
+        if self.config.fact_strategy=='per_claim_v1':PROMPT_VERSION+='-fact-delivery-v1'
         hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
             for name in ('core','agents','harness','tools','services','rag','model_adapter','backend') for p in (ROOT/name).glob('*.py')}
         hashes.update({str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
@@ -54,6 +56,8 @@ class ComponentFactory:
               'domain':'power-domain-review-output-v3.1','revision':'revision-output-v2'},
             'rules':'power-demo-rules-v1.1','policy':'limited-repair-policy-v1','unit_tool':'scalar-si-conversion-v2',
             'retrieval':'existing BM25 with default RetrievalSettings and adjacent-context order',
+            'fact_retrieval_strategy':self.config.fact_strategy,
+            'fact_delivery_contract':'fact-evidence-delivery-v1' if self.config.fact_strategy=='per_claim_v1' else None,
             'source_sha256':hashes,'template_sha256':{'independent':hashlib.sha256(INDEPENDENT.encode()).hexdigest(),
               'original_citation':hashlib.sha256(ORIGINAL.encode()).hexdigest()},
             'model_settings':{'timeout_seconds':90,'max_output_tokens':8000,'max_response_chars':96000}}
@@ -91,7 +95,7 @@ class ComponentFactory:
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=4),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7),
-                policy=LimitedRepairPolicy(),retriever=retriever,unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer)
+                policy=LimitedRepairPolicy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer)
             return Bundle(harness,resources)
         except Exception:
             for resource in resources:resource.close()

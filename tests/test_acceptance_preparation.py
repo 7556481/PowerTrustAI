@@ -106,9 +106,10 @@ class PreparationTests(unittest.TestCase):
         # archives. Preserve every historical value and structural assertion.
         def remove_unset_additions(actual, expected):
             if isinstance(actual, dict) and isinstance(expected, dict):
-                for key in ('invocation_id', 'component', 'answer_version'):
+                for key in ('invocation_id', 'component', 'answer_version', 'answer_id', 'reused_from_retrieval_id', 'fact_bindings', 'omission_reasons', 'offered_context_links'):
                     if key not in expected and key in actual:
-                        self.assertIsNone(actual.pop(key))
+                        addition=actual.pop(key)
+                        self.assertEqual(addition, [] if key in ('fact_bindings','omission_reasons','offered_context_links') else None)
                 for key in expected.keys() & actual.keys():
                     remove_unset_additions(actual[key], expected[key])
             elif isinstance(actual, list) and isinstance(expected, list):

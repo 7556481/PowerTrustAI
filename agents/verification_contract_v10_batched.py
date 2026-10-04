@@ -42,13 +42,16 @@ async def run(agent,inputs):
     from services.citation_workload import CitationWorkload, pack, messages_size
     from agents.review_templates_v3 import INDEPENDENT
     limits=agent.citation_workload or CitationWorkload()
-    prompt_version,contract_version=PROMPT_VERSION,CONTRACT_VERSION
+    prompt_version= PROMPT_VERSION+'-fact-delivery-v1' if inputs.fact_retrieval_bindings else PROMPT_VERSION
+    contract_version=CONTRACT_VERSION
     original_instruction=original_template()
     start=len(current_budget().records);scopes=joint.catalog(inputs,contract_version);wire,missing=model_wire(inputs)
     base_parse=lambda v:joint.parse(v,inputs,scopes,prompt_version='evidence-verification-v9.3-target-fidelity')
     def parse(v):
         from services.review_fidelity import parse as fidelity_parse
         result=fidelity_parse(v,inputs,base_parse,strict_bindings=True)
+        from services.fact_delivery import validate_result
+        result=validate_result(result,inputs)
         result=replace(result,prompt_version=prompt_version)
         result=replace(result,consistency_checks=check_verification_quantities(result,version='quantity-enumeration-v1.2'))
         validate_review(result,inputs.answer,inputs.claims,result.evidence,True)
@@ -94,7 +97,13 @@ async def run(agent,inputs):
                 GENERATION_INPUT_SNAPSHOT=body_snapshot(inputs))
         else:
             payload=batch_payload(citation);instruction=original_instruction
-        if citation is None:instruction=INDEPENDENT
+        if citation is None:
+            instruction=INDEPENDENT
+            from services.fact_delivery import payload as fact_payload, INSTRUCTION
+            mapping=fact_payload(inputs,scopes[0])
+            if mapping is not None:
+                payload['FACT_EVIDENCE_DELIVERY']=mapping
+                instruction+=INSTRUCTION
         messages=(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False)))
         if citation is not None and messages_size(messages)>limits.max_message_chars:
             issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,

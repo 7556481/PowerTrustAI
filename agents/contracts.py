@@ -5,7 +5,7 @@ from typing import Protocol, Tuple
 
 from core.models import (
     AnswerDraft, Claim, DomainFinding, Evidence, ExecutionIssue,
-    TaskRequest, VerificationFinding, EvidenceBinding, CitationAssessment, GenerationEvidenceSnapshot, QuoteCandidate, ConsistencyCheck, DomainRule, EngineeringContext,
+    TaskRequest, VerificationFinding, EvidenceBinding, CitationAssessment, GenerationEvidenceSnapshot, QuoteCandidate, ConsistencyCheck, DomainRule, EngineeringContext, FactRetrievalBinding,
 )
 from model_adapter.contracts import ModelCallRecord
 from tools.contracts import ToolResult
@@ -46,6 +46,7 @@ class EvidenceVerificationInput:
 class ReliabilityVerificationInput(EvidenceVerificationInput):
     tool_results: Tuple[ToolResult, ...] = ()
     delivery_summary: str = ""
+    fact_retrieval_bindings: Tuple["FactRetrievalBinding", ...] = ()
 
 
 @dataclass(frozen=True)
