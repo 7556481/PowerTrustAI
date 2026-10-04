@@ -1,5 +1,7 @@
 # 当前状态
 
+当前实现02c71bd5f1312695f16d294c25efd510b61c6054已于2026-10-04普通推送origin/master并远端回查同哈希；交付说明后续提交仅记录该事实。较早网络阻断段落保留历史含义，不表示本轮上传失败。
+
 最新（2026-10-04）：基于已推送bb0b208实现可选per_claim_v1，aggregate默认保留；正文技术组件按规范化对象检索，依据类型分流，去重/显式映射/部分失败/版本隔离已接入schema13、服务、SQLite和同源详情。见[实现](per-claim-fact-retrieval-v1.md)与[固定对照](per-claim-fact-comparison-v1.md)。真实run53613803：自然一次Revision、双重提取/审核、10模型/7检索/1纠正，无执行问题，必需阶段完整；业务review_required、工程前提未齐。重启结果相等10→10。后续历史“逐主张未实现”和上传阻断描述仅是当时状态；本轮不重建PDF或改微调/语义装配状态。
 
 记录日期：2026-10-04。接续基线：代码 `fb235746a734edc94bd60a93988db15db473e884`，最终真实接线说明 `e1042cdb0859f73e9778be5fa67923a1a449b744`。本轮仅修复公开复现和调用轨迹归属，不调用付费API；最终新增提交见Git日志与本机 `data/runtime_local/public-repro-v1/verification.json`。

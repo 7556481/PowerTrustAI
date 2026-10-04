@@ -2,6 +2,8 @@
 
 ## 2026-10-04 逐主张事实检索与证据交付 v1
 
+- 实现提交02c71bd已普通推送master并回查远端同哈希；最终交付说明提交及回查记录在本机verification.json。使用命令级127.0.0.1:7890代理，未改全局代理或SSL。
+
 - [实现与运行](per-claim-fact-retrieval-v1.md)：可选策略、事实对象/依据分流、查询缓存、显式版本/范围、失败与容量、schema13输入v1、预算及安全页面详情。
 - [固定对照](per-claim-fact-comparison-v1.md)：四组相同回答/主张/知识/BM25，目标命中与交付、持平/增益及额外资源/延迟；保留aggregate默认。
 - 源码：harness/fact_retrieval.py、services/fact_delivery.py、evaluation/fact_retrieval_comparison.py；13项新公开synthetic_fixture测试test_fact_retrieval_v1.py。

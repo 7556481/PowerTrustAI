@@ -2,6 +2,8 @@
 
 ## 2026-10-04 最新：逐主张事实检索与证据交付 v1
 
+实现提交02c71bd5f1312695f16d294c25efd510b61c6054已普通推送origin/master，2026-10-04命令级代理ls-remote回查同哈希；bb0b208→02c71bd正常快进，无强推。随后交付说明仅补推送事实，运行源码不变；最终分支/提交以Git日志和本机verification.json为准。检查通过后默认推送的长期偏好继续有效。
+
 用户确认bb0b208已推送，命令级http.proxy=http://127.0.0.1:7890 fetch核实master/origin/master一致，初始工作区干净。历史网络失败原样保留，不当当前状态。本轮完成可选per_claim_v1；aggregate默认、生成/领域查询、BM25参数、schema13/原引用分组、支持要求、有限修订与政策不变。
 
 复用RetrievalSession，按document_body/technical_content组件proposition+必要限定查询；其他依据类型不强制查文献。相同查询去重/同快照缓存，去重Evidence与逐组件映射进入同一独立模型请求。新fact-evidence-delivery-v1输入/提示后缀显式版本化，逐对象保存回答版本、claim/component、query方法、retrieval_id、核心命中/邻接链接、实际交付/省略原因/复用来源；原引用候选不借用独立召回。新版本重新绑定，失效/容量未交付与业务证据不足分开。单查询失败仍审核有效同级；未完成对象保留not_assessable与执行问题，不能pass。
