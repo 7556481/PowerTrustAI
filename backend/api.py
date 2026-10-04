@@ -16,7 +16,7 @@ from backend.assembly import ConfigurationError
 from backend.store import RunStore,StorageError,BindingError
 from backend.serialization import safe
 from backend.local_access import ProcessLease,token_for
-from core.models import TaskRequest,TaskMode,AnswerDraft,Evidence,EngineeringContext,EngineeringQuantity
+from core.models import TaskRequest,TaskMode,AnswerDraft,Evidence,EngineeringContext,EngineeringQuantity,CitationBinding
 from core.validation import InputError,ContractError
 
 class StrictModel(BaseModel):model_config=ConfigDict(extra='forbid',strict=True)
@@ -35,25 +35,34 @@ class Engineering(StrictModel):
     limits:str|None=Field(default=None,max_length=4000)
     contingencies:list[str]=Field(default_factory=list,max_length=30)
     quantities:list[Quantity]=Field(default_factory=list,max_length=30)
+class ExistingCitation(StrictModel):
+    start_offset:int=Field(ge=0)
+    end_offset:int=Field(gt=0)
+    fragment_ids:list[str]=Field(min_length=1)
+
 class Submit(StrictModel):
     mode:Literal['question_answer','assess_existing']
     question:str=Field(min_length=1,max_length=8000)
     user_context:str=Field(default='',max_length=10000)
     existing_answer:str|None=Field(default=None,min_length=1,max_length=80000)
+    existing_citations:list[ExistingCitation]=Field(default_factory=list)
     references:list[Reference]=Field(default_factory=list,max_length=10)
     engineering_context:Engineering|None=None
     answer_requirements:list[str]=Field(default_factory=list,max_length=10)
-    def task(self):
+    def task(self,indexed_evidence=()):
         if not self.question.strip() or self.existing_answer is not None and not self.existing_answer.strip():raise InputError('Nonempty question/answer required')
         if (self.mode=='assess_existing')!=(self.existing_answer is not None):raise InputError('Existing answer required only for assess_existing')
+        if self.existing_citations and self.mode!='assess_existing':raise InputError('Citation bindings require existing answer')
         if any(len(s)>4000 for s in self.answer_requirements):raise InputError('Answer requirement too long')
         aid=uuid4().hex
-        answer=None if self.existing_answer is None else AnswerDraft(aid,1,self.existing_answer)
+        by_fragment={e.provenance.fragment_id:e.evidence_id for e in indexed_evidence}
+        citations=tuple(CitationBinding(c.start_offset,c.end_offset,tuple(by_fragment[f] for f in c.fragment_ids)) for c in self.existing_citations)
+        answer=None if self.existing_answer is None else AnswerDraft(aid,1,self.existing_answer,citations=citations)
         refs=tuple(Evidence('user-'+uuid4().hex,'user_supplied','unverified',r.label,r.text,'user_reference') for r in self.references)
         e=self.engineering_context
         engineering=None if e is None else EngineeringContext(e.goal,e.network_model,e.operating_point,e.limits,
             tuple(e.contingencies),tuple(EngineeringQuantity(uuid4().hex,q.kind,q.value,q.unit,q.reference) for q in e.quantities))
-        return TaskRequest(uuid4().hex,TaskMode(self.mode),'voltage_stability_reactive_support',self.question,self.user_context,answer,refs,engineering)
+        return TaskRequest(uuid4().hex,TaskMode(self.mode),'voltage_stability_reactive_support',self.question,self.user_context,answer,refs+tuple(indexed_evidence),engineering)
 class HumanReview(StrictModel):
     answer_id:str=Field(min_length=1,max_length=150)
     answer_version:int=Field(ge=1)
@@ -145,8 +154,28 @@ def create_app(config=None,*,store=None,factory=None,access_token=None):
 
     @app.post('/runs',status_code=202,dependencies=[Depends(authorized)])
     async def submit(body:Submit,request:Request):
-        try:rid=await svc(request).submit(body.task(),answer_requirements=tuple(body.answer_requirements))
-        except (InputError,ContractError):raise HTTPException(422,detail={'code':'INPUT_CONTRACT_ERROR'}) from None
+        try:
+            indexed=()
+            if body.existing_citations:
+                if config.profile!='real':raise InputError('Indexed references require real knowledge snapshot')
+                if body.mode!='assess_existing' or body.existing_answer is None:raise InputError('Existing answer required')
+                for c in body.existing_citations:
+                    if not 0<=c.start_offset<c.end_offset<=len(body.existing_answer):raise InputError('Citation span outside answer')
+                import asyncio
+                def resolve():
+                    from rag.storage import KnowledgeStore
+                    ids=tuple(dict.fromkeys(f for c in body.existing_citations for f in c.fragment_ids))
+                    with KnowledgeStore(config.index_db,readonly=True) as index:
+                        return tuple(index.evidence(f,config.knowledge_version) for f in ids)
+                indexed=await asyncio.to_thread(resolve)
+            rid=await svc(request).submit(body.task(indexed),answer_requirements=tuple(body.answer_requirements),
+                indexed_reference_ids=tuple(e.evidence_id for e in indexed))
+        except InputError as exc:
+            if str(exc).startswith('Complete citation scopes exceed configured capacity; citation_indexes='):
+                raise HTTPException(422,detail={'code':'REVIEW_MESSAGE_CAPACITY_EXCEEDED',
+                    'citation_indexes':[int(n) for n in str(exc).split('=')[-1].strip('[]').split(',') if n.strip()]}) from None
+            raise HTTPException(422,detail={'code':'INPUT_CONTRACT_ERROR'}) from None
+        except ContractError:raise HTTPException(422,detail={'code':'INPUT_CONTRACT_ERROR'}) from None
         except ConfigurationError:raise HTTPException(503,detail={'code':'CONFIGURATION_UNAVAILABLE'}) from None
         except QueueFullError:raise HTTPException(429,detail={'code':'QUEUE_FULL'},headers={'Retry-After':'5'}) from None
         except ServiceUnavailable:raise HTTPException(503,detail={'code':'SERVICE_UNAVAILABLE'}) from None

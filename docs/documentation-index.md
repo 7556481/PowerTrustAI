@@ -161,3 +161,11 @@
 ### 2026-10-04 手册r1独立本地文档提交
 
 按后续授权提交15个明确文档交付路径，包含旧版与r1源/PDF/图源/构建器、修改清单及相关说明；应用代码不变，不推送。data/runtime_local/handbook-r1/document-commit.json记录实际提交哈希、父提交、逐文件SHA与最终工作区状态。前节无文档提交为修订完成时的历史状态；引用工作量修复尚未开始，本轮不扩写手册、不调用API。
+
+### 2026-10-04 引用工作量边界v1
+
+- [诊断、配置与复现](citation-review-workload-v1.md)：schema13/v9.5稳定有界分组、项级作用域、调用结构、API薄接线与容量失败。
+- data/runtime_local/citation-review-workload-v1/reading-notes.md、verification.json：最终离线、真实范围、冻结/最终源码SHA与本地提交；全部私有，不进Git。
+- frozen-plan.json、frozen-runtime-source.zip、api-result.json、api-trace.json、real-summary.json、raw-archive-verification.json、evidence-roundtrip.json、restart-verification.json：唯一真实2引用/1组/3调用；执行未完整的真实失败保留，修后未重跑。
+- offline-tests*.txt、targeted*.txt、api-debug.txt：早期失败、schema13输入接线与容量范围修复、最终回归；不以测试数量代替语义正确。
+- 用户手动推送后fetch成功，origin/master核实526bdee；本轮新提交仅本地，不覆盖历史网络记录。手册r1 Markdown只补状态，不重生成PDF。

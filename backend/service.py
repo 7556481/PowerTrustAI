@@ -27,16 +27,28 @@ class ApplicationService:
             await asyncio.gather(self.worker,return_exceptions=True)
         self.store.recover() # queued/running become interrupted; no auto-enqueue
 
-    async def submit(self,request,*,answer_requirements=()):
+    async def submit(self,request,*,answer_requirements=(),indexed_reference_ids=()):
         validate_request(request,self.config.budget)
         knowledge=self.factory.preflight()
+        if self.config.profile=='real' and request.existing_answer and request.existing_answer.citations:
+            from agents.verification_contract_v10_batched import citation_payload,original_template,CONTRACT_VERSION
+            from services.scoped_candidates import CandidateScope
+            from services.citation_workload import pack
+            from core.validation import InputError
+            answer=request.existing_answer;original={e.evidence_id:e for e in request.provided_evidence}
+            scopes=[None]+[CandidateScope(answer,knowledge,'original_citation',tuple(original[e] for e in c.evidence_ids),
+                check_id=i,protocol_version=CONTRACT_VERSION) for i,c in enumerate(answer.citations)]
+            groups,rejected=pack(range(len(answer.citations)),lambda g:citation_payload(answer,request.question,scopes,g),
+                original_template(),self.config.citation_workload)
+            if rejected:raise InputError('Complete citation scopes exceed configured capacity; citation_indexes='+str(list(rejected)))
         async with self.lock:
             if self.closing or self.storage_fault:raise ServiceUnavailable('Service not accepting work')
             if self.queue.full():raise QueueFullError('Waiting queue is full')
             rid=uuid4().hex;manifest=self.factory.manifest(knowledge)
             manifest['answer_requirements']=answer_requirements
+            manifest['indexed_reference_ids']=indexed_reference_ids
             self.store.create(rid,request,manifest)
-            self.queue.put_nowait((rid,request,knowledge,answer_requirements))
+            self.queue.put_nowait((rid,request,knowledge,answer_requirements,indexed_reference_ids))
         return rid
 
     async def cancel(self,rid):
@@ -59,7 +71,7 @@ class ApplicationService:
     async def _worker(self):
         while not self.closing:
             if self.storage_fault:return
-            rid,request,knowledge,requirements=await self.queue.get()
+            rid,request,knowledge,requirements,indexed_ids=await self.queue.get()
             bundle=None
             try:
                 if self.store.get(rid)['status']!='queued':continue
@@ -67,7 +79,7 @@ class ApplicationService:
                 bundle=self.factory.create(rid,lambda snapshot:self.store.checkpoint(rid,snapshot))
                 self.active_bundle=bundle
                 result=await bundle.harness.run(request,self.config.budget,knowledge_version=knowledge,
-                    answer_requirements=tuple(requirements),run_id=rid)
+                    answer_requirements=tuple(requirements),indexed_reference_ids=tuple(indexed_ids),run_id=rid)
                 status='interrupted' if self.closing else 'cancelled' if result.state.value=='cancelled' else 'failed' if result.state.value=='failed' else 'finished'
                 self.store.mark(rid,status,error_code='PROCESS_INTERRUPTED' if self.closing else None,result=result)
             except asyncio.CancelledError:

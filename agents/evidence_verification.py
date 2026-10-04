@@ -291,10 +291,11 @@ def _parse_normalized(value, inputs, *, schema_version=None):
 class ModelEvidenceVerificationAgent:
     uses_model_adapter = True
 
-    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4):
-        if schema_version not in (4, 5, 6, 7, 8, 9, 10, 11, 12):
+    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4, citation_workload=None):
+        if schema_version not in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13):
             raise ValueError("Live review supports explicit v4/v5/v6 only")
         self.schema_version = schema_version
+        self.citation_workload = citation_workload
         self.client = ModelClient(adapter, settings)
         self.diagnostics = None if diagnostic_dir is None else ResponseDiagnostics(diagnostic_dir)
 
@@ -305,6 +306,9 @@ class ModelEvidenceVerificationAgent:
             merge_evidence(inputs.seed_evidence, inputs.original_evidence, inputs.generation_snapshot.evidence)
             check(inputs.knowledge_version is None or inputs.generation_snapshot.knowledge_version == inputs.knowledge_version,
                   "$.generation_snapshot.knowledge_version", "generation_input_knowledge_version_mismatch")
+        if self.schema_version == 13:
+            from agents.verification_contract_v10_batched import run
+            return await run(self, inputs)
         if self.schema_version in (10,11,12):
             from agents.verification_contract_v9_scoped import run
             return await run(self,inputs)

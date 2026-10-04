@@ -90,7 +90,7 @@ def validate_typed_finding(finding, claim, output, answer, path):
         nonempty(rev.rationale, p + ".rationale")
         require(len(set(rev.basis_indexes)) == len(rev.basis_indexes) and all(type(n) is int and 0 <= n < len(finding.bases) for n in rev.basis_indexes), "invalid basis indexes", path=p)
         category = parts[rev.component_id].category
-        if output.prompt_version=='evidence-verification-v9.4-standalone-templates' and rev.origin=='model_judgment':
+        if output.prompt_version in ('evidence-verification-v9.4-standalone-templates','evidence-verification-v9.5-bounded-citation-groups') and rev.origin=='model_judgment':
             require(type(rev).__name__=='FidelityComponentReview','new model judgment requires its semantic target review',path=p)
         if type(rev).__name__=='FidelityComponentReview':
             from services.answer_anchors import ROLES

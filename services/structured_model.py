@@ -21,12 +21,18 @@ def strict_json(text):
                           StructuredValidationError("json_parse", "$", "nonfinite_numbers_not_allowed")))
 
 
-async def structured_request(client, messages, prompt_version, parser, *, diagnostics=None, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None,max_corrections=1):
+async def structured_request(client, messages, prompt_version, parser, *, diagnostics=None, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None,max_corrections=1,max_message_chars=None):
     budget = current_budget() or ModelBudget(limit=2)
     before = len(budget.records)
     partial=None
     if max_corrections not in (0,1):raise ValueError("At most one format correction allowed")
     for correction in ((False,True) if max_corrections else (False,)):
+        if max_message_chars is not None:
+            from services.citation_workload import messages_size, ReviewCapacityError
+            if messages_size(messages) > max_message_chars:
+                error = ReviewCapacityError('Complete review/correction message exceeds configured capacity')
+                if partial is not None:error.partial_output=partial
+                raise error
         request_messages_path=None if diagnostics is None else diagnostics.save_messages(messages,prompt_version,correction)
         try:
             response, number = await client.complete(messages, prompt_version, budget, correction,

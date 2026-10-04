@@ -35,7 +35,9 @@ class ComponentFactory:
         return self.config.knowledge_version
 
     def manifest(self,knowledge_version):
-        from agents.review_templates_v3 import PROMPT_VERSION,CONTRACT_VERSION,INDEPENDENT,ORIGINAL
+        from agents.review_templates_v3 import INDEPENDENT
+        from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
+        ORIGINAL=original_template()
         hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
             for name in ('core','agents','harness','tools','services','rag','model_adapter','backend') for p in (ROOT/name).glob('*.py')}
         hashes.update({str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
@@ -44,7 +46,8 @@ class ComponentFactory:
             'components':'simulated_synthetic_fixture' if self.config.profile=='synthetic_fixture' else 'real_model_with_demo_domain_rules',
             'model_id':os.environ.get('DEEPSEEK_MODEL_ID') if self.config.profile=='real' else None,
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
-            'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':12,'domain_review':4,'revision':2},
+            'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':13,'domain_review':4,'revision':2},
+            'citation_workload':asdict(self.config.citation_workload),
             'prompts':{'generation':'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations',
               'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.1-applicability','revision':'bounded-revision-v2-per-finding-actions'},
             'contracts':{'generation':'generation-output-v3','extraction':'atomic-claims-v7','verification':CONTRACT_VERSION,
@@ -84,7 +87,7 @@ class ComponentFactory:
             retriever=AsyncSQLiteBM25Retriever(self.config.index_db);resources.append(retriever)
             diag=ROOT/'data/retrieval_local/service_private'/rid
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=12),
+                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=4),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7),

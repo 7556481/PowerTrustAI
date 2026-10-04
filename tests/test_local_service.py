@@ -143,7 +143,7 @@ class ServiceTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(partial['findings']['domain']);await terminal(self.service,rid)
 
 class AssemblyTests(unittest.TestCase):
-    def test_real_assembly_explicit_schema12_and_no_model_fallback(self):
+    def test_real_assembly_explicit_schema13_and_no_model_fallback(self):
         from rag.storage import KnowledgeStore
         with tempfile.TemporaryDirectory() as d:
             p=Path(d);md=p/'fixture.md';md.write_text('# synthetic_fixture\n\nVoltage evidence.',encoding='utf-8')
@@ -155,7 +155,7 @@ class AssemblyTests(unittest.TestCase):
             with patch.dict('os.environ',{'DEEPSEEK_API_KEY':'fictional-key-not-real','DEEPSEEK_MODEL_ID':'deepseek-flash'},clear=True),patch('model_adapter.deepseek.create_adapter',side_effect=lambda s:MagicMock()) as adapter:
                 self.assertEqual(factory.preflight(),k);bundle=factory.create('fixture',lambda s:None)
                 h=bundle.harness
-                self.assertEqual(h.verification.schema_version,12);self.assertEqual(h.extractor.protocol_version,7)
+                self.assertEqual(h.verification.schema_version,13);self.assertEqual(h.extractor.protocol_version,7)
                 self.assertEqual(h.generation.schema_version,3);self.assertEqual(h.domain_review.protocol_version,4)
                 self.assertEqual(h.revision.protocol_version,2);self.assertIsNotNone(h.unit_tool)
                 self.assertEqual(adapter.call_count,2);bundle.close()

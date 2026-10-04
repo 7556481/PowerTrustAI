@@ -57,7 +57,7 @@ def enumeration_check(proposition, candidates, claim_id=None, *, version=VERSION
 
 
 def check_verification_quantities(output, *, version=VERSION):
-    if version=='quantity-enumeration-v1.2' and output.prompt_version in ('evidence-verification-v9.3-target-fidelity','evidence-verification-v9.4-standalone-templates'):version='quantity-enumeration-v1.3'
+    if version=='quantity-enumeration-v1.2' and output.prompt_version in ('evidence-verification-v9.3-target-fidelity','evidence-verification-v9.4-standalone-templates','evidence-verification-v9.5-bounded-citation-groups'):version='quantity-enumeration-v1.3'
     catalog={c.quote_id:c for c in output.quote_candidates};claims={c.claim_id:c for c in output.claims}
     return tuple(enumeration_check(claims[f.claim_id].proposition or claims[f.claim_id].text,
         tuple(catalog[b.quote_id] for b in f.bases if b.type=="text_excerpt" and b.quote_id in catalog),f.claim_id,version=version,

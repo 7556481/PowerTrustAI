@@ -360,7 +360,7 @@ class OfflineHarness:
                                                 d_bindings, knowledge_version if retrieval else None)
                 from agents.contracts import ReliabilityVerificationInput,ReliabilityDomainInput
                 from dataclasses import fields
-                if getattr(self.verification,'schema_version',None) in (9,10,11,12):
+                if getattr(self.verification,'schema_version',None) in (9,10,11,12,13):
                     v_input=ReliabilityVerificationInput(**{f.name:getattr(v_input,f.name) for f in fields(v_input)},tool_results=tuple(current_tools),delivery_summary=__import__('json').dumps(__import__('dataclasses').asdict(vd.record)) if retrieval else '')
                 if getattr(self.domain_review,'protocol_version',None) in (3,4):
                     d_input=ReliabilityDomainInput(**{f.name:getattr(d_input,f.name) for f in fields(d_input)},tool_results=tuple(current_tools),delivery_summary=__import__('json').dumps(__import__('dataclasses').asdict(dd.record)) if retrieval and not evidence_only else '')

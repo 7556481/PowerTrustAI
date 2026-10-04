@@ -5,6 +5,13 @@ def explain(result):
     ex=result['execution'];f=result.get('findings',{});answer=result.get('answer',{})
     facts=f.get('model_fact',[]);domain=f.get('domain',[]);rules=f.get('program_rules',[])
     reasons=[];next_steps=[]
+    codes={i.get('code') for i in ex.get('execution_issues',[])}
+    if 'REVIEW_MESSAGE_CAPACITY_EXCEEDED' in codes:
+        reasons.append('审核的完整消息超出配置容量；对应检查未完成，不能据此判断事实矛盾。')
+        next_steps.append('查看执行问题中的引用索引与完整消息容量，人工检查未完成项；有效同级发现保留。')
+    if 'REVIEW_WORKLOAD_BUDGET_SHORTFALL' in codes:
+        reasons.append('已知剩余审核请求超过本次运行的剩余调用额度；已完成检查保留，其他检查未完成。')
+        next_steps.append('查看剩余工作量与实际调用记录；运行保护不保证所有生成或修订输出都能完整审核。')
     if ex.get('execution_issues') or ex.get('status') in ('failed','interrupted','cancelled'):
         reasons.append('执行未完整结束或存在执行问题；已保存输出不等于全部审核完成。')
         next_steps.append('查看阶段事件和执行问题，人工确认已完成的回答版本；不会自动重发任务。')

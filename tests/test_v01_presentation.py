@@ -18,6 +18,10 @@ class ProjectionTests(unittest.TestCase):
         self.assertNotIn('fictional',str(p));self.assertNotIn('D:/',str(p));self.assertEqual(p['text'],'literal body')
 
 class ExplanationTests(unittest.TestCase):
+    def test_workload_failure_is_execution_not_fact_contradiction(self):
+        r=self.result(execution_issues=[{'code':'REVIEW_MESSAGE_CAPACITY_EXCEEDED'},{'code':'REVIEW_WORKLOAD_BUDGET_SHORTFALL'}])
+        text=''.join(explain(r)['reasons'])
+        self.assertIn('完整消息',text);self.assertIn('剩余调用额度',text);self.assertIn('不能据此判断事实矛盾',text)
     def result(self,**execution):
         return {'execution':dict(status='finished',required_stages_complete=True,all_required_checks_assessed=False,**execution),'findings':{},'answer':{'versions':[{'version':1}]},'evidence':[],'decision':{'kind':'review_required'}}
     def test_complete_but_unassessed_and_missing_prerequisites(self):
