@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-05 中文日常使用收尾 v1（当前）
+
+[zh-daily-v1](zh-daily-v1.md)：一键日常入口、会话/停机、网络诊断、3来源和复用库调查、固定真实验收、未达概念质量目标。源码backend/local_session.py、launcher.py、api.py、config.py；daily生成/提取提示及静态页面；611回归。私有reading-notes、verification-final、真实输入/响应、耗时、浏览器/重启和审阅ZIP位于data/runtime_local/zh-daily-v1。长期手册保持原要求，只追加本輪知识点。
+
 ## 2026-10-05 中文问答与展示 v1（最新）
 
 [qa-usability-v1](qa-usability-v1.md)：有限跨语言补检、无回答待补充/不适用、中文生成提示、答案引用/默认折叠；唯一真实运行连接失败与未完成范围。私有qa-usability-v1保留冻结/原始运行/实际浏览器/测试/哈希/审阅包，历史不回填。

@@ -57,7 +57,7 @@ evidence_sufficient (boolean). If insufficient, explain it and provide nonempty
 missing_information. If sufficient, at least one unit must cite input evidence.
 Never output a factual audit pass."""
         question.pop("answer_id"); question.pop("version")
-    system += '\nAnswer language v1: follow the user question language unless the user explicitly requests another language. For Chinese questions, answer in Chinese, including assumptions and missing_information. Keep quoted source evidence in its original language. Do not call another model to translate an answer.\n'
+    system += '\nAnswer language v3: follow the user question language unless the user explicitly requests another language. For Chinese questions, answer in Chinese, including assumptions and missing_information. Answer the requested question directly first, concisely by default: normally 1-3 short paragraphs, about 150-300 Chinese characters for a simple concept. Do not enumerate every retrieved fragment or copy unrelated laboratory formulas. Answer the causal why only when directly supported; a related power-angle formula alone is not a reactive-voltage explanation. Include only necessary conditions. Do not add unrelated regional applicability claims, generic engineering disclaimers, or procedural review text. Keep quoted source evidence in its original language. Do not call another model to translate an answer.\n'
     if product_guidance:
         system += '''\nProduct generation guidance v1: honor requested brevity and answer only the question.
 Do not add unrequested bibliography, licensing or geographic assertions as official technical body facts.
@@ -141,7 +141,7 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
-        prompt += '-question-language-v1'
+        prompt += '-question-language-v3'
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,

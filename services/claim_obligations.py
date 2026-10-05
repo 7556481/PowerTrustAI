@@ -78,3 +78,15 @@ Full component example: {"category":"technical_fact","proposition":"230 kV = 230
 "basis_target":"mathematical_relation","verification_obligation":"technical_truth"}.
 Retain grouped numeric strings; the program owns numeric parsing. Do not invent tool evidence.
 '''
+
+
+DAILY_SYSTEM=SYSTEM+"""
+FINAL OUTPUT ENUM CLARITY v1 (same v7 validation, no category aliases):
+category MUST be exactly one of technical_fact, source_quality_metadata,
+input_evidence_coverage, answer_scope, review_recommendation.
+mathematical_relation is ONLY a basis_target, NEVER a category or claim_type shortcut.
+Only a standalone unit equality/inequality such as 1 kV = 1000 V may use that target.
+Physical equations/causal relationships are technical_fact + technical_content + technical_truth;
+they need factual evidence, not the scalar unit-conversion tool. Preserve the original equation
+without repairing its physics. Do not output a new category to describe mathematics.
+"""

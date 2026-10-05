@@ -103,18 +103,26 @@ class DeepSeekAdapter:
         key = credential_from_environment(replace(self.settings, credential_env="DEEPSEEK_API_KEY"))
         connection = http.client.HTTPSConnection("api.deepseek.com", timeout=timeout,
                                                  context=ssl.create_default_context())
+        stage = 'connect_tls'
         try:
+            connection.connect()
+            stage = 'send_request'
             connection.request("POST", self._path, body=body,
                 headers={"Authorization": "Bearer " + key, "Content-Type": "application/json", "Accept": "application/json"})
+            stage = 'receive_response'
             response = connection.getresponse()
+            stage = 'read_response'
             data = response.read(byte_limit + 1) if response.status == 200 else b""
             if len(data) > byte_limit:
                 raise ModelOutputError()
             return response.status, data
         except (TimeoutError, socket.timeout):
             raise ModelTimeoutError() from None
-        except (OSError, http.client.HTTPException):
-            raise ModelConnectionError() from None
+        except (OSError, http.client.HTTPException) as exc:
+            # Never retain exception text, headers, request body or credentials.
+            raise ModelConnectionError({'version':'official-network-diagnostic-v1',
+                'stage':stage,'exception_type':type(exc).__name__,
+                'errno':getattr(exc,'errno',None),'winerror':getattr(exc,'winerror',None)}) from None
         finally:
             connection.close()
 

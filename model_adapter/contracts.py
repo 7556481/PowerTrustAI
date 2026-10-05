@@ -6,7 +6,8 @@ from core.validation import ContractError
 
 class ModelConnectionError(RuntimeError):
     code = "MODEL_CONNECTION_FAILED"
-    def __init__(self):
+    def __init__(self, diagnostic=None):
+        self.diagnostic = diagnostic
         super().__init__("Model connection failed; provider details withheld")
 
 
@@ -140,6 +141,7 @@ class ModelCallRecord:
     invocation_id: str | None = None
     component: str | None = None
     answer_version: int | None = None
+    network_diagnostic: dict | None = None
 
 
 class ModelAdapter(Protocol):

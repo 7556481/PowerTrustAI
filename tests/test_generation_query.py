@@ -78,6 +78,8 @@ class QueryTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(requests),1);self.assertTrue(result.execution_issues)
 
     def test_language_gate_and_generation_prompt(self):
+        from services.generation_query import english_fallback_available
+        self.assertTrue(english_fallback_available([{'raw_text':'English reference '*100},{'raw_text':'中文资料'}]))
         self.assertFalse(english_corpus([{'raw_text':'中文资料'+('english '*100)}]))
         req=TaskRequest('synthetic',TaskMode.QUESTION_ANSWER,'fixture','中文问题')
         prompt=messages_for(GenerationInput(req,()),3)[0].content

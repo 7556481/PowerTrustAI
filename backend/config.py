@@ -46,9 +46,21 @@ class ServiceConfig:
         if not demo:
             from harness.deepseek_trial import load_project_env
             load_project_env() # existing absolute-root literal loader; never display it
+        daily={}
+        daily_file=ROOT/'data/runtime_local/daily-knowledge.json'
+        if not demo and daily_file.exists():
+            import json
+            daily=json.loads(daily_file.read_text(encoding='utf-8'))
+            if set(daily)!={'version','index_db','knowledge_version'} or daily['version']!='daily-knowledge-v1':
+                raise ValueError('Invalid managed daily knowledge configuration')
+            index=(ROOT/daily['index_db']).resolve()
+            if not index.is_relative_to((ROOT/'data').resolve()) or not index.is_file():
+                raise ValueError('Managed daily index unavailable')
+            daily['index_db']=str(index)
         strategy=os.environ.get('POWERTRUST_FACT_RETRIEVAL_STRATEGY','aggregate')
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
+            index_db=Path(os.environ.get('POWERTRUST_INDEX_DB',daily.get('index_db',str(cls().index_db)))),
             decision_policy=os.environ.get('POWERTRUST_DECISION_POLICY','product-v1'),
             run_db=Path(os.environ.get('POWERTRUST_RUN_DB',str(cls().run_db))),
             nli_enabled=os.environ.get('POWERTRUST_LOCAL_NLI_ENABLED','0')=='1',
@@ -65,5 +77,5 @@ class ServiceConfig:
                 int(os.environ.get('POWERTRUST_REVIEW_MESSAGE_CHARS','64000')),
                 int(os.environ.get('POWERTRUST_REVIEW_CORRECTION_CHARS','192000'))),
             queue_capacity=int(os.environ.get('POWERTRUST_QUEUE_CAPACITY','2')),
-            knowledge_version=os.environ.get('POWERTRUST_KNOWLEDGE_VERSION',BASELINE_KNOWLEDGE))
+            knowledge_version=os.environ.get('POWERTRUST_KNOWLEDGE_VERSION',daily.get('knowledge_version',BASELINE_KNOWLEDGE)))
 

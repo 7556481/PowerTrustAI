@@ -13,6 +13,17 @@ def explain(result):
             'reasons':['执行未完成：查询转换失败，未进入生成、提取或双审核；不是事实错误或审核通过。'],
             'next_steps':['检查模型连接后由用户手动发起新任务；本运行不会自动重发。'],
             'saved':'原查询与失败请求记录已保留。'}
+    issues=ex.get('execution_issues',[])
+    if issues and issues[0].get('component') in {'generation','claim_extraction','evidence_verification','power_domain_review','revision'} and issues[0].get('code') in {'MODEL_CONNECTION_FAILED','MODEL_OUTPUT_ERROR','MODEL_TIMEOUT'}:
+        names={'generation':'回答生成','claim_extraction':'主张提取','evidence_verification':'事实审核','power_domain_review':'领域审核','revision':'回答修订'}
+        first=issues[0];stage=names.get(first.get('component'),'必要执行阶段')
+        code=first.get('code')
+        cause={'MODEL_CONNECTION_FAILED':'模型网络连接失败','MODEL_OUTPUT_ERROR':'模型输出未满足结构要求','MODEL_TIMEOUT':'模型请求超时'}.get(code,'该阶段未成功完成')
+        return {'run_ended':ex.get('status') in TERMINAL,
+            'answer_unavailable_reason':None if answer.get('final') else f'未生成回答：{stage}阶段失败（{cause}）。',
+            'reasons':[f'执行未完成：{stage}阶段失败（{cause}），已有回答仍可阅读，但没有完整审核结论。'],
+            'next_steps':['查看终端或执行详情的失败阶段；本记录保留，不自动重发。'],
+            'saved':'已完成的回答与阶段记录保留；执行失败不是事实矛盾。'}
     if result.get('no_substantive_answer'):
         return {'run_ended':ex.get('status') in TERMINAL,
             'reasons':['待补充：未生成实质回答，后续提取与双审核不适用。'],

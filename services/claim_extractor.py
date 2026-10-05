@@ -131,12 +131,13 @@ def parse_extraction(value, answer, *, require_components=False):
 class ModelClaimExtractor:
     uses_model_adapter = True
 
-    def __init__(self, adapter, settings, *, diagnostic_dir=None, typed_components=False, protocol_version=4):
+    def __init__(self, adapter, settings, *, diagnostic_dir=None, typed_components=False, protocol_version=4, daily_guidance=False):
         self.client = ModelClient(adapter, settings)
         self.diagnostics = None if diagnostic_dir is None else ResponseDiagnostics(diagnostic_dir)
         self.typed_components = typed_components
         require(protocol_version in (4,5,6,7),"Unknown claim protocol")
         self.protocol_version=protocol_version
+        self.daily_guidance=daily_guidance
 
     async def extract(self, answer):
         if self.protocol_version in (5,6,7):
@@ -145,11 +146,13 @@ class ModelClaimExtractor:
                 from services.answer_basis_targets import parse,SYSTEM as anchor_system
             if self.protocol_version==7:
                 from services.claim_obligations import parse,SYSTEM as anchor_system
+                if self.daily_guidance:
+                    from services.claim_obligations import DAILY_SYSTEM as anchor_system
             payload={'answer_id':answer.answer_id,'answer_version':answer.version,'ANSWER_ANCHORS':anchors(answer),
                 'assumptions':answer.assumptions,'missing_information':answer.missing_information}
             path=None if self.diagnostics is None else self.diagnostics.save_scope(payload)
             output,_=await structured_request(self.client,(ModelMessage('system',anchor_system),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),
-                'atomic-claims-v7-obligations' if self.protocol_version==7 else 'atomic-claims-v6-basis-target-anchors' if self.protocol_version==6 else 'atomic-claims-v5-program-anchors',lambda v:parse(v,answer),diagnostics=self.diagnostics,
+                ('atomic-claims-v7-obligations-category-clarity-v1' if self.daily_guidance else 'atomic-claims-v7-obligations') if self.protocol_version==7 else 'atomic-claims-v6-basis-target-anchors' if self.protocol_version==6 else 'atomic-claims-v5-program-anchors',lambda v:parse(v,answer),diagnostics=self.diagnostics,
                 response_contract_version='atomic-claims-v'+str(self.protocol_version),candidate_catalog_path=path)
             return output
         system = SYSTEM if not self.typed_components else component_system_prompt()

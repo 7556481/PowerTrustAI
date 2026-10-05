@@ -85,6 +85,7 @@ class ModelClient:
         owner = _invocation.get() or (None, None, None)
         number = budget.claim()
         started, response = perf_counter(), None
+        network_diagnostic = None
         status, code = ExecutionStatus.SUCCEEDED, None
         try:
             remaining = self.settings.timeout_seconds
@@ -130,6 +131,9 @@ class ModelClient:
         except Exception as exc:
             status = ExecutionStatus.TIMED_OUT if isinstance(exc, TimeoutError) else ExecutionStatus.FAILED
             code = getattr(exc, "code", "MODEL_CONNECTION_FAILED")
+            diagnostic=getattr(exc,'diagnostic',None)
+            if isinstance(diagnostic,dict) and diagnostic.get('version')=='official-network-diagnostic-v1':
+                network_diagnostic={k:diagnostic.get(k) for k in ('version','stage','exception_type','errno','winerror')}
             exc.model_call_number = number
             raise
         finally:
@@ -141,4 +145,5 @@ class ModelClient:
                 None if response is None else response.finish_reason, code,
                 cost_estimate=None if response is None else response.cost_estimate,
                 response_contract_version=response_contract_version,candidate_catalog_path=candidate_catalog_path,input_snapshot_path=input_snapshot_path,
-                request_metrics=measure(messages),invocation_id=owner[0],component=owner[1],answer_version=owner[2]))
+                request_metrics=measure(messages),invocation_id=owner[0],component=owner[1],answer_version=owner[2],
+                network_diagnostic=network_diagnostic))

@@ -16,7 +16,7 @@ const flush=()=>new Promise(setImmediate);
  p=page();await flush();await flush();assert(p.el('remember-connection').checked);assert(p.el('notice').textContent.includes('已连接'));
  p.el('remember-connection').checked=false;p.el('remember-connection').listeners.change();assert.equal(state.size,0);assert(p.el('notice').textContent.includes('内存'));
  p.el('remember-connection').checked=true;p.el('remember-connection').listeners.change();assert.equal(state.size,1);
- p.el('disconnect').listeners.click();assert.equal(state.size,0);assert.equal(p.el('token').value,'');assert(p.el('submit').disabled);
+ await p.el('disconnect').listeners.click();assert.equal(state.size,0);assert.equal(p.el('token').value,'');assert(p.el('submit').disabled);
  p.el('token').value=secret;p.el('remember-connection').checked=true;await p.el('access-form').listeners.submit({preventDefault(){}});assert.equal(state.size,1);
  unauthorized=true;p=page();await flush();await flush();assert.equal(state.size,0);assert(!p.el('remember-connection').checked);assert(p.el('submit').disabled);assert(p.el('notice').textContent.includes('失效'));
  const blocked=p.ctx.window.PowerTrustConnectionMemory.create(()=>{throw new Error('synthetic denied storage');});assert.equal(blocked.save(secret),false);assert.equal(blocked.load(),null);

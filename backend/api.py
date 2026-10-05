@@ -8,6 +8,7 @@ from fastapi.security import HTTPBearer,HTTPAuthorizationCredentials
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.responses import FileResponse
+from fastapi.responses import RedirectResponse
 from pathlib import Path
 from pydantic import BaseModel,ConfigDict,Field
 from backend.config import ServiceConfig
@@ -72,7 +73,7 @@ class HumanReview(StrictModel):
     source:Literal['user','ai_assisted_user_supervised']='user'
     note:str=Field(default='',max_length=10000)
 
-def create_app(config=None,*,store=None,factory=None,access_token=None):
+def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=None):
     config=config or ServiceConfig()
     injected=store is not None
     @asynccontextmanager
@@ -82,6 +83,8 @@ def create_app(config=None,*,store=None,factory=None,access_token=None):
         try:
             runtime_store=store or RunStore(config.run_db)
             app.state.token=access_token or token_for(config.token_file)
+            from backend.local_session import LocalSessions
+            app.state.sessions=LocalSessions(config.run_db)
             service=ApplicationService(config,runtime_store,factory);app.state.service=service
             await service.start();yield
         finally:
@@ -94,7 +97,9 @@ def create_app(config=None,*,store=None,factory=None,access_token=None):
                 docs_url='/docs',redoc_url=None)
     auth=HTTPBearer(auto_error=False)
     async def authorized(request:Request,credentials:HTTPAuthorizationCredentials|None=Depends(auth)):
-        if credentials is None or credentials.scheme.lower()!='bearer' or not secrets.compare_digest(credentials.credentials,request.app.state.token):
+        bearer=credentials is not None and credentials.scheme.lower()=='bearer' and secrets.compare_digest(credentials.credentials,request.app.state.token)
+        session=request.app.state.sessions.valid(request.cookies.get(request.app.state.sessions.cookie))
+        if (credentials is not None and not bearer) or (credentials is None and not session):
             raise HTTPException(401,detail={'code':'LOCAL_TOKEN_REQUIRED'},headers={'WWW-Authenticate':'Bearer'})
     def svc(request):return request.app.state.service
 
@@ -108,7 +113,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None):
             return JSONResponse(status_code=400,content={'code':'INVALID_LOCAL_HOST'})
         if request.method=='POST':
             origin=request.headers.get('origin')
-            if origin and origin!=str(request.base_url).rstrip('/'):
+            if origin and origin!=str(request.base_url).rstrip('/') and not (request.url.path=='/session/bootstrap' and origin=='null'):
                 return JSONResponse(status_code=403,content={'code':'SAME_ORIGIN_REQUIRED'})
             body=await request.body()
             if len(body)>256000:return JSONResponse(status_code=413,content={'code':'BODY_TOO_LARGE'})
@@ -148,11 +153,68 @@ def create_app(config=None,*,store=None,factory=None,access_token=None):
         try:service.factory.preflight();ready=True;reason=None
         except ConfigurationError:ready=False;reason='CONFIGURATION_UNAVAILABLE'
         return {'status':'degraded' if service.storage_fault or not ready else 'ready','health_model_requests':0,
+            'local_session_version':'localhost-launch-session-v1',
             'profile':config.profile,'configuration_ready':ready,'reason':reason,
             'retrieval_mode':config.retrieval_mode if config.profile=='real' else 'none',
             'fact_retrieval_strategy':config.fact_strategy,'knowledge_version':config.knowledge_version if config.profile=='real' else None,
             'storage_healthy':not service.storage_fault,'active_run':service.active is not None,
             'queue_capacity':config.queue_capacity,'queued':service.queue.qsize(),'workers_supported':1}
+
+    @app.post('/session/launch',dependencies=[Depends(authorized)])
+    async def launch(request:Request):
+        # Launcher is an OS-local client. A cookie alone may not mint launch files.
+        credentials=await auth(request)
+        if credentials is None or not secrets.compare_digest(credentials.credentials,request.app.state.token):
+            raise HTTPException(403,detail={'code':'LOCAL_LAUNCHER_REQUIRED'})
+        return {'html':request.app.state.sessions.issue(str(request.base_url).rstrip('/'))}
+
+    @app.post('/session/remember',dependencies=[Depends(authorized)],include_in_schema=False)
+    async def remember(request:Request):
+        credentials=await auth(request)
+        if credentials is None or not secrets.compare_digest(credentials.credentials,request.app.state.token):
+            raise HTTPException(403,detail={'code':'LOCAL_BEARER_REQUIRED'})
+        # Upgrade an existing explicitly remembered connection; no token in response.
+        sessions=request.app.state.sessions
+        import re
+        nonce=re.search(r'name="ticket" value="([^"]+)"',sessions.issue(str(request.base_url).rstrip('/')))[1]
+        session=sessions.redeem(nonce)
+        response=JSONResponse({'version':sessions.version,'connected':True})
+        response.set_cookie(sessions.cookie,session,max_age=sessions.lifetime,httponly=True,samesite='strict',path='/')
+        return response
+
+    @app.post('/session/stop',dependencies=[Depends(authorized)],include_in_schema=False)
+    async def stop_local(request:Request):
+        credentials=await auth(request)
+        if credentials is None or not secrets.compare_digest(credentials.credentials,request.app.state.token):
+            raise HTTPException(403,detail={'code':'LOCAL_LAUNCHER_REQUIRED'})
+        if shutdown is None:raise HTTPException(404)
+        service=svc(request)
+        if service.active is not None or not service.queue.empty():raise HTTPException(409,detail={'code':'SERVICE_BUSY'})
+        shutdown()
+        return {'shutdown':'graceful_requested'}
+
+    @app.post('/session/bootstrap',include_in_schema=False)
+    async def bootstrap(request:Request):
+        from urllib.parse import parse_qs
+        try:fields=parse_qs((await request.body()).decode('ascii',errors='strict'))
+        except UnicodeDecodeError:raise HTTPException(401,detail={'code':'INVALID_LAUNCH_TICKET'}) from None
+        if set(fields)!={'ticket'} or len(fields['ticket'])!=1:raise HTTPException(401,detail={'code':'INVALID_LAUNCH_TICKET'})
+        session=request.app.state.sessions.redeem(fields['ticket'][0])
+        if session is None:raise HTTPException(401,detail={'code':'LAUNCH_TICKET_EXPIRED_OR_USED'})
+        response=RedirectResponse('/',status_code=303)
+        response.set_cookie(request.app.state.sessions.cookie,session,max_age=request.app.state.sessions.lifetime,
+            httponly=True,samesite='strict',path='/')
+        return response
+
+    @app.get('/session',dependencies=[Depends(authorized)])
+    async def session_status():return {'connected':True,'version':'localhost-launch-session-v1'}
+
+    @app.post('/session/logout',dependencies=[Depends(authorized)])
+    async def logout(request:Request):
+        request.app.state.sessions.forget(request.cookies.get(request.app.state.sessions.cookie))
+        response=JSONResponse({'connected':False})
+        response.delete_cookie(request.app.state.sessions.cookie,path='/',httponly=True,samesite='strict')
+        return response
 
     @app.post('/runs',status_code=202,dependencies=[Depends(authorized)])
     async def submit(body:Submit,request:Request):

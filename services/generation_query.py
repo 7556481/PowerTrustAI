@@ -22,6 +22,11 @@ def english_corpus(rows):
     return latin >= 100 and cjk == 0
 
 
+def english_fallback_available(rows):
+    """Mixed snapshot v2: existing English body can serve one empty-query fallback."""
+    return any(english_corpus([row]) for row in rows)
+
+
 class GenerationQueryConverter:
     uses_model_adapter = True
 
