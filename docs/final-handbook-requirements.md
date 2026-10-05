@@ -1,5 +1,9 @@
 # 最终《PowerTrustAI 项目学习与面试手册》交付要求
 
+## 2026-10-05 本机身份与连接生命周期
+
+补固定服务器令牌文件/排他首次创建/配置独立、临时目录不同身份与页面内存刷新的区分；浏览器origin隔离、明确opt-in本机保存、401与网络失败、忘记/并发响应状态、静态资源白名单与实际脚本/浏览器验证。涉及凭据只讲机制与路径，不写真实值、URL或交付包；不重建整本手册/PDF。
+
 ## 2026-10-05 真实接线与组件对象教学
 
 新增production_frames转换v2/单组件字面span验证、保留v1以及nullable provenance类型修复，tests/test_local_nli_wiring.py从真实Harness/schema13输出到保存/API。教学结合唯一真实1组件/4请求/282token的身份和交付链，说明原文范围、规范化proposition、faithful模型判断并不等同程序语义证明；混合无独立span必须skip，历史缺字段与类型bug分开。真实Fact/NLI同supported也不能把review_required升pass，重启UUID/输入/审核hash不变才是无补算证据。保留单案例/既有4错误支持/PDF提取质量限制，只补知识清单，不重建PDF/整本手册/站点。

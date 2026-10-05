@@ -1,5 +1,11 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-05 固定日常令牌与主动连接记忆（最新）
+
+接续10353f9；只看路径/stat/配置、不读令牌内容。近期恢复/NLI两验证各自使用不同目录access-token，日常默认data/runtime_local/access-token此前未生成；源码缺失才x生成，存在复用、无模型/普通重启轮换，本轮首次只读日常路径启动生成后多次重启mtime不变。前端原仅内存刷新清空也是重复输入原因。
+
+新增默认不勾remember、用户主动成功鉴权后按当前origin保存、刷新自动验证、取消后仅当前内存、忘记清除、401删除失效记忆与连接而不重发POST；不存DeepSeek/URL/log。实际浏览器与579完整回归通过。初次遗漏JS静态白名单造成内存回退已修复/HTTP200回归，向用户解释并仅再连一次，随后刷新/重启/清除/401无需再输入，主页面原opt-in保留。只读验证服务已停、日常固定文件保留，8768记忆不跨8765/host。说明[connection-memory-v1](connection-memory-v1.md)，私有路径元数据/截图/测试/提交远端见data/runtime_local/connection-memory-v1/verification-final.json；不含凭据，不改鉴权/审核政策、0付费训练。
+
 ## 2026-10-05 NLI真实接线v2完成（最新）
 
 接续787dfc1，核对真实输出targets字符串数组、per_claim映射/核验delivery快照/whole候选/身份；发现可选provenance:null读取bug并修复，不冒称历史缺正文。保留production_frames_v1，默认v2要求可验证唯一单组件父原文锚点及模型faithful技术对象；当前无独立组件span，混合/共享锚点跳过，不猜切/借pool。真实Harness/schema13→转换→NLI接口→保存→API的synthetic贯通及完整575测试通过。

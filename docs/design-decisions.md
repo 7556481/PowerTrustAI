@@ -1,5 +1,9 @@
 # 重要设计决策与依据
 
+## 2026-10-05 不把临时服务身份变化当令牌轮换
+
+日常固定token_file与模型无关，x创建只在缺失时发生，存在即复用、损坏不静默换；临时目录可独立身份但要说明。浏览器只在用户主动且成功鉴权后保存当前origin token，401清除、网络故障不误删、忘记不恢复过期异步状态；默认内存，不存DeepSeek。新增资产须同时加入受限静态白名单/真实客户端测试，实际遗漏已修复。详见connection-memory-v1.md。
+
 ## 2026-10-05 组件范围优先于强行NLI覆盖
 
 现有组件无独立原文span，不能把整段混合claim.text拼入单组件假设；v2仅唯一单组件父锚点且实际原文/版本/faithful对象对应，混合或共享原文无可靠绑定skip。Nullable provenance是合法类型，读为空行政对象、不补造出处，不能误称历史缺正文。用实际Harness schema13 synthetic贯通后只执行冻结的一次真实概念审核，NLI supported与Fact绑定但原policy review_required保持；重启查询无补算/重发。保留v1转换及历史，默认开关/检索/审核政策不改，详见local-nli-wiring-v2.md。

@@ -1,9 +1,11 @@
-/* Same-origin plain-text client. No persistent credential storage or POST retries. */
+/* Same-origin plain-text client. Opt-in local connection memory; no POST retries. */
 'use strict';
 (() => {
 const $ = id => document.getElementById(id);
 const labels = {queued:'排队',running:'运行中',finished:'结束',failed:'执行失败',cancelled:'已取消',interrupted:'中断',supported:'有依据支持（限定范围）',contradicted:'与依据矛盾',insufficient_evidence:'证据不足',not_assessable:'无法评估',pass:'pass · 当前政策未要求进一步处理（非安全认证）',revise:'需修订',review_required:'需人工复核',succeeded:'执行成功',timed_out:'执行超时',pending:'待查',confirm:'确认',disagree:'反对',note:'说明',question_answer:'问答',assess_existing:'已有回答审核',generation:'生成',claim_extraction:'主张提取',evidence_verification:'事实审核',power_domain_review:'领域审核',revision:'修订',verifying:'双重审核',extracting:'提取主张',completed:'完成',generating:'生成回答',index_core_hit:'索引核心命中',index_adjacent_context:'索引相邻上下文',generation_input:'生成输入',original_citation:'原引用绑定',user_reference:'用户参考（未核实）'};
 const tr = v => v == null ? '未提供' : typeof v === 'boolean' ? (v ? '是' : '否') : labels[v] || String(v);
+let connected = false;
+const connectionMemory=window.PowerTrustConnectionMemory?.create()||{load:()=>null,save:()=>false,forget:()=>true};
 let token = '', selected = '', profile = null, result = null, timer = null, epoch = 0, reading = false, posting = false, uncertainPost = false, feedbackPosting = false, offset = 0, nextOffset = null;
 function node(tag,text,cls){const n=document.createElement(tag);if(text!=null)n.textContent=String(text);if(cls)n.className=cls;return n;}
 function clear(id){$(id).replaceChildren();}
@@ -12,9 +14,9 @@ function jsonBox(value){return node('pre',JSON.stringify(value,null,2),'json');}
 function fields(parent,items){const dl=node('dl');for(const [key,value] of items){dl.append(node('dt',key),node('dd',value==null?'未提供':typeof value==='object'?JSON.stringify(value):tr(value)));}parent.append(dl);}
 function badge(value){return node('span',tr(value),'badge'+(['contradicted','failed','timed_out'].includes(value)?' issue':['insufficient_evidence','not_assessable','interrupted','review_required'].includes(value)?' warning':''));}
 class ApiError extends Error {constructor(status,data){super('API error');this.status=status;this.code=data?.code||data?.detail?.code;}}
-async function api(path,body){const ctl=new AbortController();const timeout=setTimeout(()=>ctl.abort(),15000);try{const headers={};if(token)headers.Authorization='Bearer '+token;if(body!==undefined)headers['Content-Type']='application/json';const r=await fetch(path,{method:body===undefined?'GET':'POST',headers,body:body===undefined?undefined:JSON.stringify(body),signal:ctl.signal,cache:'no-store',credentials:'omit',redirect:'error'});const data=await r.json();if(!r.ok)throw new ApiError(r.status,data);return data;}finally{clearTimeout(timeout);}}
-function errorText(e){if(!(e instanceof ApiError))return '网络中断或请求超时：状态未知。任务可能已被服务接收；不会自动重新提交，请用已有 run_id 或运行列表查询。';const byCode={CONFIGURATION_UNAVAILABLE:'真实模型配置或固定知识库缺失，未接受任务；不会切换演示组件。',RUN_STORAGE_FAILED:'运行存储不可用，保存未确认。请检查服务端存储。',SERVICE_UNAVAILABLE:'服务当前不接受任务。',SAME_ORIGIN_REQUIRED:'请求来源不符合本机同源要求。'};return byCode[e.code]||({401:'令牌无效或未提供，请重新输入本机令牌。',409:'回答版本或 finding 关联冲突，未保存意见。请刷新后选择实际版本。',429:'等待队列已满，未接受本次任务。请等待后手动提交。',422:'输入验证失败，请检查必填项、长度与实际版本。',404:'该运行或关联记录未找到；仅在收到明确 404 时作此判断。',503:'服务不可用，未确认接受或保存。',403:'仅允许本机同源访问。'}[e.status]||`HTTP ${e.status}：操作未确认成功。`);}
-function controls(){ $('submit').disabled=!token||profile===null||posting||uncertainPost;$('refresh').disabled=!token||!selected||reading;$('cancel').disabled=!token||!selected||!['queued','running'].includes(result?.execution?.status);$('review-submit').disabled=!token||!selected||!$('review-answer').value||feedbackPosting;}
+async function api(path,body){const ctl=new AbortController();const timeout=setTimeout(()=>ctl.abort(),15000);try{const headers={};const requestToken=token;if(requestToken)headers.Authorization='Bearer '+requestToken;if(body!==undefined)headers['Content-Type']='application/json';const r=await fetch(path,{method:body===undefined?'GET':'POST',headers,body:body===undefined?undefined:JSON.stringify(body),signal:ctl.signal,cache:'no-store',credentials:'omit',redirect:'error'});const data=await r.json();if(!r.ok){if(r.status===401&&token===requestToken)invalidateConnection();throw new ApiError(r.status,data);}return data;}finally{clearTimeout(timeout);}}
+function errorText(e){if(!(e instanceof ApiError))return '网络中断或请求超时：状态未知。任务可能已被服务接收；不会自动重新提交，请用已有 run_id 或运行列表查询。';const byCode={CONFIGURATION_UNAVAILABLE:'真实模型配置或固定知识库缺失，未接受任务；不会切换演示组件。',RUN_STORAGE_FAILED:'运行存储不可用，保存未确认。请检查服务端存储。',SERVICE_UNAVAILABLE:'服务当前不接受任务。',SAME_ORIGIN_REQUIRED:'请求来源不符合本机同源要求。'};return byCode[e.code]||({401:'令牌无效或已失效；已清除页面连接与浏览器记忆，请核对本机固定令牌后重新连接。',409:'回答版本或 finding 关联冲突，未保存意见。请刷新后选择实际版本。',429:'等待队列已满，未接受本次任务。请等待后手动提交。',422:'输入验证失败，请检查必填项、长度与实际版本。',404:'该运行或关联记录未找到；仅在收到明确 404 时作此判断。',503:'服务不可用，未确认接受或保存。',403:'仅允许本机同源访问。'}[e.status]||`HTTP ${e.status}：操作未确认成功。`);}
+function controls(){ $('submit').disabled=!connected||!token||profile===null||posting||uncertainPost;$('refresh').disabled=!connected||!token||!selected||reading;$('cancel').disabled=!connected||!token||!selected||!['queued','running'].includes(result?.execution?.status);$('review-submit').disabled=!connected||!token||!selected||!$('review-answer').value||feedbackPosting;}
 function stop(){clearTimeout(timer);timer=null;}
 async function health(){try{const h=await api('/health');profile=h.profile;const demo=profile==='synthetic_fixture';$('service-mode').className='mode-banner'+(demo?' demo':'');$('service-mode').textContent=demo?'演示模式 · synthetic_fixture\n假组件、零付费调用，不代表真实模型能力。':'真实模式 · DeepSeek\n提交任务会调用付费模型。领域规则仍为演示规则。';$('connection').textContent=`服务：${h.status} · 单活动运行 · 等待 ${h.queued}/${h.queue_capacity}`+(h.configuration_ready?'':' · 配置未就绪');}catch(e){profile=null;$('service-mode').textContent='服务不可用 · 模式未确认';throw e;}finally{controls();}}
 function current(s){clear('current');const parent=$('current');parent.className='';parent.append(badge(s.status),node('span',s.profile==='synthetic_fixture'?'synthetic_fixture 演示记录':'真实运行记录','badge'));fields(parent,[['run_id',s.run_id],['当前阶段',s.harness_state],['创建时间 UTC',s.created_utc],['结束时间 UTC',s.ended_utc],['结果持久化',s.persistence_confirmed],['错误代码',s.error_code],['固定知识版本',s.knowledge_version]]);if(s.cancel_requested)parent.append(node('p','已请求取消，以下状态以服务确认结果为准。','hint'));}
@@ -31,8 +33,24 @@ function renderLocalNLI(value){clear('local-nli');const area=$('local-nli');area
 async function load(){if(!token||!selected||reading)return;stop();reading=true;controls();const stamp=epoch;const rid=selected;let s;try{s=await api('/runs/'+encodeURIComponent(rid));if(stamp!==epoch)return;current(s);const r=await api(`/runs/${encodeURIComponent(rid)}/result`);if(stamp!==epoch)return;result=r;if(r.answer){renderAnswers(r);renderFactDelivery(r);renderFindings(r);renderEvidence(r);reviewOptions(r);}else{clear('decision');$('decision').append(node('p','尚无阶段结果，未提供业务结论。','hint'));}try{renderLocalNLI(await api(`/runs/${encodeURIComponent(rid)}/nli`));}catch(_){clear('local-nli');$('local-nli').append(node('p','诊断查询失败；原审核结果仍照常展示。','hint'));}const trace=await api(`/runs/${encodeURIComponent(rid)}/trace`);if(stamp!==epoch)return;renderTrace(trace);const reviews=await api(`/runs/${encodeURIComponent(rid)}/reviews`);if(stamp!==epoch)return;renderReviews(reviews);tell(`已查询 ${rid} · ${tr(s.status)}。`);if(['queued','running'].includes(s.status))timer=setTimeout(load,1800);}catch(e){if(stamp===epoch){tell(errorText(e),true);$('progress').textContent='当前网络查询状态未知；上方保留最近已确认的结果。自动轮询已暂停，可手动查询。';}}finally{reading=false;controls();}}
 async function selectRun(rid){if(!/^[A-Za-z0-9_-]{1,150}$/.test(rid)){tell('run_id 格式无效。',true);return;}if(reading){tell('当前查询尚未结束，请稍后选择任务。',true);return;}stop();epoch++;selected=rid;result=null;$('run-id').value=rid;for(const id of ['current','progress','trace','decision','answers','usage','findings','evidence','evidence-detail','reviews','local-nli'])clear(id);$('review-answer').replaceChildren();reviewFindings();await load();}
 async function history(page=0){const data=await api('/runs/page/'+page);offset=page;nextOffset=data.next_offset;clear('history');for(const r of data.items){const btn=node('button',`${tr(r.mode)} · ${tr(r.status)} · ${r.profile}\n${r.run_id}`,'quiet');btn.type='button';btn.addEventListener('click',()=>selectRun(r.run_id));$('history').append(btn);}$('history-next').hidden=nextOffset===null;if(!data.items.length)$('history').append(node('p','暂无运行','hint'));}
-$('access-form').addEventListener('submit',async e=>{e.preventDefault();stop();token=$('token').value.trim();$('token').value='';try{await health();await history();uncertainPost=false;tell('已连接。令牌仅保存在页面内存。');if(selected)await load();}catch(err){tell(errorText(err),true);}finally{controls();}});
-$('disconnect').addEventListener('click',()=>{stop();epoch++;token='';$('token').value='';tell('令牌已从页面内存清除。');controls();});
+function forgetConnection(message='已忘记连接：浏览器保存项与页面内存均已清除。'){
+ stop();epoch++;connected=false;token='';const deleted=connectionMemory.forget();$('remember-connection').checked=false;$('token').value='';$('token').required=true;tell(deleted?message:'页面连接已清除，但浏览器拒绝删除保存项；请在浏览器站点设置中手动清除此地址的数据。',!deleted);controls();
+}
+function invalidateConnection(){forgetConnection('令牌已失效：已清除记忆与连接，请核对本机固定令牌后重新连接。');}
+async function connect(value){
+ stop();const stamp=++epoch;connected=false;token=value;$('token').value='';$('token').required=!token;
+ try{await health();if(stamp!==epoch||token!==value)return;await history();if(stamp!==epoch||token!==value)return;connected=true;uncertainPost=false;
+  if($('remember-connection').checked){if(connectionMemory.save(token))tell('已连接，并记住此浏览器的本机连接。');else{$('remember-connection').checked=false;connectionMemory.forget();tell('已连接，但浏览器存储不可用；本次仅在内存保存。');}}
+  else{connectionMemory.forget();tell('已连接。令牌仅保存在页面内存。');}
+  if(selected)await load();
+ }catch(err){if(stamp===epoch)tell(errorText(err),true);}finally{controls();}
+}
+$('access-form').addEventListener('submit',async e=>{e.preventDefault();const value=$('token').value.trim()||token;if(value)await connect(value);});
+$('disconnect').addEventListener('click',()=>forgetConnection());
+$('remember-connection').addEventListener('change',()=>{
+ if(!$('remember-connection').checked){const deleted=connectionMemory.forget();if(!deleted){tell('记忆开关已关闭，但浏览器拒绝删除保存项；请手动清除此地址的站点数据。',true);return;}tell(connected?'记忆已关闭并删除保存项；当前连接仅在页面内存使用。':'记忆已关闭，连接成功后仅在页面内存使用。');}
+ else if(connected&&token){if(connectionMemory.save(token))tell('已按你的选择记住当前本机连接。');else{$('remember-connection').checked=false;tell('浏览器存储不可用，当前连接仅在内存使用。');}}
+});
 $('mode').addEventListener('change',()=>{const existing=$('mode').value==='assess_existing';$('existing-group').hidden=!existing;$('existing').required=existing;});
 $('submit-form').addEventListener('submit',async e=>{
  e.preventDefault();if(posting||uncertainPost||!token||profile===null)return;
@@ -65,5 +83,6 @@ $('review-form').addEventListener('submit',async e=>{
 });
 function renderFactDelivery(r){const d=node("details");d.append(node("summary","事实检索模式、知识版本、逐主张交付与省略（详情）"),jsonBox({mode:r.configuration?.retrieval_mode,strategy:r.configuration?.fact_retrieval_strategy,knowledge_version:r.configuration?.knowledge_version,embedding_profile:r.configuration?.embedding_profile,scoring_method:r.configuration?.scoring_method,records:r.retrieval}));$("usage").append(d);}
 window.addEventListener('pagehide',()=>{stop();token='';});
-health().catch(e=>tell(errorText(e),true));
+const remembered=connectionMemory.load();
+if(remembered){$('remember-connection').checked=true;connect(remembered);}else health().catch(e=>tell(errorText(e),true));
 })();

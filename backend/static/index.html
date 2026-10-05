@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PowerTrustAI · 本机辅助审核</title><link rel="stylesheet" href="/ui/style.css"><script src="/ui/app.js" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PowerTrustAI · 本机辅助审核</title><link rel="stylesheet" href="/ui/style.css"><script src="/ui/connection_memory.js" defer></script><script src="/ui/app.js" defer></script></head>
 <body>
 <header><div class="brand">P<span>PowerTrustAI</span><small>本机辅助审核 · v1</small></div><span class="pill">仅本机 · 人工复核</span></header>
 <main>
 <section class="intro"><div><p class="eyebrow">从回答到依据</p><h1>查看依据，保留疑问。</h1><p>执行完整性、事实支持与工程前提分别呈现。审核结论不代表工程安全认证。</p></div><div id="service-mode" class="mode-banner" role="status">正在查询服务模式…</div></section>
-<section class="access panel"><form id="access-form"><label for="token">本机访问令牌</label><div class="inline"><input id="token" type="password" autocomplete="off" spellcheck="false" required placeholder="仅保存在当前页面内存"><button type="submit">连接服务</button><button id="disconnect" type="button" class="quiet">清除令牌</button></div></form><p id="connection" class="hint">刷新后需重新输入。DeepSeek 密钥始终留在服务端。</p></section>
+<section class="access panel"><form id="access-form"><label for="token">本机访问令牌</label><div class="inline"><input id="token" type="password" autocomplete="off" spellcheck="false" required placeholder="仅保存在当前页面内存"><button type="submit">连接服务</button><button id="disconnect" type="button" class="quiet">忘记连接</button></div><label class="remember-connection"><input id="remember-connection" type="checkbox"> 记住本机连接（仅当前浏览器与当前地址/端口）</label><p class="hint">默认仅内存保存。主动勾选并连接成功后，令牌保存在此浏览器本机存储；同一浏览器配置的使用者可访问。取消勾选会删除保存项，当前页面仍可使用；“忘记连接”同时清除记忆与内存。不会保存DeepSeek密钥。</p></form><p id="connection" class="hint">刷新后需重新输入。DeepSeek 密钥始终留在服务端。</p></section>
 <p id="notice" class="notice" role="status" aria-live="polite">输入令牌后，可提交任务或通过 run_id 恢复查看。</p>
 <div class="workspace"><aside>
 <section class="panel"><p class="eyebrow">01 / 任务输入</p><h2>提交审核任务</h2>

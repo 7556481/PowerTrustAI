@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-05 连续连接体验（最新）
+
+- [固定令牌路径、浏览器主动记忆、401与验证](connection-memory-v1.md)：不同验证目录是不同服务身份，日常固定文件复用，579回归/实际浏览器通过。
+- backend/static/connection_memory.js及app.js/页面，backend/api静态白名单；tests/test_connection_memory.py和ui_connection_memory_probe.js执行实际脚本，不导出令牌。
+- 忽略connection-memory-v1仅保存路径/stat/布尔验证/截图/测试/verification-final，真实值和浏览器存储不归档。
+
 ## 2026-10-05 NLI真实接线v2（最新）
 
 - [类型/组件范围修复与一次真实验证](local-nli-wiring-v2.md)：575离线，1实际组件、Fact/NLI同supported，业务仍review_required，4真实请求；浏览器/重启/停止已验证。
