@@ -8,12 +8,13 @@ import time
 from evaluation.support_dataset import validate_sample, task_key
 from evaluation.support_training import check_partition, classify_metrics
 
-VERSION = 'support-nli-semantic-pair-v1'
+LEGACY_VERSION = 'support-nli-semantic-pair-v1'
+VERSION = 'support-nli-document-body-pair-v2'
 NLI_TO_SUPPORT = {'entailment': 'supported', 'contradiction': 'contradicted',
                   'neutral': 'insufficient_evidence'}
 
 
-def semantic_pair(sample):
+def semantic_pair_v1(sample):
     """Label-blind full delivery, with administrative scope visibly separate."""
     validate_sample(sample)
     task = sample['task']; claim = task['claim']
@@ -47,10 +48,45 @@ def semantic_pair(sample):
     if qualifiers: hypothesis += '\nNecessary task qualifiers: ' + '; '.join(qualifiers)
     if claim.get('scope'):
         hypothesis += '\nTask applicability scope (not a quotation from the document): ' + '; '.join(claim['scope'])
-    return {'version': VERSION, 'premise': premise, 'hypothesis': hypothesis,
+    return {'version': LEGACY_VERSION, 'premise': premise, 'hypothesis': hypothesis,
             'document_bodies': bodies, 'index_declarations': admin,
             'assertion_role': claim['assertion_role'], 'necessary_qualifiers': qualifiers,
             'scope': claim.get('scope', []), 'label_used_for_input': False}
+
+
+def semantic_pair(sample):
+    """Body-only NLI; administrative context is retained outside model premise.
+
+    Claim qualifiers and applicability remain in the hypothesis. Index fields
+    describe the delivery, never technical evidence or an official quotation.
+    """
+    claim = sample['task']['claim']
+    target = claim.get('basis_target')
+    review = sample.get('quality_review', {})
+    if target not in ('literature', 'document_body'):
+        raise ValueError('Explicit document-body basis target required; route metadata separately')
+    if review.get('disposition') in ('auxiliary_only', 'hold'):
+        raise ValueError('Auxiliary attribution and hold tasks cannot enter body NLI')
+    if claim.get('category') == 'index-versus-body':
+        raise ValueError('Source attribution review requires a separate route')
+    pair = semantic_pair_v1(sample)
+    pair['version'] = VERSION
+    pair['premise'] = '\n\n'.join(pair['document_bodies'])
+    pair['document_context'] = {
+        'type': 'administrative_source_attribution_and_index_applicability',
+        'declarations': pair['index_declarations'],
+        'is_official_technical_prose': False,
+        'used_as_model_premise': False,
+        'sources': [
+            {'document_title': e['metadata'].get('provenance', {}).get('document_title'),
+             'publisher': e['metadata'].get('provenance', {}).get('publisher'),
+             'index_applicability': list(e['metadata'].get('applicability') or []),
+             'type': 'index_record_not_technical_prose'}
+            for e in sample['task']['evidence']
+        ],
+    }
+    pair['basis_target'] = 'document_body'
+    return pair
 
 
 def output_mapping(config):
@@ -170,9 +206,12 @@ def run_comparison(args):
 
 
 def run_training(args):
-    import torch
-    cfg=read(args.config); out=Path(cfg['output']); out.mkdir(parents=True,exist_ok=False)
+    cfg=read(args.config); out=Path(cfg['output'])
     samples=read(cfg['data'])['samples']; check_partition(samples)
+    if any(s['supervision']['status']!='confirmed' for s in samples):
+        raise ValueError('Explicit confirmed labels required before loading a training model')
+    import torch
+    out.mkdir(parents=True,exist_ok=False)
     random.seed(cfg['seed']); torch.manual_seed(cfg['seed']); torch.set_num_threads(cfg['threads'])
     resources=Resources(); model,tokenizer,mapping,limit,load_seconds,info=load_model(cfg['model_directory'])
     encoded,records,excluded=prepare(samples,tokenizer,limit); write(out/'semantic-inputs.json',records)

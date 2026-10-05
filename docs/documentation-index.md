@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-05 78项复核与扩大开发计划（最新）
+
+- [复核接收/69pending/合并家族/SSIAG留出/适配器v2](support-nli-review-v2.md)：55开发→13家族→43训练/12验证，33文档留出，仅准备0训练/预测。
+- evaluation/support_nli_review.py（read_review_archive/receive_pending/merge_groups/propose_split）、support_nli.py（v1保留、v2正文路由、pending训练前置拒绝）及公开合成测试。
+- 忽略data/runtime_local/support-nli-review-v2：received原包/成员SHA、quality-version、69/6/3分流、三修改理由、69模板/清单、原划分/关联边/新划分、55合并与33留出、token预检、固定官方基座计划、验证/失败及审阅ZIP。原78/19/历史报告不覆盖。
+
 ## 2026-10-05 NLI实际比较、训练与新候选（最新）
 
 - [NLI完整结果与限制](support-nli-v1.md)：两个预训练NLI头、事前验证/资源选型、唯一4epoch领域微调、5项开发对照、78pending候选与未来文档隔离。

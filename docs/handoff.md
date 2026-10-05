@@ -1,5 +1,13 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-05 78复核接收与扩大开发/SSIAG留出准备（最新）
+
+接续44046d0，已从用户明确Downloads路径接收review78 ZIP，逐ID/task/正文/依据/原建议/分配核对及78原页片段重检。新质量版69正文/6辅助/3hold，全78仍pending/null，3条insufficient→contradicted的复核理由完整保留，69模板使用本次具体建议。稳定性36与原19合并55，精确去重0；19原家族union为13，标签盲规则拟训练43/11家族、验证12/2家族，旧五题归已见开发；原划分/输入/历史结果SHA不变。SSIAG33独立留出，不训练/选型/调参/检查点或预测；本轮0模型加载/0训练/0付费。
+
+正文适配器v2仅官方原文入premise，typed来源/索引适用性保留但不充正文；主张限定保留，metadata/辅助/hold拒绝正文路由。v1函数及历史记录保留；公开测试验证pending前置拒绝、标签盲关系/路由/依据/长度。55开发57–200token，33留出76–149，0超长/截断。计划固定官方MiniLM原NLI权重重新开始，待用户明确确认69项后另行执行，禁止旧微调检查点续刷或SSIAG调参。详细计数/理由/源码/失败/待补见[support-nli-review-v2](support-nli-review-v2.md)，私有交付/提交/远端状态见data/runtime_local/support-nli-review-v2/verification-final.json。生产Harness/schema13/政策/检索默认不变，3hold保留不阻断准备，无新修订任务。
+
+最终手册仍Markdown＋本地站/PDF可选，本轮只补监督确认/家族union/共享证据泄漏/前件/正文元数据隔离与文档留出知识点，不重写全文/建站。下一步是用户审阅确认，不自动训练。
+
 ## 2026-10-05 NLI实验完成与最新交接
 
 已按补充任务完成上下文核对、两个官方NLI基座比较、唯一正式CPU微调和78项新候选准备，具体固定revision/规则/逐类指标/失败/源码入口见[support-nli-v1](support-nli-v1.md)。MiniLM与RoBERTa验证macro-F1均0.5556、错误supported均0，按事前验证耗时规则选MiniLM；保留分类头，4epoch选epoch3，同5项已见开发测试macro-F1 0.8222→1.0000、支持召回1/2→2/2，非独立验收/生产收益。原11/3/5及74用户监督不改、不重复BERT/付费基线。
