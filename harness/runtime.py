@@ -451,19 +451,23 @@ class OfflineHarness:
                     record("power_domain_review_validation", ExecutionStatus.FAILED, perf_counter(), str(exc))
                 issues.extend(verification.execution_issues + domain.execution_issues)
                 transition(RunState.DECIDING)
-                decision = self.policy.decide(verification, domain, budget, rounds)
+                product_policy = getattr(self.policy, 'product_policy', False)
+                decision = (self.policy.decide_context(verification, domain, budget, rounds,
+                    request=request, answer=answer, claims=claims, extraction=extracted,
+                    issues=issues, retrieval=retrieval) if product_policy else
+                    self.policy.decide(verification, domain, budget, rounds))
                 real_repair = (getattr(self.policy,"allows_bounded_real_revision",False)
                     and getattr(self.revision,"bounded_real_revision",False) and rounds < 1)
-                if decision.kind in (DecisionKind.PASS, DecisionKind.REVISE) and (
+                if not product_policy and decision.kind in (DecisionKind.PASS, DecisionKind.REVISE) and (
                         getattr(self.verification, "uses_model_adapter", False) or getattr(self.extractor, "uses_model_adapter", False)) and not (decision.kind==DecisionKind.REVISE and real_repair):
                     # Model reviews and demo rules are not safety certification.
                     decision = AuditDecision(DecisionKind.REVIEW_REQUIRED,
                         ("Model and rule reviews are limited; no engineering feasibility/safety certification",)
                         + decision.reasons, "evidence-local-gate-v1", decision.unresolved_finding_ids)
-                if extracted is not None and (extracted.uncovered_spans or extracted.non_claim_spans):
+                if not product_policy and extracted is not None and (extracted.uncovered_spans or extracted.non_claim_spans):
                     decision = AuditDecision(decision.kind if decision.kind==DecisionKind.REVISE and real_repair else DecisionKind.REVIEW_REQUIRED,
                         ("Some answer text is not claim-reviewed; coverage gaps remain unresolved",)+decision.reasons, "coverage-gate-v1",decision.unresolved_finding_ids)
-                if retrieval:
+                if retrieval and not product_policy:
                     if any(r.status != ExecutionStatus.SUCCEEDED for r in retrieval.records):
                         decision = AuditDecision(DecisionKind.REVIEW_REQUIRED,
                             ("Required retrieval did not complete; partial valid evidence retained",),
@@ -478,7 +482,10 @@ class OfflineHarness:
                        f"{decision.kind.value}: {'; '.join(decision.reasons)}")
                 reason = "; ".join(decision.reasons)
                 if decision.kind != DecisionKind.REVISE:
-                    transition(RunState.COMPLETED if decision.kind == DecisionKind.PASS else RunState.REVIEW_REQUIRED)
+                    terminal = {DecisionKind.PASS: RunState.COMPLETED, DecisionKind.REJECT: RunState.REJECTED,
+                        DecisionKind.NEEDS_INFORMATION: RunState.NEEDS_INFORMATION,
+                        DecisionKind.EXECUTION_INCOMPLETE: RunState.EXECUTION_INCOMPLETE}
+                    transition(terminal.get(decision.kind, RunState.REVIEW_REQUIRED))
                     break
                 if rounds >= budget.max_revision_rounds:
                     raise ContractError("Policy attempted revision beyond limit")
@@ -498,11 +505,17 @@ class OfflineHarness:
                 )
                 if issue or revised.execution_issues:
                     issues.extend((issue,) if issue else revised.execution_issues)
-                    decision = AuditDecision(DecisionKind.REVIEW_REQUIRED, ("Revision execution failed",), "offline-policy-v1",
-                                             decision.unresolved_finding_ids)
+                    if product_policy:
+                        from dataclasses import replace
+                        decision=replace(decision,kind=DecisionKind.EXECUTION_INCOMPLETE,
+                            reasons=('Revision execution failed; no completed repair',),execution_integrity='incomplete',
+                            risk_level='unknown',reason_codes=('REVISION_EXECUTION_FAILED',))
+                    else:
+                        decision = AuditDecision(DecisionKind.REVIEW_REQUIRED, ("Revision execution failed",), "offline-policy-v1",
+                                                 decision.unresolved_finding_ids)
                     report = make_report(decision)
                     reason = decision.reasons[0]
-                    transition(RunState.REVIEW_REQUIRED)
+                    transition(RunState.EXECUTION_INCOMPLETE if product_policy else RunState.REVIEW_REQUIRED)
                     break
                 answer = revised.answer
                 revision_outputs.append(revised)

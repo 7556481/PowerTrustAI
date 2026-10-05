@@ -39,7 +39,7 @@ must be nonempty. An assumption is not a substitute for unavailable evidence.
 """
 
 
-def messages_for(inputs, schema_version=2):
+def messages_for(inputs, schema_version=2, *, product_guidance=False):
     evidence = merge_evidence(inputs.evidence)
     data = {"section": "DOCUMENT_DATA_UNTRUSTED", "evidence": [asdict(e) for e in evidence],
             "origins": [asdict(b) for b in inputs.evidence_bindings]}
@@ -57,6 +57,14 @@ evidence_sufficient (boolean). If insufficient, explain it and provide nonempty
 missing_information. If sufficient, at least one unit must cite input evidence.
 Never output a factual audit pass."""
         question.pop("answer_id"); question.pop("version")
+    if product_guidance:
+        system += '''\nProduct generation guidance v1: honor requested brevity and answer only the question.
+Do not add unrequested bibliography, licensing or geographic assertions as official technical body facts.
+Index-maintained metadata is NOT an official document sentence. If a necessary source scope
+comes only from index metadata, explicitly attribute it to the index in a separate scope unit;
+never claim the document body stated it. Preserve all necessary technical conditions, negation,
+quantities and applicability. No silent evidence truncation or removal of a required limitation.
+Unit kind never exempts factual statements from independent technical truth verification.\n'''
     return (ModelMessage("system", system), ModelMessage("user", json.dumps(question, ensure_ascii=False)),
             ModelMessage("user", json.dumps(data, ensure_ascii=False)))
 
@@ -121,15 +129,17 @@ def parse_answer(text, inputs):
 class EvidenceGenerationAgent:
     uses_model_adapter = True
 
-    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=2):
+    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=2, product_guidance=False):
         require(schema_version in (2,3), "Unknown generation contract")
         self.schema_version = schema_version
+        self.product_guidance = product_guidance
         self.client = ModelClient(adapter, settings)
         self.diagnostics=None if diagnostic_dir is None else ResponseDiagnostics(diagnostic_dir)
 
     async def run(self, inputs):
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
+        if self.product_guidance:prompt += '-product-v1'
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,
@@ -137,7 +147,7 @@ class EvidenceGenerationAgent:
                 missing_information=("Traceable evidence covering the question is required.",))
             return GenerationOutput(answer, evidence_sufficient=False, prompt_version=prompt,
                 evidence_snapshot=make_snapshot(answer, inputs.evidence, inputs.knowledge_version,request=inputs.request,answer_requirements=inputs.answer_requirements,prompt_version=prompt,evidence_bindings=inputs.evidence_bindings))
-        messages = messages_for(inputs, self.schema_version)
+        messages = messages_for(inputs, self.schema_version, product_guidance=self.product_guidance)
         parser = (lambda v: parse_units(v,inputs)) if self.schema_version==3 else (lambda v:parse_answer(json.dumps(v,ensure_ascii=False),inputs))
         (answer,sufficient),records=await structured_request(self.client,messages,prompt,
             parser,diagnostics=self.diagnostics,response_contract_version=f"generation-output-v{self.schema_version}",input_snapshot_path=input_path)

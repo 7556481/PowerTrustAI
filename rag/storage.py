@@ -96,7 +96,10 @@ CREATE TABLE IF NOT EXISTS pdf_chunk_details (
 
 
 class KnowledgeStore:
-    def __init__(self, path, *, readonly=False):
+    def __init__(self, path, *, readonly=False, validated_pdf_cache=False):
+        self._validated_pdf_cache = {} if readonly and validated_pdf_cache else None
+        self.pdf_validation_hits = 0
+        self.pdf_validation_misses = 0
         self.connection = sqlite3.connect(Path(path).resolve().as_uri() + "?mode=ro", uri=True) if readonly else sqlite3.connect(path)
         self.connection.row_factory = sqlite3.Row
         self.connection.execute("PRAGMA foreign_keys=ON")
@@ -297,7 +300,17 @@ class KnowledgeStore:
             raise ContractError("Derived PDF chunk plan mismatch")
         return config, chunks, row["plan_sha256"]
 
-    def _load_pdf_report(self, document_id, version, file_hash):
+    def _load_pdf_report(self, document_id, version, file_hash, knowledge_version=None):
+        # Connection-local verified document data, not rankings or audit judgments.
+        # SQLite data_version invalidates on other connections' committed changes.
+        # No cache in writeable stores; retrieval's full replay/evidence checks remain.
+        from copy import deepcopy
+        stamp = (self.connection.execute('PRAGMA data_version').fetchone()[0], self.connection.total_changes)
+        key = (stamp, knowledge_version, document_id, version, file_hash, 'validated-pdf-report-cache-v1')
+        if self._validated_pdf_cache is not None and key in self._validated_pdf_cache:
+            self.pdf_validation_hits += 1
+            return deepcopy(self._validated_pdf_cache[key])
+        self.pdf_validation_misses += 1
         from rag.pdf import PDFPage, PDFExtraction, extraction_fingerprint
         head = self.connection.execute("SELECT * FROM pdf_versions WHERE document_id=? AND version=?", (document_id, version)).fetchone()
         if not head:
@@ -313,6 +326,11 @@ class KnowledgeStore:
         report = PDFExtraction(file_hash, head["parser_version"], json.loads(head["config"]), pages, head["status"], head["diagnostic"])
         if extraction_fingerprint(report) != head["extraction_sha256"] or report.status != "ready_for_review":
             raise ContractError("PDF extraction fingerprint/status mismatch")
+        if self._validated_pdf_cache is not None:
+            if stamp != (self.connection.execute('PRAGMA data_version').fetchone()[0], self.connection.total_changes):
+                raise ContractError('Knowledge changed during PDF validation')
+            if len(self._validated_pdf_cache) >= 8:self._validated_pdf_cache.clear()
+            self._validated_pdf_cache[key] = deepcopy(report)
         return report
 
     def pdf_report(self, document_id, knowledge_version):
@@ -322,7 +340,7 @@ class KnowledgeStore:
         row = self.connection.execute("SELECT * FROM versions WHERE document_id=? AND version=?", (document_id, members[document_id])).fetchone()
         if digest(row["raw_bytes"]) != row["file_sha256"]:
             raise ContractError("Stored PDF file hash mismatch")
-        return self._load_pdf_report(document_id, members[document_id], row["file_sha256"])
+        return self._load_pdf_report(document_id, members[document_id], row["file_sha256"], knowledge_version)
 
     def rows(self, knowledge_version):
         self._members(knowledge_version)
@@ -377,7 +395,7 @@ class KnowledgeStore:
         from rag.pdf import extraction_fingerprint
         if digest(row["raw_bytes"]) != row["file_sha256"] or row["document_text"] != "":
             raise ContractError("Stored PDF original hash/text mismatch")
-        report = self._load_pdf_report(row["document_id"], row["version"], row["file_sha256"])
+        report = self._load_pdf_report(row["document_id"], row["version"], row["file_sha256"], knowledge_version)
         text_pages = [p for p in report.pages if p.status == "text_pending_review"]
         derivation = self._load_derivation(row["document_id"], row["version"], report)
         chunks = derivation[1] if derivation else None

@@ -11,6 +11,7 @@ BASELINE_KNOWLEDGE='k-182e01fab54ebfada841fb108061c127273e9cfcd551b6f5a8888a7692
 @dataclass(frozen=True)
 class ServiceConfig:
     profile: str='real'
+    decision_policy: str='product-v1'
     run_db: Path=ROOT/'data/runtime_local/runs.sqlite3'
     token_file: Path=ROOT/'data/runtime_local/access-token'
     index_db: Path=ROOT/'data/retrieval_local/semantic/corpus.sqlite3'
@@ -30,6 +31,7 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.decision_policy not in ('product-v1','legacy-v1'):raise ValueError('Unknown decision policy')
         if type(self.nli_enabled) is not bool or not 0<float(self.nli_timeout_seconds)<=60:
             raise ValueError('Invalid local NLI diagnostic configuration')
         if self.retrieval_mode not in ('bm25','dense','hybrid'):raise ValueError('Unknown retrieval mode')
@@ -47,6 +49,8 @@ class ServiceConfig:
         strategy=os.environ.get('POWERTRUST_FACT_RETRIEVAL_STRATEGY','aggregate')
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
+            decision_policy=os.environ.get('POWERTRUST_DECISION_POLICY','product-v1'),
+            run_db=Path(os.environ.get('POWERTRUST_RUN_DB',str(cls().run_db))),
             nli_enabled=os.environ.get('POWERTRUST_LOCAL_NLI_ENABLED','0')=='1',
             nli_python=Path(os.environ['POWERTRUST_LOCAL_NLI_PYTHON']) if os.environ.get('POWERTRUST_LOCAL_NLI_PYTHON') else None,
             nli_checkpoint=Path(os.environ['POWERTRUST_LOCAL_NLI_CHECKPOINT']) if os.environ.get('POWERTRUST_LOCAL_NLI_CHECKPOINT') else None,

@@ -2,20 +2,20 @@
 <html lang="zh-CN">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PowerTrustAI · 本机辅助审核</title><link rel="stylesheet" href="/ui/style.css"><script src="/ui/connection_memory.js" defer></script><script src="/ui/app.js" defer></script></head>
 <body>
-<header><div class="brand">P<span>PowerTrustAI</span><small>本机辅助审核 · v1</small></div><span class="pill">仅本机 · 人工复核</span></header>
+<header><div class="brand">P<span>PowerTrustAI</span><small>本机辅助审核 · v1</small></div><span class="pill">仅本机 · 自动处置与复核</span></header>
 <main>
 <section class="intro"><div><p class="eyebrow">从回答到依据</p><h1>查看依据，保留疑问。</h1><p>执行完整性、事实支持与工程前提分别呈现。审核结论不代表工程安全认证。</p></div><div id="service-mode" class="mode-banner" role="status">正在查询服务模式…</div></section>
-<section class="access panel"><form id="access-form"><label for="token">本机访问令牌</label><div class="inline"><input id="token" type="password" autocomplete="off" spellcheck="false" required placeholder="仅保存在当前页面内存"><button type="submit">连接服务</button><button id="disconnect" type="button" class="quiet">忘记连接</button></div><label class="remember-connection"><input id="remember-connection" type="checkbox"> 记住本机连接（仅当前浏览器与当前地址/端口）</label><p class="hint">默认仅内存保存。主动勾选并连接成功后，令牌保存在此浏览器本机存储；同一浏览器配置的使用者可访问。取消勾选会删除保存项，当前页面仍可使用；“忘记连接”同时清除记忆与内存。不会保存DeepSeek密钥。</p></form><p id="connection" class="hint">刷新后需重新输入。DeepSeek 密钥始终留在服务端。</p></section>
+<section class="access panel"><form id="access-form"><label for="token">本机访问令牌</label><div class="inline"><input id="token" type="password" autocomplete="off" spellcheck="false" required placeholder="仅保存在当前页面内存"><button type="submit">连接服务</button><button id="disconnect" type="button" class="quiet">忘记连接</button></div><label class="remember-connection"><input id="remember-connection" type="checkbox"> 记住本机连接（仅当前浏览器与当前地址/端口）</label><p class="hint">默认仅内存保存。主动勾选并连接成功后，令牌保存在此浏览器本机存储；同一浏览器配置的使用者可访问。取消勾选会删除保存项，当前页面仍可使用；“忘记连接”同时清除记忆与内存。不会保存DeepSeek密钥。</p></form><p id="connection" class="hint">未选择记忆时刷新需重新输入。DeepSeek 密钥始终留在服务端。</p></section>
 <p id="notice" class="notice" role="status" aria-live="polite">输入令牌后，可提交任务或通过 run_id 恢复查看。</p>
 <div class="workspace"><aside>
 <section class="panel"><p class="eyebrow">01 / 任务输入</p><h2>提交审核任务</h2>
 <form id="submit-form">
 <label for="mode">模式</label><select id="mode"><option value="question_answer">问答 · 生成并审核</option><option value="assess_existing">已有回答 · 仅审核与必要修订</option></select>
-<label for="question">问题 <span>必填</span></label><textarea id="question" rows="3" maxlength="8000" required placeholder="输入简短问题，不填入虚构工程参数"></textarea>
+<label for="task-scope">请求范围（审核仍检查回答是否越界）</label><select id="task-scope"><option value="conceptual">概念解释 / 资料转述</option><option value="plant_assessment">工程方案 / 地区设定 / 性能承诺</option></select><label for="question">问题 <span>必填</span></label><textarea id="question" rows="3" maxlength="8000" required placeholder="输入简短问题，不填入虚构工程参数"></textarea>
 <div id="existing-group" hidden><label for="existing">已有回答 <span>必填</span></label><textarea id="existing" rows="5" maxlength="80000"></textarea></div>
 <label for="context">补充背景 <span>可选</span></label><textarea id="context" rows="2" maxlength="10000"></textarea>
 <details><summary>可选：回答要求与参考文本</summary><label for="requirements">回答要求（每行一条，最多 10 条）</label><textarea id="requirements" rows="2" placeholder="例如：只作概念解释，简短回答"></textarea><label for="reference-label">参考文本标签</label><input id="reference-label" maxlength="200" placeholder="用户提供的参考"><label for="reference">参考文本（未核实来源）</label><textarea id="reference" rows="3" maxlength="20000"></textarea></details>
-<p class="hint">本界面提交概念问题，不填工程参数。真实模式提交会调用付费模型；不自动重发任务。</p>
+<p class="hint">数值换算及工程输入可通过API的结构化engineering_context提交；本界面不虚构参数。真实模式提交会调用付费模型；不自动重发任务。</p>
 <button id="submit" type="submit" class="primary" disabled>提交任务</button>
 </form></section>
 <section class="panel"><h2>恢复与历史</h2><form id="lookup-form"><label for="run-id">run_id</label><div class="inline"><input id="run-id" maxlength="150" required spellcheck="false" placeholder="粘贴已提交的任务 ID"><button type="submit" class="quiet">查看</button></div></form><button id="history-refresh" type="button" class="quiet">刷新运行列表</button><div id="history" class="history"></div><button id="history-next" type="button" class="quiet" hidden>下一页</button></section>
@@ -27,5 +27,5 @@
 <section class="panel"><p class="eyebrow">05 / 原文回查</p><h2>证据</h2><p class="hint">原引用与独立检索依据分开标记；文件页与字符区间对应提取文本，尚未核对 PDF 视觉原文。</p><div id="evidence" class="empty">未提供</div><div id="evidence-detail"></div></section>
 <section class="panel"><p class="eyebrow">06 / 人工复核</p><h2>追加意见</h2><p class="hint">绑定实际任务、回答版本与发现。追加保存，不覆盖模型判断；本机用户身份不等于专家认证。</p><form id="review-form"><label for="review-answer">回答版本</label><select id="review-answer" required></select><label for="review-finding">关联发现（可选）</label><select id="review-finding"><option value="">整个回答</option></select><div class="two"><div><label for="review-action">复核意见</label><select id="review-action"><option value="pending">待查</option><option value="confirm">确认</option><option value="disagree">反对</option><option value="note">说明</option></select></div><div><label for="review-source">意见来源</label><select id="review-source"><option value="user">用户复核</option><option value="ai_assisted_user_supervised">AI 辅助、用户监督</option></select></div></div><label for="reviewer">复核者声明</label><input id="reviewer" value="local-user" maxlength="100" required><label for="review-note">说明</label><textarea id="review-note" rows="3" maxlength="10000"></textarea><button id="review-submit" type="submit" class="primary" disabled>追加保存意见</button></form><div id="reviews"></div></section>
 </div></div>
-<footer>PowerTrustAI · 辅助审核原型 / 无工程仿真 / 保留证据不足与执行失败 / 不提供可信批准</footer>
+<footer>PowerTrustAI · 辅助审核原型 / 无工程仿真 / 保留证据不足与执行失败 / 任务范围内审核 / 非安全认证</footer>
 </main></body></html>

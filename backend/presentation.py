@@ -5,6 +5,22 @@ def explain(result):
     ex=result['execution'];f=result.get('findings',{});answer=result.get('answer',{})
     facts=f.get('model_fact',[]);domain=f.get('domain',[]);rules=f.get('program_rules',[])
     reasons=[];next_steps=[]
+    decision=result.get('decision') or {}
+    if decision.get('policy_version','').startswith('product-decision-v1'):
+        disposition=decision['kind']
+        text={'pass':'通过：本任务适用检查完整且未发现阻断问题。',
+            'reject':'不通过：仍有定位明确的错误，或命中经审阅的高严重度规则。',
+            'needs_information':'待补充：缺少证据、必要工程输入或分析。',
+            'review_required':'人工复核：分类、严重度或审核判断存在不确定性。',
+            'execution_incomplete':'执行未完成：检查失败或缺失，不能据此判事实错误。',
+            'revise':'正在修订：最多一次，修订后重新提取并完整审核。'}
+        reasons=[text.get(disposition,disposition)]+decision.get('reasons',[])
+        next_steps=[{'pass':'可在限定任务范围内使用回答；工程安全仍需对应工程验证。',
+                    'needs_information':'补齐逐项发现中的证据/输入后，手动发起新任务。',
+                    'reject':'查看对应错误和每个回答版本，不自动重复运行。',
+                    'execution_incomplete':'查看执行问题；保留已完成结果，不自动重发。'}.get(disposition,'对照原文、组件和版本判断；可追加反馈，不覆盖原结论。')]
+        return {'run_ended':ex.get('status') in TERMINAL,'reasons':reasons,'next_steps':next_steps,
+                'saved':f"已保存 {len(answer.get('versions',[]))} 个独立回答版本；原版发现与反馈保留。"}
     codes={i.get('code') for i in ex.get('execution_issues',[])}
     if 'REVIEW_MESSAGE_CAPACITY_EXCEEDED' in codes:
         reasons.append('审核的完整消息超出配置容量；对应检查未完成，不能据此判断事实矛盾。')

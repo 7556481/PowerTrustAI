@@ -75,11 +75,11 @@ class ComponentFactory:
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
             'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':13,'domain_review':4,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
-            'prompts':{'generation':'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations',
+            'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations',
               'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.1-applicability','revision':'bounded-revision-v2-per-finding-actions'},
             'contracts':{'generation':'generation-output-v3','extraction':'atomic-claims-v7','verification':CONTRACT_VERSION,
               'domain':'power-domain-review-output-v3.1','revision':'revision-output-v2'},
-            'rules':'power-demo-rules-v1.1','policy':'limited-repair-policy-v1','unit_tool':'scalar-si-conversion-v2',
+            'rules':'power-demo-rules-v1.1','policy':'product-decision-v1.1' if self.config.decision_policy=='product-v1' else 'limited-repair-policy-v1','unit_tool':'scalar-si-conversion-v2',
             'retrieval':'existing BM25 with default RetrievalSettings and adjacent-context order',
             'fact_retrieval_strategy':self.config.fact_strategy,
             'fact_delivery_contract':'fact-evidence-delivery-v1' if self.config.fact_strategy=='per_claim_v1' else None,
@@ -92,11 +92,12 @@ class ComponentFactory:
             embedding_profile=None if self.semantic_resource is None else dict(self.semantic_resource.encoder.profile),
             scoring_method=SCORING_METHOD if self.config.retrieval_mode=='bm25' else RRF_VERSION if self.config.retrieval_mode=='hybrid' else 'Dense-cosine-v1(positive-only)')
         manifest['retrieval']='fixed-index '+self.config.retrieval_mode+'; full result replay validation'
+        manifest['performance_profile']='validated-pdf-report-cache-v1: connection-local immutable body verification only; full ranking replay retained' if self.config.retrieval_mode=='bm25' else 'legacy-semantic-full-replay'
         if self.config.profile=='synthetic_fixture':
             manifest['available_real_protocols']=manifest.pop('protocols')
             manifest['protocols']={k:'fake-v1' for k in ('generation','claim_extraction','evidence_verification','domain_review','revision')}
             manifest['prompts']={};manifest['contracts']={};manifest['model_settings']=None
-            manifest['rules']='offline-rules-v1';manifest['policy']='offline-policy-v1';manifest['unit_tool']=None
+            manifest['rules']='offline-rules-v1';manifest['policy']='product-decision-v1.1-synthetic_fixture' if self.config.decision_policy=='product-v1' else 'offline-policy-v1';manifest['unit_tool']=None
             manifest['retrieval']='none: synthetic_fixture only'
             manifest['configured_retrieval_mode']=manifest['retrieval_mode']
             manifest['retrieval_mode']='none';manifest['scoring_method']=None
@@ -106,6 +107,9 @@ class ComponentFactory:
         if self.config.profile=='synthetic_fixture':
             from agents.fakes import make_fake_harness
             harness=make_fake_harness();harness.observer=observer
+            if self.config.decision_policy=='product-v1':
+                from harness.product_policy import ProductAuditPolicy
+                harness.policy=ProductAuditPolicy(synthetic_fixture=True)
             return Bundle(harness)
         from agents.generation import EvidenceGenerationAgent
         from agents.evidence_verification import ModelEvidenceVerificationAgent
@@ -126,16 +130,21 @@ class ComponentFactory:
             else:
                 self.initialize_retrieval();retriever=self.semantic_resource;resources.append(RetrieverLease(retriever))
             diag=ROOT/'data/retrieval_local/service_private'/rid
-            harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3),
+            harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
                 ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=4),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7),
-                policy=LimitedRepairPolicy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer)
+                policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer)
             return Bundle(harness,resources)
         except Exception:
             for resource in resources:resource.close()
             raise ConfigurationError('Required component could not be constructed') from None
+
+    def product_policy(self):
+        if self.config.decision_policy=='legacy-v1':return LimitedRepairPolicy()
+        from harness.product_policy import ProductAuditPolicy
+        return ProductAuditPolicy()
 
 class RetrieverLease:
     """Drain per-run work without closing the service-owned encoder."""

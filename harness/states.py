@@ -15,6 +15,9 @@ class RunState(str, Enum):
     DECIDING = "deciding"
     REVISING = "revising"
     COMPLETED = "completed"
+    REJECTED = "rejected"
+    NEEDS_INFORMATION = "needs_information"
+    EXECUTION_INCOMPLETE = "execution_incomplete"
     REVIEW_REQUIRED = "review_required"
     FAILED = "failed"
     CANCELLED = "cancelled"
@@ -27,9 +30,12 @@ NORMAL_TRANSITIONS = {
     RunState.GENERATING: frozenset({RunState.EXTRACTING_CLAIMS, RunState.GENERATED}),
     RunState.EXTRACTING_CLAIMS: frozenset({RunState.VERIFYING}),
     RunState.VERIFYING: frozenset({RunState.DECIDING, RunState.EVIDENCE_REVIEWED}),
-    RunState.DECIDING: frozenset({RunState.REVISING, RunState.COMPLETED, RunState.REVIEW_REQUIRED}),
-    RunState.REVISING: frozenset({RunState.EXTRACTING_CLAIMS}),
+    RunState.DECIDING: frozenset({RunState.REVISING, RunState.COMPLETED, RunState.REVIEW_REQUIRED, RunState.REJECTED, RunState.NEEDS_INFORMATION, RunState.EXECUTION_INCOMPLETE}),
+    RunState.REVISING: frozenset({RunState.EXTRACTING_CLAIMS, RunState.EXECUTION_INCOMPLETE}),
     RunState.COMPLETED: frozenset(),
+    RunState.REJECTED: frozenset(),
+    RunState.NEEDS_INFORMATION: frozenset(),
+    RunState.EXECUTION_INCOMPLETE: frozenset(),
     RunState.GENERATED: frozenset(),
     RunState.EVIDENCE_REVIEWED: frozenset(),
     RunState.REVIEW_REQUIRED: frozenset(),
@@ -38,6 +44,7 @@ NORMAL_TRANSITIONS = {
 }
 
 TERMINAL_STATES = frozenset({
+    RunState.REJECTED, RunState.NEEDS_INFORMATION, RunState.EXECUTION_INCOMPLETE,
     RunState.COMPLETED, RunState.GENERATED, RunState.EVIDENCE_REVIEWED, RunState.REVIEW_REQUIRED, RunState.FAILED, RunState.CANCELLED,
 })
 

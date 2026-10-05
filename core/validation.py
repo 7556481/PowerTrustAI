@@ -60,7 +60,7 @@ def validate_types(value, annotation=None, path="value"):
         if annotation is float:
             require(type(value) in (int, float) and math.isfinite(value), "expected finite number", path=path)
         else:
-            allowed_subtypes={'ComponentReview':'FidelityComponentReview','Claim':'ContextualClaim','TypedBasis':'CalculationBasis','EvidenceVerificationInput':'ReliabilityVerificationInput',
+            allowed_subtypes={'AuditDecision':'ProductDecision','ComponentReview':'FidelityComponentReview','Claim':'ContextualClaim','TypedBasis':'CalculationBasis','EvidenceVerificationInput':'ReliabilityVerificationInput',
                 'EvidenceVerificationOutput':'ReliabilityVerificationOutput','PowerDomainReviewInput':'ReliabilityDomainInput','HarnessResult':'ToolHarnessResult'}
             if isinstance(annotation,type) and is_dataclass(annotation) and type(value).__name__ in ((allowed_subtypes.get(annotation.__name__),) if annotation.__name__!='Claim' else ('ContextualClaim','BasisAwareClaim','ObligationClaim')) and type(value).__module__==annotation.__module__ and isinstance(value,annotation):
                 validate_types(value);return
@@ -380,3 +380,16 @@ def validate_report(report):
     nonempty(report.decision.policy_version, "policy_version")
     require(set(report.decision.unresolved_finding_ids) <= {f.finding_id for f in all_findings}, "decision references unknown finding")
     require(bool(report.decision.reasons), "decision requires reasons")
+    from core.models import ProductDecision, DecisionKind
+    if isinstance(report.decision, ProductDecision):
+        d=report.decision
+        require(d.policy_version in ('product-decision-v1','product-decision-v1.1'),'Unknown product policy version')
+        require(d.execution_integrity in ('complete','incomplete'),'Unknown execution integrity')
+        require(d.risk_level in ('low','medium','high','unknown'),'Unknown risk level')
+        require(d.resolution in ('complete','partial','unable_to_answer'),'Unknown resolution')
+        require(bool(d.reason_codes) and bool(d.classification_basis),'Product rationale/classification required')
+        require(all(len(c)==3 and all(c) for c in d.applicable_checks),'Check applicability reason required')
+        if d.kind==DecisionKind.PASS:
+            require(d.execution_integrity=='complete' and d.risk_level=='low','Pass requires complete checks and bounded low risk')
+            require(bool(report.claims) and bool(report.verification_findings) and bool(report.domain_findings),'Empty audit cannot pass')
+            require(not report.execution_issues and all(f.status==VerificationStatus.SUPPORTED for f in report.verification_findings),'Incomplete or unsupported audit cannot pass')

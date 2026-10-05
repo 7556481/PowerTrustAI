@@ -57,7 +57,7 @@ class AsyncSQLiteBM25Retriever:
 
     def _work(self, request, result, validate):
         from rag.storage import KnowledgeStore
-        with KnowledgeStore(self.path, readonly=True) as store:
+        with KnowledgeStore(self.path, readonly=True, validated_pdf_cache=True) as store:
             if validate == "saved_evidence":
                 for evidence in result:
                     require(evidence.provenance is not None and evidence.provenance.knowledge_version == request,

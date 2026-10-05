@@ -36,6 +36,9 @@ class DecisionKind(str, Enum):
     REVISE = "revise"
     INSUFFICIENT_EVIDENCE = "insufficient_evidence"
     REVIEW_REQUIRED = "review_required"
+    REJECT = "reject"
+    NEEDS_INFORMATION = "needs_information"
+    EXECUTION_INCOMPLETE = "execution_incomplete"
 
 
 @dataclass(frozen=True)
@@ -422,6 +425,16 @@ class AuditDecision:
     reasons: Tuple[str, ...]
     policy_version: str
     unresolved_finding_ids: Tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
+class ProductDecision(AuditDecision):
+    execution_integrity: str = "incomplete"
+    risk_level: str = "unknown"
+    resolution: str = "unable_to_answer"
+    reason_codes: Tuple[str, ...] = ()
+    applicable_checks: Tuple[Tuple[str, str, str], ...] = ()
+    classification_basis: Tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-05 产品逻辑与性能改进 v1（最新）
+
+- [产品处置、适用范围、真实失败、性能与试用](product-improvement-v1.md)：原v1四真实结果、新v1.1离线修复、直接AI失败和未完成检查分开报告。
+- harness/product_policy.py与原runtime/states；core产品合同；backend日常装配/页面；generation可选提示；只读PDF校验缓存及tests/test_product_policy.py。
+- 忽略product-improvement-v1：修改前源码诊断、冻结预期/配置、原真实/合成结果、政策重放、性能/资源缺口、浏览器/重启/测试和ZIP；无凭据/DB/权重。长期学习内容暂停，仅记录后续知识点。
+
 ## 2026-10-05 连续连接体验（最新）
 
 - [固定令牌路径、浏览器主动记忆、401与验证](connection-memory-v1.md)：不同验证目录是不同服务身份，日常固定文件复用，579回归/实际浏览器通过。

@@ -163,6 +163,14 @@ class ApplicationService:
         original=row['request'].get('existing_answer')
         if original is None and raw.get('generation_output'):original=raw['generation_output']['answer']
         checked=complete and all(f.get('status')!='not_assessable' for f in verification.get('findings',[])) and all(f.get('check_status')!='not_assessable' for f in domain.get('findings',[])) and not any(c['status']=='incomplete' for c in verification.get('consistency_checks',[]))
+        if decision and decision.get('policy_version','').startswith('product-decision-v1'):
+            checked=complete and decision.get('execution_integrity')=='complete' and not any(c[1] in ('not_assessable','unknown') for c in decision.get('applicable_checks',[]))
+        if not decision and row['config'].get('policy','').startswith('product-decision-v1') and row['status'] in ('failed','interrupted','cancelled','finished'):
+            # A projection of execution failure, never a retroactive report/answer judgment.
+            decision={'kind':'execution_incomplete','policy_version':row['config']['policy'],
+                'execution_integrity':'incomplete','risk_level':'unknown','resolution':'unable_to_answer',
+                'reason_codes':['NO_COMPLETED_AUDIT_REPORT'],'reasons':['No completed audit report; no factual or safety conclusion'],
+                'origin':'service_execution_projection'}
         charged=(row['snapshot'] or {}).get('budget_usage',{})
         retrieval=raw.get('retrieval_records',[])
         projection=safe({'schema_version':'local-review-service-v1','execution':dict(self.state(rid),
@@ -188,7 +196,7 @@ class ApplicationService:
                 'Known model limitations: target conversion and confusion of fidelity with factual support.',
                 'No engineering simulation; domain rules are development demonstrations.',
                 'Missing evidence and engineering inputs remain unresolved; no aggregate confidence score.',
-                'Simulated agents and synthetic_fixture: not evidence of real model ability.' if row['config']['profile']=='synthetic_fixture' else 'Real model judgments require human review.']})
+                'Simulated agents and synthetic_fixture: not evidence of real model ability.' if row['config']['profile']=='synthetic_fixture' else 'Model judgments are fallible; task approval is not safety certification.']})
         from backend.presentation import explain
         projection['presentation']=explain(projection)
         return projection
