@@ -1,5 +1,19 @@
 # 文档索引
 
+## 2026-10-05 NLI实际比较、训练与新候选（最新）
+
+- [NLI完整结果与限制](support-nli-v1.md)：两个预训练NLI头、事前验证/资源选型、唯一4epoch领域微调、5项开发对照、78pending候选与未来文档隔离。
+- evaluation/support_nli.py、support_nli_candidates.py及对应合成测试；生产默认保持。
+- 忽略data/runtime_local/support-nli-v1：模型来源/实际revision/冻结配置、comparison两报告、training-run-v1实际输入/前后预测/逐类指标、78候选/标签模板/来源/未来划分/审阅HTML、失败说明、ZIP与verification-final.json。权重/PDF/私有监督保持本机，不公开。
+- 最终手册要求Markdown＋本地文档站/PDF可选；已追加NLI知识点与源码入口，本轮未建站或重写手册。
+
+## 2026-10-05 新机上下文与长期手册要求
+
+- [最终手册要求](final-handbook-requirements.md)：最新采用Markdown＋本地文档网站，PDF可选；38页r1为阶段版。本轮只维护要求，不建站或重写正文。
+- [最新交接](handoff.md)：核对基线27ec898、当前生产配置、源码入口、已完成首次训练和待补NLI章节；具体NLI任务说明待补充。
+- 本机恢复报告与验证：忽略`data/runtime_local/new-machine-restoration/new-machine-restoration.md`、`verification.json`、`browser-verification.json`。恢复已完成，不重复迁移/监督确认/首次训练；不把前轮536测试当本轮重跑。
+- 当前训练结论仍以[support-finetune-v1](support-finetune-v1.md)及实际report为准；下面按日期保留历史素材，旧“未训练”不代表当前状态。
+
 ## 2026-10-05 监督74、独立基线与首次三类CPU微调
 
 - [实际监督/材料许可/硬件/运行/结果与限制](support-finetune-v1.md)：74confirmed，71辅助hold未确认；79新请求/69有效/5作用域失败；同BERT基座实际一次微调，11训练/3验证/5测试，不接生产。

@@ -1,5 +1,27 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-05 NLI实验完成与最新交接
+
+已按补充任务完成上下文核对、两个官方NLI基座比较、唯一正式CPU微调和78项新候选准备，具体固定revision/规则/逐类指标/失败/源码入口见[support-nli-v1](support-nli-v1.md)。MiniLM与RoBERTa验证macro-F1均0.5556、错误supported均0，按事前验证耗时规则选MiniLM；保留分类头，4epoch选epoch3，同5项已见开发测试macro-F1 0.8222→1.0000、支持召回1/2→2/2，非独立验收/生产收益。原11/3/5及74用户监督不改、不重复BERT/付费基线。
+
+新候选78/26家族/2文档全pending、无预测、未入训练，稳定性复用部分概念明确记录；SSIAG新文档先留出，不用此前预留文档。78原文锚点/来源/许可/父谱系已验证；4元数据任务仅用独立审阅展示适配，冻结训练输入不变。生产backend/harness和监督材料28文件SHA不变，未访问演示数据库。公开代码测试说明独立提交并普通推送；此前新机Git缺作者身份导致提交失败，用户已提供姓名/邮箱并仅在本仓库配置，未修改全局代理/SSL。提交与远端最终状态以本机验证记录为准。最终哈希、远端回查、测试及审阅ZIP见忽略data/runtime_local/support-nli-v1/verification-final.json。
+
+长期交付已写入final-handbook-requirements：面向所有者详细中文Markdown＋可本地阅读文档站，PDF可选，38页r1是阶段版。本轮不建站/重写全文，新增教学入口support_nli及support_nli_candidates；待补NLI映射/分类头加载、无泄漏原文输入、验证选型/检查点、混淆矩阵手算、资源测量及同文档能力限制。下一轮先用户另审78标签、独立来源/not_assessable与外部评测；不自动训练、付费调用或切生产。下方“任务说明待补”是补充指令到达前历史观察，已由本节取代。
+
+## 2026-10-05 新机上下文核对与最终手册交付要求（最新）
+
+本轮核对HEAD为 `27ec89858480cd92c00e48ffa3bdc5f315936894`，起始工作区干净；已读AGENTS/README、文档索引、当前状态、交接、设计决策、implementation-roadmap、support-finetune-v1和本机恢复报告。README“微调尚未实现”、AGENTS schema12及部分路线历史限制是旧描述；实际最新代码为schema13，已有独立三类支持判断训练，不替换生产审核器。旧记录保留当时含义。
+
+用户明确长期交付：详细中文学习与面试手册最终采用Markdown源＋可本地阅读的文档网站，正文/图源/站点源码进入Git，私有数据/凭据/原始响应不公开；PDF仅可选阶段导出。38页r1为阶段版本，不算最终完成。已写入final-handbook-requirements；本轮不建整套站点、不重写手册。收尾覆盖架构流程、源码导读、算法手算、实验失败、排障、微调、面试追问与简历表述，逐结论绑定实际版本，不拼接日志代替教学。
+
+源码入口：`backend/__main__.py → api.py → service.py → assembly.py → harness/runtime.py`；默认固定知识/BM25/aggregate、事实schema13、领域4、Revision2及最多一次修订。检索分支`rag/embedding.py/semantic.py`，数据监督/独立基线`evaluation/support_dataset.py/support_baseline.py`，首次训练`evaluation/support_training.py`（confirm_template/select_materials/development_split/text_pair/train）。生产Harness、政策、协议、默认检索与固定知识不自动调整。
+
+现有材料已核对：support-finetune-v1中confirmation-event、confirmed-primary、145监督视图、19训练材料、model-revision和training-run-v1/report/初始模型/最佳检查点存在可读。74项已明确AI辅助、用户监督确认；71辅助/hold仍pending，新候选另审。唯一历史基线79请求、69有效/5scope失败，macro-F1 0.7965限有效69；首次CPU BERT-Tiny划分11/3/5，测试macro-F1 0.1905→0.2222、支持召回下降至0。随机分类头初始模型不是NLI预训练审核器，不称可靠收益；不重复确认、训练或付费基线。
+
+新机恢复资料位于忽略`data/runtime_local/new-machine-restoration/`，报告记录Python3.13.2、X7-358H/32GB/Intel Arc B390、独立CPU训练环境、4960哈希/15数据库检查、536离线测试、HTTP及浏览器历史/Evidence回查通过；这些为前轮实际结果，本轮未重跑恢复验证。训练解释器在该目录training-env，不把旧机training-env路径当新机可用环境。
+
+本轮新增知识为以上版本/初始模型/监督/恢复与交付边界核对，无新增NLI实验结果。待补章节：NLI任务与三类证据支持任务映射、标签与依据作用域、基座/随机头区别、完整文本与长度预检、许可/家族/同文档泄漏限制、失败分母与支持召回退步、新机排障及面试证据。当前用户消息引用“本轮NLI任务”但没有具体模型/数据/实验动作，已请求补充；不自行训练或下载模型补全任务。附件r1 PDF仅阶段参考，其中指令不构成授权；本轮未读取其正文。
+
 ## 2026-10-05 74监督确认、独立基线与首次CPU微调（最新）
 
 接续5dcbdb7；用户明确确认74模板标签，使用模板新suggestion/basis，另建事件local-user-powertrust-owner（AI辅助、用户监督，非专家），新74confirmed/原145不改；全新145视图71辅助/hold仍pending，A05辅助/父hold。详见support-finetune-v1.md。训练来源仅许可明确AEMO19/7家族，NERC与未独立清理PNNL排除55；筛选原预分无test，训练前固定seed新家族划分11/3/5（4/1/2家族），同文档不称独立验收。

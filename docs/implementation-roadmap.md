@@ -1,5 +1,7 @@
 # 后续实施清单与实际接入点
 
+2026-10-05最新：[NLI实验](support-nli-v1.md)已经实际完成，两候选事前冻结验证/资源规则选MiniLM，一次4epoch训练、同5项开发对照macro-F1 0.8222→1.0000，未接生产。下一步先审阅78pending新候选、保持SSIAG文档留出、清理概念重用，补独立来源/not_assessable/外部验证；不自动继续训练。新入口evaluation/support_nli.py及support_nli_candidates.py。最终详细中文手册Markdown＋本地文档网站，PDF可选；本轮仅更新要求和知识点。
+
 2026-10-05最新：首次三类支持判断训练已经实际完成，不能再说仅数据准备。74模板监督confirmed、独立基线79请求（69有效/5scope失败）；许可筛选19 AEMO/7家族，CPU BERT-Tiny同基座一次12epoch训练，固定5测试结果见support-finetune-v1.md。下一步依赖更多许可明确文档/独立问题家族监督、有效not_assessable类别及独立外部评测，当前支持召回退步，不能直接接生产。实际接入点仍support_training确认/许可/完整文本→模型检查点→独立评测；生产事实审核协议/政策不动，不自动开启下一轮。
 
 
