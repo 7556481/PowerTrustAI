@@ -195,6 +195,8 @@ def create_app(config=None,*,store=None,factory=None,access_token=None):
         return JSONResponse(status_code=200 if value.get('answer') else 202,content=value)
     @app.get('/runs/{run_id}/trace',dependencies=[Depends(authorized)])
     async def trace(run_id:str,request:Request):return safe({'run_id':run_id,'events':svc(request).store.events(run_id)})
+    @app.get('/runs/{run_id}/nli',dependencies=[Depends(authorized)])
+    async def nli(run_id:str,request:Request):return svc(request).nli_result(run_id)
     @app.get('/runs/{run_id}/evidence/{evidence_id}',dependencies=[Depends(authorized)])
     async def evidence(run_id:str,evidence_id:str,request:Request):return safe(svc(request).store.evidence(run_id,evidence_id))
     @app.post('/runs/{run_id}/cancel',dependencies=[Depends(authorized)])

@@ -163,5 +163,26 @@ class RunStore:
         try:return self.db.execute("SELECT value FROM meta WHERE key='schema_version'").fetchone()[0]==SCHEMA_VERSION
         except (sqlite3.Error,TypeError):return False
 
+    def add_nli_diagnostic(self,rid,value):
+        """Append a separate object; never index into or overwrite audit data."""
+        self.get(rid)
+        if value.get('run_id')!=rid or value.get('affects_decision') is not False:
+            raise BindingError('Diagnostic run/authority mismatch')
+        aid=value.get('answer_id');version=value.get('answer_version')
+        if aid and version:
+            if not self.db.execute("SELECT 1 FROM objects WHERE run_id=? AND kind='answer' AND id=? AND version=?",(rid,aid,version)).fetchone():
+                raise BindingError('Diagnostic answer/version not in run')
+            cid=value.get('claim_id')
+            if cid:
+                claim=self.db.execute("SELECT payload FROM objects WHERE run_id=? AND kind='claim' AND id=? AND answer_id=? AND version=?",(rid,cid,aid,version)).fetchone()
+                if claim is None:raise BindingError('Diagnostic claim/version not in run')
+                components={c['component_id'] for c in json.loads(claim[0]).get('components',[])}
+                if value.get('component_id') not in components and value.get('status')!='skipped':
+                    raise BindingError('Diagnostic component not in claim')
+        elif value.get('status')!='skipped':raise BindingError('Unbound completed diagnostic')
+        with self.tx():
+            self.db.execute('INSERT INTO objects VALUES (?,?,?,?,?,?)',
+                (rid,'nli_diagnostic',value['diagnostic_id'],aid or '',version or 0,dumps(value)))
+
     def close(self):self.db.close()
 

@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-05 本地NLI可选旁路（最新）
+
+- [职责/配置/实际回放/浏览器/限制](local-nli-diagnostic-v1.md)：默认关闭、无最终审核权，固定epoch1，严格交付范围，不改原政策。
+- services/local_nli.py、backend/nli_worker.py及backend服务记录/API/独立页面；tests/test_local_nli.py公开synthetic回归。
+- 忽略data/runtime_local/local-nli-diagnostic-v1：错误说明修正及清单、profile/源码校验、初始失败、33+2已见诊断回放/原logits/输入、只读历史缺口、HTTP/浏览器截图/重启记录/资源、ZIP/verification-final。新回放数据库留本机，不打包，令牌不读/不输出/不打包。
+
 ## 2026-10-05 扩大微调与SSIAG文档留出实际结果（最新）
 
 - [一次实际训练/留出/风险与运行](support-nli-expanded-v3.md)：69明确确认另版，43/12/33；epoch1，macro-F1提高但错误supported4/23，不接生产。

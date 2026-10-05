@@ -1,5 +1,13 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-05 可选本地NLI旁路诊断v1（最新）
+
+接续1b7be0b；先另存33逐项错误说明修正版/修改清单，原标签/预测/指标/报告不改。新增默认关闭LocalNLI服务生命周期CPU子进程，严格epoch1 profile/权重SHA/v2投影，只接受明确当前版本完整组件交付；缺映射/核验交付快照/完整候选/版本、元数据/数学/输入/工程前提/未实现立场跳过。原Harness终态保存后异步旁路，append nli_diagnostic对象，不回Agent/Revision/政策，GET历史只读。正文默认BM25/aggregate及schema13/最终决策不改。
+
+公共入口services/local_nli.py、backend/nli_worker.py及config/service/store/api/独立UI；私有local-nli-diagnostic-v1保存model-profile、修正分析、初次管道编码失败/UTF-8修复、新已见33正文+2辅助回放，33 logits/标签等于原冻结，4错误supported仍保留，总推理2.8942秒/观测RSS约477MiB。旧16服务记录只读转换0，缺明确交付/映射等，不补检索，不伪称真实事实Agent联动；用户监督回放与原事实判断明确分开。用户仅本机输令牌后实际浏览器35卡/6分歧/2skipped/4/23提示/版本logits检查；重启UUID同35/0补算，截图/HTTP与浏览器证据分开。最终571离线通过，提交/远端/ZIP及服务停止状态见忽略verification-final。完整职责/配置/限制见[local-nli-diagnostic-v1](local-nli-diagnostic-v1.md)。
+
+长期手册补NLI与生产审核差异、实际交付范围/类型、未校准输出、失败隔离/异步进程、版本追加与UTF-8/浏览器验证；不重训/补标/重建PDF/整本手册，下一轮不自动开始。
+
 ## 2026-10-05 扩大NLI训练及SSIAG一次留出完成（最新）
 
 接续b4c8b17，用户明确逐69模板授权后另建确认事件/confirmed版本，source为AI辅助用户监督，6辅助/3hold仍pending，所有原任务/历史不改。实际43训练/12验证/SSIAG33留出，沿用13关联家族；v2输入88全有效0截断。新入口evaluation/support_nli_expanded.py复用NLI模块，训练仅验证选checkpoint并写seal，之后独立阶段才评估文档留出，排他输出避免重复。

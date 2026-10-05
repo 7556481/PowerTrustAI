@@ -20,11 +20,18 @@ class ServiceConfig:
     retrieval_mode: str='bm25'
     embedding_model_dir: Path=ROOT/'data/retrieval_local/semantic/e5-small'
     vector_db: Path=ROOT/'data/retrieval_local/semantic/vectors.sqlite3'
+    nli_enabled: bool=False
+    nli_python: Path|None=None
+    nli_checkpoint: Path|None=None
+    nli_profile: Path|None=None
+    nli_timeout_seconds: float=5.0
     citation_workload: CitationWorkload=field(default_factory=CitationWorkload)
     budget: RunBudget=field(default_factory=lambda:RunBudget(max_revision_rounds=1,max_model_calls=40,
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if type(self.nli_enabled) is not bool or not 0<float(self.nli_timeout_seconds)<=60:
+            raise ValueError('Invalid local NLI diagnostic configuration')
         if self.retrieval_mode not in ('bm25','dense','hybrid'):raise ValueError('Unknown retrieval mode')
         if self.fact_strategy not in ('aggregate','per_claim_v1'):raise ValueError('Unknown fact retrieval strategy')
         if self.profile not in ('real','synthetic_fixture') or type(self.queue_capacity) is not int or not 1<=self.queue_capacity<=16:
@@ -40,6 +47,11 @@ class ServiceConfig:
         strategy=os.environ.get('POWERTRUST_FACT_RETRIEVAL_STRATEGY','aggregate')
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
+            nli_enabled=os.environ.get('POWERTRUST_LOCAL_NLI_ENABLED','0')=='1',
+            nli_python=Path(os.environ['POWERTRUST_LOCAL_NLI_PYTHON']) if os.environ.get('POWERTRUST_LOCAL_NLI_PYTHON') else None,
+            nli_checkpoint=Path(os.environ['POWERTRUST_LOCAL_NLI_CHECKPOINT']) if os.environ.get('POWERTRUST_LOCAL_NLI_CHECKPOINT') else None,
+            nli_profile=Path(os.environ['POWERTRUST_LOCAL_NLI_PROFILE']) if os.environ.get('POWERTRUST_LOCAL_NLI_PROFILE') else None,
+            nli_timeout_seconds=float(os.environ.get('POWERTRUST_LOCAL_NLI_TIMEOUT_SECONDS','5')),
             fact_strategy=strategy,
             retrieval_mode=os.environ.get('POWERTRUST_RETRIEVAL_MODE','bm25'),
             embedding_model_dir=Path(os.environ.get('POWERTRUST_EMBEDDING_MODEL_DIR',str(cls().embedding_model_dir))),

@@ -17,11 +17,18 @@ class ApplicationService:
         self.queue=asyncio.Queue(config.queue_capacity);self.lock=asyncio.Lock()
         self.worker=None;self.active=None;self.active_bundle=None;self.closing=False;self.storage_fault=False
         self.volatile_errors={}
+        self.nli=None;self.nli_tasks=set();self.nli_errors={}
     async def start(self):
         if hasattr(self.factory,'initialize_retrieval'):self.factory.initialize_retrieval()
         self.store.recover();self.worker=asyncio.create_task(self._worker())
+        if self.config.nli_enabled:
+            from services.local_nli import LocalNLI
+            self.nli=LocalNLI(self.config);await self.nli.start()
     async def stop(self):
         self.closing=True
+        for task in self.nli_tasks:task.cancel()
+        if self.nli_tasks:await asyncio.gather(*self.nli_tasks,return_exceptions=True)
+        if self.nli:await self.nli.close()
         if self.active_bundle:await self.active_bundle.harness.cancel(self.active)
         if self.worker:
             self.worker.cancel()
@@ -84,6 +91,9 @@ class ApplicationService:
                     answer_requirements=tuple(requirements),indexed_reference_ids=tuple(indexed_ids),run_id=rid)
                 status='interrupted' if self.closing else 'cancelled' if result.state.value=='cancelled' else 'failed' if result.state.value=='failed' else 'finished'
                 self.store.mark(rid,status,error_code='PROCESS_INTERRUPTED' if self.closing else None,result=result)
+                if self.nli and not self.closing:
+                    task=asyncio.create_task(self.diagnose_completed(rid,wire(result)))
+                    self.nli_tasks.add(task);task.add_done_callback(self.nli_tasks.discard)
             except asyncio.CancelledError:
                 try:self.store.mark(rid,'interrupted',error_code='PROCESS_INTERRUPTED')
                 except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
@@ -109,6 +119,25 @@ class ApplicationService:
             'error_code':self.volatile_errors.get(rid) or row['error_code'],'profile':row['config']['profile'],
             'knowledge_version':row['config']['knowledge_version'],'persisted_result_available':row['result'] is not None,
             'partial_result_available':row['snapshot'] is not None,'persistence_confirmed':rid not in self.volatile_errors})
+
+    async def diagnose_completed(self,rid,raw):
+        # Audit has already terminated. Never pass diagnostics to a Harness input.
+        from services.local_nli import production_frames
+        try:
+            for item in production_frames(raw,self.store.get(rid)['config']['knowledge_version']):
+                record=await self.nli.diagnose(item)
+                self.store.add_nli_diagnostic(rid,record)
+        except asyncio.CancelledError:raise
+        except Exception:self.nli_errors[rid]='diagnostic_conversion_or_storage_failed'
+
+    def nli_result(self,rid):
+        self.store.get(rid)
+        from services.local_nli import RISK,VERSION
+        return safe({'schema_version':VERSION,'enabled':self.config.nli_enabled,
+            'model_available':bool(self.nli and self.nli.identity and not self.nli.failure),
+            'records':self.store.objects(rid,'nli_diagnostic'),'error_code':self.nli_errors.get(rid),
+            'authority':'diagnostic_only','affects_decision':False,'risk_note':RISK,
+            'note':'仅展示已保存诊断，不重算历史交付；默认关闭时不加载模型。'})
 
     def result(self,rid):
         row=self.store.get(rid);raw=row['result'] or row['snapshot']

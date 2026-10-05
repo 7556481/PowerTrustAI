@@ -1,5 +1,9 @@
 # 最终《PowerTrustAI 项目学习与面试手册》交付要求
 
+## 2026-10-05 NLI旁路职责与运行边界
+
+新教学入口services/local_nli.py、backend/nli_worker.py、backend service/store/api及独立UI。结合默认关闭、epoch1/SHA、完整组件交付证明、版本/知识绑定、unsupported/超长skip、UTF-8子进程、事件循环/并发/超时/失败隔离、append-only记录和实际浏览器/重启，说明为何诊断不是事实Agent/最终审核权。保留4/23错误支持与未校准logits风险，区分用户监督开发回放和真实事实Agent联动；旧16缺口不能凭检索补造。逐sample_id分析纠正家族解释套用，标签/指标历史不改。本轮仅补知识点，不重建整本Markdown手册/PDF/站点。
+
 ## 2026-10-05 扩大训练/文档留出教学材料
 
 新增实际evaluation/support_nli_expanded.py的confirm_authorized/validate_layout/verify_freeze/match_effective/train_expanded/evaluate_document_holdout/heldout_metrics源码入口。教学须结合69逐项授权/依据子集与新确认事件、43/12/33/13家族冻结、官方原头重新训练、4epoch loss与验证同分最早epoch1、selection-seal后单次文档留出。结果macro-F1 0.6569→0.8193但错误supported0→4/23、supported预测误支持4/14，必须解释两个分母与三类混淆矩阵手算、必要条件/时间先后/充分性失败，不把提升称生产审核可靠。保留单文档/小样本/单种子/AI辅助用户监督和not_assessable缺失；长期Markdown＋本地站/PDF可选，本轮只补知识清单，不重建手册/站/PDF。
