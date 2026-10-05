@@ -31,7 +31,7 @@ def semantic_pair_v1(sample):
     for evidence in task['evidence']:
         bodies.append(evidence['text'])  # Whole delivered text, no label-based selection.
         metadata = evidence['metadata']
-        provenance = metadata.get('provenance', {})
+        provenance = metadata.get('provenance') or {}
         title = provenance.get('document_title')
         if title and title not in admin:
             admin.append('Source attribution recorded by the index: ' + title)
@@ -78,8 +78,8 @@ def semantic_pair(sample):
         'is_official_technical_prose': False,
         'used_as_model_premise': False,
         'sources': [
-            {'document_title': e['metadata'].get('provenance', {}).get('document_title'),
-             'publisher': e['metadata'].get('provenance', {}).get('publisher'),
+            {'document_title': (e['metadata'].get('provenance') or {}).get('document_title'),
+             'publisher': (e['metadata'].get('provenance') or {}).get('publisher'),
              'index_applicability': list(e['metadata'].get('applicability') or []),
              'type': 'index_record_not_technical_prose'}
             for e in sample['task']['evidence']

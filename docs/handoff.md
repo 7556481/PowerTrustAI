@@ -1,5 +1,13 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-05 NLI真实接线v2完成（最新）
+
+接续787dfc1，核对真实输出targets字符串数组、per_claim映射/核验delivery快照/whole候选/身份；发现可选provenance:null读取bug并修复，不冒称历史缺正文。保留production_frames_v1，默认v2要求可验证唯一单组件父原文锚点及模型faithful技术对象；当前无独立组件span，混合/共享锚点跳过，不猜切/借pool。真实Harness/schema13→转换→NLI接口→保存→API的synthetic贯通及完整575测试通过。
+
+唯一真实run c6dfce08803842679925392ac212e684：正常已有回答入口，NERC既有官方正文概念，单次配置BM25/per_claim/top1/no邻片段/NLI epoch1，默认BM25 aggregate/NLI off不变。实际1正文组件转换，NLI完成1/skip0/fail0，Fact与NLI均supported无分歧、同answer v1/claim/component/knowledge；282token全文无截断，本地0.118475秒/观测481MiB。4真实模型请求/14425token，0纠正/Revision/执行问题，原policy仍review_required不提升。真实浏览器同run查看并重启后查询，原审核/诊断ID/输入结果hash及4请求不变、0重发补算；服务正常停止，未训练补标。详情[local-nli-wiring-v2](local-nli-wiring-v2.md)，私有冻结/实际input/trace/关联/browser/restart/ZIP/提交远端在data/runtime_local/local-nli-wiring-v2/verification-final.json。
+
+长期手册补组件原文范围、历史缺口vs类型bug、真正Harness贯通、同身份真实联动、原policy与旁路区别和重启零补算；混合当前缺口保留，不重建PDF/站或自动下一批。
+
 ## 2026-10-05 可选本地NLI旁路诊断v1（最新）
 
 接续1b7be0b；先另存33逐项错误说明修正版/修改清单，原标签/预测/指标/报告不改。新增默认关闭LocalNLI服务生命周期CPU子进程，严格epoch1 profile/权重SHA/v2投影，只接受明确当前版本完整组件交付；缺映射/核验交付快照/完整候选/版本、元数据/数学/输入/工程前提/未实现立场跳过。原Harness终态保存后异步旁路，append nli_diagnostic对象，不回Agent/Revision/政策，GET历史只读。正文默认BM25/aggregate及schema13/最终决策不改。

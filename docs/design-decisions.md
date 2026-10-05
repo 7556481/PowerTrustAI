@@ -1,5 +1,9 @@
 # 重要设计决策与依据
 
+## 2026-10-05 组件范围优先于强行NLI覆盖
+
+现有组件无独立原文span，不能把整段混合claim.text拼入单组件假设；v2仅唯一单组件父锚点且实际原文/版本/faithful对象对应，混合或共享原文无可靠绑定skip。Nullable provenance是合法类型，读为空行政对象、不补造出处，不能误称历史缺正文。用实际Harness schema13 synthetic贯通后只执行冻结的一次真实概念审核，NLI supported与Fact绑定但原policy review_required保持；重启查询无补算/重发。保留v1转换及历史，默认开关/检索/审核政策不改，详见local-nli-wiring-v2.md。
+
 ## 2026-10-05 NLI只作独立旁路，拒绝猜测历史交付
 
 原审核终态保存后才后台诊断，数据单向，不影响支持标准/政策/Revision。默认关闭不加载模型；用隔离CPU子进程保持项目.venv，concurrency1/无排队/超时终止自有进程，失败仅诊断。只接受完整固定组件交付+候选+版本/知识匹配，不取模型basis子集或总pool，旧aggregate缺映射就skip。Append独立诊断对象，不改原运行/发现。已见用户监督回放不可冒称原事实Agent，4错误supported原样保留；logits未校准，不作可信概率。UTF-8协议修复保留初次失败与新版本。详见local-nli-diagnostic-v1.md。

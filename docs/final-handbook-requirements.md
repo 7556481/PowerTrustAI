@@ -1,5 +1,9 @@
 # 最终《PowerTrustAI 项目学习与面试手册》交付要求
 
+## 2026-10-05 真实接线与组件对象教学
+
+新增production_frames转换v2/单组件字面span验证、保留v1以及nullable provenance类型修复，tests/test_local_nli_wiring.py从真实Harness/schema13输出到保存/API。教学结合唯一真实1组件/4请求/282token的身份和交付链，说明原文范围、规范化proposition、faithful模型判断并不等同程序语义证明；混合无独立span必须skip，历史缺字段与类型bug分开。真实Fact/NLI同supported也不能把review_required升pass，重启UUID/输入/审核hash不变才是无补算证据。保留单案例/既有4错误支持/PDF提取质量限制，只补知识清单，不重建PDF/整本手册/站点。
+
 ## 2026-10-05 NLI旁路职责与运行边界
 
 新教学入口services/local_nli.py、backend/nli_worker.py、backend service/store/api及独立UI。结合默认关闭、epoch1/SHA、完整组件交付证明、版本/知识绑定、unsupported/超长skip、UTF-8子进程、事件循环/并发/超时/失败隔离、append-only记录和实际浏览器/重启，说明为何诊断不是事实Agent/最终审核权。保留4/23错误支持与未校准logits风险，区分用户监督开发回放和真实事实Agent联动；旧16缺口不能凭检索补造。逐sample_id分析纠正家族解释套用，标签/指标历史不改。本轮仅补知识点，不重建整本Markdown手册/PDF/站点。

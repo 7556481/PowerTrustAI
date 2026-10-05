@@ -10,7 +10,7 @@ from backend.config import ServiceConfig
 from backend.store import RunStore,BindingError
 from backend.service import ApplicationService
 from backend.serialization import wire
-from services.local_nli import LocalNLI,production_frames,frame
+from services.local_nli import LocalNLI,production_frames_v1 as production_frames,frame
 from tests import test_support_nli as fixtures
 from tests.test_local_service import task,terminal
 

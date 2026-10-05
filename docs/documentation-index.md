@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-05 NLI真实接线v2（最新）
+
+- [类型/组件范围修复与一次真实验证](local-nli-wiring-v2.md)：575离线，1实际组件、Fact/NLI同supported，业务仍review_required，4真实请求；浏览器/重启/停止已验证。
+- services/local_nli.py的production_frames_v1保留及默认转换v2；evaluation/support_nli.py处理合法空provenance；tests/test_local_nli_wiring.py真实Harness schema13 synthetic贯通，不绕过转换。
+- 忽略data/runtime_local/local-nli-wiring-v2：提交前request/source/config/preview/源码SHA、一次正常真实run及nli/trace/实际身份/全文token、只读历史类型对照、浏览器/重启hash、原记录不改/默认不变、ZIP与verification-final。DB/权重/令牌不打包，不重放run-id标记。
+
 ## 2026-10-05 本地NLI可选旁路（最新）
 
 - [职责/配置/实际回放/浏览器/限制](local-nli-diagnostic-v1.md)：默认关闭、无最终审核权，固定epoch1，严格交付范围，不改原政策。

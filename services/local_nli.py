@@ -17,7 +17,7 @@ def frame(sample,*,run_id,answer_id,answer_version,claim_id,component_id,product
         'comparison_source':comparison_source}
 
 
-def production_frames(raw,expected_knowledge_version=None):
+def production_frames_v1(raw,expected_knowledge_version=None):
     """Only explicit complete per-component delivery + frozen whole candidates.
 
     Aggregate/legacy pools and original citations lack an unambiguous component
@@ -88,6 +88,60 @@ def production_frames(raw,expected_knowledge_version=None):
     return output
 
 
+CONVERSION_V2='local-nli-production-conversion-v2'
+
+def production_frames(raw,expected_knowledge_version=None):
+    """Version-bound singleton literal; mixed/shared anchors fail closed.
+
+    Current ClaimComponent has no independent literal spans. A model-normalized
+    proposition alone is not a permission to guess a substring of its parent.
+    """
+    rounds=raw.get('review_rounds') or [{'answer':raw.get('answer'),
+        'extraction':raw.get('extraction_output'),'verification':raw.get('verification_output')}]
+    result=[]
+    for round in rounds:
+        answer=round.get('answer') or {};verification=round.get('verification') or {}
+        claims=(round.get('extraction') or {}).get('claims') or verification.get('claims') or []
+        narrowed=dict(raw,review_rounds=[round])
+        try:frames=production_frames_v1(narrowed,expected_knowledge_version)
+        except (KeyError,TypeError,ValueError,AttributeError,AssertionError):
+            frames=[dict(frame(None,run_id=raw['run_id'],answer_id=answer.get('answer_id'),
+                answer_version=answer.get('version'),claim_id=None,component_id=None),skip_reason='malformed_production_delivery_shape')]
+        for item in frames:
+            item['converter_version']=CONVERSION_V2
+            if item.get('skip_reason'):result.append(item);continue
+            cid=item['binding']['claim_id'];parts=[c for c in claims if c.get('claim_id')==cid]
+            reason=None
+            if len(parts)!=1:reason='claim_identity_missing_or_duplicate'
+            else:
+                claim=parts[0];components=claim.get('components',[]);targets=claim.get('component_basis_targets')
+                if type(targets) is not list or len(targets)!=len(components) or any(type(t) is not str for t in targets):reason='component_target_mapping_type_or_count_mismatch'
+                elif len(components)!=1:reason='mixed_component_literal_binding_missing'
+                else:
+                    start=claim.get('start_offset');end=claim.get('end_offset');text=answer.get('text')
+                    if type(start) is not int or type(end) is not int or type(text) is not str or not 0<=start<end<=len(text) or text[start:end]!=claim.get('text'):
+                        reason='literal_answer_span_missing_or_mismatched'
+                    elif sum((c.get('start_offset'),c.get('end_offset'))==(start,end) for c in claims)!=1:
+                        reason='shared_parent_anchor_without_component_literal_binding'
+                    else:
+                        rows=[f for f in verification.get('findings',[]) if f.get('claim_id')==cid]
+                        reviews=[r for f in rows for r in f.get('component_reviews',[]) if r.get('component_id')==components[0]['component_id']]
+                        if len(rows)!=1 or len(reviews)!=1:reason='exact_component_fact_review_missing'
+                        elif reviews[0].get('fidelity_status')!='faithful' or reviews[0].get('reviewed_assertion_role')!='asserted' or reviews[0].get('verification_obligation')!='technical_truth':
+                            reason='component_target_fidelity_unproven'
+                        elif not any(c==claim for c in verification.get('claims',[])):
+                            reason='verification_extraction_claim_mismatch'
+                        else:
+                            item['production_status']=reviews[0]['status']
+                            item['literal_binding']={'type':'unique_single_component_parent_span','answer_id':answer['answer_id'],
+                                'answer_version':answer['version'],'start_offset':start,'end_offset':end,
+                                'text_sha256':digest(text[start:end]),'claim_id':cid,'component_id':components[0]['component_id'],
+                                'normalized_fidelity_is_model_judgment':True}
+            if reason:item['sample']=None;item['skip_reason']=reason
+            result.append(item)
+    return result
+
+
 class LocalNLI:
     """One service-owned CPU process, one in-flight request, no waiting queue.
 
@@ -126,6 +180,7 @@ class LocalNLI:
             'authority':'diagnostic_only','affects_decision':False,'risk_note':RISK,
             'production_status':item.get('production_status'),'comparison_source':item.get('comparison_source','fact_agent'),
             'model':self.identity,'adapter_version':ADAPTER,'nli_three_class_result':None,'logits':None,'disagreement':None}
+        record.update(converter_version=item.get('converter_version','explicit-frozen-sample'),literal_binding=item.get('literal_binding'))
         if item.get('skip_reason'):
             context=item.get('input_context',{})
             return dict(record,status='skipped',reason=item['skip_reason'],input_context=context,
