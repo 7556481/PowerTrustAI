@@ -1,5 +1,16 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-05 74监督确认、独立基线与首次CPU微调（最新）
+
+接续5dcbdb7；用户明确确认74模板标签，使用模板新suggestion/basis，另建事件local-user-powertrust-owner（AI辅助、用户监督，非专家），新74confirmed/原145不改；全新145视图71辅助/hold仍pending，A05辅助/父hold。详见support-finetune-v1.md。训练来源仅许可明确AEMO19/7家族，NERC与未独立清理PNNL排除55；筛选原预分无test，训练前固定seed新家族划分11/3/5（4/1/2家族），同文档不称独立验收。
+
+执行v2默认逐样本，结构/单项超时继续，全局故障停止，最多一次纠正；线程超时drain再复用。536离线OK61.971秒/0skip。唯一真实74基线79调用/5纠正，69有效/5错basis scope失败，全部79原消息/响应核对，93.596秒/317502token，估算USD0.05053557–0.10107114。0历史预测复用，五旧有效预测保留；有效69三类macro-F1 0.79654，错误supported3/37非支持分母，五未完成另列，不改失败为成功。
+
+硬件i5-9300H/8GB/GTX1650 4GB旧驱动，实际隔离CPU torch2.8.0/Python3.13.2；BERT-Tiny Apache2固定revision，11条三类训练，12epoch/12.505秒，峰值RSS约422MiB，验证选epoch3。前后同5测试、macro-F1 0.19048→0.22222，accuracy都2/5；支持召回下降到0，不宣称收益或接生产。初始是同预训练编码器＋随机分类头，不是NLI审核器。完整输入19项406–490token、0截断。
+
+失败保留：测试断言位置错误TypeError在运行前修；首次ResponseDiagnostics路径错误在任何HTTP前退出（0调用），保留原freeze后合法新目录唯一批次；五错basis在一次纠正后仍失败，不重跑。data/runtime_local/support-finetune-v1含监督/来源/分组/配置/基线/训练检查点/reading-notes/verification及ZIP；响应在data/retrieval_local/support-baseline-v2/full74-v1。最终提交/普通推送远端回查见verification-final.json，不打印凭据。生产Harness/schema13/政策/默认检索和PDF不改；长期正常推送偏好继续，本轮结束不自动新实验。
+
+
 ## 2026-10-05 54复核接收与74候选准备（最新）
 
 详见support-review-merge-v1.md。接续f70fac7，根目录ZIP不存在，按用户附件Downloads读取并安全解压新忽略目录。两原ZIP哈希/54ID与任务核对；74主要、31辅助、40hold，全145 pending/0确认。A05辅助保留父hold，未解决原MW/MVA对象。新视图不覆盖旧91/48/6/5预测；74内只有1条完全同task预测可复用。质量层basis_ids子集丢失已最小修复。冻结74逐样本请求、0调用，不执行包内真实基线要求（用户最新仅准备）；原execute单项失败全局break仍待独立修复，不宣称runner已完成。新公开回归与完整离线日志、准确结果/提交/普通推送回查见data/runtime_local/review-expansion-54-v1/verification.json。未训练/确认/改生产或PDF；长期检查后普通推送偏好继续。

@@ -1,0 +1,7 @@
+# Optional isolated CPU experiment only; do not install into the service .venv.
+# Install torch from https://download.pytorch.org/whl/cpu (2.8.0+cpu).
+torch==2.8.0
+transformers==4.57.1
+numpy==2.3.3
+safetensors==0.6.2
+psutil==7.1.0

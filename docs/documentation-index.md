@@ -1,5 +1,13 @@
 # 文档索引
 
+## 2026-10-05 监督74、独立基线与首次三类CPU微调
+
+- [实际监督/材料许可/硬件/运行/结果与限制](support-finetune-v1.md)：74confirmed，71辅助hold未确认；79新请求/69有效/5作用域失败；同BERT基座实际一次微调，11训练/3验证/5测试，不接生产。
+- evaluation/support_baseline.py执行v2；evaluation/support_training.py的模板确认、许可筛选、家族划分、完整文本投影及独立CPU训练；requirements-training-v1.txt只隔离环境；tests/test_support_independent.py、test_support_training.py公开synthetic_fixture。
+- 忽略data/runtime_local/support-finetune-v1：confirmation-event/confirmed-primary/source-filter/partition-plan/training-config/model-revision/训练环境lock；deepseek-baseline-v3原冻结/预测/指标/checkpoint；training-run-v1初始模型/验证最优检查点/前后预测/report；reading-notes、final-report、verification-final、监督对照ZIP与失败日志。实际79响应在忽略retrieval_local/support-baseline-v2/full74-v1，逐SHA核对。
+- 保留旧145、原91/48/6/旧预测、历史网络与PDF，不改写为新监督或成功结果。
+
+
 ## 2026-10-05 54复核接收与74候选基线准备
 
 - [合并/依据子集修复/准备范围](support-review-merge-v1.md)：全145保留，74主候选仍pending，尚未运行基线。
