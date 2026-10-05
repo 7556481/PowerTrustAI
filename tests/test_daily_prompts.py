@@ -17,6 +17,6 @@ class DailyPromptTests(unittest.TestCase):
   from agents.contracts import GenerationInput
   from core.models import TaskRequest,TaskMode
   m=messages_for(GenerationInput(TaskRequest('synthetic',TaskMode.QUESTION_ANSWER,'fixture','中文概念'),()),3,product_guidance=True)
-  self.assertIn('150-300 Chinese characters',m[0].content)
+  self.assertIn('150-300-character guideline',m[0].content)
   self.assertIn('No silent evidence truncation',m[0].content)
 if __name__=='__main__':unittest.main()

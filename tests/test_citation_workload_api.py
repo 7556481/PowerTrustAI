@@ -70,7 +70,7 @@ class WorkloadAPITests(unittest.TestCase):
         result=self.client.get(base+'/result',headers=self.headers).json()
         citations=result['findings']['original_citations']
         self.assertEqual(len(citations),3,result);self.assertTrue(all(c['status']=='supported' for c in citations),result)
-        self.assertEqual(sum(r['prompt_version']=='evidence-verification-v9.5-bounded-citation-groups' for r in result['model_usage']),2)
+        self.assertEqual(sum(r['prompt_version']=='evidence-verification-v9.6-explicit-frozen-stance' for r in result['model_usage']),2)
         for e in result['evidence']:
             self.assertEqual(self.client.get(base+'/evidence/'+e['evidence_id'],headers=self.headers).json()['text'],e['text'])
         self.client.__exit__(None,None,None)

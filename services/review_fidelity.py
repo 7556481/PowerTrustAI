@@ -26,7 +26,11 @@ def parse(value,inputs,delegate,*,strict_bindings=False):
                 target=getattr(claim,'component_obligations',())
                 mismatch=bool(target) and (sr['verification_obligation']!=target[index] or sr['assertion_role']!=claim.assertion_role)
                 if sr['fidelity']!='faithful' or mismatch:
-                    ec.check(r.get('status')=='not_assessable',p,'disputed_or_unresolved_verification_target_cannot_be_supported_or_contradicted')
+                    if not ec.check(r.get('status')=='not_assessable',p,'unresolved_fidelity_or_frozen_binding_mismatch_requires_not_assessable'):
+                        ec.errors[-1].update(frozen_assertion_role=claim.assertion_role,
+                            frozen_verification_obligation=target[index] if target else None,
+                            required_status='not_assessable',
+                            processing_options=['Keep your actual semantic judgment; if it disagrees with the frozen stance or obligation use not_assessable, even when body evidence is also insufficient.','Do not change semantic judgment merely to obtain a favorable status.'])
                 reviews[(claim.claim_id,index)]=sr
             del r['semantic_review']
     ec.finish();out=delegate(wire)
@@ -41,6 +45,21 @@ def parse(value,inputs,delegate,*,strict_bindings=False):
                 fidelity_status=sr['fidelity'],reviewed_assertion_role=sr['assertion_role'],verification_obligation=sr['verification_obligation'],fidelity_rationale=sr['rationale']))
         findings.append(replace(f,component_reviews=tuple(components)))
     return replace(out,findings=tuple(findings))
+
+FROZEN_BINDING_INSTRUCTIONS='''
+Frozen stance consistency clarification v1 (all statuses, not only supported/contradicted):
+Compare semantic_review.assertion_role with the supplied claim.assertion_role, and
+semantic_review.verification_obligation with that component's component_obligations.
+If either differs, OR fidelity is disputed/uncertain, status MUST be not_assessable.
+insufficient_evidence is NOT an exception to this rule. Do not silently repair the frozen target.
+Judge the literal anchor honestly; never copy a frozen value just to pass validation.
+For example, if frozen role is asserted but you judge input_report, return not_assessable
+and explain the mismatch. Input_provided is an obligation, NOT automatically an input_report role.
+If the anchor actually asserts an input fact, faithful asserted/input_provided with
+insufficient_evidence is legal when evidence is lacking; absence of support alone is not a stance change.
+Keep source extraction-quality warnings separate from proven input presence; do not infer
+unparsed tables/formulas from snapshot existence alone. Required technical checks remain.
+'''
 
 SYSTEM='''
 CURRENT V9.3 independent finding component_reviews ALSO require semantic_review EXACT

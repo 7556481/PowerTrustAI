@@ -48,6 +48,11 @@ def messages_for(inputs, schema_version=2, *, product_guidance=False):
                 "answer_id": inputs.request.task_id + "-answer", "version": 1}
     if inputs.request.engineering_context is not None:
         question["engineering_context_unverified"] = asdict(inputs.request.engineering_context)
+    from services.answer_constraints import character_limit, VERSION
+    limit = character_limit(inputs.request.question, inputs.answer_requirements)
+    if limit is not None:
+        question['answer_length_constraint'] = {'version':VERSION,'maximum_characters':limit,
+            'counting_method':'complete joined answer text, including punctuation and whitespace'}
     system = SYSTEM
     if schema_version == 3:
         from services.answer_units import UNIT_INSTRUCTIONS
@@ -57,7 +62,7 @@ evidence_sufficient (boolean). If insufficient, explain it and provide nonempty
 missing_information. If sufficient, at least one unit must cite input evidence.
 Never output a factual audit pass."""
         question.pop("answer_id"); question.pop("version")
-    system += '\nAnswer language v3: follow the user question language unless the user explicitly requests another language. For Chinese questions, answer in Chinese, including assumptions and missing_information. Answer the requested question directly first, concisely by default: normally 1-3 short paragraphs, about 150-300 Chinese characters for a simple concept. Do not enumerate every retrieved fragment or copy unrelated laboratory formulas. Answer the causal why only when directly supported; a related power-angle formula alone is not a reactive-voltage explanation. Include only necessary conditions. Do not add unrelated regional applicability claims, generic engineering disclaimers, or procedural review text. Keep quoted source evidence in its original language. Do not call another model to translate an answer.\n'
+    system += '\nAnswer language v4: follow the user question language unless the user explicitly requests another language. For Chinese questions, answer in Chinese, including assumptions and missing_information. Answer directly and concisely. An explicit user maximum overrides the default 150-300-character guideline: keep the COMPLETE joined answer_units text, including separators, punctuation and any limitation, within answer_length_constraint.maximum_characters. Plan the whole answer before returning units; do not append unrelated scope or extraction reports. Do not enumerate retrieved fragments or copy unrelated laboratory formulas. Answer the causal why only when directly supported; a related power-angle formula alone is not a reactive-voltage explanation. Include necessary conditions and substantive evidence gaps briefly. Extraction warnings belong in missing_information only when they actually prevent this answer; never invent missing formulas or report every warning as an answer claim. Plain-language explanations must preserve physical distinctions: avoid absolute "no energy consumed" or "no losses" statements and water-pressure analogies that imply lossless transfer or confuse power with stored energy. Do not invent an alternative analogy or a textbook definition absent from supplied evidence; if the definition is not covered, say that specific gap briefly. Do not add unrelated regional applicability claims, generic engineering disclaimers, or procedural review text. Keep quoted source evidence in its original language. Do not call another model to translate an answer.\n'
     if product_guidance:
         system += '''\nProduct generation guidance v1: honor requested brevity and answer only the question.
 Do not add unrequested bibliography, licensing or geographic assertions as official technical body facts.
@@ -117,6 +122,8 @@ def parse_answer(text, inputs):
         answer = AnswerDraft(value["answer_id"], value["version"], value["text"], tuple(value["assumptions"]),
                              tuple(value["missing_information"]), tuple(citations))
         validate_answer(answer, inputs.evidence)
+        from services.answer_constraints import validate_length
+        validate_length(answer, inputs.request.question, inputs.answer_requirements, path='$.text')
         chk(not value["evidence_sufficient"] or bool(citations),"$.citations","sufficient_answer_requires_citations")
         chk(value["evidence_sufficient"] or bool(answer.missing_information),"$.missing_information","insufficiency_requires_missing_information")
         return answer, value["evidence_sufficient"]
@@ -141,7 +148,7 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
-        prompt += '-question-language-v3'
+        prompt += '-question-language-v4-explicit-limit-v1'
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,
@@ -162,6 +169,8 @@ def parse_units(value, inputs):
     object_fields(value, {"answer_units","assumptions","missing_information","evidence_sufficient"},set(),"$",stage="generation")
     check(type(value["evidence_sufficient"]) is bool,"$.evidence_sufficient","boolean_required",stage="generation")
     answer = assemble(value, inputs.request.task_id+"-answer",1,inputs.evidence)
+    from services.answer_constraints import validate_length
+    validate_length(answer, inputs.request.question, inputs.answer_requirements)
     check(not value["evidence_sufficient"] or bool(answer.citations),"$.answer_units","sufficient_answer_requires_citations",stage="generation")
     check(value["evidence_sufficient"] or bool(answer.missing_information),"$.missing_information","insufficiency_requires_missing_information",stage="generation")
     return answer,value["evidence_sufficient"]

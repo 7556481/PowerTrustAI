@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-05 无功试用定向修复（当前）
+
+[qa-targeted-v2](qa-targeted-v2.md)：267字符原回答、事实第9项冻结立场失败、明确长度与schema13提示修复、618回归、唯一140字符真实验证仍待补充及浏览器证据。源码services/answer_constraints.py、review_fidelity.py，agents/generation.py、verification_contract_v10_batched.py、revision_contract_v2.py；私有冻结/原新消息/短ZIP在data/runtime_local/qa-targeted-v2。
+
 ## 2026-10-05 中文日常使用收尾 v1（当前）
 
 [zh-daily-v1](zh-daily-v1.md)：一键日常入口、会话/停机、网络诊断、3来源和复用库调查、固定真实验收、未达概念质量目标。源码backend/local_session.py、launcher.py、api.py、config.py；daily生成/提取提示及静态页面；611回归。私有reading-notes、verification-final、真实输入/响应、耗时、浏览器/重启和审阅ZIP位于data/runtime_local/zh-daily-v1。长期手册保持原要求，只追加本輪知识点。

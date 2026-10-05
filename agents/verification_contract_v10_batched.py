@@ -15,7 +15,7 @@ from model_adapter.runtime import current_budget,ModelBudget,model_scope
 from core.models import ExecutionIssue,ExecutionStatus
 from core.validation import validate_review
 
-PROMPT_VERSION='evidence-verification-v9.5-bounded-citation-groups'
+PROMPT_VERSION='evidence-verification-v9.6-explicit-frozen-stance'
 CONTRACT_VERSION='evidence-verification-output-v9.5'
 
 def original_template():
@@ -41,6 +41,7 @@ async def run(agent,inputs):
         with model_scope(ModelBudget(2+len(inputs.answer.citations))):return await run(agent,inputs)
     from services.citation_workload import CitationWorkload, pack, messages_size
     from agents.review_templates_v3 import INDEPENDENT
+    from services.review_fidelity import FROZEN_BINDING_INSTRUCTIONS
     limits=agent.citation_workload or CitationWorkload()
     prompt_version= PROMPT_VERSION+'-fact-delivery-v1' if inputs.fact_retrieval_bindings else PROMPT_VERSION
     contract_version=CONTRACT_VERSION
@@ -98,7 +99,7 @@ async def run(agent,inputs):
         else:
             payload=batch_payload(citation);instruction=original_instruction
         if citation is None:
-            instruction=INDEPENDENT
+            instruction=INDEPENDENT + FROZEN_BINDING_INSTRUCTIONS
             from services.fact_delivery import payload as fact_payload, INSTRUCTION
             mapping=fact_payload(inputs,scopes[0])
             if mapping is not None:

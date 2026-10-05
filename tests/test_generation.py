@@ -56,7 +56,7 @@ class GenerationTests(unittest.IsolatedAsyncioTestCase):
         result = await agent(adapter).run(inputs())
         self.assertEqual(result.answer.citations[0].evidence_ids, ("synthetic-e1",))
         self.assertTrue(result.evidence_sufficient)
-        self.assertEqual(result.prompt_version, PROMPT_VERSION+'-question-language-v3')
+        self.assertEqual(result.prompt_version, PROMPT_VERSION+'-question-language-v4-explicit-limit-v1')
         self.assertEqual(result.model_records[0].usage, ModelUsage(12, 8, 20))
         self.assertEqual(result.model_records[0].returned_model_id, "returned_synthetic")
         self.assertEqual(result.model_records[0].finish_reason, "stop")
