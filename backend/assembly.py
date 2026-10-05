@@ -93,6 +93,8 @@ class ComponentFactory:
             scoring_method=SCORING_METHOD if self.config.retrieval_mode=='bm25' else RRF_VERSION if self.config.retrieval_mode=='hybrid' else 'Dense-cosine-v1(positive-only)')
         manifest['retrieval']='fixed-index '+self.config.retrieval_mode+'; full result replay validation'
         manifest['performance_profile']='validated-pdf-report-cache-v1: connection-local immutable body verification only; full ranking replay retained' if self.config.retrieval_mode=='bm25' else 'legacy-semantic-full-replay'
+        manifest['generation_query_conversion']='generation-cross-language-query-v1: once after successful empty BM25; Chinese question / fixed English body only'
+        manifest['prompts']['generation'] += '-question-language-v1'
         if self.config.profile=='synthetic_fixture':
             manifest['available_real_protocols']=manifest.pop('protocols')
             manifest['protocols']={k:'fake-v1' for k in ('generation','claim_extraction','evidence_verification','domain_review','revision')}
@@ -120,6 +122,8 @@ class ComponentFactory:
         from model_adapter.contracts import ModelSettings
         from model_adapter.deepseek import create_adapter
         from rag.retriever import AsyncSQLiteBM25Retriever
+        from services.generation_query import GenerationQueryConverter, english_corpus
+        from rag.storage import KnowledgeStore
         settings=ModelSettings(os.environ['DEEPSEEK_MODEL_ID'],90,8000,96000,'https://api.deepseek.com','DEEPSEEK_API_KEY')
         resources=[]
         try:
@@ -130,12 +134,16 @@ class ComponentFactory:
             else:
                 self.initialize_retrieval();retriever=self.semantic_resource;resources.append(RetrieverLease(retriever))
             diag=ROOT/'data/retrieval_local/service_private'/rid
+            with KnowledgeStore(self.config.index_db, readonly=True) as store:
+                corpus_english = english_corpus(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
                 ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=4),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7),
-                policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer)
+                policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
+                generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
+                generation_corpus_english=corpus_english)
             return Bundle(harness,resources)
         except Exception:
             for resource in resources:resource.close()

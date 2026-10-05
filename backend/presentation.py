@@ -6,6 +6,18 @@ def explain(result):
     facts=f.get('model_fact',[]);domain=f.get('domain',[]);rules=f.get('program_rules',[])
     reasons=[];next_steps=[]
     decision=result.get('decision') or {}
+    query_failures=[i for i in ex.get('execution_issues',[]) if i.get('component')=='generation_query_conversion']
+    if query_failures:
+        return {'run_ended':ex.get('status') in TERMINAL,
+            'answer_unavailable_reason':'未生成回答：英文补检查询转换执行失败。原中文查询为空，尚不能判断资料是否足以回答；请检查本机模型连接。',
+            'reasons':['执行未完成：查询转换失败，未进入生成、提取或双审核；不是事实错误或审核通过。'],
+            'next_steps':['检查模型连接后由用户手动发起新任务；本运行不会自动重发。'],
+            'saved':'原查询与失败请求记录已保留。'}
+    if result.get('no_substantive_answer'):
+        return {'run_ended':ex.get('status') in TERMINAL,
+            'reasons':['待补充：未生成实质回答，后续提取与双审核不适用。'],
+            'next_steps':['补充相关依据或问题范围后，手动发起新任务。'],
+            'saved':'原检索、补检与生成记录已保留；未审核程序拒答模板。'}
     if decision.get('policy_version','').startswith('product-decision-v1'):
         disposition=decision['kind']
         text={'pass':'通过：本任务适用检查完整且未发现阻断问题。',

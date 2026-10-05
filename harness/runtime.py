@@ -39,7 +39,8 @@ class HarnessObserverError(RuntimeError):
 
 class OfflineHarness:
     def __init__(self, generation, verification, domain_review, revision, extractor, policy=None,
-                 retriever=None, retrieval_settings=None, unit_tool=None, observer=None):
+                 retriever=None, retrieval_settings=None, unit_tool=None, observer=None,
+                 generation_query_converter=None, generation_corpus_english=False):
         self.generation = generation
         self.verification = verification
         self.domain_review = domain_review
@@ -47,6 +48,8 @@ class OfflineHarness:
         self.extractor = extractor
         self.unit_tool = unit_tool
         self.observer = observer
+        self.generation_query_converter = generation_query_converter
+        self.generation_corpus_english = generation_corpus_english
         self.policy = policy or DeterministicAuditPolicy()
         self.retriever = retriever
         self.retrieval_settings = retrieval_settings or RetrievalSettings()
@@ -206,7 +209,7 @@ class OfflineHarness:
             validate_report(result)
             return result
 
-        async def retrieve_for(purpose):
+        async def retrieve_for(purpose, query_override=None):
             nonlocal evidence, bindings
             started = perf_counter()
             try:
@@ -214,7 +217,7 @@ class OfflineHarness:
                     from harness.fact_retrieval import retrieve_facts
                     delivery = await retrieve_facts(retrieval, request, answer, claims)
                 else:
-                    delivery = await retrieval.retrieve(purpose, request, answer, claims)
+                    delivery = await retrieval.retrieve(purpose, request, answer, claims, query_override=query_override)
                 evidence = merge_evidence(evidence, delivery.evidence)
                 bindings += delivery.bindings
                 return delivery
@@ -269,6 +272,25 @@ class OfflineHarness:
                     if generated_delivery.issue:
                         issues.append(generated_delivery.issue)
                         raise RequiredRetrievalFailure("Required generation retrieval did not complete")
+                    from services.generation_query import chinese_query, VERSION as query_version
+                    if (generated_delivery.record.outcome == 'empty' and
+                            self.generation_query_converter is not None and self.generation_corpus_english and
+                            chinese_query(request.question)):
+                        converted, issue = await invoke('generation_query_conversion',
+                            self.generation_query_converter.run, request.question,
+                            lambda q: require(type(q) is str and bool(q.strip()), 'Nonempty query required'),
+                            True, getattr(self.generation_query_converter, 'uses_model_adapter', False))
+                        record('generation_query_conversion_result', ExecutionStatus.FAILED if issue else ExecutionStatus.SUCCEEDED,
+                            perf_counter(), stage_output={'version': query_version, 'original_query': request.question,
+                            'converted_query': converted, 'status': 'failed' if issue else 'succeeded',
+                            'corpus_language': 'english', 'first_retrieval_id': generated_delivery.record.retrieval_id})
+                        if issue:
+                            issues.append(issue)
+                            raise RequiredRetrievalFailure('英文补检查询转换失败；执行未完成，未生成回答')
+                        generated_delivery = await retrieve_for(RetrievalPurpose.GENERATION, converted)
+                        if generated_delivery.issue:
+                            issues.append(generated_delivery.issue)
+                            raise RequiredRetrievalFailure('英文补检执行失败；未生成回答')
                 transition(RunState.GENERATING)
 
                 def check_generation(output):
@@ -295,7 +317,21 @@ class OfflineHarness:
                 answer = generated.answer
                 active_snapshot = generated.evidence_snapshot
                 record("answer_created", ExecutionStatus.SUCCEEDED, perf_counter(), outputs=(f"{answer.answer_id}@{answer.version}",))
-                if generation_only:
+                if not generated.substantive_answer:
+                    from core.models import ProductDecision
+                    reason = ('未生成实质回答，主张提取与双审核不适用；' +
+                        ('生成阶段认为交付依据不足，未提供有引用的回答' if evidence else '当前检索未找到回答所需依据'))
+                    decision = ProductDecision(DecisionKind.NEEDS_INFORMATION, (reason,),
+                        'product-decision-v1.1', execution_integrity='complete', risk_level='unknown',
+                        resolution='unable_to_answer', reason_codes=('NO_SUBSTANTIVE_ANSWER',),
+                        classification_basis=('generation-no-answer-v1: generation returned no substantive cited answer',),
+                        applicable_checks=tuple((name, 'not_applicable', '未生成回答，不核验程序拒答模板')
+                            for name in ('claim_extraction', 'fact_support', 'domain_review')))
+                    report = make_report(decision)
+                    record('review_not_applicable', ExecutionStatus.SUCCEEDED, perf_counter(), reason)
+                    transition(RunState.NEEDS_INFORMATION)
+                    generation_only = True
+                elif generation_only:
                     reason = "Draft generated only; no factual or domain audit performed"
                     transition(RunState.GENERATED)
             while not generation_only:
@@ -532,7 +568,8 @@ class OfflineHarness:
             raise
         except RequiredRetrievalFailure as exc:
             reason = str(exc)
-            transition(RunState.REVIEW_REQUIRED)
+            transition(RunState.EXECUTION_INCOMPLETE if any(
+                i.component == 'generation_query_conversion' for i in issues) else RunState.REVIEW_REQUIRED)
         except asyncio.CancelledError:
             reason = "Run cancelled"
             issues.append(ExecutionIssue("harness", ExecutionStatus.CANCELLED, "CANCELLED", reason))

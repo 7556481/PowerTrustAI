@@ -158,6 +158,8 @@ class ApplicationService:
         for output in (raw.get('verification_output'),raw.get('domain_output')):
             if output:issues+=output.get('execution_issues',[])
         current_version=(raw.get('answer') or {}).get('version')
+        no_answer=(raw.get('generation_output') or {}).get('substantive_answer') is False
+        if no_answer and not issues:complete=True
         complete=bool(rounds) and rounds[-1]['answer']['version']==current_version and all(not r[k].get('execution_issues') for r in rounds for k in ('verification','domain_review')) and not issues
         verification=raw.get('verification_output') or {};domain=raw.get('domain_output') or {}
         original=row['request'].get('existing_answer')
@@ -176,6 +178,7 @@ class ApplicationService:
         projection=safe({'schema_version':'local-review-service-v1','execution':dict(self.state(rid),
             required_stages_complete=complete,all_required_checks_assessed=checked,execution_issues=issues,termination_reason=raw.get('termination_reason'),
             partial_only=row['result'] is None),'decision':decision,
+            'no_substantive_answer':no_answer,
             'answer':{'original':original,
                 'final':raw.get('answer'),'versions':self.store.objects(rid,'answer'),'revisions':raw.get('revision_outputs',[])},
             'findings':{'model_fact':verification.get('findings',[]),'domain':domain.get('findings',[]),

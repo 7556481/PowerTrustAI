@@ -355,7 +355,16 @@ def validate_report(report):
     validate_types(report, AuditReport)
     evidence = merge_evidence(report.evidence)
     validate_answer(report.answer, evidence)
-    validate_claims(report.claims, report.answer)
+    from core.models import ProductDecision, DecisionKind
+    no_answer = (isinstance(report.decision, ProductDecision) and
+                 report.decision.reason_codes == ('NO_SUBSTANTIVE_ANSWER',))
+    if no_answer:
+        require(report.decision.kind == DecisionKind.NEEDS_INFORMATION and
+                not report.claims and not report.answer.citations and bool(report.answer.missing_information) and
+                not report.verification_findings and not report.domain_findings and not report.execution_issues,
+                'No-answer path requires missing information and no substantive audit; cannot pass')
+    else:
+        validate_claims(report.claims, report.answer)
     all_findings = report.verification_findings + report.domain_findings
     unique(all_findings, "finding_id")
     known_claims = {c.claim_id for c in report.claims}

@@ -26,8 +26,8 @@ class RunState(str, Enum):
 NORMAL_TRANSITIONS = {
     RunState.RECEIVED: frozenset({RunState.VALIDATED}),
     RunState.VALIDATED: frozenset({RunState.RETRIEVING, RunState.EXTRACTING_CLAIMS}),
-    RunState.RETRIEVING: frozenset({RunState.GENERATING, RunState.REVIEW_REQUIRED}),
-    RunState.GENERATING: frozenset({RunState.EXTRACTING_CLAIMS, RunState.GENERATED}),
+    RunState.RETRIEVING: frozenset({RunState.GENERATING, RunState.REVIEW_REQUIRED, RunState.EXECUTION_INCOMPLETE}),
+    RunState.GENERATING: frozenset({RunState.EXTRACTING_CLAIMS, RunState.GENERATED, RunState.NEEDS_INFORMATION}),
     RunState.EXTRACTING_CLAIMS: frozenset({RunState.VERIFYING}),
     RunState.VERIFYING: frozenset({RunState.DECIDING, RunState.EVIDENCE_REVIEWED}),
     RunState.DECIDING: frozenset({RunState.REVISING, RunState.COMPLETED, RunState.REVIEW_REQUIRED, RunState.REJECTED, RunState.NEEDS_INFORMATION, RunState.EXECUTION_INCOMPLETE}),

@@ -57,6 +57,7 @@ evidence_sufficient (boolean). If insufficient, explain it and provide nonempty
 missing_information. If sufficient, at least one unit must cite input evidence.
 Never output a factual audit pass."""
         question.pop("answer_id"); question.pop("version")
+    system += '\nAnswer language v1: follow the user question language unless the user explicitly requests another language. For Chinese questions, answer in Chinese, including assumptions and missing_information. Keep quoted source evidence in its original language. Do not call another model to translate an answer.\n'
     if product_guidance:
         system += '''\nProduct generation guidance v1: honor requested brevity and answer only the question.
 Do not add unrequested bibliography, licensing or geographic assertions as official technical body facts.
@@ -140,12 +141,13 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
+        prompt += '-question-language-v1'
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,
-                "Insufficient evidence: no reference material was retrieved or supplied.",
-                missing_information=("Traceable evidence covering the question is required.",))
-            return GenerationOutput(answer, evidence_sufficient=False, prompt_version=prompt,
+                "当前检索未找到回答所需依据。请补充相关资料或更明确的问题范围；这不表示整个知识库不存在资料。",
+                missing_information=("需要能够支持本问题的可回查依据。",))
+            return GenerationOutput(answer, evidence_sufficient=False, prompt_version=prompt, substantive_answer=False,
                 evidence_snapshot=make_snapshot(answer, inputs.evidence, inputs.knowledge_version,request=inputs.request,answer_requirements=inputs.answer_requirements,prompt_version=prompt,evidence_bindings=inputs.evidence_bindings))
         messages = messages_for(inputs, self.schema_version, product_guidance=self.product_guidance)
         parser = (lambda v: parse_units(v,inputs)) if self.schema_version==3 else (lambda v:parse_answer(json.dumps(v,ensure_ascii=False),inputs))

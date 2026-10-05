@@ -28,6 +28,7 @@ class GenerationOutput:
     model_records: Tuple[ModelCallRecord, ...] = ()
     prompt_version: str | None = None
     evidence_snapshot: "GenerationEvidenceSnapshot | None" = None
+    substantive_answer: bool = True
 
 
 @dataclass(frozen=True)
