@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-05 扩大微调与SSIAG文档留出实际结果（最新）
+
+- [一次实际训练/留出/风险与运行](support-nli-expanded-v3.md)：69明确确认另版，43/12/33；epoch1，macro-F1提高但错误supported4/23，不接生产。
+- evaluation/support_nli_expanded.py与tests/test_support_nli_expanded.py：确认子集、冻结SHA、开发/文档隔离、train/heldout阶段seal与排他输出、双分母/三类矩阵。
+- 忽略data/runtime_local/support-nli-expanded-v3：confirmation-event/confirmed69/监督78视图、55开发/33留出、固定分配/输入/token/有效集合/config/源码模型SHA、独立环境、run-v1四epoch/selection-seal/两逐项logits/指标、错误分析/保留性检查、ZIP/verification-final。权重留本机不入ZIP/Git，原pending和历史保持。
+
 ## 2026-10-05 78项复核与扩大开发计划（最新）
 
 - [复核接收/69pending/合并家族/SSIAG留出/适配器v2](support-nli-review-v2.md)：55开发→13家族→43训练/12验证，33文档留出，仅准备0训练/预测。

@@ -1,5 +1,9 @@
 # 最终《PowerTrustAI 项目学习与面试手册》交付要求
 
+## 2026-10-05 扩大训练/文档留出教学材料
+
+新增实际evaluation/support_nli_expanded.py的confirm_authorized/validate_layout/verify_freeze/match_effective/train_expanded/evaluate_document_holdout/heldout_metrics源码入口。教学须结合69逐项授权/依据子集与新确认事件、43/12/33/13家族冻结、官方原头重新训练、4epoch loss与验证同分最早epoch1、selection-seal后单次文档留出。结果macro-F1 0.6569→0.8193但错误supported0→4/23、supported预测误支持4/14，必须解释两个分母与三类混淆矩阵手算、必要条件/时间先后/充分性失败，不把提升称生产审核可靠。保留单文档/小样本/单种子/AI辅助用户监督和not_assessable缺失；长期Markdown＋本地站/PDF可选，本轮只补知识清单，不重建手册/站/PDF。
+
 ## 2026-10-05 扩大开发划分与监督接收知识点
 
 新增evaluation/support_nli_review.py的复核身份/依据/模板交叉核对、保留pending历史、union关联家族与标签盲划分，以及support_nli正文v2与训练pending前置拒绝。实际78→69正文/6辅助/3hold，19＋36保留55/13关联家族，拟43/12，SSIAG33仅文档留出；本轮无训练/预测。待补教学：必要条件取消为何可能矛盾而非证据不足、列表/paragraph(a)前件、质量意见与明确标签确认、同概念/父谱系/共享原文泄漏、旧五题已见开发、索引声明的typed保留与正文路由、官方基座重训/验证选检查点/留出禁止调参。绑定实际提交和私有版本，保留小验证2家族限制，不能把待确认建议当金标准。本轮只补要求，不建站或重建PDF。

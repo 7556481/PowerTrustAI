@@ -1,5 +1,13 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-05 扩大NLI训练及SSIAG一次留出完成（最新）
+
+接续b4c8b17，用户明确逐69模板授权后另建确认事件/confirmed版本，source为AI辅助用户监督，6辅助/3hold仍pending，所有原任务/历史不改。实际43训练/12验证/SSIAG33留出，沿用13关联家族；v2输入88全有效0截断。新入口evaluation/support_nli_expanded.py复用NLI模块，训练仅验证选checkpoint并写seal，之后独立阶段才评估文档留出，排他输出避免重复。
+
+唯一官方原始MiniLM固定revision训练4epoch；验证四轮macro-F1均0.915344，同分取最早epoch1，训练112.8836秒/峰RSS2.71GiB。SSIAG同33一次基座→微调macro-F1 0.656914→0.819349、accuracy22→27/33，但错误supported0→4/23、错误支持预测比例0→4/14，contradicted召回下降；不称生产可靠性提升、不采用审核器。19双对/8改善/3退步/3仍错，必要条件/SSC/时间先后/充分性失败完整保留。执行前560/发布后561离线通过、原Harness七场景完成；77历史生产文件及全部冻结/官方权重SHA不变，付费0，实验停止不继续刷分。详细源码/指标/运行/资源/失败见[support-nli-expanded-v3](support-nli-expanded-v3.md)，私有监督/输入/epoch/logits/错误/ZIP/提交/远端验证在data/runtime_local/support-nli-expanded-v3。生产schema13/Harness/政策/检索默认不变。
+
+长期手册补两阶段入口、确认子集作用域、epoch选择、文档留出混淆矩阵与错误支持双分母/必要条件/时间关系失败，不重建手册/PDF/站点。后续实验须另行目标与授权，不从SSIAG结果自动调参或重训。
+
 ## 2026-10-05 78复核接收与扩大开发/SSIAG留出准备（最新）
 
 接续44046d0，已从用户明确Downloads路径接收review78 ZIP，逐ID/task/正文/依据/原建议/分配核对及78原页片段重检。新质量版69正文/6辅助/3hold，全78仍pending/null，3条insufficient→contradicted的复核理由完整保留，69模板使用本次具体建议。稳定性36与原19合并55，精确去重0；19原家族union为13，标签盲规则拟训练43/11家族、验证12/2家族，旧五题归已见开发；原划分/输入/历史结果SHA不变。SSIAG33独立留出，不训练/选型/调参/检查点或预测；本轮0模型加载/0训练/0付费。

@@ -1,5 +1,7 @@
 # 后续实施清单与实际接入点
 
+2026-10-05最新：扩大NLI训练和SSIAG单次文档留出已完成（support-nli-expanded-v3.md），69监督另版确认、43/12/33、epoch1。macro-F1改善伴随错误支持风险增加，未接生产；当前实验已停止，下一步需所有者另定独立资料/风险验证目标，不根据这33项自动调参或重跑。新增support_nli_expanded两阶段入口及公开门禁回归；手册待补错误支持双分母/混淆矩阵/验证seal知识。
+
 2026-10-05最新：78复核已接收，全78新标签pending，69正文候选分为稳定性36开发/SSIAG33文档留出。扩大55已合并13家族，拟43/12；下一步先明确逐ID确认69，再按固定官方MiniLM计划另行实施开发训练与冻结后留出评估。本轮0训练/预测，hold3以后补前件另建任务，不阻断准备。SSIAG永不参与调参/检查点；正文v2行政隔离不改生产。见support-nli-review-v2.md。
 
 2026-10-05最新：[NLI实验](support-nli-v1.md)已经实际完成，两候选事前冻结验证/资源规则选MiniLM，一次4epoch训练、同5项开发对照macro-F1 0.8222→1.0000，未接生产。下一步先审阅78pending新候选、保持SSIAG文档留出、清理概念重用，补独立来源/not_assessable/外部验证；不自动继续训练。新入口evaluation/support_nli.py及support_nli_candidates.py。最终详细中文手册Markdown＋本地文档网站，PDF可选；本轮仅更新要求和知识点。
