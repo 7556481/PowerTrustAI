@@ -291,11 +291,12 @@ def _parse_normalized(value, inputs, *, schema_version=None):
 class ModelEvidenceVerificationAgent:
     uses_model_adapter = True
 
-    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4, citation_workload=None):
+    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4, citation_workload=None, support_relation_checks=False):
         if schema_version not in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13):
             raise ValueError("Live review supports explicit v4/v5/v6 only")
         self.schema_version = schema_version
         self.citation_workload = citation_workload
+        self.support_relation_checks = support_relation_checks
         self.client = ModelClient(adapter, settings)
         self.diagnostics = None if diagnostic_dir is None else ResponseDiagnostics(diagnostic_dir)
 

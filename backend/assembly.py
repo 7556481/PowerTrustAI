@@ -64,8 +64,14 @@ class ComponentFactory:
         from agents.review_templates_v3 import INDEPENDENT
         from services.review_fidelity import FROZEN_BINDING_INSTRUCTIONS
         INDEPENDENT += FROZEN_BINDING_INSTRUCTIONS
+        from services.support_relation import INSTRUCTIONS
+        INDEPENDENT=INDEPENDENT.replace('Optional classification_issue EXACT suggested_category,rationale.',
+            'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')
+        INDEPENDENT += INSTRUCTIONS
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
-        ORIGINAL=original_template()
+        ORIGINAL=original_template(support_relation_checks=True)
+        PROMPT_VERSION='evidence-verification-v9.7-source-support-relation'
+        CONTRACT_VERSION='evidence-verification-output-v9.7'
         if self.config.fact_strategy=='per_claim_v1':PROMPT_VERSION+='-fact-delivery-v1'
         hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
             for name in ('core','agents','harness','tools','services','rag','model_adapter','backend') for p in (ROOT/name).glob('*.py')}
@@ -139,7 +145,7 @@ class ComponentFactory:
             with KnowledgeStore(self.config.index_db, readonly=True) as store:
                 corpus_english = english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload),
+                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload,support_relation_checks=True),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=4),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),

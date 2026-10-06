@@ -18,15 +18,21 @@ from core.validation import validate_review
 PROMPT_VERSION='evidence-verification-v9.6-explicit-frozen-stance'
 CONTRACT_VERSION='evidence-verification-output-v9.5'
 
-def original_template():
+def original_template(*,support_relation_checks=False):
     from agents.review_templates_v3 import ORIGINAL
-    return ORIGINAL.replace('EXACTLY one item for this index.',
+    template=ORIGINAL.replace('EXACTLY one item for this index.',
         'EXACTLY one item for EVERY supplied citation_index, in supplied order.')+"""
 Multiple ORIGINAL_CITATION_SCOPES may share this request. Each has its own citation_index,
 bound answer substring and QUOTE_CANDIDATES. Select IDs ONLY from THAT item's scope.
 Never borrow a candidate from any other item, even if its Evidence or text is identical.
 Keep each rationale concise; cover every item. Other/new independent support does not cure it.
 """
+    if support_relation_checks:
+        from services.support_relation import INSTRUCTIONS
+        template=template.replace('Item EXACT citation_index,status,rationale,applicability_conditions,bases.',
+            'Item required citation_index,status,rationale,applicability_conditions,bases; optional support_relation, REQUIRED for supported/contradicted.')
+        template+=INSTRUCTIONS
+    return template
 
 def citation_payload(answer,question,scopes,indexes):
     return {'section':'BOUNDED_ORIGINAL_CITATIONS_UNTRUSTED','question':question,
@@ -43,9 +49,9 @@ async def run(agent,inputs):
     from agents.review_templates_v3 import INDEPENDENT
     from services.review_fidelity import FROZEN_BINDING_INSTRUCTIONS
     limits=agent.citation_workload or CitationWorkload()
-    prompt_version= PROMPT_VERSION+'-fact-delivery-v1' if inputs.fact_retrieval_bindings else PROMPT_VERSION
-    contract_version=CONTRACT_VERSION
-    original_instruction=original_template()
+    prompt_version=('evidence-verification-v9.7-source-support-relation' if agent.support_relation_checks else PROMPT_VERSION)+('-fact-delivery-v1' if inputs.fact_retrieval_bindings else '')
+    contract_version='evidence-verification-output-v9.7' if agent.support_relation_checks else CONTRACT_VERSION
+    original_instruction=original_template(support_relation_checks=agent.support_relation_checks)
     start=len(current_budget().records);scopes=joint.catalog(inputs,contract_version);wire,missing=model_wire(inputs)
     base_parse=lambda v:joint.parse(v,inputs,scopes,prompt_version='evidence-verification-v9.3-target-fidelity')
     def parse(v):
@@ -77,6 +83,9 @@ async def run(agent,inputs):
         if citation is None and not wire[group]:continue
         selected={group:deepcopy(wire[group] if citation is None else [wire[group][i] for i in citation])}
         def strict(value):
+            if agent.support_relation_checks:
+                from services.support_relation import normalize
+                value=normalize(value,group,scopes)
             ec=ErrorCollector('evidence_verification_v9_2');ec.fields(value,{group},set(),'$')
             if not ec.check(type(value.get(group)) is list,'$.'+group,'array_required'):ec.finish()
             if citation is not None:
@@ -100,6 +109,11 @@ async def run(agent,inputs):
             payload=batch_payload(citation);instruction=original_instruction
         if citation is None:
             instruction=INDEPENDENT + FROZEN_BINDING_INSTRUCTIONS
+            if agent.support_relation_checks:
+                from services.support_relation import INSTRUCTIONS
+                instruction=instruction.replace('Optional classification_issue EXACT suggested_category,rationale.',
+                    'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')
+                instruction+=INSTRUCTIONS
             from services.fact_delivery import payload as fact_payload, INSTRUCTION
             mapping=fact_payload(inputs,scopes[0])
             if mapping is not None:

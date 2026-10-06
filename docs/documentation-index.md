@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-06 基础概念覆盖（当前）
+
+[basic-coverage-v1](basic-coverage-v1.md)：BAAI有限抽样与未采用理由、TUP正文/源定位/排版归一快照、source-support-relation-v1与schema13日常配置、两题真实引用及剩余问题。源码services/support_relation.py、agents/verification_contract_v10_batched.py、backend/assembly.py；原件/逐字映射/输入响应/审阅包留在data/runtime_local/basic-coverage-v1与data/retrieval_local/basic-coverage-v1。
+
 ## 2026-10-05 无功试用定向修复（当前）
 
 [qa-targeted-v2](qa-targeted-v2.md)：267字符原回答、事实第9项冻结立场失败、明确长度与schema13提示修复、618回归、唯一140字符真实验证仍待补充及浏览器证据。源码services/answer_constraints.py、review_fidelity.py，agents/generation.py、verification_contract_v10_batched.py、revision_contract_v2.py；私有冻结/原新消息/短ZIP在data/runtime_local/qa-targeted-v2。
