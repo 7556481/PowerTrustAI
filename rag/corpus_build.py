@@ -78,14 +78,14 @@ def publish(args):
         if Path(args.publish).exists():raise ValueError('Publication is immutable; choose a new file')
         root=hashlib.sha256()
         for r in con.execute('SELECT fragment_id,text_hash FROM corpus_chunks ORDER BY id'):root.update(canonical(r).encode()+b'\n')
-        data={'version':'industry-corpus-fts-v1','revision':manifest['revision'],'tokenizer':VERSION,
+        data={'version':'industry-corpus-fts-v1','publication_version':'corpus-publication-v2-covered-exclusions','revision':manifest['revision'],'tokenizer':VERSION,
               'query_version':QUERY_VERSION,
               'base_knowledge_version':args.base_knowledge,'chunks_root':root.hexdigest(),'complete':complete,
               'progress':progress,'records':con.execute('SELECT count(*) FROM corpus_records').fetchone()[0],
               'excluded_shards':excluded,'coverage_definition':'all_manifest_shards_accounted_valid_rows_built_verified_unreadable_excluded',
               'chunks':con.execute('SELECT count(*) FROM corpus_chunks').fetchone()[0],
               'duplicates':con.execute('SELECT count(*) FROM corpus_duplicates').fetchone()[0],
-              'has_english':any(r[0].startswith('english/') for r in progress),
+              'has_english':any(r[0].startswith('english/') and r[1]>0 and r[2]!=-1 for r in progress),
               'shards':[{'path':x['path'],'sha256':x['lfs']['oid'],'bytes':x['size']} for x in manifest['files'] if any(r[0]==x['path'] for r in progress)]}
         k='kc-'+digest(canonical(data).encode())
         with closing(sqlite3.connect(args.publish)) as dst:

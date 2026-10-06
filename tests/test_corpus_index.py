@@ -121,11 +121,12 @@ class CorpusTests(unittest.TestCase):
   from rag.corpus_build import build,publish,sha
   folder=Path(self.tmp.name);shards=folder/'mixed';shards.mkdir()
   valid=shards/'good.parquet';pq.write_table(pa.table({'_id':[1],'text':['Synthetic_fixture: constant pressure is required.']}),valid)
-  bad=shards/'bad.parquet';bad.write_bytes(b'PAR1synthetic_fixture_bad_footer')
-  manifest=folder/'mixed.json';manifest.write_text(json.dumps({'revision':'r'*40,'files':[{'path':p.name,'size':p.stat().st_size,'lfs':{'oid':sha(p)}} for p in (valid,bad)]}))
+  (shards/'english').mkdir();bad=shards/'english/bad.parquet';bad.write_bytes(b'PAR1synthetic_fixture_bad_footer')
+  manifest=folder/'mixed.json';manifest.write_text(json.dumps({'revision':'r'*40,'files':[{'path':p.relative_to(shards).as_posix(),'size':p.stat().st_size,'lfs':{'oid':sha(p)}} for p in (valid,bad)]}))
   args=SimpleNamespace(base=str(self.p),database=str(folder/'mixed.sqlite3'),base_knowledge=self.base,manifest=str(manifest),shards=str(shards),wait=False,publish=str(folder/'mixed-published.sqlite3'),allow_partial=False)
   with closing(sqlite3.connect(self.p)) as con:base_records=con.execute('SELECT count(*) FROM corpus_records').fetchone()[0]
   build(args);publish(args)
   m=json.loads(Path(args.publish+'.manifest.json').read_text(encoding='utf-8'))
   self.assertTrue(m['complete']);self.assertEqual(m['records'],base_records+1);self.assertEqual(len(m['excluded_shards']),1)
   self.assertIn('verified_unreadable_excluded',m['coverage_definition'])
+  self.assertFalse(m['has_english']);self.assertEqual(m['publication_version'],'corpus-publication-v2-covered-exclusions')
