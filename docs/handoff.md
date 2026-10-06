@@ -1,5 +1,12 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-06 英文身份与忠实性收尾 v1（最新）
+
+接续a898e34，51片可读英文无_id，使用固定revision/分片/原始绝对行号的命名空间内部身份，另存正文SHA与缺失标记；中文7,373,300行、去重与断点不变。唯一逻辑写者已安全续建，完整库尚未发布，不切换日常kc-5894部分库。
+
+事实提示v9.12明确忠实性只比回答与提取目标，证据不支持属于事实判断；schema13/输出v9.11/support-v5/派生v2/一次Revision门控不改。678离线回归。原功率因数一次新run ab338c35…4请求50716token18.089秒，完整执行；因果组件faithful/证据不足，但repair=null，原引用条件仍未知，人工复核/部分，0Revision。自动修订仍未验收，不继续刷题。浏览器自动连接、原句与引用、旧新两结果重启零重发通过。详见[本轮说明](identity-fidelity-v1.md)及忽略目录identity-fidelity-v1审阅包。日常8765与后台构建继续；停止新增开发交所有者试用。
+
+
 ## 2026-10-06 审核接口 v2（最新）
 
 接续30e48a8，工作区干净/远端一致。source-condition-carriers-v1程序绑定既有完整quote作用域/range/version；support-relation-v5/schema13 v9.11仅选载体ID，不自由复写来源摘录，忠实同义条件/未知保留。independent-review-projection-v2保存原始支持/语义异议，先严格验证ID/类型/覆盖，再程序计算有效NotAssess/需复核；product-v1.4保留旧版。生成language-v8与日常Revision clean-body完整ID拒绝/有限重写，不删技术内容。4真实旧失败离线协议投影3有效复核/1缺项拒绝，不改旧响应、语义真值或失败。

@@ -70,7 +70,7 @@ def parse(value,inputs,delegate,*,strict_bindings=False,independent_judgments=Fa
     return replace(out,findings=tuple(findings),citation_reviews=citations)
 
 INDEPENDENT_JUDGMENTS='''
-Independent review projection v2: status is your RAW support judgment of the evaluated
+Independent review projection v3 (answer-target fidelity boundary): status is your RAW support judgment of the evaluated
 proposition. semantic_review and classification_issue are separate actual judgments.
 Do NOT change status to repeat a fidelity/category/stance-derived result. The program
 preserves raw support and all semantic objections, computes effective not_assessable
@@ -78,6 +78,17 @@ and review_required for unresolved objections; they cannot approve the answer.
 Still select only exact allowed IDs, cover every component, use the correct frozen
 component basis TYPES; illegal IDs/types/scope do not become legal via an objection.
 An insufficient status with a legitimate asserted/conditional disagreement is legal.
+Fidelity compares ONLY the delivered original ANSWER anchor with the frozen extracted
+proposition: stance, qualifiers, negation, quantities, causal subject/direction and obligation.
+It does NOT compare that proposition with Evidence. An incorrect answer can be faithfully
+extracted: evidence absence, factual overstatement or different SOURCE attribution alone
+belongs in status/support_relation, NOT fidelity. Say which ANSWER wording was changed
+or lost when disputed/uncertain; real uncertain equivalence remains uncertain. Never force
+faithful just to enable repair. An answer saying 'A may cause B', extracted as 'A may cause B',
+is faithful even if a source says C causes B; raw support may be insufficient/contradicted.
+A correct answer 'only under C, A causes B' extracted as unconditional 'A causes B' is
+unfaithful even if body Evidence supports the qualified original. A faithful correct target
+is assessed normally. These examples illustrate separation, not predetermined labels.
 Keep causal subject, qualifiers and every technical truth obligation. Never reclassify
 silently, invent metadata or turn uncertain semantics into confidence.
 '''

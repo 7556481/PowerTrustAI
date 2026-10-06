@@ -1,10 +1,39 @@
 """CPU streaming corpus builder. Resume by committed source row, publish explicitly."""
 import argparse,hashlib,json,sqlite3,time
-from contextlib import closing
+from contextlib import closing,contextmanager
 from pathlib import Path
 from rag.storage import KnowledgeStore,canonical,digest
 from rag.corpus_index import SCHEMA,add_record
 from rag.chinese_terms import VERSION,QUERY_VERSION,terms
+IDENTITY_VERSION='corpus-row-identity-v2'
+
+def source_identity(row,revision,shard,row_number):
+    original=row.get('_id')
+    missing=original is None or original==''
+    if not missing:return str(original),False
+    return 'industrycorpus2:row-v1:'+digest(canonical([revision,shard,row_number]).encode()),True
+
+@contextmanager
+def writer_lease(database):
+    # OS lock survives a stale filename and is released on process exit.
+    lock=Path(str(database)+'.writer-lock')
+    with lock.open('a+b') as f:
+        if not lock.stat().st_size:f.write(b'0');f.flush()
+        f.seek(0)
+        if __import__('os').name=='nt':
+            import msvcrt
+            msvcrt.locking(f.fileno(),msvcrt.LK_NBLCK,1)
+            try:yield
+            finally:f.seek(0);msvcrt.locking(f.fileno(),msvcrt.LK_UNLCK,1)
+        else:
+            import fcntl
+            fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB)
+            try:yield
+            finally:fcntl.flock(f,fcntl.LOCK_UN)
+
+def build(args):
+    with writer_lease(args.database):return _build(args)
+
 def sha(path):
     h=hashlib.sha256()
     with Path(path).open('rb') as f:
@@ -22,11 +51,18 @@ def initialize(base,destination,base_k):
                 con.execute('INSERT INTO corpus_native VALUES(?,?)',(i,e.provenance.fragment_id))
                 con.execute('INSERT INTO corpus_fts(rowid,terms) VALUES(?,?)',(-i,' '.join(terms(row['search_text']))))
             con.commit()
-def build(args):
+def _build(args):
     import pyarrow.parquet as pq
     initialize(args.base,args.database,args.base_knowledge)
     manifest=json.loads(Path(args.manifest).read_text());root=Path(args.shards)
-    con=sqlite3.connect(args.database,timeout=60);con.execute('PRAGMA journal_mode=WAL');con.execute('PRAGMA cache_size=-65536')
+    con=sqlite3.connect(args.database,timeout=60)
+    try:
+        return _build_connection(args,con,manifest,root)
+    finally:con.close()
+
+def _build_connection(args,con,manifest,root):
+    import pyarrow.parquet as pq
+    con.execute('PRAGMA journal_mode=WAL');con.execute('PRAGMA cache_size=-65536')
     con.execute('PRAGMA temp_store=FILE');started=time.time()
     for shard in manifest['files']:
         name=shard['path'];p=root/name
@@ -56,13 +92,16 @@ def build(args):
                     if i<resume:continue
                     text=row.get('text')
                     if not isinstance(text,str) or not text.strip():raise ValueError('Invalid body at '+name+':'+str(i))
-                    add_record(con,text=text,shard=name,shard_sha=expected,record_id=row['_id'],row_number=i,revision=manifest['revision'])
+                    record_id,missing=source_identity(row,manifest['revision'],name,i)
+                    add_record(con,text=text,shard=name,shard_sha=expected,record_id=record_id,row_number=i,revision=manifest['revision'])
+                    if missing:
+                        con.execute('INSERT OR IGNORE INTO corpus_identity VALUES(?,?,?,?,?,?,?)',(name,i,record_id,manifest['revision'],digest(text.encode()),1,IDENTITY_VERSION))
                 offset+=len(rows)
                 con.execute('INSERT OR REPLACE INTO corpus_progress VALUES(?,?,0)',(name,offset))
             if offset%4096==0:print(json.dumps({'shard':name,'committed_rows':offset,'seconds':round(time.time()-started,1)}),flush=True)
         with con:con.execute('INSERT OR REPLACE INTO corpus_progress VALUES(?,?,1)',(name,offset))
         print(json.dumps({'complete_shard':name,'rows':offset,'seconds':round(time.time()-started,1)}),flush=True)
-    con.execute('PRAGMA wal_checkpoint(TRUNCATE)');con.close()
+    con.execute('PRAGMA wal_checkpoint(TRUNCATE)')
 def publish(args):
     manifest=json.loads(Path(args.manifest).read_text())
     with closing(sqlite3.connect(args.database,timeout=60)) as con:

@@ -79,7 +79,7 @@ class ComponentFactory:
         INDEPENDENT += instructions(5)
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
         ORIGINAL=original_template(support_relation_checks=True,support_relation_version=5)
-        PROMPT_VERSION='evidence-verification-v9.11-condition-ids-independent-verdict'
+        PROMPT_VERSION='evidence-verification-v9.12-answer-target-fidelity-boundary'
         CONTRACT_VERSION='evidence-verification-output-v9.11'
         if self.config.fact_strategy=='per_claim_v1':PROMPT_VERSION+='-fact-delivery-v1'
         hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()

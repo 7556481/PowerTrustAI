@@ -14,6 +14,7 @@ from rag.contracts import RetrievalRequest,RetrievalResult,RetrievalHit
 SCORING='sqlite-fts5-bm25-jieba-electric-semantic-query-v2'
 _OPENED={}
 SCHEMA='''
+CREATE TABLE IF NOT EXISTS corpus_identity(shard TEXT,row_number INTEGER,internal_id TEXT NOT NULL,revision TEXT NOT NULL,body_sha256 TEXT NOT NULL,original_id_missing INTEGER NOT NULL,identity_version TEXT NOT NULL,PRIMARY KEY(shard,row_number));
 CREATE TABLE IF NOT EXISTS corpus_records(id INTEGER PRIMARY KEY, text_hash TEXT UNIQUE NOT NULL,
  raw_text TEXT NOT NULL, shard TEXT NOT NULL, shard_sha TEXT NOT NULL, record_id TEXT NOT NULL,
  row_number INTEGER NOT NULL, revision TEXT NOT NULL);
@@ -98,13 +99,15 @@ def corpus_evidence(store,fid,k,s):
     neighbors=con.execute('SELECT fragment_id,start FROM corpus_chunks WHERE record_id=? ORDER BY start',(row['record_id'],)).fetchall()
     pos=next(i for i,r in enumerate(neighbors) if r['fragment_id']==fid)
     url='https://huggingface.co/datasets/BAAI/IndustryCorpus2_electric_power_energy/blob/'+row['revision']+'/'+row['shard']
+    missing_identity=con.execute("SELECT 1 FROM sqlite_master WHERE name='corpus_identity'").fetchone() and con.execute('SELECT original_id_missing FROM corpus_identity WHERE shard=? AND row_number=?',(row['shard'],row['row_number'])).fetchone()
+    identity_warning=('original_id_missing','stable_internal_row_identity') if missing_identity else ()
     p=EvidenceProvenance(doc,row['record_hash'],row['shard_sha'],fid,k,row['start'],row['end'],
         row['raw_text'][:row['start']].count('\n')+1,row['raw_text'][:row['end']].count('\n')+1,
         source_uri=url,document_title='IndustryCorpus2 record '+row['original_id'],
         parser_version='parquet-record-character-v1',text_basis='dataset_record_original_text',
         previous_fragment_id=neighbors[pos-1]['fragment_id'] if pos else None,
         next_fragment_id=neighbors[pos+1]['fragment_id'] if pos+1<len(neighbors) else None,
-        quality_status='original_source_unverified',quality_warnings=('original_publisher_url_date_unknown','not_sole_authority_for_normative_settings_or_engineering_guarantees'))
+        quality_status='original_source_unverified',quality_warnings=('original_publisher_url_date_unknown','not_sole_authority_for_normative_settings_or_engineering_guarantees')+identity_warning)
     locator=f"shard={row['shard']};row={row['row_number']};record={row['original_id']};chars[{row['start']}:{row['end']})"
     return Evidence('e-'+digest(canonical([k,fid]).encode()),doc,row['record_hash'],locator,text,'industry_corpus_unverified',
         ('RAG explanation coverage; original source unverified; not sole normative/engineering authority',),p)
