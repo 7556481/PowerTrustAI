@@ -16,6 +16,7 @@
 <details><summary>可选：背景、审核范围与参考资料</summary><label for="task-scope">请求范围（审核仍检查回答是否越界）</label><select id="task-scope"><option value="conceptual">概念解释 / 资料转述</option><option value="plant_assessment">工程方案 / 地区设定 / 性能承诺</option></select><label for="context">补充背景 <span>可选</span></label><textarea id="context" rows="2" maxlength="10000"></textarea>
 <label for="requirements">回答要求（每行一条，最多 10 条）</label><textarea id="requirements" rows="2" placeholder="例如：只作概念解释，简短回答"></textarea><label for="reference-label">参考文本标签</label><input id="reference-label" maxlength="200" placeholder="用户提供的参考"><label for="reference">参考文本（未核实来源）</label><textarea id="reference" rows="3" maxlength="20000"></textarea></details>
 <p class="hint">数值换算及工程输入可通过API的结构化engineering_context提交；本界面不虚构参数。真实模式提交会调用付费模型；不自动重发任务。</p>
+<label><input id="nli-enabled" type="checkbox" disabled> 本地NLI第二判断（仅诊断，默认关闭）</label><p id="nli-availability" class="hint">连接后核查服务端可用性。</p>
 <button id="submit" type="submit" class="primary" disabled>提交任务</button>
 </form></section>
 <section class="panel"><h2>恢复与历史</h2><form id="lookup-form"><label for="run-id">run_id</label><div class="inline"><input id="run-id" maxlength="150" required spellcheck="false" placeholder="粘贴已提交的任务 ID"><button id="lookup" type="submit" class="quiet" disabled>查看</button></div></form><button id="history-refresh" type="button" class="quiet">刷新运行列表</button><div id="history" class="history"></div><button id="history-next" type="button" class="quiet" hidden>下一页</button></section>

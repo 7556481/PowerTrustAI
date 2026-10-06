@@ -70,7 +70,10 @@ def publish(args):
         con.execute("INSERT INTO corpus_fts(corpus_fts) VALUES('integrity-check')");con.commit()
         con.execute('BEGIN')
         progress=list(con.execute('SELECT shard,next_row,complete FROM corpus_progress ORDER BY shard'))
-        complete=len(progress)==len(manifest['files']) and all(r[2]==1 for r in progress)
+        excluded=list(con.execute('SELECT * FROM corpus_failures ORDER BY shard'))
+        expected={f['path']:f['lfs']['oid'] for f in manifest['files']}
+        verified_excluded={r[0] for r in excluded if r[0] in expected and r[1]==expected[r[0]] and r[3]=='verified_bytes_unreadable_parquet'}
+        complete=bool(progress) and any(r[2]==1 for r in progress) and len(progress)==len(expected) and {r[0] for r in progress}==set(expected) and all(r[2]==1 or r[2]==-1 and r[0] in verified_excluded for r in progress)
         if not complete and not args.allow_partial:raise ValueError('Full corpus incomplete; --allow-partial explicitly labels coverage')
         if Path(args.publish).exists():raise ValueError('Publication is immutable; choose a new file')
         root=hashlib.sha256()
@@ -79,7 +82,7 @@ def publish(args):
               'query_version':QUERY_VERSION,
               'base_knowledge_version':args.base_knowledge,'chunks_root':root.hexdigest(),'complete':complete,
               'progress':progress,'records':con.execute('SELECT count(*) FROM corpus_records').fetchone()[0],
-              'excluded_shards':list(con.execute('SELECT * FROM corpus_failures ORDER BY shard')),
+              'excluded_shards':excluded,'coverage_definition':'all_manifest_shards_accounted_valid_rows_built_verified_unreadable_excluded',
               'chunks':con.execute('SELECT count(*) FROM corpus_chunks').fetchone()[0],
               'duplicates':con.execute('SELECT count(*) FROM corpus_duplicates').fetchone()[0],
               'has_english':any(r[0].startswith('english/') for r in progress),

@@ -42,6 +42,7 @@ class ExistingCitation(StrictModel):
     fragment_ids:list[str]=Field(min_length=1)
 
 class Submit(StrictModel):
+    local_nli_enabled:bool=False
     mode:Literal['question_answer','assess_existing']
     question:str=Field(min_length=1,max_length=8000)
     user_context:str=Field(default='',max_length=10000)
@@ -160,6 +161,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
         except ConfigurationError:ready=False;reason='CONFIGURATION_UNAVAILABLE'
         return {'status':'degraded' if service.storage_fault or not ready else 'ready','health_model_requests':0,
             'local_session_version':'localhost-launch-session-v1',
+            'local_nli':service.nli_capability(),
             'profile':config.profile,'configuration_ready':ready,'reason':reason,
             'retrieval_mode':config.retrieval_mode if config.profile=='real' else 'none',
             'fact_retrieval_strategy':config.fact_strategy,'knowledge_version':config.knowledge_version if config.profile=='real' else None,
@@ -239,7 +241,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
                         return tuple(index.evidence(f,config.knowledge_version) for f in ids)
                 indexed=await asyncio.to_thread(resolve)
             rid=await svc(request).submit(body.task(indexed),answer_requirements=tuple(body.answer_requirements),
-                indexed_reference_ids=tuple(e.evidence_id for e in indexed))
+                indexed_reference_ids=tuple(e.evidence_id for e in indexed),nli_enabled=body.local_nli_enabled)
         except InputError as exc:
             if str(exc).startswith('Complete citation scopes exceed configured capacity; citation_indexes='):
                 raise HTTPException(422,detail={'code':'REVIEW_MESSAGE_CAPACITY_EXCEEDED',

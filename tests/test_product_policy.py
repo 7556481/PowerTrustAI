@@ -85,6 +85,10 @@ class VerifiedPDFCacheTests(unittest.TestCase):
     with self.assertRaises(ContractError):s.evidence(fid,ing.knowledge_version)
 class ProductionShapeTests(unittest.TestCase):
  def test_actual_schema13_and_domain4_harness_can_auto_pass(self):
+  self.production_shape(4)
+ def test_actual_schema13_domain5_delivers_tools_and_reviews_gaps(self):
+  self.production_shape(5)
+ def production_shape(self,protocol):
   import json
   from agents.evidence_verification import ModelEvidenceVerificationAgent
   from agents.power_domain_review import ModelPowerDomainReviewAgent
@@ -101,6 +105,7 @@ class ProductionShapeTests(unittest.TestCase):
   class DomainAdapter:
    async def complete(self,r):
     v={'checks':[{'check_id':key,'status':'no_issue' if key=='analysis_scope' else 'not_applicable','claim_ids':[],'quote_ids':[],'basis_kind':'engineering_rule','rationale':'synthetic_fixture conceptual bounded check; no operations or quantities','missing_prerequisites':[]} for key in ('answer_units','analysis_scope','operating_prerequisites')]}
+    if protocol==5:v['missing_information_review']=[]
     return ModelResponse(json.dumps(v),r.model_id,finish_reason='stop')
   with tempfile.TemporaryDirectory() as t:
    root=Path(t);f=root/'fixture.md';f.write_text('Alpha supports voltage.','utf-8');db=root/'k.sqlite3'
@@ -109,7 +114,7 @@ class ProductionShapeTests(unittest.TestCase):
    try:
     h=make_fake_harness(FakeConfig(text='Alpha supports voltage.'));h.extractor=Extractor();h.retriever=retriever;h.policy=ProductAuditPolicy()
     h.verification=ModelEvidenceVerificationAgent(FactAdapter(),ModelSettings('synthetic_fixture'),schema_version=13)
-    h.domain_review=ModelPowerDomainReviewAgent(DomainAdapter(),ModelSettings('synthetic_fixture'),protocol_version=4)
+    h.domain_review=ModelPowerDomainReviewAgent(DomainAdapter(),ModelSettings('synthetic_fixture'),protocol_version=protocol)
     result=asyncio.run(h.run(TaskRequest('shape',TaskMode.QUESTION_ANSWER,'synthetic_fixture','Alpha voltage',engineering_context=EngineeringContext()),RunBudget(),knowledge_version=k))
     self.assertEqual(result.report.decision.kind,DecisionKind.PASS,result.termination_reason)
     self.assertEqual(result.report.decision.execution_integrity,'complete')

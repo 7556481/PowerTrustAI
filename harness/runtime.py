@@ -406,7 +406,7 @@ class OfflineHarness:
                 from dataclasses import fields
                 if getattr(self.verification,'schema_version',None) in (9,10,11,12,13):
                     v_input=ReliabilityVerificationInput(**{f.name:getattr(v_input,f.name) for f in fields(v_input)},tool_results=tuple(current_tools),delivery_summary=__import__('json').dumps(__import__('dataclasses').asdict(vd.record)) if retrieval else '',fact_retrieval_bindings=vd.record.fact_bindings if retrieval else ())
-                if getattr(self.domain_review,'protocol_version',None) in (3,4):
+                if getattr(self.domain_review,'protocol_version',None) in (3,4,5):
                     d_input=ReliabilityDomainInput(**{f.name:getattr(d_input,f.name) for f in fields(d_input)},tool_results=tuple(current_tools),delivery_summary=__import__('json').dumps(__import__('dataclasses').asdict(dd.record)) if retrieval and not evidence_only else '')
 
                 async def review(component, agent, inputs, allowed, is_verification, retrieval_issue):

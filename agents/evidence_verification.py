@@ -297,7 +297,7 @@ class ModelEvidenceVerificationAgent:
         self.schema_version = schema_version
         self.citation_workload = citation_workload
         self.support_relation_checks = support_relation_checks
-        require(support_relation_version in (1,2,3), "Unknown support relation version")
+        require(support_relation_version in (1,2,3,4), "Unknown support relation version")
         self.support_relation_version = support_relation_version
         self.client = ModelClient(adapter, settings)
         self.diagnostics = None if diagnostic_dir is None else ResponseDiagnostics(diagnostic_dir)

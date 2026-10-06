@@ -52,8 +52,8 @@ class WarrantTests(unittest.TestCase):
     return ModelResponse(json.dumps(v),r.model_id,finish_reason='stop')
   async def run():
    with model_scope(ModelBudget(2)):
-    return await ModelEvidenceVerificationAgent(Adapter(),ModelSettings('synthetic_fixture'),schema_version=13,support_relation_checks=True,support_relation_version=3).run(inp)
-  out=asyncio.run(run());self.assertFalse(out.execution_issues);self.assertEqual(len(seen),2);self.assertIn('source-support-relation-v3',out.findings[0].component_reviews[0].rationale)
+    return await ModelEvidenceVerificationAgent(Adapter(),ModelSettings('synthetic_fixture'),schema_version=13,support_relation_checks=True,support_relation_version=4).run(inp)
+  out=asyncio.run(run());self.assertFalse(out.execution_issues);self.assertEqual(len(seen),2);self.assertIn('source-support-relation-v4',out.findings[0].component_reviews[0].rationale)
   from backend.assembly import ComponentFactory
   from backend.config import ServiceConfig
   manifest=ComponentFactory(ServiceConfig(profile='synthetic_fixture')).manifest(None)

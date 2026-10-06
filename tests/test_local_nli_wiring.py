@@ -20,7 +20,7 @@ from tests.test_fact_rereview_v3 import response
 from tests.test_local_nli import FakeProcess
 
 class WiringTests(unittest.TestCase):
- def exercise(self,kind,*,enabled=True,fail=False):
+ def exercise(self,kind,*,enabled=True,fail=False,selection=None):
   with tempfile.TemporaryDirectory() as directory:
    root=Path(directory);doc=root/'synthetic_fixture.md';doc.write_text('Alpha supports voltage.\n',encoding='utf-8')
    db=root/'knowledge.sqlite3'
@@ -50,17 +50,20 @@ class WiringTests(unittest.TestCase):
    with patch('services.local_nli.LocalNLI.start',new=start),TestClient(create_app(config,factory=Factory(config),access_token='synthetic-only')) as client:
     header={'Authorization':'Bearer synthetic-only'}
     text='Alpha supports voltage and 5 MW equals 5 MVA.' if kind=='mixed' else 'Alpha supports voltage.'
-    submit=client.post('/runs',headers=header,json={'mode':'assess_existing','question':'synthetic_fixture concept review','existing_answer':text,'references':[{'label':'synthetic_fixture','text':'Alpha supports voltage.'}]})
+    submit=client.post('/runs',headers=header,json={'local_nli_enabled':enabled if selection is None else selection,'mode':'assess_existing','question':'synthetic_fixture concept review','existing_answer':text,'references':[{'label':'synthetic_fixture','text':'Alpha supports voltage.'}]})
     self.assertEqual(submit.status_code,202);rid=submit.json()['run_id']
     for _ in range(200):
      state=client.get('/runs/'+rid,headers=header).json()
      nli=client.get('/runs/'+rid+'/nli',headers=header).json()
-     if state['status'] not in ('queued','running') and (nli['records'] or not enabled):break
+     if state['status'] not in ('queued','running') and (nli['records'] or not (enabled if selection is None else selection)):break
      time.sleep(.01)
     result=client.get('/runs/'+rid+'/result',headers=header).json()
     diag=client.get('/runs/'+rid+'/nli',headers=header).json()
    retriever.close()
    return result,diag
+ def test_explicit_off_task_uses_no_diagnostics_on_enabled_service(self):
+  result,diag=self.exercise('body',enabled=True,selection=False)
+  self.assertFalse(result['configuration']['local_nli_diagnostic']['enabled']);self.assertFalse(diag['enabled']);self.assertEqual(diag['records'],[])
  def test_actual_singleton_harness_output_saved_api_disagreement(self):
   result,diag=self.exercise('body')
   self.assertEqual(result['decision']['kind'],'review_required')

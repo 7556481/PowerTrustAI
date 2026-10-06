@@ -6,8 +6,9 @@ def repair_proposals(finding):
     rationales=[r.rationale for r in rows if getattr(r,'status',None)==finding.status] if rows else [finding.rationale]
     proposals=[]
     for rationale in rationales:
-        if MARKER not in rationale:return ()
-        try:relation=json.loads(rationale.rsplit(MARKER,1)[1])
+        marker=next((m for m in (MARKER,' [source-support-relation-v4] ') if m in rationale),None)
+        if marker is None:return ()
+        try:relation=json.loads(rationale.rsplit(marker,1)[1])
         except (ValueError,TypeError):return ()
         repair=relation.get('repair')
         if not isinstance(repair,dict) or not all(isinstance(repair.get(k),str) and repair[k].strip() for k in ('replacement','source_quote_id','source_excerpt')):return ()
@@ -16,3 +17,23 @@ def repair_proposals(finding):
         if not any(repair['source_excerpt'] in t for t in excerpts):return ()
         proposals.append(repair)
     return tuple(proposals)
+
+def eligible_repairs(finding):
+    """At least one faithful adverse component; other gaps remain untouched."""
+    from dataclasses import replace
+    rows=getattr(finding,'component_reviews',())
+    if not rows:return repair_proposals(finding)
+    proposals=[]
+    for row in rows:
+        if row.status.value not in ('insufficient_evidence','contradicted'):continue
+        if row.classification_issue or row.fidelity_status!='faithful':continue
+        proposals.extend(repair_proposals(replace(finding,status=row.status,component_reviews=(row,))))
+    return tuple(proposals)
+
+GAP_MARKER=' [missing-information-applicability-v1] '
+def missing_information_review(findings):
+    for finding in findings:
+        if finding.category=='analysis_scope' and GAP_MARKER in finding.rationale:
+            try:return json.loads(finding.rationale.rsplit(GAP_MARKER,1)[1])
+            except (ValueError,TypeError):return None
+    return None

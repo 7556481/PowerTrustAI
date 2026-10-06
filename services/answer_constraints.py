@@ -30,4 +30,4 @@ def validate_length(answer, question, requirements=(), *, stage='generation', pa
 def product_default_limit(request):
     """Bound the already-declared concise Chinese concept UX; no evidence truncation."""
     context=getattr(request,'engineering_context',None)
-    return 300 if context is not None and context.goal=='conceptual' and re.search(r'[\u4e00-\u9fff]',request.question) else None
+    return 300 if context is not None and context.goal in ('conceptual','plant_assessment') and re.search(r'[\u4e00-\u9fff]',request.question) else None

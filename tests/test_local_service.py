@@ -156,7 +156,7 @@ class AssemblyTests(unittest.TestCase):
                 self.assertEqual(factory.preflight(),k);bundle=factory.create('fixture',lambda s:None)
                 h=bundle.harness
                 self.assertEqual(h.verification.schema_version,13);self.assertEqual(h.extractor.protocol_version,7)
-                self.assertEqual(h.generation.schema_version,3);self.assertEqual(h.domain_review.protocol_version,4)
+                self.assertEqual(h.generation.schema_version,3);self.assertEqual(h.domain_review.protocol_version,5)
                 self.assertEqual(h.revision.protocol_version,2);self.assertIsNotNone(h.unit_tool)
                 self.assertEqual(adapter.call_count,2);bundle.close()
 

@@ -1,5 +1,10 @@
 # 文档索引
 
+## 2026-10-06 首版收尾（最新）
+
+[first-release-v1](first-release-v1.md)：任务范围缺口/部分可修复项、条件同义与精确摘录、protocol5接线失败及修复、实际未完成项、逐任务NLI与跳过/重启、后台构建和覆盖核算。私有统一包在data/runtime_local/first-release-v1；真实数据不入Git。源码policy/runtime、domain/generation/support_relation、backend服务/API/开关和corpus_build。
+
+
 - [电力大语料、中文FTS与整句支持 v1](industry-corpus-v1.md)：完整字节下载、3片格式缺口、可恢复构建/明确部分快照、固定真实对照与剩余语义限制。
 
 ## 2026-10-06 基础概念覆盖（当前）

@@ -96,7 +96,7 @@ class FrozenStanceTests(unittest.TestCase):
         manifest=ComponentFactory(ServiceConfig(profile='synthetic_fixture')).manifest(None)
         from services.support_relation import instructions
         daily=seen[0].messages[0].content.replace('Optional classification_issue EXACT suggested_category,rationale.',
-            'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')+instructions(3)
+            'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')+instructions(4)
         self.assertEqual(manifest['template_sha256']['independent'],hashlib.sha256(daily.encode()).hexdigest())
         self.assertEqual(json.loads(seen[1].messages[-1].content)['validation_error']['required_status'],'not_assessable')
 

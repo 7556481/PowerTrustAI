@@ -114,3 +114,18 @@ class CorpusTests(unittest.TestCase):
   with patch('rag.corpus_download.build_opener',side_effect=AssertionError('Offline fixture must not access network')):
    result=download(entry,folder,'r'*40,None)
   self.assertEqual(result['status'],'verified');self.assertTrue(result['reused'])
+ @unittest.skipUnless(importlib.util.find_spec('pyarrow'),'Optional Parquet dependency not installed')
+ def test_publication_accounts_for_valid_and_verified_excluded_shards(self):
+  import pyarrow as pa,pyarrow.parquet as pq
+  from types import SimpleNamespace
+  from rag.corpus_build import build,publish,sha
+  folder=Path(self.tmp.name);shards=folder/'mixed';shards.mkdir()
+  valid=shards/'good.parquet';pq.write_table(pa.table({'_id':[1],'text':['Synthetic_fixture: constant pressure is required.']}),valid)
+  bad=shards/'bad.parquet';bad.write_bytes(b'PAR1synthetic_fixture_bad_footer')
+  manifest=folder/'mixed.json';manifest.write_text(json.dumps({'revision':'r'*40,'files':[{'path':p.name,'size':p.stat().st_size,'lfs':{'oid':sha(p)}} for p in (valid,bad)]}))
+  args=SimpleNamespace(base=str(self.p),database=str(folder/'mixed.sqlite3'),base_knowledge=self.base,manifest=str(manifest),shards=str(shards),wait=False,publish=str(folder/'mixed-published.sqlite3'),allow_partial=False)
+  with closing(sqlite3.connect(self.p)) as con:base_records=con.execute('SELECT count(*) FROM corpus_records').fetchone()[0]
+  build(args);publish(args)
+  m=json.loads(Path(args.publish+'.manifest.json').read_text(encoding='utf-8'))
+  self.assertTrue(m['complete']);self.assertEqual(m['records'],base_records+1);self.assertEqual(len(m['excluded_shards']),1)
+  self.assertIn('verified_unreadable_excluded',m['coverage_definition'])

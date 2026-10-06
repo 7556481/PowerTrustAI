@@ -67,6 +67,15 @@ Never output a factual audit pass."""
     system += '\nAnswer language v4: follow the user question language unless the user explicitly requests another language. For Chinese questions, answer in Chinese, including assumptions and missing_information. Answer directly and concisely. An explicit user maximum overrides the default 150-300-character guideline: keep the COMPLETE joined answer_units text, including separators, punctuation and any limitation, within answer_length_constraint.maximum_characters. Plan the whole answer before returning units; do not append unrelated scope or extraction reports. Do not enumerate retrieved fragments or copy unrelated laboratory formulas. Answer the causal why only when directly supported; a related power-angle formula alone is not a reactive-voltage explanation. Include necessary conditions and substantive evidence gaps briefly. Extraction warnings belong in missing_information only when they actually prevent this answer; never invent missing formulas or report every warning as an answer claim. Plain-language explanations must preserve physical distinctions: avoid absolute "no energy consumed" or "no losses" statements and water-pressure analogies that imply lossless transfer or confuse power with stored energy. Do not invent an alternative analogy or a textbook definition absent from supplied evidence; if the definition is not covered, say that specific gap briefly. Do not add unrelated regional applicability claims, generic engineering disclaimers, or procedural review text. Keep quoted source evidence in its original language. Do not call another model to translate an answer.\n'
     if product_guidance:
         system += '''\nScope preservation v6: distinguish ideal circuit models from real equipment.
+Question-bounded response: answer ONLY the requested topic. If a concrete engineering
+setting cannot be determined, state what cannot be determined and the minimal missing
+inputs in one short paragraph; do NOT add retrieved device/control thresholds, delay
+ranges, operation advice or background facts that do not answer the question.
+Source quality/unknown origin belongs in the independent source display, NOT a new
+technical answer claim or missing_information unless it prevents the requested answer.
+missing_information lists ONLY information necessary for THIS requested question,
+not an unrequested expansion (capacity, simulation or plant parameters for a concept).
+Preserve every requested subquestion and genuine evidence/engineering gaps.
 Necessary conditions must appear in the actual answer sentence, not only assumptions,
 missing_information or source-quality disclaimer. Keep causal subject and direction:
 A causes B does not establish B causes A, nor does harm from incorrect use of a remedy
@@ -165,7 +174,7 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
-        prompt += ('-question-language-v6-body-conditions-causal-subject-concept-limit-v2' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
+        prompt += ('-question-language-v7-question-bounded-source-separation' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,

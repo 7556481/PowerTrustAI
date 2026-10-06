@@ -78,7 +78,7 @@ class RepairPolicy(unittest.TestCase):
   f=DomainFinding('missing',round.answer.answer_id,1,(),Severity.NONE,'engineering_inputs','Missing plant model',missing_prerequisites=('model',),check_status='not_assessable')
   d=replace(round.domain_review,findings=(f,))
   request=TaskRequest('fixture',TaskMode.QUESTION_ANSWER,'synthetic_fixture','Plant performance',engineering_context=EngineeringContext(goal='plant_assessment'))
-  decision=h.policy.decide_context(round.verification,d,RunBudget(),0,request=request,answer=round.answer,claims=round.verification.claims,extraction=round.extraction,issues=(),retrieval=None)
+  decision=ProductAuditPolicy(synthetic_fixture=True,version='product-decision-v1.2').decide_context(round.verification,d,RunBudget(),0,request=request,answer=round.answer,claims=round.verification.claims,extraction=round.extraction,issues=(),retrieval=None)
   self.assertEqual(decision.kind,DecisionKind.NEEDS_INFORMATION)
 class PresentationTests(unittest.TestCase):
  def test_unresolved_uses_actual_current_sentence_not_generic_engineering(self):

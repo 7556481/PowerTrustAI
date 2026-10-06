@@ -75,11 +75,11 @@ class ComponentFactory:
         from services.support_relation import instructions
         INDEPENDENT=INDEPENDENT.replace('Optional classification_issue EXACT suggested_category,rationale.',
             'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')
-        INDEPENDENT += instructions(3)
+        INDEPENDENT += instructions(4)
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
-        ORIGINAL=original_template(support_relation_checks=True,support_relation_version=3)
-        PROMPT_VERSION='evidence-verification-v9.9-answer-conditions-repair'
-        CONTRACT_VERSION='evidence-verification-output-v9.9'
+        ORIGINAL=original_template(support_relation_checks=True,support_relation_version=4)
+        PROMPT_VERSION='evidence-verification-v9.10-semantic-body-conditions'
+        CONTRACT_VERSION='evidence-verification-output-v9.10'
         if self.config.fact_strategy=='per_claim_v1':PROMPT_VERSION+='-fact-delivery-v1'
         hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
             for name in ('core','agents','harness','tools','services','rag','model_adapter','backend') for p in (ROOT/name).glob('*.py')}
@@ -90,13 +90,13 @@ class ComponentFactory:
             'components':'simulated_synthetic_fixture' if self.config.profile=='synthetic_fixture' else 'real_model_with_demo_domain_rules',
             'model_id':os.environ.get('DEEPSEEK_MODEL_ID') if self.config.profile=='real' else None,
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
-            'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':13,'domain_review':4,'revision':2},
+            'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':13,'domain_review':5,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
             'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-category-clarity-v1' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
-              'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.1-applicability','revision':REVISION_PROMPT_VERSION},
+              'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.2-question-gap-applicability','revision':REVISION_PROMPT_VERSION},
             'contracts':{'generation':'generation-output-v3','extraction':'atomic-claims-v7','verification':CONTRACT_VERSION,
-              'domain':'power-domain-review-output-v3.1','revision':'revision-output-v2'},
-            'rules':'power-demo-rules-v1.1','policy':'product-decision-v1.2' if self.config.decision_policy=='product-v1' else 'limited-repair-policy-v1','unit_tool':'scalar-si-conversion-v2',
+              'domain':'power-domain-review-output-v3.2','revision':'revision-output-v2'},
+            'rules':'power-demo-rules-v1.1','policy':'product-decision-v1.3' if self.config.decision_policy=='product-v1' else 'limited-repair-policy-v1','unit_tool':'scalar-si-conversion-v2',
             'retrieval':'existing BM25 with default RetrievalSettings and adjacent-context order',
             'fact_retrieval_strategy':self.config.fact_strategy,
             'fact_delivery_contract':'fact-evidence-delivery-v1' if self.config.fact_strategy=='per_claim_v1' else None,
@@ -121,12 +121,12 @@ class ComponentFactory:
                 manifest['retrieval']='immutable SQLite FTS5 postings; versioned Chinese segmentation/topic query; strict hit replay'
                 manifest['performance_profile']='build/publication FTS integrity; open structural checks; immutable-file stamp; strict per-hit original/span verification; no full snapshot query scan'
         manifest['generation_query_conversion']='generation-cross-language-query-v1: once after successful empty BM25; Chinese question / fixed English body available (mixed-snapshot-gate-v2)'
-        manifest['prompts']['generation'] += ('-question-language-v6-body-conditions-causal-subject-concept-limit-v2' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
+        manifest['prompts']['generation'] += ('-question-language-v7-question-bounded-source-separation' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
         if self.config.profile=='synthetic_fixture':
             manifest['available_real_protocols']=manifest.pop('protocols')
             manifest['protocols']={k:'fake-v1' for k in ('generation','claim_extraction','evidence_verification','domain_review','revision')}
             manifest['prompts']={};manifest['contracts']={};manifest['model_settings']=None
-            manifest['rules']='offline-rules-v1';manifest['policy']='product-decision-v1.2-synthetic_fixture' if self.config.decision_policy=='product-v1' else 'offline-policy-v1';manifest['unit_tool']=None
+            manifest['rules']='offline-rules-v1';manifest['policy']='product-decision-v1.3-synthetic_fixture' if self.config.decision_policy=='product-v1' else 'offline-policy-v1';manifest['unit_tool']=None
             manifest['retrieval']='none: synthetic_fixture only'
             manifest['configured_retrieval_mode']=manifest['retrieval_mode']
             manifest['retrieval_mode']='none';manifest['scoring_method']=None
@@ -166,8 +166,8 @@ class ComponentFactory:
                 corpus=seal(store,self.config.knowledge_version)
                 corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=3),
-                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=4),
+                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=4),
+                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,

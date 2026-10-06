@@ -74,6 +74,17 @@ This is type/shape guidance only, NEVER use synthetic example words as actual ev
 
 def instructions(version=1):
     if version==1:return INSTRUCTIONS
+    if version==4:
+        old=instructions(3).replace('Source support relation v3','Source support relation v4').replace('EXACT {source_quote_id,source_condition,answer_quote}','EXACT {source_quote_id,source_condition,answer_quote,relationship,reason}')
+        start=old.index('Its literal words must also occur');end=old.index('An assumption,',start)
+        old=old[:start]+'''Faithful paraphrases are permitted; do not require copying source words.
+relationship is exactly preserved, missing or uncertain; reason explains semantic
+equivalence of the ACTUAL body quote and source condition (not shared topic alone).
+Preserve negation, quantifiers, necessary/sufficient direction, causal subject,
+units and scope. If uncertain, cannot certify supported. source_condition remains
+an EXACT source excerpt; answer_quote remains an EXACT answer excerpt. Never use
+reviewer explanation as body qualification.\n'''+old[end:]
+        return old.replace('"answer_quote":""}', '"answer_quote":"","relationship":"missing","reason":"Condition absent from answer"}')
     if version==3:return instructions(2).replace('source_kind,quote_ids,explanation,whole_claim_supported,missing_clauses,conditions_preserved,authority_scope}', 'source_kind,quote_ids,explanation,whole_claim_supported,missing_clauses,conditions_preserved,authority_scope,answer_conditions,causal_direction_preserved,repair}')+V3_INSTRUCTIONS
     return INSTRUCTIONS.replace('{source_kind,quote_ids,explanation}',
         '{source_kind,quote_ids,explanation,whole_claim_supported,missing_clauses,conditions_preserved,authority_scope}')+V2_INSTRUCTIONS
@@ -124,7 +135,7 @@ def normalize(value,group,scopes,version=1,answer=None,claims=()):
             p=path+'.support_relation'
             required={'source_kind','quote_ids','explanation'}
             if version>=2:required|={'whole_claim_supported','missing_clauses','conditions_preserved','authority_scope'}
-            if version==3:required|={'answer_conditions','causal_direction_preserved','repair'}
+            if version>=3:required|={'answer_conditions','causal_direction_preserved','repair'}
             if not ec.fields(relation,required,set(),p):continue
             if version>=2:
                 ec.check(type(relation['whole_claim_supported']) is bool,p+'.whole_claim_supported','boolean_required')
@@ -139,7 +150,7 @@ def normalize(value,group,scopes,version=1,answer=None,claims=()):
                         selected={getattr(scope.by_wire[q],'evidence_id',None) for q in ids if isinstance(q,str) and q in scope.by_wire}
                         metadata=[m for m in getattr(scope,'metadata',[]) if m.get('evidence_id') in selected]
                         ec.check(not metadata or not all(m.get('source_type')=='industry_corpus_unverified' for m in metadata),p,'unverified_corpus_not_sole_normative_or_engineering_authority')
-            if version==3:
+            if version>=3:
                 body=''
                 if answer is not None:
                     if group=='citation_reviews':
@@ -153,15 +164,22 @@ def normalize(value,group,scopes,version=1,answer=None,claims=()):
                 ec.check(type(relation['causal_direction_preserved']) is bool,p,'causal_boolean_required')
                 for ci,pair in enumerate(pairs if isinstance(pairs,list) else []):
                     cp=p+'.answer_conditions['+str(ci)+']'
-                    if not ec.fields(pair,{'source_quote_id','source_condition','answer_quote'},set(),cp):continue
+                    pair_fields={'source_quote_id','source_condition','answer_quote'}
+                    if version==4:pair_fields|={'relationship','reason'}
+                    if not ec.fields(pair,pair_fields,set(),cp):continue
                     q=pair['source_quote_id'];src=pair['source_condition'];dst=pair['answer_quote']
                     ec.check(type(q) is str and q in ids and scope is not None and q in scope.by_wire,cp,'bound_source_condition_required')
                     ec.check(type(src) is str and bool(src.strip()) and scope is not None and type(q) is str and q in scope.by_wire and src in scope.by_wire[q].text,cp,'literal_source_condition_required')
                     ec.check(type(dst) is str and (dst=='' or dst in body),cp,'condition_must_be_in_evaluated_answer_body')
                     if row.get('status')=='supported':
                         ec.check(type(dst) is str and bool(dst.strip()),cp,'supported_answer_condition_missing')
-                        literal=lambda x:re.sub(r'[\W_]+','',x).casefold()
-                        ec.check(type(src) is str and type(dst) is str and bool(literal(src)) and literal(src) in literal(dst),cp,'source_qualifier_words_must_be_in_answer_condition')
+                        if version==3:
+                            literal=lambda x:re.sub(r'[\W_]+','',x).casefold()
+                            ec.check(type(src) is str and type(dst) is str and bool(literal(src)) and literal(src) in literal(dst),cp,'source_qualifier_words_must_be_in_answer_condition')
+                        else:ec.check(pair['relationship']=='preserved',cp,'uncertain_or_missing_condition_cannot_be_supported')
+                    if version==4:
+                        ec.check(pair['relationship'] in ('preserved','missing','uncertain'),cp,'known_condition_relationship_required')
+                        ec.check(type(pair['reason']) is str and bool(pair['reason'].strip()),cp,'condition_equivalence_reason_required')
                 if row.get('status')=='supported':ec.check(relation['causal_direction_preserved'] is True,p,'causal_subject_or_direction_changed')
                 repair=relation['repair']
                 if repair is not None and ec.fields(repair,{'replacement','source_quote_id','source_excerpt'},set(),p+'.repair'):

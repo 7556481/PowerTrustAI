@@ -17,7 +17,7 @@ class ApplicationService:
         self.queue=asyncio.Queue(config.queue_capacity);self.lock=asyncio.Lock()
         self.worker=None;self.active=None;self.active_bundle=None;self.closing=False;self.storage_fault=False
         self.volatile_errors={}
-        self.nli=None;self.nli_tasks=set();self.nli_errors={}
+        self.nli=None;self.nli_tasks=set();self.nli_errors={};self.nli_start_lock=asyncio.Lock()
     async def start(self):
         if hasattr(self.factory,'initialize_retrieval'):self.factory.initialize_retrieval()
         self.store.recover();self.worker=asyncio.create_task(self._worker())
@@ -36,8 +36,31 @@ class ApplicationService:
         self.store.recover() # queued/running become interrupted; no auto-enqueue
         if hasattr(self.factory,'close'):await self.factory.close()
 
-    async def submit(self,request,*,answer_requirements=(),indexed_reference_ids=()):
+    def nli_capability(self):
+        paths=(self.config.nli_python,self.config.nli_checkpoint,self.config.nli_profile)
+        configured=all(paths) and paths[0].is_file() and paths[1].is_dir() and paths[2].is_file()
+        failed=bool(self.nli and self.nli.failure)
+        loaded=bool(self.nli and self.nli.identity and not failed)
+        return {'configured':bool(configured),'available':bool((configured or loaded) and not failed),
+            'loaded':bool(self.nli and self.nli.identity and not failed),'authority':'diagnostic_only',
+            'default_enabled':False,'strategy':self.config.fact_strategy,
+            'note':'本地模型加载或推理失败，当前不可用；原审核仍可关闭NLI继续。' if failed else ('aggregate缺逐组件交付证明时跳过；不为NLI切换默认检索。' if self.config.fact_strategy=='aggregate' else '仅诊断有完整逐组件交付证明的正文；混合对象与超长输入跳过。') if configured else '服务端尚未配置可用的本地模型、独立解释器与profile。'}
+
+    async def ensure_nli(self):
+        async with self.nli_start_lock:
+            if self.nli is None:
+                from services.local_nli import LocalNLI
+                self.nli=LocalNLI(self.config);await self.nli.start()
+            return bool(self.nli.identity and not self.nli.failure)
+
+    async def submit(self,request,*,answer_requirements=(),indexed_reference_ids=(),nli_enabled=None):
         validate_request(request,self.config.budget)
+        selected=self.config.nli_enabled if nli_enabled is None else nli_enabled
+        if type(selected) is not bool:raise ValueError('NLI selection must be boolean')
+        if selected and nli_enabled is not None:
+            from core.validation import InputError
+            if not self.nli_capability()['available']:raise InputError('Local NLI not configured/available; disable the optional selection')
+            await self.ensure_nli() # A load failure is diagnostic only; the audit still runs.
         knowledge=self.factory.preflight()
         if self.config.profile=='real' and request.existing_answer and request.existing_answer.citations:
             from agents.verification_contract_v10_batched import citation_payload,original_template,CONTRACT_VERSION
@@ -56,6 +79,8 @@ class ApplicationService:
             rid=uuid4().hex;manifest=self.factory.manifest(knowledge)
             manifest['answer_requirements']=answer_requirements
             manifest['indexed_reference_ids']=indexed_reference_ids
+            manifest['local_nli_diagnostic']={'version':'local-nli-task-selection-v1','enabled':selected,'authority':'diagnostic_only','affects_decision':False}
+            manifest['local_nli_diagnostic'].update(load_status='ready' if selected and self.nli and self.nli.identity and not self.nli.failure else 'failed' if selected else 'not_requested',load_error=self.nli.failure if selected and self.nli else None)
             self.store.create(rid,request,manifest)
             self.queue.put_nowait((rid,request,knowledge,answer_requirements,indexed_reference_ids))
         return rid
@@ -91,8 +116,8 @@ class ApplicationService:
                     answer_requirements=tuple(requirements),indexed_reference_ids=tuple(indexed_ids),run_id=rid)
                 status='interrupted' if self.closing else 'cancelled' if result.state.value=='cancelled' else 'failed' if result.state.value=='failed' else 'finished'
                 self.store.mark(rid,status,error_code='PROCESS_INTERRUPTED' if self.closing else None,result=result)
-                if self.nli and not self.closing:
-                    task=asyncio.create_task(self.diagnose_completed(rid,wire(result)))
+                if self.nli and not self.closing and self.store.get(rid)['config'].get('local_nli_diagnostic',{}).get('enabled',self.config.nli_enabled):
+                    task=asyncio.create_task(self.diagnose_completed(rid,wire(result)),name='local-nli:'+rid)
                     self.nli_tasks.add(task);task.add_done_callback(self.nli_tasks.discard)
             except asyncio.CancelledError:
                 try:self.store.mark(rid,'interrupted',error_code='PROCESS_INTERRUPTED')
@@ -131,11 +156,12 @@ class ApplicationService:
         except Exception:self.nli_errors[rid]='diagnostic_conversion_or_storage_failed'
 
     def nli_result(self,rid):
-        self.store.get(rid)
+        row=self.store.get(rid)
         from services.local_nli import RISK,VERSION
-        return safe({'schema_version':VERSION,'enabled':self.config.nli_enabled,
+        return safe({'schema_version':VERSION,'enabled':row['config'].get('local_nli_diagnostic',{}).get('enabled',self.config.nli_enabled),
+            'pending':any(t.get_name()=='local-nli:'+rid and not t.done() for t in self.nli_tasks),
             'model_available':bool(self.nli and self.nli.identity and not self.nli.failure),
-            'records':self.store.objects(rid,'nli_diagnostic'),'error_code':self.nli_errors.get(rid),
+            'records':self.store.objects(rid,'nli_diagnostic'),'error_code':self.nli_errors.get(rid) or row['config'].get('local_nli_diagnostic',{}).get('load_error'),
             'authority':'diagnostic_only','affects_decision':False,'risk_note':RISK,
             'note':'仅展示已保存诊断，不重算历史交付；默认关闭时不加载模型。'})
 

@@ -57,6 +57,12 @@ class ServiceConfig:
             if not index.is_relative_to((ROOT/'data').resolve()) or not index.is_file():
                 raise ValueError('Managed daily index unavailable')
             daily['index_db']=str(index)
+        nli={}
+        nli_file=ROOT/'data/runtime_local/local-nli-config.json'
+        if not demo and nli_file.exists():
+            import json
+            nli=json.loads(nli_file.read_text(encoding='utf-8'))
+            if set(nli)!={'version','python','checkpoint','profile'} or nli.pop('version')!='local-nli-server-config-v1':raise ValueError('Invalid server-owned NLI configuration')
         strategy=os.environ.get('POWERTRUST_FACT_RETRIEVAL_STRATEGY','aggregate')
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
@@ -64,9 +70,9 @@ class ServiceConfig:
             decision_policy=os.environ.get('POWERTRUST_DECISION_POLICY','product-v1'),
             run_db=Path(os.environ.get('POWERTRUST_RUN_DB',str(cls().run_db))),
             nli_enabled=os.environ.get('POWERTRUST_LOCAL_NLI_ENABLED','0')=='1',
-            nli_python=Path(os.environ['POWERTRUST_LOCAL_NLI_PYTHON']) if os.environ.get('POWERTRUST_LOCAL_NLI_PYTHON') else None,
-            nli_checkpoint=Path(os.environ['POWERTRUST_LOCAL_NLI_CHECKPOINT']) if os.environ.get('POWERTRUST_LOCAL_NLI_CHECKPOINT') else None,
-            nli_profile=Path(os.environ['POWERTRUST_LOCAL_NLI_PROFILE']) if os.environ.get('POWERTRUST_LOCAL_NLI_PROFILE') else None,
+            nli_python=Path(os.environ.get('POWERTRUST_LOCAL_NLI_PYTHON',nli.get('python'))) if os.environ.get('POWERTRUST_LOCAL_NLI_PYTHON') or nli.get('python') else None,
+            nli_checkpoint=Path(os.environ.get('POWERTRUST_LOCAL_NLI_CHECKPOINT',nli.get('checkpoint'))) if os.environ.get('POWERTRUST_LOCAL_NLI_CHECKPOINT') or nli.get('checkpoint') else None,
+            nli_profile=Path(os.environ.get('POWERTRUST_LOCAL_NLI_PROFILE',nli.get('profile'))) if os.environ.get('POWERTRUST_LOCAL_NLI_PROFILE') or nli.get('profile') else None,
             nli_timeout_seconds=float(os.environ.get('POWERTRUST_LOCAL_NLI_TIMEOUT_SECONDS','5')),
             fact_strategy=strategy,
             retrieval_mode=os.environ.get('POWERTRUST_RETRIEVAL_MODE','bm25'),

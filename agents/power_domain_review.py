@@ -197,14 +197,14 @@ class ModelPowerDomainReviewAgent:
     uses_model_adapter=True
     rule_set_version=RULE_SET_VERSION
     def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1):
-        require(protocol_version in (1,2,3,4),"Unknown domain contract")
+        require(protocol_version in (1,2,3,4,5),"Unknown domain contract")
         self.protocol_version=protocol_version
         self.client=ModelClient(adapter,settings)
         self.diagnostics=None if diagnostic_dir is None else ResponseDiagnostics(diagnostic_dir)
 
     async def run(self,inputs):
         require(inputs.rule_set_version==RULE_SET_VERSION,"Domain rule set mismatch")
-        if self.protocol_version in (3,4):
+        if self.protocol_version in (3,4,5):
             from agents.domain_contract_v3 import run
             return await run(self,inputs)
         if self.protocol_version==2:
