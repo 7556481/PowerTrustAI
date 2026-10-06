@@ -1,125 +1,145 @@
 {
-  "source_commit": "61080300b0db47adaf754f17fc7479f36da0f024",
+  "source_commit": "d3ace11aad71fc5a1dcf2aa43afe7f9fe994fcd6",
   "chapters": [
     {
       "file": "01-product.md",
       "characters": 1900,
       "cjk_characters": 1396,
-      "h2_sections": 6
+      "h2_sections": 6,
+      "sha256": "c627344a234943050878682fa711898737405e0ff99545287982f7f24f223781"
     },
     {
       "file": "02-architecture.md",
       "characters": 2823,
       "cjk_characters": 1257,
-      "h2_sections": 6
+      "h2_sections": 6,
+      "sha256": "1a38d4b24d583ac379168cedd145901c0e25b86b00f0e0a3203fca5f91eb4ee9"
     },
     {
       "file": "03-agents.md",
       "characters": 2139,
       "cjk_characters": 1299,
-      "h2_sections": 7
+      "h2_sections": 7,
+      "sha256": "e49adf6087fcca6a102bfea2b7e3bf72ab2247f2d2d56fd5218dec829af1bd7e"
     },
     {
       "file": "04-harness.md",
       "characters": 2230,
       "cjk_characters": 1261,
-      "h2_sections": 7
+      "h2_sections": 7,
+      "sha256": "7f51e9b15e44d41a2da11161a7df6361674975218e1b4ab12e669c476247ac2c"
     },
     {
       "file": "05-rag.md",
       "characters": 2144,
       "cjk_characters": 1452,
-      "h2_sections": 8
+      "h2_sections": 8,
+      "sha256": "8780c7a1166a839064349f79b7a72d510dd9d3d5b0f57c6716f0d8bd27b8ac6e"
     },
     {
       "file": "06-retrieval-math.md",
       "characters": 4509,
       "cjk_characters": 2059,
-      "h2_sections": 12
+      "h2_sections": 12,
+      "sha256": "714c07293019c5f7d02fe7fdc66acaf8ae164e13ce85c5ebad3ede8158995817"
     },
     {
       "file": "07-corpus.md",
       "characters": 3012,
       "cjk_characters": 1797,
-      "h2_sections": 10
+      "h2_sections": 10,
+      "sha256": "540ab981a792bb840b60d620e224919935b88a0a2271a180e3a96f5ec8d5dbaf"
     },
     {
       "file": "08-verification.md",
-      "characters": 2108,
-      "cjk_characters": 1398,
-      "h2_sections": 7
+      "characters": 2806,
+      "cjk_characters": 1745,
+      "h2_sections": 8,
+      "sha256": "db13f3b1e757481bd48a449d6c95589c815058c16ac755010837976e36313107"
     },
     {
       "file": "09-engineering-tools.md",
       "characters": 1802,
       "cjk_characters": 1162,
-      "h2_sections": 6
+      "h2_sections": 6,
+      "sha256": "7ed51411d39a06a2c83bd322da64a79d4e335f30ba621713606b4de254412c2e"
     },
     {
       "file": "10-api-storage.md",
       "characters": 2051,
       "cjk_characters": 1165,
-      "h2_sections": 7
+      "h2_sections": 7,
+      "sha256": "01be717f52d749a306ddce07f3eb2bf01ffeb478f14ad2cc65fcaaa7c540b099"
     },
     {
       "file": "11-supervision-metrics.md",
       "characters": 2886,
       "cjk_characters": 1676,
-      "h2_sections": 10
+      "h2_sections": 10,
+      "sha256": "8ff6b25071168bb9f18d5d13279991e07b64ca34a0563a09d902c381c907ea47"
     },
     {
       "file": "12-training-nli.md",
-      "characters": 4767,
-      "cjk_characters": 1849,
-      "h2_sections": 13
+      "characters": 4768,
+      "cjk_characters": 1850,
+      "h2_sections": 13,
+      "sha256": "a2b8be9c7e6ea42d793276d80d334b7d9bccc2a233c65214435b9cf2cf0e36c0"
     },
     {
       "file": "13-local-nli.md",
       "characters": 1755,
       "cjk_characters": 898,
-      "h2_sections": 6
+      "h2_sections": 6,
+      "sha256": "86ffc673e220af9ae97b4b49e2133840bdee5499220b8f60253f51736eb312d9"
     },
     {
       "file": "14-code-tour.md",
-      "characters": 5988,
-      "cjk_characters": 1303,
-      "h2_sections": 8
+      "characters": 6206,
+      "cjk_characters": 1377,
+      "h2_sections": 8,
+      "sha256": "9b92d4a442772dc16c2366a5342f0abd8d89110ecdd0180accb3b14bb9c3499f"
     },
     {
       "file": "15-failures.md",
-      "characters": 2274,
-      "cjk_characters": 1544,
-      "h2_sections": 11
+      "characters": 2887,
+      "cjk_characters": 1896,
+      "h2_sections": 12,
+      "sha256": "ba482ec5b9ceb8e290ef7b208433f253d920efd481ab38b7294755ea0bafbc95"
     },
     {
       "file": "16-performance.md",
-      "characters": 1723,
-      "cjk_characters": 1071,
-      "h2_sections": 7
+      "characters": 1986,
+      "cjk_characters": 1239,
+      "h2_sections": 8,
+      "sha256": "709d35fc9dcdc0dc438f6dc86ddef9a0724c76b1ab001c0bb67e565e00b4e17e"
     },
     {
       "file": "17-interview.md",
       "characters": 2749,
       "cjk_characters": 1679,
-      "h2_sections": 9
+      "h2_sections": 9,
+      "sha256": "73558e897171a8cbac672100ff5bfc54660ff2b6d6c947302f2154503b8403a1"
     },
     {
       "file": "18-operations.md",
       "characters": 2492,
       "cjk_characters": 1125,
-      "h2_sections": 8
+      "h2_sections": 8,
+      "sha256": "43c8bda170f4546c16751a9537b4f44271564debac08921901196c0638b3f132"
     },
     {
       "file": "19-glossary.md",
-      "characters": 3928,
+      "characters": 3927,
       "cjk_characters": 1981,
-      "h2_sections": 5
+      "h2_sections": 5,
+      "sha256": "e465202078f93f86989628827d4125d6636bee1b02ecc10b85f66e720d5b42bf"
     },
     {
       "file": "20-workshops.md",
       "characters": 2840,
       "cjk_characters": 1765,
-      "h2_sections": 9
+      "h2_sections": 9,
+      "sha256": "ad9eb60acd39b511984b0b60045157262e998e26680b664e6fbe00e3d2fcf5a2"
     }
   ],
   "code_references": [
@@ -160,7 +180,7 @@
       "symbol": "eligible_repairs",
       "start_line": 21,
       "end_line": 31,
-      "file_sha256": "8d7e473a2726467616771f37749fa84bb3340311e1a5577cc2a3787f2c546bb3",
+      "file_sha256": "809326ac11d33a844da60e44d09d6c08234460c2d9e4cce11aab7f9a81e934a4",
       "excerpt_sha256": "bfaf15e73f41ea2f4a544be97b69039c264daee19fbd86b541dc8a62b0677f62"
     },
     {
@@ -194,7 +214,20 @@
       "historical_only": true
     }
   ],
-  "total_characters": 56120,
-  "total_cjk": 29137,
-  "old_content_reused": "Conceptual/math ideas reviewed and rewritten; new current training/NLI/corpus chapters, no old status copied as current."
+  "total_characters": 57912,
+  "total_cjk": 30079,
+  "old_content_reused": "Conceptual/math ideas reviewed and rewritten; new current training/NLI/corpus chapters, no old status copied as current.",
+  "actual_browser_home_search_chapter_navigation_code_highlight": true,
+  "exact_browser_excerpt_text_matches_source": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "old_pdfs_not_modified": true,
+  "private_content_in_public_site": false,
+  "review_status": "Owner/ChatGPT review requested; API compact acceptance failed, documented rather than hidden"
 }

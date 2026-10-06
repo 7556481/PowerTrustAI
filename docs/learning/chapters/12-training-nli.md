@@ -33,7 +33,7 @@ backward → clip_grad_norm(1.0) → AdamW.step → zero_grad
 
 ## 首次Tiny：失败也是真结果
 
-19许可材料按11/3/5开发划分，Tiny编码器4,386,307参数，12epochs、seed固定，第3epoch选中。训练12.505秒、峰值RSS约422MiB。5项已见开发对照accuracy仍2/5，macro-F1 0.190476→0.222222；错误supported 3/3→1/3，但supported召回2/2→0/2，insufficient召回0/1。不能只挑误支持下降宣传“更安全”，它也失去了全部支持召回。
+19许可材料按11/3/5开发划分，Tiny分类模型4,386,307参数，12epochs、seed固定，第3epoch选中。训练12.505秒、峰值RSS约422MiB。5项已见开发对照accuracy仍2/5，macro-F1 0.190476→0.222222；错误supported 3/3→1/3，但supported召回2/2→0/2，insufficient召回0/1。不能只挑误支持下降宣传“更安全”，它也失去了全部支持召回。
 
 ## 扩大MiniLM：选checkpoint与留出矩阵
 

@@ -37,7 +37,7 @@
       "symbol": "eligible_repairs",
       "start_line": 21,
       "end_line": 31,
-      "file_sha256": "8d7e473a2726467616771f37749fa84bb3340311e1a5577cc2a3787f2c546bb3",
+      "file_sha256": "809326ac11d33a844da60e44d09d6c08234460c2d9e4cce11aab7f9a81e934a4",
       "excerpt_sha256": "bfaf15e73f41ea2f4a544be97b69039c264daee19fbd86b541dc8a62b0677f62"
     },
     {
@@ -57,7 +57,7 @@
       "excerpt_sha256": "81c466174821c6394822f496e87bb78476f7be272641608277fc47edca0a5372"
     }
   ],
-  "application_commit": "61080300b0db47adaf754f17fc7479f36da0f024",
+  "application_commit": "d3ace11aad71fc5a1dcf2aa43afe7f9fe994fcd6",
   "new_agent": false,
   "old_pdfs_unchanged": true
 }
