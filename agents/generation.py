@@ -48,11 +48,13 @@ def messages_for(inputs, schema_version=2, *, product_guidance=False):
                 "answer_id": inputs.request.task_id + "-answer", "version": 1}
     if inputs.request.engineering_context is not None:
         question["engineering_context_unverified"] = asdict(inputs.request.engineering_context)
-    from services.answer_constraints import character_limit, VERSION
+    from services.answer_constraints import character_limit, VERSION,product_default_limit
     limit = character_limit(inputs.request.question, inputs.answer_requirements)
+    if limit is None and product_guidance:limit=product_default_limit(inputs.request)
     if limit is not None:
         question['answer_length_constraint'] = {'version':VERSION,'maximum_characters':limit,
-            'counting_method':'complete joined answer text, including punctuation and whitespace'}
+            'counting_method':'complete joined answer text, including punctuation and whitespace',
+            'origin':'explicit_user_limit' if character_limit(inputs.request.question,inputs.answer_requirements) is not None else 'product_concept_default_limit_v1'}
     system = SYSTEM
     if schema_version == 3:
         from services.answer_units import UNIT_INSTRUCTIONS
@@ -64,7 +66,12 @@ Never output a factual audit pass."""
         question.pop("answer_id"); question.pop("version")
     system += '\nAnswer language v4: follow the user question language unless the user explicitly requests another language. For Chinese questions, answer in Chinese, including assumptions and missing_information. Answer directly and concisely. An explicit user maximum overrides the default 150-300-character guideline: keep the COMPLETE joined answer_units text, including separators, punctuation and any limitation, within answer_length_constraint.maximum_characters. Plan the whole answer before returning units; do not append unrelated scope or extraction reports. Do not enumerate retrieved fragments or copy unrelated laboratory formulas. Answer the causal why only when directly supported; a related power-angle formula alone is not a reactive-voltage explanation. Include necessary conditions and substantive evidence gaps briefly. Extraction warnings belong in missing_information only when they actually prevent this answer; never invent missing formulas or report every warning as an answer claim. Plain-language explanations must preserve physical distinctions: avoid absolute "no energy consumed" or "no losses" statements and water-pressure analogies that imply lossless transfer or confuse power with stored energy. Do not invent an alternative analogy or a textbook definition absent from supplied evidence; if the definition is not covered, say that specific gap briefly. Do not add unrelated regional applicability claims, generic engineering disclaimers, or procedural review text. Keep quoted source evidence in its original language. Do not call another model to translate an answer.\n'
     if product_guidance:
-        system += '''\nScope preservation v5: distinguish ideal circuit models from real equipment.
+        system += '''\nScope preservation v6: distinguish ideal circuit models from real equipment.
+Necessary conditions must appear in the actual answer sentence, not only assumptions,
+missing_information or source-quality disclaimer. Keep causal subject and direction:
+A causes B does not establish B causes A, nor does harm from incorrect use of a remedy
+establish harm from the original deficiency. Do not infer a converse from improvements.
+Distinguish general definitions from model-specific identities and special cases.
 Keep the source's sinusoidal steady-state, ideal-element, fixed supply voltage and
 appropriate compensation assumptions explicitly where needed; a brevity limit is
 not permission to drop them. Do not generalize SOME magnetic/inductive devices to
@@ -158,7 +165,7 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
-        prompt += ('-question-language-v5-scope-preservation-explicit-limit-v1' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
+        prompt += ('-question-language-v6-body-conditions-causal-subject-concept-limit-v2' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,
@@ -167,20 +174,20 @@ class EvidenceGenerationAgent:
             return GenerationOutput(answer, evidence_sufficient=False, prompt_version=prompt, substantive_answer=False,
                 evidence_snapshot=make_snapshot(answer, inputs.evidence, inputs.knowledge_version,request=inputs.request,answer_requirements=inputs.answer_requirements,prompt_version=prompt,evidence_bindings=inputs.evidence_bindings))
         messages = messages_for(inputs, self.schema_version, product_guidance=self.product_guidance)
-        parser = (lambda v: parse_units(v,inputs)) if self.schema_version==3 else (lambda v:parse_answer(json.dumps(v,ensure_ascii=False),inputs))
+        parser = (lambda v: parse_units(v,inputs,product_guidance=self.product_guidance)) if self.schema_version==3 else (lambda v:parse_answer(json.dumps(v,ensure_ascii=False),inputs))
         (answer,sufficient),records=await structured_request(self.client,messages,prompt,
             parser,diagnostics=self.diagnostics,response_contract_version=f"generation-output-v{self.schema_version}",input_snapshot_path=input_path)
         return GenerationOutput(answer,evidence_sufficient=sufficient,model_records=records,prompt_version=prompt,
             evidence_snapshot=make_snapshot(answer,inputs.evidence,inputs.knowledge_version,request=inputs.request,answer_requirements=inputs.answer_requirements,prompt_version=prompt,evidence_bindings=inputs.evidence_bindings))
 
 
-def parse_units(value, inputs):
+def parse_units(value, inputs, *, product_guidance=False):
     from services.answer_units import assemble
     object_fields(value, {"answer_units","assumptions","missing_information","evidence_sufficient"},set(),"$",stage="generation")
     check(type(value["evidence_sufficient"]) is bool,"$.evidence_sufficient","boolean_required",stage="generation")
     answer = assemble(value, inputs.request.task_id+"-answer",1,inputs.evidence)
-    from services.answer_constraints import validate_length
-    validate_length(answer, inputs.request.question, inputs.answer_requirements)
+    from services.answer_constraints import validate_length,product_default_limit
+    validate_length(answer, inputs.request.question, inputs.answer_requirements, default_limit=product_default_limit(inputs.request) if product_guidance else None)
     check(not value["evidence_sufficient"] or bool(answer.citations),"$.answer_units","sufficient_answer_requires_citations",stage="generation")
     check(value["evidence_sufficient"] or bool(answer.missing_information),"$.missing_information","insufficiency_requires_missing_information",stage="generation")
     return answer,value["evidence_sufficient"]

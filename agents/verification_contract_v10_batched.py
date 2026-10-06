@@ -49,9 +49,9 @@ async def run(agent,inputs):
     from agents.review_templates_v3 import INDEPENDENT
     from services.review_fidelity import FROZEN_BINDING_INSTRUCTIONS
     limits=agent.citation_workload or CitationWorkload()
-    profile='evidence-verification-v9.8-whole-claim-conditions' if agent.support_relation_version==2 else 'evidence-verification-v9.7-source-support-relation'
+    profile='evidence-verification-v9.9-answer-conditions-repair' if agent.support_relation_version==3 else 'evidence-verification-v9.8-whole-claim-conditions' if agent.support_relation_version==2 else 'evidence-verification-v9.7-source-support-relation'
     prompt_version=(profile if agent.support_relation_checks else PROMPT_VERSION)+('-fact-delivery-v1' if inputs.fact_retrieval_bindings else '')
-    contract_version=('evidence-verification-output-v9.8' if agent.support_relation_version==2 else 'evidence-verification-output-v9.7') if agent.support_relation_checks else CONTRACT_VERSION
+    contract_version=('evidence-verification-output-v9.9' if agent.support_relation_version==3 else 'evidence-verification-output-v9.8' if agent.support_relation_version==2 else 'evidence-verification-output-v9.7') if agent.support_relation_checks else CONTRACT_VERSION
     original_instruction=original_template(support_relation_checks=agent.support_relation_checks,support_relation_version=agent.support_relation_version)
     start=len(current_budget().records);scopes=joint.catalog(inputs,contract_version);wire,missing=model_wire(inputs)
     base_parse=lambda v:joint.parse(v,inputs,scopes,prompt_version='evidence-verification-v9.3-target-fidelity')
@@ -86,7 +86,7 @@ async def run(agent,inputs):
         def strict(value):
             if agent.support_relation_checks:
                 from services.support_relation import normalize
-                value=normalize(value,group,scopes,agent.support_relation_version)
+                value=normalize(value,group,scopes,agent.support_relation_version,inputs.answer,inputs.claims)
             ec=ErrorCollector('evidence_verification_v9_2');ec.fields(value,{group},set(),'$')
             if not ec.check(type(value.get(group)) is list,'$.'+group,'array_required'):ec.finish()
             if citation is not None:

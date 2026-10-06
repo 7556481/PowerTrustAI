@@ -392,7 +392,7 @@ def validate_report(report):
     from core.models import ProductDecision, DecisionKind
     if isinstance(report.decision, ProductDecision):
         d=report.decision
-        require(d.policy_version in ('product-decision-v1','product-decision-v1.1'),'Unknown product policy version')
+        require(d.policy_version in ('product-decision-v1','product-decision-v1.1','product-decision-v1.2'),'Unknown product policy version')
         require(d.execution_integrity in ('complete','incomplete'),'Unknown execution integrity')
         require(d.risk_level in ('low','medium','high','unknown'),'Unknown risk level')
         require(d.resolution in ('complete','partial','unable_to_answer'),'Unknown resolution')

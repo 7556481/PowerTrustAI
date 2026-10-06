@@ -314,3 +314,5 @@
 - data/runtime_local/citation-review-workload-v1/schema13-final/reading-notes-final.md、verification-final.json：新run b4ede2ab、10请求/1纠正、逐目的请求/消息容量/每项绑定范围、用量、Git文档提交。
 - 同目录frozen-plan.json、api-result.json、api-trace.json、evidence-roundtrip.json、restart-verification.json：原样输入与固定知识，旧31459a原档SHA不变，新旧独立库存在，重启相等无新增调用；实际消息/响应留service_private对应run并核对SHA。
 - 仅HTTP接线验证，无浏览器检查或PDF重生成；上一批真实失败保持原结果，最新回归独立解释。
+
+- [日常收尾验收v1](final-acceptance-v1.md)：最新实现、未通过的真实验收、一次修订门控、固定部分库与统一入口。

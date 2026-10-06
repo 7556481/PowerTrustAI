@@ -33,8 +33,10 @@ function renderAnswers(r){
  if(!cited.size)sources.append(node('p','本回答没有引用来源；检索命中不等于答案引用。','hint'));$('answers').append(sources);
  const d=$('decision');d.className='';d.append(badge(r.decision?.kind));if(r.decision?.risk_level)d.append(node('p','风险：'+tr(r.decision.risk_level)+'；问题解决程度：'+tr(r.decision.resolution)));
  for(const t of (r.presentation?.reasons||[]).filter(x=>!/[A-Za-z]{3}/.test(x)).slice(0,2))d.append(node('p',t));
- const codes=r.decision?.reason_codes||[];const reasons={FACT_BASIS_MISSING:'部分主张或引用的依据不足。',REQUIRED_INPUT_MISSING:'必要工程输入或分析尚缺。',REPAIRABLE_ERROR:'存在可定位的错误，需要有限修订并重审。',UNRESOLVED_ORDINARY_ERROR:'修订后仍有错误。',COMPONENT_CLASSIFICATION_UNCERTAIN:'主张分类或原文绑定不确定。',NO_SUBSTANTIVE_ANSWER:'未生成实质回答，后续审核不适用。',REQUIRED_EXECUTION_FAILED:'必需检查执行失败。',NONCLAIM_CLASSIFICATION_UNCERTAIN:'回答文本是否已完整覆盖存在疑问。',ANSWER_DECLARED_MISSING_INFORMATION:'回答明确保留了缺失信息。',DOMAIN_JUDGMENT_DISPUTE:'领域判断仍有争议。',TASK_SCOPE_UNKNOWN:'任务适用范围尚不明确。'};
+ const codes=r.decision?.reason_codes||[];const reasons={FACT_BASIS_MISSING:'部分主张或引用的依据不足。',REQUIRED_INPUT_MISSING:'必要工程输入或分析尚缺。',SOURCE_BOUND_REPAIR:'存在有原文依据的可定位缺陷，执行一次修订并完整重审。',REPAIRABLE_ERROR:'存在可定位的错误，需要有限修订并重审。',UNRESOLVED_ORDINARY_ERROR:'修订后仍有错误。',COMPONENT_CLASSIFICATION_UNCERTAIN:'主张分类或原文绑定不确定。',NO_SUBSTANTIVE_ANSWER:'未生成实质回答，后续审核不适用。',REQUIRED_EXECUTION_FAILED:'必需检查执行失败。',NONCLAIM_CLASSIFICATION_UNCERTAIN:'回答文本是否已完整覆盖存在疑问。',ANSWER_DECLARED_MISSING_INFORMATION:'回答明确保留了缺失信息。',DOMAIN_JUDGMENT_DISPUTE:'领域判断仍有争议。',TASK_SCOPE_UNKNOWN:'任务适用范围尚不明确。'};
  for(const code of codes)if(reasons[code])d.append(node('p',reasons[code]));
+ for(const u of r.presentation?.unresolved||[]){const box=node('div',null,'card');box.append(node('strong','未解决句子：'),node('p',u.sentence),node('p',tr(u.status)+'：'+u.reason.split(' [source-support-relation-')[0]));d.append(box);}
+ for(const gap of final?.missing_information||[])d.append(node('p','回答保留的缺口：'+gap));
  const detail=node('details');detail.append(node('summary','审核详情／技术详情：执行、版本及原始原因'),jsonBox({execution:r.execution,decision:r.decision,presentation:r.presentation,answer:final}));
  for(const v of a.versions||[])detail.append(node('h4',`回答版本 v${v.version}`),node('pre',v.text));if(a.revisions?.length)detail.append(jsonBox(a.revisions));d.append(detail);
  $('usage').append(jsonBox({budget_usage:r.budget_usage,model_usage:r.model_usage,limitations:r.limitations}));

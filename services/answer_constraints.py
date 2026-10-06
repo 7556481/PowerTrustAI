@@ -14,8 +14,9 @@ def character_limit(question, requirements=()):
             if value > 0:values.append(value)
     return min(values) if values else None
 
-def validate_length(answer, question, requirements=(), *, stage='generation', path='$.answer_units'):
+def validate_length(answer, question, requirements=(), *, stage='generation', path='$.answer_units', default_limit=None):
     limit = character_limit(question, requirements)
+    if limit is None:limit=default_limit
     if limit is not None and len(answer.text) > limit:
         error = StructuredValidationError(stage, path,
             'explicit_answer_character_limit_exceeded_no_truncation')
@@ -24,3 +25,9 @@ def validate_length(answer, question, requirements=(), *, stage='generation', pa
             correction_instruction='Rewrite a complete concise answer within the original limit; preserve necessary conditions and valid citation bindings. Never cut text or weaken evidence requirements.')
         raise error
     return answer
+
+
+def product_default_limit(request):
+    """Bound the already-declared concise Chinese concept UX; no evidence truncation."""
+    context=getattr(request,'engineering_context',None)
+    return 300 if context is not None and context.goal=='conceptual' and re.search(r'[\u4e00-\u9fff]',request.question) else None

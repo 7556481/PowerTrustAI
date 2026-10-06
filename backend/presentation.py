@@ -33,7 +33,7 @@ def explain(result):
         disposition=decision['kind']
         text={'pass':'通过：本任务适用检查完整且未发现阻断问题。',
             'reject':'不通过：仍有定位明确的错误，或命中经审阅的高严重度规则。',
-            'needs_information':'待补充：缺少证据、必要工程输入或分析。',
+            'needs_information':'待补充：存在尚未解决的具体依据或输入缺口。',
             'review_required':'人工复核：分类、严重度或审核判断存在不确定性。',
             'execution_incomplete':'执行未完成：检查失败或缺失，不能据此判事实错误。',
             'revise':'正在修订：最多一次，修订后重新提取并完整审核。'}
@@ -42,7 +42,7 @@ def explain(result):
                     'needs_information':'补齐逐项发现中的证据/输入后，手动发起新任务。',
                     'reject':'查看对应错误和每个回答版本，不自动重复运行。',
                     'execution_incomplete':'查看执行问题；保留已完成结果，不自动重发。'}.get(disposition,'对照原文、组件和版本判断；可追加反馈，不覆盖原结论。')]
-        return {'run_ended':ex.get('status') in TERMINAL,'reasons':reasons,'next_steps':next_steps,
+        return {'run_ended':ex.get('status') in TERMINAL,'reasons':reasons,'next_steps':next_steps,'unresolved':unresolved_items(result),
                 'saved':f"已保存 {len(answer.get('versions',[]))} 个独立回答版本；原版发现与反馈保留。"}
     codes={i.get('code') for i in ex.get('execution_issues',[])}
     if 'REVIEW_MESSAGE_CAPACITY_EXCEEDED' in codes:
@@ -70,5 +70,25 @@ def explain(result):
     if not reasons:
         reasons.append('结构化发现未提供更具体的复核原因；请结合业务决策详情人工检查。' if (result.get('decision') or {}).get('kind')!='pass' else '当前政策未要求进一步处理；pass 不代表工程安全认证。')
     if not next_steps:next_steps.append('下一步无法从结构化发现确定，待人工检查业务决策与逐项发现；不生成工程操作建议。')
-    return {'run_ended':ex.get('status') in TERMINAL,'reasons':reasons,'next_steps':next_steps,
+    return {'run_ended':ex.get('status') in TERMINAL,'reasons':reasons,'next_steps':next_steps,'unresolved':unresolved_items(result),
         'saved':f"已保存 {len(answer.get('versions',[]))} 个回答版本、{len(facts)} 条当前事实发现、{len(domain)} 条当前领域发现、{len(result.get('evidence',[]))} 条 Evidence；历史轮次与人工意见分别查看。"}
+
+
+def unresolved_items(result):
+    """Read-only current-version projection; no historic judgment rewrite."""
+    answer=(result.get('answer') or {}).get('final') or {}
+    extraction=(result.get('snapshots') or {}).get('extraction') or {}
+    claims={c['claim_id']:c for c in extraction.get('claims',[])}
+    rows=[]
+    for f in (result.get('findings') or {}).get('model_fact',[]):
+        if f.get('status')=='supported':continue
+        c=claims.get(f.get('claim_id'),{})
+        rows.append({'sentence':c.get('text') or c.get('proposition') or '主张原文绑定未提供',
+            'status':f.get('status'),'reason':f.get('rationale','具体原因未提供'),'finding_id':f.get('finding_id')})
+    for f in (result.get('findings') or {}).get('original_citations',[]):
+        if f.get('status')=='supported':continue
+        i=f.get('citation_index');citations=answer.get('citations',[])
+        cit=citations[i] if type(i) is int and 0<=i<len(citations) else {}
+        rows.append({'sentence':answer.get('text','')[cit.get('start_offset',0):cit.get('end_offset',0)] or '引用原文绑定未提供',
+            'status':f.get('status'),'reason':f.get('rationale','具体原因未提供'),'citation_index':i})
+    return rows

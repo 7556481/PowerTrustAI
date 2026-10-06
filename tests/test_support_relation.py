@@ -48,12 +48,12 @@ class WarrantTests(unittest.TestCase):
     for f in v['findings']:
      for c in f['component_reviews']:
       c['support_relation']={'source_kind':'term_mention' if len(seen)==1 else 'explanatory_body','quote_ids':[f['bases'][k]['quote_id'] for k in c['basis_indexes']],
-       'explanation':'Synthetic text explicitly names the three rating categories with their actual conditions.','whole_claim_supported':True,'missing_clauses':[],'conditions_preserved':True,'authority_scope':'explanation'}
+       'explanation':'Synthetic text explicitly names the three rating categories with their actual conditions.','whole_claim_supported':True,'missing_clauses':[],'conditions_preserved':True,'authority_scope':'explanation','answer_conditions':[],'causal_direction_preserved':True,'repair':None}
     return ModelResponse(json.dumps(v),r.model_id,finish_reason='stop')
   async def run():
    with model_scope(ModelBudget(2)):
-    return await ModelEvidenceVerificationAgent(Adapter(),ModelSettings('synthetic_fixture'),schema_version=13,support_relation_checks=True,support_relation_version=2).run(inp)
-  out=asyncio.run(run());self.assertFalse(out.execution_issues);self.assertEqual(len(seen),2);self.assertIn('source-support-relation-v2',out.findings[0].component_reviews[0].rationale)
+    return await ModelEvidenceVerificationAgent(Adapter(),ModelSettings('synthetic_fixture'),schema_version=13,support_relation_checks=True,support_relation_version=3).run(inp)
+  out=asyncio.run(run());self.assertFalse(out.execution_issues);self.assertEqual(len(seen),2);self.assertIn('source-support-relation-v3',out.findings[0].component_reviews[0].rationale)
   from backend.assembly import ComponentFactory
   from backend.config import ServiceConfig
   manifest=ComponentFactory(ServiceConfig(profile='synthetic_fixture')).manifest(None)

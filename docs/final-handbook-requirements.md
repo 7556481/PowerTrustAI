@@ -95,3 +95,6 @@
 ## 2026-10-06 电力语料与整句支持 v1
 
 待补：流式Parquet/原始格式失败与发布哈希；中文词典/查询分词/同义词误召回；FTS倒排、封印/打开/命中校验及事务断点；来源取得位置与原机构未知、相关性和权威分开；完整因果子句、理想电容/正弦条件与模型漏判；部分库进度和混杂对照。绑定本轮公开源码及私有真实失败，不重建手册/PDF/学习站。 详见[industry-corpus-v1](industry-corpus-v1.md)。
+
+## 收尾待共同编写知识点
+绑定最终源码：generation/answer_constraints、support_relation/bounded_repair、product_policy/Revision、presentation。解释正文限定与审核补充的区别、因果主体/反向推理、逐字守卫保守性、修复资格与真实成功区别、模型遗漏/分类及失败停止、固定部分库恢复。保留本轮真实未通过和历史失败；Markdown＋本地阅读站要求不变，验收后共同编写。

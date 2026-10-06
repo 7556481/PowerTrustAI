@@ -6,14 +6,16 @@ bound current claims and literal body bases. Synthetic tests register fixture ru
 """
 from core.models import ProductDecision, DecisionKind as D, VerificationStatus as V, Severity
 
-VERSION = 'product-decision-v1.1'
+VERSION = 'product-decision-v1.2'
 
 
 class ProductAuditPolicy:
     product_policy = True
     allows_bounded_real_revision = True
 
-    def __init__(self, *, high_risk_rules=(), synthetic_fixture=False):
+    def __init__(self, *, high_risk_rules=(), synthetic_fixture=False, version=VERSION):
+        if version not in ('product-decision-v1.1',VERSION):raise ValueError('Unknown product policy version')
+        self.version=version
         self.high_risk_rules = frozenset(high_risk_rules)
         self.synthetic_fixture = synthetic_fixture
 
@@ -45,7 +47,7 @@ class ProductAuditPolicy:
 
         def result(kind, code, reason, risk='unknown', execution='complete', resolution='partial'):
             return ProductDecision(kind, (reason, 'Automatic approval is bounded to this task; not engineering safety certification'),
-                VERSION, ids, execution, risk, resolution, (code,), tuple(checks), basis)
+                self.version, ids, execution, risk, resolution, (code,), tuple(checks), basis)
 
         if issues or verification.execution_issues or domain.execution_issues or (
                 retrieval and any(r.status.value != 'succeeded' for r in retrieval.records)):
@@ -81,6 +83,15 @@ class ProductAuditPolicy:
         citations = verification.citation_reviews
         if {c.citation_index for c in citations} != set(range(len(answer.citations))):
             return result(D.EXECUTION_INCOMPLETE, 'MISSING_CITATION_CHECK', 'Original citation coverage incomplete', execution='incomplete')
+        # Only explicit selected-body repair proposals may repair an evidence gap.
+        # Unknown applicability, absent basis or engineering input cannot be cured
+        # by deleting a requested subquestion. Full review still decides the new version.
+        adverse=[f for f in facts+citations if f.status in (V.INSUFFICIENT_EVIDENCE,V.NOT_ASSESSABLE,V.CONTRADICTED)]
+        from services.bounded_repair import repair_proposals
+        located=bool(adverse) and all(f.status!=V.NOT_ASSESSABLE and repair_proposals(f) for f in adverse)
+        missing_domain=any(f.check_status=='not_assessable' or f.missing_prerequisites for f in findings)
+        if self.version==VERSION and located and not missing_domain and revision_round < min(1,budget.max_revision_rounds):
+            return result(D.REVISE,'SOURCE_BOUND_REPAIR','Located answer defect has a selected literal source and substantive replacement; preserve every requested subquestion and fully re-review',risk='medium')
         if any(f.status in (V.INSUFFICIENT_EVIDENCE, V.NOT_ASSESSABLE) for f in facts + citations):
             return result(D.NEEDS_INFORMATION, 'FACT_BASIS_MISSING', 'Evidence or required factual inputs are insufficient')
         # A located contradiction can be repaired even when a separate domain
