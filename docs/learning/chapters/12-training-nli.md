@@ -1,0 +1,95 @@
+# 12 BERT-Tiny、MiniLM与一次训练的真实结果
+
+## 预训练编码器与NLI分类头
+
+编码器把token变表示，分类头把表示映射为类别logits。BERT-Tiny的语言预训练并不意味着已学会entailment/contradiction。首次项目模型google/bert_uncased_L-2_H-128_A-2加载编码器后随机初始化三分类头，是从固定随机头开发对照，不可称官方NLI基线。
+
+MiniLM候选cross-encoder/nli-MiniLM2-L6-H768已有NLI训练，固定revision b95119…、82,120,707参数。load_model检查missing/unexpected/mismatched/error均为空，保留分类头。真实mapping为0contradiction→contradicted，1entailment→supported，2neutral→insufficient_evidence。顺序不能根据名字猜，更不能把整个head重置后还称同NLI基座。
+
+## 文本对与长度
+
+premise是实际交付完整正文，hypothesis是原核验命题。前者不是整套JSON、URL或哈希，后者保留立场、否定、数量、单位、必要条件和范围。正文与行政索引声明分开，不根据标签选择Evidence。tokenizer对成对输入计特殊token，max512事前检查；超长排除或记录处理，不能静默截断条件。
+
+training和production的任务范围不同。三分类文本支持不覆盖not_assessable、元数据、工具计算或工程不可评估。本地NLI只能在适配器明确支持的任务上使用。
+
+## 训练流程：每一步在更新什么
+
+每batch前向计算logits，交叉熵比较标签，backward形成梯度，clip限制全局梯度范数，AdamW按学习率更新参数并独立权重衰减。训练模式允许dropout，评估模式关闭dropout且不算梯度。仅load/predict不是训练；仅loss下降不代表泛化提高。
+
+```text
+logits z = model(premise, hypothesis)
+p_k = exp(z_k)/Σexp(z_j)
+loss = -log(p_true)
+backward → clip_grad_norm(1.0) → AdamW.step → zero_grad
+```
+
+教学构造：正确类模型概率0.5，loss≈0.693；提高到0.9，loss≈0.105。这只解释损失，不把softmax称事实可信概率。概率来自训练分类目标，未校准且数据分布可能变化。
+
+## 独立CPU环境与冻结配置
+
+项目.venv用于服务，训练环境独立在new-machine-restoration/training-env；实际Python3.13.2、torch2.8.0+cpu、transformers4.57.1等版本归档。X7-358H/32GB采用CPU，不按NVIDIA CUDA配置。服务启动不自动安装训练依赖或下载模型。
+
+扩大训练从官方原NLI权重重新加载，不沿旧领域checkpoint刷分。冻结线程4、seed20261005、4epochs、batch1、AdamW lr1e-5、weight_decay0.01、clip1.0。train只用43训练和12验证，验证macro-F1选checkpoint，同分最早。选定epoch1后封存，再独立评SSIAG，不提前看留出。
+
+## 首次Tiny：失败也是真结果
+
+19许可材料按11/3/5开发划分，Tiny编码器4,386,307参数，12epochs、seed固定，第3epoch选中。训练12.505秒、峰值RSS约422MiB。5项已见开发对照accuracy仍2/5，macro-F1 0.190476→0.222222；错误supported 3/3→1/3，但supported召回2/2→0/2，insufficient召回0/1。不能只挑误支持下降宣传“更安全”，它也失去了全部支持召回。
+
+## 扩大MiniLM：选checkpoint与留出矩阵
+
+43训练/12验证/33SSIAG留出，开发13关联家族；88语义输入全有效，无截断。4epoch平均loss0.601204→0.056194→0.005194→0.002484，验证macro-F1四轮均0.915344，取最早epoch1。训练112.8836秒、峰值RSS约2.71GiB；时间含验证和保存，加载另计。
+
+| 行真值、列预测 | supported | contradicted | insufficient |
+|---|---:|---:|---:|
+| 基座supported（10） | 5 | 1 | 4 |
+| 基座contradicted（13） | 0 | 11 | 2 |
+| 基座insufficient（10） | 0 | 4 | 6 |
+| 微调supported（10） | 10 | 0 | 0 |
+| 微调contradicted（13） | 3 | 9 | 1 |
+| 微调insufficient（10） | 1 | 1 | 8 |
+
+基座accuracy22/33、macro-F1 0.656914；微调27/33、macro-F1 0.819349。微调支持召回100%，但4个错误supported，4/23非支持真值、4/14支持预测。微调supported precision=10/14=0.7143，recall=10/10=1，F1=0.8333。其余两类F1约0.7826和0.8421，平均得到0.8193。
+
+## 为什么不升级生产
+
+总体F1提高却误支持增加，四错误涉及额定MW外推、必要条件删除、联合评估条件和时间顺序。单文档、小样本、单种子、AI辅助用户监督，不能宣布通用准确率或工程可靠性。旧错误说明曾按家族误继承到正确样本，后来另存逐项修正版，不改标签/预测/指标；解释也要审计。
+
+验证看evaluation/support_nli_expanded.py的validate_layout、verify_freeze、train_expanded、evaluate_document_holdout；前者不产生留出预测，后者必须selection_seal已关闭并核对checkpoint哈希。训练和留出排他启动记录防自动重复。
+
+面试说法：“我区别随机头和已训练NLI头，用验证选最早同分checkpoint，封存后一次文档留出。F1提高但错误支持增加，所以只作为可选诊断，保留失败而非强行上线。”
+
+## 给Python读者的模型计算地图
+
+tokenizer输出input_ids和attention_mask。input_ids是词表索引，不是词向量；embedding层查表后加入位置表示，Transformer层通过注意力和前馈网络更新每token的上下文表示，分类头输出三维logits。训练时梯度从loss经过分类头和编码器反传；本项目全参数训练并非仅训练head，也不是LoRA。
+
+以三类logits z=(2,1,0)作教学构造，softmax约(0.6652,0.2447,0.0900)。若真值是第0类，loss≈0.4076；若真值是第2类，loss≈2.4076。最小化交叉熵倾向提高真类相对logit。但未校准分数0.6652不能解释成该电力命题有66.52%事实可信度，特别是分布外、条件复杂或任务类型不同。
+
+梯度不是“错误的百分比”，它是损失对参数的局部导数。AdamW维护梯度的一阶/二阶滑动估计并做权重衰减，学习率决定每步尺度。clip_grad_norm_限制全参数梯度范数，避免某批次过大；它不保证收敛或防过拟合。weight_decay与学习率也不是同一个东西。
+
+## 一个epoch怎样走，为什么batch1仍能训练
+
+一个epoch遍历43训练样本，每个batch1产生一次更新；4epoch约172样本更新步，另有验证前向。batch1内存较低，但梯度噪声和统计波动大。shuffle和seed影响顺序，torch线程数影响本机资源；固定seed提升复现条件，不保证跨所有硬件/库版本逐位一致。
+
+训练前记录实际解释器/依赖、参数量、配置、输入哈希、partition、模型revision。模型加载后的标签mapping必须核对config，不能只把logits.argmax的0当supported。训练结束保存tokenizer/config/weights及哈希，不能只留一个文件名叫best。
+
+验证期间model.eval()与no_grad()承担不同责任：eval切换dropout等行为，no_grad禁梯度记录省内存。只做eval却继续算梯度会浪费资源；只no_grad而保持train会受dropout扰动。验证集选择epoch，测试集只在选择关闭后评估。
+
+## 为什么早停选择同分最早
+
+本次4epoch验证macro-F1完全相同，训练loss继续逼近0。选择最早最高epoch1避免以“多训肯定更好”替代证据，也不从SSIAG错误挑epoch。selection-seal保存best_epoch、配置/冻结清单和checkpoint文件哈希，并声明封存前留出预测0。
+
+这是先验选择规则，不是看到epoch1留出最好才写规则。若留出表现退步，仍交付实际退步，不自动换模型、重分数据或训练到好看。小数据中任何checkpoint都可能对不同家族有偏差，单种子只能说明这一次配置。
+
+## 用微调矩阵完整手算
+
+微调矩阵行/列S,C,I：[[10,0,0],[3,9,1],[1,1,8]]。对C，TP=9，列总10，所以precision=0.9；行总13，所以recall=9/13≈0.6923；F1=18/23≈0.7826。对I，TP8、列9、行10，precision8/9，recall0.8，F1=16/19≈0.8421。S的F1=20/24=0.8333；macro≈(0.8333+0.7826+0.8421)/3=0.81935。
+
+accuracy=(10+9+8)/33=27/33。错误支持是C行3与I行1，总4。非支持真值是13+10=23，误支持率4/23；S列总14，错误支持比例4/14。两类recall提高不能消除C→S的严重偏差。把macro-F1和错误支持并列，读者才看见权衡。
+
+## 概念错误：中立不是“事实中性”
+
+NLI neutral表示premise没有蕴含或矛盾hypothesis，映射为本实验证据不足。它不表示现实事实没有答案，也不表示生产无法评估。production not_assessable可能由绑定、分类或工程对象无效导致，三类NLI不能覆盖。所以加入not_assessable样本不能只改label2含义继续用，需重新定义任务与评测。
+
+## 训练复现与不该公开的材料
+
+公开代码可解释配置冻结和训练入口，私有原文/监督模板/模型权重不默认公开。复现报告应说明材料权限、文件哈希、版本及缺失依赖。一个外部读者只有Git代码不能重现33条私有评测，不应把这点隐藏成“运行脚本即可得到相同分数”。本轮不执行训练或重新下载基座。

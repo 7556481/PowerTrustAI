@@ -1,5 +1,12 @@
 ﻿# PowerTrustAI
 
+## 2026-10-06 正式学习站与审核共同诊断（最新）
+
+先交付docs/learning：18主题章＋术语/工作坊两附录，Markdown唯一正文，标准库静态构建，8770独立学习入口start-learning.cmd，目录/搜索/代码高亮/导航；旧30/38页PDF仅参考、保留。源码摘录/公式/真实训练检索/NLI失败及待补清单核对，实际浏览器阅读验证。
+
+新用户4df8…非法JSON后source_kind混成explanation；47个历史诊断响应汇总，程序接线、协议负担和语义错分开。实现schema14紧凑target原型，但真实Harness仍只包装schema9–13扩展输入，缺tool_results，Fact前失败。固定12题同源码配置、无预期泄漏、无重发：0/12完整，32请求304657token，0Fact请求/无结构成功率分母，0Revision，0pass。客户端遗漏共享EXECUTION_FAILURE停止条件，12已结束才人工发现，明确保留，没有自动修复重跑。只恢复日常默认13；14不启用/未验收，原13仍可能契约失败。详见[audit-stability-learning-v1](docs/audit-stability-learning-v1.md)。原唯一语料写者继续、日常固定部分快照不切换。停止追加开发，待所有者和ChatGPT审阅。
+
+
 ## 2026-10-06 英文身份与忠实性收尾 v1（最新）
 
 接续a898e34，51片可读英文无_id，使用固定revision/分片/原始绝对行号的命名空间内部身份，另存正文SHA与缺失标记；中文7,373,300行、去重与断点不变。唯一逻辑写者已安全续建，完整库尚未发布，不切换日常kc-5894部分库。

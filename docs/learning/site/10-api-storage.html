@@ -1,0 +1,29 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 API、UI、队列、SQLite与本机会话 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 61080300b0db · learning-site-v1, 2026-10-06 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">10 API、UI、队列、SQLite与本机会话</h1>
+<h2 id="section-2">服务与浏览器的分工</h2>
+<p>浏览器提交普通问题和配置选择，不能传入模型本机路径或DeepSeek密钥。API验证结构、同源和身份，ApplicationService创建run并排队，UI读取状态、答案与详情。模型profile、解释器和固定知识库只由服务端配置。页面不自行拼接另一个调度器。</p>
+<p>日常统一python -m backend和start-powertrustai.cmd，默认8765。临时验证端口与独立数据库属于不同服务，浏览器记忆按origin隔离；历史反复手输令牌曾因验证目录各生不同令牌和内存连接刷新丢失，不是固定文件每次重启都轮换。</p>
+<h2 id="section-3">队列和单活动运行</h2>
+<p>ApplicationService.submit先保存请求/config，有限等待队列由worker逐运行执行。这样单运行的预算和模型生命周期可管理；队列满明确返回错误。收到run_id说明接受任务，不说明模型已经成功。轮询GET不会自动重复POST。</p>
+<p>客户端“POST已发出但响应丢失”是未知提交状态。不能自动重发，因为服务可能已接收并产生付费请求。前端防重复提交是当前页保护，不是通用服务端幂等键。历史查询、刷新和重启不补算旧诊断或重发模型请求。</p>
+<h2 id="section-4">两类SQLite和WAL</h2>
+<p>运行库存请求、配置、stage_output、对象、结果和追加反馈；知识库存原文、文档版本、知识成员和片段；全文构建库独立处理大语料。不要把所有DB都叫“知识库”，更不能让审阅ZIP带完整运行库。</p>
+<p>RunStore.tx用BEGIN IMMEDIATE、commit/rollback短事务。HTTP/模型等待发生在事务外，observer完成一个事件后保存。WAL允许读者读取一致快照并协调单写者，不等于多写者并行。WAL/SHM是运行中辅助文件，迁移不直接复制旧WAL代替一致备份。</p>
+<pre><code class="language-python"><span class="comment"># 教学构造：请求期间不占长写事务</span>
+<span class="keyword">with</span> transaction():
+    save_accepted_request()
+result = <span class="keyword">await</span> remote_model_call()
+<span class="keyword">with</span> transaction():
+    save_stage_result(result)</code></pre>
+<p>真正实现看backend/store.py和service.py。异常持久化需要记录RUN_STORAGE_FAILED，不能在内存算完就谎称已保存。对象索引绑定run_id/answer_id/version，反馈追加而不覆盖旧结果。</p>
+<h2 id="section-5">取消和重启</h2>
+<p>排队任务取消与活动任务取消不同。活动任务合作式中断、等待底层资源drain；不能通过UI显示“已取消”保证网络对端不收费。RunStore.recover把上次queued/running变interrupted，不自动重新执行。服务重启后查询同run_id应返回原结果及调用量，历史Evidence按原知识版本回查。</p>
+<p>测试时比较原结果和快照哈希、诊断ID/输入/结果、请求数及引用文本，排除只比较页面标签的假恢复。展示投影可以另版改善中文说明，但不能回填旧语义判断。</p>
+<h2 id="section-6">访问令牌与本机会话</h2>
+<p>本机访问令牌控制API，DeepSeek密钥控制远程模型，二者不同。固定令牌文件存在复用，普通重启和模型配置切换不轮换。一次性引导机制让本机启动器兑换HttpOnly会话，长期令牌不进入URL；引导票据短期/单次，与长期密钥分开。普通刷新/重启复用会话；高级手动连接及主动记忆保留。</p>
+<p>原连接记忆默认不勾选，选择后按当前origin保存本机令牌，取消或忘记清除；401使失效记忆和连接失效，不自动重发真实任务。自动会话与旧主动记忆是迁移兼容，不叠加两套互相冲突的授权。浏览器永远不保存DeepSeek密钥。</p>
+<h2 id="section-7">安全显示不是隐藏业务错误</h2>
+<p>UI使用textContent和安全链接投影，原文中&lt;script&gt;不能执行。长ID、轨迹、NLI和JSON折叠，答案、处置和关键原因先显示。字段路径是JSON诊断位置，不能误当本机私有路径删除；真正凭据、请求头和私有文件路径应隔离。</p>
+<p>不同claim/answer版本不能合并“最终supported数量”当正确率。NLI只显示旁路诊断，logits/softmax不升级主结论。用户反馈绑定具体对象、来源保留AI辅助用户监督，不自动训练。</p>
+<h2 id="section-8">验证与面试追问</h2>
+<p>练习：为一次模型等待30秒设计存储事务。参考：接收短事务→异步执行→阶段短事务，别BEGIN后等30秒。追问：WAL能解决所有锁吗？不能，仍单写者；长事务、多个进程和读后升级会锁冲突。</p>
+<p>面试可说：“API只接收任务，服务管理队列和生命周期，observer短事务持久化。重启中断不自动重发，GET历史只读。我保留同源鉴权，通过本机会话改善体验，没有删掉访问保护。”</p></article><footer><a href="09-engineering-tools.html">← 09 工程审核、有限工具与两种缺口</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">服务与浏览器的分工</a><a href="#section-3">队列和单活动运行</a><a href="#section-4">两类SQLite和WAL</a><a href="#section-5">取消和重启</a><a href="#section-6">访问令牌与本机会话</a><a href="#section-7">安全显示不是隐藏业务错误</a><a href="#section-8">验证与面试追问</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

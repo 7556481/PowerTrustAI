@@ -93,7 +93,7 @@ class FrozenStanceTests(unittest.TestCase):
         from backend.assembly import ComponentFactory
         from backend.config import ServiceConfig
         import hashlib
-        manifest=ComponentFactory(ServiceConfig(profile='synthetic_fixture')).manifest(None)
+        manifest=ComponentFactory(ServiceConfig(profile='synthetic_fixture',verification_schema=13)).manifest(None)
         from services.support_relation import instructions
         from services.review_fidelity import FROZEN_BINDING_INSTRUCTIONS,INDEPENDENT_JUDGMENTS
         current=seen[0].messages[0].content.replace(FROZEN_BINDING_INSTRUCTIONS,'').replace('These are model judgments, NOT mechanical proofs. Unresolved fidelity/stance/obligation disagreement\nrequires not_assessable; never supported or contradicted.','These are independent raw model judgments; program computes the effective disposition for unresolved objections.').replace('Same-category uncertainty needs no issue: not_assessable with a specific reason.','Same-category uncertainty needs no issue: preserve actual support and semantic judgments independently.')+INDEPENDENT_JUDGMENTS

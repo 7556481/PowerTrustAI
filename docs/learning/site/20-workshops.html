@@ -1,0 +1,37 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>20 八个综合工作坊：把概念落到对象和失败 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 61080300b0db · learning-site-v1, 2026-10-06 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">20 八个综合工作坊：把概念落到对象和失败</h1>
+<p>全部是教学构造，不调用付费模型、不训练、不写日常数据库。每个工作坊给目标、步骤、参考答案和错误思路；可以口头完成或用临时synthetic测试验证。真实实验另看固定报告。</p>
+<h2 id="section-2">工作坊一：从一句话列出全部审核义务</h2>
+<p>材料：“根据资料A，在正弦稳态和端电压不变时，给感性负载并联适当电容，可减小供电电流，因此所有现场方案都保证达标。”</p>
+<p>先标原文范围，不改错句；提取条件化技术关系、原来源归属、全称性能保证等组件。问每个组件需什么basis。概念关系需要实际技术正文，归属需要适当来源证明，保证需要工程输入和对应研究。共同句子不代表共同证据充分。</p>
+<p>参考答案：条件化概念可能supported，保证不应因为前半句有依据就supported。提取若只取“电容与电感互补”，漏掉供电电流因果和保证，会审核错对象。Domain需保留工程范围；原引用还要独立核对A是否支持全部所引用单元。</p>
+<p>错误思路：“整句含三个supported关键词所以通过”“高风险话题所以拒绝”“缺厂站参数所以连概念也无法解释”。三种分别混淆支持、严重度和任务范围。</p>
+<h2 id="section-3">工作坊二：作用域与同文字</h2>
+<p>材料：原引用0只允许quote-x，引用1只允许quote-y；两者正文完全相同。模型在引用0选quote-y。问题：是否可按文字匹配改回quote-x？</p>
+<p>参考答案：不可以。作用域绑定回答区间、来源版本和交付；模型选择非法ID必须记录结构失败和有限纠正。程序把一个明确合法ID映射为内部正式对象是合法派生，借同文字替非法选择是猜测修补。独立检索也不能借来治原引用。</p>
+<p>再问：quote-x存在但原文只问“X与Y关系是什么”，模型理由“因此X导致Y”。结构可合法，语义不支持。需要区分exercise_question与explanatory_body及完整因果，不是用更严格ID证明真值。</p>
+<h2 id="section-4">工作坊三：单位工具与类别</h2>
+<p>材料：答案“0.8MW=800kW，0.8MVA也等于800kW”。第一项可由前缀换算，第二项跨物理类别。列出工具result_id、claim_id与成功状态绑定，分别审核。</p>
+<p>参考答案：第一项执行真实允许单位换算，得到800kW；第二项不能靠相同M前缀放行，缺功率因数或类别定义。工具不支持该计算时记录不可评估/相应问题，不伪造result。用户未问厂站方案，不额外要求潮流模型核验第一项。</p>
+<p>追问：同一次工具0.8MW结果可用于另claim“额定视在容量”吗？不可跨claim借结果。计算正确不证明参数来自可靠工程输入。</p>
+<h2 id="section-5">工作坊四：条件、充分必要与逆命题</h2>
+<p>材料：来源“若C且D，则A成立”。答案只说“若C，则A成立”。条件D被删，缺的是合取必要前提。来源没有说C是A必要条件，也没说A推出C或D。</p>
+<p>把教学逻辑写成(C∧D)→A。它不蕴含C→A，也不蕴含A→(C∧D)。例子取C真、D假、A假，来源条件命题仍可真，但C→A为假。取A真、C假，原条件命题可真，但逆命题为假。用反例比背“不能逆推”更清楚。</p>
+<p>参考答案：忠实提取答案C→A可以faithful，而事实支持不足或冲突取决于实际来源。若提取器悄悄补D，是不忠实提取错误答案，不应用“补正确条件”冒充审核成功。Revision可根据已有来源提议实质补回D，但不能直接通过，需新版本完整重审。</p>
+<h2 id="section-6">工作坊五：结构纠正与业务修订计数</h2>
+<p>材料：Generation1次，Extractor1次，Fact初次漏项→纠正1次，Domain1次；合法Fact指出错误并提供绑定修复，Revision1次，v2提取1次，Fact1次、Domain1次。共多少模型请求？</p>
+<p>参考答案：9次。初次结构Fact失败但有限纠正恢复；业务Revision一次；v2全双审完成，仍要看实质改正与未解决项。不能计“第一次5个阶段”或只统计成功响应。并发不减少请求，只有墙钟关键路径可能缩短。</p>
+<p>追问：v2只重审Fact，Domain结果沿v1，是否完成闭环？不完成。新答案可能引入工程断言；版本不能复用旧结论。若没发生Revision，after/re_review应为空，不创建一张假成功表。</p>
+<h2 id="section-7">工作坊六：断点、重复和发布</h2>
+<p>材料：260输入行，两批128和末批4；第130行故障，第259行与第0重复。要求画事务边界、恢复next_row及record/duplicate/identity计数。</p>
+<p>参考答案：故障后已提交128，失败批全回滚；恢复后输入进度260，规范正文259，重复来源1，缺原ID内部身份260。发布需验证各分片状态、正文/区间/FTS，不能仅看progress=260。原text_hash查到规范正文，duplicate保留原来源行。</p>
+<p>追问：残留writer-lock文件可以删吗？不应凭文件存在决定，OS锁会在退出释放；先查实际进程和日志。不清空数据库和WAL，不重复下载。发布新文件，不自动切换日常服务。</p>
+<h2 id="section-8">工作坊七：误支持与采用决定</h2>
+<p>材料：33留出微调矩阵[[10,0,0],[3,9,1],[1,1,8]]。请算支持P/R/F1、accuracy、macro-F1和两种误支持率，再给采用建议。</p>
+<p>参考答案：P10/14≈0.7143，R1，F1≈0.8333；accuracy27/33≈0.8182，macro≈0.81935；错误支持4/23非支持真值，4/14支持预测。总体提高不意味着审核可靠，因为错误支持从基座0/23增长。可保留仅诊断，不能替生产判断，需说明小样本/单种子/单文档/用户监督。</p>
+<p>追问：以F1最高选择SSIAG表现最好epoch是否允许？不允许，这会泄漏留出。验证macro-F1同分选最早是事前规则，封存后一次留出。</p>
+<h2 id="section-9">工作坊八：HTTP未知状态和重启</h2>
+<p>材料：POST已发但客户端超时，页面不知道run_id。正确处理是先查历史/活动运行，不自动重发。服务重启将未完任务interrupted，GET旧结果不补算；如果有部分对象保留则标不完整。</p>
+<p>参考答案：浏览器按钮锁只是当前页，不能保证多页/HTTP客户端exactly-once。持久化run/config在模型前短事务可帮助核对接受事实，但并不创造供应商请求幂等。取消也不能保证已接收的远端请求马上停止计费。</p>
+<p>追问：学习站打不开，能否为了修它停止8765？不需要，8770静态服务和审核分离。公开站不应载入运行库、token或完整响应；教学材料用必要脱敏摘要，不发布私有原件。</p>
+<h2 id="section-10">工作坊验收方式</h2>
+<p>请先不用看参考答案，画对象表/状态/公式，再对照源码路径。能准确指出“程序可证明的事实”和“仍需要模型/人工判断的语义”比背所有协议名更重要。回答里若把哈希、相关性、支持、业务处置和安全认证混在一起，就回到第01、08章。</p></article><footer><a href="19-glossary.html">← 19 术语词典：每个词对应哪个工程对象</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">工作坊一：从一句话列出全部审核义务</a><a href="#section-3">工作坊二：作用域与同文字</a><a href="#section-4">工作坊三：单位工具与类别</a><a href="#section-5">工作坊四：条件、充分必要与逆命题</a><a href="#section-6">工作坊五：结构纠正与业务修订计数</a><a href="#section-7">工作坊六：断点、重复和发布</a><a href="#section-8">工作坊七：误支持与采用决定</a><a href="#section-9">工作坊八：HTTP未知状态和重启</a><a href="#section-10">工作坊验收方式</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

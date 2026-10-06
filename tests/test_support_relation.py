@@ -56,7 +56,7 @@ class WarrantTests(unittest.TestCase):
   out=asyncio.run(run());self.assertFalse(out.execution_issues);self.assertEqual(len(seen),2);self.assertIn('source-support-relation-v5',out.findings[0].component_reviews[0].rationale)
   from backend.assembly import ComponentFactory
   from backend.config import ServiceConfig
-  manifest=ComponentFactory(ServiceConfig(profile='synthetic_fixture')).manifest(None)
+  manifest=ComponentFactory(ServiceConfig(profile='synthetic_fixture',verification_schema=13)).manifest(None)
   self.assertEqual(manifest['template_sha256']['independent'],hashlib.sha256(seen[0].messages[0].content.encode()).hexdigest())
 
 if __name__=='__main__':unittest.main()

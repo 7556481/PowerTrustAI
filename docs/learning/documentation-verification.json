@@ -1,0 +1,200 @@
+{
+  "source_commit": "61080300b0db47adaf754f17fc7479f36da0f024",
+  "chapters": [
+    {
+      "file": "01-product.md",
+      "characters": 1900,
+      "cjk_characters": 1396,
+      "h2_sections": 6
+    },
+    {
+      "file": "02-architecture.md",
+      "characters": 2823,
+      "cjk_characters": 1257,
+      "h2_sections": 6
+    },
+    {
+      "file": "03-agents.md",
+      "characters": 2139,
+      "cjk_characters": 1299,
+      "h2_sections": 7
+    },
+    {
+      "file": "04-harness.md",
+      "characters": 2230,
+      "cjk_characters": 1261,
+      "h2_sections": 7
+    },
+    {
+      "file": "05-rag.md",
+      "characters": 2144,
+      "cjk_characters": 1452,
+      "h2_sections": 8
+    },
+    {
+      "file": "06-retrieval-math.md",
+      "characters": 4509,
+      "cjk_characters": 2059,
+      "h2_sections": 12
+    },
+    {
+      "file": "07-corpus.md",
+      "characters": 3012,
+      "cjk_characters": 1797,
+      "h2_sections": 10
+    },
+    {
+      "file": "08-verification.md",
+      "characters": 2108,
+      "cjk_characters": 1398,
+      "h2_sections": 7
+    },
+    {
+      "file": "09-engineering-tools.md",
+      "characters": 1802,
+      "cjk_characters": 1162,
+      "h2_sections": 6
+    },
+    {
+      "file": "10-api-storage.md",
+      "characters": 2051,
+      "cjk_characters": 1165,
+      "h2_sections": 7
+    },
+    {
+      "file": "11-supervision-metrics.md",
+      "characters": 2886,
+      "cjk_characters": 1676,
+      "h2_sections": 10
+    },
+    {
+      "file": "12-training-nli.md",
+      "characters": 4767,
+      "cjk_characters": 1849,
+      "h2_sections": 13
+    },
+    {
+      "file": "13-local-nli.md",
+      "characters": 1755,
+      "cjk_characters": 898,
+      "h2_sections": 6
+    },
+    {
+      "file": "14-code-tour.md",
+      "characters": 5988,
+      "cjk_characters": 1303,
+      "h2_sections": 8
+    },
+    {
+      "file": "15-failures.md",
+      "characters": 2274,
+      "cjk_characters": 1544,
+      "h2_sections": 11
+    },
+    {
+      "file": "16-performance.md",
+      "characters": 1723,
+      "cjk_characters": 1071,
+      "h2_sections": 7
+    },
+    {
+      "file": "17-interview.md",
+      "characters": 2749,
+      "cjk_characters": 1679,
+      "h2_sections": 9
+    },
+    {
+      "file": "18-operations.md",
+      "characters": 2492,
+      "cjk_characters": 1125,
+      "h2_sections": 8
+    },
+    {
+      "file": "19-glossary.md",
+      "characters": 3928,
+      "cjk_characters": 1981,
+      "h2_sections": 5
+    },
+    {
+      "file": "20-workshops.md",
+      "characters": 2840,
+      "cjk_characters": 1765,
+      "h2_sections": 9
+    }
+  ],
+  "code_references": [
+    {
+      "file": "services/structured_model.py",
+      "symbol": "strict_json",
+      "start_line": 18,
+      "end_line": 21,
+      "file_sha256": "a4a5265f183c6e78223aea9d1ebd1d79bca5c93dab8b65d6cda7565e25c95245",
+      "excerpt_sha256": "552dc767e2a2641f0e3149e139b410c31cc7885cd6616113ffb0b919b71e3e5e"
+    },
+    {
+      "file": "rag/semantic.py",
+      "symbol": "fuse_ranks",
+      "start_line": 149,
+      "end_line": 154,
+      "file_sha256": "ab0a24946a2b8757aa838c4181649f9f1820d9e22a7c2123de33af3a8f7ee0f6",
+      "excerpt_sha256": "08176d496a554214a252c23434791d23dab4aff0703cba0206cfdf040faa284c"
+    },
+    {
+      "file": "rag/corpus_build.py",
+      "symbol": "source_identity",
+      "start_line": 10,
+      "end_line": 14,
+      "file_sha256": "9a2345519e3bae7e931c8cb033015e852de265a4df9a712d3e37e05ef469d6ba",
+      "excerpt_sha256": "c84fb1b29a6628fadbe3c8627e5af0f8ac88ff00c1c014d359a700e236fdf012"
+    },
+    {
+      "file": "backend/store.py",
+      "symbol": "RunStore.tx",
+      "start_line": 50,
+      "end_line": 56,
+      "file_sha256": "5f800f7fd9abfb7306f1338612fcd098cc04e7aa2d9fde9061da1d5e3694edc2",
+      "excerpt_sha256": "a147a0de482cb0fdc50b6c0d748ff113291ba65b649db53a42eeb21a8fc770ca"
+    },
+    {
+      "file": "services/bounded_repair.py",
+      "symbol": "eligible_repairs",
+      "start_line": 21,
+      "end_line": 31,
+      "file_sha256": "8d7e473a2726467616771f37749fa84bb3340311e1a5577cc2a3787f2c546bb3",
+      "excerpt_sha256": "bfaf15e73f41ea2f4a544be97b69039c264daee19fbd86b541dc8a62b0677f62"
+    },
+    {
+      "file": "tools/unit_conversion.py",
+      "symbol": "compute",
+      "start_line": 14,
+      "end_line": 24,
+      "file_sha256": "b4b1737ea09e0ec99c528a512ca4c27815082422a6ebdf24e31e7f56b8e774b9",
+      "excerpt_sha256": "e96a1607c84a12d7654acda95d265ca57046ad4207a3cca792210105082aee4e"
+    },
+    {
+      "file": "backend/store.py",
+      "symbol": "RunStore.recover",
+      "start_line": 58,
+      "end_line": 60,
+      "file_sha256": "5f800f7fd9abfb7306f1338612fcd098cc04e7aa2d9fde9061da1d5e3694edc2",
+      "excerpt_sha256": "81c466174821c6394822f496e87bb78476f7be272641608277fc47edca0a5372"
+    }
+  ],
+  "old_pdf_reference": [
+    {
+      "file": "PowerTrustAI_Project_Study_Handbook_20261003.txt",
+      "characters": 21033,
+      "cjk_characters": 12904,
+      "historical_only": true
+    },
+    {
+      "file": "PowerTrustAI_Project_Study_Interview_Handbook_v0.1-r1.txt",
+      "characters": 45731,
+      "cjk_characters": 21560,
+      "historical_only": true
+    }
+  ],
+  "total_characters": 56120,
+  "total_cjk": 29137,
+  "old_content_reused": "Conceptual/math ideas reviewed and rewritten; new current training/NLI/corpus chapters, no old status copied as current."
+}

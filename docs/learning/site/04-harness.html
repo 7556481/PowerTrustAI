@@ -1,0 +1,28 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04 Harness：状态机、并发、有限纠正与完整重审 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 61080300b0db · learning-site-v1, 2026-10-06 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">04 Harness：状态机、并发、有限纠正与完整重审</h1>
+<h2 id="section-2">状态机是什么</h2>
+<p>状态机把“现在做到哪一步”和“允许下一步做什么”显式化。harness/states.py列举状态及转移集合，runtime.py执行转移并记录Trace。与随处if/while相比，显式状态能拒绝“审核未完成就直接completed”的非法路径。终态包括通过、拒绝、待补充、执行未完成、复核、失败和取消。</p>
+<pre><code class="language-text">received → validated → retrieving → generating
+                                     ↓
+                 extracting_claims → verifying → deciding
+                         ↑                         ↓
+                         └──── revising（最多一次）─┘</code></pre>
+<p>已有回答入口从validated进入提取，跳过生成。没有实质回答时进入needs_information而非把模板当成功答案。中断、失败与业务不足是不同终态，实际归档保存终止原因。</p>
+<h2 id="section-3">冻结与并发：共享什么，不共享什么</h2>
+<p>提取完成后，两审核收到同一不可变答案及claim tuple。事实和领域用途检索可以顺序组织，模型审核再并发。asyncio并发适合等待网络，不等于CPU并行，也不意味着请求成本减半。如果一个耗时20秒、另一个15秒，双审墙钟近似较慢者加开销，但仍有两笔请求。</p>
+<p>两审核不把对方输出放进首轮提示，避免“事实Agent说对所以领域也说对”。并发失败不能使另一份有效结果消失。保存部分结果时仍标明哪些必需步骤缺失，政策不能以存在一份结果证明全执行完成。</p>
+<h2 id="section-4">有限格式纠正与Revision不是一回事</h2>
+<p>services/structured_model.py对一条结构请求最多一次有限纠正。它处理JSON、漏字段、错ID等输出合同问题；纠正后仍非法就记录失败，不静默填充。业务Revision则是在已完成的审核发现基础上改答案，需要新回答版本、重新提取和双审。前者不应计为“答案已改正”，后者不应只计一次模型调用成功。</p>
+<p>教学算例：初次Fact漏一个组件→一次纠正补齐→Fact阶段合法。这只是结构恢复。如果合法结果指出错误，再Revision把错误改正并全重审，才形成实质业务闭环。结构纠正、业务修订、通过三个计数要分别记。</p>
+<h2 id="section-5">预算、超时和停止</h2>
+<p>RunBudget控制每运行的模型、工具、检索和修订资源，ModelBudget实际记调用号与deadline。保留有限纠正、最多一次Revision及超时，不为一批开发题临时设任意总帽来掩盖设计问题。结构上引用分组可能增加调用，预算须与完整覆盖兼容；耗尽时保存执行缺口，不减少必需检查假装完成。</p>
+<p>取消是合作式的：协程取消不能保证底层线程或网络对端立即停止。后台编码/检索资源需要drain后才能复用或关闭。操作系统线程CPU计算不会因await被自动打断，因此本地模型采用受控工作线程或子进程。</p>
+<h2 id="section-6">一次Revision的门控与记录</h2>
+<p>ProductAuditPolicy检查真实执行、适用义务和发现，不给模型最终通过权。明确可修复普通错误可以一次Revision；缺证据并非一律可修复。services/bounded_repair.py要求实质replacement与当前选中原文绑定，faithful adverse component可作为局部修复入口，其他缺口不必先消失，但也不能被删除。</p>
+<p>修订后answer_version增加。旧finding仍指v1，v2必须重新提取对象和按新版本构建检索绑定。新答案引入的新主张同样审核，不能只检查修复摘要。未解决发现、执行问题及问题解决程度独立保留。</p>
+<h2 id="section-7">如何验证完整闭环</h2>
+<p>测试需要验证状态序列和对象关系：v1错→Revision→v2新claims→双重审→政策；不是只断言Revision被调用。反例：把v1 claims原样塞给v2审核，可能审核了旧错误而不是新答案。另一个反例：只重跑Fact没重跑Domain，新增工程承诺没有被审。</p>
+<p>真实早期e1c6…运行有自然一次Revision及8次请求，最终仍复核；最新ab338…没有修复建议，0Revision。两者配置与日期不同，不能拿早期成功证明最新自动修订已验收。结构测试覆盖机制，固定真实批次验证自然触发与实际改正。</p>
+<h2 id="section-8">练习与面试</h2>
+<p>练习：Generation调用成功但返回没有引用的拒答，应该进入哪个路径？参考：结合substantive_answer与实际Evidence判断无实质回答，后续提取双审不适用，待补充；若连接失败则执行未完成，不能说证据在全库不存在。</p>
+<p>追问：为什么一次而非多次Revision？参考：控制成本、避免模型把问题删到通过、保留未解决限制。一轮是当前有界产品选择，不是理论最优；扩大必须另行评测，不能在看到题目失败后循环刷成功。</p>
+<p>面试可说：“Harness管理显式状态和有界资源。两审核并发但共享冻结对象；格式纠正与业务Revision分开，Revision后完整重提取双审，历史版本不可覆盖。”</p></article><footer><a href="03-agents.html">← 03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">状态机是什么</a><a href="#section-3">冻结与并发：共享什么，不共享什么</a><a href="#section-4">有限格式纠正与Revision不是一回事</a><a href="#section-5">预算、超时和停止</a><a href="#section-6">一次Revision的门控与记录</a><a href="#section-7">如何验证完整闭环</a><a href="#section-8">练习与面试</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

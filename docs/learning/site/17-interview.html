@@ -1,0 +1,43 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>17 深入面试、公式和代码练习 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 61080300b0db · learning-site-v1, 2026-10-06 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">17 深入面试、公式和代码练习</h1>
+<h2 id="section-2">30秒项目介绍：先说做了什么</h2>
+<p>可用表达：“PowerTrustAI是本机电力资料问答与已有回答辅助审核系统。我用一个有界Harness组织生成、主张提取、独立事实/领域审核和一次修订；SQLite保存版本化原文与运行记录。重点解决证据作用域、条件因果、失败隔离与可追溯性，并做了固定检索/训练实验。模型语义和自然修订仍有未验收限制，没有把它称工程认证。”</p>
+<p>这段不冒认所有代码都是手工独立设计，也不虚构生产用户量/准确率。个人贡献可描述你实际参与的需求定义、监督确认、技术决策、验证和代码理解；若AI协助实现，要能逐段解释，而不是隐藏协作过程。</p>
+<h2 id="section-3">架构追问</h2>
+<p>问：为什么不用多个模型投票？参考答：相同基座/资料相关误差，投票不形成证据。系统按义务分工，Fact与Domain独立，最后确定性政策；NLI只旁路。追问何时多模型有用：可做独立对照或分歧诊断，但须评测误差相关性、成本和权责，不能直接升级主结论。</p>
+<p>问：为什么没有另一个Planner Agent？参考答：当前流程和资源边界明确，Harness已能管理状态、检索、取消和有限闭环。新Planner会增加不确定输出与预算，没有实际收益证据。现有设计不是宣称框架无用，而是按问题复用。</p>
+<p>问：为什么引入ClaimExtractor？参考答：答案整体难逐项绑定依据，提取主张组件后可独立审核；但分类错误会造成审核错对象，需冻结锚点、覆盖检查和忠实性异议。不能说提取本身消除了幻觉。</p>
+<h2 id="section-4">数据与安全追问</h2>
+<p>问：哈希能证明什么？参考答：内容/身份一致，不证明权威、支持或安全。来源未知不能伪造；内部ID明确区分原ID。追问同样正文来自两机构：正文可精确去重，但来源谱系分别保留。</p>
+<p>问：为什么旧Evidence不能用现在检索补？参考答：运行只证明当时交付，当前知识变化不能回填过去读过的材料。answer/knowledge版本绑定、GET只读、旧协议解释是复现边界。</p>
+<p>问：本机会话是否等于公网安全？参考答：没有。服务当前回环单用户，固定令牌与HttpOnly会话改善日常体验，DeepSeek密钥在服务端。多用户身份、公网TLS、权限和审计需另做，不能把本机验收推广。</p>
+<h2 id="section-5">RAG与算法追问</h2>
+<p>问：Dense为何不一定更好？参考答：语义相似可以召回主题背景而漏精确条件、数值或来源范围。实际固定对照有收益和退步，默认没因“模型先进”切换。RRF按名次合并也可能挤出必要组合。</p>
+<p>问：FTS5是否天然支持中文？参考答：不自动。项目预分词，固定jieba词典/版本和查询处理，验证术语/自然问句/同义及误召回；库规模变化后避免全扫描。</p>
+<p>问：reranker能召回池外证据吗？参考答：不能，它只重排输入池。候选侧截断是该实验配置，不能照搬NLI支持全文要求。logit不能当事实概率。</p>
+<h2 id="section-6">微调追问</h2>
+<p>问：Tiny为什么不能当NLI基线？参考答：它是语言预训练编码器加随机分类头，分类任务未训练；MiniLM官方NLI头已有任务学习，需核对label顺序和完整加载。比较基座必须区分这个起点。</p>
+<p>问：loss接近零为何不能部署？参考答：可记忆小数据；验证F1四epoch不变，留出总体提升却4个错误supported。需家族/文档隔离、固定一次测试和风险分母，不凭loss。</p>
+<p>问：F1涨为何只有诊断？参考答：单种子33条SSIAG、AI辅助监督、三分类不覆盖not_assessable/工程义务；错误支持由0/23增4/23，supported预测中错误4/14。权责必须受证据限制。</p>
+<h2 id="section-7">执行与产品追问</h2>
+<p>问：结构失败如何处理？参考答：一次有限纠正，仍非法则保留部分与执行缺口，不能静默补ID。业务Revision是另一流程，最多一次且全重审。批次单题失败隔离，共享故障停止。</p>
+<p>问：Revision调用成功就完成了吗？参考答：要检查实质内容改正、问题仍被回答、新版本重提取双审完整及处置合理；最新原PF题没有修复建议，0Revision，应如实列未验收。</p>
+<p>问：SQLite够用吗？参考答：本机单活动运行与短事务够当前需要；WAL不提供多写者并行。全文构建独立库、唯一写者和不可变发布；公网多用户负载另需设计，不能凭当前bench推断。</p>
+<h2 id="section-8">公式练习与参考答案</h2>
+<ul>
+<li>给定归一化q=(0.6,0.8)，d=(1,0)，余弦是多少？答案0.6。不是60%事实正确。</li>
+<li>A在BM25第一、Dense缺失，B两路第二，k=60。答案A=1/61≈0.016393，B=2/62≈0.032258，B胜。缺失路没有rank0贡献。</li>
+<li>supported TP=10、FP=4、FN=0。答案precision10/14、recall1、F1=20/24≈0.8333；误支持真值分母需额外知道非支持数。</li>
+<li>[unknown,grade0,grade2]的MRR界限？答案[1/3,1]，unknown不删；实际评测器可能不报点估计，要说明实现。</li>
+<li>正确答案限定C被proposition删了，来源支持原答案。答案：保留提取异议，有效not_assessable，不用来源支持补提取丢失。</li>
+</ul>
+<h2 id="section-9">代码阅读练习与参考答案</h2>
+<ul>
+<li>找ModelBudget.claim为何先检查deadline再计used。参考：到期不应启动新请求；实际调用数量独立于提示声称。</li>
+<li>找RunStore.recover为何不调用Harness。参考：只标interrupted，无安全续执行证明，避免重发。</li>
+<li>找source_identity为何不用text_hash当来源ID。参考：同正文不同来源行必须可区分，text_hash另存去重。</li>
+<li>找LocalNLI.diagnose为何锁并发、超时后close。参考：避免响应交叉或失配，失败隔离且不继续用坏worker。</li>
+<li>找原引用scope为何按citation_index隔离。参考：审核的是对应答案区间的原依据，不能借另项来源证明本项引用。</li>
+</ul>
+<h2 id="section-10">简历写法与不能写的说法</h2>
+<p>可以写实现了版本化Evidence、严格作用域、可恢复流式构建、有界状态机、真实固定评测和NLI诊断，并注明本机原型。数字使用明确样本及指标，例如33条文档留出macro-F1，同时披露误支持。不能写“工程审核准确率82%”“四Agent保证无幻觉”“已服务全电力行业”或“完整库已入库”而没有完成记录。</p>
+<p>个人动机、为什么选择某次设计及放弃方案可由所有者与ChatGPT补充，见待补清单；已有代码和结论不因等待这些反思而空着。</p></article><footer><a href="16-performance.html">← 16 性能与可观测性：测量到底属于谁</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">30秒项目介绍：先说做了什么</a><a href="#section-3">架构追问</a><a href="#section-4">数据与安全追问</a><a href="#section-5">RAG与算法追问</a><a href="#section-6">微调追问</a><a href="#section-7">执行与产品追问</a><a href="#section-8">公式练习与参考答案</a><a href="#section-9">代码阅读练习与参考答案</a><a href="#section-10">简历写法与不能写的说法</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

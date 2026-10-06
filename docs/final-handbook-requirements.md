@@ -110,3 +110,7 @@
 绑定最终源码：generation/answer_constraints、support_relation/bounded_repair、product_policy/Revision、presentation。解释正文限定与审核补充的区别、因果主体/反向推理、逐字守卫保守性、修复资格与真实成功区别、模型遗漏/分类及失败停止、固定部分库恢复。保留本轮真实未通过和历史失败；Markdown＋本地阅读站要求不变，验收后共同编写。
 
 本轮待补知识点（identity-fidelity-v1）：命名空间内部身份与原ID缺失、跨batch断点和事务回滚、OS唯一写者锁、重复正文谱系、提取忠实性与事实真值分离、原引用反向支持风险、repair=null及自动Revision未验收。绑定最终提交和私有证据；本轮不建学习站、不重写手册。
+
+## 2026-10-06 正式学习站已授权并开始交付
+
+用户明确要求本轮先站点，再审核故障；历史“本轮仅素材、不建站”不再限制本轮。已写18主题章＋词典/工作坊，正文Markdown、静态网页/搜索/导航/高亮及实际源码核对。入口docs/learning/index.md和start-learning.cmd；源文件进入Git，旧PDF不覆盖，PDF仅可选。当前版本覆盖架构、算法手算、流式库、监督/微调/NLI、源码、失败、运维及面试，后续按questions-for-chatgpt深化个人取舍，不视为永不更新的最终成品。真实12题审核失败已纳入，不编造验收成功或暂用离线测试替代。

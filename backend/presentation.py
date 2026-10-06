@@ -91,7 +91,7 @@ def unresolved_items(result):
         cit=citations[i] if type(i) is int and 0<=i<len(citations) else {}
         reason=f.get('rationale','具体原因未提供')
         from services.support_relation_v5 import relation,MARKER
-        if MARKER in reason:
+        if MARKER in reason or ' [compact-support-assessment-v1] ' in reason:
             rel=relation(reason)
             if rel.get('raw_model_status')!=f.get('status'):
                 detail='来源条件必要性或保留关系尚不确定' if rel.get('semantic_uncertain') else '完整主张、必要条件、因果方向或来源权限仍有未满足项'

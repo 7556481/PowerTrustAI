@@ -330,3 +330,8 @@
 ## 最新收尾
 
 - [英文身份与忠实性收尾 v1](identity-fidelity-v1.md)：稳定内部身份、唯一续建、实际0Revision与首版未验收能力。
+
+## 正式学习站与审核共同诊断
+
+- [学习站Markdown首页](learning/index.md)，静态入口learning/site/index.html；20章节源在learning/chapters，待补questions-for-chatgpt，源码核对source-check、documentation-verification。tools/learning_site.py和start-learning.cmd负责纯本地构建/阅读。
+- [本轮诊断与未通过验收](audit-stability-learning-v1.md)：47实际诊断、compact14未验收、固定12题0完成及停止遗漏，私有learning-audit-v1保留全部原结果/冻结/审阅包。日常恢复13；无新训练/排名/Agent。

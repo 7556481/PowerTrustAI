@@ -1,0 +1,21 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 性能与可观测性：测量到底属于谁 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 61080300b0db · learning-site-v1, 2026-10-06 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">16 性能与可观测性：测量到底属于谁</h1>
+<h2 id="section-2">端到端时间不是模型推理时间</h2>
+<p>用户从提交到答案包含排队、检索、查询转换、生成、提取、工具、双审、可能的纠正/Revision、持久化和页面轮询。第一次反馈只是用户看到已接收或阶段，不是答案完成。冷启动包含模型加载、数据库封印检查和FTS打开，与热请求不能混平均。</p>
+<p>教学构造：排队2秒、检索0.4、生成8、提取4、Fact12/Domain10并发、保存0.2，关键路径约26.6秒，而不是把两个审核相加36.6秒。调用量仍生成/提取/双审4次，不因并发减半。若Fact纠正又12秒，关键路径增长；要保存初次结构成功与纠正成本。</p>
+<h2 id="section-3">请求归属：避免全运行列表切片重叠</h2>
+<p>model_adapter/runtime.py使用ContextVar保存invocation_id、component和answer_version，实际call_number全运行唯一。并发审核共享预算records，但不能用“开始时len到结束时len”切片推断阶段请求；两个阶段并行观察可能重叠，曾出现2调用/3轨迹。当前按实际调用归属记录，不按提示文本猜，也不删重复观察隐藏错误。</p>
+<p>Trace的stage duration、ModelUsage的elapsed和服务端created/ended时间可能不同。供应商只给usage时，不应从字符数伪造token数；失败usage未知就未知。cache_hit_tokens与cache_miss_tokens、output_tokens分开，缓存命中也不表示总请求免费或语义正确。</p>
+<h2 id="section-4">哪些开销适合优化</h2>
+<p>同知识版本、同配置、同查询可复用已验证检索结果；答案版本或候选scope变化要重新绑定。请求内重复Evidence可按身份去重，不能把同文字不同来源强合并。原文完整性校验可在构建/发布/打开分层，命中严格回查，避免每query全库SHA扫描。</p>
+<p>大库采用倒排而非全快照扫描是规模优化，不是改变排名试验。冷启动数据库字节封印检查移到启动线程，避免健康页面超时，但仍需完成验证才ready。缓存仅改善重复工作，不减少必需覆盖或条件。</p>
+<h2 id="section-5">不该为了速度做什么</h2>
+<p>不能静默截断Evidence、删难组件、减少双审、用旧v1判断审核v2、只验证原修复句或提高通过率。不适用检查应由任务范围有理由地标记，不是程序不调用就默认通过。模型请求可批量的对象有有界分组，但每项scope独立，分组过大又会造成响应容量和漏项。</p>
+<h2 id="section-6">资源测量与真实记录</h2>
+<p>RSS是进程驻留内存，WorkingSet也是时点观测；训练采样峰值不等于整机峰值。父venv进程几MB不代表实际训练只用几MB，应检查子进程。CPU线程限制4不是“使用了4个独立Agent”。本地NLI加载、推理、服务内存另计，不把网络等待的墙钟说成CPU计算速度。</p>
+<p>真实扩大MiniLM训练112.8836秒含验证/保存；加载0.1332秒另计；SSIAG微调推理3.8054秒是33小文本，不可推断长工程问答端到端。ab338…4请求18.089秒是已有回答审核、不含Generation，与6请求问答不能直接称优化了多少。</p>
+<h2 id="section-7">一批固定题如何报告</h2>
+<p>每题记录原始耗时、请求/纠正次数、token、阶段和执行问题，汇总中位数/范围有明确样本数。12题不足以把P95当稳定SLA；单题的首反馈、端到端及阶段可同时报告。源代码/配置/知识固定，批次中不能修一个bug后将新旧结果混为同一版。</p>
+<p>性能与质量一起看：一个题更快却只返回拒答模板，不算高质量提速；平均请求少因5题审核失败，也不能称性能提高。结构完整、解决问题、错误放行先分层，再解释成本。</p>
+<h2 id="section-8">面试练习</h2>
+<p>练习：一题没有usage，但响应已收到并结构失败，如何记token？参考：实际请求计入，token按供应商usage未知，不估成0；原始响应、校验诊断和有限纠正保留。</p>
+<p>面试说法：“我用阶段invocation归属解释并发成本，区分冷启动、推理和端到端。优化重复校验和大库查询，而不是截断证据或减少义务；小样本性能只报告实际值。”</p></article><footer><a href="15-failures.html">← 15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="17-interview.html">17 深入面试、公式和代码练习 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">端到端时间不是模型推理时间</a><a href="#section-3">请求归属：避免全运行列表切片重叠</a><a href="#section-4">哪些开销适合优化</a><a href="#section-5">不该为了速度做什么</a><a href="#section-6">资源测量与真实记录</a><a href="#section-7">一批固定题如何报告</a><a href="#section-8">面试练习</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

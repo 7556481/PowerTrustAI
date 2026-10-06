@@ -1,0 +1,98 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14 核心源码阅读路线：输入、调用、异常与取舍 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 61080300b0db · learning-site-v1, 2026-10-06 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">14 核心源码阅读路线：输入、调用、异常与取舍</h1>
+<h2 id="section-2">如何读，不被版本文件淹没</h2>
+<p>先看backend/__main__.py和assembly.py，再读OfflineHarness.run，最后才深入当前Agent协议。目录里旧v4/v6/v9不是多个并行审核器，而是历史契约保留。当前manifest明确schema和prompt；不要凭文件名最大数字猜采用版本。</p>
+<p>本章代码摘录由write-excerpts脚本按AST函数/实际行号读取当前源码，记录文件及片段SHA。省略的部分明确是摘录，不当完整函数。你可以从同名函数继续读上下文。正文解释的是责任，代码才是异常和字段的最终依据。</p>
+<h2 id="section-3">第一条路线：从提交到冻结答案</h2>
+<p>ApplicationService.submit验证配置、排队并保存TaskRequest。worker建立Bundle，调用OfflineHarness.run；runtime中invoke统一处理期限、使用量、执行问题和observer。问答先检索、Generation，已有回答直接冻结；提取服务输出claims，validate_extraction检查覆盖和绑定。</p>
+<p>阅读任务：找到answer_id/version在哪里生成，找到substantive_answer=False为何绕过提取。若生成未成功，是否可能还有领域模型请求？按状态和usage回答，别只看函数名。</p>
+<h2 id="section-4">第二条路线：Evidence怎样变成typed basis</h2>
+<p>KnowledgeStore.evidence从固定版本片段构造原文对象；RetrievalSession保存命中与交付，quote_candidates提供字面候选，EvidenceScope为独立审核和每项原引用建立不同命名空间。解析器把合法选择映射到TextExcerpt或metadata/calculation等正式对象；core.typed_evidence负责类型义务。</p>
+<p>阅读任务：一个quote属于当前原引用scope但text相同于另一scope，借用是否合法？答案是不合法，作用域是审核对象与交付身份，不仅文字。程序可验证这个关系，不用模型判断“看起来同源”。</p>
+<h2 id="section-5">第三条路线：政策与Revision</h2>
+<p>ProductAuditPolicy.decide_context读取执行、分类、支持、领域和引用结果。bounded_repair.eligible_repairs只允许存在原文绑定建议的faithful adverse对象。Revision不自行通过；runtime创建新版本后回到提取和双审。观察review_rounds和answer.versions而非只看usage中有没有revision组件。</p>
+<p>阅读任务：为什么一个insufficient finding不必自动修订？因为可能是缺资料；没有已交付原文能支撑实质replacement时不能发明修复。反例中即使可修另一个错误，其他缺口也保留。</p>
+<h2 id="section-6">第四条路线：存储和只读恢复</h2>
+<p>RunStore.tx管理短写事务，index保存版本化对象，result经backend.presentation/serialization安全投影。GET result和NLI读取已存结果，不调用Harness。LocalNLI失败只产生diagnostic对象，主判断已结束，不反向进入Agent输入。</p>
+<p>阅读任务：重启恢复时为什么queued/running变interrupted而不是继续worker？没有供应商幂等保证和完整续执行证明，自动重发会重复收费、改变历史。恢复不等于重新执行。</p>
+<h2 id="section-7">对每个函数问五个问题</h2>
+<ul>
+<li>输入来自用户、数据库、模型还是程序派生？信任边界不同。</li>
+<li>输出是否绑定task、answer和knowledge版本？有没有跨版本缓存？</li>
+<li>哪些非法字段会抛异常，哪些业务未知会合法返回？</li>
+<li>函数是否改变状态/数据库，还是纯转换？</li>
+<li>测试是否走真实生产调用路线，还是只手工构造内部对象？</li>
+</ul>
+<p>例如strict_json拒绝重复键，避免模型输出两个status被普通json.loads静默保留后者。它能保证唯一键，不能保证status语义正确。source_identity生成稳定定位，不证明原来源权威。fuse_ranks融合排名，不执行事实核验。</p>
+<h2 id="section-8">面试阅读练习</h2>
+<p>练习1：注释掉某个validate_review会发生什么？参考：未知/错版本依据可能进入结果，影响政策和存储；不是“更宽容”而是失去边界。练习2：只删除旧协议文件能简化当前模型消息吗？不一定，应检查真正拼装模板与运行profile；清代码目录不等于减少输出字段。</p>
+<p>面试说法：“我能从API沿submit/worker/Harness读到审核解析，解释每个边界可证明什么。代码摘录绑定实际版本和哈希，历史协议不冒充当前默认。”</p>
+<h2 id="section-9">实际代码摘录</h2>
+<p>以下段落由程序读取源码生成，并由source-check.json核对；不是手写伪代码。</p>
+<h3 id="section-10">重复键、非有限值与严格JSON</h3>
+<p>路径 services/structured_model.py，函数 strict_json，行18–21。</p>
+<pre><code class="language-python"><span class="keyword">def</span> strict_json(text):
+    <span class="keyword">return</span> json.loads(text, object_pairs_hook=_object,
+                      parse_constant=<span class="keyword">lambda</span> _: (_ <span class="keyword">for</span> _ <span class="keyword">in</span> ()).throw(
+                          StructuredValidationError(<span class="string">&quot;json_parse&quot;</span>, <span class="string">&quot;$&quot;</span>, <span class="string">&quot;nonfinite_numbers_not_allowed&quot;</span>)))</code></pre>
+<p>输入是模型响应字符串，输出JSON对象；异常仍进入有限纠正，绝不把解析失败变业务通过。</p>
+<h3 id="section-11">名次融合不验证事实</h3>
+<p>路径 rag/semantic.py，函数 fuse_ranks，行149–154。</p>
+<pre><code class="language-python"><span class="keyword">def</span> fuse_ranks(bm25, dense, *, constant=<span class="number">60</span>):
+    scores = {}
+    <span class="keyword">for</span> ranking <span class="keyword">in</span> (bm25, dense):
+        <span class="keyword">for</span> rank, (index, _) <span class="keyword">in</span> enumerate(ranking, <span class="number">1</span>):
+            scores[index] = scores.get(index, <span class="number">0.0</span>) + <span class="number">1.0</span> / (constant + rank)
+    <span class="keyword">return</span> scores</code></pre>
+<p>输入是两路固定排名，输出各片段RRF分；未出现的路不贡献，名次从1。</p>
+<h3 id="section-12">原ID和内部ID分离</h3>
+<p>路径 rag/corpus_build.py，函数 source_identity，行10–14。</p>
+<pre><code class="language-python"><span class="keyword">def</span> source_identity(row,revision,shard,row_number):
+    original=row.get(<span class="string">&#x27;_id&#x27;</span>)
+    missing=original <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> original==<span class="string">&#x27;&#x27;</span>
+    <span class="keyword">if</span> <span class="keyword">not</span> missing:<span class="keyword">return</span> str(original),<span class="keyword">False</span>
+    <span class="keyword">return</span> <span class="string">&#x27;industrycorpus2:row-v1:&#x27;</span>+digest(canonical([revision,shard,row_number]).encode()),<span class="keyword">True</span></code></pre>
+<p>输入含可缺失_id的记录、revision、分片和绝对行号；输出身份和missing标志，不猜出版机构。</p>
+<h3 id="section-13">短事务的commit与rollback</h3>
+<p>路径 backend/store.py，函数 RunStore.tx，行50–56。</p>
+<pre><code class="language-python">    <span class="keyword">def</span> tx(self):
+        <span class="keyword">try</span>:
+            self.db.execute(<span class="string">&#x27;BEGIN IMMEDIATE&#x27;</span>);<span class="keyword">yield</span>;self.db.commit()
+        <span class="keyword">except</span> BaseException <span class="keyword">as</span> exc:
+            self.db.rollback()
+            <span class="keyword">if</span> isinstance(exc,sqlite3.Error):<span class="keyword">raise</span> StorageError(<span class="string">&#x27;Run transaction failed&#x27;</span>) <span class="keyword">from</span> <span class="keyword">None</span>
+            <span class="keyword">raise</span></code></pre>
+<p>写入中异常回滚，SQLite错误转StorageError；网络调用在事务外。</p>
+<h3 id="section-14">一次修订资格不是修订成功</h3>
+<p>路径 services/bounded_repair.py，函数 eligible_repairs，行21–31。</p>
+<pre><code class="language-python"><span class="keyword">def</span> eligible_repairs(finding):
+    <span class="string">&quot;&quot;&quot;At least one faithful adverse component; other gaps remain untouched.&quot;&quot;&quot;</span>
+    <span class="keyword">from</span> dataclasses <span class="keyword">import</span> replace
+    rows=getattr(finding,<span class="string">&#x27;component_reviews&#x27;</span>,())
+    <span class="keyword">if</span> <span class="keyword">not</span> rows:<span class="keyword">return</span> repair_proposals(finding)
+    proposals=[]
+    <span class="keyword">for</span> row <span class="keyword">in</span> rows:
+        <span class="keyword">if</span> row.status.value <span class="keyword">not</span> <span class="keyword">in</span> (<span class="string">&#x27;insufficient_evidence&#x27;</span>,<span class="string">&#x27;contradicted&#x27;</span>):<span class="keyword">continue</span>
+        <span class="keyword">if</span> row.classification_issue <span class="keyword">or</span> row.fidelity_status!=<span class="string">&#x27;faithful&#x27;</span>:<span class="keyword">continue</span>
+        proposals.extend(repair_proposals(replace(finding,status=row.status,component_reviews=(row,))))
+    <span class="keyword">return</span> tuple(proposals)</code></pre>
+<p>输入是当前finding，输出可用原文绑定建议；faithful并且adverse才考虑，repair=null不会自动造建议。</p>
+<h3 id="section-15">确定性标量计算的边界</h3>
+<p>路径 tools/unit_conversion.py，函数 compute，行14–24。</p>
+<pre><code class="language-python"><span class="keyword">def</span> compute(payload):
+    <span class="keyword">if</span> set(payload)!={<span class="string">&#x27;value&#x27;</span>,<span class="string">&#x27;from_unit&#x27;</span>,<span class="string">&#x27;to_unit&#x27;</span>,<span class="string">&#x27;claim_id&#x27;</span>}:<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.input: exact declared fields required&#x27;</span>)
+    value=payload[<span class="string">&#x27;value&#x27;</span>];a,b=payload[<span class="string">&#x27;from_unit&#x27;</span>],payload[<span class="string">&#x27;to_unit&#x27;</span>]
+    <span class="keyword">if</span> type(value) <span class="keyword">not</span> <span class="keyword">in</span> (int,float) <span class="keyword">or</span> <span class="keyword">not</span> math.isfinite(value):<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.value: finite scalar required&#x27;</span>)
+    <span class="keyword">if</span> a <span class="keyword">not</span> <span class="keyword">in</span> PAIRS <span class="keyword">or</span> b <span class="keyword">not</span> <span class="keyword">in</span> PAIRS <span class="keyword">or</span> PAIRS[a][<span class="number">0</span>]!=PAIRS[b][<span class="number">0</span>]:<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.units: known same-dimension units required&#x27;</span>)
+    <span class="keyword">if</span> type(payload[<span class="string">&#x27;claim_id&#x27;</span>]) <span class="keyword">is</span> <span class="keyword">not</span> str:<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.claim_id: program claim binding required&#x27;</span>)
+    converted=value*PAIRS[a][<span class="number">1</span>]/PAIRS[b][<span class="number">1</span>]
+    <span class="keyword">if</span> <span class="keyword">not</span> math.isfinite(converted):<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.output: finite result required&#x27;</span>)
+    <span class="keyword">return</span> {<span class="string">&#x27;input&#x27;</span>:dict(payload),<span class="string">&#x27;output_value&#x27;</span>:converted,<span class="string">&#x27;output_unit&#x27;</span>:b,<span class="string">&#x27;quantity_kind&#x27;</span>:PAIRS[a][<span class="number">0</span>],
+        <span class="string">&#x27;scope&#x27;</span>:<span class="string">&#x27;scalar SI conversion only; user data unverified; no stability, equipment suitability or simulation result&#x27;</span>,
+        <span class="string">&#x27;rule_source&#x27;</span>:<span class="string">&#x27;SI prefix scale whitelist in tools/unit_conversion.py; program rule, not an electrical operating standard&#x27;</span>}</code></pre>
+<p>完整函数可看有限单位表和类别校验；不做潮流或厂站性能分析。</p>
+<h3 id="section-16">恢复状态但不重发</h3>
+<p>路径 backend/store.py，函数 RunStore.recover，行58–60。</p>
+<pre><code class="language-python">    <span class="keyword">def</span> recover(self):
+        <span class="keyword">with</span> self.tx():
+            self.db.execute(<span class="string">&quot;UPDATE runs SET status=&#x27;interrupted&#x27;,ended=?,error_code=&#x27;PROCESS_INTERRUPTED&#x27; WHERE status IN (&#x27;queued&#x27;,&#x27;running&#x27;)&quot;</span>,(now(),))</code></pre>
+<p>SQL只将未完成标interrupted，没有模型调用；已有结果保持原版本。</p></article><footer><a href="13-local-nli.html">← 13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">如何读，不被版本文件淹没</a><a href="#section-3">第一条路线：从提交到冻结答案</a><a href="#section-4">第二条路线：Evidence怎样变成typed basis</a><a href="#section-5">第三条路线：政策与Revision</a><a href="#section-6">第四条路线：存储和只读恢复</a><a href="#section-7">对每个函数问五个问题</a><a href="#section-8">面试阅读练习</a><a href="#section-9">实际代码摘录</a><a href="#section-10">重复键、非有限值与严格JSON</a><a href="#section-11">名次融合不验证事实</a><a href="#section-12">原ID和内部ID分离</a><a href="#section-13">短事务的commit与rollback</a><a href="#section-14">一次修订资格不是修订成功</a><a href="#section-15">确定性标量计算的边界</a><a href="#section-16">恢复状态但不重发</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

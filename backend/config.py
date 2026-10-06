@@ -12,6 +12,7 @@ BASELINE_KNOWLEDGE='k-182e01fab54ebfada841fb108061c127273e9cfcd551b6f5a8888a7692
 class ServiceConfig:
     profile: str='real'
     decision_policy: str='product-v1'
+    verification_schema: int=13
     run_db: Path=ROOT/'data/runtime_local/runs.sqlite3'
     token_file: Path=ROOT/'data/runtime_local/access-token'
     index_db: Path=ROOT/'data/retrieval_local/semantic/corpus.sqlite3'
@@ -31,6 +32,7 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if type(self.verification_schema) is not int or self.verification_schema not in (13,14):raise ValueError('Explicit schema13 or schema14 required')
         if self.decision_policy not in ('product-v1','legacy-v1'):raise ValueError('Unknown decision policy')
         if type(self.nli_enabled) is not bool or not 0<float(self.nli_timeout_seconds)<=60:
             raise ValueError('Invalid local NLI diagnostic configuration')

@@ -81,7 +81,10 @@ class ComponentFactory:
         ORIGINAL=original_template(support_relation_checks=True,support_relation_version=5)
         PROMPT_VERSION='evidence-verification-v9.12-answer-target-fidelity-boundary'
         CONTRACT_VERSION='evidence-verification-output-v9.11'
-        if self.config.fact_strategy=='per_claim_v1':PROMPT_VERSION+='-fact-delivery-v1'
+        if self.config.verification_schema==14:
+            from agents.verification_contract_v14 import SYSTEM,PROMPT_VERSION,CONTRACT_VERSION
+            INDEPENDENT=ORIGINAL=SYSTEM
+        elif self.config.fact_strategy=='per_claim_v1':PROMPT_VERSION+='-fact-delivery-v1'
         hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
             for name in ('core','agents','harness','tools','services','rag','model_adapter','backend') for p in (ROOT/name).glob('*.py')}
         hashes.update({str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
@@ -91,7 +94,7 @@ class ComponentFactory:
             'components':'simulated_synthetic_fixture' if self.config.profile=='synthetic_fixture' else 'real_model_with_demo_domain_rules',
             'model_id':os.environ.get('DEEPSEEK_MODEL_ID') if self.config.profile=='real' else None,
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
-            'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':13,'domain_review':5,'revision':2},
+            'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':self.config.verification_schema,'domain_review':5,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
             'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-category-clarity-v1' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
               'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.2-question-gap-applicability','revision':REVISION_PROMPT_VERSION},
@@ -167,7 +170,7 @@ class ComponentFactory:
                 corpus=seal(store,self.config.knowledge_version)
                 corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=5),
+                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=5),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),

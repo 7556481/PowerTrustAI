@@ -6,7 +6,7 @@ def repair_proposals(finding):
     rationales=[r.rationale for r in rows if getattr(r,'status',None)==finding.status] if rows else [finding.rationale]
     proposals=[]
     for rationale in rationales:
-        marker=next((m for m in (MARKER,' [source-support-relation-v4] ',' [source-support-relation-v5] ') if m in rationale),None)
+        marker=next((m for m in (MARKER,' [source-support-relation-v4] ',' [source-support-relation-v5] ',' [compact-support-assessment-v1] ') if m in rationale),None)
         if marker is None:return ()
         try:relation=json.loads(rationale.rsplit(marker,1)[1])
         except (ValueError,TypeError):return ()

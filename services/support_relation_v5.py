@@ -107,5 +107,7 @@ def normalize(value,group,scopes,answer,claims):
     ec.finish();return v
 
 def relation(rationale):
-    if MARKER not in rationale:return None
-    return json.loads(rationale.rsplit(MARKER,1)[1])
+    markers=(MARKER,' [compact-support-assessment-v1] ')
+    marker=next((m for m in markers if m in rationale),None)
+    if marker is None:return None
+    return json.loads(rationale.rsplit(marker,1)[1])

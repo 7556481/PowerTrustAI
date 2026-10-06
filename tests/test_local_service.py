@@ -148,7 +148,7 @@ class AssemblyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d);md=p/'fixture.md';md.write_text('# synthetic_fixture\n\nVoltage evidence.',encoding='utf-8')
             with KnowledgeStore(p/'knowledge.sqlite3') as index:k=index.ingest(md,'synthetic_fixture').knowledge_version
-            config=ServiceConfig(index_db=p/'knowledge.sqlite3',knowledge_version=k)
+            config=ServiceConfig(index_db=p/'knowledge.sqlite3',knowledge_version=k,verification_schema=13)
             factory=ComponentFactory(config)
             with patch.dict('os.environ',{},clear=True):
                 with self.assertRaises(ConfigurationError):factory.preflight()
