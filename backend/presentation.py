@@ -89,6 +89,13 @@ def unresolved_items(result):
         if f.get('status')=='supported':continue
         i=f.get('citation_index');citations=answer.get('citations',[])
         cit=citations[i] if type(i) is int and 0<=i<len(citations) else {}
+        reason=f.get('rationale','具体原因未提供')
+        from services.support_relation_v5 import relation,MARKER
+        if MARKER in reason:
+            rel=relation(reason)
+            if rel.get('raw_model_status')!=f.get('status'):
+                detail='来源条件必要性或保留关系尚不确定' if rel.get('semantic_uncertain') else '完整主张、必要条件、因果方向或来源权限仍有未满足项'
+                reason='程序有效判断：'+detail+'；原始模型判断 '+str(rel.get('raw_model_status'))+'，原理由：'+reason
         rows.append({'sentence':answer.get('text','')[cit.get('start_offset',0):cit.get('end_offset',0)] or '引用原文绑定未提供',
-            'status':f.get('status'),'reason':f.get('rationale','具体原因未提供'),'citation_index':i})
+            'status':f.get('status'),'reason':reason,'citation_index':i})
     return rows

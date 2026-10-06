@@ -1,5 +1,10 @@
 # 文档索引
 
+## 2026-10-06 审核接口 v2（最新）
+
+[audit-interface-v2](audit-interface-v2.md)：来源条件载体ID/严格绑定、原始与有效判断、旧失败协议投影、新3真实完整执行与修订未触发、ID拒绝/浏览器/重启及构建已停止。源码condition_candidates/support_relation_v5/review_fidelity/answer_body及既有Harness/政策。私有统一包data/runtime_local/audit-interface-v2，不公开真实输入/响应。
+
+
 ## 2026-10-06 首版收尾（最新）
 
 [first-release-v1](first-release-v1.md)：任务范围缺口/部分可修复项、条件同义与精确摘录、protocol5接线失败及修复、实际未完成项、逐任务NLI与跳过/重启、后台构建和覆盖核算。私有统一包在data/runtime_local/first-release-v1；真实数据不入Git。源码policy/runtime、domain/generation/support_relation、backend服务/API/开关和corpus_build。

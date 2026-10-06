@@ -1,5 +1,14 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-06 审核接口 v2（最新）
+
+接续30e48a8，工作区干净/远端一致。source-condition-carriers-v1程序绑定既有完整quote作用域/range/version；support-relation-v5/schema13 v9.11仅选载体ID，不自由复写来源摘录，忠实同义条件/未知保留。independent-review-projection-v2保存原始支持/语义异议，先严格验证ID/类型/覆盖，再程序计算有效NotAssess/需复核；product-v1.4保留旧版。生成language-v8与日常Revision clean-body完整ID拒绝/有限重写，不删技术内容。4真实旧失败离线协议投影3有效复核/1缺项拒绝，不改旧响应、语义真值或失败。
+
+674完整回归，3固定真实run16请求250033token：正常192字符/当前任务pass；功率因数原122/人工复核，模型混淆证据不足与忠实性未知、无可用修复建议，0实际Revision；ID影响工程路径补239字符/复核，均完整执行0契约问题。未再跑。浏览器答案/引用/有效与原始理由、6条新旧记录/请求/版本/Evidence重启不变。NLI off/门禁及aggregate/kc-5894默认不变、不作本轮阻断。详见[audit-interface-v2](audit-interface-v2.md)，私有冻结/原新响应/重放/ZIP在data/runtime_local/audit-interface-v2。
+
+原构建唯一写者已退出，日志明确KeyError:_id；english/high/rank_00934实际仅text/质量指标，无_id。已提交7,373,300行保留，无第二写者/重复下载/发布/换日常快照；按本轮只报告范围，不能重复启动必失败命令或伪造原ID，英文身份格式兼容恢复待后续审阅。日常服务仍8765正常运行；停止新增实验待所有者试用。真实修订未验证、语义未知/多余工程背景等限制保留，手册仅待补知识点。
+
+
 ## 2026-10-06 首版收尾 v1（最新）
 
 接续863e47c，初始工作区干净/远端一致。product-v1.3任务范围缺口分类/单个原文可修复缺陷的一次Revision；support_relation-v4/schema13 v9.10允许忠实同义条件、摘录作用域仍严格；领域v3.2/protocol5明确缺口用途，复用ReliabilityDomainInput。新增分支漏接导致真实AttributeError，保留后定向修复/实际Harness synthetic贯通。生成v7问题范围/来源区域/简洁缺输入；默认aggregate、固定kc-5894、NLI off保持。

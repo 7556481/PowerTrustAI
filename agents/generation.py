@@ -67,6 +67,7 @@ Never output a factual audit pass."""
     system += '\nAnswer language v4: follow the user question language unless the user explicitly requests another language. For Chinese questions, answer in Chinese, including assumptions and missing_information. Answer directly and concisely. An explicit user maximum overrides the default 150-300-character guideline: keep the COMPLETE joined answer_units text, including separators, punctuation and any limitation, within answer_length_constraint.maximum_characters. Plan the whole answer before returning units; do not append unrelated scope or extraction reports. Do not enumerate retrieved fragments or copy unrelated laboratory formulas. Answer the causal why only when directly supported; a related power-angle formula alone is not a reactive-voltage explanation. Include necessary conditions and substantive evidence gaps briefly. Extraction warnings belong in missing_information only when they actually prevent this answer; never invent missing formulas or report every warning as an answer claim. Plain-language explanations must preserve physical distinctions: avoid absolute "no energy consumed" or "no losses" statements and water-pressure analogies that imply lossless transfer or confuse power with stored energy. Do not invent an alternative analogy or a textbook definition absent from supplied evidence; if the definition is not covered, say that specific gap briefly. Do not add unrelated regional applicability claims, generic engineering disclaimers, or procedural review text. Keep quoted source evidence in its original language. Do not call another model to translate an answer.\n'
     if product_guidance:
         system += '''\nScope preservation v6: distinguish ideal circuit models from real equipment.
+Internal Evidence IDs belong ONLY in evidence_ids, not normal answer text. Preserve all technical content; do not delete or truncate content to hide IDs.
 Question-bounded response: answer ONLY the requested topic. If a concrete engineering
 setting cannot be determined, state what cannot be determined and the minimal missing
 inputs in one short paragraph; do NOT add retrieved device/control thresholds, delay
@@ -174,7 +175,7 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
-        prompt += ('-question-language-v7-question-bounded-source-separation' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
+        prompt += ('-question-language-v8-condition-scope-clean-body' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,
@@ -195,6 +196,9 @@ def parse_units(value, inputs, *, product_guidance=False):
     object_fields(value, {"answer_units","assumptions","missing_information","evidence_sufficient"},set(),"$",stage="generation")
     check(type(value["evidence_sufficient"]) is bool,"$.evidence_sufficient","boolean_required",stage="generation")
     answer = assemble(value, inputs.request.task_id+"-answer",1,inputs.evidence)
+    if product_guidance:
+        from services.answer_body import validate
+        validate(answer)
     from services.answer_constraints import validate_length,product_default_limit
     validate_length(answer, inputs.request.question, inputs.answer_requirements, default_limit=product_default_limit(inputs.request) if product_guidance else None)
     check(not value["evidence_sufficient"] or bool(answer.citations),"$.answer_units","sufficient_answer_requires_citations",stage="generation")

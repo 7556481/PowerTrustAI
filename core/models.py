@@ -314,6 +314,9 @@ class FidelityComponentReview(ComponentReview):
     reviewed_assertion_role: str = 'legacy_unspecified'
     verification_obligation: str = ''
     fidelity_rationale: str = ''
+    raw_support_status: str = ''
+    review_disposition: str = ''
+    review_projection_version: str = ''
 
 
 @dataclass(frozen=True)

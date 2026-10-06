@@ -74,6 +74,9 @@ This is type/shape guidance only, NEVER use synthetic example words as actual ev
 
 def instructions(version=1):
     if version==1:return INSTRUCTIONS
+    if version==5:
+        from services.support_relation_v5 import INSTRUCTIONS as v5
+        return v5
     if version==4:
         old=instructions(3).replace('Source support relation v3','Source support relation v4').replace('EXACT {source_quote_id,source_condition,answer_quote}','EXACT {source_quote_id,source_condition,answer_quote,relationship,reason}')
         start=old.index('Its literal words must also occur');end=old.index('An assumption,',start)
@@ -117,6 +120,9 @@ def pure_question(text):
     return bool(re.fullmatch(r'[^\n|。.!！?？]+[?？]',text))
 
 def normalize(value,group,scopes,version=1,answer=None,claims=()):
+    if version==5:
+        from services.support_relation_v5 import normalize as v5
+        return v5(value,group,scopes,answer,claims)
     v=deepcopy(value);ec=ErrorCollector('source-support-relation-v'+str(version))
     for n,item in enumerate(v.get(group,[]) if isinstance(v,dict) else []):
         if not isinstance(item,dict):continue

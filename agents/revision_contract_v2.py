@@ -11,6 +11,7 @@ from services.validation_diagnostics import ErrorCollector
 
 PROMPT_VERSION="bounded-revision-v2-source-bound-repair-body-conditions-v1"
 CONTRACT_VERSION="revision-output-v2"
+ID_CLEAN_PROMPT_VERSION='bounded-revision-v2-source-bound-repair-clean-answer-body-v1'
 
 
 def catalog(inputs):
@@ -30,7 +31,7 @@ def catalog(inputs):
     return rows
 
 
-def parse(value,inputs):
+def parse(value,inputs,*,clean_body=False):
     ec=ErrorCollector("revision_v2")
     ec.fields(value,{"answer_units","assumptions","missing_information","finding_actions"},set(),"$")
     known={f.finding_id for f in inputs.verification.findings+inputs.domain_review.findings}
@@ -53,6 +54,9 @@ def parse(value,inputs):
     ec.finish()
     body={k:value[k] for k in ("answer_units","assumptions","missing_information")}
     answer=assemble(body,inputs.answer.answer_id,inputs.answer.version+1,inputs.allowed_evidence,stage="revision_v2")
+    if clean_body:
+        from services.answer_body import validate
+        validate(answer,stage='revision_v2')
     from services.answer_constraints import validate_length,product_default_limit
     validate_length(answer, inputs.request.question, stage='revision_v2',default_limit=product_default_limit(inputs.request))
     output=RevisionOutput(answer,tuple(RevisionChange((a.finding_id,),a.explanation) for a in actions if a.action=="modified"),
@@ -63,6 +67,7 @@ def parse(value,inputs):
 
 
 async def run(agent,inputs):
+    prompt_version=ID_CLEAN_PROMPT_VERSION if getattr(agent,'clean_answer_body',False) else PROMPT_VERSION
     rows=catalog(inputs)
     context={"frozen_answer":asdict(inputs.answer),"finding_catalog":rows,"revision_limit":1,
         "review_rules":[asdict(r) for r in inputs.domain_review.rules],
@@ -71,7 +76,7 @@ async def run(agent,inputs):
         "consistency_checks":[asdict(c) for c in inputs.verification.consistency_checks]}
     requirements=inputs.revision_instructions+(json.dumps(context,ensure_ascii=False,sort_keys=True),)
     creation=GenerationInput(inputs.request,inputs.allowed_evidence,inputs.evidence_bindings,inputs.knowledge_version,requirements)
-    path=None if agent.diagnostics is None else agent.diagnostics.save_generation_input(creation,PROMPT_VERSION,
+    path=None if agent.diagnostics is None else agent.diagnostics.save_generation_input(creation,prompt_version,
         answer_id=inputs.answer.answer_id,answer_version=inputs.answer.version+1)
     payload={"question":inputs.request.question,"user_context":inputs.request.user_context,
         "engineering_context":None if inputs.request.engineering_context is None else asdict(inputs.request.engineering_context),
@@ -110,8 +115,9 @@ Complete shape example; provide one action for EVERY actual program finding:
 "assumptions":[],"missing_information":["Study inputs"],
 "finding_actions":[{"finding_id":"actual_input_ID","action":"modified","explanation":"Removed unsupported assurance."}]}
 """
+    if getattr(agent,'clean_answer_body',False):system+='\nInternal Evidence IDs belong ONLY in evidence_ids; never put IDs in answer text. Rewrite the same complete technical answer, preserving all subquestions and necessary conditions, not deleting content to hide IDs.\n'
     output,records=await structured_request(agent.client,(ModelMessage("system",system),ModelMessage("user",json.dumps(payload,ensure_ascii=False))),
-        PROMPT_VERSION,lambda v:parse(v,inputs),diagnostics=agent.diagnostics,response_contract_version=CONTRACT_VERSION,input_snapshot_path=path)
+        prompt_version,lambda v:parse(v,inputs,clean_body=getattr(agent,'clean_answer_body',False)),diagnostics=agent.diagnostics,response_contract_version=CONTRACT_VERSION,input_snapshot_path=path)
     snapshot=make_snapshot(output.answer,inputs.allowed_evidence,inputs.knowledge_version,request=inputs.request,
-        answer_requirements=requirements,prompt_version=PROMPT_VERSION,evidence_bindings=inputs.evidence_bindings)
-    return replace(output,model_records=records,prompt_version=PROMPT_VERSION,evidence_snapshot=snapshot)
+        answer_requirements=requirements,prompt_version=prompt_version,evidence_bindings=inputs.evidence_bindings)
+    return replace(output,model_records=records,prompt_version=prompt_version,evidence_snapshot=snapshot)

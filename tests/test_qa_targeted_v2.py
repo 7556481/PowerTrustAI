@@ -95,8 +95,10 @@ class FrozenStanceTests(unittest.TestCase):
         import hashlib
         manifest=ComponentFactory(ServiceConfig(profile='synthetic_fixture')).manifest(None)
         from services.support_relation import instructions
-        daily=seen[0].messages[0].content.replace('Optional classification_issue EXACT suggested_category,rationale.',
-            'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')+instructions(4)
+        from services.review_fidelity import FROZEN_BINDING_INSTRUCTIONS,INDEPENDENT_JUDGMENTS
+        current=seen[0].messages[0].content.replace(FROZEN_BINDING_INSTRUCTIONS,'').replace('These are model judgments, NOT mechanical proofs. Unresolved fidelity/stance/obligation disagreement\nrequires not_assessable; never supported or contradicted.','These are independent raw model judgments; program computes the effective disposition for unresolved objections.').replace('Same-category uncertainty needs no issue: not_assessable with a specific reason.','Same-category uncertainty needs no issue: preserve actual support and semantic judgments independently.')+INDEPENDENT_JUDGMENTS
+        daily=current.replace('Optional classification_issue EXACT suggested_category,rationale.',
+            'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')+instructions(5)
         self.assertEqual(manifest['template_sha256']['independent'],hashlib.sha256(daily.encode()).hexdigest())
         self.assertEqual(json.loads(seen[1].messages[-1].content)['validation_error']['required_status'],'not_assessable')
 

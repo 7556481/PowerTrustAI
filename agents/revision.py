@@ -63,9 +63,10 @@ class ModelRevisionAgent:
     uses_model_adapter=True
     bounded_real_revision=True
 
-    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1):
+    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1,clean_answer_body=False):
         require(protocol_version in (1,2),"Unknown revision protocol")
         self.protocol_version=protocol_version
+        self.clean_answer_body=clean_answer_body
         self.client=ModelClient(adapter,settings)
         self.diagnostics=None if diagnostic_dir is None else ResponseDiagnostics(diagnostic_dir)
 
