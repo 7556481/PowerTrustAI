@@ -64,6 +64,16 @@ Never output a factual audit pass."""
         question.pop("answer_id"); question.pop("version")
     system += '\nAnswer language v4: follow the user question language unless the user explicitly requests another language. For Chinese questions, answer in Chinese, including assumptions and missing_information. Answer directly and concisely. An explicit user maximum overrides the default 150-300-character guideline: keep the COMPLETE joined answer_units text, including separators, punctuation and any limitation, within answer_length_constraint.maximum_characters. Plan the whole answer before returning units; do not append unrelated scope or extraction reports. Do not enumerate retrieved fragments or copy unrelated laboratory formulas. Answer the causal why only when directly supported; a related power-angle formula alone is not a reactive-voltage explanation. Include necessary conditions and substantive evidence gaps briefly. Extraction warnings belong in missing_information only when they actually prevent this answer; never invent missing formulas or report every warning as an answer claim. Plain-language explanations must preserve physical distinctions: avoid absolute "no energy consumed" or "no losses" statements and water-pressure analogies that imply lossless transfer or confuse power with stored energy. Do not invent an alternative analogy or a textbook definition absent from supplied evidence; if the definition is not covered, say that specific gap briefly. Do not add unrelated regional applicability claims, generic engineering disclaimers, or procedural review text. Keep quoted source evidence in its original language. Do not call another model to translate an answer.\n'
     if product_guidance:
+        system += '''\nScope preservation v5: distinguish ideal circuit models from real equipment.
+Keep the source's sinusoidal steady-state, ideal-element, fixed supply voltage and
+appropriate compensation assumptions explicitly where needed; a brevity limit is
+not permission to drop them. Do not generalize SOME magnetic/inductive devices to
+ALL electrical equipment. A true local exchange mechanism does not establish every
+system-level causal conclusion; cite direct explanatory body for the causal link.
+Avoid universal zero losses or invariant branch current claims about actual devices.
+industry_corpus_unverified text may contribute explanations with original provenance
+unknown, but cannot alone establish binding standards, settings or performance guarantees.
+Never call dataset host the original publisher. Preserve the actual source scope.\n'''
         system += '''\nProduct generation guidance v1: honor requested brevity and answer only the question.
 Do not add unrequested bibliography, licensing or geographic assertions as official technical body facts.
 Index-maintained metadata is NOT an official document sentence. If a necessary source scope
@@ -148,7 +158,7 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
-        prompt += '-question-language-v4-explicit-limit-v1'
+        prompt += ('-question-language-v5-scope-preservation-explicit-limit-v1' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,

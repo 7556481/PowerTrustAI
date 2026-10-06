@@ -18,7 +18,7 @@ from core.validation import validate_review
 PROMPT_VERSION='evidence-verification-v9.6-explicit-frozen-stance'
 CONTRACT_VERSION='evidence-verification-output-v9.5'
 
-def original_template(*,support_relation_checks=False):
+def original_template(*,support_relation_checks=False, support_relation_version=1):
     from agents.review_templates_v3 import ORIGINAL
     template=ORIGINAL.replace('EXACTLY one item for this index.',
         'EXACTLY one item for EVERY supplied citation_index, in supplied order.')+"""
@@ -28,10 +28,10 @@ Never borrow a candidate from any other item, even if its Evidence or text is id
 Keep each rationale concise; cover every item. Other/new independent support does not cure it.
 """
     if support_relation_checks:
-        from services.support_relation import INSTRUCTIONS
+        from services.support_relation import instructions
         template=template.replace('Item EXACT citation_index,status,rationale,applicability_conditions,bases.',
             'Item required citation_index,status,rationale,applicability_conditions,bases; optional support_relation, REQUIRED for supported/contradicted.')
-        template+=INSTRUCTIONS
+        template+=instructions(support_relation_version)
     return template
 
 def citation_payload(answer,question,scopes,indexes):
@@ -49,9 +49,10 @@ async def run(agent,inputs):
     from agents.review_templates_v3 import INDEPENDENT
     from services.review_fidelity import FROZEN_BINDING_INSTRUCTIONS
     limits=agent.citation_workload or CitationWorkload()
-    prompt_version=('evidence-verification-v9.7-source-support-relation' if agent.support_relation_checks else PROMPT_VERSION)+('-fact-delivery-v1' if inputs.fact_retrieval_bindings else '')
-    contract_version='evidence-verification-output-v9.7' if agent.support_relation_checks else CONTRACT_VERSION
-    original_instruction=original_template(support_relation_checks=agent.support_relation_checks)
+    profile='evidence-verification-v9.8-whole-claim-conditions' if agent.support_relation_version==2 else 'evidence-verification-v9.7-source-support-relation'
+    prompt_version=(profile if agent.support_relation_checks else PROMPT_VERSION)+('-fact-delivery-v1' if inputs.fact_retrieval_bindings else '')
+    contract_version=('evidence-verification-output-v9.8' if agent.support_relation_version==2 else 'evidence-verification-output-v9.7') if agent.support_relation_checks else CONTRACT_VERSION
+    original_instruction=original_template(support_relation_checks=agent.support_relation_checks,support_relation_version=agent.support_relation_version)
     start=len(current_budget().records);scopes=joint.catalog(inputs,contract_version);wire,missing=model_wire(inputs)
     base_parse=lambda v:joint.parse(v,inputs,scopes,prompt_version='evidence-verification-v9.3-target-fidelity')
     def parse(v):
@@ -85,7 +86,7 @@ async def run(agent,inputs):
         def strict(value):
             if agent.support_relation_checks:
                 from services.support_relation import normalize
-                value=normalize(value,group,scopes)
+                value=normalize(value,group,scopes,agent.support_relation_version)
             ec=ErrorCollector('evidence_verification_v9_2');ec.fields(value,{group},set(),'$')
             if not ec.check(type(value.get(group)) is list,'$.'+group,'array_required'):ec.finish()
             if citation is not None:
@@ -110,10 +111,10 @@ async def run(agent,inputs):
         if citation is None:
             instruction=INDEPENDENT + FROZEN_BINDING_INSTRUCTIONS
             if agent.support_relation_checks:
-                from services.support_relation import INSTRUCTIONS
+                from services.support_relation import instructions
                 instruction=instruction.replace('Optional classification_issue EXACT suggested_category,rationale.',
                     'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')
-                instruction+=INSTRUCTIONS
+                instruction+=instructions(agent.support_relation_version)
             from services.fact_delivery import payload as fact_payload, INSTRUCTION
             mapping=fact_payload(inputs,scopes[0])
             if mapping is not None:

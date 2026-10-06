@@ -97,6 +97,8 @@ CREATE TABLE IF NOT EXISTS pdf_chunk_details (
 
 class KnowledgeStore:
     def __init__(self, path, *, readonly=False, validated_pdf_cache=False):
+        self._path=Path(path).resolve()
+        self._readonly=readonly
         self._validated_pdf_cache = {} if readonly and validated_pdf_cache else None
         self.pdf_validation_hits = 0
         self.pdf_validation_misses = 0
@@ -350,6 +352,10 @@ class KnowledgeStore:
             WHERE s.knowledge_version=? ORDER BY f.document_id,f.version,f.ordinal,f.fragment_id""", (knowledge_version,)).fetchall()
 
     def evidence(self, fragment_id, knowledge_version):
+        from rag.corpus_index import seal,corpus_evidence
+        corpus=seal(self,knowledge_version)
+        if corpus is not None:
+            return corpus_evidence(self,fragment_id,knowledge_version,corpus)
         self._members(knowledge_version)
         row = self.connection.execute("""SELECT f.*,v.file_sha256,v.raw_bytes,v.raw_text AS document_text,v.metadata FROM fragments f
             JOIN versions v ON v.document_id=f.document_id AND v.version=f.version

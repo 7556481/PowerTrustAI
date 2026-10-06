@@ -5,6 +5,31 @@ import re
 from services.validation_diagnostics import ErrorCollector
 
 VERSION='source-support-relation-v1'
+V2_INSTRUCTIONS='''
+Source support relation v2: ALSO include whole_claim_supported (boolean),
+missing_clauses (list of strings), conditions_preserved (boolean),
+authority_scope (explanation,normative_requirement,setting,engineering_guarantee,other)
+in support_relation. Classify the ACTUAL proposition, not the topic or source's tone.
+Evaluate EVERY proposition, causal link, quantifier and necessary condition in the
+complete citation/component, not only its true subset. A supported result requires
+whole_claim_supported=true, missing_clauses=[], conditions_preserved=true.
+Explain separately the source's asserted premises, its causal link/conclusion, and
+the claim's scope. If only one clause is established, use insufficient_evidence,
+list the unsupported clauses and retain the supported subset in explanation.
+Do not generalize some inductive devices to all loads or equate local component
+reactive exchange with a whole-grid voltage-maintenance explanation. Ideal,
+sinusoidal steady-state, fixed voltage and appropriate compensation conditions
+cannot disappear: lossless ideal elements do not establish zero losses in actual
+equipment, nor unchanged branch current when supply voltage changes.
+Industry corpus original_source_unverified is permitted for explanatory coverage,
+not sole authority for normative requirements, settings or engineering guarantees.
+Unknown original publisher/URL/date remain unknown; dataset host is not the author.
+These coverage flags are model judgments, not a deterministic semantic proof.
+'''
+def instructions(version=1):
+    if version==1:return INSTRUCTIONS
+    return INSTRUCTIONS.replace('{source_kind,quote_ids,explanation}',
+        '{source_kind,quote_ids,explanation,whole_claim_supported,missing_clauses,conditions_preserved,authority_scope}')+V2_INSTRUCTIONS
 INSTRUCTIONS='''
 Source support relation v1: topic relevance is not support. For each supported or
 contradicted body-based component, ALSO return support_relation EXACT
@@ -33,7 +58,7 @@ def pure_question(text):
     text=re.sub(r'^\s*(?:思考题|练习题|Question)\s*[:：]?\s*','',text.strip(),flags=re.I)
     return bool(re.fullmatch(r'[^\n|。.!！?？]+[?？]',text))
 
-def normalize(value,group,scopes):
+def normalize(value,group,scopes,version=1):
     v=deepcopy(value);ec=ErrorCollector(VERSION)
     for n,item in enumerate(v.get(group,[]) if isinstance(v,dict) else []):
         if not isinstance(item,dict):continue
@@ -50,7 +75,22 @@ def normalize(value,group,scopes):
             if not ids and group=='findings' and relation is None:continue
             if not definitive and relation is None:continue
             p=path+'.support_relation'
-            if not ec.fields(relation,{'source_kind','quote_ids','explanation'},set(),p):continue
+            required={'source_kind','quote_ids','explanation'}
+            if version==2:required|={'whole_claim_supported','missing_clauses','conditions_preserved','authority_scope'}
+            if not ec.fields(relation,required,set(),p):continue
+            if version==2:
+                ec.check(type(relation['whole_claim_supported']) is bool,p+'.whole_claim_supported','boolean_required')
+                ec.check(type(relation['conditions_preserved']) is bool,p+'.conditions_preserved','boolean_required')
+                authority=relation['authority_scope']
+                ec.check(authority in ('explanation','normative_requirement','setting','engineering_guarantee','other'),p+'.authority_scope','known_authority_scope_required')
+                missing=relation['missing_clauses']
+                ec.check(type(missing) is list and all(type(x) is str and x.strip() for x in missing),p+'.missing_clauses','string_array_required')
+                if row.get('status')=='supported':
+                    ec.check(relation['whole_claim_supported'] is True and missing==[] and relation['conditions_preserved'] is True,p,'partial_or_condition_lost_claim_cannot_be_supported')
+                    if authority in ('normative_requirement','setting','engineering_guarantee') and scope is not None:
+                        selected={getattr(scope.by_wire[q],'evidence_id',None) for q in ids if isinstance(q,str) and q in scope.by_wire}
+                        metadata=[m for m in getattr(scope,'metadata',[]) if m.get('evidence_id') in selected]
+                        ec.check(not metadata or not all(m.get('source_type')=='industry_corpus_unverified' for m in metadata),p,'unverified_corpus_not_sole_normative_or_engineering_authority')
             ec.check(type(row.get('rationale')) is str and bool(row['rationale'].strip()),path+'.rationale','original_nonempty_rationale_required')
             kind=relation['source_kind'];ec.check(kind in ('explanatory_body','data_table','exercise_question','term_mention','mixed','other'),p+'.source_kind','known_source_kind_required')
             ec.check(type(relation['quote_ids']) is list and relation['quote_ids']==list(dict.fromkeys(ids)),p+'.quote_ids','exact_local_selected_body_basis_ids_required')
@@ -60,5 +100,5 @@ def normalize(value,group,scopes):
                 candidates=[scope.by_wire[q].text for q in ids if scope is not None and isinstance(q,str) and q in scope.by_wire]
                 ec.check(not candidates or not all(pure_question(t) for t in candidates),p,'selected_only_unanswered_question_is_not_support')
             if type(row.get('rationale')) is str:
-                row['rationale']=row['rationale']+' ['+VERSION+'] '+json.dumps(relation,ensure_ascii=False,separators=(',',':'))
+                row['rationale']=row['rationale']+' ['+('source-support-relation-v2' if version==2 else VERSION)+'] '+json.dumps(relation,ensure_ascii=False,separators=(',',':'))
     ec.finish();return v

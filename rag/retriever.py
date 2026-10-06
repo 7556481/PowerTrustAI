@@ -64,7 +64,8 @@ class AsyncSQLiteBM25Retriever:
                             "Saved evidence snapshot mismatch")
                     require(store.verify_evidence(evidence) == evidence, "Saved evidence differs from fixed index")
                 return None
-            retriever = BM25Retriever(store)
+            from rag.corpus_index import seal,CorpusRetriever
+            retriever = CorpusRetriever(store) if seal(store,request.knowledge_version) is not None else BM25Retriever(store)
             if validate:
                 retriever._validate_result(request, result)
                 return None

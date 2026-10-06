@@ -71,3 +71,6 @@ python -m venv .venv
 [当前状态](docs/current-status.md) · [公开复现报告](docs/public-reproducibility-v1.md) · [并发轨迹修复](docs/model-trace-attribution-v1.md) · [后续实施接入点](docs/implementation-roadmap.md) · [文档索引](docs/documentation-index.md)
 
 中文学习与面试手册为[独立r1文档](docs/PowerTrustAI-project-study-interview-handbook-r1.md)，README不替代手册。本轮未重建PDF或改写历史验收。
+# 电力大语料接入与当前覆盖
+
+本机可选中文全文索引、来源层级与固定真实对照见 [industry-corpus-v1](docs/industry-corpus-v1.md)。73分片已取得；3个发布文件缺Parquet尾部，完整处理仍在继续。日常目前使用显式部分快照，不能称完整库。旧小库、知识版本和运行保留；启动入口、自动连接、政策与NLI默认关闭不变。可选CPU依赖在 `requirements-corpus.txt`；完整原文只留本机data。

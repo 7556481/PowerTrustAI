@@ -23,6 +23,12 @@ class Bundle:
 
 class ComponentFactory:
     def __init__(self,config):self.config=config;self.semantic_resource=None;self.retrieval_metrics=None
+    def warm_corpus_index(self):
+        """Open-time validation before accepting HTTP; never a model request."""
+        if self.config.profile!='real' or not self.config.index_db.is_file():return
+        from rag.storage import KnowledgeStore
+        from rag.corpus_index import seal
+        with KnowledgeStore(self.config.index_db,readonly=True) as store:seal(store,self.config.knowledge_version)
     def initialize_retrieval(self,encoder=None):
         if self.config.profile=='synthetic_fixture' or self.config.retrieval_mode=='bm25':return
         if self.semantic_resource is not None:return
@@ -55,7 +61,9 @@ class ComponentFactory:
         from rag.storage import KnowledgeStore
         try:
             with KnowledgeStore(self.config.index_db,readonly=True) as store:
-                store.rows(self.config.knowledge_version)
+                from rag.corpus_index import seal
+                corpus=seal(store,self.config.knowledge_version)
+                if corpus is None:store.rows(self.config.knowledge_version)
         except Exception:raise ConfigurationError('Fixed knowledge snapshot unavailable') from None
         self.initialize_retrieval()
         return self.config.knowledge_version
@@ -64,14 +72,14 @@ class ComponentFactory:
         from agents.review_templates_v3 import INDEPENDENT
         from services.review_fidelity import FROZEN_BINDING_INSTRUCTIONS
         INDEPENDENT += FROZEN_BINDING_INSTRUCTIONS
-        from services.support_relation import INSTRUCTIONS
+        from services.support_relation import instructions
         INDEPENDENT=INDEPENDENT.replace('Optional classification_issue EXACT suggested_category,rationale.',
             'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')
-        INDEPENDENT += INSTRUCTIONS
+        INDEPENDENT += instructions(2)
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
-        ORIGINAL=original_template(support_relation_checks=True)
-        PROMPT_VERSION='evidence-verification-v9.7-source-support-relation'
-        CONTRACT_VERSION='evidence-verification-output-v9.7'
+        ORIGINAL=original_template(support_relation_checks=True,support_relation_version=2)
+        PROMPT_VERSION='evidence-verification-v9.8-whole-claim-conditions'
+        CONTRACT_VERSION='evidence-verification-output-v9.8'
         if self.config.fact_strategy=='per_claim_v1':PROMPT_VERSION+='-fact-delivery-v1'
         hashes={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
             for name in ('core','agents','harness','tools','services','rag','model_adapter','backend') for p in (ROOT/name).glob('*.py')}
@@ -101,8 +109,18 @@ class ComponentFactory:
             scoring_method=SCORING_METHOD if self.config.retrieval_mode=='bm25' else RRF_VERSION if self.config.retrieval_mode=='hybrid' else 'Dense-cosine-v1(positive-only)')
         manifest['retrieval']='fixed-index '+self.config.retrieval_mode+'; full result replay validation'
         manifest['performance_profile']='validated-pdf-report-cache-v1: connection-local immutable body verification only; full ranking replay retained' if self.config.retrieval_mode=='bm25' else 'legacy-semantic-full-replay'
+        if self.config.profile=='real' and self.config.retrieval_mode=='bm25':
+            from rag.storage import KnowledgeStore
+            from rag.corpus_index import seal,SCORING
+            with KnowledgeStore(self.config.index_db,readonly=True) as store:
+                corpus=seal(store,knowledge_version)
+            if corpus is not None:
+                manifest['corpus_index']={key:corpus.get(key) for key in ('version','revision','tokenizer','query_version','complete','records','chunks','duplicates','chunks_root')}
+                manifest['scoring_method']=SCORING
+                manifest['retrieval']='immutable SQLite FTS5 postings; versioned Chinese segmentation/topic query; strict hit replay'
+                manifest['performance_profile']='build/publication FTS integrity; open structural checks; immutable-file stamp; strict per-hit original/span verification; no full snapshot query scan'
         manifest['generation_query_conversion']='generation-cross-language-query-v1: once after successful empty BM25; Chinese question / fixed English body available (mixed-snapshot-gate-v2)'
-        manifest['prompts']['generation'] += '-question-language-v4-explicit-limit-v1'
+        manifest['prompts']['generation'] += ('-question-language-v5-scope-preservation-explicit-limit-v1' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
         if self.config.profile=='synthetic_fixture':
             manifest['available_real_protocols']=manifest.pop('protocols')
             manifest['protocols']={k:'fake-v1' for k in ('generation','claim_extraction','evidence_verification','domain_review','revision')}
@@ -143,9 +161,11 @@ class ComponentFactory:
                 self.initialize_retrieval();retriever=self.semantic_resource;resources.append(RetrieverLease(retriever))
             diag=ROOT/'data/retrieval_local/service_private'/rid
             with KnowledgeStore(self.config.index_db, readonly=True) as store:
-                corpus_english = english_fallback_available(store.rows(self.config.knowledge_version))
+                from rag.corpus_index import seal
+                corpus=seal(store,self.config.knowledge_version)
+                corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload,support_relation_checks=True),
+                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=13,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=2),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=4),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),

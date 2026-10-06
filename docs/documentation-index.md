@@ -1,5 +1,7 @@
 # 文档索引
 
+- [电力大语料、中文FTS与整句支持 v1](industry-corpus-v1.md)：完整字节下载、3片格式缺口、可恢复构建/明确部分快照、固定真实对照与剩余语义限制。
+
 ## 2026-10-06 基础概念覆盖（当前）
 
 [basic-coverage-v1](basic-coverage-v1.md)：BAAI有限抽样与未采用理由、TUP正文/源定位/排版归一快照、source-support-relation-v1与schema13日常配置、两题真实引用及剩余问题。源码services/support_relation.py、agents/verification_contract_v10_batched.py、backend/assembly.py；原件/逐字映射/输入响应/审阅包留在data/runtime_local/basic-coverage-v1与data/retrieval_local/basic-coverage-v1。

@@ -86,6 +86,12 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
             from backend.local_session import LocalSessions
             app.state.sessions=LocalSessions(config.run_db)
             service=ApplicationService(config,runtime_store,factory);app.state.service=service
+            # Large-index validation belongs to startup, not every health/query.
+            # Invalid configuration keeps the existing degraded health behavior.
+            if hasattr(service.factory,'warm_corpus_index'):
+                import asyncio
+                try:await asyncio.to_thread(service.factory.warm_corpus_index)
+                except Exception:pass
             await service.start();yield
         finally:
             try:
