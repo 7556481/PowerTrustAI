@@ -338,3 +338,6 @@
 
 - [集成与学习站定向修订v2](integration-learning-v2.md)：真实接线/烟测失败、20章修订和浏览器缺口。
 - [逐章核对](learning/revision-v2-checklist.md)，[待ChatGPT补充](learning/questions-for-chatgpt.md)。
+
+- [schema13/14对照与公开收尾](schema-choice-v1.md)：逐项分母、实际Revision、准备失败、日常13及CI/浏览器限制。
+- [公开Portfolio](../portfolio/README.md)，[旧README完整工程日志](engineering-readme-history.md)，[旧状态完整工程日志](engineering-status-history.md)。

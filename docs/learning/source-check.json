@@ -5,7 +5,7 @@
       "symbol": "strict_json",
       "start_line": 18,
       "end_line": 21,
-      "file_sha256": "a4a5265f183c6e78223aea9d1ebd1d79bca5c93dab8b65d6cda7565e25c95245",
+      "file_sha256": "25748c225587e6b86a57753a9efceef0ffb0a054f1438e99f835996421b21594",
       "excerpt_sha256": "552dc767e2a2641f0e3149e139b410c31cc7885cd6616113ffb0b919b71e3e5e"
     },
     {
@@ -57,7 +57,7 @@
       "excerpt_sha256": "81c466174821c6394822f496e87bb78476f7be272641608277fc47edca0a5372"
     }
   ],
-  "application_commit": "5f8374e076d594fec5ab22b5732ded1fb1521c10",
+  "application_commit": "3c1c03d5d03f36df6f72fff640947ef0bd196da7",
   "new_agent": false,
   "old_pdfs_unchanged": true,
   "request_route_excerpts": [

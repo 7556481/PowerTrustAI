@@ -1,8 +1,8 @@
 {
-  "application_commit": "5f8374e076d594fec5ab22b5732ded1fb1521c10",
-  "document_version": "learning-site-v2 targeted review, 2026-10-07",
+  "application_commit": "3c1c03d5d03f36df6f72fff640947ef0bd196da7",
+  "document_version": "learning-site-v3 schema comparison and public closure, 2026-10-07",
   "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
   "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
   "daily_schema": 13,
-  "compact_schema14": "input integration repaired; one real smoke incomplete due invalid condition/basis IDs; daily13"
+  "compact_schema14": "v9.14 scope guidance; fixed8 corrected8/8 but semantic reservations; daily13; not declared stable"
 }

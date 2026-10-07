@@ -1,11 +1,11 @@
 {
   "version": {
-    "application_commit": "5f8374e076d594fec5ab22b5732ded1fb1521c10",
-    "document_version": "learning-site-v2 targeted review, 2026-10-07",
+    "application_commit": "3c1c03d5d03f36df6f72fff640947ef0bd196da7",
+    "document_version": "learning-site-v3 schema comparison and public closure, 2026-10-07",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
-    "compact_schema14": "input integration repaired; one real smoke incomplete due invalid condition/basis IDs; daily13"
+    "compact_schema14": "v9.14 scope guidance; fixed8 corrected8/8 but semantic reservations; daily13; not declared stable"
   },
   "chapters": [
     {
@@ -50,8 +50,8 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 3735,
-      "sha256": "f78a208f61476e7bce6b6f5b8e84ad2e8ac3d30b9c7215991b5867171e39142e"
+      "characters": 4174,
+      "sha256": "e44d5656528e1421732a22a0f2f68bf60adc9306ee128c690d5f269a1703a7c9"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -80,8 +80,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 29803,
-      "sha256": "2a596488a2c899eb21871f42ff0c1dce6ee4e7aca2fe81b1ce1bf6d3c83e6278"
+      "characters": 30788,
+      "sha256": "fa25a9689b5ab6972b9569a389e7f666a06dc953d90b92ab69a506b50db29fde"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -90,8 +90,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 2979,
-      "sha256": "8239d31b5fc609ee11335c6bf8faab41d08e73c31d0b7a71de809d52dea8c228"
+      "characters": 3181,
+      "sha256": "06d93390e160b4b7c65c7b526cef724eda0bda17e18df44856be1ed83f39f474"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -115,10 +115,10 @@
     },
     {
       "source": "docs/learning/questions-for-chatgpt.md",
-      "characters": 1688,
-      "sha256": "7922e019c5341c3c26bb99449ebd63c26e6486a84d738a1bf6a83ef6856fa075"
+      "characters": 1848,
+      "sha256": "75902d09074e71e1607ca94d14578c8b361c6e4e85eaf18500e2866864aefdb8"
     }
   ],
-  "markdown_characters": 101799,
+  "markdown_characters": 103585,
   "network_dependencies": false
 }

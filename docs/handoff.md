@@ -1,24 +1,28 @@
 # PowerTrustAI 会话交接
 
-## 2026-10-07 集成与学习站定向修订（最新交接）
+## 2026-10-07 契约对照与公开收尾（当前）
+
+日常保留13，14纠正后8/8但语义疑点；13纠正后7/8，不称稳定。真实正常及局部2ω→ω一次Revision全重审完整，工程goal非法未受理。712离线/公开克隆27私有跳过、README一个状态、CI/Portfolio/学习站定向更新；浏览器最终补验工具故障，HTTP重启两记录一致。语料唯一安全续建，日常快照不换。采集准备错误及已发首题离线恢复完整保留，不重跑。见[schema-choice-v1](schema-choice-v1.md)。本轮后不自动追加实验。
+
+## 2026-10-07 集成与学习站定向修订（历史交接）
 
 学习站20章定向纠错/60折叠自测/实际源码路线已更新；显式审核输入修复，706离线通过。唯一schema14烟测已调用Fact但条件/依据ID非法，完整执行未达，不新批次；日常13。语料写者当前未观察到，断点11,902,079行，退出原因未知，不重启或切换。最后浏览器补验受工具初始化故障阻断，详细范围见[integration-learning-v2](integration-learning-v2.md)。停止自动追加实验，待审阅。
 
-## 2026-10-06 正式学习站与审核共同诊断（最新）
+## 2026-10-06 正式学习站与审核共同诊断（历史）
 
 先交付docs/learning：18主题章＋术语/工作坊两附录，Markdown唯一正文，标准库静态构建，8770独立学习入口start-learning.cmd，目录/搜索/代码高亮/导航；旧30/38页PDF仅参考、保留。源码摘录/公式/真实训练检索/NLI失败及待补清单核对，实际浏览器阅读验证。
 
 新用户4df8…非法JSON后source_kind混成explanation；47个历史诊断响应汇总，程序接线、协议负担和语义错分开。实现schema14紧凑target原型，但真实Harness仍只包装schema9–13扩展输入，缺tool_results，Fact前失败。固定12题同源码配置、无预期泄漏、无重发：0/12完整，32请求304657token，0Fact请求/无结构成功率分母，0Revision，0pass。客户端遗漏共享EXECUTION_FAILURE停止条件，12已结束才人工发现，明确保留，没有自动修复重跑。只恢复日常默认13；14不启用/未验收，原13仍可能契约失败。详见[audit-stability-learning-v1](audit-stability-learning-v1.md)。原唯一语料写者继续、日常固定部分快照不切换。停止追加开发，待所有者和ChatGPT审阅。
 
 
-## 2026-10-06 英文身份与忠实性收尾 v1（最新）
+## 2026-10-06 英文身份与忠实性收尾 v1（历史）
 
 接续a898e34，51片可读英文无_id，使用固定revision/分片/原始绝对行号的命名空间内部身份，另存正文SHA与缺失标记；中文7,373,300行、去重与断点不变。唯一逻辑写者已安全续建，完整库尚未发布，不切换日常kc-5894部分库。
 
 事实提示v9.12明确忠实性只比回答与提取目标，证据不支持属于事实判断；schema13/输出v9.11/support-v5/派生v2/一次Revision门控不改。678离线回归。原功率因数一次新run ab338c35…4请求50716token18.089秒，完整执行；因果组件faithful/证据不足，但repair=null，原引用条件仍未知，人工复核/部分，0Revision。自动修订仍未验收，不继续刷题。浏览器自动连接、原句与引用、旧新两结果重启零重发通过。详见[本轮说明](identity-fidelity-v1.md)及忽略目录identity-fidelity-v1审阅包。日常8765与后台构建继续；停止新增开发交所有者试用。
 
 
-## 2026-10-06 审核接口 v2（最新）
+## 2026-10-06 审核接口 v2（历史）
 
 接续30e48a8，工作区干净/远端一致。source-condition-carriers-v1程序绑定既有完整quote作用域/range/version；support-relation-v5/schema13 v9.11仅选载体ID，不自由复写来源摘录，忠实同义条件/未知保留。independent-review-projection-v2保存原始支持/语义异议，先严格验证ID/类型/覆盖，再程序计算有效NotAssess/需复核；product-v1.4保留旧版。生成language-v8与日常Revision clean-body完整ID拒绝/有限重写，不删技术内容。4真实旧失败离线协议投影3有效复核/1缺项拒绝，不改旧响应、语义真值或失败。
 
@@ -27,7 +31,7 @@
 原构建唯一写者已退出，日志明确KeyError:_id；english/high/rank_00934实际仅text/质量指标，无_id。已提交7,373,300行保留，无第二写者/重复下载/发布/换日常快照；按本轮只报告范围，不能重复启动必失败命令或伪造原ID，英文身份格式兼容恢复待后续审阅。日常服务仍8765正常运行；停止新增实验待所有者试用。真实修订未验证、语义未知/多余工程背景等限制保留，手册仅待补知识点。
 
 
-## 2026-10-06 首版收尾 v1（最新）
+## 2026-10-06 首版收尾 v1（历史）
 
 接续863e47c，初始工作区干净/远端一致。product-v1.3任务范围缺口分类/单个原文可修复缺陷的一次Revision；support_relation-v4/schema13 v9.10允许忠实同义条件、摘录作用域仍严格；领域v3.2/protocol5明确缺口用途，复用ReliabilityDomainInput。新增分支漏接导致真实AttributeError，保留后定向修复/实际Harness synthetic贯通。生成v7问题范围/来源区域/简洁缺输入；默认aggregate、固定kc-5894、NLI off保持。
 
@@ -36,7 +40,7 @@
 日常恢复8765/aggregate，NLI仅server-owned配置＋逐任务布尔开关，失败隔离/保存，不替代政策、不改检索为凑覆盖。旧构建已退出原因未知；确认无写者后唯一原断点恢复，父/子venv是同一逻辑写者，完整库仍处理、不自动换日常快照。未来发布有效分片＋已核验排除分片覆盖核算另版，实际完整发布/完整索引验收仍待完成。真实阻断是事实契约不稳定、实际修订未成功、本轮NLI推理未完成；完整库/语义模型限制如实记录。停止新增实验等待用户试用；长期Markdown＋本地学习站手册要求保留，无建站/训练/新语料/Agent/排序实验。
 
 
-## 2026-10-06 日常收尾验收 v1（最新）
+## 2026-10-06 日常收尾验收 v1（历史）
 
 基线3ad1d6b，先核对干净工作区/远端。生成v6正文条件/因果主体＋概念300字默认上限、schema13 v9.9/support-relation-v3逐字答案条件、新product-decision-v1.2选中原文修复资格、未解决原句与实际缺口展示；保留旧政策/协议/原记录。初次3项契约失败，修复明确类型/条件检查后相同冻结输入各再验证一次，共6run36请求700422token，0业务Revision。定向正常概念完整审核但待补充，原失败回放人工复核未真实修订，工程缺资料例仍执行未完成。**最终真实验收未通过，剩余阻断如实保留，不继续付费刷题**。离线机制/浏览器/重启/最终测试及提交以私有final-acceptance-v1/verification-final.json为准。
 
@@ -78,7 +82,7 @@
 
 长期手册仅待补：本机会话与鉴权、宿主网络vs模型能力、中文原文/权利/定位、预览检索vs实际生成交付、提示契约失败和严格解析、中文答案质量与审核完整性分离、重启不可变记录。Markdown源+本地文档站/PDF可选要求保留，本轮不建设或重写。
 
-## 2026-10-05 中文问答与答案优先 v1（最新）
+## 2026-10-05 中文问答与答案优先 v1（历史）
 
 接续a87f8af，读1141f391原运行/ZIP，确认中文原查询空、程序英文拒答被后续审核。新增generation-cross-language-query-v1：原查询保留，成功空/中文/固定英文正文门控后单转换、单补检，无术语/排名修改。无依据程序中文说明、显式无回答→待补充/提取双审不适用；模型未引用文字仍审核。提示跟随问题语言，答案/原因优先、实际引用过滤、细节折叠。政策/schema13/BM25 aggregate/NLI off不变，历史不回填。
 
@@ -86,19 +90,19 @@
 
 学习站、长手册、训练、扩充/检索调参继续暂停。后续知识点暂记查询忠实性、空检索vs全库不存在、无回答阶段不适用、执行失败/业务处置、引用/检索证据区别；不自动再验证。
 
-## 2026-10-05 产品逻辑与性能改进 v1（最新）
+## 2026-10-05 产品逻辑与性能改进 v1（历史）
 
 从76641c7接续；日常product-decision-v1.1，旧LimitedRepairPolicy/归档保留。通过/不通过/待补充/复核/执行未完成贯通，有限Revision完整重审；领域demo没有权威high注册，风险未知保留，NLI/BM25/aggregate默认不变。4冻结真实案例执行完整但均待补充，预期2/4；14请求，原v1结果不改。修订顺序和生成索引归属另版修复，仅离线/保存发现政策重放，不重跑模型。直接AI参数拒绝保留，经用户授权继续4项，无有效直接AI比较。浏览器/重启版本与反馈验证，私有数据/审阅包在product-improvement-v1；详见[运行、规则、失败及试用](product-improvement-v1.md)。
 
 学习站、长手册、模型训练、数据扩充、检索调参暂停。长期手册后续待补：政策与执行分离、适用范围/未知、模型语义失败、有限修订/版本、缓存失效与真实性能、原请求指标和直接AI对照失败；本轮不编长章节。所有者亲自试用/共同验收后再决定下一步，不启动新批次。
 
-## 2026-10-05 固定日常令牌与主动连接记忆（最新）
+## 2026-10-05 固定日常令牌与主动连接记忆（历史）
 
 接续10353f9；只看路径/stat/配置、不读令牌内容。近期恢复/NLI两验证各自使用不同目录access-token，日常默认data/runtime_local/access-token此前未生成；源码缺失才x生成，存在复用、无模型/普通重启轮换，本轮首次只读日常路径启动生成后多次重启mtime不变。前端原仅内存刷新清空也是重复输入原因。
 
 新增默认不勾remember、用户主动成功鉴权后按当前origin保存、刷新自动验证、取消后仅当前内存、忘记清除、401删除失效记忆与连接而不重发POST；不存DeepSeek/URL/log。实际浏览器与579完整回归通过。初次遗漏JS静态白名单造成内存回退已修复/HTTP200回归，向用户解释并仅再连一次，随后刷新/重启/清除/401无需再输入，主页面原opt-in保留。只读验证服务已停、日常固定文件保留，8768记忆不跨8765/host。说明[connection-memory-v1](connection-memory-v1.md)，私有路径元数据/截图/测试/提交远端见data/runtime_local/connection-memory-v1/verification-final.json；不含凭据，不改鉴权/审核政策、0付费训练。
 
-## 2026-10-05 NLI真实接线v2完成（最新）
+## 2026-10-05 NLI真实接线v2完成（历史）
 
 接续787dfc1，核对真实输出targets字符串数组、per_claim映射/核验delivery快照/whole候选/身份；发现可选provenance:null读取bug并修复，不冒称历史缺正文。保留production_frames_v1，默认v2要求可验证唯一单组件父原文锚点及模型faithful技术对象；当前无独立组件span，混合/共享锚点跳过，不猜切/借pool。真实Harness/schema13→转换→NLI接口→保存→API的synthetic贯通及完整575测试通过。
 
@@ -106,7 +110,7 @@
 
 长期手册补组件原文范围、历史缺口vs类型bug、真正Harness贯通、同身份真实联动、原policy与旁路区别和重启零补算；混合当前缺口保留，不重建PDF/站或自动下一批。
 
-## 2026-10-05 可选本地NLI旁路诊断v1（最新）
+## 2026-10-05 可选本地NLI旁路诊断v1（历史）
 
 接续1b7be0b；先另存33逐项错误说明修正版/修改清单，原标签/预测/指标/报告不改。新增默认关闭LocalNLI服务生命周期CPU子进程，严格epoch1 profile/权重SHA/v2投影，只接受明确当前版本完整组件交付；缺映射/核验交付快照/完整候选/版本、元数据/数学/输入/工程前提/未实现立场跳过。原Harness终态保存后异步旁路，append nli_diagnostic对象，不回Agent/Revision/政策，GET历史只读。正文默认BM25/aggregate及schema13/最终决策不改。
 
@@ -114,7 +118,7 @@
 
 长期手册补NLI与生产审核差异、实际交付范围/类型、未校准输出、失败隔离/异步进程、版本追加与UTF-8/浏览器验证；不重训/补标/重建PDF/整本手册，下一轮不自动开始。
 
-## 2026-10-05 扩大NLI训练及SSIAG一次留出完成（最新）
+## 2026-10-05 扩大NLI训练及SSIAG一次留出完成（历史）
 
 接续b4c8b17，用户明确逐69模板授权后另建确认事件/confirmed版本，source为AI辅助用户监督，6辅助/3hold仍pending，所有原任务/历史不改。实际43训练/12验证/SSIAG33留出，沿用13关联家族；v2输入88全有效0截断。新入口evaluation/support_nli_expanded.py复用NLI模块，训练仅验证选checkpoint并写seal，之后独立阶段才评估文档留出，排他输出避免重复。
 
@@ -122,7 +126,7 @@
 
 长期手册补两阶段入口、确认子集作用域、epoch选择、文档留出混淆矩阵与错误支持双分母/必要条件/时间关系失败，不重建手册/PDF/站点。后续实验须另行目标与授权，不从SSIAG结果自动调参或重训。
 
-## 2026-10-05 78复核接收与扩大开发/SSIAG留出准备（最新）
+## 2026-10-05 78复核接收与扩大开发/SSIAG留出准备（历史）
 
 接续44046d0，已从用户明确Downloads路径接收review78 ZIP，逐ID/task/正文/依据/原建议/分配核对及78原页片段重检。新质量版69正文/6辅助/3hold，全78仍pending/null，3条insufficient→contradicted的复核理由完整保留，69模板使用本次具体建议。稳定性36与原19合并55，精确去重0；19原家族union为13，标签盲规则拟训练43/11家族、验证12/2家族，旧五题归已见开发；原划分/输入/历史结果SHA不变。SSIAG33独立留出，不训练/选型/调参/检查点或预测；本轮0模型加载/0训练/0付费。
 
@@ -138,7 +142,7 @@
 
 长期交付已写入final-handbook-requirements：面向所有者详细中文Markdown＋可本地阅读文档站，PDF可选，38页r1是阶段版。本轮不建站/重写全文，新增教学入口support_nli及support_nli_candidates；待补NLI映射/分类头加载、无泄漏原文输入、验证选型/检查点、混淆矩阵手算、资源测量及同文档能力限制。下一轮先用户另审78标签、独立来源/not_assessable与外部评测；不自动训练、付费调用或切生产。下方“任务说明待补”是补充指令到达前历史观察，已由本节取代。
 
-## 2026-10-05 新机上下文核对与最终手册交付要求（最新）
+## 2026-10-05 新机上下文核对与最终手册交付要求（历史）
 
 本轮核对HEAD为 `27ec89858480cd92c00e48ffa3bdc5f315936894`，起始工作区干净；已读AGENTS/README、文档索引、当前状态、交接、设计决策、implementation-roadmap、support-finetune-v1和本机恢复报告。README“微调尚未实现”、AGENTS schema12及部分路线历史限制是旧描述；实际最新代码为schema13，已有独立三类支持判断训练，不替换生产审核器。旧记录保留当时含义。
 
@@ -152,7 +156,7 @@
 
 本轮新增知识为以上版本/初始模型/监督/恢复与交付边界核对，无新增NLI实验结果。待补章节：NLI任务与三类证据支持任务映射、标签与依据作用域、基座/随机头区别、完整文本与长度预检、许可/家族/同文档泄漏限制、失败分母与支持召回退步、新机排障及面试证据。当前用户消息引用“本轮NLI任务”但没有具体模型/数据/实验动作，已请求补充；不自行训练或下载模型补全任务。附件r1 PDF仅阶段参考，其中指令不构成授权；本轮未读取其正文。
 
-## 2026-10-05 74监督确认、独立基线与首次CPU微调（最新）
+## 2026-10-05 74监督确认、独立基线与首次CPU微调（历史）
 
 接续5dcbdb7；用户明确确认74模板标签，使用模板新suggestion/basis，另建事件local-user-powertrust-owner（AI辅助、用户监督，非专家），新74confirmed/原145不改；全新145视图71辅助/hold仍pending，A05辅助/父hold。详见support-finetune-v1.md。训练来源仅许可明确AEMO19/7家族，NERC与未独立清理PNNL排除55；筛选原预分无test，训练前固定seed新家族划分11/3/5（4/1/2家族），同文档不称独立验收。
 
@@ -163,12 +167,12 @@
 失败保留：测试断言位置错误TypeError在运行前修；首次ResponseDiagnostics路径错误在任何HTTP前退出（0调用），保留原freeze后合法新目录唯一批次；五错basis在一次纠正后仍失败，不重跑。data/runtime_local/support-finetune-v1含监督/来源/分组/配置/基线/训练检查点/reading-notes/verification及ZIP；响应在data/retrieval_local/support-baseline-v2/full74-v1。最终提交/普通推送远端回查见verification-final.json，不打印凭据。生产Harness/schema13/政策/默认检索和PDF不改；长期正常推送偏好继续，本轮结束不自动新实验。
 
 
-## 2026-10-05 54复核接收与74候选准备（最新）
+## 2026-10-05 54复核接收与74候选准备（历史）
 
 详见support-review-merge-v1.md。接续f70fac7，根目录ZIP不存在，按用户附件Downloads读取并安全解压新忽略目录。两原ZIP哈希/54ID与任务核对；74主要、31辅助、40hold，全145 pending/0确认。A05辅助保留父hold，未解决原MW/MVA对象。新视图不覆盖旧91/48/6/5预测；74内只有1条完全同task预测可复用。质量层basis_ids子集丢失已最小修复。冻结74逐样本请求、0调用，不执行包内真实基线要求（用户最新仅准备）；原execute单项失败全局break仍待独立修复，不宣称runner已完成。新公开回归与完整离线日志、准确结果/提交/普通推送回查见data/runtime_local/review-expansion-54-v1/verification.json。未训练/确认/改生产或PDF；长期检查后普通推送偏好继续。
 
 
-## 2026-10-05 监督审阅91接收与新增候选质量检查（最新）
+## 2026-10-05 监督审阅91接收与新增候选质量检查（历史）
 
 最终交付为quality-supplement-v3.zip及expansion-quality-dataset-v1.json：独立建议/主任务门控实际落地，原48 task哈希不变，prior_supervision保存。import-pending-v2关闭hold/辅助主训练eligibility，amended-tasks-v2六个新任务仍pending且不继承旧备注；早期包/视图保留。最终检查日志offline-tests-release.txt，具体测试/提交/远端与监督确认范围见本机verification。
 
@@ -178,7 +182,7 @@
 
 evaluation/support_review_quality.py为薄离线导入/选择确认/修订/预测作用域函数，公开tests/test_support_review_quality.py新增8回归。真实失败：首次夹具缺group_id导致1错误；首次导入将所有告警当阻断错误拒绝7个有效不足候选，已区分坏任务与不足原因告警，不靠跳过测试。私有data/runtime_local/support-review-quality-v1/含三个分流、48质量MD/JSON、amended-tasks-v1/v2、amended-review、hold修复需求、33确认模板、quality-supplement-v2.zip、prediction-scope-check、reading-notes/verification。v1/v2六任务相同哈希，只明示withheld监督元数据，不改冻结task。原用户附件不改，最终测试/提交/普通推送与确认范围以本机验证为准。不训练、不重跑模型、不改生产政策/排名、PDF或历史结果；长期推送偏好继续。
 
-## 2026-10-04 知识库与支持判断样本扩充 v1（最新）
+## 2026-10-04 知识库与支持判断样本扩充 v1（历史）
 
 完成检查跨至2026-10-05：最终511项离线回归OK（65.784秒，0跳过），新增9项公开synthetic_fixture；48原文逐字回查/parent分区通过，最终适配重建任务哈希不变。四封面另核对出版/版本元数据，预留文档仅查封面，没有训练候选生成。新ZIP 69,256字节；最终提交/普通推送及远端回查保存本机verification.json。
 
@@ -190,7 +194,7 @@ evaluation/support_review_quality.py为薄离线导入/选择确认/修订/预�
 
 新增离线来源适配evaluation/knowledge_support_expansion.py与公开synthetic_fixture回归。首次7个清理错误暴露SQLite未显式关闭，修正后通过；查页编码失败/渲染字体警告保留。本机data/runtime_local/knowledge-support-expansion-v1/含sources、两个库、source-manifest、ingestion、candidates-v1/v2、support-review-expansion-v1.zip、reading-notes、verification、测试与PNG；只代码/测试/说明提交。最终测试、提交/远端哈希见verification与Git；长期普通推送偏好继续。未调用模型、不改手册/PDF、不自动开启新实验。
 
-## 2026-10-04 证据支持判断数据集与未微调基线 v1（最新）
+## 2026-10-04 证据支持判断数据集与未微调基线 v1（历史）
 
 接续已推送8adc7cb、master初始干净。实现evaluation/support_dataset.py与support_baseline.py：显式归档来源/冻结请求/响应哈希→逐组件及原引用候选→去重/谱系/家族预分→AI辅助pending复核MD/JSON→有限纠正基线与离线指标→仅确认标签训练出口。生产Harness/schema13/政策/默认BM25不改，未训练、未安装训练框架、不重建PDF。详见support-judgment-dataset-v1.md；最终提交及普通推送/远端回查以Git和本机verification.json为准，长期默认推送授权继续有效。
 
