@@ -4,22 +4,342 @@
 
 一个可测试系统必须允许替换模型适配器，而不重新发明业务流程。PowerTrustAI的领域对象在core，Agent执行各自判断，Harness控制流程，Retriever交付证据，应用服务持久化，UI只展示和提交。这些模块依赖方向比“四个Agent”的名字更重要。
 
-```text
-浏览器 → backend/api → ApplicationService → ComponentFactory
-                                      ↓
-                               OfflineHarness
-                         检索 → 生成 → 冻结答案
-                                      ↓
-                              ClaimExtractor + 工具
-                                      ↓
-                       Fact审核 ║ Domain审核（并发）
-                                      ↓
-                              确定性Product政策
-                         结束 或 一次Revision → 全重审
-                                      ↓
-                       Observer → RunStore → API投影 → UI
-                                      ↓
-                          可选LocalNLI诊断（无回流）
+```diagram
+{
+  "title": "调用、证据交付与持久化分离",
+  "width": 820,
+  "height": 710,
+  "nodes": [
+    {
+      "id": "api",
+      "x": 20,
+      "y": 20,
+      "w": 170,
+      "h": 60,
+      "label": "API / Submit\n结构验证与任务身份"
+    },
+    {
+      "id": "svc",
+      "x": 300,
+      "y": 20,
+      "w": 170,
+      "h": 60,
+      "label": "ApplicationService\n保存 / 有界队列"
+    },
+    {
+      "id": "worker",
+      "x": 590,
+      "y": 20,
+      "w": 170,
+      "h": 60,
+      "label": "worker / Factory\n真实组件装配"
+    },
+    {
+      "id": "h",
+      "x": 590,
+      "y": 150,
+      "w": 170,
+      "h": 75,
+      "label": "OfflineHarness\n检索 / 生成 / 冻结\n控制状态与预算"
+    },
+    {
+      "id": "extract",
+      "x": 300,
+      "y": 150,
+      "w": 170,
+      "h": 60,
+      "label": "ClaimExtractor\n锚点 / 主张 / 组件"
+    },
+    {
+      "id": "rag",
+      "x": 20,
+      "y": 300,
+      "w": 145,
+      "h": 60,
+      "label": "Retriever / Evidence\n限定用途的交付"
+    },
+    {
+      "id": "fact",
+      "x": 230,
+      "y": 300,
+      "w": 145,
+      "h": 60,
+      "label": "事实审核\n独立核验 / 原引用"
+    },
+    {
+      "id": "domain",
+      "x": 440,
+      "y": 300,
+      "w": 145,
+      "h": 60,
+      "label": "领域审核\n输入 / 范围 / 前提"
+    },
+    {
+      "id": "policy",
+      "x": 590,
+      "y": 420,
+      "w": 170,
+      "h": 60,
+      "label": "确定性政策\n结束 / 一次修订"
+    },
+    {
+      "id": "observer",
+      "x": 300,
+      "y": 510,
+      "w": 170,
+      "h": 60,
+      "label": "observer\n阶段快照 / 事件"
+    },
+    {
+      "id": "store",
+      "x": 20,
+      "y": 510,
+      "w": 170,
+      "h": 60,
+      "label": "RunStore\n短事务 / 版本保存"
+    },
+    {
+      "id": "ui",
+      "x": 20,
+      "y": 630,
+      "w": 170,
+      "h": 60,
+      "label": "API结果投影 / UI\n只读回查"
+    }
+  ],
+  "edges": [
+    {
+      "from": "api",
+      "to": "svc",
+      "kind": "control"
+    },
+    {
+      "from": "svc",
+      "to": "worker",
+      "kind": "control"
+    },
+    {
+      "from": "worker",
+      "to": "h",
+      "kind": "control"
+    },
+    {
+      "from": "h",
+      "to": "extract",
+      "kind": "control",
+      "points": [
+        [
+          590,
+          177
+        ],
+        [
+          470,
+          177
+        ]
+      ]
+    },
+    {
+      "from": "extract",
+      "to": "fact",
+      "kind": "data",
+      "points": [
+        [
+          340,
+          210
+        ],
+        [
+          302,
+          300
+        ]
+      ],
+      "label": "同版主张",
+      "label_at": [
+        260,
+        260
+      ]
+    },
+    {
+      "from": "extract",
+      "to": "domain",
+      "kind": "data",
+      "points": [
+        [
+          425,
+          210
+        ],
+        [
+          510,
+          300
+        ]
+      ]
+    },
+    {
+      "from": "h",
+      "to": "fact",
+      "kind": "control",
+      "points": [
+        [
+          590,
+          215
+        ],
+        [
+          615,
+          270
+        ],
+        [
+          385,
+          270
+        ],
+        [
+          385,
+          330
+        ],
+        [
+          375,
+          330
+        ]
+      ]
+    },
+    {
+      "from": "h",
+      "to": "domain",
+      "kind": "control",
+      "points": [
+        [
+          650,
+          225
+        ],
+        [
+          650,
+          330
+        ],
+        [
+          585,
+          330
+        ]
+      ]
+    },
+    {
+      "from": "rag",
+      "to": "fact",
+      "kind": "data"
+    },
+    {
+      "from": "rag",
+      "to": "domain",
+      "kind": "data",
+      "points": [
+        [
+          92,
+          360
+        ],
+        [
+          92,
+          385
+        ],
+        [
+          510,
+          385
+        ],
+        [
+          510,
+          360
+        ]
+      ]
+    },
+    {
+      "from": "fact",
+      "to": "policy",
+      "kind": "data",
+      "points": [
+        [
+          302,
+          360
+        ],
+        [
+          302,
+          450
+        ],
+        [
+          590,
+          450
+        ]
+      ]
+    },
+    {
+      "from": "domain",
+      "to": "policy",
+      "kind": "data",
+      "points": [
+        [
+          585,
+          340
+        ],
+        [
+          630,
+          340
+        ],
+        [
+          630,
+          420
+        ]
+      ]
+    },
+    {
+      "from": "h",
+      "to": "observer",
+      "kind": "persist",
+      "points": [
+        [
+          760,
+          187
+        ],
+        [
+          800,
+          187
+        ],
+        [
+          800,
+          540
+        ],
+        [
+          470,
+          540
+        ]
+      ],
+      "label": "阶段通知",
+      "label_at": [
+        707,
+        520
+      ]
+    },
+    {
+      "from": "observer",
+      "to": "store",
+      "kind": "persist",
+      "points": [
+        [
+          300,
+          540
+        ],
+        [
+          190,
+          540
+        ]
+      ]
+    },
+    {
+      "from": "store",
+      "to": "ui",
+      "kind": "data"
+    },
+    {
+      "from": "h",
+      "to": "policy",
+      "kind": "control"
+    }
+  ]
+}
 ```
 
 箭头既有控制调用也有数据交付；数据库不是第五个Agent，observer不是另一个调度器。事实和领域审核收到同一版本答案和同一主张集合，但独立的用途检索证据。第一次审核不读取对方结论，避免直接迎合。
@@ -66,3 +386,23 @@ ComponentFactory构造真实模型/检索/工具，传给OfflineHarness。离线
 练习：API收到任务后立刻返回run_id，为什么不是同步返回审核结果？参考：实际生成/双审耗时较长，服务通过有界队列执行并保存状态；UI能读进度和取消，网络短暂中断不会要求重新POST。仍需承认服务没有通用提交幂等保证。
 
 面试说法：“我复用一个Harness，把供应商、检索和持久化作为可替换组件。程序管理身份/定位/处置，模型承担语义。observer只记录事实，不自行发起新Agent。”
+
+## 三道自测：先作答，再展开
+
+### 自测1：observer为何不是调度器？
+
+::: answer 展开参考答案1
+它记录阶段快照/事件并持久化，不发起Agent行动。
+:::
+
+### 自测2：回答版本与知识版本有什么区别？
+
+::: answer 展开参考答案2
+前者标哪版答案，后者标哪组资料版本，二者都必须绑定。
+:::
+
+### 自测3：为什么数据库不是事实裁判？
+
+::: answer 展开参考答案3
+数据库保存可回查内容，支持关系仍需语义核验。
+:::

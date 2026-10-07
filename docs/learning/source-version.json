@@ -1,8 +1,8 @@
 {
-  "application_commit": "d3ace11aad71fc5a1dcf2aa43afe7f9fe994fcd6",
-  "document_version": "learning-site-v1 reviewed, 2026-10-06",
+  "application_commit": "5f8374e076d594fec5ab22b5732ded1fb1521c10",
+  "document_version": "learning-site-v2 targeted review, 2026-10-07",
   "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
   "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
   "daily_schema": 13,
-  "compact_schema14": "unaccepted prototype; actual Harness input gap; 0/12 complete"
+  "compact_schema14": "input integration repaired; one real smoke incomplete due invalid condition/basis IDs; daily13"
 }

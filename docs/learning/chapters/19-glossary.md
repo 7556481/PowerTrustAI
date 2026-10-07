@@ -94,3 +94,23 @@
 - Immutable publication：构建后封印并独立发布新文件，不能边改边作为固定快照服务。
 - Local session：本机引导换取的HttpOnly会话；DeepSeek密钥仍服务端。
 - Idempotency：相同提交不产生重复任务的服务端协议；当前页按钮锁不等于此能力。
+
+## 三道自测：先作答，再展开
+
+### 自测1：typed basis与Evidence有何差别？
+
+::: answer 展开参考答案1
+Evidence是可交付材料，typed basis是某判断明确选用的依据形式。
+:::
+
+### 自测2：checkpoint文件名best证明什么？
+
+::: answer 展开参考答案2
+没有选择规则/封印哈希时不能证明是合法最优选择。
+:::
+
+### 自测3：logit是不是概率？
+
+::: answer 展开参考答案3
+不是；softmax也只是未校准分数，不是事实可信度。
+:::

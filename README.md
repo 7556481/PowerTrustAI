@@ -106,3 +106,7 @@ python -m venv .venv
 # 电力大语料接入与当前覆盖
 
 本机可选中文全文索引、来源层级与固定真实对照见 [industry-corpus-v1](docs/industry-corpus-v1.md)。73分片已取得；3个发布文件缺Parquet尾部，完整处理仍在继续。日常目前使用显式部分快照，不能称完整库。旧小库、知识版本和运行保留；启动入口、自动连接、政策与NLI默认关闭不变。可选CPU依赖在 `requirements-corpus.txt`；完整原文只留本机data。
+
+## 学习站定向修订（2026-10-07）
+
+双击`start-learning.cmd`独立打开8770学习站；20章Markdown、渐进计划、60道折叠自测及源码路线。日常一键入口保持`start-powertrustai.cmd`，默认schema13。schema14接线已修复但唯一真实烟测仍因非法依据ID执行未完成，不作为日常已验收能力。具体验证与浏览器补验缺口见[本轮说明](docs/integration-learning-v2.md)。

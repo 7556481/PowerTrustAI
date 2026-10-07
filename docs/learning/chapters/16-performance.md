@@ -45,3 +45,33 @@ RSS是进程驻留内存，WorkingSet也是时点观测；训练采样峰值不�
 12题累计131.31秒、中位12.49、范围5.80–15.09秒，共32请求，只有生成8、提取12、领域12，事实0。它们比某些完整审核更快，是因为Fact在模型调用前接线失败，不是有效优化。因此不与此前完整链路作“速度提高”比值，完整率是0/12。
 
 初次Fact结构成功率没有分母，不能写0/0=100%。语义未审、Revision未触发，耗时只描述失败路径。批次没有改代码/换题/重发，但共享停止条件遗漏也必须报告。真实用户性能只有在相同完成义务和合理答案质量下才可比较。
+
+## 缓存与回退：本轮源码核对结论
+
+真实Dense/Hybrid启动：ComponentFactory.initialize_retrieval→VectorIndex.load，profile/knowledge/source fingerprint/成员/向量完整性不匹配拒绝，不自动降级BM25。BM25是显式配置分支，不需要匹配向量；管理员另选BM25不是缓存失效后的隐式回退。
+
+当前query_cache只属于RetrievalSession，fact_query=True才使用，键为(knowledge_version,retriever.cache_identity,query,max_results,实际context)。SemanticRetriever身份含mode和profile_id；每run重建session，跨回答版本可命中同查询结果但重新生成交付/映射并按(version,evidence_id)计交付预算，不复用旧版本判决。aggregate路径不启用它。命中仍执行validate_result确定性重放，所以不能说已经消除完整重放。
+
+retrieve_facts.deliveries仅在一次逐组件调用按完整query去重。PDF报告缓存是只读连接局部，带SQLite data_version/total_changes、knowledge/document/version/file_hash，外部提交或新连接不会错用；不是排名缓存。corpus_index._OPENED是已验证文件打开身份与stamp记忆，变化拒绝，逐命中仍回查。
+
+尚未实现的建议包括跨服务结果缓存、全面取消排名重放和模型答案缓存。本轮没有性能实验或排名调参，不能写成已采用优化或速度收益。
+
+## 三道自测：先作答，再展开
+
+### 自测1：缓存命中是否跳过重放？
+
+::: answer 展开参考答案1
+当前fact_query命中仍validate_result确定性重放。
+:::
+
+### 自测2：失败路径更快可称优化吗？
+
+::: answer 展开参考答案2
+不可；完成义务不同，不能比成功端到端。
+:::
+
+### 自测3：RSS时点观测等于整机峰值吗？
+
+::: answer 展开参考答案3
+不是；需说明采样、进程和测量范围。
+:::

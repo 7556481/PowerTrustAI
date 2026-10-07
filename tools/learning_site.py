@@ -40,6 +40,30 @@ def highlight(code,language):
         except (tokenize.TokenError,IndentationError):pass
     return html.escape(code)
 
+def diagram(source):
+    """Small explicit diagram format embedded in Markdown; no remote renderer."""
+    spec=json.loads(source);nodes={n['id']:n for n in spec['nodes']}
+    colors={'control':'#176f63','data':'#275a97','persist':'#a85a13'}
+    uid=hashlib.sha256(source.encode()).hexdigest()[:10]
+    out=[f'<div class="diagram"><svg role="img" aria-label="{html.escape(spec["title"])}" viewBox="0 0 {int(spec["width"])} {int(spec["height"])}" xmlns="http://www.w3.org/2000/svg"><title>{html.escape(spec["title"])}</title><defs>']
+    for kind,color in colors.items():out.append(f'<marker id="{uid}-{kind}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="{color}"/></marker>')
+    out.append('</defs>')
+    for edge in spec['edges']:
+        a,b=nodes[edge['from']],nodes[edge['to']];kind=edge['kind'];color=colors[kind]
+        if 'points' in edge:points=edge['points']
+        elif a['x']==b['x']:points=[[a['x']+a['w']/2,a['y']+a['h']],[b['x']+b['w']/2,b['y']]]
+        else:points=[[a['x']+a['w'],a['y']+a['h']/2],[b['x'],b['y']+b['h']/2]]
+        path='M '+' L '.join(f'{float(x)} {float(y)}' for x,y in points)
+        dash='' if kind=='control' else ' stroke-dasharray="7 4"' if kind=='data' else ' stroke-dasharray="2 4"'
+        out.append(f'<path d="{path}" fill="none" stroke="{color}" stroke-width="2"{dash} marker-end="url(#{uid}-{kind})"/>')
+        if edge.get('label'):
+            x,y=edge.get('label_at',points[len(points)//2]);out.append(f'<text x="{x}" y="{y}" class="edge-label" fill="{color}">{html.escape(edge["label"])}</text>')
+    for n in nodes.values():
+        out.append(f'<rect x="{n["x"]}" y="{n["y"]}" width="{n["w"]}" height="{n["h"]}" rx="8" fill="#edf3ee" stroke="#64858b"/>')
+        for i,line in enumerate(n['label'].split('\n')):out.append(f'<text x="{n["x"]+n["w"]/2}" y="{n["y"]+22+i*19}" text-anchor="middle" fill="#182c34" class="node-label">{html.escape(line)}</text>')
+    out.append('</svg></div><p class="diagram-legend">实线绿：控制调用；虚线蓝：数据交付；点线橙：持久化。箭头不表示投票或事实证明。</p>')
+    return ''.join(out)
+
 def render(markdown):
     out=[];toc=[];lines=markdown.splitlines();i=0;paragraph=[];listing=False
     def flush():
@@ -52,7 +76,12 @@ def render(markdown):
         if line.startswith('```'):
             flush();close_list();language=line[3:].strip();code=[];i+=1
             while i<len(lines) and not lines[i].startswith('```'):code.append(lines[i]);i+=1
-            out.append('<pre><code class="language-'+html.escape(language)+'">'+highlight('\n'.join(code),language)+'</code></pre>')
+            out.append(diagram('\n'.join(code)) if language=='diagram' else '<pre><code class="language-'+html.escape(language)+'">'+highlight('\n'.join(code),language)+'</code></pre>')
+        elif line.startswith('::: answer'):
+            flush();close_list();title=line[len('::: answer'):].strip() or '展开参考答案';inner=[];i+=1
+            while i<len(lines) and lines[i].strip()!=':::':inner.append(lines[i]);i+=1
+            if i==len(lines):raise ValueError('Unclosed answer block')
+            content,_=render('\n'.join(inner));out.append('<details class="self-answer"><summary>'+html.escape(title)+'</summary>'+content+'</details>')
         elif re.match(r'^#{1,6} ',line):
             flush();close_list();level=len(line)-len(line.lstrip('#'));title=line[level:].strip();anchor='section-'+str(len(toc)+1);toc.append((level,title,anchor));out.append(f'<h{level} id="{anchor}">'+inline(title)+f'</h{level}>')
         elif line.startswith('|') and i+1<len(lines) and re.match(r'^\|[ :|\-]+\|?$',lines[i+1]):

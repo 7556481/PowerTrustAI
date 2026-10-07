@@ -40,10 +40,43 @@ Generation用途检索围绕原问题，Verification可围绕冻结主张，Doma
 
 对一个漏答问题依次问：正文是否入库？查询词是什么？排名在截断前后哪里？上下文实际交付了吗？模型输入有完整段落吗？答案引用了哪个区间？原引用审核如何解释？实验指导书第60页正文旧排11，未进入前三及上下文，属于排名/交付缺口，不是生成看完后故意忽略。
 
-缓存可以避免重复验证，但身份必须包含知识版本、策略、问题及影响结果的配置。新快照无匹配向量索引时走可用BM25，不误用旧索引。构建/打开时验完整性、逐命中时验原文，是性能与可追溯性的分工，不是减少必要校验。
+不能把显式配置BM25写成“向量坏了自动回退”。ComponentFactory.initialize_retrieval在bm25模式直接返回；dense/hybrid调用VectorIndex.load，模型/profile/维数/知识/片段不匹配就抛ConfigurationError拒绝启动，不会静默改BM25。新快照没有匹配向量时，管理员可以明确配置BM25；这是一项配置选择，不是程序自动降级。构建/打开和逐命中校验仍保持。
 
 ## 面试与练习
 
 面试说法：“我用SQLite保留原文与版本，倒排和向量只是检索派生。中文分词是显式方案，不把FTS5当中文能力保证。生成实际交付与原引用分别归档，可以区分库里有、检索到、模型读到和引用支持。”
 
 练习：同一片段text不变但knowledge_version改变，Evidence是否可以不变？参考：片段内容可复用，但Evidence的快照归属与绑定需要新身份；不能拿旧缓存暗示新集合已完整验证。
+
+## 缓存逐项核对：哪些已经实现
+
+| 实际对象/函数 | 缓存键或范围 | 失效与仍执行的检查 |
+|---|---|---|
+| RetrievalSession.query_cache / retrieve | 同一run；knowledge_version、retriever.cache_identity、query、max_results、实际ContextOptions | 只在fact_query=True查询和写入；新run新字典，知识/模式/profile/查询/上下文变更另键；命中仍validate_result完整确定性重放 |
+| retrieve_facts内deliveries | 单次逐组件审核；完整规范查询字符串 | 本次同查询复用Delivery；下一轮重新创建字典，组件映射/回答版本重新绑定 |
+| KnowledgeStore._load_pdf_report | 只读连接局部；SQLite data_version/total_changes、知识、文档、版本、file_hash及缓存版本 | 外部提交改变stamp；可写Store禁用；返回deepcopy；容量达到8清空。不是排名/审核结论缓存 |
+| corpus_index._OPENED / seal | 进程内路径＋knowledge_version；已验证文件size/mtime_ns | stamp变化拒绝；首次检查sidecar字节SHA/SQLite/成员，不在每题全库SHA；逐命中原文和区间继续校验 |
+
+AsyncSQLiteBM25Retriever._work每次工作打开只读KnowledgeStore，所以PDF报告缓存不能跨这些新连接任意复用。aggregate普通检索不启用上述fact_query结果复用；不能把per_claim的优化写成默认aggregate行为。当前没有通用跨服务答案缓存或用缓存跳过必需审核。减少重放等其他优化只是建议，需要另行证据，未在本轮实现。
+
+独立审核只判断实际交付；空命中/交付预算遗漏分别记录。“这个查询未找到”与“库内没有”不同，知识快照固定也不等于全量穷尽检查。
+
+## 三道自测：先作答，再展开
+
+### 自测1：dense索引不匹配是否自动BM25？
+
+::: answer 展开参考答案1
+不会；拒绝配置。BM25需显式选择。
+:::
+
+### 自测2：当前交付不足是否证明全库无资料？
+
+::: answer 展开参考答案2
+不能；查询/排名/预算都可能限制交付。
+:::
+
+### 自测3：query_cache是否跨服务？
+
+::: answer 展开参考答案3
+否；RetrievalSession每run新建，且只用于fact_query路径。
+:::

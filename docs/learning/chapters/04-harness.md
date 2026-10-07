@@ -4,12 +4,164 @@
 
 状态机把“现在做到哪一步”和“允许下一步做什么”显式化。harness/states.py列举状态及转移集合，runtime.py执行转移并记录Trace。与随处if/while相比，显式状态能拒绝“审核未完成就直接completed”的非法路径。终态包括通过、拒绝、待补充、执行未完成、复核、失败和取消。
 
-```text
-received → validated → retrieving → generating
-                                     ↓
-                 extracting_claims → verifying → deciding
-                         ↑                         ↓
-                         └──── revising（最多一次）─┘
+```diagram
+{
+  "title": "状态与有界修订：对象重建而非原地抹错",
+  "width": 780,
+  "height": 670,
+  "nodes": [
+    {
+      "id": "start",
+      "x": 30,
+      "y": 20,
+      "w": 280,
+      "h": 60,
+      "label": "接收 / 验证\n问答检索生成或已有回答冻结"
+    },
+    {
+      "id": "extract",
+      "x": 30,
+      "y": 145,
+      "w": 280,
+      "h": 60,
+      "label": "提取主张与真实标量工具\n当前answer_id / version"
+    },
+    {
+      "id": "review",
+      "x": 30,
+      "y": 270,
+      "w": 280,
+      "h": 60,
+      "label": "并发事实 + 领域审核\n同版本目标 / 各自实际交付"
+    },
+    {
+      "id": "decide",
+      "x": 30,
+      "y": 395,
+      "w": 280,
+      "h": 60,
+      "label": "政策决策\n执行、发现、解决程度分开"
+    },
+    {
+      "id": "rev",
+      "x": 470,
+      "y": 395,
+      "w": 255,
+      "h": 60,
+      "label": "最多一次Revision\n新版本 + 完整重提取双审"
+    },
+    {
+      "id": "end",
+      "x": 30,
+      "y": 535,
+      "w": 360,
+      "h": 80,
+      "label": "终态：通过 / 不通过 / 待补充\n人工复核 / 执行未完成\n失败或取消另记"
+    },
+    {
+      "id": "obs",
+      "x": 470,
+      "y": 535,
+      "w": 255,
+      "h": 80,
+      "label": "每个阶段observer保存\n旧版 + 新版 / Trace\n网络等待不占长写事务"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "extract",
+      "kind": "control"
+    },
+    {
+      "from": "extract",
+      "to": "review",
+      "kind": "control"
+    },
+    {
+      "from": "review",
+      "to": "decide",
+      "kind": "control"
+    },
+    {
+      "from": "decide",
+      "to": "rev",
+      "kind": "control",
+      "label": "有依据可修复",
+      "label_at": [
+        328,
+        423
+      ]
+    },
+    {
+      "from": "rev",
+      "to": "extract",
+      "kind": "control",
+      "points": [
+        [
+          598,
+          395
+        ],
+        [
+          598,
+          173
+        ],
+        [
+          310,
+          173
+        ]
+      ],
+      "label": "重建当前对象",
+      "label_at": [
+        405,
+        156
+      ]
+    },
+    {
+      "from": "decide",
+      "to": "end",
+      "kind": "control",
+      "points": [
+        [
+          170,
+          455
+        ],
+        [
+          170,
+          535
+        ]
+      ]
+    },
+    {
+      "from": "review",
+      "to": "obs",
+      "kind": "persist",
+      "points": [
+        [
+          310,
+          300
+        ],
+        [
+          405,
+          300
+        ],
+        [
+          405,
+          575
+        ],
+        [
+          470,
+          575
+        ]
+      ],
+      "label": "事件/快照",
+      "label_at": [
+        411,
+        553
+      ]
+    }
+  ]
+}
 ```
 
 已有回答入口从validated进入提取，跳过生成。没有实质回答时进入needs_information而非把模板当成功答案。中断、失败与业务不足是不同终态，实际归档保存终止原因。
@@ -51,3 +203,23 @@ ProductAuditPolicy检查真实执行、适用义务和发现，不给模型最�
 追问：为什么一次而非多次Revision？参考：控制成本、避免模型把问题删到通过、保留未解决限制。一轮是当前有界产品选择，不是理论最优；扩大必须另行评测，不能在看到题目失败后循环刷成功。
 
 面试可说：“Harness管理显式状态和有界资源。两审核并发但共享冻结对象；格式纠正与业务Revision分开，Revision后完整重提取双审，历史版本不可覆盖。”
+
+## 三道自测：先作答，再展开
+
+### 自测1：纠正与Revision是否同一事？
+
+::: answer 展开参考答案1
+不是；前者恢复输出合同，后者产生新答案并需完整重审。
+:::
+
+### 自测2：并发双审是否减少请求数？
+
+::: answer 展开参考答案2
+不减少，只可能缩短等待关键路径。
+:::
+
+### 自测3：修订后能否沿用旧claims？
+
+::: answer 展开参考答案3
+不能；重新提取并重建当前版本对象和两审核。
+:::

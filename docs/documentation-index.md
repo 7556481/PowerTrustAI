@@ -335,3 +335,6 @@
 
 - [学习站Markdown首页](learning/index.md)，静态入口learning/site/index.html；20章节源在learning/chapters，待补questions-for-chatgpt，源码核对source-check、documentation-verification。tools/learning_site.py和start-learning.cmd负责纯本地构建/阅读。
 - [本轮诊断与未通过验收](audit-stability-learning-v1.md)：47实际诊断、compact14未验收、固定12题0完成及停止遗漏，私有learning-audit-v1保留全部原结果/冻结/审阅包。日常恢复13；无新训练/排名/Agent。
+
+- [集成与学习站定向修订v2](integration-learning-v2.md)：真实接线/烟测失败、20章修订和浏览器缺口。
+- [逐章核对](learning/revision-v2-checklist.md)，[待ChatGPT补充](learning/questions-for-chatgpt.md)。
