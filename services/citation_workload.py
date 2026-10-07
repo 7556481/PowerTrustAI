@@ -39,3 +39,22 @@ def pack(items, payload, instruction, limits):
         else: current = trial
     if current: groups.append(tuple(current))
     return tuple(groups), tuple(rejected)
+
+def submission_rejections(request,knowledge_version,schema,limits):
+    """Capacity preflight uses the same protocol payload as the actual reviewer."""
+    answer=request.existing_answer
+    if schema==14:
+        from agents.contracts import ReliabilityVerificationInput
+        from agents.verification_contract_v14 import ReviewCatalog,SYSTEM
+        catalog=ReviewCatalog(ReliabilityVerificationInput(request,answer,(),(),
+            knowledge_version=knowledge_version,original_evidence=request.provided_evidence))
+        _,rejected=pack(tuple(catalog.targets),catalog.payload,SYSTEM,limits)
+        return tuple(catalog.targets[t]['citation_index'] for t in rejected)
+    if schema!=13:raise ValueError('Unsupported service verification protocol')
+    from services.scoped_candidates import CandidateScope
+    from agents.verification_contract_v10_batched import citation_payload,original_template,CONTRACT_VERSION
+    original={e.evidence_id:e for e in request.provided_evidence}
+    scopes=[None]+[CandidateScope(answer,knowledge_version,'original_citation',
+        tuple(original[e] for e in c.evidence_ids),check_id=i,protocol_version=CONTRACT_VERSION) for i,c in enumerate(answer.citations)]
+    _,rejected=pack(range(len(answer.citations)),lambda g:citation_payload(answer,request.question,scopes,g),original_template(),limits)
+    return rejected

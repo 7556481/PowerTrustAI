@@ -70,6 +70,7 @@ class ServiceConfig:
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
             index_db=Path(os.environ.get('POWERTRUST_INDEX_DB',daily.get('index_db',str(cls().index_db)))),
             decision_policy=os.environ.get('POWERTRUST_DECISION_POLICY','product-v1'),
+            verification_schema=int(os.environ.get('POWERTRUST_VERIFICATION_SCHEMA','13')),
             run_db=Path(os.environ.get('POWERTRUST_RUN_DB',str(cls().run_db))),
             nli_enabled=os.environ.get('POWERTRUST_LOCAL_NLI_ENABLED','0')=='1',
             nli_python=Path(os.environ.get('POWERTRUST_LOCAL_NLI_PYTHON',nli.get('python'))) if os.environ.get('POWERTRUST_LOCAL_NLI_PYTHON') or nli.get('python') else None,

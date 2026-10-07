@@ -295,6 +295,8 @@ class ModelEvidenceVerificationAgent:
         if schema_version not in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14):
             raise ValueError("Live review supports explicit v4/v5/v6 only")
         self.schema_version = schema_version
+        from agents.contracts import EvidenceVerificationInput,ReliabilityVerificationInput
+        self.review_input_type=ReliabilityVerificationInput if schema_version>=9 else EvidenceVerificationInput
         self.citation_workload = citation_workload
         self.support_relation_checks = support_relation_checks
         require(support_relation_version in (1,2,3,4,5), "Unknown support relation version")

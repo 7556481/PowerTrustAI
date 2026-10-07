@@ -63,16 +63,11 @@ class ApplicationService:
             await self.ensure_nli() # A load failure is diagnostic only; the audit still runs.
         knowledge=self.factory.preflight()
         if self.config.profile=='real' and request.existing_answer and request.existing_answer.citations:
-            from agents.verification_contract_v10_batched import citation_payload,original_template,CONTRACT_VERSION
-            from services.scoped_candidates import CandidateScope
-            from services.citation_workload import pack
+            from services.citation_workload import submission_rejections
             from core.validation import InputError
-            answer=request.existing_answer;original={e.evidence_id:e for e in request.provided_evidence}
-            scopes=[None]+[CandidateScope(answer,knowledge,'original_citation',tuple(original[e] for e in c.evidence_ids),
-                check_id=i,protocol_version=CONTRACT_VERSION) for i,c in enumerate(answer.citations)]
-            groups,rejected=pack(range(len(answer.citations)),lambda g:citation_payload(answer,request.question,scopes,g),
-                original_template(),self.config.citation_workload)
+            rejected=submission_rejections(request,knowledge,self.config.verification_schema,self.config.citation_workload)
             if rejected:raise InputError('Complete citation scopes exceed configured capacity; citation_indexes='+str(list(rejected)))
+
         async with self.lock:
             if self.closing or self.storage_fault:raise ServiceUnavailable('Service not accepting work')
             if self.queue.full():raise QueueFullError('Waiting queue is full')

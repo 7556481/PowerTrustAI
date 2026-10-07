@@ -199,6 +199,8 @@ class ModelPowerDomainReviewAgent:
     def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1):
         require(protocol_version in (1,2,3,4,5),"Unknown domain contract")
         self.protocol_version=protocol_version
+        from agents.contracts import PowerDomainReviewInput,ReliabilityDomainInput
+        self.review_input_type=ReliabilityDomainInput if protocol_version>=3 else PowerDomainReviewInput
         self.client=ModelClient(adapter,settings)
         self.diagnostics=None if diagnostic_dir is None else ResponseDiagnostics(diagnostic_dir)
 
