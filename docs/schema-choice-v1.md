@@ -51,3 +51,7 @@ Topics建议：python, fastapi, rag, evidence-verification, electrical-engineeri
 学习站20章Markdown源，start-learning.cmd/8770独立；第14章新增一页对象流并链接深读，08/16补协议作用域/对照/分母/耗时解释。旧手册完整保留，个人设计动机/面试贡献留给ChatGPT共同补充。最终已验收和仅离线项分别标明。
 
 阻断/未验收：两版真实语义稳定性、工程项本轮无效准备、最终浏览器补验。已接受限制：小样本开发评价、AI辅助监督、NLI仅诊断、固定部分快照、未获得工程认证。停止自动追加修复/实验；背景唯一构建可继续。
+
+## GitHub CI首轮与跨平台文档修复
+
+首轮37602134945实际安装/公开回归/Harness演示通过，学习校验失败；公开日志下载API未授权，未声称读到远端异常文本。用Git LF源码副本明确重现Stale source reference: services/structured_model.py；20个引用的Windows原始SHA与Git LF不同，规范LF字节完全一致。只在文档新增source_text_lf_sha256并保留原file_sha256，不改变Evidence或知识库字节真实性规则。两个新回归证明换行等价、真实代码变化不等价；修复后同一副本校验通过。远端修复后状态见私有ci-status记录及工作流链接，不以首次失败冒充成功。

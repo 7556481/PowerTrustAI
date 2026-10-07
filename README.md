@@ -44,7 +44,7 @@ Python、FastAPI、现有受控Harness/四Agent、严格结构及候选作用域
 
 ## 验证
 
-公开离线回归本机712项通过；无私有资料副本712项、27项私有历史回放明确跳过。实际CI状态需查看[Public offline checks](https://github.com/7556481/PowerTrustAI/actions/workflows/public-offline.yml)，本轮推送后的运行状态另见工程记录，未使用装饰性成功徽章。
+公开离线回归本机714项通过；无私有资料副本714项、27项私有历史回放明确跳过。实际CI状态需查看[Public offline checks](https://github.com/7556481/PowerTrustAI/actions/workflows/public-offline.yml)，本轮推送后的运行状态另见工程记录，未使用装饰性成功徽章。
 
 固定8题同回答/主张/交付对照：schema13初次7/8、纠正后7/8；schema14初次6/8、纠正后8/8。单位案例工具准备失败，合法计算语义比较不成立；3次首题token因采集失败未保存。不能用pass数量、快速失败或小样本推导通用准确率/性能承诺。两项完整服务分别5和9次请求；修订ω条件保留并完整重审。详见[本轮对照与限制](docs/schema-choice-v1.md)。
 

@@ -67,6 +67,10 @@ git -c http.proxy=http://127.0.0.1:7897 ls-remote origin refs/heads/master
 
 面试可说：“我把可运行代码、私有资料恢复和可复现结论分开，保留哈希/版本与失败。统一入口改善本机使用，但没有把单用户localhost部署宣称多用户生产平台。”
 
+## 文档源码跨平台身份
+
+Git可把Windows工作区CRLF检出为Linux LF；直接比较工作区原字节SHA会误报代码不同。学习站source-check同时保留原始文件SHA和明确source_text_lf_sha256（仅CRLF→LF，空格/代码不变）；CI按后者核查教学源码。真实Evidence、PDF和快照仍严格原字节/原文/版本哈希，不能套这个教学规则修改生产依据。首次远端CI失败保留，Git LF副本重现后修复，再核对CI，而不是取消来源校验。
+
 ## 三道自测：先作答，再展开
 
 ### 自测1：学习站启动是否要停8765？

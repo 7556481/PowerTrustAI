@@ -460,3 +460,7 @@ origin按授权添加指定地址。只读Git HTTPS连续连接重置，匿名cu
 最终独立事实、原引用检查、领域审核均执行完成，无execution_issues，required_stages_complete=true；检查未全评估、review_required。v2事实6 supported/2 not_assessable（元数据来源未核实、建议不是事实）；领域缺engineering_context、完整单位检查、已执行工程分析，未仿真。不得把业务前提缺失称作容量/结构失败，也不宣称工程认证。结果、部分发现、Evidence回查和重启相等，10→10无重发，旧/新记录分别存在。
 
 129505输入/5756输出/135261总token，cache hit21248/miss108257，HTTP全程51.830秒；适配器2026-10-02快照估算USD0.019755894–0.039511788，非账单。冻结原始请求/响应、阶段统计、SHA、用量及提交记录见schema13-final/verification-final.json，简明结论reading-notes-final.md。原运行说明新增最新验证范围，不抹去旧失败。无功能/政策/检索/运行代码变化，不扩手册或重生成PDF；本轮未重跑离线/历史实验、未做浏览器交互，444项为之前证据。8766服务已停止；本轮仅明确文档清单独立本地提交，不推送，不启动下一实验。
+
+### 公开CI补记
+
+首轮远端公开回归/演示通过，学习原字节SHA受Git LF/Windows CRLF影响失败；用Git副本重现后增文档LF身份（原SHA保留、Evidence哈希不变），两个内容等价/不等价回归通过。最终CI按具体head回查，不把本机通过当远端。
