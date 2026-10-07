@@ -219,6 +219,32 @@ class OfflineHarness:
                     delivery = await retrieve_facts(retrieval, request, answer, claims)
                 else:
                     delivery = await retrieval.retrieve(purpose, request, answer, claims, query_override=query_override)
+                if (getattr(self, 'subject_supplement', False) and query_override is None
+                        and not delivery.issue and (purpose == RetrievalPurpose.GENERATION or
+                        (purpose == RetrievalPurpose.VERIFICATION and self.retrieval_settings.fact_strategy == 'aggregate'))):
+                    from services.audit_subject_query import question_subject, before_review, PRE_REVIEW_VERSION
+                    subject_query = question_subject(request.question) if purpose == RetrievalPurpose.GENERATION else before_review(claims)
+                    if subject_query and subject_query != delivery.record.query:
+                        # Preserve each ranked record, including the original, before merging delivery.
+                        import json
+                        from dataclasses import asdict, replace
+                        record('retrieval_original_' + purpose.value, delivery.record.status, started,
+                               json.dumps(asdict(delivery.record), ensure_ascii=False))
+                        extra = await retrieval.retrieve(purpose, request, answer, claims, query_override=subject_query)
+                        record('retrieval_subject_' + purpose.value, extra.record.status, started,
+                               json.dumps({'version': PRE_REVIEW_VERSION, 'original_retrieval_id': delivery.record.retrieval_id,
+                                           'supplement': asdict(extra.record)}, ensure_ascii=False))
+                        combined = merge_evidence(delivery.evidence, extra.evidence)
+                        summary = replace(delivery.record, query_method=PRE_REVIEW_VERSION,
+                            status=extra.record.status if extra.issue else delivery.record.status,
+                            outcome='partial' if extra.issue else ('delivered' if combined else 'empty'),
+                            hits=delivery.record.hits + extra.record.hits,
+                            core_evidence_ids=tuple(dict.fromkeys(delivery.record.core_evidence_ids + extra.record.core_evidence_ids)),
+                            context_evidence_ids=tuple(dict.fromkeys(delivery.record.context_evidence_ids + extra.record.context_evidence_ids)),
+                            accepted_chars=sum(len(e.text) for e in combined), calls_used=retrieval.calls,
+                            cumulative_chars=retrieval.chars, reason='Original query and literal subject supplement; complete delivered bodies retained')
+                        delivery = replace(delivery, evidence=combined, bindings=delivery.bindings + extra.bindings,
+                                           record=summary, issue=extra.issue, issues=extra.issues)
                 evidence = merge_evidence(evidence, delivery.evidence)
                 bindings += delivery.bindings
                 return delivery

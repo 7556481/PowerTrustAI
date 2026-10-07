@@ -2,7 +2,7 @@
 import re
 from services.validation_diagnostics import StructuredValidationError
 
-VERSION = 'explicit-answer-character-limit-v1'
+VERSION = 'explicit-answer-character-limit-v2'
 
 def character_limit(question, requirements=()):
     # Only explicit Arabic-digit upper bounds in user answer instructions.
@@ -10,6 +10,9 @@ def character_limit(question, requirements=()):
     values = []
     for text in (question, *requirements):
         for match in re.finditer(r'(?:控制在|不超过|不多于|最多|限)\s*([0-9]{1,5})\s*(?:个)?(?:字|字符)(?:以内|以下)?', text):
+            value = int(match[1])
+            if value > 0:values.append(value)
+        for match in re.finditer(r'([0-9]{1,5})\s*(?:个)?(?:字|字符)\s*(?:以内|以下)', text):
             value = int(match[1])
             if value > 0:values.append(value)
     return min(values) if values else None

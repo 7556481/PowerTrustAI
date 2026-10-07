@@ -79,7 +79,7 @@ class ComponentFactory:
         INDEPENDENT += instructions(5)
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
         ORIGINAL=original_template(support_relation_checks=True,support_relation_version=5)
-        PROMPT_VERSION='evidence-verification-v9.15-support-fidelity-separation'
+        PROMPT_VERSION='evidence-verification-v9.16-repair-null-scope-clarity'
         CONTRACT_VERSION='evidence-verification-output-v9.11'
         if self.config.verification_schema==14:
             from agents.verification_contract_v14 import SYSTEM,PROMPT_VERSION,CONTRACT_VERSION
@@ -96,7 +96,7 @@ class ComponentFactory:
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
             'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':self.config.verification_schema,'domain_review':5,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
-            'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-category-clarity-v1' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
+            'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-faithful-assertions-v2' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
               'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.3-operational-hazard','revision':REVISION_PROMPT_VERSION},
             'contracts':{'generation':'generation-output-v3','extraction':'atomic-claims-v7','verification':CONTRACT_VERSION,
               'domain':'power-domain-review-output-v3.3','revision':'revision-output-v2'},
@@ -124,7 +124,7 @@ class ComponentFactory:
                 manifest['scoring_method']=SCORING
                 manifest['retrieval']='immutable SQLite FTS5 postings; versioned Chinese segmentation/topic query; strict hit replay'
                 manifest['performance_profile']='build/publication FTS integrity; open structural checks; immutable-file stamp; strict per-hit original/span verification; no full snapshot query scan'
-        manifest['fact_subject_supplement']='audit-subject-supplement-v1: once per answer version after assessed insufficiency; default first query/settings preserved'
+        manifest['fact_subject_supplement']='literal-subject-pre-review-v2: generation/aggregate verification before model; audit-subject-supplement-v1 after assessed insufficiency; original queries/settings retained'
         from services.operational_safety import RULE,SOURCES,VERSION as SAFETY_VERSION
         manifest['operational_safety_registry']={'version':SAFETY_VERSION,'rule':RULE,'sources':SOURCES,'judgment_origin':'model semantic application of registered source-backed advice rule; not expert or engineering certification'}
         manifest['operational_safety']='operational-hazard-screen-v1: model judgment with source/answer binding; no engineering certification'

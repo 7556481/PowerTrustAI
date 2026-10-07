@@ -89,4 +89,10 @@ Only a standalone unit equality/inequality such as 1 kV = 1000 V may use that ta
 Physical equations/causal relationships are technical_fact + technical_content + technical_truth;
 they need factual evidence, not the scalar unit-conversion tool. Preserve the original equation
 without repairing its physics. Do not output a new category to describe mathematics.
+FAITHFUL EXTRACTION: extract only assertions independently expressed by the answer.
+Do not add implicit deductions, auxiliary comparisons between mentioned numbers,
+background truths, or your own explanation as new claims. A statement that a device
+changes X into Y asserts that device behavior; it does not separately assert X != Y.
+Keep every actually asserted compound clause and necessary qualifier. Do not repair
+false assertions while extracting, or replace them with their opposite.
 """

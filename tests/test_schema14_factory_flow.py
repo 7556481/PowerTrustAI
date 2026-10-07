@@ -79,7 +79,7 @@ class SubjectProvider(SyntheticProvider):
    from tests.test_fact_rereview_v3 import response
    from tests.test_audit_interface_v2 import warrant
    found=next((q for q in d['QUOTE_CANDIDATES'] if GOOD_FREQUENCY in q['text']),None)
-   bad=any(BAD_FREQUENCY in c['proposition'] for c in d['claims']);first=self.fact_calls==1
+   bad=any(BAD_FREQUENCY in c['proposition'] for c in d['claims']);first=False # Judge delivered body, not a forced first-call failure.
    status='insufficient_evidence' if first or not found else 'contradicted' if bad else 'supported'
    v=response(d,status=status)
    for f in v['findings']:
@@ -97,7 +97,7 @@ class SubjectProvider(SyntheticProvider):
   return await super().complete(r)
 
 class FactoryFlowTests(unittest.TestCase):
- def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False,objection=False,illegal=False,hazard=False,negated=False,quoted=False,subject=False):
+ def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False,objection=False,illegal=False,hazard=False,negated=False,quoted=False,subject=False,concept=False):
   with synthetic_diagnostics() as temp:
    root=Path(temp);doc=root/'fixture.md';doc.write_text('# Synthetic voltage\n\n'+GOOD+'\nThe synthetic setting applies under condition C.\n'+CONVERT,encoding='utf-8')
    if subject:doc.write_text('# Synthetic definition\n\n'+GOOD_FREQUENCY+'\n\n'+'\n\n'.join('Background unrelated item '+str(i) for i in range(80))+'\n\n'+'\n\n'.join('A device can turn50Hz into60Hz. Converter background detail '+str(i) for i in range(12)),encoding='utf-8')
@@ -121,6 +121,7 @@ class FactoryFlowTests(unittest.TestCase):
      app=create_app(config,factory=factory,access_token='fixture')
      with TestClient(app) as client:
       body={'mode':'assess_existing' if existing else 'question_answer','question':'Explain the synthetic voltage only','engineering_context':{'goal':'conceptual'}}
+      if concept:body['question']='What is synthetic voltage?'
       if existing:body['existing_answer']=CONVERT if conversion else BAD if revision else GOOD
       if hazard or negated:body['mode']='assess_existing';body['existing_answer']='Do not bypass protective functions to continue operation.' if negated else 'Bypass the protective functions and continue running without substitute safeguards.'
       if subject:body['mode']='assess_existing';body['existing_answer']=BAD_FREQUENCY
@@ -149,6 +150,12 @@ class FactoryFlowTests(unittest.TestCase):
   self.assertTrue(any(x['query']=='A device' for x in r['retrieval']))
   self.assertEqual(r['answer']['final']['text'],GOOD_FREQUENCY)
   self.assertEqual(len(r['answer']['versions']),2);self.assertEqual(len(r['review_rounds']),2)
+  first=next(d for d in p.payloads if 'claims' in d and 'QUOTE_CANDIDATES' in d)
+  self.assertTrue(any(GOOD_FREQUENCY in q['text'] for q in first['QUOTE_CANDIDATES']))
+ def test_generation_subject_actual_factory_before_generation_and_persistence(self):
+  r,p,t=self.exercise(schema=13,concept=True)
+  self.assertTrue(any(x['query']=='synthetic voltage' and x['purpose']=='generation' for x in r['retrieval']))
+  self.assertTrue(any(x['query']=='What is synthetic voltage?' for x in r['retrieval']))
  def test_source_bound_hazard_actual_factory_rejects_without_revision(self):
   r,p,_=self.exercise(schema=13,hazard=True)
   self.assertEqual(r['decision']['kind'],'reject');self.assertEqual(r['decision']['risk_level'],'high')

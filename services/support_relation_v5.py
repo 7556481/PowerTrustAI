@@ -34,6 +34,12 @@ tables may support bounded measured values. Unknown corpus origin is allowed for
 explanations, not sole authority for settings/normative requirements/engineering guarantees.
 repair null or EXACT {replacement,condition_id}: choose an actual selected source
 carrier supporting a substantive SAME-question correction. Do not copy source_excerpt.
+NULL CONTRACT: use "repair": null when no directly supported replacement is available.
+A repair object requires BOTH fields: replacement is a nonempty string; condition_id
+is a NON-NULL string identifying a SOURCE_CONDITION_CANDIDATE whose quote_id occurs
+in this relation's selected quote_ids. {"replacement":"...","condition_id":null}
+is INVALID. Never invent/select an unrelated ID just to complete a repair. Either
+select a genuinely supporting carrier from this scope or keep the whole repair null.
 Propose a repair for a located qualifier loss or changed causal subject IF the already
 selected body justifies the correction. Do not delete requested topics or invent inputs.
 This proposal is not verification; all remaining gaps and full re-review remain required.

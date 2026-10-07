@@ -22,3 +22,11 @@ def catalog(scope):
     return result
 
 def payload(scope):return {'version':VERSION,'candidates':[{k:v for k,v in c.items() if k not in ('text','provenance')} for c in catalog(scope).values()],'note':'Exact source body is the corresponding QUOTE_CANDIDATES text. Complete quote carriers, not automatically extracted minimal condition spans; model identifies necessity.'}
+
+def repair_guidance(scopes, citation_indexes=None):
+    """Correction context only: no illegal output is edited or assigned an ID."""
+    indexes=(0,) if citation_indexes is None else tuple(i+1 for i in citation_indexes)
+    return {'version':'repair-null-scope-guidance-v1',
+        'null_rule':'No directly justified correction: repair=null. A repair object requires non-null condition_id; its carrier quote_id must also be selected in this SAME component/citation relation.',
+        'scopes':[{'scope_id':scopes[i].scope_id,'citation_index':None if i==0 else i-1,
+                   'carriers':[{'condition_id':c['condition_id'],'quote_id':c['quote_id']} for c in catalog(scopes[i]).values()]} for i in indexes]}
