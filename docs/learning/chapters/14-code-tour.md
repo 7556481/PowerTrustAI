@@ -413,7 +413,7 @@ services/claim_extractor.py / ModelClaimExtractor.extract，实际行142–157�
                 'assumptions':answer.assumptions,'missing_information':answer.missing_information}
             path=None if self.diagnostics is None else self.diagnostics.save_scope(payload)
             output,_=await structured_request(self.client,(ModelMessage('system',anchor_system),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),
-                ('atomic-claims-v7-obligations-category-clarity-v1' if self.daily_guidance else 'atomic-claims-v7-obligations') if self.protocol_version==7 else 'atomic-claims-v6-basis-target-anchors' if self.protocol_version==6 else 'atomic-claims-v5-program-anchors',lambda v:parse(v,answer),diagnostics=self.diagnostics,
+                ('atomic-claims-v7-obligations-faithful-assertions-v2' if self.daily_guidance else 'atomic-claims-v7-obligations') if self.protocol_version==7 else 'atomic-claims-v6-basis-target-anchors' if self.protocol_version==6 else 'atomic-claims-v5-program-anchors',lambda v:parse(v,answer),diagnostics=self.diagnostics,
                 response_contract_version='atomic-claims-v'+str(self.protocol_version),candidate_catalog_path=path)
             return output
 ```
@@ -516,7 +516,7 @@ backend/assembly.py实际行176–185，仅连接处摘录，周围初始化/后
 
 ### 关键连接：按输入契约包装，而非散落版本条件
 
-harness/runtime.py实际行406–412，仅连接处摘录，周围初始化/后续逻辑省略。
+harness/runtime.py实际行432–438，仅连接处摘录，周围初始化/后续逻辑省略。
 
 ```python
                 from services.review_inputs import build as build_review_input
@@ -530,7 +530,7 @@ harness/runtime.py实际行406–412，仅连接处摘录，周围初始化/后�
 
 ### 关键连接：并发双审和异常收尾
 
-harness/runtime.py实际行451–462，仅连接处摘录，周围初始化/后续逻辑省略。
+harness/runtime.py实际行477–488，仅连接处摘录，周围初始化/后续逻辑省略。
 
 ```python
                 reviewers = [asyncio.create_task(job) for job in (
@@ -549,7 +549,7 @@ harness/runtime.py实际行451–462，仅连接处摘录，周围初始化/后�
 
 ### 关键连接：修订后重建与旧轮次保留
 
-harness/runtime.py实际行574–587，仅连接处摘录，周围初始化/后续逻辑省略。
+harness/runtime.py实际行600–613，仅连接处摘录，周围初始化/后续逻辑省略。
 
 ```python
                 answer = revised.answer

@@ -1,6 +1,6 @@
 {
-  "application_commit": "9d363efdbe3a92dd7f9b8779c350e7d47cfad58a",
-  "document_version": "learning-site-v3.4 bounded operational safety and actual failures, 2026-10-07",
+  "application_commit": "440dce365664c2679a66385952c456593cff899f",
+  "document_version": "learning-site-v3.5 ordinary chain factual update, 2026-10-08",
   "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
   "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
   "daily_schema": 13,

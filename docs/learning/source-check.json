@@ -115,8 +115,8 @@
       "end_line": 158,
       "function_end_line": 183,
       "excerpt_sha256": "dfef916a9bb8bc02fdeedb70f8ac0d51c19ee4d210b33dc2dbdf32b7d47937c6",
-      "file_sha256": "df0987591ec689d3f6511109407d91818d585d40504e3f290b417610d7ed2c3c",
-      "source_text_lf_sha256": "dad6130f8cc3485b251e713d139119a7cf1c070190738a3c9e25e217451408a9"
+      "file_sha256": "c7ce1f32a544d229e29de5bd37e0a07f21ec359a4e07c10cee20a759ad06915f",
+      "source_text_lf_sha256": "6b6995a738373fe7aa189ab4885b4452c185b0f67a17355ca50974b8d3501a2a"
     },
     {
       "file": "services/claim_extractor.py",
@@ -124,9 +124,9 @@
       "start_line": 142,
       "end_line": 157,
       "function_end_line": 165,
-      "excerpt_sha256": "fdca916a8107715017c5d444f8ce8dd1741238c670a90178e1bb85f271a1ef78",
-      "file_sha256": "bed702d44d4e35ae4de4c4c318147c3e44d008687daf9ceb80166a39983c5159",
-      "source_text_lf_sha256": "04477b40ac1db862578ffe56f276fa060715a43c914234f2b81d15142898ccb1"
+      "excerpt_sha256": "3e639cac860d8f70c4d072a7671eb2111049093872bc8538fbb56ad928214417",
+      "file_sha256": "364439019186c84f9a073dc972c687c12c2d77aac14ef1c0c4cf1c703cc1377e",
+      "source_text_lf_sha256": "4c0fa7fdb25e335ded2f45e466e7faf32a9493c6e5001cb9dbb60f65a4742b57"
     },
     {
       "file": "harness/product_policy.py",
@@ -166,35 +166,35 @@
       "start_line": 176,
       "end_line": 185,
       "excerpt_sha256": "ec9723445c435fcf66b3fc6de17ae89db8c828ce47e71d4a16eddb760bfaf94e",
-      "file_sha256": "df0987591ec689d3f6511109407d91818d585d40504e3f290b417610d7ed2c3c",
-      "source_text_lf_sha256": "dad6130f8cc3485b251e713d139119a7cf1c070190738a3c9e25e217451408a9"
+      "file_sha256": "c7ce1f32a544d229e29de5bd37e0a07f21ec359a4e07c10cee20a759ad06915f",
+      "source_text_lf_sha256": "6b6995a738373fe7aa189ab4885b4452c185b0f67a17355ca50974b8d3501a2a"
     },
     {
       "file": "harness/runtime.py",
       "symbol": "from services.review_inputs import build",
-      "start_line": 406,
-      "end_line": 412,
+      "start_line": 432,
+      "end_line": 438,
       "excerpt_sha256": "c1cec012bcc8f014e5a4195f1afe06f2348ac37bfdfadc944947c211ecc5701f",
-      "file_sha256": "d3bef0594a3eefecb75533faaa466b582367971d87a9756784b0f883b26d141a",
-      "source_text_lf_sha256": "d012e1ebae64877823448f5c1a885d6ea95e577fd5fed152c6df73554304a475"
+      "file_sha256": "ca232dd2edb2e8d4bf2541cd22cea37bea7452159f7bdb31d70b3fff7e25ede2",
+      "source_text_lf_sha256": "0376f1b87ee5426e6010dd88e1a6148ba47fa1f9f545c05bb34594ff121c2b12"
     },
     {
       "file": "harness/runtime.py",
       "symbol": "reviewers = [asyncio.create_task",
-      "start_line": 451,
-      "end_line": 462,
+      "start_line": 477,
+      "end_line": 488,
       "excerpt_sha256": "832a8ca12fcb962b9bd9ff143d39003a626785dbcb3df7f6c992521c9906d113",
-      "file_sha256": "d3bef0594a3eefecb75533faaa466b582367971d87a9756784b0f883b26d141a",
-      "source_text_lf_sha256": "d012e1ebae64877823448f5c1a885d6ea95e577fd5fed152c6df73554304a475"
+      "file_sha256": "ca232dd2edb2e8d4bf2541cd22cea37bea7452159f7bdb31d70b3fff7e25ede2",
+      "source_text_lf_sha256": "0376f1b87ee5426e6010dd88e1a6148ba47fa1f9f545c05bb34594ff121c2b12"
     },
     {
       "file": "harness/runtime.py",
       "symbol": "answer = revised.answer",
-      "start_line": 574,
-      "end_line": 587,
+      "start_line": 600,
+      "end_line": 613,
       "excerpt_sha256": "c060684081e33a457eac39fb29a3fa30e66d946e62f8cae133d9bb931678afb8",
-      "file_sha256": "d3bef0594a3eefecb75533faaa466b582367971d87a9756784b0f883b26d141a",
-      "source_text_lf_sha256": "d012e1ebae64877823448f5c1a885d6ea95e577fd5fed152c6df73554304a475"
+      "file_sha256": "ca232dd2edb2e8d4bf2541cd22cea37bea7452159f7bdb31d70b3fff7e25ede2",
+      "source_text_lf_sha256": "0376f1b87ee5426e6010dd88e1a6148ba47fa1f9f545c05bb34594ff121c2b12"
     }
   ],
   "documentation_source_hash_method": "source_text_lf_sha256: CRLF to LF only; original raw file_sha256 retained; not an Evidence hashing rule"

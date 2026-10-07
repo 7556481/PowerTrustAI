@@ -1,7 +1,7 @@
 {
   "version": {
-    "application_commit": "9d363efdbe3a92dd7f9b8779c350e7d47cfad58a",
-    "document_version": "learning-site-v3.4 bounded operational safety and actual failures, 2026-10-07",
+    "application_commit": "440dce365664c2679a66385952c456593cff899f",
+    "document_version": "learning-site-v3.5 ordinary chain factual update, 2026-10-08",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
@@ -10,8 +10,8 @@
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 1960,
-      "sha256": "0a7ee8c187a5558f0b3a3b4b59610eff5fe328d0a45c504b07e59d0fa9712f89"
+      "characters": 2102,
+      "sha256": "7f99f8d195352ffcedb9eedbc33f4d590ac6402f3a836658f627254a5f3c4daf"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -35,8 +35,8 @@
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 3785,
-      "sha256": "cea7a30e8e829917a28023641e7d83368732937292f0443cc7d75533efb17924"
+      "characters": 3986,
+      "sha256": "52fac44b9cb1ea7707721e42aabf7f1f72f05c80362485ce2ebba0d8dc8fa2d1"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -50,8 +50,8 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 4847,
-      "sha256": "c5d57961eac3bec180768498d415f7142a34d917c91d820d6720943eceaca870"
+      "characters": 5055,
+      "sha256": "e4872cb7291b023f718f5f3ce5d005d99b808f910a6cb5a74f0067fa6cc8f889"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -80,13 +80,13 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 31078,
-      "sha256": "a03b547bffc853ad5ba0f617436d534cf7d4a738199f993755f9d2303ba8b65b"
+      "characters": 31081,
+      "sha256": "5e71cf19421f77c1cd5bf686161d647169a492da456a31648b9f244e2910baac"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
-      "characters": 4765,
-      "sha256": "dcb28a2c139e8026157f858cc3f12c223638574a21008874d156432796d4ead6"
+      "characters": 4964,
+      "sha256": "1a5c60fa9f2d1280c5b4590845c09efabaf3ee271d0db4d470b030f2bcf87748"
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
@@ -119,6 +119,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 110345,
+  "markdown_characters": 111098,
   "network_dependencies": false
 }
