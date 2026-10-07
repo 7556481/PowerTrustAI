@@ -1,46 +1,19 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>与项目所有者和ChatGPT共同补充的问题 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 12a543d38d36 · learning-site-v3.1 portable source identity, 2026-10-07 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">与项目所有者和ChatGPT共同补充的问题</h1>
-<p>18个必需章节及两份练习附录已有实质正文。下面是深入补充清单，不是占位章。请将补充写回对应Markdown，区分个人反思与可核查实现；新增实验结论需附版本/报告，不能凭记忆改指标。</p>
-<h2 id="section-2">设计动机：现有代码不能直接回答的事</h2>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>与项目所有者和ChatGPT共同补充的问题 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 d29eccf4cc87 · learning-site-v3.2 coauthor targeted supplement, 2026-10-07 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">与项目所有者和ChatGPT共同补充的问题</h1>
+<p>20章已有正文。本次共同作者补充按记录事实、共同复盘、个人待确认分层合并；下面区分已完成与仍需本人回答，避免重复等待已有内容。Markdown仍是唯一正文，补充不改历史实验/标签/预测。</p>
+<h2 id="section-2">已完成：已有证据或明确标为共同复盘</h2>
+<div class="table-scroll"><table><thead><tr><th>补充问题</th><th>合并位置</th><th>边界</th></tr></thead><tbody><tr><td>整体评分为何不足、产品目标怎样变化</td><td>01/15</td><td>对象/用户需求有记录；工程解释标共同复盘</td></tr><tr><td>四Agent为何不投票、两路独立指什么</td><td>02/03</td><td>输入/职责隔离，不证明统计独立；四角色不等于四请求</td></tr><tr><td>字符覆盖是否等于命题完整</td><td>03/08</td><td>程序检查区间，语义仍可能遗漏；non_claim不能静默放行</td></tr><tr><td>一次Revision和格式纠正区别、最新是否成功</td><td>04/15/17</td><td>真实2ω→ω闭环与原PF失败并列；不泛化通用成功</td></tr><tr><td>资料缺口、中文分词与FTS/Dense区别</td><td>05/07</td><td>快照/排名/交付分开；行数非向量数</td></tr><tr><td>Dense/RRF/reranker收益及为何不默认采用</td><td>06/15</td><td>已做20题重排约180秒；必要组合与unknown不能省略</td></tr><tr><td>协议复杂度、13保留和条件状态交互</td><td>08/17</td><td>实际no_evidence原不足派生未知；完整JSON不等于有效语义区分</td></tr><tr><td>SI工具范围、NLI领域适配及双风险分母</td><td>09/11/12/13</td><td>理论公式非工具执行，三类不覆盖生产四类，NLI无决策权</td></tr><tr><td>测试计数、真实Factory贯通、采集错误与准备缺陷</td><td>15/16/20</td><td>记录恢复非重发；新准备版本不能回填旧失败</td></tr><tr><td>30秒/2分钟稿、贡献与深入追问、只读实操</td><td>17/20</td><td>均为练习稿，须本人理解核对，不冒认全手写/生产经验</td></tr></tbody></table></div>
+<h2 id="section-3">仍待所有者确认：个人经历与学习程度</h2>
 <ul>
-<li>01-product：最初希望服务什么用户？哪些任务在真实试用中最有价值？给出一条本人实际使用流程。</li>
-<li>02-architecture：为什么坚持复用Harness而不转通用框架？当时评估过哪些具体替代方案，哪些只是聊天提议？</li>
-<li>03-agents：为什么选双审核的职责划分？有没有曾尝试一个模型合并审核，实际证据是什么？</li>
-<li>04-harness：一次Revision限制的成本与产品权衡，你最担心哪种“改到通过”的失败？</li>
-<li>05-rag：哪些资料覆盖缺口来自项目真实目标变化，而不是检索算法？</li>
-<li>06-retrieval-math：看到局部Hit改善却未采纳时，所有者如何决定完整依据优先级？</li>
-<li>07-corpus：扩完整库的预期用途是什么？原出处未知材料的使用边界是否需要产品再确认？</li>
-<li>08-verification：哪些审核字段确实帮助解释，哪些只是反复重复状态？本轮共同诊断以后如何防协议膨胀？</li>
+<li>是否确为毕业论文/毕业项目起点？旧六维评分的本人动机、权重依据是什么？记录不证明这些阈值已验证。</li>
+<li>最初目标用户是谁？哪条真实试用最有价值，界面/中文/连接反馈中本人怎样决定优先级？</li>
+<li>当时真正评估或尝试过哪些框架/合并审核方案？哪些只是聊天提议？没有实测证据就不说已比较LangChain/LangGraph。</li>
+<li>面对必要组合退步或4个误支持，本人怎样权衡指标、成本及默认配置？复盘解释已有，个人当时判断仍待补。</li>
+<li>74项及后69项的监督审阅本人怎样执行？难例/hold如何决定？不能改为专家金标准。</li>
+<li>迁移、来源许可审阅、人工浏览器验收中，本人承担和AI协助步骤分别是什么？</li>
+<li>能否独立讲清Submit.task→submit/_worker→Factory→Harness→observer/Store→GET？标出尚不理解的解析/异常分支，不背一串版本号。</li>
+<li>用自己的话重讲第06章公式、第12章双误支持分母，并据真实理解修改第17章口述稿；尚未掌握的函数不要认领可独立实现。</li>
 </ul>
-<h2 id="section-3">工程与运维的个人复盘</h2>
-<ul>
-<li>09-engineering-tools：希望未来支持哪些确定性工具？目前不应编成已实现清单。</li>
-<li>10-api-storage：本机一键体验最有价值的改变是什么？公网/多用户是否在目标范围，尚未决策就注明。</li>
-<li>14-code-tour：请所有者独立讲一次submit→worker→Harness→store调用，标出还不理解的函数。</li>
-<li>15-failures：每个历史失败当时有哪些原因假设？哪些后来被证据否定？不要把后验结论写成起初已经知道。</li>
-<li>16-performance：哪些耗时影响日常使用最明显？哪些性能数字只来自短文本实验？</li>
-<li>18-operations：迁移过程中本人承担的步骤与AI协助步骤分别是什么？有哪些人工验证不可替代？</li>
-</ul>
-<h2 id="section-4">数据与微调的反思</h2>
-<ul>
-<li>11-supervision-metrics：74项与后69项逐确认的人工过程如何执行？有哪些难例需要上下文，如何决定hold？</li>
-<li>12-training-nli：为什么接受Tiny失败继续换已有NLI基座？请补模型选择时的真实权衡，不捏造选型搜索。</li>
-<li>13-local-nli：面对4个错误supported，为什么只旁路？用户是否愿意把分歧用作以后人工复核线索？这不是自动标签授权。</li>
-</ul>
-<h2 id="section-5">面试共同练习</h2>
-<ul>
-<li>17-interview：写一版符合本人经历的30秒/2分钟介绍；不要直接认领全部代码手工实现。</li>
-<li>补三条被追问“你的贡献是什么”时的证据路线，列本人需求、监督、审阅、排查及能解释的实现。</li>
-<li>补一次选错方向的反思：当时有什么证据，为什么没有早发现，后来怎样改进实验或契约设计。</li>
-<li>为第06和12章分别准备白板计算，用自己的话解释两种错误支持分母。</li>
-</ul>
-<h2 id="section-6">需要后来核对而不能现在编造</h2>
-<ul>
-<li>本轮12题批次语义评价需所有者审阅；AI辅助用户监督初评不是专家认证。</li>
-<li>完整库的最后发布规模、全量核验和日常切换需要实际完成记录；站点不能按估计宣称已完成。</li>
-<li>多用户、公网部署、工程仿真、通用事实准确率均没有当前验收证据。</li>
-<li>最终PDF如将来需要，可从Markdown派生，但不成为独立维护正文；旧PDF保留。</li>
-</ul>
-<h2 id="section-7">定向复盘待补（2026-10-07）</h2>
-<p>请分别补可核查事实与个人反思：为何从小型可追溯英文库转向广泛中文解释；当时六维评分的动机/阈值有无验证；哪些框架或候选真的评估过、哪些只被提及；何时意识到重复字段增加负担；本人在需求、监督、代码审阅和验证中具体贡献。已有记录未证明的动机/备选不补成事实。请就第14章路线独立解释输入契约与真实Factory测试，评价新烟测仅能支持什么结论，不把单例完整写成可靠性。</p>
-<h2 id="section-8">本轮共同补充</h2>
-<p>请结合实际贡献说明：为什么结构成功与事实正确分开？严格条件摘录的保守误拒如何衡量？如何解释13保留而不宣称稳定？采集错误/不完整分母如何诚实交付？局部修订成功为何不等于通用Revision能力？既有输入不足场景与非法准备输入如何区分？个人选择/历史动机未确认处请补充，不推测当时已比较所有框架。</p></article><footer><a href="20-workshops.html">← 20 八个综合工作坊：把概念落到对象和失败</a></footer></main><aside aria-label="本章目录"><a href="#section-2">设计动机：现有代码不能直接回答的事</a><a href="#section-3">工程与运维的个人复盘</a><a href="#section-4">数据与微调的反思</a><a href="#section-5">面试共同练习</a><a href="#section-6">需要后来核对而不能现在编造</a><a href="#section-7">定向复盘待补（2026-10-07）</a><a href="#section-8">本轮共同补充</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<h2 id="section-4">后续边界：不因共同写作自动授权执行</h2>
+<p>未来确定性电力计算工具、LangGraph对照、更多语义benchmark、公网多用户及工程仿真均未实现/未验收，不在本轮实施。可以另建新准备版本修正单位工具或goal，但需另有执行授权，旧失败不回填。</p>
+<p>完整库最终覆盖/去重/索引/原文核验及发布看实际记录，本轮未查询动态进度或切库；仍不能在正文编造最新规模。浏览器补验与模型语义可靠性也不能由文档写作证明。</p>
+<p>旧PDF完整保留，若以后导出仍从Markdown派生。本次更新只解决共同作者补充已有充分依据的部分，不以“等待个人动机”阻止可写内容。</p></article><footer><a href="20-workshops.html">← 20 八个综合工作坊：把概念落到对象和失败</a></footer></main><aside aria-label="本章目录"><a href="#section-2">已完成：已有证据或明确标为共同复盘</a><a href="#section-3">仍待所有者确认：个人经历与学习程度</a><a href="#section-4">后续边界：不因共同写作自动授权执行</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

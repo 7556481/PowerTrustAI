@@ -341,3 +341,5 @@
 
 - [schema13/14对照与公开收尾](schema-choice-v1.md)：逐项分母、实际Revision、准备失败、日常13及CI/浏览器限制。
 - [公开Portfolio](../portfolio/README.md)，[旧README完整工程日志](engineering-readme-history.md)，[旧状态完整工程日志](engineering-status-history.md)。
+
+- [共同作者v1定向补充与事实核对](learning/coauthor-v1-changes.md)：16章合并、最新局部Revision/原PF限制、工具/语义/FTS边界及个人待确认。

@@ -14,7 +14,7 @@ training和production的任务范围不同。三分类文本支持不覆盖not_a
 
 ## 训练流程：每一步在更新什么
 
-每batch前向计算logits，交叉熵比较标签，backward形成梯度，clip限制全局梯度范数，AdamW按学习率更新参数并独立权重衰减。训练模式允许dropout，评估模式关闭dropout且不算梯度。仅load/predict不是训练；仅loss下降不代表泛化提高。
+每batch前向计算logits，交叉熵比较标签，backward形成梯度，clip限制全局梯度范数，AdamW按学习率更新参数并独立权重衰减。训练模式允许dropout，评估模式关闭dropout且不算梯度。仅load/predict不是训练；仅loss下降不代表泛化提高。这里微调的是既有NLI分类器的领域文本支持能力，不是给生成模型灌知识或建立新的RAG语料。官方NLI头起点不同于Tiny的随机头，验证打平后按冻结速度规则选MiniLM，不证明它在整个电力领域最佳。
 
 ```text
 logits z = model(premise, hypothesis)
