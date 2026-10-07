@@ -19,3 +19,11 @@ class LearningTests(unittest.TestCase):
  def test_unsafe_link_not_executable(self):
   h,_=render('[unsafe](javascript:alert)\n\n[chapter](01-product.md)')
   self.assertNotIn('href="javascript:',h);self.assertIn('01-product.html',h)
+
+class DocumentationTextIdentityTests(unittest.TestCase):
+ def test_git_lf_and_windows_crlf_have_identical_documentation_identity(self):
+  from tools.learning_checks import source_text_digest
+  self.assertEqual(source_text_digest(b'def f():\n    return 1\n'),source_text_digest(b'def f():\r\n    return 1\r\n'))
+ def test_content_change_is_not_normalized_away(self):
+  from tools.learning_checks import source_text_digest
+  self.assertNotEqual(source_text_digest(b'return 1\n'),source_text_digest(b'return 2\n'))

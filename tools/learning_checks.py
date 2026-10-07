@@ -3,6 +3,11 @@ from pathlib import Path
 import json,re,hashlib
 from tools.learning_site import build
 
+def source_text_digest(data):
+    # Documentation-only identity: Git text checkout may use CRLF or LF.
+    # No spaces/content changes; original Evidence/file hashes are untouched.
+    return hashlib.sha256(data.replace(b'\r\n',b'\n')).hexdigest()
+
 def main():
     build();root=Path('docs/learning');chapters=sorted((root/'chapters').glob('*.md'))
     if len(chapters)!=20:raise ValueError('Required twenty chapters absent')
@@ -14,7 +19,7 @@ def main():
     v=json.loads((root/'source-check.json').read_text(encoding='utf-8'))
     for key in ('excerpts','request_route_excerpts','connection_excerpts'):
         for record in v.get(key,[]):
-            if hashlib.sha256(Path(record['file']).read_bytes()).hexdigest()!=record['file_sha256']:raise ValueError('Stale source reference: '+record['file'])
+            if source_text_digest(Path(record['file']).read_bytes())!=record['source_text_lf_sha256']:raise ValueError('Stale source reference: '+record['file'])
     for p in (root/'site').glob('*.html'):
         for link in re.findall(r'href="([^"]+)"',p.read_text(encoding='utf-8')):
             target=link.split('#')[0]
