@@ -18,8 +18,8 @@ BAD='Under condition C, the synthetic permitted voltage is 9 kV.'
 CONVERT='2.5 kV = 2500 V.'
 
 class SyntheticProvider:
- def __init__(self,*,revision=False,two=False,conversion=False):
-  self.revision=revision;self.two=two;self.conversion=conversion;self.requests=[];self.payloads=[]
+ def __init__(self,*,revision=False,two=False,conversion=False,objection=False,illegal=False):
+  self.revision=revision;self.two=two;self.conversion=conversion;self.objection=objection;self.illegal=illegal;self.requests=[];self.payloads=[]
  def close(self):pass
  async def complete(self,r):
   self.requests.append(r);data=[json.loads(m.content) for m in r.messages if m.role=='user'];d=data[-1];self.payloads.append(d)
@@ -30,11 +30,14 @@ class SyntheticProvider:
    v={'answer_units':units,'assumptions':[],'missing_information':[],'evidence_sufficient':True}
   elif r.prompt_version.startswith('atomic-claims'):
    v={'claims':[{'anchor_id':a['anchor_id'],'proposition':a['text'],'claim_type':'technical_fact','components':[{'category':'technical_fact','proposition':a['text'],'basis_target':'mathematical_relation' if self.conversion else 'technical_content','verification_obligation':'technical_truth'}],'assertion_role':'conditional' if a['text'].startswith('Under condition C') else 'asserted','semantic_qualifiers':[]} for a in d['ANSWER_ANCHORS']],'non_claims':[]}
-  elif r.prompt_version.startswith('evidence-verification-v9.13'):
+  elif r.prompt_version.startswith('evidence-verification-v9.14'):
    judgments=[]
    for t in d['targets']:
     bad=self.revision and '9 kV' in t['proposition'];ids=t['allowed_basis_ids'][:1]
     judgments.append({'target_id':t['target_id'],'status':'contradicted' if bad else 'supported','basis_ids':ids,'reason':'Synthetic same scoped source supports3 and contradicts9 underC.' if bad else 'Synthetic complete bound target supported.','conditions':[],'objection':None,'repair':{'basis_id':ids[0],'replacement':GOOD} if bad and t['kind']=='fact' else None,'requires_authoritative_source':False})
+    if t['kind']=='fact' and t['target_id']=='F0C0':
+     if self.objection:judgments[-1]['objection']={'kind':'classification','reason':'Synthetic genuine classification dispute; retain raw support.'}
+     if self.illegal:judgments[-1]['basis_ids']=['not-in-this-target']
    v={'judgments':judgments}
   elif r.prompt_version.startswith('evidence-verification'):
    from tests.test_fact_rereview_v3 import response
@@ -54,14 +57,14 @@ class SyntheticProvider:
   return ModelResponse(json.dumps(v),r.model_id,finish_reason='stop')
 
 class FactoryFlowTests(unittest.TestCase):
- def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False):
+ def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False,objection=False,illegal=False):
   with synthetic_diagnostics() as temp:
    root=Path(temp);doc=root/'fixture.md';doc.write_text('# Synthetic voltage\n\n'+GOOD+'\nThe synthetic setting applies under condition C.\n'+CONVERT,encoding='utf-8')
    with KnowledgeStore(root/'knowledge.sqlite3') as knowledge:
     k=knowledge.ingest(doc,'synthetic-fixture',SourceMetadata(source_type='synthetic_fixture')).knowledge_version
     fragment=knowledge.rows(k)[0]['fragment_id']
    config=ServiceConfig(index_db=root/'knowledge.sqlite3',knowledge_version=k,run_db=root/'runs.sqlite3',token_file=root/'token',verification_schema=schema,citation_workload=CitationWorkload(max_items=1))
-   factory=ComponentFactory(config);provider=SyntheticProvider(revision=revision,two=two,conversion=conversion)
+   factory=ComponentFactory(config);provider=SyntheticProvider(revision=revision,two=two,conversion=conversion,objection=objection,illegal=illegal)
    # Patch only the external provider creation and the isolated diagnostic root.
    from agents.evidence_verification import ModelEvidenceVerificationAgent
    original_init=ModelEvidenceVerificationAgent.__init__
@@ -87,8 +90,8 @@ class FactoryFlowTests(unittest.TestCase):
        time.sleep(.01)
       result=client.get('/runs/'+rid+'/result',headers={'Authorization':'Bearer fixture'}).json()
       events=client.get('/runs/'+rid+'/trace',headers={'Authorization':'Bearer fixture'}).json()
-      self.assertEqual(result['execution']['required_stages_complete'],not fault,result['execution']['execution_issues'])
-      if not fault:self.assertFalse(result['execution']['execution_issues'])
+      self.assertEqual(result['execution']['required_stages_complete'],not (fault or illegal),result['execution']['execution_issues'])
+      if not (fault or illegal):self.assertFalse(result['execution']['execution_issues'])
       self.assertTrue(events['events']);self.assertEqual(result['configuration']['protocols']['evidence_verification'],schema)
       self.assertTrue(result['answer']['versions'])
    import sqlite3
@@ -96,6 +99,15 @@ class FactoryFlowTests(unittest.TestCase):
    with closing(sqlite3.connect('file:'+config.run_db.as_posix()+'?mode=ro',uri=True)) as db:
     self.assertGreater(db.execute('SELECT count(*) FROM objects WHERE run_id=?',(rid,)).fetchone()[0],0)
    return result,provider,events
+ def test_legal_objection_actual_factory_is_complete_but_never_pass(self):
+  result,_,_=self.exercise(objection=True)
+  self.assertTrue(result['execution']['required_stages_complete'])
+  self.assertNotEqual(result['decision']['kind'],'pass')
+ def test_illegal_id_partial_results_actual_factory_and_store_api(self):
+  result,p,_=self.exercise(illegal=True,two=True)
+  self.assertFalse(result['execution']['required_stages_complete'])
+  self.assertTrue(any(f['status']=='supported' for f in result['findings']['model_fact']))
+  self.assertEqual(sum(r.correction for r in p.requests if r.prompt_version.startswith('evidence-verification')),1)
  def test_question_answer_real_factory_and_original_scope_groups(self):
   result,p,_=self.exercise(two=True)
   fact=[d for d in p.payloads if d.get('contract')=='evidence-verification-output-v14']

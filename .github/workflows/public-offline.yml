@@ -1,0 +1,27 @@
+name: Public offline checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install public test dependencies
+        run: python -m pip install -r requirements-api.lock.txt -r requirements-corpus.txt -r requirements-pdf.txt
+      - name: Public regression (private history explicitly optional)
+        run: python -m tools.public_checks
+      - name: Offline Harness demonstration
+        run: python -m harness.demo
+      - name: Learning site source and build validation
+        run: python -m tools.learning_site build && python -m tools.learning_checks

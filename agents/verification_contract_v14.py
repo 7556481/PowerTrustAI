@@ -20,7 +20,7 @@ from services.citation_workload import CitationWorkload,pack
 from model_adapter.contracts import ModelMessage
 from model_adapter.runtime import current_budget,model_scope,ModelBudget
 
-PROMPT_VERSION='evidence-verification-v9.13-compact-targets'
+PROMPT_VERSION='evidence-verification-v9.14-explicit-target-basis-scope'
 CONTRACT_VERSION='evidence-verification-output-v14'
 MARKER=' [compact-support-assessment-v1] '
 SYSTEM='''Review only the supplied frozen TARGETS, with their literal ANSWER anchors and
@@ -39,7 +39,12 @@ calculation is not simulation or physical input truth. Original citations use on
 their own scope, not independently found Evidence. [] is legal for insufficient or
 not_assessable; definitive support/refutation requires a corresponding legal basis.
 conditions is an array of EXACT {basis_id,required,answer_quote,preserved}. basis_id
-must be one of YOUR SELECTED text bases. required and preserved are true,false,null
+must be one of YOUR SELECTED text bases, also listed in this target's condition_basis_ids.
+Each target declares basis_type and its own legal IDs; never borrow a sibling target's IDs.
+For answer_text, metadata, calculation or input snapshot targets with condition_basis_ids=[],
+conditions must be []. Evaluate that target by its declared basis type, not source conditions.
+Empty condition candidates do NOT waive a technical target's missing/uncertain qualifiers.
+required and preserved are true,false,null
 (null means genuine uncertainty). answer_quote must occur literally in this evaluated
 ANSWER body, or "" when absent. Explain which source qualifier is necessary in reason.
 Faithful synonyms are allowed, but reviewer notes do not supply missing answer limits.
@@ -99,6 +104,10 @@ class ReviewCatalog:
                 self.targets[target]={'kind':'fact','claim_index':ci,'component_index':pi,'scope_index':0,'proposition':p.proposition,'answer_text':inputs.answer.text[c.start_offset:c.end_offset],'category':p.category,'assertion_role':c.assertion_role,'verification_obligation':c.component_obligations[pi],'allowed_basis_ids':allowed,'delivery':m}
         for i,c in enumerate(inputs.answer.citations):
             self.targets['R'+str(i)]={'kind':'citation','citation_index':i,'scope_index':i+1,'proposition':inputs.answer.text[c.start_offset:c.end_offset],'answer_text':inputs.answer.text[c.start_offset:c.end_offset],'allowed_basis_ids':scope_bases[i+1]}
+        for target in self.targets.values():
+            allowed=target['allowed_basis_ids'];target['basis_types']=sorted({self.bases[b]['wire']['type'] for b in allowed})
+            target['condition_basis_ids']=[b for b in allowed if self.bases[b]['wire']['type']=='text_excerpt']
+            target['repair_basis_ids']=list(target['condition_basis_ids'])
         for tid in self.targets:self.rows[tid]={'target_id':tid,'status':'not_assessable','basis_ids':[],'reason':'model_execution_incomplete','conditions':[],'objection':{'kind':'uncertain','reason':'model_execution_incomplete'},'repair':None,'requires_authoritative_source':False}
 
     def payload(self,ids):
@@ -107,6 +116,22 @@ class ReviewCatalog:
             'basis_catalog':[dict(basis_id=b,**{k:v for k,v in self.bases[b].items() if k not in ('wire','candidate','binding','scope_index')},basis_type=self.bases[b]['wire']['type']) for b in bids]}
         if any(self.targets[t].get('verification_obligation')=='input_provided' for t in ids):data['actual_generation_input']=body_snapshot(self.inputs)
         return data
+
+    def correction_context(self,group,value,diagnostic):
+        # Program-owned identities only; no proposed status, semantic guess or ID repair.
+        if isinstance(value,str):
+            try:value=json.loads(value)
+            except (ValueError,TypeError):value={}
+        rows={r.get('target_id'):r for r in value.get('judgments',[]) if isinstance(r,dict) and isinstance(r.get('target_id'),str)} if isinstance(value,dict) else {}
+        result=[]
+        for tid in group:
+            t=self.targets[tid];selected=rows.get(tid,{}).get('basis_ids',[])
+            selected=selected if isinstance(selected,list) else []
+            result.append({'target_id':tid,'basis_types':t['basis_types'],
+                'allowed_basis_ids':t['allowed_basis_ids'],'condition_basis_ids':t['condition_basis_ids'],
+                'selected_legal_body_ids':[b for b in selected if isinstance(b,str) and b in t['condition_basis_ids']],
+                'instruction':'Select only these exact IDs. Conditions and repair additionally require membership in your basis_ids. No text bases means conditions=[] and repair=null. Preserve other valid judgments; never borrow IDs.'})
+        return result
 
     def parse_one(self,row,target,path):
         ec=ErrorCollector(CONTRACT_VERSION)
@@ -216,6 +241,7 @@ async def run(agent,inputs):
         try:
             await structured_request(agent.client,(ModelMessage('system',SYSTEM),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),PROMPT_VERSION,isolation.parse,
                 diagnostics=agent.diagnostics,response_contract_version=CONTRACT_VERSION,candidate_catalog_path=path,max_corrections=0 if corrected else 1,
+                correction_context=lambda value,diagnostic:cat.correction_context(group,value,diagnostic),
                 max_message_chars=None if group==tuple(facts) else (agent.citation_workload or CitationWorkload()).max_correction_message_chars)
         except Exception as exc:
             if not getattr(exc,'code',None):raise

@@ -24,3 +24,19 @@ class BatchControlTests(unittest.TestCase):
   async def collect(a):raise AssertionError('No accepted run known')
   asyncio.run(run_fixed([{'id':'a','input':{}},{'id':'b','input':{}}],submit=submit,collect=collect,persist=lambda *x:None))
   self.assertEqual(len(sent),1)
+
+class PersistenceBoundaryTests(unittest.TestCase):
+ def test_acceptance_persistence_failure_returns_identity_and_stops(self):
+  async def submit(body):return {'run_id':'accepted-synthetic'}
+  async def collect(a):raise AssertionError('Never collect after failed persistence')
+  def fail(i,k,v):raise TypeError('synthetic callback fault')
+  rows=asyncio.run(run_fixed([{'id':'one','input':{}},{'id':'two','input':{}}],submit=submit,collect=collect,persist=fail))
+  self.assertEqual(len(rows),1);self.assertTrue(rows[0]['stop']);self.assertEqual(rows[0]['accepted']['run_id'],'accepted-synthetic')
+ def test_result_persistence_failure_retains_partial_and_never_resubmits(self):
+  submitted=[]
+  async def submit(body):submitted.append(body);return {'run_id':'accepted-synthetic'}
+  async def collect(a):return {'execution':{'required_stages_complete':True}}
+  def persist(i,k,v):
+   if k=='result':raise TypeError('synthetic callback fault')
+  rows=asyncio.run(run_fixed([{'id':'one','input':{}},{'id':'two','input':{}}],submit=submit,collect=collect,persist=persist))
+  self.assertEqual(len(submitted),1);self.assertTrue(rows[0]['partial_result']['execution']['required_stages_complete'])

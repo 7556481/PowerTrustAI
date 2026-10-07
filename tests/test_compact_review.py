@@ -68,4 +68,17 @@ class CompactTests(unittest.TestCase):
   from backend.config import ServiceConfig
   self.assertFalse(ServiceConfig().nli_enabled);self.assertEqual(ServiceConfig().fact_strategy,'aggregate')
 
+ def test_correction_scope_guidance_never_suggests_replacement_id(self):
+  cat=ReviewCatalog(inputs(True));group=list(cat.targets)
+  rows=response(cat.payload(group));rows['judgments'][0]['basis_ids']=['illegal']
+  guide=cat.correction_context(group,json.dumps(rows),{})
+  self.assertEqual(guide[0]['selected_legal_body_ids'],[])
+  self.assertEqual(guide[0]['allowed_basis_ids'],cat.targets[group[0]]['allowed_basis_ids'])
+  self.assertTrue(cat.correction_context(group,'not-json',{}))
+ def test_target_declares_exact_condition_subset(self):
+  cat=ReviewCatalog(inputs(True))
+  for tid,t in cat.targets.items():
+   self.assertTrue(set(t['condition_basis_ids'])<=set(t['allowed_basis_ids']))
+   self.assertTrue(all(cat.bases[b]['wire']['type']=='text_excerpt' for b in t['condition_basis_ids']))
+
 if __name__=='__main__':unittest.main()

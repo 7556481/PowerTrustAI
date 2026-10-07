@@ -21,7 +21,7 @@ def strict_json(text):
                           StructuredValidationError("json_parse", "$", "nonfinite_numbers_not_allowed")))
 
 
-async def structured_request(client, messages, prompt_version, parser, *, diagnostics=None, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None,max_corrections=1,max_message_chars=None):
+async def structured_request(client, messages, prompt_version, parser, *, diagnostics=None, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None,max_corrections=1,max_message_chars=None,correction_context=None):
     budget = current_budget() or ModelBudget(limit=2)
     request_numbers = []
     partial=None
@@ -75,6 +75,7 @@ async def structured_request(client, messages, prompt_version, parser, *, diagno
                 "invalid_output": response.text,
                 "validation_error": diagnostic,
                 "validation_errors": diagnostic.get("errors", [diagnostic]),
+                  **({"program_scope_guidance":correction_context(response.text,diagnostic)} if correction_context is not None else {}),
                 "instruction": "Return valid JSON matching the original schema. For ID-only source evidence, select existing allowed candidate IDs; never copy text or change bindings. Otherwise follow the declared original field rules."},
                 ensure_ascii=False)),)
         else:

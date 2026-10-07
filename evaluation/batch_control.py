@@ -36,13 +36,23 @@ async def run_fixed(cases,*,submit,collect,persist,configuration_matches=lambda 
         except Exception as exc:
             record={'case_id':ident,'phase':'submit','stop':True,'reason':'submission_state_unknown','exception_type':type(exc).__name__}
             persist(ident,'control',record);records.append(record);break
-        persist(ident,'accepted',accepted)
+        try:persist(ident,'accepted',accepted)
+        except Exception as exc:
+            records.append({'case_id':ident,'accepted':accepted,'phase':'persist_acceptance','stop':True,
+                'reason':'collection_persistence_failure','exception_type':type(exc).__name__})
+            break # Acceptance remains in the returned record; never submit again.
+
         try:
             result=await collect(accepted)
         except Exception as exc:
             record={'case_id':ident,'accepted':accepted,'phase':'collect','stop':True,'reason':'shared_service_or_collection_failure','exception_type':type(exc).__name__}
             persist(ident,'control',record);records.append(record);break
-        persist(ident,'result',result)
+        try:persist(ident,'result',result)
+        except Exception as exc:
+            records.append({'case_id':ident,'accepted':accepted,'partial_result':result,'phase':'persist_result','stop':True,
+                'reason':'collection_persistence_failure','exception_type':type(exc).__name__})
+            break # Preserve the result for the caller's fallback archive.
+
         decision=classify(result,configuration_matches=configuration_matches(result))
         record={'case_id':ident,'accepted':accepted,'stop':decision['shared'],'decision':decision}
         persist(ident,'control',record);records.append(record)
