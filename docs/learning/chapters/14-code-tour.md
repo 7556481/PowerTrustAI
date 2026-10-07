@@ -24,7 +24,7 @@
 
 本章代码摘录由write-excerpts脚本按AST函数/实际行号读取当前源码，记录文件及片段SHA。省略的部分明确是摘录，不当完整函数。你可以从同名函数继续读上下文。正文解释的是责任，代码才是异常和字段的最终依据。
 
-在learning-audit-v1历史版本中，新增紧凑协议入口agents/verification_contract_v14.py的ReviewCatalog/run只通过直接组件回归，真实Harness输入包装遗漏导致12题失败；默认日常仍13。读harness/runtime.py中schema9–13构造ReliabilityVerificationInput的分支，便能定位为何新14没有tool_results。那个批次没有在当轮自动补后重跑，见第15章。
+在learning-audit-v1历史版本中，新增紧凑协议入口agents/verification_contract_v14.py的ReviewCatalog/run只通过直接组件回归，真实Harness输入包装遗漏导致12题失败；默认日常仍13。查看learning-audit-v1冻结源码中harness/runtime.py的历史schema9–13包装分支，可以定位当时14缺tool_results；当前已改用显式输入能力和services/review_inputs.build，不把历史分支当现行源码。那个批次没有在当轮自动补后重跑，见第15章。
 
 ## 第一条路线：从提交到冻结答案
 
@@ -182,7 +182,7 @@ SQL只将未完成标interrupted，没有模型调用；已有结果保持原版
 
 ## 沿一条实际请求完整阅读：谁创建对象，谁保存事实
 
-以下基于当前函数，不是另建示意调度器。先看教学对象，再沿十步追字段；schema14上轮包装遗漏在真实Harness中，直接组件测试绕过该输入构造。日常仍默认13。本轮已统一声明输入类型并完成真实Factory回归；唯一烟测已经发出Fact请求，但一个目标的条件/basis选择非法，完整执行未达，未开启新批次。
+以下基于当前函数，不是另建示意调度器。先看教学对象，再沿十步追字段；schema14上轮包装遗漏在真实Harness中，直接组件测试绕过该输入构造。日常仍默认13。integration-learning-v2历史阶段统一输入能力并完成Factory回归；该轮唯一烟测634a22…已发Fact请求，但条件/basis ID非法而未完整，当轮未开启新批次。后续schema-choice-v1已完成固定8题13/14对照，并另列正常服务及2ω→ω实质修订全重审；详见[第08章后续对照](08-verification.md)。这里的“唯一烟测”只指历史阶段，不代表至今只有一次验证。
 
 ### 一个贯穿对象的synthetic摘要
 

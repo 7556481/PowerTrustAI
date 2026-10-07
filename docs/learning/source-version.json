@@ -1,6 +1,6 @@
 {
-  "application_commit": "d29eccf4cc87d55c05a38bd4557685c44ec92a50",
-  "document_version": "learning-site-v3.2 coauthor targeted supplement, 2026-10-07",
+  "application_commit": "ea9e3b4ba9fe6020bd9f6ea3b297fbf7ab722c68",
+  "document_version": "learning-site-v3.3 final errata, 2026-10-07",
   "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
   "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
   "daily_schema": 13,

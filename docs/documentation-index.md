@@ -343,3 +343,6 @@
 - [公开Portfolio](../portfolio/README.md)，[旧README完整工程日志](engineering-readme-history.md)，[旧状态完整工程日志](engineering-status-history.md)。
 
 - [共同作者v1定向补充与事实核对](learning/coauthor-v1-changes.md)：16章合并、最新局部Revision/原PF限制、工具/语义/FTS边界及个人待确认。
+
+- [最后学习站勘误](learning/final-errata-v1.md)：6项范围/时效纠正，保留布局与历史。
+- [本人最终验收清单与3题](owner-acceptance-v1.md)：当前日常配置、已有证据和待试用分开，无自动模型提交。

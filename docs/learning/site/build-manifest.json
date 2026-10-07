@@ -1,7 +1,7 @@
 {
   "version": {
-    "application_commit": "d29eccf4cc87d55c05a38bd4557685c44ec92a50",
-    "document_version": "learning-site-v3.2 coauthor targeted supplement, 2026-10-07",
+    "application_commit": "ea9e3b4ba9fe6020bd9f6ea3b297fbf7ab722c68",
+    "document_version": "learning-site-v3.3 final errata, 2026-10-07",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
@@ -10,8 +10,8 @@
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 1818,
-      "sha256": "0924e1d142cfde22b9783e2edbb2391420b4f5c88393f55b6fa66718c5562bd9"
+      "characters": 1960,
+      "sha256": "0a7ee8c187a5558f0b3a3b4b59610eff5fe328d0a45c504b07e59d0fa9712f89"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -30,8 +30,8 @@
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 4834,
-      "sha256": "375b416ab3db916b3281fa667b163976499ad536de5d1b5f15ab95ee7b91891a"
+      "characters": 4931,
+      "sha256": "d00e8a4d207e4a3d90ccf1ed3409d3c65a5b81f955a2d73a61e65f451edee035"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -40,8 +40,8 @@
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
-      "characters": 4869,
-      "sha256": "3d00f5219418cd20290780eea02e00fd11bbe747a9617ba80cd93f89620be881"
+      "characters": 4936,
+      "sha256": "fef95c85bf7a02c904396cf43b7d48aa9c224493c9d9f20294474f6e683fdf4d"
     },
     {
       "source": "docs/learning/chapters/07-corpus.md",
@@ -80,8 +80,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 30788,
-      "sha256": "fa25a9689b5ab6972b9569a389e7f666a06dc953d90b92ab69a506b50db29fde"
+      "characters": 30971,
+      "sha256": "5c0d68cab6ef254782a9803410d1933a19fd63ffdf140e5a0c7639e44fdb8803"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -95,8 +95,8 @@
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
-      "characters": 3711,
-      "sha256": "2ae8b48d14a962de491837a3ca04538b7fc45ff905ab2d3cbe5b9199674f15e2"
+      "characters": 3746,
+      "sha256": "19bc51e997091fe76748d570a2ce38cc4e1925424cc22429ff79276272f37d2f"
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
@@ -105,8 +105,8 @@
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
-      "characters": 4198,
-      "sha256": "ad4cca4ee2a3c53c3ab7db5817e98f05b86f143225a0f6e0086f2fb1fda53f44"
+      "characters": 4259,
+      "sha256": "c77078bf4c2f772963dccb5fe35cde517cf3ae94a7b75c3c1322b40d221c63c7"
     },
     {
       "source": "docs/learning/chapters/20-workshops.md",
@@ -119,6 +119,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 109091,
+  "markdown_characters": 109676,
   "network_dependencies": false
 }
