@@ -135,3 +135,11 @@ Example component: {"component_index":0,"status":"not_assessable","basis_indexes
 For correct mathematical relations, choose a real current conversion result. For unit-category
 claims choose relevant body or insufficient_evidence, never scalar conversion alone.
 '''
+
+INDEPENDENT_JUDGMENTS += """
+Evidence not supporting/refuting a claim is a support result, never by itself extraction
+infidelity. Compare literal answer with proposition for fidelity. For refutation, an
+irrelevant source qualifier or the mere existence of exceptions is not automatically a
+necessary condition of the target. Explain true qualifier necessity; use uncertainty only
+for actual unresolved semantics, not to replace a directly sourced technical conflict.
+"""

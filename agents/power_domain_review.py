@@ -148,6 +148,9 @@ def parse_domain(value,inputs):
 
 
 def validate_domain_output(output,answer,claims):
+    if getattr(output,'safety_profile',None) is not None:
+        from services.operational_safety import validate
+        validate(output,answer,claims)
     from types import SimpleNamespace
     from services.quote_candidates import validate_catalog
     from core.validation import validate_excerpts
@@ -196,9 +199,10 @@ def validate_domain_output(output,answer,claims):
 class ModelPowerDomainReviewAgent:
     uses_model_adapter=True
     rule_set_version=RULE_SET_VERSION
-    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1):
+    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1,safety_review=False):
         require(protocol_version in (1,2,3,4,5),"Unknown domain contract")
         self.protocol_version=protocol_version
+        self.safety_review=safety_review
         from agents.contracts import PowerDomainReviewInput,ReliabilityDomainInput
         self.review_input_type=ReliabilityDomainInput if protocol_version>=3 else PowerDomainReviewInput
         self.client=ModelClient(adapter,settings)

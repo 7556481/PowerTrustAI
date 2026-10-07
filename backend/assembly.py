@@ -79,7 +79,7 @@ class ComponentFactory:
         INDEPENDENT += instructions(5)
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
         ORIGINAL=original_template(support_relation_checks=True,support_relation_version=5)
-        PROMPT_VERSION='evidence-verification-v9.12-answer-target-fidelity-boundary'
+        PROMPT_VERSION='evidence-verification-v9.15-support-fidelity-separation'
         CONTRACT_VERSION='evidence-verification-output-v9.11'
         if self.config.verification_schema==14:
             from agents.verification_contract_v14 import SYSTEM,PROMPT_VERSION,CONTRACT_VERSION
@@ -97,10 +97,10 @@ class ComponentFactory:
             'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':self.config.verification_schema,'domain_review':5,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
             'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-category-clarity-v1' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
-              'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.2-question-gap-applicability','revision':REVISION_PROMPT_VERSION},
+              'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.3-operational-hazard','revision':REVISION_PROMPT_VERSION},
             'contracts':{'generation':'generation-output-v3','extraction':'atomic-claims-v7','verification':CONTRACT_VERSION,
-              'domain':'power-domain-review-output-v3.2','revision':'revision-output-v2'},
-            'rules':'power-demo-rules-v1.1','policy':'product-decision-v1.4' if self.config.decision_policy=='product-v1' else 'limited-repair-policy-v1','unit_tool':'scalar-si-conversion-v2',
+              'domain':'power-domain-review-output-v3.3','revision':'revision-output-v2'},
+            'rules':'power-demo-rules-v1.1','policy':'product-decision-v1.5' if self.config.decision_policy=='product-v1' else 'limited-repair-policy-v1','unit_tool':'scalar-si-conversion-v2',
             'retrieval':'existing BM25 with default RetrievalSettings and adjacent-context order',
             'fact_retrieval_strategy':self.config.fact_strategy,
             'fact_delivery_contract':'fact-evidence-delivery-v1' if self.config.fact_strategy=='per_claim_v1' else None,
@@ -124,13 +124,17 @@ class ComponentFactory:
                 manifest['scoring_method']=SCORING
                 manifest['retrieval']='immutable SQLite FTS5 postings; versioned Chinese segmentation/topic query; strict hit replay'
                 manifest['performance_profile']='build/publication FTS integrity; open structural checks; immutable-file stamp; strict per-hit original/span verification; no full snapshot query scan'
+        manifest['fact_subject_supplement']='audit-subject-supplement-v1: once per answer version after assessed insufficiency; default first query/settings preserved'
+        from services.operational_safety import RULE,SOURCES,VERSION as SAFETY_VERSION
+        manifest['operational_safety_registry']={'version':SAFETY_VERSION,'rule':RULE,'sources':SOURCES,'judgment_origin':'model semantic application of registered source-backed advice rule; not expert or engineering certification'}
+        manifest['operational_safety']='operational-hazard-screen-v1: model judgment with source/answer binding; no engineering certification'
         manifest['generation_query_conversion']='generation-cross-language-query-v1: once after successful empty BM25; Chinese question / fixed English body available (mixed-snapshot-gate-v2)'
         manifest['prompts']['generation'] += ('-question-language-v8-condition-scope-clean-body' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
         if self.config.profile=='synthetic_fixture':
             manifest['available_real_protocols']=manifest.pop('protocols')
             manifest['protocols']={k:'fake-v1' for k in ('generation','claim_extraction','evidence_verification','domain_review','revision')}
             manifest['prompts']={};manifest['contracts']={};manifest['model_settings']=None
-            manifest['rules']='offline-rules-v1';manifest['policy']='product-decision-v1.4-synthetic_fixture' if self.config.decision_policy=='product-v1' else 'offline-policy-v1';manifest['unit_tool']=None
+            manifest['rules']='offline-rules-v1';manifest['policy']='product-decision-v1.5-synthetic_fixture' if self.config.decision_policy=='product-v1' else 'offline-policy-v1';manifest['unit_tool']=None
             manifest['retrieval']='none: synthetic_fixture only'
             manifest['configured_retrieval_mode']=manifest['retrieval_mode']
             manifest['retrieval_mode']='none';manifest['scoring_method']=None
@@ -171,12 +175,13 @@ class ComponentFactory:
                 corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
                 ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=5),
-                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5),
+                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
                 generation_corpus_english=corpus_english)
+            harness.subject_supplement=True
             return Bundle(harness,resources)
         except Exception:
             for resource in resources:resource.close()

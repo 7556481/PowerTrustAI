@@ -1,12 +1,14 @@
 """Product disposition v1. Evidence judgments remain model judgments, not certification.
 
-No production high-risk rule is registered: demonstration severity cannot certify risk.
+Legacy high-risk engineering certification registry remains empty. v1.5 separately
+applies the source-bound protective-function-integrity advice screen; model assessment
+is not an engineering certification.
 The explicit high-risk mechanism accepts only a caller-owned reviewed rule registry,
 bound current claims and literal body bases. Synthetic tests register fixture rules only.
 """
 from core.models import ProductDecision, DecisionKind as D, VerificationStatus as V, Severity
 
-VERSION = 'product-decision-v1.4'
+VERSION = 'product-decision-v1.5'
 
 
 class ProductAuditPolicy:
@@ -14,7 +16,7 @@ class ProductAuditPolicy:
     allows_bounded_real_revision = True
 
     def __init__(self, *, high_risk_rules=(), synthetic_fixture=False, version=VERSION):
-        if version not in ('product-decision-v1.1','product-decision-v1.2','product-decision-v1.3',VERSION):raise ValueError('Unknown product policy version')
+        if version not in ('product-decision-v1.1','product-decision-v1.2','product-decision-v1.3','product-decision-v1.4',VERSION):raise ValueError('Unknown product policy version')
         self.version=version
         self.high_risk_rules = frozenset(high_risk_rules)
         self.synthetic_fixture = synthetic_fixture
@@ -49,6 +51,17 @@ class ProductAuditPolicy:
             return ProductDecision(kind, (reason, 'Automatic approval is bounded to this task; not engineering safety certification'),
                 self.version, ids, execution, risk, resolution, (code,), tuple(checks), basis)
 
+        safety=getattr(domain,'safety_reviews',())
+        dangerous=[s for s in safety if s.verdict=='dangerous' and s.source_ids]
+        uncertain_safety=[s for s in safety if s.verdict=='uncertain' and s.reason!='model_execution_incomplete']
+        if self.version==VERSION and dangerous:
+            incomplete=bool(issues or verification.execution_issues or domain.execution_issues)
+            return result(D.EXECUTION_INCOMPLETE if incomplete else D.REJECT,'MODEL_BOUND_OPERATIONAL_HAZARD',
+                '禁止采用：领域模型识别有来源绑定的操作危险；'+ '; '.join(s.original_text+'：'+s.reason for s in dangerous),risk='high',execution='incomplete' if incomplete else 'complete')
+        if self.version==VERSION and uncertain_safety:
+            # Uncertainty warns, never pretends a hazard is absent.
+            if not (issues or verification.execution_issues or domain.execution_issues):
+                return result(D.REVIEW_REQUIRED,'OPERATIONAL_HAZARD_UNCERTAIN','暂勿采用，操作安全判断不确定：'+'; '.join(s.original_text+'：'+s.reason for s in uncertain_safety))
         if issues or verification.execution_issues or domain.execution_issues or (
                 retrieval and any(r.status.value != 'succeeded' for r in retrieval.records)):
             return result(D.EXECUTION_INCOMPLETE, 'REQUIRED_EXECUTION_FAILED',
@@ -69,9 +82,9 @@ class ProductAuditPolicy:
                 c = next(c for c in claims if c.claim_id == f.claim_id)
                 if c.components and len(f.component_reviews) != len(c.components):
                     return result(D.EXECUTION_INCOMPLETE, 'MISSING_COMPONENT_CHECK', 'Component coverage incomplete', execution='incomplete')
-                if any(r.classification_issue or getattr(r, 'fidelity_status', 'uncertain') != 'faithful' or getattr(r,'review_disposition','')=='review_required' for r in f.component_reviews):
+                if any(r.classification_issue or getattr(r, 'fidelity_status', 'uncertain') != 'faithful' or (self.version!=VERSION and getattr(r,'review_disposition','')=='review_required') for r in f.component_reviews):
                     classification_uncertain=True
-        if classification_uncertain and self.version not in ('product-decision-v1.3',VERSION):
+        if classification_uncertain and self.version not in ('product-decision-v1.3','product-decision-v1.4',VERSION):
             return result(D.REVIEW_REQUIRED, 'COMPONENT_CLASSIFICATION_UNCERTAIN', 'Component classification or literal fidelity is uncertain')
         # A severity label/topic/contradiction alone is never the high-risk criterion.
         rules = {r.rule_id: r for r in domain.rules}
@@ -93,15 +106,18 @@ class ProductAuditPolicy:
         from services.bounded_repair import repair_proposals
         located=bool(adverse) and all(f.status!=V.NOT_ASSESSABLE and repair_proposals(f) for f in adverse)
         missing_domain=any(f.check_status=='not_assessable' or f.missing_prerequisites for f in findings)
-        if self.version in ('product-decision-v1.3',VERSION):
+        if self.version in ('product-decision-v1.3','product-decision-v1.4',VERSION):
             from services.bounded_repair import eligible_repairs
             located=any(eligible_repairs(f) for f in adverse)
-        if ((self.version in ('product-decision-v1.3',VERSION) and located) or (self.version=='product-decision-v1.2' and located and not missing_domain and not classification_uncertain)) and revision_round < min(1,budget.max_revision_rounds):
+        if ((self.version in ('product-decision-v1.3','product-decision-v1.4',VERSION) and located) or (self.version=='product-decision-v1.2' and located and not missing_domain and not classification_uncertain)) and revision_round < min(1,budget.max_revision_rounds):
             return result(D.REVISE,'SOURCE_BOUND_REPAIR','Located answer defect has a selected literal source and substantive replacement; preserve every requested subquestion and fully re-review',risk='medium')
         from services.support_relation_v5 import relation
-        if any((relation(c.rationale) or {}).get('semantic_uncertain') for c in citations):classification_uncertain=True
+        source_uncertain=any((relation(c.rationale) or {}).get('semantic_uncertain') for c in citations)
+        if self.version!=VERSION and source_uncertain:classification_uncertain=True
         if classification_uncertain:
             return result(D.REVIEW_REQUIRED, 'COMPONENT_CLASSIFICATION_UNCERTAIN', 'Component classification or literal fidelity is uncertain')
+        if self.version==VERSION and (source_uncertain or any(f.status==V.NOT_ASSESSABLE for f in facts+citations)):
+            return result(D.REVIEW_REQUIRED,'FACT_ASSESSMENT_UNCERTAIN','事实支持或来源条件不确定，不自动解释为提取不忠实；原句不能视为审核认可')
         if any(f.status in (V.INSUFFICIENT_EVIDENCE, V.NOT_ASSESSABLE) for f in facts + citations):
             return result(D.NEEDS_INFORMATION, 'FACT_BASIS_MISSING', 'Evidence or required factual inputs are insufficient')
         # A located contradiction can be repaired even when a separate domain
@@ -124,9 +140,9 @@ class ProductAuditPolicy:
         if any(f.check_status == 'warning' for f in findings):
             # Demo engineering rules are advice, not authoritative rejection standards.
             return result(D.REVIEW_REQUIRED, 'DOMAIN_JUDGMENT_DISPUTE', 'Domain warning requires review; demonstration rules cannot certify severity')
-        if answer.missing_information and self.version not in ('product-decision-v1.3',VERSION):
+        if answer.missing_information and self.version not in ('product-decision-v1.3','product-decision-v1.4',VERSION):
             return result(D.NEEDS_INFORMATION, 'ANSWER_DECLARED_MISSING_INFORMATION', 'Answer explicitly declares missing information')
-        if answer.missing_information and self.version in ('product-decision-v1.3',VERSION):
+        if answer.missing_information and self.version in ('product-decision-v1.3','product-decision-v1.4',VERSION):
             from services.bounded_repair import missing_information_review
             reviewed=missing_information_review(findings)
             if reviewed is None or len(reviewed)!=len(answer.missing_information) or any(x['applicability']=='uncertain' for x in reviewed):

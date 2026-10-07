@@ -477,3 +477,28 @@ class RunTrace:
     run_id: str
     task_id: str
     events: Tuple[TraceEvent, ...] = ()
+
+@dataclass(frozen=True)
+class HazardSourceBinding:
+    source_id: str
+    url: str
+    section: str
+    text: str
+    sha256: str
+    scope: str
+
+@dataclass(frozen=True)
+class HazardAssessment:
+    claim_id: str
+    verdict: str
+    reason: str
+    source_ids: Tuple[str,...]
+    answer_id: str
+    answer_version: int
+    original_text: str
+    start_offset: int
+    end_offset: int
+    source_bindings: Tuple[HazardSourceBinding,...]
+    origin: str = 'model_semantic_judgment'
+    version: str = 'operational-hazard-screen-v1'
+    rule_id: str = 'protective-function-integrity-v1'

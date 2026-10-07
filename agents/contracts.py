@@ -1,5 +1,6 @@
 """Explicit input/output interfaces for the four agents."""
 
+from core.models import HazardAssessment
 from dataclasses import dataclass
 from typing import Protocol, Tuple
 
@@ -103,6 +104,13 @@ class PowerDomainReviewOutput:
     model_records: Tuple[ModelCallRecord, ...] = ()
     prompt_version: str | None = None
     engineering_context: EngineeringContext | None = None
+
+
+
+@dataclass(frozen=True)
+class SafetyDomainReviewOutput(PowerDomainReviewOutput):
+    safety_reviews: Tuple[HazardAssessment,...] = ()
+    safety_profile: str = 'operational-hazard-screen-v1'
 
 
 @dataclass(frozen=True)

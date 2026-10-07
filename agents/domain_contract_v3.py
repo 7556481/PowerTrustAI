@@ -79,12 +79,22 @@ async def run(agent,inputs):
     if agent.protocol_version==5:
         wire['missing_information_review']=[{'index':i,'applicability':'uncertain','reason':'model_execution_incomplete'} for i in range(len(inputs.answer.missing_information))]
         groups['missing_information_review']='index'
-    isolation=WireIsolation(wire,lambda v:parse(v,inputs,scope,review_missing=agent.protocol_version==5),groups,mark)
+    delegate=lambda v:parse(v,inputs,scope,review_missing=agent.protocol_version==5)
+    safety=getattr(agent,'safety_review',False)
+    if safety:
+        from services import operational_safety as hazard
+        wire['safety_reviews']=hazard.baseline(inputs);groups['safety_reviews']='claim_id'
+        parser=lambda v:hazard.parse(v,inputs,delegate)
+        prompt_version='power-domain-review-v3.3-operational-hazard'
+        contract_version='power-domain-review-output-v3.3'
+    else:parser=delegate
+    isolation=WireIsolation(wire,parser,groups,mark)
     payload={**scope.payload(),'question':inputs.request.question,'user_context':inputs.request.user_context,
         'engineering_context':None if inputs.request.engineering_context is None else asdict(inputs.request.engineering_context),
         'answer':asdict(inputs.answer),'claims':[asdict(c) for c in inputs.claims],'rules':[asdict(r) for r in domain.registered_rules(inputs.claims)],
         'MODEL_KEYS':domain.MODEL_KEYS,'TOOL_RESULTS':[asdict(t) for t in inputs.tool_results],'DELIVERY_RECORD':inputs.delivery_summary,
         'METADATA_ORIGINS':'index/user source manifest; not body statements','simulation_records':[]}
+    if safety:payload.update(SAFETY_SOURCES=hazard.SOURCES,SAFETY_RULE=hazard.RULE)
     path=None if agent.diagnostics is None else agent.diagnostics.save_scope(payload);before=len(current_budget().records)
     instruction=SYSTEM
     if agent.protocol_version in (4,5):
@@ -105,6 +115,7 @@ missing_information. analysis_scope must retain that concrete unresolved require
 Engineering missing inputs remain missing; asking for data is not an operation instruction.
 Use concise Chinese rationale/reasons. This review does not weaken independent factual
 or citation obligations, and has no access to the other reviewer judgments.\n'''
+    if safety:instruction+=hazard.INSTRUCTION
     try:
         output,records=await structured_request(agent.client,(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),prompt_version,isolation.parse,
             diagnostics=agent.diagnostics,response_contract_version=contract_version,candidate_catalog_path=path)

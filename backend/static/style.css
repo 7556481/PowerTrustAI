@@ -9,3 +9,5 @@ pre,dd,p,a,summary{overflow-wrap:anywhere;word-break:normal}.intro{margin-bottom
 @media(max-width:760px){.workspace{display:flex;flex-direction:column}.results{order:1}aside{order:0}.panel{padding:14px}#history{max-height:160px}.intro p.eyebrow{display:none}}
 
 .answer-sources{max-height:180px;overflow:auto}#phase{min-height:1.2em}
+
+.danger-warning{border-left:4px solid #a52121;background:#fff1f1;color:#752020;padding:10px;font-weight:600;overflow-wrap:anywhere}.safety-warning{border-left:4px solid #a66a00;background:#fff7e6;color:#704500;padding:10px;overflow-wrap:anywhere}

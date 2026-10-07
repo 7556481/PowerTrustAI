@@ -61,7 +61,7 @@ def validate_types(value, annotation=None, path="value"):
             require(type(value) in (int, float) and math.isfinite(value), "expected finite number", path=path)
         else:
             allowed_subtypes={'AuditDecision':'ProductDecision','ComponentReview':'FidelityComponentReview','Claim':'ContextualClaim','TypedBasis':'CalculationBasis','EvidenceVerificationInput':'ReliabilityVerificationInput',
-                'EvidenceVerificationOutput':'ReliabilityVerificationOutput','PowerDomainReviewInput':'ReliabilityDomainInput','HarnessResult':'ToolHarnessResult'}
+                'EvidenceVerificationOutput':'ReliabilityVerificationOutput','PowerDomainReviewInput':'ReliabilityDomainInput','PowerDomainReviewOutput':'SafetyDomainReviewOutput','HarnessResult':'ToolHarnessResult'}
             if isinstance(annotation,type) and is_dataclass(annotation) and type(value).__name__ in ((allowed_subtypes.get(annotation.__name__),) if annotation.__name__!='Claim' else ('ContextualClaim','BasisAwareClaim','ObligationClaim')) and type(value).__module__==annotation.__module__ and isinstance(value,annotation):
                 validate_types(value);return
             require(isinstance(value, annotation) if isinstance(annotation, type) and issubclass(annotation, Enum)
@@ -392,7 +392,7 @@ def validate_report(report):
     from core.models import ProductDecision, DecisionKind
     if isinstance(report.decision, ProductDecision):
         d=report.decision
-        require(d.policy_version in ('product-decision-v1','product-decision-v1.1','product-decision-v1.2','product-decision-v1.3','product-decision-v1.4'),'Unknown product policy version')
+        require(d.policy_version in ('product-decision-v1','product-decision-v1.1','product-decision-v1.2','product-decision-v1.3','product-decision-v1.4','product-decision-v1.5'),'Unknown product policy version')
         require(d.execution_integrity in ('complete','incomplete'),'Unknown execution integrity')
         require(d.risk_level in ('low','medium','high','unknown'),'Unknown risk level')
         require(d.resolution in ('complete','partial','unable_to_answer'),'Unknown resolution')

@@ -67,6 +67,7 @@ class OfflineHarness:
 
     async def run(self, request, budget, *, knowledge_version=None, generation_only=False, answer_requirements=(),
                   evidence_only=False, indexed_reference_ids=(), generation_snapshot=None, run_id=None):
+        from dataclasses import replace
         # Invalid user input raises InputError before any agent is executed.
         validate_request(request, budget)
         if generation_snapshot is not None:
@@ -470,6 +471,22 @@ class OfflineHarness:
                         domain = execution_incomplete_domain(d_input,d_issue)
                     else:
                         domain = PowerDomainReviewOutput(answer.answer_id, answer.version, (), (), (d_issue,))
+                # One assessment-triggered subject supplement; keep default first query,
+                # algorithm, scope, full bodies, limits and original citation isolation.
+                if retrieval and getattr(self,'subject_supplement',False) and not v_issue and not verification.execution_issues:
+                    from services.audit_subject_query import query as subject_query,VERSION as SUBJECT_QUERY_VERSION
+                    q=subject_query(claims,verification.findings)
+                    if q:
+                        extra=await retrieval.retrieve(RetrievalPurpose.VERIFICATION,request,answer,claims,query_override=q)
+                        record('fact_subject_supplement',extra.record.status,perf_counter(),SUBJECT_QUERY_VERSION+'; '+q)
+                        if extra.issue:
+                            verification=replace(verification,execution_issues=verification.execution_issues+(extra.issue,))
+                        elif any(e.evidence_id not in {x.evidence_id for x in v_evidence} for e in extra.evidence):
+                            v_evidence=merge_evidence(v_evidence,extra.evidence)
+                            v_input=replace(v_input,seed_evidence=v_evidence,evidence_bindings=v_input.evidence_bindings+extra.bindings)
+                            second,second_issue=await review('evidence_verification',self.verification,v_input,merge_evidence(v_evidence,original_evidence),True,None)
+                            if second_issue:verification=replace(verification,execution_issues=verification.execution_issues+(second_issue,))
+                            else:verification=second
                 # Conflicting output IDs invalidate the offending component, not its peer.
                 try:
                     evidence = merge_evidence(evidence, verification.evidence)
