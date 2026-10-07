@@ -34,7 +34,7 @@ backend/api.py负责同源HTTP、鉴权和请求结构，backend/service.py负�
 | 人工复核 | 分类、语义或条件适用性有未解决疑点 | 本机产品一律必须人工复核 |
 | 执行未完成 | 必需步骤没完成，结论不可放行 | 已证明回答为假 |
 
-当前harness/product_policy.py的ProductAuditPolicy默认high_risk_rules为空，真实Factory没有注册生产高风险规则。拒绝机制已实现，但演示规则、模型自报high、高风险话题和普通contradicted均不等于已验证的工程高风险判定；没有工程认证能力。
+当前harness/product_policy.py的ProductAuditPolicy默认high_risk_rules为空，真实Factory没有注册工程认证类高风险规则；core-audit-fix-v1另登记来源绑定保护功能完整性建议筛查，由领域模型应用、程序阻止采用，见第09章，仍非工程认证。拒绝机制已实现，但演示规则、模型自报high、高风险话题和普通contradicted均不等于已验证的工程高风险判定；没有工程认证能力。
 
 ## 用户流程：答案先读，细节再查
 

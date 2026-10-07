@@ -1,7 +1,7 @@
 {
   "version": {
-    "application_commit": "ea9e3b4ba9fe6020bd9f6ea3b297fbf7ab722c68",
-    "document_version": "learning-site-v3.3 final errata, 2026-10-07",
+    "application_commit": "9d363efdbe3a92dd7f9b8779c350e7d47cfad58a",
+    "document_version": "learning-site-v3.4 bounded operational safety and actual failures, 2026-10-07",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
@@ -15,8 +15,8 @@
     },
     {
       "source": "docs/learning/chapters/01-product.md",
-      "characters": 3091,
-      "sha256": "eda3a822eaaee1a6d218b24969aac422fec3d18bf73965244c58ab68896f6c56"
+      "characters": 3158,
+      "sha256": "1449773785cccedef463672351afbdcc04f0b2ae3a642eca59821e8784013e20"
     },
     {
       "source": "docs/learning/chapters/02-architecture.md",
@@ -50,18 +50,18 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 4727,
-      "sha256": "6c55e39599c3ba9b810dd32f5c7ec5c10c3719fc77e7f19b3938f9727605f27d"
+      "characters": 4847,
+      "sha256": "c5d57961eac3bec180768498d415f7142a34d917c91d820d6720943eceaca870"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
-      "characters": 2740,
-      "sha256": "862f26d6547b98642869baab224b9de9e4779ee26948ce0a51d97abf91d2d91a"
+      "characters": 2874,
+      "sha256": "feff50953682bbfab734ce826faeb6ea2a460c7ce7f2662b8da5baf65399920a"
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 2281,
-      "sha256": "e14e78d8ce88392136f19a40f9c09b1a021f8854226cb1d20ec5c5e2ef860b45"
+      "characters": 2372,
+      "sha256": "09a71d5778fe8db7ebcf136a6a71459a7e0ff612fd467e473dad0e27f98a84dd"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
@@ -80,13 +80,13 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 30971,
-      "sha256": "5c0d68cab6ef254782a9803410d1933a19fd63ffdf140e5a0c7639e44fdb8803"
+      "characters": 31078,
+      "sha256": "a03b547bffc853ad5ba0f617436d534cf7d4a738199f993755f9d2303ba8b65b"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
-      "characters": 4615,
-      "sha256": "5ef8392c18e8fc27f73192fbf8d9d8592a7b74cd3db26b2d0fb1c5a15e6a09d0"
+      "characters": 4765,
+      "sha256": "dcb28a2c139e8026157f858cc3f12c223638574a21008874d156432796d4ead6"
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
@@ -119,6 +119,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 109676,
+  "markdown_characters": 110345,
   "network_dependencies": false
 }

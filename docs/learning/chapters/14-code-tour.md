@@ -272,7 +272,7 @@ backend/api.py / Submit.task，实际行54–67。
             tuple(e.contingencies),tuple(EngineeringQuantity(uuid4().hex,q.kind,q.value,q.unit,q.reference) for q in e.quantities))
         return TaskRequest(uuid4().hex,TaskMode(self.mode),'voltage_stability_reactive_support',self.question,self.user_context,answer,refs+tuple(indexed_evidence),engineering)
 ```
-此段为函数体；装饰器/周围作用域在源文件上下文。
+只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
 ### 摘录：API接收与异常返回
 
@@ -300,7 +300,7 @@ backend/api.py / create_app.submit，实际行228–247。
             if str(exc).startswith('Complete citation scopes exceed configured capacity; citation_indexes='):
                 raise HTTPException(422,detail={'code':'REVIEW_MESSAGE_CAPACITY_EXCEEDED',
 ```
-后续实际行248–254省略，请接着源文件读。
+只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
 ### 摘录：保存接受和队列
 
@@ -334,7 +334,7 @@ backend/service.py / ApplicationService.submit，实际行56–81。
             self.queue.put_nowait((rid,request,knowledge,answer_requirements,indexed_reference_ids))
         return rid
 ```
-此段为函数体；装饰器/周围作用域在源文件上下文。
+只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
 ### 摘录：worker装配和最终保存
 
@@ -369,11 +369,11 @@ backend/service.py / ApplicationService._worker，实际行100–126。
             except Exception:
                 try:self.store.mark(rid,'failed',error_code='SERVICE_EXECUTION_FAILED')
 ```
-后续实际行127–132省略，请接着源文件读。
+只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
 ### 摘录：真实装配的资源建立
 
-backend/assembly.py / ComponentFactory.create，实际行139–154。
+backend/assembly.py / ComponentFactory.create，实际行143–158。
 
 ```python
     def create(self,rid,observer):
@@ -393,7 +393,7 @@ backend/assembly.py / ComponentFactory.create，实际行139–154。
         from model_adapter.contracts import ModelSettings
         from model_adapter.deepseek import create_adapter
 ```
-后续实际行155–183省略，请接着源文件读。
+只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
 ### 摘录：原锚点输入与实际解析选择
 
@@ -417,11 +417,11 @@ services/claim_extractor.py / ModelClaimExtractor.extract，实际行142–157�
                 response_contract_version='atomic-claims-v'+str(self.protocol_version),candidate_catalog_path=path)
             return output
 ```
-后续实际行158–165省略，请接着源文件读。
+只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
 ### 摘录：政策上下文，不是另一个模型
 
-harness/product_policy.py / ProductAuditPolicy.decide_context，实际行22–38。
+harness/product_policy.py / ProductAuditPolicy.decide_context，实际行24–40。
 
 ```python
     def decide_context(self, verification, domain, budget, revision_round, *, request,
@@ -442,7 +442,7 @@ harness/product_policy.py / ProductAuditPolicy.decide_context，实际行22–38
             basis += (f'{claim.claim_id}: type={claim.claim_type}; assertion_role={claim.assertion_role}; model classification is not proof',)
             for component, target in zip(claim.components, getattr(claim, 'component_basis_targets', ())):
 ```
-后续实际行39–153省略，请接着源文件读。
+只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
 ### 摘录：阶段与对象短事务
 
@@ -462,7 +462,7 @@ backend/store.py / RunStore.checkpoint，实际行89–100。
                 for f in answer['findings']:
                     self.index(rid,dict(f,answer_id=aid,answer_version=version))
 ```
-此段为函数体；装饰器/周围作用域在源文件上下文。
+只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
 ### 摘录：保存结果到安全投影
 
@@ -495,28 +495,28 @@ backend/service.py / ApplicationService.result，实际行163–187。
         original=row['request'].get('existing_answer')
         if original is None and raw.get('generation_output'):original=raw['generation_output']['answer']
 ```
-后续实际行188–226省略，请接着源文件读。
+只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
 ### 关键连接：实际Harness组件注入
 
-backend/assembly.py实际行172–181，仅连接处摘录，周围初始化/后续逻辑省略。
+backend/assembly.py实际行176–185，仅连接处摘录，周围初始化/后续逻辑省略。
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
                 ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=5),
-                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5),
+                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
                 generation_corpus_english=corpus_english)
+            harness.subject_supplement=True
             return Bundle(harness,resources)
-        except Exception:
 ```
 
 ### 关键连接：按输入契约包装，而非散落版本条件
 
-harness/runtime.py实际行405–411，仅连接处摘录，周围初始化/后续逻辑省略。
+harness/runtime.py实际行406–412，仅连接处摘录，周围初始化/后续逻辑省略。
 
 ```python
                 from services.review_inputs import build as build_review_input
@@ -530,7 +530,7 @@ harness/runtime.py实际行405–411，仅连接处摘录，周围初始化/后�
 
 ### 关键连接：并发双审和异常收尾
 
-harness/runtime.py实际行450–461，仅连接处摘录，周围初始化/后续逻辑省略。
+harness/runtime.py实际行451–462，仅连接处摘录，周围初始化/后续逻辑省略。
 
 ```python
                 reviewers = [asyncio.create_task(job) for job in (
@@ -549,7 +549,7 @@ harness/runtime.py实际行450–461，仅连接处摘录，周围初始化/后�
 
 ### 关键连接：修订后重建与旧轮次保留
 
-harness/runtime.py实际行557–570，仅连接处摘录，周围初始化/后续逻辑省略。
+harness/runtime.py实际行574–587，仅连接处摘录，周围初始化/后续逻辑省略。
 
 ```python
                 answer = revised.answer
