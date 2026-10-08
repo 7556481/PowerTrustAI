@@ -44,16 +44,23 @@ def seal(store,k):
         else:
             # Publisher's byte seal binds the complete FTS and body database,
             # checked once per process/open identity, never for every query.
-            if value.get('version')=='industry-corpus-fts-v1':
+            published=value.get('version')=='industry-corpus-fts-v1'
+            if published:
                 sidecar=json.loads(Path(str(store._path)+'.manifest.json').read_text(encoding='utf-8'))
                 require(sidecar.get('knowledge_version')==k and type(sidecar.get('database_sha256')) is str,'Published database byte seal required')
+                require({name:v for name,v in sidecar.items() if name not in ('knowledge_version','database_sha256')}==value,'Published manifest differs from database seal')
                 h=hashlib.sha256()
                 with store._path.open('rb') as f:
                     for block in iter(lambda:f.read(8*1024*1024),b''):h.update(block)
                 require(h.hexdigest()==sidecar['database_sha256'],'Published FTS/body byte seal mismatch')
                 require((store._path.stat().st_size,store._path.stat().st_mtime_ns)==stamp,'Corpus changed during open validation')
-            require(store.connection.execute('PRAGMA quick_check').fetchone()[0]=='ok','Corpus SQLite integrity failure')
-            if 'chunks' in value:
+            # Publication already checked SQLite/FTS integrity and membership.
+            # An exact whole-file byte seal binds those checks; scanning again
+            # adds no protection against a changed body/index. Unpublished test
+            # fixtures still receive the direct SQLite checks below.
+            if not published:
+                require(store.connection.execute('PRAGMA quick_check').fetchone()[0]=='ok','Corpus SQLite integrity failure')
+            if not published and 'chunks' in value:
                 require(store.connection.execute('SELECT count(*) FROM corpus_chunks').fetchone()[0]==value['chunks'],'Corpus sealed chunk count mismatch')
                 require(store.connection.execute('SELECT count(*) FROM corpus_records').fetchone()[0]==value['records'],'Corpus sealed record count mismatch')
                 indexed=store.connection.execute('SELECT count(*) FROM corpus_fts').fetchone()[0]

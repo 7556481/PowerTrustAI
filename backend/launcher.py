@@ -15,7 +15,9 @@ def health_at(origin):
 
 
 def open_local(config, origin, *, opener=webbrowser.open):
-    deadline=time.monotonic()+40
+    # A new process verifies the complete immutable corpus byte seal before
+    # serving HTTP. Keep that check; a full corpus may exceed the old 40s wait.
+    deadline=time.monotonic()+1800
     while time.monotonic()<deadline:
         health=health_at(origin)
         if health:
