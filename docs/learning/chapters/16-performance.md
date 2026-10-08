@@ -52,11 +52,11 @@ RSS是进程驻留内存，WorkingSet也是时点观测；训练采样峰值不�
 
 真实Dense/Hybrid启动：ComponentFactory.initialize_retrieval→VectorIndex.load，profile/knowledge/source fingerprint/成员/向量完整性不匹配拒绝，不自动降级BM25。BM25是显式配置分支，不需要匹配向量；管理员另选BM25不是缓存失效后的隐式回退。
 
-当前query_cache只属于RetrievalSession，fact_query=True才使用，键为(knowledge_version,retriever.cache_identity,query,max_results,实际context)。SemanticRetriever身份含mode和profile_id；每run重建session，跨回答版本可命中同查询结果但重新生成交付/映射并按(version,evidence_id)计交付预算，不复用旧版本判决。aggregate路径不启用它。命中仍执行validate_result确定性重放，所以不能说已经消除完整重放。
+当前query_cache只属于RetrievalSession，fact_query=True才使用，键为(knowledge_version,retriever.cache_identity,query,max_results,实际context)。SemanticRetriever身份含mode和profile_id；每run重建session，跨回答版本可命中同查询结果但重新生成交付/映射并按(version,evidence_id)计交付预算，不复用旧版本判决。aggregate路径不启用它。命中仍执行validate_result；语义检索/旧小库继续完整重放，完整FTS的新即时证书分支见下文。aggregate本身仍不使用这个fact_query跨阶段缓存。
 
 retrieve_facts.deliveries仅在一次逐组件调用按完整query去重。PDF报告缓存是只读连接局部，带SQLite data_version/total_changes、knowledge/document/version/file_hash，外部提交或新连接不会错用；不是排名缓存。corpus_index._OPENED是已验证文件打开身份与stamp记忆，变化拒绝，逐命中仍回查。
 
-尚未实现的建议包括跨服务结果缓存、全面取消排名重放和模型答案缓存。本轮没有性能实验或排名调参，不能写成已采用优化或速度收益。
+未实现的建议仍包括跨服务检索缓存、全面取消排名重放和模型答案缓存。下文即时证书仅避免同次完整FTS检索紧接的重复排序，不能扩大称这些建议都已实现。
 
 
 ## 本轮对照的时间解释
@@ -68,7 +68,7 @@ retrieve_facts.deliveries仅在一次逐组件调用按完整query去重。PDF�
 ### 自测1：缓存命中是否跳过重放？
 
 ::: answer 展开参考答案1
-当前fact_query命中仍validate_result确定性重放。
+仍调用validate_result；完整FTS若恰有同请求程序证书，比较完整结果并seal/逐原文回查，不再重复排名。小库、语义路径或没有该证书时照旧重放。
 :::
 
 ### 自测2：失败路径更快可称优化吗？
@@ -86,3 +86,12 @@ retrieve_facts.deliveries仅在一次逐组件调用按完整query去重。PDF�
 ## 2026-10-08 完整库接入核对
 
 完整有效分片FTS已独立发布并接入日常，旧prefix历史保留。新进程仍读取约70.85GB做全文件SHA，sidecar与库内封印严格一致；字节一致时复用发布时结构/FTS/成员核验，未发布fixture仍直接检查SQL。进程内_OPENED只记路径/知识及size/mtime_ns，变化拒绝；没有跨进程跳过SHA的缓存。命中原文、字符区间、哈希仍验证。首启约52秒，后续正常重启43.5秒；未清OS缓存，不能称物理冷机或稳定SLA。四主题FTS查询0.11–4.76秒，命中不等于回答正确。唯一概念任务双审完整而业务待补充，知识接入与审核适用性问题分开。当前接入记录见项目源码目录的 `docs/full-corpus-adoption-v1.md`。
+
+
+## 2026-10-08 本人试用的性能证据与即时证书
+
+三题后台225.4、250.605、346.649秒，累计检索都约204–208秒。生成实际有1.7秒与含纠正40秒两种情况，不能只凭体感归因。完整库进程内seal不每任务重SHA；每次查询后再做相同FTS排名是确定性重复。`AsyncSQLiteBM25Retriever._work`的新即时证书只绑定刚完成的完整RetrievalRequest与完整RetrievalResult，不缓存模型判断。单工作线程中seal校验已发布身份/文件stamp，比较hits/分数/正文/上下文全部字段，再逐Evidence验证原文、区间、hash；请求/配置不同仍完整重放，下一次查询与close清除。答案/引用的作用域及交付预算照旧。
+
+同完整库四条固定查询，原校验排名重放3.265/7.923/22.967/50.884秒，新严格验证0.007–0.012秒，排名与全文身份一致。不是省略核验或缩库。改变SQL为rank游标实测更慢，未采用；宽泛OR第一次排名仍需处理很多命中，并非采用FTS就无成本。首查含70.85GB进程SHA，不能混入热检索对照；OS缓存未清。每新进程全SHA的本轮独立样本95.94秒，旧44–52秒只是当时测量。
+
+唯一新主题75字，API首见12.942秒、观察总48.501秒，5请求87900token/全部阶段完成。先顺序Generation/Fact/Domain检索，再模型双审并发；不把两支审核耗时相加。浏览器实际观察答案/来源/自动连接和重启恢复，但没有精确首绘计时；历史三题页面显示差值未知。服务进程峰值约129MiB含启动，不是整机或单任务瞬时峰值。不能用不同问题或单次远程波动宣布固定倍数提速。原熔断器裸数值泛化有错误放行，性能改善不能掩盖语义失误。记录见 `docs/performance-closeout-v1.md` 与私有对照归档。
