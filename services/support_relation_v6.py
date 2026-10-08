@@ -6,6 +6,18 @@ from services.validation_diagnostics import ErrorCollector
 MARKER=' [source-support-relation-v6] '
 INSTRUCTIONS=OLD.replace('relation v5','relation v6').replace('EXACT source_kind,quote_ids,','EXACT source_kind,').replace('quote_ids EXACT selected text_excerpt basis IDs for this component/citation ONLY.','quote_ids is PROGRAM-OWNED. DO NOT output that field. Select body once using bases plus component basis_indexes (citation bases directly). Conditions/repair must refer only to carriers of these selected body bases.').replace("this relation's selected quote_ids",'THIS component/citation selected text_excerpt bases')
 INSTRUCTIONS+='\nDo not repeat a selected quote list in support_relation. The program binds it strictly from this component basis_indexes; it does not repair illegal IDs or infer support. Exact quote IDs in bases and condition IDs remain scope-bound.\n'
+INSTRUCTIONS+='''
+Performance scope guidance v1: an operating time, speed, capacity or other device
+performance number is not a universal property merely because a supplied paragraph
+repeats it. Check the relevant device class/model, operating/input conditions and
+measurement definition. A bare number in an unknown-origin comparison cannot
+establish an unrestricted class-wide performance assertion. Do not invent absent
+qualifiers or place them only in reviewer notes. When the selected body does not
+establish the requested generality, retain insufficient evidence/missing coverage
+or genuine uncertainty using the existing fields. A faithful quote establishes
+what that text says; it does not independently establish universal technical truth.
+This applies to independent support AND original citation scope judgments.
+'''
 def normalize(value,group,scopes,answer,claims):
  v=deepcopy(value);ec=ErrorCollector('source-support-relation-v6')
  for i,item in enumerate(v.get(group,[]) if isinstance(v,dict) else []):

@@ -79,7 +79,7 @@ class ComponentFactory:
         INDEPENDENT += instructions(6)
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
         ORIGINAL=original_template(support_relation_checks=True,support_relation_version=6)
-        PROMPT_VERSION='evidence-verification-v9.17-program-bound-source-selection'
+        PROMPT_VERSION='evidence-verification-v9.18-performance-scope'
         CONTRACT_VERSION='evidence-verification-output-v9.12'
         if self.config.verification_schema==14:
             from agents.verification_contract_v14 import SYSTEM,PROMPT_VERSION,CONTRACT_VERSION
@@ -123,13 +123,13 @@ class ComponentFactory:
                 manifest['corpus_index']={key:corpus.get(key) for key in ('version','revision','tokenizer','query_version','complete','records','chunks','duplicates','chunks_root')}
                 manifest['scoring_method']=SCORING
                 manifest['retrieval']='immutable SQLite FTS5 postings; versioned Chinese segmentation/topic query; strict hit replay'
-                manifest['performance_profile']='build/publication FTS integrity; open structural checks; immutable-file stamp; strict per-hit original/span verification; no full snapshot query scan'
+                manifest['performance_profile']='corpus-query-certificate-v1: identical immediate request/result; immutable seal/stamp and strict body replay; no repeated FTS ranking on certificate validation; mismatches retain full replay'
         manifest['fact_subject_supplement']='literal-subject-pre-review-v2: generation/aggregate verification before model; audit-subject-supplement-v1 after assessed insufficiency; original queries/settings retained'
         from services.operational_safety import RULE,SOURCES,VERSION as SAFETY_VERSION
         manifest['operational_safety_registry']={'version':SAFETY_VERSION,'rule':RULE,'sources':SOURCES,'judgment_origin':'model semantic application of registered source-backed advice rule; not expert or engineering certification'}
         manifest['operational_safety']='operational-hazard-screen-v1: model judgment with source/answer binding; no engineering certification'
         manifest['generation_query_conversion']='generation-cross-language-query-v1: once after successful empty BM25; Chinese question / fixed English body available (mixed-snapshot-gate-v2)'
-        manifest['prompts']['generation'] += ('-question-language-v8-condition-scope-clean-body' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
+        manifest['prompts']['generation'] += ('-question-language-v9-performance-scope' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
         if self.config.profile=='synthetic_fixture':
             manifest['available_real_protocols']=manifest.pop('protocols')
             manifest['protocols']={k:'fake-v1' for k in ('generation','claim_extraction','evidence_verification','domain_review','revision')}

@@ -91,6 +91,14 @@ Avoid universal zero losses or invariant branch current claims about actual devi
 industry_corpus_unverified text may contribute explanations with original provenance
 unknown, but cannot alone establish binding standards, settings or performance guarantees.
 Never call dataset host the original publisher. Preserve the actual source scope.\n'''
+        system += '''\nPerformance scope guidance v1: do not turn an unqualified device
+comparison into a universal numerical performance claim. Operating times, speed,
+capacity and similar values depend on device class/model, input conditions and what
+is measured. If supplied text omits those prerequisites, explain the qualitative
+mechanism rather than presenting its bare number as a generally valid specification.
+Do not invent a qualifier or hide a numerical overclaim behind a separate generic
+"varies by model" disclaimer. Keep any genuinely established numeric claim and its
+applicability in the same answer sentence.\n'''
         system += '''\nProduct generation guidance v1: honor requested brevity and answer only the question.
 Do not add unrequested bibliography, licensing or geographic assertions as official technical body facts.
 Index-maintained metadata is NOT an official document sentence. If a necessary source scope
@@ -175,7 +183,7 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
-        prompt += ('-question-language-v8-condition-scope-clean-body' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
+        prompt += ('-question-language-v9-performance-scope' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,

@@ -23,6 +23,8 @@ class SelectionV6Tests(unittest.TestCase):
       if i==0 and invalid=='condition':
        wrong=next(c for c in d['SOURCE_CONDITION_CANDIDATES']['candidates'] if c['quote_id']!=q)
        row['support_relation']['answer_conditions']=[{'condition_id':wrong['condition_id'],'necessity':'required','answer_quote':'','relationship':'missing','reason':'Synthetic cross-component borrowing is forbidden'}]
+      if i==0 and invalid=='missing_performance_scope':
+       row['support_relation'].update(whole_claim_supported=False,missing_clauses=['Synthetic numerical performance lacks device/input/measurement applicability'],repair=None)
     return ModelResponse(json.dumps(v),req.model_id,finish_reason='stop')
   async def go():
    with model_scope(ModelBudget(2)):return await ModelEvidenceVerificationAgent(Adapter(),ModelSettings('synthetic_fixture'),schema_version=13,support_relation_checks=True,support_relation_version=6).run(inp)
@@ -36,3 +38,8 @@ class SelectionV6Tests(unittest.TestCase):
   r,_=self.run_case('duplicate');self.assertTrue(r.execution_issues);self.assertEqual(r.findings[1].status,VerificationStatus.SUPPORTED)
  def test_condition_cannot_borrow_an_unselected_body_carrier(self):
   r,_=self.run_case('condition');self.assertTrue(r.execution_issues);self.assertEqual(r.findings[1].status,VerificationStatus.SUPPORTED)
+ def test_reported_missing_performance_scope_cannot_be_approved(self):
+  r,_=self.run_case('missing_performance_scope')
+  self.assertFalse(r.execution_issues)
+  self.assertEqual(r.findings[0].status,VerificationStatus.INSUFFICIENT_EVIDENCE)
+  self.assertEqual(r.findings[1].status,VerificationStatus.SUPPORTED)

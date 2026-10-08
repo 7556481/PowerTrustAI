@@ -54,6 +54,9 @@ class AsyncSQLiteBM25Retriever:
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="powertrust-retrieval")
         self._active = None
         self._closed = False
+        # One worker-local certificate for the immediately preceding corpus
+        # query. This is not a model judgment or a cross-answer query cache.
+        self._corpus_certificate = None
 
     def _work(self, request, result, validate):
         from rag.storage import KnowledgeStore
@@ -67,9 +70,24 @@ class AsyncSQLiteBM25Retriever:
             from rag.corpus_index import seal,CorpusRetriever
             retriever = CorpusRetriever(store) if seal(store,request.knowledge_version) is not None else BM25Retriever(store)
             if validate:
+                if isinstance(retriever, CorpusRetriever) and self._corpus_certificate is not None:
+                    previous_request, previous_result = self._corpus_certificate
+                    if request == previous_request:
+                        validate_types(result, RetrievalResult)
+                        require(result == previous_result, "Retrieved evidence/hits/context differ from certified query")
+                        # seal above rechecks the immutable file stamp/identity;
+                        # every delivered body still receives strict hit replay.
+                        bodies = result.evidence + (() if result.context is None else tuple(x.evidence for x in result.context.items))
+                        for evidence in bodies:
+                            require(store.verify_evidence(evidence) == evidence, "Certified evidence differs from fixed index")
+                        return None
                 retriever._validate_result(request, result)
                 return None
-            return retriever._retrieve(request)
+            self._corpus_certificate = None
+            retrieved = retriever._retrieve(request)
+            if isinstance(retriever, CorpusRetriever):
+                self._corpus_certificate = (request, retrieved)
+            return retrieved
 
     async def _submit(self, request, result=None, validate=False):
         import asyncio
@@ -95,6 +113,7 @@ class AsyncSQLiteBM25Retriever:
 
     def close(self):
         self._closed = True
+        self._corpus_certificate = None
         self._executor.shutdown(wait=False, cancel_futures=True)
 
     def __enter__(self):
