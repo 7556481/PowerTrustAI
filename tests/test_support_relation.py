@@ -47,13 +47,16 @@ class WarrantTests(unittest.TestCase):
     seen.append(r);d=json.loads(r.messages[1].content);v=response(d)
     for f in v['findings']:
      for c in f['component_reviews']:
-      c['support_relation']={'source_kind':'explanatory_body','quote_ids':['alien-scope'] if len(seen)==1 else [f['bases'][k]['quote_id'] for k in c['basis_indexes']],
+      c['support_relation']={'source_kind':'explanatory_body',
        'explanation':'Synthetic text explicitly names the three rating categories with their actual conditions.','whole_claim_supported':True,'missing_clauses':[],'conditions_preserved':True,'authority_scope':'explanation','answer_conditions':[],'causal_direction_preserved':True,'repair':None}
+    if len(seen)==1:
+     for f in v['findings']:
+      if f['bases']:f['bases'][0]['quote_id']='alien-scope'
     return ModelResponse(json.dumps(v),r.model_id,finish_reason='stop')
   async def run():
    with model_scope(ModelBudget(2)):
-    return await ModelEvidenceVerificationAgent(Adapter(),ModelSettings('synthetic_fixture'),schema_version=13,support_relation_checks=True,support_relation_version=5).run(inp)
-  out=asyncio.run(run());self.assertFalse(out.execution_issues);self.assertEqual(len(seen),2);self.assertIn('source-support-relation-v5',out.findings[0].component_reviews[0].rationale)
+    return await ModelEvidenceVerificationAgent(Adapter(),ModelSettings('synthetic_fixture'),schema_version=13,support_relation_checks=True,support_relation_version=6).run(inp)
+  out=asyncio.run(run());self.assertFalse(out.execution_issues);self.assertEqual(len(seen),2);self.assertIn('source-support-relation-v6',out.findings[0].component_reviews[0].rationale)
   from backend.assembly import ComponentFactory
   from backend.config import ServiceConfig
   manifest=ComponentFactory(ServiceConfig(profile='synthetic_fixture',verification_schema=13)).manifest(None)

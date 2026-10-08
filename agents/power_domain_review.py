@@ -77,14 +77,18 @@ def _finding(inputs,key,status,reason,*,claim_ids=(),bases=(),missing=(),origin=
         check_status=status,basis_kind=basis_kind,origin=origin,bases=tuple(bases))
 
 
-def program_findings(inputs,candidates):
+def program_findings(inputs,candidates,*,assessment=None):
     context=inputs.request.engineering_context
     new=any(c.semantic_origin=='model-claims-v7-obligations' for c in inputs.claims)
-    conceptual=new and context is not None and context.goal=='conceptual'
-    findings=[];checks=list(input_checks(context,new))
-    if context is None:
+    from services.task_applicability import effective
+    scope=effective(context,assessment)
+    conceptual=new and (scope=='conceptual' if assessment is not None else context is not None and context.goal=='conceptual')
+    findings=[];checks=list(input_checks(context,new,conceptual=conceptual))
+    if conceptual and assessment is not None:
+        findings.append(_finding(inputs,"engineering_inputs","not_applicable","Current question/answer and domain applicability are conceptual; no plant study inputs required."))
+    elif context is None:
         findings.append(_finding(inputs,"engineering_inputs","not_assessable","No structured engineering goal/input; cannot assume a complete plant assessment.",missing=("engineering_context",)))
-    elif context.goal=="plant_assessment":
+    elif context.goal=="plant_assessment" or assessment is not None and scope!='conceptual':
         missing=tuple(name for name in ("network_model","operating_point","limits","contingencies") if not getattr(context,name))
         findings.append(_finding(inputs,"engineering_inputs","not_assessable" if missing else "no_issue",
             "Input presence checked only; data are user-provided and quality/adequacy are not certified.",missing=missing))
@@ -105,8 +109,8 @@ def program_findings(inputs,candidates):
     findings.append(_finding(inputs,"simulation_boundary","not_applicable" if conceptual else "not_assessable","simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",missing=() if conceptual else ("executed_and_validated_engineering_analysis",)) if new else _finding(inputs,"simulation_boundary","not_assessable","simulation_not_run: no registered engineering computation; feasibility and safety are unverified.",missing=("executed_and_validated_engineering_analysis",)))
     return tuple(findings),tuple(checks)
 
-def input_checks(context,new=False):
-    if new and context is not None and context.goal=='conceptual' and not context.quantities:
+def input_checks(context,new=False,*,conceptual=None):
+    if new and (conceptual if conceptual is not None else context is not None and context.goal=='conceptual') and not (context and context.quantities):
         from core.models import ConsistencyCheck
         return (ConsistencyCheck('units-input','not_applicable','dimensional-input-v1.1','no_requested_input_quantity_check','Conceptual request contains no structured quantities; actual answer quantity assertions are reviewed separately.'),)
     return check_input_units(context)
@@ -157,9 +161,16 @@ def validate_domain_output(output,answer,claims):
     require(output.rules==registered_rules(claims),"Domain rules/source/version must equal registered demo rules",path="$.rules")
     validate_catalog(output.quote_candidates,output.evidence)
     new=any(c.semantic_origin=='model-claims-v7-obligations' for c in claims)
-    expected_checks=input_checks(output.engineering_context,new)+tuple(enumeration_check(c.proposition or c.text,output.quote_candidates,c.claim_id,version='quantity-enumeration-v1.3' if new else 'quantity-enumeration-v1.1',assertion_role=c.assertion_role,source_text=c.text) for c in claims)
+    from services.task_applicability import read,effective
+    assessment=read(output.findings)
+    if assessment is not None:
+        import hashlib
+        require(assessment['answer_id']==answer.answer_id and assessment['answer_version']==answer.version and assessment['answer_sha256']==hashlib.sha256(answer.text.encode()).hexdigest(),'Task applicability identity mismatch')
+        require(assessment['scope'] in ('conceptual','engineering','uncertain'),'Invalid task applicability')
+    conceptual=effective(output.engineering_context,assessment)=='conceptual' if assessment is not None else None
+    expected_checks=input_checks(output.engineering_context,new,conceptual=conceptual)+tuple(enumeration_check(c.proposition or c.text,output.quote_candidates,c.claim_id,version='quantity-enumeration-v1.3' if new else 'quantity-enumeration-v1.1',assertion_role=c.assertion_role,source_text=c.text) for c in claims)
     require(output.consistency_checks==expected_checks,"Program consistency checks changed",path="$.consistency_checks")
-    expected_program,_=program_findings(SimpleNamespace(request=SimpleNamespace(engineering_context=output.engineering_context),answer=answer,claims=claims),output.quote_candidates)
+    expected_program,_=program_findings(SimpleNamespace(request=SimpleNamespace(engineering_context=output.engineering_context),answer=answer,claims=claims),output.quote_candidates,assessment=assessment)
     require(tuple(f for f in output.findings if f.origin=="program_rule")==expected_program,
             "Deterministic domain findings changed",path="$.findings")
     catalog={c.quote_id:c for c in output.quote_candidates};ids={r.rule_id for r in RULES}
@@ -191,7 +202,7 @@ def validate_domain_output(output,answer,claims):
         if f.basis_kind=="literature" and f.check_status!="not_assessable":
             require(bool(f.bases),"Literature judgment lacks basis",path=path)
     boundary=next(f for f in output.findings if f.category=="simulation_boundary")
-    expected_boundary='not_applicable' if new and output.engineering_context is not None and output.engineering_context.goal=='conceptual' else 'not_assessable'
+    expected_boundary='not_applicable' if new and (conceptual if assessment is not None else output.engineering_context is not None and output.engineering_context.goal=='conceptual') else 'not_assessable'
     require(boundary.origin=="program_rule" and boundary.check_status==expected_boundary and not boundary.tool_result_ids,
         "Cannot claim simulation feasibility",path="$.findings")
 
@@ -199,10 +210,11 @@ def validate_domain_output(output,answer,claims):
 class ModelPowerDomainReviewAgent:
     uses_model_adapter=True
     rule_set_version=RULE_SET_VERSION
-    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1,safety_review=False):
+    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1,safety_review=False,task_applicability=False):
         require(protocol_version in (1,2,3,4,5),"Unknown domain contract")
         self.protocol_version=protocol_version
         self.safety_review=safety_review
+        self.task_applicability=task_applicability
         from agents.contracts import PowerDomainReviewInput,ReliabilityDomainInput
         self.review_input_type=ReliabilityDomainInput if protocol_version>=3 else PowerDomainReviewInput
         self.client=ModelClient(adapter,settings)

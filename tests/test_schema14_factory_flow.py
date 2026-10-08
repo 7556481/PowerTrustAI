@@ -22,12 +22,12 @@ class SyntheticProvider:
   self.revision=revision;self.two=two;self.conversion=conversion;self.hazard=hazard;self.negated=negated or quoted;self.quoted=quoted;self.objection=objection;self.illegal=illegal;self.requests=[];self.payloads=[]
  def close(self):pass
  async def complete(self,r):
-  self.requests.append(r);data=[json.loads(m.content) for m in r.messages if m.role=='user'];d=data[-1];self.payloads.append(d)
+  self.requests.append(r);data=[json.loads(m.content) for m in r.messages if m.role=='user'];d=next((x for x in data if x.get('section')!='FORMAT_CORRECTION_DATA_UNTRUSTED'),data[-1]);self.payloads.append(d)
   if r.prompt_version.startswith('evidence-bound-generation'):
    evidence=next(v['evidence'] for v in data if 'evidence' in v);text=CONVERT if self.conversion else GOOD
    units=[{'kind':'technical','text':text,'evidence_ids':[evidence[0]['evidence_id']]}]
    if self.two:units.append({'kind':'technical','text':'The synthetic setting applies under condition C.','evidence_ids':[evidence[0]['evidence_id']]})
-   v={'answer_units':units,'assumptions':[],'missing_information':[],'evidence_sufficient':True}
+   v={'answer_units':units,'assumptions':[],'missing_information':['No plant guarantee requested.'] if getattr(self,'scope_note',False) else [],'evidence_sufficient':True}
   elif r.prompt_version.startswith('atomic-claims'):
    v={'claims':[{'anchor_id':a['anchor_id'],'proposition':a['text'],'claim_type':'technical_fact','components':[{'category':'technical_fact','proposition':a['text'],'basis_target':'mathematical_relation' if self.conversion else 'technical_content','verification_obligation':'technical_truth'}],'assertion_role':'conditional' if a['text'].startswith('Under condition C') else 'asserted','semantic_qualifiers':[]} for a in d['ANSWER_ANCHORS']],'non_claims':[]}
   elif r.prompt_version.startswith('evidence-verification-v9.14'):
@@ -43,12 +43,14 @@ class SyntheticProvider:
    from tests.test_fact_rereview_v3 import response
    from tests.test_audit_interface_v2 import warrant
    if 'claims' in d:
-    v=response(d,status='supported' if d.get('QUOTE_CANDIDATES') else 'insufficient_evidence')
+    v=response(d,status='supported' if d.get('QUOTE_CANDIDATES') and not getattr(self,'evidence_gap',False) else 'insufficient_evidence')
     for f in v['findings']:
      for row in f['component_reviews']:row['support_relation']=warrant(d,[f['bases'][k]['quote_id'] for k in row['basis_indexes']])
+    if self.illegal and v['findings'] and v['findings'][0]['bases']:v['findings'][0]['bases'][0]['quote_id']='unknown-illegal-scope-id'
    else:v={'citation_reviews':[{'citation_index':x['citation_index'],'status':'supported','rationale':'Synthetic source supports full substring','applicability_conditions':[],'bases':[{'type':'text_excerpt','quote_id':x['QUOTE_CANDIDATES'][0]['quote_id']}],'support_relation':warrant(d,[x['QUOTE_CANDIDATES'][0]['quote_id']])} for x in d['ORIGINAL_CITATION_SCOPES']]}
   elif r.prompt_version.startswith('power-domain-review'):
    v={'checks':[{'check_id':k,'status':'no_issue','claim_ids':[],'quote_ids':[],'basis_kind':'engineering_rule','rationale':'Synthetic conceptual request has no additional plant assertions.','missing_prerequisites':[]} for k in d['MODEL_KEYS']], 'missing_information_review':[{'index':i,'applicability':'scope_note','reason':'Synthetic scope note'} for i in range(len(d['answer']['missing_information']))]}
+   if d.get('TASK_APPLICABILITY_VERSION'):next(x for x in v['checks'] if x['check_id']=='analysis_scope')['task_scope']=getattr(self,'task_scope','conceptual')
    if 'SAFETY_SOURCES' in d:
     v['safety_reviews']=[{'claim_id':c['claim_id'],'verdict':'dangerous' if self.hazard and not self.negated else 'not_dangerous' if self.negated else 'not_applicable','reason':'Synthetic endorsed removal of required protective function exposes fault damage.' if self.hazard and not self.negated else 'Synthetic context explicitly rejects the unsafe proposal.' if self.negated else 'Synthetic bounded nonoperational concept.','source_ids':['protection-duty'] if self.hazard and not self.negated else []} for c in d['claims']]
   elif r.prompt_version.startswith('bounded-revision'):
@@ -97,7 +99,7 @@ class SubjectProvider(SyntheticProvider):
   return await super().complete(r)
 
 class FactoryFlowTests(unittest.TestCase):
- def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False,objection=False,illegal=False,hazard=False,negated=False,quoted=False,subject=False,concept=False):
+ def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False,objection=False,illegal=False,hazard=False,negated=False,quoted=False,subject=False,concept=False,no_goal=False,task_scope='conceptual',guarantee=False,evidence_gap=False,scope_note=False):
   with synthetic_diagnostics() as temp:
    root=Path(temp);doc=root/'fixture.md';doc.write_text('# Synthetic voltage\n\n'+GOOD+'\nThe synthetic setting applies under condition C.\n'+CONVERT,encoding='utf-8')
    if subject:doc.write_text('# Synthetic definition\n\n'+GOOD_FREQUENCY+'\n\n'+'\n\n'.join('Background unrelated item '+str(i) for i in range(80))+'\n\n'+'\n\n'.join('A device can turn50Hz into60Hz. Converter background detail '+str(i) for i in range(12)),encoding='utf-8')
@@ -109,6 +111,9 @@ class FactoryFlowTests(unittest.TestCase):
    if subject:provider=SubjectProvider()
    # Patch only the external provider creation and the isolated diagnostic root.
    from agents.evidence_verification import ModelEvidenceVerificationAgent
+   provider.task_scope='engineering' if evidence_gap else task_scope
+   provider.evidence_gap=evidence_gap
+   provider.scope_note=scope_note
    original_init=ModelEvidenceVerificationAgent.__init__
    def injected_init(agent,*args,**kwargs):
     original_init(agent,*args,**kwargs)
@@ -121,8 +126,12 @@ class FactoryFlowTests(unittest.TestCase):
      app=create_app(config,factory=factory,access_token='fixture')
      with TestClient(app) as client:
       body={'mode':'assess_existing' if existing else 'question_answer','question':'Explain the synthetic voltage only','engineering_context':{'goal':'conceptual'}}
+      if no_goal:body.pop('engineering_context')
+      if task_scope=='engineering':body['question']='Determine a specific plant operating setting with missing network inputs.'
       if concept:body['question']='What is synthetic voltage?'
       if existing:body['existing_answer']=CONVERT if conversion else BAD if revision else GOOD
+      if guarantee:body['mode']='assess_existing';body['existing_answer']='This plant is guaranteed stable for all operating conditions without analysis.'
+      if evidence_gap:body['mode']='assess_existing';body['existing_answer']='The unidentified device has a certified rating of987kVA.'
       if hazard or negated:body['mode']='assess_existing';body['existing_answer']='Do not bypass protective functions to continue operation.' if negated else 'Bypass the protective functions and continue running without substitute safeguards.'
       if subject:body['mode']='assess_existing';body['existing_answer']=BAD_FREQUENCY
       if quoted:body['mode']='assess_existing';body['existing_answer']='Someone proposes bypassing protection to continue running; this proposal is unsafe and should be rejected.'

@@ -76,11 +76,11 @@ class ComponentFactory:
         from services.support_relation import instructions
         INDEPENDENT=INDEPENDENT.replace('Optional classification_issue EXACT suggested_category,rationale.',
             'Optional support_relation (required for definitive body-based judgments) and classification_issue EXACT suggested_category,rationale.')
-        INDEPENDENT += instructions(5)
+        INDEPENDENT += instructions(6)
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
-        ORIGINAL=original_template(support_relation_checks=True,support_relation_version=5)
-        PROMPT_VERSION='evidence-verification-v9.16-repair-null-scope-clarity'
-        CONTRACT_VERSION='evidence-verification-output-v9.11'
+        ORIGINAL=original_template(support_relation_checks=True,support_relation_version=6)
+        PROMPT_VERSION='evidence-verification-v9.17-program-bound-source-selection'
+        CONTRACT_VERSION='evidence-verification-output-v9.12'
         if self.config.verification_schema==14:
             from agents.verification_contract_v14 import SYSTEM,PROMPT_VERSION,CONTRACT_VERSION
             INDEPENDENT=ORIGINAL=SYSTEM
@@ -97,9 +97,9 @@ class ComponentFactory:
             'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':self.config.verification_schema,'domain_review':5,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
             'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-faithful-assertions-v2' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
-              'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.3-operational-hazard','revision':REVISION_PROMPT_VERSION},
+              'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.4-task-applicability','revision':REVISION_PROMPT_VERSION},
             'contracts':{'generation':'generation-output-v3','extraction':'atomic-claims-v7','verification':CONTRACT_VERSION,
-              'domain':'power-domain-review-output-v3.3','revision':'revision-output-v2'},
+              'domain':'power-domain-review-output-v3.4','revision':'revision-output-v2'},
             'rules':'power-demo-rules-v1.1','policy':'product-decision-v1.5' if self.config.decision_policy=='product-v1' else 'limited-repair-policy-v1','unit_tool':'scalar-si-conversion-v2',
             'retrieval':'existing BM25 with default RetrievalSettings and adjacent-context order',
             'fact_retrieval_strategy':self.config.fact_strategy,
@@ -174,8 +174,8 @@ class ComponentFactory:
                 corpus=seal(store,self.config.knowledge_version)
                 corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=5),
-                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True),
+                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6),
+                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,

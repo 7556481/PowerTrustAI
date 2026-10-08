@@ -28,8 +28,10 @@ class ProductAuditPolicy:
             f.finding_id for f in findings if f.check_status in ('warning', 'not_assessable')
             or f.severity == Severity.HIGH)
         context = request.engineering_context
-        scope = context.goal if context else 'unknown'
-        basis = ('User requested scope: ' + scope,
+        from services.task_applicability import read,effective
+        assessment=read(findings)
+        scope=effective(context,assessment) if assessment else context.goal if context else 'unknown'
+        basis = (('Model-reviewed requested/asserted scope: ' + scope + '; ' + assessment['reason']) if assessment else 'User requested scope: ' + scope,
                  'Claim components and independent analysis_scope check retain technical truth obligations',
                  'Classification is fallible; scope alone never overrides an adverse finding')
         checks = [('fact_support', 'applicable', 'Every extracted claim must have independent verification'),
@@ -114,6 +116,8 @@ class ProductAuditPolicy:
         from services.support_relation_v5 import relation
         source_uncertain=any((relation(c.rationale) or {}).get('semantic_uncertain') for c in citations)
         if self.version!=VERSION and source_uncertain:classification_uncertain=True
+        if assessment and scope=='uncertain':
+            return result(D.REVIEW_REQUIRED,'TASK_SCOPE_UNCERTAIN','Actual requested/asserted scope is uncertain; retain domain reason, no automatic approval')
         if classification_uncertain:
             return result(D.REVIEW_REQUIRED, 'COMPONENT_CLASSIFICATION_UNCERTAIN', 'Component classification or literal fidelity is uncertain')
         if self.version==VERSION and (source_uncertain or any(f.status==V.NOT_ASSESSABLE for f in facts+citations)):

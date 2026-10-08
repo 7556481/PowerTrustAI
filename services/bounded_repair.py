@@ -6,7 +6,7 @@ def repair_proposals(finding):
     rationales=[r.rationale for r in rows if getattr(r,'status',None)==finding.status] if rows else [finding.rationale]
     proposals=[]
     for rationale in rationales:
-        marker=next((m for m in (MARKER,' [source-support-relation-v4] ',' [source-support-relation-v5] ',' [compact-support-assessment-v1] ') if m in rationale),None)
+        marker=next((m for m in (MARKER,' [source-support-relation-v4] ',' [source-support-relation-v5] ',' [source-support-relation-v6] ',' [compact-support-assessment-v1] ') if m in rationale),None)
         if marker is None:return ()
         try:relation=json.loads(rationale.rsplit(marker,1)[1])
         except (ValueError,TypeError):return ()
@@ -34,6 +34,14 @@ GAP_MARKER=' [missing-information-applicability-v1] '
 def missing_information_review(findings):
     for finding in findings:
         if finding.category=='analysis_scope' and GAP_MARKER in finding.rationale:
-            try:return json.loads(finding.rationale.rsplit(GAP_MARKER,1)[1])
+            try:
+                text=finding.rationale.rsplit(GAP_MARKER,1)[1]
+                value,end=json.JSONDecoder().raw_decode(text)
+                suffix=text[end:]
+                if suffix:
+                    from services.task_applicability import MARKER
+                    if not suffix.startswith(MARKER):return None
+                    json.loads(suffix[len(MARKER):])
+                return value
             except (ValueError,TypeError):return None
     return None

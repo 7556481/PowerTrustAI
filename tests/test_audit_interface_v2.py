@@ -10,9 +10,11 @@ from services.answer_body import validate
 from core.validation import ContractError
 
 def warrant(d,quote_ids,status='supported',conditions=None,repair=None):
- return {'source_kind':'explanatory_body','quote_ids':quote_ids,'explanation':'Synthetic bounded source assertion and full qualified proposition compared.',
+ result={'source_kind':'explanatory_body','quote_ids':quote_ids,'explanation':'Synthetic bounded source assertion and full qualified proposition compared.',
  'whole_claim_supported':status=='supported','missing_clauses':[],'conditions_preserved':True,'authority_scope':'explanation',
  'answer_conditions':conditions or [],'causal_direction_preserved':True,'repair':repair}
+ if d.get('PROGRAM_SOURCE_SELECTION_VERSION'):result.pop('quote_ids')
+ return result
 
 class InterfaceTests(unittest.TestCase):
  def exercise(self,transform=None,conditional=False):

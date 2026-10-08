@@ -36,7 +36,7 @@ Legal example: {"checks":[{"check_id":"answer_units","status":"not_applicable","
 {"check_id":"operating_prerequisites","status":"no_issue","claim_ids":[],"quote_ids":[],
 "basis_kind":"engineering_rule","rationale":"Only requests missing inputs.","missing_prerequisites":[]}]}'''
 
-def parse(value,inputs,scope,*,review_missing=False):
+def parse(value,inputs,scope,*,review_missing=False,task_applicability=False):
     ec=ErrorCollector('power_domain_review_v3')
     if not ec.fields(value,{'checks','missing_information_review'} if review_missing else {'checks'},set(),'$'):ec.finish()
     value=deepcopy(value)
@@ -51,6 +51,14 @@ def parse(value,inputs,scope,*,review_missing=False):
             ec.check(row['applicability'] in ('required','scope_note','unrequested_extension','uncertain'),path,'known_gap_applicability_required')
             ec.check(type(row['reason']) is str and bool(row['reason'].strip()),path,'task_bound_reason_required')
         ec.check(seen==set(range(len(inputs.answer.missing_information))),'$.missing_information_review','each_declared_gap_exactly_once')
+    task_scope=None
+    if task_applicability:
+        rows=value.get('checks',[])
+        target=next((x for x in rows if isinstance(x,dict) and x.get('check_id')=='analysis_scope'),None) if isinstance(rows,list) else None
+        if target is not None:
+            task_scope=target.pop('task_scope',None)
+            ec.check(task_scope in ('conceptual','engineering','uncertain'),'$.checks.analysis_scope.task_scope','explicit_actual_task_scope_required')
+        else:ec.check(False,'$.checks','analysis_scope_required')
     items=value.get('checks') if type(value) is dict else None
     if ec.check(type(items) is list,'$.checks','array_required'):
         for i,item in enumerate(items):
@@ -65,6 +73,9 @@ def parse(value,inputs,scope,*,review_missing=False):
     if review_missing:
         from services.bounded_repair import GAP_MARKER
         output=replace(output,findings=tuple(replace(f,rationale=f.rationale+GAP_MARKER+json.dumps(gaps,ensure_ascii=False)) if f.category=='analysis_scope' else f for f in output.findings))
+    if task_applicability:
+        from services.task_applicability import bind
+        output=bind(inputs,output,task_scope)
     return output
 
 async def run(agent,inputs):
@@ -73,20 +84,23 @@ async def run(agent,inputs):
         with model_scope(ModelBudget(2)):return await run(agent,inputs)
     prompt_version='power-domain-review-v3.2-question-gap-applicability' if agent.protocol_version==5 else 'power-domain-review-v3.1-applicability' if agent.protocol_version==4 else PROMPT_VERSION
     contract_version='power-domain-review-output-v3.2' if agent.protocol_version==5 else 'power-domain-review-output-v3.1' if agent.protocol_version==4 else CONTRACT_VERSION
+    applicability=getattr(agent,'task_applicability',False)
+    if applicability:prompt_version='power-domain-review-v3.4-task-applicability';contract_version='power-domain-review-output-v3.4'
     scope=CandidateScope(inputs.answer,inputs.knowledge_version,'domain_review',inputs.evidence,check_id=inputs.rule_set_version,protocol_version=contract_version)
     wire={'checks':[{'check_id':k,'status':'not_assessable','claim_ids':[],'quote_ids':[],'basis_kind':'engineering_rule','rationale':'model_execution_incomplete','missing_prerequisites':['model_execution_incomplete']} for k in domain.MODEL_KEYS]}
+    if applicability:next(x for x in wire['checks'] if x['check_id']=='analysis_scope')['task_scope']='uncertain'
     groups={'checks':'check_id'}
     if agent.protocol_version==5:
         wire['missing_information_review']=[{'index':i,'applicability':'uncertain','reason':'model_execution_incomplete'} for i in range(len(inputs.answer.missing_information))]
         groups['missing_information_review']='index'
-    delegate=lambda v:parse(v,inputs,scope,review_missing=agent.protocol_version==5)
+    delegate=lambda v:parse(v,inputs,scope,review_missing=agent.protocol_version==5,task_applicability=applicability)
     safety=getattr(agent,'safety_review',False)
     if safety:
         from services import operational_safety as hazard
         wire['safety_reviews']=hazard.baseline(inputs);groups['safety_reviews']='claim_id'
         parser=lambda v:hazard.parse(v,inputs,delegate)
-        prompt_version='power-domain-review-v3.3-operational-hazard'
-        contract_version='power-domain-review-output-v3.3'
+        prompt_version='power-domain-review-v3.4-task-applicability' if applicability else 'power-domain-review-v3.3-operational-hazard'
+        contract_version='power-domain-review-output-v3.4' if applicability else 'power-domain-review-output-v3.3'
     else:parser=delegate
     isolation=WireIsolation(wire,parser,groups,mark)
     payload={**scope.payload(),'question':inputs.request.question,'user_context':inputs.request.user_context,
@@ -116,6 +130,10 @@ Engineering missing inputs remain missing; asking for data is not an operation i
 Use concise Chinese rationale/reasons. This review does not weaken independent factual
 or citation obligations, and has no access to the other reviewer judgments.\n'''
     if safety:instruction+=hazard.INSTRUCTION
+    if applicability:
+        from services.task_applicability import INSTRUCTION
+        instruction+=INSTRUCTION
+        payload['TASK_APPLICABILITY_VERSION']='task-applicability-v1'
     try:
         output,records=await structured_request(agent.client,(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),prompt_version,isolation.parse,
             diagnostics=agent.diagnostics,response_contract_version=contract_version,candidate_catalog_path=path)

@@ -74,6 +74,9 @@ This is type/shape guidance only, NEVER use synthetic example words as actual ev
 
 def instructions(version=1):
     if version==1:return INSTRUCTIONS
+    if version==6:
+        from services.support_relation_v6 import INSTRUCTIONS as v6
+        return v6
     if version==5:
         from services.support_relation_v5 import INSTRUCTIONS as v5
         return v5
@@ -120,6 +123,9 @@ def pure_question(text):
     return bool(re.fullmatch(r'[^\n|。.!！?？]+[?？]',text))
 
 def normalize(value,group,scopes,version=1,answer=None,claims=()):
+    if version==6:
+        from services.support_relation_v6 import normalize as v6
+        return v6(value,group,scopes,answer,claims)
     if version==5:
         from services.support_relation_v5 import normalize as v5
         return v5(value,group,scopes,answer,claims)
