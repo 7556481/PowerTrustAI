@@ -431,16 +431,16 @@ harness/product_policy.py / ProductAuditPolicy.decide_context，实际行24–40
             f.finding_id for f in findings if f.check_status in ('warning', 'not_assessable')
             or f.severity == Severity.HIGH)
         context = request.engineering_context
-        scope = context.goal if context else 'unknown'
-        basis = ('User requested scope: ' + scope,
+        from services.task_applicability import read,effective
+        assessment=read(findings)
+        scope=effective(context,assessment) if assessment else context.goal if context else 'unknown'
+        basis = (('Model-reviewed requested/asserted scope: ' + scope + '; ' + assessment['reason']) if assessment else 'User requested scope: ' + scope,
                  'Claim components and independent analysis_scope check retain technical truth obligations',
                  'Classification is fallible; scope alone never overrides an adverse finding')
         checks = [('fact_support', 'applicable', 'Every extracted claim must have independent verification'),
                   ('original_citations', 'applicable' if answer.citations else 'not_applicable',
                    'Separate original citation judgments' if answer.citations else 'No original citations')]
         for claim in claims:
-            basis += (f'{claim.claim_id}: type={claim.claim_type}; assertion_role={claim.assertion_role}; model classification is not proof',)
-            for component, target in zip(claim.components, getattr(claim, 'component_basis_targets', ())):
 ```
 只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
@@ -503,8 +503,8 @@ backend/assembly.py实际行176–185，仅连接处摘录，周围初始化/后
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=5),
-                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True),
+                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6),
+                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
@@ -587,3 +587,9 @@ Submit.task构造任务身份；ApplicationService.submit生成运行身份。
 ::: answer 展开参考答案3
 不能；抛HarnessObserverError并报告持久化失败。
 :::
+
+## 2026-10-08 首版收尾核对
+
+schema13未换。任务范围由既有Domain的analysis_scope新增task_scope字段同次判断，结合实际问题/回答，程序记录原goal、身份/哈希/理由；缺goal不默认工程或概念，conceptual不能豁免工程承诺，真实异议/范围不确定保留复核。见 `services/task_applicability.py`、`agents/domain_contract_v3.py` 和 `agents/power_domain_review.program_findings`。同组件关系v6取消模型重复quote_ids，由合法局部bases/indexes程序绑定；条件/repair不得借未选正文或别的作用域，旧v5按旧接口保存，新增输出v9.12显式标记。见 `services/support_relation_v6.py`，危险规则未扩。
+
+4题各一次全部阶段完成：新概念通过、特定100kVA不足被识别、危险事实矛盾与来源绑定高风险完整且禁止采用；工程题不编造，但长回答/拒答及建议边界仍复核。16调用/0纠正/0修订不能称通用稳定；本批没有真实Revision，既有成功与Factory完整重审另列。实际浏览器和重启保存已核对，旧失败和完整库不变。进入限定个人最终试用，工程自动定值/认证未提供；详见项目 `docs/audit-closeout-v1.md`。

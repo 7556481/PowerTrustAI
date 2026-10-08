@@ -41,9 +41,9 @@
       "symbol": "eligible_repairs",
       "start_line": 21,
       "end_line": 31,
-      "file_sha256": "809326ac11d33a844da60e44d09d6c08234460c2d9e4cce11aab7f9a81e934a4",
+      "file_sha256": "7b879bdb1a91e892ed220f2805fdb789298fd588df4f321aa6bc4222156c55c4",
       "excerpt_sha256": "bfaf15e73f41ea2f4a544be97b69039c264daee19fbd86b541dc8a62b0677f62",
-      "source_text_lf_sha256": "19244b2627a617ad9551046e0d2dc27b0f38cb160a08bfe428a81e993054f4ae"
+      "source_text_lf_sha256": "6cb8298596f6e62c1754da6e04aedc4f7f204460527617e2344d51bca3b86f6a"
     },
     {
       "file": "tools/unit_conversion.py",
@@ -113,10 +113,10 @@
       "symbol": "ComponentFactory.create",
       "start_line": 143,
       "end_line": 158,
-      "function_end_line": 183,
+      "function_end_line": 188,
       "excerpt_sha256": "dfef916a9bb8bc02fdeedb70f8ac0d51c19ee4d210b33dc2dbdf32b7d47937c6",
-      "file_sha256": "c7ce1f32a544d229e29de5bd37e0a07f21ec359a4e07c10cee20a759ad06915f",
-      "source_text_lf_sha256": "6b6995a738373fe7aa189ab4885b4452c185b0f67a17355ca50974b8d3501a2a"
+      "file_sha256": "80888c0c0688a036f0ee3923ee2488c003388e720ac206bc587e88b1b394b145",
+      "source_text_lf_sha256": "b6d95f472c875d962d2db3505a9a40002f48cf2a74c4ea7abff39b96900e1b25"
     },
     {
       "file": "services/claim_extractor.py",
@@ -133,10 +133,10 @@
       "symbol": "ProductAuditPolicy.decide_context",
       "start_line": 24,
       "end_line": 40,
-      "function_end_line": 153,
-      "excerpt_sha256": "91258481364e9b0da98e6d1319fdcb36623252c308a88ce8ee60141d51ce059f",
-      "file_sha256": "36a9d0cffdc16525ec037daa3437bfec2f5dcb16702b808791265f3f472ba8f0",
-      "source_text_lf_sha256": "417fa0baa8db6ce090505ad943f7a4654624a2620580ee0af68e7c1fa1afa64a"
+      "function_end_line": 173,
+      "excerpt_sha256": "9a9d5c59ee687fc735edeeb69eb5b55f8fca650dbba5be494ce0b001e62af128",
+      "file_sha256": "f8a93873e1876f7870acb4674841ff225ebd9d586d4a51275f86b8a61d308922",
+      "source_text_lf_sha256": "b24130f3462977b9e0bba3c0b87cc9a97964473c0fac075eed902f2262cb54b8"
     },
     {
       "file": "backend/store.py",
@@ -165,9 +165,9 @@
       "symbol": "harness=OfflineHarness",
       "start_line": 176,
       "end_line": 185,
-      "excerpt_sha256": "ec9723445c435fcf66b3fc6de17ae89db8c828ce47e71d4a16eddb760bfaf94e",
-      "file_sha256": "c7ce1f32a544d229e29de5bd37e0a07f21ec359a4e07c10cee20a759ad06915f",
-      "source_text_lf_sha256": "6b6995a738373fe7aa189ab4885b4452c185b0f67a17355ca50974b8d3501a2a"
+      "excerpt_sha256": "37110dfbe80abff0451cb3a3af5a9fff64cbe4deba7f7a37df4085126b3827f6",
+      "file_sha256": "80888c0c0688a036f0ee3923ee2488c003388e720ac206bc587e88b1b394b145",
+      "source_text_lf_sha256": "b6d95f472c875d962d2db3505a9a40002f48cf2a74c4ea7abff39b96900e1b25"
     },
     {
       "file": "harness/runtime.py",

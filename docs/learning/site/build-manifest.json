@@ -1,7 +1,7 @@
 {
   "version": {
-    "application_commit": "8cbd9de8f45fa6c7ce6c183c7f04b9c0240052ae",
-    "document_version": "learning-site-v3.6 complete FTS daily adoption, 2026-10-08",
+    "application_commit": "bd8e803ca74681f16d1f3856164ecb29d388ca67",
+    "document_version": "learning-site-v3.7 task applicability and program-selected source binding, 2026-10-08",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
@@ -50,13 +50,13 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 5055,
-      "sha256": "e4872cb7291b023f718f5f3ce5d005d99b808f910a6cb5a74f0067fa6cc8f889"
+      "characters": 5678,
+      "sha256": "7d3e9e054a597f8b8ae9fb19225f84ad11421eba9347e092b51e2ee70c9272ff"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
-      "characters": 2874,
-      "sha256": "feff50953682bbfab734ce826faeb6ea2a460c7ce7f2662b8da5baf65399920a"
+      "characters": 3497,
+      "sha256": "26f773a31cf6b3f929b8e1b1642812038557e7d9506bf196aa13ba61efd67192"
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
@@ -80,13 +80,13 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 31081,
-      "sha256": "5e71cf19421f77c1cd5bf686161d647169a492da456a31648b9f244e2910baac"
+      "characters": 31725,
+      "sha256": "3bd3ec08e74a7be5ffa5d22fa1b97176aed2b184eea6cde175bb32cefc06fad0"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
-      "characters": 4964,
-      "sha256": "1a5c60fa9f2d1280c5b4590845c09efabaf3ee271d0db4d470b030f2bcf87748"
+      "characters": 5587,
+      "sha256": "9b72fef0a4daae89fbace03543bb7a43a17b169fdfbf4d753b13a15974578514"
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
@@ -119,6 +119,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 112644,
+  "markdown_characters": 115157,
   "network_dependencies": false
 }

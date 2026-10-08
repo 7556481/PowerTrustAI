@@ -83,3 +83,9 @@ tools/unit_conversion.py处理受支持的标量单位、前缀和数值关系�
 ::: answer 展开参考答案3
 不等，快照只证明实际交付的字段/表述。
 :::
+
+## 2026-10-08 首版收尾核对
+
+schema13未换。任务范围由既有Domain的analysis_scope新增task_scope字段同次判断，结合实际问题/回答，程序记录原goal、身份/哈希/理由；缺goal不默认工程或概念，conceptual不能豁免工程承诺，真实异议/范围不确定保留复核。见 `services/task_applicability.py`、`agents/domain_contract_v3.py` 和 `agents/power_domain_review.program_findings`。同组件关系v6取消模型重复quote_ids，由合法局部bases/indexes程序绑定；条件/repair不得借未选正文或别的作用域，旧v5按旧接口保存，新增输出v9.12显式标记。见 `services/support_relation_v6.py`，危险规则未扩。
+
+4题各一次全部阶段完成：新概念通过、特定100kVA不足被识别、危险事实矛盾与来源绑定高风险完整且禁止采用；工程题不编造，但长回答/拒答及建议边界仍复核。16调用/0纠正/0修订不能称通用稳定；本批没有真实Revision，既有成功与Factory完整重审另列。实际浏览器和重启保存已核对，旧失败和完整库不变。进入限定个人最终试用，工程自动定值/认证未提供；详见项目 `docs/audit-closeout-v1.md`。

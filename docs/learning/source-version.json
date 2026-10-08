@@ -1,6 +1,6 @@
 {
-  "application_commit": "8cbd9de8f45fa6c7ce6c183c7f04b9c0240052ae",
-  "document_version": "learning-site-v3.6 complete FTS daily adoption, 2026-10-08",
+  "application_commit": "bd8e803ca74681f16d1f3856164ecb29d388ca67",
+  "document_version": "learning-site-v3.7 task applicability and program-selected source binding, 2026-10-08",
   "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
   "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
   "daily_schema": 13,
