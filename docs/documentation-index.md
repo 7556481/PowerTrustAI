@@ -1,5 +1,12 @@
 # 文档索引
 
+## 当前：2026-10-08 首版冻结
+
+- [首版验收](release-freeze-v1.md)：最后本人run、已验证/未通过/限制、完整FTS与性能范围、停止边界。
+- [只读迁回准备](return-migration-preparation-v1.md)：旧manifest之后新增材料、空间、SQLite一致性备份与恢复顺序。
+
+以下“当前/最新”按历史阶段解释。
+
 ## 2026-10-06 审核接口 v2（最新）
 
 [audit-interface-v2](audit-interface-v2.md)：来源条件载体ID/严格绑定、原始与有效判断、旧失败协议投影、新3真实完整执行与修订未触发、ID拒绝/浏览器/重启及构建已停止。源码condition_candidates/support_relation_v5/review_fidelity/answer_body及既有Harness/政策。私有统一包data/runtime_local/audit-interface-v2，不公开真实输入/响应。

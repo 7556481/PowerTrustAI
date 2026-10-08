@@ -1,8 +1,9 @@
 {
   "application_commit": "0f0553e2388f9e170628b958fa34cdfe57acad98",
-  "document_version": "learning-site-v3.8 performance evidence and immediate corpus certificate, 2026-10-08",
+  "document_version": "learning-site-v3.9 first release bounded acceptance freeze, 2026-10-08",
   "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
   "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
   "daily_schema": 13,
-  "compact_schema14": "v9.14 scope guidance; fixed8 corrected8/8 but semantic reservations; daily13; not declared stable"
+  "compact_schema14": "v9.14 scope guidance; fixed8 corrected8/8 but semantic reservations; daily13; not declared stable",
+  "documentation_parent_commit": "98b3ffb628bccad8a1e5f056b146c4100d015571"
 }

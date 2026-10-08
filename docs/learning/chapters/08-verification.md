@@ -119,3 +119,7 @@ ordinary-chain-v2保留schema13/响应v9.11，提示v9.16区分repair整体null�
 schema13未换。任务范围由既有Domain的analysis_scope新增task_scope字段同次判断，结合实际问题/回答，程序记录原goal、身份/哈希/理由；缺goal不默认工程或概念，conceptual不能豁免工程承诺，真实异议/范围不确定保留复核。见 `services/task_applicability.py`、`agents/domain_contract_v3.py` 和 `agents/power_domain_review.program_findings`。同组件关系v6取消模型重复quote_ids，由合法局部bases/indexes程序绑定；条件/repair不得借未选正文或别的作用域，旧v5按旧接口保存，新增输出v9.12显式标记。见 `services/support_relation_v6.py`，危险规则未扩。
 
 4题各一次全部阶段完成：新概念通过、特定100kVA不足被识别、危险事实矛盾与来源绑定高风险完整且禁止采用；工程题不编造，但长回答/拒答及建议边界仍复核。16调用/0纠正/0修订不能称通用稳定；本批没有真实Revision，既有成功与Factory完整重审另列。实际浏览器和重启保存已核对，旧失败和完整库不变。进入限定个人最终试用，工程自动定值/认证未提供；详见项目 `docs/audit-closeout-v1.md`。
+
+## 2026-10-08 首版冻结补记
+
+本人最后新例的“所有熔断器/所有断路器/任何情况更快”三项均insufficient_evidence，95.854秒完整执行、无修订、人工复核。指出全称范围缺证据是本例成功，不证明所有同类命题必假或旧误放行已被回填；模型语义仍不稳定。
