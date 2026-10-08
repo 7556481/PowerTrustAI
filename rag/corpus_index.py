@@ -11,6 +11,7 @@ from core.validation import require,validate_types
 from rag.storage import canonical,digest
 from rag.chinese_terms import VERSION,terms,query_expression
 from rag.contracts import RetrievalRequest,RetrievalResult,RetrievalHit
+from rag.timing import span,timed
 SCORING='sqlite-fts5-bm25-jieba-electric-semantic-query-v2'
 _OPENED={}
 SCHEMA='''
@@ -31,6 +32,7 @@ CREATE TABLE IF NOT EXISTS corpus_seal(knowledge_version TEXT PRIMARY KEY,manife
 '''
 def exists(store):
     return store.connection.execute("SELECT 1 FROM sqlite_master WHERE name='corpus_seal'").fetchone() is not None
+@timed('immutable_seal')
 def seal(store,k):
     if not exists(store):return None
     r=store.connection.execute('SELECT manifest FROM corpus_seal WHERE knowledge_version=?',(k,)).fetchone()
@@ -120,24 +122,31 @@ def corpus_evidence(store,fid,k,s):
         ('RAG explanation coverage; original source unverified; not sole normative/engineering authority',),p)
 class CorpusRetriever:
     def __init__(self,store):self.store=store
+    @timed('corpus_retrieve')
     def _retrieve(self,request):
-        validate_types(request,RetrievalRequest);require(request.max_results>0,'Positive result count required')
-        s=seal(self.store,request.knowledge_version);require(s is not None,'Sealed corpus required')
-        expression=query_expression(request.query,s.get('query_version','electric-topic-query-v1'))
+        with span('query_prepare'):
+            validate_types(request,RetrievalRequest);require(request.max_results>0,'Positive result count required')
+            s=seal(self.store,request.knowledge_version);require(s is not None,'Sealed corpus required')
+            expression=query_expression(request.query,s.get('query_version','electric-topic-query-v1'))
         if not expression:return RetrievalResult((),request.knowledge_version)
         con=self.store.connection
-        ranked=con.execute('SELECT rowid,bm25(corpus_fts) AS score FROM corpus_fts WHERE corpus_fts MATCH ? ORDER BY score,rowid LIMIT ?',
-            (expression,request.max_results)).fetchall()
+        with span('fts_execute_fetch_sort') as measured:
+            ranked=con.execute('SELECT rowid,bm25(corpus_fts) AS score FROM corpus_fts WHERE corpus_fts MATCH ? ORDER BY score,rowid LIMIT ?',
+                (expression,request.max_results)).fetchall()
+            measured['result_count']=len(ranked)
         evidence=[];hits=[]
-        for rank,row in enumerate(ranked,1):
-            if row['rowid']<0:fid=con.execute('SELECT fragment_id FROM corpus_native WHERE id=?',(-row['rowid'],)).fetchone()[0]
-            else:fid=con.execute('SELECT fragment_id FROM corpus_chunks WHERE id=?',(row['rowid'],)).fetchone()[0]
-            e=corpus_evidence(self.store,fid,request.knowledge_version,s);evidence.append(e)
-            hits.append(RetrievalHit(e.evidence_id,fid,rank,-row['score'],SCORING))
+        with span('body_evidence_construct') as measured:
+            for rank,row in enumerate(ranked,1):
+                if row['rowid']<0:fid=con.execute('SELECT fragment_id FROM corpus_native WHERE id=?',(-row['rowid'],)).fetchone()[0]
+                else:fid=con.execute('SELECT fragment_id FROM corpus_chunks WHERE id=?',(row['rowid'],)).fetchone()[0]
+                e=corpus_evidence(self.store,fid,request.knowledge_version,s);evidence.append(e)
+                hits.append(RetrievalHit(e.evidence_id,fid,rank,-row['score'],SCORING))
+            measured['body_count']=len(evidence)
         context=None
         if request.context_options is not None:
             from rag.context import read_adjacent_context
-            context=read_adjacent_context(self.store,tuple(evidence),request.knowledge_version,request.context_options)
+            with span('adjacent_context'):
+                context=read_adjacent_context(self.store,tuple(evidence),request.knowledge_version,request.context_options)
         return RetrievalResult(tuple(evidence),request.knowledge_version,hits=tuple(hits),context=context)
     def _validate_result(self,request,result):
         require(result==self._retrieve(request),'Corpus result differs from immutable FTS index')

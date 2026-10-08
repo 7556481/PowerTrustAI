@@ -1,0 +1,129 @@
+{
+  "version": "retrieval-diagnosis-v1",
+  "run_id": "e141cf2b761949f8ba9a5848a75c5d6f",
+  "requests": [
+    {
+      "id": "R1",
+      "retrieval_id": "f7837fa3d25f404b82c0cfa991085e25",
+      "query_sha256": "e8fc86c42eb5ea334aa7dc5600428c2156e89fce26d26a6e200bfef64a8f9e7b",
+      "purpose": "generation",
+      "historical_seconds": 25.49,
+      "returned_hits": 3,
+      "missing_request_fields": [
+        "max_results",
+        "context_options"
+      ],
+      "plan_only_with_diagnostic_limit_zero": [
+        "SCAN corpus_fts VIRTUAL TABLE INDEX 0:M1",
+        "USE TEMP B-TREE FOR ORDER BY"
+      ],
+      "first_replay_seconds": null,
+      "repeat_seconds": [],
+      "result_comparison": "not_measured",
+      "segments": {
+        "query_prepare": null,
+        "fts_execute_fetch_sort": null,
+        "body_evidence_construct": null,
+        "result_validation": null
+      }
+    },
+    {
+      "id": "R2",
+      "retrieval_id": "ffcf4c1fae1d4a1181adb61fd66a6adb",
+      "query_sha256": "7a77aa5c21c940d921ca3ca1a6c731bdceb979cfae76e53d5d626fe7bcc2c882",
+      "purpose": "generation",
+      "historical_seconds": 0.364,
+      "returned_hits": 3,
+      "missing_request_fields": [
+        "max_results",
+        "context_options"
+      ],
+      "plan_only_with_diagnostic_limit_zero": [
+        "SCAN corpus_fts VIRTUAL TABLE INDEX 0:M1",
+        "USE TEMP B-TREE FOR ORDER BY"
+      ],
+      "first_replay_seconds": null,
+      "repeat_seconds": [],
+      "result_comparison": "not_measured",
+      "segments": {
+        "query_prepare": null,
+        "fts_execute_fetch_sort": null,
+        "body_evidence_construct": null,
+        "result_validation": null
+      }
+    },
+    {
+      "id": "R3",
+      "retrieval_id": "b6e684e42609495b9e40aee5a704cf8a",
+      "query_sha256": "307f1bcdff506dfdd3b2ebca3717b0ccd91fd62f6c556b0ce0571da28c8baded",
+      "purpose": "verification",
+      "historical_seconds": 49.283,
+      "returned_hits": 3,
+      "missing_request_fields": [
+        "max_results",
+        "context_options"
+      ],
+      "plan_only_with_diagnostic_limit_zero": [
+        "SCAN corpus_fts VIRTUAL TABLE INDEX 0:M1",
+        "USE TEMP B-TREE FOR ORDER BY"
+      ],
+      "first_replay_seconds": null,
+      "repeat_seconds": [],
+      "result_comparison": "not_measured",
+      "segments": {
+        "query_prepare": null,
+        "fts_execute_fetch_sort": null,
+        "body_evidence_construct": null,
+        "result_validation": null
+      }
+    },
+    {
+      "id": "R4",
+      "retrieval_id": "75ea7bae95264141b51c2f636f7eea98",
+      "query_sha256": "79d8252d62d003fc59adb4af6c9e857035865d4f775c85dc25ed4987ecd3f45c",
+      "purpose": "domain_review",
+      "historical_seconds": 62.605,
+      "returned_hits": 3,
+      "missing_request_fields": [
+        "max_results",
+        "context_options"
+      ],
+      "plan_only_with_diagnostic_limit_zero": [
+        "SCAN corpus_fts VIRTUAL TABLE INDEX 0:M1",
+        "USE TEMP B-TREE FOR ORDER BY"
+      ],
+      "first_replay_seconds": null,
+      "repeat_seconds": [],
+      "result_comparison": "not_measured",
+      "segments": {
+        "query_prepare": null,
+        "fts_execute_fetch_sort": null,
+        "body_evidence_construct": null,
+        "result_validation": null
+      }
+    }
+  ],
+  "historical_record_seconds_sum": 137.742,
+  "all_retrieval_event_seconds_sum_do_not_use": 189.176,
+  "root_wrapper_wall_union_seconds_approx": 137.80099987983704,
+  "record_sum_over_harness_counter_ratio": 0.9083307505127173,
+  "ratio_is_not_measured_critical_path_share": true,
+  "historical_replay_count": 0,
+  "query_plan_runtime_estimate": null,
+  "match_cardinality": null,
+  "gap_note": "scenario_id saved in original TaskRequest; max_results/context_options not saved in trace or examined diagnostics",
+  "chunk_indexes": [
+    "corpus_chunk_record",
+    "sqlite_autoindex_corpus_chunks_1"
+  ],
+  "native_columns": [
+    {
+      "name": "id",
+      "primary_key": true
+    },
+    {
+      "name": "fragment_id",
+      "primary_key": false
+    }
+  ]
+}

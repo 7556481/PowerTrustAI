@@ -1,5 +1,7 @@
 """Retriever contract adapter; no factual verification is performed."""
 import json
+from contextvars import copy_context
+from rag.timing import span,timed
 
 from core.validation import InputError, require, validate_types
 from rag.bm25 import SCORING_METHOD, score_corpus
@@ -58,6 +60,7 @@ class AsyncSQLiteBM25Retriever:
         # query. This is not a model judgment or a cross-answer query cache.
         self._corpus_certificate = None
 
+    @timed('retriever_worker')
     def _work(self, request, result, validate):
         from rag.storage import KnowledgeStore
         with KnowledgeStore(self.path, readonly=True, validated_pdf_cache=True) as store:
@@ -70,32 +73,40 @@ class AsyncSQLiteBM25Retriever:
             from rag.corpus_index import seal,CorpusRetriever
             retriever = CorpusRetriever(store) if seal(store,request.knowledge_version) is not None else BM25Retriever(store)
             if validate:
-                if isinstance(retriever, CorpusRetriever) and self._corpus_certificate is not None:
-                    previous_request, previous_result = self._corpus_certificate
-                    if request == previous_request:
-                        validate_types(result, RetrievalResult)
-                        require(result == previous_result, "Retrieved evidence/hits/context differ from certified query")
-                        # seal above rechecks the immutable file stamp/identity;
-                        # every delivered body still receives strict hit replay.
-                        bodies = result.evidence + (() if result.context is None else tuple(x.evidence for x in result.context.items))
-                        for evidence in bodies:
-                            require(store.verify_evidence(evidence) == evidence, "Certified evidence differs from fixed index")
-                        return None
-                retriever._validate_result(request, result)
-                return None
+                with span('result_validation') as measured:
+                    measured['certificate_hit']=False
+                    measured['_fts_mode']=isinstance(retriever,CorpusRetriever)
+                    measured['ranking_replay_attempted']=False
+                    if isinstance(retriever, CorpusRetriever) and self._corpus_certificate is not None:
+                        previous_request, previous_result = self._corpus_certificate
+                        if request == previous_request:
+                            measured['certificate_hit']=True
+                            validate_types(result, RetrievalResult)
+                            require(result == previous_result, "Retrieved evidence/hits/context differ from certified query")
+                            # seal above rechecks the immutable file stamp/identity;
+                            # every delivered body still receives strict hit replay.
+                            bodies = result.evidence + (() if result.context is None else tuple(x.evidence for x in result.context.items))
+                            for evidence in bodies:
+                                require(store.verify_evidence(evidence) == evidence, "Certified evidence differs from fixed index")
+                            return None
+                    measured['ranking_replay_attempted']=True
+                    retriever._validate_result(request, result)
+                    return None
             self._corpus_certificate = None
             retrieved = retriever._retrieve(request)
             if isinstance(retriever, CorpusRetriever):
                 self._corpus_certificate = (request, retrieved)
             return retrieved
 
+    @timed('retriever_wait')
     async def _submit(self, request, result=None, validate=False):
         import asyncio
         if self._closed:
             raise RuntimeError("Retriever is closed")
         if self._active is not None and not self._active.done():
             raise RuntimeError("Retriever worker busy; cancelled/timed-out work may still be running")
-        self._active = self._executor.submit(self._work, request, result, validate)
+        context=copy_context()
+        self._active = self._executor.submit(context.run,self._work, request, result, validate)
         future = asyncio.wrap_future(self._active)
         # Consume exceptions even if the waiter is cancelled while the worker runs.
         future.add_done_callback(lambda done: None if done.cancelled() else done.exception())

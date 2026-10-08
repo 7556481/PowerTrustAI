@@ -1,5 +1,7 @@
 # 文档索引
 
+- [离线检索诊断v1](retrieval-performance-diagnosis-v1.md)：原4请求缺数量/上下文参数，0重放；可选内部单调计时/31离线、SQL仅规划与嵌套计数口径纠正、真实分段和波动未知。附[脱敏小统计](retrieval-performance-diagnosis-v1-stats.json)。
+
 - [第二阶段性能粗测v1](performance-profile-v1.md)：首版保持，唯一e141cf2b…后台151.643秒/4检索137.742秒，5调用86222token；检索瓶颈与未知FTS/持久化/首绘分列，只读导出/11项离线及建议未实施。附[小型脱敏统计](performance-profile-v1-stats.json)，无答案/证据全文或ZIP。
 
 ## 当前：2026-10-08 首版冻结
