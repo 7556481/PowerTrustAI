@@ -1,7 +1,7 @@
 {
   "version": {
-    "application_commit": "440dce365664c2679a66385952c456593cff899f",
-    "document_version": "learning-site-v3.5 ordinary chain factual update, 2026-10-08",
+    "application_commit": "8cbd9de8f45fa6c7ce6c183c7f04b9c0240052ae",
+    "document_version": "learning-site-v3.6 complete FTS daily adoption, 2026-10-08",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
@@ -35,8 +35,8 @@
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 3986,
-      "sha256": "52fac44b9cb1ea7707721e42aabf7f1f72f05c80362485ce2ebba0d8dc8fa2d1"
+      "characters": 4430,
+      "sha256": "a09538bdf1c91e1813819bf9dfc201ced263abbccfb839adae3e40b1dee4587a"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -45,8 +45,8 @@
     },
     {
       "source": "docs/learning/chapters/07-corpus.md",
-      "characters": 3399,
-      "sha256": "4393bfcda4f07599a92c3b88f54eba9b953abbc5586c2875ef8996fd7716cbca"
+      "characters": 3753,
+      "sha256": "c3d266da92f036eabff6d5d7270f2e0c87359167570f7456e5243c014e4de0fc"
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
@@ -90,8 +90,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 3298,
-      "sha256": "64530e425a59f41a078f0f1006aadd375165c641f10da90720a011a33fc0bcef"
+      "characters": 3652,
+      "sha256": "ff9302a8d33ba7ac90b08229979e71039e15dea6d7f2b4c487f1870ac560ff5a"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -100,8 +100,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 2950,
-      "sha256": "868fdcae3b55f6c63f21625ae957de8ae0fdcc35d85d4e56927a84cc1a439529"
+      "characters": 3344,
+      "sha256": "8de484369e4a84a22ac7d1f558f6e17606b55a7f328a3ef202128f73d5193fec"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -119,6 +119,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 111098,
+  "markdown_characters": 112644,
   "network_dependencies": false
 }

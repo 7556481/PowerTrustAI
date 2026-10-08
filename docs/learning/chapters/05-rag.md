@@ -40,7 +40,7 @@ Generation用途检索围绕原问题，Verification可围绕冻结主张，Doma
 
 资料未在固定快照、资料存在但未进入排名候选、候选存在但未实际交付，是三类不同问题。大库主要扩大第一层覆盖，不保证候选/交付，更不保证生成保留条件。原中文词项与英文正文不匹配不等于BM25不适合中文；索引和查询分词、术语方案必须一致，不能把主题相似视为完整依据。
 
-预分词FTS5是全文关键词索引，不自动建立全部正文的Dense向量。旧向量profile与知识版本仍须匹配；输入行、唯一正文、片段、向量是不同计数。正文以日常固定部分快照和独立发布状态解释范围，不随后台增长反复改20章。
+预分词FTS5是全文关键词索引，不自动建立全部正文的Dense向量。旧向量profile与知识版本仍须匹配；输入行、唯一正文、片段、向量是不同计数。2026-10-08日常已显式切完整发布FTS快照：70有效片14336177行、8630479正文、24620273片段；3不可读原分片核验排除。旧部分快照保留，完整FTS不等于完整知识覆盖。
 
 对用户应说“本次交付的资料尚不足以支持这句回答”。这不等于该句为假、全库不存在或现实无依据。检索没执行完先说明执行问题；来源未核实则分内容解释与规范权威。
 
@@ -63,7 +63,7 @@ Generation用途检索围绕原问题，Verification可围绕冻结主张，Doma
 | RetrievalSession.query_cache / retrieve | 同一run；knowledge_version、retriever.cache_identity、query、max_results、实际ContextOptions | 只在fact_query=True查询和写入；新run新字典，知识/模式/profile/查询/上下文变更另键；命中仍validate_result完整确定性重放 |
 | retrieve_facts内deliveries | 单次逐组件审核；完整规范查询字符串 | 本次同查询复用Delivery；下一轮重新创建字典，组件映射/回答版本重新绑定 |
 | KnowledgeStore._load_pdf_report | 只读连接局部；SQLite data_version/total_changes、知识、文档、版本、file_hash及缓存版本 | 外部提交改变stamp；可写Store禁用；返回deepcopy；容量达到8清空。不是排名/审核结论缓存 |
-| corpus_index._OPENED / seal | 进程内路径＋knowledge_version；已验证文件size/mtime_ns | stamp变化拒绝；首次检查sidecar字节SHA/SQLite/成员，不在每题全库SHA；逐命中原文和区间继续校验 |
+| corpus_index._OPENED / seal | 进程内路径＋knowledge_version；已验证文件size/mtime_ns | stamp变化拒绝；新进程严格sidecar/库内manifest与全文件SHA；字节一致复用发布时SQLite/FTS/成员检查，不在每题全库SHA；逐命中原文和区间继续校验 |
 
 AsyncSQLiteBM25Retriever._work每次工作打开只读KnowledgeStore，所以PDF报告缓存不能跨这些新连接任意复用。aggregate普通检索不启用上述fact_query结果复用；不能把per_claim的优化写成默认aggregate行为。当前没有通用跨服务答案缓存或用缓存跳过必需审核。减少重放等其他优化只是建议，需要另行证据，未在本轮实现。
 
@@ -92,3 +92,7 @@ ordinary-chain-v2将明确概念问题/正文断言的语法主体补检前置�
 ::: answer 展开参考答案3
 否；RetrievalSession每run新建，且只用于fact_query路径。
 :::
+
+## 2026-10-08 完整库接入核对
+
+完整有效分片FTS已独立发布并接入日常，旧prefix历史保留。新进程仍读取约70.85GB做全文件SHA，sidecar与库内封印严格一致；字节一致时复用发布时结构/FTS/成员核验，未发布fixture仍直接检查SQL。进程内_OPENED只记路径/知识及size/mtime_ns，变化拒绝；没有跨进程跳过SHA的缓存。命中原文、字符区间、哈希仍验证。首启约52秒，后续正常重启43.5秒；未清OS缓存，不能称物理冷机或稳定SLA。四主题FTS查询0.11–4.76秒，命中不等于回答正确。唯一概念任务双审完整而业务待补充，知识接入与审核适用性问题分开。当前接入记录见项目源码目录的 `docs/full-corpus-adoption-v1.md`。
