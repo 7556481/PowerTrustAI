@@ -128,7 +128,10 @@ class CorpusRetriever:
         with span('query_prepare'):
             validate_types(request,RetrievalRequest);require(request.max_results>0,'Positive result count required')
             s=seal(self.store,request.knowledge_version);require(s is not None,'Sealed corpus required')
-            expression=query_expression(request.query,self.query_version or s.get('query_version','electric-topic-query-v1'))
+            if self.query_version=='topic-subject-and-bm25-v1':
+                from rag.topic_lanes import plan
+                expression=canonical(plan(request.query))
+            else:expression=query_expression(request.query,self.query_version or s.get('query_version','electric-topic-query-v1'))
         if not expression:return RetrievalResult((),request.knowledge_version)
         con=self.store.connection
         with span('fts_execute_fetch_sort') as measured:
@@ -136,8 +139,12 @@ class CorpusRetriever:
             ranked=None if self.rank_cache is None else self.rank_cache.get(key)
             measured['rank_cache_hit']=ranked is not None
             if ranked is None:
-                ranked=con.execute('SELECT rowid,bm25(corpus_fts) AS score FROM corpus_fts WHERE corpus_fts MATCH ? ORDER BY score,rowid LIMIT ?',
-                    (expression,request.max_results)).fetchall()
+                if self.query_version=='topic-subject-and-bm25-v1':
+                    from rag.topic_lanes import rank as lane_rank
+                    ranked=lane_rank(con,request.query,request.max_results)
+                else:
+                    ranked=con.execute('SELECT rowid,bm25(corpus_fts) AS score FROM corpus_fts WHERE corpus_fts MATCH ? ORDER BY score,rowid LIMIT ?',
+                        (expression,request.max_results)).fetchall()
                 if self.rank_cache is not None:self.rank_cache.put(key,ranked)
             measured['result_count']=len(ranked)
         evidence=[];hits=[]
@@ -146,7 +153,7 @@ class CorpusRetriever:
                 if row['rowid']<0:fid=con.execute('SELECT fragment_id FROM corpus_native WHERE id=?',(-row['rowid'],)).fetchone()[0]
                 else:fid=con.execute('SELECT fragment_id FROM corpus_chunks WHERE id=?',(row['rowid'],)).fetchone()[0]
                 e=corpus_evidence(self.store,fid,request.knowledge_version,s);evidence.append(e)
-                scoring=SCORING if self.query_version is None else SCORING+';'+self.query_version
+                scoring='fts-subject-constrained-bm25-v1' if self.query_version=='topic-subject-and-bm25-v1' else SCORING if self.query_version is None else SCORING+';'+self.query_version
                 hits.append(RetrievalHit(e.evidence_id,fid,rank,-row['score'],scoring))
             measured['body_count']=len(evidence)
         context=None

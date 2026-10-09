@@ -70,7 +70,11 @@ def explain(result):
     if not reasons:
         reasons.append('结构化发现未提供更具体的复核原因；请结合业务决策详情人工检查。' if (result.get('decision') or {}).get('kind')!='pass' else '当前政策未要求进一步处理；pass 不代表工程安全认证。')
     if not next_steps:next_steps.append('下一步无法从结构化发现确定，待人工检查业务决策与逐项发现；不生成工程操作建议。')
-    return {'run_ended':ex.get('status') in TERMINAL,'reasons':reasons,'next_steps':next_steps,'unresolved':unresolved_items(result),
+    from types import SimpleNamespace
+    from services.bounded_repair import missing_information_review
+    gap_reviews=missing_information_review([SimpleNamespace(category=x.get('category',''),rationale=x.get('rationale') or '') for x in domain]) or []
+    scope_notes=[x for x in gap_reviews if x.get('applicability') in ('scope_note','unrequested_extension')]
+    return {'run_ended':ex.get('status') in TERMINAL,'reasons':reasons,'next_steps':next_steps,'unresolved':unresolved_items(result),'missing_information_review':gap_reviews,'scope_note_indexes':[x['index'] for x in scope_notes],
         'saved':f"已保存 {len(answer.get('versions',[]))} 个回答版本、{len(facts)} 条当前事实发现、{len(domain)} 条当前领域发现、{len(result.get('evidence',[]))} 条 Evidence；历史轮次与人工意见分别查看。"}
 
 

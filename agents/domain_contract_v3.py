@@ -85,7 +85,7 @@ async def run(agent,inputs):
     prompt_version='power-domain-review-v3.2-question-gap-applicability' if agent.protocol_version==5 else 'power-domain-review-v3.1-applicability' if agent.protocol_version==4 else PROMPT_VERSION
     contract_version='power-domain-review-output-v3.2' if agent.protocol_version==5 else 'power-domain-review-output-v3.1' if agent.protocol_version==4 else CONTRACT_VERSION
     applicability=getattr(agent,'task_applicability',False)
-    if applicability:prompt_version='power-domain-review-v3.4-task-applicability';contract_version='power-domain-review-output-v3.4'
+    if applicability:prompt_version='power-domain-review-v3.5-task-obligations';contract_version='power-domain-review-output-v3.4'
     scope=CandidateScope(inputs.answer,inputs.knowledge_version,'domain_review',inputs.evidence,check_id=inputs.rule_set_version,protocol_version=contract_version)
     wire={'checks':[{'check_id':k,'status':'not_assessable','claim_ids':[],'quote_ids':[],'basis_kind':'engineering_rule','rationale':'model_execution_incomplete','missing_prerequisites':['model_execution_incomplete']} for k in domain.MODEL_KEYS]}
     if applicability:next(x for x in wire['checks'] if x['check_id']=='analysis_scope')['task_scope']='uncertain'
@@ -99,7 +99,7 @@ async def run(agent,inputs):
         from services import operational_safety as hazard
         wire['safety_reviews']=hazard.baseline(inputs);groups['safety_reviews']='claim_id'
         parser=lambda v:hazard.parse(v,inputs,delegate)
-        prompt_version='power-domain-review-v3.4-task-applicability' if applicability else 'power-domain-review-v3.3-operational-hazard'
+        prompt_version='power-domain-review-v3.5-task-obligations' if applicability else 'power-domain-review-v3.3-operational-hazard'
         contract_version='power-domain-review-output-v3.4' if applicability else 'power-domain-review-output-v3.3'
     else:parser=delegate
     isolation=WireIsolation(wire,parser,groups,mark)
@@ -111,6 +111,9 @@ async def run(agent,inputs):
     if safety:payload.update(SAFETY_SOURCES=hazard.SOURCES,SAFETY_RULE=hazard.RULE)
     path=None if agent.diagnostics is None else agent.diagnostics.save_scope(payload);before=len(current_budget().records)
     instruction=SYSTEM
+    from services.task_requirements import INSTRUCTION,prohibited_spans
+    instruction+=INSTRUCTION
+    payload['negative_output_constraint_spans']=prohibited_spans(inputs.request.question)
     if agent.protocol_version in (4,5):
         instruction+='\nApply checks to requested and asserted engineering scope. A conceptual explanation is not a plant safety guarantee. Missing simulation is not by itself an answer defect. Requests to obtain missing data are not equipment-operation instructions. User-provided inputs are not certified real-world states. A correction quotes old errors without endorsing them; independently inspect new asserted technical facts. Scalar SI tools cannot prove quantity-kind laws or feasibility. If stance/fidelity is uncertain, explain rather than treating a model role as program proof.\n'
     if agent.protocol_version==5:

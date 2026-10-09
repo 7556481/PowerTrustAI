@@ -1,5 +1,7 @@
 # 文档索引
 
+- [本人新主题修复v1](owner-trial-fix-v1.md)：主体约束BM25、严格引用输出投影、任务范围与页面修复；一次同题API13.709秒/总60.154秒、完整执行但review_required，内容及10秒目标未全面满足。附[小统计](owner-trial-fix-v1-stats.json)。
+
 - [实际检索优化v1](retrieval-optimization-v1.md)：topic_v3_rank_v1落地、6请求覆盖/分段/重复、原两题真实前后22调用388790token、PF有效提速及FLUX未达目标/条件呈现限制、空间与回退。附[小统计](retrieval-optimization-v1-stats.json)。
 
 - [离线检索诊断v1](retrieval-performance-diagnosis-v1.md)：原4请求缺数量/上下文参数，0重放；可选内部单调计时/31离线、SQL仅规划与嵌套计数口径纠正、真实分段和波动未知。附[脱敏小统计](retrieval-performance-diagnosis-v1-stats.json)。

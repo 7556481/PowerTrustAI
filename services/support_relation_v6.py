@@ -7,6 +7,17 @@ MARKER=' [source-support-relation-v6] '
 INSTRUCTIONS=OLD.replace('relation v5','relation v6').replace('EXACT source_kind,quote_ids,','EXACT source_kind,').replace('quote_ids EXACT selected text_excerpt basis IDs for this component/citation ONLY.','quote_ids is PROGRAM-OWNED. DO NOT output that field. Select body once using bases plus component basis_indexes (citation bases directly). Conditions/repair must refer only to carriers of these selected body bases.').replace("this relation's selected quote_ids",'THIS component/citation selected text_excerpt bases')
 INSTRUCTIONS+='\nDo not repeat a selected quote list in support_relation. The program binds it strictly from this component basis_indexes; it does not repair illegal IDs or infer support. Exact quote IDs in bases and condition IDs remain scope-bound.\n'
 INSTRUCTIONS+='''
+OUTPUT PROJECTION v2: SOURCE_CONDITION_CANDIDATES are INPUT-ONLY carriers.
+answer_conditions objects have ONLY condition_id,necessity,answer_quote,relationship,reason.
+Never copy source_condition, source_excerpt, quote_id, text, offsets, locator,
+knowledge_version or other carrier fields into answer_conditions. Example SHAPE
+only (IDs must be selected from your actual scope): {"condition_id":"<selected>",
+"necessity":"required","answer_quote":"<literal answer qualifier>",
+"relationship":"preserved","reason":"<why this selected source qualifier matters>"}.
+Do not use the example placeholder as an ID. No relevant qualifier: [] is legal;
+it never means conditions were proven absent. Retain every supplied citation_index.
+'''
+INSTRUCTIONS+='''
 Performance scope guidance v1: an operating time, speed, capacity or other device
 performance number is not a universal property merely because a supplied paragraph
 repeats it. Check the relevant device class/model, operating/input conditions and

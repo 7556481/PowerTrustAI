@@ -79,7 +79,7 @@ class ComponentFactory:
         INDEPENDENT += instructions(6)
         from agents.verification_contract_v10_batched import PROMPT_VERSION,CONTRACT_VERSION,original_template
         ORIGINAL=original_template(support_relation_checks=True,support_relation_version=6)
-        PROMPT_VERSION='evidence-verification-v9.18-performance-scope'
+        PROMPT_VERSION='evidence-verification-v9.19-output-projection'
         CONTRACT_VERSION='evidence-verification-output-v9.12'
         if self.config.verification_schema==14:
             from agents.verification_contract_v14 import SYSTEM,PROMPT_VERSION,CONTRACT_VERSION
@@ -97,7 +97,7 @@ class ComponentFactory:
             'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':self.config.verification_schema,'domain_review':5,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
             'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-faithful-assertions-v2' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
-              'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.4-task-applicability','revision':REVISION_PROMPT_VERSION},
+              'verification':PROMPT_VERSION,'domain':'power-domain-review-v3.5-task-obligations','revision':REVISION_PROMPT_VERSION},
             'contracts':{'generation':'generation-output-v3','extraction':'atomic-claims-v7','verification':CONTRACT_VERSION,
               'domain':'power-domain-review-output-v3.4','revision':'revision-output-v2'},
             'rules':'power-demo-rules-v1.1','policy':'product-decision-v1.5' if self.config.decision_policy=='product-v1' else 'limited-repair-policy-v1','unit_tool':'scalar-si-conversion-v2',
@@ -129,7 +129,7 @@ class ComponentFactory:
         manifest['operational_safety_registry']={'version':SAFETY_VERSION,'rule':RULE,'sources':SOURCES,'judgment_origin':'model semantic application of registered source-backed advice rule; not expert or engineering certification'}
         manifest['operational_safety']='operational-hazard-screen-v1: model judgment with source/answer binding; no engineering certification'
         manifest['generation_query_conversion']='generation-cross-language-query-v1: once after successful empty BM25; Chinese question / fixed English body available (mixed-snapshot-gate-v2)'
-        manifest['prompts']['generation'] += ('-question-language-v9-performance-scope' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
+        manifest['prompts']['generation'] += ('-question-language-v10-task-obligations' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
         if self.config.profile=='synthetic_fixture':
             manifest['available_real_protocols']=manifest.pop('protocols')
             manifest['protocols']={k:'fake-v1' for k in ('generation','claim_extraction','evidence_verification','domain_review','revision')}
@@ -139,8 +139,15 @@ class ComponentFactory:
             manifest['configured_retrieval_mode']=manifest['retrieval_mode']
             manifest['retrieval_mode']='none';manifest['scoring_method']=None
         manifest['retrieval_execution_profile']=self.config.retrieval_execution_profile
+        if self.config.retrieval_execution_profile=='topic_v4_subject_v1' and self.config.profile=='real' and 'corpus_index' in manifest:
+            manifest['candidate_recall']='topic-subject-and-bm25-v1; positive full terms AND per-clause subject OR; max24 subjects; same final K/full bodies'
+            manifest['scoring_method']='fts-subject-constrained-bm25-v1'
+            manifest['task_requirements']='task-requirements-v2-negative-constraints'
         manifest['effective_corpus_query_version']='electric-topic-query-v3-format-metadata' if self.config.retrieval_execution_profile=='topic_v3_rank_v1' and self.config.retrieval_mode=='bm25' else (manifest.get('corpus_index') or {}).get('query_version')
-        manifest['ranking_work_cache']='per-run-8-entries-max64-numeric-hits; sealed-SQL-key; complete request certificate/body/context replay retained' if self.config.retrieval_execution_profile=='topic_v3_rank_v1' else None
+        manifest['ranking_work_cache']='per-run-8-entries-max64-numeric-hits; sealed-SQL-key; complete request certificate/body/context replay retained' if self.config.retrieval_execution_profile in ('topic_v3_rank_v1','topic_v4_subject_v1') else None
+        if self.config.retrieval_execution_profile=='topic_v4_subject_v1' and self.config.profile=='real' and 'corpus_index' in manifest:
+            manifest['effective_corpus_query_version']='topic-subject-and-bm25-v1'
+            manifest['citation_execution']='complete-single-scope-v1; same shared one-correction budget'
         return manifest
 
     def create(self,rid,observer):

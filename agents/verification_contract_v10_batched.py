@@ -55,6 +55,7 @@ async def run(agent,inputs):
         INDEPENDENT=INDEPENDENT.replace('These are model judgments, NOT mechanical proofs. Unresolved fidelity/stance/obligation disagreement\nrequires not_assessable; never supported or contradicted.','These are independent raw model judgments; program computes the effective disposition for unresolved objections.').replace('Same-category uncertainty needs no issue: not_assessable with a specific reason.','Same-category uncertainty needs no issue: preserve actual support and semantic judgments independently.')
     limits=agent.citation_workload or CitationWorkload()
     profile='evidence-verification-v9.18-performance-scope' if agent.support_relation_version==6 else 'evidence-verification-v9.16-repair-null-scope-clarity' if new_interface else 'evidence-verification-v9.10-semantic-body-conditions' if agent.support_relation_version==4 else 'evidence-verification-v9.9-answer-conditions-repair' if agent.support_relation_version==3 else 'evidence-verification-v9.8-whole-claim-conditions' if agent.support_relation_version==2 else 'evidence-verification-v9.7-source-support-relation'
+    if agent.support_relation_version==6:profile='evidence-verification-v9.19-output-projection'
     prompt_version=(profile if agent.support_relation_checks else PROMPT_VERSION)+('-fact-delivery-v1' if inputs.fact_retrieval_bindings else '')
     contract_version=('evidence-verification-output-v9.12' if agent.support_relation_version==6 else 'evidence-verification-output-v9.11' if new_interface else 'evidence-verification-output-v9.10' if agent.support_relation_version==4 else 'evidence-verification-output-v9.9' if agent.support_relation_version==3 else 'evidence-verification-output-v9.8' if agent.support_relation_version==2 else 'evidence-verification-output-v9.7') if agent.support_relation_checks else CONTRACT_VERSION
     original_instruction=original_template(support_relation_checks=agent.support_relation_checks,support_relation_version=agent.support_relation_version)
@@ -84,6 +85,10 @@ async def run(agent,inputs):
             if agent.support_relation_version==6:data['PROGRAM_SOURCE_SELECTION_VERSION']='program-local-selected-bases-v6'
         return data
     groups,rejected=pack(range(len(inputs.answer.citations)),batch_payload,original_instruction,limits)
+    # Complete original scopes remain intact; one item per request avoids a
+    # missing sibling being mistaken for a complete citation batch.
+    if agent.support_relation_checks and agent.support_relation_version==6:
+        groups=tuple((i,) for group in groups for i in group)
     if rejected:
         issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,
             'REVIEW_MESSAGE_CAPACITY_EXCEEDED',
@@ -135,6 +140,8 @@ async def run(agent,inputs):
                 payload['SOURCE_CONDITION_CANDIDATES']=conditions(scopes[0])
                 if agent.support_relation_version==6:payload['PROGRAM_SOURCE_SELECTION_VERSION']='program-local-selected-bases-v6'
         messages=(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False)))
+        payload['MODEL_OUTPUT_CONTRACT']={'root':group,'identity_key':'claim_id' if citation is None else 'citation_index','required_ids':[x['claim_id'] for x in selected[group]] if citation is None else list(citation),'answer_condition_fields':['condition_id','necessity','answer_quote','relationship','reason'],'input_carrier_fields_are_not_output_fields':True}
+        messages=(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False)))
         if citation is not None and messages_size(messages)>limits.max_message_chars:
             issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,
                 'REVIEW_MESSAGE_CAPACITY_EXCEEDED','Complete original citation group exceeds capacity; items remain unassessed'))
@@ -151,10 +158,15 @@ async def run(agent,inputs):
         if remaining==0:break
         path=None if agent.diagnostics is None else agent.diagnostics.save_scope(payload);before=len(current_budget().records)
         result=None
+        def correction_guidance(response,diagnostic):
+            from services.support_relation_v6 import selection_guidance
+            from services.condition_candidates import repair_guidance
+            value=selection_guidance(scopes,response,citation) if agent.support_relation_version==6 else repair_guidance(scopes,citation)
+            return dict(value,output_contract=payload['MODEL_OUTPUT_CONTRACT'],retained_items=diagnostic.get('retained_items',[]),note_output='Return every required item using exact output fields; input carrier objects are not output. Illegal IDs/fields remain invalid, never substitute them.')
         try:
             result,_=await structured_request(agent.client,messages,
                 prompt_version,isolation.parse,diagnostics=agent.diagnostics,response_contract_version=contract_version,candidate_catalog_path=path,max_corrections=0 if correction_used else 1,max_message_chars=None if citation is None else limits.max_correction_message_chars,
-                correction_context=(lambda response, diagnostic: (__import__('services.support_relation_v6',fromlist=['selection_guidance']).selection_guidance(scopes,response,citation) if agent.support_relation_version==6 else __import__('services.condition_candidates',fromlist=['repair_guidance']).repair_guidance(scopes,citation))) if new_interface else None)
+                correction_context=correction_guidance if new_interface else None)
         except Exception as exc:
             if not getattr(exc,'code',None):raise
             result=getattr(exc,'partial_output',None);issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,exc.code,'Scoped semantic check incomplete; valid peers retained'))

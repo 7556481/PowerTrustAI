@@ -20,7 +20,7 @@ class ServiceConfig:
     queue_capacity: int=2
     fact_strategy: str='aggregate'
     retrieval_mode: str='bm25'
-    retrieval_execution_profile: str='topic_v3_rank_v1'
+    retrieval_execution_profile: str='topic_v4_subject_v1'
     embedding_model_dir: Path=ROOT/'data/retrieval_local/semantic/e5-small'
     vector_db: Path=ROOT/'data/retrieval_local/semantic/vectors.sqlite3'
     nli_enabled: bool=False
@@ -33,7 +33,7 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
-        if self.retrieval_execution_profile not in ('baseline_v1','topic_v3_rank_v1'):raise ValueError('Invalid retrieval execution profile')
+        if self.retrieval_execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1'):raise ValueError('Invalid retrieval execution profile')
         if type(self.verification_schema) is not int or self.verification_schema not in (13,14):raise ValueError('Explicit schema13 or schema14 required')
         if self.decision_policy not in ('product-v1','legacy-v1'):raise ValueError('Unknown decision policy')
         if type(self.nli_enabled) is not bool or not 0<float(self.nli_timeout_seconds)<=60:
@@ -70,7 +70,7 @@ class ServiceConfig:
         strategy=os.environ.get('POWERTRUST_FACT_RETRIEVAL_STRATEGY','aggregate')
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
-            retrieval_execution_profile=os.environ.get('POWERTRUST_RETRIEVAL_EXECUTION','topic_v3_rank_v1'),
+            retrieval_execution_profile=os.environ.get('POWERTRUST_RETRIEVAL_EXECUTION','topic_v4_subject_v1'),
             index_db=Path(os.environ.get('POWERTRUST_INDEX_DB',daily.get('index_db',str(cls().index_db)))),
             decision_policy=os.environ.get('POWERTRUST_DECISION_POLICY','product-v1'),
             verification_schema=int(os.environ.get('POWERTRUST_VERIFICATION_SCHEMA','13')),

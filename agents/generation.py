@@ -106,6 +106,9 @@ comes only from index metadata, explicitly attribute it to the index in a separa
 never claim the document body stated it. Preserve all necessary technical conditions, negation,
 quantities and applicability. No silent evidence truncation or removal of a required limitation.
 Unit kind never exempts factual statements from independent technical truth verification.\n'''
+    from services.task_requirements import INSTRUCTION,prohibited_spans
+    system+=INSTRUCTION
+    question['negative_output_constraint_spans']=prohibited_spans(inputs.request.question)
     return (ModelMessage("system", system), ModelMessage("user", json.dumps(question, ensure_ascii=False)),
             ModelMessage("user", json.dumps(data, ensure_ascii=False)))
 
@@ -183,7 +186,7 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
-        prompt += ('-question-language-v9-performance-scope' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
+        prompt += ('-question-language-v10-task-obligations' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,
