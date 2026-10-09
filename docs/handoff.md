@@ -2,7 +2,7 @@
 
 ## 2026-10-09 本人新主题修复v1（一次真实复验）
 
-原fddad504保留；采用topic_v4_subject_v1正向完整词项AND每句主体OR，严格投影/单完整引用作用域、禁止性任务范围和scope_note页面说明。拒绝商品/铁路退步RRF，发布库不改、索引增量0。五完整冻结检索首次无缓存对照见[报告](owner-trial-fix-v1.md)。新c3ee350cdef849ec9ae125df58bb38a5唯一同题真实：API13.709秒/总60.154秒，7请求85269token，1非合法JSON纠正成功、0Revision、必需执行完整零issues，109字；6事实supported/2不足、范围uncertain，仍review_required。原全称证明不再当任务义务；真实内容必要条件仍有缺失，未达10秒与内容全面验收。4Evidence原文身份回查通过，原运行SHA不变；最终必要回归/重启/提交状态见报告补记。不再追加付费题目。私有原始在既有data/runtime_local/owner-trial-fix-v1与service_private，公开仅小统计。
+原fddad504保留；采用topic_v4_subject_v1正向完整词项AND每句主体OR，严格投影/单完整引用作用域、禁止性任务范围和scope_note页面说明。拒绝商品/铁路退步RRF，发布库不改、索引增量0。五完整冻结检索首次无缓存对照见[报告](owner-trial-fix-v1.md)。新c3ee350cdef849ec9ae125df58bb38a5唯一同题真实：API13.709秒/总60.154秒，7请求85269token，1非合法JSON纠正成功、0Revision、必需执行完整零issues，109字；6事实supported/2不足、范围uncertain，仍review_required。原全称证明不再当任务义务；真实内容必要条件仍有缺失，未达10秒与内容全面验收。4Evidence原文身份回查通过，原运行SHA不变；最终37项必要回归通过；加载最终代码后8765ready空闲，原/新API可读，98运行/8反馈及全表SHA重启相等无重发。修复24d65eb已普通推送远端一致，收尾另普通文档提交。不再追加付费题目。私有原始在既有data/runtime_local/owner-trial-fix-v1与service_private，公开仅小统计。
 
 ## 2026-10-09 实际检索优化v1（首版保留，交本人体验）
 
