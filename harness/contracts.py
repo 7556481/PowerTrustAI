@@ -58,6 +58,15 @@ class RetrievalRecord:
     fact_bindings: Tuple["FactRetrievalBinding", ...] = ()
     omission_reasons: Tuple[Tuple[str, str], ...] = ()
     offered_context_links: Tuple[Tuple[str, Tuple[str, ...]], ...] = ()
+    request_options: "RetrievalRequestOptions | None" = None
+
+
+@dataclass(frozen=True)
+class RetrievalRequestOptions:
+    scenario_id: str
+    max_results: int
+    context_options: ContextOptions | None
+    execution_profile: str
 
 
 @dataclass(frozen=True)

@@ -138,6 +138,9 @@ class ComponentFactory:
             manifest['retrieval']='none: synthetic_fixture only'
             manifest['configured_retrieval_mode']=manifest['retrieval_mode']
             manifest['retrieval_mode']='none';manifest['scoring_method']=None
+        manifest['retrieval_execution_profile']=self.config.retrieval_execution_profile
+        manifest['effective_corpus_query_version']='electric-topic-query-v3-format-metadata' if self.config.retrieval_execution_profile=='topic_v3_rank_v1' and self.config.retrieval_mode=='bm25' else (manifest.get('corpus_index') or {}).get('query_version')
+        manifest['ranking_work_cache']='per-run-8-entries-max64-numeric-hits; sealed-SQL-key; complete request certificate/body/context replay retained' if self.config.retrieval_execution_profile=='topic_v3_rank_v1' else None
         return manifest
 
     def create(self,rid,observer):
@@ -165,7 +168,7 @@ class ComponentFactory:
             model=create_adapter(settings);resources.append(model)
             domain_model=create_adapter(settings);resources.append(domain_model)
             if self.config.retrieval_mode=='bm25':
-                retriever=AsyncSQLiteBM25Retriever(self.config.index_db);resources.append(retriever)
+                retriever=AsyncSQLiteBM25Retriever(self.config.index_db,execution_profile=self.config.retrieval_execution_profile);resources.append(retriever)
             else:
                 self.initialize_retrieval();retriever=self.semantic_resource;resources.append(RetrieverLease(retriever))
             diag=ROOT/'data/retrieval_local/service_private'/rid

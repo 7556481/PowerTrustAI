@@ -121,18 +121,24 @@ def corpus_evidence(store,fid,k,s):
     return Evidence('e-'+digest(canonical([k,fid]).encode()),doc,row['record_hash'],locator,text,'industry_corpus_unverified',
         ('RAG explanation coverage; original source unverified; not sole normative/engineering authority',),p)
 class CorpusRetriever:
-    def __init__(self,store):self.store=store
+    def __init__(self,store,*,query_version=None,rank_cache=None):
+        self.store=store;self.query_version=query_version;self.rank_cache=rank_cache
     @timed('corpus_retrieve')
     def _retrieve(self,request):
         with span('query_prepare'):
             validate_types(request,RetrievalRequest);require(request.max_results>0,'Positive result count required')
             s=seal(self.store,request.knowledge_version);require(s is not None,'Sealed corpus required')
-            expression=query_expression(request.query,s.get('query_version','electric-topic-query-v1'))
+            expression=query_expression(request.query,self.query_version or s.get('query_version','electric-topic-query-v1'))
         if not expression:return RetrievalResult((),request.knowledge_version)
         con=self.store.connection
         with span('fts_execute_fetch_sort') as measured:
-            ranked=con.execute('SELECT rowid,bm25(corpus_fts) AS score FROM corpus_fts WHERE corpus_fts MATCH ? ORDER BY score,rowid LIMIT ?',
-                (expression,request.max_results)).fetchall()
+            key=(str(self.store._path),request.knowledge_version,self.store._path.stat().st_size,self.store._path.stat().st_mtime_ns,self.query_version,expression,request.max_results)
+            ranked=None if self.rank_cache is None else self.rank_cache.get(key)
+            measured['rank_cache_hit']=ranked is not None
+            if ranked is None:
+                ranked=con.execute('SELECT rowid,bm25(corpus_fts) AS score FROM corpus_fts WHERE corpus_fts MATCH ? ORDER BY score,rowid LIMIT ?',
+                    (expression,request.max_results)).fetchall()
+                if self.rank_cache is not None:self.rank_cache.put(key,ranked)
             measured['result_count']=len(ranked)
         evidence=[];hits=[]
         with span('body_evidence_construct') as measured:
@@ -140,7 +146,8 @@ class CorpusRetriever:
                 if row['rowid']<0:fid=con.execute('SELECT fragment_id FROM corpus_native WHERE id=?',(-row['rowid'],)).fetchone()[0]
                 else:fid=con.execute('SELECT fragment_id FROM corpus_chunks WHERE id=?',(row['rowid'],)).fetchone()[0]
                 e=corpus_evidence(self.store,fid,request.knowledge_version,s);evidence.append(e)
-                hits.append(RetrievalHit(e.evidence_id,fid,rank,-row['score'],SCORING))
+                scoring=SCORING if self.query_version is None else SCORING+';'+self.query_version
+                hits.append(RetrievalHit(e.evidence_id,fid,rank,-row['score'],scoring))
             measured['body_count']=len(evidence)
         context=None
         if request.context_options is not None:

@@ -102,6 +102,8 @@ class ApplicationService:
             if self.storage_fault:return
             rid,request,knowledge,requirements,indexed_ids=await self.queue.get()
             bundle=None
+            from rag.timing import capture_timing
+            timing_manager=capture_timing(run_id=rid);timing_log=timing_manager.__enter__()
             try:
                 if self.store.get(rid)['status']!='queued':continue
                 self.active=rid;self.store.mark(rid,'running')
@@ -129,6 +131,9 @@ class ApplicationService:
                 if bundle:
                     try:await bundle.drain()
                     finally:bundle.close()
+                timing_manager.__exit__(None,None,None)
+                try:self.store.add_retrieval_timing(rid,timing_log.records)
+                except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
                 self.active=None;self.active_bundle=None;self.queue.task_done()
 
     def state(self,rid):

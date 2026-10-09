@@ -10,6 +10,12 @@ from uuid import uuid4
 
 _log = ContextVar('retrieval_timing_log', default=None)
 _parent = ContextVar('retrieval_timing_parent', default=None)
+_binding = ContextVar('retrieval_timing_binding', default=None)
+
+def bind_request(retrieval_id,answer_version,purpose):
+    return _binding.set((retrieval_id,answer_version,purpose))
+
+def reset_request(token):_binding.reset(token)
 
 
 class TimingLog:
@@ -57,12 +63,14 @@ def span(phase):
         _parent.reset(token)
         # Only small mechanical flags/counts, never arbitrary values or exceptions.
         allowed = {k: v for k, v in details.items() if k in
-                   ('result_count', 'body_count', 'ranking_replayed', 'ranking_replay_attempted', 'certificate_hit')
+                   ('result_count', 'body_count', 'ranking_replayed', 'ranking_replay_attempted', 'certificate_hit','rank_cache_hit')
                    and type(v) in (int, bool)}
         record = {'version':'retrieval-timing-v1','run_id':log.run_id,'retrieval_id':log.retrieval_id,
                   'span_id': ident, 'parent_id': parent, 'phase': phase,
                   'start_seconds': start - log.started, 'end_seconds': end - log.started,
                   'seconds': end - start, 'status': status, **allowed}
+        bound=_binding.get()
+        if bound is not None:record.update(retrieval_id=bound[0],answer_version=bound[1],purpose=bound[2])
         with log.lock:
             if phase=='result_validation' and details.get('_fts_mode'):
                 descendants={ident}
@@ -70,7 +78,7 @@ def span(phase):
                     expanded=descendants | {r['span_id'] for r in log.records if r['parent_id'] in descendants}
                     if expanded==descendants:break
                     descendants=expanded
-                sql=[r for r in log.records if r['span_id'] in descendants and r['phase']=='fts_execute_fetch_sort']
+                sql=[r for r in log.records if r['span_id'] in descendants and r['phase']=='fts_execute_fetch_sort' and not r.get('rank_cache_hit')]
                 record['ranking_sql_calls']=len(sql)
                 record['ranking_replayed']=bool(sql)
             log.records.append(record)

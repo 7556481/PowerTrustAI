@@ -49,10 +49,17 @@ class AsyncSQLiteBM25Retriever:
     Async cancellation stops awaiting, not the running Python/SQLite worker.
     A timed-out job remains busy until the actual worker completes.
     """
-    def __init__(self, path):
+    def __init__(self, path,*,execution_profile='baseline_v1'):
         from concurrent.futures import ThreadPoolExecutor
         from pathlib import Path
         self.path = str(Path(path).resolve())
+        if execution_profile not in ('baseline_v1','topic_v3_rank_v1'):raise ValueError('Unknown retrieval execution profile')
+        self.execution_profile=execution_profile
+        from rag.chinese_terms import TOPIC_VERSION
+        from rag.rank_cache import RankCache
+        self.query_version=None if execution_profile=='baseline_v1' else TOPIC_VERSION
+        self.rank_cache=None if execution_profile=='baseline_v1' else RankCache()
+        self.cache_identity=('bm25',execution_profile)
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="powertrust-retrieval")
         self._active = None
         self._closed = False
@@ -71,15 +78,15 @@ class AsyncSQLiteBM25Retriever:
                     require(store.verify_evidence(evidence) == evidence, "Saved evidence differs from fixed index")
                 return None
             from rag.corpus_index import seal,CorpusRetriever
-            retriever = CorpusRetriever(store) if seal(store,request.knowledge_version) is not None else BM25Retriever(store)
+            retriever = CorpusRetriever(store,query_version=self.query_version,rank_cache=self.rank_cache) if seal(store,request.knowledge_version) is not None else BM25Retriever(store)
             if validate:
                 with span('result_validation') as measured:
                     measured['certificate_hit']=False
                     measured['_fts_mode']=isinstance(retriever,CorpusRetriever)
                     measured['ranking_replay_attempted']=False
                     if isinstance(retriever, CorpusRetriever) and self._corpus_certificate is not None:
-                        previous_request, previous_result = self._corpus_certificate
-                        if request == previous_request:
+                        previous_request, previous_result, previous_profile = self._corpus_certificate
+                        if request == previous_request and previous_profile==self.execution_profile:
                             measured['certificate_hit']=True
                             validate_types(result, RetrievalResult)
                             require(result == previous_result, "Retrieved evidence/hits/context differ from certified query")
@@ -95,7 +102,7 @@ class AsyncSQLiteBM25Retriever:
             self._corpus_certificate = None
             retrieved = retriever._retrieve(request)
             if isinstance(retriever, CorpusRetriever):
-                self._corpus_certificate = (request, retrieved)
+                self._corpus_certificate = (request, retrieved,self.execution_profile)
             return retrieved
 
     @timed('retriever_wait')
@@ -125,6 +132,7 @@ class AsyncSQLiteBM25Retriever:
     def close(self):
         self._closed = True
         self._corpus_certificate = None
+        if self.rank_cache is not None:self.rank_cache.clear()
         self._executor.shutdown(wait=False, cancel_futures=True)
 
     def __enter__(self):

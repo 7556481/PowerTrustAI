@@ -3,10 +3,11 @@ import asyncio
 from dataclasses import dataclass, replace
 from time import perf_counter
 from uuid import uuid4
+from rag.timing import bind_request,reset_request
 
 from core.models import EvidenceBinding, ExecutionIssue, ExecutionStatus
 from core.validation import ContractError, InputError, merge_evidence, require, validate_types
-from harness.contracts import RetrievalRecord, RetrievalSettings
+from harness.contracts import RetrievalRecord, RetrievalSettings, RetrievalRequestOptions
 from rag.contracts import ContextOptions, RetrievalRequest, RetrievalResult
 
 
@@ -66,6 +67,7 @@ class RetrievalSession:
 
     async def retrieve(self, purpose, request, answer, claims, *, query_override=None, fact_query=False):
         started, rid = perf_counter(), uuid4().hex
+        retrieval_request=None
         version = None if answer is None else answer.version
         query = query_for(purpose, request, claims) if query_override is None else query_override
         reused = None
@@ -73,6 +75,7 @@ class RetrievalSession:
         issue, outcome, status, offered, reason = None, "failed", ExecutionStatus.FAILED, 0, ""
         accepted = 0
         omission_reasons = []
+        timing_token=bind_request(rid,version,purpose.value)
         try:
             remaining = self.deadline - started
             if remaining <= 0:
@@ -197,6 +200,8 @@ class RetrievalSession:
                 () if result is None or result.context is None else result.context.omitted,
                 None if answer is None else answer.answer_id, reused,
                 omission_reasons=tuple(omission_reasons), offered_context_links=() if result is None or result.context is None else
-                tuple((item.evidence.evidence_id, tuple(link.core_evidence_id for link in item.links)) for item in result.context.items))
+                tuple((item.evidence.evidence_id, tuple(link.core_evidence_id for link in item.links)) for item in result.context.items),
+                request_options=None if retrieval_request is None else RetrievalRequestOptions(retrieval_request.scenario_id,retrieval_request.max_results,retrieval_request.context_options,getattr(self.retriever,'execution_profile','baseline_v1')))
             self.records.append(record)
+            reset_request(timing_token)
         return Delivery(evidence, bindings, issue, record)

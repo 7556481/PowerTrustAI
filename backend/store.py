@@ -184,5 +184,10 @@ class RunStore:
             self.db.execute('INSERT INTO objects VALUES (?,?,?,?,?,?)',
                 (rid,'nli_diagnostic',value['diagnostic_id'],aid or '',version or 0,dumps(value)))
 
+    def add_retrieval_timing(self,rid,records):
+        self.get(rid)
+        with self.tx():
+            self.db.execute('INSERT INTO objects VALUES (?,?,?,?,?,?)',(rid,'retrieval_timing','retrieval-timing-v1','',0,dumps({'version':'retrieval-timing-v1','run_id':rid,'records':records})))
+
     def close(self):self.db.close()
 
