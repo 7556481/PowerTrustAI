@@ -139,6 +139,15 @@ class ComponentFactory:
             manifest['configured_retrieval_mode']=manifest['retrieval_mode']
             manifest['retrieval_mode']='none';manifest['scoring_method']=None
         manifest['retrieval_execution_profile']=self.config.retrieval_execution_profile
+        manifest['configured_review_message_profile']=self.config.review_message_profile
+        manifest['review_message_profile']=self.config.review_message_profile if self.config.verification_schema==13 else 'baseline_v1'
+        if self.config.review_message_profile=='lossless_v1' and self.config.verification_schema==13:
+            manifest['review_transport']='review-lossless-shared-values-v1'
+            from services.review_transport import INSTRUCTION as transport_instruction,NESTING
+            manifest['transport_instruction_sha256']=hashlib.sha256(transport_instruction.encode()).hexdigest()
+            manifest['json_nesting_instruction_sha256']=hashlib.sha256(NESTING.encode()).hexdigest()
+            manifest['template_hash_scope']='base templates; actual per-request appended instruction/message hashes archived'
+            manifest['prompts']['verification']='evidence-verification-v9.20-lossless-transport-json-nesting'+('-fact-delivery-v1' if self.config.fact_strategy=='per_claim_v1' else '')
         if self.config.retrieval_execution_profile=='topic_v4_subject_v1' and self.config.profile=='real' and 'corpus_index' in manifest:
             manifest['candidate_recall']='topic-subject-and-bm25-v1; positive full terms AND per-clause subject OR; max24 subjects; same final K/full bodies'
             manifest['scoring_method']='fts-subject-constrained-bm25-v1'
@@ -147,6 +156,12 @@ class ComponentFactory:
         manifest['ranking_work_cache']='per-run-8-entries-max64-numeric-hits; sealed-SQL-key; complete request certificate/body/context replay retained' if self.config.retrieval_execution_profile in ('topic_v3_rank_v1','topic_v4_subject_v1') else None
         if self.config.retrieval_execution_profile=='topic_v4_subject_v1' and self.config.profile=='real' and 'corpus_index' in manifest:
             manifest['effective_corpus_query_version']='topic-subject-and-bm25-v1'
+            manifest['citation_execution']='complete-single-scope-v1; same shared one-correction budget'
+        if self.config.retrieval_execution_profile=='topic_v5_grammar_v1' and self.config.profile=='real' and 'corpus_index' in manifest:
+            manifest['candidate_recall']='same subject OR membership; grammatical single-token scoring cleanup'
+            manifest['scoring_method']='fts-subject-grammar-bm25-v2'
+            manifest['effective_corpus_query_version']='topic-subject-grammar-bm25-v2'
+            manifest['ranking_work_cache']='per-run-8-entries-max64-numeric-hits; full-body/context replay retained'
             manifest['citation_execution']='complete-single-scope-v1; same shared one-correction budget'
         return manifest
 
@@ -184,7 +199,7 @@ class ComponentFactory:
                 corpus=seal(store,self.config.knowledge_version)
                 corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6),
+                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),

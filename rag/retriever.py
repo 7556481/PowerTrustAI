@@ -53,11 +53,11 @@ class AsyncSQLiteBM25Retriever:
         from concurrent.futures import ThreadPoolExecutor
         from pathlib import Path
         self.path = str(Path(path).resolve())
-        if execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1'):raise ValueError('Unknown retrieval execution profile')
+        if execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1'):raise ValueError('Unknown retrieval execution profile')
         self.execution_profile=execution_profile
         from rag.chinese_terms import TOPIC_VERSION
         from rag.rank_cache import RankCache
-        self.query_version=None if execution_profile=='baseline_v1' else ('topic-subject-and-bm25-v1' if execution_profile=='topic_v4_subject_v1' else TOPIC_VERSION)
+        self.query_version=None if execution_profile=='baseline_v1' else ('topic-subject-grammar-bm25-v2' if execution_profile=='topic_v5_grammar_v1' else 'topic-subject-and-bm25-v1' if execution_profile=='topic_v4_subject_v1' else TOPIC_VERSION)
         self.rank_cache=None if execution_profile=='baseline_v1' else RankCache()
         self.cache_identity=('bm25',execution_profile)
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="powertrust-retrieval")

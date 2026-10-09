@@ -56,8 +56,10 @@ async def structured_request(client, messages, prompt_version, parser, *, diagno
             if getattr(exc, "diagnostic", None):
                 diagnostic = exc.diagnostic
             elif isinstance(exc, json.JSONDecodeError):
+                from services.json_nesting import diagnostic as nesting_diagnostic
                 diagnostic = {"stage": "json_parse", "field_path": "$",
-                              "constraint": "valid_json_required", "line": exc.lineno, "column": exc.colno}
+                              "constraint": "valid_json_required", "line": exc.lineno, "column": exc.colno,
+                              **nesting_diagnostic(response.text)}
             else:
                 # Other parsers may raise arbitrary exception text containing input.
                 diagnostic = {"stage": "contract_validation", "field_path": "$",

@@ -1,5 +1,8 @@
 # 文档索引
 
+- [检索与审核消息优化v2](retrieval-message-optimization-v2.md)：六主题首次/重复及覆盖、lossless完整正文包装、JSON嵌套原因、两题四run真实速度/失败/纠正与token；v5非默认，继保候选生成超限失败保留，整体未达标。附[小统计](retrieval-message-optimization-v2-stats.json)。
+
+
 - [本人新主题修复v1](owner-trial-fix-v1.md)：主体约束BM25、严格引用输出投影、任务范围与页面修复；一次同题API13.709秒/总60.154秒、完整执行但review_required，内容及10秒目标未全面满足。附[小统计](owner-trial-fix-v1-stats.json)。
 
 - [实际检索优化v1](retrieval-optimization-v1.md)：topic_v3_rank_v1落地、6请求覆盖/分段/重复、原两题真实前后22调用388790token、PF有效提速及FLUX未达目标/条件呈现限制、空间与回退。附[小统计](retrieval-optimization-v1-stats.json)。

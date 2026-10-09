@@ -56,6 +56,8 @@ async def run(agent,inputs):
     limits=agent.citation_workload or CitationWorkload()
     profile='evidence-verification-v9.18-performance-scope' if agent.support_relation_version==6 else 'evidence-verification-v9.16-repair-null-scope-clarity' if new_interface else 'evidence-verification-v9.10-semantic-body-conditions' if agent.support_relation_version==4 else 'evidence-verification-v9.9-answer-conditions-repair' if agent.support_relation_version==3 else 'evidence-verification-v9.8-whole-claim-conditions' if agent.support_relation_version==2 else 'evidence-verification-v9.7-source-support-relation'
     if agent.support_relation_version==6:profile='evidence-verification-v9.19-output-projection'
+    compact=getattr(agent,'review_message_profile','baseline_v1')=='lossless_v1' and agent.support_relation_checks and agent.support_relation_version==6
+    if compact:profile='evidence-verification-v9.20-lossless-transport-json-nesting'
     prompt_version=(profile if agent.support_relation_checks else PROMPT_VERSION)+('-fact-delivery-v1' if inputs.fact_retrieval_bindings else '')
     contract_version=('evidence-verification-output-v9.12' if agent.support_relation_version==6 else 'evidence-verification-output-v9.11' if new_interface else 'evidence-verification-output-v9.10' if agent.support_relation_version==4 else 'evidence-verification-output-v9.9' if agent.support_relation_version==3 else 'evidence-verification-output-v9.8' if agent.support_relation_version==2 else 'evidence-verification-output-v9.7') if agent.support_relation_checks else CONTRACT_VERSION
     original_instruction=original_template(support_relation_checks=agent.support_relation_checks,support_relation_version=agent.support_relation_version)
@@ -141,7 +143,14 @@ async def run(agent,inputs):
                 if agent.support_relation_version==6:payload['PROGRAM_SOURCE_SELECTION_VERSION']='program-local-selected-bases-v6'
         messages=(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False)))
         payload['MODEL_OUTPUT_CONTRACT']={'root':group,'identity_key':'claim_id' if citation is None else 'citation_index','required_ids':[x['claim_id'] for x in selected[group]] if citation is None else list(citation),'answer_condition_fields':['condition_id','necessity','answer_quote','relationship','reason'],'input_carrier_fields_are_not_output_fields':True}
-        messages=(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False)))
+        if compact:
+            from services.review_transport import pack as compact_pack, INSTRUCTION as transport_instruction, NESTING
+            proposal=compact_pack(payload)
+            if len(json.dumps(proposal,ensure_ascii=False,separators=(',',':')))+len(transport_instruction)<len(json.dumps(payload,ensure_ascii=False,separators=(',',':'))):
+                delivered=proposal;instruction+=transport_instruction
+            else:delivered=payload;instruction+=NESTING
+        else:delivered=payload
+        messages=(ModelMessage('system',instruction),ModelMessage('user',json.dumps(delivered,ensure_ascii=False,separators=(',',':')) if compact else json.dumps(delivered,ensure_ascii=False)))
         if citation is not None and messages_size(messages)>limits.max_message_chars:
             issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,
                 'REVIEW_MESSAGE_CAPACITY_EXCEEDED','Complete original citation group exceeds capacity; items remain unassessed'))
