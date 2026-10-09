@@ -1,0 +1,40 @@
+{
+  "baseline_commit": "3139f953a9db0aa25585f5c49e1ad406204385bb",
+  "length_fix_commit": "04ec59b59313500ea97bffe5b1421a0def0407cb",
+  "final_configuration": {
+    "retrieval": "topic_v4_subject_v1",
+    "review_message_profile": "lossless_v1",
+    "schema": 13,
+    "model": "deepseek-flash",
+    "policy": "product-decision-v1.5",
+    "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+    "strategy": "BM25/aggregate",
+    "NLI_default": false
+  },
+  "real_acceptance": "pending explicit payload approval after auto-review rejection",
+  "questions": [
+    {
+      "id": "C1",
+      "topic": "current transformer purpose",
+      "status": "not_submitted"
+    },
+    {
+      "id": "C2",
+      "topic": "sinusoidal steady state power factor",
+      "status": "not_submitted"
+    }
+  ],
+  "new_model_calls": 0,
+  "new_paid_runs": 0,
+  "offline_full_tests_passed": 840,
+  "final_necessary_tests_passed": 43,
+  "learning_chapters": 20,
+  "self_checks": 60,
+  "stdlib_isolated_build": true,
+  "source_and_links_verified": true,
+  "browser_learning_verified": true,
+  "browser_product_landing_ready": true,
+  "browser_auto_connect_and_answers_verified": false,
+  "browser_limit": "file scheme blocked by browser policy; no workaround",
+  "browser_first_paint_seconds": null
+}

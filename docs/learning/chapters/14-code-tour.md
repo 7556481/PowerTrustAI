@@ -346,6 +346,8 @@ backend/service.py / ApplicationService._worker，实际行100–126。
             if self.storage_fault:return
             rid,request,knowledge,requirements,indexed_ids=await self.queue.get()
             bundle=None
+            from rag.timing import capture_timing
+            timing_manager=capture_timing(run_id=rid);timing_log=timing_manager.__enter__()
             try:
                 if self.store.get(rid)['status']!='queued':continue
                 self.active=rid;self.store.mark(rid,'running')
@@ -366,8 +368,6 @@ backend/service.py / ApplicationService._worker，实际行100–126。
                 self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
                 try:self.store.mark(rid,'interrupted',error_code='RUN_STORAGE_FAILED')
                 except StorageError:pass
-            except Exception:
-                try:self.store.mark(rid,'failed',error_code='SERVICE_EXECUTION_FAILED')
 ```
 只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
@@ -503,7 +503,7 @@ backend/assembly.py实际行176–185，仅连接处摘录，周围初始化/后
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6),
+                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
