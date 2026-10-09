@@ -1,3 +1,12 @@
 @echo off
 cd /d "%~dp0"
-".venv\Scripts\python.exe" -m tools.learning_site serve --open --port 8770
+if exist ".venv\Scripts\python.exe" (
+  ".venv\Scripts\python.exe" -m tools.learning_site serve --open --port 8770
+  exit /b
+)
+where py >nul 2>nul
+if not errorlevel 1 (
+  py -3 -m tools.learning_site serve --open --port 8770
+  exit /b
+)
+python -m tools.learning_site serve --open --port 8770

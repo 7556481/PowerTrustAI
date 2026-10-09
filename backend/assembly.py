@@ -129,7 +129,7 @@ class ComponentFactory:
         manifest['operational_safety_registry']={'version':SAFETY_VERSION,'rule':RULE,'sources':SOURCES,'judgment_origin':'model semantic application of registered source-backed advice rule; not expert or engineering certification'}
         manifest['operational_safety']='operational-hazard-screen-v1: model judgment with source/answer binding; no engineering certification'
         manifest['generation_query_conversion']='generation-cross-language-query-v1: once after successful empty BM25; Chinese question / fixed English body available (mixed-snapshot-gate-v2)'
-        manifest['prompts']['generation'] += ('-question-language-v10-task-obligations' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
+        manifest['prompts']['generation'] += ('-question-language-v11-length-planning' if self.config.decision_policy=='product-v1' else '-question-language-v4-explicit-limit-v1')
         if self.config.profile=='synthetic_fixture':
             manifest['available_real_protocols']=manifest.pop('protocols')
             manifest['protocols']={k:'fake-v1' for k in ('generation','claim_extraction','evidence_verification','domain_review','revision')}

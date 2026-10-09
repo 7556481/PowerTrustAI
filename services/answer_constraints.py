@@ -3,6 +3,18 @@ import re
 from services.validation_diagnostics import StructuredValidationError
 
 VERSION = 'explicit-answer-character-limit-v2'
+PLANNING_VERSION='answer-length-planning-v1'
+
+def planning_target(limit):
+    """Advisory 75% budget includes punctuation/separators; never validated."""
+    return max(1,limit*3//4)
+
+def correction_guidance(response,diagnostic):
+    if diagnostic.get('constraint')!='explicit_answer_character_limit_exceeded_no_truncation':return {}
+    maximum=diagnostic['max_characters'];actual=diagnostic['actual_characters']
+    return {'version':PLANNING_VERSION,'actual_characters':actual,'strict_maximum_characters':maximum,
+        'advisory_target_characters':planning_target(maximum),'target_is_not_an_extra_acceptance_condition':True,
+        'instruction':'Rewrite the COMPLETE answer, not a cut substring. The previous joined answer has '+str(actual)+' characters and exceeds the strict '+str(maximum)+' maximum. Aim near '+str(planning_target(maximum))+' characters to leave room for punctuation and separators. Directly answer every requested part; preserve necessary conditions/formulas/negation and valid evidence_ids attached to each rewritten unit. Remove repetition, not obligations. Assumptions/reviewer notes cannot replace conditions in the answer. No front-end hiding, string deletion, citation dropping or extra retry.'}
 
 def character_limit(question, requirements=()):
     # Only explicit Arabic-digit upper bounds in user answer instructions.

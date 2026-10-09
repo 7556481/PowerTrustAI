@@ -52,7 +52,10 @@ def messages_for(inputs, schema_version=2, *, product_guidance=False):
     limit = character_limit(inputs.request.question, inputs.answer_requirements)
     if limit is None and product_guidance:limit=product_default_limit(inputs.request)
     if limit is not None:
+        from services.answer_constraints import planning_target,PLANNING_VERSION
         question['answer_length_constraint'] = {'version':VERSION,'maximum_characters':limit,
+            'planning_version':PLANNING_VERSION,'advisory_target_characters':planning_target(limit),
+            'advisory_only':True,
             'counting_method':'complete joined answer text, including punctuation and whitespace',
             'origin':'explicit_user_limit' if character_limit(inputs.request.question,inputs.answer_requirements) is not None else 'product_concept_default_limit_v1'}
     system = SYSTEM
@@ -108,6 +111,8 @@ quantities and applicability. No silent evidence truncation or removal of a requ
 Unit kind never exempts factual statements from independent technical truth verification.\n'''
     from services.task_requirements import INSTRUCTION,prohibited_spans
     system+=INSTRUCTION
+    if limit is not None:
+        system+='\nLength planning v1: plan the COMPLETE joined answer near answer_length_constraint.advisory_target_characters, including punctuation and the two-newline unit separators. That target is advisory, not a new rejection threshold; maximum_characters remains the strict user limit. Prefer a compact direct explanation with necessary conditions/formulas in the answer and correct evidence_ids. Do not fill the whole maximum, append a generic disclaimer, cut a string, hide content, or drop a required condition to save characters.\n'
     question['negative_output_constraint_spans']=prohibited_spans(inputs.request.question)
     return (ModelMessage("system", system), ModelMessage("user", json.dumps(question, ensure_ascii=False)),
             ModelMessage("user", json.dumps(data, ensure_ascii=False)))
@@ -186,18 +191,25 @@ class EvidenceGenerationAgent:
         merge_evidence(inputs.evidence)
         prompt = UNIT_PROMPT_VERSION if self.schema_version == 3 else PROMPT_VERSION
         if self.product_guidance:prompt += '-product-v1'
-        prompt += ('-question-language-v10-task-obligations' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
+        prompt += ('-question-language-v11-length-planning' if self.product_guidance else '-question-language-v4-explicit-limit-v1')
+        if not self.product_guidance:
+            from services.answer_constraints import character_limit
+            if character_limit(inputs.request.question,inputs.answer_requirements) is not None:prompt+='-length-planning-v1'
         input_path=None if self.diagnostics is None else self.diagnostics.save_generation_input(inputs,prompt)
         if not inputs.evidence:
             answer = AnswerDraft(inputs.request.task_id + "-answer", 1,
                 "当前检索未找到回答所需依据。请补充相关资料或更明确的问题范围；这不表示整个知识库不存在资料。",
                 missing_information=("需要能够支持本问题的可回查依据。",))
+            from services.answer_constraints import validate_length,product_default_limit
+            validate_length(answer,inputs.request.question,inputs.answer_requirements,
+                default_limit=product_default_limit(inputs.request) if self.product_guidance else None)
             return GenerationOutput(answer, evidence_sufficient=False, prompt_version=prompt, substantive_answer=False,
                 evidence_snapshot=make_snapshot(answer, inputs.evidence, inputs.knowledge_version,request=inputs.request,answer_requirements=inputs.answer_requirements,prompt_version=prompt,evidence_bindings=inputs.evidence_bindings))
         messages = messages_for(inputs, self.schema_version, product_guidance=self.product_guidance)
         parser = (lambda v: parse_units(v,inputs,product_guidance=self.product_guidance)) if self.schema_version==3 else (lambda v:parse_answer(json.dumps(v,ensure_ascii=False),inputs))
         (answer,sufficient),records=await structured_request(self.client,messages,prompt,
-            parser,diagnostics=self.diagnostics,response_contract_version=f"generation-output-v{self.schema_version}",input_snapshot_path=input_path)
+            parser,diagnostics=self.diagnostics,response_contract_version=f"generation-output-v{self.schema_version}",input_snapshot_path=input_path,
+            correction_context=__import__('services.answer_constraints',fromlist=['correction_guidance']).correction_guidance)
         return GenerationOutput(answer,evidence_sufficient=sufficient,model_records=records,prompt_version=prompt,
             evidence_snapshot=make_snapshot(answer,inputs.evidence,inputs.knowledge_version,request=inputs.request,answer_requirements=inputs.answer_requirements,prompt_version=prompt,evidence_bindings=inputs.evidence_bindings))
 
