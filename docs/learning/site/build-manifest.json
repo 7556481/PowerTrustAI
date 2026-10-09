@@ -14,8 +14,8 @@
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 2581,
-      "sha256": "b241c03cfcc7aba58671a1e920a49094039314d232d6194ef36246354f01a98f"
+      "characters": 2686,
+      "sha256": "014a772c8a94c6716a86291c10e38eb9289c09f2222b0aec46226e8519678fde"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -94,8 +94,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 4997,
-      "sha256": "f9d2df95cea5d037a8c38edae439fa17e395566cbd38109d0ee6c0b3f20d1421"
+      "characters": 5242,
+      "sha256": "5562790e3170519915a09c2566c36bdc45713d68d2a8451b347eec12dc18e747"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -123,6 +123,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 118692,
+  "markdown_characters": 119042,
   "network_dependencies": false
 }

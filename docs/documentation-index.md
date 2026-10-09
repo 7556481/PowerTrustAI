@@ -1,6 +1,6 @@
 # 文档索引
 
-- [第二版冻结与验收](release-freeze-v2.md)：严格长度规划与一次纠正，最终v4/lossless两题待具体外发批准，当前未验收完成；[新电脑独立学习站同步清单](learning-site-sync-v2.md)，20章/60自测及标准库独立读站。
+- [第二版冻结与验收](release-freeze-v2.md)：严格长度规划与一次纠正，最终v4/lossless两题完整执行/长度通过/程序pass，内容语义与浏览器项目未全部通过，限定原型冻结；[新电脑独立学习站同步清单](learning-site-sync-v2.md)，20章/60自测及标准库独立读站。
 
 
 - [检索与审核消息优化v2](retrieval-message-optimization-v2.md)：六主题首次/重复及覆盖、lossless完整正文包装、JSON嵌套原因、两题四run真实速度/失败/纠正与token；v5非默认，继保候选生成超限失败保留，整体未达标。附[小统计](retrieval-message-optimization-v2-stats.json)。

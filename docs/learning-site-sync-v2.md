@@ -1,6 +1,6 @@
 # 新电脑独立学习站同步清单（第二版）
 
-GitHub仓库：https://github.com/7556481/PowerTrustAI 。冻结引用 `release-v2-20261009`；最终完整提交哈希由本轮交付明确提供，并以 `git rev-parse release-v2-20261009^{commit}` 核对。源码修复身份 `04ec59b59313500ea97bffe5b1421a0def0407cb`；文档与站点的最终交付哈希应按冻结引用核对，不能把修复提交误称全部交付。
+GitHub仓库：https://github.com/7556481/PowerTrustAI 。冻结引用 `release-v2-20261009`；最终完整提交哈希由本轮交付明确提供，并以 `git rev-parse release-v2-20261009` 核对。源码修复身份 `04ec59b59313500ea97bffe5b1421a0def0407cb`；文档与站点的最终交付哈希应按冻结引用核对，不能把修复提交误称全部交付。
 
 ## 只阅读（最小）
 
@@ -51,3 +51,5 @@ python -m tools.learning_site serve --open --port 8770
 ## 验收边界
 
 站点布局、自测与20章保留，第二版定位为限定范围性能改进原型。最终默认v4+lossless/schema13/flash/product1.5/BM25 aggregate/NLI关闭仅说明业务配置；**独立学习站不需要这些运行依赖**。覆盖不足、语义不稳定、历史长度失败和耗时波动仍需学习，不承诺所有10秒，不宣称费用或纠正率下降。
+
+最终交付以release-v2-20261009冻结引用对应的完整哈希为准；两题程序pass而内容/浏览器项目未全部通过，站点如实保存这些限制。完成发布后无需恢复业务项目即可阅读/启动本独立学习站。

@@ -49,4 +49,4 @@
 
 ## 第二版限定性能原型（2026-10-09）
 
-最终默认v4＋lossless、schema13/flash/政策1.5/完整库/aggregate/NLI关闭；短答案上限严格，75%仅建议余量，失败不截断。两题最终验收待具体外发许可，成绩尚未取得；旧v5的3.69秒不可归给此默认组合。20章/60自测保留，独立读站不需业务data，构建只需Python标准库。详见源码目录`docs/release-freeze-v2.md`与`docs/learning-site-sync-v2.md`。
+最终默认v4＋lossless、schema13/flash/政策1.5/完整库/aggregate/NLI关闭；短答案上限严格，75%仅建议余量，失败不截断。两题最终组合已运行：69/89字，首次API14.923/3.204秒、总44.454/28.068秒，11调用125538token，零纠正/Revision，程序pass；公式全称表述仍有语义疑点、浏览器自动连接核查未完成，故冻结但验收未全部通过。旧v5的3.69秒不可归给此默认组合。20章/60自测保留，独立读站不需业务data，构建只需Python标准库。详见源码目录`docs/release-freeze-v2.md`与`docs/learning-site-sync-v2.md`。
