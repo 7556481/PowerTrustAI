@@ -16,7 +16,7 @@ from model_adapter.runtime import ModelBudget, ModelClient, model_scope, model_i
 from services.structured_model import structured_request
 
 
-def freeze(prepared, output):
+def freeze(prepared, output, protocol=protocol):
     offline=json.loads((prepared/'offline-manifest.json').read_text(encoding='utf-8'))
     assert offline['version']==protocol.VERSION
     for file,key in [('input.json','input_sha256'),('expectations-private.json','expectations_sha256'),
@@ -54,7 +54,7 @@ def freeze(prepared, output):
     return frozen
 
 
-async def execute(tasks,client,diagnostics,persist,total_timeout=600):
+async def execute(tasks,client,diagnostics,persist,total_timeout=600,protocol=protocol):
     started=perf_counter();budget=ModelBudget(limit=2*len(tasks),deadline=started+total_timeout)
     lookup={t['sample_id']:t for t in tasks}
     if len(lookup)!=len(tasks):raise ValueError('Unique samples required')
@@ -79,7 +79,7 @@ async def execute(tasks,client,diagnostics,persist,total_timeout=600):
             'controls':controls}
 
 
-def run(output):
+def run(output, protocol=protocol):
     frozen=json.loads((output/'freeze.json').read_text(encoding='utf-8'))
     assert frozen['protocol']==protocol.VERSION and sha(protocol.PROMPT.encode())==frozen['prompt_sha256']
     for file,key in [('input.json','input_sha256'),('expectations-private.json','expectations_sha256')]:
@@ -104,7 +104,7 @@ def run(output):
         write(output/(sid+'.'+kind+'.json'),value)
     try:
         result=asyncio.run(execute(tasks,ModelClient(adapter,settings),
-            ResponseDiagnostics(LOCAL_ROOT/'requirement-trial-v3'/output.name),persist,frozen['total_timeout_seconds']))
+            ResponseDiagnostics(LOCAL_ROOT/'requirement-trial-v3'/output.name),persist,frozen['total_timeout_seconds'],protocol=protocol))
         write(output/'execution.json',result)
     finally:adapter.close()
     print(canonical({'actual_calls':result['actual_calls'],'attempted_items':len(result['controls']),

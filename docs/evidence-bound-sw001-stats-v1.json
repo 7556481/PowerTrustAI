@@ -1,0 +1,62 @@
+{
+  "case_id": "SW-001",
+  "protocol": "scoped-explicit-requirements-eval-v1",
+  "development_family_only": true,
+  "independent_test": false,
+  "offline_tests_passed": 15,
+  "actual_calls": 3,
+  "format_corrections": 0,
+  "input_tokens": 4952,
+  "output_tokens": 1309,
+  "total_tokens": 6261,
+  "batch_seconds": 7.144,
+  "rows": [
+    {
+      "sample_id": "SW-001-A",
+      "status": "complete",
+      "seconds": 2.444,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "overall_coverage": "complete",
+      "support": [
+        "supported",
+        "supported"
+      ]
+    },
+    {
+      "sample_id": "SW-001-B",
+      "status": "complete",
+      "seconds": 1.889,
+      "coverage": {
+        "R1": "covered",
+        "R2": "missing"
+      },
+      "overall_coverage": "incomplete",
+      "support": [
+        "supported"
+      ]
+    },
+    {
+      "sample_id": "SW-001-C",
+      "status": "complete",
+      "seconds": 2.797,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "overall_coverage": "complete",
+      "support": [
+        "supported",
+        "supported",
+        "insufficient_evidence"
+      ]
+    }
+  ],
+  "actual_messages_match_frozen_preview": true,
+  "api_reported_cost_amount": null,
+  "production_changed": false,
+  "parent_commit": "cc584cc092abcba97aaab7910091db1f204d3e86",
+  "source_identity_frozen": true
+}

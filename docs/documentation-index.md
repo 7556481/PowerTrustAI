@@ -1,5 +1,11 @@
 # 文档索引
 
+- [证据绑定开发评测阶段收尾](evidence-bound-development-closeout-v1.md)：CT协议失败/评分要求缺失、TR/SW主要模式成功分开保留，不合并准确率；核对会话接受与AI建议的监督来源边界，下一阶段同义/双段证据仅候选。
+
+- [SW-001一次开发评测](evidence-bound-sw001-evaluation-v1.md)：15离线后A/B/C各一次，完整性与条件支持分开；主要预期一致，3调用6261token/零纠正，单已见开发家族。[小统计](evidence-bound-sw001-stats-v1.json)。
+
+- [SW-001来源、已确认题卡与样例草案](evidence-bound-sw001-source-v1.md)：ABB同一手册低压定义、印刷25/26精确选段及开断条件；R1隔离/R2有界电流开断，区分disconnector与switch-disconnector，不预置全称禁断或无限故障保证。R2不强制额定参数解释，附加能力保证另受条件支持边界约束；题卡设计已确认、本人未独立验真，A/B/C标签已确认并执行，实际结果见一次开发评测。
+
 - [TR-001逐项要求协议v3与真实开发测试](evidence-bound-tr001-protocol-v3.md)：12离线后原A/B/C各一次，实际消息明确含R1/R2；A齐全有据、B缺R2但已有结论有据、C要点齐全但附加保证无据，主要模式与标签一致。3调用4824token/零纠正，单家族非独立成绩、非CT严格A/B。[小统计](evidence-bound-tr001-v3-stats.json)。
 
 - [TR-001教材来源与题卡](evidence-bound-tr001-source-v1.md)：问题、R1/R2、三个synthetic判断及允许表达已获本人确认，来源身份固定；印刷10/PDF18、PDF身份和乱码转录边界保留。实际测试见协议v3，非独立成绩；下一题检查必答点实质区别、合理同义/合并表达与证据不足边界。
