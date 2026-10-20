@@ -1,0 +1,106 @@
+{
+  "case_id": "RC-001",
+  "protocol": "typed-premise-independent-requirements-eval-v4",
+  "seen_development_protocol_recheck": true,
+  "independent_test": false,
+  "offline_tests_passed": 31,
+  "actual_calls": 5,
+  "format_corrections": 2,
+  "input_tokens": 9497,
+  "output_tokens": 3924,
+  "total_tokens": 13421,
+  "batch_seconds": 16.489,
+  "rows": [
+    {
+      "sample_id": "RC-001-A",
+      "status": "complete",
+      "item_seconds": 3.888,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "overall_coverage": "complete",
+      "support_labels": [
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ],
+      "premise_restatements": [
+        {
+          "support": "supported",
+          "only_premise_bases": true
+        }
+      ]
+    },
+    {
+      "sample_id": "RC-001-B",
+      "status": "complete",
+      "item_seconds": 5.127,
+      "coverage": {
+        "R1": "missing",
+        "R2": "covered"
+      },
+      "overall_coverage": "incomplete",
+      "support_labels": [
+        "supported",
+        "supported"
+      ],
+      "premise_restatements": [
+        {
+          "support": "supported",
+          "only_premise_bases": true
+        }
+      ]
+    },
+    {
+      "sample_id": "RC-001-C-v2",
+      "status": "failed",
+      "item_seconds": 7.449,
+      "issue_code": "MODEL_OUTPUT_ERROR",
+      "valid_semantic_prediction": false
+    }
+  ],
+  "structural_errors": [
+    {
+      "sample_id": "RC-001-B",
+      "correction": false,
+      "field_path": "$.units[0]",
+      "constraint": "no_model_composition_or_count_fields",
+      "missing_unit_fields": [
+        "rationale"
+      ],
+      "extra_unit_fields": []
+    },
+    {
+      "sample_id": "RC-001-C-v2",
+      "correction": false,
+      "field_path": "$.units[0]",
+      "constraint": "no_model_composition_or_count_fields",
+      "missing_unit_fields": [
+        "rationale"
+      ],
+      "extra_unit_fields": []
+    },
+    {
+      "sample_id": "RC-001-C-v2",
+      "correction": true,
+      "field_path": "$.units[0]",
+      "constraint": "no_model_composition_or_count_fields",
+      "missing_unit_fields": [
+        "rationale"
+      ],
+      "extra_unit_fields": []
+    }
+  ],
+  "input_sha256": "e366192ea55d1e39d5c1acb08f194bbed02e759e03f01eb20bf70c64e874eff6",
+  "prompt_sha256": "642c7698ecbdd0ef88b139b3e423ca41a1fbaa4aa2edd7803bf4b8cff3796092",
+  "original_labels_sha256": "fa1069069a26203bacbd83c3a7fc6e87043f95783b031aedd68fe0180ba15d40",
+  "actual_messages_match_frozen_inputs": true,
+  "correction_original_inputs_preserved": true,
+  "historical_files_unchanged": 20,
+  "all_targets_validated": false,
+  "C_failed_semantic_targets_unknown": true,
+  "production_changed": false,
+  "additional_retests_allowed": false
+}

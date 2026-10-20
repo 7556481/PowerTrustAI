@@ -1,0 +1,16 @@
+{
+  "protocol": "typed-premise-independent-requirements-eval-v4",
+  "offline_tests_passed": 27,
+  "synthetic_only": true,
+  "api_calls": 0,
+  "historical_artifacts_checked": 20,
+  "historical_artifacts_unchanged": true,
+  "question_answers_evidence_units_unchanged": true,
+  "requirements_reworded_independently": true,
+  "scope_preserved": true,
+  "A_C_premise_identity_equal": true,
+  "labels_in_messages": false,
+  "paid_entry_point": false,
+  "semantic_model_retest": false,
+  "production_changed": false
+}

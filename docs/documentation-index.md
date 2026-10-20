@@ -1,5 +1,9 @@
 # 文档索引
 
+- [RC-001 v4一次冻结复验及收尾](evidence-bound-rc001-v4-recheck.md)：31离线后5调用13421token/2纠正；B独立评分、A前提身份观察符合预期，C缺unit理由导致最终契约失败，语义未全验收；停止追加、关闭本轮。[小统计](evidence-bound-rc001-v4-recheck-stats.json)。
+
+- [RC-001评测设计v4仅离线](evidence-bound-rc001-protocol-v4-offline.md)：独立R1/R2、题设/文献类型身份、程序派生数量分类；27离线通过，原记录不改，0API，无付费入口。[小统计](evidence-bound-rc001-v4-offline-stats.json)。
+
 - [RC-001真实开发检查与分歧](evidence-bound-rc001-evaluation-v1.md)：15离线后原A/B/修订C各一次，4调用7400token/1结构纠正；B的R2部分覆盖及题设外露依据处理不一致保留，不宣称全语义通过。[小统计](evidence-bound-rc001-stats-v1.json)。
 
 - [显式规则链资料候选RC-001](evidence-bound-rule-chain-candidate-v1.md)：OSHA完整术语定义＋入口标志规则、同域及去段检查；简单定义链有词义先验捷径限制；题卡/R1/R2/参考已确认，A/B预期已接受，C改为用户指定十年寿命保证；旧C歧义及撤回唯一标签留痕，E2附带600V范围，0API。
