@@ -1,6 +1,10 @@
 # 文档索引
 
-- [评审组件保留集建设规格v1（待确认）](reviewer-holdout-spec-v1.md)与[来源分组清单草案](reviewer-holdout-source-groups-v1.md)：仅评审组件，按原文档/谱系隔离开发与保留，全计划报告失败，结果驱动改协议后转开发；本轮不找题/不调用，无已选保留组。
+- [MIT/BIPM候选选段复核](reviewer-holdout-excerpt-review-v1.md)：MIT热敏电阻定义与BIPM单位符号书写完整规则；范围/原页/区间及有限重合审计，不出题不预测，待本人确认、不正式入组。
+
+- [保留来源两候选与谱系初核](reviewer-holdout-source-selection-v1.md)：MIT6.002 2007转录及BIPM SI9 V4.01；官方快照/SHA与范围内开发使用记录核对，待本人及选段复核。只选来源、不出题/预测，不证明训练未见。
+
+- [评审组件保留集建设规格v1（建设规则）](reviewer-holdout-spec-v1.md)与[来源分组清单草案](reviewer-holdout-source-groups-v1.md)：仅评审组件，按原文档/谱系隔离开发与保留，全计划报告失败，结果驱动改协议后转开发；补充推导调用上界、错误支持双分母及训练污染限制；仅来源候选，最终协议未冻结、无预测。
 
 - [CT/TR/SW/RC四个开发家族汇总](evidence-bound-development-summary-v2.md)：测试目的、协议、实际有效结果与未决项分开；RC三类结论保留，暂停调用，不合并准确率或把离线检查数量当语义能力。错误映射/规则连接仅未来覆盖项。
 

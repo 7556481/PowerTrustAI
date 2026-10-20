@@ -1,6 +1,6 @@
 # 保留集来源分组清单v1（草案）
 
-2026-10-20。仅登记已知开发来源和待核对状态，不搜索或选择新保留资料。本清单待本人确认，与[建设规格](reviewer-holdout-spec-v1.md)配套；当前没有已选保留组。
+2026-10-20。已知开发组和分组规则已获整体接受，与[建设规格](reviewer-holdout-spec-v1.md)配套。后续获准来源选择后，新增[两份来源候选初核](reviewer-holdout-source-selection-v1.md)：CAND-MIT-6002及CAND-BIPM-SI9，均待本人及选段谱系复核，不代表已冻结保留组。下表开发归属保持。
 
 | 组ID | 已知来源/谱系锚点 | 归属与覆盖范围 | 未决核对项 |
 |---|---|---|---|
@@ -12,4 +12,7 @@
 
 分组不按题号或回答变体拆分；来源不同也不自动构成独立留出。后续资料入组前须记录原始文档标识、出版/版本、官方或可追溯地址、来源父组/别名、快照SHA、重复/翻译关系、已知开发接触情况及本人确认。组别变化保留历史映射，不能在看到预测结果后重新划组美化成绩。
 
-来源身份与既有局限参见[CT](evidence-bound-evaluation-v1.md)、[TR](evidence-bound-tr001-source-v1.md)、[SW](evidence-bound-sw001-source-v1.md)、[RC](evidence-bound-rule-chain-candidate-v1.md)。SHA全值与原文定位沿用既有资料记录，不复制官方完整资料或私有运行正文。AI分组建议不代替本人确认；本轮没有新建保留题、调用或执行批次。
+来源身份与既有局限参见[CT](evidence-bound-evaluation-v1.md)、[TR](evidence-bound-tr001-source-v1.md)、[SW](evidence-bound-sw001-source-v1.md)、[RC](evidence-bound-rule-chain-candidate-v1.md)。SHA全值与原文定位沿用既有资料记录，不复制官方完整资料或私有运行正文。AI分组建议不代替本人确认；未新建保留题、调用或执行批次。
+
+
+来源分组限制补充：本清单只约束本项目开发/保留隔离，不证明基础模型训练未见资料。公开原文可能已进入训练，当前不可核实，不能宣称训练未见。后续来源候选另表记录，确认谱系前不自动成为已冻结保留组。
