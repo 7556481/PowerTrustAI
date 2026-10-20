@@ -1,5 +1,17 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-20 TR-001新主题资料准备
+
+收尾授权：用户要求将本次评测代码/测试/报告/小统计普通提交推送，无大包、不增加TR变体。下一题换资料/主题，先确认评分规格：两点需实质不同，同一句合理同义/合并表达允许覆盖多项；附加无据仅证据不足，不自动事实错误。本轮定向提交/普通推送并回查远端，最终哈希以回复为准；0新增API，不改生产/训练/LangGraph，不回填CT。
+
+最新实际测试：用户“测试吧”经明确DeepSeek目的地/74字教材载荷/3项最多6调用确认后执行。12离线通过再冻结batch-tr001-v3，v3提示/输入与离线准备SHA一致。A covered/covered/complete且supported；B covered/missing/incomplete、已有结论supported；C covered/covered/complete且附加保证insufficient_evidence，主要模式与本人标签一致。3调用4824token、0纠正、总7.151秒，未追加重跑。实际3份发送消息逐字核对含R1/R2/无标签，CT旧源码/原run SHA不变。只属单开发家族非独立成绩，不能作TR与CT严格A/B或宣CT修复；未改生产/训练/LangGraph/提交推送。新执行入口requirement_trial_v3.py及4接线测试，报告/小统计见协议v3。
+
+最新：本人接受A/B/C判断与允许表达，另存TR-001.synthetic-owner-confirmed-v1（草案保留）。新增评测专用requirement_review_v3.py，明确交付中性R1/R2并逐项coverage，程序汇总overall、支持性另列、多命题/无法评估保留；复用v2严格单元验证、不改旧模块。8离线通过，实际待发3项消息R1/R2/标签边界/原文完整性检查通过；tr001-v3-offline-prepared仅离线manifest/preview，0API、无预测/付费执行入口、不加载凭据、不改生产或LangGraph。CT旧源码SHA保持。详见evidence-bound-tr001-protocol-v3；未提交推送。
+
+本人已确认修订问题及R1/R2；另存TR-001.owner-confirmed-v1.json和question-freeze-v1（问题/要求/来源身份SHA，不是付费批次）。准备A完整、B只R1、C附加全频率安全保证三个synthetic草案，R1/R2逐项位置与证据绑定；标签与允许表达细节待本人复核，不能把本次确认扩大为新样例已确认。均同一开发家族，无TR-001模型预测、0API；源SHA/JSON/位置检查通过，原草案不改。后续交付中性R1/R2要求与逐项coverage，参考答案/标签隐藏；未改协议或启动付费执行。
+
+接续评测提交439ea9d。已取出版社《电力系统分析理论》第二版公开样章，版权页2011-06/ISBN9787030316271，实际正文印刷10/PDF18、1.3.2之“2．电压变换”明确频率关系。PDF SHA6c2381a4…，PDF及页图/转录/manifest留忽略sources/TR-001，题卡source-verified-draft-v1待本人确认。自动抽取乱码，以实际渲染目视核对；转录区间非PDF字符偏移。R1/R2可见任务规格与评测侧预期分开，拟逐项coverage，不加深层推导。0模型调用，无回答变体/预测，不改生产或LangGraph，未提交推送。见[evidence-bound-tr001-source-v1](evidence-bound-tr001-source-v1.md)。
+
 ## 2026-10-20 小型证据绑定评测集第一题
 
 最终只读核对：3份实际发送消息与冻结渲染逐字相同，但两个必答点仅评测侧保存，system要求从问题推断总体coverage，未显式交付两点清单/逐项覆盖。B须归为评分标准分歧＋评测设计缺口，不能仅归模型能力（修正下列历史“误判/失败”归因）；不改原标签/消息或重跑。C prediction.rationale“以供电给仪表”附加供电含义，具体留痕为措辞偏移疑点。核对0API，新题先换主题/可追溯资料并冻结必答点/允许表达/不支持扩展/输入边界。用户要求当前定向提交评测代码、测试和简报告；不推送、不改生产、不迁移LangGraph。

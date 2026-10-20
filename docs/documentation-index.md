@@ -1,5 +1,9 @@
 # 文档索引
 
+- [TR-001逐项要求协议v3与真实开发测试](evidence-bound-tr001-protocol-v3.md)：12离线后原A/B/C各一次，实际消息明确含R1/R2；A齐全有据、B缺R2但已有结论有据、C要点齐全但附加保证无据，主要模式与标签一致。3调用4824token/零纠正，单家族非独立成绩、非CT严格A/B。[小统计](evidence-bound-tr001-v3-stats.json)。
+
+- [TR-001教材来源与题卡](evidence-bound-tr001-source-v1.md)：问题、R1/R2、三个synthetic判断及允许表达已获本人确认，来源身份固定；印刷10/PDF18、PDF身份和乱码转录边界保留。实际测试见协议v3，非独立成绩；下一题检查必答点实质区别、合理同义/合并表达与证据不足边界。
+
 - [指定文本开发评测v2](evidence-bound-evaluation-v2.md)：程序单元/多判断、coverage/support分离，结构3/3。实际消息未交付两项必答清单/逐项覆盖，B保留为分歧＋设计缺口，不能只归模型能力；C理由“供电”偏移留痕。3调用3654token，非独立成绩。[小统计](evidence-bound-evaluation-ct001-v2-stats.json)、[只读消息核对](evidence-bound-evaluation-ct001-input-audit.json)。
 
 - CT-001首次冻结开发评测结果见[逐题报告](evidence-bound-evaluation-v1.md)：S1位置越界、一次纠正后失败停止，后2未发；2调用1938token，有效0/3、语义指标未知。[小统计](evidence-bound-evaluation-ct001-v1-stats.json)。下列逐步建设状态按历史记录解释。
