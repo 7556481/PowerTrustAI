@@ -1,0 +1,34 @@
+{
+  "sample_id": "SW-001-D",
+  "family": "SW-001-development-family",
+  "purpose": "Chinese synonym development check",
+  "independent_test": false,
+  "status": "complete",
+  "coverage": {
+    "R1": "covered",
+    "R2": "covered"
+  },
+  "program_coverage": "complete",
+  "support": [
+    "supported",
+    "supported"
+  ],
+  "actual_calls": 1,
+  "format_corrections": 0,
+  "usage": {
+    "input_tokens": 1633,
+    "output_tokens": 452,
+    "total_tokens": 2085,
+    "cost_amount": null,
+    "currency": null,
+    "cache_hit_tokens": 384,
+    "cache_miss_tokens": 1249
+  },
+  "item_seconds": 2.19,
+  "batch_seconds": 2.199,
+  "actual_messages_match_frozen_preview": true,
+  "same_prompt_as_prior_SW": true,
+  "ABC_retested": false,
+  "offline_tests_passed": 18,
+  "production_changed": false
+}

@@ -16,7 +16,8 @@ from model_adapter.runtime import ModelBudget, ModelClient, model_scope, model_i
 from services.structured_model import structured_request
 
 
-def freeze(prepared, output, protocol=protocol):
+def freeze(prepared, output, protocol=protocol, expected_items=3):
+    assert expected_items in (1,3)
     offline=json.loads((prepared/'offline-manifest.json').read_text(encoding='utf-8'))
     assert offline['version']==protocol.VERSION
     for file,key in [('input.json','input_sha256'),('expectations-private.json','expectations_sha256'),
@@ -26,7 +27,7 @@ def freeze(prepared, output, protocol=protocol):
     tasks=json.loads((prepared/'input.json').read_text(encoding='utf-8'))
     preview=json.loads((prepared/'messages-preview.json').read_text(encoding='utf-8'))
     assert preview==[[{'role':m.role,'content':m.content} for m in protocol.messages(t)] for t in tasks]
-    assert len(tasks)==3 and len({t['sample_id'] for t in tasks})==3
+    assert len(tasks)==expected_items and len({t['sample_id'] for t in tasks})==expected_items
     output.mkdir(parents=True,exist_ok=False)
     # The same small literal inputs/labels; no PDFs, corpus or source archives.
     write(output/'input.json',tasks)
@@ -43,7 +44,7 @@ def freeze(prepared, output, protocol=protocol):
             'expectations_sha256':sha((output/'expectations-private.json').read_bytes()),
             'prompt_sha256':sha(protocol.PROMPT.encode()),'same_inputs_as_offline_preparation':True,
             'endpoint':'https://api.deepseek.com','model':'deepseek-flash',
-            'planned_items':3,'maximum_calls':6,'max_corrections_per_item':1,
+            'planned_items':expected_items,'maximum_calls':2*expected_items,'max_corrections_per_item':1,
             'timeout_seconds':90,'total_timeout_seconds':600,'max_output_tokens':2000,
             'max_response_chars':24000,'max_message_chars':90000,'transient_retries':0,
             'stop':'first execution, transport or storage failure; no retry on semantic disagreement',
@@ -79,14 +80,15 @@ async def execute(tasks,client,diagnostics,persist,total_timeout=600,protocol=pr
             'controls':controls}
 
 
-def run(output, protocol=protocol):
+def run(output, protocol=protocol, expected_items=3):
+    assert expected_items in (1,3)
     frozen=json.loads((output/'freeze.json').read_text(encoding='utf-8'))
     assert frozen['protocol']==protocol.VERSION and sha(protocol.PROMPT.encode())==frozen['prompt_sha256']
     for file,key in [('input.json','input_sha256'),('expectations-private.json','expectations_sha256')]:
         assert sha((output/file).read_bytes())==frozen[key]
     for path,h in frozen['working_tree_hashes'].items():assert sha(Path(path).read_bytes())==h
     tasks=json.loads((output/'input.json').read_text(encoding='utf-8'))
-    assert len(tasks)==3 and frozen['maximum_calls']==6
+    assert len(tasks)==expected_items and frozen['planned_items']==expected_items and frozen['maximum_calls']==2*expected_items
     for task in tasks:
         assert task['answer_units']==build_units(task['sample_id'],task['answer'])
         assert {r['requirement_id'] for r in task['requirements']}=={'R1','R2'}

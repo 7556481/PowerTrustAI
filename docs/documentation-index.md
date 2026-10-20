@@ -1,5 +1,7 @@
 # 文档索引
 
+- [SW-001中文同义改写单项检查](evidence-bound-sw001-synonym-v1.md)：D及预期明确确认、18离线通过后一次执行，R1/R2覆盖且两项有据；1调用2085token/零纠正，原提示不变、A/B/C未重测。结果已接受并归档，停止SW变体；仅同家族开发检查，不推普遍同义理解，不加入双段证据。[小统计](evidence-bound-sw001-D-stats-v1.json)。
+
 - [证据绑定开发评测阶段收尾](evidence-bound-development-closeout-v1.md)：CT协议失败/评分要求缺失、TR/SW主要模式成功分开保留，不合并准确率；核对会话接受与AI建议的监督来源边界，下一阶段同义/双段证据仅候选。
 
 - [SW-001一次开发评测](evidence-bound-sw001-evaluation-v1.md)：15离线后A/B/C各一次，完整性与条件支持分开；主要预期一致，3调用6261token/零纠正，单已见开发家族。[小统计](evidence-bound-sw001-stats-v1.json)。
