@@ -1,0 +1,63 @@
+{
+  "audit_date": "2026-10-20",
+  "new_model_calls": 0,
+  "actual_sent_message_audit": [
+    {
+      "sample_id": "CT-001-S1",
+      "request_messages_file_sha256": "4932da38dd4ff9c6da3b867a5673fd5025d5970f32b921728d0c783a23a8206a",
+      "matches_frozen_messages": true,
+      "user_data_fields": [
+        "answer",
+        "answer_units",
+        "evidence",
+        "question",
+        "sample_id",
+        "unit_version"
+      ],
+      "explicit_required_points_in_input": false,
+      "per_requirement_coverage_requested": false,
+      "coverage_rule": "infer from original question, not explicit two-point checklist"
+    },
+    {
+      "sample_id": "CT-001-S2",
+      "request_messages_file_sha256": "4bc1590b3523ed1cba201015235ad813281eb694534e7da4ae455f49fe0cd449",
+      "matches_frozen_messages": true,
+      "user_data_fields": [
+        "answer",
+        "answer_units",
+        "evidence",
+        "question",
+        "sample_id",
+        "unit_version"
+      ],
+      "explicit_required_points_in_input": false,
+      "per_requirement_coverage_requested": false,
+      "coverage_rule": "infer from original question, not explicit two-point checklist"
+    },
+    {
+      "sample_id": "CT-001-S3",
+      "request_messages_file_sha256": "0a1659d89af14fca837b794d24917028f711aedbc53cec336edff994d15981c7",
+      "matches_frozen_messages": true,
+      "user_data_fields": [
+        "answer",
+        "answer_units",
+        "evidence",
+        "question",
+        "sample_id",
+        "unit_version"
+      ],
+      "explicit_required_points_in_input": false,
+      "per_requirement_coverage_requested": false,
+      "coverage_rule": "infer from original question, not explicit two-point checklist"
+    }
+  ],
+  "finding": "Both mandatory points were evaluator-only and were not explicit coverage requirements delivered to the model. The protocol asked only overall coverage inferred from the original question.",
+  "b_attribution": "Disagreement with owner-confirmed evaluator-only rubric; evaluation design gap prevents attributing it solely to model capability or claiming an explicit-checklist failure.",
+  "labels_or_historical_outputs_changed": false,
+  "c_specific_observation": {
+    "output_field": "prediction.rationale",
+    "observed_wording_fragment": "以供电给仪表",
+    "problem": "Introduces supply-power wording not explicit in the selected support sentence; preserve as a rationale semantic-drift concern. No whole-C acceptance."
+  },
+  "next_case_requirements": "Different topic and traceable source; freeze mandatory points, allowable equivalent expressions, unsupported extensions and evaluator/model input boundary before predictions. Required checklist is task specification, not expected per-answer labels."
+}

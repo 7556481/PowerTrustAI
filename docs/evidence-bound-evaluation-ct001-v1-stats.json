@@ -1,0 +1,32 @@
+{
+  "batch": "CT-001-v1",
+  "protocol": "text-bound-coverage-support-eval-v1",
+  "scope": "one_seen_development_question_three_synthetic_variants",
+  "authorization": "Explicit human approval of DeepSeek destination, private selected sentence, three items / at most six calls after initial approval-review rejection; rejected attempt did not start",
+  "planned_items": 3,
+  "attempted_items": 1,
+  "valid_completed_items": 0,
+  "not_executed": [
+    "CT-001-S2",
+    "CT-001-S3"
+  ],
+  "actual_calls": 2,
+  "format_corrections": 1,
+  "usage": {
+    "input_tokens": 1613,
+    "output_tokens": 325,
+    "total_tokens": 1938
+  },
+  "elapsed_seconds": 2.5433722999878228,
+  "answer_length_s1": 47,
+  "invalid_end_offsets": [
+    55,
+    54
+  ],
+  "cause": "Model-generated answer offsets exceeded actual answer length; both structured responses strictly rejected",
+  "semantic_metrics": null,
+  "semantic_observation": "Both invalid outputs say complete/supported for S1, but are not accepted predictions or evaluation success",
+  "original_run_result_unchanged": true,
+  "next_step": "Offline versioned program-bound answer units and ID-only model output; no new paid run authorized under this frozen attempt",
+  "invoice_amount": null
+}

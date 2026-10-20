@@ -1,5 +1,11 @@
 # 文档索引
 
+- [指定文本开发评测v2](evidence-bound-evaluation-v2.md)：程序单元/多判断、coverage/support分离，结构3/3。实际消息未交付两项必答清单/逐项覆盖，B保留为分歧＋设计缺口，不能只归模型能力；C理由“供电”偏移留痕。3调用3654token，非独立成绩。[小统计](evidence-bound-evaluation-ct001-v2-stats.json)、[只读消息核对](evidence-bound-evaluation-ct001-input-audit.json)。
+
+- CT-001首次冻结开发评测结果见[逐题报告](evidence-bound-evaluation-v1.md)：S1位置越界、一次纠正后失败停止，后2未发；2调用1938token，有效0/3、语义指标未知。[小统计](evidence-bound-evaluation-ct001-v1-stats.json)。下列逐步建设状态按历史记录解释。
+
+- [小型证据绑定评测集逐题建设](evidence-bound-evaluation-v1.md)：CT-001及3项synthetic判断已获本人确认，绑定要点/错误位置；指定文本用途理解开发题、出处未核实，无支持不等于错误。未来付费已授权，批次尚未冻结/执行。私有绑定留在data，不以历史pass/supported作标准答案。
+
 - [第二版冻结与验收](release-freeze-v2.md)：严格长度规划与一次纠正，最终v4/lossless两题完整执行/长度通过/程序pass，内容语义与浏览器项目未全部通过，限定原型冻结；[新电脑独立学习站同步清单](learning-site-sync-v2.md)，20章/60自测及标准库独立读站。
 
 

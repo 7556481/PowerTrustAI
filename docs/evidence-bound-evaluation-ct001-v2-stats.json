@@ -1,0 +1,115 @@
+{
+  "version": "text-bound-coverage-support-eval-v2",
+  "batch_id": "CT-001-v2",
+  "source_commit_parent": "56080cd62aecabb48cdca3d43864256f0cfb92fa",
+  "execution_source_sha256": "371fbc2ac8c4f6520d92f412cc7551deb2236017d0ffa21fd758d9600e07d596",
+  "source_uncommitted_at_execution": true,
+  "same_question_answers_evidence_as_v1": true,
+  "source_quality": "original_source_unverified",
+  "split": "one_seen_development_family",
+  "independent_test": false,
+  "planned_items": 3,
+  "attempted_items": 3,
+  "valid_completed_items": 3,
+  "actual_calls": 3,
+  "format_corrections": 0,
+  "usage": {
+    "input_tokens": 2605,
+    "output_tokens": 1049,
+    "total_tokens": 3654
+  },
+  "elapsed_seconds": 5.92150739999488,
+  "results": [
+    {
+      "sample_id": "CT-001-S1",
+      "execution_status": "complete",
+      "elapsed_seconds": 2.0660058999201283,
+      "program_unit_count": 1,
+      "judgment_count": 2,
+      "composition": [
+        "multiple"
+      ],
+      "coverage": "complete",
+      "confirmed_expected_coverage": "complete",
+      "coverage_agrees": true,
+      "support_labels": [
+        "supported",
+        "supported"
+      ],
+      "observed_support_pattern_agrees": true,
+      "comparison_source": "AI-assisted reading of model predictions against owner-confirmed synthetic labels; not an independent expert judgment"
+    },
+    {
+      "sample_id": "CT-001-S2",
+      "execution_status": "complete",
+      "elapsed_seconds": 1.4364331999095157,
+      "program_unit_count": 1,
+      "judgment_count": 1,
+      "composition": [
+        "single"
+      ],
+      "coverage": "complete",
+      "confirmed_expected_coverage": "incomplete",
+      "coverage_agrees": false,
+      "support_labels": [
+        "supported"
+      ],
+      "observed_support_pattern_agrees": true,
+      "comparison_source": "AI-assisted reading of model predictions against owner-confirmed synthetic labels; not an independent expert judgment"
+    },
+    {
+      "sample_id": "CT-001-S3",
+      "execution_status": "complete",
+      "elapsed_seconds": 2.404074599966407,
+      "program_unit_count": 2,
+      "judgment_count": 3,
+      "composition": [
+        "multiple",
+        "single"
+      ],
+      "coverage": "complete",
+      "confirmed_expected_coverage": "complete",
+      "coverage_agrees": true,
+      "support_labels": [
+        "supported",
+        "supported",
+        "insufficient_evidence"
+      ],
+      "observed_support_pattern_agrees": true,
+      "comparison_source": "AI-assisted reading of model predictions against owner-confirmed synthetic labels; not an independent expert judgment"
+    }
+  ],
+  "coverage_agreement_count": 2,
+  "coverage_comparison_denominator": 3,
+  "generalized_accuracy": null,
+  "semantic_acceptance": "not_all_accepted: B rubric disagreement subject to missing explicit task specification; C rationale drift remains",
+  "additional_observation": "S3 coverage rationale introduces supply-power wording absent from selected basis; reasoning wording remains semantically imprecise, while unit propositions preserve the intended signal-use relation. Not silently repaired.",
+  "previous_failure": {
+    "protocol_failed": true,
+    "valid_results": 0,
+    "actual_calls": 2,
+    "format_corrections": 1,
+    "total_tokens": 1938,
+    "semantic_accuracy": null,
+    "preserved": true
+  },
+  "combined_development_cost": {
+    "actual_calls": 5,
+    "total_tokens": 5592,
+    "invoice_amount": null
+  },
+  "original_run_result_unchanged": true,
+  "production_changed": false,
+  "training_started": false,
+  "langgraph_migration_started": false,
+  "further_paid_calls": false,
+  "offline_tests_passed": 34,
+  "attribution_audit": {
+    "explicit_required_points_delivered": false,
+    "per_point_coverage_requested": false,
+    "audit_report": "evidence-bound-evaluation-ct001-input-audit.json",
+    "finding": "B is disagreement with evaluator-only owner rubric plus evaluation design gap; not attributable solely to model capability",
+    "original_private_summary_and_predictions_unchanged": true
+  },
+  "coverage_comparison_limit": "2/3 is only post-hoc agreement with evaluator-side rubric, not explicit-checklist compliance or independent accuracy"
+}
