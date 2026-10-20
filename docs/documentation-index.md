@@ -1,5 +1,11 @@
 # 文档索引
 
+- [RC-001真实开发检查与分歧](evidence-bound-rc001-evaluation-v1.md)：15离线后原A/B/修订C各一次，4调用7400token/1结构纠正；B的R2部分覆盖及题设外露依据处理不一致保留，不宣称全语义通过。[小统计](evidence-bound-rc001-stats-v1.json)。
+
+- [显式规则链资料候选RC-001](evidence-bound-rule-chain-candidate-v1.md)：OSHA完整术语定义＋入口标志规则、同域及去段检查；简单定义链有词义先验捷径限制；题卡/R1/R2/参考已确认，A/B预期已接受，C改为用户指定十年寿命保证；旧C歧义及撤回唯一标签留痕，E2附带600V范围，0API。
+
+- [SW-002候选去段检查](evidence-bound-sw002-source-audit-v1.md)：两完整定义身份核对；单段可有限回答核心非全称结论，双段补足说明但不证明必要组合推理。暂不冻结，同ABB关联组、0API。
+
 - [SW-001中文同义改写单项检查](evidence-bound-sw001-synonym-v1.md)：D及预期明确确认、18离线通过后一次执行，R1/R2覆盖且两项有据；1调用2085token/零纠正，原提示不变、A/B/C未重测。结果已接受并归档，停止SW变体；仅同家族开发检查，不推普遍同义理解，不加入双段证据。[小统计](evidence-bound-sw001-D-stats-v1.json)。
 
 - [证据绑定开发评测阶段收尾](evidence-bound-development-closeout-v1.md)：CT协议失败/评分要求缺失、TR/SW主要模式成功分开保留，不合并准确率；核对会话接受与AI建议的监督来源边界，下一阶段同义/双段证据仅候选。

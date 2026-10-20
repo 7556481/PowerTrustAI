@@ -1,0 +1,73 @@
+{
+  "case_id": "RC-001",
+  "classification": "simple definition-chain development; not independent test",
+  "protocol": "text-bound-explicit-requirements-eval-v3",
+  "input_builder": "rule-chain-input-v1",
+  "offline_tests_passed": 15,
+  "actual_calls": 4,
+  "format_corrections": 1,
+  "input_tokens": 5271,
+  "output_tokens": 2129,
+  "total_tokens": 7400,
+  "batch_seconds": 11.075,
+  "rows": [
+    {
+      "sample_id": "RC-001-A",
+      "status": "complete",
+      "item_seconds": 3.001,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "overall_coverage": "complete",
+      "support_labels": [
+        "supported",
+        "supported",
+        "supported",
+        "supported"
+      ]
+    },
+    {
+      "sample_id": "RC-001-B",
+      "status": "complete",
+      "item_seconds": 4.351,
+      "coverage": {
+        "R1": "missing",
+        "R2": "partially_covered"
+      },
+      "overall_coverage": "incomplete",
+      "support_labels": [
+        "supported",
+        "supported"
+      ]
+    },
+    {
+      "sample_id": "RC-001-C-v2",
+      "status": "complete",
+      "item_seconds": 3.69,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "overall_coverage": "complete",
+      "support_labels": [
+        "supported",
+        "supported",
+        "not_assessable",
+        "supported",
+        "insufficient_evidence"
+      ]
+    }
+  ],
+  "actual_initial_messages_match_frozen_preview": true,
+  "correction_preserves_original_input_messages": true,
+  "scope_context_delivered": true,
+  "expected_labels_delivered": false,
+  "all_semantic_expectations_met": false,
+  "disagreements": [
+    "B R2 partially_covered instead of expected covered",
+    "given exposed premise supported with E2 in A but not_assessable in C"
+  ],
+  "production_changed": false,
+  "production_run_created": false
+}
