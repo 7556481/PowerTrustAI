@@ -1,5 +1,9 @@
 # 文档索引
 
+- [评审组件保留集建设规格v1（待确认）](reviewer-holdout-spec-v1.md)与[来源分组清单草案](reviewer-holdout-source-groups-v1.md)：仅评审组件，按原文档/谱系隔离开发与保留，全计划报告失败，结果驱动改协议后转开发；本轮不找题/不调用，无已选保留组。
+
+- [CT/TR/SW/RC四个开发家族汇总](evidence-bound-development-summary-v2.md)：测试目的、协议、实际有效结果与未决项分开；RC三类结论保留，暂停调用，不合并准确率或把离线检查数量当语义能力。错误映射/规则连接仅未来覆盖项。
+
 - [RC-001 v4一次冻结复验及收尾](evidence-bound-rc001-v4-recheck.md)：31离线后5调用13421token/2纠正；B独立评分、A前提身份观察符合预期，C缺unit理由导致最终契约失败，语义未全验收；停止追加、关闭本轮。[小统计](evidence-bound-rc001-v4-recheck-stats.json)。
 
 - [RC-001评测设计v4仅离线](evidence-bound-rc001-protocol-v4-offline.md)：独立R1/R2、题设/文献类型身份、程序派生数量分类；27离线通过，原记录不改，0API，无付费入口。[小统计](evidence-bound-rc001-v4-offline-stats.json)。
