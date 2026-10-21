@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-21",
+  "protocol": "addressedness-claim-target-eval-v6-dev",
+  "source_commit": "985f8e3670f4567c8769dcd754c4c3081e447113",
+  "uncommitted_additions_bound_by_hash": [
+    "evaluation/v6_development_trial_v1.py",
+    "tests/test_v6_development_trial_v1.py"
+  ],
+  "owner_authorized": true,
+  "authorization": "User confirmed plan and api.deepseek.com payload, accepts fees; 8 initial, <=1 correction each, <=16 calls; stop on failure, no addition/resume",
+  "original_freeze_sha256": "c6ae4de495aa330b29654df8e454240128b265ee403e6ad6d1607924ff475d56",
+  "plan_sha256": "ed306da68e403e228e5ff2c5b8c3994bf56025bbf6d56c4bb52d3cc73397f152",
+  "order": [
+    "H-EIA-001-A01",
+    "H-NRC-001-A01",
+    "H-EIA-001-A02",
+    "H-NRC-001-A02",
+    "H-EIA-001-A03",
+    "H-NRC-001-A03",
+    "H-EIA-001-A04",
+    "H-NRC-001-A04"
+  ],
+  "maximum_calls": 16,
+  "production_changed": false,
+  "private_bound_artifact_count": 8,
+  "bound_public_artifact_sha256": {
+    "backend/config.py": "386673778691d94d4075f08c885471ca1c3cf48548096e8c6204aaf00e920f53",
+    "docs/evaluation/eia-nrc-answer-drafts-v1/candidates/answers.draft.json": "ac03edf32ece6a0188e8d44affe4107ecfca60718bfba1a485b9ef1aff490d1e",
+    "docs/evaluation/eia-nrc-answer-drafts-v1/evaluator-only/expected-labels.draft.json": "4dd0bf7b20834d362d5e2270fba10b0f63dc09dda6992cd01765393dcc858383",
+    "docs/evaluation/eia-nrc-answer-drafts-v1/owner-confirmation-v1.json": "9f55e973f047551f87d7cf37d75c265f56fd1e2c08aebd12c184a564a6fb0a01",
+    "docs/reviewer-independent-protocol-candidate-v1.json": "43bff210f7e9c89c4f1bac029ffb65357acf5dc76dd52ae8191dfba43098883e",
+    "docs/reviewer-v6-development-recheck-plan-v1.json": "ed306da68e403e228e5ff2c5b8c3994bf56025bbf6d56c4bb52d3cc73397f152",
+    "evaluation/batch_control.py": "265df87098a3191a0fae1bc0d4bb50480c36e64fa524fb169f1fe47c00df2009",
+    "evaluation/eia_nrc_input_preparation_v1.py": "b2b0e1253a20e8727af6186ef13357266a575ad1743eea5b1f152168217fcf9a",
+    "evaluation/eia_nrc_trial_v1.py": "7f1033046e63668e41a5fd743e97070f56b1b9fda7864561bf85755ccc6c0397",
+    "evaluation/premise_bound_review_v4.py": "ff6321d8f977ded44eb57d0fc0a61e5c5ebab7cdf302af9f8c50e4b213a6a676",
+    "evaluation/premise_bound_review_v5.py": "bbf2bc5a2ac7da49d26b74c4163dd99c9845b6778ad360f900be76ac6136ee50",
+    "evaluation/premise_bound_review_v6.py": "0cf52b776531eb636d0c93e2f8f5e9ac22c321cd0f69d277c8a29947f6bd4717",
+    "evaluation/requirement_review_v3.py": "9847d8a062a9591861532737698763ad140ca4f846ed5e2bbaefa9aefe25fea3",
+    "evaluation/requirement_trial_v3.py": "31dccc562b85b0e08f9e7fd3d7fd6e1b92a66dc7217fccde4388f1ab68ce6d17",
+    "evaluation/text_bound_review.py": "12f7172d3d062dc603749bc9c470896b145b3b82aaa3b7d5c482029928829df6",
+    "evaluation/text_bound_review_v2.py": "371fbc2ac8c4f6520d92f412cc7551deb2236017d0ffa21fd758d9600e07d596",
+    "evaluation/v6_development_trial_v1.py": "740cb2d91d6dafabf760abf72586d22754028399e0c1bc45de68ff48e5bb399e",
+    "harness/deepseek_trial.py": "1edecb0dd00434600f81a28040cf88ead8d7d3ba97e6ae791b84a97ef16a4a79",
+    "model_adapter/contracts.py": "7c23b9a46f7c01d27cec864b704eb1e902660edf8cae2614181da68b4847bf5d",
+    "model_adapter/deepseek.py": "73406215bfd5ee0a9fc319c90a723e4c3987615739e204c542ec7833ab4cdf9b",
+    "model_adapter/runtime.py": "009eb22f0ea4bbbd29cfa5cf53ea881c048436430a6896c237e2587a6eca5c8d",
+    "services/response_diagnostics.py": "87c2e772600bc2d588e7544f364df5df63a2ea2ef23f6e892ef5da3669e31ee2",
+    "services/structured_model.py": "a0ab6c75f2256e8810cb3f9d89901b821d5612196ee2496c310d6d06372d1118",
+    "services/validation_diagnostics.py": "1d642fa78787ac608344e3547b62ed423679a7b5f89a79201e3f3fd8832ae409",
+    "tests/test_v6_development_trial_v1.py": "bc2a5ef7420166679cbb912f79dfca7d03d476d9e14d3c03adf066fa4cf52a60"
+  }
+}

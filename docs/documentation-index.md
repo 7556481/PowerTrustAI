@@ -1,5 +1,7 @@
 # 文档索引
 
+- [v6八例开发复验结果](reviewer-v6-development-recheck-results-v1.md)（[统计/对齐ID](reviewer-v6-development-recheck-results-v1.json)、[执行冻结](reviewer-v6-development-recheck-freeze-v1.json)）：8最终有效、4首次有效，12调用/4纠正/28391token/28.659秒；覆盖16/16一致，支持12参考AI建议可对齐待本人复核；NRC-A04不足→矛盾分歧保留，稳定性/费用无改善声明。原规则/标签/成绩及生产不改，本批结束不恢复。
+
 - [v6有限开发复验计划v1](reviewer-v6-development-recheck-plan-v1.md)（[机器计划](reviewer-v6-development-recheck-plan-v1.json)）：原8例、顺序/标签/匹配不变；8消息离线核对，0API，最多16调用为拟定上界。待确认及本次付费授权，非最终执行冻结或新独立成绩。
 
 - [评审组件v6离线修订](reviewer-component-v6-offline.md)（[身份与检查清单](reviewer-component-v6-offline.json)）：覆盖与正确性分离、文献/实际对象区分、实际记录溯源门禁；17新合成及51合计离线通过，0API，未验证模型语义改善。生产/旧v5候选/旧成绩/匹配规则不变；EIA/NRC已登记后续开发，下一次复验待本人决定。

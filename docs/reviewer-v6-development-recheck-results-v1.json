@@ -1,0 +1,355 @@
+{
+  "date": "2026-10-21",
+  "batch": "v6-development-recheck-v1",
+  "purpose": "seen-development recheck, not independent evaluation",
+  "planned_answers": 8,
+  "questions": 2,
+  "source_groups": 2,
+  "complete": 8,
+  "failed": 0,
+  "unexecuted": 0,
+  "first_structure_valid": 4,
+  "calls": 12,
+  "corrections": 4,
+  "elapsed_seconds": 28.659,
+  "token_usage": {
+    "input_tokens": 23115,
+    "output_tokens": 5276,
+    "total_tokens": 28391
+  },
+  "coverage": {
+    "planned": 16,
+    "valid": 16,
+    "agreements": 16,
+    "confusion_counts": {
+      "covered -> covered": 14,
+      "missing -> missing": 1,
+      "partially_covered -> partially_covered": 1
+    },
+    "disagreements": []
+  },
+  "support": {
+    "planned_reference_units": 12,
+    "aligned": 12,
+    "unaligned": 0,
+    "failed": 0,
+    "unexecuted": 0,
+    "conflicts": 0,
+    "false_support": 0,
+    "aligned_non_support_reference": 4,
+    "aligned_supported_prediction": 8,
+    "F_over_A_NS": "0/4",
+    "F_over_A_SP": "0/8",
+    "denominator_basis": "reference-aligned units per frozen eia-nrc-native-reference-policy-v1, not raw returned judgment count",
+    "confusion_counts": {
+      "supported -> supported": 8,
+      "contradicted -> contradicted": 3,
+      "insufficient_evidence -> contradicted": 1
+    },
+    "false_rejection": 0,
+    "disagreements": [
+      {
+        "sample_id": "H-NRC-001-A04",
+        "reference_unit_id": "U2",
+        "prediction_unit_id": "u-cb9d5b8cb1897765f877d2ad17d25f44a52128b247ad943ba094cff7eab56f4f",
+        "judgment_index": 0,
+        "reference": "insufficient_evidence",
+        "predicted": "contradicted",
+        "claim_type": "literature_statement",
+        "status": "AI_aligned_pending_owner_review",
+        "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+      }
+    ],
+    "alignment_review": "AI assisted, pending owner review; not expert gold"
+  },
+  "items": [
+    {
+      "sample_id": "H-EIA-001-A01",
+      "status": "complete",
+      "calls": 2,
+      "corrections": 1,
+      "first_structure_valid": false,
+      "elapsed_seconds": 3.71,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "judgment_labels": [
+        [
+          "supported"
+        ]
+      ]
+    },
+    {
+      "sample_id": "H-NRC-001-A01",
+      "status": "complete",
+      "calls": 1,
+      "corrections": 0,
+      "first_structure_valid": true,
+      "elapsed_seconds": 2.17,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "judgment_labels": [
+        [
+          "supported"
+        ]
+      ]
+    },
+    {
+      "sample_id": "H-EIA-001-A02",
+      "status": "complete",
+      "calls": 1,
+      "corrections": 0,
+      "first_structure_valid": true,
+      "elapsed_seconds": 1.966,
+      "coverage": {
+        "R1": "covered",
+        "R2": "missing"
+      },
+      "judgment_labels": [
+        [
+          "supported"
+        ]
+      ]
+    },
+    {
+      "sample_id": "H-NRC-001-A02",
+      "status": "complete",
+      "calls": 1,
+      "corrections": 0,
+      "first_structure_valid": true,
+      "elapsed_seconds": 2.31,
+      "coverage": {
+        "R1": "covered",
+        "R2": "partially_covered"
+      },
+      "judgment_labels": [
+        [
+          "supported"
+        ]
+      ]
+    },
+    {
+      "sample_id": "H-EIA-001-A03",
+      "status": "complete",
+      "calls": 2,
+      "corrections": 1,
+      "first_structure_valid": false,
+      "elapsed_seconds": 5.118,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "judgment_labels": [
+        [
+          "supported"
+        ],
+        [
+          "contradicted"
+        ]
+      ]
+    },
+    {
+      "sample_id": "H-NRC-001-A03",
+      "status": "complete",
+      "calls": 1,
+      "corrections": 0,
+      "first_structure_valid": true,
+      "elapsed_seconds": 2.284,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "judgment_labels": [
+        [
+          "contradicted"
+        ]
+      ]
+    },
+    {
+      "sample_id": "H-EIA-001-A04",
+      "status": "complete",
+      "calls": 2,
+      "corrections": 1,
+      "first_structure_valid": false,
+      "elapsed_seconds": 5.293,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "judgment_labels": [
+        [
+          "contradicted"
+        ],
+        [
+          "supported"
+        ]
+      ]
+    },
+    {
+      "sample_id": "H-NRC-001-A04",
+      "status": "complete",
+      "calls": 2,
+      "corrections": 1,
+      "first_structure_valid": false,
+      "elapsed_seconds": 5.753,
+      "coverage": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "judgment_labels": [
+        [
+          "supported"
+        ],
+        [
+          "contradicted"
+        ]
+      ]
+    }
+  ],
+  "alignment": [
+    {
+      "sample_id": "H-EIA-001-A01",
+      "reference_unit_id": "U1",
+      "prediction_unit_id": "u-825d047197f7f818257027932600804b8d3f9ea74fb18c5af2738104c1e598fb",
+      "judgment_index": 0,
+      "reference": "supported",
+      "predicted": "supported",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "explicit joint equivalent proposition, each reference counted once"
+    },
+    {
+      "sample_id": "H-EIA-001-A01",
+      "reference_unit_id": "U2",
+      "prediction_unit_id": "u-825d047197f7f818257027932600804b8d3f9ea74fb18c5af2738104c1e598fb",
+      "judgment_index": 0,
+      "reference": "supported",
+      "predicted": "supported",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "explicit joint equivalent proposition, each reference counted once"
+    },
+    {
+      "sample_id": "H-NRC-001-A01",
+      "reference_unit_id": "U1",
+      "prediction_unit_id": "u-36ffe8e3a4c2cb5c989ff6ec22f8c8c5266e43f1e76ea17bb06bd4fd735c1af8",
+      "judgment_index": 0,
+      "reference": "supported",
+      "predicted": "supported",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    },
+    {
+      "sample_id": "H-EIA-001-A02",
+      "reference_unit_id": "U1",
+      "prediction_unit_id": "u-b9cf8f0aabc9c2b3439d594e27f07cb72440fcc1d0a3c178df09087bc75a6c92",
+      "judgment_index": 0,
+      "reference": "supported",
+      "predicted": "supported",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    },
+    {
+      "sample_id": "H-NRC-001-A02",
+      "reference_unit_id": "U1",
+      "prediction_unit_id": "u-1374bbb41facedf6bb5c697d3c72e9f3ad6d1bae26a1a265c977237fdeb6f96c",
+      "judgment_index": 0,
+      "reference": "supported",
+      "predicted": "supported",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    },
+    {
+      "sample_id": "H-EIA-001-A03",
+      "reference_unit_id": "U1",
+      "prediction_unit_id": "u-b819f22c7ad64af37b274b28b1fba4057356537b32958244ce75824b00deb66f",
+      "judgment_index": 0,
+      "reference": "supported",
+      "predicted": "supported",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    },
+    {
+      "sample_id": "H-EIA-001-A03",
+      "reference_unit_id": "U2",
+      "prediction_unit_id": "u-22eca250b602ae026a5c268ceac8d42938b6a3d5d1ba15897073d87dc7dc0045",
+      "judgment_index": 0,
+      "reference": "contradicted",
+      "predicted": "contradicted",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    },
+    {
+      "sample_id": "H-NRC-001-A03",
+      "reference_unit_id": "U1",
+      "prediction_unit_id": "u-b35d308b1f175672b73e5db16bffd4736b25ee2a010b18b6c3c03de7ac8c28fc",
+      "judgment_index": 0,
+      "reference": "contradicted",
+      "predicted": "contradicted",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    },
+    {
+      "sample_id": "H-EIA-001-A04",
+      "reference_unit_id": "U1",
+      "prediction_unit_id": "u-6cba6643b1f1c85f4d674d07c81fb150ce37ffbf1e942cad079f0f8f6b352461",
+      "judgment_index": 0,
+      "reference": "contradicted",
+      "predicted": "contradicted",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    },
+    {
+      "sample_id": "H-EIA-001-A04",
+      "reference_unit_id": "U2",
+      "prediction_unit_id": "u-8aba0bb9302de5885b5e98b249cf13736f18d6ae627903d81e60168a60f5a39f",
+      "judgment_index": 0,
+      "reference": "supported",
+      "predicted": "supported",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    },
+    {
+      "sample_id": "H-NRC-001-A04",
+      "reference_unit_id": "U1",
+      "prediction_unit_id": "u-2ad0367b789b38111b12aa6d686146df526e62f2d6660c610940859c8ef6a680",
+      "judgment_index": 0,
+      "reference": "supported",
+      "predicted": "supported",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    },
+    {
+      "sample_id": "H-NRC-001-A04",
+      "reference_unit_id": "U2",
+      "prediction_unit_id": "u-cb9d5b8cb1897765f877d2ad17d25f44a52128b247ad943ba094cff7eab56f4f",
+      "judgment_index": 0,
+      "reference": "insufficient_evidence",
+      "predicted": "contradicted",
+      "claim_type": "literature_statement",
+      "status": "AI_aligned_pending_owner_review",
+      "alignment_note": "equivalent scoped assertion; no rationale adds answer content"
+    }
+  ],
+  "payload_audit": {
+    "all_12_actual_requests_first_two_messages_equal_frozen_allowlist": true,
+    "all_12_response_hashes_checked": true,
+    "reference_labels_reasons_roles_reference_units_in_messages": false,
+    "original_frozen_preflight_still_passes": true
+  },
+  "freeze_sha256": "3f32c2b52d72cafbd5dfb4183a52aa3b7339baa47a74339e54a51ed361ab46ed",
+  "production_changed": false,
+  "paid_batch_finished_no_resume": true
+}
