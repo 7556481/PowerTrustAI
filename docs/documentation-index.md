@@ -1,5 +1,7 @@
 # 文档索引
 
+- [v7提示布局候选冻结](reviewer-v7-candidate-freeze-v1.md)（[冻结身份及未来实验边界](reviewer-v7-candidate-freeze-v1.json)）：本人接受工程实现，真实改善未知，停止叠加提示；后续同批跨主题开发输入对照v6/v7，格式与独立语义评测分开。当前未制作输入/未冻结付费批次，0API、生产不接入。
+
 - [评审理由字段v7离线候选](reviewer-rationale-layout-v7-offline.md)（[审计/身份/检查](reviewer-rationale-layout-v7-offline.json)）：4原响应共7处单元理由遗漏，提示/纠正接线已送达；保留全部理由字段，明确层级职责并后置唯一结构示例，严格复用v6解析。12新合成及67合计离线通过，0真实调用；稳定性收益未实测，不接生产、不重跑旧题。
 
 - [v6全部12单元本人最终对齐确认](reviewer-v6-alignment-owner-confirmation-v1.md)（[逐项确认与身份](reviewer-v6-alignment-owner-confirmation-v1.json)）：12参考均可对齐、11支持标签符合参考，NRC-A04/U2分歧保留；合并预测只算一个实际判断，旧批规则/成绩不改。公开字段语义复核，不称本人本地raw/SHA验真。v6继续归档、生产不接入，0新调用。

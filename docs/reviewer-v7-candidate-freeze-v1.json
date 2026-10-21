@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-21",
+  "status": "frozen_evaluation_prompt_layout_candidate_not_final_batch_protocol",
+  "version": "explicit-rationale-layout-eval-v7-dev",
+  "source_commit": "2e2727388ea8934f955925b2305a299d8fe896df",
+  "prompt_sha256_utf8": "9cf9cf7ef8cea96cded571995bf042edf15bd8ea1fdc209d11f66cacd8309928",
+  "comparison_v6_prompt_sha256_utf8": "bc8ffa7e04cfe98fa59a9d7ada36da9b0b470ff46ccbd2dc4646db1c05a4d44d",
+  "bound_code_sha256": {
+    "evaluation/batch_control.py": "265df87098a3191a0fae1bc0d4bb50480c36e64fa524fb169f1fe47c00df2009",
+    "evaluation/premise_bound_review_v4.py": "ff6321d8f977ded44eb57d0fc0a61e5c5ebab7cdf302af9f8c50e4b213a6a676",
+    "evaluation/premise_bound_review_v5.py": "bbf2bc5a2ac7da49d26b74c4163dd99c9845b6778ad360f900be76ac6136ee50",
+    "evaluation/premise_bound_review_v6.py": "0cf52b776531eb636d0c93e2f8f5e9ac22c321cd0f69d277c8a29947f6bd4717",
+    "evaluation/premise_bound_review_v7.py": "7e88223fc7d715fd4aaf4dabff3f9561fc93df15e4bada6c66a149d11ea227b6",
+    "evaluation/requirement_review_v3.py": "9847d8a062a9591861532737698763ad140ca4f846ed5e2bbaefa9aefe25fea3",
+    "evaluation/requirement_trial_v3.py": "31dccc562b85b0e08f9e7fd3d7fd6e1b92a66dc7217fccde4388f1ab68ce6d17",
+    "evaluation/text_bound_review.py": "12f7172d3d062dc603749bc9c470896b145b3b82aaa3b7d5c482029928829df6",
+    "evaluation/text_bound_review_v2.py": "371fbc2ac8c4f6520d92f412cc7551deb2236017d0ffa21fd758d9600e07d596",
+    "model_adapter/contracts.py": "7c23b9a46f7c01d27cec864b704eb1e902660edf8cae2614181da68b4847bf5d",
+    "model_adapter/deepseek.py": "73406215bfd5ee0a9fc319c90a723e4c3987615739e204c542ec7833ab4cdf9b",
+    "model_adapter/runtime.py": "009eb22f0ea4bbbd29cfa5cf53ea881c048436430a6896c237e2587a6eca5c8d",
+    "services/response_diagnostics.py": "87c2e772600bc2d588e7544f364df5df63a2ea2ef23f6e892ef5da3669e31ee2",
+    "services/structured_model.py": "a0ab6c75f2256e8810cb3f9d89901b821d5612196ee2496c310d6d06372d1118",
+    "services/validation_diagnostics.py": "1d642fa78787ac608344e3547b62ed423679a7b5f89a79201e3f3fd8832ae409",
+    "tests/test_premise_bound_review_v7.py": "a4d68ac3922c85edc141690a4192a2206dd8e88ffc076d050db65a44db4df292"
+  },
+  "engineering_audit_sha256": "953f778bdc331b4440764dba3a103b29434c21cf02cb2da8e9f6fb21121f4482",
+  "owner_review": "User read report and accepts v7 as reasonable prompt layout candidate, engineering implementation only; actual omission improvement not established",
+  "freeze_scope": "Current evaluation prompt and existing strict input/parser/derivation dependencies; do not append more prompt instructions during this phase",
+  "production_adoption": false,
+  "new_api_calls": 0,
+  "model_output_reliability_verified": false,
+  "semantic_reliability_verified": false,
+  "final_batch_frozen": false,
+  "paid_execution_authorized_by_this_record": false,
+  "future_experiment_constraints": {
+    "purpose": "small output-stability development experiment, not independent semantic evaluation",
+    "arms": [
+      "v6",
+      "v7"
+    ],
+    "inputs": "same pre-fixed batch across arms, several different development topics",
+    "holdout_introduced_at_same_time": false,
+    "protocol_tuning_during_batch": false,
+    "measure": [
+      "first-response field completeness, distinct from full contract validity",
+      "correction counts and final valid/failed/unexecuted states",
+      "substantive quality of each rationale, not merely nonempty strings",
+      "input/output/total tokens and available actual billing; no estimate as invoice"
+    ],
+    "keep_fixed": [
+      "model/settings",
+      "task requirements, premises, evidence, answer text and IDs",
+      "strict parser/acceptance/derived rules",
+      "correction and stopping rules"
+    ],
+    "not_yet_frozen": [
+      "input examples and reference quality judgments",
+      "sample count, exact order and per-item call-bound derivation",
+      "runner/source/messages/config identity",
+      "new batch destination/payload authorization"
+    ]
+  },
+  "historical_labels_scores_or_production_changed": false,
+  "new_inputs_or_sources_created": false
+}
