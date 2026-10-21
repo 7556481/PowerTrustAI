@@ -1,5 +1,7 @@
 # 文档索引
 
+- [四对v6/v7格式稳定性离线材料](evaluation/format-stability-v1/README.md)：[完整输入](evaluation/format-stability-v1/inputs.json)、[复核/理由质量表](evaluation/format-stability-v1/review-checklist.md)、[冻结清单](evaluation/format-stability-v1/freeze.json)。跨4主题、两对各先v6/v7，任务/解析一致，字段/契约/理由质量与初始/纠正token分开；6离线门禁通过，0API，待本人复核非付费授权。
+
 - [v7提示布局候选冻结](reviewer-v7-candidate-freeze-v1.md)（[冻结身份及未来实验边界](reviewer-v7-candidate-freeze-v1.json)）：本人接受工程实现，真实改善未知，停止叠加提示；后续同批跨主题开发输入对照v6/v7，格式与独立语义评测分开。当前未制作输入/未冻结付费批次，0API、生产不接入。
 
 - [评审理由字段v7离线候选](reviewer-rationale-layout-v7-offline.md)（[审计/身份/检查](reviewer-rationale-layout-v7-offline.json)）：4原响应共7处单元理由遗漏，提示/纠正接线已送达；保留全部理由字段，明确层级职责并后置唯一结构示例，严格复用v6解析。12新合成及67合计离线通过，0真实调用；稳定性收益未实测，不接生产、不重跑旧题。

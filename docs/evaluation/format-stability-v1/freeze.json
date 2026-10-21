@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-21",
+  "status": "offline_input_and_plan_freeze_pending_owner_review_not_paid_execution",
+  "purpose": "format stability development experiment; not holdout evaluation",
+  "source_commit": "828d7880791a6ee8942a05c066dd0a9290de29fb",
+  "candidate_commit": "2e2727388ea8934f955925b2305a299d8fe896df",
+  "arms": {
+    "v6": "addressedness-claim-target-eval-v6-dev",
+    "v7": "explicit-rationale-layout-eval-v7-dev"
+  },
+  "prompt_sha256_utf8": {
+    "v6": "bc8ffa7e04cfe98fa59a9d7ada36da9b0b470ff46ccbd2dc4646db1c05a4d44d",
+    "v7": "9cf9cf7ef8cea96cded571995bf042edf15bd8ea1fdc209d11f66cacd8309928"
+  },
+  "bound_code_sha256": {
+    "evaluation/batch_control.py": "265df87098a3191a0fae1bc0d4bb50480c36e64fa524fb169f1fe47c00df2009",
+    "evaluation/premise_bound_review_v4.py": "ff6321d8f977ded44eb57d0fc0a61e5c5ebab7cdf302af9f8c50e4b213a6a676",
+    "evaluation/premise_bound_review_v5.py": "bbf2bc5a2ac7da49d26b74c4163dd99c9845b6778ad360f900be76ac6136ee50",
+    "evaluation/premise_bound_review_v6.py": "0cf52b776531eb636d0c93e2f8f5e9ac22c321cd0f69d277c8a29947f6bd4717",
+    "evaluation/premise_bound_review_v7.py": "7e88223fc7d715fd4aaf4dabff3f9561fc93df15e4bada6c66a149d11ea227b6",
+    "evaluation/requirement_review_v3.py": "9847d8a062a9591861532737698763ad140ca4f846ed5e2bbaefa9aefe25fea3",
+    "evaluation/requirement_trial_v3.py": "31dccc562b85b0e08f9e7fd3d7fd6e1b92a66dc7217fccde4388f1ab68ce6d17",
+    "evaluation/text_bound_review.py": "12f7172d3d062dc603749bc9c470896b145b3b82aaa3b7d5c482029928829df6",
+    "evaluation/text_bound_review_v2.py": "371fbc2ac8c4f6520d92f412cc7551deb2236017d0ffa21fd758d9600e07d596",
+    "model_adapter/contracts.py": "7c23b9a46f7c01d27cec864b704eb1e902660edf8cae2614181da68b4847bf5d",
+    "model_adapter/deepseek.py": "73406215bfd5ee0a9fc319c90a723e4c3987615739e204c542ec7833ab4cdf9b",
+    "model_adapter/runtime.py": "009eb22f0ea4bbbd29cfa5cf53ea881c048436430a6896c237e2587a6eca5c8d",
+    "services/response_diagnostics.py": "87c2e772600bc2d588e7544f364df5df63a2ea2ef23f6e892ef5da3669e31ee2",
+    "services/structured_model.py": "a0ab6c75f2256e8810cb3f9d89901b821d5612196ee2496c310d6d06372d1118",
+    "services/validation_diagnostics.py": "1d642fa78787ac608344e3547b62ed423679a7b5f89a79201e3f3fd8832ae409",
+    "tests/test_premise_bound_review_v7.py": "a4d68ac3922c85edc141690a4192a2206dd8e88ffc076d050db65a44db4df292",
+    "evaluation/format_stability_inputs_v1.py": "20e9902bfc9df6e4d259125c20e4dff3989579a6f695bae7245043b3348f6374",
+    "tests/test_format_stability_inputs_v1.py": "16dbfdab17ca5668fa75fc97a22261a2e7f41b57398b4fe1003d5a72fbc89963"
+  },
+  "input_file_sha256": "523557d3924e17f99f94fdc4956cb36aaa60cddf79ee40a1259ea8135c85a2d7",
+  "review_checklist_sha256": "47a20bf21df994506508255725260850a5d09ed28af5cfa75cd10931b0c74487",
+  "order": [
+    {
+      "request_id": "FMT-01-v6",
+      "sample_id": "FMT-01",
+      "arm": "v6",
+      "task_sha256_utf8": "c44fa01cdd61c269434d6ba969178b4a7d8412c485e1dc0e71ca953314e52a4d",
+      "messages_sha256_utf8": "f1aeb0b7fc4feecb70d2a9fcac9d33736602e8ae8edea81a4424f06260097b04"
+    },
+    {
+      "request_id": "FMT-01-v7",
+      "sample_id": "FMT-01",
+      "arm": "v7",
+      "task_sha256_utf8": "c44fa01cdd61c269434d6ba969178b4a7d8412c485e1dc0e71ca953314e52a4d",
+      "messages_sha256_utf8": "175b6801f910f03e900a3baf882c955878f3ef9e008b5e179309d3806592f4b0"
+    },
+    {
+      "request_id": "FMT-02-v7",
+      "sample_id": "FMT-02",
+      "arm": "v7",
+      "task_sha256_utf8": "3a0d947498851abf30467415616f6af5cc2fa12ce506491eded031dd9e3f79d0",
+      "messages_sha256_utf8": "7341db458ca248d952a674f2bb9aefcffebe2d3cae79d950772ba0e73d3c931b"
+    },
+    {
+      "request_id": "FMT-02-v6",
+      "sample_id": "FMT-02",
+      "arm": "v6",
+      "task_sha256_utf8": "3a0d947498851abf30467415616f6af5cc2fa12ce506491eded031dd9e3f79d0",
+      "messages_sha256_utf8": "92937adffc3cffce10089e903f216ce7ddcc95e8328b5e4f7845686bd2813b70"
+    },
+    {
+      "request_id": "FMT-03-v6",
+      "sample_id": "FMT-03",
+      "arm": "v6",
+      "task_sha256_utf8": "16e897683353c319aa631eb03898145548515f508d507d53516e5eeea387e79e",
+      "messages_sha256_utf8": "1f62ba71f186c4eaeda68ee902a4091b704cd51e96d50487ae59eb5823219083"
+    },
+    {
+      "request_id": "FMT-03-v7",
+      "sample_id": "FMT-03",
+      "arm": "v7",
+      "task_sha256_utf8": "16e897683353c319aa631eb03898145548515f508d507d53516e5eeea387e79e",
+      "messages_sha256_utf8": "fb3240dd729a9c9ada1a6d0e8c1cb89adf37f8478854a22c6d687492591bc009"
+    },
+    {
+      "request_id": "FMT-04-v7",
+      "sample_id": "FMT-04",
+      "arm": "v7",
+      "task_sha256_utf8": "3868e35c9cb4f00b683325ffe9c5bf56cd8539ae0e5c43d21468d20d1a33d0fc",
+      "messages_sha256_utf8": "dcb42d16f985fd7737d3e517bff18e20a1b860e80862add80032526015dde4a7"
+    },
+    {
+      "request_id": "FMT-04-v6",
+      "sample_id": "FMT-04",
+      "arm": "v6",
+      "task_sha256_utf8": "3868e35c9cb4f00b683325ffe9c5bf56cd8539ae0e5c43d21468d20d1a33d0fc",
+      "messages_sha256_utf8": "638ed78fbc08f1c1f499923a31b53b0081d2db6d8d83b69897f97f8a60ffa887"
+    }
+  ],
+  "order_method": "Adjacent pairs; FMT01/FMT03 v6 first, FMT02/FMT04 v7 first; predetermined, not randomized or representative",
+  "model_settings": {
+    "model_id": "deepseek-flash",
+    "endpoint": "https://api.deepseek.com",
+    "timeout_seconds": 90,
+    "max_output_tokens": 2000,
+    "max_response_chars": 24000,
+    "max_message_chars": 90000,
+    "sampling_parameters": "omitted from connector request; provider defaults and drift unknown, not deterministic"
+  },
+  "common_execution": {
+    "parser": "evaluation.premise_bound_review_v6.parse; v7.parse is identical function",
+    "correction_diagnostics": "same inherited v5/v6 diagnostics and services.structured_model.structured_request; no arm-specific correction guidance",
+    "planned_requests": 8,
+    "planned_per_arm": 4,
+    "max_corrections_per_request": 1,
+    "maximum_calls": 16,
+    "upper_bound_derivation": "8 * (1+1)",
+    "per_request_timeout_seconds": 90,
+    "shared_batch_budget_deadline_seconds": 1440,
+    "budget_method": "one shared ModelBudget limit16, same admission rule for both arms; late requests may be unexecuted after stop/deadline",
+    "transport_retries": 0,
+    "stop": "first execution/transport/storage/final contract failure",
+    "automatic_resume": false,
+    "semantic_rerun": false
+  },
+  "actual_differences": {
+    "model_visible": "system prompt content and length only; identical canonical task message per pair",
+    "metadata": "request_id/arm/prompt_version identify arm; sample_id and answer/basis IDs stay identical; metadata must not change correction or acceptance",
+    "uncontrolled": "sampling/provider drift, service timing and cache effects not eliminated by balanced order"
+  },
+  "offline_checks": {
+    "new_tests_passed": 6,
+    "task_message_identity_between_arms": true,
+    "same_parser_object": true,
+    "role_count_balance": "2 pairs each first arm",
+    "api_calls": 0
+  },
+  "review_labels_quality_expected_content_sent_to_model": false,
+  "production_changed": false,
+  "paid_authorization": false,
+  "executable_paid_runner_added": false,
+  "future_required": "Owner confirms inputs and quality checklist; then freeze exact execution entry/source/messages/settings and obtain new explicit paid destination/payload authorization"
+}

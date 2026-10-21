@@ -1,0 +1,168 @@
+[
+  {
+    "sample_id": "FMT-01",
+    "question": "按合成目录约定说明柚签是什么、用来做什么。",
+    "requirements": [
+      {
+        "requirement_id": "R1",
+        "description": "说明类别"
+      },
+      {
+        "requirement_id": "R2",
+        "description": "说明用途"
+      }
+    ],
+    "scenario_premises": [],
+    "evidence": [
+      {
+        "text": "柚签是一种目录标记，用于标出待复核条目。",
+        "url": "synthetic://FMT-01",
+        "locator": "synthetic-rule-v1",
+        "text_basis": "constructed development rule",
+        "evidence_id": "FMT-01-E1",
+        "scope_context": [],
+        "source_role": "literature"
+      }
+    ],
+    "answer": "柚签属于目录标记，用于标出待复核条目。",
+    "answer_units": [
+      {
+        "unit_id": "u-85d0a44bada4b09664b5d427dcfcca39dc4f5f55523a4ec5367d034ce29cd5cd",
+        "text": "柚签属于目录标记，用于标出待复核条目。",
+        "start": 0,
+        "end": 19
+      }
+    ],
+    "unit_version": "program-sentence-units-v1"
+  },
+  {
+    "sample_id": "FMT-02",
+    "question": "按合成玩具钟规则说明蓝色模式的步长及适用范围。",
+    "requirements": [
+      {
+        "requirement_id": "R1",
+        "description": "说明每次步长"
+      },
+      {
+        "requirement_id": "R2",
+        "description": "保留适用沙盘范围"
+      }
+    ],
+    "scenario_premises": [],
+    "evidence": [
+      {
+        "text": "蓝色模式每次前进两格；该规则仅适用于沙盘S。",
+        "url": "synthetic://FMT-02",
+        "locator": "synthetic-rule-v1",
+        "text_basis": "constructed development rule",
+        "evidence_id": "FMT-02-E1",
+        "scope_context": [],
+        "source_role": "literature"
+      }
+    ],
+    "answer": "蓝色模式每次前进三格。该规则仅适用于沙盘S。",
+    "answer_units": [
+      {
+        "unit_id": "u-43a648e1609761641ebba66cce37d850eebdfb44ace6394781875d354f408498",
+        "text": "蓝色模式每次前进三格。",
+        "start": 0,
+        "end": 11
+      },
+      {
+        "unit_id": "u-a16c4278f4c0cded1c5db6df46d71257ce9b5479f773fe28ae7ea18334217cc6",
+        "text": "该规则仅适用于沙盘S。",
+        "start": 11,
+        "end": 22
+      }
+    ],
+    "unit_version": "program-sentence-units-v1"
+  },
+  {
+    "sample_id": "FMT-03",
+    "question": "根据合成图书馆约定说明松纹牌的用途，不推测借阅权限。",
+    "requirements": [
+      {
+        "requirement_id": "R1",
+        "description": "说明标记的用途"
+      },
+      {
+        "requirement_id": "R2",
+        "description": "保留待修状态限定"
+      }
+    ],
+    "scenario_premises": [],
+    "evidence": [
+      {
+        "text": "松纹牌用于标记待修图书；这段约定不说明借阅权限。",
+        "url": "synthetic://FMT-03",
+        "locator": "synthetic-rule-v1",
+        "text_basis": "constructed development rule",
+        "evidence_id": "FMT-03-E1",
+        "scope_context": [],
+        "source_role": "literature"
+      }
+    ],
+    "answer": "松纹牌标记待修图书，持牌者还可无限借阅所有馆藏。",
+    "answer_units": [
+      {
+        "unit_id": "u-e81f32824dc5d011a656fc2d92857f4f123d8032ac84c6e98ec6cab046afc8ab",
+        "text": "松纹牌标记待修图书，持牌者还可无限借阅所有馆藏。",
+        "start": 0,
+        "end": 24
+      }
+    ],
+    "unit_version": "program-sentence-units-v1"
+  },
+  {
+    "sample_id": "FMT-04",
+    "question": "假定标本K属于软封类。按合成规则说明本题接收条件，并说明适用前提，不作现实验收结论。",
+    "requirements": [
+      {
+        "requirement_id": "R1",
+        "description": "说明本题假定的类别"
+      },
+      {
+        "requirement_id": "R2",
+        "description": "说明接收窗口条件"
+      }
+    ],
+    "scenario_premises": [
+      {
+        "premise_id": "p-9a52a2e704eecc6e3f58bb82eb960e1f3267e4f5481bd9d26e220a676b8a0e70",
+        "text": "标本K属于软封类",
+        "start": 2,
+        "end": 10,
+        "origin": "question",
+        "status": "assumed_for_this_question_only",
+        "site_verified": false
+      }
+    ],
+    "evidence": [
+      {
+        "text": "软封类样品仅在窗口T内接收。",
+        "url": "synthetic://FMT-04",
+        "locator": "synthetic-rule-v1",
+        "text_basis": "constructed development rule",
+        "evidence_id": "FMT-04-E1",
+        "scope_context": [],
+        "source_role": "literature"
+      }
+    ],
+    "answer": "按本题假定，标本K属于软封类。按规则，仅在窗口T内接收它。",
+    "answer_units": [
+      {
+        "unit_id": "u-25302a034b956f19097a772562cdd5f7397d440a57b3fe0deda2e43b4f4d06bf",
+        "text": "按本题假定，标本K属于软封类。",
+        "start": 0,
+        "end": 15
+      },
+      {
+        "unit_id": "u-ccb85821f10ea1859b59a18f82985e96566058b23a8e569df749586645f75dcf",
+        "text": "按规则，仅在窗口T内接收它。",
+        "start": 15,
+        "end": 29
+      }
+    ],
+    "unit_version": "program-sentence-units-v1"
+  }
+]
