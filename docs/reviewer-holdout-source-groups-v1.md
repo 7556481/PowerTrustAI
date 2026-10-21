@@ -1,6 +1,6 @@
 # 保留集来源分组清单v1（草案）
 
-2026-10-21新候选状态：CAND2-EIA-GLOSSARY（非同时需量）及CAND2-NRC-GLOSSARY（物理半衰期）选段/支持边界获本人确认，见[来源筛选与核对方式](reviewer-holdout-source-screening-v2.md)。保持候选组身份，非最终保留批次；前者相关术语表/同句转载、后者NRC术语表及同近定义的相关谱系继续关联。有限审计未发现直接开发关联，不证明完全独立。NRC本人仅经官方检索交叉核对，不登记本人直连或快照SHA核验。旧MIT/BIPM开发归属不变，无新题或预测。
+2026-10-21新候选状态：CAND2-EIA-GLOSSARY（非同时需量）及CAND2-NRC-GLOSSARY（物理半衰期）选段/支持边界获本人确认，见[来源筛选与核对方式](reviewer-holdout-source-screening-v2.md)。保持候选组身份，非最终保留批次；前者相关术语表/同句转载、后者NRC术语表及同近定义的相关谱系继续关联。有限审计未发现直接开发关联，不证明完全独立。NRC本人仅经官方检索交叉核对，不登记本人直连或快照SHA核验。旧MIT/BIPM开发归属不变。后续已按授权制作[EIA/NRC题卡草案](reviewer-eia-nrc-question-cards-v1.md)，问题/要求待复核，无回答、标签或预测。
 
 当前状态（2026-10-21）：使用两题批次契约失败改进开发诊断后，CAND-MIT-6002→DEV-MIT-6002、CAND-BIPM-SI9→DEV-BIPM-SI9，关联谱系整体留后续开发，不再作独立保留来源。历史候选登记/标签/结果保留；下文为当时分组记录。见[v5离线修订与边界](reviewer-field-diagnostics-v5-offline.md)。
 

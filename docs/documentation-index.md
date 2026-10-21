@@ -1,6 +1,8 @@
 # 文档索引
 
-- [新保留来源筛选v2](reviewer-holdout-source-screening-v2.md)：EIA非同时需量完整定义段、NRC半衰期首句及上下文；官方HTML快照/SHA、有限谱系与近重复核查，选段及边界已获本人确认，NRC经官方检索交叉核对、非本人快照SHA验真；仍候选未建卡，未出题/预测、协议不改。
+- [EIA/NRC两题卡草案](reviewer-eia-nrc-question-cards-v1.md)：H-EIA-001构成/区间、H-NRC-001对象比例/过程时间，各两项独立要求待本人复核；无回答/标签/预测，固定协议不改。
+
+- [新保留来源筛选v2](reviewer-holdout-source-screening-v2.md)：EIA非同时需量完整定义段、NRC半衰期首句及上下文；官方HTML快照/SHA、有限谱系与近重复核查，选段及边界已获本人确认，NRC经官方检索交叉核对、非本人快照SHA验真；来源仍候选；两卡草案另列待复核，未预测、协议不改。
 
 - **下一阶段固定候选：[独立评测通用协议v1](reviewer-independent-protocol-candidate-v1.md)**（[机器清单](reviewer-independent-protocol-candidate-v1.json)）：本人已采纳，非最终批次；映射须原定义依据、混合/歧义不自动转换，顺序事前固定并报告停止实际覆盖；v5与coverage v2及映射显式绑定，已知缺陷不隐藏；未选新来源、未冻结批次、0API。
 
