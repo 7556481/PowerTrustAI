@@ -1,0 +1,184 @@
+{
+  "date": "2026-10-21",
+  "purpose": "Owner requested exact selected final prediction fields for 12-reference semantic alignment review",
+  "publication_authorized": "User requested table or public push of proposition, support, basis IDs, judgment rationale and unit rationale",
+  "fields_are_verbatim": true,
+  "selection": "Final structurally valid response only; earlier invalid responses remain in original ignored archive, not rescored",
+  "verification": "All selected fields byte-equivalent as Unicode strings to JSON-decoded final response; response UTF-8 SHA verified",
+  "full_requests_responses_or_source_documents_published": false,
+  "api_calls": 0,
+  "historical_data_labels_scores_changed": false,
+  "owner_review_scope": "User reviewed all 12 public reference/mapping records but has not yet verified actual prediction text; final semantic alignment confirmation pending",
+  "repeated_prediction_note": "EIA-A01 U1/U2 deliberately repeat one combined proposition; two reference mappings, not two separate model judgments",
+  "original_stats_sha256": "255735c67d529d7cb90710b1e0240249049f6d2801d3fe483a9d9366126e2296",
+  "rows": [
+    {
+      "reference_unit_id": "H-EIA-001-A01/U1",
+      "prediction_unit_id": "u-825d047197f7f818257027932600804b8d3f9ea74fb18c5af2738104c1e598fb",
+      "judgment_index": 0,
+      "proposition": "Noncoincident demand is the sum of the demands of at least two individual systems, where these demands do not occur in the same demand interval.",
+      "support": "supported",
+      "basis_ids": [
+        "CAND2-EIA-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "The EIA glossary defines noncoincident demand as the sum of two or more demands on individual systems that do not occur in the same demand interval; the answer matches both elements without adding maximum demand, metering intervals or examples.",
+      "unit_rationale": "The single answer unit gives one definitional statement covering both required aspects.",
+      "final_call_number": 2,
+      "final_response_sha256_utf8": "354fee03163306a1574290c3483dc59ff34e3047d071de864453fc079dfe47f2"
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A01/U2",
+      "prediction_unit_id": "u-825d047197f7f818257027932600804b8d3f9ea74fb18c5af2738104c1e598fb",
+      "judgment_index": 0,
+      "proposition": "Noncoincident demand is the sum of the demands of at least two individual systems, where these demands do not occur in the same demand interval.",
+      "support": "supported",
+      "basis_ids": [
+        "CAND2-EIA-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "The EIA glossary defines noncoincident demand as the sum of two or more demands on individual systems that do not occur in the same demand interval; the answer matches both elements without adding maximum demand, metering intervals or examples.",
+      "unit_rationale": "The single answer unit gives one definitional statement covering both required aspects.",
+      "final_call_number": 2,
+      "final_response_sha256_utf8": "354fee03163306a1574290c3483dc59ff34e3047d071de864453fc079dfe47f2"
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A01/U1",
+      "prediction_unit_id": "u-36ffe8e3a4c2cb5c989ff6ec22f8c8c5266e43f1e76ea17bb06bd4fd735c1af8",
+      "judgment_index": 0,
+      "proposition": "For a particular radioactive substance, the time required for half of its atoms to transform into another nuclear form is the physical half-life.",
+      "support": "supported",
+      "basis_ids": [
+        "CAND2-NRC-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "The NRC glossary defines half-life as the time in which one half of the atoms of a particular radioactive substance disintegrate into another nuclear form, and notes it is also called physical half-life; the answer matches this definition.",
+      "unit_rationale": "Single sentence unit asserting the definition of physical half-life.",
+      "final_call_number": 3,
+      "final_response_sha256_utf8": "6dd399b6a9ab17849c4770557eb1972a7eaff95eed5e76951209782dd0002a68"
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A02/U1",
+      "prediction_unit_id": "u-b9cf8f0aabc9c2b3439d594e27f07cb72440fcc1d0a3c178df09087bc75a6c92",
+      "judgment_index": 0,
+      "proposition": "非同时需量涉及来自两个或更多个别系统的需量求和。",
+      "support": "supported",
+      "basis_ids": [
+        "CAND2-EIA-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "EIA术语将非同时需量定义为两个或更多个别系统需量之和，与断言一致。",
+      "unit_rationale": "单一断言单元，涵盖构成来源但省略区间限定。",
+      "final_call_number": 4,
+      "final_response_sha256_utf8": "c80c1bfe4b13dcb3f3868886d6a4f2f910f44dabd1a05c9a5b5724adfeed4fb5"
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A02/U1",
+      "prediction_unit_id": "u-1374bbb41facedf6bb5c697d3c72e9f3ad6d1bae26a1a265c977237fdeb6f96c",
+      "judgment_index": 0,
+      "proposition": "半衰期涉及特定放射性物质中一半原子转变为另一核形态。",
+      "support": "supported",
+      "basis_ids": [
+        "CAND2-NRC-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "NRC词汇表定义称半衰期是特定放射性物质一半原子衰变为另一核形态的时间；答案复述了物质、比例和转化内容，但未包含时间要素。",
+      "unit_rationale": "单一单元同时陈述物质、原子比例与核形态转变；时间含义未明确表达。",
+      "final_call_number": 5,
+      "final_response_sha256_utf8": "0a0fc5b3b6065b9efcc37143ab912e379b6a71f37898d7b16b7e5168ad7fbe2c"
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A03/U1",
+      "prediction_unit_id": "u-b819f22c7ad64af37b274b28b1fba4057356537b32958244ce75824b00deb66f",
+      "judgment_index": 0,
+      "proposition": "非同时需量涉及来自两个或更多个别系统的需量求和。",
+      "support": "supported",
+      "basis_ids": [
+        "CAND2-EIA-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "EIA词条定义其为来自两个或更多个别系统的需量之和，与此陈述一致。",
+      "unit_rationale": "单个句子，陈述需量来源与求和；属一般文献定义复述。",
+      "final_call_number": 7,
+      "final_response_sha256_utf8": "acbc09cee6904c0bf39a20865d3af958fe5332e6390bca54b3d6afca0c80b9b0"
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A03/U2",
+      "prediction_unit_id": "u-22eca250b602ae026a5c268ceac8d42938b6a3d5d1ba15897073d87dc7dc0045",
+      "judgment_index": 0,
+      "proposition": "这些需量发生在同一需量区间。",
+      "support": "contradicted",
+      "basis_ids": [
+        "CAND2-EIA-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "EIA词条明确这些需量不发生（do not occur）在同一需量区间，故该断言与文献相矛盾。",
+      "unit_rationale": "单个句子，陈述区间限定；与文献定义相反。",
+      "final_call_number": 7,
+      "final_response_sha256_utf8": "acbc09cee6904c0bf39a20865d3af958fe5332e6390bca54b3d6afca0c80b9b0"
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A03/U1",
+      "prediction_unit_id": "u-b35d308b1f175672b73e5db16bffd4736b25ee2a010b18b6c3c03de7ac8c28fc",
+      "judgment_index": 0,
+      "proposition": "物理半衰期并非特定放射性物质的一半原子转变为另一核形态所需的时间。",
+      "support": "contradicted",
+      "basis_ids": [
+        "CAND2-NRC-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "NRC资料将该表述定义为半衰期本身（亦称物理或放射学半衰期），即一半原子转变为另一核形态所需的时间；答案把定义内容否定为“不是”，与文献相反。",
+      "unit_rationale": "单一否定句，针对物理半衰期定义作出相反陈述。",
+      "final_call_number": 8,
+      "final_response_sha256_utf8": "2953409bf03931b4f921332d17c21d30e0b01a5aafbe8e86abd5384a201f3723"
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A04/U1",
+      "prediction_unit_id": "u-6cba6643b1f1c85f4d674d07c81fb150ce37ffbf1e942cad079f0f8f6b352461",
+      "judgment_index": 0,
+      "proposition": "非同时需量的定义是取来自两个或更多个别系统的需量的平均值，而不是求和。",
+      "support": "contradicted",
+      "basis_ids": [
+        "CAND2-EIA-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "文献说明非同时需量为两个或更多个别系统需量之和，答案称取平均值而非求和，与文献相反。",
+      "unit_rationale": "单一陈述句，给出构成关系但将其错误表述为平均值而非求和。",
+      "final_call_number": 10,
+      "final_response_sha256_utf8": "e2f3bed627728793a49ec8eca404386e2b26e23f75e98609fb36db97812d8e80"
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A04/U2",
+      "prediction_unit_id": "u-8aba0bb9302de5885b5e98b249cf13736f18d6ae627903d81e60168a60f5a39f",
+      "judgment_index": 0,
+      "proposition": "这些需量不在同一需量区间发生。",
+      "support": "supported",
+      "basis_ids": [
+        "CAND2-EIA-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "文献说明这些需量不在同一需量区间发生，与该句一致。",
+      "unit_rationale": "单一陈述句，表述区间限定，与文献一致。",
+      "final_call_number": 10,
+      "final_response_sha256_utf8": "e2f3bed627728793a49ec8eca404386e2b26e23f75e98609fb36db97812d8e80"
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A04/U1",
+      "prediction_unit_id": "u-2ad0367b789b38111b12aa6d686146df526e62f2d6660c610940859c8ef6a680",
+      "judgment_index": 0,
+      "proposition": "某种放射性物质的物理半衰期是半数原子转为另一核形态所需的时间。",
+      "support": "supported",
+      "basis_ids": [
+        "CAND2-NRC-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "NRC词汇表将半衰期定义为特定放射性物质半数原子衰变为另一核形态所需的时间；答案复述了这一定义并冠以物理半衰期，与范围上下文所称物理或放射学半衰期一致。",
+      "unit_rationale": "第一个单元复述了NRC给出的物理半衰期定义。",
+      "final_call_number": 12,
+      "final_response_sha256_utf8": "288ee861495aac3fc2556f956294b7da9fb4c72d96e7165fcf21902dafbd10a5"
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A04/U2",
+      "prediction_unit_id": "u-cb9d5b8cb1897765f877d2ad17d25f44a52128b247ad943ba094cff7eab56f4f",
+      "judgment_index": 0,
+      "proposition": "经过一个半衰期，该物质的放射性危害就完全消失。",
+      "support": "contradicted",
+      "basis_ids": [
+        "CAND2-NRC-GLOSSARY-X1"
+      ],
+      "judgment_rationale": "给出的NRC定义只说明经过一个半衰期后半数原子衰变为另一核形态，并未支持放射性或放射性危害完全消失的说法；按该定义，仍会有一半原始原子留存，因此该附加断言与定义范围相矛盾。",
+      "unit_rationale": "第二个单元提出了定义之外的危害完全消失主张。",
+      "final_call_number": 12,
+      "final_response_sha256_utf8": "288ee861495aac3fc2556f956294b7da9fb4c72d96e7165fcf21902dafbd10a5"
+    }
+  ]
+}
