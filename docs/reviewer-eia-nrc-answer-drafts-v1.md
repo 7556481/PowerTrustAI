@@ -1,5 +1,7 @@
 # EIA/NRC待复核回答与预期草案v1
 
+当前状态：本人已读完整表及两份JSON，确认8例全部拟标签。见[确认与白名单离线核对](evaluation/eia-nrc-answer-drafts-v1/README.md)。12参考单元为8支持/3矛盾/1不足/0无法评估，8回答只有2题/2来源组，不外推全面四分类能力；不是执行冻结或API授权。原草案标签字节不改，后续确认单独记录。下文待复核为历史准备过程。
+
 后续公开授权（2026-10-21）：本人明确要求“回答和标签也推送”，现提供[完整复核表](evaluation/eia-nrc-answer-drafts-v1/evaluator-only/review-table.md)、[回答JSON](evaluation/eia-nrc-answer-drafts-v1/candidates/answers.draft.json)及[标签JSON](evaluation/eia-nrc-answer-drafts-v1/evaluator-only/expected-labels.draft.json)，均仍待本人标签复核，非预测或成绩。原回答/标签字节未改；不刊官方证据全文、原始响应或凭据。用途隔离与公开后的标签保密限制见[公开版说明](evaluation/eia-nrc-answer-drafts-v1/README.md)。下文“只留忽略目录”是公开授权前状态，以本段为当前状态。
 
 2026-10-21，接续本人题卡复核及“下一步”指令，为[两题](reviewer-eia-nrc-question-cards-v1.md)各制作4份待复核回答。共8回答、16个coverage要求槽、12个参考语义单元。**全部为AI标注建议，尚未本人确认，不是预测或执行冻结。**

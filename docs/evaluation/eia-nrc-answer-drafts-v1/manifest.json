@@ -1,5 +1,5 @@
 {
-  "status": "public_drafts_pending_owner_label_review",
+  "status": "owner_confirmed_contents_not_execution_frozen",
   "publication_authorized_by_user": true,
   "candidate_count": 8,
   "coverage_slots": 16,
@@ -8,9 +8,19 @@
   "model_predictions_created": false,
   "api_calls": 0,
   "files": {
-    "README.md": "96cba8ca09cf060168ecd5a607e9662cf83ce4c9cd62dc177e3b5f477813ee87",
+    "owner-confirmation-v1.json": "9f55e973f047551f87d7cf37d75c265f56fd1e2c08aebd12c184a564a6fb0a01",
+    "README.md": "168efd78c8873393575f65418d08e462b31fc45138ee234b0ca0f980737b1bac",
     "candidates\\answers.draft.json": "ac03edf32ece6a0188e8d44affe4107ecfca60718bfba1a485b9ef1aff490d1e",
     "evaluator-only\\expected-labels.draft.json": "4dd0bf7b20834d362d5e2270fba10b0f63dc09dda6992cd01765393dcc858383",
-    "evaluator-only\\review-table.md": "c1f4ebcbd238f0bc74b6f09c6b0e9c4d52df73728ae47e4883b2e89aa6356eaa"
-  }
+    "evaluator-only\\review-table.md": "bbee1a925f92b5cd2a8a497a7f950f55e56997406d1dc90851e06f61b67d556e"
+  },
+  "owner_confirmation_file": "owner-confirmation-v1.json",
+  "class_distribution": {
+    "supported": 8,
+    "contradicted": 3,
+    "insufficient_evidence": 1,
+    "not_assessable": 0
+  },
+  "question_count": 2,
+  "source_group_count": 2
 }

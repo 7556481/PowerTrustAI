@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-21",
+  "status": "user_confirmed_8_answer_and_label_contents_not_batch_freeze",
+  "user_review_scope": "User read public review table and both JSONs, confirms all 8 proposed label contents; no statement of independently verified SHA",
+  "supervision": "AI-assisted, user-supervised, not expert gold",
+  "answers_sha256": "ac03edf32ece6a0188e8d44affe4107ecfca60718bfba1a485b9ef1aff490d1e",
+  "labels_sha256": "4dd0bf7b20834d362d5e2270fba10b0f63dc09dda6992cd01765393dcc858383",
+  "answer_count": 8,
+  "question_count": 2,
+  "source_group_count": 2,
+  "coverage_slots": 16,
+  "reference_units": 12,
+  "support_reference_counts": {
+    "supported": 8,
+    "contradicted": 3,
+    "insufficient_evidence": 1
+  },
+  "not_assessable_reference_count": 0,
+  "limitations": [
+    "class imbalance; not full four-class validation",
+    "8 answer variants, not 8 independent questions",
+    "evaluator-only is not access control; published labels are not confidential",
+    "reference labels/rationales/reference-unit splitting/sample roles excluded from model messages"
+  ],
+  "execution_frozen": false,
+  "paid_execution_authorized": false,
+  "api_calls": 0
+}
