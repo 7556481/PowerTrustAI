@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-21",
+  "status": "owner_report_text_review_recorded",
+  "reviewed_public_commit": "45d34a4b23826130b0a75273508e8afc4aedf55a",
+  "scope": "User read public report and reviewed classifications and aggregate statistics; no inference of independent local-file/SHA verification or all per-unit original-response alignment confirmation",
+  "characterization": "source-isolated small frozen evaluation record; execution successful, semantic issues retained",
+  "findings": {
+    "EIA_coverage": "Two disagreements reflect correctness leaking into coverage against frozen definition; no reference changes",
+    "NRC_A01": "Definition question improperly required actual-site verification; task/basis identity error",
+    "EIA_A04": "Unaligned by frozen policy; main contradiction judgment may be right, but no retrospective favorable-subclaim selection"
+  },
+  "accepted_report_counts": {
+    "final_complete": "8/8",
+    "first_structure_valid": "6/8",
+    "coverage_agreement": "14/16",
+    "support_aligned": "11/12",
+    "false_support_ratios": [
+      "0/3",
+      "0/7"
+    ]
+  },
+  "limitations": [
+    "tiny sample, two question/source groups",
+    "one erroneous refusal of support and one unaligned reference remain",
+    "zero false-support numerators do not imply general reliability",
+    "class imbalance and public labels remain",
+    "source isolation relative to project development, not proof of complete independence or unseen training"
+  ],
+  "original_report_stats_sha256": "9bdcce9a14879844cbff754387d9aec9d654484fd5c0842ce52235c739c623df",
+  "label_changes": false,
+  "new_model_calls": 0,
+  "future_paid_execution_authorized": false
+}

@@ -1,6 +1,6 @@
 # 文档索引
 
-- [EIA/NRC冻结批次v1结果](reviewer-eia-nrc-batch-v1.md)：8有效、10调用18145token、2纠正；覆盖2分歧/定义支持1分歧/复合参考1未对齐，原预期不改；[冻结](evaluation/eia-nrc-answer-drafts-v1/batch-freeze-v1.json)、[统计](evaluation/eia-nrc-answer-drafts-v1/batch-results-v1.json)，本轮结束不重跑。
+- [EIA/NRC冻结批次v1结果](reviewer-eia-nrc-batch-v1.md)：本人已读报告复核，8有效、10调用18145token、2纠正；三类问题分别保留：覆盖口径未遵循/定义任务身份误判/复合参考按冻结规则未对齐，原预期不改；[冻结](evaluation/eia-nrc-answer-drafts-v1/batch-freeze-v1.json)、[统计](evaluation/eia-nrc-answer-drafts-v1/batch-results-v1.json)，本轮结束不重跑。
 
 - [EIA/NRC公开回答与标签复核表](evaluation/eia-nrc-answer-drafts-v1/evaluator-only/review-table.md)：本人授权公开8回答/16coverage槽/12参考单元，8例标签内容已获本人确认；[JSON与用途隔离说明](evaluation/eia-nrc-answer-drafts-v1/README.md)，不含证据全文或模型运行数据，0API。
 
