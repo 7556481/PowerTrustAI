@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-21 本人授权复核材料默认直接上传仓库
+
+本人要求“直接上传云端仓库，之后都这样”。将完整12候选选段、必要上下文、定位及SHA发布为[云端复核正文](evaluation/baseline-source-review-v1/review.md)和[选段JSON](evaluation/baseline-source-review-v1/selected-source-excerpts-v1.json)；JSON与忽略原件逐字节一致，Markdown仅改公开状态及链接，不改选段语义。以后可公开的项目复核材料直接提交普通推送并回查，给GitHub链接，不只本地路径；官方整份原文/模型数据库/实际运行输入响应/凭据仍不上传。原候选/冻结/审计/data不覆盖，不增来源、题卡、回答、标签或模型调用。JSON/原文对照/链接/diff检查通过，不重跑全套测试。来源选段仍待本人复核，不把上传视为确认。
+
 ## 2026-10-21 四组新来源及八方向筛选完成，待本人原文范围复核
 
 本人授权直接筛来源、不再改规格提示。新增[筛选报告](reviewer-baseline-source-screening-v1.md)及[公开身份清单](reviewer-baseline-source-screening-v1.json)：NWS预报术语（PoP定义/天空状况可省略条件）、USGS GIP106（年超越概率/洪水成因差异）、NASA轨道（偏心率倾角/同步静止条件）、CDC应急用水（海拔煮水规则/化学污染例外），4组各2方向，未正式入组。完整12选段/上下文/精确区间与SHA在忽略data/evaluation_local/source-screening-baseline-v1/candidate-originals-review-v1.md及JSON，原HTML/PDF不进Git；这是跨主题组件基线，不宣称电力语义验收。472文本+4旧PDF518页有限核查，选段英文8词无重合；EIA旧全文NOAA机构/分区关键词命中已读，不属已见同定义链；CT未知、翻译/大库未审计/训练接触限制保留。USGS FAQ403后官方PDF取得、NASA关闭异常后正常TLS读取、DOE404弃选保留；USGS单页渲染核对。快照/选段回切/链接/JSON、v7提示+16源码SHA及parse同对象通过，不跑全套测试。0待评回答/标签/消息/模型调用，提示/生产/历史attempt不改；下一步本人原文范围确认，再题卡，非执行授权。按持续授权提交普通推送回查。

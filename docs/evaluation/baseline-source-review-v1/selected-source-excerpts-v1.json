@@ -1,0 +1,309 @@
+[
+  {
+    "id": "CAND-BL-NWS-FORECAST",
+    "publisher": "NOAA National Weather Service, Weather Forecast Office Pago Pago",
+    "title": "Forecast Terms",
+    "version": "Unnumbered live page; no content-specific publication/update date identified; snapshot 2026-10-21",
+    "url": "https://www.weather.gov/ppg/forecast_terms",
+    "raw": "NOAA.html",
+    "text": "NOAA.txt",
+    "directions": [
+      "PoP定义：可测液态或冻结降水水当量、给定时间、区域内任一点；区分概率与降水时长/面积断言。",
+      "预报表达的条件规则：高降水概率达到60%时天空状况可以省略；在明确假定预报概率下判断规则是否允许，区分may与must。"
+    ],
+    "limits": "只支持本页术语及表达惯例；12小时带unless specified otherwise，不推广至所有NWS产品；不把概率当确定降雨或面积/时长保证，60%允许省略不等于强制省略。无需判断天气实况或安全。",
+    "lineage": "NWS各办公室Forecast Terms、术语表、PFM说明、镜像与翻译按相关定义谱系关联。Juneau材料出现默认6小时，PPG本页为通常12小时，表格阈值也可能不同；不得混页补条件。本组不取概率乘积公式或不同办公室云量表。NRC其他报告有气象术语不等于旧half-life定义谱系；本次旧NRC选段全文核查另列。",
+    "links": [
+      "https://www.weather.gov/media/ajk/brochures/ConvectivevsStratiform.pdf",
+      "https://www.weather.gov/mrx/pfm_explain",
+      "https://forecast.weather.gov/glossary.php?word=K"
+    ],
+    "excerpts": [
+      {
+        "id": "NWS-X1",
+        "complete_selected_text": "The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \"on and off\" nature.",
+        "locator": "Precipitation Probability heading; complete body paragraph including following on/off sentence",
+        "span": [
+          3119,
+          3747
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "320dd854bee60780ed75175abb41bdc17da331064461519596817cc660440694",
+        "necessary_context": "The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \"on and off\" nature.",
+        "context_span": [
+          3119,
+          3747
+        ]
+      },
+      {
+        "id": "NWS-X2",
+        "complete_selected_text": "The sky condition describes the predominant/average sky cover based on percent of the sky covered by opaque (not transparent) clouds. If a high probability of precipitation (60% or greater) is expected, then the sky condition may be omitted since it is inferred from the precipitation forecast.",
+        "locator": "Sky Condition heading; complete opening paragraph, no table rows needed for this direction",
+        "span": [
+          2182,
+          2476
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "d71c65d90b9b4dd852d94834b306d3a6c962305d35319978deb8158d088c2b78",
+        "necessary_context": "The sky condition describes the predominant/average sky cover based on percent of the sky covered by opaque (not transparent) clouds. If a high probability of precipitation (60% or greater) is expected, then the sky condition may be omitted since it is inferred from the precipitation forecast.",
+        "context_span": [
+          2182,
+          2476
+        ]
+      }
+    ],
+    "snapshot_date": "2026-10-21",
+    "snapshot_bytes": 55132,
+    "snapshot_sha256": "fe2773f6722f67874632cfa07c8e8aede961208cce9702c8458578940f5545ae",
+    "extracted_text_sha256": "9daf5b34ca45be7dfe21e9eea10ec2ac13e7c287f1682ad493ee5421d8a67383",
+    "status": "screened_candidate_pending_owner_excerpt_review_not_admitted",
+    "protocol_change_required": false,
+    "owner_confirmed": false
+  },
+  {
+    "id": "CAND-BL-USGS-GIP106",
+    "publisher": "USGS; Robert R. Holmes, Jr. and Karen Dinicola",
+    "title": "100-Year Flood—It’s All About Chance: Haven’t we already had one this century?",
+    "version": "General Information Product 106, April 2010; DOI 10.3133/gip106; 1-page poster",
+    "url": "https://pubs.usgs.gov/gip/106/pdf/100-year-flood_041210web.pdf",
+    "raw": "USGS-gip106.pdf",
+    "text": "USGS-page-1.txt",
+    "directions": [
+      "百年洪水与1%年超越概率的关系：相等或超越、平均重现期与不规则间隔，不解释为固定100年一次。",
+      "洪水定义及成因关系：较高流量漫过自然或人工河岸，多种成因为什么不推出相同量级、持续时间或影响。"
+    ],
+    "limits": "只解释海报定义和概念关系；不预测某河具体日期/流量/现场风险，不把示例测站量值泛化，不在本候选中考图表运算、30年风险计算或置信区间语义。第二方向不强行构造某具体地区原因已查实。",
+    "lineage": "GIP106海报、handout/网页版本、USGS百年洪水FAQ及引用本海报的Fact Sheet 2011-3146、转载与翻译同组关联。主站FAQ直连403，搜索只作关联线索；本组证据载体以实际取得PDF为准，不冒称已取得FAQ快照。",
+    "links": [
+      "https://doi.org/10.3133/gip106",
+      "https://www.usgs.gov/faqs/we-had-a-100-year-flood-two-years-a-row-how-can-be",
+      "https://pubs.usgs.gov/fs/2011/3146/"
+    ],
+    "excerpts": [
+      {
+        "id": "USGS-X1",
+        "complete_selected_text": "In the 1960’s, the United States government \ndecided to use the 1-percent annual \nexceedance probability (AEP) flood as \nthe basis for the National Flood Insurance \nProgram. The 1-percent AEP flood was \nthought to be a fair balance between \nprotecting the public and overly stringent \nregulation.  Because the 1-percent AEP flood \nhas a 1 in 100 chance of being equaled or \nexceeded in any 1 year, and it has an average \nrecurrence interval of 100 years, it often is referred to as the “100-year flood”.",
+        "locator": "PDF page 1, left column: So what is a 100-year flood and how is it determined?, complete first paragraph",
+        "span": [
+          136,
+          639
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "64484e5160384a33fd3ea9d5da08dcffa723569ebe515f7995965b53ec8ec48f",
+        "necessary_context": "In the 1960’s, the United States government \ndecided to use the 1-percent annual \nexceedance probability (AEP) flood as \nthe basis for the National Flood Insurance \nProgram. The 1-percent AEP flood was \nthought to be a fair balance between \nprotecting the public and overly stringent \nregulation.  Because the 1-percent AEP flood \nhas a 1 in 100 chance of being equaled or \nexceeded in any 1 year, and it has an average \nrecurrence interval of 100 years, it often is referred to as the “100-year flood”.",
+        "context_span": [
+          136,
+          639
+        ]
+      },
+      {
+        "id": "USGS-X2",
+        "complete_selected_text": "A flood is any relatively high streamflow \novertopping the natural or artificial banks in \nany reach of a stream. Floods occur for many \nreasons, such as long-lasting rainfall over a broad \narea, locally intense thunderstorm-generated \nrainfall, or rapid melting of a large snow pack \nwith or without accompanying rainfall.  Because \nfloods result from many different circumstances, \nnot all floods are equal in magnitude, duration, or \neffect.   Placing floods in context allows society to address such issues as the risk to life and \nproperty, and to study and understand the environmental benefits of floods. Trying to place \ncontextual framework around floods is where such terms as “100-year flood” came into \nbeing.",
+        "locator": "PDF page 1, left top: What is a Flood?, complete body paragraph; extraction order differs from visual order",
+        "span": [
+          1904,
+          2625
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "b71dfcf69c8238efb51e89dafeaef03dbbf1695c8139fd357d483feb0fc42d1b",
+        "necessary_context": "A flood is any relatively high streamflow \novertopping the natural or artificial banks in \nany reach of a stream. Floods occur for many \nreasons, such as long-lasting rainfall over a broad \narea, locally intense thunderstorm-generated \nrainfall, or rapid melting of a large snow pack \nwith or without accompanying rainfall.  Because \nfloods result from many different circumstances, \nnot all floods are equal in magnitude, duration, or \neffect.   Placing floods in context allows society to address such issues as the risk to life and \nproperty, and to study and understand the environmental benefits of floods. Trying to place \ncontextual framework around floods is where such terms as “100-year flood” came into \nbeing.",
+        "context_span": [
+          1904,
+          2625
+        ]
+      },
+      {
+        "id": "USGS-X3",
+        "complete_selected_text": "The “100-year \nflood” is an \nestimate of the \nlong-term average \nrecurrence interval, \nwhich does not \nmean that we really \nhave 100 years \nbetween each flood \nof greater or equal \nmagnitude. Floods \nhappen irregularly.",
+        "locator": "PDF page 1, middle panel: On the river near me..., complete first paragraph; graph is not needed for this paragraph",
+        "span": [
+          2843,
+          3062
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "64dba6138583108b74d09b39a75aa75ab3de8c0c4b01f250bb014fb4dd632e65",
+        "necessary_context": "The “100-year \nflood” is an \nestimate of the \nlong-term average \nrecurrence interval, \nwhich does not \nmean that we really \nhave 100 years \nbetween each flood \nof greater or equal \nmagnitude. Floods \nhappen irregularly.",
+        "context_span": [
+          2843,
+          3062
+        ]
+      }
+    ],
+    "snapshot_date": "2026-10-21",
+    "snapshot_bytes": 1128297,
+    "snapshot_sha256": "52af423da7f5d6e5f6363b7e3c2c4a7c181fd4236cbdde167d4c9a714c6a0e26",
+    "extracted_text_sha256": "f3f5b5995ad4f0fbf0c66712a5a8aa69343fe887aa4f75be748aaf76d4b54659",
+    "status": "screened_candidate_pending_owner_excerpt_review_not_admitted",
+    "protocol_change_required": false,
+    "owner_confirmed": false
+  },
+  {
+    "id": "CAND-BL-NASA-ORBITS",
+    "publisher": "NASA Earth Observatory; story by Holli Riebeek, design by Robert Simmon",
+    "title": "Catalog of Earth Satellite Orbits",
+    "version": "Article Sep 04, 2009; page last updated Nov 14, 2025; no numbered edition",
+    "url": "https://science.nasa.gov/earth/earth-observatory/catalog-of-earth-satellite-orbits/",
+    "raw": "NASA-retrieved.html",
+    "text": "NASA-retrieved.txt",
+    "directions": [
+      "轨道偏心率与倾角分别描述什么；圆轨道/赤道轨道的条件不能互相替代。",
+      "地球同步与地球静止轨道的关系；在明确假定已是圆形、赤道上空的地球同步轨道时应用条件，不将所有同步轨道都说成地面相对静止。"
+    ],
+    "limits": "保留geosynchronous前提，单有零偏心率/零倾角不足以推出同步；不把科普理想描述当真实卫星轨道测定、维护保证、通信性能或碰撞安全认证；不引入开普勒推导、未交付公式或方向假定。",
+    "lineage": "旧Earth Observatory OrbitsCatalog路径、新science.nasa.gov迁移页、转载翻译及同句教材关联；文章列出Air University Space Primer、Pisacane Fundamentals of Space Systems等参考，作为上游线索，未下载扩展教材。已知开发教材是电路/电力资料，未发现这些参考身份直接关联；不能声称追溯了全部上游。",
+    "links": [
+      "https://earthobservatory.nasa.gov/features/OrbitsCatalog/",
+      "https://science.nasa.gov/learn/basics-of-space-flight/chapter5-1/"
+    ],
+    "excerpts": [
+      {
+        "id": "NASA-X1",
+        "complete_selected_text": "In addition to height, eccentricity and inclination also shape a satellite’s orbit. Eccentricity refers to the shape of the orbit. A satellite with a low eccentricity orbit moves in a near circle around the Earth. An eccentric orbit is elliptical, with the satellite’s distance from Earth changing depending on where it is in its orbit.",
+        "locator": "Body before Three Classes of Orbit, complete eccentricity paragraph",
+        "span": [
+          9408,
+          9744
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "4a8712f267248db1cd243771d8465b046ac1718b414a0adf2cf4026ef41163bf",
+        "necessary_context": "In addition to height, eccentricity and inclination also shape a satellite’s orbit. Eccentricity refers to the shape of the orbit. A satellite with a low eccentricity orbit moves in a near circle around the Earth. An eccentric orbit is elliptical, with the satellite’s distance from Earth changing depending on where it is in its orbit.",
+        "context_span": [
+          9408,
+          9744
+        ]
+      },
+      {
+        "id": "NASA-X2",
+        "complete_selected_text": "Inclination is the angle of the orbit in relation to Earth’s equator. A satellite that orbits directly above the equator has zero inclination. If a satellite orbits from the north pole (geographic, not magnetic) to the south pole, its inclination is 90 degrees.",
+        "locator": "Body before Three Classes of Orbit, complete inclination paragraph",
+        "span": [
+          10087,
+          10348
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "110db3b02e55085eea3dd1dd230beaa6f076b1ed9ea347b7b6c04d329d8a866c",
+        "necessary_context": "Inclination is the angle of the orbit in relation to Earth’s equator. A satellite that orbits directly above the equator has zero inclination. If a satellite orbits from the north pole (geographic, not magnetic) to the south pole, its inclination is 90 degrees.",
+        "context_span": [
+          10087,
+          10348
+        ]
+      },
+      {
+        "id": "NASA-X3",
+        "complete_selected_text": "When a satellite reaches exactly 42,164 kilometers from the center of the Earth (about 36,000 kilometers from Earth’s surface), it enters a sort of “sweet spot” in which its orbit matches Earth’s rotation. Because the satellite orbits at the same speed that the Earth is turning, the satellite seems to stay in place over a single longitude, though it may drift north to south. This special, high Earth orbit is called geosynchronous.",
+        "locator": "High Earth Orbit, complete first paragraph",
+        "span": [
+          10810,
+          11244
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "337f58d94b4f847a74899d82b43986a18980dfbec177ba00f9d88bb8b1c1765a",
+        "necessary_context": "When a satellite reaches exactly 42,164 kilometers from the center of the Earth (about 36,000 kilometers from Earth’s surface), it enters a sort of “sweet spot” in which its orbit matches Earth’s rotation. Because the satellite orbits at the same speed that the Earth is turning, the satellite seems to stay in place over a single longitude, though it may drift north to south. This special, high Earth orbit is called geosynchronous.",
+        "context_span": [
+          10810,
+          11244
+        ]
+      },
+      {
+        "id": "NASA-X4",
+        "complete_selected_text": "A satellite in a circular geosynchronous orbit directly over the equator (eccentricity and inclination at zero) will have a geostationary orbit that does not move at all relative to the ground. It is always directly over the same place on the Earth’s surface.",
+        "locator": "High Earth Orbit, complete second paragraph",
+        "span": [
+          11245,
+          11504
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "9dda7d71f4dd3a11dff9fa1912903eea21626ee2b01c557d5db05aff915b7c2e",
+        "necessary_context": "When a satellite reaches exactly 42,164 kilometers from the center of the Earth (about 36,000 kilometers from Earth’s surface), it enters a sort of “sweet spot” in which its orbit matches Earth’s rotation. Because the satellite orbits at the same speed that the Earth is turning, the satellite seems to stay in place over a single longitude, though it may drift north to south. This special, high Earth orbit is called geosynchronous.\nA satellite in a circular geosynchronous orbit directly over the equator (eccentricity and inclination at zero) will have a geostationary orbit that does not move at all relative to the ground. It is always directly over the same place on the Earth’s surface.",
+        "context_span": [
+          10810,
+          11504
+        ]
+      }
+    ],
+    "snapshot_date": "2026-10-21",
+    "snapshot_bytes": 351468,
+    "snapshot_sha256": "4e2d4a17f345defa498e56646628010937f9bd7db74e8e192aab3e459906a79e",
+    "extracted_text_sha256": "981659e93d61fc972a61cbcd5137f18c80452817d7129afff8b24b5d26429f56",
+    "status": "screened_candidate_pending_owner_excerpt_review_not_admitted",
+    "protocol_change_required": false,
+    "owner_confirmed": false
+  },
+  {
+    "id": "CAND-BL-CDC-WATER",
+    "publisher": "CDC, National Center for Environmental Health",
+    "title": "How to Make Water Safe in an Emergency",
+    "version": "Page date Sept. 19, 2024; no numbered edition; snapshot 2026-10-21",
+    "url": "https://www.cdc.gov/water-emergency/about/",
+    "raw": "CDC.html",
+    "text": "CDC.txt",
+    "directions": [
+      "应急煮水规则应用：保留清水、翻滚沸腾起算、高于6500英尺时3分钟及冷却/容器步骤；仅在明确题设条件下应用。",
+      "杀菌方法的适用边界：含燃料/有毒化学品/放射性材料的水不能靠煮沸或消毒保证安全，与一般杀菌规则的关系。"
+    ],
+    "limits": "用于文献规则理解和假定应用，不诊断实际水源、人体状况或现场饮用安全；不扩成任意处理技术永远不能净化，不制作漂白剂配比/治疗问题，不从清澈推出无化学污染。严格保留above而非擅改为大于等于阈值。",
+    "lineage": "CDC旧healthywater入口、新water-emergency页、同主题Natural Disasters音频稿/资料单、多语言翻译按相关谱系同组；EPA链接是相关上游/交叉说明线索，不借其他机构不同海拔阈值替换本页。放射性污染限制与NRC半衰期定义不是同一选段/派生关系，旧NRC文本仍实际查重。",
+    "links": [
+      "https://www.cdc.gov/natural-disasters/psa-toolkit/boil-water-advisory.html",
+      "https://www.cdc.gov/water-emergency/about/drinking-water-advisories-an-overview.html",
+      "https://stacks.cdc.gov/view/cdc/128149"
+    ],
+    "excerpts": [
+      {
+        "id": "CDC-X1",
+        "complete_selected_text": "You cannot make water containing fuel, toxic chemicals, or radioactive materials safe by boiling or disinfecting it. If you know or suspect your water contains fuel or toxic chemicals: 1) Use bottled water or a different source of water 2) Contact your health department for specific advice.",
+        "locator": "Overview > Water with fuel or toxic chemicals in it, complete paragraph",
+        "span": [
+          2759,
+          3050
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "dce65965f5109e297981d947507ef7185ac6f9a8dfa95f8140cfd8f3af27f33a",
+        "necessary_context": "You cannot make water containing fuel, toxic chemicals, or radioactive materials safe by boiling or disinfecting it. If you know or suspect your water contains fuel or toxic chemicals: 1) Use bottled water or a different source of water 2) Contact your health department for specific advice.",
+        "context_span": [
+          2759,
+          3050
+        ]
+      },
+      {
+        "id": "CDC-X2",
+        "complete_selected_text": "If the water is cloudy, first filter it through a clean cloth, paper towel, or coffee filter. Another option is to let it settle. Then, draw off the clear water and follow the steps below.\nBring clear water to a rolling boil for 1 minute (at elevations above 6,500 feet, boil for 3 minutes).\nLet the boiled water cool.\nStore the boiled water in clean, sanitized containers with tight covers.",
+        "locator": "Boil > Steps for boiling water, complete preparation paragraph and all three list items",
+        "span": [
+          3208,
+          3599
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "e0623bab395fb8b45978b61e4f0a03067a74b7e3c89422f125c2abfdfc502dc7",
+        "necessary_context": "If you don’t have safe bottled water, boil your water to make it safe to drink.\nBoiling is the best way to kill germs in water.\nSteps for boiling water\nIf the water is cloudy, first filter it through a clean cloth, paper towel, or coffee filter. Another option is to let it settle. Then, draw off the clear water and follow the steps below.\nBring clear water to a rolling boil for 1 minute (at elevations above 6,500 feet, boil for 3 minutes).\nLet the boiled water cool.\nStore the boiled water in clean, sanitized containers with tight covers.",
+        "context_span": [
+          3056,
+          3599
+        ]
+      },
+      {
+        "id": "CDC-X3",
+        "complete_selected_text": "Instead, use bottled, boiled, or treated water for drinking, cooking, and personal hygiene. Follow recommendations from your health department for boiling or treating your water.",
+        "locator": "Overview, complete paragraph specifying health-department recommendations",
+        "span": [
+          2297,
+          2475
+        ],
+        "offset_basis": "0-based Unicode code points, end exclusive, in named saved extraction; not raw bytes",
+        "sha256_utf8": "15778dead45aa73065a19307b5989738a315233bb452391146d01900ad771188",
+        "necessary_context": "Instead, use bottled, boiled, or treated water for drinking, cooking, and personal hygiene. Follow recommendations from your health department for boiling or treating your water.",
+        "context_span": [
+          2297,
+          2475
+        ]
+      }
+    ],
+    "snapshot_date": "2026-10-21",
+    "snapshot_bytes": 71056,
+    "snapshot_sha256": "403a9acc422568c7bc9cbf0feea9cb3f9aacf30ddc325f8bfc0ecd48b6e53f38",
+    "extracted_text_sha256": "18bdcec7656d47491881e980dd37453a293d4bc6e5bdbefd5010426f85b4bec0",
+    "status": "screened_candidate_pending_owner_excerpt_review_not_admitted",
+    "protocol_change_required": false,
+    "owner_confirmed": false
+  }
+]

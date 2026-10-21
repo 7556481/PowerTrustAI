@@ -1,5 +1,7 @@
 # 小规模组件基线：四组新来源筛选v1
 
+后续公开（2026-10-21）：本人明确要求直接上传云端仓库、以后同样交付。完整候选选段及必要上下文现可阅读[公开复核正文](evaluation/baseline-source-review-v1/review.md)与[原选段JSON](evaluation/baseline-source-review-v1/selected-source-excerpts-v1.json)，不再限本地路径；下文“仅留忽略目录”为此前交付时点，原件及整份快照仍留data，原身份不改。
+
 2026-10-21。依据本人授权及[正式规格](reviewer-component-baseline-spec-v1.md)，一次整理4个新来源组、各2个候选问题方向；**待本人原文/范围复核，未正式入组**。无待评回答、参考标签、模型调用或提示修改。方向不是正式题卡，来源确认不升级为标签或执行确认。
 
 本批为跨主题评审组件基线，不代表电力专业语义验证。按原文可解释的边界选材，不为24回答配额硬造标签；暂无清楚not_assessable案例，不强行设计。
