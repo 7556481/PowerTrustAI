@@ -1,0 +1,186 @@
+{
+  "status": "draft_pending_owner_question_and_requirement_review",
+  "usage": "evaluator only; never include rubric/expected details in model messages; public visibility is not access isolation",
+  "cards": [
+    {
+      "card_id": "H-BL-NWS-01",
+      "requirements": [
+        {
+          "id": "R1",
+          "coverage_aspects_not_correctness_gate": "降水事件及阈值；指定时段；预报区域内任一点。明确反向说法也可回应这些方面；遗漏上述必要方面时记录对应内容缺口，正确性另评。",
+          "support_and_scope_checks_not_answer_labels": "概率针对可测液态降水或冻结降水的水当量，阈值为至少0.01英寸；不能改成降水面积/时长比例或确定降雨。"
+        },
+        {
+          "id": "R2",
+          "coverage_aspects_not_correctness_gate": "通常时段与能否另行指定两个方面。不能因R1缺空间范围而再次降低已明确的R2。",
+          "support_and_scope_checks_not_answer_labels": "本页通常12小时，保留unless specified otherwise；不是全部NWS产品统一固定12小时。"
+        }
+      ],
+      "background_not_automatically_required": [
+        "80%及以上间歇性用语、云量表、风速、时段表和概率公式不属本题必答内容。",
+        "不要求额外主动否定面积/时长解释；若主动作此断言，独立评支持。"
+      ],
+      "allowed_expressions": "合理中文同义、合理拆合均可；不按参考措辞逐字匹配",
+      "independent_scoring": "每要求分别评覆盖；明确说反仍可covered，错误性在支持侧单列；不因另一要求缺失重复降低已回应项；实际缺必要对象、范围或条件才partial/missing。",
+      "reviewer_reason_quality": "分别记录局部空泛、标签冲突、无据推论；不设充分比例，不制作预测标签。"
+    },
+    {
+      "card_id": "H-BL-NWS-02",
+      "requirements": [
+        {
+          "id": "R1",
+          "coverage_aspects_not_correctness_gate": "触发条件与许可/强制关系均须回应，不以实际结论正确性代替是否回应。",
+          "support_and_scope_checks_not_answer_labels": "60%及以上；may允许省略，不是必须省略。不能把60%改为严格大于60%。"
+        },
+        {
+          "id": "R2",
+          "coverage_aspects_not_correctness_gate": "须把给定60%与规则联系；只复述一般规则未回应应用。R1与应用分别交代，不重复惩罚其他遗漏。",
+          "support_and_scope_checks_not_answer_labels": "60%达到含等号阈值，因此规则允许省略但不要求必须省略；只是假定应用，不证明某实际预报已审核。"
+        }
+      ],
+      "background_not_automatically_required": [
+        "不要求天空云量比例表、形成降水的物理机制或现场天气核验。",
+        "未讲天空状况为何可从降水预报推知不额外扣覆盖；问题只要求条件、许可及应用。"
+      ],
+      "allowed_expressions": "合理中文同义、合理拆合均可；不按参考措辞逐字匹配",
+      "independent_scoring": "每要求分别评覆盖；明确说反仍可covered，错误性在支持侧单列；不因另一要求缺失重复降低已回应项；实际缺必要对象、范围或条件才partial/missing。",
+      "reviewer_reason_quality": "分别记录局部空泛、标签冲突、无据推论；不设充分比例，不制作预测标签。"
+    },
+    {
+      "card_id": "H-BL-USGS-01",
+      "requirements": [
+        {
+          "id": "R1",
+          "coverage_aspects_not_correctness_gate": "回答概率、达到/超过的量级关系和任一年范围；明确反向回答仍按已回应方面评覆盖。",
+          "support_and_scope_checks_not_answer_labels": "任一年达到或超过相应洪水量级的概率为1%，不能仅说恰等于而排除超过，也不是发生后100年概率归零。"
+        },
+        {
+          "id": "R2",
+          "coverage_aspects_not_correctness_gate": "须回应平均值是否等于固定间隔；仅重复百年名称不足以说明关系。",
+          "support_and_scope_checks_not_answer_labels": "长期平均重现期不保证固定100年间隔，洪水不规则发生。"
+        }
+      ],
+      "background_not_automatically_required": [
+        "不要求保险政策背景、测站数量、图表或30年累计概率，也不把示例量值当通用值。"
+      ],
+      "allowed_expressions": "合理中文同义、合理拆合均可；不按参考措辞逐字匹配",
+      "independent_scoring": "每要求分别评覆盖；明确说反仍可covered，错误性在支持侧单列；不因另一要求缺失重复降低已回应项；实际缺必要对象、范围或条件才partial/missing。",
+      "reviewer_reason_quality": "分别记录局部空泛、标签冲突、无据推论；不设充分比例，不制作预测标签。"
+    },
+    {
+      "card_id": "H-BL-USGS-02",
+      "requirements": [
+        {
+          "id": "R1",
+          "coverage_aspects_not_correctness_gate": "较高流量与漫过河岸的关系；自然/人工河岸的范围，不要求特定测站数值。",
+          "support_and_scope_checks_not_answer_labels": "相对较高的河流流量漫过某段河道的自然或人工河岸；不是任意降雨都自动成为该定义下的洪水。"
+        },
+        {
+          "id": "R2",
+          "coverage_aspects_not_correctness_gate": "要求两种可能成因及其备选/共同必要关系；接受所列任意两种，不按清单顺序匹配。",
+          "support_and_scope_checks_not_answer_labels": "大范围长时间降雨、局地强雷暴降雨、大积雪快速融化（可伴随或不伴随降雨）为例示可能成因；不能推出所有列举原因每次共同发生。"
+        },
+        {
+          "id": "R3",
+          "coverage_aspects_not_correctness_gate": "三个差异维度及是否必然相同的关系；不因R2只列一种成因重复降低已明确的R3。",
+          "support_and_scope_checks_not_answer_labels": "不同情况导致洪水，不是所有洪水在量级、持续时间或影响上都相同。不能据文献认定某次现场成因已经查实。"
+        }
+      ],
+      "background_not_automatically_required": [
+        "不要求社会环境效益、图表或具体事件、概率建模；成因示例不是穷尽清单。"
+      ],
+      "allowed_expressions": "合理中文同义、合理拆合均可；不按参考措辞逐字匹配",
+      "independent_scoring": "每要求分别评覆盖；明确说反仍可covered，错误性在支持侧单列；不因另一要求缺失重复降低已回应项；实际缺必要对象、范围或条件才partial/missing。",
+      "reviewer_reason_quality": "分别记录局部空泛、标签冲突、无据推论；不设充分比例，不制作预测标签。"
+    },
+    {
+      "card_id": "H-BL-NASA-01",
+      "requirements": [
+        {
+          "id": "R1",
+          "coverage_aspects_not_correctness_gate": "轨道形状与低偏心率的形状关系；不要求偏心率公式或具体数值。",
+          "support_and_scope_checks_not_answer_labels": "偏心率关乎形状；低偏心率支持近圆，不自动等于偏心率零或精确圆形。"
+        },
+        {
+          "id": "R2",
+          "coverage_aspects_not_correctness_gate": "倾角与地球赤道的关系及赤道上空情形；不要求再答极地90度。",
+          "support_and_scope_checks_not_answer_labels": "倾角是轨道相对地球赤道的角度；直接在赤道上空对应零倾角。零倾角不自动证明同步。"
+        }
+      ],
+      "background_not_automatically_required": [
+        "极地90度保留为背景，不是必答点；轨道距离、same speed、位置/方向和周期计算均不出题。",
+        "不要求主动陈述所有不能推出的结论；主动附加的同步或静止结论独立评支持。"
+      ],
+      "allowed_expressions": "合理中文同义、合理拆合均可；不按参考措辞逐字匹配",
+      "independent_scoring": "每要求分别评覆盖；明确说反仍可covered，错误性在支持侧单列；不因另一要求缺失重复降低已回应项；实际缺必要对象、范围或条件才partial/missing。",
+      "reviewer_reason_quality": "分别记录局部空泛、标签冲突、无据推论；不设充分比例，不制作预测标签。"
+    },
+    {
+      "card_id": "H-BL-NASA-02",
+      "requirements": [
+        {
+          "id": "R1",
+          "coverage_aspects_not_correctness_gate": "必须回应给定假定下的类别；题设已交付同步/圆形/赤道上空，不把重复全部题设词语另立必答点。",
+          "support_and_scope_checks_not_answer_labels": "三项联合假定符合NASA-X4地球静止轨道条件；不能仅凭零偏心率/零倾角或某距离独立证明地球同步。"
+        },
+        {
+          "id": "R2",
+          "coverage_aspects_not_correctness_gate": "相对地面是否移动以及是否在同一地表位置上方；问题的相对参照不替换成惯性空间静止。",
+          "support_and_scope_checks_not_answer_labels": "按资料理想描述相对地面不移动，始终位于同一地表地点上方；不是实测轨道或维持/通信/安全保证。"
+        }
+      ],
+      "background_not_automatically_required": [
+        "NASA-X3作为完整上下文交付，不从其距离或same speed建立评分事实；不考方向、任意位置、周期或轨道推导。",
+        "不要求实际记录验证假定；不要求额外说明轨道维护、摄动或工程可行性。"
+      ],
+      "allowed_expressions": "合理中文同义、合理拆合均可；不按参考措辞逐字匹配",
+      "independent_scoring": "每要求分别评覆盖；明确说反仍可covered，错误性在支持侧单列；不因另一要求缺失重复降低已回应项；实际缺必要对象、范围或条件才partial/missing。",
+      "reviewer_reason_quality": "分别记录局部空泛、标签冲突、无据推论；不设充分比例，不制作预测标签。"
+    },
+    {
+      "card_id": "H-BL-CDC-01",
+      "requirements": [
+        {
+          "id": "R1",
+          "coverage_aspects_not_correctness_gate": "计时状态、通常时长及例外的严格海拔条件/时长；不要求提及冷却储存。",
+          "support_and_scope_checks_not_answer_labels": "清水翻滚沸腾1分钟；海拔严格高于6500英尺时3分钟，不改成高于或等于，也不从加热起始时刻计时。"
+        },
+        {
+          "id": "R2",
+          "coverage_aspects_not_correctness_gate": "明确回应该假定适用何时长；仅重复通用规则却不映射题设，记录应用缺口。",
+          "support_and_scope_checks_not_answer_labels": "7000英尺高于6500英尺，采用3分钟；文献和假定联合应用不证明现场绝对安全。"
+        }
+      ],
+      "background_not_automatically_required": [
+        "完整交付化学/放射性污染例外及处理上下文；清水不等于无化学污染，时长符合不构成安全认证。",
+        "准备、冷却、容器/盖子、联系卫生部门均为背景，不自动新增覆盖要求；不要求主动复述污染例外，但若声称绝对安全需独立评支持。"
+      ],
+      "allowed_expressions": "合理中文同义、合理拆合均可；不按参考措辞逐字匹配",
+      "independent_scoring": "每要求分别评覆盖；明确说反仍可covered，错误性在支持侧单列；不因另一要求缺失重复降低已回应项；实际缺必要对象、范围或条件才partial/missing。",
+      "reviewer_reason_quality": "分别记录局部空泛、标签冲突、无据推论；不设充分比例，不制作预测标签。"
+    },
+    {
+      "card_id": "H-BL-CDC-02",
+      "requirements": [
+        {
+          "id": "R1",
+          "coverage_aspects_not_correctness_gate": "燃料、有毒化学品、放射性材料的范围与煮沸/消毒能否保证安全的关系。",
+          "support_and_scope_checks_not_answer_labels": "不能靠煮沸或消毒使这些污染水安全；不能改成延长煮沸即可，或扩成所有处理技术永远无效。"
+        },
+        {
+          "id": "R2",
+          "coverage_aspects_not_correctness_gate": "回应杀菌目标与污染/实际安全结论是否相同；不是要求现场核验才能转述定义。",
+          "support_and_scope_checks_not_answer_labels": "杀灭病菌的规则不能跨越化学/放射性限制，也不核实现场污染、处理过程或最终水质；外观清澈/合时长不支持绝对安全。"
+        }
+      ],
+      "background_not_automatically_required": [
+        "不要求替代水源、联系部门、冷却/容器、漂白剂配比或医学处置；原文背景完整保留。"
+      ],
+      "allowed_expressions": "合理中文同义、合理拆合均可；不按参考措辞逐字匹配",
+      "independent_scoring": "每要求分别评覆盖；明确说反仍可covered，错误性在支持侧单列；不因另一要求缺失重复降低已回应项；实际缺必要对象、范围或条件才partial/missing。",
+      "reviewer_reason_quality": "分别记录局部空泛、标签冲突、无据推论；不设充分比例，不制作预测标签。"
+    }
+  ],
+  "reference_answer_texts_created": false,
+  "answer_support_labels_created": false
+}

@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-21",
+  "baseline_commit": "9c5f38f952da23ff9f9a44fd14facd8bc4bbb54c",
+  "source_excerpt_file": "docs/evaluation/baseline-source-review-v1/selected-source-excerpts-v1.json",
+  "source_excerpt_file_sha256": "d01311a2d4c247fb2455d78e19b5831605d182fd7aeb76b05fdf5dc9545904cb",
+  "spec_sha256": "61134a61458bd4fb4bc91297ccf66edb3ba9391fa4a539f6ce168598ac2e25bb",
+  "files": {
+    "source-owner-confirmation-v1.json": "80a3bb641c3c06648e98d98b1962428550a60e22fe59ee42d6d3b626b3e3f952",
+    "cards-v1.json": "4809f0b3406e57c483f408e8fa4f905b75f0f0ffeb96e7f4971d3278b150960e",
+    "evaluator-rubric-v1.json": "2c03cfb22a738b0684b1843b4fc52aa5cbde83a4fa3017d96fdbb8df33124de9",
+    "README.md": "80ace33651bf4aa3f15d28704859e16879067886d82e7e9d09eae371498a91d0"
+  },
+  "counts": {
+    "source_groups": 4,
+    "families": 8,
+    "questions": 8,
+    "requirements": 17,
+    "hypothetical_questions": 3,
+    "answers": 0,
+    "labels": 0,
+    "predictions": 0,
+    "new_model_calls": 0
+  },
+  "card_review_status": "pending_owner; source acceptance is not question acceptance",
+  "prompt_or_parser_changed": false,
+  "production_changed": false,
+  "paid_execution_authorized": false,
+  "offline_checks": "SHA/source/context equality, premise span roundtrip and existing basis catalog, exact 4x2 groups, local links; no full test rerun or generated model messages",
+  "validation": {
+    "source_groups_4_each_two_cards": true,
+    "requirement_ids_consistent": true,
+    "all_source_texts_and_contexts_identical": true,
+    "premise_spans_and_existing_basis_catalog_checked": true,
+    "no_answer_or_prediction_fields": true,
+    "frozen_prompt_and_16_code_hashes_unchanged": true,
+    "local_links_passed": true,
+    "initial_preparation_failure": "direct script import could not resolve evaluation; reran offline via runpy with project-root module path, no dependency/environment/code changes"
+  }
+}

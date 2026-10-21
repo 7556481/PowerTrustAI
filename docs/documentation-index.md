@@ -1,5 +1,7 @@
 # 文档索引
 
+- **当前复核入口：[8张问题卡与明确评分要求v1](evaluation/baseline-question-cards-v1/README.md)**：4组各2卡、17要求、3显式假定；[题卡](evaluation/baseline-question-cards-v1/cards-v1.json)、[评测侧评分解释](evaluation/baseline-question-cards-v1/evaluator-rubric-v1.json)、[来源本人限定确认](evaluation/baseline-question-cards-v1/source-owner-confirmation-v1.json)、[身份/检查](evaluation/baseline-question-cards-v1/manifest-v1.json)。来源已确认，新卡片/要求待本人复核；证据背景非自动必答，NASA用途收窄，0回答/标签/预测/调用，通用提示不改。
+
 - **可直接在GitHub阅读：[四组来源完整选段复核正文](evaluation/baseline-source-review-v1/review.md)**（[原选段JSON](evaluation/baseline-source-review-v1/selected-source-excerpts-v1.json)）：本人授权公开12完整选段及必要上下文/定位/SHA，JSON与私有原件逐字节一致；整份原文快照仍留忽略data。以后复核材料默认提交推送并给远端链接。
 
 - **来源筛选入口：[四组新来源、各两方向](reviewer-baseline-source-screening-v1.md)**（[身份与精确定位清单](reviewer-baseline-source-screening-v1.json)）：NWS/USGS/NASA/CDC，12完整选段及上下文在忽略data/evaluation_local/source-screening-baseline-v1/candidate-originals-review-v1.md，待本人原文范围确认。472文本/518旧PDF页有限审计，快照与原文回切验证；0回答/标签/模型调用，提示不改。

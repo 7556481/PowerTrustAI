@@ -1,0 +1,58 @@
+{
+  "record_id": "baseline-source-owner-confirmation-v1",
+  "date": "2026-10-21",
+  "reviewed_commit": "9c5f38f952da23ff9f9a44fd14facd8bc4bbb54c",
+  "source": "User explicitly states personal confirmation after reading fixed-commit complete materials; AI review assisted, user supervised, not expert gold",
+  "confirmation_scope": "Four source texts and stated use boundaries accepted for question-card preparation; NASA use narrowed",
+  "not_confirmed": [
+    "owner local snapshot SHA verification",
+    "complete source independence",
+    "foundation-model training non-exposure",
+    "new question cards or answer labels",
+    "paid execution"
+  ],
+  "public_excerpt_file_sha256_assistant_checked": "d01311a2d4c247fb2455d78e19b5831605d182fd7aeb76b05fdf5dc9545904cb",
+  "public_review_git_blob": "ede3fb93343e3fba6d0c8d23d7594e771ca19151",
+  "group_decisions": [
+    {
+      "group": "CAND-BL-NWS-FORECAST",
+      "decision": "accepted",
+      "boundaries": [
+        "60% or greater",
+        "may is permitted, not mandatory",
+        "12 hours normally unless specified otherwise",
+        "probability is not time/area fraction"
+      ]
+    },
+    {
+      "group": "CAND-BL-USGS-GIP106",
+      "decision": "accepted",
+      "boundaries": [
+        "1% equaled or exceeded in any year",
+        "average recurrence is not fixed interval",
+        "listed causes are alternatives, not all jointly required"
+      ]
+    },
+    {
+      "group": "CAND-BL-NASA-ORBITS",
+      "decision": "accepted_with_narrowed_use",
+      "boundaries": [
+        "low eccentricity means near circle, not zero",
+        "application stipulates geosynchronous, circular, directly over equator",
+        "NASA-X3 distance and same speed not grounds for numeric/location/direction problems"
+      ]
+    },
+    {
+      "group": "CAND-BL-CDC-WATER",
+      "decision": "accepted",
+      "boundaries": [
+        "strictly above 6500 feet",
+        "chemical and radioactive contamination boundary",
+        "rule understanding not absolute actual-site safety",
+        "cooling/storage context not automatically required when question asks only time"
+      ]
+    }
+  ],
+  "context_policy": "Delivered context is not a list of mandatory answer details",
+  "new_model_calls": 0
+}
