@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-21",
+  "status": "owner_confirmed_all_12_reference_alignments_one_label_disagreement_preserved",
+  "confirmation_source": "User explicitly read all 12 published verbatim prediction rows and compared with public references",
+  "review_scope": "Selected published prediction fields and reference semantics; not owner verification of local raw response files or snapshot SHA",
+  "supervision": "AI assisted, user supervised; not expert gold",
+  "all_12_reference_alignments_owner_confirmed": true,
+  "reference_units": 12,
+  "distinct_model_judgments": 11,
+  "support_labels_matching_reference": 11,
+  "support_label_disagreements": 1,
+  "alignment_is_not_support_correctness": true,
+  "key_boundaries": {
+    "EIA-A01": "One explicit combined prediction maps to two reference assertions; not two independent model judgments",
+    "EIA-A04": "Current complete contradictory definition has no mixed-label quantity subjudgment; unchanged matching rule permits alignment; old batch remains unaligned",
+    "NRC-A04/U2": "Proposition aligns; insufficient_evidence reference vs contradicted prediction preserved; surviving atoms do not supply full hazard relation",
+    "basis_ids": "User found no cross-source borrowing in published fields; identity match does not certify support"
+  },
+  "rows": [
+    {
+      "reference_unit_id": "H-EIA-001-A01/U1",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "supported",
+      "frozen_reference_label": "supported",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A01/U2",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "supported",
+      "frozen_reference_label": "supported",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A01/U1",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "supported",
+      "frozen_reference_label": "supported",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A02/U1",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "supported",
+      "frozen_reference_label": "supported",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A02/U1",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "supported",
+      "frozen_reference_label": "supported",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A03/U1",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "supported",
+      "frozen_reference_label": "supported",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A03/U2",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "contradicted",
+      "frozen_reference_label": "contradicted",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A03/U1",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "contradicted",
+      "frozen_reference_label": "contradicted",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A04/U1",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "contradicted",
+      "frozen_reference_label": "contradicted",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-EIA-001-A04/U2",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "supported",
+      "frozen_reference_label": "supported",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A04/U1",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "supported",
+      "frozen_reference_label": "supported",
+      "label_matches_reference": true
+    },
+    {
+      "reference_unit_id": "H-NRC-001-A04/U2",
+      "alignment_owner_confirmed": true,
+      "prediction_label": "contradicted",
+      "frozen_reference_label": "insufficient_evidence",
+      "label_matches_reference": false
+    }
+  ],
+  "bound_artifact_sha256": {
+    "docs/reviewer-v6-prediction-excerpts-v1.json": "64eb72040ed1b9bb97da494311713c392e402a1128d76ec0b274a3ba0001ef8d",
+    "docs/reviewer-v6-prediction-excerpts-v1.md": "438faa1929d56b93d9234bd13a90d0d8f68a3a78a249d87e857a214a7ff8df9e",
+    "docs/reviewer-v6-development-recheck-results-v1.json": "255735c67d529d7cb90710b1e0240249049f6d2801d3fe483a9d9366126e2296",
+    "docs/reviewer-v6-development-recheck-freeze-v1.json": "76ecff1cff8d3a1ecc7a0d1396903945a6c8b88697be045c0eaca5f4b04f6353",
+    "docs/reviewer-v6-candidate-closeout-v1.json": "b15f925eabab786baf4524960ffcd27ac48c23209b46aa9ecf9cfc8d53542e58"
+  },
+  "old_labels_scores_rules_or_raw_data_changed": false,
+  "production_adoption": false,
+  "production_changed": false,
+  "new_api_calls": 0,
+  "automatic_resume": false,
+  "candidate_status": "archived development candidate with semantic and structural limitations; no independent score claim"
+}
