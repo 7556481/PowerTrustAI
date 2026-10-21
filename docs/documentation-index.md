@@ -1,5 +1,7 @@
 # 文档索引
 
+- **当前待复核改动：[NASA歧义预测前修订v2及原整批复核](evaluation/baseline-answer-drafts-v2/README.md)**：原24回答文本复核归档，原NASA01A03U2不足/矛盾分歧保留；[v2回答](evaluation/baseline-answer-drafts-v2/answers-v2.json)、[v2标签](evaluation/baseline-answer-drafts-v2/expected-labels-v2.json)、[差异与统计](evaluation/baseline-answer-drafts-v2/revision-v2.json)、[原逐项文本复核](evaluation/baseline-answer-drafts-v2/user-text-review-v1.json)、[身份/检查](evaluation/baseline-answer-drafts-v2/manifest-v2.json)。只改1回答，23保持；24回答/51覆盖/58参考，新句与映射待确认，0模型调用，旧v1保留。
+
 - **当前整批复核：[24回答、参考单元与预期标签v1](evaluation/baseline-answer-drafts-v1/README.md)**：4组8家族，51覆盖槽/57参考单元；[回答](evaluation/baseline-answer-drafts-v1/answers-v1.json)、[参考标签](evaluation/baseline-answer-drafts-v1/expected-labels-v1.json)、[组成项](evaluation/baseline-answer-drafts-v1/requirement-components-v1.json)、[题卡文本v2](evaluation/baseline-answer-drafts-v1/reviewed-cards-v2.json)、[AI辅助用户文本设计确认](evaluation/baseline-answer-drafts-v1/question-owner-confirmation-v1.json)、[身份/检查](evaluation/baseline-answer-drafts-v1/manifest-v1.json)。新回答与标签均待确认；NASA题面仅换内部定位措辞，通用协议不变，0预测/调用/训练。
 
 - **当前复核入口：[8张问题卡与明确评分要求v1](evaluation/baseline-question-cards-v1/README.md)**：4组各2卡、17要求、3显式假定；[题卡](evaluation/baseline-question-cards-v1/cards-v1.json)、[评测侧评分解释](evaluation/baseline-question-cards-v1/evaluator-rubric-v1.json)、[来源本人限定确认](evaluation/baseline-question-cards-v1/source-owner-confirmation-v1.json)、[身份/检查](evaluation/baseline-question-cards-v1/manifest-v1.json)。来源已确认，新卡片/要求待本人复核；证据背景非自动必答，NASA用途收窄，0回答/标签/预测/调用，通用提示不改。

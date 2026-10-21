@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-21",
+  "baseline_commit": "dfc67b600d2ad7a48f2de65b5350f8e220dbbcdb",
+  "status": "one_revised_answer_and_mapping_pending_user_review_not_execution_freeze",
+  "files": {
+    "answers-v2.json": "cad4d97253e8eff55603cdd28c518c53b18611f0e17d3d1e211beb33ea5c44b3",
+    "expected-labels-v2.json": "52b0eef5ae5f00863f6dd2a67e2fcdd983982f3b10dec0a6bb2456e79ae204a9",
+    "README.md": "d2aa8cc425ac3a72d2ab9cb1a6022ad31f80c193f5b6504919035caa37506488",
+    "revision-v2.json": "96c3be0b24715fc86059fc0bf5063d8f2a45438bd5285841e22b3a633081dc68",
+    "user-text-review-v1.json": "d81d5db89749e44f4064f9318ae0a889d00c3abd52f45ca222dd0da3fb017441"
+  },
+  "inherited_inputs": {
+    "reviewed-cards-v2.json": "29f6ff7aaa20b5aa49a82a1d4e8d1bd6ad20e8e80cc419d96397c528645a7eaa",
+    "requirement-components-v1.json": "21592b62d02f983f4a65557f8fa6cc85f0d6cdfe7fabe93de5442e70d0179402",
+    "reviewed-rubric-v2.json": "52f6b01080b4b9206d49ae17e982057862f8f45662e5a60d8fb5cb1bcc2555c3"
+  },
+  "counts": {
+    "answers": 24,
+    "families": 8,
+    "source_groups": 4,
+    "coverage_slots": 51,
+    "reference_units": 58,
+    "coverage_labels": {
+      "covered": 41,
+      "partially_covered": 5,
+      "missing": 5
+    },
+    "support_labels": {
+      "supported": 38,
+      "insufficient_evidence": 6,
+      "contradicted": 14
+    }
+  },
+  "old_disputed_unit_resolved_by": "not forcing old label; removing old wording from proposed future batch via pre-prediction new answer version",
+  "new_model_calls": 0,
+  "model_messages_created": false,
+  "paid_execution_authorized": false,
+  "prompt_parser_or_production_changed": false,
+  "new_answer_and_unit_mapping_user_confirmed": false,
+  "validation": {
+    "exactly_one_answer_changed_23_unchanged": true,
+    "old_v1_all_bound_file_hashes_unchanged": true,
+    "51_coverage_labels_unchanged": true,
+    "58_reference_spans_roundtrip_and_counts": true,
+    "24_pure_offline_existing_input_projection_and_basis_ids": true,
+    "no_reference_fields_in_projected_task": true,
+    "frozen_prompt_and_16_code_hashes_unchanged": true,
+    "local_links": true
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "record_id": "baseline-answer-user-text-review-v1",
+  "date": "2026-10-21",
+  "reviewed_commit": "dfc67b600d2ad7a48f2de65b5350f8e220dbbcdb",
+  "source": "User reports reading all 24 answers, 51 coverage slots and 57 reference units, supplies S/I/C table and accepts coverage treatment; AI-assisted user-supervised text review",
+  "scope": {
+    "answers_read": 24,
+    "coverage_slots_text_accepted": 51,
+    "reference_splitting_text_accepted": 57,
+    "support_labels_acceptable_except_ambiguity": 56,
+    "ambiguous_support_units": [
+      "H-BL-NASA-01-A03/U2"
+    ],
+    "no_guarantee_future_alignment": true
+  },
+  "not_claimed": [
+    "owner local JSON/SHA verification",
+    "expert gold standard",
+    "complete source independence",
+    "new revised answer/labels accepted",
+    "model predictions or paid execution approval"
+  ],
+  "support_review_table": {
+    "NWS-01": [
+      [
+        "S",
+        "S",
+        "S"
+      ],
+      [
+        "S",
+        "I"
+      ],
+      [
+        "S",
+        "C",
+        "C"
+      ]
+    ],
+    "NWS-02": [
+      [
+        "S",
+        "S"
+      ],
+      [
+        "S",
+        "I"
+      ],
+      [
+        "C",
+        "C"
+      ]
+    ],
+    "USGS-01": [
+      [
+        "S",
+        "S"
+      ],
+      [
+        "S",
+        "I"
+      ],
+      [
+        "S",
+        "C"
+      ]
+    ],
+    "USGS-02": [
+      [
+        "S",
+        "S",
+        "S"
+      ],
+      [
+        "S",
+        "S",
+        "S"
+      ],
+      [
+        "S",
+        "C",
+        "C"
+      ]
+    ],
+    "NASA-01": [
+      [
+        "S",
+        "S"
+      ],
+      [
+        "S",
+        "S",
+        "I"
+      ],
+      [
+        "S",
+        "I_pending",
+        "S",
+        "C"
+      ]
+    ],
+    "NASA-02": [
+      [
+        "S",
+        "S"
+      ],
+      [
+        "S",
+        "I"
+      ],
+      [
+        "C",
+        "C"
+      ]
+    ],
+    "CDC-01": [
+      [
+        "S",
+        "S",
+        "S"
+      ],
+      [
+        "S",
+        "S"
+      ],
+      [
+        "S",
+        "C",
+        "C"
+      ]
+    ],
+    "CDC-02": [
+      [
+        "S",
+        "S"
+      ],
+      [
+        "S"
+      ],
+      [
+        "C",
+        "C"
+      ]
+    ]
+  },
+  "retained_ambiguity": {
+    "candidate_id": "H-BL-NASA-01-A03",
+    "reference_unit_id": "U2",
+    "exact_text": "低偏心率必然等于零且轨道精确为圆形。",
+    "old_proposed_support": "insufficient_evidence",
+    "alternate_interpretation": "contradicted if near-circle wording read as rejecting necessarily exact circularity",
+    "decision": "assistant selects user offered pre-prediction rewrite option; original retained, not executed or relabeled"
+  },
+  "matching_confirmation": "Mixed labels/partial equivalence may remain unaligned under old rules; no favorable subclause picking; acceptance of reference split does not prove alignability",
+  "prior_files_sha256_assistant_checked": {
+    "answers-v1.json": "eccbdda4e127b41cf5c6e1c116d72d1212f01b11bda565fdf9f08bf3a2d740c3",
+    "expected-labels-v1.json": "5dde83a5e3b1fae772014c131c48d7044d1c889cb7ca9923067dd1c6a2651fe6",
+    "README.md": "97ab06ce347c749372db5835e26d35c4c151ca4c42a32be80d992be2e116a81c"
+  }
+}

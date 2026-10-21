@@ -1,0 +1,96 @@
+{
+  "revision_id": "baseline-answer-ambiguity-revision-v2",
+  "date": "2026-10-21",
+  "base_commit": "dfc67b600d2ad7a48f2de65b5350f8e220dbbcdb",
+  "chosen_option": "pre_prediction_versioned_rewrite_not_hold",
+  "selection_reason": "Use user-offered rewrite option while keeping planned 24 answers, without forcing a unique label for old disputed wording",
+  "changed_candidate_id": "H-BL-NASA-01-A03",
+  "old_answer": "偏心率描述轨道形状。低偏心率必然等于零且轨道精确为圆形。倾角是轨道相对地球赤道的角度。直接在赤道上空的轨道倾角为90度。",
+  "new_answer": "偏心率描述轨道形状。低偏心率对应近似圆形。材料保证所有低偏心率轨道的偏心率都不超过0.02。倾角是轨道相对地球赤道的角度。直接在赤道上空的轨道倾角为90度。",
+  "old_ambiguous_reference_unit": {
+    "reference_unit_id": "U2",
+    "exact_text": "低偏心率必然等于零且轨道精确为圆形。",
+    "start": 10,
+    "end": 28,
+    "expected_support": "insufficient_evidence",
+    "expected_claim_type": "literature_statement",
+    "selected_basis_ids": [
+      "NASA-X1"
+    ],
+    "rationale": "near circle不能推出恒等零；选段没有给出反例或明示非零，不仅因不能推出就升级矛盾。",
+    "status": "AI_proposed_pending_user_review"
+  },
+  "new_replacement_unit_ids": [
+    "U2",
+    "U3"
+  ],
+  "unchanged_text_unit_mapping": {
+    "U1": "U1",
+    "U3": "U4",
+    "U4": "U5"
+  },
+  "coverage_label_changes": [],
+  "coverage_reference_mapping_changes": {
+    "R1": {
+      "old": [
+        "U1",
+        "U2"
+      ],
+      "new": [
+        "U1",
+        "U2"
+      ],
+      "note": "U2 text changed; wrong low-eccentricity component removed, now correct near circle"
+    },
+    "R2": {
+      "old": [
+        "U3",
+        "U4"
+      ],
+      "new": [
+        "U4",
+        "U5"
+      ]
+    }
+  },
+  "unaffected_answers": 23,
+  "counts_before": {
+    "answers": 24,
+    "families": 8,
+    "source_groups": 4,
+    "coverage_slots": 51,
+    "reference_units": 57,
+    "coverage_labels": {
+      "covered": 41,
+      "partially_covered": 5,
+      "missing": 5
+    },
+    "support_labels": {
+      "supported": 37,
+      "insufficient_evidence": 6,
+      "contradicted": 14
+    }
+  },
+  "counts_after": {
+    "answers": 24,
+    "families": 8,
+    "source_groups": 4,
+    "coverage_slots": 51,
+    "reference_units": 58,
+    "coverage_labels": {
+      "covered": 41,
+      "partially_covered": 5,
+      "missing": 5
+    },
+    "support_labels": {
+      "supported": 38,
+      "insufficient_evidence": 6,
+      "contradicted": 14
+    }
+  },
+  "new_user_confirmation_required_for": "revised answer, two replacement reference units and updated unit mapping; no other answer rewritten",
+  "prompt_parser_matching_or_production_changed": false,
+  "new_model_calls": 0,
+  "paid_execution_authorized": false,
+  "predictions_exist": false
+}
