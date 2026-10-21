@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-21",
+  "status": "offline_rationale_layout_candidate_not_real_model_validated",
+  "version": "explicit-rationale-layout-eval-v7-dev",
+  "source_commit": "0a89cdcdea18ab7a0ea1bcbbacb57d3bfb4f02ed",
+  "change_scope": "Evaluation prompt layout and rationale responsibilities only; exact v6 parser/input/basis logic reused",
+  "code_sha256": {
+    "evaluation/premise_bound_review_v7.py": "7e88223fc7d715fd4aaf4dabff3f9561fc93df15e4bada6c66a149d11ea227b6",
+    "tests/test_premise_bound_review_v7.py": "a4d68ac3922c85edc141690a4192a2206dd8e88ffc076d050db65a44db4df292"
+  },
+  "prompt_sha256_utf8": "9cf9cf7ef8cea96cded571995bf042edf15bd8ea1fdc209d11f66cacd8309928",
+  "previous_prompt_sha256_utf8": "bc8ffa7e04cfe98fa59a9d7ada36da9b0b470ff46ccbd2dc4646db1c05a4d44d",
+  "prompt_chars": {
+    "v6": 5879,
+    "v7": 7014
+  },
+  "output_fields_and_required_reasons_changed": false,
+  "parser_is_identical_to_v6": true,
+  "audit": [
+    {
+      "sample_id": "H-EIA-001-A01",
+      "initial_call_number": 1,
+      "response_sha256_utf8": "58ebde68c687de05bc19b65476aafec635e5c2e532cab3366984c723e757c3e2",
+      "json_valid": true,
+      "finish_reason": "stop",
+      "output_tokens": 325,
+      "unit_count": 1,
+      "missing_unit_rationale_paths": [
+        "$.units[0].rationale"
+      ],
+      "judgment_reasons_present": true,
+      "root_and_requirement_reasons_present": true,
+      "original_prompt_delivered": true,
+      "correction_exact_invalid_output_and_diagnostic": true,
+      "correction_final_valid": true
+    },
+    {
+      "sample_id": "H-EIA-001-A03",
+      "initial_call_number": 6,
+      "response_sha256_utf8": "e0b81de3cd6baadc57afc4bb9e1391c2caa50e35f0b909ac2f77e7d09d3da7ab",
+      "json_valid": true,
+      "finish_reason": "stop",
+      "output_tokens": 457,
+      "unit_count": 2,
+      "missing_unit_rationale_paths": [
+        "$.units[0].rationale",
+        "$.units[1].rationale"
+      ],
+      "judgment_reasons_present": true,
+      "root_and_requirement_reasons_present": true,
+      "original_prompt_delivered": true,
+      "correction_exact_invalid_output_and_diagnostic": true,
+      "correction_final_valid": true
+    },
+    {
+      "sample_id": "H-EIA-001-A04",
+      "initial_call_number": 9,
+      "response_sha256_utf8": "ef27473026771a73f297626ac7127ce90b4776148f75faa5c8a7722473524a48",
+      "json_valid": true,
+      "finish_reason": "stop",
+      "output_tokens": 493,
+      "unit_count": 2,
+      "missing_unit_rationale_paths": [
+        "$.units[0].rationale",
+        "$.units[1].rationale"
+      ],
+      "judgment_reasons_present": true,
+      "root_and_requirement_reasons_present": true,
+      "original_prompt_delivered": true,
+      "correction_exact_invalid_output_and_diagnostic": true,
+      "correction_final_valid": true
+    },
+    {
+      "sample_id": "H-NRC-001-A04",
+      "initial_call_number": 11,
+      "response_sha256_utf8": "5b3ae59be5ba78f71b22dd0fb4d209d7312f5925362bef26849e4fd62080b9a1",
+      "json_valid": true,
+      "finish_reason": "stop",
+      "output_tokens": 551,
+      "unit_count": 2,
+      "missing_unit_rationale_paths": [
+        "$.units[0].rationale",
+        "$.units[1].rationale"
+      ],
+      "judgment_reasons_present": true,
+      "root_and_requirement_reasons_present": true,
+      "original_prompt_delivered": true,
+      "correction_exact_invalid_output_and_diagnostic": true,
+      "correction_final_valid": true
+    }
+  ],
+  "observed_failure": "4 complete JSON responses omitted unit rationale at 7 unit paths; other rationale levels present; correct schema and diagnostic paths delivered",
+  "unproven_cause": "Field-role overlap, nested layout and distance from schema are hypotheses, not established model internal causes",
+  "offline_tests": {
+    "new_test_methods_passed": 12,
+    "targeted_total_passed": 67,
+    "preset_synthetic_responses_not_model_predictions": true,
+    "after_prompt_compaction_v7_tests_passed": 12
+  },
+  "protected_artifact_sha256": {
+    "docs/reviewer-v6-development-recheck-results-v1.json": "255735c67d529d7cb90710b1e0240249049f6d2801d3fe483a9d9366126e2296",
+    "docs/reviewer-v6-development-recheck-freeze-v1.json": "76ecff1cff8d3a1ecc7a0d1396903945a6c8b88697be045c0eaca5f4b04f6353",
+    "docs/reviewer-v6-prediction-excerpts-v1.json": "64eb72040ed1b9bb97da494311713c392e402a1128d76ec0b274a3ba0001ef8d",
+    "docs/reviewer-v6-alignment-owner-confirmation-v1.json": "9a337129ffe055eb4f625f6513f0cd471b7a9bd5bbf95722c74b907f5c757695"
+  },
+  "new_api_calls": 0,
+  "production_changed": false,
+  "old_labels_scores_or_matching_changed": false,
+  "old_responses_reparsed_for_new_scores": false,
+  "new_paid_entrypoint": false,
+  "new_sources_selected": false,
+  "real_output_stability_improvement_verified": false,
+  "limitations": [
+    "Parser validates structure, not semantic quality of reasons",
+    "Prompt layout effect on actual model and token/cost/corrections is unmeasured",
+    "No independent evaluation and no new-source predictions in this round"
+  ]
+}
