@@ -1,0 +1,97 @@
+{
+  "status": "pre_prediction_AI_proposed_task_component_bookkeeping_pending_user_review",
+  "protocol_change": false,
+  "components": {
+    "NWS-01": {
+      "R1": {
+        "event": "液态降水或冻结降水的水当量事件",
+        "threshold": "可测降水阈值",
+        "time_scope": "指定时段",
+        "point_scope": "预报区内任一点的概率范围"
+      },
+      "R2": {
+        "usual_period": "本页通常时长",
+        "exception": "可另行指定的限定"
+      }
+    },
+    "NWS-02": {
+      "R1": {
+        "threshold": "一般规则的触发阈值及边界",
+        "modality": "允许或必须的许可关系"
+      },
+      "R2": {
+        "premise_mapping": "题设60%是否达到条件",
+        "permission": "题设下能否省略",
+        "obligation": "题设下是否必须省略"
+      }
+    },
+    "USGS-01": {
+      "R1": {
+        "probability": "1%概率",
+        "magnitude": "达到或超过相应量级的关系",
+        "annual": "任一年范围"
+      },
+      "R2": {
+        "recurrence_relation": "平均重现期是否等于固定相邻间隔"
+      }
+    },
+    "USGS-02": {
+      "R1": {
+        "streamflow": "较高河流流量",
+        "bank_relation": "漫过自然或人工河岸"
+      },
+      "R2": {
+        "cause_one": "第一种例示可能成因",
+        "cause_two": "不同的第二种例示可能成因",
+        "combination": "是否须共同出现的关系"
+      },
+      "R3": {
+        "magnitude": "量级是否必同",
+        "duration": "持续时间是否必同",
+        "effect": "影响是否必同"
+      }
+    },
+    "NASA-01": {
+      "R1": {
+        "shape_property": "偏心率所描述性质",
+        "low_eccentricity": "低偏心率所能说明的形状"
+      },
+      "R2": {
+        "reference": "倾角的赤道参照",
+        "equatorial_value": "赤道上空的倾角情形"
+      }
+    },
+    "NASA-02": {
+      "R1": {
+        "classification": "给定联合假定下的轨道类别"
+      },
+      "R2": {
+        "relative_motion": "相对于地面的运动",
+        "ground_location": "是否在同一地表地点上方"
+      }
+    },
+    "CDC-01": {
+      "R1": {
+        "water_and_start": "清水达到翻滚沸腾后的计时",
+        "normal_duration": "通常时长",
+        "altitude_condition": "海拔例外的阈值及方向",
+        "exception_duration": "例外时长"
+      },
+      "R2": {
+        "scenario_duration": "7000英尺题设适用时长"
+      }
+    },
+    "CDC-02": {
+      "R1": {
+        "fuel": "燃料污染范围",
+        "toxic": "有毒化学品污染范围",
+        "radioactive": "放射性污染范围",
+        "treatment_limit": "煮沸/消毒能否使其安全"
+      },
+      "R2": {
+        "limit_relation": "杀菌规则与已列污染限制或绝对安全结论的关系"
+      }
+    }
+  },
+  "policy": "Coverage is addressedness. Explicit opposite counts as addressed; only declared actual omissions drive partial/missing. Background is not automatically required. Semantic judgments remain AI-assisted/user-supervised, not certified by bookkeeping."
+}

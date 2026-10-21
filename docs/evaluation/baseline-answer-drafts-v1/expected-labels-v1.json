@@ -1,0 +1,1846 @@
+{
+  "version": "baseline-reference-labels-v1",
+  "status": "AI_proposed_pending_user_review_not_expert_gold",
+  "model_input_prohibited": true,
+  "labels": [
+    {
+      "candidate_id": "H-BL-NWS-01-A01",
+      "card_id": "H-BL-NWS-01",
+      "source_group": "CAND-BL-NWS-FORECAST",
+      "answer_sha256_utf8": "622fa24df1fe4229b59673d09c4c52b2e8ec7f9f73dc4f464daed2210faa5007",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "event",
+            "threshold",
+            "time_scope",
+            "point_scope"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1",
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "usual_period",
+            "exception"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U3"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "PoP描述在指定时段内，预报区域任一点发生可测液态降水或冻结降水水当量的可能性。",
+          "start": 0,
+          "end": 40,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X1"
+          ],
+          "rationale": "保留事件、点空间和指定时段。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "可测阈值是至少0.01英寸。",
+          "start": 40,
+          "end": 54,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X1"
+          ],
+          "rationale": "阈值含等号，合理中文表达。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U3",
+          "exact_text": "本页通常采用12小时，但允许另有说明。",
+          "start": 54,
+          "end": 73,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X1"
+          ],
+          "rationale": "通常与例外都保留。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "同义完整表达。",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NWS-01-A02",
+      "card_id": "H-BL-NWS-01",
+      "source_group": "CAND-BL-NWS-FORECAST",
+      "answer_sha256_utf8": "31c0be2f86509b06718f8d51dd1d2c2eb2d877c8a487f72777f0b2dc7ceb7f40",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "partially_covered",
+          "addressed_components": [
+            "event"
+          ],
+          "omitted_components": [
+            "threshold",
+            "time_scope",
+            "point_scope"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "已回应液态降水或冻结降水的水当量事件；实际缺少可测降水阈值、指定时段、预报区内任一点的概率范围，因此部分覆盖，不是因结论错误扣分。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "missing",
+          "addressed_components": [],
+          "omitted_components": [
+            "usual_period",
+            "exception"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [],
+          "rationale": "完全未回应本项，缺全部组成项。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "该页的PoP谈的是液态降水或冻结降水水当量事件发生的可能性。",
+          "start": 0,
+          "end": 30,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X1"
+          ],
+          "rationale": "只表事件，没有无条件地替代完整定义。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "材料还规定预报每六小时更新一次。",
+          "start": 30,
+          "end": 46,
+          "expected_support": "insufficient_evidence",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X1"
+          ],
+          "rationale": "通常预报时段不是更新频率；未提供更新周期，不能推矛盾。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "事件部分回应，阈值/时空缺失；通常时段全缺；附加更新频率无据。",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NWS-01-A03",
+      "card_id": "H-BL-NWS-01",
+      "source_group": "CAND-BL-NWS-FORECAST",
+      "answer_sha256_utf8": "5179d7306c6bc2e51244e43d819abe20f6d0bb36d5555afca6873b3bb81788a4",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "event",
+            "threshold",
+            "time_scope",
+            "point_scope"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "threshold"
+          ],
+          "reference_unit_ids": [
+            "U1",
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "usual_period",
+            "exception"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "exception"
+          ],
+          "reference_unit_ids": [
+            "U3"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "PoP指在指定时段内预报区任一点发生可测液态降水或冻结降水水当量的概率。",
+          "start": 0,
+          "end": 36,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X1"
+          ],
+          "rationale": "事件和时空范围完整。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "这里的可测阈值为至少0.10英寸。",
+          "start": 36,
+          "end": 53,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X1"
+          ],
+          "rationale": "0.10与交付0.01定义阈值不一致。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U3",
+          "exact_text": "本页时段固定为12小时，不允许另行指定。",
+          "start": 53,
+          "end": 73,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X1"
+          ],
+          "rationale": "明确否认原文允许另行说明的例外。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "明确错误阈值/例外仍回应相应方面。",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NWS-02-A01",
+      "card_id": "H-BL-NWS-02",
+      "source_group": "CAND-BL-NWS-FORECAST",
+      "answer_sha256_utf8": "3f5d724e6945b6b69dd90dad1eaa83465128eb8c6a3fc2ecf5bf6ef99c7c6eec",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "threshold",
+            "modality"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "premise_mapping",
+            "permission",
+            "obligation"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "预期降水概率达到60%或更高时，可以不写天空状况，但并非必须省略。",
+          "start": 0,
+          "end": 33,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X2"
+          ],
+          "rationale": "阈值含等号，may保留许可而非强制。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "题设的60%恰好达到该条件，所以允许省略，仍不要求一定省略。",
+          "start": 33,
+          "end": 63,
+          "expected_support": "supported",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-ad7e6ff8cd5a353f85d0fbae8819462cdbd6a6b5549e501e8692794efb95aabb",
+            "NWS-X2"
+          ],
+          "rationale": "题设与文献阈值联合应用。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NWS-02-A02",
+      "card_id": "H-BL-NWS-02",
+      "source_group": "CAND-BL-NWS-FORECAST",
+      "answer_sha256_utf8": "4ec0c2cdb4168769143978a39bac5b47cc018e107d0c681974360e3c238899f2",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "threshold",
+            "modality"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "missing",
+          "addressed_components": [],
+          "omitted_components": [
+            "premise_mapping",
+            "permission",
+            "obligation"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [],
+          "rationale": "完全未回应本项，缺全部组成项。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "降水概率达到60%及以上时，规则允许省略天空状况，并非强制。",
+          "start": 0,
+          "end": 30,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X2"
+          ],
+          "rationale": "通用规则正确，尚未映射具体题设。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "该页还要求每份此类预报保留五年。",
+          "start": 30,
+          "end": 46,
+          "expected_support": "insufficient_evidence",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X2"
+          ],
+          "rationale": "选段没有档案保存期限；缺依据不判矛盾。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "一般规则不冒充对具体题设的映射；额外期限无据。",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NWS-02-A03",
+      "card_id": "H-BL-NWS-02",
+      "source_group": "CAND-BL-NWS-FORECAST",
+      "answer_sha256_utf8": "bbd41cc053198434c000965c80ef52cb26fce48d13c4aebf871208115ab83dbc",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "threshold",
+            "modality"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "modality"
+          ],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "premise_mapping",
+            "permission",
+            "obligation"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "permission",
+            "obligation"
+          ],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "降水概率为60%及以上时，规则要求必须省略天空状况。",
+          "start": 0,
+          "end": 26,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NWS-X2"
+          ],
+          "rationale": "把may许可改成强制义务。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "题设预报的60%达到该条件，因此必须省略，不可保留天空状况。",
+          "start": 26,
+          "end": 56,
+          "expected_support": "contradicted",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-ad7e6ff8cd5a353f85d0fbae8819462cdbd6a6b5549e501e8692794efb95aabb",
+            "NWS-X2"
+          ],
+          "rationale": "承认60%匹配，但推成必须且不可保留，违反许可边界。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-USGS-01-A01",
+      "card_id": "H-BL-USGS-01",
+      "source_group": "CAND-BL-USGS-GIP106",
+      "answer_sha256_utf8": "0217099770103bde1627dc0a808008e4d191cea578916dfe45c8770c7462a477",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "probability",
+            "magnitude",
+            "annual"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "recurrence_relation"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "所谓百年洪水，对应任一年达到或超过相应洪水量级的机会为百分之一。",
+          "start": 0,
+          "end": 32,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X1"
+          ],
+          "rationale": "年范围、概率及超越关系完整。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "100年是长期平均重现期，并不安排两场洪水严格间隔100年；它们出现并不规则。",
+          "start": 32,
+          "end": 71,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X3"
+          ],
+          "rationale": "同义解释平均不等固定。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-USGS-01-A02",
+      "card_id": "H-BL-USGS-01",
+      "source_group": "CAND-BL-USGS-GIP106",
+      "answer_sha256_utf8": "014b5ed1918b534079a508e566fced2d6c1275434f60151510b6979022bd15e1",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "probability",
+            "magnitude",
+            "annual"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "missing",
+          "addressed_components": [],
+          "omitted_components": [
+            "recurrence_relation"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [],
+          "rationale": "完全未回应本项，缺全部组成项。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "任一年达到或超过百年洪水相应量级的概率是1%。",
+          "start": 0,
+          "end": 23,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X1"
+          ],
+          "rationale": "仅年概率，不自动补出间隔论述。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "材料指定这种洪水每次持续24小时。",
+          "start": 23,
+          "end": 40,
+          "expected_support": "insufficient_evidence",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X1",
+            "USGS-X2"
+          ],
+          "rationale": "未给百年洪水固定持续时间；一般差异陈述也不足以证明本具体时长矛盾。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-USGS-01-A03",
+      "card_id": "H-BL-USGS-01",
+      "source_group": "CAND-BL-USGS-GIP106",
+      "answer_sha256_utf8": "0101c2470fb157002589f0bc74044ad4b97442dffd5f460055331c0d2ca1b230",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "probability",
+            "magnitude",
+            "annual"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "recurrence_relation"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "recurrence_relation"
+          ],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "任一年达到或超过相应洪水量级的概率是1%。",
+          "start": 0,
+          "end": 21,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X1"
+          ],
+          "rationale": "正确的年度事件概率。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "100年平均重现期意味着相邻两场此类洪水必须固定相隔100年。",
+          "start": 21,
+          "end": 52,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X3"
+          ],
+          "rationale": "直接违背不固定且不规则的解释。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-USGS-02-A01",
+      "card_id": "H-BL-USGS-02",
+      "source_group": "CAND-BL-USGS-GIP106",
+      "answer_sha256_utf8": "dfced41506b96a918e2f73bcd813d97223cc0a7dfe6b38b089bc8bd2c86e31d7",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "streamflow",
+            "bank_relation"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "cause_one",
+            "cause_two",
+            "combination"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R3",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "magnitude",
+            "duration",
+            "effect"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U3"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "这里洪水指相对较高的河流流量漫过一段河道的自然或人工河岸。",
+          "start": 0,
+          "end": 29,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X2"
+          ],
+          "rationale": "定义的流量与漫岸关系。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "持续性大范围降雨和局地强雷暴降雨都是可能成因，不要求二者共同发生。",
+          "start": 29,
+          "end": 62,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X2"
+          ],
+          "rationale": "两种例示原因及备选关系。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U3",
+          "exact_text": "不同洪水的量级、持续时间和影响不必相同。",
+          "start": 62,
+          "end": 82,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X2"
+          ],
+          "rationale": "三个维度的差异均保留。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-USGS-02-A02",
+      "card_id": "H-BL-USGS-02",
+      "source_group": "CAND-BL-USGS-GIP106",
+      "answer_sha256_utf8": "055afdc3c421a4e2f08104ec0918f7ab3ac3bc0035c9f5f8540782a749e78c8f",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "streamflow",
+            "bank_relation"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "partially_covered",
+          "addressed_components": [
+            "cause_one",
+            "combination"
+          ],
+          "omitted_components": [
+            "cause_two"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "已回应第一种例示可能成因、是否须共同出现的关系；实际缺少不同的第二种例示可能成因，因此部分覆盖，不是因结论错误扣分。"
+        },
+        {
+          "requirement_id": "R3",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "magnitude",
+            "duration",
+            "effect"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U3"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "洪水是相对较高的河流流量漫过自然或人工河岸。",
+          "start": 0,
+          "end": 22,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X2"
+          ],
+          "rationale": "定义完整。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "可列举的一个原因是大范围长时间降雨，但不要求所有例示原因在每场洪水中同时发生。",
+          "start": 22,
+          "end": 61,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X2"
+          ],
+          "rationale": "一个原因和非共同必要关系都有据，缺第二原因是覆盖缺口。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U3",
+          "exact_text": "不同洪水在量级、持续时间和影响上不必相同。",
+          "start": 61,
+          "end": 82,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X2"
+          ],
+          "rationale": "R3独立完整，不因R2遗漏受罚。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-USGS-02-A03",
+      "card_id": "H-BL-USGS-02",
+      "source_group": "CAND-BL-USGS-GIP106",
+      "answer_sha256_utf8": "925fe2ee9cf60550df556e7f3ab3885dc210f6ea3c8d7af5583ad6060ec944a5",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "streamflow",
+            "bank_relation"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "cause_one",
+            "cause_two",
+            "combination"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "combination"
+          ],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R3",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "magnitude",
+            "duration",
+            "effect"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "magnitude",
+            "duration",
+            "effect"
+          ],
+          "reference_unit_ids": [
+            "U3"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "洪水是较高河流流量漫过自然或人工河岸。",
+          "start": 0,
+          "end": 19,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X2"
+          ],
+          "rationale": "定义仍有据。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "大范围长时间降雨与大积雪快速融化必须在每场洪水中共同出现，缺一不可。",
+          "start": 19,
+          "end": 53,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X2"
+          ],
+          "rationale": "两种原因均已列出，但必须共同发生的断言与原文融雪可不伴降雨直接冲突。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U3",
+          "exact_text": "所有洪水的量级、持续时间和影响都必然完全相同。",
+          "start": 53,
+          "end": 76,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "USGS-X2"
+          ],
+          "rationale": "与not all floods are equal直接冲突。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NASA-01-A01",
+      "card_id": "H-BL-NASA-01",
+      "source_group": "CAND-BL-NASA-ORBITS",
+      "answer_sha256_utf8": "c582d6ba4f409ab37e2845f98b1fa171fc03f1451c5b7549924a1278d52c5c4a",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "shape_property",
+            "low_eccentricity"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "reference",
+            "equatorial_value"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "偏心率描述轨道形状，偏心率低说明轨道近似圆形。",
+          "start": 0,
+          "end": 23,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X1"
+          ],
+          "rationale": "近圆不改成零。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "倾角描述轨道相对于地球赤道的角度，直接位于赤道上空的轨道倾角为零。",
+          "start": 23,
+          "end": 56,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X2"
+          ],
+          "rationale": "参照和赤道情形完整。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NASA-01-A02",
+      "card_id": "H-BL-NASA-01",
+      "source_group": "CAND-BL-NASA-ORBITS",
+      "answer_sha256_utf8": "c7e255e1fdc42a4d7d2e770fea3fd4735a124d829442a1eba66a6e123677b7ed",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "partially_covered",
+          "addressed_components": [
+            "shape_property"
+          ],
+          "omitted_components": [
+            "low_eccentricity"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "已回应偏心率所描述性质；实际缺少低偏心率所能说明的形状，因此部分覆盖，不是因结论错误扣分。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "reference",
+            "equatorial_value"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "偏心率描述轨道的形状。",
+          "start": 0,
+          "end": 11,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X1"
+          ],
+          "rationale": "只给性质，没有低偏心率形状关系。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "倾角衡量轨道与地球赤道的夹角，直接在赤道上空的轨道倾角为零。",
+          "start": 11,
+          "end": 41,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X2"
+          ],
+          "rationale": "R2完整，不受R1缺失影响。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U3",
+          "exact_text": "资料还给出了低偏心率判定的统一上限0.05。",
+          "start": 41,
+          "end": 63,
+          "expected_support": "insufficient_evidence",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X1"
+          ],
+          "rationale": "未提供低偏心率数值上限。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NASA-01-A03",
+      "card_id": "H-BL-NASA-01",
+      "source_group": "CAND-BL-NASA-ORBITS",
+      "answer_sha256_utf8": "2c2b66bebaff0dd27eaf423281b6437f14dbe1e20b27856006b5f5d31c5d4f7d",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "shape_property",
+            "low_eccentricity"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "low_eccentricity"
+          ],
+          "reference_unit_ids": [
+            "U1",
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "reference",
+            "equatorial_value"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "equatorial_value"
+          ],
+          "reference_unit_ids": [
+            "U3",
+            "U4"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "偏心率描述轨道形状。",
+          "start": 0,
+          "end": 10,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X1"
+          ],
+          "rationale": "性质正确。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "低偏心率必然等于零且轨道精确为圆形。",
+          "start": 10,
+          "end": 28,
+          "expected_support": "insufficient_evidence",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X1"
+          ],
+          "rationale": "near circle不能推出恒等零；选段没有给出反例或明示非零，不仅因不能推出就升级矛盾。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U3",
+          "exact_text": "倾角是轨道相对地球赤道的角度。",
+          "start": 28,
+          "end": 43,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X2"
+          ],
+          "rationale": "参照正确。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U4",
+          "exact_text": "直接在赤道上空的轨道倾角为90度。",
+          "start": 43,
+          "end": 60,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X2"
+          ],
+          "rationale": "赤道上空为0，90是原文极地情形，直接冲突。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "不能推出零标不足；赤道角90与明示零冲突，不能将二者混同。",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NASA-02-A01",
+      "card_id": "H-BL-NASA-02",
+      "source_group": "CAND-BL-NASA-ORBITS",
+      "answer_sha256_utf8": "914bfd6a8199ee21b7263307691d57b3e84260eb36f11e3c1c6f2758e5c1f56f",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "classification"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "relative_motion",
+            "ground_location"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "在题设的联合假定下，这属于地球静止轨道。",
+          "start": 0,
+          "end": 20,
+          "expected_support": "supported",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-84341698b6ff2df34a1b56b36f0959096e0ef8c2c21823700e252b8c4db22cdc",
+            "NASA-X4"
+          ],
+          "rationale": "联合给定同步、圆形、赤道上空后应用文献。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "在这一假定下，它相对地面不移动，始终在同一地表地点上方。",
+          "start": 20,
+          "end": 48,
+          "expected_support": "supported",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-84341698b6ff2df34a1b56b36f0959096e0ef8c2c21823700e252b8c4db22cdc",
+            "NASA-X4"
+          ],
+          "rationale": "只按假定描述相对运动，不推现场认证。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NASA-02-A02",
+      "card_id": "H-BL-NASA-02",
+      "source_group": "CAND-BL-NASA-ORBITS",
+      "answer_sha256_utf8": "7183ce74a3d725bea92cc96972752730d43d73f94bbe8c341b884d075b3227da",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "classification"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "missing",
+          "addressed_components": [],
+          "omitted_components": [
+            "relative_motion",
+            "ground_location"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [],
+          "rationale": "完全未回应本项，缺全部组成项。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "在题设的联合假定下，它属于地球静止轨道。",
+          "start": 0,
+          "end": 20,
+          "expected_support": "supported",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-84341698b6ff2df34a1b56b36f0959096e0ef8c2c21823700e252b8c4db22cdc",
+            "NASA-X4"
+          ],
+          "rationale": "类别有据。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "资料还保证这种轨道中的卫星至少工作20年。",
+          "start": 20,
+          "end": 41,
+          "expected_support": "insufficient_evidence",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "NASA-X4"
+          ],
+          "rationale": "文献没有寿命保证；是对文献规则的无据解释，不是已命名真实卫星的现场核验。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-NASA-02-A03",
+      "card_id": "H-BL-NASA-02",
+      "source_group": "CAND-BL-NASA-ORBITS",
+      "answer_sha256_utf8": "3da5adcfe1e18f5ff51c8497257411dd905d8821cb142c457cc09c8f1aac6981",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "classification"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "classification"
+          ],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "relative_motion",
+            "ground_location"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "relative_motion",
+            "ground_location"
+          ],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "在题设的联合假定下，它不属于地球静止轨道。",
+          "start": 0,
+          "end": 21,
+          "expected_support": "contradicted",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-84341698b6ff2df34a1b56b36f0959096e0ef8c2c21823700e252b8c4db22cdc",
+            "NASA-X4"
+          ],
+          "rationale": "与联合条件对应的明确类别冲突。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "在这一假定下，它相对地面持续移动，并不保持在同一地表位置上方。",
+          "start": 21,
+          "end": 52,
+          "expected_support": "contradicted",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-84341698b6ff2df34a1b56b36f0959096e0ef8c2c21823700e252b8c4db22cdc",
+            "NASA-X4"
+          ],
+          "rationale": "与relative to ground和same place冲突。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-CDC-01-A01",
+      "card_id": "H-BL-CDC-01",
+      "source_group": "CAND-BL-CDC-WATER",
+      "answer_sha256_utf8": "b1ffb29658fd98f5f370b391a8968ce47bfaf9663c85ce1388b9e8c73cd8188c",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "water_and_start",
+            "normal_duration",
+            "altitude_condition",
+            "exception_duration"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1",
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "scenario_duration"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U3"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "清水达到翻滚沸腾后，通常应持续1分钟。",
+          "start": 0,
+          "end": 19,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X2"
+          ],
+          "rationale": "只叙述通常计时。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "海拔严格高于6500英尺时，改用3分钟。",
+          "start": 19,
+          "end": 39,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X2"
+          ],
+          "rationale": "above的严格方向与例外时长。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U3",
+          "exact_text": "题设7000英尺且水已翻滚沸腾，因此采用3分钟。",
+          "start": 39,
+          "end": 63,
+          "expected_support": "supported",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-5b7fd7111a5fb98822915b809315650891d7305ff50e11cd90b7f64c72552fa7",
+            "CDC-X2"
+          ],
+          "rationale": "假定与规则联合应用，不认证水安全。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-CDC-01-A02",
+      "card_id": "H-BL-CDC-01",
+      "source_group": "CAND-BL-CDC-WATER",
+      "answer_sha256_utf8": "b117e0709beec36c256d1ccff1d6865e22c6f19573e172c68bd94bb8378045c8",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "partially_covered",
+          "addressed_components": [
+            "water_and_start",
+            "normal_duration",
+            "exception_duration"
+          ],
+          "omitted_components": [
+            "altitude_condition"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1",
+            "U2"
+          ],
+          "rationale": "已回应清水达到翻滚沸腾后的计时、通常时长、例外时长；实际缺少海拔例外的阈值及方向，因此部分覆盖，不是因结论错误扣分。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "scenario_duration"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "清水达到翻滚沸腾后通常持续1分钟。",
+          "start": 0,
+          "end": 17,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X2"
+          ],
+          "rationale": "通常规则完整但未给通用海拔例外阈值。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "题设7000英尺的清水应从已翻滚沸腾时起持续3分钟。",
+          "start": 17,
+          "end": 43,
+          "expected_support": "supported",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-5b7fd7111a5fb98822915b809315650891d7305ff50e11cd90b7f64c72552fa7",
+            "CDC-X2"
+          ],
+          "rationale": "应用正确，3分钟已出现但不能由此补造6500阈值。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "例外时长已在题设应用回应；R1实际缺的是严格高于6500的通用条件，不重复列为缺3分钟。",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-CDC-01-A03",
+      "card_id": "H-BL-CDC-01",
+      "source_group": "CAND-BL-CDC-WATER",
+      "answer_sha256_utf8": "527438fb60dd9edebbced401b36861f314dc7ed0d56d13ed768e006c09460196",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "water_and_start",
+            "normal_duration",
+            "altitude_condition",
+            "exception_duration"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "altitude_condition"
+          ],
+          "reference_unit_ids": [
+            "U1",
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "scenario_duration"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "scenario_duration"
+          ],
+          "reference_unit_ids": [
+            "U3"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "清水翻滚沸腾后通常持续1分钟。",
+          "start": 0,
+          "end": 15,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X2"
+          ],
+          "rationale": "正常规则有据。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "只有海拔低于6500英尺才改用3分钟。",
+          "start": 15,
+          "end": 34,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X2"
+          ],
+          "rationale": "方向说反且only排除实际above条件；不是没提条件。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U3",
+          "exact_text": "题设7000英尺不触发这一例外，因此只需1分钟。",
+          "start": 34,
+          "end": 58,
+          "expected_support": "contradicted",
+          "expected_claim_type": "scenario_application",
+          "selected_basis_ids": [
+            "p-5b7fd7111a5fb98822915b809315650891d7305ff50e11cd90b7f64c72552fa7",
+            "CDC-X2"
+          ],
+          "rationale": "明确映射题设但结果与above情形3分钟相反。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-CDC-02-A01",
+      "card_id": "H-BL-CDC-02",
+      "source_group": "CAND-BL-CDC-WATER",
+      "answer_sha256_utf8": "2cbad2c4de7d31dab15eb8a3ae509fa7eb8a00d4130bd9532a600df3d14c7681",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "fuel",
+            "toxic",
+            "radioactive",
+            "treatment_limit"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "limit_relation"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "燃料、有毒化学品或放射性材料污染的水，不能靠煮沸或消毒变得安全。",
+          "start": 0,
+          "end": 32,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X1"
+          ],
+          "rationale": "三类污染及处理限制完整。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "杀菌规则不能推翻这些明确列出的污染限制，因此不能据此保证现场水源绝对安全。",
+          "start": 32,
+          "end": 69,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X1",
+            "CDC-X2"
+          ],
+          "rationale": "已足够解释限制关系，无需化学去除机理或检测清单。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-CDC-02-A02",
+      "card_id": "H-BL-CDC-02",
+      "source_group": "CAND-BL-CDC-WATER",
+      "answer_sha256_utf8": "43306606cbd60f8ed4a707f63639ae5886386564be93982387c984ca3da20d65",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "partially_covered",
+          "addressed_components": [
+            "fuel",
+            "toxic",
+            "radioactive"
+          ],
+          "omitted_components": [
+            "treatment_limit"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "已回应燃料污染范围、有毒化学品污染范围、放射性污染范围；实际缺少煮沸/消毒能否使其安全，因此部分覆盖，不是因结论错误扣分。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "missing",
+          "addressed_components": [],
+          "omitted_components": [
+            "limit_relation"
+          ],
+          "explicitly_reversed_or_wrong_but_addressed": [],
+          "reference_unit_ids": [],
+          "rationale": "完全未回应本项，缺全部组成项。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "资料列举的污染类型包括燃料、有毒化学品和放射性材料。",
+          "start": 0,
+          "end": 26,
+          "expected_support": "supported",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X1"
+          ],
+          "rationale": "仅列三类污染类型，没有回应处理限制或杀菌规则的关系。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "R1三类范围已回应，但缺煮沸/消毒限制；R2连杀菌与限制关系均未表达，记missing而非要求额外技术机理。",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    },
+    {
+      "candidate_id": "H-BL-CDC-02-A03",
+      "card_id": "H-BL-CDC-02",
+      "source_group": "CAND-BL-CDC-WATER",
+      "answer_sha256_utf8": "ba36e66e55217e0330b8dc6beca5337a1505d1e45cf323f531ef0334012d6c75",
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "fuel",
+            "toxic",
+            "radioactive",
+            "treatment_limit"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "treatment_limit"
+          ],
+          "reference_unit_ids": [
+            "U1"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        },
+        {
+          "requirement_id": "R2",
+          "expected_coverage": "covered",
+          "addressed_components": [
+            "limit_relation"
+          ],
+          "omitted_components": [],
+          "explicitly_reversed_or_wrong_but_addressed": [
+            "limit_relation"
+          ],
+          "reference_unit_ids": [
+            "U2"
+          ],
+          "rationale": "回应了本项全部组成方面；错误说法的支持性另评，不机械扣覆盖。"
+        }
+      ],
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "含燃料、有毒化学品或放射性材料的水，煮沸或消毒后都能变得安全。",
+          "start": 0,
+          "end": 31,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X1"
+          ],
+          "rationale": "与cannot make safe直接冲突。",
+          "status": "AI_proposed_pending_user_review"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "杀菌规则因此足以推翻这些污染限制，并保证现场水源绝对安全。",
+          "start": 31,
+          "end": 60,
+          "expected_support": "contradicted",
+          "expected_claim_type": "literature_statement",
+          "selected_basis_ids": [
+            "CDC-X1",
+            "CDC-X2"
+          ],
+          "rationale": "把一般杀菌作用推成对已明确排除污染的安全保证，非真实现场实例核验问题。",
+          "status": "AI_proposed_pending_user_review"
+        }
+      ],
+      "offset_basis": "program-calculated Unicode code points in exact answer; end exclusive; evaluator semantic references, not model carrier IDs",
+      "design_note": "",
+      "status": "AI_proposed_pending_user_review_not_confirmed"
+    }
+  ],
+  "not_assessable": "no clear intended reference case; unverified, not forced",
+  "alignment": "inherit baseline-spec-v1 unchanged: equivalent split/merge count reference once, mixed/partial/conflict separate, no favorable selection",
+  "coverage": "covered/partially_covered/missing/uncertain; components are explicit manual reference bookkeeping, not keyword scoring",
+  "native_support_labels": true,
+  "predictions_created": false
+}

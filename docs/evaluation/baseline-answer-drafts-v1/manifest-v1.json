@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-21",
+  "baseline_commit": "7520fd5c725c256ffaa42894336a7e94327e3ab4",
+  "status": "offline_drafts_pending_user_review_not_execution_freeze",
+  "prior_source_excerpt_sha256": "d01311a2d4c247fb2455d78e19b5831605d182fd7aeb76b05fdf5dc9545904cb",
+  "files": {
+    "answers-v1.json": "eccbdda4e127b41cf5c6e1c116d72d1212f01b11bda565fdf9f08bf3a2d740c3",
+    "expected-labels-v1.json": "5dde83a5e3b1fae772014c131c48d7044d1c889cb7ca9923067dd1c6a2651fe6",
+    "question-owner-confirmation-v1.json": "30a034083d77f20e8f24155f1a894c08c6cdbdf25617297e55c667b1a52be2a1",
+    "README.md": "97ab06ce347c749372db5835e26d35c4c151ca4c42a32be80d992be2e116a81c",
+    "requirement-components-v1.json": "21592b62d02f983f4a65557f8fa6cc85f0d6cdfe7fabe93de5442e70d0179402",
+    "reviewed-cards-v2.json": "29f6ff7aaa20b5aa49a82a1d4e8d1bd6ad20e8e80cc419d96397c528645a7eaa",
+    "reviewed-rubric-v2.json": "52f6b01080b4b9206d49ae17e982057862f8f45662e5a60d8fb5cb1bcc2555c3"
+  },
+  "counts": {
+    "answers": 24,
+    "families": 8,
+    "source_groups": 4,
+    "coverage_slots": 51,
+    "reference_units": 57,
+    "coverage_labels": {
+      "covered": 41,
+      "partially_covered": 5,
+      "missing": 5
+    },
+    "support_labels": {
+      "supported": 37,
+      "insufficient_evidence": 6,
+      "contradicted": 14
+    }
+  },
+  "new_model_calls": 0,
+  "model_messages_created": false,
+  "paid_execution_authorized": false,
+  "protocol_or_production_changed": false,
+  "answer_reference_labels_confirmed_by_user": false,
+  "supervision": "AI proposed, user confirmation pending for new drafts; prior question text/design accepted by user; not expert gold",
+  "validation": {
+    "answer_counts_and_grouping": true,
+    "all_51_component_bookkeeping_partitions": true,
+    "all_57_exact_reference_spans_full_answer_roundtrip": true,
+    "old_sources_evidence_context_requirements_unchanged": true,
+    "only_NASA_question_editorial_change": true,
+    "24_actual_drafts_existing_model_input_whitelist_and_basis_catalog_checked_offline": true,
+    "reference_and_rubric_not_in_projected_task": true,
+    "no_model_messages_or_predictions_or_calls_created": true,
+    "frozen_prompt_and_16_code_hashes_unchanged": true,
+    "local_links": true,
+    "preparation_manifest_issue_resolved": "Draft regeneration initially included the prior manifest in its own file hash map; detected by final hash check. Removed self-entry; every listed non-manifest artifact hash verified. No source/protocol/model output modified."
+  }
+}

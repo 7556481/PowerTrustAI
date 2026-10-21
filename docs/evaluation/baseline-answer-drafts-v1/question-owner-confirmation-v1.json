@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-21",
+  "reviewed_commit": "7520fd5c725c256ffaa42894336a7e94327e3ab4",
+  "status": "AI_assisted_text_and_scoring_design_accepted_by_user",
+  "source": "User supplied AI text review and explicitly personally accepted it, authorizing 24 offline answer/reference/label drafts in one batch",
+  "confirmed": "8 question texts and scoring designs with stated clarifications; NASA internal locator editorial replacement",
+  "not_confirmed": [
+    "owner local JSON or SHA verification",
+    "expert gold labels",
+    "the 24 newly created answers/reference units/labels",
+    "paid execution or production adoption"
+  ],
+  "clarifications": [
+    "Explicit reverse condition/relationship may still cover the aspect; support correctness separate; missing only for actual absent content",
+    "Pre-record components and exact omission/reason for NWS-01/R1, USGS-02/R2, CDC-01/R1 before prediction",
+    "CDC-02/R2 needs no extra mechanism or test list: rule cannot overturn listed limits is sufficient",
+    "NASA-02 internal NASA-X3 wording replaced by given material distance description, unchanged meaning"
+  ],
+  "assistant_bound_prior_files": {
+    "cards-v1.json": "4809f0b3406e57c483f408e8fa4f905b75f0f0ffeb96e7f4971d3278b150960e",
+    "evaluator-rubric-v1.json": "2c03cfb22a738b0684b1843b4fc52aa5cbde83a4fa3017d96fdbb8df33124de9",
+    "README.md": "80ace33651bf4aa3f15d28704859e16879067886d82e7e9d09eae371498a91d0"
+  },
+  "new_model_calls": 0
+}
