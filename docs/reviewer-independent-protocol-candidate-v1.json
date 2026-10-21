@@ -1,6 +1,6 @@
 {
   "candidate_id": "reviewer-independent-protocol-candidate-v1",
-  "status": "pending_owner_adoption_not_final_batch_freeze",
+  "status": "adopted_fixed_candidate_not_final_batch_freeze",
   "date": "2026-10-21",
   "evaluation_target": "reviewer component only, not end-to-end RAG",
   "source_commit": "3b12375bcd272dea2fc7881f76ba274486118707",
@@ -51,7 +51,24 @@
     "automatic_resume": false,
     "revision": false,
     "stop": "first execution/transport/storage/final contract failure; record later items as unexecuted; no semantic rerun",
-    "budget_deadline_formula_seconds": "180 * planned_initial_requests; budget admission deadline, not a guarantee of exact wall-clock abort"
+    "budget_deadline_formula_seconds": "180 * planned_initial_requests; budget admission deadline, not a guarantee of exact wall-clock abort",
+    "sample_order": {
+      "freeze_before_prediction": true,
+      "required_fields": [
+        "ordered_request_ids",
+        "order_selection_method",
+        "order_manifest_hash"
+      ],
+      "adaptive_reordering": false,
+      "automatic_tail_resume": false,
+      "report": [
+        "planned order and stopping position",
+        "all per-item status",
+        "planned versus attempted versus valid coverage by source/topic/type",
+        "failures and unexecuted separately"
+      ],
+      "interpretation": "Early-stop completion depends on order; valid prefix is not representative of all planned holdout samples. No extrapolation or order-dependent reruns to improve reported results."
+    }
   },
   "alignment": {
     "reference_units": "freeze original semantic reference units before predictions; program carriers are not denominators",
@@ -105,7 +122,7 @@
     "foundation_model_training_exposure": "unknown"
   },
   "open_before_batch": [
-    "owner adoption of this candidate and mapping",
+    "batch-specific original label definitions and guarded mapping provenance confirmed; candidate adoption is not blanket label conversion approval",
     "new source lineage review and owner excerpt/range approval",
     "questions, premises, evidence identity, requirements and all reference labels confirmed",
     "reference semantic units, ambiguity policy, sample list/order and matching plan finalized",
@@ -122,5 +139,24 @@
     "strict JSON and unit rationale can fail after correction",
     "single local correction success does not demonstrate stability",
     "no independent evaluation completed"
-  ]
+  ],
+  "revision": "v1-clarification-r1",
+  "adoption_scope": "User text adoption with two requested clarifications: definition-qualified legacy mapping and pre-fixed order/coverage reporting. Not API permission or final batch freeze.",
+  "support_mapping_guard": {
+    "required": true,
+    "not_supported": "Map only when original definition explicitly means lack of evidence support and separates contradiction. If it mixes contradiction or is ambiguous, do not convert; hold or independently annotate/version before prediction.",
+    "definition_provenance_required": [
+      "original definition text/locator",
+      "original artifact identity/hash",
+      "semantic interpretation and exclusion of contradiction",
+      "pre-prediction owner confirmation for the batch"
+    ],
+    "historical_definition_example": {
+      "path": "data/evaluation_local/holdout-source-selection-v1/answer-review-v1/original/evaluator-only/rubric.draft.md",
+      "sha256": "9f9baec50a98545e0eae5e105115ffcf5564dcf139e2fa035de0e054f65dcb93",
+      "definition_summary": "not_supported means evidence insufficient, not automatically factually wrong; contradicted separately means explicit conflict with selected text",
+      "scope": "Historical example only; does not license mapping unrelated datasets or settle individual exception-interpretation disputes."
+    },
+    "unknown_or_mixed_labels": "Do not infer from names, guessed synonyms or observed predictions. Unknown/supported/contradicted/not_assessable also require original semantic definition compatibility."
+  }
 }
