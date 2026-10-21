@@ -1,0 +1,98 @@
+{
+  "spec_id": "reviewer-component-baseline-spec-v1",
+  "date": "2026-10-21",
+  "status": "owner_adopted_scope_and_reporting_not_execution_freeze",
+  "source_commit": "cab5e882adb98856129891e674ddac703d69c808",
+  "owner_confirmation_scope": "4 source groups / 8 question families / 24 answers; fixed v7 + strict v6; no percentage gates or zero-unaligned gate; validity distinct from capability results",
+  "spec_markdown_sha256": "874fd29bd7d940ce5488bd52497d4065bcb905e13043a843597946573f81aa80",
+  "prompt_version": "explicit-rationale-layout-eval-v7-dev",
+  "response_contract_version": "addressedness-claim-target-eval-v6-dev",
+  "prompt_sha256_utf8": "9cf9cf7ef8cea96cded571995bf042edf15bd8ea1fdc209d11f66cacd8309928",
+  "bound_code_sha256": {
+    "evaluation/batch_control.py": "265df87098a3191a0fae1bc0d4bb50480c36e64fa524fb169f1fe47c00df2009",
+    "evaluation/premise_bound_review_v4.py": "ff6321d8f977ded44eb57d0fc0a61e5c5ebab7cdf302af9f8c50e4b213a6a676",
+    "evaluation/premise_bound_review_v5.py": "bbf2bc5a2ac7da49d26b74c4163dd99c9845b6778ad360f900be76ac6136ee50",
+    "evaluation/premise_bound_review_v6.py": "0cf52b776531eb636d0c93e2f8f5e9ac22c321cd0f69d277c8a29947f6bd4717",
+    "evaluation/premise_bound_review_v7.py": "7e88223fc7d715fd4aaf4dabff3f9561fc93df15e4bada6c66a149d11ea227b6",
+    "evaluation/requirement_review_v3.py": "9847d8a062a9591861532737698763ad140ca4f846ed5e2bbaefa9aefe25fea3",
+    "evaluation/requirement_trial_v3.py": "31dccc562b85b0e08f9e7fd3d7fd6e1b92a66dc7217fccde4388f1ab68ce6d17",
+    "evaluation/text_bound_review.py": "12f7172d3d062dc603749bc9c470896b145b3b82aaa3b7d5c482029928829df6",
+    "evaluation/text_bound_review_v2.py": "371fbc2ac8c4f6520d92f412cc7551deb2236017d0ffa21fd758d9600e07d596",
+    "model_adapter/contracts.py": "7c23b9a46f7c01d27cec864b704eb1e902660edf8cae2614181da68b4847bf5d",
+    "model_adapter/deepseek.py": "73406215bfd5ee0a9fc319c90a723e4c3987615739e204c542ec7833ab4cdf9b",
+    "model_adapter/runtime.py": "009eb22f0ea4bbbd29cfa5cf53ea881c048436430a6896c237e2587a6eca5c8d",
+    "services/response_diagnostics.py": "87c2e772600bc2d588e7544f364df5df63a2ea2ef23f6e892ef5da3669e31ee2",
+    "services/structured_model.py": "a0ab6c75f2256e8810cb3f9d89901b821d5612196ee2496c310d6d06372d1118",
+    "services/validation_diagnostics.py": "1d642fa78787ac608344e3547b62ed423679a7b5f89a79201e3f3fd8832ae409",
+    "tests/test_premise_bound_review_v7.py": "a4d68ac3922c85edc141690a4192a2206dd8e88ffc076d050db65a44db4df292"
+  },
+  "parser_identity_verified": true,
+  "planning": {
+    "source_lineage_groups": 4,
+    "question_families": 8,
+    "answers": 24,
+    "families_per_source_group": 2,
+    "answers_per_family": 3,
+    "statistical_sufficiency_claim": false,
+    "required_support_classes": [
+      "supported",
+      "contradicted",
+      "insufficient_evidence"
+    ],
+    "required_phenomena": [
+      "synonym",
+      "omission",
+      "condition_boundary",
+      "premise_application"
+    ],
+    "not_assessable": "include only if clearly applicable and owner confirmed; otherwise unverified"
+  },
+  "gates": {
+    "percentage_thresholds": null,
+    "zero_unaligned_required": false,
+    "invalid_experiment": "report scope and invalidate affected conclusions",
+    "false_support_or_critical_overreach": "affected capability below expectation; no semantic rerun",
+    "zero_observed_errors": "not production admission or safety proof"
+  },
+  "alignment": "equivalent split/merge count each reference once; mixed/partial/conflicting unaligned, no cherry-pick; extras separate",
+  "metrics": {
+    "evaluation_set": "E: final valid, unambiguous aligned reference semantic units without conflicts",
+    "F": "E: reference non-support, prediction supported",
+    "A_NS": "E: reference insufficient_evidence/contradicted/not_assessable",
+    "A_SP": "E: prediction supported",
+    "false_support": [
+      "F/A_NS",
+      "F/A_SP"
+    ],
+    "false_rejection": "E: reference supported and prediction non-support; counts by predicted label and fraction of supported references in E",
+    "zero_denominator": "N/A",
+    "unaligned": "reduces evaluable coverage; not automatically incorrect",
+    "aggregate_accuracy": false
+  },
+  "execution_planning": {
+    "initial_requests": 24,
+    "max_corrections_per_request": 1,
+    "shared_max_calls": 48,
+    "admission_deadline_seconds": 4320,
+    "hard_wall_clock_guarantee": false,
+    "timeout_seconds": 90,
+    "max_output_tokens": 2000,
+    "max_response_chars": 24000,
+    "max_message_chars": 90000,
+    "model": "deepseek-flash",
+    "endpoint": "https://api.deepseek.com",
+    "sampling": "provider defaults; drift unknown",
+    "stop": "first execution/transport/storage/final-contract failure; subsequent unexecuted",
+    "transport_retries": 0,
+    "automatic_resume": false,
+    "semantic_rerun": false,
+    "revision": false
+  },
+  "next_stage": "source screening, then owner source/question/label review, then final batch freeze and separate paid authorization",
+  "new_source_selected": false,
+  "new_questions_created": false,
+  "paid_execution_authorized": false,
+  "new_model_calls": 0,
+  "production_changed": false,
+  "historical_files_unchanged": true
+}
