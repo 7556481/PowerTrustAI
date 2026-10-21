@@ -12,10 +12,11 @@
     "batch-report-review-v1.json": "cc3ab0642fb5712c9ef99407448711b18f5539e682ab2b02eaa76d02e173dc70",
     "batch-results-v1.json": "9bdcce9a14879844cbff754387d9aec9d654484fd5c0842ce52235c739c623df",
     "owner-confirmation-v1.json": "9f55e973f047551f87d7cf37d75c265f56fd1e2c08aebd12c184a564a6fb0a01",
-    "README.md": "b82595735df76760ad2087344e4ece6545c2d085f296a7867691c5869c2825f2",
+    "README.md": "332a0e0978b307a03bed46dd6ea28da5809e5001e470661e687bfb345171d540",
     "candidates\\answers.draft.json": "ac03edf32ece6a0188e8d44affe4107ecfca60718bfba1a485b9ef1aff490d1e",
     "evaluator-only\\expected-labels.draft.json": "4dd0bf7b20834d362d5e2270fba10b0f63dc09dda6992cd01765393dcc858383",
-    "evaluator-only\\review-table.md": "bbee1a925f92b5cd2a8a497a7f950f55e56997406d1dc90851e06f61b67d556e"
+    "evaluator-only\\review-table.md": "bbee1a925f92b5cd2a8a497a7f950f55e56997406d1dc90851e06f61b67d556e",
+    "source-group-transition-v1.json": "e5737709f97dd4c6d8f21e19f9949435bbb807e3ee2fbdcbd73340a6ab1a5b3a"
   },
   "owner_confirmation_file": "owner-confirmation-v1.json",
   "class_distribution": {
@@ -26,5 +27,6 @@
   },
   "question_count": 2,
   "source_group_count": 2,
-  "batch_report_review": "batch-report-review-v1.json"
+  "batch_report_review": "batch-report-review-v1.json",
+  "current_source_status": "subsequent_development_v6_original_frozen_batch_preserved"
 }

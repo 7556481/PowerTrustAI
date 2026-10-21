@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-21",
+  "reason": "User explicitly authorized evaluation-only component repair informed by this frozen batch",
+  "transitions": [
+    {
+      "historical_group": "CAND2-EIA-GLOSSARY",
+      "current_group": "DEV-EIA-GLOSSARY",
+      "scope": "EIA glossary entries/aliases/translations/mirrors and identified same-definition lineage"
+    },
+    {
+      "historical_group": "CAND2-NRC-GLOSSARY",
+      "current_group": "DEV-NRC-GLOSSARY",
+      "scope": "NRC glossary aliases/full-text/translations/mirrors and identified same/near-definition lineage"
+    }
+  ],
+  "historical_frozen_record_preserved": true,
+  "historical_labels_and_scores_changed": false,
+  "production_protocol_changed": false,
+  "new_paid_calls_authorized": false
+}

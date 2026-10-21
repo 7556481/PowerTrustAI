@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-21",
+  "status": "development_offline_not_semantically_validated",
+  "source_commit": "22529eefb27df0b4544540eaab13ba0bf30448c6",
+  "protocol": "addressedness-claim-target-eval-v6-dev",
+  "previous_protocol": "typed-premise-field-diagnostics-eval-v5-dev",
+  "prompt_sha256_utf8": "bc8ffa7e04cfe98fa59a9d7ada36da9b0b470ff46ccbd2dc4646db1c05a4d44d",
+  "previous_prompt_sha256_utf8": "642c7698ecbdd0ef88b139b3e423ca41a1fbaa4aa2edd7803bf4b8cff3796092",
+  "code_sha256": {
+    "evaluation/premise_bound_review_v6.py": "0cf52b776531eb636d0c93e2f8f5e9ac22c321cd0f69d277c8a29947f6bd4717",
+    "tests/test_premise_bound_review_v6.py": "58e555e24bdb7ffe282336ed55da3587c90c1e407924330320ace0bd6e055511"
+  },
+  "checks": {
+    "new_synthetic_tests_passed": 17,
+    "combined_targeted_tests_passed": 51,
+    "frozen_candidate_code_hashes_unchanged": 11,
+    "original_batch_preflight_passed": true,
+    "original_task_count": 8
+  },
+  "protected_public_artifact_sha256": {
+    "docs/evaluation/eia-nrc-answer-drafts-v1/batch-results-v1.json": "9bdcce9a14879844cbff754387d9aec9d654484fd5c0842ce52235c739c623df",
+    "docs/evaluation/eia-nrc-answer-drafts-v1/batch-freeze-v1.json": "3717a8faa46b1acc7d1908581a8e3adf018c4877d8059b48d7cd3ccbc9622b63",
+    "docs/evaluation/eia-nrc-answer-drafts-v1/batch-report-review-v1.json": "cc3ab0642fb5712c9ef99407448711b18f5539e682ab2b02eaa76d02e173dc70",
+    "docs/evaluation/eia-nrc-answer-drafts-v1/owner-confirmation-v1.json": "9f55e973f047551f87d7cf37d75c265f56fd1e2c08aebd12c184a564a6fb0a01",
+    "docs/evaluation/eia-nrc-answer-drafts-v1/candidates/answers.draft.json": "ac03edf32ece6a0188e8d44affe4107ecfca60718bfba1a485b9ef1aff490d1e",
+    "docs/evaluation/eia-nrc-answer-drafts-v1/evaluator-only/expected-labels.draft.json": "4dd0bf7b20834d362d5e2270fba10b0f63dc09dda6992cd01765393dcc858383"
+  },
+  "api_calls": 0,
+  "production_changed": false,
+  "historical_labels_scores_or_alignment_changed": false,
+  "output_schema_changed": false,
+  "input_extension": "source_role and traceable record_context for actual_record",
+  "new_paid_entrypoint": false,
+  "current_source_groups": [
+    "DEV-EIA-GLOSSARY",
+    "DEV-NRC-GLOSSARY"
+  ],
+  "semantic_improvement_verified": false,
+  "limitations": [
+    "Synthetic preset outputs validate contracts, not model semantic performance",
+    "Semantic target classification, subject/property applicability and record authenticity are not mechanically guaranteed",
+    "Prior frozen candidate and production defaults are not replaced"
+  ]
+}
