@@ -1,5 +1,41 @@
 # 文档索引
 
+当前交付按本人授权在本地提交后普通推送；不纳入data或恢复模型实验。
+
+- **当前阶段入口：[评审开发阶段收尾v2](reviewer-development-closeout-v2.md)**：三批记录分开、未整批验收，33离线通过、停止追加；MIT/BIPM均后续开发，独立评测未完成。以下早期“待确认/待批准”等条目为各自时点记录，最新状态以收尾与交接首条为准。
+
+- [9支持单元文本对齐确认与映射溯源](reviewer-remaining8-v5-results.md)：本人确认文本对齐，标签/理由张力及SI例外边界保留；找到旧批冻结映射，本批未显式绑定的记录限制另列，0API。
+
+- [剩余8项文本复核与只读失败核对](reviewer-remaining8-v5-results.md)：本人仅复核报告文本；助手核对7响应哈希与两结构原因，9有效支持单元复核表留忽略目录待本人确认，0API、不恢复执行。
+
+- [剩余8项v5开发结果](reviewer-remaining8-v5-results.md)：7调用14258token，4有效/1失败/3未执行；MIT覆盖混入正确性、SI省例外错误支持、SI-A03契约失败均保留；[统计](reviewer-remaining8-v5-results-stats.json)，不补跑。
+
+- [剩余8项v5开发计划](reviewer-remaining8-v5-plan.md)：22coverage槽、20支持单元；最多16调用计划/匹配停止规则及执行门禁离线就绪，待明确批准，0API。
+
+- [开发侧覆盖定义v2：30槽文本确认完成](reviewer-coverage-definition-v2.md)：两轮合计23covered/5missing/2partial，仅改两处理由；原参考不覆盖，未确认JSON/SHA、未冻结或授权执行，0API。
+
+- 覆盖定义v2其余25槽复核材料：忽略目录coverage-definition-v2-review-remaining25中的review-table.md供本人逐项复核，含完整构造回答不公开；25槽全部待确认，0API。背景见[定义v2](reviewer-coverage-definition-v2.md)。
+
+- [开发侧覆盖定义v2与五项文本确认](reviewer-coverage-definition-v2.md)：四covered、一partial；非原标签等价改名，25槽/JSON/SHA未本人确认，未冻结或授权调用。
+
+- [覆盖参考v2草案](reviewer-coverage-reference-v2-draft.md)：30槽另存覆盖建议，5个not_met逐项复核、SI-A04范围边界重点待确认；旧标签不改，0API，不启动剩余8项。
+
+- [A04 v5单项开发复验](reviewer-a04-v5-recheck.md)：原输入一次，1调用1732token、2.589秒、零纠正，覆盖与支持主要判断符合参考；没有验证纠正路径，不补8项；[统计](reviewer-a04-v5-recheck-stats.json)。
+
+- [v5开发侧精确字段诊断](reviewer-field-diagnostics-v5-offline.md)：缺unit理由明确定位；30项离线通过、0API、不补跑；MIT/BIPM关联组转后续开发，历史结果保留，生产不变。
+
+- [两题固定评测v1](reviewer-fixed-batch-v1.md)：恢复授权后6调用10495token，3有效、1契约失败、8未执行；缺unit理由纠正仍失败即停止，非独立成绩；[统计](reviewer-fixed-batch-v1-stats.json)。
+
+- [开发侧评分定义统一](reviewer-coverage-semantics-development-v1.md)：本人暂停12项执行；分开覆盖、证据支持和正确作答要求满足度，16项既有离线回归通过；保留题hold，0API。
+
+- 执行准备状态：人工not_met与现有coverage口径冲突，待明确处理方式；见[交接](handoff.md)。尚未调用或冻结可执行批次。
+
+- [两题回答与预期审核确认](reviewer-holdout-question-cards-v1.md)：用户确认外部包12回答/27参考单元；哈希与原文绑定核对，忽略目录保留标签；最终匹配及执行协议待冻结，0预测。
+
+- [两题初步复核及BIPM措辞修订](reviewer-holdout-question-cards-v1.md)：MIT设计保留，BIPM评分范围不变、题目采用本人建议；旧卡保留，无样例或预测，非执行冻结。
+
+- [保留来源候选正式登记与两张待复核题卡](reviewer-holdout-question-cards-v1.md)：本人确认建设规则及MIT/BIPM选段/范围；类别关系与单位符号书写题卡草案，要求独立评分，非最终协议/批次；0预测、不改生产。
+
 - [MIT/BIPM候选选段复核](reviewer-holdout-excerpt-review-v1.md)：MIT热敏电阻定义与BIPM单位符号书写完整规则；范围/原页/区间及有限重合审计，不出题不预测，待本人确认、不正式入组。
 
 - [保留来源两候选与谱系初核](reviewer-holdout-source-selection-v1.md)：MIT6.002 2007转录及BIPM SI9 V4.01；官方快照/SHA与范围内开发使用记录核对，待本人及选段复核。只选来源、不出题/预测，不证明训练未见。

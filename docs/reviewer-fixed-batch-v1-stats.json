@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-21",
+  "batch": "execution-20261021-v1",
+  "independent_holdout_claim": false,
+  "planned": 12,
+  "complete": 3,
+  "failed_contract": 1,
+  "unexecuted": 8,
+  "actual_calls": 6,
+  "corrections": 2,
+  "elapsed_seconds": 12.449,
+  "usage": {
+    "input_tokens": 7856,
+    "output_tokens": 2639,
+    "total_tokens": 10495
+  },
+  "requirements": {
+    "planned": 30,
+    "valid": 6,
+    "failed": 2,
+    "unexecuted": 22,
+    "not_met_reference": 5,
+    "not_met_valid": 0,
+    "comparable_agreements": 6
+  },
+  "support": {
+    "planned": 27,
+    "aligned": 4,
+    "unaligned_valid": 0,
+    "failed": 3,
+    "unexecuted": 20,
+    "false_support": 0,
+    "aligned_non_support_reference": 0,
+    "aligned_supported_prediction": 4,
+    "F_over_A_NS": "N/A (0/0)",
+    "F_over_A_SP": "0/4",
+    "alignment": "AI-assisted; owner review pending"
+  },
+  "items": [
+    {
+      "sample_id": "H-MIT-001-A01",
+      "status": "complete",
+      "reference_units": 2,
+      "requirements": 2,
+      "elapsed_seconds": 4.763,
+      "calls": 2,
+      "corrections": 1
+    },
+    {
+      "sample_id": "H-MIT-001-A02",
+      "status": "complete",
+      "reference_units": 1,
+      "requirements": 2,
+      "elapsed_seconds": 1.629,
+      "calls": 1,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-MIT-001-A03",
+      "status": "complete",
+      "reference_units": 1,
+      "requirements": 2,
+      "elapsed_seconds": 1.838,
+      "calls": 1,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-MIT-001-A04",
+      "status": "failed",
+      "reference_units": 3,
+      "requirements": 2,
+      "elapsed_seconds": 4.189,
+      "calls": 2,
+      "corrections": 1
+    },
+    {
+      "sample_id": "H-MIT-001-A05",
+      "status": "unexecuted_after_stop",
+      "reference_units": 2,
+      "requirements": 2,
+      "elapsed_seconds": null,
+      "calls": 0,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-MIT-001-A06",
+      "status": "unexecuted_after_stop",
+      "reference_units": 1,
+      "requirements": 2,
+      "elapsed_seconds": null,
+      "calls": 0,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-SI-001-A01",
+      "status": "unexecuted_after_stop",
+      "reference_units": 3,
+      "requirements": 3,
+      "elapsed_seconds": null,
+      "calls": 0,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-SI-001-A02",
+      "status": "unexecuted_after_stop",
+      "reference_units": 3,
+      "requirements": 3,
+      "elapsed_seconds": null,
+      "calls": 0,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-SI-001-A03",
+      "status": "unexecuted_after_stop",
+      "reference_units": 3,
+      "requirements": 3,
+      "elapsed_seconds": null,
+      "calls": 0,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-SI-001-A04",
+      "status": "unexecuted_after_stop",
+      "reference_units": 3,
+      "requirements": 3,
+      "elapsed_seconds": null,
+      "calls": 0,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-SI-001-A05",
+      "status": "unexecuted_after_stop",
+      "reference_units": 2,
+      "requirements": 3,
+      "elapsed_seconds": null,
+      "calls": 0,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-SI-001-A06",
+      "status": "unexecuted_after_stop",
+      "reference_units": 3,
+      "requirements": 3,
+      "elapsed_seconds": null,
+      "calls": 0,
+      "corrections": 0
+    }
+  ],
+  "freeze_sha256": "fb4cbd7f6b6d68b62a1375a380c239f52006dfa555b348b4219fcd81dcdf9838",
+  "failure": "Missing required unit rationale, not JSON syntax or extra composition/count fields",
+  "production_changed": false
+}

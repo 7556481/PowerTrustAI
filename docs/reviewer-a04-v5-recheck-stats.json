@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-21",
+  "sample_id": "H-MIT-001-A04",
+  "protocol": "typed-premise-field-diagnostics-eval-v5-dev",
+  "planned": 1,
+  "complete": 1,
+  "failed": 0,
+  "calls": 1,
+  "corrections": 0,
+  "elapsed_seconds": 2.589,
+  "tokens": {
+    "input_tokens": 1150,
+    "output_tokens": 582,
+    "total_tokens": 1732
+  },
+  "coverage": {
+    "R1": "covered",
+    "R2": "covered",
+    "reference_agreements": 2
+  },
+  "support": {
+    "planned_reference_units": 3,
+    "aligned": 3,
+    "unaligned": 0,
+    "failed": 0,
+    "unexecuted": 0,
+    "supported": 2,
+    "insufficient_evidence": 1,
+    "contradicted": 0,
+    "false_support": 0,
+    "F_over_A_NS": "0/1",
+    "F_over_A_SP": "0/2",
+    "review": "AI-assisted; owner review pending"
+  },
+  "input_identical_to_old_A04": true,
+  "diagnostic_correction_exercised": false,
+  "independent_score": false,
+  "old_batch_changed": false,
+  "remaining_eight_executed": false,
+  "production_changed": false,
+  "freeze_sha256": "1bb1b7bfe2444574977fb473368d6c4ca35abd35468ad3009f132058d1063f64"
+}

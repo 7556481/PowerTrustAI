@@ -1,5 +1,9 @@
 # 保留集来源分组清单v1（草案）
 
+当前状态（2026-10-21）：使用两题批次契约失败改进开发诊断后，CAND-MIT-6002→DEV-MIT-6002、CAND-BIPM-SI9→DEV-BIPM-SI9，关联谱系整体留后续开发，不再作独立保留来源。历史候选登记/标签/结果保留；下文为当时分组记录。见[v5离线修订与边界](reviewer-field-diagnostics-v5-offline.md)。
+
+后续登记（2026-10-20）：本人确认建设规则、两组选段及范围。CAND-MIT-6002（别名CAND-MIT-6002-L01）与CAND-BIPM-SI9已正式登记为**保留来源候选组**，具体身份、谱系、哈希与待复核题卡见[登记报告](reviewer-holdout-question-cards-v1.md)。并非正式执行批次；下文待选段确认状态保留为历史过程。开发分组不变。
+
 2026-10-20。已知开发组和分组规则已获整体接受，与[建设规格](reviewer-holdout-spec-v1.md)配套。后续获准来源选择后，新增[两份来源候选初核](reviewer-holdout-source-selection-v1.md)：CAND-MIT-6002及CAND-BIPM-SI9，均待本人及选段谱系复核，不代表已冻结保留组。下表开发归属保持。
 
 | 组ID | 已知来源/谱系锚点 | 归属与覆盖范围 | 未决核对项 |
