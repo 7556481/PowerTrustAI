@@ -1,0 +1,238 @@
+{
+  "date": "2026-10-21",
+  "batch": "batch-eia-nrc-v1",
+  "planned_answers": 8,
+  "questions": 2,
+  "source_groups": 2,
+  "complete": 8,
+  "failed": 0,
+  "unexecuted": 0,
+  "calls": 10,
+  "corrections": 2,
+  "elapsed_seconds": 24.696,
+  "token_usage": {
+    "input_tokens": 13376,
+    "output_tokens": 4769,
+    "total_tokens": 18145
+  },
+  "coverage": {
+    "planned": 16,
+    "valid": 16,
+    "failed": 0,
+    "unexecuted": 0,
+    "agreements": 14,
+    "confusion_counts": {
+      "covered -> covered": 12,
+      "missing -> missing": 1,
+      "partially_covered -> partially_covered": 1,
+      "covered -> partially_covered": 2
+    },
+    "disagreements": [
+      {
+        "sample_id": "H-EIA-001-A03",
+        "requirement_id": "R2",
+        "expected": "covered",
+        "predicted": "partially_covered"
+      },
+      {
+        "sample_id": "H-EIA-001-A04",
+        "requirement_id": "R1",
+        "expected": "covered",
+        "predicted": "partially_covered"
+      }
+    ]
+  },
+  "support": {
+    "planned_reference_units": 12,
+    "aligned": 11,
+    "unaligned": 1,
+    "failed": 0,
+    "unexecuted": 0,
+    "conflicts": 0,
+    "reference_distribution": {
+      "supported": 8,
+      "contradicted": 3,
+      "insufficient_evidence": 1,
+      "not_assessable": 0
+    },
+    "false_support": 0,
+    "aligned_non_support_reference": 3,
+    "aligned_supported_prediction": 7,
+    "F_over_A_NS": "0/3",
+    "F_over_A_SP": "0/7",
+    "confusion_counts": {
+      "supported -> supported": 7,
+      "supported -> insufficient_evidence": 1,
+      "contradicted -> contradicted": 2,
+      "insufficient_evidence -> insufficient_evidence": 1
+    },
+    "raw_returned_judgments_for_audit_not_denominator": {
+      "supported": 8,
+      "insufficient_evidence": 2,
+      "contradicted": 3
+    },
+    "unaligned_references": [
+      {
+        "sample_id": "H-EIA-001-A04",
+        "reference_unit_id": "U1",
+        "expected": "contradicted",
+        "program_carrier_id": "u-6cba6643b1f1c85f4d674d07c81fb150ce37ffbf1e942cad079f0f8f6b352461",
+        "review": "AI-assisted semantic alignment, owner confirmation pending",
+        "alignment": "unaligned_mixed_compound",
+        "predicted": null,
+        "reason": "One compound reference produced full contradiction plus supported subclaim; mixed labels excluded by frozen policy, no cherry-picking.",
+        "raw_labels": [
+          "contradicted",
+          "supported"
+        ]
+      }
+    ],
+    "alignment_review_status": "AI-assisted pending owner confirmation",
+    "aligned_reference_results": [
+      {
+        "sample_id": "H-EIA-001-A01",
+        "reference_unit_id": "U1",
+        "expected": "supported",
+        "predicted": "supported"
+      },
+      {
+        "sample_id": "H-EIA-001-A01",
+        "reference_unit_id": "U2",
+        "expected": "supported",
+        "predicted": "supported"
+      },
+      {
+        "sample_id": "H-NRC-001-A01",
+        "reference_unit_id": "U1",
+        "expected": "supported",
+        "predicted": "insufficient_evidence"
+      },
+      {
+        "sample_id": "H-EIA-001-A02",
+        "reference_unit_id": "U1",
+        "expected": "supported",
+        "predicted": "supported"
+      },
+      {
+        "sample_id": "H-NRC-001-A02",
+        "reference_unit_id": "U1",
+        "expected": "supported",
+        "predicted": "supported"
+      },
+      {
+        "sample_id": "H-EIA-001-A03",
+        "reference_unit_id": "U1",
+        "expected": "supported",
+        "predicted": "supported"
+      },
+      {
+        "sample_id": "H-EIA-001-A03",
+        "reference_unit_id": "U2",
+        "expected": "contradicted",
+        "predicted": "contradicted"
+      },
+      {
+        "sample_id": "H-NRC-001-A03",
+        "reference_unit_id": "U1",
+        "expected": "contradicted",
+        "predicted": "contradicted"
+      },
+      {
+        "sample_id": "H-EIA-001-A04",
+        "reference_unit_id": "U2",
+        "expected": "supported",
+        "predicted": "supported"
+      },
+      {
+        "sample_id": "H-NRC-001-A04",
+        "reference_unit_id": "U1",
+        "expected": "supported",
+        "predicted": "supported"
+      },
+      {
+        "sample_id": "H-NRC-001-A04",
+        "reference_unit_id": "U2",
+        "expected": "insufficient_evidence",
+        "predicted": "insufficient_evidence"
+      }
+    ]
+  },
+  "order": [
+    "H-EIA-001-A01",
+    "H-NRC-001-A01",
+    "H-EIA-001-A02",
+    "H-NRC-001-A02",
+    "H-EIA-001-A03",
+    "H-NRC-001-A03",
+    "H-EIA-001-A04",
+    "H-NRC-001-A04"
+  ],
+  "order_method": "question-group interleaving, ascending A01-A04, EIA first; fixed before outcome, not randomized",
+  "stop_triggered": false,
+  "first_pass_structure_valid": 6,
+  "format_failure_type": "Missing required unit rationale; both corrected once successfully",
+  "label_confidentiality_claim": false,
+  "full_four_class_claim": false,
+  "independence_scope": "relative isolation from project debugging only; generic sources widely disseminated, labels publicly released; no unseen-training or fully independent claim",
+  "all_pass_or_correct_claim": false,
+  "production_changed": false,
+  "items": [
+    {
+      "sample_id": "H-EIA-001-A01",
+      "status": "complete",
+      "elapsed_seconds": 2.421,
+      "calls": 1,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-NRC-001-A01",
+      "status": "complete",
+      "elapsed_seconds": 2.378,
+      "calls": 1,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-EIA-001-A02",
+      "status": "complete",
+      "elapsed_seconds": 2.171,
+      "calls": 1,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-NRC-001-A02",
+      "status": "complete",
+      "elapsed_seconds": 2.088,
+      "calls": 1,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-EIA-001-A03",
+      "status": "complete",
+      "elapsed_seconds": 2.375,
+      "calls": 1,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-NRC-001-A03",
+      "status": "complete",
+      "elapsed_seconds": 2.578,
+      "calls": 1,
+      "corrections": 0
+    },
+    {
+      "sample_id": "H-EIA-001-A04",
+      "status": "complete",
+      "elapsed_seconds": 5.882,
+      "calls": 2,
+      "corrections": 1
+    },
+    {
+      "sample_id": "H-NRC-001-A04",
+      "status": "complete",
+      "elapsed_seconds": 4.745,
+      "calls": 2,
+      "corrections": 1
+    }
+  ],
+  "freeze_sha256": "c6ae4de495aa330b29654df8e454240128b265ee403e6ad6d1607924ff475d56"
+}

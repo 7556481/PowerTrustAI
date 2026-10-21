@@ -1,15 +1,17 @@
 {
-  "status": "owner_confirmed_contents_not_execution_frozen",
+  "status": "confirmed_materials_batch_v1_executed_with_semantic_disagreements",
   "publication_authorized_by_user": true,
   "candidate_count": 8,
   "coverage_slots": 16,
   "reference_units": 12,
   "answer_and_label_bytes_unchanged_from_local_drafts": true,
-  "model_predictions_created": false,
-  "api_calls": 0,
+  "model_predictions_created": true,
+  "api_calls": 10,
   "files": {
+    "batch-freeze-v1.json": "3717a8faa46b1acc7d1908581a8e3adf018c4877d8059b48d7cd3ccbc9622b63",
+    "batch-results-v1.json": "9bdcce9a14879844cbff754387d9aec9d654484fd5c0842ce52235c739c623df",
     "owner-confirmation-v1.json": "9f55e973f047551f87d7cf37d75c265f56fd1e2c08aebd12c184a564a6fb0a01",
-    "README.md": "168efd78c8873393575f65418d08e462b31fc45138ee234b0ca0f980737b1bac",
+    "README.md": "4c70df5dc8176d8cdfa39799247de743b6f07de8c7bbb2c181044f41f8736f74",
     "candidates\\answers.draft.json": "ac03edf32ece6a0188e8d44affe4107ecfca60718bfba1a485b9ef1aff490d1e",
     "evaluator-only\\expected-labels.draft.json": "4dd0bf7b20834d362d5e2270fba10b0f63dc09dda6992cd01765393dcc858383",
     "evaluator-only\\review-table.md": "bbee1a925f92b5cd2a8a497a7f950f55e56997406d1dc90851e06f61b67d556e"
