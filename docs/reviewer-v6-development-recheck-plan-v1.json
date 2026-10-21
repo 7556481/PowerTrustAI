@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-21",
+  "status": "offline_plan_pending_owner_confirmation_and_paid_authorization",
+  "purpose": "seen-development protocol recheck, not independent evaluation",
+  "protocol": "addressedness-claim-target-eval-v6-dev",
+  "code_commit": "899cb2b76b46597dfa8ef478ab4a192d9097a063",
+  "prompt_sha256_utf8": "bc8ffa7e04cfe98fa59a9d7ada36da9b0b470ff46ccbd2dc4646db1c05a4d44d",
+  "code_sha256": {
+    "evaluation/premise_bound_review_v6.py": "0cf52b776531eb636d0c93e2f8f5e9ac22c321cd0f69d277c8a29947f6bd4717",
+    "evaluation/premise_bound_review_v5.py": "bbf2bc5a2ac7da49d26b74c4163dd99c9845b6778ad360f900be76ac6136ee50",
+    "evaluation/premise_bound_review_v4.py": "ff6321d8f977ded44eb57d0fc0a61e5c5ebab7cdf302af9f8c50e4b213a6a676",
+    "evaluation/requirement_trial_v3.py": "31dccc562b85b0e08f9e7fd3d7fd6e1b92a66dc7217fccde4388f1ab68ce6d17"
+  },
+  "order": [
+    "H-EIA-001-A01",
+    "H-NRC-001-A01",
+    "H-EIA-001-A02",
+    "H-NRC-001-A02",
+    "H-EIA-001-A03",
+    "H-NRC-001-A03",
+    "H-EIA-001-A04",
+    "H-NRC-001-A04"
+  ],
+  "order_method": "reuse original fixed interleaved order, no outcome-based reordering",
+  "items": [
+    {
+      "sample_id": "H-EIA-001-A01",
+      "original_task_sha256_utf8": "1f32c117473875474bf134bde5c9c60f24347ba496868ccde05aefa62d0a0e7e",
+      "candidate_task_sha256_utf8": "76aa501e4b4e7507bc9a21a7cb13e150f09c00ab3a8417c2cc32cb8474858777",
+      "candidate_messages_sha256_utf8": "65d531efc35c6e9782af24ed969a951316e8d480d29720cd2359bc2f5e596275"
+    },
+    {
+      "sample_id": "H-NRC-001-A01",
+      "original_task_sha256_utf8": "4a004b7e6a2f518bf333f114c4f1938d8a9efc58dc32869a3bd6d3804f47f7ec",
+      "candidate_task_sha256_utf8": "22dd1355d48d71d94f7afc231bd5d9e3c112d6ac2993ebf4015977408572e16c",
+      "candidate_messages_sha256_utf8": "479e338929291c3a6556803f6e51319352d14a3ffb88288889f787250ab1a354"
+    },
+    {
+      "sample_id": "H-EIA-001-A02",
+      "original_task_sha256_utf8": "17908718a10bc13fa677309ac9a215e4c186782791f591428f68e5cc43b6b223",
+      "candidate_task_sha256_utf8": "8e266700f0943d3e357ea9d6757a1361657c21f8a60a087dca044e997496b062",
+      "candidate_messages_sha256_utf8": "6fa21c5821ce31262d186bdf488e43e9c7d8db21c1c928de04189e5854578484"
+    },
+    {
+      "sample_id": "H-NRC-001-A02",
+      "original_task_sha256_utf8": "05db373e666685476e3e5f7b2859932f50d160f4859ab7c8b01c7d9e4d557aaa",
+      "candidate_task_sha256_utf8": "1d26859cb252fd20cb9c029aabcabbccba3f6138037dab8c446a3fcc595b4e5b",
+      "candidate_messages_sha256_utf8": "b31a8d003602db7dca6ac844773fe9e7b7f30fabcb04e8c9baedcf08f4c83ae3"
+    },
+    {
+      "sample_id": "H-EIA-001-A03",
+      "original_task_sha256_utf8": "8f3df584e6494f4aa50acb1bd5b3b9e2a04663ae6304b2f6295928c2534fc6fe",
+      "candidate_task_sha256_utf8": "becbf61ead8664086664417b25cd7f18867baee427627ee9d1797d04ae9f5b77",
+      "candidate_messages_sha256_utf8": "55d969d8c2b2efa9137baf5d7b9b50cc319b4b3fd4ad37c5600bfcbf68ea77ef"
+    },
+    {
+      "sample_id": "H-NRC-001-A03",
+      "original_task_sha256_utf8": "f71b6d37a801f86573f2ffd0d684e92fa486ecab1e11bdd538e6d70e099f023a",
+      "candidate_task_sha256_utf8": "dca609539cec02919ad0748d2259bdde314cb472e0c6a0d75ce9cf1c9b9353f5",
+      "candidate_messages_sha256_utf8": "085d4262f605113ab037e660c477b42737e3ccabd41aaa05ac9bbd375688f06f"
+    },
+    {
+      "sample_id": "H-EIA-001-A04",
+      "original_task_sha256_utf8": "1a178910caeefd0849d3e55ed3ac0703fd0e2e3f5e1f9fe2aab9e9f2a47cb1e0",
+      "candidate_task_sha256_utf8": "5f6d7fbfc6801333ae1e4333972065a743d8bc669ca87ec734be551dde4fbc9a",
+      "candidate_messages_sha256_utf8": "9a593022827a32fb6efe7dd8a45ea40a7c384f366b855e6d9570adf3b405d90b"
+    },
+    {
+      "sample_id": "H-NRC-001-A04",
+      "original_task_sha256_utf8": "f344e3c3b69aa2063689e5493173fe3520c1731486093bf3f3fc805da00e2967",
+      "candidate_task_sha256_utf8": "cbdae935a940b70b29d74afc6ad7185420dd818af6cabf515328a0b41ebcd800",
+      "candidate_messages_sha256_utf8": "36e0147516204e6c44f0dd8500b6e026522cd3e43fccb4de638b0640eb6b8a9a"
+    }
+  ],
+  "changed": "v6 system prompt and explicit literature source_role only; parser/derived scope follows independently versioned v6",
+  "unchanged": [
+    "questions",
+    "requirements",
+    "answer text",
+    "mechanical answer units",
+    "selected excerpts",
+    "necessary context",
+    "evidence IDs and source snapshot identity",
+    "reference labels and alignment policy including EIA-A04"
+  ],
+  "model_settings": {
+    "model_id": "deepseek-flash",
+    "endpoint": "https://api.deepseek.com",
+    "timeout_seconds": 90,
+    "max_output_tokens": 2000,
+    "max_response_chars": 24000,
+    "max_message_chars": 90000,
+    "sampling_parameters": "omitted from connector request; provider defaults and drift unknown, not deterministic"
+  },
+  "execution": {
+    "planned_initial_requests": 8,
+    "maximum_format_corrections_per_request": 1,
+    "maximum_calls": 16,
+    "maximum_calls_derivation": "8 * (1 + 1)",
+    "timeout_seconds": 90,
+    "budget_deadline_seconds": 1440,
+    "transport_retries": 0,
+    "automatic_resume": false,
+    "automatic_semantic_rerun": false,
+    "stop": "first execution/transport/storage/final contract failure; list remaining items unexecuted"
+  },
+  "report": [
+    "all 8 completion states and actual coverage",
+    "first-valid and final contract validity; corrections, calls, tokens",
+    "coverage agreement plus explicit opposite-answer and scope-omission errors",
+    "aligned support judgments, false support both denominators, false rejection, unaligned and conflicts",
+    "literature definition vs actual-target classification and rationale tensions",
+    "old v5 historical observations vs new v6 results, not controlled model A/B"
+  ],
+  "reference_labels_reasons_roles_and_reference_units_sent": false,
+  "api_calls": 0,
+  "production_changed": false,
+  "source_groups": [
+    "DEV-EIA-GLOSSARY",
+    "DEV-NRC-GLOSSARY"
+  ],
+  "offline_checks": {
+    "original_frozen_preflight": true,
+    "tasks_match_original_except_source_role": true,
+    "all_v6_message_construction_passed": true
+  },
+  "limitations": [
+    "Seen materials and results informed v6 changes; cannot restore holdout status",
+    "Historical v5 comparison includes provider/time variability",
+    "These examples cannot test real-site verification adequacy; synthetic guards are not model semantic evidence",
+    "No result-dependent protocol change, relabeling or favorable matching"
+  ]
+}
