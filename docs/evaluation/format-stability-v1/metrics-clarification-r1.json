@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-21",
+  "revision": "format-first-field-completeness-r1",
+  "scope": "Statistics definition only, not model instructions or acceptance parser",
+  "review_source": "User read the three preparation files and relayed AI design review; accepts preparation suitability, not paid execution authorization",
+  "definition": "Requirement and original answer-unit objects must each occur exactly once for every expected ID, no omissions/duplicates/foreign IDs, independent of array order; all required fields must be present",
+  "remaining_contract_checks": [
+    "nonempty/nonblank rationale",
+    "allowed enum values",
+    "other binding and scope checks such as basis IDs",
+    "exact field sets and other existing parser constraints"
+  ],
+  "bound_original_files_sha256": {
+    "docs\\evaluation\\format-stability-v1\\inputs.json": "523557d3924e17f99f94fdc4956cb36aaa60cddf79ee40a1259ea8135c85a2d7",
+    "docs\\evaluation\\format-stability-v1\\freeze.json": "0ccd100f78cc0a485ee973fdf8f822f129a98deb5297ada5d12145ce7ff51320",
+    "docs\\evaluation\\format-stability-v1\\review-checklist.md": "47a20bf21df994506508255725260850a5d09ed28af5cfa75cd10931b0c74487"
+  },
+  "expected_ids": [
+    {
+      "sample_id": "FMT-01",
+      "expected_requirement_ids": [
+        "R1",
+        "R2"
+      ],
+      "expected_unit_ids": [
+        "u-85d0a44bada4b09664b5d427dcfcca39dc4f5f55523a4ec5367d034ce29cd5cd"
+      ]
+    },
+    {
+      "sample_id": "FMT-02",
+      "expected_requirement_ids": [
+        "R1",
+        "R2"
+      ],
+      "expected_unit_ids": [
+        "u-43a648e1609761641ebba66cce37d850eebdfb44ace6394781875d354f408498",
+        "u-a16c4278f4c0cded1c5db6df46d71257ce9b5479f773fe28ae7ea18334217cc6"
+      ]
+    },
+    {
+      "sample_id": "FMT-03",
+      "expected_requirement_ids": [
+        "R1",
+        "R2"
+      ],
+      "expected_unit_ids": [
+        "u-e81f32824dc5d011a656fc2d92857f4f123d8032ac84c6e98ec6cab046afc8ab"
+      ]
+    },
+    {
+      "sample_id": "FMT-04",
+      "expected_requirement_ids": [
+        "R1",
+        "R2"
+      ],
+      "expected_unit_ids": [
+        "u-25302a034b956f19097a772562cdd5f7397d440a57b3fe0deda2e43b4f4d06bf",
+        "u-ccb85821f10ea1859b59a18f82985e96566058b23a8e569df749586645f75dcf"
+      ]
+    }
+  ],
+  "offline_definition_examples_checked": "All 4 tasks: reversed ID order preserves exact membership; omission, duplication and replacement by foreign ID fail. This is an offline definition check, not a deployed scoring implementation or model result.",
+  "semantic_boundaries": {
+    "FMT-03": "No stated borrowing permission is not a prohibition",
+    "FMT-04": "Window T is a necessary reception restriction, not sufficient guarantee of acceptance"
+  },
+  "model_prompts_inputs_parser_changed": false,
+  "old_freeze_overwritten": false,
+  "new_api_calls": 0,
+  "paid_execution_authorized": false,
+  "execution_freeze_requirement": "Future batch must bind both original preparation freeze and this metrics clarification; runner/source identity and new paid authorization remain required"
+}
