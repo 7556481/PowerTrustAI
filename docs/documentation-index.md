@@ -1,5 +1,7 @@
 # 文档索引
 
+- **下一阶段候选：[独立评测通用协议v1](reviewer-independent-protocol-candidate-v1.md)**（[机器清单](reviewer-independent-protocol-candidate-v1.json)）：待本人采纳，v5与coverage v2及映射显式绑定，已知缺陷不隐藏；未选新来源、未冻结批次、0API。
+
 当前交付按本人授权在本地提交后普通推送；不纳入data或恢复模型实验。
 
 - **当前阶段入口：[评审开发阶段收尾v2](reviewer-development-closeout-v2.md)**：三批记录分开、未整批验收，33离线通过、停止追加；MIT/BIPM均后续开发，独立评测未完成。以下早期“待确认/待批准”等条目为各自时点记录，最新状态以收尾与交接首条为准。
