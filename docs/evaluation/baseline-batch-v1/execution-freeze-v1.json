@@ -1,0 +1,245 @@
+{
+  "date": "2026-10-21",
+  "batch_id": "reviewer-baseline-v1",
+  "owner_authorized": true,
+  "source_commit": "080a84e17a6258b218d70d554e3deb993c1c69be",
+  "uncommitted_additions_bound_by_sha": [
+    "evaluation/reviewer_baseline_trial_v1.py",
+    "tests/test_reviewer_baseline_trial_v1.py"
+  ],
+  "bound_file_hashes": {
+    "backend/config.py": "386673778691d94d4075f08c885471ca1c3cf48548096e8c6204aaf00e920f53",
+    "docs/evaluation/baseline-answer-drafts-v1/requirement-components-v1.json": "21592b62d02f983f4a65557f8fa6cc85f0d6cdfe7fabe93de5442e70d0179402",
+    "docs/evaluation/baseline-answer-drafts-v1/reviewed-cards-v2.json": "29f6ff7aaa20b5aa49a82a1d4e8d1bd6ad20e8e80cc419d96397c528645a7eaa",
+    "docs/evaluation/baseline-answer-drafts-v1/reviewed-rubric-v2.json": "52f6b01080b4b9206d49ae17e982057862f8f45662e5a60d8fb5cb1bcc2555c3",
+    "docs/evaluation/baseline-answer-drafts-v2/answers-v2.json": "cad4d97253e8eff55603cdd28c518c53b18611f0e17d3d1e211beb33ea5c44b3",
+    "docs/evaluation/baseline-answer-drafts-v2/expected-labels-v2.json": "52b0eef5ae5f00863f6dd2a67e2fcdd983982f3b10dec0a6bb2456e79ae204a9",
+    "docs/evaluation/baseline-answer-drafts-v2/manifest-v2.json": "d1b0a469fc5ac652e370fd1f79e98981728cd9dffcc722eaaeab8ca94940b8a2",
+    "docs/evaluation/baseline-answer-drafts-v2/revision-v2.json": "96c3be0b24715fc86059fc0bf5063d8f2a45438bd5285841e22b3a633081dc68",
+    "docs/evaluation/baseline-answer-drafts-v2/user-text-review-v1.json": "d81d5db89749e44f4064f9318ae0a889d00c3abd52f45ca222dd0da3fb017441",
+    "docs/evaluation/baseline-batch-v1/matching-rules-v1.json": "6310da92cd2ddf3661ed2dedf3457dcc38a0620486be137672cb105e301edb29",
+    "docs/evaluation/baseline-batch-v1/owner-confirmation-authorization-v1.json": "97d0c5bebc7846511c2ae835966432d1eed702b120599320b694e5cc37774e81",
+    "docs/evaluation/baseline-source-review-v1/selected-source-excerpts-v1.json": "d01311a2d4c247fb2455d78e19b5831605d182fd7aeb76b05fdf5dc9545904cb",
+    "docs/reviewer-component-baseline-spec-v1.json": "61134a61458bd4fb4bc91297ccf66edb3ba9391fa4a539f6ce168598ac2e25bb",
+    "docs/reviewer-component-baseline-spec-v1.md": "874fd29bd7d940ce5488bd52497d4065bcb905e13043a843597946573f81aa80",
+    "docs/reviewer-independent-protocol-candidate-v1.json": "43bff210f7e9c89c4f1bac029ffb65357acf5dc76dd52ae8191dfba43098883e",
+    "evaluation/batch_control.py": "265df87098a3191a0fae1bc0d4bb50480c36e64fa524fb169f1fe47c00df2009",
+    "evaluation/format_stability_trial_v1.py": "f3c0e2a934fbfba0e6b2d2810aa62012578527702d26afed7831dec62194bb16",
+    "evaluation/premise_bound_review_v4.py": "ff6321d8f977ded44eb57d0fc0a61e5c5ebab7cdf302af9f8c50e4b213a6a676",
+    "evaluation/premise_bound_review_v5.py": "bbf2bc5a2ac7da49d26b74c4163dd99c9845b6778ad360f900be76ac6136ee50",
+    "evaluation/premise_bound_review_v6.py": "0cf52b776531eb636d0c93e2f8f5e9ac22c321cd0f69d277c8a29947f6bd4717",
+    "evaluation/premise_bound_review_v7.py": "7e88223fc7d715fd4aaf4dabff3f9561fc93df15e4bada6c66a149d11ea227b6",
+    "evaluation/requirement_review_v3.py": "9847d8a062a9591861532737698763ad140ca4f846ed5e2bbaefa9aefe25fea3",
+    "evaluation/requirement_trial_v3.py": "31dccc562b85b0e08f9e7fd3d7fd6e1b92a66dc7217fccde4388f1ab68ce6d17",
+    "evaluation/reviewer_baseline_trial_v1.py": "5f1576ab98e73611bc5c3b4baec2a46ff1f0950802df0b2195fee7af579ffa72",
+    "evaluation/text_bound_review.py": "12f7172d3d062dc603749bc9c470896b145b3b82aaa3b7d5c482029928829df6",
+    "evaluation/text_bound_review_v2.py": "371fbc2ac8c4f6520d92f412cc7551deb2236017d0ffa21fd758d9600e07d596",
+    "harness/deepseek_trial.py": "1edecb0dd00434600f81a28040cf88ead8d7d3ba97e6ae791b84a97ef16a4a79",
+    "model_adapter/contracts.py": "7c23b9a46f7c01d27cec864b704eb1e902660edf8cae2614181da68b4847bf5d",
+    "model_adapter/deepseek.py": "73406215bfd5ee0a9fc319c90a723e4c3987615739e204c542ec7833ab4cdf9b",
+    "model_adapter/runtime.py": "009eb22f0ea4bbbd29cfa5cf53ea881c048436430a6896c237e2587a6eca5c8d",
+    "services/response_diagnostics.py": "87c2e772600bc2d588e7544f364df5df63a2ea2ef23f6e892ef5da3669e31ee2",
+    "services/structured_model.py": "a0ab6c75f2256e8810cb3f9d89901b821d5612196ee2496c310d6d06372d1118",
+    "services/validation_diagnostics.py": "1d642fa78787ac608344e3547b62ed423679a7b5f89a79201e3f3fd8832ae409",
+    "tests/test_premise_bound_review_v7.py": "a4d68ac3922c85edc141690a4192a2206dd8e88ffc076d050db65a44db4df292",
+    "tests/test_reviewer_baseline_trial_v1.py": "7d33d3c1da7b55fb6344493cdaebff7972435dcb2abd16719eefb3538d888874"
+  },
+  "prompt_version": "explicit-rationale-layout-eval-v7-dev",
+  "response_contract_version": "addressedness-claim-target-eval-v6-dev",
+  "prompt_sha256_utf8": "9cf9cf7ef8cea96cded571995bf042edf15bd8ea1fdc209d11f66cacd8309928",
+  "parser": "evaluation.premise_bound_review_v6.parse; v7.parse is same object",
+  "planned_items": 24,
+  "maximum_calls": 48,
+  "budget_deadline_seconds": 4320,
+  "timeout_note": "admission deadline, not a strict wall clock guarantee",
+  "model_settings": {
+    "model_id": "deepseek-flash",
+    "endpoint": "https://api.deepseek.com",
+    "timeout_seconds": 90,
+    "max_output_tokens": 2000,
+    "max_response_chars": 24000
+  },
+  "max_message_chars": 90000,
+  "sampling": "omitted provider defaults, drift unknown",
+  "order_method": "answer variant A01/A02/A03, then family 01/02, then NWS/USGS/NASA/CDC; fixed before predictions",
+  "order": [
+    {
+      "sample_id": "H-BL-NWS-01-A01",
+      "source": "NWS",
+      "family": "H-BL-NWS-01",
+      "task_sha256_utf8": "d50c974a6a52470d2400c38ac40ca5516441a5ed1e5551950c633c2dfb95a419",
+      "messages_sha256_utf8": "626aa4114332441cdf6b74b0d1d9bde23d927b3fdd1ac535fa05a0a2b6a64fcc"
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A01",
+      "source": "USGS",
+      "family": "H-BL-USGS-01",
+      "task_sha256_utf8": "18ed2e2bf8ad92c60b44a1e9ff827b98a15f9f0ed896d1959e030916b1e2033c",
+      "messages_sha256_utf8": "636ae31ae85442b0bdc98774f77ee0f95ddf7e652fa4c16035aba5b7d1b5b487"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A01",
+      "source": "NASA",
+      "family": "H-BL-NASA-01",
+      "task_sha256_utf8": "94189877d83659c0b0e8a33cd1e1f40cc9ef3ff480eac4222e5ce06144f7bd71",
+      "messages_sha256_utf8": "905a86219da42953a7991f1489ed6e2efa202fc94ecb08c38ad735762dfb5f76"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A01",
+      "source": "CDC",
+      "family": "H-BL-CDC-01",
+      "task_sha256_utf8": "1d3a584385c1e02eda856a125a58d0cb1ccdedf1e863f2875f8a89edea3d265d",
+      "messages_sha256_utf8": "b5220a058eaf10101a13d756a50240e7ef76f244b79821adbc95a9b089d61be5"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A01",
+      "source": "NWS",
+      "family": "H-BL-NWS-02",
+      "task_sha256_utf8": "917b038abca8a17d83a7125c00d986324adebc0e9feea02a68f992559e1d316e",
+      "messages_sha256_utf8": "eff5fc1cb770d7c67f20aa97f0c01cc48310f8074a9269eac773ee8f3e80dcb6"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A01",
+      "source": "USGS",
+      "family": "H-BL-USGS-02",
+      "task_sha256_utf8": "07598cf6e7a9e05bdc3434444dcf2708c9ee011704be94e7869baf19b7313d64",
+      "messages_sha256_utf8": "246bfbef233c4d55056ad17cdc711dd5d1f82dff41333f862350ebad0290ff80"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A01",
+      "source": "NASA",
+      "family": "H-BL-NASA-02",
+      "task_sha256_utf8": "398079fccf45a4bfcb73001279b5cbd4eaf53904528c14fedbca671e81e169ff",
+      "messages_sha256_utf8": "c688e37b763fdc33e11753b02ba933f9a3164ad0c73bb36c9206e4c3d2836adb"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A01",
+      "source": "CDC",
+      "family": "H-BL-CDC-02",
+      "task_sha256_utf8": "1c0dcc361655823130d4b6c4fdb2d7e97e093efeaa2f97f9f8bc2dd37dc068e0",
+      "messages_sha256_utf8": "aa1ec26bb9b76885149210f57c9d2be60c9a1d76e7d76197ebde09afb4900ae9"
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A02",
+      "source": "NWS",
+      "family": "H-BL-NWS-01",
+      "task_sha256_utf8": "0f24c01333ce6e11640b64c16936b823e23462bb1197ea8c5d60522f70befff3",
+      "messages_sha256_utf8": "6034680dff95239c9c5f13ad5a3a82f21f5138b94e07326ce45e6c63ca10c1dd"
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A02",
+      "source": "USGS",
+      "family": "H-BL-USGS-01",
+      "task_sha256_utf8": "282626aa6d2864109e20e61201c62c8347d45202b5affc63ac0123bde2e02c85",
+      "messages_sha256_utf8": "c02e8764b8571accfaf687697b0a8b7d29d73e528938f93648ddbf9ac65b5307"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A02",
+      "source": "NASA",
+      "family": "H-BL-NASA-01",
+      "task_sha256_utf8": "e6f4ebd06cabfe029f8f4242e56b217e8c4915030abe76b034d9ffe9c008ea6e",
+      "messages_sha256_utf8": "53255be3c9b929a7c5a2314c9f486cc8c45523f96cf0e92b3eef238276029701"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A02",
+      "source": "CDC",
+      "family": "H-BL-CDC-01",
+      "task_sha256_utf8": "bb2f998fea70d187c7b1b6d45bce89191ba871fa63b54bc1adeca13fbba1a852",
+      "messages_sha256_utf8": "b17e5de75287cac2855f970294be3dd39670be277a40e5daa0018e6e55f9c636"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A02",
+      "source": "NWS",
+      "family": "H-BL-NWS-02",
+      "task_sha256_utf8": "2e89cfee328b6f991a6210073acaf27e51289ed9e54a7d24673772126439d624",
+      "messages_sha256_utf8": "d17a4244491f83938fd1275dd4563785acfb5d31e8c5eb87d4b7024579d2a85f"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A02",
+      "source": "USGS",
+      "family": "H-BL-USGS-02",
+      "task_sha256_utf8": "f5b35d60c9933ebd3970b1c70e3bc0cbfb43b8dc52eb3c909559ad43a4330a23",
+      "messages_sha256_utf8": "4bc45a63d316264f1c963df2248a39c0fb4d87171a48e364817c25d39663ba06"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A02",
+      "source": "NASA",
+      "family": "H-BL-NASA-02",
+      "task_sha256_utf8": "6c82b152aa55bda00be2e41161d7cdb9783a29b382da60208897dda1e9474705",
+      "messages_sha256_utf8": "6ef5dd2e10b2875058037b871c3ee7bf096b3b20be95a321ff7e906c0e02b39c"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A02",
+      "source": "CDC",
+      "family": "H-BL-CDC-02",
+      "task_sha256_utf8": "bb1d48a69a4f6efa3eb2f4dd2d4177ac1ee46ad4eb5dd451140ccf88ead35aa8",
+      "messages_sha256_utf8": "49c2f00442dde672e3e392b7c1418e5ada491233f853fb48228151a8af38f3d6"
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A03",
+      "source": "NWS",
+      "family": "H-BL-NWS-01",
+      "task_sha256_utf8": "f83e51590a3490040aa7730968f7e848cc36709f7bc0efce02424f092b3378aa",
+      "messages_sha256_utf8": "8485005a3ffc6862601f79c9f04109cf6abde4158c0d1b53060409aae2285503"
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A03",
+      "source": "USGS",
+      "family": "H-BL-USGS-01",
+      "task_sha256_utf8": "59d2689548e9e215065ca894234c706f0286f0d08161dbdd48272a42d745e1b0",
+      "messages_sha256_utf8": "ac9953e5d95dfee715c0580332c81c9a7bfb26e63fd822e6f99095e9d62a8e06"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A03",
+      "source": "NASA",
+      "family": "H-BL-NASA-01",
+      "task_sha256_utf8": "a9df83956b8c08959defe7b200aee5927c3381e3b1a6bb456af44f591f07256d",
+      "messages_sha256_utf8": "3130290df52b6796dcb61dc78fc4cf2ab33d73aeb4b0f4601d8e70b6c29e776b"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A03",
+      "source": "CDC",
+      "family": "H-BL-CDC-01",
+      "task_sha256_utf8": "50c31fc1e33d1918684fd091fdd24078e41f8fb8a6d6eca0fd44913c63468966",
+      "messages_sha256_utf8": "a904950207c6fbfacc59fb1ba85a55d019845fdd15adacbe38dbee3e0f500e57"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A03",
+      "source": "NWS",
+      "family": "H-BL-NWS-02",
+      "task_sha256_utf8": "a07a8836413d794171bb824abe6c4e1abcee7e5245f5a551e4823d6a30285243",
+      "messages_sha256_utf8": "b64391e2083b769c58ad0ffeb12d4b09f2f92a85779faab63579649568144e8c"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A03",
+      "source": "USGS",
+      "family": "H-BL-USGS-02",
+      "task_sha256_utf8": "314d94dc0270ef5137955778109a0961502c6675ad5e969eda8cbfe69fb8764b",
+      "messages_sha256_utf8": "e247766d9423e45d8528204ac35f3ceb96132e20f2dfc4c0cd587e1cac27d3a6"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A03",
+      "source": "NASA",
+      "family": "H-BL-NASA-02",
+      "task_sha256_utf8": "4ff59253c7446e8a56080908fe521edb348a164de0cd8a557384668004e86e1f",
+      "messages_sha256_utf8": "d186c2a9ac4cd18b096dff45ae6b0223fa0f840ebecea4233fbf08eecec15dc0"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A03",
+      "source": "CDC",
+      "family": "H-BL-CDC-02",
+      "task_sha256_utf8": "fd46a4f4623742ae0fed2d1379f3b62bfb52849e0141067c7ce286c9f946cb21",
+      "messages_sha256_utf8": "a7b1bcacce5f6f5dae2ac486d3e97cdb0d530a48b0903cf012b64c28391c20e5"
+    }
+  ],
+  "input_file_sha256": "88d4e5d2bd9a86ca838e224593c1d50f24c6d47168d44a73b34eebf38ad40061",
+  "messages_file_sha256": "d3bd8647018bb01064b73772ec8f8ac3d0d93714f9d69d88ef10a39fc3949a7a",
+  "correction_messages": "unknown until initial output; construction frozen in structured_model.py; each actual message set is hashed and persisted by save_messages before call; verify afterward",
+  "stop": "first execution/transport/storage/final-contract failure; <=1 correction; no transport retry/resume or semantic rerun",
+  "reference_labels_or_reasons_in_messages": false,
+  "manual_reference_units_in_messages": false,
+  "roles_in_messages": false,
+  "offline_tests_passed": 29,
+  "production_changed": false,
+  "private_output_directory": "data/evaluation_local/reviewer-baseline-v1/batch-v1"
+}

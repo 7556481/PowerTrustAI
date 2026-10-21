@@ -1,0 +1,273 @@
+{
+  "status": "AI_assisted_pending_owner_review_not_expert_gold",
+  "method": "Read all final valid requirement/unit/judgment/overall reasons and propositions against fixed source texts/requirements; no semantic score from nonempty fields; invalid initial syntax response not scored semantically",
+  "rows": [
+    {
+      "sample_id": "H-BL-NWS-01-A01",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A01",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A01",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A01",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A01",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A01",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A01",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A01",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A02",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_with_semantic_or_type_issue",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "support": "U2参考不足，预测矛盾；把预报涵盖时段12小时误作反驳6小时更新频率的依据。",
+        "reason": "局部判断先承认没有更新周期，再以12小时推冲突；总理由称该附加unsupported，与C标签有张力。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A02",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_with_scope_or_type_issue",
+      "judgment_reasons": "specific_with_semantic_or_type_issue",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "type": "U2关于材料给出24小时的泛化文献内容断言被标external_claim，理由额外要求实际记录；支持不足标签符合参考。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A02",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A02",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_with_issue",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_with_semantic_or_type_issue",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "coverage": "R1参考partial、预测covered；理由由7000英尺具体应用隐含补足未说出的通用6500英尺阈值。",
+        "reason": "单元理由承认未给阈值，要求级却据隐含条件判完整；具体3分钟已在回答，不重复记为遗漏。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A02",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_with_issue",
+      "unit_reasons": "specific_with_scope_or_type_issue",
+      "judgment_reasons": "specific_with_semantic_or_type_issue",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "coverage": "R2参考missing、预测covered；以一般60%规则替代回答中未显式进行的题设映射。",
+        "type": "U2页面保留5年要求被标external_claim；本应按给定文献内容解释，不凭页面断言虚构真实实例。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A02",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A02",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_with_scope_or_type_issue",
+      "judgment_reasons": "specific_with_semantic_or_type_issue",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "type": "U2文献20年寿命保证被标external_claim；不足标签相符，但泛化文献内容与实际命名设备记录边界仍有疑点。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A02",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_with_issue",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "coverage": "R1参考partial、预测missing；三类污染范围已回应，仅处理限制缺失，不应把整项内容抹为完全未回应。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A03",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A03",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A03",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A03",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {},
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A03",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_with_issue",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_with_semantic_or_type_issue",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "coverage": "R1参考covered、预测partial；因must说反而扣覆盖，违反反向仍回应的已冻结口径。",
+        "support": "U2参考矛盾、预测不足；对同一must模态，规则单元判C、应用单元判I，分歧保留。",
+        "reason": "R1理由用not accurately addressed混入正确性；应用判断用部分有据/结论无据处理，与冻结C参考不同。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A03",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "alignment": "U2拆为两可能成因S＋必须共同发生C，混合标签，按事前规则无法对齐，不挑C子句。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A03",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_with_issue",
+      "unit_reasons": "specific_to_unit_contents",
+      "judgment_reasons": "specific_to_proposition_and_selected_basis",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "coverage": "R1参考covered、预测partial；已明确否定类别，模型要求正面正确类别与额外条件展开，混入正确性/额外解释义务。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A03",
+      "review_status": "AI_assisted_final_valid_output_review_pending_owner_not_expert_gold",
+      "requirement_reasons": "specific_no_new_issue_noted",
+      "unit_reasons": "specific_with_scope_or_type_issue",
+      "judgment_reasons": "specific_with_semantic_or_type_issue",
+      "overall_reason": "does_not_replace_local_reasons; inspected",
+      "notes": {
+        "alignment": "U2拆为推翻限制C＋保证现场安全I，混合标签，按事前规则无法对齐。",
+        "type": "后一判断将泛化安全保证识别为特定现场external_claim；材料未指向已核实真实水源，分类与作用域疑点保留。",
+        "reason": "污染限制理由还使用去除措辞，来源只明确不能使水安全；保留这一比原文更强的机理表述疑点，不要求模型提供化学机理。"
+      },
+      "nonempty_not_equivalent_to_sufficient": true
+    }
+  ]
+}

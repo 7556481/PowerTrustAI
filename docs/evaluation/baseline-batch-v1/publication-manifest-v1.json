@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-21",
+  "batch_status": "finished_no_resume",
+  "public_files_sha256": {
+    "actual-call-hashes-v1.json": "b6cec44ddce6f35994c005759a894f1b1e6dfa9aa8fc8d9d922ae928d810ca73",
+    "execution-freeze-v1.json": "77286900f6d5fdb45ceefb48e65847623e2f746bc66c43497075722b90060f1d",
+    "matching-rules-v1.json": "6310da92cd2ddf3661ed2dedf3457dcc38a0620486be137672cb105e301edb29",
+    "owner-confirmation-authorization-v1.json": "97d0c5bebc7846511c2ae835966432d1eed702b120599320b694e5cc37774e81",
+    "README.md": "b23627588c23a0a511fdf71763639e5feec8c7c423509952cbeaa74d536c0f6d",
+    "reason-quality-review-v1.json": "10a02dd886be3367cfd19d3e9832e7fbce357619f373b014c570db7fce31b251",
+    "results-v1.json": "4ad50d85e7fd60ce5bfeddb27d3db45d2e3859ec0ad5cc4bbde46fbd29cd7afd"
+  },
+  "execution_entry_sha256": "5f1576ab98e73611bc5c3b4baec2a46ff1f0950802df0b2195fee7af579ffa72",
+  "test_sha256": "7d33d3c1da7b55fb6344493cdaebff7972435dcb2abd16719eefb3538d888874",
+  "original_expectations_unchanged": true,
+  "raw_data_not_published": true,
+  "alignment_and_reason_review_pending_owner": true,
+  "production_changed": false
+}

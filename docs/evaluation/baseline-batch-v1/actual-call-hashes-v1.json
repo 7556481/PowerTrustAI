@@ -1,0 +1,231 @@
+{
+  "status": "all_actual_messages_archived_and_hashed_before_each_call; responses_hashed_after_return",
+  "calls": [
+    {
+      "call_number": 1,
+      "sample_id": "H-BL-NWS-01-A01",
+      "correction": false,
+      "messages_sha256_utf8": "626aa4114332441cdf6b74b0d1d9bde23d927b3fdd1ac535fa05a0a2b6a64fcc",
+      "messages_scope_sha256": "019ab76178465cb17303deb6a9b716db13a27d7ac838de3cd194fad008e5b63e",
+      "response_sha256_utf8": "344b33b7605cd77e49fd3c6066e45ef039ca788867ce6bd185f9b173fcc04b12",
+      "response_file_sha256": "09ac18699633867027421020d21830f9a2d17caf5bfbc56e9f5676506616e0c2"
+    },
+    {
+      "call_number": 2,
+      "sample_id": "H-BL-USGS-01-A01",
+      "correction": false,
+      "messages_sha256_utf8": "636ae31ae85442b0bdc98774f77ee0f95ddf7e652fa4c16035aba5b7d1b5b487",
+      "messages_scope_sha256": "4e47cf4157dd6e728c63314a95d96a09d2b3fbe954367ec9c03e91e8c2931936",
+      "response_sha256_utf8": "0783f9f54cc03c0967f408caf61e55efc08ecf577f352516855a05a0d41d3764",
+      "response_file_sha256": "216b724cd677562c9f0a6803bc4aefde939869dbb3ee2e2b285f11bce144bd62"
+    },
+    {
+      "call_number": 3,
+      "sample_id": "H-BL-NASA-01-A01",
+      "correction": false,
+      "messages_sha256_utf8": "905a86219da42953a7991f1489ed6e2efa202fc94ecb08c38ad735762dfb5f76",
+      "messages_scope_sha256": "3883712557b07bae4ff7085c1fc773764ec6c2a785ed02cce5aa026196c16557",
+      "response_sha256_utf8": "85b87a3ffb0ee09881d64b63e559007207f60d9a55f0c28c8a666ea76f9e0e4b",
+      "response_file_sha256": "08e8ba0aa1e18049a34b33875c57b6c41b40471641da46680f8deef093682678"
+    },
+    {
+      "call_number": 4,
+      "sample_id": "H-BL-CDC-01-A01",
+      "correction": false,
+      "messages_sha256_utf8": "b5220a058eaf10101a13d756a50240e7ef76f244b79821adbc95a9b089d61be5",
+      "messages_scope_sha256": "8ba01fbd77602ff4e4fd75bc637902e6731da797170a98ad801d4144cca7be1d",
+      "response_sha256_utf8": "12c293fa063f1b13a927930ad8ee6a8f839cae46fc32357c32a1bba242eb37ba",
+      "response_file_sha256": "cbc8e12f4a3006501a6cf66f2839135af07792b1d710b25e16240b89674e194e"
+    },
+    {
+      "call_number": 5,
+      "sample_id": "H-BL-NWS-02-A01",
+      "correction": false,
+      "messages_sha256_utf8": "eff5fc1cb770d7c67f20aa97f0c01cc48310f8074a9269eac773ee8f3e80dcb6",
+      "messages_scope_sha256": "362ff3094284d97be13ce1729fede7a593b910ab964223d5a044214a2b0b595f",
+      "response_sha256_utf8": "c88ede3a207132b16f09ac07da8d5991a76d33e6138c580bb81521cec344684e",
+      "response_file_sha256": "f1011d5402c067ece168877463e0efceaf3247aa57295699b1fc09dd9cfef294"
+    },
+    {
+      "call_number": 6,
+      "sample_id": "H-BL-USGS-02-A01",
+      "correction": false,
+      "messages_sha256_utf8": "246bfbef233c4d55056ad17cdc711dd5d1f82dff41333f862350ebad0290ff80",
+      "messages_scope_sha256": "72860d0edaaffbb371ccb07d09943aec7aad7e7bff77c9d28cf8e3135a0b885b",
+      "response_sha256_utf8": "3829e0d9b45d78c29faa17f98350c312d4afdf903545249a45ecc65f7d4b8bc4",
+      "response_file_sha256": "bc81f7dfafd69eaa45a0e0024566a43887563efa8c842cb136175cd03c7a486b"
+    },
+    {
+      "call_number": 7,
+      "sample_id": "H-BL-NASA-02-A01",
+      "correction": false,
+      "messages_sha256_utf8": "c688e37b763fdc33e11753b02ba933f9a3164ad0c73bb36c9206e4c3d2836adb",
+      "messages_scope_sha256": "f6b63b7b38a390a84b1bf4ba3f3c21cdc9ba0a3ebf944fe8528c0ee4477254a9",
+      "response_sha256_utf8": "f6e03a1970a17f2a3e0f3c93ebb16f28efc8afeda0fcd85a57052d8737fd16f6",
+      "response_file_sha256": "397f8246651d1d5664ce872d940c0dda23a82c8f0df29a1927540a3ebf863365"
+    },
+    {
+      "call_number": 8,
+      "sample_id": "H-BL-CDC-02-A01",
+      "correction": false,
+      "messages_sha256_utf8": "aa1ec26bb9b76885149210f57c9d2be60c9a1d76e7d76197ebde09afb4900ae9",
+      "messages_scope_sha256": "c53be65471c845373b294b26ec55d79d57acb92100e0bda2df9d8fb3ea45a7f3",
+      "response_sha256_utf8": "4bfce679b5db892475a38dc762c89196f1e0e52e2fe48e514bc104137147735f",
+      "response_file_sha256": "791d7b1a00dcbb1a1347747c56c37f0a234e76e7b6a021959d926ac5b56714d8"
+    },
+    {
+      "call_number": 9,
+      "sample_id": "H-BL-NWS-01-A02",
+      "correction": false,
+      "messages_sha256_utf8": "6034680dff95239c9c5f13ad5a3a82f21f5138b94e07326ce45e6c63ca10c1dd",
+      "messages_scope_sha256": "6498f92b14a2bed07754f670320d10e41e1edf96d34cc82f2ad2d6c1e84f219c",
+      "response_sha256_utf8": "d38233ac9e13b7710a950385263b5e67a7f9932851aa29e593c916a01a2f6893",
+      "response_file_sha256": "a5a32c45c567cf2bfe05e8af9a5e1b657f4894145bfc5af032709612e10582d3"
+    },
+    {
+      "call_number": 10,
+      "sample_id": "H-BL-USGS-01-A02",
+      "correction": false,
+      "messages_sha256_utf8": "c02e8764b8571accfaf687697b0a8b7d29d73e528938f93648ddbf9ac65b5307",
+      "messages_scope_sha256": "599d57e007661699d0763abc68c880d7d51bb01f94a953a17c2910fa89f8c805",
+      "response_sha256_utf8": "3cbba341ddf995e9f798ef519c1745f24b2eb34efa4d1b9ab96fca1901ca5c89",
+      "response_file_sha256": "54a5e38c352fb21000394d4756306849b798d4d1767c4a2e26e921231202d83a"
+    },
+    {
+      "call_number": 11,
+      "sample_id": "H-BL-NASA-01-A02",
+      "correction": false,
+      "messages_sha256_utf8": "53255be3c9b929a7c5a2314c9f486cc8c45523f96cf0e92b3eef238276029701",
+      "messages_scope_sha256": "8fdf7f7d987be6947c184ad77070625b6cb9d0c114638151e0e44d72170803ca",
+      "response_sha256_utf8": "305ddb858ded0c6d5b166fe7bd84e8d5f6f1e8bbcbd80bf9364a241d7a64ca51",
+      "response_file_sha256": "553710255ce7a9362885f903121dcc498cffee0817f1e6c0687563c16aba4036"
+    },
+    {
+      "call_number": 12,
+      "sample_id": "H-BL-CDC-01-A02",
+      "correction": false,
+      "messages_sha256_utf8": "b17e5de75287cac2855f970294be3dd39670be277a40e5daa0018e6e55f9c636",
+      "messages_scope_sha256": "d88ea7f12c734ecc2951d85d6da7b13155766087fbeb75e59d3f73154c0660cd",
+      "response_sha256_utf8": "0a981e2494fe752f5791bad6c53dc5790bac6e3cfd4a71e3c2430f386fd568e7",
+      "response_file_sha256": "d9a0068e476e88b6b0f23de704554f817e743c35066bb8fb9ab5aa145a07d155"
+    },
+    {
+      "call_number": 13,
+      "sample_id": "H-BL-NWS-02-A02",
+      "correction": false,
+      "messages_sha256_utf8": "d17a4244491f83938fd1275dd4563785acfb5d31e8c5eb87d4b7024579d2a85f",
+      "messages_scope_sha256": "372961cf5c30685f2fba71f7d0ecfd03bc7c1242de6a9b014488bea64d9a8fb3",
+      "response_sha256_utf8": "07b701d98f6dd24ec4f1e4f84adcfe96e07d839fca56ea1cb63615ddc36e2c6d",
+      "response_file_sha256": "a132941a995c747c1903ac5a13f7efcd35f73015ec1956de233246a7ce349c56"
+    },
+    {
+      "call_number": 14,
+      "sample_id": "H-BL-USGS-02-A02",
+      "correction": false,
+      "messages_sha256_utf8": "4bc45a63d316264f1c963df2248a39c0fb4d87171a48e364817c25d39663ba06",
+      "messages_scope_sha256": "d3bd3445da5461324cd4395dbd2e0a388177207b4d86c1a249360e091b360335",
+      "response_sha256_utf8": "6f0ec3379c6b64ddebe6c00f181825a29487864088eb57c6bc67944d2b547b4e",
+      "response_file_sha256": "e8e1da06d3cbb3ee763cfebd58a35d9770c970dffb1d79b34a731fd179afe370"
+    },
+    {
+      "call_number": 15,
+      "sample_id": "H-BL-NASA-02-A02",
+      "correction": false,
+      "messages_sha256_utf8": "6ef5dd2e10b2875058037b871c3ee7bf096b3b20be95a321ff7e906c0e02b39c",
+      "messages_scope_sha256": "a012038ef8f668cd94d6ab76a555eef364d5d133e6516b43638c406396692b28",
+      "response_sha256_utf8": "534f905b9379bf149af1656d48b0e22b3bee5db4179ef9282399766ba25a9cf8",
+      "response_file_sha256": "406101afa064a02202c01b1d6e998c75e48f4cc3cd1b89a9a038a35741f8d6fb"
+    },
+    {
+      "call_number": 16,
+      "sample_id": "H-BL-CDC-02-A02",
+      "correction": false,
+      "messages_sha256_utf8": "49c2f00442dde672e3e392b7c1418e5ada491233f853fb48228151a8af38f3d6",
+      "messages_scope_sha256": "4abfea18e5baeadc4a7fa2aefcc95f2d47ad1625cb70a166b5ffd7c74d9af1db",
+      "response_sha256_utf8": "b82a1224a86192073acb0a074d7fa02a609a4ee65e4ffc867127d9b94049478c",
+      "response_file_sha256": "3f927312d1ece33015d39629ee0f00e34d66479a767099689264a18ebf255f3e"
+    },
+    {
+      "call_number": 17,
+      "sample_id": "H-BL-CDC-02-A02",
+      "correction": true,
+      "messages_sha256_utf8": "b0db93d644d741d40ba1ce2090743f05589156b0b24ed693dce97eac2abd0283",
+      "messages_scope_sha256": "e649aa182b5a937a01457435e61c1e4d4fa1148cc72cd88e6188cfc97cfd5971",
+      "response_sha256_utf8": "093099f380e8717d31abad13b6079cdc44bb3d2da103533b08229b6a52fc2a4d",
+      "response_file_sha256": "9e601ed9c25d4acf6dcd3a76ab35077a07f3f0b99dd9aefdc12e39e9d417ef1d"
+    },
+    {
+      "call_number": 18,
+      "sample_id": "H-BL-NWS-01-A03",
+      "correction": false,
+      "messages_sha256_utf8": "8485005a3ffc6862601f79c9f04109cf6abde4158c0d1b53060409aae2285503",
+      "messages_scope_sha256": "01243b536fbb99116f1d509ab810218907a50cde261e7266a0151daa2071cabb",
+      "response_sha256_utf8": "45392e5d291528fccb716c8b5d43b309d81bf9eb7ff14d663921d90b8175964f",
+      "response_file_sha256": "e030ca1c116484dd4f7c855f6d21966af798266dc56977168ffcb9c11fec7939"
+    },
+    {
+      "call_number": 19,
+      "sample_id": "H-BL-USGS-01-A03",
+      "correction": false,
+      "messages_sha256_utf8": "ac9953e5d95dfee715c0580332c81c9a7bfb26e63fd822e6f99095e9d62a8e06",
+      "messages_scope_sha256": "dfc215854966a146d77cfaaf2ff51423248ffacf3df0a911de982b0e73bf5b2b",
+      "response_sha256_utf8": "61223cea1d6db041823af7c4e8ad7f85d87d5e7765920e32e31f57ed49a0bcc0",
+      "response_file_sha256": "6e95d79c16e953ffa090265fafeb4363aaf8298a125e7a4d25f69075ebeea56f"
+    },
+    {
+      "call_number": 20,
+      "sample_id": "H-BL-NASA-01-A03",
+      "correction": false,
+      "messages_sha256_utf8": "3130290df52b6796dcb61dc78fc4cf2ab33d73aeb4b0f4601d8e70b6c29e776b",
+      "messages_scope_sha256": "195764aea84821362a9420dc56b04bb13630ec807f8b3148de9e2f642523aa83",
+      "response_sha256_utf8": "cce523b2ff2eabf637cd70447f742621f8c44f0bc09d8b2102ba1be64f8fa456",
+      "response_file_sha256": "1050383607d19775f9a8b389e00483fcf27eddcd1b3ce5ea2dc2d340d2cb5158"
+    },
+    {
+      "call_number": 21,
+      "sample_id": "H-BL-CDC-01-A03",
+      "correction": false,
+      "messages_sha256_utf8": "a904950207c6fbfacc59fb1ba85a55d019845fdd15adacbe38dbee3e0f500e57",
+      "messages_scope_sha256": "7a5d1df0b6b2558fd57df2689674e19b6ca8f2d43dffb15fd20189228fb85436",
+      "response_sha256_utf8": "dc46d434e78dda24e0e2be86684e0029569d8b572e79c9eb557cdc0baf9d102a",
+      "response_file_sha256": "b2b29fc9656733d26493cb1dae35e52b12b6831c7f4f57e12d43a926b6bcb783"
+    },
+    {
+      "call_number": 22,
+      "sample_id": "H-BL-NWS-02-A03",
+      "correction": false,
+      "messages_sha256_utf8": "b64391e2083b769c58ad0ffeb12d4b09f2f92a85779faab63579649568144e8c",
+      "messages_scope_sha256": "90f378327b59a92f7fecd0e14be9252bbc71138747a6d531155b83f76b8dd192",
+      "response_sha256_utf8": "8a9263b47c7d31627ce04c015ea7f6f784851e504a50128acc2b2a402f7a48d1",
+      "response_file_sha256": "f2130fd62e41f9d81a1bde8d7a3b3c3d330203d83b247de54c3c351d0c931b22"
+    },
+    {
+      "call_number": 23,
+      "sample_id": "H-BL-USGS-02-A03",
+      "correction": false,
+      "messages_sha256_utf8": "e247766d9423e45d8528204ac35f3ceb96132e20f2dfc4c0cd587e1cac27d3a6",
+      "messages_scope_sha256": "39021604b646b310a4dbce61a9c196ce8031aa93776306d00216aa132ed81482",
+      "response_sha256_utf8": "fcbfba4bc254622906cbcf8f66cd2fc8450a7753202ee8f6a7e893d25021d00b",
+      "response_file_sha256": "f914ce8c7e11e728ecf5cdea91a1588561cf2562f22d80c53d42c05c9277028d"
+    },
+    {
+      "call_number": 24,
+      "sample_id": "H-BL-NASA-02-A03",
+      "correction": false,
+      "messages_sha256_utf8": "d186c2a9ac4cd18b096dff45ae6b0223fa0f840ebecea4233fbf08eecec15dc0",
+      "messages_scope_sha256": "6e8977dfbbb2ad8df31cfabe88ccaad805ce31ece92a18ee162600db01d4373a",
+      "response_sha256_utf8": "6e408f96ce8414c75bca3fd1bff13588a81a9052a87452aa9ee26dd344a9b780",
+      "response_file_sha256": "50ea7dcdbeede19164c2e4780456a0074a662b762a133df956cb201b9056b001"
+    },
+    {
+      "call_number": 25,
+      "sample_id": "H-BL-CDC-02-A03",
+      "correction": false,
+      "messages_sha256_utf8": "a7b1bcacce5f6f5dae2ac486d3e97cdb0d530a48b0903cf012b64c28391c20e5",
+      "messages_scope_sha256": "b91abbe318c96214f1a54515ccccb3995928fbbfe4a5f05913e8b4b0b596e353",
+      "response_sha256_utf8": "14679ee8c753f60e69944c5a7a1e7ca7c6d95948a105b31a305e7064c41c1c5e",
+      "response_file_sha256": "d43090a3b7aa151624d2efee05fe497f2031eba79b209a12ddb3ef4c4a179afc"
+    }
+  ],
+  "credentials_or_headers_included": false
+}

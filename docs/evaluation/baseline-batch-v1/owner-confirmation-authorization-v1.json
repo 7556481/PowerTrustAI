@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-21",
+  "confirmed_material_commit": "080a84e17a6258b218d70d554e3deb993c1c69be",
+  "scope": "User explicitly confirms v2 24 answers, 51 coverage slots, 58 references and expected labels; AI-assisted user-supervised, not expert gold; no owner SHA verification claimed",
+  "confirmed_material_hashes": {
+    "docs/evaluation/baseline-answer-drafts-v2/answers-v2.json": "cad4d97253e8eff55603cdd28c518c53b18611f0e17d3d1e211beb33ea5c44b3",
+    "docs/evaluation/baseline-answer-drafts-v2/expected-labels-v2.json": "52b0eef5ae5f00863f6dd2a67e2fcdd983982f3b10dec0a6bb2456e79ae204a9",
+    "docs/evaluation/baseline-answer-drafts-v2/manifest-v2.json": "d1b0a469fc5ac652e370fd1f79e98981728cd9dffcc722eaaeab8ca94940b8a2"
+  },
+  "paid_authorization": {
+    "endpoint": "https://api.deepseek.com",
+    "payload": "planned questions, requirements, hypothetical premises, provided evidence and candidate answers; no reference labels/reasons/manual semantic splits/answer roles",
+    "actual_fees_accepted": true,
+    "initial_requests": 24,
+    "corrections_per_item_at_most": 1,
+    "maximum_calls": 48,
+    "offline_gates_then_execute_without_reconfirmation": true,
+    "stop": "first final execution/transport/storage/contract failure; no retry/resume/semantic rerun"
+  },
+  "production_changed": false
+}

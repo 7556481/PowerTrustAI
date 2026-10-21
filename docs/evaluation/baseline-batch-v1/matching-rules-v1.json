@@ -1,0 +1,27 @@
+{
+  "version": "baseline-matching-v1",
+  "inherit_spec": "reviewer-component-baseline-spec-v1",
+  "coverage": "each original requirement exactly once; compare labels independently; wrong-direction can be covered, actual missing components partial/missing; report confusion and full planned coverage",
+  "reference_units": "58 frozen semantic units, not mechanical carriers; no edits after results",
+  "equivalent_split_merge": "same scoped meaning may jointly align; reference once only; shared prediction index disclosed, not independent repeated judgments",
+  "mixed_or_partial": "mixed support labels inside a compound reference or partial meaning equivalence => unaligned; no favored-subclause selection, collapse or scope completion from rationale",
+  "conflict": "conflicting duplicate predictions separate; do not cherry-pick",
+  "extra_predictions": "separate, no denominator inflation",
+  "alignment_method": "AI-assisted semantic review of final valid predictions and original answer references; program carrier overlap supports location only, not semantic equivalence; no keyword similarity gate",
+  "E": "final valid, fully semantically aligned reference units without unresolved conflict",
+  "F": "E: predicted supported and reference in insufficient_evidence/contradicted/not_assessable",
+  "A_NS": "E: reference in insufficient_evidence/contradicted/not_assessable",
+  "A_SP": "E: predicted supported",
+  "false_support": [
+    "F/A_NS",
+    "F/A_SP"
+  ],
+  "false_rejection": "E: reference supported and predicted non-support; report count and fraction over E supported references, split predicted labels",
+  "zero_denominator": "N/A",
+  "unaligned": "reduces evaluable coverage, not automatically incorrect",
+  "failures_unexecuted": "all planned samples/requirements/reference units enumerated; no extrapolation from completed prefix",
+  "reasons": "each requirement/unit/judgment/overall reason inspected for specific scope, empty/general text, label conflict, unsupported inference; structural nonempty not semantic guarantee",
+  "human_status": "user confirms frozen references, post-prediction AI alignment/reason judgments remain suggestions pending user review; not expert gold",
+  "no_aggregate_accuracy": true,
+  "no_semantic_reruns": true
+}

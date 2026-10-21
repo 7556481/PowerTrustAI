@@ -1,0 +1,2408 @@
+{
+  "date": "2026-10-21",
+  "batch_id": "reviewer-baseline-v1",
+  "status": "finished_no_resume",
+  "scope": "limited source-isolated reviewer-component batch, not end-to-end RAG or production admission",
+  "execution": {
+    "planned": 24,
+    "attempted": 24,
+    "initial_fields_complete": 23,
+    "initial_contract_valid": 23,
+    "final_valid": 24,
+    "failed": 0,
+    "unexecuted": 0,
+    "actual_calls": 25,
+    "corrections": 1,
+    "elapsed_seconds": 83.787,
+    "stop_position": null,
+    "initial_failure": {
+      "sample_id": "H-BL-CDC-02-A02",
+      "type": "invalid_JSON",
+      "field_path": "$",
+      "line": 1,
+      "column": 1907,
+      "actual_closer": "]",
+      "correction_succeeded": true,
+      "no_semantic_score_from_invalid_initial": true
+    }
+  },
+  "coverage": {
+    "planned": 51,
+    "evaluated": 51,
+    "agrees": 46,
+    "disagreements": 5,
+    "confusion": [
+      {
+        "reference": "covered",
+        "predicted": "covered",
+        "count": 39
+      },
+      {
+        "reference": "covered",
+        "predicted": "partially_covered",
+        "count": 2
+      },
+      {
+        "reference": "missing",
+        "predicted": "covered",
+        "count": 1
+      },
+      {
+        "reference": "missing",
+        "predicted": "missing",
+        "count": 4
+      },
+      {
+        "reference": "partially_covered",
+        "predicted": "covered",
+        "count": 1
+      },
+      {
+        "reference": "partially_covered",
+        "predicted": "missing",
+        "count": 1
+      },
+      {
+        "reference": "partially_covered",
+        "predicted": "partially_covered",
+        "count": 3
+      }
+    ]
+  },
+  "support": {
+    "planned_reference_units": 58,
+    "aligned": 56,
+    "unaligned": 2,
+    "conflicts": 0,
+    "aligned_agrees": 54,
+    "aligned_disagreements": 2,
+    "predicted_judgments": 66,
+    "confusion": [
+      {
+        "reference": "contradicted",
+        "predicted": "contradicted",
+        "count": 11
+      },
+      {
+        "reference": "contradicted",
+        "predicted": "insufficient_evidence",
+        "count": 1
+      },
+      {
+        "reference": "insufficient_evidence",
+        "predicted": "contradicted",
+        "count": 1
+      },
+      {
+        "reference": "insufficient_evidence",
+        "predicted": "insufficient_evidence",
+        "count": 5
+      },
+      {
+        "reference": "supported",
+        "predicted": "supported",
+        "count": 38
+      }
+    ],
+    "false_support": {
+      "F": 0,
+      "A_NS": 18,
+      "F_over_A_NS": 0,
+      "A_SP": 38,
+      "F_over_A_SP": 0,
+      "definition": "only fully aligned non-conflicting reference units E, each reference once"
+    },
+    "false_rejection": {
+      "count": 0,
+      "supported_reference_denominator": 38,
+      "rate": 0
+    },
+    "not_assessable": "unverified; no reference case",
+    "alignment_review_status": "AI proposed pending owner; labels remain user-confirmed original references"
+  },
+  "tokens": {
+    "phases": [
+      {
+        "phase": "initial",
+        "requests": 24,
+        "input_tokens": 65693,
+        "output_tokens": 17582,
+        "total_tokens": 83275,
+        "actual_cost": "unknown, no actual invoice amount returned"
+      },
+      {
+        "phase": "correction",
+        "requests": 1,
+        "input_tokens": 3026,
+        "output_tokens": 345,
+        "total_tokens": 3371,
+        "actual_cost": "unknown, no actual invoice amount returned"
+      }
+    ],
+    "total": 86646
+  },
+  "audit": {
+    "initial_24_message_sets_match_frozen": true,
+    "all_25_pre_send_scope_hashes_valid": true,
+    "all_25_response_hashes_valid": true,
+    "single_correction_exact_frozen_rule": true,
+    "v7_prompt_v6_contract_all_calls": true,
+    "post_execution_preflight_passed": true,
+    "reference_labels_or_manual_semantic_splits_sent": false,
+    "actual_call_audit_sha256": "81a32bf2ba169fef70bf9f3cd4e0c6202e72d462ad3833216c641d5f427a6daa",
+    "execution_freeze_sha256": "77286900f6d5fdb45ceefb48e65847623e2f746bc66c43497075722b90060f1d",
+    "example_answer_roles_sent": false,
+    "literature_source_role_sent": true,
+    "roles_note": "Freeze roles_in_messages=false refers to example answer roles, not the required literature source_role field"
+  },
+  "items": [
+    {
+      "position": 1,
+      "sample_id": "H-BL-NWS-01-A01",
+      "source": "NWS",
+      "family": "H-BL-NWS-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.789,
+      "coverage_status": "all_agree",
+      "aligned_references": 3,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 2,
+      "sample_id": "H-BL-USGS-01-A01",
+      "source": "USGS",
+      "family": "H-BL-USGS-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.308,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 3,
+      "sample_id": "H-BL-NASA-01-A01",
+      "source": "NASA",
+      "family": "H-BL-NASA-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 2.69,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 4,
+      "sample_id": "H-BL-CDC-01-A01",
+      "source": "CDC",
+      "family": "H-BL-CDC-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.572,
+      "coverage_status": "all_agree",
+      "aligned_references": 3,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 5,
+      "sample_id": "H-BL-NWS-02-A01",
+      "source": "NWS",
+      "family": "H-BL-NWS-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.325,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 6,
+      "sample_id": "H-BL-USGS-02-A01",
+      "source": "USGS",
+      "family": "H-BL-USGS-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.799,
+      "coverage_status": "all_agree",
+      "aligned_references": 3,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 7,
+      "sample_id": "H-BL-NASA-02-A01",
+      "source": "NASA",
+      "family": "H-BL-NASA-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.403,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 8,
+      "sample_id": "H-BL-CDC-02-A01",
+      "source": "CDC",
+      "family": "H-BL-CDC-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 2.733,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 9,
+      "sample_id": "H-BL-NWS-01-A02",
+      "source": "NWS",
+      "family": "H-BL-NWS-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 2.928,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "has_disagreement",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 10,
+      "sample_id": "H-BL-USGS-01-A02",
+      "source": "USGS",
+      "family": "H-BL-USGS-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.068,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 11,
+      "sample_id": "H-BL-NASA-01-A02",
+      "source": "NASA",
+      "family": "H-BL-NASA-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.182,
+      "coverage_status": "all_agree",
+      "aligned_references": 3,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 12,
+      "sample_id": "H-BL-CDC-01-A02",
+      "source": "CDC",
+      "family": "H-BL-CDC-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 2.971,
+      "coverage_status": "has_disagreement",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 13,
+      "sample_id": "H-BL-NWS-02-A02",
+      "source": "NWS",
+      "family": "H-BL-NWS-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.22,
+      "coverage_status": "has_disagreement",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 14,
+      "sample_id": "H-BL-USGS-02-A02",
+      "source": "USGS",
+      "family": "H-BL-USGS-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.78,
+      "coverage_status": "all_agree",
+      "aligned_references": 3,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 15,
+      "sample_id": "H-BL-NASA-02-A02",
+      "source": "NASA",
+      "family": "H-BL-NASA-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.105,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 16,
+      "sample_id": "H-BL-CDC-02-A02",
+      "source": "CDC",
+      "family": "H-BL-CDC-02",
+      "status": "complete",
+      "initial_fields_complete": false,
+      "initial_contract_valid": false,
+      "calls": 2,
+      "corrections": 1,
+      "elapsed_seconds": 4.234,
+      "coverage_status": "has_disagreement",
+      "aligned_references": 1,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 17,
+      "sample_id": "H-BL-NWS-01-A03",
+      "source": "NWS",
+      "family": "H-BL-NWS-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.599,
+      "coverage_status": "all_agree",
+      "aligned_references": 3,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 18,
+      "sample_id": "H-BL-USGS-01-A03",
+      "source": "USGS",
+      "family": "H-BL-USGS-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.143,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 19,
+      "sample_id": "H-BL-NASA-01-A03",
+      "source": "NASA",
+      "family": "H-BL-NASA-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 4.388,
+      "coverage_status": "all_agree",
+      "aligned_references": 5,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 20,
+      "sample_id": "H-BL-CDC-01-A03",
+      "source": "CDC",
+      "family": "H-BL-CDC-01",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 4.24,
+      "coverage_status": "all_agree",
+      "aligned_references": 3,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "reviewed_no_new_issue_noted",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 21,
+      "sample_id": "H-BL-NWS-02-A03",
+      "source": "NWS",
+      "family": "H-BL-NWS-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.764,
+      "coverage_status": "has_disagreement",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "has_disagreement",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 22,
+      "sample_id": "H-BL-USGS-02-A03",
+      "source": "USGS",
+      "family": "H-BL-USGS-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 4.29,
+      "coverage_status": "all_agree",
+      "aligned_references": 2,
+      "unaligned_references": 1,
+      "support_status": "aligned_agree_with_unaligned",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 23,
+      "sample_id": "H-BL-NASA-02-A03",
+      "source": "NASA",
+      "family": "H-BL-NASA-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.605,
+      "coverage_status": "has_disagreement",
+      "aligned_references": 2,
+      "unaligned_references": 0,
+      "support_status": "aligned_all_agree",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    },
+    {
+      "position": 24,
+      "sample_id": "H-BL-CDC-02-A03",
+      "source": "CDC",
+      "family": "H-BL-CDC-02",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 3.447,
+      "coverage_status": "all_agree",
+      "aligned_references": 1,
+      "unaligned_references": 1,
+      "support_status": "aligned_agree_with_unaligned",
+      "reason_status": "has_reported_issue_or_alignment_limit",
+      "reason_review_pending_owner": true
+    }
+  ],
+  "coverage_rows": [
+    {
+      "sample_id": "H-BL-NWS-01-A01",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A01",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A01",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A01",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A01",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A01",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A01",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A01",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A01",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A01",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A01",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A01",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A01",
+      "requirement_id": "R3",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A01",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A01",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A01",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A01",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A02",
+      "requirement_id": "R1",
+      "reference": "partially_covered",
+      "predicted": "partially_covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A02",
+      "requirement_id": "R2",
+      "reference": "missing",
+      "predicted": "missing",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A02",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A02",
+      "requirement_id": "R2",
+      "reference": "missing",
+      "predicted": "missing",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A02",
+      "requirement_id": "R1",
+      "reference": "partially_covered",
+      "predicted": "partially_covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A02",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A02",
+      "requirement_id": "R1",
+      "reference": "partially_covered",
+      "predicted": "covered",
+      "agrees": false,
+      "review_note": "R1参考partial、预测covered；理由由7000英尺具体应用隐含补足未说出的通用6500英尺阈值。"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A02",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A02",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A02",
+      "requirement_id": "R2",
+      "reference": "missing",
+      "predicted": "covered",
+      "agrees": false,
+      "review_note": "R2参考missing、预测covered；以一般60%规则替代回答中未显式进行的题设映射。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A02",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A02",
+      "requirement_id": "R2",
+      "reference": "partially_covered",
+      "predicted": "partially_covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A02",
+      "requirement_id": "R3",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A02",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A02",
+      "requirement_id": "R2",
+      "reference": "missing",
+      "predicted": "missing",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A02",
+      "requirement_id": "R1",
+      "reference": "partially_covered",
+      "predicted": "missing",
+      "agrees": false,
+      "review_note": "R1参考partial、预测missing；三类污染范围已回应，仅处理限制缺失，不应把整项内容抹为完全未回应。"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A02",
+      "requirement_id": "R2",
+      "reference": "missing",
+      "predicted": "missing",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A03",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A03",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A03",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A03",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "partially_covered",
+      "agrees": false,
+      "review_note": "R1参考covered、预测partial；因must说反而扣覆盖，违反反向仍回应的已冻结口径。"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A03",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A03",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A03",
+      "requirement_id": "R3",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "partially_covered",
+      "agrees": false,
+      "review_note": "R1参考covered、预测partial；已明确否定类别，模型要求正面正确类别与额外条件展开，混入正确性/额外解释义务。"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A03",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A03",
+      "requirement_id": "R2",
+      "reference": "covered",
+      "predicted": "covered",
+      "agrees": true
+    }
+  ],
+  "alignment_rows": [
+    {
+      "sample_id": "H-BL-NWS-01-A01",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-f6e1121991430748ca5ba58e14bb85121660e8cf0b63584cd52e28db00262c51",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A01",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-56ef61a12a9f2c583efe4ddfd8837192e00ccf1454744da16edcfc69f363cb42",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A01",
+      "reference_unit_id": "U3",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-6c5de42948b3340aeae6ad4144caa5ee55aeeb715db4529c2ec58ced1b2beb68",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A01",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-98476611151a3ec02d1dd576998cc8605d1a0412457de85b17f7c23e3653a6da",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A01",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-c71619beb9809c8cbc1d96c45498ab4a3294063717e7724f70061ec61409301c",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-c71619beb9809c8cbc1d96c45498ab4a3294063717e7724f70061ec61409301c",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "supported",
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A01",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-384faa087b24bd9ffab8419bfae215d4c1e3307fddaccc7bbd7e9fe134c81b06",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-384faa087b24bd9ffab8419bfae215d4c1e3307fddaccc7bbd7e9fe134c81b06",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "supported",
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A01",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-4681addd9f0ae6a0415e931899241f2e555c0be6899636a9fdf8273e462950e7",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-4681addd9f0ae6a0415e931899241f2e555c0be6899636a9fdf8273e462950e7",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "supported",
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A01",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-ae03e4706e519657b27296be9795a93209ba34fad697089022ff72a7e043eaf0",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A01",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-8a5d61dd9bc423957a7605248c3ffa9c7d9c1e22c85cad35228b6df5aa9874b8",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A01",
+      "reference_unit_id": "U3",
+      "reference_support": "supported",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-9357c0e88ad5c1acd43d55ed86842eedaf4fb643a701fbbb92ab167e35fde106",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A01",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-9801c0139fc8487e589e32c05f635129d55d9689b9e65e87eb32f5a970da3c40",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A01",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-d6913768b41e391b82ae5e2ec58369917cfd64b29a179fb5e4170b073fe9e8ed",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A01",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-12ca1175ba79c3f485c4b63b787b37d97915417fb39fce72070347b299e45264",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A01",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-473bd0f941dda08641b391e6bfc2305885a3c8a398917d439af69503b4d231d4",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A01",
+      "reference_unit_id": "U3",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-a9a8be3f01ec62c0f8b3bed1fded88dbba16475df1ad848a0babc8ebf23f48a5",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A01",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-ef8f21a2ca73ef2cee29e2ee9ff1fd4e490317f2a7ae2edad5711434bb8e7b59",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A01",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-3b83a8f74e41fd6d0fa047c401ad4100cc0f09b0b0af9e8b62267c968fa2662e",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A01",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-335d5e0391c350dbca24d6369db2de75b06df25f3d11f3713294020b64929787",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A01",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-731d40ad47efece6c13f9f893869a35d7f46baae3d210ad54c080712aacc8a46",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A02",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-258e0551f4fcd571b9b25f333aa2dbd81a9a75c8f620cbd5cef3742c5c59d9f7",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A02",
+      "reference_unit_id": "U2",
+      "reference_support": "insufficient_evidence",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-00de528eb913f38c6f4c6c619682faf95ea4a35ea8fb21e67a85ccbcbf32b9a9",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": false,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。",
+      "review_note": "U2参考不足，预测矛盾；把预报涵盖时段12小时误作反驳6小时更新频率的依据。"
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A02",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-d48419a3edbc02abc68f7b335eee92fcc349229bb5cbf920f1444228e0d7e1b3",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A02",
+      "reference_unit_id": "U2",
+      "reference_support": "insufficient_evidence",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-e0fc68daae42bcc82f5c689edfa5d32bc0d937cc1f6e199474782479c3021b8a",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "insufficient_evidence"
+      ],
+      "predicted_claim_types": [
+        "external_claim"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "insufficient_evidence",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A02",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-b9c694a5e96d6e541d6a3ce481f2892433a0609be79609192d41924bb1e4545a",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A02",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-3275fd9bd80eb9518781f862ae64304990cfd9c9d1b2ea3324f29959a14dd50f",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-3275fd9bd80eb9518781f862ae64304990cfd9c9d1b2ea3324f29959a14dd50f",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "supported",
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A02",
+      "reference_unit_id": "U3",
+      "reference_support": "insufficient_evidence",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-2f665b16394f99124fa30422181a03c71498388bc193a7e2bc3d11804b1cde30",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "insufficient_evidence"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "insufficient_evidence",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A02",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-21d24156ecbc80fcce8220d3115d865dc194eb0a1d40af026261f23181379cf9",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A02",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-18d094f06448eb81ae4826271d89e281a589a1a07a66e2614030076a3cb19d12",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A02",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-0dcb4dce0384ea3e0f45ffa294fb71f4549c8de3b7f4255a1d533621c734e890",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-0dcb4dce0384ea3e0f45ffa294fb71f4549c8de3b7f4255a1d533621c734e890",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "supported",
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A02",
+      "reference_unit_id": "U2",
+      "reference_support": "insufficient_evidence",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-9fd91156e2c28ffc51d9da0f16e1d780207d55f8616759d48a2c2828da26fe56",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "insufficient_evidence"
+      ],
+      "predicted_claim_types": [
+        "external_claim"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "insufficient_evidence",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A02",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-e8e0254eaab4b99178a60cd2141eb13aec83f1f2bbfda4d440969ffedc22c7f7",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A02",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-a425690ce80911a8b6accace7465a23ddc84fde17bd60b2d794bd82226cddde9",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-a425690ce80911a8b6accace7465a23ddc84fde17bd60b2d794bd82226cddde9",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "supported",
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A02",
+      "reference_unit_id": "U3",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-e32f8f9f61aaeec0cc9ad2b9bc1119dd9bb2315d3cc3134148091c19846289da",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A02",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-8521079f9fb9e064ff18c984889ffff6428008e350ab9c2a70c233ebba8c42fa",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A02",
+      "reference_unit_id": "U2",
+      "reference_support": "insufficient_evidence",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-f7e35bff6112aaadddfd06a8c7f9866a806467266efcc80028274c64a3ba4111",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "insufficient_evidence"
+      ],
+      "predicted_claim_types": [
+        "external_claim"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "insufficient_evidence",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A02",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-04081ef8cfdee2f264af5b581902b89cd54f2280c08751782b2cede73226d40c",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A03",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-373f76ecd7a1c6ed610574d74fe426b006dd707dff3c0a55b8efad75bf96f95d",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-b7cf952a38b62e5903d688c9a5d6a4788ba0cd40235a284f4bd5225fcc141470",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-01-A03",
+      "reference_unit_id": "U3",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-cfbca8a61ebd0f639677bfe5792e59251c6d1280421e381ffd637cd4037f01ba",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A03",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-4a66d498f3d6ecb2a57266f1ffa644afb17443056ca5b9726a072633a2c2f75e",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-01-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-57c703899e42f2f20372f69f0c96a996b9e51fa628e4e84008914d080be62ac3",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A03",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-15b48b7d206f1f7501931983335639ef8c39795955cd75f4d91e84e54246a1c4",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-75a494550d7d052a8d86b2d663745fd84fc35abdcdd6c8634872168e5a273b6e",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A03",
+      "reference_unit_id": "U3",
+      "reference_support": "insufficient_evidence",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-928372853a51f9f5adbece0371ed798f46dacf5f5576cf572df04195eee6c039",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "insufficient_evidence"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "insufficient_evidence",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A03",
+      "reference_unit_id": "U4",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-89ea7485bdafcec77159c7808a7fe2eae27ef81aeb5ff6a39cfc655b828378d9",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-01-A03",
+      "reference_unit_id": "U5",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-6eb5b18325e1af129bf89853481bd1695bb80e4664f731f15b7b9aa15ad114c6",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A03",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-3b057fdecacec5b8677fb6cb7afe2bede1dc6588619138f8340afabd76bb01de",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-227315740b248e2c8cdc3033602e0c9fc580ca17287bc7bfb2632a5f223cc000",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-01-A03",
+      "reference_unit_id": "U3",
+      "reference_support": "contradicted",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-b0e08cf3456531072e7607fc6ca52bfbcf88ff16c5377a78fcc19d3b690b1ca3",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A03",
+      "reference_unit_id": "U1",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-360eeee269bdc7d74e82c65ec00dd94edc8153810f4759ecc4afbc3c82a46bb2",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-b7597c5fdef4a1693928f933850a3ce96f9432472390ca856126aa36d7ca9e97",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "insufficient_evidence"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "insufficient_evidence",
+      "agrees": false,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。",
+      "review_note": "U2参考矛盾、预测不足；对同一must模态，规则单元判C、应用单元判I，分歧保留。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A03",
+      "reference_unit_id": "U1",
+      "reference_support": "supported",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-0788ebc61d8614338b56612a94de90d67ff594d45a66de592544f94eae775a39",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "supported"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "supported",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-166de8020f7ce902ae5317f34512a039928fcc68c48950b626ec0fd8454b8b99",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-166de8020f7ce902ae5317f34512a039928fcc68c48950b626ec0fd8454b8b99",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "supported",
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "literature_statement"
+      ],
+      "alignment_status": "unaligned_mixed_labels",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "agrees": null,
+      "review_note": "U2拆为两可能成因S＋必须共同发生C，混合标签，按事前规则无法对齐，不挑C子句。"
+    },
+    {
+      "sample_id": "H-BL-USGS-02-A03",
+      "reference_unit_id": "U3",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-625ee8208ae719c6c4480778aca43543952c623d4ce07692487f18921d1570e1",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A03",
+      "reference_unit_id": "U1",
+      "reference_support": "contradicted",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-0b04d09a40a27e8373d334dd150827377a29ef5620602bf1584cd0917055c9ee",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "reference_claim_type": "scenario_application",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-ad8ad8a77045ad98ab71c2590c8e9dfdee12a3fb574e20410ec68b95f0ee7dc9",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A03",
+      "reference_unit_id": "U1",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-60b2afc1ba5753230fdce2549654c3076254973742f8b32fe2cfcdb525ef8c14",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "predicted_support": "contradicted",
+      "agrees": true,
+      "semantic_match_note": "所列判断联合覆盖该参考原句的全部断言/范围；同标签拆分联合对齐，参考只计一次。"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "reference_claim_type": "literature_statement",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-2a8f7f10549a8ed0539a818eb1c34b68f7091890bcfae9f0c6c10f4b140e67db",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-2a8f7f10549a8ed0539a818eb1c34b68f7091890bcfae9f0c6c10f4b140e67db",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted",
+        "insufficient_evidence"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "external_claim"
+      ],
+      "alignment_status": "unaligned_mixed_labels",
+      "method": "AI post-prediction semantic review; program confirms location/ID only; pending owner alignment review",
+      "agrees": null,
+      "review_note": "U2拆为推翻限制C＋保证现场安全I，混合标签，按事前规则无法对齐。"
+    }
+  ],
+  "production_changed": false,
+  "aggregate_accuracy": null,
+  "limitations": [
+    "4 source groups / 8 families with correlated synthetic variants",
+    "source audit limited; foundational training exposure unknown",
+    "58 references not independent observations; 66 predictions not 66 references",
+    "unaligned mixed compounds excluded from E but fully reported",
+    "post-prediction semantic alignment and reason review AI-assisted, pending user review",
+    "zero observed false support does not establish safety, universal accuracy or production admission"
+  ],
+  "by_source": [
+    {
+      "source": "NWS",
+      "planned": 6,
+      "attempted": 6,
+      "final_valid": 6,
+      "failed": 0,
+      "unexecuted": 0,
+      "initial_contract_valid": 6,
+      "coverage_slots": 12,
+      "coverage_agrees": 10,
+      "reference_units": 14,
+      "aligned": 14,
+      "unaligned": 0
+    },
+    {
+      "source": "USGS",
+      "planned": 6,
+      "attempted": 6,
+      "final_valid": 6,
+      "failed": 0,
+      "unexecuted": 0,
+      "initial_contract_valid": 6,
+      "coverage_slots": 15,
+      "coverage_agrees": 15,
+      "reference_units": 15,
+      "aligned": 14,
+      "unaligned": 1
+    },
+    {
+      "source": "NASA",
+      "planned": 6,
+      "attempted": 6,
+      "final_valid": 6,
+      "failed": 0,
+      "unexecuted": 0,
+      "initial_contract_valid": 6,
+      "coverage_slots": 12,
+      "coverage_agrees": 11,
+      "reference_units": 16,
+      "aligned": 16,
+      "unaligned": 0
+    },
+    {
+      "source": "CDC",
+      "planned": 6,
+      "attempted": 6,
+      "final_valid": 6,
+      "failed": 0,
+      "unexecuted": 0,
+      "initial_contract_valid": 5,
+      "coverage_slots": 12,
+      "coverage_agrees": 10,
+      "reference_units": 13,
+      "aligned": 12,
+      "unaligned": 1
+    }
+  ]
+}
