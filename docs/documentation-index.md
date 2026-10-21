@@ -1,5 +1,7 @@
 # 文档索引
 
+- [v6评审候选归档](reviewer-v6-candidate-closeout-v1.md)（[复核范围及身份](reviewer-v6-candidate-closeout-v1.json)）：本人报告复核，已见开发改善但语义/结构限制仍存，暂不接生产；EIA-A04本次可对齐及旧记录保留，NRC-A04分歧保留；全部12单元对齐仍待本人另行确认。0新调用、不再改到全对。
+
 - [v6八例开发复验结果](reviewer-v6-development-recheck-results-v1.md)（[统计/对齐ID](reviewer-v6-development-recheck-results-v1.json)、[执行冻结](reviewer-v6-development-recheck-freeze-v1.json)）：8最终有效、4首次有效，12调用/4纠正/28391token/28.659秒；覆盖16/16一致，支持12参考AI建议可对齐待本人复核；NRC-A04不足→矛盾分歧保留，稳定性/费用无改善声明。原规则/标签/成绩及生产不改，本批结束不恢复。
 
 - [v6有限开发复验计划v1](reviewer-v6-development-recheck-plan-v1.md)（[机器计划](reviewer-v6-development-recheck-plan-v1.json)）：原8例、顺序/标签/匹配不变；8消息离线核对，0API，最多16调用为拟定上界。待确认及本次付费授权，非最终执行冻结或新独立成绩。

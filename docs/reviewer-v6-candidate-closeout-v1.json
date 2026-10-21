@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-21",
+  "status": "archived_development_improvement_with_semantic_and_structural_limits",
+  "review_basis": "User read public report; specific text-level review, not blanket per-unit or local SHA confirmation",
+  "user_review": {
+    "EIA-A04": "Current full contradictory definition without prior mixed-label subjudgment can align under unchanged rule; prior batch remains unaligned",
+    "NRC-A04": "Keep insufficient_evidence reference vs contradicted prediction disagreement; remaining atoms alone do not establish hazard relationship",
+    "structure": "Four initial outputs miss unit.rationale; specific protocol-prone field, small batch does not prove population failure-rate increase",
+    "scope": "Seen-development improvement only, no independent evaluation claim"
+  },
+  "all_12_unit_alignment_owner_confirmed": false,
+  "alignment_pending": "Owner per-unit confirmation remains separate; do not infer from report review",
+  "bound_report_artifact_sha256": {
+    "docs/reviewer-v6-development-recheck-results-v1.md": "92fa0baeba67f39f6d5fa69a0fd70a723a945a589cf50fc29930864274ee4be2",
+    "docs/reviewer-v6-development-recheck-results-v1.json": "255735c67d529d7cb90710b1e0240249049f6d2801d3fe483a9d9366126e2296",
+    "docs/reviewer-v6-development-recheck-freeze-v1.json": "76ecff1cff8d3a1ecc7a0d1396903945a6c8b88697be045c0eaca5f4b04f6353"
+  },
+  "production_adoption": false,
+  "production_changed": false,
+  "protocol_or_parser_changed": false,
+  "historical_labels_scores_alignment_rules_changed": false,
+  "new_api_calls": 0,
+  "automatic_resume": false,
+  "future_work_not_started": [
+    "reason-field output reliability as separately scoped development",
+    "new-source evaluation after independently freezing any future protocol"
+  ],
+  "candidate_status": "archived, not production-ready, not a final independent evaluation protocol"
+}
