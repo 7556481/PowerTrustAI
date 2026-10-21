@@ -1,5 +1,7 @@
 # 文档索引
 
+- **来源筛选入口：[四组新来源、各两方向](reviewer-baseline-source-screening-v1.md)**（[身份与精确定位清单](reviewer-baseline-source-screening-v1.json)）：NWS/USGS/NASA/CDC，12完整选段及上下文在忽略data/evaluation_local/source-screening-baseline-v1/candidate-originals-review-v1.md，待本人原文范围确认。472文本/518旧PDF页有限审计，快照与原文回切验证；0回答/标签/模型调用，提示不改。
+
 - **当前准备依据：[小规模组件基线正式规格v1](reviewer-component-baseline-spec-v1.md)**（[机器清单与冻结候选身份](reviewer-component-baseline-spec-v1.json)）：本人确认4新来源组/8问题家族/24回答、v7提示＋v6严格解析；取消拟议百分比和未对齐零门槛，实验有效性与能力成绩分开。下一步来源筛选，非最终批次冻结/付费授权；本轮0新来源/题目/调用。
 - 原[门槛草案](reviewer-validation-gates-draft-v1.md)保留为历史；其95%/90%及无法对齐为0建议未采用，当前以正式规格为准。
 
