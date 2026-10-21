@@ -1,0 +1,213 @@
+{
+  "status": "pending_user_review",
+  "supervision": "AI-proposed, user confirmation pending; not expert gold",
+  "coverage_definition": "development-v2",
+  "support_label_policy": "native protocol enums; no not_supported legacy conversion",
+  "model_input_prohibited": true,
+  "labels": [
+    {
+      "question_id": "H-EIA-001",
+      "candidate_id": "H-EIA-001-A01",
+      "coverage_v2": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "coverage_rationale": "同义合并表达；同一程序载体可含两个参考断言，不强制逐句对应要求。",
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "把至少两个个别系统的需量加在一起",
+          "start": 0,
+          "end": 16,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "supported",
+          "rationale": "给定定义的系统数量与求和关系，合理中文同义。"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "这些需量不在同一个需量区间发生",
+          "start": 18,
+          "end": 33,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "supported",
+          "rationale": "保留非同一区间关系。"
+        }
+      ],
+      "status": "AI_proposal_pending_user_review"
+    },
+    {
+      "question_id": "H-EIA-001",
+      "candidate_id": "H-EIA-001-A02",
+      "coverage_v2": {
+        "R1": "covered",
+        "R2": "missing"
+      },
+      "coverage_rationale": "R1明确，未表达需量发生区间；R2缺失，不由评审补全。",
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "它涉及来自两个或更多个别系统的需量求和。",
+          "start": 0,
+          "end": 20,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "supported",
+          "rationale": "只说构成关系，无区间断言；遗漏不新增一个支持错误。"
+        }
+      ],
+      "status": "AI_proposal_pending_user_review"
+    },
+    {
+      "question_id": "H-EIA-001",
+      "candidate_id": "H-EIA-001-A03",
+      "coverage_v2": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "coverage_rationale": "明确反向回答区间关系；拟判涉及该方面，错误由支持性另评，不把反向关系算遗漏。",
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "它涉及来自两个或更多个别系统的需量求和。",
+          "start": 0,
+          "end": 20,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "supported",
+          "rationale": "构成关系有定义支持。"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "这些需量发生在同一需量区间。",
+          "start": 20,
+          "end": 34,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "contradicted",
+          "rationale": "同一与原定义的非同一区间关系直接相反。"
+        }
+      ],
+      "status": "AI_proposal_pending_user_review"
+    },
+    {
+      "question_id": "H-EIA-001",
+      "candidate_id": "H-EIA-001-A04",
+      "coverage_v2": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "coverage_rationale": "错误运算关系仍明确涉及构成要求；R2独立，不能因R1的错误而扣区间覆盖。",
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "它的定义是取来自两个或更多个别系统的需量平均值，而不是求和。",
+          "start": 0,
+          "end": 30,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "contradicted",
+          "rationale": "原文定义为sum；此处明确否定求和并改为平均，定义关系不符，不依赖具体数值算例。"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "这些需量不在同一需量区间发生。",
+          "start": 30,
+          "end": 45,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "supported",
+          "rationale": "独立区间关系仍符合定义。"
+        }
+      ],
+      "status": "AI_proposal_pending_user_review"
+    },
+    {
+      "question_id": "H-NRC-001",
+      "candidate_id": "H-NRC-001-A01",
+      "coverage_v2": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "coverage_rationale": "合理中文同义合并表达，不强制复述原条目文字。",
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "对某种放射性物质，半数原子转为另一核形态所需的时长，就是这里的物理半衰期。",
+          "start": 0,
+          "end": 37,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "supported",
+          "rationale": "对象、半数、核转变和时长均保留，未要求否定危害消失。"
+        }
+      ],
+      "status": "AI_proposal_pending_user_review"
+    },
+    {
+      "question_id": "H-NRC-001",
+      "candidate_id": "H-NRC-001-A02",
+      "coverage_v2": {
+        "R1": "covered",
+        "R2": "partially_covered"
+      },
+      "coverage_rationale": "对象/比例已说出，核转变也涉及，但没有表达所需时间这一必要部分；不把缺时间扣到R1。",
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "它涉及特定放射性物质中一半原子转变为另一核形态。",
+          "start": 0,
+          "end": 24,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "supported",
+          "rationale": "只说定义涉及的核转变事实，不声称危害消失。"
+        }
+      ],
+      "status": "AI_proposal_pending_user_review"
+    },
+    {
+      "question_id": "H-NRC-001",
+      "candidate_id": "H-NRC-001-A03",
+      "coverage_v2": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "coverage_rationale": "拟按覆盖定义v2判两方面均明确涉及，不表示正确回答；需本人重点核对整体否定的覆盖边界。",
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "这里的物理半衰期并不是特定放射性物质的一半原子转变为另一核形态所需的时间。",
+          "start": 0,
+          "end": 37,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "contradicted",
+          "rationale": "明确否定给定定义；对象、比例、过程与时长均出现，但定义断言与原文相反。"
+        }
+      ],
+      "status": "AI_proposal_pending_user_review"
+    },
+    {
+      "question_id": "H-NRC-001",
+      "candidate_id": "H-NRC-001-A04",
+      "coverage_v2": {
+        "R1": "covered",
+        "R2": "covered"
+      },
+      "coverage_rationale": "定义完整但无据附加；不因附加保证抹掉已有覆盖，不把负面澄清当必答。",
+      "reference_units": [
+        {
+          "reference_unit_id": "U1",
+          "exact_text": "对某种放射性物质，半数原子转为另一核形态所需的时长，就是这里的物理半衰期。",
+          "start": 0,
+          "end": 37,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "supported",
+          "rationale": "定义表述保留全部必要方面。"
+        },
+        {
+          "reference_unit_id": "U2",
+          "exact_text": "经过一个半衰期，该物质的放射性危害就完全消失。",
+          "start": 37,
+          "end": 60,
+          "offset_basis": "program-calculated Unicode code points in answer, end exclusive; reference semantic spans, not model outputs",
+          "expected_support": "insufficient_evidence",
+          "rationale": "给定段落未说明危害消失；不把原子比例直接等同危害或据常识自动判矛盾。"
+        }
+      ],
+      "status": "AI_proposal_pending_user_review"
+    }
+  ]
+}

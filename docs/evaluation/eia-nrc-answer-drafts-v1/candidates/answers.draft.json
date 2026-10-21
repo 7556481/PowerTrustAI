@@ -1,0 +1,45 @@
+{
+  "status": "pending_user_review",
+  "answers": [
+    {
+      "question_id": "H-EIA-001",
+      "candidate_id": "H-EIA-001-A01",
+      "answer": "把至少两个个别系统的需量加在一起，且这些需量不在同一个需量区间发生，这就是这里的非同时需量。"
+    },
+    {
+      "question_id": "H-EIA-001",
+      "candidate_id": "H-EIA-001-A02",
+      "answer": "它涉及来自两个或更多个别系统的需量求和。"
+    },
+    {
+      "question_id": "H-EIA-001",
+      "candidate_id": "H-EIA-001-A03",
+      "answer": "它涉及来自两个或更多个别系统的需量求和。这些需量发生在同一需量区间。"
+    },
+    {
+      "question_id": "H-EIA-001",
+      "candidate_id": "H-EIA-001-A04",
+      "answer": "它的定义是取来自两个或更多个别系统的需量平均值，而不是求和。这些需量不在同一需量区间发生。"
+    },
+    {
+      "question_id": "H-NRC-001",
+      "candidate_id": "H-NRC-001-A01",
+      "answer": "对某种放射性物质，半数原子转为另一核形态所需的时长，就是这里的物理半衰期。"
+    },
+    {
+      "question_id": "H-NRC-001",
+      "candidate_id": "H-NRC-001-A02",
+      "answer": "它涉及特定放射性物质中一半原子转变为另一核形态。"
+    },
+    {
+      "question_id": "H-NRC-001",
+      "candidate_id": "H-NRC-001-A03",
+      "answer": "这里的物理半衰期并不是特定放射性物质的一半原子转变为另一核形态所需的时间。"
+    },
+    {
+      "question_id": "H-NRC-001",
+      "candidate_id": "H-NRC-001-A04",
+      "answer": "对某种放射性物质，半数原子转为另一核形态所需的时长，就是这里的物理半衰期。经过一个半衰期，该物质的放射性危害就完全消失。"
+    }
+  ]
+}

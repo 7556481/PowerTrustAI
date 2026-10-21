@@ -1,6 +1,8 @@
 # 文档索引
 
-- [EIA/NRC八回答与预期草案](reviewer-eia-nrc-answer-drafts-v1.md)：各4样例、16coverage槽/12参考单元，完整回答/标签仅忽略目录复核，全部待本人确认，0模型调用，协议不改。
+- [EIA/NRC公开回答与标签复核表](evaluation/eia-nrc-answer-drafts-v1/evaluator-only/review-table.md)：本人授权公开8回答/16coverage槽/12参考单元，标签仍待确认；[JSON与用途隔离说明](evaluation/eia-nrc-answer-drafts-v1/README.md)，不含证据全文或模型运行数据，0API。
+
+- [EIA/NRC八回答与预期草案](reviewer-eia-nrc-answer-drafts-v1.md)：各4样例、16coverage槽/12参考单元，完整回答/标签后经本人授权公开供复核（原件仍留忽略目录），全部待本人确认，0模型调用，协议不改。
 
 - [EIA/NRC两题卡草案](reviewer-eia-nrc-question-cards-v1.md)：H-EIA-001构成/区间、H-NRC-001对象比例/过程时间，各两项独立要求；本人复核修改已落实：系统数量明确、NRC负面说明归支持边界，非最终批次冻结；无回答/标签/预测，固定协议不改。
 
