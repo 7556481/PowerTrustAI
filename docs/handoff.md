@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-21 四对格式实验完成，不追加/恢复
+
+本人明确确认4输入/检查表/r1并授权api.deepseek.com/flash8初始最多16调用。执行前新入口/测试与消息SHA绑定，26离线通过；复用run_fixed/ModelBudget/structured_request，一个共享16预算，保持配对task sample_id不变，request_id区分8项，解析/诊断/response_contract_version共同v6。8最终有效/0失败/未执行，9调用20.444秒。v6首次字段完整/契约3/4，一次FMT04缺两unit理由纠正；v7两指标4/4，0纠正，4对不推总体稳定率。初始token v6输入5868/输出1760/总7628，v7输入6748/输出1988/总8736；v6纠正2464/566/3030，v7无纠正，实际账单未知，不拿不等量总token比费用。AI理由检查待本人：FMT03v6未说明权限误推矛盾且单元unsupported与标签张力；v7不足标签合理但external_claim分类疑点；FMT02v6单元理由概括，FMT04未见充分获准保证。全部有效响应按检查表复核，初始无效不抽语义成绩。9实际消息/响应SHA与preflight通过，公开format-stability-v1/results-v1.md/JSON、质量表与执行冻结，原始留data忽略batch-v1，attempt锁保留。生产/冻结提示/历史不变，本批结束先本人复核，提交推送。
+
 ## 2026-10-21 格式实验统计口径澄清r1
 
 用户读三材料并转述AI方案复核接受设计，补清首次字段完整：按预期requirement_id/unit_id存在唯一无遗漏且无外来替代，不依赖数组顺序；空白理由/非法枚举及其他绑定由契约有效处理。新增format-stability-v1/metrics-clarification-r1.md/JSON绑定原输入/检查表/freeze，不覆盖；4任务ID反转/遗漏/重复/外来替换离线示例核对。FMT03未说明权限不当禁令，FMT04仅窗口T不推出充分获准，评测侧说明不进提示。无新运行评分器/模型调用/授权/提示解析器修改；未来实际批次须同时绑定r1并完成入口冻结及明确付费授权。提交普通推送。

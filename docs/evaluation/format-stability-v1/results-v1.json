@@ -1,0 +1,274 @@
+{
+  "date": "2026-10-21",
+  "status": "finished_no_resume",
+  "scope": "four paired single observations, development format experiment, not independent semantic evaluation",
+  "planned_initial": 8,
+  "complete": 8,
+  "failed": 0,
+  "unexecuted": 0,
+  "complete_pairs": 4,
+  "unpaired_due_to_stop": [],
+  "actual_calls": 9,
+  "elapsed_seconds": 20.444,
+  "arms": {
+    "v6": {
+      "planned_initial": 4,
+      "attempted_initial": 4,
+      "initial_fields_complete": 3,
+      "initial_contract_valid": 3,
+      "final_complete": 4,
+      "final_failed": 0,
+      "unexecuted": 0,
+      "corrections": 1,
+      "phases": {
+        "initial": {
+          "requests": 4,
+          "tokens": {
+            "input_tokens": 5868,
+            "output_tokens": 1760,
+            "total_tokens": 7628
+          },
+          "usage_known_all": true,
+          "actual_cost": "unknown; provider returned no actual invoice amount"
+        },
+        "correction": {
+          "requests": 1,
+          "tokens": {
+            "input_tokens": 2464,
+            "output_tokens": 566,
+            "total_tokens": 3030
+          },
+          "usage_known_all": true,
+          "actual_cost": "unknown; provider returned no actual invoice amount"
+        }
+      }
+    },
+    "v7": {
+      "planned_initial": 4,
+      "attempted_initial": 4,
+      "initial_fields_complete": 4,
+      "initial_contract_valid": 4,
+      "final_complete": 4,
+      "final_failed": 0,
+      "unexecuted": 0,
+      "corrections": 0,
+      "phases": {
+        "initial": {
+          "requests": 4,
+          "tokens": {
+            "input_tokens": 6748,
+            "output_tokens": 1988,
+            "total_tokens": 8736
+          },
+          "usage_known_all": true,
+          "actual_cost": "unknown; provider returned no actual invoice amount"
+        },
+        "correction": {
+          "requests": 0,
+          "tokens": {
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "total_tokens": 0
+          },
+          "usage_known_all": true,
+          "actual_cost": "unknown; provider returned no actual invoice amount"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "request_id": "FMT-01-v6",
+      "arm": "v6",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_field_issues": [],
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 1.816,
+      "initial_tokens": {
+        "input_tokens": 1403,
+        "output_tokens": 388,
+        "total_tokens": 1791,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1024,
+        "cache_miss_tokens": 379
+      },
+      "correction_tokens": []
+    },
+    {
+      "request_id": "FMT-01-v7",
+      "arm": "v7",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_field_issues": [],
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 1.857,
+      "initial_tokens": {
+        "input_tokens": 1623,
+        "output_tokens": 393,
+        "total_tokens": 2016,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 256,
+        "cache_miss_tokens": 1367
+      },
+      "correction_tokens": []
+    },
+    {
+      "request_id": "FMT-02-v7",
+      "arm": "v7",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_field_issues": [],
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 2.399,
+      "initial_tokens": {
+        "input_tokens": 1683,
+        "output_tokens": 476,
+        "total_tokens": 2159,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1152,
+        "cache_miss_tokens": 531
+      },
+      "correction_tokens": []
+    },
+    {
+      "request_id": "FMT-02-v6",
+      "arm": "v6",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_field_issues": [],
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 2.108,
+      "initial_tokens": {
+        "input_tokens": 1463,
+        "output_tokens": 425,
+        "total_tokens": 1888,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1024,
+        "cache_miss_tokens": 439
+      },
+      "correction_tokens": []
+    },
+    {
+      "request_id": "FMT-03-v6",
+      "arm": "v6",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_field_issues": [],
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 2.231,
+      "initial_tokens": {
+        "input_tokens": 1426,
+        "output_tokens": 406,
+        "total_tokens": 1832,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1024,
+        "cache_miss_tokens": 402
+      },
+      "correction_tokens": []
+    },
+    {
+      "request_id": "FMT-03-v7",
+      "arm": "v7",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_field_issues": [],
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 2.464,
+      "initial_tokens": {
+        "input_tokens": 1646,
+        "output_tokens": 467,
+        "total_tokens": 2113,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1152,
+        "cache_miss_tokens": 494
+      },
+      "correction_tokens": []
+    },
+    {
+      "request_id": "FMT-04-v7",
+      "arm": "v7",
+      "status": "complete",
+      "initial_fields_complete": true,
+      "initial_field_issues": [],
+      "initial_contract_valid": true,
+      "calls": 1,
+      "corrections": 0,
+      "elapsed_seconds": 2.907,
+      "initial_tokens": {
+        "input_tokens": 1796,
+        "output_tokens": 652,
+        "total_tokens": 2448,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1152,
+        "cache_miss_tokens": 644
+      },
+      "correction_tokens": []
+    },
+    {
+      "request_id": "FMT-04-v6",
+      "arm": "v6",
+      "status": "complete",
+      "initial_fields_complete": false,
+      "initial_field_issues": [
+        "$.units[0].rationale",
+        "$.units[1].rationale"
+      ],
+      "initial_contract_valid": false,
+      "calls": 2,
+      "corrections": 1,
+      "elapsed_seconds": 4.602,
+      "initial_tokens": {
+        "input_tokens": 1576,
+        "output_tokens": 541,
+        "total_tokens": 2117,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1024,
+        "cache_miss_tokens": 552
+      },
+      "correction_tokens": [
+        {
+          "input_tokens": 2464,
+          "output_tokens": 566,
+          "total_tokens": 3030,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1536,
+          "cache_miss_tokens": 928
+        }
+      ]
+    }
+  ],
+  "audit": {
+    "all_actual_messages_match_frozen_system_and_task": true,
+    "all_response_utf8_sha_verified": true,
+    "common_response_contract_v6_verified": true,
+    "correction_exact_diagnostic_and_prior_output_verified": true,
+    "no_reference_checklist_sent": true,
+    "preflight_passed_after_execution": true
+  },
+  "execution_freeze_sha256": "8d960acb4d8b72e6cc53c1b3b9afc6646ecb4425325bd6990c96ae54283f3cb4",
+  "production_changed": false,
+  "semantic_review": "AI assisted observations pending owner confirmation; labels/checklists unchanged",
+  "interpretation": "Cannot infer population stability from four pairs; no post-hoc reruns, no holdout claim"
+}

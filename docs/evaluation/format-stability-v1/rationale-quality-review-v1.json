@@ -1,0 +1,71 @@
+{
+  "status": "AI_assisted_pending_owner_review_not_expert_gold",
+  "method": "Read final valid propositions, requirement/unit/judgment rationales against frozen checklist; not inferred from nonempty fields",
+  "rows": [
+    {
+      "request_id": "FMT-01-v6",
+      "requirements": "分别解释类别与用途",
+      "unit_reason": "说明一个单元含两个分句并分别评估，具有本单元针对性",
+      "judgment_reasons": "两判断均将合成定义中的类别/用途与命题对应",
+      "invented_conditions": "未见",
+      "review_status": "AI意见待本人确认"
+    },
+    {
+      "request_id": "FMT-01-v7",
+      "requirements": "分别解释类别与用途",
+      "unit_reason": "明确指出类别与用途及未含额外断言",
+      "judgment_reasons": "均具体对应原定义",
+      "invented_conditions": "未见",
+      "review_status": "AI意见待本人确认"
+    },
+    {
+      "request_id": "FMT-02-v7",
+      "requirements": "说反仍covered，范围独立",
+      "unit_reason": "各单元点明三格主张与沙盘S范围",
+      "judgment_reasons": "三格/两格冲突、仅沙盘S支持分别解释",
+      "invented_conditions": "未见",
+      "review_status": "AI意见待本人确认"
+    },
+    {
+      "request_id": "FMT-02-v6",
+      "requirements": "说反仍covered，范围独立",
+      "unit_reason": "理由分别针对步长/范围，但较概括；不等于缺字段，也不预设为完全无效",
+      "judgment_reasons": "具体解释三格与两格冲突、沙盘S范围匹配",
+      "invented_conditions": "未见",
+      "review_status": "单元理由实质充分程度待本人复核"
+    },
+    {
+      "request_id": "FMT-03-v6",
+      "requirements": "用途与待修限定均回应",
+      "unit_reason": "识别有据用途和unsupported权限附加，具有针对性但与判断标签张力",
+      "judgment_reasons": "用途理由有据；权限理由从未说明权限推出contradicted不成立，题目禁止推测也不是事实矛盾证据",
+      "invented_conditions": "错误推导权限结论矛盾；不改原标签",
+      "review_status": "实质语义问题，AI意见待本人确认"
+    },
+    {
+      "request_id": "FMT-03-v7",
+      "requirements": "用途与待修限定均回应",
+      "unit_reason": "识别两个主张并要求单独评估附加权限",
+      "judgment_reasons": "用途支持；权限insufficient_evidence理由符合缺依据边界，但generic合成权限被分类external_claim仍有对象分类疑点",
+      "invented_conditions": "未见新增授予/禁止权限条件",
+      "review_status": "不足标签有正向证据；类型疑点待本人复核"
+    },
+    {
+      "request_id": "FMT-04-v7",
+      "requirements": "假定类别和窗口分别回应",
+      "unit_reason": "分别说明题设复述与假定规则应用，不升级现场验真",
+      "judgment_reasons": "前提ID/文献ID结合，保留仅窗口T，没有保证窗口内必然获准",
+      "invented_conditions": "未见",
+      "review_status": "AI意见待本人确认"
+    },
+    {
+      "request_id": "FMT-04-v6",
+      "requirements": "最终有效响应分别说明类别和窗口",
+      "unit_reason": "初始两个unit理由缺失，不计有效语义；纠正后分别说明假定与规则应用",
+      "judgment_reasons": "最终响应拆出前提、规则和应用，保留假定/窗口限制，没有必然获准承诺",
+      "invented_conditions": "未见；初始无效响应不抽语义成绩",
+      "review_status": "最终理由AI意见待本人确认"
+    }
+  ],
+  "not_a_population_quality_score": true
+}
