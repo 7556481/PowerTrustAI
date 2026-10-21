@@ -1,5 +1,8 @@
 # 文档索引
 
+- [v7格式实验本人限定复核](reviewer-v7-owner-review-v1.md)：有限正向证据、保留候选且生产不接入；非全部8份理由原文或本地SHA验真，原结果保留，不补跑或叠提示。
+- [下一阶段验证能力与验收门槛草案v1](reviewer-validation-gates-draft-v1.md)：执行/覆盖/支持/类型/拆分/理由分别列建议门槛；数值待本人确认，先规格与规模再新来源，非批次冻结或付费授权。
+
 - [四对v6/v7格式实验结果](evaluation/format-stability-v1/results-v1.md)（[统计](evaluation/format-stability-v1/results-v1.json)、[理由质量意见](evaluation/format-stability-v1/rationale-quality-review-v1.json)、[执行冻结](evaluation/format-stability-v1/execution-freeze-v1.json)）：8最终有效，9调用；v6首次3/4、1纠正，v7首次4/4、无纠正；初始token7628/8736、v6纠正3030。理由语义问题及分类疑点单列，意见待本人，4对不证总体提升；本批结束生产不改。
 
 - [格式实验首次字段完整统计澄清r1](evaluation/format-stability-v1/metrics-clarification-r1.md)（[ID与绑定清单](evaluation/format-stability-v1/metrics-clarification-r1.json)）：按预期要求/单元ID存在唯一无遗漏，不依赖数组顺序；空白理由/非法枚举另由契约处理。原输入/冻结不覆盖，不改提示，0API，非付费授权。
