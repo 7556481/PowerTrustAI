@@ -2,7 +2,7 @@
 
 - 先读 `docs/handoff.md`、`docs/documentation-index.md` 和 `docs/design-decisions.md`；以实际代码及指定版本归档为准，历史报告不是当前配置。
 - 最终中文学习与面试手册要求见 `docs/final-handbook-requirements.md`；每轮结束更新 handoff 和文档索引，保留重要决策、失败及验证证据。README 不替代最终手册。
-- 复用现有 `harness.runtime.OfflineHarness`、四 Agent、Retriever/Evidence 与确定性政策，不另建调度器。真实服务事实审核必须显式启用 schema12。
+- 复用现有 `harness.runtime.OfflineHarness`、四 Agent、Retriever/Evidence 与确定性政策，不另建调度器。真实服务事实审核以已确认的 schema13 为生产基线；不因历史 schema12 说明降级，不自动切换 schema14。依据见 `docs/schema13-production-baseline-confirmation-v1.md`。
 - 保持默认检索、固定知识快照和严格 ID/版本/原文定位约束；改变协议、模型、切分或实验配置须独立版本化，不能覆盖历史结果。
 - `power-system-hallucination-risk-assessor/` 是独立历史仓库，不修改或展开跟踪。旧六维评分、阈值、默认参考及关键词规则未经审查不能成为生产依据。
 - 不读取、显示或归档密钥文件内容、凭据和请求头。仅在用户授权的真实运行中由已有入口加载项目根 `.env`；环境变量优先。
