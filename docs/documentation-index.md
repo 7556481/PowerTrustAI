@@ -1,5 +1,7 @@
 # 文档索引
 
+- **整批原文复核入口：[51槽覆盖＋58参考对应全部预测字段](evaluation/baseline-batch-v1/prediction-full-review-v1.md)**：单个轻量Markdown含51覆盖对象原文及理由、66唯一判断、原单元/24总体理由；两个混合未对齐全部拆分，附问题/要求/回答/前提/12依据索引。与最终有效响应字段逐字核对，原报告/分数不改，0新增调用；本人整批复核待后续，不记raw/SHA验真。
+
 - **当前结果：[四来源24回答评审组件冻结批次v1](evaluation/baseline-batch-v1/README.md)**：24最终有效、23首次、25调用/1纠正/86646token；覆盖46/51一致，支持56/58建议对齐、54一致2分歧、2混合未对齐，F双分母0/18及0/38、错误拒支持0/38。对象类型/理由疑点及AI对齐待本人复核，非全面验收；[脱敏统计](evaluation/baseline-batch-v1/results-v1.json)、[理由摘要](evaluation/baseline-batch-v1/reason-quality-review-v1.json)、[事前冻结](evaluation/baseline-batch-v1/execution-freeze-v1.json)、[匹配规则](evaluation/baseline-batch-v1/matching-rules-v1.json)、[本人确认及本批授权](evaluation/baseline-batch-v1/owner-confirmation-authorization-v1.json)、[25实际调用SHA](evaluation/baseline-batch-v1/actual-call-hashes-v1.json)。已结束不追加/恢复，原始data忽略、生产不变。
 
 - **当前待复核改动：[NASA歧义预测前修订v2及原整批复核](evaluation/baseline-answer-drafts-v2/README.md)**：原24回答文本复核归档，原NASA01A03U2不足/矛盾分歧保留；[v2回答](evaluation/baseline-answer-drafts-v2/answers-v2.json)、[v2标签](evaluation/baseline-answer-drafts-v2/expected-labels-v2.json)、[差异与统计](evaluation/baseline-answer-drafts-v2/revision-v2.json)、[原逐项文本复核](evaluation/baseline-answer-drafts-v2/user-text-review-v1.json)、[身份/检查](evaluation/baseline-answer-drafts-v2/manifest-v2.json)。只改1回答，23保持；24回答/51覆盖/58参考，新句与映射待确认，0模型调用，旧v1保留。

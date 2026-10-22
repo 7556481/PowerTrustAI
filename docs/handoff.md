@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-22 一次公开完整预测字段供本人整批复核
+
+本人明确授权公开51覆盖原文及理由、58参考对应全部预测命题/标签/依据/理由，两个未对齐保留所有拆分；新增单文件[完整预测复核](evaluation/baseline-batch-v1/prediction-full-review-v1.md)，24项最终有效响应，51覆盖槽/58参考/66唯一判断/24总体理由，附原单元理由、问题/要求/回答/题设及12依据选段索引。对齐映射来自原公开统计，模型原字段来自最终响应解码字符串，逐字段相同无翻译/摘要/补理由；JSON展示回读核对，24最终响应SHA与原调用清单一致。USGS02A03U2 S/C及CDC02A03U2 C/I全保留，AI建议未对齐/对齐仍待本人复核，不改原分数或标签。原无效初始响应不抽语义，完整封装/实际请求/凭据不公开；原data、freeze、结果及publication-manifest全文件SHA不改。沙箱解释器启动被拒后按规则审批运行同一纯离线导出检查，无API/.env读取，不重跑测试或实验。按默认直接提交普通推送GitHub回查。下一步本人一次核对公开原文，不扩大为本人raw/SHA验真或全面验收。
+
 ## 2026-10-21 四来源v7组件冻结批次完成，不追加/恢复
 
 本人确认v2整批24回答/51覆盖/58参考及标签，AI辅助用户监督，明确api.deepseek.com载荷/费用/最多48授权。新增reviewer_baseline_trial_v1复用run_fixed/ModelBudget/structured_request，v7提示/v6严格解析与契约、所有v2/匹配/初始消息及入口SHA事前绑定；29离线门禁通过（沙箱async卡住仅结束本轮测试进程后审批离线通过）。固定A01→A02→A03，各01/02家族内NWS/USGS/NASA/CDC交错；24最终有效/23首次字段与契约/0失败未执行，25调用1纠正83.787秒、86646token，实际账单未知。CDC02A02初始JSON闭合错误，一纠正有效，不抽初始无效语义。覆盖46/51一致5分歧（两处因正确性扣覆盖、隐含补阈值/映射、partial误missing）。支持AI建议56/58对齐，54一致2分歧：NWS01A02U2不足→矛盾（更新周期混涵盖时段），NWS02A03U2矛盾→不足；USGS02A03U2 S/C及CDC02A03U2 C/I混合按事前规则未对齐，不挑子句。F/A_NS0/18、F/A_SP0/38，错误拒支持0/38，仅E，66预测不是独立参考。理由/文献断言external_claim分类及机理措辞疑点保留，后验AI对齐和理由待本人复核，未全面验收/生产不接入。公开[短报告](evaluation/baseline-batch-v1/README.md)、统计、理由表、冻结、确认及25调用哈希；实际消息/响应/data/retrieval_local及data/evaluation_local/reviewer-baseline-v1/batch-v1忽略原件保留attempt锁。25消息scope/响应SHA、纠正逐字段、postflight通过；无参考标签/理由/人工切分/样例角色外发，source_role文献仍正常交付。原标签/提示/生产不改，不补跑到全对、不自动LangGraph。按默认普通提交推送回查；下一步仅本人复核分歧及对齐建议。
