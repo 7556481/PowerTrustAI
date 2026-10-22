@@ -1,5 +1,7 @@
 # 文档索引
 
+- **最新收尾状态：[整批文本复核与用户确认](evaluation/baseline-batch-v1/owner-text-review-closeout-v1.md)**（[范围、原统计及文件身份](evaluation/baseline-batch-v1/owner-text-review-closeout-v1.json)）：51槽、58参考及66预测判断连同两级理由、依据索引全部公开文本复核完成；ChatGPT复核、用户本人确认，AI辅助用户监督。原5覆盖分歧、2支持分歧、56对齐/2无法对齐及理由问题保留，标签/成绩不改。小规模组件基线收尾，非生产或普遍可靠性证明，0新调用/补跑。下方旧“待复核”表述保留为历史阶段，当前以此记录为准；非本人本地原始响应或SHA验真。
+
 - **整批原文复核入口：[51槽覆盖＋58参考对应全部预测字段](evaluation/baseline-batch-v1/prediction-full-review-v1.md)**：单个轻量Markdown含51覆盖对象原文及理由、66唯一判断、原单元/24总体理由；两个混合未对齐全部拆分，附问题/要求/回答/前提/12依据索引。与最终有效响应字段逐字核对，原报告/分数不改，0新增调用；本人整批复核待后续，不记raw/SHA验真。
 
 - **当前结果：[四来源24回答评审组件冻结批次v1](evaluation/baseline-batch-v1/README.md)**：24最终有效、23首次、25调用/1纠正/86646token；覆盖46/51一致，支持56/58建议对齐、54一致2分歧、2混合未对齐，F双分母0/18及0/38、错误拒支持0/38。对象类型/理由疑点及AI对齐待本人复核，非全面验收；[脱敏统计](evaluation/baseline-batch-v1/results-v1.json)、[理由摘要](evaluation/baseline-batch-v1/reason-quality-review-v1.json)、[事前冻结](evaluation/baseline-batch-v1/execution-freeze-v1.json)、[匹配规则](evaluation/baseline-batch-v1/matching-rules-v1.json)、[本人确认及本批授权](evaluation/baseline-batch-v1/owner-confirmation-authorization-v1.json)、[25实际调用SHA](evaluation/baseline-batch-v1/actual-call-hashes-v1.json)。已结束不追加/恢复，原始data忽略、生产不变。

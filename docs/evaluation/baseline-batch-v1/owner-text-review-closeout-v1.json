@@ -1,0 +1,344 @@
+{
+  "record_id": "reviewer-baseline-v1-owner-text-review-closeout-v1",
+  "date": "2026-10-22",
+  "reviewed_commit": "a47eb9ac59c8d9ebf934035c2ce9df0df241a63d",
+  "status": "closed_after_full_public_text_review_user_confirmed",
+  "attribution_statement": "ChatGPT完成全部公开预测字段的文本复核，认可当前覆盖分歧、支持分歧及对齐统计；用户本人确认",
+  "feedback_provenance": "AI-assisted, user-supervised; user explicitly confirmed the public text review",
+  "review_scope": {
+    "coverage_slots": 51,
+    "reference_units": 58,
+    "unique_predicted_judgments": 66,
+    "includes": [
+      "all public coverage fields and reasons",
+      "all predicted propositions, labels, basis IDs and judgment rationales",
+      "unit rationales",
+      "24 overall rationales",
+      "evidence index",
+      "all split judgments for both unaligned references"
+    ]
+  },
+  "owner_confirmed_original_statistics": {
+    "execution": {
+      "planned": 24,
+      "attempted": 24,
+      "initial_fields_complete": 23,
+      "initial_contract_valid": 23,
+      "final_valid": 24,
+      "failed": 0,
+      "unexecuted": 0,
+      "actual_calls": 25,
+      "corrections": 1,
+      "elapsed_seconds": 83.787,
+      "stop_position": null,
+      "initial_failure": {
+        "sample_id": "H-BL-CDC-02-A02",
+        "type": "invalid_JSON",
+        "field_path": "$",
+        "line": 1,
+        "column": 1907,
+        "actual_closer": "]",
+        "correction_succeeded": true,
+        "no_semantic_score_from_invalid_initial": true
+      }
+    },
+    "coverage": {
+      "planned": 51,
+      "evaluated": 51,
+      "agrees": 46,
+      "disagreements": 5,
+      "confusion": [
+        {
+          "reference": "covered",
+          "predicted": "covered",
+          "count": 39
+        },
+        {
+          "reference": "covered",
+          "predicted": "partially_covered",
+          "count": 2
+        },
+        {
+          "reference": "missing",
+          "predicted": "covered",
+          "count": 1
+        },
+        {
+          "reference": "missing",
+          "predicted": "missing",
+          "count": 4
+        },
+        {
+          "reference": "partially_covered",
+          "predicted": "covered",
+          "count": 1
+        },
+        {
+          "reference": "partially_covered",
+          "predicted": "missing",
+          "count": 1
+        },
+        {
+          "reference": "partially_covered",
+          "predicted": "partially_covered",
+          "count": 3
+        }
+      ]
+    },
+    "support": {
+      "planned_reference_units": 58,
+      "aligned": 56,
+      "unaligned": 2,
+      "conflicts": 0,
+      "aligned_agrees": 54,
+      "aligned_disagreements": 2,
+      "predicted_judgments": 66,
+      "confusion": [
+        {
+          "reference": "contradicted",
+          "predicted": "contradicted",
+          "count": 11
+        },
+        {
+          "reference": "contradicted",
+          "predicted": "insufficient_evidence",
+          "count": 1
+        },
+        {
+          "reference": "insufficient_evidence",
+          "predicted": "contradicted",
+          "count": 1
+        },
+        {
+          "reference": "insufficient_evidence",
+          "predicted": "insufficient_evidence",
+          "count": 5
+        },
+        {
+          "reference": "supported",
+          "predicted": "supported",
+          "count": 38
+        }
+      ],
+      "false_support": {
+        "F": 0,
+        "A_NS": 18,
+        "F_over_A_NS": 0,
+        "A_SP": 38,
+        "F_over_A_SP": 0,
+        "definition": "only fully aligned non-conflicting reference units E, each reference once"
+      },
+      "false_rejection": {
+        "count": 0,
+        "supported_reference_denominator": 38,
+        "rate": 0
+      },
+      "not_assessable": "unverified; no reference case"
+    },
+    "tokens": {
+      "phases": [
+        {
+          "phase": "initial",
+          "requests": 24,
+          "input_tokens": 65693,
+          "output_tokens": 17582,
+          "total_tokens": 83275,
+          "actual_cost": "unknown, no actual invoice amount returned"
+        },
+        {
+          "phase": "correction",
+          "requests": 1,
+          "input_tokens": 3026,
+          "output_tokens": 345,
+          "total_tokens": 3371,
+          "actual_cost": "unknown, no actual invoice amount returned"
+        }
+      ],
+      "total": 86646
+    }
+  },
+  "confirmed_coverage_disagreements": [
+    {
+      "sample_id": "H-BL-CDC-01-A02",
+      "requirement_id": "R1",
+      "reference": "partially_covered",
+      "predicted": "covered",
+      "agrees": false,
+      "review_note": "R1参考partial、预测covered；理由由7000英尺具体应用隐含补足未说出的通用6500英尺阈值。"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A02",
+      "requirement_id": "R2",
+      "reference": "missing",
+      "predicted": "covered",
+      "agrees": false,
+      "review_note": "R2参考missing、预测covered；以一般60%规则替代回答中未显式进行的题设映射。"
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A02",
+      "requirement_id": "R1",
+      "reference": "partially_covered",
+      "predicted": "missing",
+      "agrees": false,
+      "review_note": "R1参考partial、预测missing；三类污染范围已回应，仅处理限制缺失，不应把整项内容抹为完全未回应。"
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "partially_covered",
+      "agrees": false,
+      "review_note": "R1参考covered、预测partial；因must说反而扣覆盖，违反反向仍回应的已冻结口径。"
+    },
+    {
+      "sample_id": "H-BL-NASA-02-A03",
+      "requirement_id": "R1",
+      "reference": "covered",
+      "predicted": "partially_covered",
+      "agrees": false,
+      "review_note": "R1参考covered、预测partial；已明确否定类别，模型要求正面正确类别与额外条件展开，混入正确性/额外解释义务。"
+    }
+  ],
+  "confirmed_support_disagreements": [
+    {
+      "sample_id": "H-BL-NWS-01-A02",
+      "reference_unit_id": "U2",
+      "reference_support": "insufficient_evidence",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-00de528eb913f38c6f4c6c619682faf95ea4a35ea8fb21e67a85ccbcbf32b9a9",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement"
+      ],
+      "alignment_status": "aligned",
+      "predicted_support": "contradicted",
+      "agrees": false
+    },
+    {
+      "sample_id": "H-BL-NWS-02-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-b7597c5fdef4a1693928f933850a3ce96f9432472390ca856126aa36d7ca9e97",
+          "judgment_index_0based": 0
+        }
+      ],
+      "predicted_support_labels": [
+        "insufficient_evidence"
+      ],
+      "predicted_claim_types": [
+        "scenario_application"
+      ],
+      "alignment_status": "aligned",
+      "predicted_support": "insufficient_evidence",
+      "agrees": false
+    }
+  ],
+  "confirmed_unaligned_references": [
+    {
+      "sample_id": "H-BL-USGS-02-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-166de8020f7ce902ae5317f34512a039928fcc68c48950b626ec0fd8454b8b99",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-166de8020f7ce902ae5317f34512a039928fcc68c48950b626ec0fd8454b8b99",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "supported",
+        "contradicted"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "literature_statement"
+      ],
+      "alignment_status": "unaligned_mixed_labels",
+      "agrees": null
+    },
+    {
+      "sample_id": "H-BL-CDC-02-A03",
+      "reference_unit_id": "U2",
+      "reference_support": "contradicted",
+      "prediction_addresses": [
+        {
+          "unit_id": "u-2a8f7f10549a8ed0539a818eb1c34b68f7091890bcfae9f0c6c10f4b140e67db",
+          "judgment_index_0based": 0
+        },
+        {
+          "unit_id": "u-2a8f7f10549a8ed0539a818eb1c34b68f7091890bcfae9f0c6c10f4b140e67db",
+          "judgment_index_0based": 1
+        }
+      ],
+      "predicted_support_labels": [
+        "contradicted",
+        "insufficient_evidence"
+      ],
+      "predicted_claim_types": [
+        "literature_statement",
+        "external_claim"
+      ],
+      "alignment_status": "unaligned_mixed_labels",
+      "agrees": null
+    }
+  ],
+  "retained_reason_issues": [
+    "literature statements misclassified as real-site external claims, including 24-hour and 20-year guarantees",
+    "rationale and label tension",
+    "cannot make water safe strengthened into cannot remove contamination"
+  ],
+  "no_new_issue_requiring_reference_or_statistics_change": true,
+  "original_reference_labels_statistics_freeze_matching_and_public_predictions_unchanged": true,
+  "historical_pending_review_statements": "preserved; current confirmation is recorded here rather than retroactively replacing history",
+  "conclusion": "small-scale limited source-isolated reviewer-component baseline; no production admission, universal reliability or safety proof",
+  "not_asserted": [
+    "owner verified local raw responses, JSON bytes or SHA",
+    "expert gold standard",
+    "complete source independence or absence from foundation-model training",
+    "all rationales correct",
+    "unaligned automatically incorrect",
+    "aggregate accuracy"
+  ],
+  "execution_boundary": {
+    "new_api_calls": 0,
+    "reruns": 0,
+    "resume_allowed": false,
+    "new_paid_batch_authorized": false,
+    "prompt_parser_production_changed": false,
+    "attempt_marker_retained": true
+  },
+  "assistant_mechanical_identity_check": {
+    "original_public_manifest_files_verified": 7,
+    "execution_frozen_files_verified": 35,
+    "owner_sha_verification_claimed": false,
+    "bound_files_sha256": {
+      "docs/evaluation/baseline-batch-v1/actual-call-hashes-v1.json": "b6cec44ddce6f35994c005759a894f1b1e6dfa9aa8fc8d9d922ae928d810ca73",
+      "docs/evaluation/baseline-batch-v1/execution-freeze-v1.json": "77286900f6d5fdb45ceefb48e65847623e2f746bc66c43497075722b90060f1d",
+      "docs/evaluation/baseline-batch-v1/matching-rules-v1.json": "6310da92cd2ddf3661ed2dedf3457dcc38a0620486be137672cb105e301edb29",
+      "docs/evaluation/baseline-batch-v1/owner-confirmation-authorization-v1.json": "97d0c5bebc7846511c2ae835966432d1eed702b120599320b694e5cc37774e81",
+      "docs/evaluation/baseline-batch-v1/README.md": "b23627588c23a0a511fdf71763639e5feec8c7c423509952cbeaa74d536c0f6d",
+      "docs/evaluation/baseline-batch-v1/reason-quality-review-v1.json": "10a02dd886be3367cfd19d3e9832e7fbce357619f373b014c570db7fce31b251",
+      "docs/evaluation/baseline-batch-v1/results-v1.json": "4ad50d85e7fd60ce5bfeddb27d3db45d2e3859ec0ad5cc4bbde46fbd29cd7afd",
+      "docs/evaluation/baseline-batch-v1/publication-manifest-v1.json": "ce704ccffca8646006ca29b472fa69d01ebb0d100e1cf2bdf3dc84537871d588",
+      "docs/evaluation/baseline-batch-v1/prediction-full-review-v1.md": "ee897443562bfdf97094a15d37a9a9aad1854f0a7129cd2590891a850d6cb90b",
+      "docs/evaluation/baseline-batch-v1/owner-text-review-closeout-v1.md": "5991b7b4b300c2be19ce70b7056abb03a70fd042fe6151f28f550ef2264ce61f",
+      "docs/evaluation/baseline-answer-drafts-v2/answers-v2.json": "cad4d97253e8eff55603cdd28c518c53b18611f0e17d3d1e211beb33ea5c44b3",
+      "docs/evaluation/baseline-answer-drafts-v2/expected-labels-v2.json": "52b0eef5ae5f00863f6dd2a67e2fcdd983982f3b10dec0a6bb2456e79ae204a9",
+      "docs/evaluation/baseline-answer-drafts-v2/manifest-v2.json": "d1b0a469fc5ac652e370fd1f79e98981728cd9dffcc722eaaeab8ca94940b8a2",
+      "docs/evaluation/baseline-answer-drafts-v2/revision-v2.json": "96c3be0b24715fc86059fc0bf5063d8f2a45438bd5285841e22b3a633081dc68",
+      "docs/evaluation/baseline-answer-drafts-v2/user-text-review-v1.json": "d81d5db89749e44f4064f9318ae0a889d00c3abd52f45ca222dd0da3fb017441"
+    }
+  },
+  "future_use": "frozen regression baseline may be reused; tuning on these results requires registering the batch and source lineages as subsequent development, retaining original frozen scores"
+}
