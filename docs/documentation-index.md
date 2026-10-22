@@ -1,5 +1,9 @@
 # 文档索引
 
+## 最新离线候选
+
+规则/实例对象边界v2，合法同类别对象异议进入复核，严格联合依据门禁保持；7专项与相关53离线通过，0真实模型，生产不变。 见[交付报告](evaluation/public-review-object-v2/README.md)及[源码身份](evaluation/public-review-object-v2/results-v1.json)。
+
 - **最新B真实验证已停止封存：[短报告](evaluation/public-review-validation-v1/results-v1.md)**（[统计](evaluation/public-review-validation-v1/results-v1.json)、[必要预测原文](evaluation/public-review-validation-v1/predictions-review-v1.json)、[实际冻结](evaluation/public-review-validation-v1/execution-freeze-v1.json)、[私有产物身份](evaluation/public-review-validation-v1/artifact-identities-v1.json)）：60离线检查通过后执行一次；首01QA生成有效、审核最终失败，另3主线及1固定错误诊断未执行。6调用/36804token，非强制规则的应用对象分类与题设依据约束冲突保留；5有效supported与1执行占位分开，不称B修复。生产不变，不恢复A/B或补跑。下列待授权文字为历史准备状态。
 
 - **当前待整批复核：[B有限真实验证4例完整材料与调用计划](evaluation/public-review-validation-v1/README.md)**（[输入](evaluation/public-review-validation-v1/tasks-v1.json)、[独立复核边界](evaluation/public-review-validation-v1/review-criteria-v1.json)、[合成来源身份](evaluation/public-review-validation-v1/source-manifest-v1.json)、[冻结提案](evaluation/public-review-validation-v1/freeze-plan-v1.json)）：4原生成器+B主线＋1固定错误诊断，共5分支；12主线/3诊断要求槽，三组合成开发来源非独立保留集。诊断输入74/答案88，无快照/原引用不补造；主线未触发错误不算检出。计数修复独立记录，拟原40共享保护/有限纠正/首最终执行失败停止，无旧审核真实对照。6项纯离线材料检查与身份核对通过，入口待新授权后实现并门禁；0模型、无attempt，生产和A封存保持。

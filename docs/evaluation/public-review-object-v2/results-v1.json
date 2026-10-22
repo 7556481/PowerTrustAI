@@ -1,0 +1,30 @@
+{
+  "version": "public-review-object-v2-offline-v1",
+  "source_base_commit": "154633e29fb081e9afbf1ecba767050a65d5937a",
+  "model_calls": 0,
+  "production_changed": false,
+  "tests": {
+    "related": 53,
+    "related_seconds": 10.817,
+    "final_specific": 7,
+    "specific_seconds": 0.84
+  },
+  "bound_files": [
+    {
+      "path": "services/premise_claim_extractor_v2.py",
+      "sha256": "a52a9b1cb454f42cb29b1d5df945499260a61f62d2809898365627bccbd869cf"
+    },
+    {
+      "path": "services/premise_review_protocol_v2.py",
+      "sha256": "77b04d748c5f079aa6e1ee2abbf436a55280a99b59428734199767f3e67aeece"
+    },
+    {
+      "path": "agents/premise_verification_v2.py",
+      "sha256": "898155578a5b8e7a01f83abe8ee3a863be47fddd3105a44b7814f8f2b236fe16"
+    },
+    {
+      "path": "tests/test_public_review_object_v2.py",
+      "sha256": "84cb56489f89cb4d41d286dcec294d4c7756b42a30d72e36b1b0d7db08e12cf4"
+    }
+  ]
+}

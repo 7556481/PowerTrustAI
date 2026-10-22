@@ -595,3 +595,7 @@ analysis_scope同次领域判断联合问题/当前回答，不以缺goal默认�
 ## 2026-10-22 B真实验证保留对象分类与严格契约冲突
 
 固定首例非强制规则本身被提取为应用对象，事实模型仅选规则正文；严格联合题设契约两次拒绝后停止整批。保持原始分类、失败和同伴，不事后重分类放行或将占位not_assessable算语义不足；正确答案也可能审核执行失败。见[evaluation/public-review-validation-v1/results-v1.md](evaluation/public-review-validation-v1/results-v1.md)。这不是B修复验收，不改生产，不恢复批次；后续如需改动须新版本与新验证，当前不自动实施。
+
+## 2026-10-22 对象异议复用复核路径，不替审核补无关题设
+
+规则与应用按命题区分；同category对象争议用既有提取忠实性异议明确说明并保持not_assessable/review_required，不误用不同category的classification_issue、不嵌套、不静默改类型。新v2指令显式注入，原schema13/政策/存储/封存批次不变；离线替身不证明模型分类正确。见[evaluation/public-review-object-v2/README.md](evaluation/public-review-object-v2/README.md)。

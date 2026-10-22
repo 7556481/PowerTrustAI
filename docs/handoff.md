@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-22 规则复述/实例应用v2离线候选
+
+新增显式v2提取/审核指令，复用v1严格解析、内部类型与原Harness；规则不因同段绑定题设，应用保留正文＋题设门禁。同category对象异议用既有fidelity disputed/uncertain、具体理由及not_assessable，派生review_required而不静默重分类；不同category的classification_issue仅同级合法。7专项0.840秒，相关53项10.817秒；0模型/回放/安装/生产改动，不扩A或恢复旧批。真实语义尚未验证，下一批须新版本新授权。 见[交付报告](evaluation/public-review-object-v2/README.md)及[源码身份](evaluation/public-review-object-v2/results-v1.json)。
+
 ## 2026-10-22 B真实验证首分支最终审核失败，已停止封存
 
 用户确认df2ab120fe70f325b57769fcfd558d6999f44d28五分支材料并授权本批费用。起始该HEAD/工作区干净；新增最小执行入口evaluation/public_review_validation_trial_v1.py，复用原Harness/run_fixed，14新门禁＋相关共60离线通过9.738秒，实际冻结103文件后一次执行。[短报告](evaluation/public-review-validation-v1/results-v1.md)、[小统计](evaluation/public-review-validation-v1/results-v1.json)、[必要预测原文含无效尝试](evaluation/public-review-validation-v1/predictions-review-v1.json)、[执行冻结](evaluation/public-review-validation-v1/execution-freeze-v1.json)。01QA生成首次有效79字，3要求回应有据；事实独立初始非法嵌套字段及非强制规则断言缺提取所登记题设，纠正后后者仍未通过。非强制规则被分类scenario_application存在语义疑点，不能只归生成失败或机械要求其依赖评分；冻结校验不放宽，1项执行占位不当语义不足。保留5项supported/原引用supported/领域有效，整体execution_incomplete，原顺序其余02QA/02DIAG/03QA/04QA未执行。6调用（5初始1事实纠正）/36804token，实际费用未知，最终保存20.389秒非首绘；C1/I1预算充足，不追加或补跑。唯一事实纠正归属明确，领域未纠正，串账故障未触发。6发送前消息/53私有JSON身份核对，旧A35产物字节不变；attempt保留禁止恢复，生产默认/提示/解析/政策/检索/UI/图不变。AI辅助分析、用户监督执行，未称用户已确认预测或独立验收。到此收尾，不自动开始新优化/批次。
