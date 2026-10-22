@@ -73,7 +73,7 @@ def execute():
     c=ServiceConfig.from_environment()
     if config_identity(c)!=freeze['configuration'] or os.environ.get('DEEPSEEK_MODEL_ID')!=freeze['model_id']:raise ValueError('Frozen production config mismatch')
     if tasks()!=read(LOCAL/'payloads.json'):raise ValueError('Payload identity changed')
-    write(LOCAL/'attempt.json',{'authorization':'Explicit user six-run DeepSeek authorization; no added cases','freeze_sha256':hashlib.sha256((PUBLIC/'execution-freeze-v1.json').read_bytes()).hexdigest()})
+    write(LOCAL/'attempt.json',{'authorization':freeze.get('authorization','Explicit user six-run DeepSeek authorization; no added cases'),'freeze_sha256':hashlib.sha256((PUBLIC/'execution-freeze-v1.json').read_bytes()).hexdigest()})
     from model_adapter.deepseek import create_adapter as provider_factory
     from model_adapter.runtime import current_model_invocation
     result=[];stopped=False
@@ -139,7 +139,7 @@ def execute():
         except BaseException as exc:
             stopped=True;item={'id':ident,'execution_path':path,'run_id':run_id,'status':'execution_failed','exception_type':type(exc).__name__,'result':raw,'sent':state['sent']}
             write(directory/'entry-failure.json',{k:v for k,v in item.items() if k!='result'});result.append(item)
-    write(LOCAL/'summary.json',{'version':'langgraph-real-service-integration-v1','branches':result})
+    write(LOCAL/'summary.json',{'version':freeze['version'],'branches':result})
     print(json.dumps([{k:b.get(k) for k in ('id','status','run_id')} for b in result]),flush=True)
 
 if __name__=='__main__':
