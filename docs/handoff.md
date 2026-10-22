@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-22 固定证据付费对照首最终审核失败后收尾，禁止恢复
+
+用户明确确认4组/12要求/交替顺序，授权deepseek-flash与原审核载荷实际费用，并撤销16/128提案，沿用每分支40共享保护、无新增批次帽。起始HEAD fccea835b06e8e97c4e4c0a3ecd0630f6da32d9b，工作区干净。新增evaluation/generation_mapping_trial_v1.py复用原Harness/run_fixed、发送前保存消息身份及最小首最终失败停批门禁，未改生产/提示/审核/解析/检索/政策/UI/图默认。65相关离线通过（25.494秒），冻结99文件及8计划身份后直接按授权执行；[完整短报告](evaluation/generation-mapping-comparison-v1/results-v1.md)、[统计及实际答案/审核摘要](evaluation/generation-mapping-comparison-v1/results-v1.json)、[执行冻结](evaluation/generation-mapping-comparison-v1/execution-freeze-v1.json)、[产物哈希](evaluation/generation-mapping-comparison-v1/artifact-identities-v1.json)。实际到第3分支停止：GEC-01原/候选完成，GEC-02候选执行不完整（独立事实首次JSON无效，唯一纠正后题设阈值命题误用快照依据违反原类型门禁）；同伴有效判断/2引用及领域保留。后续02原、03原/候选、04候选/原共5项未执行，无补跑/恢复。21真实请求、输入86927/输出14785/总101712 token，缓存命中37504；3生成首次有效、候选2映射均有效，0生成纠正，2事实纠正；账单金额未知。不是预算短缺，各分支7调用，提取后初始空间充足。9实际槽均回应、15未执行，不当整体准确率；核心条件保留，01候选新增归档范围说明被non_claim复核门禁要求复核，唯一完整对未见正文改善。新语义审阅为AI完成、用户监督，未称本人已确认这些新结果。暂不采用候选、生产保持原默认，不自动启动后续优化。原材料/评分/freeze-plan保留历史，README标明16/128作废；旧材料检查器仅属准备阶段快照，新执行核对使用真实冻结。真实attempt/原始输入响应/部分失败留忽略固定batch-v1，禁止删标记换目录。开发测试导入/异常字段/夹具路径失败及只读导出字段修正均留报告，未放宽契约。到此提交普通推送回查后停止。
+
 ## 2026-10-22 A离线获用户认可，4组真实生成对照材料待整批复核
 
 用户认可4ad48da3d3aadf977c1bc48b7ae87bd553cc1d1c的A开发与139离线检查，限定不证明答案质量；授权只准备4组固定证据原／候选各一次的材料与冻结计划，明确不付费执行。起始HEAD即4ad48da、工作区干净。新增[整批完整材料](evaluation/generation-mapping-comparison-v1/README.md)、tasks/rubric/source-lineage/freeze-plan及纯离线材料检查入口evaluation/generation_mapping_comparison_materials_v1.py。复用NWS／USGS／NASA三个已用谱系6选段，登记后续生成开发用途，不称新独立保留集，旧结果保留；四类任务分别定义、条件关系、部分有据、术语不足支持关系。12原要求／24计划观察，8个初始消息身份离线核对，同组GenerationInput相同；来源原文逐字与旧SHA一致，未读官方原全文或旧响应。次序01原→候选、02候选→原、03原→候选、04候选→原。提案固定证据、不实时检索，原schema13／领域5／policy1.5链，修订预算0，比较首次答案；模型flash／90秒／8000输出两版一致，分支模型16、含审核纠正整批≤128，非只有8次总调用。首最终分支执行失败停后续，不因语义分歧补跑；新执行入口尚未实现绑定，既有run_fixed只保证共享故障停批须离线补核，不能称已可运行。完整预备消息留忽略preparation-v1，未建付费attempt；本轮0模型／重放／安装／生产修改，不改候选提示及审核器。材料、预算和新费用授权均待本人整批复核，未来执行冻结另立，不自动继续。普通提交推送回查。

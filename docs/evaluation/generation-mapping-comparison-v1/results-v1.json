@@ -1,0 +1,1275 @@
+{
+  "version": "generation-mapping-comparison-results-v1",
+  "source_base_commit": "fccea835b06e8e97c4e4c0a3ecd0630f6da32d9b",
+  "freeze_sha256": "fb1433b516387d136010e3616dffcb2c8877b220879ee39cba37e183c3dc862e",
+  "status": "stopped_after_first_final_required_review_failure_no_resume",
+  "assessment": "AI-assisted post-run text review; user supervision, no owner acceptance of these new judgments yet",
+  "planned_branches": 8,
+  "initial_generations": 3,
+  "complete_branches": 2,
+  "failed_branches": 1,
+  "unexecuted_branches": 5,
+  "complete_pairs": 1,
+  "coverage": {
+    "planned_slots": 24,
+    "text_evaluated_slots": 9,
+    "covered": 9,
+    "unexecuted": 15,
+    "note": "Not accuracy; includes the answer from an execution-incomplete branch. Mapping is not denominator."
+  },
+  "total": {
+    "calls": 21,
+    "input_tokens": 86927,
+    "output_tokens": 14785,
+    "total_tokens": 101712,
+    "cache_hit_tokens": 37504,
+    "cache_miss_tokens": 49423,
+    "request_duration_ms_sum": 66082
+  },
+  "usage_groups": [
+    {
+      "variant": "original",
+      "stage": "generation",
+      "attempt": "initial",
+      "calls": 1,
+      "input_tokens": 2176,
+      "output_tokens": 145,
+      "total_tokens": 2321,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 2176,
+      "request_duration_ms_sum": 1387
+    },
+    {
+      "variant": "original",
+      "stage": "claim_extraction",
+      "attempt": "initial",
+      "calls": 1,
+      "input_tokens": 1636,
+      "output_tokens": 596,
+      "total_tokens": 2232,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 1636,
+      "request_duration_ms_sum": 2288
+    },
+    {
+      "variant": "original",
+      "stage": "power_domain_review",
+      "attempt": "initial",
+      "calls": 1,
+      "input_tokens": 4905,
+      "output_tokens": 625,
+      "total_tokens": 5530,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 4905,
+      "request_duration_ms_sum": 3381
+    },
+    {
+      "variant": "original",
+      "stage": "evidence_verification",
+      "attempt": "initial",
+      "calls": 4,
+      "input_tokens": 14750,
+      "output_tokens": 2126,
+      "total_tokens": 16876,
+      "cache_hit_tokens": 3328,
+      "cache_miss_tokens": 11422,
+      "request_duration_ms_sum": 10946
+    },
+    {
+      "variant": "candidate",
+      "stage": "generation",
+      "attempt": "initial",
+      "calls": 2,
+      "input_tokens": 5670,
+      "output_tokens": 737,
+      "total_tokens": 6407,
+      "cache_hit_tokens": 3072,
+      "cache_miss_tokens": 2598,
+      "request_duration_ms_sum": 4476
+    },
+    {
+      "variant": "candidate",
+      "stage": "claim_extraction",
+      "attempt": "initial",
+      "calls": 2,
+      "input_tokens": 3284,
+      "output_tokens": 1469,
+      "total_tokens": 4753,
+      "cache_hit_tokens": 2432,
+      "cache_miss_tokens": 852,
+      "request_duration_ms_sum": 5800
+    },
+    {
+      "variant": "candidate",
+      "stage": "power_domain_review",
+      "attempt": "initial",
+      "calls": 2,
+      "input_tokens": 10355,
+      "output_tokens": 1298,
+      "total_tokens": 11653,
+      "cache_hit_tokens": 2560,
+      "cache_miss_tokens": 7795,
+      "request_duration_ms_sum": 6042
+    },
+    {
+      "variant": "candidate",
+      "stage": "evidence_verification",
+      "attempt": "initial",
+      "calls": 6,
+      "input_tokens": 24525,
+      "output_tokens": 4495,
+      "total_tokens": 29020,
+      "cache_hit_tokens": 12416,
+      "cache_miss_tokens": 12109,
+      "request_duration_ms_sum": 20738
+    },
+    {
+      "variant": "candidate",
+      "stage": "evidence_verification",
+      "attempt": "correction",
+      "calls": 2,
+      "input_tokens": 19626,
+      "output_tokens": 3294,
+      "total_tokens": 22920,
+      "cache_hit_tokens": 13696,
+      "cache_miss_tokens": 5930,
+      "request_duration_ms_sum": 11024
+    }
+  ],
+  "branches": [
+    {
+      "request_id": "GEC-01-original",
+      "task_id": "GEC-01",
+      "variant": "original",
+      "status": "complete",
+      "reason": null,
+      "workload": [
+        {
+          "after": "generation",
+          "citations": 3,
+          "independent_initial": 1,
+          "independent_provisional": true,
+          "required_initial_remaining": 6,
+          "used": 1,
+          "available": 39,
+          "initial_shortfall": 0,
+          "room_after_initial": 33,
+          "correction_potential_remaining": 3,
+          "note": "Initial work only; format, message capacity, deadlines and concurrent corrections may still fail. No guarantee or budget increase."
+        },
+        {
+          "after": "extraction",
+          "citations": 3,
+          "independent_initial": 1,
+          "independent_provisional": false,
+          "required_initial_remaining": 5,
+          "used": 2,
+          "available": 38,
+          "initial_shortfall": 0,
+          "room_after_initial": 33,
+          "correction_potential_remaining": 2,
+          "note": "Initial work only; format, message capacity, deadlines and concurrent corrections may still fail. No guarantee or budget increase."
+        }
+      ],
+      "answer": "PoP指在指定时段内，预报区域内任一给定地点出现可测液态降水（或冻降水的水当量）的可能性，以百分比表示。\n\n可测降水的阈值为≥0.01英寸。\n\n时间范围默认通常为12小时，除非另有说明；空间范围为预报区域内任一给定地点。",
+      "answer_sha256": "459b95e22f4adc2620c15f93d70b386e550c3ceab576dec7bc435030b44b1046",
+      "answer_chars": 110,
+      "citations": 3,
+      "citation_initial_calls": 3,
+      "calls": 7,
+      "policy": "pass",
+      "execution_issues": [],
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "label": "covered"
+        },
+        {
+          "requirement_id": "R2",
+          "label": "covered"
+        },
+        {
+          "requirement_id": "R3",
+          "label": "covered"
+        }
+      ],
+      "coverage_assessment": "AI text review after execution, user supervision; not owner confirmation of new results",
+      "blanket_refusal": false,
+      "deleted_subquestion": false,
+      "conditions_retained": true,
+      "answer_failure_count": 0,
+      "envelope_failure_count": 0,
+      "non_claim_spans": [],
+      "findings": [
+        {
+          "claim_id": "claim-c4186141b8f87ee80905d8ed",
+          "proposition": "PoP表示在指定时段内预报区域内任一给定地点出现可测液态降水（或冻降水的水当量）的可能性。",
+          "answer_quote": "PoP指在指定时段内，预报区域内任一给定地点出现可测液态降水（或冻降水的水当量）的可能性，以百分比表示。",
+          "status": "supported",
+          "rationale": "选定段落直接给出PoP的定义，涵盖指定时段、预报区域内任一地点、可测液态降水或冻降水的水当量。",
+          "components": [
+            {
+              "component_id": "claim-c4186141b8f87ee80905d8ed-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-7147bf656bd17fedc765bd17",
+          "proposition": "PoP以百分比表示。",
+          "answer_quote": "PoP指在指定时段内，预报区域内任一给定地点出现可测液态降水（或冻降水的水当量）的可能性，以百分比表示。",
+          "status": "supported",
+          "rationale": "段落明确POP以百分比表示。",
+          "components": [
+            {
+              "component_id": "claim-7147bf656bd17fedc765bd17-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-bd9339a77da118be99fc0eec",
+          "proposition": "可测降水的阈值为≥0.01英寸。",
+          "answer_quote": "可测降水的阈值为≥0.01英寸。",
+          "status": "supported",
+          "rationale": "原文明确可测降水为等于或大于0.01英寸。",
+          "components": [
+            {
+              "component_id": "claim-bd9339a77da118be99fc0eec-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-76a407d10fb25fa439e3704a",
+          "proposition": "时间范围默认通常为12小时，除非另有说明。",
+          "answer_quote": "时间范围默认通常为12小时，除非另有说明；空间范围为预报区域内任一给定地点。",
+          "status": "supported",
+          "rationale": "原文说明除非另有说明，时段通常为12小时；答案保留默认、通常及例外条件。",
+          "components": [
+            {
+              "component_id": "claim-76a407d10fb25fa439e3704a-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-19b77f68ce520850989b0480",
+          "proposition": "空间范围为预报区域内任一给定地点。",
+          "answer_quote": "时间范围默认通常为12小时，除非另有说明；空间范围为预报区域内任一给定地点。",
+          "status": "supported",
+          "rationale": "原文将空间范围界定为预报区域内任一给定地点。",
+          "components": [
+            {
+              "component_id": "claim-19b77f68ce520850989b0480-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        }
+      ],
+      "citation_reviews": [
+        {
+          "index": 0,
+          "status": "supported",
+          "rationale": "The bound source defines PoP as the percent likelihood of measurable liquid precipitation (or frozen water equivalent) at any given point in the forecast area during a specified period. The bound answer substring preserves these elements. It omits the measurable threshold and the 12-hour default, but those are not part of this bound substring; coverage of the complete question is assessed separately."
+        },
+        {
+          "index": 1,
+          "status": "supported",
+          "rationale": "所选来源段落明确给出可测降水为等于或大于0.01英寸，绑定答案仅陈述这一阈值，未越出该范围。"
+        },
+        {
+          "index": 2,
+          "status": "supported",
+          "rationale": "The bound paragraph states the default period is normally 12 hours unless specified otherwise and defines POP at any given point in the forecast area, which matches the bounded answer substring's default time range and spatial scope."
+        }
+      ],
+      "domain": [
+        {
+          "category": "answer_units",
+          "check_status": "no_issue",
+          "rationale": "答案中的0.01英寸阈值与12小时默认时段均直接取自已给文献原句，单位与出处一致，无换算或量纲错误。"
+        },
+        {
+          "category": "analysis_scope",
+          "check_status": "no_issue",
+          "rationale": "任务为概念解释：PoP含义、可测阈值、时空范围及默认时段与例外。答案逐点覆盖，未作真实天气或设备结论，未超出所给文献范围。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"任务为概念解释：PoP含义、可测阈值、时空范围及默认时段与例外。答案逐点覆盖，未作真实天气或设备结论，未超出所给文献范围。\", \"answer_id\": \"GEC-01-answer\", \"answer_version\": 1, \"answer_sha256\": \"459b95e22f4adc2620c15f93d70b386e550c3ceab576dec7bc435030b44b1046\", \"question_sha256\": \"ed2bfd9d3a9b8483c157ff21aacf9a40b04f2e341a2bb88e3b8382f2f152b6d5\", \"structured_goal\": \"conceptual\"}"
+        },
+        {
+          "category": "operating_prerequisites",
+          "check_status": "not_applicable",
+          "rationale": "答案仅为气象定义解释，不含设备操作或工程建议，无运行前提需声明。"
+        }
+      ],
+      "timing_seconds": {
+        "generation_output_persisted": 1.430697,
+        "power_domain_review_persisted": 7.375707,
+        "evidence_verification_persisted": 15.199806,
+        "final_result_persisted": 15.286596
+      },
+      "usage": {
+        "calls": 7,
+        "input_tokens": 23467,
+        "output_tokens": 3492,
+        "total_tokens": 26959,
+        "cache_hit_tokens": 3328,
+        "cache_miss_tokens": 20139,
+        "request_duration_ms_sum": 18002
+      },
+      "failures": [],
+      "mapping": "not_applicable_original"
+    },
+    {
+      "request_id": "GEC-01-candidate",
+      "task_id": "GEC-01",
+      "variant": "candidate",
+      "status": "complete",
+      "reason": null,
+      "workload": [
+        {
+          "after": "generation",
+          "citations": 2,
+          "independent_initial": 1,
+          "independent_provisional": true,
+          "required_initial_remaining": 5,
+          "used": 1,
+          "available": 39,
+          "initial_shortfall": 0,
+          "room_after_initial": 34,
+          "correction_potential_remaining": 3,
+          "note": "Initial work only; format, message capacity, deadlines and concurrent corrections may still fail. No guarantee or budget increase."
+        },
+        {
+          "after": "extraction",
+          "citations": 2,
+          "independent_initial": 1,
+          "independent_provisional": false,
+          "required_initial_remaining": 4,
+          "used": 2,
+          "available": 38,
+          "initial_shortfall": 0,
+          "room_after_initial": 34,
+          "correction_potential_remaining": 2,
+          "note": "Initial work only; format, message capacity, deadlines and concurrent corrections may still fail. No guarantee or budget increase."
+        }
+      ],
+      "answer": "PoP指在预报区内任一给定点、指定时段内出现可测液态降水（或冻性降水的水当量）的百分比概率。可测降水为≥0.01英寸。\n\n空间范围为预报区内任一给定点，时间范围为指定时段；除非另有说明，该时段通常为12小时。\n\n本页仅为归档定义，不判断真实天气。",
+      "answer_sha256": "2d3cd9c1257567b8255df907ef3a5754afe460c118e6616c597297fed1f0c37e",
+      "answer_chars": 123,
+      "citations": 2,
+      "citation_initial_calls": 2,
+      "calls": 7,
+      "policy": "review_required",
+      "execution_issues": [],
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "label": "covered"
+        },
+        {
+          "requirement_id": "R2",
+          "label": "covered"
+        },
+        {
+          "requirement_id": "R3",
+          "label": "covered"
+        }
+      ],
+      "coverage_assessment": "AI text review after execution, user supervision; not owner confirmation of new results",
+      "blanket_refusal": false,
+      "deleted_subquestion": false,
+      "conditions_retained": true,
+      "answer_failure_count": 0,
+      "envelope_failure_count": 0,
+      "non_claim_spans": [
+        {
+          "text": "本页仅为归档定义，不判断真实天气。",
+          "start_offset": 106,
+          "end_offset": 123,
+          "reason": "该段为归档声明与范围限定，不判断真实天气，不含可核查的技术事实断言。"
+        }
+      ],
+      "findings": [
+        {
+          "claim_id": "claim-a8df44afe35695d239344829",
+          "proposition": "PoP是预报区内任一给定点在指定时段内出现可测液态降水或冻性降水水当量的百分比概率。",
+          "answer_quote": "PoP指在预报区内任一给定点、指定时段内出现可测液态降水（或冻性降水的水当量）的百分比概率。可测降水为≥0.01英寸。",
+          "status": "supported",
+          "rationale": "选段直接定义PoP为预报区内任一给定点在指定时段内出现可测液态降水或冻性降水水当量的百分比概率，与命题一致。",
+          "components": [
+            {
+              "component_id": "claim-a8df44afe35695d239344829-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-142ac33df8988caec69b283d",
+          "proposition": "可测降水为≥0.01英寸。",
+          "answer_quote": "PoP指在预报区内任一给定点、指定时段内出现可测液态降水（或冻性降水的水当量）的百分比概率。可测降水为≥0.01英寸。",
+          "status": "supported",
+          "rationale": "选段明确可测降水为等于或大于0.01英寸，与命题一致。",
+          "components": [
+            {
+              "component_id": "claim-142ac33df8988caec69b283d-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-15eaeb4889213b804be71a2b",
+          "proposition": "PoP的空间范围为预报区内任一给定点。",
+          "answer_quote": "空间范围为预报区内任一给定点，时间范围为指定时段；除非另有说明，该时段通常为12小时。",
+          "status": "supported",
+          "rationale": "选段说明空间范围为预报区内任一给定点，与命题一致。",
+          "components": [
+            {
+              "component_id": "claim-15eaeb4889213b804be71a2b-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-0781c6ed60ed7c51e914e23c",
+          "proposition": "PoP的时间范围为指定时段。",
+          "answer_quote": "空间范围为预报区内任一给定点，时间范围为指定时段；除非另有说明，该时段通常为12小时。",
+          "status": "supported",
+          "rationale": "选段说明时间范围为指定时段，与命题一致。",
+          "components": [
+            {
+              "component_id": "claim-0781c6ed60ed7c51e914e23c-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-32ec9f657934b19e264bcfe8",
+          "proposition": "除非另有说明，PoP的时间时段通常为12小时。",
+          "answer_quote": "空间范围为预报区内任一给定点，时间范围为指定时段；除非另有说明，该时段通常为12小时。",
+          "status": "supported",
+          "rationale": "选段明确除非另有说明，时间时段通常为12小时；命题保留条件与例外。",
+          "components": [
+            {
+              "component_id": "claim-32ec9f657934b19e264bcfe8-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-01-E1",
+              "quote_id": "quote-e33c9e8be49ca9b90049d49f",
+              "type": "text_excerpt"
+            }
+          ]
+        }
+      ],
+      "citation_reviews": [
+        {
+          "index": 0,
+          "status": "supported",
+          "rationale": "The bound source defines PoP as the percent likelihood of measurable liquid precipitation or frozen water equivalent at any given point in the forecast area during a specified period, and sets measurable precipitation at ≥0.01 inches; both answer clauses restate these qualifiers."
+        },
+        {
+          "index": 1,
+          "status": "supported",
+          "rationale": "The bound source paragraph defines POP as likelihood at any given point in the forecast area during a specified period, and states that unless specified otherwise the period is normally 12 hours. The bound answer substring asserts exactly this spatial scope (any given point in the forecast area) and temporal scope (specified period; normally 12 hours unless otherwise specified), preserving the default/exception qualifier."
+        }
+      ],
+      "domain": [
+        {
+          "category": "answer_units",
+          "check_status": "not_applicable",
+          "rationale": "答案为概念性定义解释，仅含0.01英寸与12小时等文献固有单位，无功率/无功等需换算的量。"
+        },
+        {
+          "category": "analysis_scope",
+          "check_status": "no_issue",
+          "rationale": "用户仅要求解释本页PoP定义、阈值、时空范围与例外；答案准确覆盖这些子问题并声明仅为归档定义、不判断真实天气。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户仅要求解释本页PoP定义、阈值、时空范围与例外；答案准确覆盖这些子问题并声明仅为归档定义、不判断真实天气。\", \"answer_id\": \"GEC-01-answer\", \"answer_version\": 1, \"answer_sha256\": \"2d3cd9c1257567b8255df907ef3a5754afe460c118e6616c597297fed1f0c37e\", \"question_sha256\": \"ed2bfd9d3a9b8483c157ff21aacf9a40b04f2e341a2bb88e3b8382f2f152b6d5\", \"structured_goal\": \"conceptual\"}"
+        },
+        {
+          "category": "operating_prerequisites",
+          "check_status": "not_applicable",
+          "rationale": "概念性定义解释，不涉及设备运行或安全操作指令，无需运行/设备前置条件。"
+        }
+      ],
+      "timing_seconds": {
+        "generation_output_persisted": 2.449073,
+        "power_domain_review_persisted": 7.617934,
+        "evidence_verification_persisted": 19.329062,
+        "final_result_persisted": 19.414264
+      },
+      "usage": {
+        "calls": 7,
+        "input_tokens": 31333,
+        "output_tokens": 4825,
+        "total_tokens": 36158,
+        "cache_hit_tokens": 16768,
+        "cache_miss_tokens": 14565,
+        "request_duration_ms_sum": 21258
+      },
+      "failures": [
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "validation_error": {
+            "stage": "source-support-relation-v5",
+            "field_path": "$.findings[0].support_relation[0]",
+            "constraint": "expected_object",
+            "errors": [
+              {
+                "stage": "source-support-relation-v5",
+                "field_path": "$.findings[0].support_relation[0]",
+                "constraint": "expected_object"
+              },
+              {
+                "stage": "source-support-relation-v5",
+                "field_path": "$.findings[1].support_relation[0]",
+                "constraint": "expected_object"
+              },
+              {
+                "stage": "source-support-relation-v5",
+                "field_path": "$.findings[2].support_relation[0]",
+                "constraint": "expected_object"
+              },
+              {
+                "stage": "source-support-relation-v5",
+                "field_path": "$.findings[3].support_relation[0]",
+                "constraint": "expected_object"
+              },
+              {
+                "stage": "source-support-relation-v5",
+                "field_path": "$.findings[4].support_relation[0]",
+                "constraint": "expected_object"
+              }
+            ],
+            "retained_items": [],
+            "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+          }
+        }
+      ],
+      "mapping_report": {
+        "version": "generation-map-attempt-report-v1",
+        "candidate_valid": true,
+        "execution_error_code": null,
+        "attempts": [
+          {
+            "call_number": 1,
+            "correction": false,
+            "output_status": "valid_structure",
+            "layers": {
+              "answer": "valid",
+              "mapping": "valid",
+              "envelope": "valid"
+            }
+          }
+        ],
+        "failure_counts": {
+          "mapping_only": 0,
+          "answer_invalid": 0,
+          "mapping_invalid": 0,
+          "both_invalid": 0,
+          "envelope_only": 0,
+          "unchecked": 0
+        },
+        "note": "Structural observations, not semantic scores; failure counts overlap."
+      },
+      "mapping": [
+        {
+          "point": "PoP对应可测降水的概率含义",
+          "answer_quotes": [
+            "PoP指在预报区内任一给定点、指定时段内出现可测液态降水（或冻性降水的水当量）的百分比概率。可测降水为≥0.01英寸。"
+          ],
+          "source_ids": [
+            "GEC-01-E1"
+          ],
+          "condition_ids": [],
+          "note": "正文直接给出似然百分比及可测液态降水或冻性降水水当量定义。"
+        },
+        {
+          "point": "可测降水阈值0.01英寸",
+          "answer_quotes": [
+            "PoP指在预报区内任一给定点、指定时段内出现可测液态降水（或冻性降水的水当量）的百分比概率。可测降水为≥0.01英寸。"
+          ],
+          "source_ids": [
+            "GEC-01-E1"
+          ],
+          "condition_ids": [],
+          "note": "正文明确阈值为等于或大于0.01英寸，保留原单位。"
+        },
+        {
+          "point": "时间空间范围及通常12小时时段",
+          "answer_quotes": [
+            "空间范围为预报区内任一给定点，时间范围为指定时段；除非另有说明，该时段通常为12小时。"
+          ],
+          "source_ids": [
+            "GEC-01-E1"
+          ],
+          "condition_ids": [
+            "condition-3a23b17052206affa6dd42e5"
+          ],
+          "note": "正文说明任一点与指定时段，并给出除非另有说明通常12小时的限定。"
+        }
+      ]
+    },
+    {
+      "request_id": "GEC-02-candidate",
+      "task_id": "GEC-02",
+      "variant": "candidate",
+      "status": "execution_failed",
+      "reason": null,
+      "workload": [
+        {
+          "after": "generation",
+          "citations": 2,
+          "independent_initial": 1,
+          "independent_provisional": true,
+          "required_initial_remaining": 5,
+          "used": 1,
+          "available": 39,
+          "initial_shortfall": 0,
+          "room_after_initial": 34,
+          "correction_potential_remaining": 3,
+          "note": "Initial work only; format, message capacity, deadlines and concurrent corrections may still fail. No guarantee or budget increase."
+        },
+        {
+          "after": "extraction",
+          "citations": 2,
+          "independent_initial": 1,
+          "independent_provisional": false,
+          "required_initial_remaining": 4,
+          "used": 2,
+          "available": 38,
+          "initial_shortfall": 0,
+          "room_after_initial": 34,
+          "correction_potential_remaining": 2,
+          "note": "Initial work only; format, message capacity, deadlines and concurrent corrections may still fail. No guarantee or budget increase."
+        }
+      ],
+      "answer": "材料所言的“天空状况”指按不透光云覆盖天空百分比描述的平均天空覆盖。当预计降水概率高（60%及以上）时，天空状况可以省略，因为可由降水预报推断。这是“可以”而非“必须”，实际预报不必须省略。\n\n按题设预期概率恰为60%，正好达到“60%或以上”的阈值，故允许省略；但材料不强制省略。",
+      "answer_sha256": "a1bc9a87ebf63cefc53a4f2ec25deaf18da5fe04abfe33f9dd0a214cecebeb8b",
+      "answer_chars": 141,
+      "citations": 2,
+      "citation_initial_calls": 2,
+      "calls": 7,
+      "policy": "execution_incomplete",
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Scoped semantic check incomplete; valid peers retained"
+        }
+      ],
+      "coverage": [
+        {
+          "requirement_id": "R1",
+          "label": "covered"
+        },
+        {
+          "requirement_id": "R2",
+          "label": "covered"
+        },
+        {
+          "requirement_id": "R3",
+          "label": "covered"
+        }
+      ],
+      "coverage_assessment": "AI text review after execution, user supervision; not owner confirmation of new results",
+      "blanket_refusal": false,
+      "deleted_subquestion": false,
+      "conditions_retained": true,
+      "answer_failure_count": 0,
+      "envelope_failure_count": 0,
+      "non_claim_spans": [],
+      "findings": [
+        {
+          "claim_id": "claim-e72a238fd8ab529328fae344",
+          "proposition": "“天空状况”指按不透光云覆盖天空百分比描述的平均天空覆盖。",
+          "answer_quote": "材料所言的“天空状况”指按不透光云覆盖天空百分比描述的平均天空覆盖。当预计降水概率高（60%及以上）时，天空状况可以省略，因为可由降水预报推断。这是“可以”而非“必须”，实际预报不必须省略。",
+          "status": "supported",
+          "rationale": "所选正文明确界定天空状况为按不透光云覆盖天空百分比描述的平均/主导天空覆盖，与命题一致。",
+          "components": [
+            {
+              "component_id": "claim-e72a238fd8ab529328fae344-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-02-E1",
+              "quote_id": "quote-20cac987b24aa7998340d195",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-5f7c7b3bbf78e271c5e502fb",
+          "proposition": "当预计降水概率为60%及以上时，天空状况可以省略，因为可由降水预报推断。",
+          "answer_quote": "材料所言的“天空状况”指按不透光云覆盖天空百分比描述的平均天空覆盖。当预计降水概率高（60%及以上）时，天空状况可以省略，因为可由降水预报推断。这是“可以”而非“必须”，实际预报不必须省略。",
+          "status": "supported",
+          "rationale": "正文直接说明当预计降水概率高（60%或以上）时天空状况可以省略，因为可由降水预报推断。",
+          "components": [
+            {
+              "component_id": "claim-5f7c7b3bbf78e271c5e502fb-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            },
+            {
+              "component_id": "claim-5f7c7b3bbf78e271c5e502fb-part-1",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-02-E1",
+              "quote_id": "quote-20cac987b24aa7998340d195",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-723928468d56e4c7451c0f75",
+          "proposition": "天空状况的省略是“可以”而非“必须”，实际预报不必须省略。",
+          "answer_quote": "材料所言的“天空状况”指按不透光云覆盖天空百分比描述的平均天空覆盖。当预计降水概率高（60%及以上）时，天空状况可以省略，因为可由降水预报推断。这是“可以”而非“必须”，实际预报不必须省略。",
+          "status": "supported",
+          "rationale": "正文使用“may be omitted”，属许可而非强制，支持省略非必需的判断。",
+          "components": [
+            {
+              "component_id": "claim-723928468d56e4c7451c0f75-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            },
+            {
+              "component_id": "claim-723928468d56e4c7451c0f75-part-1",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-02-E1",
+              "quote_id": "quote-20cac987b24aa7998340d195",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-61966461c873fb0b6de70c01",
+          "proposition": "题设预期概率恰为60%，正好达到“60%或以上”的阈值。",
+          "answer_quote": "按题设预期概率恰为60%，正好达到“60%或以上”的阈值，故允许省略；但材料不强制省略。",
+          "status": "not_assessable",
+          "rationale": "model_execution_incomplete: no judgment retained",
+          "components": [
+            {
+              "component_id": "claim-61966461c873fb0b6de70c01-part-0",
+              "status": "not_assessable",
+              "origin": "execution_incomplete",
+              "reason_code": "model_execution_incomplete",
+              "basis_indexes": [],
+              "fidelity_status": "uncertain",
+              "review_disposition": "review_required"
+            },
+            {
+              "component_id": "claim-61966461c873fb0b6de70c01-part-1",
+              "status": "not_assessable",
+              "origin": "execution_incomplete",
+              "reason_code": "model_execution_incomplete",
+              "basis_indexes": [],
+              "fidelity_status": "uncertain",
+              "review_disposition": "review_required"
+            }
+          ],
+          "basis_ids": []
+        },
+        {
+          "claim_id": "claim-4a5b6e656c9adb544b0c823f",
+          "proposition": "因达到阈值，故允许省略天空状况。",
+          "answer_quote": "按题设预期概率恰为60%，正好达到“60%或以上”的阈值，故允许省略；但材料不强制省略。",
+          "status": "supported",
+          "rationale": "正文规定60%或以上时允许省略，将该阈值应用于恰好60%的题设即为允许省略。",
+          "components": [
+            {
+              "component_id": "claim-4a5b6e656c9adb544b0c823f-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-02-E1",
+              "quote_id": "quote-20cac987b24aa7998340d195",
+              "type": "text_excerpt"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-66d48dcc194ba5b41bef62ea",
+          "proposition": "材料不强制省略天空状况。",
+          "answer_quote": "按题设预期概率恰为60%，正好达到“60%或以上”的阈值，故允许省略；但材料不强制省略。",
+          "status": "supported",
+          "rationale": "正文“may be omitted”表明许可而非强制，支持材料不强制省略。",
+          "components": [
+            {
+              "component_id": "claim-66d48dcc194ba5b41bef62ea-part-0",
+              "status": "supported",
+              "origin": "model_judgment",
+              "reason_code": null,
+              "basis_indexes": [
+                0
+              ],
+              "fidelity_status": "faithful",
+              "review_disposition": "assessed"
+            }
+          ],
+          "basis_ids": [
+            {
+              "evidence_id": "GEC-02-E1",
+              "quote_id": "quote-20cac987b24aa7998340d195",
+              "type": "text_excerpt"
+            }
+          ]
+        }
+      ],
+      "citation_reviews": [
+        {
+          "index": 0,
+          "status": "supported",
+          "rationale": "The bound excerpt defines sky condition via opaque-cloud percentage, conditions permission to omit it on a high precipitation probability of 60% or greater, and states inference from the precipitation forecast. The answer preserves the definition, the 60% threshold, permissive 'may' rather than mandatory omission, and the inference rationale."
+        },
+        {
+          "index": 1,
+          "status": "supported",
+          "rationale": "所选原文说，当高概率（60%或以上）时，允许省略天空状况；这与绑定答案子串相符，即恰好60%达到阈值、允许省略但不强制。"
+        }
+      ],
+      "domain": [
+        {
+          "category": "answer_units",
+          "check_status": "not_applicable",
+          "rationale": "答案中只有60%概率阈值，属于给定文本的百分数，不涉及功率/无功等工程单位换算或虚构换算。"
+        },
+        {
+          "category": "analysis_scope",
+          "check_status": "no_issue",
+          "rationale": "用户问的是概念性解释：天空状况定义、省略原因、适用条件、是否强制及对60%的判定。答案逐项回答：定义按不透光云覆盖比例；60%及以上可省略且可推断；属“可以”非“必须”；60%恰达阈值故允许但非强制。与引文一致，未越出概念范围或断言设备/天气结论。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户问的是概念性解释：天空状况定义、省略原因、适用条件、是否强制及对60%的判定。答案逐项回答：定义按不透光云覆盖比例；60%及以上可省略且可推断；属“可以”非“必须”；60%恰达阈值故允许但非强制。与引文一致，未越出概念范围或断言设备/天气结论。\", \"answer_id\": \"GEC-02-answer\", \"answer_version\": 1, \"answer_sha256\": \"a1bc9a87ebf63cefc53a4f2ec25deaf18da5fe04abfe33f9dd0a214cecebeb8b\", \"question_sha256\": \"2c91c873e27612b419eeb48a1cef246b1b36abf07f93209e49f55e1e901c7b46\", \"structured_goal\": \"conceptual\"}"
+        },
+        {
+          "category": "operating_prerequisites",
+          "check_status": "not_applicable",
+          "rationale": "纯概念性文献解释，不涉及设备操作、整定或运行建议，无需运行前提。"
+        }
+      ],
+      "timing_seconds": {
+        "generation_output_persisted": 2.111917,
+        "power_domain_review_persisted": 9.228865,
+        "evidence_verification_persisted": 23.803576,
+        "final_result_persisted": 23.896674
+      },
+      "usage": {
+        "calls": 7,
+        "input_tokens": 32127,
+        "output_tokens": 6468,
+        "total_tokens": 38595,
+        "cache_hit_tokens": 17408,
+        "cache_miss_tokens": 14719,
+        "request_duration_ms_sum": 26822
+      },
+      "failures": [
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "validation_error": {
+            "stage": "json_parse",
+            "field_path": "$",
+            "constraint": "valid_json_required",
+            "line": 1,
+            "column": 4030,
+            "unclosed_containers": 6,
+            "unclosed_string": true
+          }
+        },
+        {
+          "call_number": 5,
+          "component": "evidence_verification",
+          "correction": true,
+          "output_status": "invalid_structure",
+          "validation_error": {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[3].component_reviews[0].basis_indexes",
+            "constraint": "component_requires_corresponding_basis_text_excerpt",
+            "component_category": "technical_fact",
+            "required_basis_type": "text_excerpt",
+            "selected_basis_types": [
+              "input_snapshot_reference"
+            ],
+            "processing_options": [
+              "select_an_existing_matching_basis",
+              "add_an_exact_allowed_basis_if_available",
+              "otherwise_insufficient_evidence_or_not_assessable",
+              "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+            ],
+            "errors": [
+              {
+                "stage": "evidence_verification",
+                "field_path": "$.findings[3].component_reviews[0].basis_indexes",
+                "constraint": "component_requires_corresponding_basis_text_excerpt",
+                "component_category": "technical_fact",
+                "required_basis_type": "text_excerpt",
+                "selected_basis_types": [
+                  "input_snapshot_reference"
+                ],
+                "processing_options": [
+                  "select_an_existing_matching_basis",
+                  "add_an_exact_allowed_basis_if_available",
+                  "otherwise_insufficient_evidence_or_not_assessable",
+                  "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+                ]
+              },
+              {
+                "stage": "evidence_verification",
+                "field_path": "$.findings[3].component_reviews[0].basis_indexes",
+                "constraint": "snapshot_not_support_for_other_claim_types"
+              }
+            ],
+            "retained_items": [
+              {
+                "group": "findings",
+                "id": "claim-e72a238fd8ab529328fae344",
+                "response_attempt": 1
+              },
+              {
+                "group": "findings",
+                "id": "claim-5f7c7b3bbf78e271c5e502fb",
+                "response_attempt": 1
+              },
+              {
+                "group": "findings",
+                "id": "claim-723928468d56e4c7451c0f75",
+                "response_attempt": 1
+              },
+              {
+                "group": "findings",
+                "id": "claim-4a5b6e656c9adb544b0c823f",
+                "response_attempt": 1
+              },
+              {
+                "group": "findings",
+                "id": "claim-66d48dcc194ba5b41bef62ea",
+                "response_attempt": 1
+              }
+            ],
+            "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+          }
+        }
+      ],
+      "mapping_report": {
+        "version": "generation-map-attempt-report-v1",
+        "candidate_valid": true,
+        "execution_error_code": null,
+        "attempts": [
+          {
+            "call_number": 1,
+            "correction": false,
+            "output_status": "valid_structure",
+            "layers": {
+              "answer": "valid",
+              "mapping": "valid",
+              "envelope": "valid"
+            }
+          }
+        ],
+        "failure_counts": {
+          "mapping_only": 0,
+          "answer_invalid": 0,
+          "mapping_invalid": 0,
+          "both_invalid": 0,
+          "envelope_only": 0,
+          "unchecked": 0
+        },
+        "note": "Structural observations, not semantic scores; failure counts overlap."
+      },
+      "mapping": [
+        {
+          "point": "天空状况的含义及其可否省略",
+          "answer_quotes": [
+            "材料所言的“天空状况”指按不透光云覆盖天空百分比描述的平均天空覆盖。当预计降水概率高（60%及以上）时，天空状况可以省略，因为可由降水预报推断。这是“可以”而非“必须”，实际预报不必须省略。"
+          ],
+          "source_ids": [
+            "GEC-02-E1"
+          ],
+          "condition_ids": [
+            "condition-a5ef472467794b4193ff7c44"
+          ],
+          "note": "选段给出天空状况定义，并说明降水概率60%或以上时可省略、因由降水预报推断。"
+        },
+        {
+          "point": "恰好60%是否允许及是否强制省略",
+          "answer_quotes": [
+            "材料所言的“天空状况”指按不透光云覆盖天空百分比描述的平均天空覆盖。当预计降水概率高（60%及以上）时，天空状况可以省略，因为可由降水预报推断。这是“可以”而非“必须”，实际预报不必须省略。",
+            "按题设预期概率恰为60%，正好达到“60%或以上”的阈值，故允许省略；但材料不强制省略。"
+          ],
+          "source_ids": [
+            "GEC-02-E1"
+          ],
+          "condition_ids": [
+            "condition-a5ef472467794b4193ff7c44"
+          ],
+          "note": "60%达到阈值故允许；材料措辞为may，故非强制。"
+        }
+      ]
+    },
+    {
+      "request_id": "GEC-02-original",
+      "task_id": "GEC-02",
+      "variant": "original",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "workload": [],
+      "answer_quality": "unexecuted",
+      "mapping": "unexecuted",
+      "audit": "unexecuted",
+      "calls": 0
+    },
+    {
+      "request_id": "GEC-03-original",
+      "task_id": "GEC-03",
+      "variant": "original",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "workload": [],
+      "answer_quality": "unexecuted",
+      "mapping": "unexecuted",
+      "audit": "unexecuted",
+      "calls": 0
+    },
+    {
+      "request_id": "GEC-03-candidate",
+      "task_id": "GEC-03",
+      "variant": "candidate",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "workload": [],
+      "answer_quality": "unexecuted",
+      "mapping": "unexecuted",
+      "audit": "unexecuted",
+      "calls": 0
+    },
+    {
+      "request_id": "GEC-04-candidate",
+      "task_id": "GEC-04",
+      "variant": "candidate",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "workload": [],
+      "answer_quality": "unexecuted",
+      "mapping": "unexecuted",
+      "audit": "unexecuted",
+      "calls": 0
+    },
+    {
+      "request_id": "GEC-04-original",
+      "task_id": "GEC-04",
+      "variant": "original",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "workload": [],
+      "answer_quality": "unexecuted",
+      "mapping": "unexecuted",
+      "audit": "unexecuted",
+      "calls": 0
+    }
+  ],
+  "bill_amount": null,
+  "adoption": "do_not_adopt; insufficient completed comparison and no observed answer benefit in sole complete pair",
+  "checks": {
+    "frozen_files_unchanged": 99,
+    "pre_send_journals_verified": 21,
+    "final_results_preserved": 3,
+    "generation_corrections": 0,
+    "audit_corrections": 2,
+    "guard_or_storage_failures": 0,
+    "model_transport_failures": 0
+  },
+  "limits": [
+    "Reused development sources, not independent validation",
+    "Only one complete pair",
+    "Concurrent request durations are summed work, not branch wall time",
+    "Saved-answer timing is not browser first render",
+    "No production switch or new semantic claims"
+  ]
+}

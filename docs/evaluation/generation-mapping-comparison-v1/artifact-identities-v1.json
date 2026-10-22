@@ -1,0 +1,167 @@
+{
+  "version": "local-artifact-hash-ledger-v1",
+  "artifacts": [
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/before-send-001.json",
+      "sha256": "8b4c136f1eba9394f9ad31baeba5234332d07eff8c5b43b5712eb731870208ca",
+      "messages_sha256": "edc549d2c229a51999ff560b2435c287db5f2c65d3ec75239bc8a0e15072c6d7"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/before-send-002.json",
+      "sha256": "cdbfe0d1c1fdc08c60f21e17eef93da80443e4ad2ffb83ffa0dd9f567d52d975",
+      "messages_sha256": "ba63b72d11e503623e309ca7a0b73a670855f5e9383a71c1ee773992f762a0be"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/before-send-003.json",
+      "sha256": "e1d84d4c48bf5a0b32b1345f32fe60fdf818a75c27c19de06ab2142d4fbc749d",
+      "messages_sha256": "37337c213fd0240055747e645408ebf9f5af5d1c284aea93793fa928b95e0649"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/before-send-004.json",
+      "sha256": "4538574f806e32f0938d90e1e14b664b966d077dfc4f02008e60792f0e1c6b3d",
+      "messages_sha256": "b873fc54bdb6873f39808d4722389b2e83576934e62d0b98e073af912d3fd1de"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/before-send-005.json",
+      "sha256": "ff2f82c6ef4fefdb592545d657e7eb1627ccda6a20020e3b1e694df2f186b29a",
+      "messages_sha256": "22c391c9ff25e9d30dcff59c81790e5e985c4abc175deae7049e6ed0b3d7673a"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/before-send-006.json",
+      "sha256": "c3bdeb0fdc463bc203c0464f377f828e515d4966f0a679cae95123bc91b67185",
+      "messages_sha256": "c8b7d2f437a3ed673f438a26be604de94939ca01d45019337d47d5db484b516f"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/before-send-007.json",
+      "sha256": "eabd622977578f27d6ae027271a3784b2dbe37f7571e13cc94598c844e4c0694",
+      "messages_sha256": "346f8396c49051773fa88692f4d16d02ed68c4bfca9a44a3734b618d5ded82d0"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/final-result.json",
+      "sha256": "00f0fe42b970fcc29a1b767d735b04a1482f04e2e37da88e2f8906f617e6f4ff"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/execution-observations.json",
+      "sha256": "b7b1f45231df69662cc42c55e8b3b713cb1e04fcd8ea872a2ce5edf21bd512fb"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/controller-accepted.json",
+      "sha256": "e9372a19f53e5e472421b8c8fbaa50a95c3ebdfc81ce18f45208b18ec9b1cb8f"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/controller-result.json",
+      "sha256": "e3ee1001af4175a4ffa557f5377dd294cd0f870c08b351484d0a49a8d5e86198"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-original/controller-control.json",
+      "sha256": "1311d9142c796e03241c14ab08eb815092fae2dc6e11b4cd7c119a064621cae2"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/before-send-001.json",
+      "sha256": "f957a8d5ed70dd5767ef7cb0e94ecda96c2bc43812cf01174cb5a3d282034f93",
+      "messages_sha256": "c9806a94c24756b73604f583a12e32b6fe666aa7840a986ba6fdc5968f9e2c4a"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/before-send-002.json",
+      "sha256": "80c13e736e4f6df3dd50aff4d4b53ebd2a9a1755f4f26293bfcab38bb8790507",
+      "messages_sha256": "41a2e6be7145ac36691e81ca2dec5460042641aeabe6d57ee9a2dbcd3f6aa66e"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/before-send-003.json",
+      "sha256": "e05e0fa90cfeda8c036280c14c50fb649bf13069cf82616524b9436a1ac7586c",
+      "messages_sha256": "4906b84b27eee2fdbbca5b1c2f117e35564912747aa3fb3d1d58802a181aee97"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/before-send-004.json",
+      "sha256": "fce29af3b704ac10f64f4c3b99f159ece281a9f78c94015791934c277a8454ef",
+      "messages_sha256": "3ae363417585a0e1cfe6b5a5488792a3fa47410781ddd66e105b0d40c5842a58"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/before-send-005.json",
+      "sha256": "eefc7f3c734e6187bf394fad5a45169df1e214f112ac677e9511667630418cef",
+      "messages_sha256": "0c1d834fc192958a1b93fb31e44a4d46c31cd7ad77d9895959196cbd10a7be94"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/before-send-006.json",
+      "sha256": "84f2411cfbf5817f2132f2810c474d900b4ce2d9aa3463a98620009f38b4accc",
+      "messages_sha256": "88adeaf7247c014929dd709327065cbefdc8e81847442447d7c98661d21c79a8"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/before-send-007.json",
+      "sha256": "fe4f147b398b585e28f0c2f2b09aef8853cdfdffac82023dc963af7225a75ad3",
+      "messages_sha256": "1c29f0f32f4ec9786a31f82ae607a3a2bf781af3625fc945cec4cff15ed5bec7"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/final-result.json",
+      "sha256": "d7b676a0f38e1abbd1814b83c26ea29456c751b55b7021cf67dcb73933a2151c"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/execution-observations.json",
+      "sha256": "501994becdc8dd15152a3b75bafb618f5e6c7f743d5086fbf24c1ff83252f02d"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/controller-accepted.json",
+      "sha256": "1896c239ebdf33309a54af86efcb3b35d1cb1c47d1b7e1c2d552d25f88a4d638"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/controller-result.json",
+      "sha256": "eaed0c8576a5842cccd6125acc2b7305e519b9630fde8ca5d0f2c675afb594a0"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-01-candidate/controller-control.json",
+      "sha256": "689d116263bcaf4b22e722c22ec3d0f9515e04b7d8f489988f64b81038c071be"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/before-send-001.json",
+      "sha256": "a7fdea76b1c4b3232dc0d43c2fa5afc1a4991a923ee19f19abc1be72776115fa",
+      "messages_sha256": "50cec4d62d9ccf99b74b89b4df9cb297e4e7e62430eb8d1a50dc3fdd4e98c562"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/before-send-002.json",
+      "sha256": "cea938fb866dd165ca4e39e1cb79a9384dcb711e4fd67c5ad478647026365a26",
+      "messages_sha256": "46c3856bfac70e0e07973b2f7439173e9ae1100c57081f48dc59d5bf2bbf3d7f"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/before-send-003.json",
+      "sha256": "1f628df35b298fe7d93ffcd708160926286007f461df5749725ee5a537249dd2",
+      "messages_sha256": "09bebdb21af874ca14699f19f5d6e9240af41ea5d33a21d65464e37cef01e2ca"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/before-send-004.json",
+      "sha256": "a0ddde7227efc487055d9813f49830520c4f13d6d94567227947cc9e69ade68f",
+      "messages_sha256": "1467822fccea68422a25d6e6b4702d7c7d874a0fca22e886276987ddb7add980"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/before-send-005.json",
+      "sha256": "35ae50278899ea9ab89540bc6c4672273c316f591af26dad1022d35b4b3ff55f",
+      "messages_sha256": "412a0fda31ae3ca477f257bc6bea993eda9f0b5126eaf33b6bf6dc729e94295f"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/before-send-006.json",
+      "sha256": "94a8cf39e42080c6b0d9ee9b226c877585729d5fd9dcd71daf8765a85d075eaf",
+      "messages_sha256": "cf05dd174542931d3015fa58aa8c3726e50bff91a08fde225f5d81ce524db6d8"
+    },
+    {
+      "path": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/before-send-007.json",
+      "sha256": "a25d9526143ef9ee4d7f91ff8cc667571d43445e5f4e43ab70fda4d75726dcdb",
+      "messages_sha256": "4e1328c0b8b834ab61fdbde996d09c1a488d129cef3ecedf9aa8993758e352eb"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/final-result.json",
+      "sha256": "1fdc42b9f6d1cb0899c35ef2f6dc57d1f7ba363090d5ff6e5609fb3511092be7"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/execution-observations.json",
+      "sha256": "c142cd57577441f43e427a6f89ba5dd55e3af296166524101fa766b232f54d06"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/controller-accepted.json",
+      "sha256": "58b32c8b75d88d89f24d208c5d5f7fcfb5fbd41b5d677c0f6a4ccf225ebbb6f8"
+    },
+    {
+      "path": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1/GEC-02-candidate/controller-control.json",
+      "sha256": "afc0b5e919d8f48f56d63ad004e7fc11e3157eab0b4f111595e5eaf626bb9ec2"
+    }
+  ],
+  "note": "Hashes only; actual requests/responses remain ignored data. No credentials or headers included."
+}

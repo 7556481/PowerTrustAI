@@ -1,5 +1,7 @@
 # 文档索引
 
+- **最新已授权实跑收尾：[固定证据生成对照结果](evaluation/generation-mapping-comparison-v1/results-v1.md)**（[实际答案/审核及统计](evaluation/generation-mapping-comparison-v1/results-v1.json)、[真实执行冻结](evaluation/generation-mapping-comparison-v1/execution-freeze-v1.json)、[私有产物身份](evaluation/generation-mapping-comparison-v1/artifact-identities-v1.json)）：原40次分支保护、无新增批次帽，99文件/21发送前消息核对；65相关离线通过。实跑2完成/1必需审核失败/5未执行，1完整对，21调用/101712 token；3份答案首次有效、2映射有效，事实2纠正后在GEC-02候选依据类型门禁最终失败即停。9实际槽回应/15未执行不是准确率，01候选附加说明与non_claim疑点保留；未见足够答案收益，暂不采用。新结果AI辅助、用户监督，未称本人逐项确认；禁止恢复或补跑，生产不变。
+
 - **当前整批复核：[4组固定证据生成对照材料与冻结计划v1](evaluation/generation-mapping-comparison-v1/README.md)**：完整问题／要求／6选段及评分边界集中展示；[模型输入](evaluation/generation-mapping-comparison-v1/tasks-v1.json)、[独立评分](evaluation/generation-mapping-comparison-v1/rubric-v1.json)、[来源谱系](evaluation/generation-mapping-comparison-v1/source-lineage-v1.json)、[冻结提案与8组消息身份](evaluation/generation-mapping-comparison-v1/freeze-plan-v1.json)。4任务、8初始生成、12要求／24计划观察；复用3个旧来源为后续开发，非独立验证。固定证据＋相同原审核链，修订0；含审核及纠正预算提案≤128，不是8次总调用。A离线已获用户认可，本材料与新付费授权尚待确认；入口未实现／未执行，0模型，生产不变。
 
 - **当前A离线交付：[最小可选生成映射候选v1](evaluation/generation-mapping-v1/README.md)**（[分层失败、验证与身份](evaluation/generation-mapping-v1/results-v1.json)）：开发入口可选，复用原答案结构／候选／完整快照，一次生成＋最多一次格式纠正；仅映射失败与答案失败独立记，严格候选无效不放行。20专项及相关共139离线通过，未映射新增断言进入全文提取／双审，映射不传审核、不作评分要求。原生产schema13／顺序路径及检索审核修订UI不变，0真实调用；语义收益尚未验证，下一步另冻结真实对照，不自动执行。
