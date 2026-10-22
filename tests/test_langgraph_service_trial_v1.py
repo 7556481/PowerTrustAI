@@ -1,5 +1,5 @@
 """Pre-paid gates for the fixed six-run service entry, with no live connection."""
-import json,os,socket,unittest,tempfile
+import json,os,socket,unittest,tempfile,importlib.util
 from pathlib import Path
 from contextlib import ExitStack
 from unittest.mock import patch
@@ -35,6 +35,7 @@ class Gates(unittest.TestCase):
         s,p=self.exercise(True)
         self.assertEqual([x['status'] for x in s['branches']],['execution_failed']+['unexecuted']*5)
         self.assertEqual(len(p.requests),2)
+    @unittest.skipUnless(importlib.util.find_spec('langgraph'), 'Optional locked graph runtime not installed')
     def test_successful_service_collection_reads_separate_connection_all_six_once(self):
         s,p=self.exercise(False)
         self.assertEqual([x['status'] for x in s['branches']],['complete']*6)

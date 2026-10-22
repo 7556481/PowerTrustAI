@@ -1,5 +1,5 @@
 """Service/Factory integration, fixed providers only; no credentials or paid calls."""
-import asyncio,json,tempfile,unittest,socket
+import asyncio,json,tempfile,unittest,socket,importlib.util
 from dataclasses import replace
 from pathlib import Path
 from unittest.mock import patch
@@ -10,6 +10,7 @@ from backend.store import RunStore
 from tests.test_local_service import task,terminal
 from tests.test_schema14_factory_flow import FactoryFlowTests
 
+@unittest.skipUnless(importlib.util.find_spec('langgraph'), 'Optional locked graph runtime not installed')
 class FactoryGraph(unittest.TestCase):
     def exercise(self,**kwargs):
         config=ServiceConfig
@@ -41,6 +42,7 @@ class FactoryGraph(unittest.TestCase):
         with patch('harness.graph_runtime_v1.validate_versions',side_effect=ImportError('fixture')):
             with self.assertRaises(ConfigurationError):ComponentFactory(c).preflight()
 
+@unittest.skipUnless(importlib.util.find_spec('langgraph'), 'Optional locked graph runtime not installed')
 class Persistence(unittest.IsolatedAsyncioTestCase):
     async def test_graph_restart_queries_feedback_and_versions_do_not_execute(self):
         with tempfile.TemporaryDirectory() as temp:
