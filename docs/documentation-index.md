@@ -1,5 +1,7 @@
 # 文档索引
 
+- **当前方案：[LangGraph迁移方案v1](langgraph-migration-plan-v1.md)**（[代码身份与范围](langgraph-migration-plan-v1.json)）：业务四Agent与独立v7组件分开验证；同一Harness共享阶段、可选图路径，明确节点/状态/接口/预算/取消/存储、离线差分和组件回归。原默认路径、生产、提示及基线不改，首版无图层重试或自动恢复；已记录schema12要求与代码13/14差异。仅方案待确认，0安装/实现/模型调用，不沿用付费授权。
+
 - **最新收尾状态：[整批文本复核与用户确认](evaluation/baseline-batch-v1/owner-text-review-closeout-v1.md)**（[范围、原统计及文件身份](evaluation/baseline-batch-v1/owner-text-review-closeout-v1.json)）：51槽、58参考及66预测判断连同两级理由、依据索引全部公开文本复核完成；ChatGPT复核、用户本人确认，AI辅助用户监督。原5覆盖分歧、2支持分歧、56对齐/2无法对齐及理由问题保留，标签/成绩不改。小规模组件基线收尾，非生产或普遍可靠性证明，0新调用/补跑。下方旧“待复核”表述保留为历史阶段，当前以此记录为准；非本人本地原始响应或SHA验真。
 
 - **整批原文复核入口：[51槽覆盖＋58参考对应全部预测字段](evaluation/baseline-batch-v1/prediction-full-review-v1.md)**：单个轻量Markdown含51覆盖对象原文及理由、66唯一判断、原单元/24总体理由；两个混合未对齐全部拆分，附问题/要求/回答/前提/12依据索引。与最终有效响应字段逐字核对，原报告/分数不改，0新增调用；本人整批复核待后续，不记raw/SHA验真。

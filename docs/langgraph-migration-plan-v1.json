@@ -1,0 +1,105 @@
+{
+  "record_id": "langgraph-migration-plan-v1",
+  "date": "2026-10-22",
+  "status": "proposal_only_pending_user_review",
+  "inspected_code_commit": "9628c53893ee5add5cf5902c733d8e617b76fa0c",
+  "authorization_scope": "read code and prepare migration design documents only",
+  "runtime_metadata_read_only": {
+    "python": "3.13.2",
+    "packages": {
+      "langgraph": null,
+      "langchain-core": null
+    },
+    "packages_installed_this_round": false,
+    "dependency_version_selected": null
+  },
+  "design": {
+    "host": "existing OfflineHarness; one execution path per run",
+    "business_interface": "existing Harness.run/cancel and HarnessResult contracts",
+    "node_strategy": "shared original stage methods; initial review_pair retains existing internal asyncio concurrency",
+    "component_path": "separate v7/v6 single-task graph wrapper; existing run_fixed stays outer batch controller",
+    "initial_checkpointer": false,
+    "automatic_resume": false,
+    "graph_retry_policy_enabled": false,
+    "graph_node_cache_enabled": false,
+    "production_switch_authorized": false
+  },
+  "validation_tracks": [
+    "business workflow offline differential checks with identical fakes and immutable evidence",
+    "component offline response replay preserving prompt, strict parser, correction and matching identities",
+    "optional separately frozen and authorized live component regression; not a new independent score"
+  ],
+  "known_rule_code_difference": {
+    "rule_file": "AGENTS.md",
+    "rule": "real-service fact review explicitly requires schema12",
+    "code_file": "backend/config.py",
+    "default_schema": 13,
+    "accepted_schemas": [
+      13,
+      14
+    ],
+    "resolution": "recorded only; no configuration change; user clarification required before real-service integration"
+  },
+  "baseline_reference": {
+    "coverage_slots": 51,
+    "reference_units": 58,
+    "predicted_judgments": 66,
+    "coverage_disagreements": 5,
+    "aligned": 56,
+    "support_disagreements": 2,
+    "unaligned": 2,
+    "original_public_hashes_verified": 7,
+    "original_frozen_file_hashes_verified": 35,
+    "old_entry_and_attempt_not_reexecuted": true,
+    "new_percentage_or_zero_unaligned_gates": false
+  },
+  "actions_this_round": {
+    "implementation_changes": false,
+    "prompt_changes": false,
+    "production_changes": false,
+    "dependency_changes": false,
+    "tests_or_response_replay_executed": false,
+    "model_or_paid_calls": 0,
+    "credentials_or_env_files_read": false,
+    "official_documentation_browsed": true
+  },
+  "official_design_references": [
+    "https://docs.langchain.com/oss/python/langgraph/graph-api",
+    "https://docs.langchain.com/oss/python/langgraph/use-graph-api",
+    "https://docs.langchain.com/oss/python/langgraph/persistence",
+    "https://github.com/langchain-ai/docs/blob/main/src/oss/langgraph/graph-api.mdx"
+  ],
+  "file_identity_sha256": {
+    "AGENTS.md": "6e1fa99ba2434579248b82f0d7733ebce27356adfb23c6727367f3a1f0afa44c",
+    "harness/runtime.py": "ca232dd2edb2e8d4bf2541cd22cea37bea7452159f7bdb31d70b3fff7e25ede2",
+    "harness/states.py": "2f46b590715d0a83761ba3e17982d03de94a2f07c2bf372b4d35d93b39aa893f",
+    "harness/contracts.py": "6ddbee88cc4f1c201ec4b56893ba747a9a63c8150d5d0e5e2539d89c78541c80",
+    "harness/policy.py": "afbabe126944e17a3db730533145882df5aea05838e17fa8fa833d4f2fc253e8",
+    "harness/product_policy.py": "f8a93873e1876f7870acb4674841ff225ebd9d586d4a51275f86b8a61d308922",
+    "harness/retrieval.py": "86db969a09944356004a20346f4ba2e62a4ff772fb17e492c857830158c1f598",
+    "agents/contracts.py": "b2c08418de002bab314783c865b343f50c57220ae356ae75e0a4d3c3b7acd9d7",
+    "backend/assembly.py": "619a96fdcf92dfb689cdf87d6fb118f0dedf67ca40ccf628e373eff6808337ae",
+    "backend/config.py": "386673778691d94d4075f08c885471ca1c3cf48548096e8c6204aaf00e920f53",
+    "backend/service.py": "84e5b694f36915c304d4eb5fd7ef12e5fd99346ba298097eeac335638bbc1bf0",
+    "backend/store.py": "ed695812b0e950b4ebeffc436ecc23ed26dd54d2f0f4107fdf54555f2c51788f",
+    "backend/serialization.py": "d43b9043840c85aaa48480620fd917a82443b6c005917c832cb1b6fdaad54d50",
+    "model_adapter/runtime.py": "009eb22f0ea4bbbd29cfa5cf53ea881c048436430a6896c237e2587a6eca5c8d",
+    "services/structured_model.py": "a0ab6c75f2256e8810cb3f9d89901b821d5612196ee2496c310d6d06372d1118",
+    "evaluation/reviewer_baseline_trial_v1.py": "5f1576ab98e73611bc5c3b4baec2a46ff1f0950802df0b2195fee7af579ffa72",
+    "evaluation/batch_control.py": "265df87098a3191a0fae1bc0d4bb50480c36e64fa524fb169f1fe47c00df2009",
+    "evaluation/premise_bound_review_v7.py": "7e88223fc7d715fd4aaf4dabff3f9561fc93df15e4bada6c66a149d11ea227b6",
+    "evaluation/premise_bound_review_v6.py": "0cf52b776531eb636d0c93e2f8f5e9ac22c321cd0f69d277c8a29947f6bd4717",
+    "requirements.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/test_harness.py": "2e4397ba132d9f86b98dd44544222f4a98a73fabbf57cfd12c9bd042cd33fc85",
+    "tests/test_harness_retrieval.py": "d1968fd8bf45bf6a361c734b49c0e74ca25962ce495eae2f6102ec5b50f69594",
+    "tests/test_product_policy.py": "0d832a6e8448cb5db03b6cbae94a9cb0a3de1325fc490f1e96af153625e8654c",
+    "tests/test_local_service.py": "51ea3f8427ee2a5658cd60bcbead1aae29dde74954bf58ba64cdaa755c5a0a8d",
+    "tests/test_model_trace_attribution.py": "a63cec367474f329c7b7fb80ce8d1cda538fcde942a22819f271caf4fde23d47",
+    "tests/test_reviewer_baseline_trial_v1.py": "7d33d3c1da7b55fb6344493cdaebff7972435dcb2abd16719eefb3538d888874",
+    "docs/final-handbook-requirements.md": "1de7c001bf5d3be371b1d56a9fb06725f1adcb0e758ef76373ae991fb3e8a388",
+    "docs/evaluation/baseline-batch-v1/owner-text-review-closeout-v1.md": "5991b7b4b300c2be19ce70b7056abb03a70fd042fe6151f28f550ef2264ce61f",
+    "docs/evaluation/baseline-batch-v1/results-v1.json": "4ad50d85e7fd60ce5bfeddb27d3db45d2e3859ec0ad5cc4bbde46fbd29cd7afd",
+    "docs/langgraph-migration-plan-v1.md": "4ce93483deff80b0b667f3efc1d24c2325be6fb118c7529d21f41e5502fac018"
+  },
+  "identity_note": "read-only design provenance, not an executable freeze or authorization for a new batch; local hash checks are assistant checks, not owner verification"
+}
