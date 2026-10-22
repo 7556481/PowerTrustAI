@@ -28,7 +28,15 @@ def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def compatibility(old,c,manifest):
     """Exact configuration and production sources, with explicit engineering deltas."""
     if trial.config_identity(c)!=old['configuration']:raise ValueError('Business configuration changed')
-    if manifest!=old['manifest']:raise ValueError('Agent/knowledge/model/prompt manifest changed')
+    manifest=trial.wire(manifest)
+    old_manifest=old['manifest']
+    if {k:v for k,v in manifest.items() if k!='source_sha256'}!={k:v for k,v in old_manifest.items() if k!='source_sha256'}:
+        raise ValueError('Agent/knowledge/model/prompt manifest changed')
+    current_sources=manifest['source_sha256'];old_sources=old_manifest['source_sha256']
+    if set(current_sources)!=set(old_sources):raise ValueError('Production source inventory changed')
+    for path,value in current_sources.items():
+        if value!=old_sources[path] and path.replace('\\','/') not in ENGINEERING:
+            raise ValueError('Production source identity changed: '+path)
     if os.environ.get('DEEPSEEK_MODEL_ID')!=old['model_id']:raise ValueError('Model changed')
     if [{ 'id':i,'task_id':t,'execution_path':p,'payload_sha256':trial.sha(trial.tasks()[t])} for i,t,p in ORDER]!=old['order'][1:]:
         raise ValueError('Only original five unsent inputs allowed')

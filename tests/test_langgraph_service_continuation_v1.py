@@ -57,4 +57,15 @@ class ContinuationGates(unittest.TestCase):
         self.assertEqual(continuation.ORDER,trial.ORDER[1:])
         self.assertNotIn('LSI-01-S',[i for i,_,_ in continuation.ORDER])
 
+    def test_manifest_allows_only_declared_engineering_hash_changes(self):
+        old=trial.read(continuation.OLD_FREEZE)
+        manifest=trial.read(continuation.OLD_FREEZE)['manifest']
+        key=next(k for k in manifest['source_sha256'] if k.replace('\\','/')=='backend/static/app.js')
+        manifest['source_sha256'][key]='engineering-change'
+        with patch.object(trial,'config_identity',return_value=old['configuration']),patch.dict('os.environ',{'DEEPSEEK_MODEL_ID':old['model_id']}):
+            changes=continuation.compatibility(old,None,manifest)
+            self.assertIn('backend/static/app.js',[r['path'] for r in changes])
+            manifest['prompts']['generation']='forbidden-business-change'
+            with self.assertRaises(ValueError):continuation.compatibility(old,None,manifest)
+
 if __name__=='__main__':unittest.main()
