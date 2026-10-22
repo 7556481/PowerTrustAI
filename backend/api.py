@@ -163,6 +163,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
             'local_session_version':'localhost-launch-session-v1',
             'local_nli':service.nli_capability(),
             'profile':config.profile,'configuration_ready':ready,'reason':reason,
+            'execution_path':config.execution_path,
             'retrieval_mode':config.retrieval_mode if config.profile=='real' else 'none',
             'fact_retrieval_strategy':config.fact_strategy,'knowledge_version':config.knowledge_version if config.profile=='real' else None,
             'storage_healthy':not service.storage_fault,'active_run':service.active is not None,

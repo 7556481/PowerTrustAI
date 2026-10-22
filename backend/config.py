@@ -13,6 +13,7 @@ class ServiceConfig:
     profile: str='real'
     decision_policy: str='product-v1'
     verification_schema: int=13
+    execution_path: str='sequential'
     run_db: Path=ROOT/'data/runtime_local/runs.sqlite3'
     token_file: Path=ROOT/'data/runtime_local/access-token'
     index_db: Path=ROOT/'data/retrieval_local/semantic/corpus.sqlite3'
@@ -34,6 +35,7 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.execution_path not in ('sequential','langgraph_v1'):raise ValueError('Invalid execution path')
         if self.review_message_profile not in ('baseline_v1','lossless_v1'):raise ValueError('Invalid review message profile')
         if self.retrieval_execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1'):raise ValueError('Invalid retrieval execution profile')
         if type(self.verification_schema) is not int or self.verification_schema not in (13,14):raise ValueError('Explicit schema13 or schema14 required')
@@ -53,6 +55,13 @@ class ServiceConfig:
             from harness.deepseek_trial import load_project_env
             load_project_env() # existing absolute-root literal loader; never display it
         daily={}
+        orchestration={}
+        orchestration_file=ROOT/'data/runtime_local/orchestration.json'
+        if not demo and orchestration_file.exists():
+            import json
+            orchestration=json.loads(orchestration_file.read_text(encoding='utf-8'))
+            if set(orchestration)!={'version','execution_path'} or orchestration['version']!='service-orchestration-v1':
+                raise ValueError('Invalid managed orchestration configuration')
         daily_file=ROOT/'data/runtime_local/daily-knowledge.json'
         if not demo and daily_file.exists():
             import json
@@ -72,6 +81,7 @@ class ServiceConfig:
         strategy=os.environ.get('POWERTRUST_FACT_RETRIEVAL_STRATEGY','aggregate')
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
+            execution_path=os.environ.get('POWERTRUST_EXECUTION_PATH',orchestration.get('execution_path','sequential')),
             review_message_profile=os.environ.get('POWERTRUST_REVIEW_MESSAGE_PROFILE','lossless_v1'),
             retrieval_execution_profile=os.environ.get('POWERTRUST_RETRIEVAL_EXECUTION','topic_v4_subject_v1'),
             index_db=Path(os.environ.get('POWERTRUST_INDEX_DB',daily.get('index_db',str(cls().index_db)))),

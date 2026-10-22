@@ -55,6 +55,7 @@ def safe(value,key=''):
         return result
     if isinstance(value,list):return [safe(x,key) for x in value]
     if isinstance(value,str) and key not in LITERAL:
+        if key=='execution_path' and value in ('sequential','langgraph_v1'):return value
         if key.lower().endswith(('_uri','_url')) or key.lower() in ('uri','url'):return public_https(value)
         if key=='detail':
             try:return safe(json.loads(value))

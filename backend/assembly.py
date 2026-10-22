@@ -54,6 +54,11 @@ class ComponentFactory:
             if hasattr(resource.encoder,'close'):resource.encoder.close()
             self.semantic_resource=None
     def preflight(self):
+        if self.config.execution_path=='langgraph_v1':
+            try:
+                from harness.graph_runtime_v1 import validate_versions,build_graph
+                validate_versions();build_graph()
+            except Exception:raise ConfigurationError('Graph runtime unavailable; no fallback or submission') from None
         if self.config.profile=='synthetic_fixture':return None
         if not os.environ.get('DEEPSEEK_API_KEY') or not os.environ.get('DEEPSEEK_MODEL_ID'):
             raise ConfigurationError('Explicit model configuration required; no simulated fallback')
@@ -91,6 +96,7 @@ class ComponentFactory:
                        for p in (ROOT/'backend/static').glob('*') if p.is_file()})
         from agents.revision_contract_v2 import ID_CLEAN_PROMPT_VERSION as REVISION_PROMPT_VERSION
         manifest={'schema_version':'local-review-service-v1','profile':self.config.profile,
+            'execution_path':self.config.execution_path,
             'components':'simulated_synthetic_fixture' if self.config.profile=='synthetic_fixture' else 'real_model_with_demo_domain_rules',
             'model_id':os.environ.get('DEEPSEEK_MODEL_ID') if self.config.profile=='real' else None,
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
@@ -168,7 +174,7 @@ class ComponentFactory:
     def create(self,rid,observer):
         if self.config.profile=='synthetic_fixture':
             from agents.fakes import make_fake_harness
-            harness=make_fake_harness();harness.observer=observer
+            harness=make_fake_harness();harness.observer=observer;harness.execution_path=self.config.execution_path
             if self.config.decision_policy=='product-v1':
                 from harness.product_policy import ProductAuditPolicy
                 harness.policy=ProductAuditPolicy(synthetic_fixture=True)
@@ -205,7 +211,7 @@ class ComponentFactory:
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
-                generation_corpus_english=corpus_english)
+                generation_corpus_english=corpus_english,execution_path=self.config.execution_path)
             harness.subject_supplement=True
             return Bundle(harness,resources)
         except Exception:

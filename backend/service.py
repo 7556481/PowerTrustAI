@@ -143,6 +143,7 @@ class ApplicationService:
             'cancel_requested':bool(row['cancel_requested']),'harness_state':row['harness_state'],
             'error_code':self.volatile_errors.get(rid) or row['error_code'],'profile':row['config']['profile'],
             'knowledge_version':row['config']['knowledge_version'],'persisted_result_available':row['result'] is not None,
+            'execution_path':row['config'].get('execution_path','sequential'),
             'partial_result_available':row['snapshot'] is not None,'persistence_confirmed':rid not in self.volatile_errors})
 
     async def diagnose_completed(self,rid,raw):
