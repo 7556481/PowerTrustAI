@@ -8,16 +8,17 @@
 <section class="access panel"><details><summary>高级：手动连接与令牌记忆（自动连接无需填写）</summary><form id="access-form"><label for="token">本机访问令牌</label><div class="inline"><input id="token" type="password" autocomplete="off" spellcheck="false" required placeholder="仅保存在当前页面内存"><button type="submit">连接服务</button><button id="disconnect" type="button" class="quiet">忘记连接</button></div><label class="remember-connection"><input id="remember-connection" type="checkbox"> 记住本机连接（仅当前浏览器与当前地址/端口）</label><p class="hint">默认仅内存保存。主动勾选并连接成功后，令牌保存在此浏览器本机存储；同一浏览器配置的使用者可访问。取消勾选会删除保存项，当前页面仍可使用；“忘记连接”同时清除记忆与内存。不会保存DeepSeek密钥。</p></form></details><p id="connection" class="hint">一键启动后自动连接；会话有效期七天，刷新和普通重启可继续使用。DeepSeek 密钥始终留在服务端。</p></section>
 <p id="notice" class="notice" role="status" aria-live="polite">正在确认本机连接；不会自动提交或重发历史任务。</p>
 <div class="workspace"><aside>
-<section class="panel"><p class="eyebrow">01 / 任务输入</p><h2>提交审核任务</h2>
+<section class="panel"><p class="eyebrow">01 / 任务输入</p><h2>提问并审核回答</h2>
 <form id="submit-form">
-<label for="mode">模式</label><select id="mode"><option value="question_answer">问答 · 生成并审核</option><option value="assess_existing">已有回答 · 仅审核与必要修订</option></select>
+<details id="diagnostic-entry"><summary>诊断与回归：审核已有回答</summary><p class="hint">日常使用默认提问生成；已有回答入口用于兼容、诊断及回归。</p><label for="mode">模式</label><select id="mode"><option value="question_answer">问答 · 生成并审核</option><option value="assess_existing">已有回答 · 仅审核与必要修订</option></select><div id="existing-group" hidden><label for="existing">已有回答 <span>必填</span></label><textarea id="existing" rows="5" maxlength="80000"></textarea></div></details>
+
 <label for="question">问题 <span>必填</span></label><textarea id="question" rows="3" maxlength="8000" required placeholder="输入简短问题，不填入虚构工程参数"></textarea>
-<div id="existing-group" hidden><label for="existing">已有回答 <span>必填</span></label><textarea id="existing" rows="5" maxlength="80000"></textarea></div>
+
 <details><summary>可选：背景、审核范围与参考资料</summary><label for="task-scope">请求范围（审核仍检查回答是否越界）</label><select id="task-scope"><option value="conceptual">概念解释 / 资料转述</option><option value="plant_assessment">工程方案 / 地区设定 / 性能承诺</option></select><label for="context">补充背景 <span>可选</span></label><textarea id="context" rows="2" maxlength="10000"></textarea>
 <label for="requirements">回答要求（每行一条，最多 10 条）</label><textarea id="requirements" rows="2" placeholder="例如：只作概念解释，简短回答"></textarea><label for="reference-label">参考文本标签</label><input id="reference-label" maxlength="200" placeholder="用户提供的参考"><label for="reference">参考文本（未核实来源）</label><textarea id="reference" rows="3" maxlength="20000"></textarea></details>
 <p class="hint">数值换算及工程输入可通过API的结构化engineering_context提交；本界面不虚构参数。真实模式提交会调用付费模型；不自动重发任务。</p>
 <label><input id="nli-enabled" type="checkbox" disabled> 本地NLI第二判断（仅诊断，默认关闭）</label><p id="nli-availability" class="hint">连接后核查服务端可用性。</p>
-<button id="submit" type="submit" class="primary" disabled>提交任务</button>
+<button id="submit" type="submit" class="primary" disabled>提问并生成、审核</button>
 </form></section>
 <section class="panel"><h2>恢复与历史</h2><form id="lookup-form"><label for="run-id">run_id</label><div class="inline"><input id="run-id" maxlength="150" required spellcheck="false" placeholder="粘贴已提交的任务 ID"><button id="lookup" type="submit" class="quiet" disabled>查看</button></div></form><button id="history-refresh" type="button" class="quiet">刷新运行列表</button><div id="history" class="history"></div><button id="history-next" type="button" class="quiet" hidden>下一页</button></section>
 </aside><div class="results">
