@@ -60,6 +60,11 @@ def current_budget():
     return _scope.get()
 
 
+def current_model_invocation():
+    """Read the current call owner; contains identifiers only, never credentials."""
+    return _invocation.get()
+
+
 def credential_from_environment(settings):
     """Only an explicitly configured factory uses this; never enumerate env vars."""
     if not settings.credential_env:

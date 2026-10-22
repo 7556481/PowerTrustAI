@@ -291,10 +291,15 @@ def _parse_normalized(value, inputs, *, schema_version=None):
 class ModelEvidenceVerificationAgent:
     uses_model_adapter = True
 
-    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4, citation_workload=None, support_relation_checks=False, support_relation_version=1,review_message_profile='baseline_v1'):
+    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4, citation_workload=None, support_relation_checks=False, support_relation_version=1,review_message_profile='baseline_v1', correction_accounting='shared_slice_v1'):
         if schema_version not in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14):
             raise ValueError("Live review supports explicit v4/v5/v6 only")
         self.schema_version = schema_version
+        if correction_accounting not in ('shared_slice_v1', 'invocation_scoped_v1'):
+            raise ValueError('Unknown correction accounting version')
+        if schema_version != 13 and correction_accounting != 'shared_slice_v1':
+            raise ValueError('Scoped correction accounting is a schema13 development option')
+        self.correction_accounting = correction_accounting
         from agents.contracts import EvidenceVerificationInput,ReliabilityVerificationInput
         self.review_input_type=ReliabilityVerificationInput if schema_version>=9 else EvidenceVerificationInput
         self.citation_workload = citation_workload

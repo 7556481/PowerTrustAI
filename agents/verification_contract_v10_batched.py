@@ -45,6 +45,13 @@ from agents.verification_contract_v9_scoped import body_snapshot, model_wire
 async def run(agent,inputs):
     if current_budget() is None:
         with model_scope(ModelBudget(2+len(inputs.answer.citations))):return await run(agent,inputs)
+    scoped=getattr(agent,'correction_accounting','shared_slice_v1')=='invocation_scoped_v1'
+    from model_adapter.runtime import current_model_invocation,model_invocation_scope
+    owner=current_model_invocation()
+    if scoped and owner is None:
+        from uuid import uuid4
+        with model_invocation_scope(str(uuid4()),'evidence_verification',inputs.answer.version):
+            return await run(agent,inputs)
     from services.citation_workload import CitationWorkload, pack, messages_size
     from agents.review_templates_v3 import INDEPENDENT
     from services.review_fidelity import FROZEN_BINDING_INSTRUCTIONS
@@ -181,7 +188,9 @@ async def run(agent,inputs):
             result=getattr(exc,'partial_output',None);issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,exc.code,'Scoped semantic check incomplete; valid peers retained'))
             if exc.code in ('MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED'):break
         finally:
-            correction_used=correction_used or any(r.correction for r in current_budget().records[before:])
+            correction_used=correction_used or any(r.correction and (not scoped or
+                (r.invocation_id==owner[0] and r.component==owner[1] and r.answer_version==owner[2]
+                 and r.prompt_version==prompt_version)) for r in current_budget().records[before:])
         if result is None:continue
         if citation is None:combined=replace(combined,findings=result.findings)
         else:combined=replace(combined,citation_reviews=tuple(result.citation_reviews[i] if i in citation else c for i,c in enumerate(combined.citation_reviews)))
@@ -190,5 +199,6 @@ async def run(agent,inputs):
         partial_claim_ids=citation_coverage(inputs.answer,inputs.claims,c.citation_index,combined.findings)[0],
         coverage_issues=citation_coverage(inputs.answer,inputs.claims,c.citation_index,combined.findings)[1]) for c in combined.citation_reviews))
     combined=replace(combined,consistency_checks=check_verification_quantities(combined,version='quantity-enumeration-v1.2'),
-        model_records=tuple(r for r in current_budget().records[start:] if r.prompt_version==prompt_version))
+        model_records=tuple(r for r in current_budget().records[start:] if r.prompt_version==prompt_version
+            and (not scoped or (r.invocation_id==owner[0] and r.component==owner[1] and r.answer_version==owner[2]))))
     validate_review(combined,inputs.answer,inputs.claims,combined.evidence,True);return combined

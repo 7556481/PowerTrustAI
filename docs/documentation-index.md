@@ -1,5 +1,7 @@
 # 文档索引
 
+- **当前B源码核对与工程候选：[公共审核题设/规则/应用边界](evaluation/public-review-boundaries-v1/README.md)**（[范围与离线结果](evaluation/public-review-boundaries-v1/results-v1.json)）：归档用户对A的有范围复核，候选生成合法，停止是公共审核失败，未执行能力未知。语义最小规格尚未接线，题设引用与正文规则分离，应用联合核对，不放宽旧快照门禁。纠正计数可选invocation_scoped_v1已实现，8专项/相关68离线通过；原共享预算与一次事实纠正不变，默认shared_slice_v1/schema13/原顺序路径保留。0真实调用/旧回放/安装，不恢复A实验。
+
 - **最新已授权实跑收尾：[固定证据生成对照结果](evaluation/generation-mapping-comparison-v1/results-v1.md)**（[实际答案/审核及统计](evaluation/generation-mapping-comparison-v1/results-v1.json)、[真实执行冻结](evaluation/generation-mapping-comparison-v1/execution-freeze-v1.json)、[私有产物身份](evaluation/generation-mapping-comparison-v1/artifact-identities-v1.json)）：原40次分支保护、无新增批次帽，99文件/21发送前消息核对；65相关离线通过。实跑2完成/1必需审核失败/5未执行，1完整对，21调用/101712 token；3份答案首次有效、2映射有效，事实2纠正后在GEC-02候选依据类型门禁最终失败即停。9实际槽回应/15未执行不是准确率，01候选附加说明与non_claim疑点保留；未见足够答案收益，暂不采用。新结果AI辅助、用户监督，未称本人逐项确认；禁止恢复或补跑，生产不变。
 
 - **当前整批复核：[4组固定证据生成对照材料与冻结计划v1](evaluation/generation-mapping-comparison-v1/README.md)**：完整问题／要求／6选段及评分边界集中展示；[模型输入](evaluation/generation-mapping-comparison-v1/tasks-v1.json)、[独立评分](evaluation/generation-mapping-comparison-v1/rubric-v1.json)、[来源谱系](evaluation/generation-mapping-comparison-v1/source-lineage-v1.json)、[冻结提案与8组消息身份](evaluation/generation-mapping-comparison-v1/freeze-plan-v1.json)。4任务、8初始生成、12要求／24计划观察；复用3个旧来源为后续开发，非独立验证。固定证据＋相同原审核链，修订0；含审核及纠正预算提案≤128，不是8次总调用。A离线已获用户认可，本材料与新付费授权尚待确认；入口未实现／未执行，0模型，生产不变。

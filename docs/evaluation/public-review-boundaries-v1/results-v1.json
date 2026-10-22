@@ -1,0 +1,67 @@
+{
+  "version": "public-review-boundaries-v1",
+  "source_base_commit": "a988ab82b12b31cc528c6074831818a27298442c",
+  "semantic_status": "minimal_specification_only_not_integrated",
+  "accounting_status": "optional_implementation_offline_verified_not_default",
+  "accounting_profile": "invocation_scoped_v1",
+  "default_accounting_profile": "shared_slice_v1",
+  "production_schema": 13,
+  "production_default_changed": false,
+  "model_calls": 0,
+  "historical_response_replay_calls": 0,
+  "dependencies_installed": 0,
+  "tests": {
+    "new_focused": 8,
+    "related_total": 68,
+    "passed": 68,
+    "failed": 0,
+    "duration_seconds": 27.594,
+    "full_suite_run": false,
+    "modules": [
+      "tests.test_review_correction_accounting_v1",
+      "tests.test_citation_workload",
+      "tests.test_fact_rereview_v3",
+      "tests.test_audit_interface_v2",
+      "tests.test_model_trace_attribution",
+      "tests.test_product_policy",
+      "tests.test_generation_mapping_trial_v1"
+    ]
+  },
+  "synthetic_reproduction": {
+    "old_total_calls": 4,
+    "old_fact_calls": 2,
+    "old_fact_correction_calls": 0,
+    "new_total_calls": 5,
+    "new_fact_calls": 3,
+    "new_fact_correction_calls": 1,
+    "global_limit_4_still_blocks_fifth": true,
+    "same_prompt_other_invocation_isolated": true,
+    "initial_fact_messages_identical": true
+  },
+  "historical_artifact_hashes_verified": 35,
+  "historical_freeze_files_unchanged": true,
+  "current_source_differences_from_old_execution_freeze": [
+    "agents/evidence_verification.py",
+    "agents/verification_contract_v10_batched.py",
+    "model_adapter/runtime.py"
+  ],
+  "note": "Old source hashes intentionally belong to the historical commit. Never update the old freeze or resume its attempt. Synthetic supported labels do not demonstrate model semantics.",
+  "files": [
+    {
+      "path": "agents/evidence_verification.py",
+      "sha256": "ac9623bee1bececba6307206beb8ecf1573fa68bc0135cae37d153bd8406ff12"
+    },
+    {
+      "path": "agents/verification_contract_v10_batched.py",
+      "sha256": "e8996d2c40dbcc4ab2959543f4b10c715d53878abbbc14425b754e18bb05784f"
+    },
+    {
+      "path": "model_adapter/runtime.py",
+      "sha256": "559900e35c3d90a24ee8f9a2f4693726926769172260e922cd02f74c3ff7c042"
+    },
+    {
+      "path": "tests/test_review_correction_accounting_v1.py",
+      "sha256": "24c0bd5434eb73f6230293437d92e65b2370d640dc28ad93a0d682642ee12a6b"
+    }
+  ]
+}
