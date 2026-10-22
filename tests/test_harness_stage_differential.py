@@ -63,6 +63,7 @@ def canonical(value):
 
 
 class StageDifferentialTests(unittest.IsolatedAsyncioTestCase):
+    candidate_execution_path = 'sequential'
     @classmethod
     def setUpClass(cls):
         cls.old = legacy_module()
@@ -72,6 +73,7 @@ class StageDifferentialTests(unittest.IsolatedAsyncioTestCase):
         values = []
         for old in (True, False):
             h = (factory or make_fake_harness)()
+            h.execution_path = 'sequential' if old else self.candidate_execution_path
             # Constructors are unchanged. Only bind the original run/cancel
             # implementation for the reference side; agents are fresh doubles.
             if old:
@@ -115,6 +117,7 @@ class StageDifferentialTests(unittest.IsolatedAsyncioTestCase):
                 'domain_inputs': getattr(h.domain_review, 'inputs',
                                          getattr(getattr(h.domain_review, 'delegate', None), 'inputs', [])),
                 'extraction_versions': h.extractor.versions,
+                'transport_requests': getattr(h, '_fixture_requests', []),
             }))
         self.assertEqual(values[0], values[1])
         return values[1]

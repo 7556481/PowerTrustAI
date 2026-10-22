@@ -510,22 +510,29 @@ class RunExecution:
         self.report = None
         return True
 
-    async def run(self):
-        """Original sequential driver; graph execution is not introduced here."""
+    async def run_stages(self):
+        """Original sequential route, retained as the default implementation."""
+        await self.validate_saved_inputs()
+        if self.request.mode == TaskMode.QUESTION_ANSWER:
+            await self.generate()
+        while not self.generation_only:
+            await self.extract_and_tools()
+            await self.prepare_review()
+            await self.review_pair()
+            if self.evidence_only:
+                break
+            if await self.merge_and_decide():
+                break
+            if not await self.revise():
+                break
+
+    async def run(self, *, driver=None):
+        """One driver inside the existing exception, registry and result boundary."""
         try:
-            await self.validate_saved_inputs()
-            if self.request.mode == TaskMode.QUESTION_ANSWER:
-                await self.generate()
-            while not self.generation_only:
-                await self.extract_and_tools()
-                await self.prepare_review()
-                await self.review_pair()
-                if self.evidence_only:
-                    break
-                if await self.merge_and_decide():
-                    break
-                if not await self.revise():
-                    break
+            if driver is None:
+                await self.run_stages()
+            else:
+                await driver(self)
         except HarnessObserverError:
             raise
         except RequiredRetrievalFailure as exc:

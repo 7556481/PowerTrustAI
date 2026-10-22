@@ -11,7 +11,11 @@ from harness.execution import RunExecution, RequiredRetrievalFailure, HarnessObs
 class OfflineHarness:
     def __init__(self, generation, verification, domain_review, revision, extractor, policy=None,
                  retriever=None, retrieval_settings=None, unit_tool=None, observer=None,
-                 generation_query_converter=None, generation_corpus_english=False):
+                 generation_query_converter=None, generation_corpus_english=False, *,
+                 execution_path="sequential"):
+        if execution_path not in ("sequential", "langgraph_v1"):
+            raise InputError("Unknown Harness execution path")
+        self.execution_path = execution_path
         self.generation = generation
         self.verification = verification
         self.domain_review = domain_review
@@ -38,10 +42,21 @@ class OfflineHarness:
 
     async def run(self, request, budget, *, knowledge_version=None, generation_only=False, answer_requirements=(),
                   evidence_only=False, indexed_reference_ids=(), generation_snapshot=None, run_id=None):
+        if self.execution_path not in ("sequential", "langgraph_v1"):
+            raise InputError("Unknown Harness execution path")
+        driver = None
+        if self.execution_path == "langgraph_v1":
+            # Optional dependencies are never imported by the default path.
+            try:
+                from harness.graph_runtime_v1 import run_graph, validate_versions
+            except ImportError as exc:
+                raise InputError("Optional LangGraph dependencies unavailable; install requirements-langgraph.lock.txt") from exc
+            validate_versions()
+            driver = run_graph
         execution = RunExecution(
             self, request, budget, knowledge_version=knowledge_version,
             generation_only=generation_only, answer_requirements=answer_requirements,
             evidence_only=evidence_only, indexed_reference_ids=indexed_reference_ids,
             generation_snapshot=generation_snapshot, run_id=run_id,
         )
-        return await execution.run()
+        return await execution.run(driver=driver)
