@@ -28,6 +28,45 @@ class GraphDifferentialTests(baseline.StageDifferentialTests):
     def setUpClass(cls):
         cls.old = types.SimpleNamespace(OfflineHarness=OfflineHarness, uuid4=None)
 
+    async def test_product_policy_terminal_routes_and_revision_match(self):
+        from agents.fakes import FakeConfig
+        from core.models import VerificationStatus
+        from harness.product_policy import ProductAuditPolicy
+        cases = [
+            (FakeConfig(), RunState.COMPLETED),
+            (FakeConfig(verification_statuses=(VerificationStatus.CONTRADICTED,
+                                              VerificationStatus.SUPPORTED)), RunState.COMPLETED),
+            (FakeConfig(verification_statuses=(VerificationStatus.CONTRADICTED,)), RunState.REJECTED),
+            (FakeConfig(verification_statuses=(VerificationStatus.INSUFFICIENT_EVIDENCE,)), RunState.NEEDS_INFORMATION),
+            (FakeConfig(verification_error=True), RunState.EXECUTION_INCOMPLETE),
+        ]
+        for config, state in cases:
+            def factory():
+                h = make_fake_harness(config)
+                h.policy = ProductAuditPolicy(synthetic_fixture=True)
+                return h
+            with self.subTest(state=state, config=config):
+                value = await self.compare(factory)
+                self.assertEqual(value['result']['state'], state)
+
+    async def test_no_substantive_answer_skips_all_reviews(self):
+        def factory():
+            h = make_fake_harness()
+            generate = h.generation.run
+
+            async def no_answer(inputs):
+                output = await generate(inputs)
+                return replace(output, substantive_answer=False, answer=replace(
+                    output.answer, text='synthetic_fixture: insufficient evidence.',
+                    missing_information=('synthetic_fixture: required evidence missing',)))
+            h.generation.run = no_answer
+            return h
+        value = await self.compare(factory)
+        self.assertEqual(value['result']['state'], RunState.NEEDS_INFORMATION)
+        self.assertFalse(value['verification_inputs'])
+        self.assertFalse(value['domain_inputs'])
+        self.assertFalse(value['extraction_versions'])
+
     async def test_exact_managed_message_content_and_correction(self):
         class RecordingAdapter(Adapter):
             def __init__(self):
@@ -51,6 +90,32 @@ class GraphDifferentialTests(baseline.StageDifferentialTests):
 
 @unittest.skipUnless(AVAILABLE, 'Optional requirements-langgraph.lock.txt not installed')
 class GraphControlTests(unittest.IsolatedAsyncioTestCase):
+    async def test_existing_sqlite_wire_and_restore_compatibility(self):
+        import tempfile
+        from pathlib import Path
+        from backend.store import RunStore
+        from backend.serialization import wire
+        from evaluation.archive_replay import restore
+        from harness.contracts import HarnessResult
+        with tempfile.TemporaryDirectory() as directory:
+            store = RunStore(Path(directory) / 'synthetic.sqlite3')
+            try:
+                rid = 'synthetic-graph-storage'
+                value = request()
+                store.create(rid, value, {'profile': 'synthetic_fixture', 'execution_path': 'langgraph_v1'})
+                h = managed_setup(Adapter(correction=True))
+                h.execution_path = 'langgraph_v1'
+                h.observer = lambda snapshot: store.checkpoint(rid, snapshot)
+                result = await h.run(value, RunBudget(max_model_calls=4), run_id=rid)
+                store.mark(rid, 'finished', result=result)
+                saved = store.get(rid)['result']
+                self.assertEqual(restore(saved, HarnessResult), result)
+                self.assertTrue(store.events(rid))
+                self.assertNotIn('next_stage', wire(result))
+                self.assertEqual(len(result.model_records), 3)
+            finally:
+                store.close()
+
     async def test_graph_really_drives_all_stages_and_revision_loop(self):
         from contextlib import ExitStack
         from agents.fakes import FakeConfig
