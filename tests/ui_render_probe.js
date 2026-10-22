@@ -38,5 +38,16 @@ function texts(e){return e.textContent+e.children.map(texts).join(' ');}
  assert(texts(element('answers')).includes('cited_source'));
  assert(!texts(element('answers')).includes('uncited_source'));
  assert(texts(element('evidence')).includes('uncited_source')); // retained in technical detail
+ result.no_substantive_answer=true;result.execution.required_stages_complete=false;
+ await element('refresh').listeners.click();
+ assert(texts(element('phase')).includes('资料不足'));
+ assert(!texts(element('phase')).includes('执行未完成'));
+ result.no_substantive_answer=false;result.decision.kind='execution_incomplete';
+ await element('refresh').listeners.click();
+ assert(texts(element('phase')).includes('执行未完成，已有草稿保留'));
+ result.execution.status='running';
+ await element('refresh').listeners.click();
+ assert(texts(element('phase')).includes('回答已生成，正在审核'));
+ assert(requests.every(r=>r.method==='GET'));
  console.log('Actual client render, saved configuration, text safety and GET-only restoration passed.');
 })().catch(e=>{console.error(e.message);process.exitCode=1;});
