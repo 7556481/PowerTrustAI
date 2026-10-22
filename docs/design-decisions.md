@@ -599,3 +599,7 @@ analysis_scope同次领域判断联合问题/当前回答，不以缺goal默认�
 ## 2026-10-22 对象异议复用复核路径，不替审核补无关题设
 
 规则与应用按命题区分；同category对象争议用既有提取忠实性异议明确说明并保持not_assessable/review_required，不误用不同category的classification_issue、不嵌套、不静默改类型。新v2指令显式注入，原schema13/政策/存储/封存批次不变；离线替身不证明模型分类正确。见[evaluation/public-review-object-v2/README.md](evaluation/public-review-object-v2/README.md)。
+
+## 2026-10-22 OB2停止后转编排等价验收，不自动语义追修
+
+规则复述分类有有限正向观察，数值比较被列应用却仅选题设仍触发严格失败；不改预期、类型或依据门禁以补跑通过。对象诊断未执行，不能报成功；fidelity执行占位uncertain不当合法对象异议。语义缺口与编排迁移验收分离：可以推进只切路径的真实服务集成验收，固定Agent/提示/政策、保留失败与部分结果及旧入口；不自动切生产、跑新批或清理候选。见[evaluation/public-review-object-v2-live-v1/results-v1.md](evaluation/public-review-object-v2-live-v1/results-v1.md)。

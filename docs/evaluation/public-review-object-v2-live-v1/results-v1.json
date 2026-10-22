@@ -1,0 +1,276 @@
+{
+  "version": "OB2-live-results-v1",
+  "source_base_commit": "c59badb1807777646c5a16da66003ac2675d0bb9",
+  "status": "closed_no_resume",
+  "offline_checks": {
+    "passed": 28,
+    "seconds": 2.893
+  },
+  "length": {
+    "old_unrecognized_requirement": "中文正文不超过220个Unicode字符。",
+    "new_requirement": "中文正文不超过220字符。",
+    "maximum_characters": 220,
+    "advisory_target": 165,
+    "actual_answer_characters": 103,
+    "220_accepted_221_rejected": true,
+    "only_first_branch_length_and_derived_message_identity_changed": true
+  },
+  "branches": [
+    {
+      "request_id": "OB2-01",
+      "mode": "question_answer",
+      "status": "execution_failed",
+      "reason": null,
+      "times": {
+        "generation_output_persisted": 1.076157700001204,
+        "power_domain_review_persisted": 13.406254400000762,
+        "evidence_verification_persisted": 31.604371900000842,
+        "final_result_persisted": 31.710843200000454
+      },
+      "workload": [
+        {
+          "after": "before_extraction",
+          "citations": 2,
+          "independent_initial": 1,
+          "independent_provisional": true,
+          "required_initial_remaining": 5,
+          "used": 1,
+          "available": 39,
+          "initial_shortfall": 0,
+          "room_after_initial": 34,
+          "correction_potential_remaining": 3,
+          "note": "Actual C and eligible I; no completion guarantee, citation removal or budget increase."
+        },
+        {
+          "after": "extraction",
+          "citations": 2,
+          "independent_initial": 1,
+          "independent_provisional": false,
+          "required_initial_remaining": 4,
+          "used": 3,
+          "available": 37,
+          "initial_shortfall": 0,
+          "room_after_initial": 33,
+          "correction_potential_remaining": 2,
+          "note": "Actual C and eligible I; no completion guarantee, citation removal or budget increase."
+        }
+      ],
+      "calls": 8,
+      "actual_citations": 2
+    },
+    {
+      "request_id": "OB2-02",
+      "mode": "assess_existing",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "times": {},
+      "workload": [],
+      "calls": 0,
+      "actual_citations": null
+    },
+    {
+      "request_id": "OB2-03",
+      "mode": "assess_existing",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "times": {},
+      "workload": [],
+      "calls": 0,
+      "actual_citations": null
+    }
+  ],
+  "calls": {
+    "total": 8,
+    "initial": 6,
+    "correction": 2,
+    "tokens": {
+      "input_tokens": 44282,
+      "output_tokens": 9335,
+      "total_tokens": 53617
+    },
+    "records": [
+      {
+        "call_number": 1,
+        "component": "generation",
+        "prompt_version": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+        "correction": false,
+        "duration_ms": 1025,
+        "output_status": "valid_structure",
+        "usage": {
+          "input_tokens": 1965,
+          "output_tokens": 123,
+          "total_tokens": 2088,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1280,
+          "cache_miss_tokens": 685
+        },
+        "invocation_id": "b866242be4734be1978a834050191157",
+        "answer_version": null
+      },
+      {
+        "call_number": 2,
+        "component": "claim_extraction",
+        "prompt_version": "public-review-object-boundary-v2-dev-extraction",
+        "correction": false,
+        "duration_ms": 4236,
+        "output_status": "invalid_structure",
+        "usage": {
+          "input_tokens": 2390,
+          "output_tokens": 1251,
+          "total_tokens": 3641,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1536,
+          "cache_miss_tokens": 854
+        },
+        "invocation_id": "e340c88c482041da93f1abfbfbca2df2",
+        "answer_version": 1
+      },
+      {
+        "call_number": 3,
+        "component": "claim_extraction",
+        "prompt_version": "public-review-object-boundary-v2-dev-extraction",
+        "correction": true,
+        "duration_ms": 3939,
+        "output_status": "valid_structure",
+        "usage": {
+          "input_tokens": 4086,
+          "output_tokens": 1306,
+          "total_tokens": 5392,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 2304,
+          "cache_miss_tokens": 1782
+        },
+        "invocation_id": "e340c88c482041da93f1abfbfbca2df2",
+        "answer_version": 1
+      },
+      {
+        "call_number": 4,
+        "component": "evidence_verification",
+        "prompt_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "correction": false,
+        "duration_ms": 8929,
+        "output_status": "invalid_structure",
+        "usage": {
+          "input_tokens": 8580,
+          "output_tokens": 2563,
+          "total_tokens": 11143,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 3200,
+          "cache_miss_tokens": 5380
+        },
+        "invocation_id": "7abd627989754019a3f983dc159a2753",
+        "answer_version": 1
+      },
+      {
+        "call_number": 5,
+        "component": "power_domain_review",
+        "prompt_version": "power-domain-review-v3.5-task-obligations",
+        "correction": false,
+        "duration_ms": 3915,
+        "output_status": "valid_structure",
+        "usage": {
+          "input_tokens": 6181,
+          "output_tokens": 920,
+          "total_tokens": 7101,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1280,
+          "cache_miss_tokens": 4901
+        },
+        "invocation_id": "692b8295f9044935b48e2e9b9987e733",
+        "answer_version": 1
+      },
+      {
+        "call_number": 6,
+        "component": "evidence_verification",
+        "prompt_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "correction": true,
+        "duration_ms": 8697,
+        "output_status": "invalid_structure",
+        "usage": {
+          "input_tokens": 14058,
+          "output_tokens": 2547,
+          "total_tokens": 16605,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 8576,
+          "cache_miss_tokens": 5482
+        },
+        "invocation_id": "7abd627989754019a3f983dc159a2753",
+        "answer_version": 1
+      },
+      {
+        "call_number": 7,
+        "component": "evidence_verification",
+        "prompt_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "correction": false,
+        "duration_ms": 2377,
+        "output_status": "valid_structure",
+        "usage": {
+          "input_tokens": 3526,
+          "output_tokens": 342,
+          "total_tokens": 3868,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1792,
+          "cache_miss_tokens": 1734
+        },
+        "invocation_id": "7abd627989754019a3f983dc159a2753",
+        "answer_version": 1
+      },
+      {
+        "call_number": 8,
+        "component": "evidence_verification",
+        "prompt_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "correction": false,
+        "duration_ms": 1506,
+        "output_status": "valid_structure",
+        "usage": {
+          "input_tokens": 3496,
+          "output_tokens": 283,
+          "total_tokens": 3779,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 2304,
+          "cache_miss_tokens": 1192
+        },
+        "invocation_id": "7abd627989754019a3f983dc159a2753",
+        "answer_version": 1
+      }
+    ],
+    "actual_invoice_amount": null
+  },
+  "effective": {
+    "claims": 9,
+    "components": 10,
+    "supported_claims": 8,
+    "supported_components": 9,
+    "execution_placeholders": 1,
+    "object_objections_observed": 0,
+    "coverage": {
+      "R1": "covered",
+      "R2": "covered",
+      "R3": "partial",
+      "R3_reason": "Practice scope retained, but rule and instance separated by two newlines, violating same-paragraph requirement. Cannot credit reviewer rationale for missing requested organization."
+    }
+  },
+  "literal_fidelity_vs_object_issue": {
+    "OB2-01": "Retained model fidelity faithful; execution-placeholder uncertain is not a real object objection. Pure arithmetic versus scenario application remains a type/obligation concern.",
+    "OB2-02": "unexecuted",
+    "OB2-03": "unexecuted: controlled object fault not assessed; literal fidelity and object objection axes have no observed model result"
+  },
+  "readiness": {
+    "production_switch": false,
+    "reason": "Known deterministic failure is an explicit terminal outcome to compare in sequential/graph integration; semantic perfection is not a migration prerequisite. No graph service run in this batch; freeze agents/prompts/policy, preserve old entry and failure/partial outcomes. New real calls require separate scope and authorization.",
+    "langgraph_service_acceptance_phase_ready": true
+  },
+  "identities": {
+    "bound_files": 107,
+    "actual_message_hashes": 8,
+    "old_artifacts_unchanged": 88
+  }
+}

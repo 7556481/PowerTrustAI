@@ -1,0 +1,1561 @@
+{
+  "version": "OB2-live-prediction-review-v1",
+  "provenance": "AI-assisted text review; user-supervised execution, not user-confirmed predictions",
+  "actual_answer": {
+    "answer_id": "OB2-01-answer",
+    "version": 1,
+    "text": "练习规则：得分≥64分允许省略标签Q，也允许保留；低于64分不允许省略；无论得分如何，均不要求必须省略，该规则仅用于本练习，不是现实产品规范。\n\n本题71分≥64分，故可省略标签Q，也可保留；不属必须省略。",
+    "assumptions": [],
+    "missing_information": [],
+    "citations": [
+      {
+        "start_offset": 0,
+        "end_offset": 71,
+        "evidence_ids": [
+          "OB2-E1"
+        ]
+      },
+      {
+        "start_offset": 73,
+        "end_offset": 103,
+        "evidence_ids": [
+          "OB2-E1"
+        ]
+      }
+    ]
+  },
+  "all_actual_responses": [
+    {
+      "call_number": 1,
+      "component": "generation",
+      "prompt_version": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+      "correction": false,
+      "output_status": "valid_structure",
+      "response_text": "{\"answer_units\":[{\"kind\":\"technical\",\"text\":\"练习规则：得分≥64分允许省略标签Q，也允许保留；低于64分不允许省略；无论得分如何，均不要求必须省略，该规则仅用于本练习，不是现实产品规范。\",\"evidence_ids\":[\"OB2-E1\"]},{\"kind\":\"technical\",\"text\":\"本题71分≥64分，故可省略标签Q，也可保留；不属必须省略。\",\"evidence_ids\":[\"OB2-E1\"]}],\"assumptions\":[],\"missing_information\":[],\"evidence_sufficient\":true}",
+      "response_sha256": "3b58d0db0dbe2fd568717ab9bbdeac20fc7793ff896b324949ab5419f747a63e",
+      "validation_error": null
+    },
+    {
+      "call_number": 2,
+      "component": "claim_extraction",
+      "prompt_version": "public-review-object-boundary-v2-dev-extraction",
+      "correction": false,
+      "output_status": "invalid_structure",
+      "response_text": "{\"claims\":[{\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\",\"proposition\":\"在练习规则下，得分≥64分允许省略标签Q，也允许保留。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分≥64分\",\"对象：练习规则\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"得分≥64分允许省略标签Q。\",\"basis_target\":\"document_body\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"literature\",\"premise_ids\":[]},{\"category\":\"technical_fact\",\"proposition\":\"得分≥64分允许保留标签Q。\",\"basis_target\":\"document_body\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"literature\",\"premise_ids\":[]}]},{\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\",\"proposition\":\"在练习规则下，得分低于64分不允许省略标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分低于64分\",\"对象：练习规则\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"得分低于64分不允许省略标签Q。\",\"basis_target\":\"document_body\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"literature\",\"premise_ids\":[]}]},{\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\",\"proposition\":\"在练习规则下，无论得分如何，均不要求必须省略标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：无论得分如何\",\"对象：练习规则\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"无论得分如何，均不要求必须省略标签Q。\",\"basis_target\":\"document_body\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"literature\",\"premise_ids\":[]}]},{\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\",\"proposition\":\"该规则仅用于本练习，不是现实产品规范。\",\"claim_type\":\"answer_scope\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"对象：练习规则\"],\"components\":[{\"category\":\"answer_scope\",\"proposition\":\"该规则仅用于本练习，不是现实产品规范。\",\"basis_target\":\"answer_text\",\"verification_obligation\":\"answer_scope\",\"object_kind\":\"ordinary\",\"premise_ids\":[]}]},{\"anchor_id\":\"answer-anchor-f21c72f3292c9690d75fe324\",\"proposition\":\"本题得分为71分，且71分≥64分。\",\"claim_type\":\"input_report\",\"assertion_role\":\"input_report\",\"semantic_qualifiers\":[\"本题得分71分\"],\"components\":[{\"category\":\"input_evidence_coverage\",\"proposition\":\"本题得分为71分。\",\"basis_target\":\"input_snapshot\",\"verification_obligation\":\"input_provided\",\"object_kind\":\"premise_restatement\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]},{\"category\":\"technical_fact\",\"proposition\":\"71分≥64分。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]}]},{\"anchor_id\":\"answer-anchor-f21c72f3292c9690d75fe324\",\"proposition\":\"按题设得分，可省略标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分71分≥64分\",\"对象：本题练习\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"按题设得分，可省略标签Q。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]}]},{\"anchor_id\":\"answer-anchor-f21c72f3292c9690d75fe324\",\"proposition\":\"按题设得分，也可保留标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分71分≥64分\",\"对象：本题练习\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"按题设得分，也可保留标签Q。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]}]},{\"anchor_id\":\"answer-anchor-f21c72f3292c9690d75fe324\",\"proposition\":\"按题设得分，不属于必须省略标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分71分≥64分\",\"对象：本题练习\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"按题设得分，不属于必须省略标签Q。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]}]}],\"non_claims\":[]}",
+      "response_sha256": "e11b03b7a855dbd5edd0d954e441fcd9a588cc55da725d0b7137c3037df92a23",
+      "validation_error": {
+        "stage": "public-review-premise-boundary-v1-dev-extraction",
+        "field_path": "$.claims[4].components[0]",
+        "constraint": "independent_task_premise_target_required",
+        "errors": [
+          {
+            "stage": "public-review-premise-boundary-v1-dev-extraction",
+            "field_path": "$.claims[4].components[0]",
+            "constraint": "independent_task_premise_target_required"
+          }
+        ]
+      }
+    },
+    {
+      "call_number": 3,
+      "component": "claim_extraction",
+      "prompt_version": "public-review-object-boundary-v2-dev-extraction",
+      "correction": true,
+      "output_status": "valid_structure",
+      "response_text": "{\"claims\":[{\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\",\"proposition\":\"在练习规则下，得分≥64分允许省略标签Q，也允许保留。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分≥64分\",\"对象：练习规则\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"得分≥64分允许省略标签Q。\",\"basis_target\":\"document_body\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"literature\",\"premise_ids\":[]},{\"category\":\"technical_fact\",\"proposition\":\"得分≥64分允许保留标签Q。\",\"basis_target\":\"document_body\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"literature\",\"premise_ids\":[]}]},{\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\",\"proposition\":\"在练习规则下，得分低于64分不允许省略标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分低于64分\",\"对象：练习规则\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"得分低于64分不允许省略标签Q。\",\"basis_target\":\"document_body\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"literature\",\"premise_ids\":[]}]},{\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\",\"proposition\":\"在练习规则下，无论得分如何，均不要求必须省略标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：无论得分如何\",\"对象：练习规则\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"无论得分如何，均不要求必须省略标签Q。\",\"basis_target\":\"document_body\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"literature\",\"premise_ids\":[]}]},{\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\",\"proposition\":\"该规则仅用于本练习，不是现实产品规范。\",\"claim_type\":\"answer_scope\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"对象：练习规则\"],\"components\":[{\"category\":\"answer_scope\",\"proposition\":\"该规则仅用于本练习，不是现实产品规范。\",\"basis_target\":\"answer_text\",\"verification_obligation\":\"answer_scope\",\"object_kind\":\"ordinary\",\"premise_ids\":[]}]},{\"anchor_id\":\"answer-anchor-f21c72f3292c9690d75fe324\",\"proposition\":\"本题得分为71分。\",\"claim_type\":\"input_report\",\"assertion_role\":\"input_report\",\"semantic_qualifiers\":[\"本题得分71分\"],\"components\":[{\"category\":\"input_evidence_coverage\",\"proposition\":\"本题得分为71分。\",\"basis_target\":\"task_premise\",\"verification_obligation\":\"input_provided\",\"object_kind\":\"premise_restatement\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]}]},{\"anchor_id\":\"answer-anchor-f21c72f3292c9690d75fe324\",\"proposition\":\"71分≥64分。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"本题得分71分\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"71分≥64分。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]}]},{\"anchor_id\":\"answer-anchor-f21c72f3292c9690d75fe324\",\"proposition\":\"按题设得分，可省略标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分71分≥64分\",\"对象：本题练习\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"按题设得分，可省略标签Q。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]}]},{\"anchor_id\":\"answer-anchor-f21c72f3292c9690d75fe324\",\"proposition\":\"按题设得分，也可保留标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分71分≥64分\",\"对象：本题练习\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"按题设得分，也可保留标签Q。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]}]},{\"anchor_id\":\"answer-anchor-f21c72f3292c9690d75fe324\",\"proposition\":\"按题设得分，不属于必须省略标签Q。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"条件：得分71分≥64分\",\"对象：本题练习\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"按题设得分，不属于必须省略标签Q。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"]}]}],\"non_claims\":[]}",
+      "response_sha256": "d3f3a0ebbd86673337a8d281ba82be308ddff1993cf21abbfd02fd435492a702",
+      "validation_error": null
+    },
+    {
+      "call_number": 4,
+      "component": "evidence_verification",
+      "prompt_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+      "correction": false,
+      "output_status": "invalid_structure",
+      "response_text": "{\"findings\":[{\"claim_id\":\"claim-61d648b57c50709d4353f270\",\"rationale\":\"The synthetic practice paragraph states that at ≥64 points omission of tag Q is allowed and retention is also allowed.\",\"applicability_conditions\":[\"Applies within the synthetic practice rule only, not a real product specification.\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"The body permits omission at ≥64.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"Condition and permission preserved.\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"The practice rule explicitly allows omission at or above 64 points.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"得分≥64分\",\"relationship\":\"preserved\",\"reason\":\"The threshold at or above 64 points is the qualifier for permitted omission.\"}],\"causal_direction_preserved\":true,\"repair\":null}},{\"component_index\":1,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"The body permits retention at ≥64.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"Permission to retain is preserved.\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"The practice rule allows retention as well as omission at or above 64.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"得分≥64分\",\"relationship\":\"preserved\",\"reason\":\"The threshold qualifier governs the permission to retain.\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-6e128937673b1e8e37a0aa48\",\"rationale\":\"The paragraph states that below 64 points omission of tag Q is not allowed.\",\"applicability_conditions\":[\"Applies within the synthetic practice rule only.\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"Body denies omission below 64.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"Negation and threshold preserved.\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"Below 64, omission is prohibited.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"低于64分\",\"relationship\":\"preserved\",\"reason\":\"The below-64 threshold is the qualifier for the prohibition.\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-62303ac74b202db071c3f7df\",\"rationale\":\"The paragraph states that regardless of score omission is never required.\",\"applicability_conditions\":[\"Applies within the synthetic practice rule only.\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"Body denies any mandatory omission.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"Non-mandatory nature preserved.\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"No score makes omission mandatory.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-e11fa9c865dbd9756ad3a3ce\",\"rationale\":\"The answer limits the rule to the practice and denies it is a real product specification.\",\"applicability_conditions\":[],\"bases\":[{\"type\":\"answer_text_reference\",\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"The answer body itself states the bounded practice-only scope.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"answer_scope\",\"rationale\":\"Scope limitation is stated in the answer.\"}}]},{\"claim_id\":\"claim-fd57705c319363c7e8058485\",\"rationale\":\"The task premise stipulates the sample score as 71.\",\"applicability_conditions\":[\"Stipulated practice fact, not a verified field record.\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"The premise records a score of 71.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"input_report\",\"verification_obligation\":\"input_provided\",\"rationale\":\"Faithful restatement of the stipulated score.\"}}]},{\"claim_id\":\"claim-2d68b7cc4b810d9204ae4247\",\"rationale\":\"The arithmetic comparison 71≥64 is correct given the stipulated score.\",\"applicability_conditions\":[\"Based on the stipulated 71-point practice score.\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"71 is at least 64.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"Simple comparison preserved.\"},\"support_relation\":{\"source_kind\":\"other\",\"explanation\":\"Arithmetic comparison using the stipulated score.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"other\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-a1982560de1b25bb47cd7daa\",\"rationale\":\"The rule plus the stipulated 71-point score supports that omission is permitted.\",\"applicability_conditions\":[\"Within the synthetic practice rule and stipulated score.\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"},{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"Rule permits omission at ≥64 and the premise sets 71.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"Application of rule to stipulated score preserved.\"},\"support_relation\":{\"source_kind\":\"mixed\",\"explanation\":\"Rule body permits omission at ≥64; stipulated score is 71.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"本题71分≥64分\",\"relationship\":\"preserved\",\"reason\":\"Meeting the ≥64 threshold is needed for omission to be permitted.\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-1fdf9f4aeafaed6ec122b10e\",\"rationale\":\"The rule plus stipulated score supports that retention is permitted.\",\"applicability_conditions\":[\"Within the synthetic practice rule and stipulated score.\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"},{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"Rule permits retention at ≥64 and premise sets 71.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"Application preserved.\"},\"support_relation\":{\"source_kind\":\"mixed\",\"explanation\":\"Rule body allows retention at ≥64; score is 71.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"本题71分≥64分\",\"relationship\":\"preserved\",\"reason\":\"The ≥64 threshold qualifier is satisfied and governs permitted retention.\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-629a50d1d634f057c377f7d6\",\"rationale\":\"The rule states omission is never mandatory, so the applied conclusion holds.\",\"applicability_conditions\":[\"Within the synthetic practice rule and stipulated score.\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"},{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"Rule denies mandatory omission; score applied.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"Non-mandatory conclusion preserved.\"},\"support_relation\":{\"source_kind\":\"mixed\",\"explanation\":\"No score makes omission mandatory.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]}]}",
+      "response_sha256": "b50ffd6d4391384d0ca5a29b274e3edb239e551b03a73bafde80557305f72346",
+      "validation_error": {
+        "stage": "core_validation",
+        "field_path": "$.findings[5].component_reviews[0]",
+        "constraint": "rule application also requires selected technical body",
+        "errors": [
+          {
+            "stage": "core_validation",
+            "field_path": "$.findings[5].component_reviews[0]",
+            "constraint": "rule application also requires selected technical body"
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "findings",
+            "id": "claim-61d648b57c50709d4353f270",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-6e128937673b1e8e37a0aa48",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-62303ac74b202db071c3f7df",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-e11fa9c865dbd9756ad3a3ce",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-fd57705c319363c7e8058485",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-a1982560de1b25bb47cd7daa",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-1fdf9f4aeafaed6ec122b10e",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-629a50d1d634f057c377f7d6",
+            "response_attempt": 1
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "call_number": 5,
+      "component": "power_domain_review",
+      "prompt_version": "power-domain-review-v3.5-task-obligations",
+      "correction": false,
+      "output_status": "valid_structure",
+      "response_text": "{\"checks\":[{\"check_id\":\"answer_units\",\"status\":\"not_applicable\",\"claim_ids\":[\"claim-2d68b7cc4b810d9204ae4247\"],\"quote_ids\":[],\"basis_kind\":\"engineering_rule\",\"rationale\":\"答案中无量纲量纲换算或SI单位断言，仅有71≥64的分数比较，无量纲不一致。\",\"missing_prerequisites\":[]},{\"check_id\":\"analysis_scope\",\"status\":\"no_issue\",\"claim_ids\":[\"claim-61d648b57c50709d4353f270\",\"claim-6e128937673b1e8e37a0aa48\",\"claim-62303ac74b202db071c3f7df\",\"claim-e11fa9c865dbd9756ad3a3ce\",\"claim-a1982560de1b25bb47cd7daa\",\"claim-1fdf9f4aeafaed6ec122b10e\",\"claim-629a50d1d634f057c377f7d6\"],\"quote_ids\":[\"scope-d63848e34466a9ad7dc2e9a9-0\"],\"basis_kind\":\"literature\",\"rationale\":\"用户问题为教学练习的概念性规则说明与题设应用，答案完整覆盖三子问（可省略、是否必须省略、可保留），并明确该规则仅用于本练习、非现实产品规范，与引文一致，无越界工程保证。\",\"missing_prerequisites\":[],\"task_scope\":\"conceptual\"},{\"check_id\":\"operating_prerequisites\",\"status\":\"not_applicable\",\"claim_ids\":[],\"quote_ids\":[],\"basis_kind\":\"engineering_rule\",\"rationale\":\"本答复为练习规则说明，不涉及设备运行、操作指令或工程建议，无运行前提需要声明。\",\"missing_prerequisites\":[]}],\"missing_information_review\":[],\"safety_reviews\":[{\"claim_id\":\"claim-61d648b57c50709d4353f270\",\"verdict\":\"not_applicable\",\"reason\":\"教学练习中标签省略规则说明，非启用/停用防护功能或带电操作建议，无危害机制。\",\"source_ids\":[]},{\"claim_id\":\"claim-6e128937673b1e8e37a0aa48\",\"verdict\":\"not_applicable\",\"reason\":\"练习规则的低分禁止省略条款描述，与电气防护功能无关，无危害机制。\",\"source_ids\":[]},{\"claim_id\":\"claim-62303ac74b202db071c3f7df\",\"verdict\":\"not_applicable\",\"reason\":\"练习规则中“不要求必须省略”为概念性规则陈述，非操作建议，无防护功能影响。\",\"source_ids\":[]},{\"claim_id\":\"claim-e11fa9c865dbd9756ad3a3ce\",\"verdict\":\"not_applicable\",\"reason\":\"范围限定声明，说明规则仅用于练习、非现实规范，不构成任何操作或防护绕过建议。\",\"source_ids\":[]},{\"claim_id\":\"claim-fd57705c319363c7e8058485\",\"verdict\":\"not_applicable\",\"reason\":\"对题设输入（71分）的复述，非操作或防护建议，无危害机制。\",\"source_ids\":[]},{\"claim_id\":\"claim-2d68b7cc4b810d9204ae4247\",\"verdict\":\"not_applicable\",\"reason\":\"纯数值比较陈述，与防护功能或带电运行无关。\",\"source_ids\":[]},{\"claim_id\":\"claim-a1982560de1b25bb47cd7daa\",\"verdict\":\"not_applicable\",\"reason\":\"练习规则下的标签省略判断，属教学概念，不涉及 defeating 防护功能或带电继续运行。\",\"source_ids\":[]},{\"claim_id\":\"claim-1fdf9f4aeafaed6ec122b10e\",\"verdict\":\"not_applicable\",\"reason\":\"练习规则下的保留判断，概念性说明，无安全危害机制。\",\"source_ids\":[]},{\"claim_id\":\"claim-629a50d1d634f057c377f7d6\",\"verdict\":\"not_applicable\",\"reason\":\"练习规则下“不属于必须省略”的判断，纯规则解释，无操作或防护绕过含义。\",\"source_ids\":[]}]}",
+      "response_sha256": "a0bd41e4ee0579854b6c4461cdfbb2c09d260d68598a8ab42d49dedc348c0747",
+      "validation_error": null
+    },
+    {
+      "call_number": 6,
+      "component": "evidence_verification",
+      "prompt_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+      "correction": true,
+      "output_status": "invalid_structure",
+      "response_text": "{\"findings\":[\n{\"claim_id\":\"claim-61d648b57c50709d4353f270\",\"rationale\":\"合成练习段落规定得分达到或超过64分时允许省略标签Q，也允许保留。\",\"applicability_conditions\":[\"仅适用于本合成练习规则，不是现实产品规范。\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"}],\"component_reviews\":[\n{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"正文允许在≥64分时省略。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"条件与许可含义保留。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"练习规则明确允许达到或超过64分时省略标签Q。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"得分≥64分\",\"relationship\":\"preserved\",\"reason\":\"该阈值是允许省略的限定条件。\"}],\"causal_direction_preserved\":true,\"repair\":null}},\n{\"component_index\":1,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"正文允许在≥64分时保留。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"保留许可含义保留。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"练习规则在达到或超过64分时允许保留。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"得分≥64分\",\"relationship\":\"preserved\",\"reason\":\"该阈值限定保留许可。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},\n{\"claim_id\":\"claim-6e128937673b1e8e37a0aa48\",\"rationale\":\"段落规定低于64分时不允许省略标签Q。\",\"applicability_conditions\":[\"仅适用于本合成练习规则。\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"}],\"component_reviews\":[\n{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"正文否定低于64分时省略。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"否定与阈值保留。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"低于64分时省略被禁止。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"低于64分\",\"relationship\":\"preserved\",\"reason\":\"低于64分是该禁止的限定条件。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},\n{\"claim_id\":\"claim-62303ac74b202db071c3f7df\",\"rationale\":\"段落规定无论得分如何均不要求必须省略标签Q。\",\"applicability_conditions\":[\"仅适用于本合成练习规则。\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"}],\"component_reviews\":[\n{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"正文否定任何强制省略。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"非强制性含义保留。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"无论得分如何，均不强制省略。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]},\n{\"claim_id\":\"claim-e11fa9c865dbd9756ad3a3ce\",\"rationale\":\"答案本身将该规则限制为练习规则，并否认其为现实产品规范。\",\"applicability_conditions\":[],\"bases\":[{\"type\":\"answer_text_reference\",\"anchor_id\":\"answer-anchor-72db5231db733e44a38951fb\"}],\"component_reviews\":[\n{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"答题正文明确陈述仅限练习的范围。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"answer_scope\",\"rationale\":\"答案中已陈述范围限制。\"}}]},\n{\"claim_id\":\"claim-fd57705c319363c7e8058485\",\"rationale\":\"任务前提规定样品得分为71分。\",\"applicability_conditions\":[\"练习假定事实，不是经验证的现场记录。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[\n{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"前提记录得分为71分。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"input_report\",\"verification_obligation\":\"input_provided\",\"rationale\":\"对约定得分的忠实转述。\"}}]},\n{\"claim_id\":\"claim-2d68b7cc4b810d9204ae4247\",\"rationale\":\"依据约定得分，71≥64这一算术比较成立。\",\"applicability_conditions\":[\"基于约定的71分练习得分。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[\n{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"71不小于64。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"简单比较关系保留。\"},\"support_relation\":{\"source_kind\":\"other\",\"explanation\":\"使用约定得分进行算术比较。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"other\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]},\n{\"claim_id\":\"claim-a1982560de1b25bb47cd7daa\",\"rationale\":\"规则正文允许≥64分时省略，且约定得分为71分，故结论成立。\",\"applicability_conditions\":[\"在本合成练习规则与约定得分范围内。\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"},{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[\n{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"规则允许≥64分省略，且前提设定为71分。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"规则对约定得分的适用条件保留。\"},\"support_relation\":{\"source_kind\":\"mixed\",\"explanation\":\"规则正文允许≥64分省略；约定得分为71分。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"本题71分≥64分\",\"relationship\":\"preserved\",\"reason\":\"达到≥64阈值是允许省略的必要条件。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},\n{\"claim_id\":\"claim-1fdf9f4aeafaed6ec122b10e\",\"rationale\":\"规则正文允许≥64分时保留，且约定得分为71分，故结论成立。\",\"applicability_conditions\":[\"在本合成练习规则与约定得分范围内。\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"},{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[\n{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"规则允许≥64分保留，且前提设定为71分。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"适用关系保留。\"},\"support_relation\":{\"source_kind\":\"mixed\",\"explanation\":\"规则正文允许≥64分保留；得分为71分。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-a0a64d36768d3f5f43b24dd3\",\"necessity\":\"required\",\"answer_quote\":\"本题71分≥64分\",\"relationship\":\"preserved\",\"reason\":\"≥64阈值已满足并限定保留许可。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},\n{\"claim_id\":\"claim-629a50d1d634f057c377f7d6\",\"rationale\":\"规则正文规定从不强制省略，故适用结论成立。\",\"applicability_conditions\":[\"在本合成练习规则与约定得分范围内。\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-1405d11d8e787ab70335dade-0\"},{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-04b9d7ad855b4516d755c7d3b4086360\"}],\"component_reviews\":[\n{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"规则否定强制省略，且得分已代入。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"非强制性结论保留。\"},\"support_relation\":{\"source_kind\":\"mixed\",\"explanation\":\"无论得分如何，均不强制省略。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]}\n]}",
+      "response_sha256": "63c719cdd9ee4022c86c95a613f29f216d528cf91f2d3490ef0d950f72b238d1",
+      "validation_error": {
+        "stage": "core_validation",
+        "field_path": "$.findings[5].component_reviews[0]",
+        "constraint": "rule application also requires selected technical body",
+        "errors": [
+          {
+            "stage": "core_validation",
+            "field_path": "$.findings[5].component_reviews[0]",
+            "constraint": "rule application also requires selected technical body"
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "findings",
+            "id": "claim-61d648b57c50709d4353f270",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-6e128937673b1e8e37a0aa48",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-62303ac74b202db071c3f7df",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-e11fa9c865dbd9756ad3a3ce",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-fd57705c319363c7e8058485",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-a1982560de1b25bb47cd7daa",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-1fdf9f4aeafaed6ec122b10e",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-629a50d1d634f057c377f7d6",
+            "response_attempt": 2
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "call_number": 7,
+      "component": "evidence_verification",
+      "prompt_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+      "correction": false,
+      "output_status": "valid_structure",
+      "response_text": "{\"citation_reviews\":[{\"citation_index\":0,\"status\":\"supported\",\"rationale\":\"绑定来源是唯一的合成练习规则段落，完整覆盖答案所引内容：≥64分允许省略也允许保留、<64分不允许省略、任何得分均不要求必须省略，且明确只用于本练习、非现实产品规范。答案所述分数边界、允许/不允许/不要求必须省略的语气与范围均与来源一致。\",\"applicability_conditions\":[],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-a43a581f342c38feaeca17b1-0\"}],\"support_relation\":{\"source_kind\":\"other\",\"explanation\":\"该来源为合成练习规则段落，直接陈述省略标签Q的得分条件与允许/不允许/非必须省略的规范方向，并限定仅适用于本练习。答案忠实复述了这些条件与限制。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-7e9ff18d67b710b6cab5e10f\",\"necessity\":\"required\",\"answer_quote\":\"得分≥64分允许省略标签Q，也允许保留；低于64分不允许省略\",\"relationship\":\"preserved\",\"reason\":\"该载体同时提供≥64分允许省略与保留、<64分不允许省略的得分阈值条件，答案以等价阈值表述完整保留，并保留“不论得分均不要求必须省略”的非必然性。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]}",
+      "response_sha256": "17d8de7b209068099c5a7e504aea7aeffb7690042b1d8926bfbad7b59868b7ed",
+      "validation_error": null
+    },
+    {
+      "call_number": 8,
+      "component": "evidence_verification",
+      "prompt_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+      "correction": false,
+      "output_status": "valid_structure",
+      "response_text": "{\"citation_reviews\":[{\"citation_index\":1,\"status\":\"supported\",\"rationale\":\"绑定片段写明：得分达到或超过64分时允许省略标签Q，也允许保留；且无论得分如何均不要求必须省略。答案称71分≥64分故可省略、可保留、不属必须省略，与规则一致。\",\"applicability_conditions\":[],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-fd99b739d0cea199f5688548-0\"}],\"support_relation\":{\"source_kind\":\"other\",\"explanation\":\"合成练习段落直接规定阈值、可省略、可保留及不要求必须省略；答案套用71分≥64分得出可省略、可保留、非必须省略。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-9ef11e22f60ea241ef2dd918\",\"necessity\":\"required\",\"answer_quote\":\"本题71分≥64分\",\"relationship\":\"preserved\",\"reason\":\"规则以得分达到或超过64分为允许省略兼允许保留的阈值条件；答案明确71分≥64分，满足该限定。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]}",
+      "response_sha256": "59b628658e2131615be0726997bf70d31331b779b2019074dd7b9d386524dc35",
+      "validation_error": null
+    }
+  ],
+  "effective_findings": [
+    {
+      "claim": {
+        "claim_id": "claim-61d648b57c50709d4353f270",
+        "answer_id": "OB2-01-answer",
+        "answer_version": 1,
+        "text": "练习规则：得分≥64分允许省略标签Q，也允许保留；低于64分不允许省略；无论得分如何，均不要求必须省略，该规则仅用于本练习，不是现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 71,
+        "claim_type": "technical_fact",
+        "proposition": "在练习规则下，得分≥64分允许省略标签Q，也允许保留。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-61d648b57c50709d4353f270-part-0",
+            "category": "technical_fact",
+            "proposition": "得分≥64分允许省略标签Q。"
+          },
+          {
+            "component_id": "claim-61d648b57c50709d4353f270-part-1",
+            "category": "technical_fact",
+            "proposition": "得分≥64分允许保留标签Q。"
+          }
+        ],
+        "anchor_group_id": "anchor-433074e8668b65e24f2cd87f",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "条件：得分≥64分",
+          "对象：练习规则"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "document_body",
+          "document_body"
+        ],
+        "component_obligations": [
+          "technical_truth",
+          "technical_truth"
+        ],
+        "component_objects": [
+          "literature",
+          "literature"
+        ],
+        "component_premise_ids": [
+          [],
+          []
+        ]
+      },
+      "finding": {
+        "finding_id": "finding-claim-61d648b57c50709d4353f270",
+        "claim_id": "claim-61d648b57c50709d4353f270",
+        "status": "supported",
+        "evidence_ids": [
+          "OB2-E1"
+        ],
+        "rationale": "合成练习段落规定得分达到或超过64分时允许省略标签Q，也允许保留。",
+        "checker_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "tool_result_ids": [],
+        "excerpts": [
+          {
+            "evidence_id": "OB2-E1",
+            "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 88
+          }
+        ],
+        "applicability_conditions": [
+          "仅适用于本合成练习规则，不是现实产品规范。"
+        ],
+        "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+        "checked_dimensions": [],
+        "claim_category": "technical_fact",
+        "assessment_basis": "typed_components",
+        "metadata_refs": [],
+        "scope_id": null,
+        "required_dimensions": [
+          "quantity",
+          "negation",
+          "causality",
+          "conditions",
+          "jurisdiction"
+        ],
+        "dimension_findings": [],
+        "bases": [
+          {
+            "type": "text_excerpt",
+            "evidence_id": "OB2-E1",
+            "excerpt": {
+              "evidence_id": "OB2-E1",
+              "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+              "start_offset": 0,
+              "end_offset": 88
+            },
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": "quote-209b5b4ead54eea9c88e776d"
+          }
+        ]
+      },
+      "component_reviews": [
+        {
+          "component_id": "claim-61d648b57c50709d4353f270-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0
+          ],
+          "rationale": "正文允许在≥64分时省略。",
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "条件与许可含义保留。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2"
+        },
+        {
+          "component_id": "claim-61d648b57c50709d4353f270-part-1",
+          "status": "supported",
+          "basis_indexes": [
+            0
+          ],
+          "rationale": "正文允许在≥64分时保留。",
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "保留许可含义保留。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2"
+        }
+      ]
+    },
+    {
+      "claim": {
+        "claim_id": "claim-6e128937673b1e8e37a0aa48",
+        "answer_id": "OB2-01-answer",
+        "answer_version": 1,
+        "text": "练习规则：得分≥64分允许省略标签Q，也允许保留；低于64分不允许省略；无论得分如何，均不要求必须省略，该规则仅用于本练习，不是现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 71,
+        "claim_type": "technical_fact",
+        "proposition": "在练习规则下，得分低于64分不允许省略标签Q。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-6e128937673b1e8e37a0aa48-part-0",
+            "category": "technical_fact",
+            "proposition": "得分低于64分不允许省略标签Q。"
+          }
+        ],
+        "anchor_group_id": "anchor-433074e8668b65e24f2cd87f",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "条件：得分低于64分",
+          "对象：练习规则"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "document_body"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "literature"
+        ],
+        "component_premise_ids": [
+          []
+        ]
+      },
+      "finding": {
+        "finding_id": "finding-claim-6e128937673b1e8e37a0aa48",
+        "claim_id": "claim-6e128937673b1e8e37a0aa48",
+        "status": "supported",
+        "evidence_ids": [
+          "OB2-E1"
+        ],
+        "rationale": "段落规定低于64分时不允许省略标签Q。",
+        "checker_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "tool_result_ids": [],
+        "excerpts": [
+          {
+            "evidence_id": "OB2-E1",
+            "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 88
+          }
+        ],
+        "applicability_conditions": [
+          "仅适用于本合成练习规则。"
+        ],
+        "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+        "checked_dimensions": [],
+        "claim_category": "technical_fact",
+        "assessment_basis": "typed_components",
+        "metadata_refs": [],
+        "scope_id": null,
+        "required_dimensions": [
+          "quantity",
+          "negation",
+          "causality",
+          "conditions",
+          "jurisdiction"
+        ],
+        "dimension_findings": [],
+        "bases": [
+          {
+            "type": "text_excerpt",
+            "evidence_id": "OB2-E1",
+            "excerpt": {
+              "evidence_id": "OB2-E1",
+              "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+              "start_offset": 0,
+              "end_offset": 88
+            },
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": "quote-209b5b4ead54eea9c88e776d"
+          }
+        ]
+      },
+      "component_reviews": [
+        {
+          "component_id": "claim-6e128937673b1e8e37a0aa48-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0
+          ],
+          "rationale": "正文否定低于64分时省略。",
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "否定与阈值保留。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2"
+        }
+      ]
+    },
+    {
+      "claim": {
+        "claim_id": "claim-62303ac74b202db071c3f7df",
+        "answer_id": "OB2-01-answer",
+        "answer_version": 1,
+        "text": "练习规则：得分≥64分允许省略标签Q，也允许保留；低于64分不允许省略；无论得分如何，均不要求必须省略，该规则仅用于本练习，不是现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 71,
+        "claim_type": "technical_fact",
+        "proposition": "在练习规则下，无论得分如何，均不要求必须省略标签Q。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-62303ac74b202db071c3f7df-part-0",
+            "category": "technical_fact",
+            "proposition": "无论得分如何，均不要求必须省略标签Q。"
+          }
+        ],
+        "anchor_group_id": "anchor-433074e8668b65e24f2cd87f",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "条件：无论得分如何",
+          "对象：练习规则"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "document_body"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "literature"
+        ],
+        "component_premise_ids": [
+          []
+        ]
+      },
+      "finding": {
+        "finding_id": "finding-claim-62303ac74b202db071c3f7df",
+        "claim_id": "claim-62303ac74b202db071c3f7df",
+        "status": "supported",
+        "evidence_ids": [
+          "OB2-E1"
+        ],
+        "rationale": "段落规定无论得分如何均不要求必须省略标签Q。",
+        "checker_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "tool_result_ids": [],
+        "excerpts": [
+          {
+            "evidence_id": "OB2-E1",
+            "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 88
+          }
+        ],
+        "applicability_conditions": [
+          "仅适用于本合成练习规则。"
+        ],
+        "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+        "checked_dimensions": [],
+        "claim_category": "technical_fact",
+        "assessment_basis": "typed_components",
+        "metadata_refs": [],
+        "scope_id": null,
+        "required_dimensions": [
+          "quantity",
+          "negation",
+          "causality",
+          "conditions",
+          "jurisdiction"
+        ],
+        "dimension_findings": [],
+        "bases": [
+          {
+            "type": "text_excerpt",
+            "evidence_id": "OB2-E1",
+            "excerpt": {
+              "evidence_id": "OB2-E1",
+              "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+              "start_offset": 0,
+              "end_offset": 88
+            },
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": "quote-209b5b4ead54eea9c88e776d"
+          }
+        ]
+      },
+      "component_reviews": [
+        {
+          "component_id": "claim-62303ac74b202db071c3f7df-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0
+          ],
+          "rationale": "正文否定任何强制省略。",
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "非强制性含义保留。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2"
+        }
+      ]
+    },
+    {
+      "claim": {
+        "claim_id": "claim-e11fa9c865dbd9756ad3a3ce",
+        "answer_id": "OB2-01-answer",
+        "answer_version": 1,
+        "text": "练习规则：得分≥64分允许省略标签Q，也允许保留；低于64分不允许省略；无论得分如何，均不要求必须省略，该规则仅用于本练习，不是现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 71,
+        "claim_type": "answer_scope",
+        "proposition": "该规则仅用于本练习，不是现实产品规范。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-e11fa9c865dbd9756ad3a3ce-part-0",
+            "category": "answer_scope",
+            "proposition": "该规则仅用于本练习，不是现实产品规范。"
+          }
+        ],
+        "anchor_group_id": "anchor-433074e8668b65e24f2cd87f",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "对象：练习规则"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "answer_text"
+        ],
+        "component_obligations": [
+          "answer_scope"
+        ],
+        "component_objects": [
+          "ordinary"
+        ],
+        "component_premise_ids": [
+          []
+        ]
+      },
+      "finding": {
+        "finding_id": "finding-claim-e11fa9c865dbd9756ad3a3ce",
+        "claim_id": "claim-e11fa9c865dbd9756ad3a3ce",
+        "status": "supported",
+        "evidence_ids": [],
+        "rationale": "答案本身将该规则限制为练习规则，并否认其为现实产品规范。",
+        "checker_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "tool_result_ids": [],
+        "excerpts": [],
+        "applicability_conditions": [],
+        "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+        "checked_dimensions": [],
+        "claim_category": "answer_scope",
+        "assessment_basis": "typed_components",
+        "metadata_refs": [],
+        "scope_id": null,
+        "required_dimensions": [
+          "quantity",
+          "negation",
+          "causality",
+          "conditions",
+          "jurisdiction"
+        ],
+        "dimension_findings": [],
+        "bases": [
+          {
+            "type": "answer_text_reference",
+            "evidence_id": null,
+            "excerpt": null,
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": {
+              "text": "练习规则：得分≥64分允许省略标签Q，也允许保留；低于64分不允许省略；无论得分如何，均不要求必须省略，该规则仅用于本练习，不是现实产品规范。",
+              "start_offset": 0,
+              "end_offset": 71,
+              "reason": "Frozen answer basis"
+            },
+            "quote_id": null
+          }
+        ]
+      },
+      "component_reviews": [
+        {
+          "component_id": "claim-e11fa9c865dbd9756ad3a3ce-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0
+          ],
+          "rationale": "答题正文明确陈述仅限练习的范围。",
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "answer_scope",
+          "fidelity_rationale": "答案中已陈述范围限制。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2"
+        }
+      ]
+    },
+    {
+      "claim": {
+        "claim_id": "claim-fd57705c319363c7e8058485",
+        "answer_id": "OB2-01-answer",
+        "answer_version": 1,
+        "text": "本题71分≥64分，故可省略标签Q，也可保留；不属必须省略。",
+        "start_offset": 73,
+        "end_offset": 103,
+        "claim_type": "input_report",
+        "proposition": "本题得分为71分。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-fd57705c319363c7e8058485-part-0",
+            "category": "input_evidence_coverage",
+            "proposition": "本题得分为71分。"
+          }
+        ],
+        "anchor_group_id": "anchor-ecf7ebbea790edaf7c6c3169",
+        "assertion_role": "input_report",
+        "semantic_qualifiers": [
+          "本题得分71分"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "task_premise"
+        ],
+        "component_obligations": [
+          "input_provided"
+        ],
+        "component_objects": [
+          "premise_restatement"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-04b9d7ad855b4516d755c7d3b4086360"
+          ]
+        ]
+      },
+      "finding": {
+        "finding_id": "finding-claim-fd57705c319363c7e8058485",
+        "claim_id": "claim-fd57705c319363c7e8058485",
+        "status": "supported",
+        "evidence_ids": [],
+        "rationale": "任务前提规定样品得分为71分。",
+        "checker_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "tool_result_ids": [],
+        "excerpts": [],
+        "applicability_conditions": [
+          "练习假定事实，不是经验证的现场记录。"
+        ],
+        "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+        "checked_dimensions": [],
+        "claim_category": "input_evidence_coverage",
+        "assessment_basis": "typed_components",
+        "metadata_refs": [],
+        "scope_id": null,
+        "required_dimensions": [
+          "quantity",
+          "negation",
+          "causality",
+          "conditions",
+          "jurisdiction"
+        ],
+        "dimension_findings": [],
+        "bases": [
+          {
+            "type": "task_premise_reference",
+            "evidence_id": null,
+            "excerpt": null,
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": null,
+            "premise_reference": {
+              "premise_id": "task-premise-04b9d7ad855b4516d755c7d3b4086360",
+              "task_id": "OB2-01",
+              "context_sha256": "8babb794a8ffa04958de8a7a680f3c87e63d64b241250abd2132c26b630d4858",
+              "source_field": "user_context",
+              "kind": "stipulated",
+              "text": "样品得分为71分。",
+              "start_offset": 5,
+              "end_offset": 14,
+              "version": "task-premise-catalog-v1"
+            }
+          }
+        ]
+      },
+      "component_reviews": [
+        {
+          "component_id": "claim-fd57705c319363c7e8058485-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0
+          ],
+          "rationale": "前提记录得分为71分。",
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "input_report",
+          "verification_obligation": "input_provided",
+          "fidelity_rationale": "对约定得分的忠实转述。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2"
+        }
+      ]
+    },
+    {
+      "claim": {
+        "claim_id": "claim-2d68b7cc4b810d9204ae4247",
+        "answer_id": "OB2-01-answer",
+        "answer_version": 1,
+        "text": "本题71分≥64分，故可省略标签Q，也可保留；不属必须省略。",
+        "start_offset": 73,
+        "end_offset": 103,
+        "claim_type": "technical_fact",
+        "proposition": "71分≥64分。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-2d68b7cc4b810d9204ae4247-part-0",
+            "category": "technical_fact",
+            "proposition": "71分≥64分。"
+          }
+        ],
+        "anchor_group_id": "anchor-ecf7ebbea790edaf7c6c3169",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "本题得分71分"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "technical_content"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "scenario_application"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-04b9d7ad855b4516d755c7d3b4086360"
+          ]
+        ]
+      },
+      "finding": {
+        "finding_id": "finding-claim-2d68b7cc4b810d9204ae4247",
+        "claim_id": "claim-2d68b7cc4b810d9204ae4247",
+        "status": "not_assessable",
+        "evidence_ids": [],
+        "rationale": "model_execution_incomplete: no judgment retained",
+        "checker_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "tool_result_ids": [],
+        "excerpts": [],
+        "applicability_conditions": [],
+        "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+        "checked_dimensions": [],
+        "claim_category": "technical_fact",
+        "assessment_basis": "typed_components",
+        "metadata_refs": [],
+        "scope_id": null,
+        "required_dimensions": [
+          "quantity",
+          "negation",
+          "causality",
+          "conditions",
+          "jurisdiction"
+        ],
+        "dimension_findings": [],
+        "bases": []
+      },
+      "component_reviews": [
+        {
+          "component_id": "claim-2d68b7cc4b810d9204ae4247-part-0",
+          "status": "not_assessable",
+          "basis_indexes": [],
+          "rationale": "model_execution_incomplete",
+          "classification_issue": null,
+          "origin": "execution_incomplete",
+          "reason_code": "model_execution_incomplete",
+          "fidelity_status": "uncertain",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "model_execution_incomplete; equivalence not established",
+          "raw_support_status": "not_assessable",
+          "review_disposition": "review_required",
+          "review_projection_version": "independent-review-projection-v2"
+        }
+      ]
+    },
+    {
+      "claim": {
+        "claim_id": "claim-a1982560de1b25bb47cd7daa",
+        "answer_id": "OB2-01-answer",
+        "answer_version": 1,
+        "text": "本题71分≥64分，故可省略标签Q，也可保留；不属必须省略。",
+        "start_offset": 73,
+        "end_offset": 103,
+        "claim_type": "technical_fact",
+        "proposition": "按题设得分，可省略标签Q。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-a1982560de1b25bb47cd7daa-part-0",
+            "category": "technical_fact",
+            "proposition": "按题设得分，可省略标签Q。"
+          }
+        ],
+        "anchor_group_id": "anchor-ecf7ebbea790edaf7c6c3169",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "条件：得分71分≥64分",
+          "对象：本题练习"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "technical_content"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "scenario_application"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-04b9d7ad855b4516d755c7d3b4086360"
+          ]
+        ]
+      },
+      "finding": {
+        "finding_id": "finding-claim-a1982560de1b25bb47cd7daa",
+        "claim_id": "claim-a1982560de1b25bb47cd7daa",
+        "status": "supported",
+        "evidence_ids": [
+          "OB2-E1"
+        ],
+        "rationale": "规则正文允许≥64分时省略，且约定得分为71分，故结论成立。",
+        "checker_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "tool_result_ids": [],
+        "excerpts": [
+          {
+            "evidence_id": "OB2-E1",
+            "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 88
+          }
+        ],
+        "applicability_conditions": [
+          "在本合成练习规则与约定得分范围内。"
+        ],
+        "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+        "checked_dimensions": [],
+        "claim_category": "technical_fact",
+        "assessment_basis": "typed_components",
+        "metadata_refs": [],
+        "scope_id": null,
+        "required_dimensions": [
+          "quantity",
+          "negation",
+          "causality",
+          "conditions",
+          "jurisdiction"
+        ],
+        "dimension_findings": [],
+        "bases": [
+          {
+            "type": "text_excerpt",
+            "evidence_id": "OB2-E1",
+            "excerpt": {
+              "evidence_id": "OB2-E1",
+              "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+              "start_offset": 0,
+              "end_offset": 88
+            },
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": "quote-209b5b4ead54eea9c88e776d"
+          },
+          {
+            "type": "task_premise_reference",
+            "evidence_id": null,
+            "excerpt": null,
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": null,
+            "premise_reference": {
+              "premise_id": "task-premise-04b9d7ad855b4516d755c7d3b4086360",
+              "task_id": "OB2-01",
+              "context_sha256": "8babb794a8ffa04958de8a7a680f3c87e63d64b241250abd2132c26b630d4858",
+              "source_field": "user_context",
+              "kind": "stipulated",
+              "text": "样品得分为71分。",
+              "start_offset": 5,
+              "end_offset": 14,
+              "version": "task-premise-catalog-v1"
+            }
+          }
+        ]
+      },
+      "component_reviews": [
+        {
+          "component_id": "claim-a1982560de1b25bb47cd7daa-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "rationale": "规则允许≥64分省略，且前提设定为71分。",
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "规则对约定得分的适用条件保留。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2"
+        }
+      ]
+    },
+    {
+      "claim": {
+        "claim_id": "claim-1fdf9f4aeafaed6ec122b10e",
+        "answer_id": "OB2-01-answer",
+        "answer_version": 1,
+        "text": "本题71分≥64分，故可省略标签Q，也可保留；不属必须省略。",
+        "start_offset": 73,
+        "end_offset": 103,
+        "claim_type": "technical_fact",
+        "proposition": "按题设得分，也可保留标签Q。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-1fdf9f4aeafaed6ec122b10e-part-0",
+            "category": "technical_fact",
+            "proposition": "按题设得分，也可保留标签Q。"
+          }
+        ],
+        "anchor_group_id": "anchor-ecf7ebbea790edaf7c6c3169",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "条件：得分71分≥64分",
+          "对象：本题练习"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "technical_content"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "scenario_application"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-04b9d7ad855b4516d755c7d3b4086360"
+          ]
+        ]
+      },
+      "finding": {
+        "finding_id": "finding-claim-1fdf9f4aeafaed6ec122b10e",
+        "claim_id": "claim-1fdf9f4aeafaed6ec122b10e",
+        "status": "supported",
+        "evidence_ids": [
+          "OB2-E1"
+        ],
+        "rationale": "规则正文允许≥64分时保留，且约定得分为71分，故结论成立。",
+        "checker_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "tool_result_ids": [],
+        "excerpts": [
+          {
+            "evidence_id": "OB2-E1",
+            "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 88
+          }
+        ],
+        "applicability_conditions": [
+          "在本合成练习规则与约定得分范围内。"
+        ],
+        "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+        "checked_dimensions": [],
+        "claim_category": "technical_fact",
+        "assessment_basis": "typed_components",
+        "metadata_refs": [],
+        "scope_id": null,
+        "required_dimensions": [
+          "quantity",
+          "negation",
+          "causality",
+          "conditions",
+          "jurisdiction"
+        ],
+        "dimension_findings": [],
+        "bases": [
+          {
+            "type": "text_excerpt",
+            "evidence_id": "OB2-E1",
+            "excerpt": {
+              "evidence_id": "OB2-E1",
+              "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+              "start_offset": 0,
+              "end_offset": 88
+            },
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": "quote-209b5b4ead54eea9c88e776d"
+          },
+          {
+            "type": "task_premise_reference",
+            "evidence_id": null,
+            "excerpt": null,
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": null,
+            "premise_reference": {
+              "premise_id": "task-premise-04b9d7ad855b4516d755c7d3b4086360",
+              "task_id": "OB2-01",
+              "context_sha256": "8babb794a8ffa04958de8a7a680f3c87e63d64b241250abd2132c26b630d4858",
+              "source_field": "user_context",
+              "kind": "stipulated",
+              "text": "样品得分为71分。",
+              "start_offset": 5,
+              "end_offset": 14,
+              "version": "task-premise-catalog-v1"
+            }
+          }
+        ]
+      },
+      "component_reviews": [
+        {
+          "component_id": "claim-1fdf9f4aeafaed6ec122b10e-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "rationale": "规则允许≥64分保留，且前提设定为71分。",
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "适用关系保留。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2"
+        }
+      ]
+    },
+    {
+      "claim": {
+        "claim_id": "claim-629a50d1d634f057c377f7d6",
+        "answer_id": "OB2-01-answer",
+        "answer_version": 1,
+        "text": "本题71分≥64分，故可省略标签Q，也可保留；不属必须省略。",
+        "start_offset": 73,
+        "end_offset": 103,
+        "claim_type": "technical_fact",
+        "proposition": "按题设得分，不属于必须省略标签Q。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-629a50d1d634f057c377f7d6-part-0",
+            "category": "technical_fact",
+            "proposition": "按题设得分，不属于必须省略标签Q。"
+          }
+        ],
+        "anchor_group_id": "anchor-ecf7ebbea790edaf7c6c3169",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "条件：得分71分≥64分",
+          "对象：本题练习"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "technical_content"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "scenario_application"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-04b9d7ad855b4516d755c7d3b4086360"
+          ]
+        ]
+      },
+      "finding": {
+        "finding_id": "finding-claim-629a50d1d634f057c377f7d6",
+        "claim_id": "claim-629a50d1d634f057c377f7d6",
+        "status": "supported",
+        "evidence_ids": [
+          "OB2-E1"
+        ],
+        "rationale": "规则正文规定从不强制省略，故适用结论成立。",
+        "checker_version": "evidence-verification-v9.22-object-boundary-v2-dev",
+        "tool_result_ids": [],
+        "excerpts": [
+          {
+            "evidence_id": "OB2-E1",
+            "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 88
+          }
+        ],
+        "applicability_conditions": [
+          "在本合成练习规则与约定得分范围内。"
+        ],
+        "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+        "checked_dimensions": [],
+        "claim_category": "technical_fact",
+        "assessment_basis": "typed_components",
+        "metadata_refs": [],
+        "scope_id": null,
+        "required_dimensions": [
+          "quantity",
+          "negation",
+          "causality",
+          "conditions",
+          "jurisdiction"
+        ],
+        "dimension_findings": [],
+        "bases": [
+          {
+            "type": "text_excerpt",
+            "evidence_id": "OB2-E1",
+            "excerpt": {
+              "evidence_id": "OB2-E1",
+              "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+              "start_offset": 0,
+              "end_offset": 88
+            },
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": "quote-209b5b4ead54eea9c88e776d"
+          },
+          {
+            "type": "task_premise_reference",
+            "evidence_id": null,
+            "excerpt": null,
+            "metadata_reference": null,
+            "snapshot_id": null,
+            "answer_excerpt": null,
+            "quote_id": null,
+            "premise_reference": {
+              "premise_id": "task-premise-04b9d7ad855b4516d755c7d3b4086360",
+              "task_id": "OB2-01",
+              "context_sha256": "8babb794a8ffa04958de8a7a680f3c87e63d64b241250abd2132c26b630d4858",
+              "source_field": "user_context",
+              "kind": "stipulated",
+              "text": "样品得分为71分。",
+              "start_offset": 5,
+              "end_offset": 14,
+              "version": "task-premise-catalog-v1"
+            }
+          }
+        ]
+      },
+      "component_reviews": [
+        {
+          "component_id": "claim-629a50d1d634f057c377f7d6-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "rationale": "规则否定强制省略，且得分已代入。",
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "非强制性结论保留。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2"
+        }
+      ]
+    }
+  ],
+  "domain_findings": [
+    {
+      "finding_id": "domain-engineering_inputs",
+      "answer_id": "OB2-01-answer",
+      "answer_version": 1,
+      "claim_ids": [],
+      "severity": "none",
+      "category": "engineering_inputs",
+      "rationale": "Current question/answer and domain applicability are conceptual; no plant study inputs required.",
+      "rule_ids": [
+        "engineering_inputs"
+      ],
+      "evidence_ids": [],
+      "tool_result_ids": [],
+      "missing_prerequisites": [],
+      "check_status": "not_applicable",
+      "basis_kind": "engineering_rule",
+      "origin": "program_rule",
+      "bases": []
+    },
+    {
+      "finding_id": "domain-input_units:units-input",
+      "answer_id": "OB2-01-answer",
+      "answer_version": 1,
+      "claim_ids": [],
+      "severity": "none",
+      "category": "input_units:units-input",
+      "rationale": "Conceptual request contains no structured quantities; actual answer quantity assertions are reviewed separately.",
+      "rule_ids": [
+        "input_units"
+      ],
+      "evidence_ids": [],
+      "tool_result_ids": [],
+      "missing_prerequisites": [],
+      "check_status": "not_applicable",
+      "basis_kind": "engineering_rule",
+      "origin": "program_rule",
+      "bases": []
+    },
+    {
+      "finding_id": "domain-simulation_boundary",
+      "answer_id": "OB2-01-answer",
+      "answer_version": 1,
+      "claim_ids": [],
+      "severity": "none",
+      "category": "simulation_boundary",
+      "rationale": "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",
+      "rule_ids": [
+        "simulation_boundary"
+      ],
+      "evidence_ids": [],
+      "tool_result_ids": [],
+      "missing_prerequisites": [],
+      "check_status": "not_applicable",
+      "basis_kind": "engineering_rule",
+      "origin": "program_rule",
+      "bases": []
+    },
+    {
+      "finding_id": "domain-answer_units",
+      "answer_id": "OB2-01-answer",
+      "answer_version": 1,
+      "claim_ids": [
+        "claim-2d68b7cc4b810d9204ae4247"
+      ],
+      "severity": "none",
+      "category": "answer_units",
+      "rationale": "答案中无量纲量纲换算或SI单位断言，仅有71≥64的分数比较，无量纲不一致。",
+      "rule_ids": [
+        "answer_units"
+      ],
+      "evidence_ids": [],
+      "tool_result_ids": [],
+      "missing_prerequisites": [],
+      "check_status": "not_applicable",
+      "basis_kind": "engineering_rule",
+      "origin": "model_judgment",
+      "bases": []
+    },
+    {
+      "finding_id": "domain-analysis_scope",
+      "answer_id": "OB2-01-answer",
+      "answer_version": 1,
+      "claim_ids": [
+        "claim-61d648b57c50709d4353f270",
+        "claim-6e128937673b1e8e37a0aa48",
+        "claim-62303ac74b202db071c3f7df",
+        "claim-e11fa9c865dbd9756ad3a3ce",
+        "claim-a1982560de1b25bb47cd7daa",
+        "claim-1fdf9f4aeafaed6ec122b10e",
+        "claim-629a50d1d634f057c377f7d6"
+      ],
+      "severity": "none",
+      "category": "analysis_scope",
+      "rationale": "用户问题为教学练习的概念性规则说明与题设应用，答案完整覆盖三子问（可省略、是否必须省略、可保留），并明确该规则仅用于本练习、非现实产品规范，与引文一致，无越界工程保证。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户问题为教学练习的概念性规则说明与题设应用，答案完整覆盖三子问（可省略、是否必须省略、可保留），并明确该规则仅用于本练习、非现实产品规范，与引文一致，无越界工程保证。\", \"answer_id\": \"OB2-01-answer\", \"answer_version\": 1, \"answer_sha256\": \"116cc119f81dcabf6d63f61908189da3aa341369b946068d99938af3b49e386d\", \"question_sha256\": \"53f68bafc0ba260a0ad5a080834551b4ced320fe1f8835864685cb1a97b89362\", \"structured_goal\": \"conceptual\"}",
+      "rule_ids": [
+        "analysis_scope"
+      ],
+      "evidence_ids": [
+        "OB2-E1"
+      ],
+      "tool_result_ids": [],
+      "missing_prerequisites": [],
+      "check_status": "no_issue",
+      "basis_kind": "literature",
+      "origin": "model_judgment",
+      "bases": [
+        {
+          "type": "text_excerpt",
+          "evidence_id": "OB2-E1",
+          "excerpt": {
+            "evidence_id": "OB2-E1",
+            "text": "本合成练习规定：得分达到或超过64分时，允许省略标签Q，也允许保留；低于64分时，不允许省略标签Q。无论得分如何，均不要求必须省略标签Q。该规则只用于本练习，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 88
+          },
+          "metadata_reference": null,
+          "snapshot_id": null,
+          "answer_excerpt": null,
+          "quote_id": "quote-209b5b4ead54eea9c88e776d"
+        }
+      ]
+    },
+    {
+      "finding_id": "domain-operating_prerequisites",
+      "answer_id": "OB2-01-answer",
+      "answer_version": 1,
+      "claim_ids": [],
+      "severity": "none",
+      "category": "operating_prerequisites",
+      "rationale": "本答复为练习规则说明，不涉及设备运行、操作指令或工程建议，无运行前提需要声明。",
+      "rule_ids": [
+        "operating_prerequisites"
+      ],
+      "evidence_ids": [],
+      "tool_result_ids": [],
+      "missing_prerequisites": [],
+      "check_status": "not_applicable",
+      "basis_kind": "engineering_rule",
+      "origin": "model_judgment",
+      "bases": []
+    }
+  ],
+  "decision": {
+    "kind": "execution_incomplete",
+    "reasons": [
+      "Required execution failed; this is not a factual contradiction",
+      "Automatic approval is bounded to this task; not engineering safety certification"
+    ],
+    "policy_version": "product-decision-v1.5",
+    "unresolved_finding_ids": [
+      "finding-claim-2d68b7cc4b810d9204ae4247"
+    ],
+    "execution_integrity": "incomplete",
+    "risk_level": "unknown",
+    "resolution": "partial",
+    "reason_codes": [
+      "REQUIRED_EXECUTION_FAILED"
+    ],
+    "applicable_checks": [
+      [
+        "fact_support",
+        "applicable",
+        "Every extracted claim must have independent verification"
+      ],
+      [
+        "original_citations",
+        "applicable",
+        "Separate original citation judgments"
+      ],
+      [
+        "claim-61d648b57c50709d4353f270/claim-61d648b57c50709d4353f270-part-0",
+        "applicable",
+        "Required basis target: document_body; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-61d648b57c50709d4353f270/claim-61d648b57c50709d4353f270-part-1",
+        "applicable",
+        "Required basis target: document_body; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-6e128937673b1e8e37a0aa48/claim-6e128937673b1e8e37a0aa48-part-0",
+        "applicable",
+        "Required basis target: document_body; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-62303ac74b202db071c3f7df/claim-62303ac74b202db071c3f7df-part-0",
+        "applicable",
+        "Required basis target: document_body; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-e11fa9c865dbd9756ad3a3ce/claim-e11fa9c865dbd9756ad3a3ce-part-0",
+        "applicable",
+        "Required basis target: answer_text; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-fd57705c319363c7e8058485/claim-fd57705c319363c7e8058485-part-0",
+        "applicable",
+        "Required basis target: task_premise; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-2d68b7cc4b810d9204ae4247/claim-2d68b7cc4b810d9204ae4247-part-0",
+        "applicable",
+        "Required basis target: technical_content; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-a1982560de1b25bb47cd7daa/claim-a1982560de1b25bb47cd7daa-part-0",
+        "applicable",
+        "Required basis target: technical_content; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-1fdf9f4aeafaed6ec122b10e/claim-1fdf9f4aeafaed6ec122b10e-part-0",
+        "applicable",
+        "Required basis target: technical_content; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-629a50d1d634f057c377f7d6/claim-629a50d1d634f057c377f7d6-part-0",
+        "applicable",
+        "Required basis target: technical_content; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "engineering_inputs",
+        "not_applicable",
+        "Current question/answer and domain applicability are conceptual; no plant study inputs required."
+      ],
+      [
+        "input_units:units-input",
+        "not_applicable",
+        "Conceptual request contains no structured quantities; actual answer quantity assertions are reviewed separately."
+      ],
+      [
+        "simulation_boundary",
+        "not_applicable",
+        "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review."
+      ],
+      [
+        "answer_units",
+        "not_applicable",
+        "答案中无量纲量纲换算或SI单位断言，仅有71≥64的分数比较，无量纲不一致。"
+      ],
+      [
+        "analysis_scope",
+        "no_issue",
+        "用户问题为教学练习的概念性规则说明与题设应用，答案完整覆盖三子问（可省略、是否必须省略、可保留），并明确该规则仅用于本练习、非现实产品规范，与引文一致，无越界工程保证。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户问题为教学练习的概念性规则说明与题设应用，答案完整覆盖三子问（可省略、是否必须省略、可保留），并明确该规则仅用于本练习、非现实产品规范，与引文一致，无越界工程保证。\", \"answer_id\": \"OB2-01-answer\", \"answer_version\": 1, \"answer_sha256\": \"116cc119f81dcabf6d63f61908189da3aa341369b946068d99938af3b49e386d\", \"question_sha256\": \"53f68bafc0ba260a0ad5a080834551b4ced320fe1f8835864685cb1a97b89362\", \"structured_goal\": \"conceptual\"}"
+      ],
+      [
+        "operating_prerequisites",
+        "not_applicable",
+        "本答复为练习规则说明，不涉及设备运行、操作指令或工程建议，无运行前提需要声明。"
+      ]
+    ],
+    "classification_basis": [
+      "Model-reviewed requested/asserted scope: conceptual; 用户问题为教学练习的概念性规则说明与题设应用，答案完整覆盖三子问（可省略、是否必须省略、可保留），并明确该规则仅用于本练习、非现实产品规范，与引文一致，无越界工程保证。",
+      "Claim components and independent analysis_scope check retain technical truth obligations",
+      "Classification is fallible; scope alone never overrides an adverse finding",
+      "claim-61d648b57c50709d4353f270: type=technical_fact; assertion_role=asserted; model classification is not proof",
+      "claim-61d648b57c50709d4353f270-part-0: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-61d648b57c50709d4353f270-part-1: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-6e128937673b1e8e37a0aa48: type=technical_fact; assertion_role=asserted; model classification is not proof",
+      "claim-6e128937673b1e8e37a0aa48-part-0: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-62303ac74b202db071c3f7df: type=technical_fact; assertion_role=asserted; model classification is not proof",
+      "claim-62303ac74b202db071c3f7df-part-0: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-e11fa9c865dbd9756ad3a3ce: type=answer_scope; assertion_role=asserted; model classification is not proof",
+      "claim-e11fa9c865dbd9756ad3a3ce-part-0: task hint=answer_text; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-fd57705c319363c7e8058485: type=input_report; assertion_role=input_report; model classification is not proof",
+      "claim-fd57705c319363c7e8058485-part-0: task hint=task_premise; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-2d68b7cc4b810d9204ae4247: type=technical_fact; assertion_role=asserted; model classification is not proof",
+      "claim-2d68b7cc4b810d9204ae4247-part-0: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-a1982560de1b25bb47cd7daa: type=technical_fact; assertion_role=asserted; model classification is not proof",
+      "claim-a1982560de1b25bb47cd7daa-part-0: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-1fdf9f4aeafaed6ec122b10e: type=technical_fact; assertion_role=asserted; model classification is not proof",
+      "claim-1fdf9f4aeafaed6ec122b10e-part-0: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-629a50d1d634f057c377f7d6: type=technical_fact; assertion_role=asserted; model classification is not proof",
+      "claim-629a50d1d634f057c377f7d6-part-0: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint"
+    ]
+  },
+  "note": "Actual response_text preserved including invalid attempts. Effective rationale removes appended program support JSON only; no interpretation added to raw predictions. OB2-02/03 unexecuted."
+}
