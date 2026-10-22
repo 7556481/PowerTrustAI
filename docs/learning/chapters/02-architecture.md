@@ -405,6 +405,12 @@ Harness可以使用图作为底层编排运行时。`backend/assembly.py`仍构�
 
 面试说法：“我复用一个Harness，把供应商、检索和持久化作为可替换组件。程序管理身份/定位/处置，模型承担语义。observer只记录事实，不自行发起新Agent。”
 
+## 2026-10-22 正常服务中的可选图接线
+
+ComponentFactory读取ServiceConfig.execution_path，把同一个配置传给原OfflineHarness；worker、observer、RunStore及API沿用原链路。图调用七个共享阶段，不复制Agent或政策；双审继续在一个阶段内部并行。服务运行清单保存实际编排，旧记录缺该字段按sequential读取，查询/重启不补算。默认是否切换以本轮集成验收报告为准；可选接线不等于切换成功。
+
+当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md)。
+
 ## 三道自测：先作答，再展开
 
 ### 自测1：observer为何不是调度器？

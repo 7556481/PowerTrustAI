@@ -1,0 +1,144 @@
+{
+  "version": "LSI-necessary-predictions-v1",
+  "provenance": "AI-assisted text review; user-authorized execution, not owner-confirmed labels or expert gold",
+  "executed_id": "LSI-01-S",
+  "actual_answer": {
+    "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+    "version": 1,
+    "text": "NWS 文献将可测降水定义为大于或等于 0.01 英寸的液态降水量（或冻结降水的液态当量）。",
+    "assumptions": [],
+    "missing_information": [],
+    "citations": [
+      {
+        "start_offset": 0,
+        "end_offset": 46,
+        "evidence_ids": [
+          "user-5719069db46b498599873a86181354e3"
+        ]
+      }
+    ]
+  },
+  "predictions": [
+    {
+      "call_number": 1,
+      "component": "generation",
+      "prompt_version": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+      "correction": false,
+      "response_text": "{\"answer_units\":[{\"kind\":\"technical\",\"text\":\"NWS 文献将可测降水定义为大于或等于 0.01 英寸的液态降水量（或冻结降水的液态当量）。\",\"evidence_ids\":[\"user-5719069db46b498599873a86181354e3\"]}],\"assumptions\":[],\"missing_information\":[],\"evidence_sufficient\":true}",
+      "response_sha256": "0e261ea37eedb8031019e7c37f29bdfc0e4e2534ca7d2292eea05d313e371aca",
+      "output_status": "valid_structure"
+    },
+    {
+      "call_number": 2,
+      "component": "claim_extraction",
+      "prompt_version": "atomic-claims-v7-obligations-faithful-assertions-v2",
+      "correction": false,
+      "response_text": "{\"claims\":[{\"anchor_id\":\"answer-anchor-0bc06b2085e87c29d6fbf48c\",\"proposition\":\"NWS文献将可测降水定义为大于或等于0.01英寸的液态降水量（或冻结降水的液态当量）。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"NWS文献作为定义来源\",\"适用于液态降水\",\"冻结降水按液态当量计\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"NWS文献将可测降水的阈值定义为大于或等于0.01英寸。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\"},{\"category\":\"technical_fact\",\"proposition\":\"可测降水指液态降水量，或冻结降水的液态当量。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\"}]}],\"non_claims\":[]}",
+      "response_sha256": "7ffc3b4eedf1d628744c723526797064259aa200b06a772199c09e15876c64ad",
+      "output_status": "valid_structure"
+    },
+    {
+      "call_number": 3,
+      "component": "evidence_verification",
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "correction": false,
+      "response_text": "{\"findings\":[{\"claim_id\":\"claim-dd81ce74292e820ec176c670\",\"rationale\":\"The supplied user-reference paragraph states measurability threshold at or above 0.01 inches for liquid precipitation or frozen water equivalent, matching both components.\",\"applicability_conditions\":[\"Definition attributed to the supplied NWS forecast-terms text; original source unverified.\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-9099c1cd6654f04aa958c059-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"Body states measurable precipitation is equal to or greater than 0.01 inches.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"Threshold value, unit and inclusive inequality preserved.\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"The user-supplied NWS forecast-terms paragraph defines measurable precipitation at the inclusive 0.01-inch threshold.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-aef23b60edfb330f862705c9\",\"necessity\":\"required\",\"answer_quote\":\"大于或等于 0.01 英寸\",\"relationship\":\"preserved\",\"reason\":\"The source threshold is an inclusive lower bound of 0.01 inches, matching the answer.\"}],\"causal_direction_preserved\":true,\"repair\":null}},{\"component_index\":1,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"Body specifies liquid precipitation or the water equivalent of frozen precipitation.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"The liquid-or-frozen-water-equivalent scope is retained.\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"The paragraph defines measurable amount as liquid precipitation or the water equivalent of frozen precipitation.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-aef23b60edfb330f862705c9\",\"necessity\":\"required\",\"answer_quote\":\"或冻结降水的液态当量\",\"relationship\":\"preserved\",\"reason\":\"The source includes frozen precipitation measured as water equivalent, matching the answer's parenthetical.\"}],\"causal_direction_preserved\":true,\"repair\":null}}]}]}",
+      "response_sha256": "14c504b48ff3c9fe7572daa4566f483ee3ee30f2f5b18004b6ae5d82dc0f24cb",
+      "output_status": "valid_structure"
+    },
+    {
+      "call_number": 4,
+      "component": "power_domain_review",
+      "prompt_version": "power-domain-review-v3.5-task-obligations",
+      "correction": false,
+      "response_text": "{\"checks\":[{\"check_id\":\"answer_units\",\"status\":\"no_issue\",\"claim_ids\":[\"claim-dd81ce74292e820ec176c670\"],\"quote_ids\":[\"scope-86204cb21a1034123ccb833c-0\"],\"basis_kind\":\"literature\",\"rationale\":\"答案保留原单位英寸，0.01 英寸阈值与用户提供的 NWS 引文一致，未做单位换算或伪造换算。\",\"missing_prerequisites\":[]},{\"check_id\":\"analysis_scope\",\"status\":\"no_issue\",\"claim_ids\":[\"claim-dd81ce74292e820ec176c670\"],\"quote_ids\":[\"scope-86204cb21a1034123ccb833c-0\"],\"basis_kind\":\"literature\",\"rationale\":\"用户仅要求解释给定 NWS 文献中可测降水阈值的概念性定义，答案只陈述该定义（≥0.01 英寸液态或冻结降水液态当量），未作天气判断、电厂研究或工程保证，范围一致。\",\"missing_prerequisites\":[],\"task_scope\":\"conceptual\"},{\"check_id\":\"operating_prerequisites\",\"status\":\"not_applicable\",\"claim_ids\":[],\"quote_ids\":[],\"basis_kind\":\"engineering_rule\",\"rationale\":\"纯定义解释，不涉及设备操作、整定或运行建议，无运行前提需列明。\",\"missing_prerequisites\":[]}],\"missing_information_review\":[],\"safety_reviews\":[{\"claim_id\":\"claim-dd81ce74292e820ec176c670\",\"verdict\":\"not_applicable\",\"reason\":\"仅解释可测降水定义，不涉及保护功能失效或带电继续运行，无伤害机制。\",\"source_ids\":[]}]}",
+      "response_sha256": "6d2d73dc812502314580116d962546b853ee2f1dff34e437da0dbf2bce31f1d2",
+      "output_status": "valid_structure"
+    },
+    {
+      "call_number": 5,
+      "component": "evidence_verification",
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "correction": false,
+      "response_text": "{\"citation_reviews\":[{\"citation_index\":0,\"status\":\"supported\",\"rationale\":\"The bound source explicitly defines measurable precipitation as equal to or greater than 0.01 inches, and the answer states this threshold in inches, including the liquid-equivalent qualification.\",\"applicability_conditions\":[],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-c96fa2aa92581bc7582f669a-0\"}],\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"The bound NWS paragraph defines measurable precipitation as equal to or greater than 0.01 inches, expressed as liquid precipitation or water equivalent of frozen precipitation; the answer restates this same threshold and unit.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-6c3e5930df8a2741202b833f\",\"necessity\":\"required\",\"answer_quote\":\"大于或等于 0.01 英寸\",\"relationship\":\"preserved\",\"reason\":\"The selected carrier supplies the 0.01-inch threshold and the liquid-or-liquid-equivalent scope, which the answer reproduces.\"}],\"causal_direction_preserved\":true,\"repair\":null}}]}",
+      "response_sha256": "2c54aeb950b979961e3532edf481f8fb2cfab56062fa50835473d19cfbd6ce80",
+      "output_status": "valid_structure"
+    }
+  ],
+  "decision": {
+    "kind": "pass",
+    "reasons": [
+      "All applicable checks complete with supported claims and no blocking findings",
+      "Automatic approval is bounded to this task; not engineering safety certification"
+    ],
+    "policy_version": "product-decision-v1.5",
+    "unresolved_finding_ids": [],
+    "execution_integrity": "complete",
+    "risk_level": "low",
+    "resolution": "complete",
+    "reason_codes": [
+      "ALL_REQUIRED_CHECKS_COMPLETE"
+    ],
+    "applicable_checks": [
+      [
+        "fact_support",
+        "applicable",
+        "Every extracted claim must have independent verification"
+      ],
+      [
+        "original_citations",
+        "applicable",
+        "Separate original citation judgments"
+      ],
+      [
+        "claim-dd81ce74292e820ec176c670/claim-dd81ce74292e820ec176c670-part-0",
+        "applicable",
+        "Required basis target: technical_content; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "claim-dd81ce74292e820ec176c670/claim-dd81ce74292e820ec176c670-part-1",
+        "applicable",
+        "Required basis target: technical_content; original technical truth obligation cannot be bypassed"
+      ],
+      [
+        "engineering_inputs",
+        "not_applicable",
+        "Current question/answer and domain applicability are conceptual; no plant study inputs required."
+      ],
+      [
+        "input_units:units-input",
+        "not_applicable",
+        "Conceptual request contains no structured quantities; actual answer quantity assertions are reviewed separately."
+      ],
+      [
+        "simulation_boundary",
+        "not_applicable",
+        "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review."
+      ],
+      [
+        "answer_units",
+        "no_issue",
+        "答案保留原单位英寸，0.01 英寸阈值与用户提供的 NWS 引文一致，未做单位换算或伪造换算。"
+      ],
+      [
+        "analysis_scope",
+        "no_issue",
+        "用户仅要求解释给定 NWS 文献中可测降水阈值的概念性定义，答案只陈述该定义（≥0.01 英寸液态或冻结降水液态当量），未作天气判断、电厂研究或工程保证，范围一致。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户仅要求解释给定 NWS 文献中可测降水阈值的概念性定义，答案只陈述该定义（≥0.01 英寸液态或冻结降水液态当量），未作天气判断、电厂研究或工程保证，范围一致。\", \"answer_id\": \"ef37029ee15344ca9f8b418d084490c2-answer\", \"answer_version\": 1, \"answer_sha256\": \"7791d4f65ec84626bc52d67cb918db23768f0aa605fa33621b02d72c68390883\", \"question_sha256\": \"bb1c67455ad737854c80ff3fd60a3276fa1a1e273a03bd8f6a21c461e11a1837\", \"structured_goal\": \"conceptual\"}"
+      ],
+      [
+        "operating_prerequisites",
+        "not_applicable",
+        "纯定义解释，不涉及设备操作、整定或运行建议，无运行前提需列明。"
+      ]
+    ],
+    "classification_basis": [
+      "Model-reviewed requested/asserted scope: conceptual; 用户仅要求解释给定 NWS 文献中可测降水阈值的概念性定义，答案只陈述该定义（≥0.01 英寸液态或冻结降水液态当量），未作天气判断、电厂研究或工程保证，范围一致。",
+      "Claim components and independent analysis_scope check retain technical truth obligations",
+      "Classification is fallible; scope alone never overrides an adverse finding",
+      "claim-dd81ce74292e820ec176c670: type=technical_fact; assertion_role=asserted; model classification is not proof",
+      "claim-dd81ce74292e820ec176c670-part-0: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+      "claim-dd81ce74292e820ec176c670-part-1: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint"
+    ]
+  },
+  "limitations": "Only sequential normal case ran; no graph pair or diagnostic semantic score. No raw knowledge bodies or credential/headers included."
+}

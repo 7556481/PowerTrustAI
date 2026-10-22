@@ -1,0 +1,54 @@
+{
+  "version": "LSI-cleanup-v1",
+  "removed_duplicate_implementation": {
+    "file": "evaluation/langgraph_service_replay_v1.py",
+    "commit": "835560bb684867e26374ec2f37de5777aba38900",
+    "insertions": 26,
+    "deletions": 227,
+    "validation": "24 tasks /25 saved responses reader identities; final full offline suite"
+  },
+  "retained_references": {
+    "generation_mapping_v1": [
+      "evaluation/generation_mapping_comparison_materials_v1.py",
+      "evaluation/generation_mapping_trial_v1.py",
+      "tests/test_generation_mapping_v1.py"
+    ],
+    "premise_verification_v1": [
+      "agents/premise_verification_v2.py",
+      "evaluation/public_review_validation_trial_v1.py",
+      "tests/test_public_review_premise_v1.py"
+    ],
+    "premise_verification_v2": [
+      "evaluation/public_review_object_trial_v1.py",
+      "tests/test_public_review_object_v2.py"
+    ],
+    "premise_claim_extractor_v1": [
+      "evaluation/public_review_validation_trial_v1.py",
+      "tests/test_public_review_premise_v1.py"
+    ],
+    "premise_claim_extractor_v2": [
+      "evaluation/public_review_object_trial_v1.py",
+      "tests/test_public_review_object_v2.py"
+    ],
+    "graph_runtime_v1": [
+      "backend/assembly.py",
+      "evaluation/reviewer_graph_v1.py",
+      "harness/runtime.py",
+      "tests/test_langgraph_runtime_v1.py",
+      "tests/test_langgraph_service_integration_v1.py"
+    ]
+  },
+  "deleted_resources": [],
+  "deferred": [
+    "A/B candidates referenced by tests and frozen experiment entry points",
+    "historical schema parsers and reports needed for reading/reproduction",
+    "sequential driver retained for rollback"
+  ],
+  "rollback": {
+    "environment": "POWERTRUST_EXECUTION_PATH=sequential, process-local before normal start",
+    "managed_file": "data/runtime_local/orchestration.json",
+    "managed_version": "service-orchestration-v1",
+    "current_default": "sequential",
+    "rule": "Stop idle service normally, select sequential, restart, query saved records only; never recover old runs to compare."
+  }
+}

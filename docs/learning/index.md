@@ -1,5 +1,7 @@
 # PowerTrustAI：从代码到判断的学习路线
 
+2026-10-22更新：服务图接线与产品入口已收敛，默认仍sequential；真实图验收未完成，A/B未采用。1136项离线通过；首项真实原路径5调用，收集失败即停。见[集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md)。
+
 这是一份给项目所有者的中文工程教材，不是运行报告合集。你只需要会Python的函数、类、字典、异常和基本文件操作。学习目标是能沿一条真实请求解释：哪些文本送进模型，哪些关系由程序验证，模型错了会发生什么，为什么某个分数提高仍不能自动采纳。
 
 正文唯一来源是 chapters 下的Markdown。页面是这些文件的静态派生物；改Markdown后运行构建器，搜索和导航一起更新。无需文档云、账号、付费API或新的训练环境。右侧是本章目录，左侧是全书目录，上方可搜索中文术语、函数名和公式。双击项目根目录 start-learning.cmd 打开8770学习服务，不会重启8765日常审核服务，也不读取其令牌或数据库。也可以直接打开 site/index.html 离线阅读，搜索无需fetch。

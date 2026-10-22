@@ -603,3 +603,7 @@ analysis_scope同次领域判断联合问题/当前回答，不以缺goal默认�
 ## 2026-10-22 OB2停止后转编排等价验收，不自动语义追修
 
 规则复述分类有有限正向观察，数值比较被列应用却仅选题设仍触发严格失败；不改预期、类型或依据门禁以补跑通过。对象诊断未执行，不能报成功；fidelity执行占位uncertain不当合法对象异议。语义缺口与编排迁移验收分离：可以推进只切路径的真实服务集成验收，固定Agent/提示/政策、保留失败与部分结果及旧入口；不自动切生产、跑新批或清理候选。见[evaluation/public-review-object-v2-live-v1/results-v1.md](evaluation/public-review-object-v2-live-v1/results-v1.md)。
+
+## 2026-10-22 可选图进入正常服务，不满足实测门槛则不切默认
+
+服务执行路径为后端合法枚举、随运行存储；图继续调用唯一共享业务阶段，回退原驱动保留，不自动回退重发。固定验收首项服务完成但收集器线程错误即停，图未执行，不能以离线修复或语义pass补足真实图证据；保持sequential。历史及反馈不迁移或补算。UI主线收敛、登录后浏览器验收不足独立记录；file安全阻止不绕过。只清理已证实重复的新回放执行实现，A/B及历史协议因引用保留。见[evaluation/langgraph-service-integration-v1/results-v1.md](evaluation/langgraph-service-integration-v1/results-v1.md)。

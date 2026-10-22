@@ -578,6 +578,10 @@ backend/assembly.py实际行201–210，仅连接处摘录，周围初始化/后
 
 与第04章的节点图一起阅读，并区分代码已存在、离线通过和真实运行验证。当前只完成前两项；v7历史响应回放不是新的模型生成成绩，生产组装仍为schema13及默认顺序路径。
 
+## 2026-10-22 服务图接线阅读点
+
+先看backend/config.py的服务端execution_path，再看backend/assembly.py的preflight、manifest和create。worker依然只调用同一个Harness，图和原驱动均调用harness/execution.py七共享阶段。API/SQLite保存编排身份，历史默认原路；正常Factory不注入A/B候选。服务收集器曾跨线程读SQLite，已改只读独立连接，修复不代表恢复已停止批次。
+
 ## 三道自测：先作答，再展开
 
 ### 自测1：为什么直接组件测试不够？

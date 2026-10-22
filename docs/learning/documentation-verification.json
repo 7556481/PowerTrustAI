@@ -1,233 +1,170 @@
 {
-  "source_commit": "d3ace11aad71fc5a1dcf2aa43afe7f9fe994fcd6",
+  "source_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
+  "previous_source_commit": "d3ace11aad71fc5a1dcf2aa43afe7f9fe994fcd6",
   "chapters": [
     {
       "file": "01-product.md",
-      "characters": 1900,
-      "cjk_characters": 1396,
-      "h2_sections": 6,
-      "sha256": "c627344a234943050878682fa711898737405e0ff99545287982f7f24f223781"
+      "characters": 3739,
+      "cjk_characters": 2594,
+      "h2_sections": 11,
+      "self_checks": 3,
+      "sha256": "39256fd4b02b2c78a9d7c6259f8388d636ba103e0576180d8af2f5086a628765"
     },
     {
       "file": "02-architecture.md",
-      "characters": 2823,
-      "cjk_characters": 1257,
-      "h2_sections": 6,
-      "sha256": "1a38d4b24d583ac379168cedd145901c0e25b86b00f0e0a3203fca5f91eb4ee9"
+      "characters": 8627,
+      "cjk_characters": 2135,
+      "h2_sections": 10,
+      "self_checks": 3,
+      "sha256": "003be19712b509d30cf6f9a294b4592f8ca3dc651f5dce0b85bedd337af68b69"
     },
     {
       "file": "03-agents.md",
-      "characters": 2139,
-      "cjk_characters": 1299,
-      "h2_sections": 7,
-      "sha256": "e49adf6087fcca6a102bfea2b7e3bf72ab2247f2d2d56fd5218dec829af1bd7e"
+      "characters": 3952,
+      "cjk_characters": 2450,
+      "h2_sections": 13,
+      "self_checks": 3,
+      "sha256": "79c7aad986c3e70909ca5181c69466df36506091a65f3c8686cbb2e127d277ea"
     },
     {
       "file": "04-harness.md",
-      "characters": 2230,
-      "cjk_characters": 1261,
-      "h2_sections": 7,
-      "sha256": "7f51e9b15e44d41a2da11161a7df6361674975218e1b4ab12e669c476247ac2c"
+      "characters": 8835,
+      "cjk_characters": 2776,
+      "h2_sections": 11,
+      "self_checks": 3,
+      "sha256": "155e7cc11e7e297b74c7e9555590f44146ddccb188e710a3cc62eaa9a1ab5ef9"
     },
     {
       "file": "05-rag.md",
-      "characters": 2144,
-      "cjk_characters": 1452,
-      "h2_sections": 8,
-      "sha256": "8780c7a1166a839064349f79b7a72d510dd9d3d5b0f57c6716f0d8bd27b8ac6e"
+      "characters": 4644,
+      "cjk_characters": 2651,
+      "h2_sections": 14,
+      "self_checks": 3,
+      "sha256": "7168630fb940a9d0b53db8603e8ea94aff6c4d6139c390f81a2bf3053256abde"
     },
     {
       "file": "06-retrieval-math.md",
-      "characters": 4509,
-      "cjk_characters": 2059,
-      "h2_sections": 12,
-      "sha256": "714c07293019c5f7d02fe7fdc66acaf8ae164e13ce85c5ebad3ede8158995817"
+      "characters": 4936,
+      "cjk_characters": 2252,
+      "h2_sections": 13,
+      "self_checks": 3,
+      "sha256": "fef95c85bf7a02c904396cf43b7d48aa9c224493c9d9f20294474f6e683fdf4d"
     },
     {
       "file": "07-corpus.md",
-      "characters": 3012,
-      "cjk_characters": 1797,
-      "h2_sections": 10,
-      "sha256": "540ab981a792bb840b60d620e224919935b88a0a2271a180e3a96f5ec8d5dbaf"
+      "characters": 3753,
+      "cjk_characters": 2222,
+      "h2_sections": 12,
+      "self_checks": 3,
+      "sha256": "c3d266da92f036eabff6d5d7270f2e0c87359167570f7456e5243c014e4de0fc"
     },
     {
       "file": "08-verification.md",
-      "characters": 2806,
-      "cjk_characters": 1745,
-      "h2_sections": 8,
-      "sha256": "db13f3b1e757481bd48a449d6c95589c815058c16ac755010837976e36313107"
+      "characters": 6039,
+      "cjk_characters": 3500,
+      "h2_sections": 18,
+      "self_checks": 3,
+      "sha256": "307ce5ee70a234f54836f9a86750ed255697ac457fb62fe7f5eedc3907589e84"
     },
     {
       "file": "09-engineering-tools.md",
-      "characters": 1802,
-      "cjk_characters": 1162,
-      "h2_sections": 6,
-      "sha256": "7ed51411d39a06a2c83bd322da64a79d4e335f30ba621713606b4de254412c2e"
+      "characters": 3497,
+      "cjk_characters": 2121,
+      "h2_sections": 10,
+      "self_checks": 3,
+      "sha256": "26f773a31cf6b3f929b8e1b1642812038557e7d9506bf196aa13ba61efd67192"
     },
     {
       "file": "10-api-storage.md",
-      "characters": 2051,
-      "cjk_characters": 1165,
-      "h2_sections": 7,
-      "sha256": "01be717f52d749a306ddce07f3eb2bf01ffeb478f14ad2cc65fcaaa7c540b099"
+      "characters": 2571,
+      "cjk_characters": 1469,
+      "h2_sections": 10,
+      "self_checks": 3,
+      "sha256": "1d173f3ae4da1fc2f38278cda920c64282a2c8e2009579c2c791d1d54277885b"
     },
     {
       "file": "11-supervision-metrics.md",
-      "characters": 2886,
-      "cjk_characters": 1676,
-      "h2_sections": 10,
-      "sha256": "8ff6b25071168bb9f18d5d13279991e07b64ca34a0563a09d902c381c907ea47"
+      "characters": 3661,
+      "cjk_characters": 2038,
+      "h2_sections": 12,
+      "self_checks": 3,
+      "sha256": "069cb9a2835d952b8bcb8bd22587f1f4d1d925a96534c8162eb513381a7ddf64"
     },
     {
       "file": "12-training-nli.md",
-      "characters": 4768,
-      "cjk_characters": 1850,
-      "h2_sections": 13,
-      "sha256": "a2b8be9c7e6ea42d793276d80d334b7d9bccc2a233c65214435b9cf2cf0e36c0"
+      "characters": 6313,
+      "cjk_characters": 2453,
+      "h2_sections": 15,
+      "self_checks": 3,
+      "sha256": "cda87df86b3b00cb03dc5551e6766131d51a7e696a1ca874eaf6b9ba808eb659"
     },
     {
       "file": "13-local-nli.md",
-      "characters": 1755,
-      "cjk_characters": 898,
-      "h2_sections": 6,
-      "sha256": "86ffc673e220af9ae97b4b49e2133840bdee5499220b8f60253f51736eb312d9"
+      "characters": 2169,
+      "cjk_characters": 1134,
+      "h2_sections": 7,
+      "self_checks": 3,
+      "sha256": "05837850582b5c37b1cb84ee515be18f72fef1e83a76c43c74bc243ad8137444"
     },
     {
       "file": "14-code-tour.md",
-      "characters": 6206,
-      "cjk_characters": 1377,
-      "h2_sections": 8,
-      "sha256": "9b92d4a442772dc16c2366a5342f0abd8d89110ecdd0180accb3b14bb9c3499f"
+      "characters": 33000,
+      "cjk_characters": 4863,
+      "h2_sections": 15,
+      "self_checks": 3,
+      "sha256": "b7c2f7e53f55dae7454204f3af8e35669d7815fd0e8d3fe7261aa92914933790"
     },
     {
       "file": "15-failures.md",
-      "characters": 2887,
-      "cjk_characters": 1896,
-      "h2_sections": 12,
-      "sha256": "ba482ec5b9ceb8e290ef7b208433f253d920efd481ab38b7294755ea0bafbc95"
+      "characters": 5587,
+      "cjk_characters": 3584,
+      "h2_sections": 19,
+      "self_checks": 3,
+      "sha256": "9b72fef0a4daae89fbace03543bb7a43a17b169fdfbf4d753b13a15974578514"
     },
     {
       "file": "16-performance.md",
-      "characters": 1986,
-      "cjk_characters": 1239,
-      "h2_sections": 8,
-      "sha256": "709d35fc9dcdc0dc438f6dc86ddef9a0724c76b1ab001c0bb67e565e00b4e17e"
+      "characters": 5242,
+      "cjk_characters": 2912,
+      "h2_sections": 16,
+      "self_checks": 3,
+      "sha256": "5562790e3170519915a09c2566c36bdc45713d68d2a8451b347eec12dc18e747"
     },
     {
       "file": "17-interview.md",
-      "characters": 2749,
-      "cjk_characters": 1679,
-      "h2_sections": 9,
-      "sha256": "73558e897171a8cbac672100ff5bfc54660ff2b6d6c947302f2154503b8403a1"
+      "characters": 3746,
+      "cjk_characters": 2383,
+      "h2_sections": 11,
+      "self_checks": 3,
+      "sha256": "19bc51e997091fe76748d570a2ce38cc4e1925424cc22429ff79276272f37d2f"
     },
     {
       "file": "18-operations.md",
-      "characters": 2492,
-      "cjk_characters": 1125,
-      "h2_sections": 8,
-      "sha256": "43c8bda170f4546c16751a9537b4f44271564debac08921901196c0638b3f132"
+      "characters": 4609,
+      "cjk_characters": 2089,
+      "h2_sections": 14,
+      "self_checks": 3,
+      "sha256": "3fd928d6a662fd2a5861dc37cb8ca83d5c63bdeab44bbf57237eb5e89bb1368e"
     },
     {
       "file": "19-glossary.md",
-      "characters": 3927,
-      "cjk_characters": 1981,
-      "h2_sections": 5,
-      "sha256": "e465202078f93f86989628827d4125d6636bee1b02ecc10b85f66e720d5b42bf"
+      "characters": 4259,
+      "cjk_characters": 2132,
+      "h2_sections": 6,
+      "self_checks": 3,
+      "sha256": "c77078bf4c2f772963dccb5fe35cde517cf3ae94a7b75c3c1322b40d221c63c7"
     },
     {
       "file": "20-workshops.md",
-      "characters": 2840,
-      "cjk_characters": 1765,
-      "h2_sections": 9,
-      "sha256": "ad9eb60acd39b511984b0b60045157262e998e26680b664e6fbe00e3d2fcf5a2"
+      "characters": 3740,
+      "cjk_characters": 2215,
+      "h2_sections": 11,
+      "self_checks": 3,
+      "sha256": "5b513703e6758e1ce7a8e2be3acaefdbee4844e8badf8d933821f2987013f971"
     }
   ],
-  "code_references": [
-    {
-      "file": "services/structured_model.py",
-      "symbol": "strict_json",
-      "start_line": 18,
-      "end_line": 21,
-      "file_sha256": "a4a5265f183c6e78223aea9d1ebd1d79bca5c93dab8b65d6cda7565e25c95245",
-      "excerpt_sha256": "552dc767e2a2641f0e3149e139b410c31cc7885cd6616113ffb0b919b71e3e5e"
-    },
-    {
-      "file": "rag/semantic.py",
-      "symbol": "fuse_ranks",
-      "start_line": 149,
-      "end_line": 154,
-      "file_sha256": "ab0a24946a2b8757aa838c4181649f9f1820d9e22a7c2123de33af3a8f7ee0f6",
-      "excerpt_sha256": "08176d496a554214a252c23434791d23dab4aff0703cba0206cfdf040faa284c"
-    },
-    {
-      "file": "rag/corpus_build.py",
-      "symbol": "source_identity",
-      "start_line": 10,
-      "end_line": 14,
-      "file_sha256": "9a2345519e3bae7e931c8cb033015e852de265a4df9a712d3e37e05ef469d6ba",
-      "excerpt_sha256": "c84fb1b29a6628fadbe3c8627e5af0f8ac88ff00c1c014d359a700e236fdf012"
-    },
-    {
-      "file": "backend/store.py",
-      "symbol": "RunStore.tx",
-      "start_line": 50,
-      "end_line": 56,
-      "file_sha256": "5f800f7fd9abfb7306f1338612fcd098cc04e7aa2d9fde9061da1d5e3694edc2",
-      "excerpt_sha256": "a147a0de482cb0fdc50b6c0d748ff113291ba65b649db53a42eeb21a8fc770ca"
-    },
-    {
-      "file": "services/bounded_repair.py",
-      "symbol": "eligible_repairs",
-      "start_line": 21,
-      "end_line": 31,
-      "file_sha256": "809326ac11d33a844da60e44d09d6c08234460c2d9e4cce11aab7f9a81e934a4",
-      "excerpt_sha256": "bfaf15e73f41ea2f4a544be97b69039c264daee19fbd86b541dc8a62b0677f62"
-    },
-    {
-      "file": "tools/unit_conversion.py",
-      "symbol": "compute",
-      "start_line": 14,
-      "end_line": 24,
-      "file_sha256": "b4b1737ea09e0ec99c528a512ca4c27815082422a6ebdf24e31e7f56b8e774b9",
-      "excerpt_sha256": "e96a1607c84a12d7654acda95d265ca57046ad4207a3cca792210105082aee4e"
-    },
-    {
-      "file": "backend/store.py",
-      "symbol": "RunStore.recover",
-      "start_line": 58,
-      "end_line": 60,
-      "file_sha256": "5f800f7fd9abfb7306f1338612fcd098cc04e7aa2d9fde9061da1d5e3694edc2",
-      "excerpt_sha256": "81c466174821c6394822f496e87bb78476f7be272641608277fc47edca0a5372"
-    }
-  ],
-  "old_pdf_reference": [
-    {
-      "file": "PowerTrustAI_Project_Study_Handbook_20261003.txt",
-      "characters": 21033,
-      "cjk_characters": 12904,
-      "historical_only": true
-    },
-    {
-      "file": "PowerTrustAI_Project_Study_Interview_Handbook_v0.1-r1.txt",
-      "characters": 45731,
-      "cjk_characters": 21560,
-      "historical_only": true
-    }
-  ],
-  "total_characters": 57912,
-  "total_cjk": 30079,
-  "old_content_reused": "Conceptual/math ideas reviewed and rewritten; new current training/NLI/corpus chapters, no old status copied as current.",
-  "actual_browser_home_search_chapter_navigation_code_highlight": true,
-  "exact_browser_excerpt_text_matches_source": [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true
-  ],
-  "old_pdfs_not_modified": true,
-  "private_content_in_public_site": false,
-  "review_status": "Owner/ChatGPT review requested; API compact acceptance failed, documented rather than hidden"
+  "chapter_count": 20,
+  "self_checks": 60,
+  "verification": "tools.learning_checks: 20 chapters /60 folded answers /source hashes /local links",
+  "browser": "Product entry/mode checked; authenticated views unaccepted due browser file protocol policy. Learning static check is not browser acceptance."
 }

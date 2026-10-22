@@ -267,6 +267,14 @@ harness.execution_path = "langgraph_v1"  # 安装可选依赖后，仅开发验�
 
 面试可说：“Harness管理显式状态和有界资源。两审核并发但共享冻结对象；格式纠正与业务Revision分开，Revision后完整重提取双审，历史版本不可覆盖。”
 
+## 2026-10-22 服务编排配置与失败
+
+服务端通过POWERTRUST_EXECUTION_PATH选择sequential或langgraph_v1；受管orchestration.json只保留版本和合法枚举，环境变量优先。API提交不允许路径字段，用户不用选择内部编排。图依赖缺失或执行失败不自动改回原路径重发；没有图重试、checkpointer、自动恢复。既有共享预算、90秒请求/110秒步骤/800秒运行及一次Revision保持，预算不保证任意输出均能完成审核。
+
+离线固定响应差分是编排等价的主要证据；真实两版回答不同不能直接归因为图。真实运行分别报告必需执行、语义处置、修订是否触发、用量和持久化。首最终执行或存储故障停止后续付费，仍保留已完成同伴和草稿。明确的证据不足或合法复核结论不是编排失败。
+
+当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md)。
+
 ## 三道自测：先作答，再展开
 
 ### 自测1：纠正与Revision是否同一事？

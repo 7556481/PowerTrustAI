@@ -1,0 +1,364 @@
+{
+  "version": "LSI-results-v1",
+  "starting_commit": "aa033532b4d41fbb71645ea745d300cf423f4ee5",
+  "execution_implementation_commit": "ebb405e47f78319330aaf84ba74e2899bce31fbe",
+  "post_stop_collection_fix_commit": "c10510b63ed6acea7c1f87c73099d0726ed9f3fc",
+  "default_execution_path": "sequential",
+  "default_changed": false,
+  "production_configuration": {
+    "verification_schema": 13,
+    "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+    "retrieval_mode": "bm25",
+    "fact_strategy": "aggregate",
+    "retrieval_execution_profile": "topic_v4_subject_v1",
+    "review_message_profile": "lossless_v1",
+    "decision_policy": "product-v1"
+  },
+  "model_id": "deepseek-flash",
+  "budget": {
+    "max_revision_rounds": 1,
+    "max_model_calls": 40,
+    "max_tool_calls": 40,
+    "max_retrieval_calls": 12,
+    "max_duration_seconds": 800,
+    "max_transient_retries": 0,
+    "step_timeout_seconds": 110,
+    "max_retrieval_chars_per_call": 16000,
+    "max_retrieval_chars_total": 160000
+  },
+  "extra_batch_cap": null,
+  "versions": {
+    "python": "3.13.2",
+    "langgraph": "1.2.16"
+  },
+  "offline": {
+    "service_and_stage_differential": {
+      "passed": 66,
+      "seconds": 27.629
+    },
+    "historical_component_replay": {
+      "items": 24,
+      "records_per_path": 25,
+      "correction_per_path": 1,
+      "same_predictions_messages_and_controls": true,
+      "new_model_calls": 0,
+      "source_evolution_profile": "backend/config.py and model_adapter/runtime.py explicitly differ from old live freeze; old live gate unchanged"
+    },
+    "full_before_collection_fix": {
+      "passed": 1135,
+      "seconds": 173.146
+    },
+    "full_final": {
+      "passed": 1136,
+      "seconds": 158.902,
+      "failed": 0,
+      "errors": 0,
+      "implementation_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df"
+    },
+    "collection_fix_targeted": {
+      "passed": 3,
+      "seconds": 4.205
+    },
+    "final_portability_targeted": {
+      "passed": 9,
+      "seconds": 8.178,
+      "installed_graph_tested": true,
+      "public_minimal_install": "Graph-specific tests explicitly skip if optional lock is absent; no CI success claimed"
+    },
+    "final_presentation_targeted": {
+      "passed": 13,
+      "seconds": 3.204,
+      "scope": "Actual client GET-only DOM probe separates evidence gap/no substantive answer, draft execution failure and generated-but-reviewing; not actual authenticated browser validation."
+    },
+    "full_after_collection_fix": {
+      "passed": 1136,
+      "seconds": 162.582,
+      "failed": 0,
+      "errors": 0
+    }
+  },
+  "counts": {
+    "planned_service_runs": 6,
+    "accepted_service_runs": 1,
+    "completed_service_runs": 1,
+    "service_pipeline_execution_failures": 0,
+    "entry_collection_failures": 1,
+    "unexecuted_runs": 5,
+    "complete_pairs": 0,
+    "real_graph_runs": 0,
+    "real_revision_triggered": 0
+  },
+  "branches": [
+    {
+      "id": "LSI-01-S",
+      "execution_path": "sequential",
+      "run_id": "a83c9966ad034532954127b6958b075b",
+      "status": "execution_failed",
+      "exception_type": "StorageError",
+      "reason": null,
+      "collection_status": "execution_failed",
+      "service_execution_status": "complete",
+      "service_state": "completed",
+      "decision": "pass",
+      "required_execution_integrity": "complete",
+      "calls": 5,
+      "revision": "not_triggered",
+      "harness_duration_ms": 26801
+    },
+    {
+      "id": "LSI-01-G",
+      "execution_path": "langgraph_v1",
+      "run_id": null,
+      "status": "unexecuted",
+      "exception_type": null,
+      "reason": "stopped_after_previous_final_failure",
+      "collection_status": "unexecuted",
+      "service_execution_status": "unexecuted"
+    },
+    {
+      "id": "LSI-02-G",
+      "execution_path": "langgraph_v1",
+      "run_id": null,
+      "status": "unexecuted",
+      "exception_type": null,
+      "reason": "stopped_after_previous_final_failure",
+      "collection_status": "unexecuted",
+      "service_execution_status": "unexecuted"
+    },
+    {
+      "id": "LSI-02-S",
+      "execution_path": "sequential",
+      "run_id": null,
+      "status": "unexecuted",
+      "exception_type": null,
+      "reason": "stopped_after_previous_final_failure",
+      "collection_status": "unexecuted",
+      "service_execution_status": "unexecuted"
+    },
+    {
+      "id": "LSI-03-S",
+      "execution_path": "sequential",
+      "run_id": null,
+      "status": "unexecuted",
+      "exception_type": null,
+      "reason": "stopped_after_previous_final_failure",
+      "collection_status": "unexecuted",
+      "service_execution_status": "unexecuted"
+    },
+    {
+      "id": "LSI-03-G",
+      "execution_path": "langgraph_v1",
+      "run_id": null,
+      "status": "unexecuted",
+      "exception_type": null,
+      "reason": "stopped_after_previous_final_failure",
+      "collection_status": "unexecuted",
+      "service_execution_status": "unexecuted"
+    }
+  ],
+  "cost": {
+    "actual_model_calls": 5,
+    "initial": 5,
+    "correction": 0,
+    "input_tokens": 54321,
+    "output_tokens": 1500,
+    "total_tokens": 55821,
+    "actual_invoice_amount": null,
+    "records": [
+      {
+        "call_number": 1,
+        "component": "generation",
+        "prompt_version": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+        "correction": false,
+        "duration_ms": 1730,
+        "usage": {
+          "input_tokens": 9900,
+          "output_tokens": 84,
+          "total_tokens": 9984,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1280,
+          "cache_miss_tokens": 8620
+        },
+        "output_status": "valid_structure",
+        "invocation_id": "a6bfae6185bc403890ec8dd6da6879e4"
+      },
+      {
+        "call_number": 2,
+        "component": "claim_extraction",
+        "prompt_version": "atomic-claims-v7-obligations-faithful-assertions-v2",
+        "correction": false,
+        "duration_ms": 1358,
+        "usage": {
+          "input_tokens": 1529,
+          "output_tokens": 200,
+          "total_tokens": 1729,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1152,
+          "cache_miss_tokens": 377
+        },
+        "output_status": "valid_structure",
+        "invocation_id": "78db085a8fd24e25a1a41353cc0157e9"
+      },
+      {
+        "call_number": 3,
+        "component": "evidence_verification",
+        "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+        "correction": false,
+        "duration_ms": 2874,
+        "usage": {
+          "input_tokens": 27478,
+          "output_tokens": 572,
+          "total_tokens": 28050,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 2816,
+          "cache_miss_tokens": 24662
+        },
+        "output_status": "valid_structure",
+        "invocation_id": "e6ca0e52169841058da61ea4038a909d"
+      },
+      {
+        "call_number": 4,
+        "component": "power_domain_review",
+        "prompt_version": "power-domain-review-v3.5-task-obligations",
+        "correction": false,
+        "duration_ms": 1974,
+        "usage": {
+          "input_tokens": 12705,
+          "output_tokens": 369,
+          "total_tokens": 13074,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1280,
+          "cache_miss_tokens": 11425
+        },
+        "output_status": "valid_structure",
+        "invocation_id": "ac8f828b82934acf85144ad71ce9268e"
+      },
+      {
+        "call_number": 5,
+        "component": "evidence_verification",
+        "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+        "correction": false,
+        "duration_ms": 2530,
+        "usage": {
+          "input_tokens": 2709,
+          "output_tokens": 275,
+          "total_tokens": 2984,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1536,
+          "cache_miss_tokens": 1173
+        },
+        "output_status": "valid_structure",
+        "invocation_id": "e6ca0e52169841058da61ea4038a909d"
+      }
+    ]
+  },
+  "timing": {
+    "harness_duration_ms": 26801,
+    "first_model_before_send_from_controller_seconds": 204.96276209999996,
+    "note": "Controller time includes process startup/full immutable-knowledge SHA plus retrieval. Not browser first paint; no graph latency comparison."
+  },
+  "collection_failure": {
+    "type": "StorageError",
+    "cause": "TestClient worker owns SQLite connection; collector wrongly used it from caller thread. Service completed and persisted successfully.",
+    "recovery": "Separate read-only SQL after stop; no new execution or original-summary replacement.",
+    "fix": "Separate explicitly closed read-only connection plus successful-six scripted regression; batch stays stopped."
+  },
+  "source_evolution_after_stop": [
+    {
+      "path": "backend/static/app.js",
+      "execution_sha256": "14078e91e8e03b3d82e2ef8426330925d9a913b66d8699dc7ae5dd2fe71fb8fb",
+      "current_sha256": "14ac7f60fdfdc8d1652505b35f4e5a06d3a96cbec7925447241bb96b505443ea",
+      "original_recoverable_commit": "ebb405e47f78319330aaf84ba74e2899bce31fbe",
+      "checkout_line_endings": "CRLF",
+      "reason": "post-stop collection fix, optional-dependency annotations or presentation-only evidence-gap distinction; not used for a batch resume"
+    },
+    {
+      "path": "evaluation/langgraph_service_trial_v1.py",
+      "execution_sha256": "05fd850e911ee8992854cfeb357586a75c2beadbd200dae7d713cbb5117c255c",
+      "current_sha256": "04dd523e717e98e81bc8d66eed9fc070c6023cbe923d55111a7914c710ef5e75",
+      "original_recoverable_commit": "ebb405e47f78319330aaf84ba74e2899bce31fbe",
+      "checkout_line_endings": "CRLF",
+      "reason": "post-stop collection fix, optional-dependency annotations or presentation-only evidence-gap distinction; not used for a batch resume"
+    },
+    {
+      "path": "tests/test_langgraph_service_integration_v1.py",
+      "execution_sha256": "b2fd45fba11d7ed81b541a90ab14f00ecda20441e72351ca9ffc786c77fc54ea",
+      "current_sha256": "33be72a1a917d00c22379037f6c82504ec292692602b7a345013b368d034f581",
+      "original_recoverable_commit": "ebb405e47f78319330aaf84ba74e2899bce31fbe",
+      "checkout_line_endings": "CRLF",
+      "reason": "post-stop collection fix, optional-dependency annotations or presentation-only evidence-gap distinction; not used for a batch resume"
+    },
+    {
+      "path": "tests/test_langgraph_service_trial_v1.py",
+      "execution_sha256": "fa75ccd540a1980260b0aa6044fde5db951877811522f48646ba3bee6dd6d429",
+      "current_sha256": "6979097aa64427158518e05176e688b9c3837d6ced778c15beec2463e2dff0b7",
+      "original_recoverable_commit": "ebb405e47f78319330aaf84ba74e2899bce31fbe",
+      "checkout_line_endings": "CRLF",
+      "reason": "post-stop collection fix, optional-dependency annotations or presentation-only evidence-gap distinction; not used for a batch resume"
+    }
+  ],
+  "production_history": {
+    "cold_start_unchanged": true,
+    "tables": {
+      "runs": {
+        "count": 104,
+        "rows_sha256": "7d56b30fbd00d1adac469af808a02a7d8368a395bbb5ce4498f9f18138822e7d"
+      },
+      "events": {
+        "count": 2278,
+        "rows_sha256": "7761b5e8576f306a78f3db089583a68adff9e9f7d5c123cc504c5a6534b2a9c1"
+      },
+      "objects": {
+        "count": 2999,
+        "rows_sha256": "c6fd2d407c41f38226f6d7b9c33499353703ac41fd0f2dd4691cbfb0c99da608"
+      },
+      "reviews": {
+        "count": 8,
+        "rows_sha256": "5ebddaeb7d5d009fe8d25a82919e7b0cf6433b36f030ab10550cb3f552b1ed7f"
+      }
+    },
+    "actual_graph_default_restart": "not_performed; graph live gate not met"
+  },
+  "browser": {
+    "actual_browser": "in-app browser on http://127.0.0.1:8765/",
+    "default_question_entry": "verified",
+    "folded_existing_answer_diagnostic_and_labels": "verified",
+    "no_submission_on_mode_change": "verified",
+    "automatic_launch_connection": "not_accepted: file protocol blocked by browser security; no workaround",
+    "authenticated_history_citations_versions_failure_views": "not_accepted in browser; offline API checks are separate"
+  },
+  "switch_gates": {
+    "offline_equivalence": "pass",
+    "real_graph_required_stages": "not_run",
+    "real_graph_budget_and_persistence": "not_run",
+    "history_cold_start": "pass",
+    "graph_default_restart": "not_run",
+    "rollback_available": "offline_verified",
+    "decision": "keep_sequential; graph candidate only"
+  },
+  "old_private_artifacts_unchanged": 150,
+  "bound_files_at_execution": 145,
+  "learning": {
+    "markdown_chapters_updated": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "10",
+      "14",
+      "18"
+    ],
+    "total_chapters": 20,
+    "folded_self_checks": 60,
+    "characters": 127535,
+    "source_identity_and_local_links": "pass",
+    "source_application_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
+    "default_described": "sequential, real graph service acceptance not completed",
+    "sync_note": "docs/learning/langgraph-service-sync-v1.md"
+  }
+}

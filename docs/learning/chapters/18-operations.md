@@ -71,6 +71,14 @@ git -c http.proxy=http://127.0.0.1:7897 ls-remote origin refs/heads/master
 
 Git可把Windows工作区CRLF检出为Linux LF；直接比较工作区原字节SHA会误报代码不同。学习站source-check同时保留原始文件SHA和明确source_text_lf_sha256（仅CRLF→LF，空格/代码不变）；CI按后者核查教学源码。真实Evidence、PDF和快照仍严格原字节/原文/版本哈希，不能套这个教学规则修改生产依据。首次远端CI失败保留，Git LF副本重现后修复，再核对CI，而不是取消来源校验。
 
+## 2026-10-22 图路径与回退
+
+只在服务空闲时正常停服，再修改服务端编排配置并重启。临时回退可在单个PowerShell进程中设置`$env:POWERTRUST_EXECUTION_PATH='sequential'`后按原命令启动；该值不改变全局环境。受管文件为data/runtime_local/orchestration.json，版本service-orchestration-v1、execution_path为合法枚举；删除候选默认配置并不等于删除任何运行数据。回退前后均核对健康、历史运行/反馈/回答版本及请求数，不通过恢复旧任务验证。
+
+默认是否已切换、真实付费完成数量及未验收项见本轮集成报告。完整发布库每个新进程保留首次字节SHA检查，不能以启动慢为由跳过或改成mtime认证。学习站由Markdown构建，20章和60折叠自测保持；不手工维护第二份HTML正文。
+
+当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md)。
+
 ## 三道自测：先作答，再展开
 
 ### 自测1：学习站启动是否要停8765？

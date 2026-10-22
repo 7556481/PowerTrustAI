@@ -1,0 +1,29 @@
+{
+  "version": "LSI-validation-evidence-v1",
+  "artifacts": [
+    {
+      "path": "data/evaluation_local/langgraph-service-integration-v1/full-offline-v1.log",
+      "sha256": "026df7059f6413d8b83c80f12ce9494eae765d53f50f701dda61c78342099980"
+    },
+    {
+      "path": "data/evaluation_local/langgraph-service-integration-v1/full-offline-final-v1.log",
+      "sha256": "a1dc14f5cdd3988a4b5adde554f8a3a82139660c8eb2b32b131714e6625b8443"
+    },
+    {
+      "path": "data/evaluation_local/langgraph-service-integration-v1/final-portability-targeted-v1.log",
+      "sha256": "317f006b424a4af7364908eb03aa15a229ee20f1b85564e58fd40fc88ff53520"
+    },
+    {
+      "path": "data/evaluation_local/langgraph-service-integration-v1/production-history-before.json",
+      "sha256": "beeed7dbce0229b066cc0b3960df0f8ec7763ec4f5c77f69daaee5c317d627f7"
+    },
+    {
+      "path": "data/evaluation_local/langgraph-service-integration-v1/production-history-after-cold-start.json",
+      "sha256": "beeed7dbce0229b066cc0b3960df0f8ec7763ec4f5c77f69daaee5c317d627f7"
+    },
+    {
+      "path": "data/evaluation_local/langgraph-service-integration-v1/full-offline-final-ui-v1.log",
+      "sha256": "314e0aa0cabc6f19729964177fa5c40b5d2e7ecfc6f00fa3ea3d07999c9d53fb"
+    }
+  ]
+}
