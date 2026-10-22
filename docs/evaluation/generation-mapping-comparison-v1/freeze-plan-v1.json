@@ -1,0 +1,352 @@
+{
+  "version": "generation-mapping-comparison-freeze-plan-v1",
+  "status": "prepared_for_owner_batch_review_not_execution_freeze",
+  "source_commit": "4ad48da3d3aadf977c1bc48b7ae87bd553cc1d1c",
+  "execution_authorized": false,
+  "ready_to_execute": false,
+  "stage_a_owner_acceptance": {
+    "accepted": true,
+    "scope": "development and offline wiring only; no answer quality improvement proven",
+    "reviewed_commit": "4ad48da3d3aadf977c1bc48b7ae87bd553cc1d1c",
+    "feedback_origin": "AI-assisted, user supervised",
+    "raw_response_or_sha_owner_verification_claimed": false
+  },
+  "task_count": 4,
+  "planned_branches": 8,
+  "planned_initial_generations": 8,
+  "task_lineage": "three reused prior source groups, six excerpts, subsequent development use, not new independent validation",
+  "model_settings_proposal": {
+    "model_id": "deepseek-flash",
+    "endpoint": "https://api.deepseek.com",
+    "timeout_seconds": 90,
+    "max_output_tokens": 8000,
+    "max_response_chars": 96000,
+    "thinking": "disabled by unchanged connector",
+    "temperature": "omitted by current connector; service default not controlled",
+    "seed": "not supplied or controlled",
+    "stream": false,
+    "response_format": "json_object",
+    "note": "proposal based on explicit archived model identity; not a check of present availability, price, account settings or authorization"
+  },
+  "generation": {
+    "product_guidance": true,
+    "original_class": "agents.generation.EvidenceGenerationAgent(schema_version=3, product_guidance=True)",
+    "candidate_class": "agents.generation_mapping_v1.EvidenceMappingGenerationAgent(product_guidance=True)",
+    "original_prompt_version": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+    "candidate_prompt_version": "concept-evidence-generation-map-v1-dev-product",
+    "original_response_contract": "generation-output-v3",
+    "candidate_response_contract": "generation-answer-and-map-v1",
+    "same_model_input_per_pair": true,
+    "variant_not_inserted_into_task_question_or_evidence_ids": true,
+    "each_variant_one_initial_attempt": true,
+    "max_format_corrections_per_generation": 1,
+    "planning_calls": 0,
+    "answer_characters_max": 220,
+    "answer_parser_unchanged": true
+  },
+  "review_chain": {
+    "harness": "harness.runtime.OfflineHarness",
+    "execution_path": "sequential",
+    "retriever": null,
+    "knowledge_version": null,
+    "fixed_delivered_evidence": "same complete provided evidence per pair, not map-selected subset",
+    "scope": "fixed-evidence application of original audit chain; not production live-retrieval end-to-end validation",
+    "extractor": "ModelClaimExtractor(typed_components=True, protocol_version=7, daily_guidance=True)",
+    "verification": "ModelEvidenceVerificationAgent(schema_version=13, support_relation_checks=True, support_relation_version=6, review_message_profile=lossless_v1)",
+    "domain": "ModelPowerDomainReviewAgent(protocol_version=5, safety_review=True, task_applicability=True)",
+    "policy": "ProductAuditPolicy product-decision-v1.5",
+    "revision": "original agent retained but zero revision budget, no revised answer comparison",
+    "unit_tool": "UnitConversionTool scalar-si-conversion-v2",
+    "citation_workload": {
+      "max_items": 32,
+      "max_message_chars": 64000,
+      "max_correction_message_chars": 192000
+    },
+    "same_model_settings_for_all_stages": true,
+    "review_mapping_leakage": "mapping not transmitted; actual generation snapshot including prompt identity preserved",
+    "blinded_model_review_claimed": false
+  },
+  "budget_proposal": {
+    "per_branch_model_calls": 16,
+    "batch_upper_bound": 128,
+    "generation_initial": 8,
+    "generation_including_maximum_one_format_correction": 16,
+    "max_revision_rounds": 0,
+    "max_tool_calls_per_branch": 40,
+    "max_retrieval_calls_per_branch": 0,
+    "max_transient_retries": 0,
+    "max_duration_seconds_per_branch": 800,
+    "step_timeout_seconds": 110,
+    "batch_admission_deadline_seconds": 6400,
+    "derivation": "each branch: generation<=2, extraction<=2, domain<=2, fact independent+each original citation C+at most one total fact-stage correction => C+8; hard branch cap 16, 8 branches <=128; not 128 planned or guaranteed calls",
+    "citation_count": "unknown until generation; no new parser cap, no budget increase or rerun if exhausted",
+    "deadline_note": "admission/step limits, not a strict wall-clock guarantee including in-flight transport and persistence",
+    "cost": "real amount unknown; no price or invoice inferred; new explicit expense authorization required"
+  },
+  "stop_plan": {
+    "first_final_branch_execution_failure": "save completed and partial records, then do not start next branch",
+    "format_correction": "one existing format correction within stage rules, not semantic regeneration",
+    "semantic_disagreement": "retain contradiction, insufficiency, uncertainty, refusal and policy rejection; not an execution failure by themselves",
+    "partial_audit": "retain valid sibling and in-flight call accounting under original Harness; no fabricated label for absent result",
+    "no_resubmit": true,
+    "no_resume": true,
+    "no_fallback": true,
+    "no_new_directory_retry": true,
+    "all_unexecuted_enumerated": true
+  },
+  "future_execution_directory": "data/evaluation_local/generation-mapping-comparison-v1/batch-v1",
+  "future_private_response_directory": "data/retrieval_local/generation-mapping-comparison-v1/batch-v1",
+  "attempt_marker_created": false,
+  "order": [
+    {
+      "request_id": "GEC-01-original",
+      "task_id": "GEC-01",
+      "variant": "original",
+      "generation_input_sha256": "06da98234f79a712077b6d075072a2a6fdb9464783110dd21a9c1a6a39b1b463",
+      "initial_messages_sha256": "edc549d2c229a51999ff560b2435c287db5f2c65d3ec75239bc8a0e15072c6d7",
+      "initial_message_characters": 10166
+    },
+    {
+      "request_id": "GEC-01-candidate",
+      "task_id": "GEC-01",
+      "variant": "candidate",
+      "generation_input_sha256": "06da98234f79a712077b6d075072a2a6fdb9464783110dd21a9c1a6a39b1b463",
+      "initial_messages_sha256": "c9806a94c24756b73604f583a12e32b6fe666aa7840a986ba6fdc5968f9e2c4a",
+      "initial_message_characters": 13012
+    },
+    {
+      "request_id": "GEC-02-candidate",
+      "task_id": "GEC-02",
+      "variant": "candidate",
+      "generation_input_sha256": "8435d996a6372f629a62f08f3ec4a58941f22986b0ed527c199b0d4a9a84afb5",
+      "initial_messages_sha256": "50cec4d62d9ccf99b74b89b4df9cb297e4e7e62430eb8d1a50dc3fdd4e98c562",
+      "initial_message_characters": 12709
+    },
+    {
+      "request_id": "GEC-02-original",
+      "task_id": "GEC-02",
+      "variant": "original",
+      "generation_input_sha256": "8435d996a6372f629a62f08f3ec4a58941f22986b0ed527c199b0d4a9a84afb5",
+      "initial_messages_sha256": "0fac6525239ac51676f5d39a62fe72b44132aedd27e672e390cc557861847e81",
+      "initial_message_characters": 9863
+    },
+    {
+      "request_id": "GEC-03-original",
+      "task_id": "GEC-03",
+      "variant": "original",
+      "generation_input_sha256": "d6db15b9f93826bcfdc34ad77c3212411a308bc9ddec8e24cbf2a26cbfd4bac9",
+      "initial_messages_sha256": "1c1c734e57fe1f3b5f2d58e0e13d381e7f733f458a4607d5b58d39f8f124094b",
+      "initial_message_characters": 11031
+    },
+    {
+      "request_id": "GEC-03-candidate",
+      "task_id": "GEC-03",
+      "variant": "candidate",
+      "generation_input_sha256": "d6db15b9f93826bcfdc34ad77c3212411a308bc9ddec8e24cbf2a26cbfd4bac9",
+      "initial_messages_sha256": "c6e377786ca6909a9b5549a552db9ae93dfe9cb1b012a6af6d79ece61abea1e0",
+      "initial_message_characters": 14143
+    },
+    {
+      "request_id": "GEC-04-candidate",
+      "task_id": "GEC-04",
+      "variant": "candidate",
+      "generation_input_sha256": "a1eea5250e6ca3e789a4a64d181935b42b95895ed9b8fd4b26502e2d7d3241f6",
+      "initial_messages_sha256": "4d77215ffc0a1862013120dd7e24fa5ae01f38972b0f62b1cf48f0a72f987787",
+      "initial_message_characters": 13954
+    },
+    {
+      "request_id": "GEC-04-original",
+      "task_id": "GEC-04",
+      "variant": "original",
+      "generation_input_sha256": "a1eea5250e6ca3e789a4a64d181935b42b95895ed9b8fd4b26502e2d7d3241f6",
+      "initial_messages_sha256": "5fdcbc93328bd1e4b41196b3b7e92c3e1caa320956d2b108da9a39698ed76c1b",
+      "initial_message_characters": 10842
+    }
+  ],
+  "identity_algorithm": "sha256 UTF-8 canonical JSON ensure_ascii=False, sort_keys=True, separators comma/colon; exact role/content strings retained",
+  "dynamic_message_binding": "review/correction messages depend on actual answer/response; freeze construction code now, save/hash exact scope and messages before each future send; do not invent future-message hashes",
+  "pre_execution_blockers": [
+    "owner accepts these four new tasks, requirements, rubric and execution settings",
+    "new explicit paid payload/expense/call-budget authorization",
+    "execution entry not implemented/bound yet; use existing Harness/controller, offline-check first-final-execution-failure stop and audit identity",
+    "freeze final runner/code/settings/material identities and 8 initial messages, private persistence and attempt marker before any model call"
+  ],
+  "file_identities": [
+    {
+      "path": "docs/evaluation/generation-mapping-comparison-v1/tasks-v1.json",
+      "sha256": "306a8bd50b49eaca39eb13462725f0e45f77e026e05959a378dfb1709c9a2c89"
+    },
+    {
+      "path": "docs/evaluation/generation-mapping-comparison-v1/rubric-v1.json",
+      "sha256": "9d46816aaa0f8247e540d894dd8d124d99fdd691196bbbb4fd18ad848bbf989c"
+    },
+    {
+      "path": "docs/evaluation/generation-mapping-comparison-v1/source-lineage-v1.json",
+      "sha256": "f018d39020d208dfd17fbc1af40f2ea677906cad8dc13ac7ca1ab7f5fd73c1ea"
+    },
+    {
+      "path": "docs/evaluation/generation-mapping-comparison-v1/README.md",
+      "sha256": "f46abcae8498a432ab96cd2f9d98ac43350b82e62ffe314fc81819068443ffc5"
+    },
+    {
+      "path": "evaluation/generation_mapping_comparison_materials_v1.py",
+      "sha256": "83108a673566d27eb96835e0c012c2458f806229a2d9a47ffc842dd79e892efe"
+    },
+    {
+      "path": "agents/generation.py",
+      "sha256": "a743a4580bcf087c7d08dc32da5888c598f62ca2ff1c6bd026ab40abfc75f75c"
+    },
+    {
+      "path": "agents/generation_mapping_v1.py",
+      "sha256": "2bb183120e20115fb347ec48decc4123bf77809d93e7e5e709c672f93ef3982f"
+    },
+    {
+      "path": "agents/contracts.py",
+      "sha256": "b2c08418de002bab314783c865b343f50c57220ae356ae75e0a4d3c3b7acd9d7"
+    },
+    {
+      "path": "services/answer_units.py",
+      "sha256": "60472840c5d2f5319b642bfc544ecd17a5fd90ef52df8d51bbee5095b5e14f4e"
+    },
+    {
+      "path": "services/quote_candidates.py",
+      "sha256": "3f954643274ac5dba5baa54993dcb930053eb37ff918f08c6a53085ef4f95385"
+    },
+    {
+      "path": "services/condition_candidates.py",
+      "sha256": "a473a008cca3eb2efe140f6c579e55402648282dd9b10f302c7b4384a2b2621a"
+    },
+    {
+      "path": "services/evidence_scope.py",
+      "sha256": "d7a7f3a8eb088c12f4387b575b2e23f79a5234003632c534a526d8b63247206e"
+    },
+    {
+      "path": "services/structured_model.py",
+      "sha256": "a0ab6c75f2256e8810cb3f9d89901b821d5612196ee2496c310d6d06372d1118"
+    },
+    {
+      "path": "services/claim_extractor.py",
+      "sha256": "364439019186c84f9a073dc972c687c12c2d77aac14ef1c0c4cf1c703cc1377e"
+    },
+    {
+      "path": "services/claim_obligations.py",
+      "sha256": "bbe901bb4ac457072ba8af4a9ca394383f682db652dd530410746288f36a6bec"
+    },
+    {
+      "path": "services/review_inputs.py",
+      "sha256": "54df9dcc3a0e5dd000996b0cd4dd0fc4eda6a7ae2410d17eb0498753dcecc7da"
+    },
+    {
+      "path": "services/review_fidelity.py",
+      "sha256": "607e00c3906ab96c358a6fa07607b1f0df874564ac502c3e3dd025fdfd6d569e"
+    },
+    {
+      "path": "services/support_relation_v6.py",
+      "sha256": "414259a5a786676469f8f1163ce5b2f473b543f99344ad18b555d1b27db43db9"
+    },
+    {
+      "path": "services/review_transport.py",
+      "sha256": "d4b3150466ea7ca043357744521babb3f99f6e1306b6007732d8d2ad84f8ac2b"
+    },
+    {
+      "path": "services/task_applicability.py",
+      "sha256": "84490fd9e78c476452bb67d219a62c52c657ed4e62cf1dbb2677074b89682bc5"
+    },
+    {
+      "path": "agents/evidence_verification.py",
+      "sha256": "4e1ae428ac4e9cbb49065d503e39a69a43d03a5a25e6ce091f005f34d1f85b78"
+    },
+    {
+      "path": "agents/verification_contract_v10_batched.py",
+      "sha256": "1e3c858dc1118a40b3d0103385cb91753903ef885b1b86daeeaa986c5fe11f8f"
+    },
+    {
+      "path": "agents/review_templates_v3.py",
+      "sha256": "15e059dcf9f52ab34ee5e73131597c4b6db2622ac1d90c31a3b8b8f9ddb826e0"
+    },
+    {
+      "path": "agents/power_domain_review.py",
+      "sha256": "d664f4fa1ecf3687f71dafe86d80dc1983e372078538bda395968608d60bfd4e"
+    },
+    {
+      "path": "agents/domain_contract_v3.py",
+      "sha256": "d69d8ae817d83fb8c6b6aeb6c6fd62fa525fa75c900a64a15b0bd3302ce59027"
+    },
+    {
+      "path": "harness/runtime.py",
+      "sha256": "f3343876ab3eb9946271e8f6ea0b8aca5132e9c741e223b05193cdd9381fe547"
+    },
+    {
+      "path": "harness/execution.py",
+      "sha256": "c817c756a2131f7941c735d87bf425446baa16e32060619149870ab82e9a0e81"
+    },
+    {
+      "path": "harness/product_policy.py",
+      "sha256": "f8a93873e1876f7870acb4674841ff225ebd9d586d4a51275f86b8a61d308922"
+    },
+    {
+      "path": "harness/contracts.py",
+      "sha256": "6ddbee88cc4f1c201ec4b56893ba747a9a63c8150d5d0e5e2539d89c78541c80"
+    },
+    {
+      "path": "evaluation/batch_control.py",
+      "sha256": "265df87098a3191a0fae1bc0d4bb50480c36e64fa524fb169f1fe47c00df2009"
+    },
+    {
+      "path": "model_adapter/runtime.py",
+      "sha256": "009eb22f0ea4bbbd29cfa5cf53ea881c048436430a6896c237e2587a6eca5c8d"
+    },
+    {
+      "path": "model_adapter/contracts.py",
+      "sha256": "7c23b9a46f7c01d27cec864b704eb1e902660edf8cae2614181da68b4847bf5d"
+    },
+    {
+      "path": "model_adapter/deepseek.py",
+      "sha256": "73406215bfd5ee0a9fc319c90a723e4c3987615739e204c542ec7833ab4cdf9b"
+    },
+    {
+      "path": "services/response_diagnostics.py",
+      "sha256": "87c2e772600bc2d588e7544f364df5df63a2ea2ef23f6e892ef5da3669e31ee2"
+    },
+    {
+      "path": "docs/evaluation/baseline-source-review-v1/selected-source-excerpts-v1.json",
+      "sha256": "d01311a2d4c247fb2455d78e19b5831605d182fd7aeb76b05fdf5dc9545904cb"
+    },
+    {
+      "path": "docs/evaluation/baseline-batch-v1/results-v1.json",
+      "sha256": "4ad50d85e7fd60ce5bfeddb27d3db45d2e3859ec0ad5cc4bbde46fbd29cd7afd"
+    },
+    {
+      "path": "docs/evaluation/baseline-batch-v1/owner-text-review-closeout-v1.json",
+      "sha256": "afe6a39f13745dd0fea186e3f4ca48c0e561bb14c12e935b7f3df85a9d3b2593"
+    },
+    {
+      "path": "docs/evaluation/generation-mapping-v1/results-v1.json",
+      "sha256": "d7dfb10814dbc5f2ee705c09515d039dcc0a6a9fa95b32c92263c1712aa4636e"
+    }
+  ],
+  "preparation_model_calls": 0,
+  "historical_model_or_batch_replays": 0,
+  "production_changes": 0,
+  "dependency_installs": 0,
+  "offline_preparation": {
+    "groups": 4,
+    "branches": 8,
+    "original_requirements": 12,
+    "planned_requirement_observations": 24,
+    "exact_reused_excerpts": 6,
+    "source_groups": 3,
+    "model_calls": 0,
+    "raw_initial_message_directory": "data/evaluation_local/generation-mapping-comparison-v1/preparation-v1",
+    "attempt_marker_created": false,
+    "source_snapshot_raw_files_read": false,
+    "new_material_review_pending": true,
+    "checks": "passed: four tasks / twelve original requirements / six exact prior excerpts / eight unsent message identities; paired inputs identical; whitelist builder excludes rubric; no model execution",
+    "display_check_event": {
+      "event": "staged_diff_detected_original_USGS_trailing_spaces",
+      "fix": "README renders the two full literal excerpts as reversible JSON strings; no source input bytes or message identities changed",
+      "source_text_trimmed": false,
+      "review_status": "resolved before commit"
+    }
+  }
+}

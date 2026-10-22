@@ -1,0 +1,164 @@
+{
+  "version": "generation-mapping-comparison-tasks-v1",
+  "status": "prepared_pending_owner_batch_review_not_execution_authorization",
+  "common_answer_requirements": [
+    "请用中文直接、简洁回答；完整正文不超过220字，包含标点、空白及单元分隔。",
+    "仅依据给定材料及明确题设作答；保留必要条件。有据部分照答，未解决部分明确限制，不添加无关保证。"
+  ],
+  "tasks": [
+    {
+      "task_id": "GEC-01",
+      "category": "definition_directly_supported",
+      "question": "根据给定页面解释PoP（降水概率）的含义、可测降水阈值和时空范围，并说明本页通常时段及例外。无需解释概率计算算法。",
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "description": "解释PoP对应何种降水事件及概率含义。"
+        },
+        {
+          "requirement_id": "R2",
+          "description": "给出可测降水的阈值，并保留原单位。"
+        },
+        {
+          "requirement_id": "R3",
+          "description": "说明概率的时间、空间范围，以及本页通常时段是否允许另有说明。"
+        }
+      ],
+      "user_context": "仅解释本页归档定义，不判断真实天气。",
+      "evidence": [
+        {
+          "evidence_id": "GEC-01-E1",
+          "source_id": "CAND-BL-NWS-FORECAST",
+          "source_version": "archived-2026-10-21-extraction-9daf5b34ca45be7dfe21e9eea10ec2ac13e7c287f1682ad493ee5421d8a67383",
+          "locator": "https://www.weather.gov/ppg/forecast_terms :: Precipitation Probability heading; complete body paragraph including following on/off sentence",
+          "text": "The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \"on and off\" nature.",
+          "source_type": "official_public_excerpt",
+          "applicability": [
+            "仅解释给定归档文献选段；不是实际设备、现场或天气记录。"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "GEC-02",
+      "category": "conditional_relation_and_application",
+      "question": "根据给定材料，为什么某些降水预报可以省略天空状况？说明适用条件及是否强制省略，并对题设中恰好60%的情况作判断。",
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "description": "说明允许省略所需的预报条件及许可强度。"
+        },
+        {
+          "requirement_id": "R2",
+          "description": "解释材料给出的省略理由，不扩大为其他因果或天气保证。"
+        },
+        {
+          "requirement_id": "R3",
+          "description": "明确将条件应用于预期概率恰好60%的题设，说明是否允许省略及是否必须省略。"
+        }
+      ],
+      "user_context": "题设仅作假设：某份预报的预期降水概率恰好为60%。这不是对真实天气的观测或预报。",
+      "evidence": [
+        {
+          "evidence_id": "GEC-02-E1",
+          "source_id": "CAND-BL-NWS-FORECAST",
+          "source_version": "archived-2026-10-21-extraction-9daf5b34ca45be7dfe21e9eea10ec2ac13e7c287f1682ad493ee5421d8a67383",
+          "locator": "https://www.weather.gov/ppg/forecast_terms :: Sky Condition heading; complete opening paragraph, no table rows needed for this direction",
+          "text": "The sky condition describes the predominant/average sky cover based on percent of the sky covered by opaque (not transparent) clouds. If a high probability of precipitation (60% or greater) is expected, then the sky condition may be omitted since it is inferred from the precipitation forecast.",
+          "source_type": "official_public_excerpt",
+          "applicability": [
+            "仅解释给定归档文献选段；不是实际设备、现场或天气记录。"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "GEC-03",
+      "category": "multiple_questions_partly_supported",
+      "question": "请解释给定材料中1%年超越概率洪水的含义，并说明平均重现期100年是否表示固定相隔100年。另外，这些材料能否确定一次此类洪水通常持续多少小时？有依据的部分要回答，缺依据的部分请具体指出。",
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "description": "解释1%年超越概率的时间基准以及达到或超过相应洪水量级的含义。"
+        },
+        {
+          "requirement_id": "R2",
+          "description": "说明平均重现期100年与固定间隔的区别。"
+        },
+        {
+          "requirement_id": "R3",
+          "description": "保留单次洪水持续小时数这个子问题，明确给定材料能否提供定量回答；不把其他时间概念当成持续时间。"
+        }
+      ],
+      "user_context": "仅解释给定文献，不评价任何实际地点的洪水风险。",
+      "evidence": [
+        {
+          "evidence_id": "GEC-03-E1",
+          "source_id": "CAND-BL-USGS-GIP106",
+          "source_version": "archived-2026-10-21-extraction-f3f5b5995ad4f0fbf0c66712a5a8aa69343fe887aa4f75be748aaf76d4b54659",
+          "locator": "https://pubs.usgs.gov/gip/106/pdf/100-year-flood_041210web.pdf :: PDF page 1, left column: So what is a 100-year flood and how is it determined?, complete first paragraph",
+          "text": "In the 1960’s, the United States government \ndecided to use the 1-percent annual \nexceedance probability (AEP) flood as \nthe basis for the National Flood Insurance \nProgram. The 1-percent AEP flood was \nthought to be a fair balance between \nprotecting the public and overly stringent \nregulation.  Because the 1-percent AEP flood \nhas a 1 in 100 chance of being equaled or \nexceeded in any 1 year, and it has an average \nrecurrence interval of 100 years, it often is referred to as the “100-year flood”.",
+          "source_type": "official_public_excerpt",
+          "applicability": [
+            "仅解释给定归档文献选段；不是实际设备、现场或天气记录。"
+          ]
+        },
+        {
+          "evidence_id": "GEC-03-E2",
+          "source_id": "CAND-BL-USGS-GIP106",
+          "source_version": "archived-2026-10-21-extraction-f3f5b5995ad4f0fbf0c66712a5a8aa69343fe887aa4f75be748aaf76d4b54659",
+          "locator": "https://pubs.usgs.gov/gip/106/pdf/100-year-flood_041210web.pdf :: PDF page 1, middle panel: On the river near me..., complete first paragraph; graph is not needed for this paragraph",
+          "text": "The “100-year \nflood” is an \nestimate of the \nlong-term average \nrecurrence interval, \nwhich does not \nmean that we really \nhave 100 years \nbetween each flood \nof greater or equal \nmagnitude. Floods \nhappen irregularly.",
+          "source_type": "official_public_excerpt",
+          "applicability": [
+            "仅解释给定归档文献选段；不是实际设备、现场或天气记录。"
+          ]
+        }
+      ]
+    },
+    {
+      "task_id": "GEC-04",
+      "category": "related_terms_not_target_relation",
+      "question": "仅凭给定材料中的低偏心率和零倾角，能否推出卫星必然与地球自转同步？先回答能否据此推出，再解释材料实际说明了什么，以及所问关系还缺少什么依据。",
+      "requirements": [
+        {
+          "requirement_id": "R1",
+          "description": "明确判断给定材料是否足以建立所问的必然同步关系。"
+        },
+        {
+          "requirement_id": "R2",
+          "description": "准确解释给定材料中低偏心率与零倾角各自的含义，保留限定。"
+        },
+        {
+          "requirement_id": "R3",
+          "description": "说明已有几何性质与所问同步关系在材料中是否有充分连接；缺依据时指出范围，不能以术语或数字替代关系依据。"
+        }
+      ],
+      "user_context": "仅讨论这两份给定选段是否支持所问关系，不提供任何实际卫星的观测记录，也不要求数值推导。",
+      "evidence": [
+        {
+          "evidence_id": "GEC-04-E1",
+          "source_id": "CAND-BL-NASA-ORBITS",
+          "source_version": "archived-2026-10-21-extraction-981659e93d61fc972a61cbcd5137f18c80452817d7129afff8b24b5d26429f56",
+          "locator": "https://science.nasa.gov/earth/earth-observatory/catalog-of-earth-satellite-orbits/ :: Body before Three Classes of Orbit, complete eccentricity paragraph",
+          "text": "In addition to height, eccentricity and inclination also shape a satellite’s orbit. Eccentricity refers to the shape of the orbit. A satellite with a low eccentricity orbit moves in a near circle around the Earth. An eccentric orbit is elliptical, with the satellite’s distance from Earth changing depending on where it is in its orbit.",
+          "source_type": "official_public_excerpt",
+          "applicability": [
+            "仅解释给定归档文献选段；不是实际设备、现场或天气记录。"
+          ]
+        },
+        {
+          "evidence_id": "GEC-04-E2",
+          "source_id": "CAND-BL-NASA-ORBITS",
+          "source_version": "archived-2026-10-21-extraction-981659e93d61fc972a61cbcd5137f18c80452817d7129afff8b24b5d26429f56",
+          "locator": "https://science.nasa.gov/earth/earth-observatory/catalog-of-earth-satellite-orbits/ :: Body before Three Classes of Orbit, complete inclination paragraph",
+          "text": "Inclination is the angle of the orbit in relation to Earth’s equator. A satellite that orbits directly above the equator has zero inclination. If a satellite orbits from the north pole (geographic, not magnetic) to the south pole, its inclination is 90 degrees.",
+          "source_type": "official_public_excerpt",
+          "applicability": [
+            "仅解释给定归档文献选段；不是实际设备、现场或天气记录。"
+          ]
+        }
+      ]
+    }
+  ]
+}

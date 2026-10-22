@@ -1,0 +1,63 @@
+{
+  "version": "generation-mapping-comparison-rubric-v1",
+  "status": "draft_pending_owner_batch_review",
+  "model_visible": false,
+  "assessment_source": "AI-assisted preparation; user supervision and confirmation pending for these new tasks",
+  "planned_requirement_observations": 24,
+  "coverage_labels": ["covered", "partially_covered", "missing", "uncertain"],
+  "coverage_rule": "Explicit opposite/wrong answers can be covered; real omission of required content/scope is partial or missing. Reviewer rationale cannot complete the answer. Point/condition mapping is not the scoring denominator.",
+  "support_rule": "Assess actual assertions independently. No basis is not contradiction. Unstated assertions are not invented to assign support labels. Existing schema13 judgments and human text review are reported separately.",
+  "tasks": [
+    {
+      "task_id": "GEC-01",
+      "requirements": [
+        {"requirement_id": "R1", "components": ["likelihood expressed as a percent", "measurable liquid precipitation or water equivalent of frozen precipitation"], "omission_rule": "One required component absent is partial; no event definition is missing. An explicitly wrong definition is still addressed but support is wrong."},
+        {"requirement_id": "R2", "components": ["equal to or greater than 0.01", "inches"], "omission_rule": "Missing threshold or its unit is partial; no threshold response is missing. Wrong explicit value/comparison is a support error, not automatically omission."},
+        {"requirement_id": "R3", "components": ["specified time period", "any given point in forecast area", "normally 12 hours unless otherwise specified"], "omission_rule": "Identify which scope/exception is actually absent. The event probability is not area fraction or duration fraction; only score these extra errors if the answer actually asserts them."}
+      ],
+      "quality_checks": ["Retain measurable precipitation and frozen-water-equivalent scope", "Do not claim every product always uses 12 hours", "No probability algorithm, update-frequency or weather-safety guarantee is required"],
+      "unresolved_target": null
+    },
+    {
+      "task_id": "GEC-02",
+      "requirements": [
+        {"requirement_id": "R1", "components": ["expected precipitation probability 60% or greater", "omission is permitted, not mandatory"], "omission_rule": "Absent probability condition or absent modality is partial. Explicitly saying must omit still addresses modality and is judged separately for support."},
+        {"requirement_id": "R2", "components": ["sky condition is inferred from precipitation forecast"], "omission_rule": "No explanation of the stated relation is missing; a definite reversed/wrong explanation can be covered, with separate support error."},
+        {"requirement_id": "R3", "components": ["explicit application to stipulated exactly 60%", "allowed omission does not require omission"], "omission_rule": "General rule alone does not explicitly apply the premise: application missing. Application without one requested conclusion is partial. Wrong explicit application is not automatically missing."}
+      ],
+      "quality_checks": ["Threshold is inclusive", "Necessary probability condition must occur in actual answer, not only assumptions or map note", "Permission is not a weather guarantee; hypothetical probability is not a real observation"],
+      "unresolved_target": null
+    },
+    {
+      "task_id": "GEC-03",
+      "requirements": [
+        {"requirement_id": "R1", "components": ["1 in 100 in any one year", "equaling or exceeding the corresponding flood magnitude"], "omission_rule": "Identify omitted time or event/magnitude scope; a wrong but explicit probability interpretation can still address the aspect."},
+        {"requirement_id": "R2", "components": ["100 years is a long-term average recurrence interval", "not a fixed interval between floods; occurrence irregular"], "omission_rule": "Leaving either requested relationship unexplained is partial; asserting a fixed interval addresses the relationship but contradicts the source."},
+        {"requirement_id": "R3", "components": ["retain the single-flood duration-in-hours subquestion", "explicitly state the delivered excerpts do not supply its quantitative duration"], "omission_rule": "Deleting the duration subquestion is missing; saying only generic insufficient evidence without identifying this gap is partial/uncertain with reason. Explicitly identifying inability can be covered, while the requested numeric duration remains unresolved; no invented number is required."}
+      ],
+      "quality_checks": ["Still explain R1 and R2 rather than refuse the whole question", "No fixed flood duration follows from one year or 100 years", "Correct task-bounded limitation is not an unsupported technical assertion by default"],
+      "unresolved_target": "Numerical duration remains unavailable. Coverage of a limitation is not full business resolution. Do not mark the omission of a fabricated duration as an answer defect."
+    },
+    {
+      "task_id": "GEC-04",
+      "requirements": [
+        {"requirement_id": "R1", "components": ["explicit verdict on whether these excerpts establish necessary synchronism"], "omission_rule": "No verdict is missing. A definite yes still addresses the question; the evidence judgment is separate."},
+        {"requirement_id": "R2", "components": ["low eccentricity means near-circular, not necessarily exactly zero", "zero inclination describes an orbit directly above the equator"], "omission_rule": "Missing one geometric property is partial, missing both is missing; explicitly wrong properties are support errors rather than automatic coverage omissions."},
+        {"requirement_id": "R3", "components": ["identify absence of a source relation connecting these geometric descriptions to matching Earth's rotation"], "omission_rule": "Generic uncertainty without the specific absent relation is partial/uncertain; model knowledge or reviewer explanation cannot fill an absent answer explanation."}
+      ],
+      "quality_checks": ["No NASA-X3 distance or same-speed simplification is delivered", "No orbital-period calculation, motion-direction problem or actual satellite verification is required", "The missing relation is insufficient evidence for the stated inference, not automatic contradiction or proof that no such orbit exists", "Only these delivered excerpts lack the relation; do not claim the full NASA page or all NASA material lacks it"],
+      "unresolved_target": "The claimed synchronism cannot be established from these selected excerpts. Do not invent additional technical facts to make the answer look complete."
+    }
+  ],
+  "reporting": {
+    "all_planned_branches": 8,
+    "execution": "Initial and final contract validity, every correction, generation/mapping/envelope failures, review failures, skipped review and unexecuted branches separately. No aggregate accuracy.",
+    "answer_quality": "Per original requirement and actual condition: addressed, omitted, misstated; actual unsupported extras and causal/scope expansions with literal spans. Correct limitation, blanket refusal and deleted subquestion are distinct.",
+    "audit": "Complete original review outputs plus whether actual answer defects were found, missed or falsely alleged in independent text review. Policy pass is not a gold label.",
+    "mapping": "Candidate only: point coverage, selected source relation, condition carrier relevance and label/note tension; valid mapping is not better answer quality. Mapping-only failures do not become answer failures.",
+    "timing_tokens": "Generation initial/correction and review stages separately; answer first persisted, final valid answer persisted, audit finished and storage confirmed. Report input/output/cache tokens and actual calls, not billed amounts without invoice.",
+    "nonadoption": "No actual answer improvement, more evasion/omission, or increased contract failures without a clear compensating answer benefit: preserve records and do not adopt. Even a favorable four-pair observation does not authorize production switch or general reliability claims.",
+    "no_new_thresholds": true,
+    "reference_answers_or_predictions_created": false
+  }
+}

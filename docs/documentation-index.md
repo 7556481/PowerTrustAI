@@ -1,5 +1,7 @@
 # 文档索引
 
+- **当前整批复核：[4组固定证据生成对照材料与冻结计划v1](evaluation/generation-mapping-comparison-v1/README.md)**：完整问题／要求／6选段及评分边界集中展示；[模型输入](evaluation/generation-mapping-comparison-v1/tasks-v1.json)、[独立评分](evaluation/generation-mapping-comparison-v1/rubric-v1.json)、[来源谱系](evaluation/generation-mapping-comparison-v1/source-lineage-v1.json)、[冻结提案与8组消息身份](evaluation/generation-mapping-comparison-v1/freeze-plan-v1.json)。4任务、8初始生成、12要求／24计划观察；复用3个旧来源为后续开发，非独立验证。固定证据＋相同原审核链，修订0；含审核及纠正预算提案≤128，不是8次总调用。A离线已获用户认可，本材料与新付费授权尚待确认；入口未实现／未执行，0模型，生产不变。
+
 - **当前A离线交付：[最小可选生成映射候选v1](evaluation/generation-mapping-v1/README.md)**（[分层失败、验证与身份](evaluation/generation-mapping-v1/results-v1.json)）：开发入口可选，复用原答案结构／候选／完整快照，一次生成＋最多一次格式纠正；仅映射失败与答案失败独立记，严格候选无效不放行。20专项及相关共139离线通过，未映射新增断言进入全文提取／双审，映射不传审核、不作评分要求。原生产schema13／顺序路径及检索审核修订UI不变，0真实调用；语义收益尚未验证，下一步另冻结真实对照，不自动执行。
 
 - **当前统一设计：[唯一产品主线与四层判定设计v1](unified-business-judgment-design-v1.md)**（[源码身份及检查清单](unified-business-judgment-design-v1.json)）：设计建议，尚未实施。回答＋审核为唯一产品主线，已有回答保留诊断／回归兼容；核对入口、状态、验收，再提出A生成／B公共审核／C局部修订／D展示的最小改动。区分生产文本覆盖、评测任务覆盖与候选能力，保留默认schema13／顺序路径；合成示例、契约关联、部分失败／回退及政策取舍集中说明。0业务改动／安装／模型调用，不自动启动实施。
