@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-22 v2三重点真实复验材料已准备，未执行
+
+用户接受v2离线候选，明确后续图真实集成可独立推进、暂不清理兼容入口。新增[三分支完整复验材料](evaluation/public-review-object-v2-live-v1/README.md)及输入/独立评分/冻结提案：01自然生成同段规则应用，02固定错误应用，03确定性注入错误分类验证真实异议通路。fidelity文字忠实与对象异议分轴解释，03不作自然分类成绩；中性任务ID不泄漏角色，题设71与无关蓝色分开。拟原40共享预算、有限纠正/首最终失败停止；未实现入口、未授权本批费用、无attempt/模型/安装/旧回放。材料身份与注入解析离线核对；旧A/B封存、生产不变。先供整批确认，不自动付费或切图；切换验收后再集中清理。
+
 ## 2026-10-22 规则复述/实例应用v2离线候选
 
 新增显式v2提取/审核指令，复用v1严格解析、内部类型与原Harness；规则不因同段绑定题设，应用保留正文＋题设门禁。同category对象异议用既有fidelity disputed/uncertain、具体理由及not_assessable，派生review_required而不静默重分类；不同category的classification_issue仅同级合法。7专项0.840秒，相关53项10.817秒；0模型/回放/安装/生产改动，不扩A或恢复旧批。真实语义尚未验证，下一批须新版本新授权。 见[交付报告](evaluation/public-review-object-v2/README.md)及[源码身份](evaluation/public-review-object-v2/results-v1.json)。

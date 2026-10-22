@@ -1,0 +1,29 @@
+{
+  "model_visible": false,
+  "provenance": "AI-assisted draft awaiting user review, not expert gold",
+  "cases": {
+    "OB2-01": {
+      "coverage": [
+        "明确陈述许可阈值和非强制性。",
+        "按本题得分给出省略与保留的许可结论。",
+        "规则和实例结论放在同一段，保持练习范围，不作现场保证。"
+      ],
+      "objects": "Rule restatements are literature with empty premise IDs; instance conclusion uses relevant score plus body, not blue packaging. Main error not observed means untriggered, not detection success."
+    },
+    "OB2-02": {
+      "fidelity_to_answer": "Explicit wrong comparison can be faithfully extracted. Rule threshold/permission must not be relabeled to avoid technical review.",
+      "support": "Rule statement supported; 71 below64 and resulting disallowance contradicted jointly by actual71 and body rule. Preserve mixed clause splits, no cherry picking.",
+      "coverage": "Wrong explicit application still responds; missing optional-retention conclusion is actual omission, not a second semantic penalty."
+    },
+    "OB2-03": {
+      "controlled_fault": "Premade scenario_application type is deliberately inappropriate; actual rule is score-independent. No model extraction call.",
+      "expected_disposition": "Concrete same-category object objection via disputed/uncertain fidelity, not_assessable and review_required; no irrelevant premise selection, no silent reclassification, no approval.",
+      "separate_axes": [
+        "literal answer/proposition fidelity is faithful",
+        "fidelity field is reused for the object-type objection, not literal misquotation"
+      ]
+    }
+  },
+  "not_observed": "untriggered or unexecuted, never infer detection success",
+  "no_total_score": true
+}
