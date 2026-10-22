@@ -1,0 +1,258 @@
+{
+  "version": "unified-business-judgment-design-v1",
+  "date": "2026-10-22",
+  "status": "design_proposal_not_implemented",
+  "source_commit": "ea4c9f3c5c57a1bf4276cedb1061e804e61b9b9c",
+  "initial_worktree": "clean",
+  "product_line": "question_answer_with_review",
+  "assess_existing_role": "diagnostics_and_regression_compatible_api_and_history_preserved",
+  "candidate_progress": "committed_plan_only_no_mapping_implementation",
+  "repository_defaults": {
+    "execution_path": "sequential",
+    "verification_schema": 13,
+    "decision_policy": "product-v1",
+    "retrieval_mode": "bm25",
+    "fact_strategy": "aggregate",
+    "retrieval_execution_profile": "topic_v4_subject_v1",
+    "review_message_profile": "lossless_v1",
+    "live_process_configuration_verified": false
+  },
+  "implementation_order": [
+    "A_generation_evidence_use",
+    "B_common_review_boundaries_and_task_coverage",
+    "C_local_repair_full_reaudit",
+    "D_minimal_presentation"
+  ],
+  "decision_points": [
+    "Minimal diagnostic mapping adds output tokens and contract burden without an extra planning call",
+    "Task coverage starts as a separate candidate observation; blocking adoption requires a separately versioned policy decision"
+  ],
+  "boundaries": {
+    "business_code_changes": 0,
+    "prompt_changes": 0,
+    "parser_changes": 0,
+    "production_configuration_changes": 0,
+    "dependency_installs": 0,
+    "model_calls": 0,
+    "historical_replays": 0,
+    "business_test_runs": 0,
+    "database_or_secret_reads": 0,
+    "historical_record_migrations": 0
+  },
+  "source_identities": [
+    {
+      "path": "backend/config.py",
+      "sha256": "386673778691d94d4075f08c885471ca1c3cf48548096e8c6204aaf00e920f53",
+      "anchor": "class ServiceConfig",
+      "line": 12
+    },
+    {
+      "path": "backend/assembly.py",
+      "sha256": "619a96fdcf92dfb689cdf87d6fb118f0dedf67ca40ccf628e373eff6808337ae",
+      "anchor": "harness=OfflineHarness",
+      "line": 201
+    },
+    {
+      "path": "backend/api.py",
+      "sha256": "600cb80fbc1a14c264a79adc5dbe680bb806ff8dbc7c4d17a22f08127e0bc11a",
+      "anchor": "class Submit",
+      "line": 44
+    },
+    {
+      "path": "backend/service.py",
+      "sha256": "84e5b694f36915c304d4eb5fd7ef12e5fd99346ba298097eeac335638bbc1bf0",
+      "anchor": "def result",
+      "line": 168
+    },
+    {
+      "path": "backend/static/index.html",
+      "sha256": "613a68912f07419e912d30d955b52886aa1feac8f46b660b143144d239c0a566",
+      "anchor": "select id=\"mode\"",
+      "line": 13
+    },
+    {
+      "path": "backend/static/app.js",
+      "sha256": "1148bdcccbbbdf6ae3ae9f2ac60b8d5a6f3acd8afe5ffd2fbd56e2d11a8a450b",
+      "anchor": "function renderAnswers",
+      "line": 26
+    },
+    {
+      "path": "backend/presentation.py",
+      "sha256": "5a9a6867a58b18922cbf0f06f4b4cbb6fadbf2d577b8c759b6db453be3494a72",
+      "anchor": "def explain",
+      "line": 4
+    },
+    {
+      "path": "backend/store.py",
+      "sha256": "ed695812b0e950b4ebeffc436ecc23ed26dd54d2f0f4107fdf54555f2c51788f",
+      "anchor": "class RunStore",
+      "line": 22
+    },
+    {
+      "path": "harness/runtime.py",
+      "sha256": "f3343876ab3eb9946271e8f6ea0b8aca5132e9c741e223b05193cdd9381fe547",
+      "anchor": "execution_path=\"sequential\"",
+      "line": 15
+    },
+    {
+      "path": "harness/execution.py",
+      "sha256": "c817c756a2131f7941c735d87bf425446baa16e32060619149870ab82e9a0e81",
+      "anchor": "async def prepare_review",
+      "line": 339
+    },
+    {
+      "path": "harness/graph_runtime_v1.py",
+      "sha256": "76286693cbbfb4f7cfc59f0121684080e6b18c5aabd584579bf3ccc6c2529044",
+      "anchor": "def build_graph",
+      "line": 69
+    },
+    {
+      "path": "harness/product_policy.py",
+      "sha256": "f8a93873e1876f7870acb4674841ff225ebd9d586d4a51275f86b8a61d308922",
+      "anchor": "def decide_context",
+      "line": 24
+    },
+    {
+      "path": "harness/retrieval.py",
+      "sha256": "86db969a09944356004a20346f4ba2e62a4ff772fb17e492c857830158c1f598",
+      "anchor": "self.query_cache = {}",
+      "line": 65
+    },
+    {
+      "path": "agents/contracts.py",
+      "sha256": "b2c08418de002bab314783c865b343f50c57220ae356ae75e0a4d3c3b7acd9d7",
+      "anchor": "class GenerationInput",
+      "line": 16
+    },
+    {
+      "path": "agents/generation.py",
+      "sha256": "a743a4580bcf087c7d08dc32da5888c598f62ca2ff1c6bd026ab40abfc75f75c",
+      "anchor": "def messages_for",
+      "line": 42
+    },
+    {
+      "path": "agents/evidence_verification.py",
+      "sha256": "4e1ae428ac4e9cbb49065d503e39a69a43d03a5a25e6ce091f005f34d1f85b78",
+      "anchor": "if self.schema_version == 13",
+      "line": 319
+    },
+    {
+      "path": "agents/verification_contract_v10_batched.py",
+      "sha256": "1e3c858dc1118a40b3d0103385cb91753903ef885b1b86daeeaa986c5fe11f8f",
+      "anchor": "async def run",
+      "line": 45
+    },
+    {
+      "path": "agents/power_domain_review.py",
+      "sha256": "d664f4fa1ecf3687f71dafe86d80dc1983e372078538bda395968608d60bfd4e",
+      "anchor": "MODEL_KEYS=",
+      "line": 28
+    },
+    {
+      "path": "agents/revision_contract_v2.py",
+      "sha256": "e90021ce1e854178003407705a78b71f2620115c2c2962d228a197ecf46f04c5",
+      "anchor": "def parse",
+      "line": 34
+    },
+    {
+      "path": "services/claim_extractor.py",
+      "sha256": "364439019186c84f9a073dc972c687c12c2d77aac14ef1c0c4cf1c703cc1377e",
+      "anchor": "async def extract",
+      "line": 142
+    },
+    {
+      "path": "services/answer_units.py",
+      "sha256": "60472840c5d2f5319b642bfc544ecd17a5fd90ef52df8d51bbee5095b5e14f4e",
+      "anchor": "def assemble",
+      "line": 20
+    },
+    {
+      "path": "services/evidence_scope.py",
+      "sha256": "d7a7f3a8eb088c12f4387b575b2e23f79a5234003632c534a526d8b63247206e",
+      "anchor": "def make_snapshot",
+      "line": 16
+    },
+    {
+      "path": "services/bounded_repair.py",
+      "sha256": "7b879bdb1a91e892ed220f2805fdb789298fd588df4f321aa6bc4222156c55c4",
+      "anchor": "def eligible_repairs",
+      "line": 21
+    },
+    {
+      "path": "core/models.py",
+      "sha256": "a4c143fd1d98ef906455497d54e3d99262bef8ac6b1b27c56b174326164ef368",
+      "anchor": "class VerificationStatus",
+      "line": 13
+    },
+    {
+      "path": "core/validation.py",
+      "sha256": "25aa135652e2b2edfa4f9f1942c8fb0fa667a3103840c78a65c2a27c90bb11c8",
+      "anchor": "def validate_revision",
+      "line": 328
+    },
+    {
+      "path": "evaluation/premise_bound_review_v6.py",
+      "sha256": "0cf52b776531eb636d0c93e2f8f5e9ac22c321cd0f69d277c8a29947f6bd4717",
+      "anchor": "VERSION =",
+      "line": 9
+    },
+    {
+      "path": "evaluation/premise_bound_review_v7.py",
+      "sha256": "7e88223fc7d715fd4aaf4dabff3f9561fc93df15e4bada6c66a149d11ea227b6",
+      "anchor": "VERSION =",
+      "line": 8
+    }
+  ],
+  "artifact_identities": [
+    {
+      "path": "docs/evaluation/langgraph-adapter-v1/README.md",
+      "sha256": "d6fa0b24c37d8079da567dcb16547e4fef08b673d244cdf0f5a68924b5b7340e"
+    },
+    {
+      "path": "docs/evaluation/langgraph-adapter-v1/results-v1.json",
+      "sha256": "6ad90eedcea8ef4074c082d02ea0986d26f8f9cea31a579d227ee5289e06ffd0"
+    },
+    {
+      "path": "docs/concept-evidence-generation-plan-v1.md",
+      "sha256": "e57f869aec9e6a58c4355582ab8b80734f97be7a4b92ce7e99c61d2579bfe354"
+    },
+    {
+      "path": "docs/evaluation/baseline-batch-v1/README.md",
+      "sha256": "b23627588c23a0a511fdf71763639e5feec8c7c423509952cbeaa74d536c0f6d"
+    },
+    {
+      "path": "docs/evaluation/baseline-batch-v1/results-v1.json",
+      "sha256": "4ad50d85e7fd60ce5bfeddb27d3db45d2e3859ec0ad5cc4bbde46fbd29cd7afd"
+    },
+    {
+      "path": "docs/evaluation/baseline-batch-v1/matching-rules-v1.json",
+      "sha256": "6310da92cd2ddf3661ed2dedf3457dcc38a0620486be137672cb105e301edb29"
+    },
+    {
+      "path": "docs/evaluation/baseline-batch-v1/owner-text-review-closeout-v1.md",
+      "sha256": "5991b7b4b300c2be19ce70b7056abb03a70fd042fe6151f28f550ef2264ce61f"
+    },
+    {
+      "path": "docs/unified-business-judgment-design-v1.md",
+      "sha256": "977d48d4b23d2f5fe7f419cb1c11bf708ea7c3a2163df36d5789e441aede6cdd"
+    }
+  ],
+  "checks": {
+    "source_anchors_found": true,
+    "sha_scope": "assistant mechanical checkout-byte provenance; not user SHA verification or semantic validation",
+    "document_links": "passed: 32 design links plus new handoff/index links",
+    "json_and_identity_recheck": "passed: 35 file identities and 27 source anchors",
+    "git_diff_check": "passed; tracked modifications limited to handoff/index; two new design files"
+  },
+  "historical_evidence": {
+    "langgraph_offline_tests": 1016,
+    "component_historical_predictions_replayed": 24,
+    "baseline_coverage_slots": 51,
+    "baseline_reference_units": 58,
+    "baseline_prediction_judgments": 66,
+    "baseline_aligned": 56,
+    "baseline_unaligned": 2,
+    "rerun_this_round": false,
+    "new_semantic_score": false
+  }
+}
