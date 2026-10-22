@@ -1,0 +1,34 @@
+{
+  "version": "B-synthetic-source-manifest-v1",
+  "scope": "development_materials_not_independent_holdout",
+  "sources": [
+    {
+      "source_id": "BTV-S1",
+      "source_version": "synthetic-rule-v1-2026-10-22",
+      "locator": "tasks-v1.json :: sources[BTV-S1] :: complete teaching paragraph",
+      "text": "本题的合成练习规则：评分达到或超过80分时，允许省略外盒标记M，也允许保留。评分低于80分时，不允许省略标记M。无论评分如何，本规则均不要求必须省略标记M。此规则只定义本题练习中的许可，不是现实产品规范。",
+      "source_type": "synthetic_fixture",
+      "text_utf8_sha256": "2432052e9e208a218ea2ebcc4fbc40f48bc61c8e587ed136c483435a3a1ba6eb",
+      "provenance": "AI-assisted new teaching text, 2026-10-22; pending user material review; no official source claim"
+    },
+    {
+      "source_id": "BTV-S2",
+      "source_version": "synthetic-identifier-v1-2026-10-22",
+      "locator": "tasks-v1.json :: sources[BTV-S2] :: complete teaching paragraph",
+      "text": "本题的合成档案说明：档案号采用字母R加三位数字。例如，R105是一个档案标识，末三位是流水编号。",
+      "source_type": "synthetic_fixture",
+      "text_utf8_sha256": "769cbe43a87c23c6d8bfccf0d0bc8af33dd3e0bfa92b3c932cac11ddba45cb1f",
+      "provenance": "AI-assisted new teaching text, 2026-10-22; pending user material review; no official source claim"
+    },
+    {
+      "source_id": "BTV-S3",
+      "source_version": "synthetic-instrument-introduction-v1-2026-10-22",
+      "locator": "tasks-v1.json :: sources[BTV-S3] :: complete teaching paragraph",
+      "text": "本题的合成仪表资料：仪表示值用于描述观测中读到的数值。一般显示原理的介绍不等同于某台具体设备的观测记录。设备安全结论应限定到相应设备、条件及判定依据。",
+      "source_type": "synthetic_fixture",
+      "text_utf8_sha256": "93479c63a9c19d0d26ab2e559da8e4d6e81e2c1a3db9ee38658ce9734724d9bf",
+      "provenance": "AI-assisted new teaching text, 2026-10-22; pending user material review; no official source claim"
+    }
+  ],
+  "lineage": "BTV-01/02 share BTV-S1; two other source groups. Threshold/permission structure intentionally resembles earlier synthetic development cases. Not a new isolation or pretraining-novelty proof."
+}

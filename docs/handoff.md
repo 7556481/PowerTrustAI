@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-22 B有限真实验证材料准备，待一次复核与新费用授权
+
+用户已接受90bdfea的B离线接线，强调合法ID/类型不证明理解题设；只授权准备4固定证据案例与调用计划，整批复核后再授权执行。[完整材料](evaluation/public-review-validation-v1/README.md)、[输入](evaluation/public-review-validation-v1/tasks-v1.json)、[模型不可见复核边界](evaluation/public-review-validation-v1/review-criteria-v1.json)、[来源身份](evaluation/public-review-validation-v1/source-manifest-v1.json)、[冻结提案](evaluation/public-review-validation-v1/freeze-plan-v1.json)。起始HEAD90bdfeacd6a2b993a7604acf29b40fd7845cb265、工作区干净；四例为正确许可应用、题设忠实性、缺规则正文、现实测量/安全越界；3个新合成来源组，01/02同源，结构承接开发思路不称独立保留集，未复用A输入。计划4个原生成器+B主线，加1个固定已有回答诊断共5分支；02诊断把输入74写成88，原引用空/无生成快照，非篡改未来生成。顺序01QA→02QA→02DIAG→03QA→04QA；主线实际不出现某错误则标未触发，不能算检出成功。主线12覆盖槽、诊断3分开，诊断许可与保留混合标签不挑有利子句；无固定生成参考单元数/准确率门槛。拟flash/每分支40共享保护、无新增总帽/Revision0/重试0/检索0/90请求110步骤800分支；初始QA C+I+3、诊断C+I+2；条件含纠正上界C+I+7/C+I+5。计数invocation_scoped_v1明确单列，不追加旧计数/旧审核真实分支，不宣称比较语义提升。首最终执行/必需审核/存储失败停后续，语义reject非执行失败。6项材料检查通过0.030秒，5输入目录/4初始消息及源码身份通过；纯离线检查入口evaluation/public_review_validation_materials_v1.py无execute动作，真实批次入口尚未实现，授权后还须绑定实际入口/离线存储停止门禁，不能称已可运行。未发送输入/消息留忽略preparation-v1，标PREPARATION_ONLY_NOT_SENT；无付费attempt/模型/旧响应回放/安装/全套重跑/生产改动，不启A、不恢复A。普通提交推送回查后到此停止，等待用户整批复核与新费用授权。
+
 ## 2026-10-22 B语义候选接线与完整Harness离线交付，生产不切换
 
 最终补清候选提取器v7/typed/daily构造元数据后，25候选＋8计数共33专项通过6.135秒；消息/解析不变，未重复全套，最终源码身份以新清单为准。

@@ -1,0 +1,55 @@
+{
+  "version": "public-review-validation-criteria-v1",
+  "status": "draft_pending_owner_whole_batch_review",
+  "model_visible": false,
+  "provenance": "AI-assisted preparation; user review and supervision, not expert gold",
+  "coverage_rule": "An explicit opposite or wrong numerical answer can be covered. Real omission is partial/missing. Do not repair the answer using reviewer rationale. No coverage policy change.",
+  "support_rule": "Actual assertions only. Keep raw support, fidelity/object judgments, effective disposition, contract errors and execution placeholders separate. Absence is not contradiction. Valid IDs are not semantic proof.",
+  "cases": [
+    {
+      "case_id": "BTV-01",
+      "target": "correct_application",
+      "coverage_components": {"R1": ["applies the stipulated score to the threshold; no forced verbatim repetition"], "R2": ["answers permission to omit"], "R3": ["permission is not mandatory omission", "retention remains allowed"]},
+      "answer_boundary": "83 reaches or exceeds 80; omission and retention both permitted. No real-world product conclusion.",
+      "review_boundary": "Premise restatement, if actually asserted, is task-input fidelity; rule/application, if asserted, need body and applicable premise. Wrong or missing qualifiers must not be repaired in reviewer notes."
+    },
+    {
+      "case_id": "BTV-02",
+      "target": "premise_fidelity",
+      "coverage_components": {"R1": ["responds to given score, even when explicitly misstated"], "R2": ["inclusive threshold 80", "permission versus obligation"], "R3": ["explicit conclusion about this task, even if the calculation/premise is wrong"]},
+      "answer_boundary": "Actual given value is 74, below 80; rule expressly disallows omission below threshold. Main-line generation is not forced to make an error.",
+      "review_boundary": "If generation is correct, record no wrong-premise event observed. Diagnostic answer deliberately says 88: inspect comparison with actual task rather than believing the answer's number."
+    },
+    {
+      "case_id": "BTV-03",
+      "target": "premise_without_rule_body",
+      "coverage_components": {"R1": ["identifies the given input without inventing a rule"], "R2": ["explicit verdict about insufficient delivered support"], "R3": ["names missing score-to-permission rule", "limits absence to these materials"]},
+      "answer_boundary": "Can confirm a stipulated score of 91. Cannot establish the omission permission; cannot import BTV-S1 or its threshold. Honest bounded inability is covered, not blanket refusal.",
+      "review_boundary": "A positive permission claim has insufficient evidence, not automatic contradiction. Correct statement that the complete delivered input lacks a rule may use actual QA snapshot coverage; do not require fabricated body text or worldwide search."
+    },
+    {
+      "case_id": "BTV-04",
+      "target": "real_world_overreach",
+      "coverage_components": {"R1": ["hypothetical value versus actual measurement"], "R2": ["measurement claim", "safety guarantee"], "R3": ["appropriate actual observation record", "applicable safety criterion/evidence"]},
+      "answer_boundary": "The hypothetical value and general description establish neither actual measurement nor safety. Missing records do not prove the real value is different or the device unsafe.",
+      "review_boundary": "If an actual measurement/safety assertion is added, assess it separately; premise reference/general literature cannot establish it. A correct evidence-limit answer must not automatically become a full on-site engineering assessment. No forced tests or detailed inspection plan."
+    }
+  ],
+  "diagnostic_reference_clauses": [
+    {"clause": "题设给定评分为88分。", "expected": "contradicted as a restatement of the actual stipulated 74", "scope": "fidelity to supplied task, not reality"},
+    {"clause": "练习规则规定，评分达到或超过80分时允许省略标记M，但不要求省略。", "expected": "supported by BTV-S1", "scope": "teaching rule only"},
+    {"clause": "本题允许省略标记M", "expected": "contradicted by the explicit below-80 restriction jointly with actual premise 74", "scope": "do not apply the answer's invented 88"},
+    {"clause": "也可以保留", "expected": "supported", "scope": "keep this clause separate if a mixed assertion is split"}
+  ],
+  "diagnostic_coverage": "All three requirements are explicitly addressed, although premise and application are wrong; no mechanical coverage penalty for an explicit wrong number or conclusion.",
+  "reporting": {
+    "main_coverage_slots": 12,
+    "diagnostic_coverage_slots": 3,
+    "no_reference_unit_count_frozen": "Generation is unknown. Clause references here do not force model atomization or count as independent predictions.",
+    "errors_not_triggered": "Report not observed/not tested for generated-error detection; do not manufacture an error or count the review as a detection success.",
+    "alignment": "Use literal task/answer identity and declared semantic matching. Mixed-label splits or unresolved mapping are listed, not cherry-picked or automatically counted wrong.",
+    "execution": "First/final validity, failed, incomplete, unexecuted, partial peers and storage status separately. Contract failure is not semantic insufficiency.",
+    "accounting": "invocation_scoped_v1 is an engineering condition; expose correction ownership and initial/final judgments. A format-corrected completion is not itself semantic improvement.",
+    "conclusions": "Limited live-model development verification only; not an independent holdout, comparative accuracy gain, production admission or safety proof. No new success-rate threshold."
+  }
+}

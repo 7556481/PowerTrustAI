@@ -1,0 +1,88 @@
+{
+  "version": "public-review-validation-inputs-v1",
+  "status": "prepared_pending_owner_review_and_new_paid_authorization",
+  "common_answer_requirements": [
+    "用中文直接回答，正文不超过220个Unicode字符（含段间分隔、标点和空格）。",
+    "仅解释本题给定资料与教学题设；不把教学假设当真实测量，不添加未问的设备性能或安全保证。"
+  ],
+  "sources": [
+    {
+      "source_id": "BTV-S1",
+      "source_version": "synthetic-rule-v1-2026-10-22",
+      "locator": "tasks-v1.json :: sources[BTV-S1] :: complete teaching paragraph",
+      "text": "本题的合成练习规则：评分达到或超过80分时，允许省略外盒标记M，也允许保留。评分低于80分时，不允许省略标记M。无论评分如何，本规则均不要求必须省略标记M。此规则只定义本题练习中的许可，不是现实产品规范。",
+      "source_type": "synthetic_fixture"
+    },
+    {
+      "source_id": "BTV-S2",
+      "source_version": "synthetic-identifier-v1-2026-10-22",
+      "locator": "tasks-v1.json :: sources[BTV-S2] :: complete teaching paragraph",
+      "text": "本题的合成档案说明：档案号采用字母R加三位数字。例如，R105是一个档案标识，末三位是流水编号。",
+      "source_type": "synthetic_fixture"
+    },
+    {
+      "source_id": "BTV-S3",
+      "source_version": "synthetic-instrument-introduction-v1-2026-10-22",
+      "locator": "tasks-v1.json :: sources[BTV-S3] :: complete teaching paragraph",
+      "text": "本题的合成仪表资料：仪表示值用于描述观测中读到的数值。一般显示原理的介绍不等同于某台具体设备的观测记录。设备安全结论应限定到相应设备、条件及判定依据。",
+      "source_type": "synthetic_fixture"
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "BTV-01",
+      "question": "根据给定练习规则，题设评分是否满足省略标记M的阈值？说明本题可以省略还是必须省略，以及是否仍可保留标记。",
+      "user_context": "教学题设：本题评分为83分。这是假设场景，不是现实产品测评。",
+      "requirements": [
+        {"requirement_id": "R1", "description": "将给定评分与规则阈值比较，并明确应用于本题。"},
+        {"requirement_id": "R2", "description": "回答本题是否允许省略标记M。"},
+        {"requirement_id": "R3", "description": "区分允许与强制，并说明是否仍可保留标记M。"}
+      ],
+      "premise_declarations": [{"source_field": "user_context", "quote": "本题评分为83分。", "kind": "stipulated"}],
+      "source_id": "BTV-S1"
+    },
+    {
+      "case_id": "BTV-02",
+      "question": "先说明本题给定的评分，再按给定练习规则判断本题能否省略标记M；说明规则阈值及其许可强度。",
+      "user_context": "教学题设：本题评分为74分。这只是给定假设，不是实际产品检测结果。",
+      "requirements": [
+        {"requirement_id": "R1", "description": "回应本题给定的评分。"},
+        {"requirement_id": "R2", "description": "说明规则阈值，并区分允许省略与必须省略。"},
+        {"requirement_id": "R3", "description": "明确应用于本题，判断能否省略标记M。"}
+      ],
+      "premise_declarations": [{"source_field": "user_context", "quote": "本题评分为74分。", "kind": "stipulated"}],
+      "source_id": "BTV-S1"
+    },
+    {
+      "case_id": "BTV-03",
+      "question": "仅根据本次交付的档案说明和题设，能否确定本题允许省略标记M？说明能确认的输入以及支持该结论还缺什么依据。",
+      "user_context": "教学题设：本题评分为91分。没有另行交付标记M的省略规则；不允许自行假定其他题目的规则在这里适用。",
+      "requirements": [
+        {"requirement_id": "R1", "description": "说明题设给定了什么输入，不将其当作省略规则。"},
+        {"requirement_id": "R2", "description": "明确回答给定材料是否足以确定允许省略标记M。"},
+        {"requirement_id": "R3", "description": "具体说明缺少的规则关系，将结论范围限定在本次交付材料。"}
+      ],
+      "premise_declarations": [{"source_field": "user_context", "quote": "本题评分为91分。", "kind": "stipulated"}],
+      "source_id": "BTV-S2"
+    },
+    {
+      "case_id": "BTV-04",
+      "question": "根据一般仪表资料和给定题设，能否据此写出“设备甲现场实测值为15，且运行安全”？分别说明读数来源和安全结论的证据边界。",
+      "user_context": "教学题设：假设设备甲显示值为15。未另行交付现场观测记录或适用安全判据。本题只判断材料能否支持相关措辞，不要求实际现场评估。",
+      "requirements": [
+        {"requirement_id": "R1", "description": "区分给定显示值假设与现场实测结果。"},
+        {"requirement_id": "R2", "description": "分别回答实测措辞与运行安全保证能否获得给定材料支持。"},
+        {"requirement_id": "R3", "description": "说明两类断言各缺何种相应依据，不用一般资料替代具体记录或安全判据。"}
+      ],
+      "premise_declarations": [{"source_field": "user_context", "quote": "假设设备甲显示值为15。", "kind": "stipulated"}],
+      "source_id": "BTV-S3"
+    }
+  ],
+  "diagnostic": {
+    "request_id": "BTV-02-DIAG",
+    "case_id": "BTV-02",
+    "answer_id": "BTV-02-diagnostic-answer",
+    "answer_version": 1,
+    "text": "题设给定评分为88分。\n\n练习规则规定，评分达到或超过80分时允许省略标记M，但不要求省略。\n\n因此本题允许省略标记M，也可以保留。"
+  }
+}
