@@ -1,5 +1,7 @@
 # 文档索引
 
+- **最新用户确认：[第二阶段离线迁移收尾](evaluation/langgraph-adapter-v1/owner-offline-closeout-v1.md)**：用户已读6a70f496交付报告，认可达到离线目标；限定于编排与行为保持，24份回放不算新语义成绩，不记用户本地测试／SHA验真。不切生产、不追加真实调用，默认原路径/schema13不变；后续先讨论一项Agent业务问题再决定定制，尚未启动新实现。
+
 - **当前交付：[可选LangGraph适配v1第二阶段](evaluation/langgraph-adapter-v1/README.md)**（[分项结果与身份](evaluation/langgraph-adapter-v1/results-v1.json)、[实际节点图](evaluation/langgraph-adapter-v1/node-graphs-v1.md)）：7共享阶段由图控制路由，开发开关、原路径默认，38项哈希依赖锁；原19包不升级，无云服务/恢复/额外重试。29项新门禁及全套1016离线通过；25历史响应/每路径1纠正，24预测与原一致，不是新模型成绩，真实API0。开销、首次回放启动失败和回退边界完整保留。学习站相关章节及当前/历史源码身份同步，生产schema13、原标签/分歧不改；第二阶段收尾，后续事项另行决定。
 
 - **当前阶段：[共享阶段抽取v1与离线差分](harness-shared-stages-v1.md)**（[身份/验证记录](harness-shared-stages-v1.json)）：原Harness接口与顺序驱动、7共享阶段，前后相关76项通过、新增11差分通过、全套987离线通过；三处测试夹具问题留痕，未发现未解释行为差异。仅第一阶段，不安装图依赖/新工具、不真实调用或切生产；含Agent/工具定制说明。[schema13生产基线确认](schema13-production-baseline-confirmation-v1.md)单独提交，取代AGENTS过时schema12说明，旧方案待确认文字保留历史。
