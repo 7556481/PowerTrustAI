@@ -2,7 +2,7 @@
 
 ## 状态机是什么
 
-状态机把“现在做到哪一步”和“允许下一步做什么”显式化。harness/states.py列举状态及转移集合，runtime.py执行转移并记录Trace。与随处if/while相比，显式状态能拒绝“审核未完成就直接completed”的非法路径。终态包括通过、拒绝、待补充、执行未完成、复核、失败和取消。
+状态机把“现在做到哪一步”和“允许下一步做什么”显式化。harness/states.py列举状态及转移集合；2026-10-22抽取后，runtime.py保留入口和任务注册，execution.py的每运行上下文执行转移并记录Trace。显式状态能拒绝“审核未完成就直接completed”的非法路径。终态包括通过、拒绝、待补充、执行未完成、复核、失败和取消。
 
 ```diagram
 {
@@ -197,6 +197,67 @@ ProductAuditPolicy检查真实执行、适用义务和发现，不给模型最�
 测试需要验证状态序列和对象关系：v1错→Revision→v2新claims→双重审→政策；不是只断言Revision被调用。反例：把v1 claims原样塞给v2审核，可能审核了旧错误而不是新答案。另一个反例：只重跑Fact没重跑Domain，新增工程承诺没有被审。
 
 历史阶段：早期e1c6…运行自然一次Revision及8请求、最终复核；identity-fidelity-v1的ab338原功率因数题仍无修复建议、0Revision。后续schema-choice-v1的schema13实际运行f61a804c…自然将2ω纠正为ω，保留线性时不变、正弦激励、暂态消失，2版本/2轮，完成重提取、双审和原引用检查。该局部闭环已真实验证，原PF失败不改；结构机制验证与通用修订能力仍需分别判断。
+
+## 2026-10-22：7共享阶段接成可选图
+
+`harness/execution.py`的RunExecution持有一次运行的数据和资源引用。`run_stages()`保留原顺序驱动；选择图时，`harness/graph_runtime_v1.py`建立7个真实阶段节点并通过条件边控制下一步，外层`RunExecution.run(driver=...)`仍处理失败、取消、注册清理和结果组装。
+
+```diagram
+{
+  "title": "可选图实际控制7阶段，Harness保留执行约束",
+  "width": 900,
+  "height": 760,
+  "nodes": [
+    {"id":"validate","x":40,"y":20,"w":260,"h":55,"label":"validate_saved_inputs\n固定身份与原索引校验"},
+    {"id":"generate","x":40,"y":120,"w":260,"h":55,"label":"generate\n问答检索与生成"},
+    {"id":"extract","x":350,"y":120,"w":260,"h":55,"label":"extract_and_tools\n当前版本提取及工具"},
+    {"id":"prepare","x":350,"y":230,"w":260,"h":55,"label":"prepare_review\n分别交付两用途证据"},
+    {"id":"review","x":350,"y":340,"w":260,"h":55,"label":"review_pair\n节点内部保留双审并发"},
+    {"id":"decide","x":350,"y":450,"w":260,"h":55,"label":"merge_and_decide\n原合并与确定性政策"},
+    {"id":"revise","x":40,"y":450,"w":260,"h":55,"label":"revise\n有限修订并推进版本"},
+    {"id":"end","x":650,"y":450,"w":220,"h":55,"label":"END → Harness\n终止记录及结果组装"}
+  ],
+  "edges": [
+    {"from":"validate","to":"generate","kind":"control","label":"问答","label_at":[185,100]},
+    {"from":"validate","to":"extract","kind":"control","points":[[300,47],[480,47],[480,120]],"label":"已有回答","label_at":[355,36]},
+    {"from":"generate","to":"extract","kind":"control","label":"审核","label_at":[305,139]},
+    {"from":"extract","to":"prepare","kind":"control"},
+    {"from":"prepare","to":"review","kind":"control"},
+    {"from":"review","to":"decide","kind":"control"},
+    {"from":"decide","to":"revise","kind":"control","points":[[350,478],[300,478]],"label":"修订","label_at":[304,465]},
+    {"from":"revise","to":"extract","kind":"control","points":[[170,450],[170,410],[325,410],[325,148],[350,148]],"label":"完整重审","label_at":[185,400]},
+    {"from":"decide","to":"end","kind":"control","label":"终止","label_at":[610,439]},
+    {"from":"review","to":"end","kind":"control","points":[[610,367],[760,367],[760,450]],"label":"仅证据审核","label_at":[650,351]},
+    {"from":"generate","to":"end","kind":"control","points":[[40,148],[16,148],[16,715],[760,715],[760,505]],"label":"仅生成或无实质回答","label_at":[320,704]}
+  ]
+}
+```
+
+图中END不是业务pass。失败、取消、observer异常在各阶段退出，仍由原Harness边界处理；未解释差异必须保留并停止推进。图的递归上限按修订预算派生，只防编排失控，不代替模型/工具/检索调用预算。
+
+开发合成示例（不会访问真实模型）：
+
+```python
+from agents.fakes import make_fake_harness
+
+harness = make_fake_harness()
+assert harness.execution_path == "sequential"
+harness.execution_path = "langgraph_v1"  # 安装可选依赖后，仅开发验证
+```
+
+直接构造OfflineHarness也可传`execution_path="langgraph_v1"`。该开关不在API任务载荷里，生产组装仍选默认路径。回退是下次开发运行明确选择`sequential`；发生失败的图运行不会自动执行旧驱动再发请求。
+
+## 图适配的验证与开销边界
+
+依赖锁为`requirements-langgraph.lock.txt`：LangGraph 1.2.16，Windows/Python3.13精确轮子哈希。原19个包版本未变，新增依赖包含SDK/checkpoint/追踪库，但没有启用相关服务。图不启用checkpointer、store、cache或RetryPolicy；显式关闭云追踪，即使外层打开追踪也通过无网络替身检查。
+
+业务差分使用同一输入、假模型和合成SQLite快照，比较结果、阶段输入、observer快照、调用归属、消息内容、修订重审和终态；只规范化时钟观测并固定新生成ID序列。独立评审组件另用历史25份响应回放，两路径最终24份预测均与原记录相同；不是重新生成、重评标签或新的语义成绩。原5覆盖分歧、2支持分歧及2未对齐继续保留。
+
+本机无observer、假Agent的30对交错暖运行：无修订中位数原路径2.68ms、图15.99ms；一次修订原路径6.08ms、图22.47ms。单次冷启动原路径4.95ms、图923.16ms，图包含首次依赖导入及编译。这说明编排引入开销，不说明真实服务延迟、费用或准确率变化。
+
+回放工具首次把网络禁用检查放在事件循环创建外，拦住Windows内部socketpair，0次适配器回放、未重建预测。失败目录保留，改为循环已创建、回放开始前禁止连接；最终回放无网络。这个故障不属于原付费批次，更未删除其attempt或补跑模型。
+
+价值是流程更明确、分支更可测试、后续扩展更可控。图不会替我们设计正确的语义边界；真实验证、生产切换和Agent进一步定制留作后续独立决定。
 
 ## 练习与面试
 

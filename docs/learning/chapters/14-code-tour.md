@@ -499,7 +499,7 @@ backend/service.py / ApplicationService.result，实际行163–187。
 
 ### 关键连接：实际Harness组件注入
 
-backend/assembly.py实际行176–185，仅连接处摘录，周围初始化/后续逻辑省略。
+backend/assembly.py实际行201–210，仅连接处摘录，周围初始化/后续逻辑省略；当前工厂没有传图路径，仍使用默认顺序驱动。
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
@@ -516,7 +516,7 @@ backend/assembly.py实际行176–185，仅连接处摘录，周围初始化/后
 
 ### 关键连接：按输入契约包装，而非散落版本条件
 
-harness/runtime.py实际行432–438，仅连接处摘录，周围初始化/后续逻辑省略。
+以下为共享阶段抽取前固定提交`1d5528f`的harness/runtime.py行432–438历史摘录。当前同一职责在harness/execution.py的prepare_review；保留旧片段帮助理解移动前后的连接，不能拿旧行号定位现行代码。
 
 ```python
                 from services.review_inputs import build as build_review_input
@@ -530,7 +530,7 @@ harness/runtime.py实际行432–438，仅连接处摘录，周围初始化/后�
 
 ### 关键连接：并发双审和异常收尾
 
-harness/runtime.py实际行477–488，仅连接处摘录，周围初始化/后续逻辑省略。
+以下为固定提交`1d5528f`的harness/runtime.py行477–488历史摘录；当前在harness/execution.py的review_pair，仍是一个阶段内部并发双审，不因图适配改为两个图节点。
 
 ```python
                 reviewers = [asyncio.create_task(job) for job in (
@@ -549,7 +549,7 @@ harness/runtime.py实际行477–488，仅连接处摘录，周围初始化/后�
 
 ### 关键连接：修订后重建与旧轮次保留
 
-harness/runtime.py实际行600–613，仅连接处摘录，周围初始化/后续逻辑省略。
+以下为固定提交`1d5528f`的harness/runtime.py行600–613历史摘录；当前在harness/execution.py的revise和外层run异常边界，不因修订而覆盖旧轮次。
 
 ```python
                 answer = revised.answer
@@ -567,6 +567,16 @@ harness/runtime.py实际行600–613，仅连接处摘录，周围初始化/后�
             raise
         except RequiredRetrievalFailure as exc:
 ```
+
+## 2026-10-22现行连接：共享阶段与可选图
+
+图适配应用源码绑定提交`9f0e491`，`docs/learning/source-check.json`保留上述旧连接记录并新增当前阶段/图函数的行号与文本哈希。先看harness/runtime.py的OfflineHarness.run：只有显式选`langgraph_v1`才加载可选依赖并传入图driver；默认路径不需要图依赖，也没有API载荷开关。
+
+接着看harness/execution.py：run_stages保留原顺序驱动，run(driver=...)只选择一个driver，并共用同一套异常、取消、observer、注册清理和结果组装。harness/graph_runtime_v1.py的build_graph定义7节点和条件边；run_graph调用ainvoke，不调用run_stages。节点每次只执行一个共享阶段，通过状态更新提供下一阶段标签，条件边实际完成路由。
+
+调试时可对照tests/test_langgraph_runtime_v1.py：让run_stages直接抛错，图仍完成7阶段和修订回环；图失败则检查旧驱动没有执行。预算、调用归属和部分结果通过同一输入的差分核对。evaluation/reviewer_graph_v1.py包装独立评审组件，evaluation/langgraph_replay_v1.py只返回绑定消息哈希的历史响应，不创建真实供应商适配器。
+
+与第04章的节点图一起阅读，并区分代码已存在、离线通过和真实运行验证。当前只完成前两项；v7历史响应回放不是新的模型生成成绩，生产组装仍为schema13及默认顺序路径。
 
 ## 三道自测：先作答，再展开
 

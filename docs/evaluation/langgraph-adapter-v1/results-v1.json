@@ -1,0 +1,738 @@
+{
+  "record_id": "optional-langgraph-adapter-v1-phase2",
+  "date": "2026-10-22",
+  "status": "offline_phase2_complete_no_unexplained_observed_business_differences",
+  "implementation_commit": "9f0e491ad41e8b1beb4d2d9bd45eff2755163d4c",
+  "phase1_commit": "fb2695a69ed42c46a0d53b4848e600bae7754e93",
+  "execution_paths": {
+    "default": "sequential",
+    "development_option": "langgraph_v1",
+    "selection": "OfflineHarness constructor keyword; no API or environment selector",
+    "automatic_fallback": false
+  },
+  "graph": {
+    "business_nodes": [
+      "validate_saved_inputs",
+      "generate",
+      "extract_and_tools",
+      "prepare_review",
+      "review_pair",
+      "merge_and_decide",
+      "revise"
+    ],
+    "business_edges": 13,
+    "component_nodes": [
+      "prepare",
+      "review"
+    ],
+    "actual_node_graphs_file": "node-graphs-v1.md",
+    "controls_stage_routing": true,
+    "old_driver_called_inside_node": false,
+    "parallel_review_stays_in_one_node": true,
+    "checkpointer": null,
+    "store": null,
+    "cache": null,
+    "retry_policy": [],
+    "automatic_resume": false,
+    "cloud_tracing_enabled": false,
+    "shared_per_run_budget_observer_cancel_validation_and_policy": true
+  },
+  "dependencies": {
+    "python": "3.13.2",
+    "platform": "Windows amd64",
+    "langgraph": "1.2.16",
+    "lock_file": "requirements-langgraph.lock.txt",
+    "full_active_dependency_closure": 38,
+    "original_distributions": 19,
+    "original_versions_unchanged": true,
+    "added_distribution_count": 27,
+    "added_distributions": [
+      {
+        "name": "charset-normalizer",
+        "version": "3.5.2"
+      },
+      {
+        "name": "distro",
+        "version": "1.9.0"
+      },
+      {
+        "name": "httpcore2",
+        "version": "2.16.0"
+      },
+      {
+        "name": "httpx2",
+        "version": "2.16.0"
+      },
+      {
+        "name": "jsonpatch",
+        "version": "1.36"
+      },
+      {
+        "name": "jsonpointer",
+        "version": "3.4"
+      },
+      {
+        "name": "langchain-core",
+        "version": "1.6.13"
+      },
+      {
+        "name": "langchain-protocol",
+        "version": "0.0.20"
+      },
+      {
+        "name": "langgraph",
+        "version": "1.2.16"
+      },
+      {
+        "name": "langgraph-checkpoint",
+        "version": "4.3.0"
+      },
+      {
+        "name": "langgraph-prebuilt",
+        "version": "1.1.1"
+      },
+      {
+        "name": "langgraph-sdk",
+        "version": "0.4.8"
+      },
+      {
+        "name": "langsmith",
+        "version": "0.14.12"
+      },
+      {
+        "name": "orjson",
+        "version": "3.13.0"
+      },
+      {
+        "name": "ormsgpack",
+        "version": "1.13.0"
+      },
+      {
+        "name": "packaging",
+        "version": "26.3"
+      },
+      {
+        "name": "PyYAML",
+        "version": "6.0.3"
+      },
+      {
+        "name": "requests",
+        "version": "2.34.2"
+      },
+      {
+        "name": "requests-toolbelt",
+        "version": "1.0.0"
+      },
+      {
+        "name": "sniffio",
+        "version": "1.3.1"
+      },
+      {
+        "name": "tenacity",
+        "version": "9.2.1"
+      },
+      {
+        "name": "truststore",
+        "version": "0.10.5"
+      },
+      {
+        "name": "urllib3",
+        "version": "2.8.0"
+      },
+      {
+        "name": "uuid_utils",
+        "version": "0.18.0"
+      },
+      {
+        "name": "websockets",
+        "version": "16.1.1"
+      },
+      {
+        "name": "xxhash",
+        "version": "4.0.2"
+      },
+      {
+        "name": "zstandard",
+        "version": "0.25.0"
+      }
+    ],
+    "pip_check": "passed",
+    "new_environment_created": false,
+    "package_artifact_sha256": [
+      {
+        "name": "annotated-types",
+        "version": "0.8.0",
+        "wheel_sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0"
+      },
+      {
+        "name": "anyio",
+        "version": "4.15.1",
+        "wheel_sha256": "6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101"
+      },
+      {
+        "name": "certifi",
+        "version": "2026.7.22",
+        "wheel_sha256": "62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775"
+      },
+      {
+        "name": "charset-normalizer",
+        "version": "3.5.2",
+        "wheel_sha256": "78456a747de8dc58360ffa581f30a002baf5aa28cb262536545e91f113ed7639"
+      },
+      {
+        "name": "distro",
+        "version": "1.9.0",
+        "wheel_sha256": "7bffd925d65168f85027d8da9af6bddab658135b840670a223589bc0c8ef02b2"
+      },
+      {
+        "name": "h11",
+        "version": "0.16.0",
+        "wheel_sha256": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86"
+      },
+      {
+        "name": "httpcore",
+        "version": "1.0.9",
+        "wheel_sha256": "2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55"
+      },
+      {
+        "name": "httpcore2",
+        "version": "2.16.0",
+        "wheel_sha256": "5c4358319f2602d984ad93182c9fee5160f22e9da7babdda870a5e7c4e2dc34f"
+      },
+      {
+        "name": "httpx",
+        "version": "0.28.1",
+        "wheel_sha256": "d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad"
+      },
+      {
+        "name": "httpx2",
+        "version": "2.16.0",
+        "wheel_sha256": "fd2c5d7909e8d86fe92d53020c310ca0e4e431b838c207c5754b9bbf0308d49a"
+      },
+      {
+        "name": "idna",
+        "version": "3.20",
+        "wheel_sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c"
+      },
+      {
+        "name": "jsonpatch",
+        "version": "1.36",
+        "wheel_sha256": "aa3ffbc15816644ffcc6b13712dacbc99f6f6dde302abc66983f9831d35630a5"
+      },
+      {
+        "name": "jsonpointer",
+        "version": "3.4",
+        "wheel_sha256": "136e2e3273fd82a1502274f56ec172f331b6a1703d86a1824d503af4d9a96142"
+      },
+      {
+        "name": "langchain-core",
+        "version": "1.6.13",
+        "wheel_sha256": "8605de6f84a49902ef6be03d6fe2a126e7dfc35184315989689f341181f0a8fb"
+      },
+      {
+        "name": "langchain-protocol",
+        "version": "0.0.20",
+        "wheel_sha256": "3c935e5e46b0f6f9cb52f45ba7cfa53d1b9fa80c82c4a277d47f03e07f7385b1"
+      },
+      {
+        "name": "langgraph",
+        "version": "1.2.16",
+        "wheel_sha256": "aeceb1bc49488409f12b02f1e51881099391d9e85bcfd78e1dbead71831c41b5"
+      },
+      {
+        "name": "langgraph-checkpoint",
+        "version": "4.3.0",
+        "wheel_sha256": "bedfafe2f997ded60e4fa593e79f56f436a6e45586392dc382aa810d0c751c64"
+      },
+      {
+        "name": "langgraph-prebuilt",
+        "version": "1.1.1",
+        "wheel_sha256": "fae17c22562e501940eb7aa052a15c58a431febbabf33f8ad172e1b44354a7e4"
+      },
+      {
+        "name": "langgraph-sdk",
+        "version": "0.4.8",
+        "wheel_sha256": "bef8ac54bdfe3ac2f7eba5be2f322dde296701b39e1c1aa403302f08d273fab5"
+      },
+      {
+        "name": "langsmith",
+        "version": "0.14.12",
+        "wheel_sha256": "9dafba7f615afa77204dc8afbb9c803e4ba1b55e96249f12c8f9aafb23fae6d0"
+      },
+      {
+        "name": "orjson",
+        "version": "3.13.0",
+        "wheel_sha256": "4ee06e53b998c71ce3eb93b86222912fdd9dcced685ac64d4525d36fac338ea4"
+      },
+      {
+        "name": "ormsgpack",
+        "version": "1.13.0",
+        "wheel_sha256": "8ae078104fceb107250d1b792a4c3b72bc9a0e9536c11c4dd0b6cc6ffc44ba9c"
+      },
+      {
+        "name": "packaging",
+        "version": "26.3",
+        "wheel_sha256": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c"
+      },
+      {
+        "name": "pydantic",
+        "version": "2.13.5",
+        "wheel_sha256": "346a034f080da3755d8e9cb5e00e8b07de1d39e4f6e2c87d8ab7cafa0b269a73"
+      },
+      {
+        "name": "pydantic-core",
+        "version": "2.46.5",
+        "wheel_sha256": "15f4a94963c95accac15b7b657bb177d3ad82bb90b0d0526d9a9b85079925db5"
+      },
+      {
+        "name": "pyyaml",
+        "version": "6.0.3",
+        "wheel_sha256": "79005a0d97d5ddabfeeea4cf676af11e647e41d81c9a7722a193022accdb6b7c"
+      },
+      {
+        "name": "requests",
+        "version": "2.34.2",
+        "wheel_sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0"
+      },
+      {
+        "name": "requests-toolbelt",
+        "version": "1.0.0",
+        "wheel_sha256": "cccfdd665f0a24fcf4726e690f65639d272bb0637b9b92dfd91a5568ccf6bd06"
+      },
+      {
+        "name": "sniffio",
+        "version": "1.3.1",
+        "wheel_sha256": "2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2"
+      },
+      {
+        "name": "tenacity",
+        "version": "9.2.1",
+        "wheel_sha256": "9e56f17539296baab7beabb08b92f6ee3d7be92d8be72d763360677c2ad6580e"
+      },
+      {
+        "name": "truststore",
+        "version": "0.10.5",
+        "wheel_sha256": "9aaaedaefaf06d8b206278cf8b5012bc897f485a874503501e12d776df78951c"
+      },
+      {
+        "name": "typing-extensions",
+        "version": "4.16.0",
+        "wheel_sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+      },
+      {
+        "name": "typing-inspection",
+        "version": "0.4.4",
+        "wheel_sha256": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147"
+      },
+      {
+        "name": "urllib3",
+        "version": "2.8.0",
+        "wheel_sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3"
+      },
+      {
+        "name": "uuid-utils",
+        "version": "0.18.0",
+        "wheel_sha256": "8a21c79359f0ee0b59139919c77414cf575f214b97096bae971aa715ae2983b3"
+      },
+      {
+        "name": "websockets",
+        "version": "16.1.1",
+        "wheel_sha256": "d9531d9cbeac99af6f038fb1bc351403531f7d634a2c2e10e2f7c854c6ed5b68"
+      },
+      {
+        "name": "xxhash",
+        "version": "4.0.2",
+        "wheel_sha256": "99fec645143af9dc697620aebff07e99388c16d4208a2ee8b6a2a9bb7d68a21b"
+      },
+      {
+        "name": "zstandard",
+        "version": "0.25.0",
+        "wheel_sha256": "1f830a0dac88719af0ae43b8b2d6aef487d437036468ef3c2ea59c51f9d55fd5"
+      }
+    ],
+    "sdk_checkpoint_langsmith_packages_are_dependencies_not_enabled_services": true
+  },
+  "validation": {
+    "full_offline_unittest": {
+      "tests": 1016,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 126.562,
+      "log_sha256": "5ff671ece830808b94001424c9838c50fdecb4ed08e5f0414dacc7cc251f305f"
+    },
+    "new_tests": {
+      "business_differential_methods": 14,
+      "graph_control_methods": 8,
+      "component_methods": 7,
+      "total": 29
+    },
+    "observed_unexplained_differences": 0,
+    "comparison": [
+      "answers, evidence, bindings, labels, versions and terminal states",
+      "stage inputs, observer snapshots and complete trace ownership",
+      "model request messages and format correction",
+      "shared budget, failure stop, cancel, storage failure and full revision re-audit"
+    ],
+    "normalization": [
+      "timestamp and duration observations",
+      "new IDs fixed to identical sequence, with IDs and references still compared"
+    ],
+    "graph_driver_proven_independent_of_original_sequence": true,
+    "network_disabled_under_outer_enabled_trace_context_tested": true,
+    "previous_full_offline_unittest": {
+      "tests": 1013,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 121.659,
+      "log_sha256": "c53b98e8fb24c543b5b84f00e80b5cae3bdac0d5ab35218fa2637c39b3ec13c1"
+    }
+  },
+  "component_replay": {
+    "kind": "offline_recorded_response_replay_not_new_semantic_score",
+    "items": 24,
+    "response_records_per_path": 25,
+    "corrections_per_path": 1,
+    "coverage_slots": 51,
+    "reference_units_from_frozen_batch": 58,
+    "judgments": 66,
+    "exact_message_hash_checks_per_path": 25,
+    "all_predictions_equal_original": true,
+    "all_business_outputs_records_and_controls_equal_between_paths": true,
+    "real_model_calls": 0,
+    "network_calls": 0,
+    "old_attempt_sha256": "f9887d7ece5f99ef2b7660db9c3a8890569ec7412abdfc7b5ae11b588d3794aa",
+    "original_frozen_files_checked": 35,
+    "prediction_identities": [
+      {
+        "sample_id": "H-BL-NWS-01-A01",
+        "prediction_sha256_utf8": "bc005c93a42446d7340000945cf722bafb391301173dd46063a58019479819b9",
+        "coverage_slots": 2,
+        "judgments": 3
+      },
+      {
+        "sample_id": "H-BL-USGS-01-A01",
+        "prediction_sha256_utf8": "3072ad7803ff239e2fd7ccdaf49e88662f047cce82ba885852b0bd2e131c11ad",
+        "coverage_slots": 2,
+        "judgments": 3
+      },
+      {
+        "sample_id": "H-BL-NASA-01-A01",
+        "prediction_sha256_utf8": "709e5dc3bffb3e8d5574f0d740f540ebdba21bc5d5fe00f5420ba89e5734abc0",
+        "coverage_slots": 2,
+        "judgments": 4
+      },
+      {
+        "sample_id": "H-BL-CDC-01-A01",
+        "prediction_sha256_utf8": "6b6d23101cbcbcc24999f23a9229e8bc36aea476d3ae8e462e11c8236e65e43f",
+        "coverage_slots": 2,
+        "judgments": 3
+      },
+      {
+        "sample_id": "H-BL-NWS-02-A01",
+        "prediction_sha256_utf8": "57b0dbfaee308d573bb43ea82a1d598421eb49410655baaa80d61fc26c311d59",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-USGS-02-A01",
+        "prediction_sha256_utf8": "82fc88529af8ddaf0b2a52a578e8e8035f509a7f7ce709a32462f81f855425d7",
+        "coverage_slots": 3,
+        "judgments": 3
+      },
+      {
+        "sample_id": "H-BL-NASA-02-A01",
+        "prediction_sha256_utf8": "d4ff37dea3c295c69f545bcb468d13eaa24e636fbcd4e6a52d8e662a088a7e27",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-CDC-02-A01",
+        "prediction_sha256_utf8": "ed8f8d4725b1bd4ea7777c5bae0b6e4d5645852c5413ca8b05aa552a594a88cf",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-NWS-01-A02",
+        "prediction_sha256_utf8": "25b55ec9725be19a57bc713db33c8377b798e29ddbe322050479e3ab118d5a06",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-USGS-01-A02",
+        "prediction_sha256_utf8": "94c9d85228a2771bd75caefb3368cae08270fbaf0730c3a83badd6c2299c25a7",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-NASA-01-A02",
+        "prediction_sha256_utf8": "073f8d6af0f6d5a7b2a39e340dd7815a60217c14197b647ba3777fa4b594de31",
+        "coverage_slots": 2,
+        "judgments": 4
+      },
+      {
+        "sample_id": "H-BL-CDC-01-A02",
+        "prediction_sha256_utf8": "39684b1ab71c46f5cdcf6a0b649b9ed547d40608503cb526596dfca6986cea61",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-NWS-02-A02",
+        "prediction_sha256_utf8": "43a7254f7d7bffcba5721875fa35e4d139372bb0dcf71f3179096bb9c4a44f22",
+        "coverage_slots": 2,
+        "judgments": 3
+      },
+      {
+        "sample_id": "H-BL-USGS-02-A02",
+        "prediction_sha256_utf8": "1324c407f0d4cd16f0f362ab6d814d300d554b57a836ad966db2765449b36829",
+        "coverage_slots": 3,
+        "judgments": 4
+      },
+      {
+        "sample_id": "H-BL-NASA-02-A02",
+        "prediction_sha256_utf8": "18573eddb59b876a571993a86d626850420aefb5d7677a03d34ff4d2762ac0a6",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-CDC-02-A02",
+        "prediction_sha256_utf8": "5dfde80a195d6922d2c0c55851397cfe01c43b731c0e3a9f529ab4ee18451131",
+        "coverage_slots": 2,
+        "judgments": 1
+      },
+      {
+        "sample_id": "H-BL-NWS-01-A03",
+        "prediction_sha256_utf8": "63d5fadd26d61ab35d437841f5f3b449ce56d097006b2321beeeded75ff036f3",
+        "coverage_slots": 2,
+        "judgments": 3
+      },
+      {
+        "sample_id": "H-BL-USGS-01-A03",
+        "prediction_sha256_utf8": "4b313dd77fabaa923927bfc56fccb2555c6de1f32526e9ca57ddbbdfd5c9d05e",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-NASA-01-A03",
+        "prediction_sha256_utf8": "89209da7808e06edce28fcf348c0471d8ea0919ca72bb3e8799b0ffa53ae5b43",
+        "coverage_slots": 2,
+        "judgments": 5
+      },
+      {
+        "sample_id": "H-BL-CDC-01-A03",
+        "prediction_sha256_utf8": "44726ff9f8b7d55fc5102376e07d3d227b0a3248f67d4352b24f8390144e41cd",
+        "coverage_slots": 2,
+        "judgments": 3
+      },
+      {
+        "sample_id": "H-BL-NWS-02-A03",
+        "prediction_sha256_utf8": "b64a2e6b9a86a6d4af0e102eca4fed44ce52e6159dfb3d70189f15e0e108864a",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-USGS-02-A03",
+        "prediction_sha256_utf8": "aadf65645e0ff732a6754b65d26dc2aba87afd4bfdd336980faba001c6a9e3d2",
+        "coverage_slots": 3,
+        "judgments": 4
+      },
+      {
+        "sample_id": "H-BL-NASA-02-A03",
+        "prediction_sha256_utf8": "3ed2cb7f055b72dd31c9f6ea6661f829b446f418615c72f8be5b6c7cb2d7085b",
+        "coverage_slots": 2,
+        "judgments": 2
+      },
+      {
+        "sample_id": "H-BL-CDC-02-A03",
+        "prediction_sha256_utf8": "cc029cc5f449f570065fe1fd1aadbeb0a04144e5fc218bc05eceb312df2c4c33",
+        "coverage_slots": 2,
+        "judgments": 3
+      }
+    ],
+    "elapsed_seconds": {
+      "sequential": 0.024501199999576784,
+      "langgraph_v1": 0.2574086000004172
+    },
+    "limitations": [
+      "25 adapter operations per path return saved text; no new generation",
+      "one sequential-then-graph pass; elapsed time is not a latency study",
+      "reference labels, alignment and semantic statistics were not re-adjudicated"
+    ]
+  },
+  "replay_entry_followup": "After the successful saved replay, explicit 25-operation/one-correction assertions were added; retained output was rechecked against them without regenerating responses. Graph/parser/messages unchanged.",
+  "original_semantic_baseline_not_recomputed": {
+    "source": "docs/evaluation/baseline-batch-v1/results-v1.json",
+    "coverage": {
+      "slots": 51,
+      "agrees": 46,
+      "disagreements": 5
+    },
+    "support": {
+      "reference_units": 58,
+      "aligned": 56,
+      "aligned_agrees": 54,
+      "aligned_disagreements": 2,
+      "unaligned": 2,
+      "predicted_judgments": 66
+    },
+    "reason_and_claim_type_issues_retained": true,
+    "new_semantic_score": false
+  },
+  "overhead": {
+    "kind": "local_fake_agent_overhead_not_model_latency",
+    "cold_first_call_ms": {
+      "sequential": 4.951099999743747,
+      "langgraph_v1": 923.1564000001526
+    },
+    "warmup_per_path": 3,
+    "warm_groups": [
+      {
+        "case": "no_revision",
+        "path": "sequential",
+        "runs": 30,
+        "median_ms": 2.6817000002665736,
+        "p95_ms": 3.733999999894877,
+        "minimum_ms": 2.476800000295043,
+        "maximum_ms": 3.985100000136299
+      },
+      {
+        "case": "no_revision",
+        "path": "langgraph_v1",
+        "runs": 30,
+        "median_ms": 15.991700000085984,
+        "p95_ms": 19.352600000274833,
+        "minimum_ms": 14.993600000707374,
+        "maximum_ms": 19.46270000007644
+      },
+      {
+        "case": "one_revision",
+        "path": "sequential",
+        "runs": 30,
+        "median_ms": 6.078299999899173,
+        "p95_ms": 7.560199999716133,
+        "minimum_ms": 5.161299999599578,
+        "maximum_ms": 7.7693000002909685
+      },
+      {
+        "case": "one_revision",
+        "path": "langgraph_v1",
+        "runs": 30,
+        "median_ms": 22.471849999874394,
+        "p95_ms": 27.62239999992744,
+        "minimum_ms": 21.169600000575883,
+        "maximum_ms": 28.623199999856297
+      }
+    ],
+    "real_model_calls": 0,
+    "network_calls": 0,
+    "observer": "none for both paths",
+    "limitations": [
+      "single local process, correlated synthetic runs",
+      "cold graph includes imports/compile; warm graph reuses structure",
+      "does not estimate service latency, API cost or semantic quality"
+    ]
+  },
+  "retained_failure": {
+    "kind": "offline_replay_startup_failure",
+    "exception": "AssertionError: Replay network prohibited",
+    "cause": "Network guard intercepted Windows asyncio internal socketpair during event-loop creation, before replay",
+    "response_replay_operations": 0,
+    "real_model_calls": 0,
+    "old_attempt_changed": false,
+    "fix": "Activate the same network guard inside the running event loop, before replay operations; preserve this directory"
+  },
+  "historical_identity_checks": {
+    "original_public_files_verified": 7,
+    "original_execution_frozen_files_verified": 35,
+    "owner_closeout_bound_files_verified": true,
+    "attempt_unchanged": true,
+    "original_expected_labels_matching_results_and_public_fields_unchanged": true
+  },
+  "learning_site": {
+    "application_commit": "9f0e491ad41e8b1beb4d2d9bd45eff2755163d4c",
+    "updated_markdown_chapters": [
+      "01-product",
+      "02-architecture",
+      "03-agents",
+      "04-harness",
+      "14-code-tour"
+    ],
+    "index_updated": true,
+    "chapters_built": 20,
+    "folded_answers_checked": 60,
+    "current_source_hashes_and_links_checked": true,
+    "historical_connection_excerpts_retained": 3,
+    "browser_visual_acceptance_claimed": false,
+    "server_started": false,
+    "old_pdf_changed": false,
+    "validation_commit": "6ed4c9576dc3515c8ecff56027fb74cd93133aff"
+  },
+  "rollback": "Select sequential for a subsequent new development invocation; preserve failed run and never automatically resubmit or resume. Default production path already sequential.",
+  "scope": {
+    "api_schema_or_database_changed": false,
+    "production_switched": false,
+    "production_schema": 13,
+    "agents_prompts_parsers_policies_retrieval_changed": false,
+    "reference_labels_or_matching_changed": false,
+    "real_model_calls": 0,
+    "api_cost": 0,
+    "credentials_env_files_or_headers_read": false,
+    "semantic_upgrade_or_speedup_claimed": false,
+    "new_training_or_corpus": false,
+    "old_paid_authorization_reused": false
+  },
+  "next_steps": "phase2 stops here; live validation, production switch and Agent optimization are separate future decisions and live calls require fresh authorization/freeze",
+  "private_artifacts": [
+    "data/evaluation_local/langgraph-adapter-v1/packages-before.json",
+    "data/evaluation_local/langgraph-adapter-v1/packages-after.json",
+    "data/evaluation_local/langgraph-adapter-v1/install-plan.json",
+    "data/evaluation_local/langgraph-adapter-v1/full-tests.txt",
+    "data/evaluation_local/langgraph-adapter-v1/replay-v1/failure.json",
+    "data/evaluation_local/langgraph-adapter-v1/replay-v1-r1",
+    "data/evaluation_local/langgraph-adapter-v1/overhead-v1/timings.json",
+    "data/evaluation_local/langgraph-adapter-v1/full-tests-final.txt",
+    "data/evaluation_local/langgraph-adapter-v1/supplemental-initial-failure.json",
+    "data/evaluation_local/langgraph-adapter-v1/supplemental-tests.txt"
+  ],
+  "delivery_file_sha256": {
+    "harness/runtime.py": "f3343876ab3eb9946271e8f6ea0b8aca5132e9c741e223b05193cdd9381fe547",
+    "harness/execution.py": "c817c756a2131f7941c735d87bf425446baa16e32060619149870ab82e9a0e81",
+    "harness/graph_runtime_v1.py": "76286693cbbfb4f7cfc59f0121684080e6b18c5aabd584579bf3ccc6c2529044",
+    "evaluation/reviewer_graph_v1.py": "27913b5d80d3b1768880c1094cd5598a3cdf9b4639cca3ecb6f7eddf8dfd769d",
+    "evaluation/langgraph_replay_v1.py": "eb263ba9f8e1f09b89238eb8b407482b68f41880d5ae8d22b84126caa6b4c0c5",
+    "evaluation/langgraph_overhead_v1.py": "858f93c4e620178ec42bfe6a711ad7343e2574166015bc917a1c7857643e1db0",
+    "requirements-langgraph.txt": "23a94eaece48c99d9a3c570dbd2b0a224ff3c71f786dc6e0aa24395040ba1f89",
+    "requirements-langgraph.lock.txt": "4449d5913b48bb900144a19fee44216b654ac71b06e89b7821442b9e9b0bd515",
+    "tests/test_harness_stage_differential.py": "9b1ccfce68ae2d7f3c1232151fa16dd45a9c37b508099875299639a9972cea84",
+    "tests/test_langgraph_runtime_v1.py": "dca3267c6158ba0aa5e6880f93c3d06999af97db9a6ec69e95133ac5b76a2856",
+    "tests/test_langgraph_reviewer_v1.py": "fdd58804f9050100d90ce5a3339f60e2b653d323824342f897f7855afc38a285",
+    "docs/evaluation/langgraph-adapter-v1/README.md": "d6fa0b24c37d8079da567dcb16547e4fef08b673d244cdf0f5a68924b5b7340e",
+    "docs/evaluation/langgraph-adapter-v1/node-graphs-v1.md": "196f6b78dc5bf9b0f74382c636e68839d13f2665c3434a204465d22ce33b30e6",
+    "docs/learning/source-version.json": "889752b6115228bee7e4f0ed0c98d5c5a4b9621f559371ba9ed00b6deb81e004",
+    "docs/learning/source-check.json": "a9642666f43c4209435da4396caabb5d95f86d13c0531f57e547364c29734629",
+    "tools/learning_checks.py": "31127e4c60e0884e9ef3385415a8cc7a61bba058b949f1df0c30a627dff0fcea",
+    "docs/learning/site/build-manifest.json": "591c228ff59b2b203a57b4940feb743fac9eba9c49d89bc2dd02d8b79cd9cb97",
+    "docs/learning/chapters/01-product.md": "84c0964b5c8e6d0bb945f2bb260ae2d16c674046cec523b4c7ed89a6c568a6c6",
+    "docs/learning/chapters/02-architecture.md": "76a7e7b1f97868459dd5491dd8e08a132c074335a7c225d13370507ed3447eb4",
+    "docs/learning/chapters/03-agents.md": "92dda69f5c28bd3872d128af02e29a82a4168c78ca4312427a9c1cd3511900b0",
+    "docs/learning/chapters/04-harness.md": "047c8fb5646935c438c843bc8f2647b35aac4c210444e6f3557608575c88ddfa",
+    "docs/learning/chapters/14-code-tour.md": "ff4dcfb95ad89f85468e187196cc01305cd1e4fc7f947b330c2bbce4d37d87b8"
+  },
+  "identity_scope": "assistant mechanical provenance of delivered files; not a new paid execution freeze or owner SHA verification",
+  "supplemental_fixture_check": {
+    "kind": "offline_test_fixture_failure",
+    "targeted_tests": 3,
+    "passed": 2,
+    "failed": 1,
+    "case": "no_substantive_answer",
+    "reference_and_graph_both_returned": "failed",
+    "contract_error": "No-answer path requires missing information and no substantive audit; cannot pass",
+    "cause": "Synthetic no-answer fixture omitted required answer.missing_information",
+    "resolution": "Add explicit synthetic missing_information and non-substantive text; retain strict validator and all runtime code unchanged",
+    "focused_final_tests": 3,
+    "focused_final_result": "passed",
+    "real_model_calls": 0
+  },
+  "validation_commit": "6ed4c9576dc3515c8ecff56027fb74cd93133aff"
+}

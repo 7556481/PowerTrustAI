@@ -22,7 +22,7 @@
 
 ## 项目怎样实现：入口和输出分层
 
-backend/api.py负责同源HTTP、鉴权和请求结构，backend/service.py负责排队和生命周期，backend/assembly.py装配真实组件。harness/runtime.py执行生成、提取、审核、决策和有限Revision。core/models.py定义TaskRequest、AnswerDraft、Claim、Finding与业务处置对象。
+backend/api.py负责同源HTTP、鉴权和请求结构，backend/service.py负责排队和生命周期，backend/assembly.py装配真实组件。harness/runtime.py保留运行入口及取消，harness/execution.py提供生成、提取、审核、决策和有限Revision共享阶段；默认顺序驱动，可选图路径只供开发验证。core/models.py定义TaskRequest、AnswerDraft、Claim、Finding与业务处置对象。
 
 输出至少分开四个维度：执行完整性、审核发现及严重度、最终处置、问题解决程度。正常概念可在条件完整、引用满足、无阻断发现时自动通过；缺证据进入待补充；判断不确定需人工复核；符合已审阅规则注册及当前依据要求的高严重度错误可不通过；接口超时或漏检查属于执行未完成，不伪装成事实矛盾。
 

@@ -1,7 +1,7 @@
 {
   "version": {
-    "application_commit": "04ec59b59313500ea97bffe5b1421a0def0407cb",
-    "document_version": "learning-site-v4.0 second bounded performance prototype, 2026-10-09",
+    "application_commit": "9f0e491ad41e8b1beb4d2d9bd45eff2755163d4c",
+    "document_version": "learning-site-v4.1 optional LangGraph adapter and offline replay, 2026-10-22",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
@@ -9,33 +9,41 @@
     "documentation_parent_commit": "3139f953a9db0aa25585f5c49e1ad406204385bb",
     "final_delivery_ref": "release-v2-20261009",
     "default_retrieval": "topic_v4_subject_v1",
-    "default_review_message_profile": "lossless_v1"
+    "default_review_message_profile": "lossless_v1",
+    "previous_application_commit": "04ec59b59313500ea97bffe5b1421a0def0407cb",
+    "execution_path_default": "sequential",
+    "optional_development_execution_path": "langgraph_v1",
+    "langgraph_version": "1.2.16",
+    "production_switch": false,
+    "new_live_model_calls": 0,
+    "validation_commit": "6ed4c9576dc3515c8ecff56027fb74cd93133aff",
+    "offline_unittest_count": 1016
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 2686,
-      "sha256": "014a772c8a94c6716a86291c10e38eb9289c09f2222b0aec46226e8519678fde"
+      "characters": 2916,
+      "sha256": "84fc8ef384992a3ed8c401eca8ba10ee1a24e0af789922876cbb876913e232bf"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
-      "characters": 3302,
-      "sha256": "9fb59410293762cdf8bfdcdd8af9a8d81d930f735e0f13dec020af68e6ce1134"
+      "characters": 3355,
+      "sha256": "23f7b6f7774557f1cdfad1e26bf258c3070504f1f81e7b91ec166036a3fe99ff"
     },
     {
       "source": "docs/learning/chapters/02-architecture.md",
-      "characters": 7603,
-      "sha256": "1ca535951c7178a80ef2e097c6fb3040d0b03c7ce16f2c5e588cbf35b17f758c"
+      "characters": 8180,
+      "sha256": "2e156f33c125e985978fd65651efae3c84d5dc98156d6ee4744c7771343dd871"
     },
     {
       "source": "docs/learning/chapters/03-agents.md",
-      "characters": 3263,
-      "sha256": "16d2bc02a8e31a6e9a63bac83a25ae7598088b39488172b6fd3025a998608a57"
+      "characters": 3752,
+      "sha256": "2b3d8eb6952094a5b2e8676956fb305bfad5afb0c9fe5d15670179e894552894"
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 4931,
-      "sha256": "d00e8a4d207e4a3d90ccf1ed3409d3c65a5b81f955a2d73a61e65f451edee035"
+      "characters": 8265,
+      "sha256": "76c9fc99fac9e87945115f14917c247db088f923fb25ce798ab15e428b320a22"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -84,8 +92,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 31807,
-      "sha256": "c1d949fec7cbe6da5deaf5f30f68410f71f9e860bf41c13be625844405829ecf"
+      "characters": 32751,
+      "sha256": "f6a14e09f22fc603bd3230eeb3a0d631945dddf009679560a13841f8e4c9e06e"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -123,6 +131,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 119042,
+  "markdown_characters": 124669,
   "network_dependencies": false
 }

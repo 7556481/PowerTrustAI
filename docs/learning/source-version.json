@@ -1,6 +1,6 @@
 {
-  "application_commit": "04ec59b59313500ea97bffe5b1421a0def0407cb",
-  "document_version": "learning-site-v4.0 second bounded performance prototype, 2026-10-09",
+  "application_commit": "9f0e491ad41e8b1beb4d2d9bd45eff2755163d4c",
+  "document_version": "learning-site-v4.1 optional LangGraph adapter and offline replay, 2026-10-22",
   "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
   "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
   "daily_schema": 13,
@@ -8,5 +8,13 @@
   "documentation_parent_commit": "3139f953a9db0aa25585f5c49e1ad406204385bb",
   "final_delivery_ref": "release-v2-20261009",
   "default_retrieval": "topic_v4_subject_v1",
-  "default_review_message_profile": "lossless_v1"
+  "default_review_message_profile": "lossless_v1",
+  "previous_application_commit": "04ec59b59313500ea97bffe5b1421a0def0407cb",
+  "execution_path_default": "sequential",
+  "optional_development_execution_path": "langgraph_v1",
+  "langgraph_version": "1.2.16",
+  "production_switch": false,
+  "new_live_model_calls": 0,
+  "validation_commit": "6ed4c9576dc3515c8ecff56027fb74cd93133aff",
+  "offline_unittest_count": 1016
 }
