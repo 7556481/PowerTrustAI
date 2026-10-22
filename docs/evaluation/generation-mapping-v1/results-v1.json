@@ -1,0 +1,229 @@
+{
+  "version": "generation-mapping-development-delivery-v1",
+  "date": "2026-10-22",
+  "status": "offline_candidate_complete_semantic_benefit_unverified",
+  "source_base_commit": "a27602e39dd1ba60b79bb21f0ee4f80b52928de0",
+  "candidate_version": "concept-evidence-generation-map-v1-dev",
+  "response_contract": "generation-answer-and-map-v1",
+  "report_contract": "generation-map-attempt-report-v1",
+  "product_line": "question_answer_with_independent_full_review",
+  "entry": {
+    "class": "agents.generation_mapping_v1.EvidenceMappingGenerationAgent",
+    "selection": "explicit development dependency injection into existing Harness",
+    "run_return": "exact original GenerationOutput",
+    "diagnostic_method": "run_with_diagnostics",
+    "production_factory_changed": false,
+    "default_execution_path": "sequential",
+    "production_verification_schema": 13
+  },
+  "wire_contract": {
+    "root_fields": [
+      "answer_units",
+      "assumptions",
+      "missing_information",
+      "evidence_sufficient",
+      "diagnostic_map"
+    ],
+    "map_fields": [
+      "point",
+      "unit_indexes",
+      "quote_ids",
+      "condition_ids",
+      "note"
+    ],
+    "minimum_rows": 1,
+    "maximum_rows": 6,
+    "maximum_quote_ids_per_row": 8,
+    "maximum_condition_ids_per_row": 8,
+    "maximum_point_characters": 240,
+    "maximum_note_characters": 400,
+    "positions": "program computed; no model offsets",
+    "catalog": "existing whole_fragment quote candidates and source condition carriers; no duplicate body in added catalog",
+    "extra_planning_calls": 0,
+    "initial_generation_calls": 1,
+    "maximum_format_corrections": 1,
+    "strict_combined_contract": true,
+    "partial_answer_release": false,
+    "mapping_transmitted_to_reviewers": false,
+    "mapping_used_as_scoring_requirements": false,
+    "mapping_used_as_policy_input": false,
+    "semantic_coverage_is_not_structural_validity": true
+  },
+  "layer_statuses": [
+    "valid",
+    "invalid",
+    "not_checked"
+  ],
+  "failure_count_keys": [
+    "mapping_only",
+    "answer_invalid",
+    "mapping_invalid",
+    "both_invalid",
+    "envelope_only",
+    "unchecked"
+  ],
+  "failure_count_overlap": "do not sum into a total; final candidate validity and execution are separate",
+  "no_evidence": "not_applicable_no_evidence; zero calls; not valid candidate generation",
+  "cancellation": "run-owned ModelBudget retains actual call identity; in-flight sidecar call_number may be null",
+  "checks": {
+    "new_targeted_test_methods": 20,
+    "related_test_count": 139,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 34.956,
+    "test_modules": [
+      "tests.test_generation_mapping_v1",
+      "tests.test_generation",
+      "tests.test_review_inputs",
+      "tests.test_harness",
+      "tests.test_harness_retrieval",
+      "tests.test_harness_stage_differential",
+      "tests.test_model_trace_attribution",
+      "tests.test_reliability_scope",
+      "tests.test_langgraph_runtime_v1",
+      "tests.test_product_policy"
+    ],
+    "private_log_path": "data/evaluation_local/generation-mapping-v1/offline-checks-v1.txt",
+    "private_log_sha256": "b6d62a18acca060456d5681f25345d1465f0d40df1ca7f4048bfabb94553c17d",
+    "network": "new candidate async tests prohibit socket.connect after loop creation; all responses synthetic",
+    "full_suite_rerun": false,
+    "historical_prediction_replay": false,
+    "semantic_score_produced": false,
+    "unmapped_assertion": "two synthetic answer units, map only first; real extraction service with synthetic response yields both; both review doubles receive complete answer and both claims",
+    "scope_limit": "wiring and contracts only; not proof of real-model extraction or judgment"
+  },
+  "retained_events": [
+    {
+      "event": "initial_fixture_failure",
+      "tests": 15,
+      "passed": 14,
+      "failed": 1,
+      "seconds": 0.467,
+      "test": "test_unmapped_actual_assertion_gets_real_extraction_and_both_reviews",
+      "expected_state": "review_required",
+      "actual_state": "failed",
+      "cause": "fixture omitted one actual user_reference binding; input scope mismatch",
+      "fix": "fixture now reproduces both actual delivered origin bindings",
+      "validator_relaxed": false,
+      "record_scope": "conversation output plus this summary; not an archived original raw log"
+    },
+    {
+      "event": "fixture_fixed",
+      "tests": 15,
+      "passed": 15,
+      "seconds": 0.464
+    },
+    {
+      "event": "expanded_checks",
+      "tests": 19,
+      "passed": 19,
+      "seconds": 0.659
+    },
+    {
+      "event": "approval_review_unavailable",
+      "command_executed": false,
+      "reason": "automatic approval review usage limit; no unsafe-action determination",
+      "resolution": "user requested continue; same require_escalated review mechanism succeeded; no bypass"
+    }
+  ],
+  "scope": {
+    "new_business_modules": 1,
+    "modified_existing_business_files": 0,
+    "original_prompts_or_parsers_modified": 0,
+    "retrieval_review_revision_ui_graph_defaults_modified": 0,
+    "dependency_installs": 0,
+    "real_model_requests": 0,
+    "new_paid_batch_authorized": false,
+    "new_coverage_policy_integrated": false,
+    "original_baseline_or_alignment_changed": false
+  },
+  "file_identities": [
+    {
+      "path": "agents/generation_mapping_v1.py",
+      "sha256": "2bb183120e20115fb347ec48decc4123bf77809d93e7e5e709c672f93ef3982f"
+    },
+    {
+      "path": "tests/test_generation_mapping_v1.py",
+      "sha256": "5063ebd7c22b854f7859ae19b6cd87822f3af6bb8f769126e7a3b516d2b3a004"
+    },
+    {
+      "path": "agents/generation.py",
+      "sha256": "a743a4580bcf087c7d08dc32da5888c598f62ca2ff1c6bd026ab40abfc75f75c"
+    },
+    {
+      "path": "agents/contracts.py",
+      "sha256": "b2c08418de002bab314783c865b343f50c57220ae356ae75e0a4d3c3b7acd9d7"
+    },
+    {
+      "path": "services/answer_units.py",
+      "sha256": "60472840c5d2f5319b642bfc544ecd17a5fd90ef52df8d51bbee5095b5e14f4e"
+    },
+    {
+      "path": "services/quote_candidates.py",
+      "sha256": "3f954643274ac5dba5baa54993dcb930053eb37ff918f08c6a53085ef4f95385"
+    },
+    {
+      "path": "services/condition_candidates.py",
+      "sha256": "a473a008cca3eb2efe140f6c579e55402648282dd9b10f302c7b4384a2b2621a"
+    },
+    {
+      "path": "services/evidence_scope.py",
+      "sha256": "d7a7f3a8eb088c12f4387b575b2e23f79a5234003632c534a526d8b63247206e"
+    },
+    {
+      "path": "services/structured_model.py",
+      "sha256": "a0ab6c75f2256e8810cb3f9d89901b821d5612196ee2496c310d6d06372d1118"
+    },
+    {
+      "path": "model_adapter/runtime.py",
+      "sha256": "009eb22f0ea4bbbd29cfa5cf53ea881c048436430a6896c237e2587a6eca5c8d"
+    },
+    {
+      "path": "harness/runtime.py",
+      "sha256": "f3343876ab3eb9946271e8f6ea0b8aca5132e9c741e223b05193cdd9381fe547"
+    },
+    {
+      "path": "harness/execution.py",
+      "sha256": "c817c756a2131f7941c735d87bf425446baa16e32060619149870ab82e9a0e81"
+    },
+    {
+      "path": "harness/graph_runtime_v1.py",
+      "sha256": "76286693cbbfb4f7cfc59f0121684080e6b18c5aabd584579bf3ccc6c2529044"
+    },
+    {
+      "path": "harness/product_policy.py",
+      "sha256": "f8a93873e1876f7870acb4674841ff225ebd9d586d4a51275f86b8a61d308922"
+    },
+    {
+      "path": "backend/config.py",
+      "sha256": "386673778691d94d4075f08c885471ca1c3cf48548096e8c6204aaf00e920f53"
+    },
+    {
+      "path": "backend/assembly.py",
+      "sha256": "619a96fdcf92dfb689cdf87d6fb118f0dedf67ca40ccf628e373eff6808337ae"
+    },
+    {
+      "path": "backend/static/app.js",
+      "sha256": "1148bdcccbbbdf6ae3ae9f2ac60b8d5a6f3acd8afe5ffd2fbd56e2d11a8a450b"
+    },
+    {
+      "path": "docs/evaluation/baseline-batch-v1/results-v1.json",
+      "sha256": "4ad50d85e7fd60ce5bfeddb27d3db45d2e3859ec0ad5cc4bbde46fbd29cd7afd"
+    },
+    {
+      "path": "docs/evaluation/baseline-batch-v1/matching-rules-v1.json",
+      "sha256": "6310da92cd2ddf3661ed2dedf3457dcc38a0620486be137672cb105e301edb29"
+    },
+    {
+      "path": "docs/evaluation/langgraph-adapter-v1/results-v1.json",
+      "sha256": "6ad90eedcea8ef4074c082d02ea0986d26f8f9cea31a579d227ee5289e06ffd0"
+    },
+    {
+      "path": "docs/evaluation/generation-mapping-v1/README.md",
+      "sha256": "867fddbb0c2b48e48826f7ecfc958d5926851fef482793124f2fffa127646628"
+    }
+  ],
+  "identity_note": "assistant mechanical checkout-byte provenance, not user SHA verification; future paid batch requires its own full message/configuration/material freeze",
+  "next_step": "prepare and confirm fixed-evidence real generation comparison freeze and obtain new cost authorization; no execution now"
+}
