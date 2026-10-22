@@ -35,6 +35,13 @@ class Gates(unittest.TestCase):
         s,p=self.exercise(True)
         self.assertEqual([x['status'] for x in s['branches']],['execution_failed']+['unexecuted']*5)
         self.assertEqual(len(p.requests),2)
+    def test_successful_service_collection_reads_separate_connection_all_six_once(self):
+        s,p=self.exercise(False)
+        self.assertEqual([x['status'] for x in s['branches']],['complete']*6)
+        self.assertEqual(len({x['run_id'] for x in s['branches']}),6)
+        for b in s['branches']:
+            self.assertTrue(b['result'])
+            self.assertEqual(len(b['sent']),len(b['result']['model_records']))
     def test_plan_has_exact_six_alternating_runs_unchanged_payload_per_pair(self):
         self.assertEqual(len(trial.ORDER),6)
         self.assertEqual([r[2] for r in trial.ORDER],['sequential','langgraph_v1','langgraph_v1','sequential','sequential','langgraph_v1'])

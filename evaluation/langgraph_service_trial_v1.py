@@ -1,8 +1,9 @@
 """Exactly six authorized service runs, single admission each, no resume."""
-import argparse,json,hashlib,os,time,secrets
+import argparse,json,hashlib,os,time,secrets,sqlite3
 from pathlib import Path
 from dataclasses import replace,asdict
 from unittest.mock import patch
+from contextlib import closing
 from backend.config import ServiceConfig,ROOT
 from backend.assembly import ComponentFactory
 from backend.api import create_app
@@ -36,6 +37,13 @@ def config_identity(c):
     value=wire(c)
     for k in ('run_db','token_file'):value.pop(k,None)
     return value
+
+def saved_result(database,run_id):
+    """Collection-only: a separate read-only connection, never the worker handle."""
+    with closing(sqlite3.connect(Path(database).resolve().as_uri()+'?mode=ro',uri=True)) as db:
+        row=db.execute('SELECT result FROM runs WHERE id=?',(run_id,)).fetchone()
+        if row is None:raise ValueError('Accepted run not found')
+        return None if row[0] is None else json.loads(row[0])
 
 def prepare():
     if LOCAL.exists() or (PUBLIC/'execution-freeze-v1.json').exists():raise ValueError('Fresh fixed batch only')
@@ -115,7 +123,7 @@ def execute():
                         if progress['status'] not in ('queued','running'):break
                         time.sleep(.2)
                     projected=client.get('/runs/'+run_id+'/result',headers=h).json()
-                    raw=client.app.state.service.store.get(run_id)['result']
+                    raw=saved_result(cfg.run_db,run_id)
                     write(directory/'raw-result.json',raw);write(directory/'api-result.json',projected)
                     write(directory/'trace.json',client.get('/runs/'+run_id+'/trace',headers=h).json())
                     if not raw or raw['execution_issues'] or raw['state'] in ('failed','cancelled','execution_incomplete') or projected['execution']['error_code'] or state['fatal']:
