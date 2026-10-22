@@ -1,0 +1,135 @@
+{
+  "record_id": "harness-shared-stages-v1",
+  "date": "2026-10-22",
+  "status": "phase_1_complete_stop_before_graph_dependencies",
+  "versioning": "new shared-stage implementation identity; historical freezes are preserved",
+  "pre_refactor_commit": "1d5528ff5eb15b79cd1479b1b6864cb4a0f904c5",
+  "pre_refactor_git_lf_runtime_sha256": "0376f1b87ee5426e6010dd88e1a6148ba47fa1f9f545c05bb34594ff121c2b12",
+  "pre_refactor_checkout_crlf_runtime_sha256": "ca232dd2edb2e8d4bf2541cd22cea37bea7452159f7bdb31d70b3fff7e25ede2",
+  "schema13_document_correction_commit": "f029e46",
+  "schema13_user_confirmed": true,
+  "production_config_code_changed": false,
+  "implementation": {
+    "owner": "OfflineHarness with one RunExecution context per invocation",
+    "public_run_cancel_signature_unchanged": true,
+    "driver": "original sequential route; no graph execution",
+    "stages": [
+      "validate_saved_inputs",
+      "generate",
+      "extract_and_tools",
+      "prepare_review",
+      "review_pair",
+      "merge_and_decide",
+      "revise"
+    ],
+    "new_scheduler": false,
+    "parallel_review_boundary_changed": false,
+    "policy_validation_correction_copied": false
+  },
+  "verification": {
+    "before_related_unittests": {
+      "tests": 76,
+      "failures": 0,
+      "errors": 0
+    },
+    "after_related_unittests": {
+      "tests": 76,
+      "failures": 0,
+      "errors": 0
+    },
+    "new_differential_methods": 11,
+    "full_offline_suite": {
+      "command": "python -m unittest discover -s tests -q",
+      "tests": 987,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 117.103
+    },
+    "final_differential": {
+      "command": "python -W error::ResourceWarning -m unittest tests.test_harness_stage_differential -q",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 2.471
+    },
+    "final_edit_note": "After full-suite startup, only source layout and fixture resource cleanup were adjusted; final differential checks cover final files.",
+    "unexplained_behavior_differences": 0
+  },
+  "differential_method": {
+    "old_runtime_loaded": "local git show into memory, SHA bound; no duplicate production source stored",
+    "fixtures": "fresh fake agents/adapters and same synthetic SQLite knowledge snapshot",
+    "compared": [
+      "final result",
+      "all observer snapshots",
+      "stage inputs",
+      "extraction versions",
+      "evidence, claim, answer IDs and versions",
+      "reasons and issues",
+      "model records with invocation, component, call number, answer version and correction"
+    ],
+    "normalization": [
+      "wall-clock timestamp_utc and duration_ms omitted",
+      "new runtime/retrieval UUIDs fixed to identical sequence; IDs and links remain compared",
+      "JSON event detail decoded recursively for clock normalization"
+    ],
+    "real_model_outputs_replayed": false
+  },
+  "initial_check_issues": [
+    {
+      "phase": "first differential setup",
+      "result": "0 tests, fixture identity assertion error",
+      "cause": "checkout CRLF hash used for Git LF bytes",
+      "resolution": "bind both exact fixed byte identities separately"
+    },
+    {
+      "phase": "second differential",
+      "result": "10 passed, 1 test assertion failed after old/new parity succeeded",
+      "cause": "test assumed records ordered by admission; both old/new retain completion order [3,2,4]",
+      "resolution": "test call-number membership independently; preserve and compare full completion-ordered records"
+    },
+    {
+      "phase": "fixture cleanup",
+      "result": "TemporaryDirectory ResourceWarning",
+      "cause": "borrowed IsolatedAsyncioTestCase cleanup without its separate runner",
+      "resolution": "explicitly close synthetic retriever and temporary directory; final warnings-as-errors test passed"
+    }
+  ],
+  "unchanged_baseline_audit": {
+    "original_public_files": 7,
+    "execution_frozen_files": 35,
+    "owner_closeout_bound_files_verified": true,
+    "attempt_not_removed_or_resumed": true,
+    "original_expected_labels_matching_and_results_unchanged": true
+  },
+  "scope": {
+    "langgraph_installed": false,
+    "langchain_core_installed": false,
+    "new_tools_installed": false,
+    "production_switched": false,
+    "prompt_or_protocol_changed": false,
+    "real_model_calls": 0,
+    "api_cost": 0,
+    "env_or_credentials_read": false,
+    "dataset_expanded": false,
+    "framework_semantic_or_performance_improvement_claimed": false
+  },
+  "inspected_tool_interfaces": [
+    "ToolSpec",
+    "ToolRequest",
+    "ToolResult",
+    "UnitConversionTool role validation"
+  ],
+  "next_step": "Stop here. Graph dependency installation and optional node routing are a later stage, not performed or implicitly started by this record.",
+  "file_identity_sha256": {
+    "harness/runtime.py": "0599c4ff0b5bae0721ae7ae8955b9c07b20fc1a02bc6a445d58ec8e828ee36e6",
+    "harness/execution.py": "f35aa01f9a9fc3246ed019af138e40986bb82461a0cc13c069618f498209f2b8",
+    "tests/test_harness_stage_differential.py": "943efcf1caa94c516ea16e0ea89a782c34521ef832bbf961c6605fb3bf9a7c14",
+    "AGENTS.md": "5cebdcce374dbcc7674cb1c1e29d3ca4dbbb583041a1275f0ef6f6f8931bbdcf",
+    "docs/schema13-production-baseline-confirmation-v1.md": "affc826087731c1f82b8857b80d8b385673f1a02b847ea935dd48ecac6e30a5b",
+    "docs/harness-shared-stages-v1.md": "a095b0118b285dacc2c076d4bc0ac15fefade483a20ce54ace60875b06c60141",
+    "backend/config.py": "386673778691d94d4075f08c885471ca1c3cf48548096e8c6204aaf00e920f53",
+    "tools/contracts.py": "fa8c6350c86d86882d5e6fa235884b3d6102f21420b3e58c08479b9b7dae44dd",
+    "tools/unit_conversion.py": "b4b1737ea09e0ec99c528a512ca4c27815082422a6ebdf24e31e7f56b8e774b9"
+  }
+}

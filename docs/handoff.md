@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-22 共享阶段第一阶段完成，停在图依赖之前
+
+用户接受迁移方案为可选适配，明确schema13生产基线并授权先抽共享阶段和离线差分；未授权图安装/生产切换/付费调用。schema说明单独提交f029e46，AGENTS不再要求退回12，既有代码配置不改。新增[阶段抽取与验证](harness-shared-stages-v1.md)、[身份记录](harness-shared-stages-v1.json)；OfflineHarness公开接口不变，每运行RunExecution上下文抽出7阶段，保留原顺序驱动、双审并发、预算/调用归属、取消、observer及Revision完整重审；无新调度器或整个旧流程的装饰性图包装。抽取前/后相关76项均通过，新增11项差分通过，完整离线987项通过；Git/LF与CRLF哈希夹具、完成顺序断言及临时资源清理三处检查问题已解释修正并留痕，最终11项含ResourceWarning即错误通过。未发现未解释行为差异；真实API/费用0，未回放旧模型响应、不扩题集，原公开7文件/执行冻结35文件身份不改。工具可按职责选择/授权，复用既有ToolSpec和Retriever/换算工具，本轮未安装。更新手册待补要点，不重建手册或站点。到此停止，不自动继续LangGraph或真实回归；普通提交推送回查。
+
 ## 2026-10-22 LangGraph迁移方案完成，尚未实施
 
 用户仅授权基于现有代码做方案；起始HEAD为9628c53893ee5add5cf5902c733d8e617b76fa0c且工作区干净。新增[迁移方案v1](langgraph-migration-plan-v1.md)与[只读身份清单](langgraph-migration-plan-v1.json)。明确业务OfflineHarness四Agent闭环与独立v7组件评测两条路径，24回答基线不能替代全流程验证。拟先抽共享阶段并验证旧行为，再在同一Harness内可选图路径，保留原接口、政策、证据/版本、共享预算、双审并发、失败/取消与observer；首版不checkpoint/resume、不图层重试，不新增调度器或接入生产。先离线差分/组件回放，后续真实回归另立版本和授权，不覆盖旧冻结或恢复attempt。现有Python3.13.2，langgraph/langchain-core未安装，本轮不安装/不改依赖。AGENTS要求真实审核schema12，但ServiceConfig仅接受13/14的现有差异已明示；本轮不改，真实服务集成前需明确适用要求。仅文档链接/身份/差异检查，不跑测试、回放或实验，0API；交付后直接普通推送回查，下一步用户审阅方案，不自动实施。

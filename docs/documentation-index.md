@@ -1,5 +1,7 @@
 # 文档索引
 
+- **当前阶段：[共享阶段抽取v1与离线差分](harness-shared-stages-v1.md)**（[身份/验证记录](harness-shared-stages-v1.json)）：原Harness接口与顺序驱动、7共享阶段，前后相关76项通过、新增11差分通过、全套987离线通过；三处测试夹具问题留痕，未发现未解释行为差异。仅第一阶段，不安装图依赖/新工具、不真实调用或切生产；含Agent/工具定制说明。[schema13生产基线确认](schema13-production-baseline-confirmation-v1.md)单独提交，取代AGENTS过时schema12说明，旧方案待确认文字保留历史。
+
 - **当前方案：[LangGraph迁移方案v1](langgraph-migration-plan-v1.md)**（[代码身份与范围](langgraph-migration-plan-v1.json)）：业务四Agent与独立v7组件分开验证；同一Harness共享阶段、可选图路径，明确节点/状态/接口/预算/取消/存储、离线差分和组件回归。原默认路径、生产、提示及基线不改，首版无图层重试或自动恢复；已记录schema12要求与代码13/14差异。仅方案待确认，0安装/实现/模型调用，不沿用付费授权。
 
 - **最新收尾状态：[整批文本复核与用户确认](evaluation/baseline-batch-v1/owner-text-review-closeout-v1.md)**（[范围、原统计及文件身份](evaluation/baseline-batch-v1/owner-text-review-closeout-v1.json)）：51槽、58参考及66预测判断连同两级理由、依据索引全部公开文本复核完成；ChatGPT复核、用户本人确认，AI辅助用户监督。原5覆盖分歧、2支持分歧、56对齐/2无法对齐及理由问题保留，标签/成绩不改。小规模组件基线收尾，非生产或普遍可靠性证明，0新调用/补跑。下方旧“待复核”表述保留为历史阶段，当前以此记录为准；非本人本地原始响应或SHA验真。
