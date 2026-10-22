@@ -1,5 +1,7 @@
 # 文档索引
 
+- **最新B真实验证已停止封存：[短报告](evaluation/public-review-validation-v1/results-v1.md)**（[统计](evaluation/public-review-validation-v1/results-v1.json)、[必要预测原文](evaluation/public-review-validation-v1/predictions-review-v1.json)、[实际冻结](evaluation/public-review-validation-v1/execution-freeze-v1.json)、[私有产物身份](evaluation/public-review-validation-v1/artifact-identities-v1.json)）：60离线检查通过后执行一次；首01QA生成有效、审核最终失败，另3主线及1固定错误诊断未执行。6调用/36804token，非强制规则的应用对象分类与题设依据约束冲突保留；5有效supported与1执行占位分开，不称B修复。生产不变，不恢复A/B或补跑。下列待授权文字为历史准备状态。
+
 - **当前待整批复核：[B有限真实验证4例完整材料与调用计划](evaluation/public-review-validation-v1/README.md)**（[输入](evaluation/public-review-validation-v1/tasks-v1.json)、[独立复核边界](evaluation/public-review-validation-v1/review-criteria-v1.json)、[合成来源身份](evaluation/public-review-validation-v1/source-manifest-v1.json)、[冻结提案](evaluation/public-review-validation-v1/freeze-plan-v1.json)）：4原生成器+B主线＋1固定错误诊断，共5分支；12主线/3诊断要求槽，三组合成开发来源非独立保留集。诊断输入74/答案88，无快照/原引用不补造；主线未触发错误不算检出。计数修复独立记录，拟原40共享保护/有限纠正/首最终执行失败停止，无旧审核真实对照。6项纯离线材料检查与身份核对通过，入口待新授权后实现并门禁；0模型、无attempt，生产和A封存保持。
 
 - **最新B候选实现：[题设独立依据与公共审核接线](evaluation/public-review-premise-candidate-v1/README.md)**（[身份/离线检查](evaluation/public-review-premise-candidate-v1/results-v1.json)）：当前任务独立目录、程序定位、专门TaskPremiseBasis，规则应用联合正文+题设；两种输入共用验证，无快照诊断不补造。原Harness/schema13阶段内可选注入，不加规划/调度节点；候选计数独立启用，生产仍原默认。25专项、一次全套1081离线通过，原/候选及顺序/图差分；错误替身也可合法pass，明确不能证明真实模型语义已修好。0真实调用/旧响应回放/安装，A批次封存，下一次真实验证需另冻结授权。

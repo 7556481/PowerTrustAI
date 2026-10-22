@@ -1,0 +1,756 @@
+{
+  "version": "B-validation-prediction-text-v1",
+  "provenance": "AI-assisted review; user-supervised execution, not owner semantic confirmation",
+  "answer": {
+    "answer_id": "BTV-01-answer",
+    "version": 1,
+    "text": "本题评分83分，达到“≥80分”阈值，因此按该合成练习规则允许省略外盒标记M；该规则并不强制省略，所以仍可保留标记M。此结论仅适用于题设练习，非现实产品规范。",
+    "assumptions": [
+      "83分为题设给定的教学评分，而非真实测量结果。"
+    ],
+    "missing_information": [],
+    "citations": [
+      {
+        "start_offset": 0,
+        "end_offset": 79,
+        "evidence_ids": [
+          "BTV-01-E1"
+        ]
+      }
+    ]
+  },
+  "extraction": {
+    "answer_id": "BTV-01-answer",
+    "answer_version": 1,
+    "claims": [
+      {
+        "claim_id": "claim-f9412dfe31afdcbae939013b",
+        "answer_id": "BTV-01-answer",
+        "answer_version": 1,
+        "text": "本题评分83分，达到“≥80分”阈值，因此按该合成练习规则允许省略外盒标记M；该规则并不强制省略，所以仍可保留标记M。此结论仅适用于题设练习，非现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 79,
+        "claim_type": "input_report",
+        "proposition": "本题评分为83分。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-f9412dfe31afdcbae939013b-part-0",
+            "category": "input_evidence_coverage",
+            "proposition": "题设给定本题评分为83分。"
+          }
+        ],
+        "anchor_group_id": "anchor-165b2f4e5ce88256eca94ff4",
+        "assertion_role": "input_report",
+        "semantic_qualifiers": [
+          "题设给定",
+          "教学练习场景"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "task_premise"
+        ],
+        "component_obligations": [
+          "input_provided"
+        ],
+        "component_objects": [
+          "premise_restatement"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-576e4b2db63a1665caf0ddc1da4d225c"
+          ]
+        ]
+      },
+      {
+        "claim_id": "claim-cb223f5f574158a69e10e83d",
+        "answer_id": "BTV-01-answer",
+        "answer_version": 1,
+        "text": "本题评分83分，达到“≥80分”阈值，因此按该合成练习规则允许省略外盒标记M；该规则并不强制省略，所以仍可保留标记M。此结论仅适用于题设练习，非现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 79,
+        "claim_type": "technical_fact",
+        "proposition": "83分达到“≥80分”阈值。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-cb223f5f574158a69e10e83d-part-0",
+            "category": "technical_fact",
+            "proposition": "83分达到“≥80分”阈值。"
+          }
+        ],
+        "anchor_group_id": "anchor-165b2f4e5ce88256eca94ff4",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "题设练习规则",
+          "阈值≥80分"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "technical_content"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "scenario_application"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-576e4b2db63a1665caf0ddc1da4d225c"
+          ]
+        ]
+      },
+      {
+        "claim_id": "claim-62251aa5f045078a8cb542b1",
+        "answer_id": "BTV-01-answer",
+        "answer_version": 1,
+        "text": "本题评分83分，达到“≥80分”阈值，因此按该合成练习规则允许省略外盒标记M；该规则并不强制省略，所以仍可保留标记M。此结论仅适用于题设练习，非现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 79,
+        "claim_type": "technical_fact",
+        "proposition": "按该合成练习规则，达到阈值允许省略外盒标记M。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-62251aa5f045078a8cb542b1-part-0",
+            "category": "technical_fact",
+            "proposition": "按该合成练习规则，达到阈值允许省略外盒标记M。"
+          }
+        ],
+        "anchor_group_id": "anchor-165b2f4e5ce88256eca94ff4",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "题设练习规则",
+          "允许而非强制"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "technical_content"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "scenario_application"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-576e4b2db63a1665caf0ddc1da4d225c"
+          ]
+        ]
+      },
+      {
+        "claim_id": "claim-bd7bbadc0e78426d501812dc",
+        "answer_id": "BTV-01-answer",
+        "answer_version": 1,
+        "text": "本题评分83分，达到“≥80分”阈值，因此按该合成练习规则允许省略外盒标记M；该规则并不强制省略，所以仍可保留标记M。此结论仅适用于题设练习，非现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 79,
+        "claim_type": "technical_fact",
+        "proposition": "该规则并不强制省略标记M。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-bd7bbadc0e78426d501812dc-part-0",
+            "category": "technical_fact",
+            "proposition": "该规则并不强制省略标记M。"
+          }
+        ],
+        "anchor_group_id": "anchor-165b2f4e5ce88256eca94ff4",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "题设练习规则",
+          "非强制性"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "technical_content"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "scenario_application"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-576e4b2db63a1665caf0ddc1da4d225c"
+          ]
+        ]
+      },
+      {
+        "claim_id": "claim-43d6d1f087eb46e535bfcb85",
+        "answer_id": "BTV-01-answer",
+        "answer_version": 1,
+        "text": "本题评分83分，达到“≥80分”阈值，因此按该合成练习规则允许省略外盒标记M；该规则并不强制省略，所以仍可保留标记M。此结论仅适用于题设练习，非现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 79,
+        "claim_type": "technical_fact",
+        "proposition": "仍可保留标记M。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-43d6d1f087eb46e535bfcb85-part-0",
+            "category": "technical_fact",
+            "proposition": "仍可保留标记M。"
+          }
+        ],
+        "anchor_group_id": "anchor-165b2f4e5ce88256eca94ff4",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "题设练习规则",
+          "允许保留"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "technical_content"
+        ],
+        "component_obligations": [
+          "technical_truth"
+        ],
+        "component_objects": [
+          "scenario_application"
+        ],
+        "component_premise_ids": [
+          [
+            "task-premise-576e4b2db63a1665caf0ddc1da4d225c"
+          ]
+        ]
+      },
+      {
+        "claim_id": "claim-921ec8e781a964bf1259e086",
+        "answer_id": "BTV-01-answer",
+        "answer_version": 1,
+        "text": "本题评分83分，达到“≥80分”阈值，因此按该合成练习规则允许省略外盒标记M；该规则并不强制省略，所以仍可保留标记M。此结论仅适用于题设练习，非现实产品规范。",
+        "start_offset": 0,
+        "end_offset": 79,
+        "claim_type": "answer_scope",
+        "proposition": "此结论仅适用于题设练习，非现实产品规范。",
+        "qualifiers": [],
+        "components": [
+          {
+            "component_id": "claim-921ec8e781a964bf1259e086-part-0",
+            "category": "answer_scope",
+            "proposition": "此结论仅适用于题设练习，非现实产品规范。"
+          }
+        ],
+        "anchor_group_id": "anchor-165b2f4e5ce88256eca94ff4",
+        "assertion_role": "asserted",
+        "semantic_qualifiers": [
+          "适用范围限于题设练习"
+        ],
+        "semantic_origin": "public-review-premise-boundary-v1-dev",
+        "component_basis_targets": [
+          "answer_text"
+        ],
+        "component_obligations": [
+          "answer_scope"
+        ],
+        "component_objects": [
+          "ordinary"
+        ],
+        "component_premise_ids": [
+          []
+        ]
+      }
+    ],
+    "non_claim_spans": [],
+    "uncovered_spans": [],
+    "warnings": [
+      "Semantic atomicity and completeness require human review",
+      "Only answer.text is claim-anchored; assumptions and missing_information remain outside separate claim review"
+    ]
+  },
+  "model_responses": [
+    {
+      "call_number": 1,
+      "component": "generation",
+      "correction": false,
+      "output_status": "valid_structure",
+      "response_sha256": "0603fe8c309571252205235f80dd3d8d863cb90f1d35e12d8a886fe09efdf809",
+      "response_text": "{\"answer_units\":[{\"kind\":\"technical\",\"text\":\"本题评分83分，达到“≥80分”阈值，因此按该合成练习规则允许省略外盒标记M；该规则并不强制省略，所以仍可保留标记M。此结论仅适用于题设练习，非现实产品规范。\",\"evidence_ids\":[\"BTV-01-E1\"]}],\"assumptions\":[\"83分为题设给定的教学评分，而非真实测量结果。\"],\"missing_information\":[],\"evidence_sufficient\":true}",
+      "validation_error": null
+    },
+    {
+      "call_number": 2,
+      "component": "claim_extraction",
+      "correction": false,
+      "output_status": "valid_structure",
+      "response_sha256": "913666ff3dd76e8d15c83633eb0f3835b77e93d9b4493a6e2445011a6716e17f",
+      "response_text": "{\"claims\":[{\"anchor_id\":\"answer-anchor-acc3a8f9e9ce74a78eb6bb01\",\"proposition\":\"本题评分为83分。\",\"claim_type\":\"input_report\",\"assertion_role\":\"input_report\",\"semantic_qualifiers\":[\"题设给定\",\"教学练习场景\"],\"components\":[{\"category\":\"input_evidence_coverage\",\"proposition\":\"题设给定本题评分为83分。\",\"basis_target\":\"task_premise\",\"verification_obligation\":\"input_provided\",\"object_kind\":\"premise_restatement\",\"premise_ids\":[\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"]}]},{\"anchor_id\":\"answer-anchor-acc3a8f9e9ce74a78eb6bb01\",\"proposition\":\"83分达到“≥80分”阈值。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"题设练习规则\",\"阈值≥80分\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"83分达到“≥80分”阈值。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"]}]},{\"anchor_id\":\"answer-anchor-acc3a8f9e9ce74a78eb6bb01\",\"proposition\":\"按该合成练习规则，达到阈值允许省略外盒标记M。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"题设练习规则\",\"允许而非强制\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"按该合成练习规则，达到阈值允许省略外盒标记M。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"]}]},{\"anchor_id\":\"answer-anchor-acc3a8f9e9ce74a78eb6bb01\",\"proposition\":\"该规则并不强制省略标记M。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"题设练习规则\",\"非强制性\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"该规则并不强制省略标记M。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"]}]},{\"anchor_id\":\"answer-anchor-acc3a8f9e9ce74a78eb6bb01\",\"proposition\":\"仍可保留标记M。\",\"claim_type\":\"technical_fact\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"题设练习规则\",\"允许保留\"],\"components\":[{\"category\":\"technical_fact\",\"proposition\":\"仍可保留标记M。\",\"basis_target\":\"technical_content\",\"verification_obligation\":\"technical_truth\",\"object_kind\":\"scenario_application\",\"premise_ids\":[\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"]}]},{\"anchor_id\":\"answer-anchor-acc3a8f9e9ce74a78eb6bb01\",\"proposition\":\"此结论仅适用于题设练习，非现实产品规范。\",\"claim_type\":\"answer_scope\",\"assertion_role\":\"asserted\",\"semantic_qualifiers\":[\"适用范围限于题设练习\"],\"components\":[{\"category\":\"answer_scope\",\"proposition\":\"此结论仅适用于题设练习，非现实产品规范。\",\"basis_target\":\"answer_text\",\"verification_obligation\":\"answer_scope\",\"object_kind\":\"ordinary\",\"premise_ids\":[]}]}],\"non_claims\":[]}",
+      "validation_error": null
+    },
+    {
+      "call_number": 3,
+      "component": "evidence_verification",
+      "correction": false,
+      "output_status": "invalid_structure",
+      "response_sha256": "d7293dfb3bb95ef4645596ca52780509ed7f3366aa66f17a17020a955a018af8",
+      "response_text": "{\"findings\":[{\"claim_id\":\"claim-f9412dfe31afdcbae939013b\",\"rationale\":\"当前任务前提明确规定本题评分为83分，该前提即任务设定的教学评分。\",\"applicability_conditions\":[\"仅适用于题设教学场景，并非真实测量结果。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"任务前提原文写明评分为83分，与转述一致。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"input_report\",\"verification_obligation\":\"input_provided\",\"rationale\":\"仅复述题设前提，未宣称真实测量结果。\"}}]},{\"claim_id\":\"claim-cb223f5f574158a69e10e83d\",\"rationale\":\"83大于或等于80，阈值比较成立；同时需结合题设评分前提。\",\"applicability_conditions\":[\"评分83分为题设教学前提，非现实测评。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"},{\"type\":\"text_excerpt\",\"quote_id\":\"scope-3f5f79728c486bc36fe4f017-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"题设评分83与规则中≥80的阈值比较成立。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"保留阈值方向与题设评分的结合。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"规则写明评分达到或超过80分时适用该许可；题设评分为83分，满足条件。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-0f9b61f698e67d46ae06ebaf\",\"necessity\":\"required\",\"answer_quote\":\"达到“≥80分”阈值\",\"relationship\":\"preserved\",\"reason\":\"规则以评分达到或超过80分为适用条件，答案明确比较了题设83分。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-62251aa5f045078a8cb542b1\",\"rationale\":\"规则明确在评分达到或超过80分时允许省略标记M，题设评分83分满足该条件。\",\"applicability_conditions\":[\"仅限本题合成练习规则。\",\"评分为题设教学值83分。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"},{\"type\":\"text_excerpt\",\"quote_id\":\"scope-3f5f79728c486bc36fe4f017-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"规则原文允许在达标时省略，答案正确应用该许可。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"保留“允许”而非“必须”的许可性质。\",\"classification_issue\":{\"suggested_category\":\"technical_fact\",\"rationale\":\"该命题是对规则的行为应用，属于技术性判断而非单纯输入覆盖。\"}},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"规则写明达到或超过80分时允许省略外盒标记M，题设评分为83分。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-0f9b61f698e67d46ae06ebaf\",\"necessity\":\"required\",\"answer_quote\":\"达到“≥80分”阈值\",\"relationship\":\"preserved\",\"reason\":\"达标是允许省略的必要前提，答案已表明评分83分满足该阈值。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-bd7bbadc0e78426d501812dc\",\"rationale\":\"规则明确无论评分如何均不要求必须省略标记M。\",\"applicability_conditions\":[\"仅限本题合成练习规则。\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-3f5f79728c486bc36fe4f017-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"规则原文直接写明不要求必须省略。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"答案正确转述非强制性。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"规则明示无论评分如何均不要求必须省略标记M。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-43d6d1f087eb46e535bfcb85\",\"rationale\":\"规则允许达到阈值时保留标记，且明确不强制省略，故保留是允许的。\",\"applicability_conditions\":[\"仅限本题合成练习规则。\",\"评分为题设教学值83分。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"},{\"type\":\"text_excerpt\",\"quote_id\":\"scope-3f5f79728c486bc36fe4f017-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"规则允许保留且不强制省略，答案的“仍可保留”有据。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"保留“可保留”这一许可含义。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"规则写明达到阈值时也允许保留，且任何情况都不要求必须省略。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-0f9b61f698e67d46ae06ebaf\",\"necessity\":\"required\",\"answer_quote\":\"达到“≥80分”阈值\",\"relationship\":\"preserved\",\"reason\":\"允许保留与达标条件相关，答案已表明题设评分满足阈值。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-921ec8e781a964bf1259e086\",\"rationale\":\"答案末句限定了结论的适用范围；与规则中“非现实产品规范”的限定一致。\",\"applicability_conditions\":[],\"bases\":[{\"type\":\"answer_text_reference\",\"anchor_id\":\"answer-anchor-acc3a8f9e9ce74a78eb6bb01\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"答案正文明确声明结论仅适用于题设练习而非现实规范。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"answer_scope\",\"rationale\":\"该句为评估范围限定，判定仅针对答案文本范围。\"}}]}]}",
+      "validation_error": {
+        "stage": "verification_target_fidelity_v1",
+        "field_path": "$.findings[2].component_reviews[0].semantic_review",
+        "constraint": "unexpected_fields_not_allowed",
+        "allowed_fields": [
+          "assertion_role",
+          "fidelity",
+          "rationale",
+          "verification_obligation"
+        ],
+        "required_fields": [
+          "assertion_role",
+          "fidelity",
+          "rationale",
+          "verification_obligation"
+        ],
+        "processing_options": [
+          "return_only_declared_fields",
+          "do_not_echo_program_binding_or_other_check_fields"
+        ],
+        "errors": [
+          {
+            "stage": "verification_target_fidelity_v1",
+            "field_path": "$.findings[2].component_reviews[0].semantic_review",
+            "constraint": "unexpected_fields_not_allowed",
+            "allowed_fields": [
+              "assertion_role",
+              "fidelity",
+              "rationale",
+              "verification_obligation"
+            ],
+            "required_fields": [
+              "assertion_role",
+              "fidelity",
+              "rationale",
+              "verification_obligation"
+            ],
+            "processing_options": [
+              "return_only_declared_fields",
+              "do_not_echo_program_binding_or_other_check_fields"
+            ]
+          },
+          {
+            "stage": "core_validation",
+            "field_path": "$.findings[3].component_reviews[0]",
+            "constraint": "definitive premise/application needs all explicitly selected premises"
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "findings",
+            "id": "claim-f9412dfe31afdcbae939013b",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-cb223f5f574158a69e10e83d",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-43d6d1f087eb46e535bfcb85",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-921ec8e781a964bf1259e086",
+            "response_attempt": 1
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "call_number": 4,
+      "component": "power_domain_review",
+      "correction": false,
+      "output_status": "valid_structure",
+      "response_sha256": "9231bdd92dbd83dd9fe95e9ea84b6b191ae35379dc30356241751aabc6978379",
+      "response_text": "{\"checks\":[{\"check_id\":\"answer_units\",\"status\":\"not_applicable\",\"claim_ids\":[],\"quote_ids\":[],\"basis_kind\":\"engineering_rule\",\"rationale\":\"答案仅涉及练习评分阈值（83分与80分），无数值单位换算或电气量纲断言。\",\"missing_prerequisites\":[]},{\"check_id\":\"analysis_scope\",\"status\":\"no_issue\",\"claim_ids\":[\"claim-cb223f5f574158a69e10e83d\",\"claim-62251aa5f045078a8cb542b1\",\"claim-bd7bbadc0e78426d501812dc\",\"claim-43d6d1f087eb46e535bfcb85\",\"claim-921ec8e781a964bf1259e086\"],\"quote_ids\":[\"scope-39e270306e4d93fb01e5144f-0\"],\"basis_kind\":\"literature\",\"rationale\":\"用户问题为概念性练习规则解释：83≥80，允许省略但非强制，仍可保留。答案严格依规则作答并声明仅限练习、非现实规范，未作设备或电网结论。\",\"missing_prerequisites\":[],\"task_scope\":\"conceptual\"},{\"check_id\":\"operating_prerequisites\",\"status\":\"not_applicable\",\"claim_ids\":[],\"quote_ids\":[],\"basis_kind\":\"engineering_rule\",\"rationale\":\"答案为教学练习的许可性解释，不含设备运行、维护或操作建议，无需说明运行前提。\",\"missing_prerequisites\":[]}],\"missing_information_review\":[],\"safety_reviews\":[{\"claim_id\":\"claim-f9412dfe31afdcbae939013b\",\"verdict\":\"not_applicable\",\"reason\":\"仅复述题设评分83分的教学前提，不涉及保护功能或带电运行。\",\"source_ids\":[]},{\"claim_id\":\"claim-cb223f5f574158a69e10e83d\",\"verdict\":\"not_applicable\",\"reason\":\"纯数值阈值比较（83≥80），无电气保护或操作含义。\",\"source_ids\":[]},{\"claim_id\":\"claim-62251aa5f045078a8cb542b1\",\"verdict\":\"not_applicable\",\"reason\":\"说明练习规则允许省略标记M，非削弱电气保护功能或带电作业建议。\",\"source_ids\":[]},{\"claim_id\":\"claim-bd7bbadc0e78426d501812dc\",\"verdict\":\"not_applicable\",\"reason\":\"陈述规则非强制，属概念说明，与保护功能完整性无关。\",\"source_ids\":[]},{\"claim_id\":\"claim-43d6d1f087eb46e535bfcb85\",\"verdict\":\"not_applicable\",\"reason\":\"说明仍可保留标记M，非操作指令也未涉及防护装置失效。\",\"source_ids\":[]},{\"claim_id\":\"claim-921ec8e781a964bf1259e086\",\"verdict\":\"not_applicable\",\"reason\":\"限定结论仅适用练习场景、非现实规范，进一步排除现实操作危害。\",\"source_ids\":[]}]}",
+      "validation_error": null
+    },
+    {
+      "call_number": 5,
+      "component": "evidence_verification",
+      "correction": true,
+      "output_status": "invalid_structure",
+      "response_sha256": "fe059ddc656162aa0de1036662d45cc9180df1f6bb70266bc4cd7cc954152bfe",
+      "response_text": "{\"findings\":[{\"claim_id\":\"claim-f9412dfe31afdcbae939013b\",\"rationale\":\"当前任务前提明确规定本题评分为83分，该前提即任务设定的教学评分。\",\"applicability_conditions\":[\"仅适用于题设教学场景，并非真实测量结果。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"任务前提原文写明评分为83分，与转述一致。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"input_report\",\"verification_obligation\":\"input_provided\",\"rationale\":\"仅复述题设前提，未宣称真实测量结果。\"}}]},{\"claim_id\":\"claim-cb223f5f574158a69e10e83d\",\"rationale\":\"83大于或等于80，阈值比较成立；同时需结合题设评分前提。\",\"applicability_conditions\":[\"评分83分为题设教学前提，非现实测评。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"},{\"type\":\"text_excerpt\",\"quote_id\":\"scope-3f5f79728c486bc36fe4f017-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"题设评分83与规则中≥80的阈值比较成立。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"保留阈值方向与题设评分的结合。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"规则写明评分达到或超过80分时适用该许可；题设评分为83分，满足条件。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-0f9b61f698e67d46ae06ebaf\",\"necessity\":\"required\",\"answer_quote\":\"达到“≥80分”阈值\",\"relationship\":\"preserved\",\"reason\":\"规则以评分达到或超过80分为适用条件，答案明确比较了题设83分。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-62251aa5f045078a8cb542b1\",\"rationale\":\"规则明确在评分达到或超过80分时允许省略标记M，题设评分83分满足该条件。\",\"applicability_conditions\":[\"仅限本题合成练习规则。\",\"评分为题设教学值83分。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"},{\"type\":\"text_excerpt\",\"quote_id\":\"scope-3f5f79728c486bc36fe4f017-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"规则原文允许在达标时省略，答案正确应用该许可。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"保留“允许”而非“必须”的许可性质。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"规则写明达到或超过80分时允许省略外盒标记M，题设评分为83分。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-0f9b61f698e67d46ae06ebaf\",\"necessity\":\"required\",\"answer_quote\":\"达到“≥80分”阈值\",\"relationship\":\"preserved\",\"reason\":\"达标是允许省略的必要前提，答案已表明评分83分满足该阈值。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-bd7bbadc0e78426d501812dc\",\"rationale\":\"规则明确无论评分如何均不要求必须省略标记M。\",\"applicability_conditions\":[\"仅限本题合成练习规则。\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-3f5f79728c486bc36fe4f017-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"规则原文直接写明不要求必须省略。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"答案正确转述非强制性。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"规则明示无论评分如何均不要求必须省略标记M。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-43d6d1f087eb46e535bfcb85\",\"rationale\":\"规则允许达到阈值时保留标记，且明确不强制省略，故保留是允许的。\",\"applicability_conditions\":[\"仅限本题合成练习规则。\",\"评分为题设教学值83分。\"],\"bases\":[{\"type\":\"task_premise_reference\",\"premise_id\":\"task-premise-576e4b2db63a1665caf0ddc1da4d225c\"},{\"type\":\"text_excerpt\",\"quote_id\":\"scope-3f5f79728c486bc36fe4f017-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0,1],\"rationale\":\"规则允许保留且不强制省略，答案的“仍可保留”有据。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"保留“可保留”这一许可含义。\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"规则写明达到阈值时也允许保留，且任何情况都不要求必须省略。\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"setting\",\"answer_conditions\":[{\"condition_id\":\"condition-0f9b61f698e67d46ae06ebaf\",\"necessity\":\"required\",\"answer_quote\":\"达到“≥80分”阈值\",\"relationship\":\"preserved\",\"reason\":\"允许保留与达标条件相关，答案已表明题设评分满足阈值。\"}],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-921ec8e781a964bf1259e086\",\"rationale\":\"答案末句限定了结论的适用范围；与规则中“非现实产品规范”的限定一致。\",\"applicability_conditions\":[],\"bases\":[{\"type\":\"answer_text_reference\",\"anchor_id\":\"answer-anchor-acc3a8f9e9ce74a78eb6bb01\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"答案正文明确声明结论仅适用于题设练习而非现实规范。\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"answer_scope\",\"rationale\":\"该句为评估范围限定，判定仅针对答案文本范围。\"}}]}]}",
+      "validation_error": {
+        "stage": "core_validation",
+        "field_path": "$.findings[3].component_reviews[0]",
+        "constraint": "definitive premise/application needs all explicitly selected premises",
+        "errors": [
+          {
+            "stage": "core_validation",
+            "field_path": "$.findings[3].component_reviews[0]",
+            "constraint": "definitive premise/application needs all explicitly selected premises"
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "findings",
+            "id": "claim-f9412dfe31afdcbae939013b",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-cb223f5f574158a69e10e83d",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-62251aa5f045078a8cb542b1",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-43d6d1f087eb46e535bfcb85",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-921ec8e781a964bf1259e086",
+            "response_attempt": 2
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "call_number": 6,
+      "component": "evidence_verification",
+      "correction": false,
+      "output_status": "valid_structure",
+      "response_sha256": "30a50bdb66cc07de7e4c6d48fb47dbfd14ec6cbd1ef440a6ea05e06449821b6c",
+      "response_text": "{\"citation_reviews\":[{\"citation_index\":0,\"status\":\"supported\",\"rationale\":\"Bound rule states scores ≥80 allow omitting M and also allow retaining it, and the rule never requires omission; the answer applies this to score 83 and preserves the practice-only scope.\",\"applicability_conditions\":[],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-d0c44cbf3e5d093a568a9041-0\"}],\"support_relation\":{\"source_kind\":\"other\",\"explanation\":\"The selected synthetic practice rule permits but never requires omission of marker M at scores of 80 or above, and the answer only claims permission plus optional retention, confined to the exercise setting.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"other\",\"answer_conditions\":[{\"condition_id\":\"condition-0c07312164d5d1e53a59078c\",\"necessity\":\"required\",\"answer_quote\":\"本题评分83分，达到“≥80分”阈值\",\"relationship\":\"preserved\",\"reason\":\"The rule's permissible-omission branch is conditioned on a score reaching or exceeding 80, and the answer states the scenario score meets that threshold; permission and non-obligation are retained, with no must-omit inference.\"}],\"causal_direction_preserved\":true,\"repair\":null}}]}",
+      "validation_error": null
+    }
+  ],
+  "effective_findings": [
+    {
+      "claim_id": "claim-f9412dfe31afdcbae939013b",
+      "proposition": "本题评分为83分。",
+      "object_kinds": [
+        "premise_restatement"
+      ],
+      "status": "supported",
+      "rationale": "当前任务前提明确规定本题评分为83分，该前提即任务设定的教学评分。",
+      "bases": [
+        {
+          "type": "task_premise_reference",
+          "evidence_id": null,
+          "excerpt": null,
+          "metadata_reference": null,
+          "snapshot_id": null,
+          "answer_excerpt": null,
+          "quote_id": null,
+          "premise_reference": {
+            "premise_id": "task-premise-576e4b2db63a1665caf0ddc1da4d225c",
+            "task_id": "BTV-01",
+            "context_sha256": "f4aa7565ad1e3b3e262ac1d69e1e52a4401219a5004e42a6504e70049cef1ecd",
+            "source_field": "user_context",
+            "kind": "stipulated",
+            "text": "本题评分为83分。",
+            "start_offset": 5,
+            "end_offset": 14,
+            "version": "task-premise-catalog-v1"
+          }
+        }
+      ],
+      "components": [
+        {
+          "component_id": "claim-f9412dfe31afdcbae939013b-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "input_report",
+          "verification_obligation": "input_provided",
+          "fidelity_rationale": "仅复述题设前提，未宣称真实测量结果。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2",
+          "rationale": "任务前提原文写明评分为83分，与转述一致。"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-cb223f5f574158a69e10e83d",
+      "proposition": "83分达到“≥80分”阈值。",
+      "object_kinds": [
+        "scenario_application"
+      ],
+      "status": "supported",
+      "rationale": "83大于或等于80，阈值比较成立；同时需结合题设评分前提。",
+      "bases": [
+        {
+          "type": "task_premise_reference",
+          "evidence_id": null,
+          "excerpt": null,
+          "metadata_reference": null,
+          "snapshot_id": null,
+          "answer_excerpt": null,
+          "quote_id": null,
+          "premise_reference": {
+            "premise_id": "task-premise-576e4b2db63a1665caf0ddc1da4d225c",
+            "task_id": "BTV-01",
+            "context_sha256": "f4aa7565ad1e3b3e262ac1d69e1e52a4401219a5004e42a6504e70049cef1ecd",
+            "source_field": "user_context",
+            "kind": "stipulated",
+            "text": "本题评分为83分。",
+            "start_offset": 5,
+            "end_offset": 14,
+            "version": "task-premise-catalog-v1"
+          }
+        },
+        {
+          "type": "text_excerpt",
+          "evidence_id": "BTV-01-E1",
+          "excerpt": {
+            "evidence_id": "BTV-01-E1",
+            "text": "本题的合成练习规则：评分达到或超过80分时，允许省略外盒标记M，也允许保留。评分低于80分时，不允许省略标记M。无论评分如何，本规则均不要求必须省略标记M。此规则只定义本题练习中的许可，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 102
+          },
+          "metadata_reference": null,
+          "snapshot_id": null,
+          "answer_excerpt": null,
+          "quote_id": "quote-9c638ee07520d9d7d56d8a34"
+        }
+      ],
+      "components": [
+        {
+          "component_id": "claim-cb223f5f574158a69e10e83d-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "保留阈值方向与题设评分的结合。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2",
+          "rationale": "题设评分83与规则中≥80的阈值比较成立。"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-62251aa5f045078a8cb542b1",
+      "proposition": "按该合成练习规则，达到阈值允许省略外盒标记M。",
+      "object_kinds": [
+        "scenario_application"
+      ],
+      "status": "supported",
+      "rationale": "规则明确在评分达到或超过80分时允许省略标记M，题设评分83分满足该条件。",
+      "bases": [
+        {
+          "type": "task_premise_reference",
+          "evidence_id": null,
+          "excerpt": null,
+          "metadata_reference": null,
+          "snapshot_id": null,
+          "answer_excerpt": null,
+          "quote_id": null,
+          "premise_reference": {
+            "premise_id": "task-premise-576e4b2db63a1665caf0ddc1da4d225c",
+            "task_id": "BTV-01",
+            "context_sha256": "f4aa7565ad1e3b3e262ac1d69e1e52a4401219a5004e42a6504e70049cef1ecd",
+            "source_field": "user_context",
+            "kind": "stipulated",
+            "text": "本题评分为83分。",
+            "start_offset": 5,
+            "end_offset": 14,
+            "version": "task-premise-catalog-v1"
+          }
+        },
+        {
+          "type": "text_excerpt",
+          "evidence_id": "BTV-01-E1",
+          "excerpt": {
+            "evidence_id": "BTV-01-E1",
+            "text": "本题的合成练习规则：评分达到或超过80分时，允许省略外盒标记M，也允许保留。评分低于80分时，不允许省略标记M。无论评分如何，本规则均不要求必须省略标记M。此规则只定义本题练习中的许可，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 102
+          },
+          "metadata_reference": null,
+          "snapshot_id": null,
+          "answer_excerpt": null,
+          "quote_id": "quote-9c638ee07520d9d7d56d8a34"
+        }
+      ],
+      "components": [
+        {
+          "component_id": "claim-62251aa5f045078a8cb542b1-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "保留“允许”而非“必须”的许可性质。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2",
+          "rationale": "规则原文允许在达标时省略，答案正确应用该许可。"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-bd7bbadc0e78426d501812dc",
+      "proposition": "该规则并不强制省略标记M。",
+      "object_kinds": [
+        "scenario_application"
+      ],
+      "status": "not_assessable",
+      "rationale": "model_execution_incomplete: no judgment retained",
+      "bases": [],
+      "components": [
+        {
+          "component_id": "claim-bd7bbadc0e78426d501812dc-part-0",
+          "status": "not_assessable",
+          "basis_indexes": [],
+          "classification_issue": null,
+          "origin": "execution_incomplete",
+          "reason_code": "model_execution_incomplete",
+          "fidelity_status": "uncertain",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "model_execution_incomplete; equivalence not established",
+          "raw_support_status": "not_assessable",
+          "review_disposition": "review_required",
+          "review_projection_version": "independent-review-projection-v2",
+          "rationale": "model_execution_incomplete"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-43d6d1f087eb46e535bfcb85",
+      "proposition": "仍可保留标记M。",
+      "object_kinds": [
+        "scenario_application"
+      ],
+      "status": "supported",
+      "rationale": "规则允许达到阈值时保留标记，且明确不强制省略，故保留是允许的。",
+      "bases": [
+        {
+          "type": "task_premise_reference",
+          "evidence_id": null,
+          "excerpt": null,
+          "metadata_reference": null,
+          "snapshot_id": null,
+          "answer_excerpt": null,
+          "quote_id": null,
+          "premise_reference": {
+            "premise_id": "task-premise-576e4b2db63a1665caf0ddc1da4d225c",
+            "task_id": "BTV-01",
+            "context_sha256": "f4aa7565ad1e3b3e262ac1d69e1e52a4401219a5004e42a6504e70049cef1ecd",
+            "source_field": "user_context",
+            "kind": "stipulated",
+            "text": "本题评分为83分。",
+            "start_offset": 5,
+            "end_offset": 14,
+            "version": "task-premise-catalog-v1"
+          }
+        },
+        {
+          "type": "text_excerpt",
+          "evidence_id": "BTV-01-E1",
+          "excerpt": {
+            "evidence_id": "BTV-01-E1",
+            "text": "本题的合成练习规则：评分达到或超过80分时，允许省略外盒标记M，也允许保留。评分低于80分时，不允许省略标记M。无论评分如何，本规则均不要求必须省略标记M。此规则只定义本题练习中的许可，不是现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 102
+          },
+          "metadata_reference": null,
+          "snapshot_id": null,
+          "answer_excerpt": null,
+          "quote_id": "quote-9c638ee07520d9d7d56d8a34"
+        }
+      ],
+      "components": [
+        {
+          "component_id": "claim-43d6d1f087eb46e535bfcb85-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "保留“可保留”这一许可含义。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2",
+          "rationale": "规则允许保留且不强制省略，答案的“仍可保留”有据。"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-921ec8e781a964bf1259e086",
+      "proposition": "此结论仅适用于题设练习，非现实产品规范。",
+      "object_kinds": [
+        "ordinary"
+      ],
+      "status": "supported",
+      "rationale": "答案末句限定了结论的适用范围；与规则中“非现实产品规范”的限定一致。",
+      "bases": [
+        {
+          "type": "answer_text_reference",
+          "evidence_id": null,
+          "excerpt": null,
+          "metadata_reference": null,
+          "snapshot_id": null,
+          "answer_excerpt": {
+            "text": "本题评分83分，达到“≥80分”阈值，因此按该合成练习规则允许省略外盒标记M；该规则并不强制省略，所以仍可保留标记M。此结论仅适用于题设练习，非现实产品规范。",
+            "start_offset": 0,
+            "end_offset": 79,
+            "reason": "Frozen answer basis"
+          },
+          "quote_id": null
+        }
+      ],
+      "components": [
+        {
+          "component_id": "claim-921ec8e781a964bf1259e086-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "answer_scope",
+          "fidelity_rationale": "该句为评估范围限定，判定仅针对答案文本范围。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "independent-review-projection-v2",
+          "rationale": "答案正文明确声明结论仅适用于题设练习而非现实规范。"
+        }
+      ]
+    }
+  ],
+  "note": "response_text is exact saved model text, including invalid attempts; effective component rationale omits appended program-derived source-support JSON only. Raw invalid judgments are not adopted results."
+}

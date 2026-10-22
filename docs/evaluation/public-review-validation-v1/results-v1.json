@@ -1,0 +1,308 @@
+{
+  "version": "B-validation-results-v1",
+  "source_base_commit": "df2ab120fe70f325b57769fcfd558d6999f44d28",
+  "status": "closed_after_first_final_required_review_failure_no_resume",
+  "provenance": "AI-assisted analysis, user-supervised authorized execution; not user-confirmed semantic gold",
+  "offline_checks": {
+    "passed": 60,
+    "seconds": 9.738,
+    "entry_tests": 14
+  },
+  "identities": {
+    "bound_files": 103,
+    "before_send_messages": 6,
+    "messages_verified": true,
+    "old_A_artifacts_unchanged": 35
+  },
+  "counts": {
+    "main_planned": 4,
+    "main_generated": 1,
+    "main_complete_audit": 0,
+    "main_failed_audit": 1,
+    "main_unexecuted": 3,
+    "diagnostic_planned": 1,
+    "diagnostic_executed": 0,
+    "diagnostic_unexecuted": 1,
+    "coverage_main_observed_covered": 3,
+    "coverage_main_unexecuted": 9,
+    "coverage_diagnostic_unexecuted": 3,
+    "effective_supported": 5,
+    "execution_placeholders": 1,
+    "original_citations": 1,
+    "original_citation_supported": 1
+  },
+  "calls": {
+    "total": 6,
+    "initial": 5,
+    "correction": 1,
+    "tokens": {
+      "input_tokens": 31327,
+      "output_tokens": 5477,
+      "total_tokens": 36804
+    },
+    "groups": {
+      "generation/initial": {
+        "calls": 1,
+        "input_tokens": 2040,
+        "output_tokens": 108,
+        "total_tokens": 2148,
+        "duration_ms": 1329
+      },
+      "claim_extraction/initial": {
+        "calls": 1,
+        "input_tokens": 2074,
+        "output_tokens": 894,
+        "total_tokens": 2968,
+        "duration_ms": 3385
+      },
+      "evidence_verification/independent/initial": {
+        "calls": 1,
+        "input_tokens": 7358,
+        "output_tokens": 1779,
+        "total_tokens": 9137,
+        "duration_ms": 6953
+      },
+      "power_domain_review/initial": {
+        "calls": 1,
+        "input_tokens": 5358,
+        "output_tokens": 654,
+        "total_tokens": 6012,
+        "duration_ms": 3020
+      },
+      "evidence_verification/independent/correction": {
+        "calls": 1,
+        "input_tokens": 11358,
+        "output_tokens": 1746,
+        "total_tokens": 13104,
+        "duration_ms": 6407
+      },
+      "evidence_verification/citation/initial": {
+        "calls": 1,
+        "input_tokens": 3139,
+        "output_tokens": 296,
+        "total_tokens": 3435,
+        "duration_ms": 1713
+      }
+    },
+    "actual_billed_amount": null,
+    "note": "Overlapping fact/domain durations cannot be added into wall time; original citation support is not independent joint task-premise proof."
+  },
+  "branches": [
+    {
+      "request_id": "BTV-01-QA",
+      "mode": "question_answer",
+      "status": "execution_failed",
+      "reason": null,
+      "times": {
+        "generation_output_persisted": 1.390912799999569,
+        "power_domain_review_persisted": 8.043930699999692,
+        "evidence_verification_persisted": 20.30605799999921,
+        "final_result_persisted": 20.38874079999914
+      },
+      "workload": [
+        {
+          "after": "before_extraction",
+          "citations": 1,
+          "independent_initial": 1,
+          "independent_provisional": true,
+          "required_initial_remaining": 4,
+          "used": 1,
+          "available": 39,
+          "initial_shortfall": 0,
+          "room_after_initial": 35,
+          "correction_potential_remaining": 3,
+          "note": "Actual C and eligible I; no completion guarantee, citation removal or budget increase."
+        },
+        {
+          "after": "extraction",
+          "citations": 1,
+          "independent_initial": 1,
+          "independent_provisional": false,
+          "required_initial_remaining": 3,
+          "used": 2,
+          "available": 38,
+          "initial_shortfall": 0,
+          "room_after_initial": 35,
+          "correction_potential_remaining": 2,
+          "note": "Actual C and eligible I; no completion guarantee, citation removal or budget increase."
+        }
+      ],
+      "citations": 1,
+      "calls": 6,
+      "boundary_review": {
+        "premise_fidelity": "83 faithfully restated; wrong premise error not triggered",
+        "literature_rule": "non-obligation supported by body in human text review, but object classification disputed",
+        "joint_application": "threshold/permission/retention have task premise plus body in retained independent findings",
+        "external_assertions": "no actual-world overclaim observed; error not triggered"
+      }
+    },
+    {
+      "request_id": "BTV-02-QA",
+      "mode": "question_answer",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "times": {},
+      "workload": [],
+      "citations": null,
+      "calls": 0,
+      "boundary_review": {
+        "all": "unexecuted, no semantic observation"
+      }
+    },
+    {
+      "request_id": "BTV-02-DIAG",
+      "mode": "assess_existing",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "times": {},
+      "workload": [],
+      "citations": null,
+      "calls": 0,
+      "boundary_review": {
+        "all": "unexecuted, no semantic observation"
+      }
+    },
+    {
+      "request_id": "BTV-03-QA",
+      "mode": "question_answer",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "times": {},
+      "workload": [],
+      "citations": null,
+      "calls": 0,
+      "boundary_review": {
+        "all": "unexecuted, no semantic observation"
+      }
+    },
+    {
+      "request_id": "BTV-04-QA",
+      "mode": "question_answer",
+      "status": "unexecuted",
+      "reason": "stopped_after_previous_final_execution_or_storage_failure",
+      "times": {},
+      "workload": [],
+      "citations": null,
+      "calls": 0,
+      "boundary_review": {
+        "all": "unexecuted, no semantic observation"
+      }
+    }
+  ],
+  "failure": {
+    "code": "MODEL_OUTPUT_ERROR",
+    "initial_errors": {
+      "stage": "verification_target_fidelity_v1",
+      "field_path": "$.findings[2].component_reviews[0].semantic_review",
+      "constraint": "unexpected_fields_not_allowed",
+      "allowed_fields": [
+        "assertion_role",
+        "fidelity",
+        "rationale",
+        "verification_obligation"
+      ],
+      "required_fields": [
+        "assertion_role",
+        "fidelity",
+        "rationale",
+        "verification_obligation"
+      ],
+      "processing_options": [
+        "return_only_declared_fields",
+        "do_not_echo_program_binding_or_other_check_fields"
+      ],
+      "errors": [
+        {
+          "stage": "verification_target_fidelity_v1",
+          "field_path": "$.findings[2].component_reviews[0].semantic_review",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "assertion_role",
+            "fidelity",
+            "rationale",
+            "verification_obligation"
+          ],
+          "required_fields": [
+            "assertion_role",
+            "fidelity",
+            "rationale",
+            "verification_obligation"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ]
+        },
+        {
+          "stage": "core_validation",
+          "field_path": "$.findings[3].component_reviews[0]",
+          "constraint": "definitive premise/application needs all explicitly selected premises"
+        }
+      ],
+      "retained_items": [
+        {
+          "group": "findings",
+          "id": "claim-f9412dfe31afdcbae939013b",
+          "response_attempt": 1
+        },
+        {
+          "group": "findings",
+          "id": "claim-cb223f5f574158a69e10e83d",
+          "response_attempt": 1
+        },
+        {
+          "group": "findings",
+          "id": "claim-43d6d1f087eb46e535bfcb85",
+          "response_attempt": 1
+        },
+        {
+          "group": "findings",
+          "id": "claim-921ec8e781a964bf1259e086",
+          "response_attempt": 1
+        }
+      ],
+      "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+    },
+    "final_error": {
+      "stage": "core_validation",
+      "field_path": "$.findings[3].component_reviews[0]",
+      "constraint": "definitive premise/application needs all explicitly selected premises",
+      "errors": [
+        {
+          "stage": "core_validation",
+          "field_path": "$.findings[3].component_reviews[0]",
+          "constraint": "definitive premise/application needs all explicitly selected premises"
+        }
+      ],
+      "retained_items": [
+        {
+          "group": "findings",
+          "id": "claim-f9412dfe31afdcbae939013b",
+          "response_attempt": 2
+        },
+        {
+          "group": "findings",
+          "id": "claim-cb223f5f574158a69e10e83d",
+          "response_attempt": 2
+        },
+        {
+          "group": "findings",
+          "id": "claim-62251aa5f045078a8cb542b1",
+          "response_attempt": 2
+        },
+        {
+          "group": "findings",
+          "id": "claim-43d6d1f087eb46e535bfcb85",
+          "response_attempt": 2
+        },
+        {
+          "group": "findings",
+          "id": "claim-921ec8e781a964bf1259e086",
+          "response_attempt": 2
+        }
+      ],
+      "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+    },
+    "interpretation": "Non-obligation classified as scenario_application with premise obligation, but model selected body only; frozen contract rejects. Object classification questionable because rule explicitly says regardless of score. No runtime relabel, repair or relaxation."
+  }
+}

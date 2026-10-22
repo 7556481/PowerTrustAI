@@ -1,0 +1,217 @@
+{
+  "version": "B-private-artifact-identities-v1",
+  "artifacts": [
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/attempt.json",
+      "sha256": "403b0584998aae36619a9f5eba77483db0d4334ca9295722b406f8c380791172"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/controller-accepted.json",
+      "sha256": "b8f8bc83e88d6b9da033c2a9812496bda55a4f475458485e79c003b2cfb5cfad"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/controller-control.json",
+      "sha256": "1b06f9d7417cdb93ad19ed8d65f54303117be7cb77eccca15d2c96797cb20560"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0001.json",
+      "sha256": "c9e102e774f605e440bd1d2214067b1359a90685c291e3b0973b00d3c4451389"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0002.json",
+      "sha256": "fc60e580c029e4019e7532e189aae6548ca7a29771c210a82c02dbad57b7debd"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0003.json",
+      "sha256": "7524405a9c2f7051a139512cfdd1d6a183bb24de4a7fd917d659de80fa65b442"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0004.json",
+      "sha256": "61f8790b970a0a96b7cf2b557d8ce06027d74939dc4f0eb472dedc31e3976320"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0005.json",
+      "sha256": "ccfbbbb353096c88ad820839776b223d53c6a9ce45bec5c9fd7d6c0404475844"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0006.json",
+      "sha256": "cbe62fc388ab085df1d1137176c429b2566677ba78d459f7eb88af454ab70aaf"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0007.json",
+      "sha256": "966475d56e94ff97864cf0592f1e8ee25c6f8cab1fad87d3d944ef21f98cf12c"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0008.json",
+      "sha256": "e45c3fb180d7af28b232cbb2ec52e9485a6763898550bc831412961ba1f5fb94"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0009.json",
+      "sha256": "28a4c53dd31f6897aa5c987832756b5f8554eb1896deed735e2192aebd95694f"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0010.json",
+      "sha256": "52f2230d395951db150169c1728ae42c9b634200639a60cdd3c94095dfe2cce3"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0011.json",
+      "sha256": "63108826f7f1660f535dff349bc2dea607cc5ad226e16852d7e9e038bcc40eac"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0012.json",
+      "sha256": "39f77ebda60dd52a339c5fa401022902e5bda4f76ef7863558cd848bc7fc4cc1"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0013.json",
+      "sha256": "1a9a517bfb5ca1688277864c5a62bb86543c7857f5533d454872544f2bc598a4"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0014.json",
+      "sha256": "dd2e4fb7899d9113accc97a509ff34556086e0cb50f502f5bb16397595b4d698"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0015.json",
+      "sha256": "2a0df21f43055ef7427826d8c304cddd6ae99e4a4ec9644a8fe24a2ceb66817e"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0016.json",
+      "sha256": "f9a338ad2e4bcae9b8a759ba8db7ae52efeafbfe03059a319d897730f0d5642b"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0017.json",
+      "sha256": "472458005eaa1b859d0ec01bca3cb46c102ce54bee121b1026e523371da6b5a1"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0018.json",
+      "sha256": "32fd788059fad0268aa00c0940cdcadb280e99f748bcda48671c9be75cade2af"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0019.json",
+      "sha256": "8f6bfc6e98bda039c7fc582e47a27c245ac7707e013cdb91ec93ced6c1bfa1a0"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0020.json",
+      "sha256": "d4128aaa82fecf60f0f8a43e9b1b1655d627f1bf28ac3a2abb2f2640c5fb8c25"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0021.json",
+      "sha256": "c322ba0ee9aeceb7aebb632b0e5628da6b988fa470b44382cfc2426422104ede"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0022.json",
+      "sha256": "97bf682ab504fe290f49b06d78b8c0fa94e1f082f7cde0a515f3d3eaca1ac719"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/event-0023.json",
+      "sha256": "623338ad4b22f8f01cf4226bdf093f843137b32b0baf98fdd32f0e6be9f14f85"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/execution-observations.json",
+      "sha256": "58f4687738164c0ca58e420dc72eb8cc4837f08efe17968b5a774b7a055b9129"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/BTV-01-QA/final-result.json",
+      "sha256": "f00096e9c06f8391d28180f8b90c5ea56c764a96e7ac54015357311abc312440"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/freeze.json",
+      "sha256": "b129afad4013b2f298fa51956ce680ffd0a3887e8e4c37a6f4fd0c4c5d739de0"
+    },
+    {
+      "path": "data/evaluation_local/public-review-validation-v1/batch-v1/summary.json",
+      "sha256": "9df206161ad6a73ec5c78d9c8ad4e20b9874781f93927478a3362d0fe04c35ba"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/before-send-001.json",
+      "sha256": "6a5f8027302cd936957192f6cf29ff94bcc8fe3780a46701942b09b476ce541e"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/before-send-002.json",
+      "sha256": "3faa78549da2e04ccd4b8980170f65f227df6345bd23abe85fa9c9a2c5ed04fe"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/before-send-003.json",
+      "sha256": "08280e5eb04e2d39c8f20f7c8d15be1c113ef9fe4598838fe429cb2771519195"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/before-send-004.json",
+      "sha256": "a7791c7b62d561f7a8c0fbce6d5fd4e96b4c9a9b3d5921df64d0f55132716a47"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/before-send-005.json",
+      "sha256": "8790d7a342b021ea1c69a3844fafe28c9f4bdc855622fe8c5cf0f667609780b4"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/before-send-006.json",
+      "sha256": "5ec30e820049058fdffb3c4d81d31447fb47e84554fd5819a69ad429485ec12d"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/generation-input-fe87ce940d4846d4b1fc7755906a92e8.json",
+      "sha256": "62bd010f23fce4ae06e74f80c39cbf5cc8bd62348daa1d37d491d01bbdad13af"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/response-161816063ac44bf7a4e99a7cac22f354.json",
+      "sha256": "25a86c5dc69249156c15e74334fd31d1fc47bd80cf5777099cca9152ec45b942"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/response-1d5dd77bbe6f4d099ced38b4f54ab593.json",
+      "sha256": "5bbfed5c01ce86a6902b82e3c43c00afbf6cf3a299a4fc24083a05c7685df9d6"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/response-3024e0d29b6f4c66b5d58141365f8aab.json",
+      "sha256": "28dac48ddc00c50f05a1637600e39b85b483d0c11c79ba6b755cf384e0dc28ca"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/response-397b790a59f647e9bccebbe2f96a01f6.json",
+      "sha256": "b527a088701dee7bb25cfb4dd0e6d70532d81d743d72f68355f8391e3edd9c9d"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/response-3ec40d8a2238407989c74648b99159c4.json",
+      "sha256": "859442ef7078f294b3a4971619cf7fa1a2aba53cb035564069d96b5eae05f411"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/response-f80d8f773812498586ec18f4c0e6681a.json",
+      "sha256": "4833c7b443977116d7e6136e98429831ad3ee4f7ff8526b6c9be6e22251c98b2"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-1a7137605859476a912ec619723b8738.json",
+      "sha256": "5631e392fb6d892ebb8e2949b519de77578673f8551f72b902b4ddd6ca7605f7"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-207c201fef90411f86b09fb6383b3b6e.json",
+      "sha256": "529dd602089eebb8fc755b33447defadb19b7b2d0499ef1531cfc1273038009f"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-2b5be54ebdd24d93bb7ea2eb6d38d418.json",
+      "sha256": "82b125fd234efee7b33658b43ed40c8567cba7fad7b419cd5f727d74480a2f13"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-2fb289baab9444b4a64f373769e40e81.json",
+      "sha256": "d9ad8d080c443229cbd00bcc37749c2caab616de947c2b44d34ad270f0ad24cf"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-4433fc909e7f450d951f8b81adc9e6d1.json",
+      "sha256": "4e1b1e41eaee9db00b7c4e0642ba600b3ee17804afb5334463aebec3cfbff128"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-560dbe4efdba48178276d6c7aa494a13.json",
+      "sha256": "14eac2c71b084f7fed503c04029a0148c5ac080b62feb01650e9ee54e7862ab1"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-7f7cc97ae876431b8a6c293aa6291dbe.json",
+      "sha256": "4d73b438dce9297a5319d18d541697c5be48ec431d332bae109aa286932c7ed8"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-ae691c76bcf745498fd0cff6be71a137.json",
+      "sha256": "012bca30004271dbbf05fcb7274c957299cd1267ba36de7a0d02d4140706481a"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-deb99166d96e420e8310da760e28fa82.json",
+      "sha256": "dcaff09bdce498800eb1c713429c9952dfd64ffaba75867a7ba489705975bb30"
+    },
+    {
+      "path": "data/retrieval_local/public-review-validation-v1/batch-v1/BTV-01-QA/scope-fdbefd38940649fc8c2993348903ae20.json",
+      "sha256": "86f91766874a4c3403047c21cf4abb6874e9ce0ed19f9845bbc3a819c7be7292"
+    }
+  ]
+}
