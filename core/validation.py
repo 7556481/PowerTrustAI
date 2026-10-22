@@ -62,7 +62,10 @@ def validate_types(value, annotation=None, path="value"):
         else:
             allowed_subtypes={'AuditDecision':'ProductDecision','ComponentReview':'FidelityComponentReview','Claim':'ContextualClaim','TypedBasis':'CalculationBasis','EvidenceVerificationInput':'ReliabilityVerificationInput',
                 'EvidenceVerificationOutput':'ReliabilityVerificationOutput','PowerDomainReviewInput':'ReliabilityDomainInput','PowerDomainReviewOutput':'SafetyDomainReviewOutput','HarnessResult':'ToolHarnessResult'}
-            if isinstance(annotation,type) and is_dataclass(annotation) and type(value).__name__ in ((allowed_subtypes.get(annotation.__name__),) if annotation.__name__!='Claim' else ('ContextualClaim','BasisAwareClaim','ObligationClaim')) and type(value).__module__==annotation.__module__ and isinstance(value,annotation):
+            extensions={'Claim':('ContextualClaim','BasisAwareClaim','ObligationClaim','PremiseBoundClaim'),
+                'TypedBasis':('CalculationBasis','TaskPremiseBasis'), 'TaskRequest':('PremiseTaskRequest',),
+                'EvidenceVerificationOutput':('ReliabilityVerificationOutput','PremiseVerificationOutput')}
+            if isinstance(annotation,type) and is_dataclass(annotation) and type(value).__name__ in extensions.get(annotation.__name__,(allowed_subtypes.get(annotation.__name__),)) and type(value).__module__==annotation.__module__ and isinstance(value,annotation):
                 validate_types(value);return
             require(isinstance(value, annotation) if isinstance(annotation, type) and issubclass(annotation, Enum)
                     else type(value) is annotation, f"expected {annotation}", path=path)
@@ -121,7 +124,10 @@ def validate_claims(claims, answer):
             nonempty(claim.proposition, "claim.proposition")
         require(claim.assertion_role in {'legacy_unspecified','asserted','input_report','reported_error','correction','conditional','assumption','missing_information'},'unknown assertion semantic role',path='$.claims.assertion_role')
         require(all(q in claim.text and q.strip() for q in claim.qualifiers), "claim qualifier not literal")
-        if isinstance(claim,BasisAwareClaim):
+        if isinstance(claim,PremiseBoundClaim):
+            from services.task_premises_v1 import validate_claim
+            validate_claim(claim)
+        elif isinstance(claim,BasisAwareClaim):
             from services.answer_basis_targets import validate_targets
             validate_targets(claim)
         if type(claim).__name__=='ObligationClaim':
@@ -160,6 +166,9 @@ def validate_request(request, budget):
     from harness.contracts import RunBudget
     try:
         validate_types(request, TaskRequest)
+        if isinstance(request,PremiseTaskRequest):
+            from services.task_premises_v1 import catalog
+            catalog(request)
         validate_types(budget, RunBudget)
         for name in ("task_id", "scenario_id"):
             nonempty(getattr(request, name), name)

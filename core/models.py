@@ -165,6 +165,12 @@ class ObligationClaim(BasisAwareClaim):
 
 
 @dataclass(frozen=True)
+class PremiseBoundClaim(ObligationClaim):
+    component_objects: Tuple[str, ...] = ()
+    component_premise_ids: Tuple[Tuple[str, ...], ...] = ()
+
+
+@dataclass(frozen=True)
 class CitationBinding:
     start_offset: int
     end_offset: int
@@ -289,6 +295,36 @@ class TypedBasis:
 @dataclass(frozen=True)
 class CalculationBasis(TypedBasis):
     calculation_result_id: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class TaskPremise:
+    premise_id: str
+    task_id: str
+    context_sha256: str
+    source_field: str
+    kind: str
+    text: str
+    start_offset: int
+    end_offset: int
+    version: str = "task-premise-catalog-v1"
+
+
+@dataclass(frozen=True)
+class TaskPremiseBasis(TypedBasis):
+    premise_reference: Optional[TaskPremise] = None
+
+
+@dataclass(frozen=True)
+class PremiseDeclaration:
+    source_field: str
+    quote: str
+    kind: str = "stipulated"
+
+
+@dataclass(frozen=True)
+class PremiseTaskRequest(TaskRequest):
+    premise_declarations: Tuple[PremiseDeclaration, ...] = ()
 
 
 @dataclass(frozen=True)

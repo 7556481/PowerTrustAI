@@ -59,8 +59,10 @@ def full_delivered(inputs):
     s=inputs.generation_snapshot
     return bool(s and s.snapshot_version=='generation-full-input-v2' and sum(len(e.text) for e in s.evidence)<=32000)
 
-def parse(value,inputs,scopes,prompt_version=PROMPT_VERSION):
+def parse(value,inputs,scopes,prompt_version=PROMPT_VERSION,*,premise_profile=None):
     missing={} if full_delivered(inputs) else {c.claim_id:tuple(i for i,p in enumerate(c.components) if p.category=='input_evidence_coverage') for c in inputs.claims}
+    if premise_profile is not None:
+        missing=premise_profile.missing_components(inputs)
     ec=ErrorCollector('evidence_verification_v9');ec.fields(value,{'findings','citation_reviews'},set(),'$')
     value=deepcopy(value)
     if not ec.check(isinstance(value,dict) and type(value.get('findings')) is list,'$.findings','array_required'):ec.finish()
@@ -83,6 +85,9 @@ def parse(value,inputs,scopes,prompt_version=PROMPT_VERSION):
         if not ec.check(type(items) is list,path,'basis_array_required'):return ()
         for i,item in enumerate(items):
             p=f'{path}[{i}]';kind=item.get('type') if type(item) is dict else None
+            if kind=='task_premise_reference' and premise_profile is not None:
+                out.append(premise_profile.parse_basis(item,current,p,citation,ec))
+                continue
             if kind=='calculation_result_reference':
                 if ec.fields(item,{'type','result_id'},set(),p) and ec.check(citation is None and item['result_id'] in {t.result_id for t in current.tool_results if t.status==ExecutionStatus.SUCCEEDED},p+'.result_id','current_successful_calculation_required_not_original_citation'):
                     out.append(CalculationBasis(kind,calculation_result_id=item['result_id']))
@@ -103,6 +108,8 @@ def parse(value,inputs,scopes,prompt_version=PROMPT_VERSION):
             out.extend(source_bases([translated],current,p,citation=citation,collector=ec,candidates=scope.candidates))
         return tuple(out)
     result=parse_v5(value,inputs,basis_parser=basis_parser,response_prompt_version=prompt_version,
+        component_validator=None if premise_profile is None else premise_profile.component_validator,
+        output_factory=None if premise_profile is None else lambda out:premise_profile.promote(out,inputs),
         quote_candidates=build_candidates(tuple(e for e in merge_evidence(inputs.seed_evidence,inputs.original_evidence) if e.evidence_id in {c.evidence_id for s in scopes for c in s.candidates})))
     result=replace(result,consistency_checks=check_verification_quantities(result,version='quantity-enumeration-v1.2'))
     if missing:

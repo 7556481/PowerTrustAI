@@ -68,8 +68,13 @@ async def run(agent,inputs):
     prompt_version=(profile if agent.support_relation_checks else PROMPT_VERSION)+('-fact-delivery-v1' if inputs.fact_retrieval_bindings else '')
     contract_version=('evidence-verification-output-v9.12' if agent.support_relation_version==6 else 'evidence-verification-output-v9.11' if new_interface else 'evidence-verification-output-v9.10' if agent.support_relation_version==4 else 'evidence-verification-output-v9.9' if agent.support_relation_version==3 else 'evidence-verification-output-v9.8' if agent.support_relation_version==2 else 'evidence-verification-output-v9.7') if agent.support_relation_checks else CONTRACT_VERSION
     original_instruction=original_template(support_relation_checks=agent.support_relation_checks,support_relation_version=agent.support_relation_version)
-    start=len(current_budget().records);scopes=joint.catalog(inputs,contract_version);wire,missing=model_wire(inputs)
-    base_parse=lambda v:joint.parse(v,inputs,scopes,prompt_version='evidence-verification-v9.3-target-fidelity')
+    premise_profile=getattr(agent,'premise_profile',None)
+    if premise_profile is not None:
+        prompt_version=premise_profile.PROMPT+('-fact-delivery-v1' if inputs.fact_retrieval_bindings else '')
+        contract_version=premise_profile.PROFILE
+    start=len(current_budget().records);scopes=joint.catalog(inputs,contract_version)
+    wire,missing=model_wire(inputs) if premise_profile is None else premise_profile.model_wire(inputs)
+    base_parse=lambda v:joint.parse(v,inputs,scopes,prompt_version='evidence-verification-v9.3-target-fidelity' if premise_profile is None else prompt_version,premise_profile=premise_profile)
     def parse(v):
         from services.review_fidelity import parse as fidelity_parse
         result=fidelity_parse(v,inputs,base_parse,strict_bindings=True,independent_judgments=new_interface)
@@ -86,6 +91,9 @@ async def run(agent,inputs):
                 'verification_obligation':claim.component_obligations[r['component_index']],
                 'rationale':'model_execution_incomplete; equivalence not established'}
     combined=parse(wire);issues=[];correction_used=False;shortfall_reported=False
+    if premise_profile is not None:
+        combined=replace(combined,findings=tuple(replace(f,component_reviews=tuple(replace(r,
+            origin='execution_incomplete',reason_code='model_execution_incomplete') for r in f.component_reviews)) for f in combined.findings))
     def batch_payload(indexes):
         data=citation_payload(inputs.answer,inputs.request.question,scopes,indexes)
         if new_interface:
@@ -132,6 +140,10 @@ async def run(agent,inputs):
                 GENERATION_INPUT_SNAPSHOT=body_snapshot(inputs))
         else:
             payload=batch_payload(citation);instruction=original_instruction
+        if premise_profile is not None:
+            from services.task_premises_v1 import catalog
+            payload['TASK_PREMISES']=[asdict(p) for p in catalog(inputs.request)]
+            payload['CURRENT_TASK']={'task_id':inputs.request.task_id,'question':inputs.request.question,'user_context':inputs.request.user_context}
         if citation is None:
             instruction=INDEPENDENT + FROZEN_BINDING_INSTRUCTIONS
             if agent.support_relation_checks:
@@ -148,6 +160,8 @@ async def run(agent,inputs):
                 from services.condition_candidates import payload as conditions
                 payload['SOURCE_CONDITION_CANDIDATES']=conditions(scopes[0])
                 if agent.support_relation_version==6:payload['PROGRAM_SOURCE_SELECTION_VERSION']='program-local-selected-bases-v6'
+        if premise_profile is not None:
+            instruction+=premise_profile.INSTRUCTION
         messages=(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False)))
         payload['MODEL_OUTPUT_CONTRACT']={'root':group,'identity_key':'claim_id' if citation is None else 'citation_index','required_ids':[x['claim_id'] for x in selected[group]] if citation is None else list(citation),'answer_condition_fields':['condition_id','necessity','answer_quote','relationship','reason'],'input_carrier_fields_are_not_output_fields':True}
         if compact:

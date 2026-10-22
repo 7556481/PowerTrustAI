@@ -12,6 +12,12 @@ TARGET_OBLIGATIONS={
     'input_snapshot':'input_provided','answer_text':'answer_scope',
     'recommendation':'recommendation'}
 
+
+def has_obligations(claim):
+    from core.models import PremiseBoundClaim
+    return claim.semantic_origin == 'model-claims-v7-obligations' or (
+        isinstance(claim, PremiseBoundClaim) and claim.semantic_origin == 'public-review-premise-boundary-v1-dev')
+
 def direct_rating_declaration(text):
     # A closed, positive declaration grammar, not arbitrary polarity detection.
     # Anything outside it is unknown, including nested reporting and rebuttals.

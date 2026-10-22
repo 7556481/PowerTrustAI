@@ -1,6 +1,6 @@
 """Explicit input/output interfaces for the four agents."""
 
-from core.models import HazardAssessment
+from core.models import HazardAssessment, TaskPremise
 from dataclasses import dataclass
 from typing import Protocol, Tuple
 
@@ -72,6 +72,11 @@ class ReliabilityVerificationOutput(EvidenceVerificationOutput):
     tool_results: Tuple[ToolResult, ...] = ()
     delivery_summary: str = ""
     input_body_delivered: bool = False
+
+
+@dataclass(frozen=True)
+class PremiseVerificationOutput(ReliabilityVerificationOutput):
+    task_premises: Tuple["TaskPremise", ...] = ()
 
 
 @dataclass(frozen=True)

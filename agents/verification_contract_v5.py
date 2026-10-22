@@ -180,7 +180,7 @@ def parse_bases(items, inputs, path, *, citation=None, collector=None):
     return tuple(result)
 
 
-def parse_v5(value, inputs, *, basis_parser=None, response_prompt_version=None, quote_candidates=()):
+def parse_v5(value, inputs, *, basis_parser=None, response_prompt_version=None, quote_candidates=(), component_validator=None, output_factory=None):
     from agents.evidence_verification import status, string_list, DIMENSIONS, METHOD
     ec = ErrorCollector()
     ec.fields(value, {"findings", "citation_reviews"}, set(), "$")
@@ -247,7 +247,8 @@ def parse_v5(value, inputs, *, basis_parser=None, response_prompt_version=None, 
                                 issue = ClassificationIssue(suggested, raw_issue["rationale"])
                         types = {bases[n].type for n in indexes if bases[n]}
                         definitive = st in (VerificationStatus.SUPPORTED, VerificationStatus.CONTRADICTED)
-                        if definitive:
+                        handled = component_validator(claim, part, bases, indexes, st, rp, ec) if component_validator is not None else False
+                        if definitive and not handled:
                             targets=getattr(claim,'component_basis_targets',())
                             target=targets[part] if targets else None
                             calc=bool(response_prompt_version and response_prompt_version.startswith('evidence-verification-v9') and category=='technical_fact' and 'calculation_result_reference' in types and target in (None,'mathematical_relation'))
@@ -258,7 +259,7 @@ def parse_v5(value, inputs, *, basis_parser=None, response_prompt_version=None, 
                                     ec.errors[-1].update(legal_basis_shape={"type":"input_snapshot_reference"},
                                         bases_field_path=p+".bases", snapshot_available=inputs.generation_snapshot is not None,
                                         instruction="Only if the actual complete snapshot supports this proposition, append the explicit basis and reference its zero-based local index; otherwise use insufficient_evidence/not_assessable. No automatic support.")
-                        if category == "input_evidence_coverage" and inputs.generation_snapshot is None:
+                        if category == "input_evidence_coverage" and inputs.generation_snapshot is None and not handled:
                             if not ec.check(st == VerificationStatus.NOT_ASSESSABLE and not indexes, rp, "missing_complete_input_requires_not_assessable_without_basis"):
                                 ec.errors[-1].update(allowed_status="not_assessable", required_basis_indexes=[], snapshot_available=False,
                                     processing_options=["keep_frozen_category", "return_not_assessable_with_empty_basis_indexes", "fresh_retrieval_cannot_replace_historical_generation_snapshot"])
@@ -308,5 +309,7 @@ def parse_v5(value, inputs, *, basis_parser=None, response_prompt_version=None, 
         output=replace(output,findings=tuple(replace(f,tool_result_ids=tuple(b.calculation_result_id for b in f.bases if b.calculation_result_id)) for f in output.findings))
         from services.quantity_checks import check_verification_quantities
         output=replace(output,consistency_checks=check_verification_quantities(output,version="quantity-enumeration-v1.2"))
+    if output_factory is not None:
+        output = output_factory(output)
     validate_review(output, inputs.answer, inputs.claims, output.evidence, True)
     return output

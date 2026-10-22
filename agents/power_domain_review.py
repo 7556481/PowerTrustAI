@@ -27,7 +27,8 @@ RULES=tuple(DomainRule(key,RULE_SET_VERSION,SOURCE,"Demo voltage-stability/react
     ("simulation_boundary","No simulation or registered calculation was executed by this workflow; engineering feasibility is unverified.")))
 MODEL_KEYS=("answer_units","analysis_scope","operating_prerequisites")
 def registered_rules(claims):
-    if any(c.semantic_origin=='model-claims-v7-obligations' for c in claims):
+    from services.claim_obligations import has_obligations
+    if any(has_obligations(c) for c in claims):
         return tuple(replace(r,version='power-demo-rules-v1.1',applicable_scope=r.applicable_scope+'; applicability is bounded by requested engineering goal; conceptual explanation does not require a completed plant simulation') for r in RULES)
     return RULES
 SYSTEM="""Return one complete JSON object only, without Markdown fences.
@@ -79,7 +80,8 @@ def _finding(inputs,key,status,reason,*,claim_ids=(),bases=(),missing=(),origin=
 
 def program_findings(inputs,candidates,*,assessment=None):
     context=inputs.request.engineering_context
-    new=any(c.semantic_origin=='model-claims-v7-obligations' for c in inputs.claims)
+    from services.claim_obligations import has_obligations
+    new=any(has_obligations(c) for c in inputs.claims)
     from services.task_applicability import effective
     scope=effective(context,assessment)
     conceptual=new and (scope=='conceptual' if assessment is not None else context is not None and context.goal=='conceptual')
@@ -160,7 +162,8 @@ def validate_domain_output(output,answer,claims):
     from core.validation import validate_excerpts
     require(output.rules==registered_rules(claims),"Domain rules/source/version must equal registered demo rules",path="$.rules")
     validate_catalog(output.quote_candidates,output.evidence)
-    new=any(c.semantic_origin=='model-claims-v7-obligations' for c in claims)
+    from services.claim_obligations import has_obligations
+    new=any(has_obligations(c) for c in claims)
     from services.task_applicability import read,effective
     assessment=read(output.findings)
     if assessment is not None:

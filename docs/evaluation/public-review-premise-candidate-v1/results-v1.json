@@ -1,0 +1,128 @@
+{
+  "version": "public-review-premise-candidate-v1-offline",
+  "source_base_commit": "900db09c1a2147a174562656f07e7f26ed2e9faa",
+  "status": "candidate_implemented_full_harness_offline_only",
+  "profile": "public-review-premise-boundary-v1-dev",
+  "prompt": "evidence-verification-v9.21-task-premise-boundary-v1-dev",
+  "candidate_correction_accounting": "invocation_scoped_v1",
+  "production_defaults": {
+    "schema": 13,
+    "execution_path": "sequential",
+    "generation": "original",
+    "correction_accounting": "shared_slice_v1",
+    "changed": false
+  },
+  "tests": {
+    "new_synthetic": 25,
+    "new_synthetic_seconds": 5.577,
+    "related_intermediate": 96,
+    "related_intermediate_seconds": 7.585,
+    "intermediate_new_case_count": 16,
+    "full_suite": 1081,
+    "full_suite_seconds": 140.552,
+    "all_passed": true,
+    "full_suite_runs": 1,
+    "final_targeted": 33,
+    "final_targeted_seconds": 6.135,
+    "final_targeted_after_explicit_extractor_metadata": true,
+    "full_suite_preceded_explicit_extractor_metadata_clarification": true
+  },
+  "differentials": {
+    "qa_vs_existing_same_task_premise_catalog": true,
+    "qa_actual_snapshot_preserved": true,
+    "existing_snapshot_remains_absent": true,
+    "plain_literature_original_vs_candidate_business_outputs_equal": true,
+    "sequential_vs_graph_messages_and_results_equal": true,
+    "candidate_no_correction_accounting_profiles_equal": true,
+    "scripted_qa_calls": 5,
+    "scripted_existing_calls": 4,
+    "new_planning_calls": 0
+  },
+  "limits": [
+    "All new tests use synthetic sources and scripted outputs, no model semantic score",
+    "Wrong scripted faithful/supported can pass valid IDs with premise41/answer42",
+    "Premise kind is explicit, not auto inferred or upgraded from user reports",
+    "Candidate object classification and rule applicability remain model judgments",
+    "Cancellation retains completed sibling stage event; terminal domain_output may be None",
+    "No coverage policy, production switch, schema14 migration or old data migration"
+  ],
+  "execution_failures_retained": [
+    "instruction initialization placement",
+    "candidate obligation version recognition by domain",
+    "invalid JSON baseline execution origin",
+    "mixed generation fixture missing required citation",
+    "cancellation fixture assumed terminal sibling assignment"
+  ],
+  "real_api_calls": 0,
+  "historical_response_replay_calls": 0,
+  "dependencies_installed": 0,
+  "historical_paid_batch_resumed": false,
+  "historical_artifacts_verified": 35,
+  "historical_freeze_and_attempt_binding_verified": true,
+  "log": {
+    "path": "data/evaluation_local/public-review-premise-v1/offline-checks-v1/suite-v1.log",
+    "sha256": "c3b5f1ffea39dc04e3df4c9391f1473fda7aceb4271e27ec887b3c81a405a067"
+  },
+  "files": [
+    {
+      "path": "agents/contracts.py",
+      "sha256": "e9379d523cfe6315cc14e7fa53363e84bf9d524e0c1439e53baa88afac6d007b"
+    },
+    {
+      "path": "agents/power_domain_review.py",
+      "sha256": "9b0312fa012581b3e283aa687bfbc2368816b48bdf5bc3926e84b4f9f4b65938"
+    },
+    {
+      "path": "agents/verification_contract_v10_batched.py",
+      "sha256": "3fa147d63522b854b02306d8a880553fa09280137d0ddeecd867dac0a813a3e3"
+    },
+    {
+      "path": "agents/verification_contract_v5.py",
+      "sha256": "de0d3372793a7d6ec6f8dcb826643d52f18290bb78e9d46efe82399e06868613"
+    },
+    {
+      "path": "agents/verification_contract_v9.py",
+      "sha256": "7928a9f59c8c8d5c6f9fac5786704f5c0ba0938ca6d82f7d80d38384ba9233ca"
+    },
+    {
+      "path": "agents/premise_verification_v1.py",
+      "sha256": "a6dd19002be505f49e5561be8df8cdd4270e06456e44b725ff86aea564f213ac"
+    },
+    {
+      "path": "core/models.py",
+      "sha256": "fbc2294093356ff43c9d308c1a78536167ab9c176e4751450f922f5557a809c0"
+    },
+    {
+      "path": "core/typed_evidence.py",
+      "sha256": "530d6179fdde8e77998ce68f8243a416746118692645a2a9b682d4c8843c4b33"
+    },
+    {
+      "path": "core/validation.py",
+      "sha256": "fbeefbcbb3725838f64ffb702bb96dd0078b792c5c07e8bca2bd667fb7d86858"
+    },
+    {
+      "path": "harness/execution.py",
+      "sha256": "06e162cc3ce92b18f6423846cf75b1c104f6541c0cc27334183302a2d4ac353a"
+    },
+    {
+      "path": "services/claim_obligations.py",
+      "sha256": "ecdeb5719d0ade9e65e1665f55766c4d45f6c1a468713032a3d63856bf3e6fe3"
+    },
+    {
+      "path": "services/task_premises_v1.py",
+      "sha256": "f26289a1a42168525339d3f6fde53657d2783a86967bb977195f4c1fffff5bfe"
+    },
+    {
+      "path": "services/premise_claim_extractor_v1.py",
+      "sha256": "4aee5b4a7b107ce345b4294a67dc4cb277427a5e0011d1d748399911bcd0ae2a"
+    },
+    {
+      "path": "services/premise_review_protocol_v1.py",
+      "sha256": "a51359d92227b25e19a701bcc0568952f1ae8b20d6f6b07934a17961e616aacb"
+    },
+    {
+      "path": "tests/test_public_review_premise_v1.py",
+      "sha256": "af32d6316f23846b822622d01627ffae16beabb7623d454f630c34b4f8d16c4d"
+    }
+  ]
+}

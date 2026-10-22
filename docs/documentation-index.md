@@ -1,5 +1,7 @@
 # 文档索引
 
+- **最新B候选实现：[题设独立依据与公共审核接线](evaluation/public-review-premise-candidate-v1/README.md)**（[身份/离线检查](evaluation/public-review-premise-candidate-v1/results-v1.json)）：当前任务独立目录、程序定位、专门TaskPremiseBasis，规则应用联合正文+题设；两种输入共用验证，无快照诊断不补造。原Harness/schema13阶段内可选注入，不加规划/调度节点；候选计数独立启用，生产仍原默认。25专项、一次全套1081离线通过，原/候选及顺序/图差分；错误替身也可合法pass，明确不能证明真实模型语义已修好。0真实调用/旧响应回放/安装，A批次封存，下一次真实验证需另冻结授权。
+
 - **当前B源码核对与工程候选：[公共审核题设/规则/应用边界](evaluation/public-review-boundaries-v1/README.md)**（[范围与离线结果](evaluation/public-review-boundaries-v1/results-v1.json)）：归档用户对A的有范围复核，候选生成合法，停止是公共审核失败，未执行能力未知。语义最小规格尚未接线，题设引用与正文规则分离，应用联合核对，不放宽旧快照门禁。纠正计数可选invocation_scoped_v1已实现，8专项/相关68离线通过；原共享预算与一次事实纠正不变，默认shared_slice_v1/schema13/原顺序路径保留。0真实调用/旧回放/安装，不恢复A实验。
 
 - **最新已授权实跑收尾：[固定证据生成对照结果](evaluation/generation-mapping-comparison-v1/results-v1.md)**（[实际答案/审核及统计](evaluation/generation-mapping-comparison-v1/results-v1.json)、[真实执行冻结](evaluation/generation-mapping-comparison-v1/execution-freeze-v1.json)、[私有产物身份](evaluation/generation-mapping-comparison-v1/artifact-identities-v1.json)）：原40次分支保护、无新增批次帽，99文件/21发送前消息核对；65相关离线通过。实跑2完成/1必需审核失败/5未执行，1完整对，21调用/101712 token；3份答案首次有效、2映射有效，事实2纠正后在GEC-02候选依据类型门禁最终失败即停。9实际槽回应/15未执行不是准确率，01候选附加说明与non_claim疑点保留；未见足够答案收益，暂不采用。新结果AI辅助、用户监督，未称本人逐项确认；禁止恢复或补跑，生产不变。

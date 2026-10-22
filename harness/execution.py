@@ -218,6 +218,9 @@ class RunExecution:
 
         def check(output):
             self.guard_agent_evidence(output, allowed)
+            if is_verification and type(output).__name__ == 'PremiseVerificationOutput':
+                from services.task_premises_v1 import validate_catalog
+                validate_catalog(self.request, output.task_premises)
             if not is_verification and getattr(output, 'prompt_version', None) and output.prompt_version.startswith(('power-domain-review-v1', 'power-domain-review-v2', 'power-domain-review-v3')):
                 require(output.engineering_context == self.request.engineering_context, 'Domain review changed engineering inputs')
             validate_review(output, self.answer, self.claims, allowed, is_verification)
@@ -304,7 +307,10 @@ class RunExecution:
                 validate_extraction(output, self.answer)
             else:
                 validate_claims(output, self.answer)
-        extraction, issue = await self.invoke('claim_extraction', self.harness.extractor.extract, self.answer, check_extraction, getattr(self.harness.extractor, 'uses_model_adapter', False), getattr(self.harness.extractor, 'uses_model_adapter', False))
+        extract = self.harness.extractor.extract
+        if hasattr(self.harness.extractor, 'extract_for_task'):
+            extract = lambda answer: self.harness.extractor.extract_for_task(answer, self.request)
+        extraction, issue = await self.invoke('claim_extraction', extract, self.answer, check_extraction, getattr(self.harness.extractor, 'uses_model_adapter', False), getattr(self.harness.extractor, 'uses_model_adapter', False))
         if issue:
             self.issues.append(issue)
             raise RuntimeError(issue.message)

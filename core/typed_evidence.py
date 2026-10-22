@@ -20,6 +20,16 @@ def validate_bases(bases, output, answer, path, *, allowed_ids=None, citation=Fa
     catalog = {c.quote_id:c for c in output.quote_candidates}
     for i, basis in enumerate(bases):
         p = f"{path}[{i}]"
+        if basis.type == 'task_premise_reference':
+            from core.models import TaskPremiseBasis
+            require(type(output).__name__ == 'PremiseVerificationOutput' and isinstance(basis, TaskPremiseBasis)
+                    and not citation, 'task premise basis requires explicit candidate output and independent scope', path=p)
+            require(basis.premise_reference is not None and basis.premise_reference in output.task_premises,
+                    'task premise basis binding changed', path=p)
+            require(all(getattr(basis, k) is None for k in ('evidence_id', 'excerpt', 'metadata_reference',
+                'snapshot_id', 'answer_excerpt', 'quote_id', 'calculation_result_id')), 'task premise is not another basis type', path=p)
+            continue
+        require(getattr(basis, 'premise_reference', None) is None, 'premise reference cannot masquerade as another basis', path=p)
         expected = {"text_excerpt": {"evidence_id", "excerpt"}, "metadata_reference": {"evidence_id", "metadata_reference"},
                     "input_snapshot_reference": {"snapshot_id"}, "answer_text_reference": {"answer_excerpt"}}
         if output.prompt_version and output.prompt_version.startswith('evidence-verification-v9'):
@@ -71,6 +81,9 @@ def validate_bases(bases, output, answer, path, *, allowed_ids=None, citation=Fa
 
 
 def validate_typed_finding(finding, claim, output, answer, path):
+    from core.models import PremiseBoundClaim
+    if isinstance(claim, PremiseBoundClaim):
+        require(type(output).__name__ == 'PremiseVerificationOutput', 'premise-bound claim requires explicit candidate validation', path=path)
     require(finding.assessment_basis == "typed_components" and finding.scope_id is None, "typed finding binding mismatch", path=path)
     require(bool(claim.components), "explicit frozen components required", path=path + ".component_reviews")
     categories = {c.category for c in claim.components}
@@ -120,7 +133,12 @@ def validate_typed_finding(finding, claim, output, answer, path):
             nonempty(issue.rationale, p + ".classification_issue.rationale")
             require(rev.status == VerificationStatus.NOT_ASSESSABLE, "classification disagreement cannot weaken support rules", path=p + ".status")
         types = {finding.bases[n].type for n in rev.basis_indexes}
-        if rev.status in (VerificationStatus.SUPPORTED, VerificationStatus.CONTRADICTED):
+        handled = False
+        if isinstance(claim, PremiseBoundClaim):
+            from services.premise_review_protocol_v1 import validate_selected
+            index = next(n for n,c in enumerate(claim.components) if c.component_id == rev.component_id)
+            handled = validate_selected(claim, index, [finding.bases[n] for n in rev.basis_indexes], rev.status, p)
+        if rev.status in (VerificationStatus.SUPPORTED, VerificationStatus.CONTRADICTED) and not handled:
             calc=bool(output.prompt_version and output.prompt_version.startswith('evidence-verification-v9') and category=='technical_fact' and 'calculation_result_reference' in types)
             require(REQUIRED.get(category) in types or calc, "component lacks matching support basis", path=p)
             if calc:
@@ -134,7 +152,7 @@ def validate_typed_finding(finding, claim, output, answer, path):
                     if b.calculation_result_id:
                         tool=next(t for t in output.tool_results if t.result_id==b.calculation_result_id)
                         validate_claim_conversion(parts[rev.component_id].proposition,claim.claim_id,tool,rev.status,p+'.basis_indexes')
-        if category == "input_evidence_coverage" and output.generation_snapshot is None:
+        if category == "input_evidence_coverage" and output.generation_snapshot is None and not handled:
             require(rev.status == VerificationStatus.NOT_ASSESSABLE and not rev.basis_indexes, "historical input coverage unavailable", path=p)
         if category == "review_recommendation":
             require(rev.status == VerificationStatus.NOT_ASSESSABLE, "advice is not verified fact", path=p)
