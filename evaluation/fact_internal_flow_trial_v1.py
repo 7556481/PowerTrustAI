@@ -33,7 +33,7 @@ def freeze():
         'model':asdict(SETTINGS),'max_sends':28,'files':[{'path':p,'sha256':digest(ROOT/p)} for p in sorted(set(paths))],
         'order':read(PUBLIC/'preparation-v1.json')['order']})
 
-async def batch(f,root,factory):
+async def batch(f,root,factory,*,agent_builder=None,max_sends=28,version="fact-internal-flow-live-v1"):
     results=[];total=0;stopped=False
     for entry in f['order']:
         ident=entry['case']+'-'+entry['variant']
@@ -49,14 +49,14 @@ async def batch(f,root,factory):
                 async def complete(self,request):
                     nonlocal total
                     n=len(sent)
-                    if n>=2 or total>=28 or n==0 and (entry['initial_calls']!=1 or request.correction or message_hash(request.messages)!=entry['message_sha256']) or n==1 and not request.correction:raise GateError({})
+                    if n>=2 or total>=max_sends or n==0 and (entry['initial_calls']!=1 or request.correction or message_hash(request.messages)!=entry['message_sha256']) or n==1 and not request.correction:raise GateError({})
                     if request.model_id!=SETTINGS.model_id or request.prompt_version!=entry['prompt_version']:raise GateError({})
                     write(branch/f'messages-{n+1}.json',{'messages':[asdict(m) for m in request.messages],'correction':request.correction})
                     total+=1;sent.append({'sequence':total,'correction':request.correction,'message_sha256':message_hash(request.messages)})
                     response=await delegate.complete(request)
                     write(branch/f'response-{n+1}.json',wire(response))
                     return response
-            agent=(FactFlowAgent(Guard(),SETTINGS,diagnostic_dir=branch/'diagnostics') if entry['variant']=='candidate' else ModelEvidenceVerificationAgent(Guard(),SETTINGS,diagnostic_dir=branch/'diagnostics',schema_version=13,support_relation_checks=True,support_relation_version=6,review_message_profile='lossless_v1'))
+            agent=agent_builder(Guard(),SETTINGS,branch/'diagnostics') if agent_builder is not None else (FactFlowAgent(Guard(),SETTINGS,diagnostic_dir=branch/'diagnostics') if entry['variant']=='candidate' else ModelEvidenceVerificationAgent(Guard(),SETTINGS,diagnostic_dir=branch/'diagnostics',schema_version=13,support_relation_checks=True,support_relation_version=6,review_message_profile='lossless_v1'))
             with model_scope(budget),model_invocation_scope(ident,'evidence_verification',1):
                 output=await asyncio.wait_for(agent.run(inp),110)
             value=wire(output);write(branch/'output.json',value)
@@ -64,13 +64,14 @@ async def batch(f,root,factory):
             known=entry['initial_calls']==0 and not sent and not output.execution_issues
             row={'id':ident,'status':'known_precondition' if known else 'execution_failed' if failure else 'complete','seconds':perf_counter()-start,'sent':sent,'model_records':wire(budget.records),'output':value}
             write(branch/'summary.json',row);results.append(row);stopped=failure and not known
-        except Exception as exc:
+        except (Exception,asyncio.CancelledError) as exc:
             row={'id':ident,'status':'execution_failed','exception_type':type(exc).__name__,'seconds':perf_counter()-start,'sent':sent,'model_records':wire(budget.records)}
+            if hasattr(exc,'partial_output'):row['partial_output']=wire(exc.partial_output)
             results.append(row);stopped=True
             write(root/(ident+'-failure.json'),row)
         finally:
             if delegate is not None:delegate.close()
-    summary={'version':'fact-internal-flow-live-v1','total_sends':total,'branches':results}
+    summary={'version':version,'total_sends':total,'branches':results}
     write(root/'summary.json',summary)
     return summary
 

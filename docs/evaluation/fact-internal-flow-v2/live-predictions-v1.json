@@ -1,0 +1,1019 @@
+{
+  "scope": "Necessary exact model texts including invalid attempts; user-authorized v2 fixed-reference development revalidation; AI-assisted review, user supervision; historical v1 descriptive only.",
+  "branches": [
+    {
+      "id": "F01-v2",
+      "status": "complete",
+      "seconds": 2.433009899992612,
+      "attempts": [
+        {
+          "call_number": 1,
+          "correction": false,
+          "output_status": "valid_structure",
+          "duration_ms": 2336,
+          "usage": {
+            "input_tokens": 2038,
+            "output_tokens": 325,
+            "total_tokens": 2363,
+            "cost_amount": null,
+            "currency": null,
+            "cache_hit_tokens": 0,
+            "cache_miss_tokens": 2038
+          },
+          "validation_error": null,
+          "raw_response_text": "{\"judgments\":[{\"target_id\":\"F0C0\",\"status\":\"supported\",\"basis_ids\":[\"S0B0\"],\"reason\":\"命题准确复述S0B0规则：满18岁为可借阅的许可条件，而非强制义务，否定方向（并非必须）保留。\",\"conditions\":[],\"repair\":null,\"requires_authoritative_source\":false,\"object_kind\":\"literature_rule\",\"classification_objection\":null,\"fidelity\":\"faithful\",\"fidelity_reason\":\"答案原文与命题一致，复述了规则的许可性及非强制性。\",\"dependencies\":[\"S0B0\"],\"comparison\":null},{\"target_id\":\"F0C1\",\"status\":\"supported\",\"basis_ids\":[\"S0B0\",\"P0\"],\"reason\":\"P0给出读者19岁，满足S0B0中年龄至少18岁的许可前提，据此得出可借阅档案成立；规则仅授权非强制，结论措辞为'可借阅'亦一致。\",\"conditions\":[{\"basis_id\":\"S0B0\",\"required\":true,\"answer_quote\":\"年龄至少18岁可借阅档案\",\"preserved\":true}],\"repair\":null,\"requires_authoritative_source\":false,\"object_kind\":\"rule_application\",\"classification_objection\":null,\"fidelity\":\"faithful\",\"fidelity_reason\":\"答案原文先复述规则再引19岁前提并推出可借阅，与命题一致。\",\"dependencies\":[\"S0B0\",\"P0\"],\"comparison\":null}]}"
+        }
+      ],
+      "component_reviews": [
+        {
+          "claim_id": "claim-5bfdd77c611f7115260ebaa9",
+          "component_id": "claim-5bfdd77c611f7115260ebaa9-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "答案原文与命题一致，复述了规则的许可性及非强制性。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "fact-internal-flow-v2",
+          "selected_bound_bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "body-F01",
+              "excerpt": {
+                "evidence_id": "body-F01",
+                "text": "合成图书馆规则：年龄至少18岁可借阅档案，但并非必须借阅。",
+                "start_offset": 0,
+                "end_offset": 29
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-bb35d60a7b7373123ad46f53"
+            }
+          ]
+        },
+        {
+          "claim_id": "claim-5bfdd77c611f7115260ebaa9",
+          "component_id": "claim-5bfdd77c611f7115260ebaa9-part-1",
+          "status": "supported",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "答案原文先复述规则再引19岁前提并推出可借阅，与命题一致。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "fact-internal-flow-v2",
+          "selected_bound_bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "body-F01",
+              "excerpt": {
+                "evidence_id": "body-F01",
+                "text": "合成图书馆规则：年龄至少18岁可借阅档案，但并非必须借阅。",
+                "start_offset": 0,
+                "end_offset": 29
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-bb35d60a7b7373123ad46f53"
+            },
+            {
+              "type": "task_premise_reference",
+              "evidence_id": null,
+              "excerpt": null,
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": null,
+              "premise_reference": {
+                "premise_id": "task-premise-9d448475139c2ad43ff243475845881c",
+                "task_id": "task-F01",
+                "context_sha256": "6c4d7d2fa6462820ad501eb169e71f9df792b87bbdfcb42211d5781bb8ec4bc0",
+                "source_field": "user_context",
+                "kind": "stipulated",
+                "text": "读者年龄为19岁。",
+                "start_offset": 0,
+                "end_offset": 9,
+                "version": "task-premise-catalog-v1"
+              }
+            }
+          ]
+        }
+      ],
+      "object_reviews": [
+        {
+          "raw_model_status": "supported",
+          "effective_support_status": "supported",
+          "semantic_uncertain": false,
+          "condition_bindings": [],
+          "objection": null,
+          "authority_missing": false,
+          "repair": null,
+          "raw_repair": null,
+          "contract": "fact-internal-flow-v2",
+          "object_kind": "literature_rule",
+          "classification_objection": null,
+          "fidelity": "faithful",
+          "fidelity_reason": "答案原文与命题一致，复述了规则的许可性及非强制性。",
+          "dependencies": [
+            "S0B0"
+          ],
+          "comparison": null,
+          "scalar_result": null,
+          "capability_limit": null,
+          "claim_id": "claim-5bfdd77c611f7115260ebaa9",
+          "component_id": "claim-5bfdd77c611f7115260ebaa9-part-0",
+          "origin": "model_judgment"
+        },
+        {
+          "raw_model_status": "supported",
+          "effective_support_status": "supported",
+          "semantic_uncertain": false,
+          "condition_bindings": [
+            {
+              "basis_id": "S0B0",
+              "required": true,
+              "answer_quote": "年龄至少18岁可借阅档案",
+              "preserved": true,
+              "program_source": {
+                "quote_id": "quote-bb35d60a7b7373123ad46f53",
+                "evidence_id": "body-F01",
+                "start_offset": 0,
+                "end_offset": 29,
+                "text": "合成图书馆规则：年龄至少18岁可借阅档案，但并非必须借阅。",
+                "context_start_offset": 0,
+                "context_end_offset": 29,
+                "context_text": "合成图书馆规则：年龄至少18岁可借阅档案，但并非必须借阅。",
+                "candidate_version": "literal-quote-candidates-v1",
+                "method": "whole_fragment",
+                "warnings": [
+                  "candidate_units_are_heuristic_not_semantic_proof"
+                ]
+              },
+              "scope_binding": {
+                "answer_id": "fixed-F01",
+                "answer_version": 1,
+                "answer_sha256": "03b0f2cc58cc21a4ddcc4157c2dad0ece200dcd3f07c1848b8f87052e353908b",
+                "knowledge_version": null,
+                "purpose": "independent",
+                "check_id": null,
+                "protocol_version": "fact-internal-flow-v2",
+                "candidate_ids": [
+                  "quote-bb35d60a7b7373123ad46f53"
+                ]
+              }
+            }
+          ],
+          "objection": null,
+          "authority_missing": false,
+          "repair": null,
+          "raw_repair": null,
+          "contract": "fact-internal-flow-v2",
+          "object_kind": "rule_application",
+          "classification_objection": null,
+          "fidelity": "faithful",
+          "fidelity_reason": "答案原文先复述规则再引19岁前提并推出可借阅，与命题一致。",
+          "dependencies": [
+            "S0B0",
+            "P0"
+          ],
+          "comparison": null,
+          "scalar_result": null,
+          "capability_limit": null,
+          "claim_id": "claim-5bfdd77c611f7115260ebaa9",
+          "component_id": "claim-5bfdd77c611f7115260ebaa9-part-1",
+          "origin": "model_judgment"
+        }
+      ],
+      "execution_issues": []
+    },
+    {
+      "id": "F02-v2",
+      "status": "complete",
+      "seconds": 1.8441771999932826,
+      "attempts": [
+        {
+          "call_number": 1,
+          "correction": false,
+          "output_status": "valid_structure",
+          "duration_ms": 1738,
+          "usage": {
+            "input_tokens": 1665,
+            "output_tokens": 205,
+            "total_tokens": 1870,
+            "cost_amount": null,
+            "currency": null,
+            "cache_hit_tokens": 384,
+            "cache_miss_tokens": 1281
+          },
+          "validation_error": null,
+          "raw_response_text": "{\"judgments\":[{\"target_id\":\"F0C0\",\"status\":\"contradicted\",\"basis_ids\":[\"S0B0\",\"P0\"],\"reason\":\"规则要求温度不高于4度才可入库；前提给出样本温度为8度，8高于4，违反入库条件，故“符合条件、可以入库”的结论被否定。\",\"conditions\":[{\"basis_id\":\"S0B0\",\"required\":true,\"answer_quote\":\"\",\"preserved\":false}],\"repair\":{\"basis_id\":\"S0B0\",\"replacement\":\"样本温度为8度，高于4度，不符合入库条件，不可入库。\"},\"requires_authoritative_source\":false,\"object_kind\":\"rule_application\",\"classification_objection\":null,\"fidelity\":\"faithful\",\"fidelity_reason\":\"提取命题与答案文本一致，均陈述8度符合不高于4度条件并可入库。\",\"dependencies\":[\"S0B0\",\"P0\"],\"comparison\":null}]}"
+        }
+      ],
+      "component_reviews": [
+        {
+          "claim_id": "claim-e43e114c76ba9b25bd5f0a7f",
+          "component_id": "claim-e43e114c76ba9b25bd5f0a7f-part-0",
+          "status": "contradicted",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "提取命题与答案文本一致，均陈述8度符合不高于4度条件并可入库。",
+          "raw_support_status": "contradicted",
+          "review_disposition": "assessed",
+          "review_projection_version": "fact-internal-flow-v2",
+          "selected_bound_bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "body-F02",
+              "excerpt": {
+                "evidence_id": "body-F02",
+                "text": "合成样本规则：只有温度不高于4度的样本才允许入库。",
+                "start_offset": 0,
+                "end_offset": 25
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-d84d8dfb51ce0beee7529db0"
+            },
+            {
+              "type": "task_premise_reference",
+              "evidence_id": null,
+              "excerpt": null,
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": null,
+              "premise_reference": {
+                "premise_id": "task-premise-6fae85e232eceba2412f095b9c851ebd",
+                "task_id": "task-F02",
+                "context_sha256": "e8c54776c03758699fd580c3eec1a936045565bf31ea109c6d17ae22a0b158cd",
+                "source_field": "user_context",
+                "kind": "stipulated",
+                "text": "样本温度为8度。",
+                "start_offset": 0,
+                "end_offset": 8,
+                "version": "task-premise-catalog-v1"
+              }
+            }
+          ]
+        }
+      ],
+      "object_reviews": [
+        {
+          "raw_model_status": "contradicted",
+          "effective_support_status": "contradicted",
+          "semantic_uncertain": false,
+          "condition_bindings": [
+            {
+              "basis_id": "S0B0",
+              "required": true,
+              "answer_quote": "",
+              "preserved": false,
+              "program_source": {
+                "quote_id": "quote-d84d8dfb51ce0beee7529db0",
+                "evidence_id": "body-F02",
+                "start_offset": 0,
+                "end_offset": 25,
+                "text": "合成样本规则：只有温度不高于4度的样本才允许入库。",
+                "context_start_offset": 0,
+                "context_end_offset": 25,
+                "context_text": "合成样本规则：只有温度不高于4度的样本才允许入库。",
+                "candidate_version": "literal-quote-candidates-v1",
+                "method": "whole_fragment",
+                "warnings": [
+                  "candidate_units_are_heuristic_not_semantic_proof"
+                ]
+              },
+              "scope_binding": {
+                "answer_id": "fixed-F02",
+                "answer_version": 1,
+                "answer_sha256": "5bdf941351538550380b415a017b11df4971fc30147926bf7acbd93acd08404f",
+                "knowledge_version": null,
+                "purpose": "independent",
+                "check_id": null,
+                "protocol_version": "fact-internal-flow-v2",
+                "candidate_ids": [
+                  "quote-d84d8dfb51ce0beee7529db0"
+                ]
+              }
+            }
+          ],
+          "objection": null,
+          "authority_missing": false,
+          "repair": {
+            "basis_id": "S0B0",
+            "replacement": "样本温度为8度，高于4度，不符合入库条件，不可入库。",
+            "source_quote_id": "scope-98dc4f7c1163f7868f3da32c-0",
+            "source_excerpt": "合成样本规则：只有温度不高于4度的样本才允许入库。",
+            "program_binding": {
+              "quote_id": "quote-d84d8dfb51ce0beee7529db0",
+              "evidence_id": "body-F02",
+              "start_offset": 0,
+              "end_offset": 25,
+              "text": "合成样本规则：只有温度不高于4度的样本才允许入库。",
+              "context_start_offset": 0,
+              "context_end_offset": 25,
+              "context_text": "合成样本规则：只有温度不高于4度的样本才允许入库。",
+              "candidate_version": "literal-quote-candidates-v1",
+              "method": "whole_fragment",
+              "warnings": [
+                "candidate_units_are_heuristic_not_semantic_proof"
+              ]
+            }
+          },
+          "raw_repair": {
+            "basis_id": "S0B0",
+            "replacement": "样本温度为8度，高于4度，不符合入库条件，不可入库。"
+          },
+          "contract": "fact-internal-flow-v2",
+          "object_kind": "rule_application",
+          "classification_objection": null,
+          "fidelity": "faithful",
+          "fidelity_reason": "提取命题与答案文本一致，均陈述8度符合不高于4度条件并可入库。",
+          "dependencies": [
+            "S0B0",
+            "P0"
+          ],
+          "comparison": null,
+          "scalar_result": null,
+          "capability_limit": null,
+          "claim_id": "claim-e43e114c76ba9b25bd5f0a7f",
+          "component_id": "claim-e43e114c76ba9b25bd5f0a7f-part-0",
+          "origin": "model_judgment"
+        }
+      ],
+      "execution_issues": []
+    },
+    {
+      "id": "F03-v2",
+      "status": "complete",
+      "seconds": 1.6275770000065677,
+      "attempts": [
+        {
+          "call_number": 1,
+          "correction": false,
+          "output_status": "valid_structure",
+          "duration_ms": 1518,
+          "usage": {
+            "input_tokens": 2004,
+            "output_tokens": 157,
+            "total_tokens": 2161,
+            "cost_amount": null,
+            "currency": null,
+            "cache_hit_tokens": 384,
+            "cache_miss_tokens": 1620
+          },
+          "validation_error": null,
+          "raw_response_text": "{\"judgments\":[{\"target_id\":\"F0C0\",\"status\":\"supported\",\"basis_ids\":[\"S0B0\",\"P0\"],\"reason\":\"规则规定学分至少20即可报名，前提给出学分为24，24≥20，满足条件；推理方向正确。\",\"conditions\":[{\"basis_id\":\"S0B0\",\"required\":true,\"answer_quote\":\"至少20学分的报名条件\",\"preserved\":true}],\"repair\":null,\"requires_authoritative_source\":false,\"object_kind\":\"rule_application\",\"classification_objection\":null,\"fidelity\":\"faithful\",\"fidelity_reason\":\"答案文本与命题一致，忠实提取。\",\"dependencies\":[\"S0B0\",\"P0\"],\"comparison\":null}]}"
+        }
+      ],
+      "component_reviews": [
+        {
+          "claim_id": "claim-e8e47aef6c760ae3cac1e15c",
+          "component_id": "claim-e8e47aef6c760ae3cac1e15c-part-0",
+          "status": "supported",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "答案文本与命题一致，忠实提取。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "fact-internal-flow-v2",
+          "selected_bound_bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "body-F03",
+              "excerpt": {
+                "evidence_id": "body-F03",
+                "text": "合成课程规则：学分至少20即可报名。",
+                "start_offset": 0,
+                "end_offset": 18
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-1e302ff59bdf40df90cd6863"
+            },
+            {
+              "type": "task_premise_reference",
+              "evidence_id": null,
+              "excerpt": null,
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": null,
+              "premise_reference": {
+                "premise_id": "task-premise-b53acb5e1e66a89a82c9b3b14e0f7e1f",
+                "task_id": "task-F03",
+                "context_sha256": "b11e9264dffa749aedc2b118ec17810ea5a6551e412460f730b1184b47fd8f76",
+                "source_field": "user_context",
+                "kind": "stipulated",
+                "text": "学分为24。",
+                "start_offset": 0,
+                "end_offset": 6,
+                "version": "task-premise-catalog-v1"
+              }
+            }
+          ]
+        }
+      ],
+      "object_reviews": [
+        {
+          "raw_model_status": "supported",
+          "effective_support_status": "supported",
+          "semantic_uncertain": false,
+          "condition_bindings": [
+            {
+              "basis_id": "S0B0",
+              "required": true,
+              "answer_quote": "至少20学分的报名条件",
+              "preserved": true,
+              "program_source": {
+                "quote_id": "quote-1e302ff59bdf40df90cd6863",
+                "evidence_id": "body-F03",
+                "start_offset": 0,
+                "end_offset": 18,
+                "text": "合成课程规则：学分至少20即可报名。",
+                "context_start_offset": 0,
+                "context_end_offset": 18,
+                "context_text": "合成课程规则：学分至少20即可报名。",
+                "candidate_version": "literal-quote-candidates-v1",
+                "method": "whole_fragment",
+                "warnings": [
+                  "candidate_units_are_heuristic_not_semantic_proof"
+                ]
+              },
+              "scope_binding": {
+                "answer_id": "fixed-F03",
+                "answer_version": 1,
+                "answer_sha256": "d1fd3ea12ced99e3bb9d3b49523cb60660bc567e42845ca679a0e110207d0c62",
+                "knowledge_version": null,
+                "purpose": "independent",
+                "check_id": null,
+                "protocol_version": "fact-internal-flow-v2",
+                "candidate_ids": [
+                  "quote-1e302ff59bdf40df90cd6863"
+                ]
+              }
+            }
+          ],
+          "objection": null,
+          "authority_missing": false,
+          "repair": null,
+          "raw_repair": null,
+          "contract": "fact-internal-flow-v2",
+          "object_kind": "rule_application",
+          "classification_objection": null,
+          "fidelity": "faithful",
+          "fidelity_reason": "答案文本与命题一致，忠实提取。",
+          "dependencies": [
+            "S0B0",
+            "P0"
+          ],
+          "comparison": null,
+          "scalar_result": null,
+          "capability_limit": null,
+          "claim_id": "claim-e8e47aef6c760ae3cac1e15c",
+          "component_id": "claim-e8e47aef6c760ae3cac1e15c-part-0",
+          "origin": "model_judgment"
+        }
+      ],
+      "execution_issues": []
+    },
+    {
+      "id": "F04-v2",
+      "status": "complete",
+      "seconds": 3.570349300003727,
+      "attempts": [
+        {
+          "call_number": 1,
+          "correction": false,
+          "output_status": "invalid_structure",
+          "duration_ms": 1945,
+          "usage": {
+            "input_tokens": 1823,
+            "output_tokens": 227,
+            "total_tokens": 2050,
+            "cost_amount": null,
+            "currency": null,
+            "cache_hit_tokens": 384,
+            "cache_miss_tokens": 1439
+          },
+          "validation_error": {
+            "stage": "fact-internal-flow-v2",
+            "field_path": "$.judgments[0].conditions[0]",
+            "constraint": "preserved_requires_literal_carrier",
+            "errors": [
+              {
+                "stage": "fact-internal-flow-v2",
+                "field_path": "$.judgments[0].conditions[0]",
+                "constraint": "preserved_requires_literal_carrier"
+              }
+            ],
+            "retained_items": [],
+            "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+          },
+          "raw_response_text": "{\"judgments\":[{\"target_id\":\"F0C0\",\"status\":\"supported\",\"basis_ids\":[\"S0B0\",\"P0\"],\"reason\":\"前提给出分数71（P0），正文基准为64分（S0B0），71>64，数值关系成立。P1姓名与本题无关，不纳入依赖。\",\"conditions\":[{\"basis_id\":\"S0B0\",\"required\":true,\"answer_quote\":\"本表比较基准为64分\",\"preserved\":true}],\"repair\":null,\"requires_authoritative_source\":false,\"object_kind\":\"numeric_comparison\",\"classification_objection\":null,\"fidelity\":\"faithful\",\"fidelity_reason\":\"答案文字与命题一致，正确提取了数值比较关系。\",\"dependencies\":[\"S0B0\",\"P0\"],\"comparison\":{\"left\":{\"value\":\"71\",\"quote\":\"分数为71\"},\"right\":{\"value\":\"64\",\"quote\":\"本表比较基准为64分\"},\"operator\":\">\",\"left_basis_id\":\"P0\",\"right_basis_id\":\"S0B0\"}}]}"
+        },
+        {
+          "call_number": 2,
+          "correction": true,
+          "output_status": "valid_structure",
+          "duration_ms": 1544,
+          "usage": {
+            "input_tokens": 3142,
+            "output_tokens": 219,
+            "total_tokens": 3361,
+            "cost_amount": null,
+            "currency": null,
+            "cache_hit_tokens": 1792,
+            "cache_miss_tokens": 1350
+          },
+          "validation_error": null,
+          "raw_response_text": "{\"judgments\":[{\"target_id\":\"F0C0\",\"status\":\"supported\",\"basis_ids\":[\"S0B0\",\"P0\"],\"reason\":\"P0给出分数71，S0B0给出正文基准64分，71>64，数值关系成立；P1姓名与本题无关，不纳入依赖。\",\"conditions\":[{\"basis_id\":\"S0B0\",\"required\":true,\"answer_quote\":\"\",\"preserved\":false}],\"repair\":null,\"requires_authoritative_source\":false,\"object_kind\":\"numeric_comparison\",\"classification_objection\":null,\"fidelity\":\"faithful\",\"fidelity_reason\":\"答案文字与命题一致，正确表达了71大于64的数值比较。\",\"dependencies\":[\"S0B0\",\"P0\"],\"comparison\":{\"left\":{\"value\":\"71\",\"quote\":\"分数为71\"},\"right\":{\"value\":\"64\",\"quote\":\"本表比较基准为64分\"},\"operator\":\">\",\"left_basis_id\":\"P0\",\"right_basis_id\":\"S0B0\"}}]}"
+        }
+      ],
+      "component_reviews": [
+        {
+          "claim_id": "claim-fe9c21d193dac3cffe5bf3ba",
+          "component_id": "claim-fe9c21d193dac3cffe5bf3ba-part-0",
+          "status": "insufficient_evidence",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "答案文字与命题一致，正确表达了71大于64的数值比较。",
+          "raw_support_status": "supported",
+          "review_disposition": "assessed",
+          "review_projection_version": "fact-internal-flow-v2",
+          "selected_bound_bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "body-F04",
+              "excerpt": {
+                "evidence_id": "body-F04",
+                "text": "合成资料：本表比较基准为64分。",
+                "start_offset": 0,
+                "end_offset": 16
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-5d059537fccc4d4f5b07fd29"
+            },
+            {
+              "type": "task_premise_reference",
+              "evidence_id": null,
+              "excerpt": null,
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": null,
+              "premise_reference": {
+                "premise_id": "task-premise-341a72c5bff661a223408ccf094fc437",
+                "task_id": "task-F04",
+                "context_sha256": "03269ce09dca9d82a3e9f6fc0cc735584a57e402ae119dda6299774df39ef439",
+                "source_field": "user_context",
+                "kind": "stipulated",
+                "text": "分数为71。",
+                "start_offset": 0,
+                "end_offset": 6,
+                "version": "task-premise-catalog-v1"
+              }
+            }
+          ]
+        }
+      ],
+      "object_reviews": [
+        {
+          "raw_model_status": "supported",
+          "effective_support_status": "insufficient_evidence",
+          "semantic_uncertain": false,
+          "condition_bindings": [
+            {
+              "basis_id": "S0B0",
+              "required": true,
+              "answer_quote": "",
+              "preserved": false,
+              "program_source": {
+                "quote_id": "quote-5d059537fccc4d4f5b07fd29",
+                "evidence_id": "body-F04",
+                "start_offset": 0,
+                "end_offset": 16,
+                "text": "合成资料：本表比较基准为64分。",
+                "context_start_offset": 0,
+                "context_end_offset": 16,
+                "context_text": "合成资料：本表比较基准为64分。",
+                "candidate_version": "literal-quote-candidates-v1",
+                "method": "whole_fragment",
+                "warnings": [
+                  "candidate_units_are_heuristic_not_semantic_proof"
+                ]
+              },
+              "scope_binding": {
+                "answer_id": "fixed-F04",
+                "answer_version": 1,
+                "answer_sha256": "7c53196770a0e90934fb624416c2d60435efd4237fb5d272a367a6c1fa26eaa8",
+                "knowledge_version": null,
+                "purpose": "independent",
+                "check_id": null,
+                "protocol_version": "fact-internal-flow-v2",
+                "candidate_ids": [
+                  "quote-5d059537fccc4d4f5b07fd29"
+                ]
+              }
+            }
+          ],
+          "objection": null,
+          "authority_missing": false,
+          "repair": null,
+          "raw_repair": null,
+          "contract": "fact-internal-flow-v2",
+          "object_kind": "numeric_comparison",
+          "classification_objection": null,
+          "fidelity": "faithful",
+          "fidelity_reason": "答案文字与命题一致，正确表达了71大于64的数值比较。",
+          "dependencies": [
+            "S0B0",
+            "P0"
+          ],
+          "comparison": {
+            "left": {
+              "value": "71",
+              "quote": "分数为71"
+            },
+            "right": {
+              "value": "64",
+              "quote": "本表比较基准为64分"
+            },
+            "operator": ">",
+            "left_basis_id": "P0",
+            "right_basis_id": "S0B0"
+          },
+          "scalar_result": true,
+          "capability_limit": "scalar_order_only; units_and_relevance_require_semantic_review",
+          "claim_id": "claim-fe9c21d193dac3cffe5bf3ba",
+          "component_id": "claim-fe9c21d193dac3cffe5bf3ba-part-0",
+          "origin": "model_judgment"
+        }
+      ],
+      "execution_issues": []
+    },
+    {
+      "id": "F05-v2",
+      "status": "complete",
+      "seconds": 4.018144300003769,
+      "attempts": [
+        {
+          "call_number": 1,
+          "correction": false,
+          "output_status": "invalid_structure",
+          "duration_ms": 1899,
+          "usage": {
+            "input_tokens": 1659,
+            "output_tokens": 196,
+            "total_tokens": 1855,
+            "cost_amount": null,
+            "currency": null,
+            "cache_hit_tokens": 384,
+            "cache_miss_tokens": 1275
+          },
+          "validation_error": {
+            "stage": "fact-internal-flow-v2",
+            "field_path": "$.judgments[0].classification_objection",
+            "constraint": "changed_obligation_requires_explicit_objection",
+            "errors": [
+              {
+                "stage": "fact-internal-flow-v2",
+                "field_path": "$.judgments[0].classification_objection",
+                "constraint": "changed_obligation_requires_explicit_objection"
+              }
+            ],
+            "retained_items": [],
+            "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+          },
+          "raw_response_text": "{\"judgments\":[{\"target_id\":\"F0C0\",\"status\":\"insufficient_evidence\",\"basis_ids\":[\"S0B0\",\"P0\"],\"reason\":\"档案规则规定记录至少2页时可以编号，属于必要条件；而本次记录有3页这一前提未被答案引用，答案直接陈述“规则允许至少2页的记录编号”，把规则的条件性许可表述为无条件允许，与原文的限定方向不符。\",\"conditions\":[{\"basis_id\":\"S0B0\",\"required\":true,\"answer_quote\":\"至少2页\",\"preserved\":true}],\"repair\":null,\"requires_authoritative_source\":true,\"object_kind\":\"rule_application\",\"classification_objection\":null,\"fidelity\":\"faithful\",\"fidelity_reason\":\"提取的命题与答案文本一致，答案确实陈述规则允许至少2页的记录编号。\",\"dependencies\":[\"S0B0\",\"P0\"],\"comparison\":null}]}"
+        },
+        {
+          "call_number": 2,
+          "correction": true,
+          "output_status": "valid_structure",
+          "duration_ms": 1995,
+          "usage": {
+            "input_tokens": 2929,
+            "output_tokens": 240,
+            "total_tokens": 3169,
+            "cost_amount": null,
+            "currency": null,
+            "cache_hit_tokens": 1536,
+            "cache_miss_tokens": 1393
+          },
+          "validation_error": null,
+          "raw_response_text": "{\"judgments\":[{\"target_id\":\"F0C0\",\"status\":\"insufficient_evidence\",\"basis_ids\":[\"S0B0\",\"P0\"],\"reason\":\"档案规则规定记录至少2页时可以编号，即条件性许可；答案把该规则表述为无条件允许“至少2页编号”，未保留条件/许可方向。且本次记录有3页的前提未被答案使用。\",\"conditions\":[{\"basis_id\":\"S0B0\",\"required\":true,\"answer_quote\":\"至少2页\",\"preserved\":true}],\"repair\":null,\"requires_authoritative_source\":true,\"object_kind\":\"uncertain\",\"classification_objection\":\"所给类别为input_evidence_coverage/input_provided，但命题是对档案规则内容的复述，证据是对规则文本的覆盖，不是对输入证据是否提供的判断；宜按可评估的规则内容判断，而非输入提供覆盖。\",\"fidelity\":\"faithful\",\"fidelity_reason\":\"提取的命题与答案文本一致，答案确实陈述规则允许至少2页的记录编号。\",\"dependencies\":[\"S0B0\",\"P0\"],\"comparison\":null}]}"
+        }
+      ],
+      "component_reviews": [
+        {
+          "claim_id": "claim-20018051d5b1950d63332b00",
+          "component_id": "claim-20018051d5b1950d63332b00-part-0",
+          "status": "not_assessable",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "input_provided",
+          "fidelity_rationale": "提取的命题与答案文本一致，答案确实陈述规则允许至少2页的记录编号。",
+          "raw_support_status": "insufficient_evidence",
+          "review_disposition": "review_required",
+          "review_projection_version": "fact-internal-flow-v2",
+          "selected_bound_bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "body-F05",
+              "excerpt": {
+                "evidence_id": "body-F05",
+                "text": "合成档案规则：记录至少2页时可以编号。",
+                "start_offset": 0,
+                "end_offset": 19
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-2f019254ec892c64600106d6"
+            },
+            {
+              "type": "task_premise_reference",
+              "evidence_id": null,
+              "excerpt": null,
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": null,
+              "premise_reference": {
+                "premise_id": "task-premise-5ed9c9ad1380ab76e25b897d42ac9900",
+                "task_id": "task-F05",
+                "context_sha256": "15b46c805ac3b667ad706bd9548b842683116667a72d4c0aba01d3f38c73f60a",
+                "source_field": "user_context",
+                "kind": "stipulated",
+                "text": "本次记录有3页。",
+                "start_offset": 0,
+                "end_offset": 8,
+                "version": "task-premise-catalog-v1"
+              }
+            }
+          ]
+        }
+      ],
+      "object_reviews": [
+        {
+          "raw_model_status": "insufficient_evidence",
+          "effective_support_status": "not_assessable",
+          "semantic_uncertain": true,
+          "condition_bindings": [
+            {
+              "basis_id": "S0B0",
+              "required": true,
+              "answer_quote": "至少2页",
+              "preserved": true,
+              "program_source": {
+                "quote_id": "quote-2f019254ec892c64600106d6",
+                "evidence_id": "body-F05",
+                "start_offset": 0,
+                "end_offset": 19,
+                "text": "合成档案规则：记录至少2页时可以编号。",
+                "context_start_offset": 0,
+                "context_end_offset": 19,
+                "context_text": "合成档案规则：记录至少2页时可以编号。",
+                "candidate_version": "literal-quote-candidates-v1",
+                "method": "whole_fragment",
+                "warnings": [
+                  "candidate_units_are_heuristic_not_semantic_proof"
+                ]
+              },
+              "scope_binding": {
+                "answer_id": "fixed-F05",
+                "answer_version": 1,
+                "answer_sha256": "f1d05aec3cb70e3437adbf43bc78b6cdb644ec2a3f10d7bef5d23606b256dc40",
+                "knowledge_version": null,
+                "purpose": "independent",
+                "check_id": null,
+                "protocol_version": "fact-internal-flow-v2",
+                "candidate_ids": [
+                  "quote-2f019254ec892c64600106d6"
+                ]
+              }
+            }
+          ],
+          "objection": {
+            "kind": "classification",
+            "reason": "所给类别为input_evidence_coverage/input_provided，但命题是对档案规则内容的复述，证据是对规则文本的覆盖，不是对输入证据是否提供的判断；宜按可评估的规则内容判断，而非输入提供覆盖。"
+          },
+          "authority_missing": false,
+          "repair": null,
+          "raw_repair": null,
+          "contract": "fact-internal-flow-v2",
+          "object_kind": "uncertain",
+          "classification_objection": "所给类别为input_evidence_coverage/input_provided，但命题是对档案规则内容的复述，证据是对规则文本的覆盖，不是对输入证据是否提供的判断；宜按可评估的规则内容判断，而非输入提供覆盖。",
+          "fidelity": "faithful",
+          "fidelity_reason": "提取的命题与答案文本一致，答案确实陈述规则允许至少2页的记录编号。",
+          "dependencies": [
+            "S0B0",
+            "P0"
+          ],
+          "comparison": null,
+          "scalar_result": null,
+          "capability_limit": null,
+          "claim_id": "claim-20018051d5b1950d63332b00",
+          "component_id": "claim-20018051d5b1950d63332b00-part-0",
+          "origin": "model_judgment"
+        }
+      ],
+      "execution_issues": []
+    },
+    {
+      "id": "F08-v2",
+      "status": "complete",
+      "seconds": 1.5752396000025328,
+      "attempts": [
+        {
+          "call_number": 1,
+          "correction": false,
+          "output_status": "valid_structure",
+          "duration_ms": 1457,
+          "usage": {
+            "input_tokens": 1660,
+            "output_tokens": 176,
+            "total_tokens": 1836,
+            "cost_amount": null,
+            "currency": null,
+            "cache_hit_tokens": 384,
+            "cache_miss_tokens": 1276
+          },
+          "validation_error": null,
+          "raw_response_text": "{\"judgments\":[{\"target_id\":\"F0C0\",\"status\":\"insufficient_evidence\",\"basis_ids\":[\"S0B0\",\"P0\"],\"reason\":\"前提只给出电流为5安；但资料明确未提供寿命模型、温度或试验数据，无法从电流推出寿命为50年，因果关系缺乏依据。\",\"conditions\":[{\"basis_id\":\"S0B0\",\"required\":true,\"answer_quote\":\"\",\"preserved\":false}],\"repair\":null,\"requires_authoritative_source\":false,\"object_kind\":\"engineering_relation\",\"classification_objection\":null,\"fidelity\":\"faithful\",\"fidelity_reason\":\"命题与答案文本'电流为5安，因此设备寿命为50年。'字面一致。\",\"dependencies\":[\"S0B0\",\"P0\"],\"comparison\":null}]}"
+        }
+      ],
+      "component_reviews": [
+        {
+          "claim_id": "claim-d6755aa68cae9bdf1a114a69",
+          "component_id": "claim-d6755aa68cae9bdf1a114a69-part-0",
+          "status": "insufficient_evidence",
+          "basis_indexes": [
+            0,
+            1
+          ],
+          "classification_issue": null,
+          "origin": "model_judgment",
+          "reason_code": null,
+          "fidelity_status": "faithful",
+          "reviewed_assertion_role": "asserted",
+          "verification_obligation": "technical_truth",
+          "fidelity_rationale": "命题与答案文本'电流为5安，因此设备寿命为50年。'字面一致。",
+          "raw_support_status": "insufficient_evidence",
+          "review_disposition": "assessed",
+          "review_projection_version": "fact-internal-flow-v2",
+          "selected_bound_bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "body-F08",
+              "excerpt": {
+                "evidence_id": "body-F08",
+                "text": "合成设备资料：未给出寿命模型、温度或试验数据。",
+                "start_offset": 0,
+                "end_offset": 23
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-9bebdfe50f228c0c24a66405"
+            },
+            {
+              "type": "task_premise_reference",
+              "evidence_id": null,
+              "excerpt": null,
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": null,
+              "premise_reference": {
+                "premise_id": "task-premise-b74e171f4cf61f93dee6b634910857e7",
+                "task_id": "task-F08",
+                "context_sha256": "61debdc684664c478c76d8aca7c4eb76edbd4e1955e71c2c094b5db0c37aebf7",
+                "source_field": "user_context",
+                "kind": "stipulated",
+                "text": "电流为5安。",
+                "start_offset": 0,
+                "end_offset": 6,
+                "version": "task-premise-catalog-v1"
+              }
+            }
+          ]
+        }
+      ],
+      "object_reviews": [
+        {
+          "raw_model_status": "insufficient_evidence",
+          "effective_support_status": "insufficient_evidence",
+          "semantic_uncertain": false,
+          "condition_bindings": [
+            {
+              "basis_id": "S0B0",
+              "required": true,
+              "answer_quote": "",
+              "preserved": false,
+              "program_source": {
+                "quote_id": "quote-9bebdfe50f228c0c24a66405",
+                "evidence_id": "body-F08",
+                "start_offset": 0,
+                "end_offset": 23,
+                "text": "合成设备资料：未给出寿命模型、温度或试验数据。",
+                "context_start_offset": 0,
+                "context_end_offset": 23,
+                "context_text": "合成设备资料：未给出寿命模型、温度或试验数据。",
+                "candidate_version": "literal-quote-candidates-v1",
+                "method": "whole_fragment",
+                "warnings": [
+                  "candidate_units_are_heuristic_not_semantic_proof"
+                ]
+              },
+              "scope_binding": {
+                "answer_id": "fixed-F08",
+                "answer_version": 1,
+                "answer_sha256": "378a46a1a9caadc34370146371779bf14d249ef2fd1573fabdc1037790c47063",
+                "knowledge_version": null,
+                "purpose": "independent",
+                "check_id": null,
+                "protocol_version": "fact-internal-flow-v2",
+                "candidate_ids": [
+                  "quote-9bebdfe50f228c0c24a66405"
+                ]
+              }
+            }
+          ],
+          "objection": null,
+          "authority_missing": false,
+          "repair": null,
+          "raw_repair": null,
+          "contract": "fact-internal-flow-v2",
+          "object_kind": "engineering_relation",
+          "classification_objection": null,
+          "fidelity": "faithful",
+          "fidelity_reason": "命题与答案文本'电流为5安，因此设备寿命为50年。'字面一致。",
+          "dependencies": [
+            "S0B0",
+            "P0"
+          ],
+          "comparison": null,
+          "scalar_result": null,
+          "capability_limit": "no_engineering_calculator; body_support_is_not_engineering_validation",
+          "claim_id": "claim-d6755aa68cae9bdf1a114a69",
+          "component_id": "claim-d6755aa68cae9bdf1a114a69-part-0",
+          "origin": "model_judgment"
+        }
+      ],
+      "execution_issues": []
+    }
+  ]
+}

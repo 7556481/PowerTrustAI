@@ -1,5 +1,14 @@
 # 文档索引
 
+## 2026-10-24 归档续办
+
+[v2真实复验报告](evaluation/fact-internal-flow-v2/live-report-v1.md)已完成归档核对；本次仅解除上次审批用量限制后的提交阻断，不新增模型执行，原结果与参考不变。
+
+## 2026-10-23 最新v2固定参考真实复验
+
+- [本批真实短报告](evaluation/fact-internal-flow-v2/live-report-v1.md)、[必要响应原文](evaluation/fact-internal-flow-v2/live-predictions-v1.json)、[小统计](evaluation/fact-internal-flow-v2/live-results-v1.json)：仅v2六项，6完整、首次4/6、8调用含2纠正；F04有效不足、F05合法异议但内容仍错，生产不变，不自动新批。
+- [实际单臂执行计划](evaluation/fact-internal-flow-v2/actual-execution-plan-v1.json)、[155文件冻结](evaluation/fact-internal-flow-v2/execution-freeze-v1.json)：原v1/v2提案保留，历史v1仅描述参考，无严格配对提升率。
+
 ## 2026-10-23 最新事实审核契约审计
 
 - [v2审计、设计比较及实现边界](evaluation/fact-internal-flow-v2/README.md)：联合判断与独立义务确认成本比较；统一字段规范，保留独立异议，不做关键词分类或语义补造。

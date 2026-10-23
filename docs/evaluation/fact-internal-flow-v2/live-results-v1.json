@@ -1,0 +1,114 @@
+{
+  "version": "fact-internal-flow-v2-fixed-reference-live-v1",
+  "scope": "v2 fixed-reference only; historical v1 descriptive, no strict paired improvement rate",
+  "planned_cases": 6,
+  "planned_components": 7,
+  "completed_cases": 6,
+  "complete_components": 7,
+  "execution_failed": 0,
+  "unexecuted": 0,
+  "calls": 8,
+  "initial_calls": 6,
+  "corrections": 2,
+  "first_contract_valid": 4,
+  "first_contract_denominator": 6,
+  "final_execution_complete": 6,
+  "final_execution_denominator": 6,
+  "raw_final_status_counts": {
+    "supported": 4,
+    "contradicted": 1,
+    "insufficient_evidence": 2
+  },
+  "effective_final_status_counts": {
+    "supported": 3,
+    "contradicted": 1,
+    "insufficient_evidence": 2,
+    "not_assessable": 1
+  },
+  "ordinary_reference_cases": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F08"
+  ],
+  "ordinary_reference_components": 6,
+  "ordinary_raw_label_matches": 6,
+  "ordinary_effective_label_matches": 5,
+  "F05_injected_diagnostic": {
+    "initial_explicit_objection": false,
+    "final_explicit_objection": true,
+    "final_structurally_valid": true,
+    "fidelity": "faithful",
+    "object_kind": "uncertain",
+    "raw": "insufficient_evidence",
+    "raw_reference": "supported",
+    "effective": "not_assessable",
+    "effective_reference": "not_assessable/review_required",
+    "content_matches": false,
+    "effective_disposition_matches": true,
+    "unrelated_current_premise_selected": true,
+    "needed_correction": true
+  },
+  "F04": {
+    "both_operand_sources_retained": true,
+    "scalar_result": true,
+    "initial_condition_quote_not_in_answer": true,
+    "final_condition": {
+      "required": true,
+      "preserved": false,
+      "answer_quote": ""
+    },
+    "final_condition_structurally_consistent": true,
+    "condition_semantic_resolution_matches_reference": false,
+    "raw": "supported",
+    "effective": "insufficient_evidence",
+    "reference": "supported",
+    "needed_correction": true
+  },
+  "F08": {
+    "missing_lifetime_model_explicit": true,
+    "scalar_to_engineering_inference_rejected": true,
+    "raw": "insufficient_evidence",
+    "effective": "insufficient_evidence"
+  },
+  "rule_application_dependencies": {
+    "cases": [
+      "F01",
+      "F02",
+      "F03"
+    ],
+    "complete_relevant_dependencies": 3,
+    "unrelated_premises_selected": 0
+  },
+  "rule_restatement": {
+    "F01": "literature_rule, body only",
+    "F05": "uncertain after correction, current premise incorrectly retained"
+  },
+  "usage": {
+    "input_tokens": 16920,
+    "output_tokens": 1745,
+    "total_tokens": 18665,
+    "cache_hit_tokens": 5248,
+    "cache_miss_tokens": 11672
+  },
+  "actual_billed_cost": "unknown",
+  "summed_model_ms": 14432,
+  "summed_branch_seconds": 15.068497300002491,
+  "offline_gate_tests": 23,
+  "offline_gate_seconds": 4.402,
+  "prior_full_regression_tests": 1174,
+  "full_regression_repeated_this_batch": false,
+  "production_changed": false,
+  "additional_runs_authorized_or_started": false,
+  "no_strict_paired_improvement_rate": true,
+  "verification": {
+    "frozen_files_unchanged": 155,
+    "prior_private_artifacts_unchanged": 89,
+    "new_private_json_artifacts": 58,
+    "initial_message_hashes_match": 6,
+    "exact_public_response_texts_match": 8,
+    "original_proposal_and_reference_unchanged": true,
+    "offline_log_sha256": "50aacc9a18f496a961843d785b940c4785c6e7c6e5428a531da5955d18f74db5"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "version": "fact-internal-flow-v2-fixed-reference-live-v1",
+  "authorization": "User accepted v2 and six cases, authorized this v2-only DeepSeek run; historical v1 descriptive only, no paid v1 and no strict paired improvement rate.",
+  "model": {
+    "model_id": "deepseek-flash",
+    "timeout_seconds": 90,
+    "max_output_tokens": 8000,
+    "max_response_chars": 96000,
+    "endpoint": "https://api.deepseek.com",
+    "credential_env": "DEEPSEEK_API_KEY"
+  },
+  "order": [
+    {
+      "case": "F01",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "ac34b5ea41c92886caecd7b4cfd82fc8483f90215b9e1c730a52e2331e06ff16"
+    },
+    {
+      "case": "F02",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "5cc13d7f89f1076c759689b847ccec33de2d219ab1b8da1256f894de94852a9c"
+    },
+    {
+      "case": "F03",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "207ac59c0b90b0a82f5082d1b3e1a182a3e727247b2b2fe6e23d5a361bdbb833"
+    },
+    {
+      "case": "F04",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "21ab19b6aaac78bc5c05520b7e9bcdaeb2bff48d155f636bcbc56ab89f129a6e"
+    },
+    {
+      "case": "F05",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "674827a8be45beb283d4a36232e3cfbea8d30f0203c4607bf52f9fe792c2fc5d"
+    },
+    {
+      "case": "F08",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "f975bf68f208beff781ef814355072c4ae11f1589dcf34283d1a652740402a38"
+    }
+  ],
+  "initial_calls": 6,
+  "corrections_per_branch": 1,
+  "max_sends": 12,
+  "budget_per_branch": 40,
+  "budget_deadline_seconds": 800,
+  "branch_timeout_seconds": 110,
+  "stop": "First unexpected final structure, execution, cancellation, timeout or storage failure stops all later sends.",
+  "no_retry_resume_supplement": true,
+  "production_changed": false,
+  "prior_proposal_preserved_sha256": "6e9ac303e465ac2fe559f7cf6d467d6f428bdeac7d0f2d1695fcbabe023a7ea6",
+  "reference_sha256": "0025fb2329d9e1768ce0c48b478878e7946a6a41a973c8d1622fcac25db1f190",
+  "scoring": "Original and effective support separate; F05 content supported plus explicit objection/fidelity faithful/effective review-required. Fixed six cases/seven components; F05 diagnostic separate. No reduced denominators or paired improvement rates."
+}
