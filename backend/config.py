@@ -36,7 +36,7 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
-        if self.fact_internal_flow not in ('production','langgraph_candidate_v1'):raise ValueError('Invalid fact internal flow')
+        if self.fact_internal_flow not in ('production','langgraph_candidate_v1','joint_v2','two_stage_v1'):raise ValueError('Invalid fact internal flow')
         if self.fact_internal_flow!='production' and self.profile!='real':raise ValueError('Candidate requires actual Factory assembly, not fake demo')
         if self.fact_internal_flow!='production' and self.verification_schema!=13:raise ValueError('Candidate requires explicit schema13 baseline')
         if self.execution_path not in ('sequential','langgraph_v1'):raise ValueError('Invalid execution path')

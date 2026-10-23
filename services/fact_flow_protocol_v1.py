@@ -68,7 +68,7 @@ def full_wire(inputs):
 
 
 def validate_projection(output, claim, review, finding, path):
-    require(output.flow_protocol in (VERSION, 'fact-internal-flow-v2'), 'known flow protocol required', path=path)
+    require(output.flow_protocol in (VERSION, 'fact-internal-flow-v2', 'fact-two-stage-v1'), 'known flow protocol required', path=path)
     record=next((r for r in output.object_reviews if r['claim_id']==claim.claim_id and r['component_id']==review.component_id),None)
     require(record is not None, 'candidate object record required', path=path)
     if record['classification_objection'] or record['fidelity']!='faithful' or record['object_kind']=='uncertain':

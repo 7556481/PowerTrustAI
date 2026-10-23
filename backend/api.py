@@ -238,7 +238,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
     @app.post('/runs',status_code=202,dependencies=[Depends(authorized)])
     async def submit(body:Submit,request:Request):
         try:
-            if body.premise_declarations and config.fact_internal_flow!='langgraph_candidate_v1':raise InputError('Explicit premises require candidate flow')
+            if body.premise_declarations and config.fact_internal_flow=='production':raise InputError('Explicit premises require candidate flow')
             indexed=()
             if body.existing_citations:
                 if config.profile!='real':raise InputError('Indexed references require real knowledge snapshot')

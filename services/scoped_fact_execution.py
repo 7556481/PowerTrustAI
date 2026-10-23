@@ -18,7 +18,7 @@ from model_adapter.runtime import current_budget,model_scope,ModelBudget
 
 async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruction):
     if current_budget() is None:
-        with model_scope(ModelBudget(2+len(inputs.answer.citations))):return await execute(agent,inputs,catalog=catalog,prompt_version=prompt_version,contract_version=contract_version,instruction=instruction)
+        with model_scope(ModelBudget((3 if hasattr(catalog,"prepare_stage") else 2)+len(inputs.answer.citations))):return await execute(agent,inputs,catalog=catalog,prompt_version=prompt_version,contract_version=contract_version,instruction=instruction)
     if catalog is None:
         from agents.verification_contract_v14 import ReviewCatalog
         cat=ReviewCatalog(inputs)
@@ -39,6 +39,10 @@ async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruc
         isolation=WireIsolation(baseline,strict,{'judgments':'target_id'},cat.mark);payload=cat.payload(group)
         path=None if agent.diagnostics is None else agent.diagnostics.save_scope(payload);before=len(current_budget().records)
         try:
+            if group==tuple(facts) and hasattr(cat,'prepare_stage'):
+                await cat.prepare_stage(agent,group,max_corrections=0 if corrected else 1)
+                corrected=corrected or any(r.correction for r in current_budget().records[before:])
+                payload=cat.payload(group)
             await structured_request(agent.client,(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),prompt_version,isolation.parse,
                 diagnostics=agent.diagnostics,response_contract_version=contract_version,candidate_catalog_path=path,max_corrections=0 if corrected else 1,
                 correction_context=lambda value,diagnostic:cat.correction_context(group,value,diagnostic),

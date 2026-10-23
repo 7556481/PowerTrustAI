@@ -54,7 +54,7 @@ class ComponentFactory:
             if hasattr(resource.encoder,'close'):resource.encoder.close()
             self.semantic_resource=None
     def preflight(self):
-        if self.config.execution_path=='langgraph_v1' or self.config.fact_internal_flow=='langgraph_candidate_v1':
+        if self.config.execution_path=='langgraph_v1' or self.config.fact_internal_flow!='production':
             try:
                 from harness.graph_runtime_v1 import validate_versions,build_graph
                 validate_versions();build_graph()
@@ -170,11 +170,13 @@ class ComponentFactory:
             manifest['effective_corpus_query_version']='topic-subject-grammar-bm25-v2'
             manifest['ranking_work_cache']='per-run-8-entries-max64-numeric-hits; full-body/context replay retained'
             manifest['citation_execution']='complete-single-scope-v1; same shared one-correction budget'
-        if self.config.fact_internal_flow=='langgraph_candidate_v1':
-            from services.fact_flow_protocol_v1 import SYSTEM,PROMPT,VERSION
+        if self.config.fact_internal_flow!='production':
+            from importlib import import_module
+            protocol=import_module({'langgraph_candidate_v1':'services.fact_flow_protocol_v1','joint_v2':'services.fact_flow_protocol_v2','two_stage_v1':'services.fact_two_stage_v1'}[self.config.fact_internal_flow])
+            SYSTEM,PROMPT,VERSION=protocol.SYSTEM,protocol.PROMPT,protocol.VERSION
             manifest['prompts']['verification']=PROMPT
             manifest['contracts']['verification']=VERSION
-            manifest['review_message_profile']='fact-internal-flow-v1'
+            manifest['review_message_profile']=VERSION
             manifest['review_transport']='target-scoped-catalog-v1'
             manifest['fact_flow_protocol']=VERSION
             manifest['template_sha256']={k:hashlib.sha256(SYSTEM.encode()).hexdigest() for k in ('independent','original_citation')}
@@ -190,8 +192,12 @@ class ComponentFactory:
             return Bundle(harness)
         from agents.generation import EvidenceGenerationAgent
         from agents.evidence_verification import ModelEvidenceVerificationAgent
-        if self.config.fact_internal_flow=='langgraph_candidate_v1':
+        if self.config.fact_internal_flow!='production':
             from agents.fact_flow_v1 import FactFlowAgent as FactAgent
+            if self.config.fact_internal_flow=='joint_v2':
+                from services.fact_flow_protocol_v2 import create_agent as FactAgent
+            elif self.config.fact_internal_flow=='two_stage_v1':
+                from services.fact_two_stage_v1 import create_agent as FactAgent
         else:FactAgent=ModelEvidenceVerificationAgent
         from agents.power_domain_review import ModelPowerDomainReviewAgent
         from agents.revision import ModelRevisionAgent
