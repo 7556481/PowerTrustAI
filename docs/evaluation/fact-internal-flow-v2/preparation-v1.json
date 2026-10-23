@@ -1,0 +1,105 @@
+{
+  "state": "PREPARATION_ONLY_NOT_AUTHORIZED_OR_SENT",
+  "model": {
+    "model_id": "deepseek-flash",
+    "timeout_seconds": 90,
+    "max_output_tokens": 8000,
+    "max_response_chars": 96000,
+    "endpoint": "https://api.deepseek.com",
+    "credential_env": "DEEPSEEK_API_KEY"
+  },
+  "order": [
+    {
+      "case": "F01",
+      "variant": "v1",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "initial_calls": 1,
+      "message_sha256": "2d39ed0d63489003d0d705bf6cd3d38b9ddec84eb290ab2687ceed6a5a9405de"
+    },
+    {
+      "case": "F01",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "ac34b5ea41c92886caecd7b4cfd82fc8483f90215b9e1c730a52e2331e06ff16"
+    },
+    {
+      "case": "F02",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "5cc13d7f89f1076c759689b847ccec33de2d219ab1b8da1256f894de94852a9c"
+    },
+    {
+      "case": "F02",
+      "variant": "v1",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "initial_calls": 1,
+      "message_sha256": "75c5f499541ff1d3a0936133e8fe5c4aab71055f1560c1936f8fb1371acbf699"
+    },
+    {
+      "case": "F03",
+      "variant": "v1",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "initial_calls": 1,
+      "message_sha256": "77b0343511920382d92ac7a3197e31471cd59817959c2006313918743e833dc5"
+    },
+    {
+      "case": "F03",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "207ac59c0b90b0a82f5082d1b3e1a182a3e727247b2b2fe6e23d5a361bdbb833"
+    },
+    {
+      "case": "F04",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "21ab19b6aaac78bc5c05520b7e9bcdaeb2bff48d155f636bcbc56ab89f129a6e"
+    },
+    {
+      "case": "F04",
+      "variant": "v1",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "initial_calls": 1,
+      "message_sha256": "9e94ce34ba0b4a9fb6c34f70d4dc98f3dc7c4f615505aed7fd0160f45546ba04"
+    },
+    {
+      "case": "F05",
+      "variant": "v1",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "initial_calls": 1,
+      "message_sha256": "46fd0908d430da73acc9d4d45492d455db6e46000d704ea56e7df362d2eb1042"
+    },
+    {
+      "case": "F05",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "674827a8be45beb283d4a36232e3cfbea8d30f0203c4607bf52f9fe792c2fc5d"
+    },
+    {
+      "case": "F08",
+      "variant": "v2",
+      "prompt_version": "evidence-verification-v9.31-fact-internal-flow-v2-dev",
+      "initial_calls": 1,
+      "message_sha256": "f975bf68f208beff781ef814355072c4ae11f1589dcf34283d1a652740402a38"
+    },
+    {
+      "case": "F08",
+      "variant": "v1",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "initial_calls": 1,
+      "message_sha256": "4abc08d79d036b6696a45db9d51179a03e69b477689e9231fa54e9bfc120d0fc"
+    }
+  ],
+  "planned_initial_calls": 12,
+  "shared_corrections_per_branch": 1,
+  "max_total_calls": 24,
+  "budget_per_branch": 40,
+  "request_timeout_seconds": 90,
+  "branch_timeout_seconds": 110,
+  "no_retry_resume_or_supplement": true,
+  "first_unexpected_final_failure_stops_later_branches": true
+}

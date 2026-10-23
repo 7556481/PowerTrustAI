@@ -1,5 +1,12 @@
 # 03 四Agent与ClaimExtractor：对象比角色名称重要
 
+## 2026-10-23 契约审计与v2离线候选
+
+首真实内部候选对照已按F05最终失败停止：12调用、3纠正，后6分支未发送，生产未切。审计实际消息发现旧objection字段要求与新字段禁止并存，以及必填repair缺失、纠正提示禁止复制文本与字面quote字段的歧义。v2使用唯一字段规范供初始/纠正消息共用；程序检查preserved=true必须有回答原片段，并拒绝技术对象以ordinary静默绕过义务；明确异议后ordinary仍可合法转复核。程序不猜分类、不补理由或条件片段。
+
+v2仍一次联合判断，没有额外规划调用。独立对象/义务确认可能减少耦合，但每事实组增加一次初始调用，并可能将分类错误传给支持阶段，当前无证据证明值得。结构接线和完整离线回归通过不代表语义改善；下一次6项开发复验材料仅准备、0真实发送。v2仅显式开发create_agent入口，原Factory/生产默认不变。见[审计与设计比较](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v2/README.md)。旧段落中的“本轮0调用”为其历史轮次。
+
+
 ## 2026-10-23 事实审核内部流程候选
 
 事实审核内部候选仍属于原事实Agent，没有新增Master。生成、领域和修订职责不变；Factory显式fact_internal_flow=langgraph_candidate_v1才装配FactFlowAgent，默认production仍schema13。内部对象分类与支持同次请求，不增加规划调用。

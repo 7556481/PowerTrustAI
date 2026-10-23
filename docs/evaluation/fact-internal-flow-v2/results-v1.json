@@ -1,0 +1,45 @@
+{
+  "version": "fact-flow-v2-offline-v1",
+  "implementation_commit": "a16eeb994c3a815fa1d219e6925ee7ddd31d2230",
+  "production_changed": false,
+  "real_model_calls": 0,
+  "new_attempt_created": false,
+  "full_regression": {
+    "tests": 1174,
+    "seconds": 164.132,
+    "result": "OK",
+    "log_path": "data/retrieval_local/fact-flow-v2-final-tests.log",
+    "log_sha256": "c6266c07ae3f3563c057d568d1242de85324c67e1df9c5fc530f4fbb96c4bcb4"
+  },
+  "new_candidate_tests": 10,
+  "intermediate_full_regression": {
+    "tests": 1173,
+    "seconds": 244.378,
+    "result": "OK"
+  },
+  "development_failures": [
+    "Sandbox asynchronous first test stalled; interrupted and ran same offline tests with tool approval.",
+    "First targeted suite 29 tests: one test expected StructuredValidationError but ErrorCollector correctly raised ValidationErrors; changed assertion to common ContractError.",
+    "Final review preserved explicit ordinary classification objection as valid review-required; added regression and repeated full suite."
+  ],
+  "historical_private_artifacts_unchanged": 89,
+  "captured_initial_messages": 12,
+  "v1_messages_identical_to_previous_preparation": 6,
+  "initial_message_content_characters": {
+    "v1": 47362,
+    "v2": 43876
+  },
+  "characters_are_not_tokens": true,
+  "learning_site": {
+    "chapters": 20,
+    "self_checks": 60,
+    "build_source_and_links": "passed",
+    "layout_changed": false
+  },
+  "service_read_only": {
+    "status": "ready",
+    "execution_path": "langgraph_v1",
+    "restarted": false
+  },
+  "semantic_accuracy_measured": false
+}

@@ -37,6 +37,16 @@
       "new_live_calls": 0,
       "full_offline_tests": 1158,
       "full_offline_seconds": 166.597
+    },
+    "fact_internal_flow_v2_candidate": {
+      "protocol": "fact-internal-flow-v2",
+      "implementation_commit": "a16eeb994c3a815fa1d219e6925ee7ddd31d2230",
+      "production_enabled": false,
+      "real_calls": 0,
+      "full_offline_tests": 1174,
+      "full_offline_seconds": 164.132,
+      "entry": "services.fact_flow_protocol_v2.create_agent",
+      "prior_v1_live_result": "docs/evaluation/fact-internal-flow-v1/live-report-v1.md"
     }
   },
   "chapters": [
@@ -57,13 +67,13 @@
     },
     {
       "source": "docs/learning/chapters/03-agents.md",
-      "characters": 4696,
-      "sha256": "b257be1cb6c56bd7e3e76b4be249fec7c92179072ff2b5891aeaf0cf79453837"
+      "characters": 5233,
+      "sha256": "0591d21e66d5ec5a780d4fda2ccb101837b63a7d89c6b697393382c5bcd97a38"
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 9551,
-      "sha256": "2d6c0593ae3a25000da55dd514b237944d5869d3e56ea3bf6ccab338ae54535d"
+      "characters": 10088,
+      "sha256": "5df7de45c6c85f8fb88cfc231a99311317005ab92328476ff3ff0c14daf4e4ba"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -151,6 +161,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 136756,
+  "markdown_characters": 137830,
   "network_dependencies": false
 }

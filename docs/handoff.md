@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-23 事实审核v2契约审计与离线复验准备
+
+起始51c805f94a68cd95b70b21707503c43610592db8。直接核对F03/F04/F05实际发送消息：v1拼旧objection规范再禁止，repair必填分散，通用纠正never copy text与字面quote歧义。v2独立统一13字段表供初始/纠正共用，复用原图/目录/解析/预算/隔离；preserved=true需原回答载体，技术对象ordinary需明确异议而非静默逃逸，显式异议仍合法复核，不补造字段/理由/依据。比较联合/分步：先保留联合，分步每事实组多1初始且有错误传递风险，未证明值得。新增v2仅create_agent开发装配，生产Factory和v1开关不改。第一次专项测试异常类型断言错误已修；1173中间完整回归通过244.378秒，补ordinary合法异议边界后最终1174项通过164.132秒；实现提交a16eeb994c3a815fa1d219e6925ee7ddd31d2230，详见v2/results-v1.json。学习站20章60自测/源码/链接通过。本机ready/langgraph_v1，仅只读核对未重启。旧89私有归档不变，旧公开输入/标签/结果/attempt不动。6原合成开发案例12初始消息捕获，v1六条SHA完全等旧准备；v2消息真实到达适配器边界，0真实发送。最多24调用仅复验提案，未授权费用，无execute入口或新attempt；不恢复旧批。见[evaluation/fact-internal-flow-v2/README.md](evaluation/fact-internal-flow-v2/README.md)。
+
 ## 2026-10-23 事实审核内部候选首真实对照停止封存
 
 用户接受8合成材料并授权本批费用；起始b44271d27231f758306d3ba84ca5da83b88cc2f1。先补F05内容supported/有效复核双层及共同6案例7组件分母，原输入标签不改。新最小事实接口执行入口，6门禁+14候选共20离线通过3.941秒；诊断目录初误拒0发送，修到既有允许路径。实际冻结后一次执行：F01–04两版8分支完整，F05原版已知缺快照继续，F05候选唯一纠正后仍缺合法题设依赖最终失败，后6分支不发送。12请求/3纠正/38822token；首次6/9（原4/4、候选2/5）。共同完成4对5组件/版，有效参考对齐原3/5候4/5，另2组件/版未执行，不当整体正确率。候选F03相关题设选择有利但需纠正，F04两来源/标量true仍因空条件载体有效不足，F05未形成有效异议。全部必要原文含无效尝试公开；原始data、attempt保留，不恢复不补跑，生产不变，暂不接入。见[evaluation/fact-internal-flow-v1/live-report-v1.md](evaluation/fact-internal-flow-v1/live-report-v1.md)、live-results-v1.json、live-predictions-v1.json。结果AI辅助分析、用户监督，待整批统一复核，不自动新批。

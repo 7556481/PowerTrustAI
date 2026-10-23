@@ -36,5 +36,15 @@
     "new_live_calls": 0,
     "full_offline_tests": 1158,
     "full_offline_seconds": 166.597
+  },
+  "fact_internal_flow_v2_candidate": {
+    "protocol": "fact-internal-flow-v2",
+    "implementation_commit": "a16eeb994c3a815fa1d219e6925ee7ddd31d2230",
+    "production_enabled": false,
+    "real_calls": 0,
+    "full_offline_tests": 1174,
+    "full_offline_seconds": 164.132,
+    "entry": "services.fact_flow_protocol_v2.create_agent",
+    "prior_v1_live_result": "docs/evaluation/fact-internal-flow-v1/live-report-v1.md"
   }
 }

@@ -1,0 +1,151 @@
+{
+  "provenance": "Accepted synthetic development cases reused unchanged; not independent held-out tests.",
+  "cases": [
+    {
+      "id": "F01",
+      "topic": "library",
+      "question": "复述规则并判断本次借阅。",
+      "premises": [
+        "读者年龄为19岁。",
+        "卡片为蓝色。"
+      ],
+      "body": "合成图书馆规则：年龄至少18岁可借阅档案，但并非必须借阅。",
+      "answer": "年龄至少18岁可借阅档案，但并非必须借阅。本次读者19岁，因此可借阅档案。",
+      "components": [
+        [
+          "年龄至少18岁可借阅档案，但并非必须借阅。",
+          "literature_rule",
+          "supported",
+          []
+        ],
+        [
+          "本次读者19岁，因此可借阅档案。",
+          "rule_application",
+          "supported",
+          [
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "F02",
+      "topic": "freezer",
+      "question": "按规则判断样本能否入库。",
+      "premises": [
+        "样本温度为8度。"
+      ],
+      "body": "合成样本规则：只有温度不高于4度的样本才允许入库。",
+      "answer": "样本温度为8度，故符合不高于4度的条件，可以入库。",
+      "components": [
+        [
+          "样本温度为8度，故符合不高于4度的条件，可以入库。",
+          "rule_application",
+          "contradicted",
+          [
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "F03",
+      "topic": "course",
+      "question": "判断本次课程报名资格。",
+      "premises": [
+        "学分为24。",
+        "背包为绿色。",
+        "学生编号为88。"
+      ],
+      "body": "合成课程规则：学分至少20即可报名。",
+      "answer": "学分为24，因此满足至少20学分的报名条件。",
+      "components": [
+        [
+          "学分为24，因此满足至少20学分的报名条件。",
+          "rule_application",
+          "supported",
+          [
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "F04",
+      "topic": "score",
+      "question": "比较题设分数与正文阈值，只判断数值关系。",
+      "premises": [
+        "分数为71。",
+        "姓名为甲。"
+      ],
+      "body": "合成资料：本表比较基准为64分。",
+      "answer": "题设分数71大于正文基准64。",
+      "components": [
+        [
+          "题设分数71大于正文基准64。",
+          "numeric_comparison",
+          "supported",
+          [
+            0
+          ]
+        ]
+      ],
+      "comparison": {
+        "left": {
+          "value": "71",
+          "quote": "71"
+        },
+        "right": {
+          "value": "64",
+          "quote": "64"
+        },
+        "operator": ">"
+      }
+    },
+    {
+      "id": "F05",
+      "topic": "archive",
+      "question": "只复述档案规则。",
+      "premises": [
+        "本次记录有3页。"
+      ],
+      "body": "合成档案规则：记录至少2页时可以编号。",
+      "answer": "规则允许至少2页的记录编号。",
+      "components": [
+        [
+          "规则允许至少2页的记录编号。",
+          "literature_rule",
+          "supported",
+          []
+        ]
+      ],
+      "injected_category": "input_evidence_coverage",
+      "diagnostic": "预置提取分类故障，单列诊断，不是自然分类正确率"
+    },
+    {
+      "id": "F08",
+      "topic": "engineering",
+      "question": "给定电流能否算出设备寿命？",
+      "premises": [
+        "电流为5安。"
+      ],
+      "body": "合成设备资料：未给出寿命模型、温度或试验数据。",
+      "answer": "电流为5安，因此设备寿命为50年。",
+      "components": [
+        [
+          "电流为5安，因此设备寿命为50年。",
+          "engineering_relation",
+          "insufficient_evidence",
+          []
+        ]
+      ]
+    }
+  ],
+  "F05_layers": {
+    "content": "supported",
+    "effective": "not_assessable/review_required",
+    "fidelity": "faithful",
+    "classification_objection": "explicit nonempty objection required; injected diagnosis, not natural classification accuracy"
+  },
+  "reference_never_sent_to_model": true
+}

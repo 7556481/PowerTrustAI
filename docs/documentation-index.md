@@ -1,5 +1,10 @@
 # 文档索引
 
+## 2026-10-23 最新事实审核契约审计
+
+- [v2审计、设计比较及实现边界](evaluation/fact-internal-flow-v2/README.md)：联合判断与独立义务确认成本比较；统一字段规范，保留独立异议，不做关键词分类或语义补造。
+- [6项复验计划](evaluation/fact-internal-flow-v2/revalidation-plan-v1.md)、[完整输入/参考](evaluation/fact-internal-flow-v2/inputs-and-reference-v1.json)、[实际准备消息身份](evaluation/fact-internal-flow-v2/preparation-v1.json)、[离线结果](evaluation/fact-internal-flow-v2/results-v1.json)：0真实调用，旧批封存，生产不变。
+
 ## 2026-10-23 事实审核内部候选首真实对照停止封存
 
 用户接受8合成材料并授权本批费用；起始b44271d27231f758306d3ba84ca5da83b88cc2f1。先补F05内容supported/有效复核双层及共同6案例7组件分母，原输入标签不改。新最小事实接口执行入口，6门禁+14候选共20离线通过3.941秒；诊断目录初误拒0发送，修到既有允许路径。实际冻结后一次执行：F01–04两版8分支完整，F05原版已知缺快照继续，F05候选唯一纠正后仍缺合法题设依赖最终失败，后6分支不发送。12请求/3纠正/38822token；首次6/9（原4/4、候选2/5）。共同完成4对5组件/版，有效参考对齐原3/5候4/5，另2组件/版未执行，不当整体正确率。候选F03相关题设选择有利但需纠正，F04两来源/标量true仍因空条件载体有效不足，F05未形成有效异议。全部必要原文含无效尝试公开；原始data、attempt保留，不恢复不补跑，生产不变，暂不接入。见[evaluation/fact-internal-flow-v1/live-report-v1.md](evaluation/fact-internal-flow-v1/live-report-v1.md)、live-results-v1.json、live-predictions-v1.json。结果AI辅助分析、用户监督，待整批统一复核，不自动新批。

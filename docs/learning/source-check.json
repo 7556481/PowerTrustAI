@@ -5,9 +5,9 @@
       "symbol": "strict_json",
       "start_line": 18,
       "end_line": 21,
-      "file_sha256": "a0ab6c75f2256e8810cb3f9d89901b821d5612196ee2496c310d6d06372d1118",
+      "file_sha256": "a3fe344d74279e7112f873b52fdf8061749f2164ee716839439ee3f856a6307f",
       "excerpt_sha256": "552dc767e2a2641f0e3149e139b410c31cc7885cd6616113ffb0b919b71e3e5e",
-      "source_text_lf_sha256": "e158715bfd44fe1bba4836ff8cf516714016fd3a8da966f2768fea26ccbae21a"
+      "source_text_lf_sha256": "e07ed6073dd9c6fe231510bdce7a3e33af14ce3020859cdc5766b67b7c4ac78e"
     },
     {
       "file": "rag/semantic.py",
@@ -298,28 +298,28 @@
     {
       "file": "agents/fact_flow_v1.py",
       "symbol": "FactFlowAgent.run",
-      "start_line": 21,
-      "end_line": 33,
-      "file_sha256": "7756acdf40b6e90ad3a40d7ce459064044a42b856ea943a6c26aa8f2beff0d5f",
-      "source_text_lf_sha256": "35de4966d09b4fe767697a3aacc1b03cc234ba6d3a9aca50784ea0d428dbbeab",
-      "excerpt_sha256": "0d5592b13863180ec02a8c53f347e72ea0a52a1eeaf481260679a01ea29de4bc"
+      "start_line": 26,
+      "end_line": 38,
+      "file_sha256": "b2e5b6dfd31afbb89123cc02d8798b67a9344c865c0cd56bff19a72938e26d51",
+      "source_text_lf_sha256": "3418e3facb2006517fb98dd88b13f6afae25e868321ddbd7f86d38266a49b32a",
+      "excerpt_sha256": "3f7176a98142e6fa8326c980960d1b248ff766be8460d3abb802c76f57f2e2cc"
     },
     {
       "file": "services/fact_flow_protocol_v1.py",
       "symbol": "Catalog.parse_one",
-      "start_line": 113,
-      "end_line": 125,
-      "file_sha256": "40da130c60f86c8f66ce9e939842b4b236ca0c2ba9e603e21c6d17778eadd6a9",
-      "source_text_lf_sha256": "7e3c98407b08dc38113e0d95fb4384b19116b3e1f26eb1e73acca0a7de08663d",
-      "excerpt_sha256": "97b9505be0c93969adb9a570715585d6dd8f227ed839137f24537f9f1242a3cd"
+      "start_line": 115,
+      "end_line": 127,
+      "file_sha256": "c90c539bd5edeb7023e35343e06b6ae7b7902d955ee0be8d0c6cf937988a871c",
+      "source_text_lf_sha256": "c80c98c1aa0b18354962b7c65c9c40bfb30d36c4e5615ba5c03338f847e87d09",
+      "excerpt_sha256": "fdfac7e1359fff0e237acca3c1921f557d12772f7fc17f157aa2a1dfd7537b21"
     },
     {
       "file": "services/scoped_fact_execution.py",
       "symbol": "execute",
       "start_line": 19,
       "end_line": 31,
-      "file_sha256": "cac3cd4ef2350abaa313062eda66c69451ae8d3b287102dc586e85b08f9bad2c",
-      "source_text_lf_sha256": "6684d6e79c852dcb1bb95d2ebe7ced77d4eff6fb8ed183cb06f21b18fa6affbf",
+      "file_sha256": "c6b973dfc593770d52f47f07c3b7a8d73054b6e5c6a001f06ef839a82f5351c0",
+      "source_text_lf_sha256": "03ded9fd7b881b26e275ec596a8ad5a443e87e76f5a2b8908faf8763dda99f76",
       "excerpt_sha256": "65e9f59b865c1239eee156d1b26ab725062b4c5729bd621196713cc00446ec95"
     }
   ],
