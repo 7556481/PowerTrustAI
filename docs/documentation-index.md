@@ -1,5 +1,12 @@
 # 文档索引
 
+## 2026-10-24 当前两阶段开发对照
+
+- [完整报告与边界](evaluation/fact-two-stage-v1/report.md)：唯一16分支、27调用、原始/有效参考差异、继续候选建议。
+- [全部必要预测和无效尝试](evaluation/fact-two-stage-v1/predictions.json)、[逐项结果](evaluation/fact-two-stage-v1/results.json)、[小统计](evaluation/fact-two-stage-v1/statistics.json)、[冻结](evaluation/fact-two-stage-v1/freeze.json)。
+- [内部盘点与有限整理](evaluation/fact-two-stage-v1/engineering-review.md)：新增、复用、暂留和领域→生成→修订优先级。
+
+
 ## 2026-10-24 归档续办
 
 [v2真实复验报告](evaluation/fact-internal-flow-v2/live-report-v1.md)已完成归档核对；本次仅解除上次审批用量限制后的提交阻断，不新增模型执行，原结果与参考不变。

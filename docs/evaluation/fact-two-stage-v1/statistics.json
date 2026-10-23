@@ -1,0 +1,48 @@
+{
+  "v2": {
+    "planned_branches": 8,
+    "complete": 8,
+    "first_contract_valid": 6,
+    "initial_calls": 8,
+    "correction_calls": 2,
+    "usage": {
+      "input_tokens": 20795,
+      "output_tokens": 2310,
+      "total_tokens": 23105,
+      "cache_hit_tokens": 13691,
+      "cache_miss_tokens": 7104
+    },
+    "model_seconds": 17.374,
+    "branch_seconds": 18.038540800014744,
+    "raw_reference_matches": 9,
+    "effective_reference_matches": 6,
+    "regular_components": 9,
+    "false_supported": 0,
+    "false_contradicted": 0,
+    "execution_failed": 0,
+    "unexecuted": 0
+  },
+  "two_stage": {
+    "planned_branches": 8,
+    "complete": 8,
+    "first_contract_valid": 7,
+    "initial_calls": 16,
+    "correction_calls": 1,
+    "usage": {
+      "input_tokens": 28053,
+      "output_tokens": 4099,
+      "total_tokens": 32152,
+      "cache_hit_tokens": 6144,
+      "cache_miss_tokens": 21909
+    },
+    "model_seconds": 31.08,
+    "branch_seconds": 31.80981969999266,
+    "raw_reference_matches": 9,
+    "effective_reference_matches": 5,
+    "regular_components": 9,
+    "false_supported": 0,
+    "false_contradicted": 0,
+    "execution_failed": 0,
+    "unexecuted": 0
+  }
+}

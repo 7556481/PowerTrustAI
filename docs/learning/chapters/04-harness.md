@@ -309,3 +309,12 @@ harness.execution_path = "langgraph_v1"  # 安装可选依赖后，仅开发验�
 ::: answer 展开参考答案3
 不能；重新提取并重建当前版本对象和两审核。
 :::
+
+
+## 2026-10-24 两阶段事实审核开发候选
+
+生产仍使用原事实审核配置和外层 LangGraph。开发配置 `POWERTRUST_FACT_INTERNAL_FLOW=joint_v2` 选择联合 v2，`two_stage_v1` 选择对象依赖→支持条件两阶段，`production` 回退原入口。两阶段复用原 Catalog、适配器、共享预算、一次纠正、内部子图和完整重审链；没有新增 Master 或 Harness。
+
+阶段一选择每个命题实际依赖的正文与题设；阶段二仍接收实际回答与全部合法正文，能反对阶段一。条件在答案中出现、实例满足条件、完整结论受支持分别记录。数值来源不是额外适用条件，标量排序不认证工程关系。分类冲突和 unknown 进入复核，不静默通过。每事实组多一次初始请求；两个阶段共用一次纠正，原引用不增加规划调用。固定 F01—F08 是已见开发材料，F05 是预置分类诊断，不能称独立测试或从单次随机输出推断架构优势。
+
+实现入口：`services/fact_two_stage_v1.py`；共享请求循环：`services/scoped_fact_execution.py`；固定批控制器：`evaluation/fact_two_stage_trial_v1.py`。结果与必要预测见 `docs/evaluation/fact-two-stage-v1/`。离线通过只证明工程契约，不证明语义正确，也不是工程安全认证。
