@@ -1,5 +1,7 @@
 # 文档索引
 
+- **事实审核内部流程候选交付：[报告与回退](evaluation/fact-internal-flow-v1/README.md)**：明确开发开关、实际内部图、独立分类异议与忠实性、相关题设子集、数字两来源及工程限制；复用原Factory/Harness/Store/API，生产未切。附[验证统计](evaluation/fact-internal-flow-v1/results-v1.json)、[完整固定输入与参考](evaluation/fact-internal-flow-v1/inputs-and-reference-v1.json)、[对照计划和理由](evaluation/fact-internal-flow-v1/comparison-plan-v1.md)、[首消息身份](evaluation/fact-internal-flow-v1/preparation-v1.json)、[节点图](evaluation/fact-internal-flow-v1/node-graph-v1.md)。0真实请求，旧批次不恢复，学习站20章60题更新。
+
 ## 2026-10-23 剩余五项完成，本机默认LangGraph
 
 用户新授权仅旧计划未发送五项及达标切换，起始2c75ba0/工作区干净；旧首项不重发、旧失败/attempt不改。新后续入口复用正常Factory/worker/API及独立显式关闭只读收集；7项收集门禁13.849秒及1项清单门禁0.048秒通过，未重复全套。准备曾误拒上轮UI哈希变化，0发送，独立修正工程清单比较；Agent/提示/模型/政策/证据/预算/任务仍与旧冻一致。五项均完成、5个唯一受理、32调用含1纠正，输入399128/输出13890/总413018token，0失败/未执行。三图必需阶段完整；两诊断各一次实际修订和完整重审，图最终待补充、原最终通过，保留语义差异不归因编排。实际本机受管默认已langgraph_v1，正常入口启动ready；四表104/2278/2999/8及全行哈希前后完全相同，环境原编排回退有效。源码无配置回退仍sequential，A/B未采用、不清理候选/历史。实际页面入口已验，工具浏览器未登录，自动连接及登录后引用/版本/失败展示待用户一次清单确认，不绕过file限制。学习站20章60自测由Markdown同步。[短报告](evaluation/langgraph-service-continuation-v1/results-v1.md)、[统计](evaluation/langgraph-service-continuation-v1/results-v1.json)、[必要预测](evaluation/langgraph-service-continuation-v1/predictions-review-v1.json)、[切换核对](evaluation/langgraph-service-continuation-v1/switch-verification-v1.json)。到此停止，不自动新实验。
@@ -560,3 +562,5 @@
 接续4887c375，实现0f0553e。三题唯一ID只读：熔断器346.649秒/泛化未通过；异步机250.605秒/一次实质修订及完整重审、限定通过；容量225.400秒/不猜容量、待补充。检索累计均约204–208秒，未发现每任务重复全SHA，重复FTS排名校验是真实瓶颈。仅移除刚完成同请求的重复排名，seal/全文区间/hash回查与范围仍严格。四条同查询排名正文身份一致、验证约7–12ms；rank SQL替代无优势未采用。
 
 唯一新主题75字、API12.942秒可见/48.501秒完成、5请求87900token/完整pass，不能称同题端到端A/B或普遍性能。通用性能量值适用提示另版v9/v9.18，原熔断器不重跑/旧pass不改，语义对应复验仍缺，内容错误放行风险不能宣布解除。796完整回归＋之后4项相关检查；实际浏览器/自动连接/回查和全表重启不变。完整库、schema13/flash/product1.5/BM25aggregate/NLIoff保持，8765运行。见[报告](performance-closeout-v1.md)，私有审阅包performance-closeout-v1。停止追加，速度与剩余内容风险等待共同确认。
+
+- [事实审核内部流程候选启动草案（未实施）](fact-internal-flow-candidate-v1.md)：初步职责、源码问题与未完成项；无验证成绩。

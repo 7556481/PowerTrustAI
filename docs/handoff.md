@@ -1,5 +1,11 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-23 事实审核内部候选离线交付及身份阻断解除
+
+起始efbc2840938f26ac006b88a098d5214ba9e69f8e，保留先前草案。实现显式fact_internal_flow=langgraph_candidate_v1，默认production；四Agent/政策原职责、原Factory/Harness/Store/API。新对象分类/实际依赖、独立分类异议与忠实性、数字两来源及标量校验；内部四节点，无规划调用或图重发，有限补检仍在原共享阶段。双模式真实装配离线贯通、两版本修订重新提取与完整审核。14专项；首全套1158有2旧冻结门禁拒绝，保留旧冻结，测试隔离历史夹具后1158通过200.806秒；最终源码1158通过166.597秒。8合成对照案例16分支已准备，14初始/最多28调用，原版F05/F07缺快照预条件不算成功，真实0调用。学习站20章60自测、源码与链接检查通过。生产健康ready/空闲/外层langgraph，保存配置schema13/flash/product1.5，四表104/2278/2999/8；未读凭据或重启生产。
+
+详见[evaluation/fact-internal-flow-v1/README.md](evaluation/fact-internal-flow-v1/README.md)。首次提交因Git缺作者身份失败，未擅自配置。随后用户授权只读核对并沿用本人既有身份；最近8次作者/提交者一致，仓库级配置为空，使用命令级身份成功提交实现 `c81c8c5fe2fe3b92c78d212dd76d873f55c5a7c8`，未改全局或仓库Git配置。文档、材料与学习站随后独立提交并普通推送核对；最终远端提交哈希见本轮交付消息。真实执行仍未授权。
+
 ## 2026-10-23 剩余五项完成，本机默认LangGraph
 
 用户新授权仅旧计划未发送五项及达标切换，起始2c75ba0/工作区干净；旧首项不重发、旧失败/attempt不改。新后续入口复用正常Factory/worker/API及独立显式关闭只读收集；7项收集门禁13.849秒及1项清单门禁0.048秒通过，未重复全套。准备曾误拒上轮UI哈希变化，0发送，独立修正工程清单比较；Agent/提示/模型/政策/证据/预算/任务仍与旧冻一致。五项均完成、5个唯一受理、32调用含1纠正，输入399128/输出13890/总413018token，0失败/未执行。三图必需阶段完整；两诊断各一次实际修订和完整重审，图最终待补充、原最终通过，保留语义差异不归因编排。实际本机受管默认已langgraph_v1，正常入口启动ready；四表104/2278/2999/8及全行哈希前后完全相同，环境原编排回退有效。源码无配置回退仍sequential，A/B未采用、不清理候选/历史。实际页面入口已验，工具浏览器未登录，自动连接及登录后引用/版本/失败展示待用户一次清单确认，不绕过file限制。学习站20章60自测由Markdown同步。[短报告](evaluation/langgraph-service-continuation-v1/results-v1.md)、[统计](evaluation/langgraph-service-continuation-v1/results-v1.json)、[必要预测](evaluation/langgraph-service-continuation-v1/predictions-review-v1.json)、[切换核对](evaluation/langgraph-service-continuation-v1/switch-verification-v1.json)。到此停止，不自动新实验。
@@ -941,3 +947,6 @@ origin按授权添加指定地址。只读Git HTTPS连续连接重置，匿名cu
 ## 2026-10-08 首版审核收尾v1
 
 [审核收尾](audit-closeout-v1.md)：代码bd8e803；schema13+source-support-v6/program局部选择/输出v9.12，Domainv3.4同次analysis_scope实际范围；缺goal不默认，conceptual不能豁免工程承诺。旧c47/v5错误及baf输入覆盖未评估原样。4冻结题4/4阶段完整，概念pass/工程复核/数值不足/危险high-reject；16请求259734token，0纠正/0Revision，无新增批次。773离线/浏览器/全表重启哈希和Evidence/反馈通过，日常完整库与原配置不变、8765仍运行。限定个人最终试用可开始；工程长回答/语义复核未达简洁路由目标、旧输入快照缺口及模型局限待试用认可，不能说已接受/全面稳定。私有统一审阅包audit-closeout-v1；学习站仅同步相关行为/源码，不重写布局、20章/60题/旧手册保留。
+
+## 2026-10-23 事实审核内部重构启动，未完成
+起始efbc2840938f26ac006b88a098d5214ba9e69f8e，工作区干净。初步读取与职责草案见 fact-internal-flow-candidate-v1.md；尚无代码实现、测试、服务核对、对照材料或推送。0付费调用，生产未改；用户已授权继续完成全部离线实施，不需再次确认。

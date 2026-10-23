@@ -1,0 +1,175 @@
+{
+  "version": "fact-internal-flow-comparison-preparation-v1",
+  "paid_execution_authorized": false,
+  "synthetic_development_material": true,
+  "tool_inputs": [],
+  "retrieval": "fixed delivered evidence; no new retrieval",
+  "model": "deepseek-flash",
+  "timeout_seconds": 90,
+  "max_output_tokens": 8000,
+  "max_response_chars": 96000,
+  "per_branch_existing_budget": 40,
+  "planned_initial_calls": 14,
+  "conditional_corrections_max": 14,
+  "planned_call_upper_bound": 28,
+  "order": [
+    {
+      "case": "F01",
+      "variant": "original",
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "message_sha256": "62e85cd96895ddbd5cbc7b620e3a7365733347aacfb9af52152ea50fc0e8921b",
+      "message_chars": 19629,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F01",
+      "variant": "candidate",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "message_sha256": "2d39ed0d63489003d0d705bf6cd3d38b9ddec84eb290ab2687ceed6a5a9405de",
+      "message_chars": 8860,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F02",
+      "variant": "candidate",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "message_sha256": "75c5f499541ff1d3a0936133e8fe5c4aab71055f1560c1936f8fb1371acbf699",
+      "message_chars": 7846,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F02",
+      "variant": "original",
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "message_sha256": "ad29f157ed37e7ce157802a41daa943625aed29daedcf1639a70b6997395e39e",
+      "message_chars": 19407,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F03",
+      "variant": "original",
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "message_sha256": "74f9abe47de8e4fa7c954036ad820a1920dd54799a260a068010e0d5e0118f21",
+      "message_chars": 19382,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F03",
+      "variant": "candidate",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "message_sha256": "77b0343511920382d92ac7a3197e31471cd59817959c2006313918743e833dc5",
+      "message_chars": 8761,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F04",
+      "variant": "candidate",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "message_sha256": "9e94ce34ba0b4a9fb6c34f70d4dc98f3dc7c4f615505aed7fd0160f45546ba04",
+      "message_chars": 8283,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F04",
+      "variant": "original",
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "message_sha256": "1e770aa8579cff441cde46130ff7b63e59d4414b424308b5cb1c0de08fd8ab19",
+      "message_chars": 19352,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F05",
+      "variant": "original",
+      "status": "PROGRAM_PRECONDITION_NO_INPUT_SNAPSHOT",
+      "initial_calls": 0,
+      "maximum_corrections": 0,
+      "not_a_success": true
+    },
+    {
+      "case": "F05",
+      "variant": "candidate",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "message_sha256": "46fd0908d430da73acc9d4d45492d455db6e46000d704ea56e7df362d2eb1042",
+      "message_chars": 7857,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F06",
+      "variant": "candidate",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "message_sha256": "5c57ea36e6a48898849af0cc7dc7ed5aa451b6bae9fe65f9e36d54f55ccadeb0",
+      "message_chars": 7826,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F06",
+      "variant": "original",
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "message_sha256": "f16c56d1b4e08afc6bd457df9005b8fcb8055697af20326748a6e2b95c72ed14",
+      "message_chars": 19355,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F07",
+      "variant": "original",
+      "status": "PROGRAM_PRECONDITION_NO_INPUT_SNAPSHOT",
+      "initial_calls": 0,
+      "maximum_corrections": 0,
+      "not_a_success": true
+    },
+    {
+      "case": "F07",
+      "variant": "candidate",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "message_sha256": "3024eb94e757808e72234a0f24c504187cd743708521b41ea2cb78ff02f55caa",
+      "message_chars": 8363,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F08",
+      "variant": "candidate",
+      "prompt_version": "evidence-verification-v9.30-fact-internal-flow-v1-dev",
+      "message_sha256": "4abc08d79d036b6696a45db9d51179a03e69b477689e9231fa54e9bfc120d0fc",
+      "message_chars": 7825,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    },
+    {
+      "case": "F08",
+      "variant": "original",
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "message_sha256": "bfe72cd767f2d7513752d91e5f70805270fb00753d8e8aced80698d83f22c7ac",
+      "message_chars": 19374,
+      "status": "PREPARATION_ONLY_NOT_SENT",
+      "initial_calls": 1,
+      "maximum_corrections": 1
+    }
+  ],
+  "input_sha256": "d5fc37f182ea9a6c50b953e11a75ae1b61ee5b0635bc92d7f8760f3db4393c16",
+  "reference_sent_to_model": false
+}

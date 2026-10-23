@@ -611,3 +611,10 @@ analysis_scope同次领域判断联合问题/当前回答，不以缺goal默认�
 ## 2026-10-22 可选图进入正常服务，不满足实测门槛则不切默认
 
 服务执行路径为后端合法枚举、随运行存储；图继续调用唯一共享业务阶段，回退原驱动保留，不自动回退重发。固定验收首项服务完成但收集器线程错误即停，图未执行，不能以离线修复或语义pass补足真实图证据；保持sequential。历史及反馈不迁移或补算。UI主线收敛、登录后浏览器验收不足独立记录；file安全阻止不绕过。只清理已证实重复的新回放执行实现，A/B及历史协议因引用保留。见[evaluation/langgraph-service-integration-v1/results-v1.md](evaluation/langgraph-service-integration-v1/results-v1.md)。
+
+
+## 2026-10-23 事实审核内部候选：义务选择与身份绑定分开
+
+旧B门禁是审核选用题设等于提取器当前组件选择，不是任务目录全集。独立fact-internal-flow-v1不采用B提取器；模型在一次请求中选择对象类型与实际依赖，程序限制合法ID、作用域、绑定及结构。跨提取类别义务改变必须显式classification_objection，fidelity只描述原文忠实性；未解决异议保守交原政策，不能静默改分类通过。数值比较分别记录两操作数来源、只确定性核对标量关系，不冒称工程工具。内部图不加规划调用，不控制新的补检循环；复用既有有限外层补检、修订完整重审和同伴保存。共用有界请求循环抽取为services/scoped_fact_execution.py，历史compact入口仍兼容；生产schema13和旧四Agent职责不切换。
+
+真实对照只准备，8合成案例16分支；原版两项缺快照零调用必须计能力缺口，不当成功或性能收益。历史付费freeze因源码演进拒绝当前源码是正确行为，测试隔离冻结夹具，不更新旧freeze。见[evaluation/fact-internal-flow-v1/README.md](evaluation/fact-internal-flow-v1/README.md)。

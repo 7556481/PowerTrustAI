@@ -1,0 +1,64 @@
+{
+  "version": "fact-internal-flow-offline-results-v1",
+  "base_commit": "efbc2840938f26ac006b88a098d5214ba9e69f8e",
+  "implementation_commit": "c81c8c5fe2fe3b92c78d212dd76d873f55c5a7c8",
+  "real_model_calls": 0,
+  "production_switched": false,
+  "full_regressions": [
+    {
+      "tests": 1158,
+      "seconds": 180.749,
+      "errors": 2,
+      "interpretation": "archived source freeze guards correctly rejected changed current code"
+    },
+    {
+      "tests": 1158,
+      "seconds": 200.806,
+      "errors": 0
+    },
+    {
+      "tests": 1158,
+      "seconds": 166.597,
+      "errors": 0,
+      "final_source": true
+    }
+  ],
+  "candidate_test_methods": 14,
+  "synthetic_topics": 8,
+  "service_modes": [
+    "question_answer",
+    "assess_existing"
+  ],
+  "service_path": "real Factory + synthetic adapter + outer langgraph_v1 + candidate subgraph + existing domain/policy + temporary Store/API",
+  "revision": {
+    "answer_versions": 2,
+    "extractions": 2,
+    "complete_review_rounds": 2
+  },
+  "learning": {
+    "chapters": 20,
+    "self_checks": 60,
+    "source_hashes": "passed",
+    "local_links": "passed",
+    "build": "passed",
+    "browser_visual_claim": false
+  },
+  "comparison": {
+    "branches": 16,
+    "planned_initial_calls": 14,
+    "conditional_corrections_max": 14,
+    "upper_bound": 28,
+    "paid_execution_authorized": false,
+    "program_precondition_original_cases": [
+      "F05",
+      "F07"
+    ]
+  },
+  "limits": [
+    "Scripted responses validate program behavior, not model semantic accuracy",
+    "Source relevance, object classification, conditions and units remain model judgments",
+    "No engineering calculator added",
+    "No new real experiment or production switch"
+  ],
+  "git_status": "Implementation committed with explicitly authorized historical identity; documentation delivered in following commit."
+}

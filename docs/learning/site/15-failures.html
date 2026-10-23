@@ -1,58 +1,61 @@
 <!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>15 真实失败复盘：从现象到证据，而非猜模型内因 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 74d7a0e6aa1b · learning-site-v4.3 local managed LangGraph default, 2026-10-23 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">15 真实失败复盘：从现象到证据，而非猜模型内因</h1>
-<h2 id="section-2">为什么失败案例比成功截图更有教学价值</h2>
+<h2 id="section-2">2026-10-23 事实审核内部流程候选</h2>
+<p>内部候选的合成替身回归证明接线、作用域、有限纠正和失败保存，不证明模型语义改善。首轮1158项中两项旧源码冻结门禁拒绝源码演进，历史冻结未修改；测试分开检查旧拒绝与冻结夹具行为。真实对照尚未付费，旧版缺快照零调用不得计成本优势或审核成功。</p>
+<p>完整材料见<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.html" rel="noreferrer noopener">候选报告</a>。生产未切换，本轮0真实调用。</p>
+<h2 id="section-3">为什么失败案例比成功截图更有教学价值</h2>
 <p>成功只告诉你某输入走通；失败迫使你检查对象、资料、协议和执行的边界。复盘应按“现象→实际证据→已确认根因→修复→验证→未解决”写，不能看到截图就断言模型不会中文，也不能用新测试通过改写旧失败。</p>
-<h2 id="section-3">案例一：独立模板继承联合根</h2>
+<h2 id="section-4">案例一：独立模板继承联合根</h2>
 <p>现象：事实重审返回联合findings+citation_reviews，独立阶段parser拒绝。证据：实际system模板保留联合示例而请求要求单根。根因：模板复用的程序/提示冲突，不是模型独自不遵从。修复：独立完整模板，只共享公共约束。验证：新独立响应与覆盖测试。限制：合法结构仍可漏条件或错对象，旧v2重审0/2保留失败。</p>
-<h2 id="section-4">案例二：中文空命中后审核拒答模板</h2>
+<h2 id="section-5">案例二：中文空命中后审核拒答模板</h2>
 <p>现象：用户中文概念题得到英文程序拒答，Agent随后审核拒答内容。证据：原BM25中文查询空、Generation没有模型调用；不是生成模型不会中文。修复：有限忠实英文补检、默认用户语言、无实质回答提取双审不适用。验证：空/转换失败/有命中仍不足分支；真实7d0e…查询转换连接失败仍没生成。限制：连接失败不能冒称完整中文链路，后续独立修复并保留旧记录。</p>
-<h2 id="section-5">案例三：库内有正文，但模型没有读到</h2>
+<h2 id="section-6">案例三：库内有正文，但模型没有读到</h2>
 <p>现象：原无功问题缺直接电压关系说明。证据：实验指导书第60页正文已在库，但旧查询排名11，未进前三及邻片交付。根因：查询/排名/交付链缺口，不是生成遗漏已读依据。修复：保留真实小节及新知识版本，补基础正文；后续大库倒排处理规模问题。验证：实际生成输入而非只看库内存在。限制：补库后模型仍可扩大所有设备或省理想条件，覆盖改善不等于答案正确。</p>
-<h2 id="section-6">案例四：思考题被当因果支持</h2>
+<h2 id="section-7">案例四：思考题被当因果支持</h2>
 <p>现象：资料“请思考X与Y关系”被判支持答案“X导致Y”。证据：实际引用只出现问题或术语表。根因：模型把主题相关当命题支持。修复：支持关系说明区分exercise_question/term_mention/data_table/explanatory_body，严格完整命题；表格不机械拒绝。验证：synthetic问题与解释正文对照，真实逐引用判断。限制：模型仍可能自报source_kind错误，程序字段存在不证明识别正确。</p>
-<h2 id="section-7">案例五：审核详情补条件，答案正文没条件</h2>
+<h2 id="section-8">案例五：审核详情补条件，答案正文没条件</h2>
 <p>现象：答案省正弦或理想条件，审核在applicability_conditions补写后supported。证据：实际答案字符串不含限定，来源有前置条件。根因：审核注释与答案限定混同。修复：检查实际正文、允许忠实同义表达；精确来源改选程序条件载体ID。验证：必要条件删失/同义/未知回归。限制：模型漏列必要条件仍可能误判，字面守卫无法覆盖全部自然语言语义。</p>
-<h2 id="section-8">案例六：低功率因数与不当补偿的因果主体</h2>
+<h2 id="section-9">案例六：低功率因数与不当补偿的因果主体</h2>
 <p>现象：运行58a5…回答把“补偿选择或使用不当导致谐波增大”扩大为“低功率因数导致谐波增大”，同时P/S与cosφ缺条件。证据：生成交付原文、原引用及实际判断。修复：保留主体/方向、事实与提取忠实性分离、程序保存原始与有效状态。截至identity-fidelity-v1，ab338…完整执行，因果对象faithful/insufficient，但repair=null，原引用仍误倾向反向支持并条件unknown，最终复核、0Revision。限制：该原功率因数场景的自然修订仍未验收；不能用其他问题成功回填其0Revision。</p>
-<h2 id="section-9">案例七：英文Parquet没有_id</h2>
+<h2 id="section-10">案例七：英文Parquet没有_id</h2>
 <p>现象：中文处理后首英文片KeyError，唯一写者退出。证据：actual schema只有text和质量列，无_id，日志定位row[&#x27;_id&#x27;]。根因：异构schema未兼容，不是网络错误。修复：固定revision/分片/原行号的内部命名空间身份、original_id_missing及正文SHA；事务/断点保持。验证：跨batch回滚恢复、实际英文行身份/哈希。限制：原出版出处仍未知，完整构建需独立核验发布，不能当已完整入库。</p>
-<h2 id="section-10">案例八：NLI解释报告继承错家族原因</h2>
+<h2 id="section-11">案例八：NLI解释报告继承错家族原因</h2>
 <p>现象：正确样本的说明复制同家族错误解释。证据：逐sample_id真值、两模型预测与原文对照。根因：报告生成的逐项归属错误，不改变原模型预测。修复：另存修正版及修改清单。验证：标签/预测/指标SHA不变。限制：解释修正不减少4个错误supported，不能用更好报告说明提高模型能力。</p>
-<h2 id="section-11">案例九：页面字段路径被当私有路径</h2>
+<h2 id="section-12">案例九：页面字段路径被当私有路径</h2>
 <p>现象：校验位置field_path被隐藏，用户只见抽象失败。证据：该字段是JSON路径而非本机文件路径，服务投影过度过滤。修复：结构化投影区分语法诊断和私有路径。验证：只读显示回归及真实浏览器，不重新调用模型。限制：显示修好不意味着原审核结构合法。</p>
-<h2 id="section-12">如何使用失败，而不把它们刷成成功</h2>
+<h2 id="section-13">如何使用失败，而不把它们刷成成功</h2>
 <p>保留旧问题/输入/响应/纠正/配置；新协议或资料用新运行。受影响路径一次固定验证，失败记具体分布，不看成绩后换题。将程序缺陷、协议负担和语义错误分开：程序修复可离线证明，语义改善需独立真实评价；任何一个成功样例都不能抹掉反例。</p>
 <p>练习：为上述案例选一条“现在仍未知”的结论。参考：不能从某一次响应推断模型内部为何选错，不能从本地PermissionError推断供应商不支持中文，不能从F1涨推断工程审核可靠。</p>
 <p>本轮新用户run4df8…共同根因与12题批次会补在本章，不需要等这个新案例才开始学习站；此前案例已经足够说明设计教训。</p>
-<h2 id="section-13">案例十：简化协议漏接实际Harness，停止规则也遗漏</h2>
+<h2 id="section-14">案例十：简化协议漏接实际Harness，停止规则也遗漏</h2>
 <p>4df8…实际题为变压器kVA/kW。初次JSON在7526处非法分隔，纠正又把source_kind写成authority_scope合法值explanation。历史47个诊断响应显示字段类型、来源条件、作用域和派生状态重复负担，于是实现新扁平target协议，程序管理定位/类型/聚合，模型集中做语义。</p>
 <p>离线直接组件通过，但固定真实12题全部Fact前AttributeError：schema14没有加入Harness的ReliabilityVerificationInput包装分支。这个失败属于本轮接线遗漏，不是模型结构或语义错误。执行器只识别指定网络/服务错误，遗漏共享EXECUTION_FAILURE，全部12已提交后才人工诊断；没有及时停止，明确记录，不把每题同错误当模型随机失败。</p>
 <p>结果32请求、304657token，Fact模型0请求、0/12完整、0Revision、0pass。零错误放行来自失败阻断，不是新模型判断可靠。已有生成文本超长/条件疑点另记AI初评。停止追加修复和付费重跑，恢复日常原schema13，新14未验收保留审阅。</p>
 <p>经验：测试输入类型必须来自真实装配路径；状态码列表不足以识别共享程序故障，还需执行阶段及异常链审查。不能用689离线测试或一条组件成功宣布产品稳定，也不能把事后发现写成事前已正确停止。</p>
-<h2 id="section-14">项目复盘：可核查变化与不能编造的动机</h2>
+<h2 id="section-15">项目复盘：可核查变化与不能编造的动机</h2>
 <p>旧六维评分把多个风险维度加权为总分；当前逐主张方案以实际对象、typed依据、明确义务和确定性处置组织判断，没有经过审查的旧权重/阈值不能成为生产真值。改变的是证据与责任结构，不只是把一个分数换成四个角色名字。</p>
 <p>最初小型可追溯官方库便于严格定位，随后用户普通中文问答暴露基础概念缺口，于是少量中文正文再到广泛行业语料。目标从小库证据核验扩到中文解释覆盖，来源未知和规模压力同时增加，不能用库行数代表答案可靠。</p>
 <p>Dense/RRF/reranker的相关Hit等局部收益没有充分消除完整依据退步、unknown或误支持代价，所以未切默认。严格身份/定位是必要复杂度；让模型重复source_kind、authority_scope、父/子状态和依据索引是输出负担，不等于更严格的语义理解。</p>
 <p>单题补提示、离线测试计数和阶段成功造成过早收尾：上轮直接组件测试传入扩展输入，却漏了真实Harness包装。可核查的教训是必须贯通真实装配、明确不同成功层次，并保留不达标和共享停止遗漏。不能写成模型已稳定或以重复刷题消除失败。</p>
 <p>必要复杂度包括版本/原文/作用域、事务/预算/有限修订、真实失败保存；暂无确认收益的复杂度包括未经独立评测就增加Agent/投票、全面模型化检索、重复语义字段或新平台。本轮不实施这些扩展。</p>
 <p>以上依据交接、源码和固定报告；“当时本人为什么偏好某方案、是否真的比较过其他框架”只能由所有者/ChatGPT补证据，不从现存代码反推个人动机。面试需诚实说明AI协作、需求/监督/审阅和实际能解释的实现，不认领全手写或生产可靠性。</p>
-<h2 id="section-15">本轮后续：先实装贯通，再一条烟测</h2>
+<h2 id="section-16">本轮后续：先实装贯通，再一条烟测</h2>
 <p>统一输入能力后，schema14已实际发Fact请求；共享停止按阶段/异常类型/共同配置识别AttributeError等，普通单题输出错误仍隔离。新的正常正弦稳态问题一次运行、6请求，Fact有一次有限纠正；条件/basis选择仍非法，完整执行未通过，未自动开新批次。接线的工程修复与输出的模型/协议问题分开，不能把“发请求成功”当烟测全部成功。旧12/12失败与32请求原状态未动。</p>
-<h2 id="section-16">后续能力边界：一个成功与原失败并存</h2>
+<h2 id="section-17">后续能力边界：一个成功与原失败并存</h2>
 <p><strong>记录事实</strong>：schema-choice-v1中f61a804c41054092a3b31d496c541c78自然将2ω改为ω，保留线性时不变/正弦/暂态消失，2回答版本、2审核轮、9请求，完整重提取/双审/原引用；原PF修复建议仍null、0Revision。旧失败不改成功，不能笼统称当前无任何真实自动修订。</p>
 <p><strong>共同复盘</strong>：多轮定向修复后普通题仍失败，说明单题提示和测试计数不够。较长时间围绕最新错误增加字段，缺少代表性固定集合与整体协议负担验证；这包含任务设计、采集和收尾节奏的问题，不只是模型“不听话”。真实Factory贯通验证工程链，真实烟测补外部不确定性，两者不能互替。</p>
 <p><strong>评测纪律</strong>：保留失败不等于永远不能验证。单位工具准备失败、goal非法应另建有新身份的修正准备版本再经授权验证，不能回填旧冻结批次；采集从已发归档恢复不等于重调用，未知token不能伪造。本文只解释，不启动补测。</p>
 <p><strong>产品复盘</strong>：普通用户指出没回答、页面看不懂、反复连接，属于是否有用而非次要美化。中文依据、答案优先、折叠与一键会话回应实际反馈；支持要求不降，内部对象与说明可简洁。个人当时想法/独立贡献仍需本人确认，不能用后验解释代替经历。</p>
-<h2 id="section-17">核心审核修复v1的当前边界</h2>
+<h2 id="section-18">核心审核修复v1的当前边界</h2>
 <p>core-audit-fix-v1一次真实4例：危险一例来源绑定识别并禁止采用；正常189字没答核心、普通错误合同失败0Revision、不足仍混有输入/分类疑点。3/4执行完整不等于目标成功，不因未放行宣称正确识别。主体补检只合成闭环通过，真实普通例未进入。</p>
-<h2 id="section-18">2026-10-08 当前行为核对</h2>
+<h2 id="section-19">2026-10-08 当前行为核对</h2>
 <p>ordinary-chain-v2归因于输入共同链路：首查询未交付核心定义；字数前缀解析漏100字以内；提取新增隐含比较；repair对象空ID与整项null混淆。725离线通过后固定4例22请求：正常/普通成功，危险Fact仍结构失败，不足复核路由不精确。配置说明补写漏manifest参数也原样记录，不用测试数/两题pass宣称稳定，不自动重跑。</p>
-<h2 id="section-19">三道自测：先作答，再展开</h2>
-<h3 id="section-20">自测1：47诊断响应等于47独立题吗？</h3>
+<h2 id="section-20">三道自测：先作答，再展开</h2>
+<h3 id="section-21">自测1：47诊断响应等于47独立题吗？</h3>
 <details class="self-answer"><summary>展开参考答案1</summary><p>不等；含多个组件、历史版本及纠正，需按响应/运行去重。</p></details>
-<h3 id="section-21">自测2：12题零放行能证明模型可靠吗？</h3>
+<h3 id="section-22">自测2：12题零放行能证明模型可靠吗？</h3>
 <details class="self-answer"><summary>展开参考答案2</summary><p>不能；上轮是Fact发请求前失败阻断。</p></details>
-<h3 id="section-22">自测3：失败复盘为何留原状态？</h3>
+<h3 id="section-23">自测3：失败复盘为何留原状态？</h3>
 <details class="self-answer"><summary>展开参考答案3</summary><p>否则失去版本及验证边界，事后修复不能改写旧事实。</p></details>
-<h2 id="section-23">2026-10-08 首版收尾核对</h2>
+<h2 id="section-24">2026-10-08 首版收尾核对</h2>
 <p>schema13未换。任务范围由既有Domain的analysis_scope新增task_scope字段同次判断，结合实际问题/回答，程序记录原goal、身份/哈希/理由；缺goal不默认工程或概念，conceptual不能豁免工程承诺，真实异议/范围不确定保留复核。见 <code>services/task_applicability.py</code>、<code>agents/domain_contract_v3.py</code> 和 <code>agents/power_domain_review.program_findings</code>。同组件关系v6取消模型重复quote_ids，由合法局部bases/indexes程序绑定；条件/repair不得借未选正文或别的作用域，旧v5按旧接口保存，新增输出v9.12显式标记。见 <code>services/support_relation_v6.py</code>，危险规则未扩。</p>
-<p>4题各一次全部阶段完成：新概念通过、特定100kVA不足被识别、危险事实矛盾与来源绑定高风险完整且禁止采用；工程题不编造，但长回答/拒答及建议边界仍复核。16调用/0纠正/0修订不能称通用稳定；本批没有真实Revision，既有成功与Factory完整重审另列。实际浏览器和重启保存已核对，旧失败和完整库不变。进入限定个人最终试用，工程自动定值/认证未提供；详见项目 <code>docs/audit-closeout-v1.md</code>。</p></article><footer><a href="14-code-tour.html">← 14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">为什么失败案例比成功截图更有教学价值</a><a href="#section-3">案例一：独立模板继承联合根</a><a href="#section-4">案例二：中文空命中后审核拒答模板</a><a href="#section-5">案例三：库内有正文，但模型没有读到</a><a href="#section-6">案例四：思考题被当因果支持</a><a href="#section-7">案例五：审核详情补条件，答案正文没条件</a><a href="#section-8">案例六：低功率因数与不当补偿的因果主体</a><a href="#section-9">案例七：英文Parquet没有_id</a><a href="#section-10">案例八：NLI解释报告继承错家族原因</a><a href="#section-11">案例九：页面字段路径被当私有路径</a><a href="#section-12">如何使用失败，而不把它们刷成成功</a><a href="#section-13">案例十：简化协议漏接实际Harness，停止规则也遗漏</a><a href="#section-14">项目复盘：可核查变化与不能编造的动机</a><a href="#section-15">本轮后续：先实装贯通，再一条烟测</a><a href="#section-16">后续能力边界：一个成功与原失败并存</a><a href="#section-17">核心审核修复v1的当前边界</a><a href="#section-18">2026-10-08 当前行为核对</a><a href="#section-19">三道自测：先作答，再展开</a><a href="#section-20">自测1：47诊断响应等于47独立题吗？</a><a href="#section-21">自测2：12题零放行能证明模型可靠吗？</a><a href="#section-22">自测3：失败复盘为何留原状态？</a><a href="#section-23">2026-10-08 首版收尾核对</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<p>4题各一次全部阶段完成：新概念通过、特定100kVA不足被识别、危险事实矛盾与来源绑定高风险完整且禁止采用；工程题不编造，但长回答/拒答及建议边界仍复核。16调用/0纠正/0修订不能称通用稳定；本批没有真实Revision，既有成功与Factory完整重审另列。实际浏览器和重启保存已核对，旧失败和完整库不变。进入限定个人最终试用，工程自动定值/认证未提供；详见项目 <code>docs/audit-closeout-v1.md</code>。</p></article><footer><a href="14-code-tour.html">← 14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">2026-10-23 事实审核内部流程候选</a><a href="#section-3">为什么失败案例比成功截图更有教学价值</a><a href="#section-4">案例一：独立模板继承联合根</a><a href="#section-5">案例二：中文空命中后审核拒答模板</a><a href="#section-6">案例三：库内有正文，但模型没有读到</a><a href="#section-7">案例四：思考题被当因果支持</a><a href="#section-8">案例五：审核详情补条件，答案正文没条件</a><a href="#section-9">案例六：低功率因数与不当补偿的因果主体</a><a href="#section-10">案例七：英文Parquet没有_id</a><a href="#section-11">案例八：NLI解释报告继承错家族原因</a><a href="#section-12">案例九：页面字段路径被当私有路径</a><a href="#section-13">如何使用失败，而不把它们刷成成功</a><a href="#section-14">案例十：简化协议漏接实际Harness，停止规则也遗漏</a><a href="#section-15">项目复盘：可核查变化与不能编造的动机</a><a href="#section-16">本轮后续：先实装贯通，再一条烟测</a><a href="#section-17">后续能力边界：一个成功与原失败并存</a><a href="#section-18">核心审核修复v1的当前边界</a><a href="#section-19">2026-10-08 当前行为核对</a><a href="#section-20">三道自测：先作答，再展开</a><a href="#section-21">自测1：47诊断响应等于47独立题吗？</a><a href="#section-22">自测2：12题零放行能证明模型可靠吗？</a><a href="#section-23">自测3：失败复盘为何留原状态？</a><a href="#section-24">2026-10-08 首版收尾核对</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

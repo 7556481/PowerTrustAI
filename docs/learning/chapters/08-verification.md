@@ -1,5 +1,11 @@
 # 08 事实支持、提取忠实性和审核协议复杂度
 
+## 2026-10-23 事实审核内部流程候选
+
+题设目录、组件提取时选择、审核实际依赖是三组不同集合。旧B要求后两组相等，不是要求目录全集。新候选让模型选择实际依赖子集，程序检查合法绑定。文献规则不因和实例同段而需要题设；应用须相关规则与题设。classification_objection与fidelity分别记录：答案说反可以忠实提取，正确性由支持判断；改变义务必须明确异议并保留复核，不能静默改类别通过。
+
+完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md)。生产未切换，本轮0真实调用。
+
 ## 四分类不是四档置信度
 
 supported表示给定完整命题受到实际依据支持；contradicted表示有依据冲突；insufficient_evidence表示依据不足以支持/反驳；not_assessable表示该对象不能有效评估或分类/绑定存在异议。它们不是从0到100的概率档位。没有证据不能当contradicted；接口失败也不能当事实错误。

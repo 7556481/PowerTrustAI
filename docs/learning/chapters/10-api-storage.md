@@ -1,5 +1,11 @@
 # 10 API、UI、队列、SQLite与本机会话
 
+## 2026-10-23 事实审核内部流程候选
+
+候选服务使用原Factory、worker、Store和API；新增受服务配置控制的premise_declarations，声明只能精确绑定当前question/user_context。FactFlowOutput单独保存object_reviews与flow_trace，API的fact_internal_flow展示两轴异议和节点诊断。旧记录继续可读。服务manifest记录实际候选prompt/contract，不把schema13数字等同本次实际协议。
+
+完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md)。生产未切换，本轮0真实调用。
+
 2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
 ## 服务与浏览器的分工

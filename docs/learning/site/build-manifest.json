@@ -28,13 +28,22 @@
     "public_unconfigured_fallback": "sequential",
     "total_fixed_plan_model_calls": 37,
     "new_live_model_tokens": 413018,
-    "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1"
+    "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1",
+    "fact_internal_flow_candidate": {
+      "version": "fact-internal-flow-v1",
+      "base_commit": "efbc2840938f26ac006b88a098d5214ba9e69f8e",
+      "implementation_commit": "c81c8c5fe2fe3b92c78d212dd76d873f55c5a7c8",
+      "production_enabled": false,
+      "new_live_calls": 0,
+      "full_offline_tests": 1158,
+      "full_offline_seconds": 166.597
+    }
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 3559,
-      "sha256": "7d458ed8b5d86b332b0d6d2351edd1561d62be82eefbb91a7c4df2779e222d1e"
+      "characters": 3723,
+      "sha256": "f3532327c8faad1ea14bcbaa6da7fcaea125f9f1e270fd90f811b085d6fd2d26"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -48,13 +57,13 @@
     },
     {
       "source": "docs/learning/chapters/03-agents.md",
-      "characters": 4384,
-      "sha256": "43c65e80e41a08a606ef9b1aa0af93d77474443cf6cfdc6f800d6d208dcd0dfd"
+      "characters": 4696,
+      "sha256": "b257be1cb6c56bd7e3e76b4be249fec7c92179072ff2b5891aeaf0cf79453837"
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 9267,
-      "sha256": "a79aca57a7a5ac26e6135b5b144a247a7bf06d93b944cad26866cb52cd0f28f2"
+      "characters": 9551,
+      "sha256": "2d6c0593ae3a25000da55dd514b237944d5869d3e56ea3bf6ccab338ae54535d"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -73,18 +82,18 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 6039,
-      "sha256": "307ce5ee70a234f54836f9a86750ed255697ac457fb62fe7f5eedc3907589e84"
+      "characters": 6378,
+      "sha256": "6bd6490eb5617c3af5dd5384a1e257b38ff4aef0269e939f8036888790e0a989"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
-      "characters": 3497,
-      "sha256": "26f773a31cf6b3f929b8e1b1642812038557e7d9506bf196aa13ba61efd67192"
+      "characters": 3786,
+      "sha256": "d882b5110354b14f6b153a98b5d98cd0ba547a9b20f11d8ca82baa54ba1529c4"
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 3003,
-      "sha256": "5245552e150b76df20d137781112e2a1f7046626b337a31405aaf7df4faeb859"
+      "characters": 3394,
+      "sha256": "f651597e748c5047dec2a63a8a399d18d6eddf3ab667cc812175327751238e88"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
@@ -103,13 +112,13 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 33432,
-      "sha256": "6a4c8bcac56962921b4905d61c9fb6c996b2006efeb296b0cccedf5352215721"
+      "characters": 37142,
+      "sha256": "450d12604fac60dc01417e827192cfb914b9a1193cd8431c274b784639d38ff1"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
-      "characters": 5587,
-      "sha256": "9b72fef0a4daae89fbace03543bb7a43a17b169fdfbf4d753b13a15974578514"
+      "characters": 5863,
+      "sha256": "4cb2d8dc38e9d4c7ec942e3b224a57f9d17bcd34130feec599a8af9fd6c90741"
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
@@ -142,6 +151,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 130991,
+  "markdown_characters": 136756,
   "network_dependencies": false
 }

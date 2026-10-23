@@ -272,7 +272,7 @@ backend/api.py / Submit.task，实际行54–67。
         e=self.engineering_context
         engineering=None if e is None else EngineeringContext(e.goal,e.network_model,e.operating_point,e.limits,
             tuple(e.contingencies),tuple(EngineeringQuantity(uuid4().hex,q.kind,q.value,q.unit,q.reference) for q in e.quantities))
-        return TaskRequest(uuid4().hex,TaskMode(self.mode),'voltage_stability_reactive_support',self.question,self.user_context,answer,refs+tuple(indexed_evidence),engineering)
+        args=(uuid4().hex,TaskMode(self.mode),'voltage_stability_reactive_support',self.question,self.user_context,answer,refs+tuple(indexed_evidence),engineering)
 ```
 只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
@@ -283,6 +283,7 @@ backend/api.py / create_app.submit，实际行228–247。
 ```python
     async def submit(body:Submit,request:Request):
         try:
+            if body.premise_declarations and config.fact_internal_flow!='langgraph_candidate_v1':raise InputError('Explicit premises require candidate flow')
             indexed=()
             if body.existing_citations:
                 if config.profile!='real':raise InputError('Indexed references require real knowledge snapshot')
@@ -300,7 +301,6 @@ backend/api.py / create_app.submit，实际行228–247。
                 indexed_reference_ids=tuple(e.evidence_id for e in indexed),nli_enabled=body.local_nli_enabled)
         except InputError as exc:
             if str(exc).startswith('Complete citation scopes exceed configured capacity; citation_indexes='):
-                raise HTTPException(422,detail={'code':'REVIEW_MESSAGE_CAPACITY_EXCEEDED',
 ```
 只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
@@ -609,3 +609,66 @@ Submit.task构造任务身份；ApplicationService.submit生成运行身份。
 schema13未换。任务范围由既有Domain的analysis_scope新增task_scope字段同次判断，结合实际问题/回答，程序记录原goal、身份/哈希/理由；缺goal不默认工程或概念，conceptual不能豁免工程承诺，真实异议/范围不确定保留复核。见 `services/task_applicability.py`、`agents/domain_contract_v3.py` 和 `agents/power_domain_review.program_findings`。同组件关系v6取消模型重复quote_ids，由合法局部bases/indexes程序绑定；条件/repair不得借未选正文或别的作用域，旧v5按旧接口保存，新增输出v9.12显式标记。见 `services/support_relation_v6.py`，危险规则未扩。
 
 4题各一次全部阶段完成：新概念通过、特定100kVA不足被识别、危险事实矛盾与来源绑定高风险完整且禁止采用；工程题不编造，但长回答/拒答及建议边界仍复核。16调用/0纠正/0修订不能称通用稳定；本批没有真实Revision，既有成功与Factory完整重审另列。实际浏览器和重启保存已核对，旧失败和完整库不变。进入限定个人最终试用，工程自动定值/认证未提供；详见项目 `docs/audit-closeout-v1.md`。
+
+
+## 事实审核内部候选源码：FactFlowAgent.run
+
+路径 agents/fact_flow_v1.py，函数 FactFlowAgent.run，行21–33。
+
+```python
+    async def run(self,inputs):
+        from harness.graph_runtime_v1 import validate_versions
+        validate_versions()
+        from core.validation import merge_evidence, require
+        from services.evidence_scope import validate_snapshot
+        merge_evidence(inputs.seed_evidence,inputs.original_evidence)
+        if inputs.generation_snapshot is not None:
+            validate_snapshot(inputs.generation_snapshot,inputs.answer)
+            merge_evidence(inputs.seed_evidence,inputs.original_evidence,inputs.generation_snapshot.evidence)
+            require(inputs.knowledge_version is None or inputs.generation_snapshot.knowledge_version==inputs.knowledge_version,'knowledge version mismatch')
+        async def prepare(state):
+            # Existing binder rejects stale source identities and scopes.
+            cat=Catalog(state['inputs'])
+```
+
+
+## 事实审核内部候选源码：Catalog.parse_one
+
+路径 services/fact_flow_protocol_v1.py，函数 Catalog.parse_one，行113–125。
+
+```python
+    def parse_one(self,row,target,path):
+        ec=ErrorCollector(VERSION)
+        required={'target_id','status','basis_ids','reason','conditions','repair','requires_authoritative_source',
+                  'object_kind','classification_objection','fidelity','fidelity_reason','dependencies','comparison'}
+        if not ec.fields(row,required,set(),path):ec.finish()
+        kind=row['object_kind'];obj=row['classification_objection'];ids=row['basis_ids'];deps=row['dependencies']
+        ec.check(type(kind) is str and kind in KINDS,path+'.object_kind','known_object_kind')
+        ec.check(obj is None or type(obj) is str and bool(obj.strip()),path+'.classification_objection','null_or_explicit_objection')
+        ec.check(row['fidelity'] in ('faithful','disputed','uncertain'),path+'.fidelity','independent_fidelity_required')
+        ec.check(type(row['fidelity_reason']) is str and bool(row['fidelity_reason'].strip()),path+'.fidelity_reason','fidelity_reason_required')
+        ec.check(type(ids) is list and all(type(b) is str and b in target['allowed_basis_ids'] for b in ids),path+'.basis_ids','legal_scoped_ids')
+        ec.check(type(deps) is list and all(type(b) is str and type(ids) is list and b in ids for b in deps) and len(set(deps))==len(deps),path+'.dependencies','selected_dependency_subset')
+        ec.finish()
+```
+
+
+## 事实审核内部候选源码：execute
+
+路径 services/scoped_fact_execution.py，函数 execute，行19–31。
+
+```python
+async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruction):
+    if current_budget() is None:
+        with model_scope(ModelBudget(2+len(inputs.answer.citations))):return await execute(agent,inputs,catalog=catalog,prompt_version=prompt_version,contract_version=contract_version,instruction=instruction)
+    if catalog is None:
+        from agents.verification_contract_v14 import ReviewCatalog
+        cat=ReviewCatalog(inputs)
+    else:cat=catalog
+    start=len(current_budget().records);current=deepcopy(cat.rows);accepted=set();issues=[];corrected=False
+    facts=[t for t,x in cat.targets.items() if x['kind']=='fact'];citations=[t for t,x in cat.targets.items() if x['kind']=='citation']
+    groups,rejected=pack(citations,cat.payload,instruction,agent.citation_workload or CitationWorkload())
+    if rejected:issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,'REVIEW_MESSAGE_CAPACITY_EXCEEDED','Complete citation scopes exceed capacity; no truncation'))
+    for group in ([tuple(facts)] if facts else [])+list(groups):
+        baseline={'judgments':[deepcopy(current[t]) for t in group]}
+```

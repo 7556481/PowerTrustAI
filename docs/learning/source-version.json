@@ -27,5 +27,14 @@
   "public_unconfigured_fallback": "sequential",
   "total_fixed_plan_model_calls": 37,
   "new_live_model_tokens": 413018,
-  "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1"
+  "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1",
+  "fact_internal_flow_candidate": {
+    "version": "fact-internal-flow-v1",
+    "base_commit": "efbc2840938f26ac006b88a098d5214ba9e69f8e",
+    "implementation_commit": "c81c8c5fe2fe3b92c78d212dd76d873f55c5a7c8",
+    "production_enabled": false,
+    "new_live_calls": 0,
+    "full_offline_tests": 1158,
+    "full_offline_seconds": 166.597
+  }
 }
