@@ -68,7 +68,7 @@ def full_wire(inputs):
 
 
 def validate_projection(output, claim, review, finding, path):
-    require(output.flow_protocol == VERSION, 'known flow protocol required', path=path)
+    require(output.flow_protocol in (VERSION, 'fact-internal-flow-v2'), 'known flow protocol required', path=path)
     record=next((r for r in output.object_reviews if r['claim_id']==claim.claim_id and r['component_id']==review.component_id),None)
     require(record is not None, 'candidate object record required', path=path)
     if record['classification_objection'] or record['fidelity']!='faithful' or record['object_kind']=='uncertain':
@@ -77,8 +77,10 @@ def validate_projection(output, claim, review, finding, path):
 
 
 class Catalog(ReviewCatalog):
+    protocol_version = VERSION
+    prompt_version_flow = PROMPT
     def __init__(self, inputs):
-        super().__init__(inputs, wire_factory=full_wire,contract_version=VERSION)
+        super().__init__(inputs, wire_factory=full_wire,contract_version=self.protocol_version)
         self.premises=premise_catalog(inputs.request)
         for i,p in enumerate(self.premises):
             self.bases['P'+str(i)]={'wire':{'type':'task_premise_reference','premise_id':p.premise_id},
@@ -102,7 +104,7 @@ class Catalog(ReviewCatalog):
         self.active_rows=self.rows
 
     def payload(self, ids):
-        value=super().payload(ids);value['contract']=VERSION
+        value=super().payload(ids);value['contract']=self.protocol_version
         value['answer_id']=self.inputs.answer.answer_id;value['answer_version']=self.inputs.answer.version
         value['available_tools']=[]
         if any(self.targets[t]['kind']=='fact' for t in ids):
@@ -111,7 +113,7 @@ class Catalog(ReviewCatalog):
         return value
 
     def parse_one(self,row,target,path):
-        ec=ErrorCollector(VERSION)
+        ec=ErrorCollector(self.protocol_version)
         required={'target_id','status','basis_ids','reason','conditions','repair','requires_authoritative_source',
                   'object_kind','classification_objection','fidelity','fidelity_reason','dependencies','comparison'}
         if not ec.fields(row,required,set(),path):ec.finish()
@@ -166,7 +168,7 @@ class Catalog(ReviewCatalog):
             {'kind':'uncertain','reason':row['fidelity_reason']} if row['fidelity']=='uncertain' or kind=='uncertain' else None)
         result=super().parse_one(legacy,target,path)
         result.update(object_kind=kind,classification_objection=obj,fidelity=row['fidelity'],
-            fidelity_reason=row['fidelity_reason'],dependencies=deps,comparison=comparison,scalar_result=computed,contract=VERSION,
+            fidelity_reason=row['fidelity_reason'],dependencies=deps,comparison=comparison,scalar_result=computed,contract=self.protocol_version,
             capability_limit='no_engineering_calculator; body_support_is_not_engineering_validation' if kind=='engineering_relation' else 'scalar_order_only; units_and_relevance_require_semantic_review' if kind=='numeric_comparison' else None)
         return result
 
@@ -180,9 +182,9 @@ class Catalog(ReviewCatalog):
             parts=[]
             for pi,r in enumerate(f.component_reviews):
                 row=rows[f'F{ci}C{pi}']
-                parts.append(replace(r,fidelity_status=row['fidelity'],fidelity_rationale=row['fidelity_reason'],review_projection_version=VERSION))
+                parts.append(replace(r,fidelity_status=row['fidelity'],fidelity_rationale=row['fidelity_reason'],review_projection_version=self.protocol_version))
             findings.append(replace(f,component_reviews=tuple(parts)))
-        return replace(out,findings=tuple(findings),prompt_version=PROMPT)
+        return replace(out,findings=tuple(findings),prompt_version=self.prompt_version_flow)
 
     def mark(self,out,missing,errors):
         result=super().mark(out,missing,errors)
@@ -211,11 +213,11 @@ class Catalog(ReviewCatalog):
                     row=owner.active_rows[tid];a=owner.parse_one(row,t,'$.judgments.'+tid)
                     c=inputs.claims[t['claim_index']]
                     records.append(dict(a,claim_id=c.claim_id,component_id=c.components[t['component_index']].component_id))
-                return FactFlowOutput(**{f.name:getattr(out,f.name) for f in fields(out)},task_premises=owner.premises,object_reviews=tuple(records))
+                return FactFlowOutput(**{f.name:getattr(out,f.name) for f in fields(out)},task_premises=owner.premises,object_reviews=tuple(records),flow_protocol=owner.protocol_version)
         # Apply conservative objection disposition before the existing typed gate.
         safe=deepcopy(wire)
         for ci,f in enumerate(safe['findings']):
             for r in f['component_reviews']:
                 tid=f'F{ci}C{r["component_index"]}';a=self.parse_one(self.active_rows[tid],self.targets[tid],'$.judgments.'+tid)
                 r['status']=a['effective_support_status']
-        return common.parse(safe,self.inputs,self.scopes,prompt_version=PROMPT,premise_profile=Profile)
+        return common.parse(safe,self.inputs,self.scopes,prompt_version=self.prompt_version_flow,premise_profile=Profile)

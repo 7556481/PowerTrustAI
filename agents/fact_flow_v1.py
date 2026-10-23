@@ -13,6 +13,11 @@ class State(TypedDict, total=False):
     trace: list
 
 class FactFlowAgent(ModelEvidenceVerificationAgent):
+    catalog_type = Catalog
+    protocol_version = VERSION
+    prompt_version_flow = PROMPT
+    instruction = SYSTEM
+
     def __init__(self,*args,**kwargs):
         kwargs['schema_version']=13
         kwargs['correction_accounting']='invocation_scoped_v1'
@@ -30,12 +35,12 @@ class FactFlowAgent(ModelEvidenceVerificationAgent):
             require(inputs.knowledge_version is None or inputs.generation_snapshot.knowledge_version==inputs.knowledge_version,'knowledge version mismatch')
         async def prepare(state):
             # Existing binder rejects stale source identities and scopes.
-            cat=Catalog(state['inputs'])
+            cat=self.catalog_type(state['inputs'])
             return {'catalog':cat,'trace':[{'node':'prepare_objects_and_legal_basis','targets':len(cat.targets),
-                'answer_version':inputs.answer.version,'protocol':VERSION}]}
+                'answer_version':inputs.answer.version,'protocol':self.protocol_version}]}
         async def review(state):
             from services.scoped_fact_execution import execute
-            out=await execute(self,inputs,catalog=state['catalog'],prompt_version=PROMPT,contract_version=VERSION,instruction=SYSTEM)
+            out=await execute(self,inputs,catalog=state['catalog'],prompt_version=self.prompt_version_flow,contract_version=self.protocol_version,instruction=self.instruction)
             return {'output':out,'trace':state['trace']+[{'node':'classify_dependencies_and_support',
                 'calls':len(out.model_records),'execution_issues':len(out.execution_issues)}]}
         async def gap(state):

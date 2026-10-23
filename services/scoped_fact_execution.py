@@ -42,6 +42,7 @@ async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruc
             await structured_request(agent.client,(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),prompt_version,isolation.parse,
                 diagnostics=agent.diagnostics,response_contract_version=contract_version,candidate_catalog_path=path,max_corrections=0 if corrected else 1,
                 correction_context=lambda value,diagnostic:cat.correction_context(group,value,diagnostic),
+                correction_instruction=getattr(cat,"correction_instruction",None),
                 max_message_chars=None if group==tuple(facts) else (agent.citation_workload or CitationWorkload()).max_correction_message_chars)
         except asyncio.CancelledError as exc:
             if catalog is not None:
