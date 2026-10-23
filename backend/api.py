@@ -41,7 +41,13 @@ class ExistingCitation(StrictModel):
     end_offset:int=Field(gt=0)
     fragment_ids:list[str]=Field(min_length=1)
 
+class TaskPremiseDeclaration(StrictModel):
+    source_field:Literal['question','user_context']
+    quote:str=Field(min_length=1,max_length=10000)
+    kind:Literal['stipulated','unverified_report']='stipulated'
+
 class Submit(StrictModel):
+    premise_declarations:list[TaskPremiseDeclaration]=Field(default_factory=list,max_length=30)
     local_nli_enabled:bool=False
     mode:Literal['question_answer','assess_existing']
     question:str=Field(min_length=1,max_length=8000)
@@ -64,7 +70,11 @@ class Submit(StrictModel):
         e=self.engineering_context
         engineering=None if e is None else EngineeringContext(e.goal,e.network_model,e.operating_point,e.limits,
             tuple(e.contingencies),tuple(EngineeringQuantity(uuid4().hex,q.kind,q.value,q.unit,q.reference) for q in e.quantities))
-        return TaskRequest(uuid4().hex,TaskMode(self.mode),'voltage_stability_reactive_support',self.question,self.user_context,answer,refs+tuple(indexed_evidence),engineering)
+        args=(uuid4().hex,TaskMode(self.mode),'voltage_stability_reactive_support',self.question,self.user_context,answer,refs+tuple(indexed_evidence),engineering)
+        if self.premise_declarations:
+            from core.models import PremiseTaskRequest,PremiseDeclaration
+            return PremiseTaskRequest(*args,premise_declarations=tuple(PremiseDeclaration(p.source_field,p.quote,p.kind) for p in self.premise_declarations))
+        return TaskRequest(*args)
 class HumanReview(StrictModel):
     answer_id:str=Field(min_length=1,max_length=150)
     answer_version:int=Field(ge=1)
@@ -228,6 +238,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
     @app.post('/runs',status_code=202,dependencies=[Depends(authorized)])
     async def submit(body:Submit,request:Request):
         try:
+            if body.premise_declarations and config.fact_internal_flow!='langgraph_candidate_v1':raise InputError('Explicit premises require candidate flow')
             indexed=()
             if body.existing_citations:
                 if config.profile!='real':raise InputError('Indexed references require real knowledge snapshot')

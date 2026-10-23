@@ -21,7 +21,17 @@ class Gates(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.guard=patch.object(socket.socket,'connect',side_effect=AssertionError('offline'));self.guard.start();self.addCleanup(self.guard.stop)
         t=tempfile.TemporaryDirectory(dir=trial.ROOT/'data/retrieval_local',prefix='object-entry-');self.addCleanup(t.cleanup);self.root=Path(t.name)
-    async def test_lengths_and_prepared_hashes(self):check()
+    async def test_lengths_and_prepared_hashes(self):
+        # Old authorization is not reusable after source evolution.
+        with self.assertRaisesRegex(ValueError,'Approved materials/source unchanged'):check()
+        from evaluation import public_review_object_materials_v1 as materials
+        original=materials.read
+        def fixture_read(name):
+            value=original(name)
+            if name=='freeze-plan-v1.json':value={**value,'bound_files':[]}
+            return value
+        # Independently retain all literal length/input/message/injection assertions.
+        with patch.object(materials,'read',side_effect=fixture_read):check()
     async def test_final_generation_failure_stops_all_later(self):
         adapters=[]
         def factory():a=Bad();adapters.append(a);return a

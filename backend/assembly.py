@@ -54,7 +54,7 @@ class ComponentFactory:
             if hasattr(resource.encoder,'close'):resource.encoder.close()
             self.semantic_resource=None
     def preflight(self):
-        if self.config.execution_path=='langgraph_v1':
+        if self.config.execution_path=='langgraph_v1' or self.config.fact_internal_flow=='langgraph_candidate_v1':
             try:
                 from harness.graph_runtime_v1 import validate_versions,build_graph
                 validate_versions();build_graph()
@@ -100,6 +100,7 @@ class ComponentFactory:
             'components':'simulated_synthetic_fixture' if self.config.profile=='synthetic_fixture' else 'real_model_with_demo_domain_rules',
             'model_id':os.environ.get('DEEPSEEK_MODEL_ID') if self.config.profile=='real' else None,
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
+            'fact_internal_flow':self.config.fact_internal_flow,
             'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':self.config.verification_schema,'domain_review':5,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
             'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-faithful-assertions-v2' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
@@ -169,6 +170,14 @@ class ComponentFactory:
             manifest['effective_corpus_query_version']='topic-subject-grammar-bm25-v2'
             manifest['ranking_work_cache']='per-run-8-entries-max64-numeric-hits; full-body/context replay retained'
             manifest['citation_execution']='complete-single-scope-v1; same shared one-correction budget'
+        if self.config.fact_internal_flow=='langgraph_candidate_v1':
+            from services.fact_flow_protocol_v1 import SYSTEM,PROMPT,VERSION
+            manifest['prompts']['verification']=PROMPT
+            manifest['contracts']['verification']=VERSION
+            manifest['review_message_profile']='fact-internal-flow-v1'
+            manifest['review_transport']='target-scoped-catalog-v1'
+            manifest['fact_flow_protocol']=VERSION
+            manifest['template_sha256']={k:hashlib.sha256(SYSTEM.encode()).hexdigest() for k in ('independent','original_citation')}
         return manifest
 
     def create(self,rid,observer):
@@ -181,6 +190,9 @@ class ComponentFactory:
             return Bundle(harness)
         from agents.generation import EvidenceGenerationAgent
         from agents.evidence_verification import ModelEvidenceVerificationAgent
+        if self.config.fact_internal_flow=='langgraph_candidate_v1':
+            from agents.fact_flow_v1 import FactFlowAgent as FactAgent
+        else:FactAgent=ModelEvidenceVerificationAgent
         from agents.power_domain_review import ModelPowerDomainReviewAgent
         from agents.revision import ModelRevisionAgent
         from services.claim_extractor import ModelClaimExtractor
@@ -205,7 +217,7 @@ class ComponentFactory:
                 corpus=seal(store,self.config.knowledge_version)
                 corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile),
+                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),

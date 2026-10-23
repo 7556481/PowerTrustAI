@@ -22,7 +22,7 @@ def validate_bases(bases, output, answer, path, *, allowed_ids=None, citation=Fa
         p = f"{path}[{i}]"
         if basis.type == 'task_premise_reference':
             from core.models import TaskPremiseBasis
-            require(type(output).__name__ == 'PremiseVerificationOutput' and isinstance(basis, TaskPremiseBasis)
+            require(type(output).__name__ in ('PremiseVerificationOutput','FactFlowOutput') and isinstance(basis, TaskPremiseBasis)
                     and not citation, 'task premise basis requires explicit candidate output and independent scope', path=p)
             require(basis.premise_reference is not None and basis.premise_reference in output.task_premises,
                     'task premise basis binding changed', path=p)
@@ -138,6 +138,9 @@ def validate_typed_finding(finding, claim, output, answer, path):
             from services.premise_review_protocol_v1 import validate_selected
             index = next(n for n,c in enumerate(claim.components) if c.component_id == rev.component_id)
             handled = validate_selected(claim, index, [finding.bases[n] for n in rev.basis_indexes], rev.status, p)
+        if type(output).__name__ == 'FactFlowOutput':
+            from services.fact_flow_protocol_v1 import validate_projection
+            handled = validate_projection(output, claim, rev, finding, p)
         if rev.status in (VerificationStatus.SUPPORTED, VerificationStatus.CONTRADICTED) and not handled:
             calc=bool(output.prompt_version and output.prompt_version.startswith('evidence-verification-v9') and category=='technical_fact' and 'calculation_result_reference' in types)
             require(REQUIRED.get(category) in types or calc, "component lacks matching support basis", path=p)

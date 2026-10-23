@@ -62,7 +62,13 @@ class ContinuationGates(unittest.TestCase):
         manifest=trial.read(continuation.OLD_FREEZE)['manifest']
         key=next(k for k in manifest['source_sha256'] if k.replace('\\','/')=='backend/static/app.js')
         manifest['source_sha256'][key]='engineering-change'
-        with patch.object(trial,'config_identity',return_value=old['configuration']),patch.dict('os.environ',{'DEEPSEEK_MODEL_ID':old['model_id']}):
+        # Archived live source identities must reject today's evolved source tree.
+        # Exercise the old delta rule against its frozen inventory, never rewrite it.
+        frozen={str((continuation.ROOT/f['path']).resolve()):f['sha256'] for f in old['bound_files']}
+        def frozen_digest(path):
+            name=Path(path).relative_to(continuation.ROOT).as_posix()
+            return 'engineering-change' if name=='backend/static/app.js' else frozen[str(Path(path).resolve())]
+        with patch.object(trial,'config_identity',return_value=old['configuration']),patch.dict('os.environ',{'DEEPSEEK_MODEL_ID':old['model_id']}),patch.object(continuation,'digest',side_effect=frozen_digest):
             changes=continuation.compatibility(old,None,manifest)
             self.assertIn('backend/static/app.js',[r['path'] for r in changes])
             manifest['prompts']['generation']='forbidden-business-change'

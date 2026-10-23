@@ -99,7 +99,7 @@ class SubjectProvider(SyntheticProvider):
   return await super().complete(r)
 
 class FactoryFlowTests(unittest.TestCase):
- def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False,objection=False,illegal=False,hazard=False,negated=False,quoted=False,subject=False,concept=False,no_goal=False,task_scope='conceptual',guarantee=False,evidence_gap=False,scope_note=False):
+ def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False,objection=False,illegal=False,hazard=False,negated=False,quoted=False,subject=False,concept=False,no_goal=False,task_scope='conceptual',guarantee=False,evidence_gap=False,scope_note=False,premises=False):
   with synthetic_diagnostics() as temp:
    root=Path(temp);doc=root/'fixture.md';doc.write_text('# Synthetic voltage\n\n'+GOOD+'\nThe synthetic setting applies under condition C.\n'+CONVERT,encoding='utf-8')
    if subject:doc.write_text('# Synthetic definition\n\n'+GOOD_FREQUENCY+'\n\n'+'\n\n'.join('Background unrelated item '+str(i) for i in range(80))+'\n\n'+'\n\n'.join('A device can turn50Hz into60Hz. Converter background detail '+str(i) for i in range(12)),encoding='utf-8')
@@ -126,6 +126,7 @@ class FactoryFlowTests(unittest.TestCase):
      app=create_app(config,factory=factory,access_token='fixture')
      with TestClient(app) as client:
       body={'mode':'assess_existing' if existing else 'question_answer','question':'Explain the synthetic voltage only','engineering_context':{'goal':'conceptual'}}
+      if premises:body.update(user_context='Synthetic current score is 71.',premise_declarations=[{'source_field':'user_context','quote':'Synthetic current score is 71.','kind':'stipulated'}])
       if no_goal:body.pop('engineering_context')
       if task_scope=='engineering':body['question']='Determine a specific plant operating setting with missing network inputs.'
       if concept:body['question']='What is synthetic voltage?'

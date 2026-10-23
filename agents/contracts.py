@@ -170,3 +170,11 @@ class PowerDomainReviewAgent(Protocol):
 
 class RevisionAgent(Protocol):
     async def run(self, inputs: RevisionInput) -> RevisionOutput: ...
+
+
+@dataclass(frozen=True)
+class FactFlowOutput(PremiseVerificationOutput):
+    """Candidate-only semantic records; ordinary output and policy remain compatible."""
+    flow_protocol: str = 'fact-internal-flow-v1'
+    object_reviews: tuple = ()
+    flow_trace: tuple = ()
