@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-23",
+  "default_execution_path": "langgraph_v1",
+  "public_unconfigured_fallback": "sequential",
+  "managed_version": "service-orchestration-v1",
+  "health": {
+    "status": "ready",
+    "health_model_requests": 0,
+    "local_session_version": "localhost-launch-session-v1",
+    "local_nli": {
+      "configured": false,
+      "available": false,
+      "loaded": false,
+      "authority": "diagnostic_only",
+      "default_enabled": false,
+      "strategy": "aggregate",
+      "note": "服务端尚未配置可用的本地模型、独立解释器与profile。"
+    },
+    "profile": "real",
+    "configuration_ready": true,
+    "reason": null,
+    "execution_path": "langgraph_v1",
+    "retrieval_mode": "bm25",
+    "fact_retrieval_strategy": "aggregate",
+    "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+    "storage_healthy": true,
+    "active_run": false,
+    "queue_capacity": 2,
+    "queued": 0,
+    "workers_supported": 1
+  },
+  "history_before": {
+    "runs": {
+      "count": 104,
+      "rows_sha256": "7d56b30fbd00d1adac469af808a02a7d8368a395bbb5ce4498f9f18138822e7d"
+    },
+    "events": {
+      "count": 2278,
+      "rows_sha256": "7761b5e8576f306a78f3db089583a68adff9e9f7d5c123cc504c5a6534b2a9c1"
+    },
+    "objects": {
+      "count": 2999,
+      "rows_sha256": "c6fd2d407c41f38226f6d7b9c33499353703ac41fd0f2dd4691cbfb0c99da608"
+    },
+    "reviews": {
+      "count": 8,
+      "rows_sha256": "5ebddaeb7d5d009fe8d25a82919e7b0cf6433b36f030ab10550cb3f552b1ed7f"
+    }
+  },
+  "history_after": {
+    "runs": {
+      "count": 104,
+      "rows_sha256": "7d56b30fbd00d1adac469af808a02a7d8368a395bbb5ce4498f9f18138822e7d"
+    },
+    "events": {
+      "count": 2278,
+      "rows_sha256": "7761b5e8576f306a78f3db089583a68adff9e9f7d5c123cc504c5a6534b2a9c1"
+    },
+    "objects": {
+      "count": 2999,
+      "rows_sha256": "c6fd2d407c41f38226f6d7b9c33499353703ac41fd0f2dd4691cbfb0c99da608"
+    },
+    "reviews": {
+      "count": 8,
+      "rows_sha256": "5ebddaeb7d5d009fe8d25a82919e7b0cf6433b36f030ab10550cb3f552b1ed7f"
+    }
+  },
+  "history_equal": true,
+  "new_acceptances": 5,
+  "old_batch_unchanged": true,
+  "execution_source_hashes_match": true,
+  "environment_override_rollback_checked": true,
+  "offline_gates": [
+    {
+      "count": 7,
+      "seconds": 13.849
+    },
+    {
+      "count": 1,
+      "seconds": 0.048
+    }
+  ],
+  "full_suite_repeated": false,
+  "fixed_response_differential": "Unchanged business code; prior 66 targeted and 24-item saved-response replay evidence retained.",
+  "browser": {
+    "actual_entry_checked": true,
+    "diagnostic_disclosure_checked": true,
+    "automatic_login": "unaccepted_pending_owner",
+    "authenticated_citation_versions_failure_views": "unaccepted_pending_owner",
+    "no_security_bypass": true
+  },
+  "cleanup_this_round": "none; candidates, historical protocols and all private resources retained"
+}

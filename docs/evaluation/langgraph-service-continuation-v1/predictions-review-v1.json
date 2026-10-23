@@ -1,0 +1,2029 @@
+{
+  "scope": "Necessary actual prediction text; no full Evidence/snapshot objects. AI-assisted review, user-supervised execution.",
+  "branches": [
+    {
+      "id": "LSI-01-G",
+      "run_id": "caca725070144636872b4136f774fe84",
+      "review_rounds": [
+        {
+          "answer": {
+            "answer_id": "f14ab31e827a4f8082db370c09b36436-answer",
+            "version": 1,
+            "text": "按该NWS文献，可测降水指降水量达到或超过0.01英寸（含液态降水或固态降水的水当量）；小于该值不计为可测降水。",
+            "assumptions": [],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 56,
+                "evidence_ids": [
+                  "user-1b611b6e44eb457480d85ee8cb3f4cb8"
+                ]
+              }
+            ]
+          },
+          "claims": [
+            {
+              "claim_id": "claim-18170b327f7367c426a40b95",
+              "answer_id": "f14ab31e827a4f8082db370c09b36436-answer",
+              "answer_version": 1,
+              "text": "按该NWS文献，可测降水指降水量达到或超过0.01英寸（含液态降水或固态降水的水当量）；小于该值不计为可测降水。",
+              "start_offset": 0,
+              "end_offset": 56,
+              "claim_type": "technical_fact",
+              "proposition": "根据该NWS文献，可测降水指降水量达到或超过0.01英寸，包括液态降水或固态降水的水当量。",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-18170b327f7367c426a40b95-part-0",
+                  "category": "technical_fact",
+                  "proposition": "根据该NWS文献，可测降水指降水量达到或超过0.01英寸。"
+                },
+                {
+                  "component_id": "claim-18170b327f7367c426a40b95-part-1",
+                  "category": "technical_fact",
+                  "proposition": "根据该NWS文献，可测降水包括液态降水或固态降水的水当量。"
+                }
+              ],
+              "anchor_group_id": "anchor-1ed1af39b85123e8778edc7c",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "根据NWS文献",
+                "阈值0.01英寸",
+                "包含液态与固态水当量"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "document_body",
+                "document_body"
+              ],
+              "component_obligations": [
+                "technical_truth",
+                "technical_truth"
+              ]
+            },
+            {
+              "claim_id": "claim-1c33b9d42ccb05e405b872ce",
+              "answer_id": "f14ab31e827a4f8082db370c09b36436-answer",
+              "answer_version": 1,
+              "text": "按该NWS文献，可测降水指降水量达到或超过0.01英寸（含液态降水或固态降水的水当量）；小于该值不计为可测降水。",
+              "start_offset": 0,
+              "end_offset": 56,
+              "claim_type": "technical_fact",
+              "proposition": "根据该NWS文献，降水量小于0.01英寸不计为可测降水。",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-1c33b9d42ccb05e405b872ce-part-0",
+                  "category": "technical_fact",
+                  "proposition": "根据该NWS文献，降水量小于0.01英寸不计为可测降水。"
+                }
+              ],
+              "anchor_group_id": "anchor-1ed1af39b85123e8778edc7c",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "根据NWS文献",
+                "小于0.01英寸"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "document_body"
+              ],
+              "component_obligations": [
+                "technical_truth"
+              ]
+            }
+          ],
+          "verification_findings": [
+            {
+              "finding_id": "finding-claim-18170b327f7367c426a40b95",
+              "claim_id": "claim-18170b327f7367c426a40b95",
+              "status": "supported",
+              "evidence_ids": [
+                "user-1b611b6e44eb457480d85ee8cb3f4cb8"
+              ],
+              "rationale": "The user-supplied NWS text states measurable precipitation is equal to or greater than 0.01 inches and defines POP for liquid precipitation or the water equivalent of frozen precipitation; both components are directly supported by the same carrier.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-18170b327f7367c426a40b95-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "Text states measurable precipitation is equal to or greater than 0.01 inches. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The body explicitly gives the 0.01-inch threshold definition.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-bd0078ead0c839a6f15b33f8-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "Answer preserves threshold and NWS attribution.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                },
+                {
+                  "component_id": "claim-18170b327f7367c426a40b95-part-1",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "Text defines measurable amount for liquid precipitation or water equivalent of frozen precipitation. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"Body covers both liquid precipitation and frozen water equivalent.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-bd0078ead0c839a6f15b33f8-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "Answer restates liquid or frozen water-equivalent inclusion.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-1c33b9d42ccb05e405b872ce",
+              "claim_id": "claim-1c33b9d42ccb05e405b872ce",
+              "status": "supported",
+              "evidence_ids": [
+                "user-1b611b6e44eb457480d85ee8cb3f4cb8"
+              ],
+              "rationale": "The contrapositive of 'equal to or greater than 0.01 inches' follows directly: amounts below 0.01 inches are not measurable precipitation under this definition.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-1c33b9d42ccb05e405b872ce-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "Text's 'equal to or greater than 0.01 inches' entails values below are excluded. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"Threshold phrasing implies sub-0.01-inch amounts are below measurable.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-bd0078ead0c839a6f15b33f8-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "Answer's negation of sub-threshold amounts matches the source's boundary.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            }
+          ],
+          "domain_findings": [
+            {
+              "finding_id": "domain-engineering_inputs",
+              "claim_ids": [],
+              "category": "engineering_inputs",
+              "rationale": "Current question/answer and domain applicability are conceptual; no plant study inputs required.",
+              "check_status": "not_applicable",
+              "origin": "program_rule",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-input_units:units-input",
+              "claim_ids": [],
+              "category": "input_units:units-input",
+              "rationale": "Conceptual request contains no structured quantities; actual answer quantity assertions are reviewed separately.",
+              "check_status": "not_applicable",
+              "origin": "program_rule",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-simulation_boundary",
+              "claim_ids": [],
+              "category": "simulation_boundary",
+              "rationale": "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",
+              "check_status": "not_applicable",
+              "origin": "program_rule",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-answer_units",
+              "claim_ids": [
+                "claim-18170b327f7367c426a40b95",
+                "claim-1c33b9d42ccb05e405b872ce"
+              ],
+              "category": "answer_units",
+              "rationale": "答案保留原单位英寸，阈值0.01英寸与文献一致，未做任何换算或单位改写。",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-analysis_scope",
+              "claim_ids": [
+                "claim-18170b327f7367c426a40b95",
+                "claim-1c33b9d42ccb05e405b872ce"
+              ],
+              "category": "analysis_scope",
+              "rationale": "用户仅要求依据给定NWS文献解释可测降水阈值的定义，不涉及具体设备额定值、整定、运行或电站结论；答案限于文献定义并给出0.01英寸阈值，与请求范围一致，且未作实际天气判断或工程可行性保证。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户仅要求依据给定NWS文献解释可测降水阈值的定义，不涉及具体设备额定值、整定、运行或电站结论；答案限于文献定义并给出0.01英寸阈值，与请求范围一致，且未作实际天气判断或工程可行性保证。\", \"answer_id\": \"f14ab31e827a4f8082db370c09b36436-answer\", \"answer_version\": 1, \"answer_sha256\": \"2aef2d61bb6ec5ef3d77642a56883685051f05a8b326679b5fb58ca8b6498695\", \"question_sha256\": \"bb1c67455ad737854c80ff3fd60a3276fa1a1e273a03bd8f6a21c461e11a1837\", \"structured_goal\": \"conceptual\"}",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-operating_prerequisites",
+              "claim_ids": [],
+              "category": "operating_prerequisites",
+              "rationale": "答案为纯概念定义解释，不含任何操作、设备投运或整定建议，无需运行前提。",
+              "check_status": "not_applicable",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            }
+          ],
+          "decision": {
+            "kind": "pass",
+            "reasons": [
+              "All applicable checks complete with supported claims and no blocking findings",
+              "Automatic approval is bounded to this task; not engineering safety certification"
+            ],
+            "execution_integrity": "complete"
+          }
+        }
+      ],
+      "revisions": []
+    },
+    {
+      "id": "LSI-02-G",
+      "run_id": "cedd45aa7a744061ad3a428caa6ce50c",
+      "review_rounds": [
+        {
+          "answer": {
+            "answer_id": "9d11b08596e646a8acade0868bed0723-answer",
+            "version": 1,
+            "text": "不能确定。缺少网络模型（拓扑与元件参数）、当前运行点（负荷、各母线电压与无功潮流）及电压/功率因数等限值，且未给定补偿目标与校核工况，无法计算所需无功补偿容量。",
+            "assumptions": [],
+            "missing_information": [
+              "厂站网络拓扑与元件参数（线路、变压器阻抗等）",
+              "当前运行点：负荷水平、各母线电压及无功潮流",
+              "电压偏差、功率因数等限值要求",
+              "补偿目标（如电压调整、降损）及需校核的运行方式"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 80,
+                "evidence_ids": [
+                  "e-47de8ef22559da08a4ba6efd0e442c9a35c1f3f2435324a4997bc3506730ae11",
+                  "e-d71bfaa7c677b8c1f14268da7b837ab05784442cd495146af2d40ac43e8ace45"
+                ]
+              }
+            ]
+          },
+          "claims": [
+            {
+              "claim_id": "claim-b39f175f2c2d45c7d3725ac6",
+              "answer_id": "9d11b08596e646a8acade0868bed0723-answer",
+              "answer_version": 1,
+              "text": "不能确定。缺少网络模型（拓扑与元件参数）、当前运行点（负荷、各母线电压与无功潮流）及电压/功率因数等限值，且未给定补偿目标与校核工况，无法计算所需无功补偿容量。",
+              "start_offset": 0,
+              "end_offset": 80,
+              "claim_type": "answer_scope",
+              "proposition": "缺少网络模型、当前运行点及电压/功率因数等限值时，所需无功补偿容量无法计算。",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-0",
+                  "category": "input_evidence_coverage",
+                  "proposition": "未提供网络拓扑与元件参数。"
+                },
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-1",
+                  "category": "input_evidence_coverage",
+                  "proposition": "未提供当前运行点，包括负荷、各母线电压与无功潮流。"
+                },
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-2",
+                  "category": "input_evidence_coverage",
+                  "proposition": "未提供电压偏差、功率因数等限值。"
+                },
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-3",
+                  "category": "input_evidence_coverage",
+                  "proposition": "未提供补偿目标与需校核的运行工况。"
+                },
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-4",
+                  "category": "answer_scope",
+                  "proposition": "在这些信息缺失的情况下无法计算所需无功补偿容量。"
+                }
+              ],
+              "anchor_group_id": "anchor-2a653126185f3681d2fd325f",
+              "assertion_role": "missing_information",
+              "semantic_qualifiers": [
+                "conditional_on_missing_inputs"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "input_snapshot",
+                "input_snapshot",
+                "input_snapshot",
+                "input_snapshot",
+                "answer_text"
+              ],
+              "component_obligations": [
+                "input_provided",
+                "input_provided",
+                "input_provided",
+                "input_provided",
+                "answer_scope"
+              ]
+            }
+          ],
+          "verification_findings": [
+            {
+              "finding_id": "finding-claim-b39f175f2c2d45c7d3725ac6",
+              "claim_id": "claim-b39f175f2c2d45c7d3725ac6",
+              "status": "not_assessable",
+              "evidence_ids": [],
+              "rationale": "四个输入缺口组成部分由交付的完整输入快照记录（用户仅询问资料是否足够）；最终范围组成部分只说明在这些信息缺失时无法计算容量，属于有界答案范围判断，而非已核实的工程事实。",
+              "component_reviews": [
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "交付的输入字段显示网络模型为空。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "missing_information",
+                  "verification_obligation": "input_provided",
+                  "fidelity_rationale": "仅主张用户未提供网络模型。",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                },
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-1",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "交付的输入字段显示运行点为空。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "missing_information",
+                  "verification_obligation": "input_provided",
+                  "fidelity_rationale": "仅主张运行点未提供。",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                },
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-2",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "交付的输入字段显示限值为空。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "missing_information",
+                  "verification_obligation": "input_provided",
+                  "fidelity_rationale": "仅主张电压/功率因数限值未提供。",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                },
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-3",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "交付字段显示补偿目标与校核工况均未提供。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "missing_information",
+                  "verification_obligation": "input_provided",
+                  "fidelity_rationale": "仅主张补偿目标与校核工况未提供。",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                },
+                {
+                  "component_id": "claim-b39f175f2c2d45c7d3725ac6-part-4",
+                  "status": "not_assessable",
+                  "basis_indexes": [
+                    1
+                  ],
+                  "rationale": "答案锚点明确说明所列信息缺失时无法计算容量；这属于有界范围陈述，不是对具体数值的断言。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "answer_scope",
+                  "fidelity_rationale": "关于在这些缺口下无法计算的回答范围判断被保留。",
+                  "raw_support_status": "supported",
+                  "review_disposition": "review_required",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            }
+          ],
+          "domain_findings": [
+            {
+              "finding_id": "domain-engineering_inputs",
+              "claim_ids": [],
+              "category": "engineering_inputs",
+              "rationale": "Input presence checked only; data are user-provided and quality/adequacy are not certified.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "network_model",
+                "operating_point",
+                "limits",
+                "contingencies"
+              ]
+            },
+            {
+              "finding_id": "domain-input_units:units-input",
+              "claim_ids": [],
+              "category": "input_units:units-input",
+              "rationale": "No structured quantities; this is not a completed free-text unit audit.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "unit_check_incomplete"
+              ]
+            },
+            {
+              "finding_id": "domain-simulation_boundary",
+              "claim_ids": [],
+              "category": "simulation_boundary",
+              "rationale": "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "executed_and_validated_engineering_analysis"
+              ]
+            },
+            {
+              "finding_id": "domain-answer_units",
+              "claim_ids": [
+                "claim-b39f175f2c2d45c7d3725ac6"
+              ],
+              "category": "answer_units",
+              "rationale": "回答未给出任何数值容量或单位换算，仅说明无法计算，无单位/量纲问题。",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-analysis_scope",
+              "claim_ids": [
+                "claim-b39f175f2c2d45c7d3725ac6"
+              ],
+              "category": "analysis_scope",
+              "rationale": "用户问是否可据现有缺失资料确定无功补偿容量，属具体工程判断；回答正确断言资料不足、无法计算容量，并列出网络模型、运行点、限值、补偿目标等待补缺口，未虚构参数或声称已完成校核。 [missing-information-applicability-v1] [{\"index\": 0, \"applicability\": \"required\", \"reason\": \"无功补偿容量计算所必需的网架基础数据，缺失则无法进行潮流与无功平衡分析。\"}, {\"index\": 1, \"applicability\": \"required\", \"reason\": \"当前运行点是确定无功潮流和补偿需求的必要输入，属回答问题所需资料。\"}, {\"index\": 2, \"applicability\": \"required\", \"reason\": \"电压偏差、功率因数等限值是判定补偿容量是否满足要求的必要约束。\"}, {\"index\": 3, \"applicability\": \"required\", \"reason\": \"补偿目标与校核运行方式决定容量选取，是计算前提，非额外扩展。\"}] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"engineering\", \"reason\": \"用户问是否可据现有缺失资料确定无功补偿容量，属具体工程判断；回答正确断言资料不足、无法计算容量，并列出网络模型、运行点、限值、补偿目标等待补缺口，未虚构参数或声称已完成校核。\", \"answer_id\": \"9d11b08596e646a8acade0868bed0723-answer\", \"answer_version\": 1, \"answer_sha256\": \"e1f33279174090f7d7cae803f4b52d0e37d0730ad15112e74af1d41d4539b778\", \"question_sha256\": \"a618e4405089f57c906fb1a86e66910807a7c80142c3d7a991e999ef463bb7bc\", \"structured_goal\": \"plant_assessment\"}",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-operating_prerequisites",
+              "claim_ids": [
+                "claim-b39f175f2c2d45c7d3725ac6"
+              ],
+              "category": "operating_prerequisites",
+              "rationale": "回答仅请求缺失资料并说明无法计算，未给出任何投运或操作指令，符合前提说明要求。",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            }
+          ],
+          "decision": {
+            "kind": "review_required",
+            "reasons": [
+              "事实支持或来源条件不确定，不自动解释为提取不忠实；原句不能视为审核认可",
+              "Automatic approval is bounded to this task; not engineering safety certification"
+            ],
+            "execution_integrity": "complete"
+          }
+        }
+      ],
+      "revisions": []
+    },
+    {
+      "id": "LSI-02-S",
+      "run_id": "70b7d70c72c648dfad789ed6b11bee19",
+      "review_rounds": [
+        {
+          "answer": {
+            "answer_id": "d218446271454ea4bd5563e91eff0dfd-answer",
+            "version": 1,
+            "text": "不能确定。缺乏网络拓扑与参数、当前运行点（电压、无功潮流）、补偿目标及电压/无功限值，无法计算所需无功补偿容量。",
+            "assumptions": [],
+            "missing_information": [
+              "厂站网络模型及参数",
+              "当前运行点（电压、无功潮流）",
+              "补偿目标与电压/无功限值"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 56,
+                "evidence_ids": [
+                  "e-47de8ef22559da08a4ba6efd0e442c9a35c1f3f2435324a4997bc3506730ae11",
+                  "e-d71bfaa7c677b8c1f14268da7b837ab05784442cd495146af2d40ac43e8ace45"
+                ]
+              }
+            ]
+          },
+          "claims": [
+            {
+              "claim_id": "claim-2393c0da06a922d0fe7cfb47",
+              "answer_id": "d218446271454ea4bd5563e91eff0dfd-answer",
+              "answer_version": 1,
+              "text": "不能确定。缺乏网络拓扑与参数、当前运行点（电压、无功潮流）、补偿目标及电压/无功限值，无法计算所需无功补偿容量。",
+              "start_offset": 0,
+              "end_offset": 56,
+              "claim_type": "answer_scope",
+              "proposition": "无法确定所需无功补偿容量。",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-2393c0da06a922d0fe7cfb47-part-0",
+                  "category": "answer_scope",
+                  "proposition": "缺乏必要信息，无法确定所需无功补偿容量。"
+                }
+              ],
+              "anchor_group_id": "anchor-ce68c72ff96c5908fda49780",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "uncertain"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "answer_text"
+              ],
+              "component_obligations": [
+                "answer_scope"
+              ]
+            },
+            {
+              "claim_id": "claim-2cb68f6fcd3ccca8728d6207",
+              "answer_id": "d218446271454ea4bd5563e91eff0dfd-answer",
+              "answer_version": 1,
+              "text": "不能确定。缺乏网络拓扑与参数、当前运行点（电压、无功潮流）、补偿目标及电压/无功限值，无法计算所需无功补偿容量。",
+              "start_offset": 0,
+              "end_offset": 56,
+              "claim_type": "technical_fact",
+              "proposition": "缺少网络拓扑与参数，无法计算所需无功补偿容量。",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-2cb68f6fcd3ccca8728d6207-part-0",
+                  "category": "technical_fact",
+                  "proposition": "缺少网络拓扑与参数时，无法计算无功补偿容量。"
+                }
+              ],
+              "anchor_group_id": "anchor-ce68c72ff96c5908fda49780",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "conditional_on_missing_network_topology_and_parameters"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "technical_content"
+              ],
+              "component_obligations": [
+                "technical_truth"
+              ]
+            },
+            {
+              "claim_id": "claim-b8eeec9522da44d3ccfece3d",
+              "answer_id": "d218446271454ea4bd5563e91eff0dfd-answer",
+              "answer_version": 1,
+              "text": "不能确定。缺乏网络拓扑与参数、当前运行点（电压、无功潮流）、补偿目标及电压/无功限值，无法计算所需无功补偿容量。",
+              "start_offset": 0,
+              "end_offset": 56,
+              "claim_type": "technical_fact",
+              "proposition": "缺少当前运行点（电压、无功潮流），无法计算所需无功补偿容量。",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-b8eeec9522da44d3ccfece3d-part-0",
+                  "category": "technical_fact",
+                  "proposition": "缺少当前运行点（电压、无功潮流）时，无法计算无功补偿容量。"
+                }
+              ],
+              "anchor_group_id": "anchor-ce68c72ff96c5908fda49780",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "conditional_on_missing_operating_point"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "technical_content"
+              ],
+              "component_obligations": [
+                "technical_truth"
+              ]
+            },
+            {
+              "claim_id": "claim-30a39ef4bba7315e2afe980d",
+              "answer_id": "d218446271454ea4bd5563e91eff0dfd-answer",
+              "answer_version": 1,
+              "text": "不能确定。缺乏网络拓扑与参数、当前运行点（电压、无功潮流）、补偿目标及电压/无功限值，无法计算所需无功补偿容量。",
+              "start_offset": 0,
+              "end_offset": 56,
+              "claim_type": "technical_fact",
+              "proposition": "缺少补偿目标及电压/无功限值，无法计算所需无功补偿容量。",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-30a39ef4bba7315e2afe980d-part-0",
+                  "category": "technical_fact",
+                  "proposition": "缺少补偿目标及电压/无功限值时，无法计算无功补偿容量。"
+                }
+              ],
+              "anchor_group_id": "anchor-ce68c72ff96c5908fda49780",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "conditional_on_missing_compensation_targets_and_limits"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "technical_content"
+              ],
+              "component_obligations": [
+                "technical_truth"
+              ]
+            }
+          ],
+          "verification_findings": [
+            {
+              "finding_id": "finding-claim-2393c0da06a922d0fe7cfb47",
+              "claim_id": "claim-2393c0da06a922d0fe7cfb47",
+              "status": "supported",
+              "evidence_ids": [],
+              "rationale": "该主张仅针对在所述输入缺失条件下能否确定容量这一回答范围作出声明，未断言具体技术数值。",
+              "component_reviews": [
+                {
+                  "component_id": "claim-2393c0da06a922d0fe7cfb47-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "答案原文明确说明不能确定并列出资料缺口，与其范围主张一致。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "answer_scope",
+                  "fidelity_rationale": "字面锚点与范围命题直接对应，未扩大为具体容量结论。",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-2cb68f6fcd3ccca8728d6207",
+              "claim_id": "claim-2cb68f6fcd3ccca8728d6207",
+              "status": "insufficient_evidence",
+              "evidence_ids": [],
+              "rationale": "所给材料未直接证明缺少网络拓扑与参数即无法计算无功补偿容量这一技术关系。",
+              "component_reviews": [
+                {
+                  "component_id": "claim-2cb68f6fcd3ccca8728d6207-part-0",
+                  "status": "insufficient_evidence",
+                  "basis_indexes": [],
+                  "rationale": "候选段落讨论无功补偿点、裕度及潮流计算，但未建立该缺失条件与不可计算容量之间的技术命题。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "原始条件性技术断言被保留，未弱化。",
+                  "raw_support_status": "insufficient_evidence",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-b8eeec9522da44d3ccfece3d",
+              "claim_id": "claim-b8eeec9522da44d3ccfece3d",
+              "status": "insufficient_evidence",
+              "evidence_ids": [],
+              "rationale": "所给材料未直接证明缺少当前运行点时无法计算无功补偿容量。",
+              "component_reviews": [
+                {
+                  "component_id": "claim-b8eeec9522da44d3ccfece3d-part-0",
+                  "status": "insufficient_evidence",
+                  "basis_indexes": [],
+                  "rationale": "候选内容提及潮流与节点电压计算，但未确立该缺失条件导致容量无法计算。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "条件与技术否定均被保留。",
+                  "raw_support_status": "insufficient_evidence",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-30a39ef4bba7315e2afe980d",
+              "claim_id": "claim-30a39ef4bba7315e2afe980d",
+              "status": "insufficient_evidence",
+              "evidence_ids": [],
+              "rationale": "所给材料未直接证明缺少补偿目标及电压/无功限值时无法计算容量。",
+              "component_reviews": [
+                {
+                  "component_id": "claim-30a39ef4bba7315e2afe980d-part-0",
+                  "status": "insufficient_evidence",
+                  "basis_indexes": [],
+                  "rationale": "候选材料讨论补偿目标与限值的作用有限，未证明其为计算容量的必要条件。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "原答案的缺失条件与不可计算主张完整呈现。",
+                  "raw_support_status": "insufficient_evidence",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            }
+          ],
+          "domain_findings": [
+            {
+              "finding_id": "domain-engineering_inputs",
+              "claim_ids": [],
+              "category": "engineering_inputs",
+              "rationale": "Input presence checked only; data are user-provided and quality/adequacy are not certified.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "network_model",
+                "operating_point",
+                "limits",
+                "contingencies"
+              ]
+            },
+            {
+              "finding_id": "domain-input_units:units-input",
+              "claim_ids": [],
+              "category": "input_units:units-input",
+              "rationale": "No structured quantities; this is not a completed free-text unit audit.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "unit_check_incomplete"
+              ]
+            },
+            {
+              "finding_id": "domain-simulation_boundary",
+              "claim_ids": [],
+              "category": "simulation_boundary",
+              "rationale": "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "executed_and_validated_engineering_analysis"
+              ]
+            },
+            {
+              "finding_id": "domain-answer_units",
+              "claim_ids": [],
+              "category": "answer_units",
+              "rationale": "答案未给出数值容量或单位换算，仅声明无法计算；无单位量需核查。",
+              "check_status": "not_applicable",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-analysis_scope",
+              "claim_ids": [
+                "claim-2393c0da06a922d0fe7cfb47",
+                "claim-2cb68f6fcd3ccca8728d6207",
+                "claim-b8eeec9522da44d3ccfece3d",
+                "claim-30a39ef4bba7315e2afe980d"
+              ],
+              "category": "analysis_scope",
+              "rationale": "用户请求为具体厂站无功补偿容量确定，属工程性问题；答案正确拒绝在缺网络拓扑参数、运行点、补偿目标与电压/无功限值条件下给出容量，未编造参数，与请求范围和资料缺口一致。 [missing-information-applicability-v1] [{\"index\": 0, \"applicability\": \"required\", \"reason\": \"厂站网络模型及参数是计算该厂站补偿容量的必要工程输入。\"}, {\"index\": 1, \"applicability\": \"required\", \"reason\": \"当前运行点（电压、无功潮流）为确定补偿需求的必要条件。\"}, {\"index\": 2, \"applicability\": \"required\", \"reason\": \"补偿目标及电压/无功限值决定所需容量，属必要资料。\"}] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"engineering\", \"reason\": \"用户请求为具体厂站无功补偿容量确定，属工程性问题；答案正确拒绝在缺网络拓扑参数、运行点、补偿目标与电压/无功限值条件下给出容量，未编造参数，与请求范围和资料缺口一致。\", \"answer_id\": \"d218446271454ea4bd5563e91eff0dfd-answer\", \"answer_version\": 1, \"answer_sha256\": \"492c060c88e57703d0fbda813eb599b8daf05a2ac5853f604c7d89aa8ca7a4bf\", \"question_sha256\": \"a618e4405089f57c906fb1a86e66910807a7c80142c3d7a991e999ef463bb7bc\", \"structured_goal\": \"plant_assessment\"}",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-operating_prerequisites",
+              "claim_ids": [],
+              "category": "operating_prerequisites",
+              "rationale": "答案仅说明所需资料缺口，未下达设备操作指令或宣称安全；无运行前提可被违反。",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            }
+          ],
+          "decision": {
+            "kind": "needs_information",
+            "reasons": [
+              "Evidence or required factual inputs are insufficient",
+              "Automatic approval is bounded to this task; not engineering safety certification"
+            ],
+            "execution_integrity": "complete"
+          }
+        }
+      ],
+      "revisions": []
+    },
+    {
+      "id": "LSI-03-S",
+      "run_id": "ea223d1f8c47483cb846ca7ed9dce238",
+      "review_rounds": [
+        {
+          "answer": {
+            "answer_id": "9f724ae0a3f64aa2a27baad12403ddee",
+            "version": 1,
+            "text": "给定NWS文献将可测降水定义为达到或超过0.1英寸；这里仅指文献定义，不判断实际天气。",
+            "assumptions": [],
+            "missing_information": [],
+            "citations": []
+          },
+          "claims": [
+            {
+              "claim_id": "claim-d6085d7ea69108fb4d3f9de4",
+              "answer_id": "9f724ae0a3f64aa2a27baad12403ddee",
+              "answer_version": 1,
+              "text": "给定NWS文献将可测降水定义为达到或超过0.1英寸；这里仅指文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 43,
+              "claim_type": "technical_fact",
+              "proposition": "The NWS literature defines measurable precipitation as reaching or exceeding 0.1 inch.",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-d6085d7ea69108fb4d3f9de4-part-0",
+                  "category": "technical_fact",
+                  "proposition": "The NWS literature defines measurable precipitation as reaching or exceeding 0.1 inch."
+                }
+              ],
+              "anchor_group_id": "anchor-88eee57d5b279a74dc04be03",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "definition",
+                "threshold 0.1 inch"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "document_body"
+              ],
+              "component_obligations": [
+                "technical_truth"
+              ]
+            },
+            {
+              "claim_id": "claim-52841da691303ad980940b4e",
+              "answer_id": "9f724ae0a3f64aa2a27baad12403ddee",
+              "answer_version": 1,
+              "text": "给定NWS文献将可测降水定义为达到或超过0.1英寸；这里仅指文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 43,
+              "claim_type": "answer_scope",
+              "proposition": "The answer limits its scope to the literature definition and does not judge actual weather.",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-52841da691303ad980940b4e-part-0",
+                  "category": "answer_scope",
+                  "proposition": "The answer limits its scope to the literature definition and does not judge actual weather."
+                }
+              ],
+              "anchor_group_id": "anchor-88eee57d5b279a74dc04be03",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "scope limitation"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "answer_text"
+              ],
+              "component_obligations": [
+                "answer_scope"
+              ]
+            }
+          ],
+          "verification_findings": [
+            {
+              "finding_id": "finding-claim-d6085d7ea69108fb4d3f9de4",
+              "claim_id": "claim-d6085d7ea69108fb4d3f9de4",
+              "status": "contradicted",
+              "evidence_ids": [
+                "user-fe59ee798a00403eb99f5462edac2261"
+              ],
+              "rationale": "The NWS passage states measurable precipitation is 0.01 inches, so the answer's '0.1 inch' threshold conflicts with the sourced value.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-d6085d7ea69108fb4d3f9de4-part-0",
+                  "status": "contradicted",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "The NWS quote defines measurable precipitation as equal to or greater than 0.01 inches, not 0.1 inches. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The NWS definition passage explicitly gives 0.01 inches as the measurable precipitation threshold, contradicting the answer's 0.1 inch.\",\"whole_claim_supported\":false,\"missing_clauses\":[\"Correct threshold is 0.01 inches, not 0.1 inches.\"],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":{\"replacement\":\"给定NWS文献将可测降水定义为达到或超过0.01英寸；这里仅指文献定义，不判断实际天气。\",\"condition_id\":\"condition-6d038dcf3125004048817437\",\"source_quote_id\":\"scope-11af3c71774f6351281413d3-0\",\"source_excerpt\":\"The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \\\"on and off\\\" nature.\",\"program_binding\":{\"version\":\"source-condition-carriers-v1\",\"scope_id\":\"scope-11af3c71774f6351281413d3\",\"quote_id\":\"scope-11af3c71774f6351281413d3-0\",\"candidate_id\":\"quote-f44a674a2f31662daa3a8c91\",\"evidence_id\":\"user-fe59ee798a00403eb99f5462edac2261\",\"start_offset\":0,\"end_offset\":628,\"source_version\":\"unverified\",\"locator\":\"https://www.weather.gov/ppg/forecast_terms :: Precipitation Probability heading; complete body paragraph including following on/off sentence\",\"provenance\":null,\"text_sha256\":\"320dd854bee60780ed75175abb41bdc17da331064461519596817cc660440694\",\"knowledge_version\":\"kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e\",\"answer_id\":\"9f724ae0a3f64aa2a27baad12403ddee\",\"answer_version\":1,\"condition_id\":\"condition-6d038dcf3125004048817437\",\"text\":\"The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \\\"on and off\\\" nature.\",\"granularity\":\"whole_existing_quote_carrier\",\"semantic_necessity_not_program_proof\":true}},\"quote_ids\":[\"scope-11af3c71774f6351281413d3-0\"],\"raw_model_status\":\"contradicted\",\"effective_support_status\":\"contradicted\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":{\"replacement\":\"给定NWS文献将可测降水定义为达到或超过0.01英寸；这里仅指文献定义，不判断实际天气。\",\"condition_id\":\"condition-6d038dcf3125004048817437\"},\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "The answer's numeric threshold is preserved as asserted; it is simply wrong against the source.",
+                  "raw_support_status": "contradicted",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-52841da691303ad980940b4e",
+              "claim_id": "claim-52841da691303ad980940b4e",
+              "status": "supported",
+              "evidence_ids": [],
+              "rationale": "The answer text itself limits its scope to the literature definition and disclaims judging actual weather.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-52841da691303ad980940b4e-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "The literal answer states it only refers to the literature definition and does not judge actual weather.",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "answer_scope",
+                  "fidelity_rationale": "The scope disclaimer is exactly what the answer says.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            }
+          ],
+          "domain_findings": [
+            {
+              "finding_id": "domain-engineering_inputs",
+              "claim_ids": [],
+              "category": "engineering_inputs",
+              "rationale": "Input presence checked only; data are user-provided and quality/adequacy are not certified.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "network_model",
+                "operating_point",
+                "limits",
+                "contingencies"
+              ]
+            },
+            {
+              "finding_id": "domain-input_units:units-input",
+              "claim_ids": [],
+              "category": "input_units:units-input",
+              "rationale": "No structured quantities; this is not a completed free-text unit audit.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "unit_check_incomplete"
+              ]
+            },
+            {
+              "finding_id": "domain-simulation_boundary",
+              "claim_ids": [],
+              "category": "simulation_boundary",
+              "rationale": "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "executed_and_validated_engineering_analysis"
+              ]
+            },
+            {
+              "finding_id": "domain-answer_units",
+              "claim_ids": [
+                "claim-d6085d7ea69108fb4d3f9de4"
+              ],
+              "category": "answer_units",
+              "rationale": "答案将阈值写成0.1英寸，但引文明确可测降水为大于或等于0.01英寸；用户要求改正局部错误，此处数值不符合文献定义。",
+              "check_status": "warning",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-analysis_scope",
+              "claim_ids": [
+                "claim-d6085d7ea69108fb4d3f9de4",
+                "claim-52841da691303ad980940b4e"
+              ],
+              "category": "analysis_scope",
+              "rationale": "任务为概念性：依据NWS文献指出并修正阈值错误。答案正确限定为文献定义、不判断实际天气，但核心修正值0.1英寸背离文献的0.01英寸，未真正完成修正要求。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"uncertain\", \"reason\": \"任务为概念性：依据NWS文献指出并修正阈值错误。答案正确限定为文献定义、不判断实际天气，但核心修正值0.1英寸背离文献的0.01英寸，未真正完成修正要求。\", \"answer_id\": \"9f724ae0a3f64aa2a27baad12403ddee\", \"answer_version\": 1, \"answer_sha256\": \"1b1f590ab37ba8448b5a8983cb4eeafb7e16a26a73b004a819fb0caf4a9e5924\", \"question_sha256\": \"0058897a90d2ba3c2c576790bfc25c75e26d0bc89c3bb363b528c89adbc1bc38\", \"structured_goal\": \"conceptual\"}",
+              "check_status": "warning",
+              "origin": "model_judgment",
+              "missing_prerequisites": [
+                "按引文将阈值修正为0.01英寸"
+              ]
+            },
+            {
+              "finding_id": "domain-operating_prerequisites",
+              "claim_ids": [],
+              "category": "operating_prerequisites",
+              "rationale": "仅为文献定义解释，无设备操作或运行建议，不涉运行前提。",
+              "check_status": "not_applicable",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            }
+          ],
+          "decision": {
+            "kind": "revise",
+            "reasons": [
+              "Located answer defect has a selected literal source and substantive replacement; preserve every requested subquestion and fully re-review",
+              "Automatic approval is bounded to this task; not engineering safety certification"
+            ],
+            "execution_integrity": "complete"
+          }
+        },
+        {
+          "answer": {
+            "answer_id": "9f724ae0a3f64aa2a27baad12403ddee",
+            "version": 2,
+            "text": "给定NWS文献将可测降水定义为达到或超过0.01英寸（而非0.1英寸）；这里仅指文献定义，不判断实际天气。",
+            "assumptions": [],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 53,
+                "evidence_ids": [
+                  "user-fe59ee798a00403eb99f5462edac2261"
+                ]
+              }
+            ]
+          },
+          "claims": [
+            {
+              "claim_id": "claim-4c3676c35c36b53c69e89ead",
+              "answer_id": "9f724ae0a3f64aa2a27baad12403ddee",
+              "answer_version": 2,
+              "text": "给定NWS文献将可测降水定义为达到或超过0.01英寸（而非0.1英寸）；这里仅指文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 53,
+              "claim_type": "technical_fact",
+              "proposition": "The NWS literature defines measurable precipitation as reaching or exceeding 0.01 inches.",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-4c3676c35c36b53c69e89ead-part-0",
+                  "category": "technical_fact",
+                  "proposition": "The NWS literature defines measurable precipitation as reaching or exceeding 0.01 inches."
+                }
+              ],
+              "anchor_group_id": "anchor-448eb26a7ea82a9c8e44ebcb",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "NWS literature definition"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "document_body"
+              ],
+              "component_obligations": [
+                "technical_truth"
+              ]
+            },
+            {
+              "claim_id": "claim-ed12904d323b3fb585c91e61",
+              "answer_id": "9f724ae0a3f64aa2a27baad12403ddee",
+              "answer_version": 2,
+              "text": "给定NWS文献将可测降水定义为达到或超过0.01英寸（而非0.1英寸）；这里仅指文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 53,
+              "claim_type": "technical_fact",
+              "proposition": "The stated NWS definition uses 0.01 inches rather than 0.1 inches.",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-ed12904d323b3fb585c91e61-part-0",
+                  "category": "technical_fact",
+                  "proposition": "The stated NWS definition uses 0.01 inches rather than 0.1 inches."
+                }
+              ],
+              "anchor_group_id": "anchor-448eb26a7ea82a9c8e44ebcb",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "NWS literature definition",
+                "contrast with 0.1 inches"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "document_body"
+              ],
+              "component_obligations": [
+                "technical_truth"
+              ]
+            },
+            {
+              "claim_id": "claim-852873a9cb19af3bd80677f3",
+              "answer_id": "9f724ae0a3f64aa2a27baad12403ddee",
+              "answer_version": 2,
+              "text": "给定NWS文献将可测降水定义为达到或超过0.01英寸（而非0.1英寸）；这里仅指文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 53,
+              "claim_type": "answer_scope",
+              "proposition": "The answer addresses only the literature definition and does not judge actual weather.",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-852873a9cb19af3bd80677f3-part-0",
+                  "category": "answer_scope",
+                  "proposition": "The answer addresses only the literature definition and does not judge actual weather."
+                }
+              ],
+              "anchor_group_id": "anchor-448eb26a7ea82a9c8e44ebcb",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "scope limitation"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "answer_text"
+              ],
+              "component_obligations": [
+                "answer_scope"
+              ]
+            }
+          ],
+          "verification_findings": [
+            {
+              "finding_id": "finding-claim-4c3676c35c36b53c69e89ead",
+              "claim_id": "claim-4c3676c35c36b53c69e89ead",
+              "status": "supported",
+              "evidence_ids": [
+                "user-fe59ee798a00403eb99f5462edac2261"
+              ],
+              "rationale": "The supplied user-reference body states measurable precipitation is equal to or greater than 0.01 inches.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-4c3676c35c36b53c69e89ead-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "The selected body text explicitly defines measurable precipitation as at least 0.01 inches. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The document defines measurable precipitation as equal to or greater than 0.01 inches.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-6038330a9bb18d4b9128bab6\",\"necessity\":\"required\",\"answer_quote\":\"这里仅指文献定义，不判断实际天气\",\"relationship\":\"preserved\",\"reason\":\"The answer confines the statement to the document's definition rather than actual weather.\"}],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-bee11df2f26f1bdcfaeb61a8-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[{\"version\":\"source-condition-carriers-v1\",\"scope_id\":\"scope-bee11df2f26f1bdcfaeb61a8\",\"quote_id\":\"scope-bee11df2f26f1bdcfaeb61a8-0\",\"candidate_id\":\"quote-f44a674a2f31662daa3a8c91\",\"evidence_id\":\"user-fe59ee798a00403eb99f5462edac2261\",\"start_offset\":0,\"end_offset\":628,\"source_version\":\"unverified\",\"locator\":\"https://www.weather.gov/ppg/forecast_terms :: Precipitation Probability heading; complete body paragraph including following on/off sentence\",\"provenance\":null,\"text_sha256\":\"320dd854bee60780ed75175abb41bdc17da331064461519596817cc660440694\",\"knowledge_version\":\"kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e\",\"answer_id\":\"9f724ae0a3f64aa2a27baad12403ddee\",\"answer_version\":2,\"condition_id\":\"condition-6038330a9bb18d4b9128bab6\",\"text\":\"The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \\\"on and off\\\" nature.\",\"granularity\":\"whole_existing_quote_carrier\",\"semantic_necessity_not_program_proof\":true}],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "The answer's limiting scope and the 0.01-inch threshold match the proposition.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-ed12904d323b3fb585c91e61",
+              "claim_id": "claim-ed12904d323b3fb585c91e61",
+              "status": "supported",
+              "evidence_ids": [
+                "user-fe59ee798a00403eb99f5462edac2261"
+              ],
+              "rationale": "The same body gives 0.01 inches, so the contrast with 0.1 inches is supported.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-ed12904d323b3fb585c91e61-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "The selected text states 0.01 inches; the answer's negative contrast with 0.1 inches is correct. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The body uses 0.01 inches, not 0.1 inches, for measurable precipitation.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-6038330a9bb18d4b9128bab6\",\"necessity\":\"required\",\"answer_quote\":\"这里仅指文献定义，不判断实际天气\",\"relationship\":\"preserved\",\"reason\":\"The correction remains confined to the document's definition.\"}],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-bee11df2f26f1bdcfaeb61a8-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[{\"version\":\"source-condition-carriers-v1\",\"scope_id\":\"scope-bee11df2f26f1bdcfaeb61a8\",\"quote_id\":\"scope-bee11df2f26f1bdcfaeb61a8-0\",\"candidate_id\":\"quote-f44a674a2f31662daa3a8c91\",\"evidence_id\":\"user-fe59ee798a00403eb99f5462edac2261\",\"start_offset\":0,\"end_offset\":628,\"source_version\":\"unverified\",\"locator\":\"https://www.weather.gov/ppg/forecast_terms :: Precipitation Probability heading; complete body paragraph including following on/off sentence\",\"provenance\":null,\"text_sha256\":\"320dd854bee60780ed75175abb41bdc17da331064461519596817cc660440694\",\"knowledge_version\":\"kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e\",\"answer_id\":\"9f724ae0a3f64aa2a27baad12403ddee\",\"answer_version\":2,\"condition_id\":\"condition-6038330a9bb18d4b9128bab6\",\"text\":\"The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \\\"on and off\\\" nature.\",\"granularity\":\"whole_existing_quote_carrier\",\"semantic_necessity_not_program_proof\":true}],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "The threshold and the contrast are stated without overreach.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-852873a9cb19af3bd80677f3",
+              "claim_id": "claim-852873a9cb19af3bd80677f3",
+              "status": "supported",
+              "evidence_ids": [],
+              "rationale": "The answer text explicitly limits itself to the literature definition and disclaims actual-weather judgment.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-852873a9cb19af3bd80677f3-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "The cited answer body contains the stated scope limitation.",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "answer_scope",
+                  "fidelity_rationale": "The scope statement is literally present in the answer.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            }
+          ],
+          "domain_findings": [
+            {
+              "finding_id": "domain-engineering_inputs",
+              "claim_ids": [],
+              "category": "engineering_inputs",
+              "rationale": "Current question/answer and domain applicability are conceptual; no plant study inputs required.",
+              "check_status": "not_applicable",
+              "origin": "program_rule",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-input_units:units-input",
+              "claim_ids": [],
+              "category": "input_units:units-input",
+              "rationale": "Conceptual request contains no structured quantities; actual answer quantity assertions are reviewed separately.",
+              "check_status": "not_applicable",
+              "origin": "program_rule",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-simulation_boundary",
+              "claim_ids": [],
+              "category": "simulation_boundary",
+              "rationale": "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",
+              "check_status": "not_applicable",
+              "origin": "program_rule",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-answer_units",
+              "claim_ids": [
+                "claim-4c3676c35c36b53c69e89ead",
+                "claim-ed12904d323b3fb585c91e61"
+              ],
+              "category": "answer_units",
+              "rationale": "答案仅引用文献中0.01英寸的阈值，并对比0.1英寸，没有做单位换算或引入新数值，与文献原句一致。",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-analysis_scope",
+              "claim_ids": [
+                "claim-852873a9cb19af3bd80677f3"
+              ],
+              "category": "analysis_scope",
+              "rationale": "用户要求为概念性任务：仅指出并修正文献中可测降水阈值的局部错误；答案正确给出0.01英寸并声明不判断实际天气，未超出文献范围。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户要求为概念性任务：仅指出并修正文献中可测降水阈值的局部错误；答案正确给出0.01英寸并声明不判断实际天气，未超出文献范围。\", \"answer_id\": \"9f724ae0a3f64aa2a27baad12403ddee\", \"answer_version\": 2, \"answer_sha256\": \"c8a77d00727d9718ee59414a9159374a85079977ce081ad9839c8f5065779b23\", \"question_sha256\": \"0058897a90d2ba3c2c576790bfc25c75e26d0bc89c3bb363b528c89adbc1bc38\", \"structured_goal\": \"conceptual\"}",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-operating_prerequisites",
+              "claim_ids": [],
+              "category": "operating_prerequisites",
+              "rationale": "该问题为文献阈值修正，不涉及设备操作或电力系统运行建议，无需运行前提。",
+              "check_status": "not_applicable",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            }
+          ],
+          "decision": {
+            "kind": "pass",
+            "reasons": [
+              "All applicable checks complete with supported claims and no blocking findings",
+              "Automatic approval is bounded to this task; not engineering safety certification"
+            ],
+            "execution_integrity": "complete"
+          }
+        }
+      ],
+      "revisions": [
+        {
+          "answer": {
+            "answer_id": "9f724ae0a3f64aa2a27baad12403ddee",
+            "version": 2,
+            "text": "给定NWS文献将可测降水定义为达到或超过0.01英寸（而非0.1英寸）；这里仅指文献定义，不判断实际天气。",
+            "assumptions": [],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 53,
+                "evidence_ids": [
+                  "user-fe59ee798a00403eb99f5462edac2261"
+                ]
+              }
+            ]
+          },
+          "changes": [
+            {
+              "finding_ids": [
+                "finding-claim-d6085d7ea69108fb4d3f9de4"
+              ],
+              "description": "将阈值0.1英寸更正为文献所载0.01英寸，并保留“大于或等于”的方向与文献定义范围。"
+            },
+            {
+              "finding_ids": [
+                "domain-answer_units"
+              ],
+              "description": "答案单位数值已按引文修正为0.01英寸。"
+            },
+            {
+              "finding_ids": [
+                "domain-analysis_scope"
+              ],
+              "description": "核心修正值由0.1英寸改为0.01英寸，完成依据文献指出并修正阈值错误的要求，且维持概念性范围。"
+            }
+          ],
+          "unresolved_finding_ids": [
+            "finding-claim-52841da691303ad980940b4e",
+            "domain-engineering_inputs",
+            "domain-input_units:units-input",
+            "domain-simulation_boundary",
+            "domain-operating_prerequisites"
+          ],
+          "execution_issues": [],
+          "finding_actions": [
+            {
+              "finding_id": "finding-claim-d6085d7ea69108fb4d3f9de4",
+              "action": "modified",
+              "explanation": "将阈值0.1英寸更正为文献所载0.01英寸，并保留“大于或等于”的方向与文献定义范围。"
+            },
+            {
+              "finding_id": "finding-claim-52841da691303ad980940b4e",
+              "action": "retained",
+              "explanation": "范围限定语句已保留：仅解释文献定义、不判断实际天气。"
+            },
+            {
+              "finding_id": "domain-engineering_inputs",
+              "action": "retained",
+              "explanation": "概念性文献解释不依赖网络模型、运行点等工程输入，故不作为缺陷修改。"
+            },
+            {
+              "finding_id": "domain-input_units:units-input",
+              "action": "retained",
+              "explanation": "本文献直接给出英寸阈值，未涉及需换算的单位体系，原样保留。"
+            },
+            {
+              "finding_id": "domain-simulation_boundary",
+              "action": "retained",
+              "explanation": "未执行仿真，此限制不构成额外答案修改。"
+            },
+            {
+              "finding_id": "domain-answer_units",
+              "action": "modified",
+              "explanation": "答案单位数值已按引文修正为0.01英寸。"
+            },
+            {
+              "finding_id": "domain-analysis_scope",
+              "action": "modified",
+              "explanation": "核心修正值由0.1英寸改为0.01英寸，完成依据文献指出并修正阈值错误的要求，且维持概念性范围。"
+            },
+            {
+              "finding_id": "domain-operating_prerequisites",
+              "action": "retained",
+              "explanation": "内容仅为文献定义，不涉设备操作前提。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LSI-03-G",
+      "run_id": "1b41971b56a84f7aa55687eefeecd3de",
+      "review_rounds": [
+        {
+          "answer": {
+            "answer_id": "c10fd9d111ac48608b121f4c1b269489",
+            "version": 1,
+            "text": "给定NWS文献将可测降水定义为达到或超过0.1英寸；这里仅指文献定义，不判断实际天气。",
+            "assumptions": [],
+            "missing_information": [],
+            "citations": []
+          },
+          "claims": [
+            {
+              "claim_id": "claim-2832b8ed9b2ebfb4fa126e96",
+              "answer_id": "c10fd9d111ac48608b121f4c1b269489",
+              "answer_version": 1,
+              "text": "给定NWS文献将可测降水定义为达到或超过0.1英寸；这里仅指文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 43,
+              "claim_type": "technical_fact",
+              "proposition": "NWS 文献将可测降水定义为达到或超过 0.1 英寸。",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-2832b8ed9b2ebfb4fa126e96-part-0",
+                  "category": "technical_fact",
+                  "proposition": "NWS 文献将可测降水定义为达到或超过 0.1 英寸。"
+                }
+              ],
+              "anchor_group_id": "anchor-9566c11e18fdfca8387fe50e",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "定义基于 NWS 文献",
+                "阈值单位为英寸"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "document_body"
+              ],
+              "component_obligations": [
+                "technical_truth"
+              ]
+            },
+            {
+              "claim_id": "claim-6489d921f9e1f53149ee2547",
+              "answer_id": "c10fd9d111ac48608b121f4c1b269489",
+              "answer_version": 1,
+              "text": "给定NWS文献将可测降水定义为达到或超过0.1英寸；这里仅指文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 43,
+              "claim_type": "answer_scope",
+              "proposition": "该回答仅给出文献定义，并不判断实际天气。",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-6489d921f9e1f53149ee2547-part-0",
+                  "category": "answer_scope",
+                  "proposition": "该回答仅给出文献定义，并不判断实际天气。"
+                }
+              ],
+              "anchor_group_id": "anchor-9566c11e18fdfca8387fe50e",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "answer_text"
+              ],
+              "component_obligations": [
+                "answer_scope"
+              ]
+            }
+          ],
+          "verification_findings": [
+            {
+              "finding_id": "finding-claim-2832b8ed9b2ebfb4fa126e96",
+              "claim_id": "claim-2832b8ed9b2ebfb4fa126e96",
+              "status": "contradicted",
+              "evidence_ids": [
+                "user-e62e2ae0ad7649e9858322c1528ccef4"
+              ],
+              "rationale": "所给NWS文献句明确将可测降水定义为等于或大于0.01英寸，回答写成0.1英寸，阈值相差一个数量级，命题与文献直接冲突。",
+              "component_reviews": [
+                {
+                  "component_id": "claim-2832b8ed9b2ebfb4fa126e96-part-0",
+                  "status": "contradicted",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "文献阈值为≥0.01英寸，回答称≥0.1英寸，直接矛盾。 [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"所选文献句直接给出可测降水阈值为等于或大于0.01英寸。\",\"whole_claim_supported\":false,\"missing_clauses\":[\"阈值为0.01英寸而非0.1英寸\"],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":{\"replacement\":\"给定NWS文献将可测降水定义为达到或超过0.01英寸；这里仅指文献定义，不判断实际天气。\",\"condition_id\":\"condition-bcd253d3602cc4b9d8c967ec\",\"source_quote_id\":\"scope-9994ecd4c337424363299f92-0\",\"source_excerpt\":\"The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \\\"on and off\\\" nature.\",\"program_binding\":{\"version\":\"source-condition-carriers-v1\",\"scope_id\":\"scope-9994ecd4c337424363299f92\",\"quote_id\":\"scope-9994ecd4c337424363299f92-0\",\"candidate_id\":\"quote-213002a6386aab67728e9ad6\",\"evidence_id\":\"user-e62e2ae0ad7649e9858322c1528ccef4\",\"start_offset\":0,\"end_offset\":628,\"source_version\":\"unverified\",\"locator\":\"https://www.weather.gov/ppg/forecast_terms :: Precipitation Probability heading; complete body paragraph including following on/off sentence\",\"provenance\":null,\"text_sha256\":\"320dd854bee60780ed75175abb41bdc17da331064461519596817cc660440694\",\"knowledge_version\":\"kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e\",\"answer_id\":\"c10fd9d111ac48608b121f4c1b269489\",\"answer_version\":1,\"condition_id\":\"condition-bcd253d3602cc4b9d8c967ec\",\"text\":\"The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \\\"on and off\\\" nature.\",\"granularity\":\"whole_existing_quote_carrier\",\"semantic_necessity_not_program_proof\":true}},\"quote_ids\":[\"scope-9994ecd4c337424363299f92-0\"],\"raw_model_status\":\"contradicted\",\"effective_support_status\":\"contradicted\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":{\"replacement\":\"给定NWS文献将可测降水定义为达到或超过0.01英寸；这里仅指文献定义，不判断实际天气。\",\"condition_id\":\"condition-bcd253d3602cc4b9d8c967ec\"},\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "回答断言NWS文献阈值为0.1英寸，命题被忠实提取，非提取失真。",
+                  "raw_support_status": "contradicted",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-6489d921f9e1f53149ee2547",
+              "claim_id": "claim-6489d921f9e1f53149ee2547",
+              "status": "supported",
+              "evidence_ids": [],
+              "rationale": "回答文本确实仅陈述文献定义并声明不判断实际天气，属回答范围自述，与原文一致。",
+              "component_reviews": [
+                {
+                  "component_id": "claim-6489d921f9e1f53149ee2547-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "回答明确限定仅指文献定义，不判断实际天气，范围陈述属实。",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "answer_scope",
+                  "fidelity_rationale": "范围自述与回答原文一致。",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            }
+          ],
+          "domain_findings": [
+            {
+              "finding_id": "domain-engineering_inputs",
+              "claim_ids": [],
+              "category": "engineering_inputs",
+              "rationale": "Input presence checked only; data are user-provided and quality/adequacy are not certified.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "network_model",
+                "operating_point",
+                "limits",
+                "contingencies"
+              ]
+            },
+            {
+              "finding_id": "domain-input_units:units-input",
+              "claim_ids": [],
+              "category": "input_units:units-input",
+              "rationale": "No structured quantities; this is not a completed free-text unit audit.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "unit_check_incomplete"
+              ]
+            },
+            {
+              "finding_id": "domain-simulation_boundary",
+              "claim_ids": [],
+              "category": "simulation_boundary",
+              "rationale": "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",
+              "check_status": "not_assessable",
+              "origin": "program_rule",
+              "missing_prerequisites": [
+                "executed_and_validated_engineering_analysis"
+              ]
+            },
+            {
+              "finding_id": "domain-answer_units",
+              "claim_ids": [
+                "claim-2832b8ed9b2ebfb4fa126e96"
+              ],
+              "category": "answer_units",
+              "rationale": "用户要求修正可测降水阈值，文献明确写为等于或大于0.01英寸；回答给出0.1英寸，量值错误（差一个数量级），单位英寸本身正确。",
+              "check_status": "warning",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-analysis_scope",
+              "claim_ids": [
+                "claim-2832b8ed9b2ebfb4fa126e96",
+                "claim-6489d921f9e1f53149ee2547"
+              ],
+              "category": "analysis_scope",
+              "rationale": "用户请求为概念性：依给定NWS文献修正可测降水阈值。回答虽声明仅引文献、不判断实际天气（符合用户限定），但未指出原错误阈值，也未给出正确的0.01英寸，实际回答未达成修正任务。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"uncertain\", \"reason\": \"用户请求为概念性：依给定NWS文献修正可测降水阈值。回答虽声明仅引文献、不判断实际天气（符合用户限定），但未指出原错误阈值，也未给出正确的0.01英寸，实际回答未达成修正任务。\", \"answer_id\": \"c10fd9d111ac48608b121f4c1b269489\", \"answer_version\": 1, \"answer_sha256\": \"1b1f590ab37ba8448b5a8983cb4eeafb7e16a26a73b004a819fb0caf4a9e5924\", \"question_sha256\": \"0058897a90d2ba3c2c576790bfc25c75e26d0bc89c3bb363b528c89adbc1bc38\", \"structured_goal\": \"conceptual\"}",
+              "check_status": "warning",
+              "origin": "model_judgment",
+              "missing_prerequisites": [
+                "文献正确阈值0.01英寸的修正表述"
+              ]
+            },
+            {
+              "finding_id": "domain-operating_prerequisites",
+              "claim_ids": [],
+              "category": "operating_prerequisites",
+              "rationale": "概念性定义解释，无设备操作或运行建议，不涉及运行前提。",
+              "check_status": "not_applicable",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            }
+          ],
+          "decision": {
+            "kind": "revise",
+            "reasons": [
+              "Located answer defect has a selected literal source and substantive replacement; preserve every requested subquestion and fully re-review",
+              "Automatic approval is bounded to this task; not engineering safety certification"
+            ],
+            "execution_integrity": "complete"
+          }
+        },
+        {
+          "answer": {
+            "answer_id": "c10fd9d111ac48608b121f4c1b269489",
+            "version": 2,
+            "text": "给定NWS文献将可测降水定义为等于或大于0.01英寸（原回答误作0.1英寸，已修正）；此为文献定义，不判断实际天气。",
+            "assumptions": [],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 58,
+                "evidence_ids": [
+                  "user-e62e2ae0ad7649e9858322c1528ccef4"
+                ]
+              }
+            ]
+          },
+          "claims": [
+            {
+              "claim_id": "claim-62e249a0e9d660dadcac8d42",
+              "answer_id": "c10fd9d111ac48608b121f4c1b269489",
+              "answer_version": 2,
+              "text": "给定NWS文献将可测降水定义为等于或大于0.01英寸（原回答误作0.1英寸，已修正）；此为文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 58,
+              "claim_type": "technical_fact",
+              "proposition": "The referenced NWS literature defines measurable precipitation as equal to or greater than 0.01 inch.",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-62e249a0e9d660dadcac8d42-part-0",
+                  "category": "technical_fact",
+                  "proposition": "The referenced NWS literature defines measurable precipitation as equal to or greater than 0.01 inch."
+                }
+              ],
+              "anchor_group_id": "anchor-88dd528694460cb5c6edd46b",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "definition",
+                "NWS source",
+                "threshold 0.01 inch"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "document_body"
+              ],
+              "component_obligations": [
+                "technical_truth"
+              ]
+            },
+            {
+              "claim_id": "claim-2bfe5bccecd52942cab9ee34",
+              "answer_id": "c10fd9d111ac48608b121f4c1b269489",
+              "answer_version": 2,
+              "text": "给定NWS文献将可测降水定义为等于或大于0.01英寸（原回答误作0.1英寸，已修正）；此为文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 58,
+              "claim_type": "input_report",
+              "proposition": "The original answer incorrectly used 0.1 inch and has been corrected.",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-2bfe5bccecd52942cab9ee34-part-0",
+                  "category": "input_evidence_coverage",
+                  "proposition": "The original answer incorrectly used 0.1 inch."
+                },
+                {
+                  "component_id": "claim-2bfe5bccecd52942cab9ee34-part-1",
+                  "category": "answer_scope",
+                  "proposition": "The value has been corrected in the current answer."
+                }
+              ],
+              "anchor_group_id": "anchor-88dd528694460cb5c6edd46b",
+              "assertion_role": "correction",
+              "semantic_qualifiers": [
+                "prior error 0.1 inch",
+                "corrected to 0.01 inch"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "input_snapshot",
+                "answer_text"
+              ],
+              "component_obligations": [
+                "input_provided",
+                "answer_scope"
+              ]
+            },
+            {
+              "claim_id": "claim-2d6dab93e917e14336683e1d",
+              "answer_id": "c10fd9d111ac48608b121f4c1b269489",
+              "answer_version": 2,
+              "text": "给定NWS文献将可测降水定义为等于或大于0.01英寸（原回答误作0.1英寸，已修正）；此为文献定义，不判断实际天气。",
+              "start_offset": 0,
+              "end_offset": 58,
+              "claim_type": "answer_scope",
+              "proposition": "The statement is a literature definition and does not judge actual weather.",
+              "qualifiers": [],
+              "components": [
+                {
+                  "component_id": "claim-2d6dab93e917e14336683e1d-part-0",
+                  "category": "answer_scope",
+                  "proposition": "The statement is presented as a literature definition rather than an assessment of actual weather."
+                }
+              ],
+              "anchor_group_id": "anchor-88dd528694460cb5c6edd46b",
+              "assertion_role": "asserted",
+              "semantic_qualifiers": [
+                "scope limitation"
+              ],
+              "semantic_origin": "model-claims-v7-obligations",
+              "component_basis_targets": [
+                "answer_text"
+              ],
+              "component_obligations": [
+                "answer_scope"
+              ]
+            }
+          ],
+          "verification_findings": [
+            {
+              "finding_id": "finding-claim-62e249a0e9d660dadcac8d42",
+              "claim_id": "claim-62e249a0e9d660dadcac8d42",
+              "status": "supported",
+              "evidence_ids": [
+                "user-e62e2ae0ad7649e9858322c1528ccef4"
+              ],
+              "rationale": "The user-supplied NWS excerpt states measurable precipitation is equal to or greater than 0.01 inches, matching the asserted definition.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-62e249a0e9d660dadcac8d42-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "The excerpt explicitly defines measurable precipitation as ≥0.01 inches. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The passage defines measurable precipitation as equal to or greater than 0.01 inches.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-f7eb5ac364bdab235901e1af-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "technical_truth",
+                  "fidelity_rationale": "Answer attributes the 0.01-inch threshold to the NWS literature definition without weather prediction.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-2bfe5bccecd52942cab9ee34",
+              "claim_id": "claim-2bfe5bccecd52942cab9ee34",
+              "status": "insufficient_evidence",
+              "evidence_ids": [],
+              "rationale": "The correction narrative (prior 0.1-inch error, now 0.01 inch) is a meta-report about the answer revision; no delivered snapshot of the prior answer body is included to verify the 0.1-inch error, while the corrected value matches the source.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-2bfe5bccecd52942cab9ee34-part-0",
+                  "status": "insufficient_evidence",
+                  "basis_indexes": [],
+                  "rationale": "No delivered snapshot of the original answer body establishes the 0.1-inch prior error.",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "correction",
+                  "verification_obligation": "input_provided",
+                  "fidelity_rationale": "The answer reports the prior error and correction as stated.",
+                  "raw_support_status": "insufficient_evidence",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                },
+                {
+                  "component_id": "claim-2bfe5bccecd52942cab9ee34-part-1",
+                  "status": "insufficient_evidence",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "The current answer body states 0.01 inches with the correction note. [source-support-relation-v6] {\"source_kind\":\"other\",\"explanation\":\"The answer anchor itself contains the corrected 0.01-inch statement.\",\"whole_claim_supported\":true,\"missing_clauses\":[\"Independent confirmation of the prior 0.1-inch error is absent.\"],\"conditions_preserved\":true,\"authority_scope\":\"other\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[],\"raw_model_status\":\"supported\",\"effective_support_status\":\"insufficient_evidence\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "correction",
+                  "verification_obligation": "answer_scope",
+                  "fidelity_rationale": "The anchor shows the corrected 0.01-inch value is present in the current answer.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            },
+            {
+              "finding_id": "finding-claim-2d6dab93e917e14336683e1d",
+              "claim_id": "claim-2d6dab93e917e14336683e1d",
+              "status": "supported",
+              "evidence_ids": [],
+              "rationale": "The answer explicitly frames the statement as a literature definition and disclaims actual-weather judgment; this scope limitation is literally present.",
+              "component_reviews": [
+                {
+                  "component_id": "claim-2d6dab93e917e14336683e1d-part-0",
+                  "status": "supported",
+                  "basis_indexes": [
+                    0
+                  ],
+                  "rationale": "The literal answer text states it is a literature definition and does not judge actual weather. [source-support-relation-v6] {\"source_kind\":\"other\",\"explanation\":\"The answer anchor contains the explicit scope limitation.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"other\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                  "classification_issue": null,
+                  "origin": "model_judgment",
+                  "reason_code": null,
+                  "fidelity_status": "faithful",
+                  "reviewed_assertion_role": "asserted",
+                  "verification_obligation": "answer_scope",
+                  "fidelity_rationale": "Scope statement matches the anchor wording.",
+                  "raw_support_status": "supported",
+                  "review_disposition": "assessed",
+                  "review_projection_version": "independent-review-projection-v2"
+                }
+              ]
+            }
+          ],
+          "domain_findings": [
+            {
+              "finding_id": "domain-engineering_inputs",
+              "claim_ids": [],
+              "category": "engineering_inputs",
+              "rationale": "Current question/answer and domain applicability are conceptual; no plant study inputs required.",
+              "check_status": "not_applicable",
+              "origin": "program_rule",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-input_units:units-input",
+              "claim_ids": [],
+              "category": "input_units:units-input",
+              "rationale": "Conceptual request contains no structured quantities; actual answer quantity assertions are reviewed separately.",
+              "check_status": "not_applicable",
+              "origin": "program_rule",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-simulation_boundary",
+              "claim_ids": [],
+              "category": "simulation_boundary",
+              "rationale": "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",
+              "check_status": "not_applicable",
+              "origin": "program_rule",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-answer_units",
+              "claim_ids": [
+                "claim-62e249a0e9d660dadcac8d42"
+              ],
+              "category": "answer_units",
+              "rationale": "文献句明确可测降水为≥0.01英寸；回答的0.01英寸与文献一致，并标示原0.1英寸为误值（未更改量纲，仅纠正数值）。",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-analysis_scope",
+              "claim_ids": [
+                "claim-62e249a0e9d660dadcac8d42",
+                "claim-2d6dab93e917e14336683e1d"
+              ],
+              "category": "analysis_scope",
+              "rationale": "用户要求依据给定NWS文献指出并修正阈值局部错误且保留定义范围；回答仅陈述文献定义并限定不判断实际天气，与请求范围一致，未作超范围保证。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户要求依据给定NWS文献指出并修正阈值局部错误且保留定义范围；回答仅陈述文献定义并限定不判断实际天气，与请求范围一致，未作超范围保证。\", \"answer_id\": \"c10fd9d111ac48608b121f4c1b269489\", \"answer_version\": 2, \"answer_sha256\": \"71d92bd0b3557858eabcca9e21418c7ddb74988d8bb85552232003c6c4ac74d9\", \"question_sha256\": \"0058897a90d2ba3c2c576790bfc25c75e26d0bc89c3bb363b528c89adbc1bc38\", \"structured_goal\": \"conceptual\"}",
+              "check_status": "no_issue",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            },
+            {
+              "finding_id": "domain-operating_prerequisites",
+              "claim_ids": [],
+              "category": "operating_prerequisites",
+              "rationale": "概念性文献定义解释，不涉及设备运行、设置或研究前提。",
+              "check_status": "not_applicable",
+              "origin": "model_judgment",
+              "missing_prerequisites": []
+            }
+          ],
+          "decision": {
+            "kind": "needs_information",
+            "reasons": [
+              "Evidence or required factual inputs are insufficient",
+              "Automatic approval is bounded to this task; not engineering safety certification"
+            ],
+            "execution_integrity": "complete"
+          }
+        }
+      ],
+      "revisions": [
+        {
+          "answer": {
+            "answer_id": "c10fd9d111ac48608b121f4c1b269489",
+            "version": 2,
+            "text": "给定NWS文献将可测降水定义为等于或大于0.01英寸（原回答误作0.1英寸，已修正）；此为文献定义，不判断实际天气。",
+            "assumptions": [],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 58,
+                "evidence_ids": [
+                  "user-e62e2ae0ad7649e9858322c1528ccef4"
+                ]
+              }
+            ]
+          },
+          "changes": [
+            {
+              "finding_ids": [
+                "finding-claim-2832b8ed9b2ebfb4fa126e96"
+              ],
+              "description": "将阈值由0.1英寸改为文献所载的0.01英寸。"
+            },
+            {
+              "finding_ids": [
+                "domain-input_units:units-input"
+              ],
+              "description": "明确给出0.01英寸单位量值，纠正原0.1英寸错误；自由文本单位审计未完成。"
+            },
+            {
+              "finding_ids": [
+                "domain-answer_units"
+              ],
+              "description": "将错误量值0.1英寸替换为文献阈值0.01英寸并保留英寸单位。"
+            },
+            {
+              "finding_ids": [
+                "domain-analysis_scope"
+              ],
+              "description": "补出原错误阈值并给出正确的0.01英寸，达成文献阈值修正任务。"
+            }
+          ],
+          "unresolved_finding_ids": [
+            "finding-claim-6489d921f9e1f53149ee2547",
+            "domain-engineering_inputs",
+            "domain-simulation_boundary",
+            "domain-operating_prerequisites"
+          ],
+          "execution_issues": [],
+          "finding_actions": [
+            {
+              "finding_id": "finding-claim-2832b8ed9b2ebfb4fa126e96",
+              "action": "modified",
+              "explanation": "将阈值由0.1英寸改为文献所载的0.01英寸。"
+            },
+            {
+              "finding_id": "finding-claim-6489d921f9e1f53149ee2547",
+              "action": "retained",
+              "explanation": "范围自述与用户限定一致，无需改动。"
+            },
+            {
+              "finding_id": "domain-engineering_inputs",
+              "action": "retained",
+              "explanation": "概念性定义解释，不涉及网架模型等工程输入；该未评估项仍需独立复核。"
+            },
+            {
+              "finding_id": "domain-input_units:units-input",
+              "action": "modified",
+              "explanation": "明确给出0.01英寸单位量值，纠正原0.1英寸错误；自由文本单位审计未完成。"
+            },
+            {
+              "finding_id": "domain-simulation_boundary",
+              "action": "retained",
+              "explanation": "未执行任何仿真，无需修改；不构成工程可行性或安全认证。"
+            },
+            {
+              "finding_id": "domain-answer_units",
+              "action": "modified",
+              "explanation": "将错误量值0.1英寸替换为文献阈值0.01英寸并保留英寸单位。"
+            },
+            {
+              "finding_id": "domain-analysis_scope",
+              "action": "modified",
+              "explanation": "补出原错误阈值并给出正确的0.01英寸，达成文献阈值修正任务。"
+            },
+            {
+              "finding_id": "domain-operating_prerequisites",
+              "action": "retained",
+              "explanation": "概念性定义解释，不涉及设备操作或运行前提。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

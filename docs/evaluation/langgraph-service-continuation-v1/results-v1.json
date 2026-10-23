@@ -1,0 +1,375 @@
+{
+  "version": "langgraph-service-continuation-results-v1",
+  "date": "2026-10-23",
+  "implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1",
+  "starting_commit": "2c75ba038011c07a6bb92a6b7bd7b19f17dfc5a5",
+  "old_first_run_not_resent": "a83c9966ad034532954127b6958b075b",
+  "model": "deepseek-flash",
+  "branches": [
+    {
+      "id": "LSI-01-G",
+      "task_id": "LSI-01",
+      "execution_path": "langgraph_v1",
+      "run_id": "caca725070144636872b4136f774fe84",
+      "status": "complete",
+      "elapsed_seconds": 32.73791859999983,
+      "state": "completed",
+      "decision": {
+        "kind": "pass",
+        "reasons": [
+          "All applicable checks complete with supported claims and no blocking findings",
+          "Automatic approval is bounded to this task; not engineering safety certification"
+        ],
+        "execution_integrity": "complete",
+        "risk_level": "low",
+        "resolution": "complete",
+        "reason_codes": [
+          "ALL_REQUIRED_CHECKS_COMPLETE"
+        ]
+      },
+      "termination_reason": "All applicable checks complete with supported claims and no blocking findings; Automatic approval is bounded to this task; not engineering safety certification",
+      "required_stages_complete": true,
+      "execution_issues": [],
+      "calls": 5,
+      "corrections": 0,
+      "usage": {
+        "input_tokens": 57260,
+        "output_tokens": 1961,
+        "total_tokens": 59221
+      },
+      "by_component": {
+        "generation/initial": {
+          "calls": 1,
+          "input_tokens": 9895,
+          "output_tokens": 97,
+          "total_tokens": 9992,
+          "request_duration_ms": 1307
+        },
+        "claim_extraction/initial": {
+          "calls": 1,
+          "input_tokens": 1536,
+          "output_tokens": 332,
+          "total_tokens": 1868,
+          "request_duration_ms": 1862
+        },
+        "power_domain_review/initial": {
+          "calls": 1,
+          "input_tokens": 14511,
+          "output_tokens": 479,
+          "total_tokens": 14990,
+          "request_duration_ms": 3216
+        },
+        "evidence_verification/initial": {
+          "calls": 2,
+          "input_tokens": 31318,
+          "output_tokens": 1053,
+          "total_tokens": 32371,
+          "request_duration_ms": 6504
+        }
+      },
+      "harness_duration_ms": 30862,
+      "review_rounds": 1,
+      "revisions": 0,
+      "answer_version": 1,
+      "answer_characters": 56,
+      "original_citations": 1
+    },
+    {
+      "id": "LSI-02-G",
+      "task_id": "LSI-02",
+      "execution_path": "langgraph_v1",
+      "run_id": "cedd45aa7a744061ad3a428caa6ce50c",
+      "status": "complete",
+      "elapsed_seconds": 26.776363000000856,
+      "state": "review_required",
+      "decision": {
+        "kind": "review_required",
+        "reasons": [
+          "事实支持或来源条件不确定，不自动解释为提取不忠实；原句不能视为审核认可",
+          "Automatic approval is bounded to this task; not engineering safety certification"
+        ],
+        "execution_integrity": "complete",
+        "risk_level": "unknown",
+        "resolution": "partial",
+        "reason_codes": [
+          "FACT_ASSESSMENT_UNCERTAIN"
+        ]
+      },
+      "termination_reason": "事实支持或来源条件不确定，不自动解释为提取不忠实；原句不能视为审核认可; Automatic approval is bounded to this task; not engineering safety certification",
+      "required_stages_complete": true,
+      "execution_issues": [],
+      "calls": 5,
+      "corrections": 0,
+      "usage": {
+        "input_tokens": 56850,
+        "output_tokens": 1755,
+        "total_tokens": 58605
+      },
+      "by_component": {
+        "generation/initial": {
+          "calls": 1,
+          "input_tokens": 9088,
+          "output_tokens": 221,
+          "total_tokens": 9309,
+          "request_duration_ms": 1626
+        },
+        "claim_extraction/initial": {
+          "calls": 1,
+          "input_tokens": 1605,
+          "output_tokens": 309,
+          "total_tokens": 1914,
+          "request_duration_ms": 1944
+        },
+        "power_domain_review/initial": {
+          "calls": 1,
+          "input_tokens": 14290,
+          "output_tokens": 495,
+          "total_tokens": 14785,
+          "request_duration_ms": 3143
+        },
+        "evidence_verification/initial": {
+          "calls": 2,
+          "input_tokens": 31867,
+          "output_tokens": 730,
+          "total_tokens": 32597,
+          "request_duration_ms": 5536
+        }
+      },
+      "harness_duration_ms": 26383,
+      "review_rounds": 1,
+      "revisions": 0,
+      "answer_version": 1,
+      "answer_characters": 80,
+      "original_citations": 1
+    },
+    {
+      "id": "LSI-02-S",
+      "task_id": "LSI-02",
+      "execution_path": "sequential",
+      "run_id": "70b7d70c72c648dfad789ed6b11bee19",
+      "status": "complete",
+      "elapsed_seconds": 20.90268460000152,
+      "state": "needs_information",
+      "decision": {
+        "kind": "needs_information",
+        "reasons": [
+          "Evidence or required factual inputs are insufficient",
+          "Automatic approval is bounded to this task; not engineering safety certification"
+        ],
+        "execution_integrity": "complete",
+        "risk_level": "unknown",
+        "resolution": "partial",
+        "reason_codes": [
+          "FACT_BASIS_MISSING"
+        ]
+      },
+      "termination_reason": "Evidence or required factual inputs are insufficient; Automatic approval is bounded to this task; not engineering safety certification",
+      "required_stages_complete": true,
+      "execution_issues": [],
+      "calls": 5,
+      "corrections": 0,
+      "usage": {
+        "input_tokens": 60244,
+        "output_tokens": 2190,
+        "total_tokens": 62434
+      },
+      "by_component": {
+        "generation/initial": {
+          "calls": 1,
+          "input_tokens": 9098,
+          "output_tokens": 174,
+          "total_tokens": 9272,
+          "request_duration_ms": 1319
+        },
+        "claim_extraction/initial": {
+          "calls": 1,
+          "input_tokens": 1561,
+          "output_tokens": 492,
+          "total_tokens": 2053,
+          "request_duration_ms": 2055
+        },
+        "power_domain_review/initial": {
+          "calls": 1,
+          "input_tokens": 14173,
+          "output_tokens": 643,
+          "total_tokens": 14816,
+          "request_duration_ms": 3727
+        },
+        "evidence_verification/initial": {
+          "calls": 2,
+          "input_tokens": 35412,
+          "output_tokens": 881,
+          "total_tokens": 36293,
+          "request_duration_ms": 6003
+        }
+      },
+      "harness_duration_ms": 20567,
+      "review_rounds": 1,
+      "revisions": 0,
+      "answer_version": 1,
+      "answer_characters": 56,
+      "original_citations": 1
+    },
+    {
+      "id": "LSI-03-S",
+      "task_id": "LSI-03",
+      "execution_path": "sequential",
+      "run_id": "ea223d1f8c47483cb846ca7ed9dce238",
+      "status": "complete",
+      "elapsed_seconds": 28.249333099996875,
+      "state": "completed",
+      "decision": {
+        "kind": "pass",
+        "reasons": [
+          "All applicable checks complete with supported claims and no blocking findings",
+          "Automatic approval is bounded to this task; not engineering safety certification"
+        ],
+        "execution_integrity": "complete",
+        "risk_level": "low",
+        "resolution": "complete",
+        "reason_codes": [
+          "ALL_REQUIRED_CHECKS_COMPLETE"
+        ]
+      },
+      "termination_reason": "All applicable checks complete with supported claims and no blocking findings; Automatic approval is bounded to this task; not engineering safety certification",
+      "required_stages_complete": true,
+      "execution_issues": [],
+      "calls": 8,
+      "corrections": 0,
+      "usage": {
+        "input_tokens": 101665,
+        "output_tokens": 3636,
+        "total_tokens": 105301
+      },
+      "by_component": {
+        "claim_extraction/initial": {
+          "calls": 2,
+          "input_tokens": 3056,
+          "output_tokens": 619,
+          "total_tokens": 3675,
+          "request_duration_ms": 3379
+        },
+        "power_domain_review/initial": {
+          "calls": 2,
+          "input_tokens": 27330,
+          "output_tokens": 941,
+          "total_tokens": 28271,
+          "request_duration_ms": 5692
+        },
+        "evidence_verification/initial": {
+          "calls": 3,
+          "input_tokens": 54377,
+          "output_tokens": 1672,
+          "total_tokens": 56049,
+          "request_duration_ms": 9641
+        },
+        "revision/initial": {
+          "calls": 1,
+          "input_tokens": 16902,
+          "output_tokens": 404,
+          "total_tokens": 17306,
+          "request_duration_ms": 3042
+        }
+      },
+      "harness_duration_ms": 27840,
+      "review_rounds": 2,
+      "revisions": 1,
+      "answer_version": 2,
+      "answer_characters": 53,
+      "original_citations": 1
+    },
+    {
+      "id": "LSI-03-G",
+      "task_id": "LSI-03",
+      "execution_path": "langgraph_v1",
+      "run_id": "1b41971b56a84f7aa55687eefeecd3de",
+      "status": "complete",
+      "elapsed_seconds": 30.116807899998093,
+      "state": "needs_information",
+      "decision": {
+        "kind": "needs_information",
+        "reasons": [
+          "Evidence or required factual inputs are insufficient",
+          "Automatic approval is bounded to this task; not engineering safety certification"
+        ],
+        "execution_integrity": "complete",
+        "risk_level": "unknown",
+        "resolution": "partial",
+        "reason_codes": [
+          "FACT_BASIS_MISSING"
+        ]
+      },
+      "termination_reason": "Evidence or required factual inputs are insufficient; Automatic approval is bounded to this task; not engineering safety certification",
+      "required_stages_complete": true,
+      "execution_issues": [],
+      "calls": 9,
+      "corrections": 1,
+      "usage": {
+        "input_tokens": 123109,
+        "output_tokens": 4348,
+        "total_tokens": 127457
+      },
+      "by_component": {
+        "claim_extraction/initial": {
+          "calls": 2,
+          "input_tokens": 3055,
+          "output_tokens": 655,
+          "total_tokens": 3710,
+          "request_duration_ms": 3885
+        },
+        "power_domain_review/initial": {
+          "calls": 2,
+          "input_tokens": 27318,
+          "output_tokens": 1001,
+          "total_tokens": 28319,
+          "request_duration_ms": 6730
+        },
+        "evidence_verification/initial": {
+          "calls": 3,
+          "input_tokens": 54853,
+          "output_tokens": 1744,
+          "total_tokens": 56597,
+          "request_duration_ms": 10411
+        },
+        "evidence_verification/correction": {
+          "calls": 1,
+          "input_tokens": 20965,
+          "output_tokens": 540,
+          "total_tokens": 21505,
+          "request_duration_ms": 2918
+        },
+        "revision/initial": {
+          "calls": 1,
+          "input_tokens": 16918,
+          "output_tokens": 408,
+          "total_tokens": 17326,
+          "request_duration_ms": 2595
+        }
+      },
+      "harness_duration_ms": 29675,
+      "review_rounds": 2,
+      "revisions": 1,
+      "answer_version": 2,
+      "answer_characters": 58,
+      "original_citations": 1
+    }
+  ],
+  "totals": {
+    "calls": 32,
+    "corrections": 1,
+    "input_tokens": 399128,
+    "output_tokens": 13890,
+    "total_tokens": 413018
+  },
+  "invoice_amount": null,
+  "new_cases": 0,
+  "resubmissions": 0,
+  "failures": 0,
+  "unexecuted": 0,
+  "semantic_scope": "AI-assisted review, user-supervised execution; development acceptance, not new independent semantic score.",
+  "default_execution_path": "langgraph_v1",
+  "default_changed": true,
+  "history_unchanged": true,
+  "browser_authenticated_acceptance": "pending_owner_manual_check",
+  "full_suite_repeated": false
+}

@@ -1,5 +1,11 @@
 # PowerTrustAI
 
+## 2026-10-23 当前默认与验收
+
+**本机受管默认已切为LangGraph（langgraph_v1）**，正常服务ready；公共源码无配置回退仍sequential，环境变量优先。剩余五项固定服务验收全部完成，32调用／413,018 token，两项诊断实际一次修订及完整重审；语义待复核、待补充保留。日常历史104运行、2278事件、2999版本/证据对象、8反馈及行哈希启动前后不变。旧首项不重发、旧失败记录不改。见[后续验收与回退](docs/evaluation/langgraph-service-continuation-v1/results-v1.md)、[小统计](docs/evaluation/langgraph-service-continuation-v1/results-v1.json)、[切换核对](docs/evaluation/langgraph-service-continuation-v1/switch-verification-v1.json)。
+
+唯一产品主线仍是回答＋完整审核；已有回答保留折叠诊断及兼容API，四Agent/schema13/检索/政策不变，A/B不采用。登录后的引用、版本及失败草稿浏览器验收仍待用户一次人工清单，未绕过本地文件限制；不把API结果当浏览器验收。空闲正常停服后将受管orchestration.json的execution_path改为sequential并重启可回退，无自动失败回退重发。以下2026-10-22“当前状态”是旧批收尾记录，以本节及新报告为准。
+
 ## 2026-10-22 当前集成状态
 
 正常Factory/worker/存储/API已接入可选LangGraph七阶段，**实际默认仍为sequential**。固定六次真实验收仅首项原编排完成，随后验收收集器跨线程SQLite读取失败，按规则停止五项；图实测未执行，不满足默认切换条件。收集器已离线修复但不补跑。本批5调用/55,821 token，最终1136项完整离线检查通过。见[集成验收报告](docs/evaluation/langgraph-service-integration-v1/results-v1.md)、[统计](docs/evaluation/langgraph-service-integration-v1/results-v1.json)及[清理与回退](docs/evaluation/langgraph-service-integration-v1/cleanup-and-rollback-v1.json)。
