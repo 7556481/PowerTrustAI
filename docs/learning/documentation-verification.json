@@ -4,35 +4,35 @@
   "chapters": [
     {
       "file": "01-product.md",
-      "characters": 3739,
-      "cjk_characters": 2594,
+      "characters": 4171,
+      "cjk_characters": 2777,
       "h2_sections": 11,
       "self_checks": 3,
-      "sha256": "39256fd4b02b2c78a9d7c6259f8388d636ba103e0576180d8af2f5086a628765"
+      "sha256": "1b3e95e817525b406a9a9e99a3b86a98bb2528743d6364a4e3f03b05a34fb56d"
     },
     {
       "file": "02-architecture.md",
-      "characters": 8627,
-      "cjk_characters": 2135,
+      "characters": 9059,
+      "cjk_characters": 2318,
       "h2_sections": 10,
       "self_checks": 3,
-      "sha256": "003be19712b509d30cf6f9a294b4592f8ca3dc651f5dce0b85bedd337af68b69"
+      "sha256": "997d864a874763b9c456953992c0d323af5c125902ed751a21ccf494c864ad5d"
     },
     {
       "file": "03-agents.md",
-      "characters": 3952,
-      "cjk_characters": 2450,
+      "characters": 4384,
+      "cjk_characters": 2633,
       "h2_sections": 13,
       "self_checks": 3,
-      "sha256": "79c7aad986c3e70909ca5181c69466df36506091a65f3c8686cbb2e127d277ea"
+      "sha256": "43c65e80e41a08a606ef9b1aa0af93d77474443cf6cfdc6f800d6d208dcd0dfd"
     },
     {
       "file": "04-harness.md",
-      "characters": 8835,
-      "cjk_characters": 2776,
+      "characters": 9267,
+      "cjk_characters": 2959,
       "h2_sections": 11,
       "self_checks": 3,
-      "sha256": "155e7cc11e7e297b74c7e9555590f44146ddccb188e710a3cc62eaa9a1ab5ef9"
+      "sha256": "a79aca57a7a5ac26e6135b5b144a247a7bf06d93b944cad26866cb52cd0f28f2"
     },
     {
       "file": "05-rag.md",
@@ -76,11 +76,11 @@
     },
     {
       "file": "10-api-storage.md",
-      "characters": 2571,
-      "cjk_characters": 1469,
+      "characters": 3003,
+      "cjk_characters": 1652,
       "h2_sections": 10,
       "self_checks": 3,
-      "sha256": "1d173f3ae4da1fc2f38278cda920c64282a2c8e2009579c2c791d1d54277885b"
+      "sha256": "5245552e150b76df20d137781112e2a1f7046626b337a31405aaf7df4faeb859"
     },
     {
       "file": "11-supervision-metrics.md",
@@ -108,11 +108,11 @@
     },
     {
       "file": "14-code-tour.md",
-      "characters": 33000,
-      "cjk_characters": 4863,
+      "characters": 33432,
+      "cjk_characters": 5046,
       "h2_sections": 15,
       "self_checks": 3,
-      "sha256": "b7c2f7e53f55dae7454204f3af8e35669d7815fd0e8d3fe7261aa92914933790"
+      "sha256": "6a4c8bcac56962921b4905d61c9fb6c996b2006efeb296b0cccedf5352215721"
     },
     {
       "file": "15-failures.md",
@@ -140,11 +140,11 @@
     },
     {
       "file": "18-operations.md",
-      "characters": 4609,
-      "cjk_characters": 2089,
+      "characters": 5041,
+      "cjk_characters": 2272,
       "h2_sections": 14,
       "self_checks": 3,
-      "sha256": "3fd928d6a662fd2a5861dc37cb8ca83d5c63bdeab44bbf57237eb5e89bb1368e"
+      "sha256": "9913f97131752815a54b13468b97664b7515a1e185f63fc2346de8f57a619a16"
     },
     {
       "file": "19-glossary.md",
@@ -166,5 +166,6 @@
   "chapter_count": 20,
   "self_checks": 60,
   "verification": "tools.learning_checks: 20 chapters /60 folded answers /source hashes /local links",
-  "browser": "Product entry/mode checked; authenticated views unaccepted due browser file protocol policy. Learning static check is not browser acceptance."
+  "browser": "Entry and collapsed diagnostic checked on current graph service; authenticated views pending owner manual check, no file restriction bypass.",
+  "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1"
 }
