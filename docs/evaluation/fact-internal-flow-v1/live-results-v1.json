@@ -1,0 +1,69 @@
+{
+  "version": "fact-internal-flow-live-results-v1",
+  "planned_branches": 16,
+  "complete": 8,
+  "known_precondition": 1,
+  "unexpected_final_failure": 1,
+  "unexecuted": 6,
+  "calls": 12,
+  "initial_calls": 9,
+  "corrections": 3,
+  "first_contract_valid": 6,
+  "first_contract_response_denominator": 9,
+  "usage": {
+    "input_tokens": 34894,
+    "output_tokens": 3928,
+    "total_tokens": 38822,
+    "cache_hit_tokens": 21376
+  },
+  "actual_billed_cost": "unknown",
+  "common_cases": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F06",
+    "F08"
+  ],
+  "common_component_denominator_per_variant": 7,
+  "common_completed_pairs": 4,
+  "common_completed_components_per_variant": 5,
+  "unexecuted_common_components_per_variant": 2,
+  "effective_reference_matches_on_completed_components": {
+    "original": 3,
+    "candidate": 4
+  },
+  "not_accuracy_on_full_denominator": true,
+  "production_changed": false,
+  "offline_tests": 20,
+  "offline_seconds": 3.941,
+  "failure": "F05-candidate: initial missing repair; correction premise_restatement with only body dependency; no valid classification objection",
+  "variants": {
+    "original": {
+      "calls": 4,
+      "corrections": 0,
+      "initial_responses": 4,
+      "first_valid": 4,
+      "model_ms": 12134,
+      "summed_branch_seconds": 12.26838680000219,
+      "usage": {
+        "input_tokens": 17240,
+        "output_tokens": 1919,
+        "total_tokens": 19159
+      }
+    },
+    "candidate": {
+      "calls": 8,
+      "corrections": 3,
+      "initial_responses": 5,
+      "first_valid": 2,
+      "model_ms": 14973,
+      "summed_branch_seconds": 15.285743300009926,
+      "usage": {
+        "input_tokens": 17654,
+        "output_tokens": 2009,
+        "total_tokens": 19663
+      }
+    }
+  }
+}
