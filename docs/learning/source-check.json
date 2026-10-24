@@ -73,7 +73,7 @@
       "excerpt_sha256": "73321a4e7463ce367e9085ad5df2a6a652ae1f0da848d65ff6e0aaec678975da"
     }
   ],
-  "application_commit": "9f0e491ad41e8b1beb4d2d9bd45eff2755163d4c",
+  "application_commit": "e399e87047b3f7d7a573eaf9a08564300951a59a",
   "new_agent": false,
   "old_pdfs_unchanged": true,
   "request_route_excerpts": [
@@ -103,29 +103,29 @@
       "start_line": 56,
       "end_line": 81,
       "function_end_line": 81,
-      "excerpt_sha256": "82602720bf261422dcf8ad9b693f1af63db9075064d9936b7414b691dbde60f3",
-      "file_sha256": "aaea32ea11a2a215c72f89b1e68b8e40fc8b84d5daf049407005f542c9bd67d8",
-      "source_text_lf_sha256": "ec56c0555f9aa085ef996434f354b18e7ab67aded31a54ace1fb6cd3519af246"
+      "excerpt_sha256": "21be6bb6126e2b64c64665f3112c4e210d5d9a78c5468801771d810708ccaa6f",
+      "file_sha256": "95a968cb262660359ae6a02b56c5ac58ba7cecd6d107544c25eb95ae8c349385",
+      "source_text_lf_sha256": "f4ba4b717188ad0ff87597d89695c53392b6971c0290c784250d00e51a675e39"
     },
     {
       "file": "backend/service.py",
       "symbol": "ApplicationService._worker",
       "start_line": 100,
       "end_line": 126,
-      "function_end_line": 132,
-      "excerpt_sha256": "6a969482cf71f2afe4fa2633da92bd66be09b757aedd296d3133d617fe94b5bb",
-      "file_sha256": "aaea32ea11a2a215c72f89b1e68b8e40fc8b84d5daf049407005f542c9bd67d8",
-      "source_text_lf_sha256": "ec56c0555f9aa085ef996434f354b18e7ab67aded31a54ace1fb6cd3519af246"
+      "function_end_line": 137,
+      "excerpt_sha256": "1bcac3c480a5cd8c6321b19f966566d0080369d487c4b62d0d45f22a2efb7851",
+      "file_sha256": "95a968cb262660359ae6a02b56c5ac58ba7cecd6d107544c25eb95ae8c349385",
+      "source_text_lf_sha256": "f4ba4b717188ad0ff87597d89695c53392b6971c0290c784250d00e51a675e39"
     },
     {
       "file": "backend/assembly.py",
       "symbol": "ComponentFactory.create",
-      "start_line": 193,
-      "end_line": 208,
-      "function_end_line": 247,
+      "start_line": 199,
+      "end_line": 214,
+      "function_end_line": 253,
       "excerpt_sha256": "8a4f3ce510a356a9418f57a88e962edbcb0cfe418f9534d4464b8c0f542cb36f",
-      "file_sha256": "21305ac362f11f772177da75cae099d0e5a79502f68ab7f09f059d52df4e01ed",
-      "source_text_lf_sha256": "f57bb76f2f4d6b81e0deafbbc38ffb31363ccd10687590d665317252bf49c6ce"
+      "file_sha256": "3f93812077ccde57a39f2e5046348b5ada82f6e1498924a1109885a0cf4e727b",
+      "source_text_lf_sha256": "330d4fbfb1a84ab097734b70f66e4fef01f0e3da00311a427d85edf68d7a3d58"
     },
     {
       "file": "services/claim_extractor.py",
@@ -162,21 +162,21 @@
       "symbol": "ApplicationService.result",
       "start_line": 169,
       "end_line": 193,
-      "function_end_line": 226,
-      "excerpt_sha256": "dd628b014cd99a4122ab553058bf99430851ffdf8637307216bb75695ef38ba1",
-      "file_sha256": "aaea32ea11a2a215c72f89b1e68b8e40fc8b84d5daf049407005f542c9bd67d8",
-      "source_text_lf_sha256": "ec56c0555f9aa085ef996434f354b18e7ab67aded31a54ace1fb6cd3519af246"
+      "function_end_line": 238,
+      "excerpt_sha256": "4708c861911db437f0bb882830966ab32bae85ad5fcd93643b3b97f57a544e89",
+      "file_sha256": "95a968cb262660359ae6a02b56c5ac58ba7cecd6d107544c25eb95ae8c349385",
+      "source_text_lf_sha256": "f4ba4b717188ad0ff87597d89695c53392b6971c0290c784250d00e51a675e39"
     }
   ],
   "connection_excerpts": [
     {
       "file": "backend/assembly.py",
       "symbol": "harness=OfflineHarness",
-      "start_line": 235,
-      "end_line": 244,
-      "excerpt_sha256": "2268e6ac2ee6737e3fad58dbb6ae82c7f2006a91bf01a5f728e4bc433ec7eaa6",
-      "file_sha256": "21305ac362f11f772177da75cae099d0e5a79502f68ab7f09f059d52df4e01ed",
-      "source_text_lf_sha256": "f57bb76f2f4d6b81e0deafbbc38ffb31363ccd10687590d665317252bf49c6ce"
+      "start_line": 241,
+      "end_line": 250,
+      "excerpt_sha256": "d2f0fe33049cb4d37647b14937b76f949986b15d5ade8c50e896a3ec23b56a1c",
+      "file_sha256": "3f93812077ccde57a39f2e5046348b5ada82f6e1498924a1109885a0cf4e727b",
+      "source_text_lf_sha256": "330d4fbfb1a84ab097734b70f66e4fef01f0e3da00311a427d85edf68d7a3d58"
     },
     {
       "file": "harness/execution.py",
@@ -327,9 +327,9 @@
       "symbol": "execute",
       "start_line": 19,
       "end_line": 31,
-      "file_sha256": "62efc95f414dc15cadb8d1bd29e905cfa741224a15dc4e050a236e48d57f35db",
-      "source_text_lf_sha256": "3270eeed9e6850794c6033d599f883550f0e1fd68a6250947582df0691e6418b",
-      "excerpt_sha256": "65e9f59b865c1239eee156d1b26ab725062b4c5729bd621196713cc00446ec95"
+      "file_sha256": "a4f1a081aaf03d0007778965460172078eaf6224e226107b21b8337044515e46",
+      "source_text_lf_sha256": "d12535bf8022f53721aa9a47fcff361aa132ed75ed56fb5ca73611017517b160",
+      "excerpt_sha256": "38852088f977c060a54af778f99c92278c586779e34f1eb91e47d2a206435ec7"
     }
   ],
   "previous_application_commit": "9d363efdbe3a92dd7f9b8779c350e7d47cfad58a"

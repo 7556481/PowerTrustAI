@@ -1,5 +1,9 @@
 # 08 事实支持、提取忠实性和审核协议复杂度
 
+## 2026-10-24 审核链v2实证更新
+
+条件属于具体对象、工况和结论；源文N-1无操作员干预不能凭关键词推广到N-2。scope_v2真实失败暴露两点：逐字字段不能容忍模型把PDF断词规范化；无条件命题的关系行进入旧投影可能错误降级。程序能校验原文绑定，不能据结构直接证明必要/充分、否定或因果语义。候选不采用。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md)。
+
 ## 2026-10-24 raw/effective支持仍可能误判
 
 本轮自然B4把N-1无操作员干预条件一并套给选定N-2，且将稳态/稳定表述为暂态；实际选段没有建立完整命题，两路模型raw/effective却都supported。整体因其他不足/执行失败未认可，不等于正确检出这个缺陷。B2原引用的raw supported与非空missing_clauses并存，缺口却来自其他答案单元或来源额外内容，程序有效降级不自动成为事实真值。不可凭关键词改分类或按pass率掩盖这些疑点；完整原文与理由见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md)。

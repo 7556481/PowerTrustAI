@@ -1,5 +1,9 @@
 # 14 核心源码阅读路线：输入、调用、异常与取舍
 
+## 2026-10-24 审核链v2实证更新
+
+本轮入口services/review_scope_v2.py，经backend/config.py与ComponentFactory显式fact_review_contract=scope_v2接入services/scoped_fact_execution.py。默认production保留旧消息/解析；fact_internal_flow须仍为production且schema13。候选使用九语义字段的顺序数组，身份由程序绑定；条件关系映射至原判断再完整重审。真实验证发现逐字字段与空条件投影缺陷，代码保留作失败证据，不建议生产验收。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md)。
+
 2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见[报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md)。
 
 2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
@@ -323,7 +327,7 @@ backend/service.py / ApplicationService.submit，实际行56–81。
         if self.config.profile=='real' and request.existing_answer and request.existing_answer.citations:
             from services.citation_workload import submission_rejections
             from core.validation import InputError
-            rejected=submission_rejections(request,knowledge,self.config.verification_schema,self.config.citation_workload)
+            rejected=submission_rejections(request,knowledge,self.config.verification_schema,self.config.citation_workload,review_contract=self.config.fact_review_contract)
             if rejected:raise InputError('Complete citation scopes exceed configured capacity; citation_indexes='+str(list(rejected)))
 
         async with self.lock:
@@ -377,7 +381,7 @@ backend/service.py / ApplicationService._worker，实际行100–126。
 
 ### 摘录：真实装配的资源建立
 
-backend/assembly.py / ComponentFactory.create，2026-10-24当前实际行193–208。
+backend/assembly.py / ComponentFactory.create，2026-10-24当前实际行199–214。
 
 ```python
     def create(self,rid,observer):
@@ -503,11 +507,11 @@ backend/service.py / ApplicationService.result，实际行163–187。
 
 ### 关键连接：实际Harness组件注入
 
-backend/assembly.py当前实际行235–244，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
+backend/assembly.py当前实际行241–250，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile),
+                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
@@ -662,7 +666,7 @@ schema13未换。任务范围由既有Domain的analysis_scope新增task_scope字
 ```python
 async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruction):
     if current_budget() is None:
-        with model_scope(ModelBudget(2+len(inputs.answer.citations))):return await execute(agent,inputs,catalog=catalog,prompt_version=prompt_version,contract_version=contract_version,instruction=instruction)
+        with model_scope(ModelBudget((3 if hasattr(catalog,"prepare_stage") else 2)+len(inputs.answer.citations))):return await execute(agent,inputs,catalog=catalog,prompt_version=prompt_version,contract_version=contract_version,instruction=instruction)
     if catalog is None:
         from agents.verification_contract_v14 import ReviewCatalog
         cat=ReviewCatalog(inputs)

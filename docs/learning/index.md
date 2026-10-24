@@ -1,5 +1,7 @@
 # PowerTrustAI：从代码到判断的学习路线
 
+2026-10-24最新：审核职责边界与条件关系候选完成一次固定验证，真实执行恶化且无自然净收益，明确不采用。保留20章60自测和布局；[本轮完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md)优先于下方历史服务状态。生产当前停服且默认不切。
+
 2026-10-24：新增回答交付候选的归档断点、显式配置、固定双线净收益评价与采集停止边界。生产默认不切，实际结果及服务状态见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md)。20章、60自测及布局保持。
 
 2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
