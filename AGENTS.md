@@ -1,5 +1,7 @@
 # PowerTrustAI 工作规则
 
+- 新增真实请求统一使用 `deepseek-flash`（2026-10-25用户约束）；历史Pro结果只作离线分析，不追加Pro/其他付费模型或恢复模型排名对照。需要变更须有新的明确授权。
+
 - 先读 `docs/handoff.md`、`docs/documentation-index.md` 和 `docs/design-decisions.md`；以实际代码及指定版本归档为准，历史报告不是当前配置。
 - 最终中文学习与面试手册要求见 `docs/final-handbook-requirements.md`；每轮结束更新 handoff 和文档索引，保留重要决策、失败及验证证据。README 不替代最终手册。
 - 复用现有 `harness.runtime.OfflineHarness`、四 Agent、Retriever/Evidence 与确定性政策，不另建调度器。真实服务事实审核以已确认的 schema13 为生产基线；不因历史 schema12 说明降级，不自动切换 schema14。依据见 `docs/schema13-production-baseline-confirmation-v1.md`。

@@ -69,11 +69,14 @@ All nine row fields and six condition fields are mandatory. Do not output carrie
 
 
 class SimpleCatalog(ReviewCatalog):
+    contract_version=CONTRACT
+    condition_answer_binding=True
+    projection_version='simple-condition-projection-v1.1'
     fatal_request_codes=('MODEL_REQUEST_REJECTED',)
     correction_instruction='Return the SAME nine-field ordered judgments and six-field conditions object specified initially. Select legal source/answer IDs, never retype literal text. Preserve valid peer judgments and actual semantics; no invented IDs or field omission.'
 
     def __init__(self,inputs):
-        super().__init__(inputs,contract_version=CONTRACT)
+        super().__init__(inputs,contract_version=self.contract_version)
         self.source_units={}
         for bid,b in self.bases.items():
             if b['wire']['type']!='text_excerpt':continue
@@ -98,7 +101,7 @@ class SimpleCatalog(ReviewCatalog):
             row.pop('conditions');row.update(gap_answer_ids=[],inference='uncertain',conditions=dict(applicability='unknown',expression='uncertain',instance='not_claimed',source_ids=[],answer_ids=[],reason='model_execution_incomplete'))
 
     def payload(self,ids):
-        value=super().payload(ids);value['contract']=CONTRACT
+        value=super().payload(ids);value['contract']=self.contract_version
         value['review_object']='independent_fact' if all(self.targets[t]['kind']=='fact' for t in ids) else 'original_citation'
         value['context_only']=dict(question=value.pop('question'),neighboring_answer=self.inputs.answer.text)
         for row,tid in zip(value['targets'],ids):
@@ -112,7 +115,7 @@ class SimpleCatalog(ReviewCatalog):
         return value
 
     def decode_wire(self,value,group):
-        ec=ErrorCollector(CONTRACT)
+        ec=ErrorCollector(self.contract_version)
         if not ec.fields(value,{'judgments'},set(),'$'):ec.finish()
         items=value['judgments'];ec.check(type(items) is list and len(items)==len(group),'$.judgments','exact_ordered_target_count_required');ec.finish()
         rows=[]
@@ -128,7 +131,7 @@ class SimpleCatalog(ReviewCatalog):
         return dict(contract=CONTRACT,ordered_targets=[dict(position=i,allowed_basis_ids=self.targets[t]['allowed_basis_ids'],answer_ids=self.targets[t]['answer_unit_ids'],source_ids=[u for u,x in self.source_units.items() if x['basis_id'] in self.targets[t]['condition_basis_ids']]) for i,t in enumerate(group)],output_fields=self.payload(group)['output_fields'])
 
     def parse_one(self,row,target,path):
-        ec=ErrorCollector(CONTRACT)
+        ec=ErrorCollector(self.contract_version)
         fields={'target_id','status','basis_ids','reason','gap_answer_ids','conditions','inference','objection','repair','requires_authoritative_source'}
         if not ec.fields(row,fields,set(),path):ec.finish()
         def ids(value,allowed,p,constraint):
@@ -136,12 +139,13 @@ class SimpleCatalog(ReviewCatalog):
         ids(row['gap_answer_ids'],target['answer_unit_ids'],path+'.gap_answer_ids','local_answer_ids_required')
         ec.check(row['inference'] in ('preserved','unsupported','uncertain'),path+'.inference','explicit_inference_required')
         c=row['conditions']
-        if not ec.fields(c,{'applicability','expression','instance','source_ids','answer_ids','reason'},set(),path+'.conditions'):ec.finish()
+        condition_fields={'applicability','expression','instance','source_ids','reason'}|({'answer_ids'} if self.condition_answer_binding else set())
+        if not ec.fields(c,condition_fields,set(),path+'.conditions'):ec.finish()
         for key,allowed in [('applicability',('none','present','unknown')),('expression',('not_applicable','preserved','missing','misattached','extended','uncertain')),('instance',('not_claimed','satisfied','missing','uncertain'))]:
             ec.check(c[key] in allowed,path+'.conditions.'+key,'explicit_condition_dimension_required')
         allowed=[u for u,x in self.source_units.items() if x['basis_id'] in target['condition_basis_ids'] and type(row['basis_ids']) is list and x['basis_id'] in row['basis_ids']]
         ids(c['source_ids'],allowed,path+'.conditions.source_ids','selected_local_source_ids_required')
-        ids(c['answer_ids'],target['answer_unit_ids'],path+'.conditions.answer_ids','local_answer_ids_required')
+        if self.condition_answer_binding:ids(c['answer_ids'],target['answer_unit_ids'],path+'.conditions.answer_ids','local_answer_ids_required')
         ec.check(type(c['reason']) is str and bool(c['reason'].strip()),path+'.conditions.reason','explicit_three_dimension_reason_required');ec.finish()
         # Reuse typed basis, authority, objection and repair checks, NOT old condition projection.
         old={k:deepcopy(row[k]) for k in fields if k not in ('gap_answer_ids','inference')};old['conditions']=[]
@@ -149,7 +153,7 @@ class SimpleCatalog(ReviewCatalog):
         if c['applicability']=='unknown' or c['expression']=='uncertain' or c['instance']=='uncertain':uncertain=True;reasons.append('condition_assessment_uncertain')
         conflict=(c['applicability']=='none' and c['expression']!='not_applicable' or c['applicability']=='present' and c['expression']=='not_applicable')
         if conflict:uncertain=True;reasons.append('condition_dimension_conflict')
-        if c['applicability']=='present' and c['expression']=='preserved' and (not c['source_ids'] or not c['answer_ids']):uncertain=True;reasons.append('preservation_without_local_binding')
+        if c['applicability']=='present' and c['expression']=='preserved' and (not c['source_ids'] or not (c['answer_ids'] if self.condition_answer_binding else target['answer_unit_ids'])):uncertain=True;reasons.append('preservation_without_local_binding')
         if c['expression'] in ('missing','misattached','extended') or c['instance']=='missing':adverse=True;reasons.append('condition_or_instance_gap')
         if row['gap_answer_ids'] or row['inference']=='unsupported':adverse=True;reasons.append('content_or_inference_gap')
         if row['inference']=='uncertain':uncertain=True;reasons.append('inference_uncertain')
@@ -157,9 +161,10 @@ class SimpleCatalog(ReviewCatalog):
         if uncertain:a['effective_support_status']='not_assessable';a['semantic_uncertain']=True
         elif row['status']=='supported' and adverse:a['effective_support_status']='insufficient_evidence'
         if a['effective_support_status'] not in ('insufficient_evidence','contradicted'):a['repair']=None
-        a.update(contract=CONTRACT,projection_version='simple-condition-projection-v1.1',projection_reasons=reasons,
+        a.update(contract=self.contract_version,projection_version=self.projection_version,projection_reasons=reasons,
             condition_assessment=deepcopy(c),inference=row['inference'],gap_answer_ids=row['gap_answer_ids'],
-            program_source_units=[deepcopy(self.source_units[u]) for u in c['source_ids']],program_answer_units=[deepcopy(self.answer_units[u]) for u in c['answer_ids']])
+            program_source_units=[deepcopy(self.source_units[u]) for u in c['source_ids']],program_answer_units=[deepcopy(self.answer_units[u]) for u in (c['answer_ids'] if self.condition_answer_binding else target['answer_unit_ids'])])
+        if not self.condition_answer_binding:a['answer_binding_kind']='program_target_scope_not_semantic_condition_location'
         return a
 
 

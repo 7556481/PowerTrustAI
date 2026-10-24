@@ -41,8 +41,9 @@ class ServiceConfig:
 
     def __post_init__(self):
         if self.review_result_transport not in ('json','strict_tool_v1'):raise ValueError('Invalid review result transport')
-        if self.review_result_transport!='json' and self.fact_review_contract!='simple_v1':raise ValueError('Strict result transport requires explicit simple_v1')
-        if self.fact_review_contract not in ('production','scope_v2','simple_v1'):raise ValueError('Invalid fact review contract')
+        if self.review_result_transport!='json' and self.fact_review_contract not in ('simple_v1','simple_bound_v1'):raise ValueError('Strict result transport requires explicit simple contract')
+        if self.fact_review_contract=='simple_bound_v1' and self.review_result_transport!='strict_tool_v1':raise ValueError('Bound candidate requires explicit strict transport')
+        if self.fact_review_contract not in ('production','scope_v2','simple_v1','simple_bound_v1'):raise ValueError('Invalid fact review contract')
         if self.fact_review_contract!='production' and (self.profile!='real' or self.verification_schema!=13 or self.fact_internal_flow!='production'):raise ValueError('Scope contract requires explicit production schema13 Agent')
         if self.revision_answer_delivery not in ('production','answer_only_v1'):raise ValueError('Invalid revision answer delivery')
         if self.revision_answer_delivery!='production' and self.profile!='real':raise ValueError('Revision candidate requires actual Factory')

@@ -203,6 +203,9 @@ class ComponentFactory:
         if self.config.review_result_transport=='strict_tool_v1':
             from services.review_simple_tool_v1 import PROMPT,SYSTEM
             from model_adapter.strict_review_tool import VERSION,specification
+            if self.config.fact_review_contract=='simple_bound_v1':
+                from services.review_bound_answer_v1 import PROMPT,SYSTEM,CONTRACT,specification
+                manifest['contracts']['verification']=CONTRACT
             manifest['prompts']['verification']=PROMPT
             manifest['result_transport']=dict(version=VERSION,tool=specification(),endpoint='https://api.deepseek.com/beta/chat/completions')
             manifest['template_sha256']={k:hashlib.sha256(SYSTEM.encode()).hexdigest() for k in ('independent','original_citation')}
@@ -239,7 +242,7 @@ class ComponentFactory:
         settings=ModelSettings(os.environ['DEEPSEEK_MODEL_ID'],90,8000,96000,'https://api.deepseek.com','DEEPSEEK_API_KEY')
         resources=[]
         try:
-            model=create_adapter(settings);resources.append(model)
+            model=create_adapter(settings,**({'review_contract':'simple_bound_v1'} if self.config.fact_review_contract=='simple_bound_v1' else {}));resources.append(model)
             domain_model=create_adapter(settings);resources.append(domain_model)
             if self.config.retrieval_mode=='bm25':
                 retriever=AsyncSQLiteBM25Retriever(self.config.index_db,execution_profile=self.config.retrieval_execution_profile);resources.append(retriever)

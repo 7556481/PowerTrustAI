@@ -107,7 +107,7 @@ def freeze():
     print('Frozen 8 capability + 4 generation + 8 natural audit tasks; zero sends.',flush=True)
 
 
-async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None):
+async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None,fixed_audit_delivery=True):
     """Submission/persistence/stop is exclusively run_fixed; collection runs Harness."""
     rows=rows or order();generated={};outputs={};send_log=[];fatal=False
     store=RunStore(root/'runs.sqlite3')
@@ -169,9 +169,9 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
                 return response
         try:
             store.mark(rid,'running')
-            with patch('model_adapter.deepseek.create_adapter',side_effect=lambda settings:Guard(provider_factory(settings))):
+            with patch('model_adapter.deepseek.create_adapter',side_effect=lambda settings,**options:Guard(provider_factory(settings,**options))):
                 bundle=factory.create(rid,observe)
-            if line!='G':
+            if line=='A' or line=='B' and fixed_audit_delivery:
                 # Fixed-evidence evaluation seam, never saved to production configuration.
                 bundle.harness.retriever=None
                 bundle.harness.subject_supplement=False

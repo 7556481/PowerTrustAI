@@ -242,9 +242,13 @@ class DeepSeekAdapter:
         self._executor.shutdown(wait=False, cancel_futures=True)
 
 
-def create_adapter(settings):
+def create_adapter(settings,*,review_contract='production'):
     # Validate destination before accessing credentials. No request at construction.
-    adapter = DeepSeekAdapter(settings)
+    if review_contract not in ('production','simple_bound_v1'):raise InputError('Explicit supported adapter contract required')
+    if review_contract=='simple_bound_v1':
+        from services.review_bound_answer_v1 import specification
+        adapter=DeepSeekAdapter(settings,diagnostic_tool=specification())
+    else:adapter = DeepSeekAdapter(settings)
     try:
         from dataclasses import replace
         credential_from_environment(replace(settings, credential_env="DEEPSEEK_API_KEY"))
