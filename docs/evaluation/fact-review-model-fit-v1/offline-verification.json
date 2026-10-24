@@ -1,0 +1,16 @@
+{
+  "before_paid": {
+    "tests": 45,
+    "seconds": 13.839,
+    "passed": true,
+    "implementation": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d"
+  },
+  "after_batch": {
+    "tests": 47,
+    "seconds": 22.964,
+    "passed": true,
+    "implementation": "1917ae3512b41ef0791b6d2d3e424e61a180f805"
+  },
+  "full_suite_rerun": false,
+  "scope": "Explicit model gate and lightweight comparison only; original path, Factory/graph/Store/API/revision mocks included. No real requests in offline tests."
+}

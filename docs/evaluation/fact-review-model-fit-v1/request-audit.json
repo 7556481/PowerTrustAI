@@ -1,0 +1,1167 @@
+{
+  "requests": [
+    {
+      "case_id": "A1-flash",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "962805e62273115968e8d144a22eb56289264990f3b38b86b4817af8dac996f0",
+        "body_bytes": 14476,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "1c02e783f894c36913766256c95ad597cea4dc5e8888e61c6cb4e721d1a66440",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "796d95058f091259cd38d9956378db05ca262a2f4aec75a6e8f02510e1b5f41c"
+    },
+    {
+      "case_id": "A1-flash",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "70ab3f0b80188579d7cd654c7f4d44f04bb4d6974d1d7c26f78c339c311595f4",
+        "body_bytes": 17289,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "5d6f2ea365f031600b8e8e99a0659b45b348c47556597667345ed9dee349542a",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "10904384a7dede4e998920ef996fb77fbc25a53f4ce5057d97adb6400ffae8bf"
+    },
+    {
+      "case_id": "A1-flash",
+      "ordinal": 3,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "d92e4db8e9b9d95263995d92963c5a88e5d2003752a526b792a0a440fa5954c6",
+        "body_bytes": 21295,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "29d715d53fd3531a104f372f9d07914a94c5d8e6ab2de3733960e5d9e1c2f8dd",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": null,
+      "messages_scope_sha256": "5ea5bb392029c30188e5488b8d7f4223c5578f43c30f6b56eb9c4a20749ed37b"
+    },
+    {
+      "case_id": "A2-flash",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "279d2ab5fb2c516fee8fc0e7453efa3449d143db1544ec19ed4ff3460a3140e0",
+        "body_bytes": 14453,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "118e0ebd92022e8b2b334dd1423b22c8378333d63ce71524ab7f521f5364f36d",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "16c64ab43f91be0b9112db10f0fefa7db1ad9e98f7e9e2192d7cead760320002"
+    },
+    {
+      "case_id": "A2-flash",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "88932a6f09d7b610195bb51069ff1de2158d84f8c47acf3ac3740ce6e594e31d",
+        "body_bytes": 19252,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "7f06c2293a29e44c58453d547a156a532420bf3612d35d30fc1b35558cb2b520",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": null,
+      "messages_scope_sha256": "badea3044874abc0de6fb48feb260f79a21b56aa4b3b2677ad6739e489af8d45"
+    },
+    {
+      "case_id": "A2-flash",
+      "ordinal": 3,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "c05f92207aa7f800d2777f623d9c10a569663994429ded2684fa0c5aa665342e",
+        "body_bytes": 17264,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "c65c068db2299e925d7087e437bf56ca29a85f9524275d19ed7e6d509772840d",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "89fc63aa85dbb5dd5c717bdd4f1d227e1a6403be077fba9097f6e22ca0415b29"
+    },
+    {
+      "case_id": "A3-flash",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "6396b2e0a579498b7a98ecba406d2dd513834e6bdf37d92150712d80dd47a6d3",
+        "body_bytes": 14024,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "6d49ca3ee5af0bcf2215a6167dbe4c96035fcdc97cb1e674685cc0c7a5445fa3",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "cd4ec3cedbf79408ce56e7512bf0b8f91e09b6e4c0b3b51f2487d7f57c83e778"
+    },
+    {
+      "case_id": "A3-flash",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "2f928c040aa8429133d055343c45e8568c4bf766d2783284ac41b38064a92847",
+        "body_bytes": 16674,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "f130be37f977e9aee953edf122a940825bbd154cd01d3bd7ddaba4f82061a86c",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "60d1a31679f35df48cf6c52bfb114f06120297e98faf4f4f44ba379a9fbae911"
+    },
+    {
+      "case_id": "A3-flash",
+      "ordinal": 3,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "196ce86ce5ea5db0bd1e50abf287ed69d045b4ac3b0ae186742b37ce0426b2c7",
+        "body_bytes": 22520,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "1e0bba1ab88b33d137b181e874c34edb1fa7880a94fb370112be21987ee0fddf",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": null,
+      "messages_scope_sha256": "1c426e7b931858962b97736f12305d1f1616689f375222b4e011d2ed7bfce0a5"
+    },
+    {
+      "case_id": "A4-flash",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "9f0c0d76ba57432cfcbf6e4db0573c7fcf832f6ded750ae3181b6a99abdfd1ea",
+        "body_bytes": 13884,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "b390b73076887ef59e98a708d6befd406fc46fa1569458a6c6bc78f99c099df4",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "0f24fa302bf3e571a606fc1d2b5e25566eca092494146ea1f57a9490eb6e66c9"
+    },
+    {
+      "case_id": "A4-flash",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "b5c35047267f9d5eee0b88b77007aff67fd5620cf95ae5efb74ceeda1a5684b2",
+        "body_bytes": 19565,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "6f4b20b445920a282b10d86126d1617837f36f82608d6356690ed3511496eeb7",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": null,
+      "messages_scope_sha256": "ead3eab2dc7b3bc905f64ee70f14882a9243d14bb74715703380b7773ad5d228"
+    },
+    {
+      "case_id": "A4-flash",
+      "ordinal": 3,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "a69654825778041e5096657db44ca1297bbc960439b77b8a507319ee19c68979",
+        "body_bytes": 16771,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "7456b558898bef9795d83a8caf854b210964aecf59f98e69ac3ee42d889a7d45",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "f206710106ebdb6b24abe27a28670e6881a25d3ee1b4b2baaa26ae51d6d7585c"
+    },
+    {
+      "case_id": "A5-flash",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "95447ee37b0026811fff2902321f18ca8b2e5e4cd56b6fa6d6359be8a8d9b1fe",
+        "body_bytes": 12844,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "83e724ae06366400a849e5ab6811e4149f04ef2695bd654dff5cbba273b021c1",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "6ea4041f1080de5bc08d3c1270361b7408502681b643bacbb6d014941502f56b"
+    },
+    {
+      "case_id": "A5-flash",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "232c4af2c95ec986db4b8bfb37b79a4d7a54736e483d27ba1ad1ce77d4764c44",
+        "body_bytes": 12685,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "0699d2a5cb8fbfb7c8168d069cbc9115af5315ef42e35ec4c0b89e73ce3a15c4",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "a80ae2ae52551edc448d6f21c4d8ed11eb7471cbece44e765dccfddc4a62df21"
+    },
+    {
+      "case_id": "A6-flash",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "a72fae137bb297b6e8ea184b8896312c1663b06d109b2c1a4f5197d8c345e48f",
+        "body_bytes": 12965,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "de7f44cd89a8f9d9655c543f19ffbbc8d3ad1de632a7a9d7e4a204e16a0b5a73",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "582fa450c78090843e3934031c8bc8f423d452e3ae0fcd5fc37a48d84cf3ddeb"
+    },
+    {
+      "case_id": "A6-flash",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "a98b8ef1ab61e7a9ddf0ab5acac72062106f25419342db3e92f9b6c40c942f5f",
+        "body_bytes": 15792,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "bef907947be1d7ef27876c02e20e4f161cb9bf940ef04f1e06b514622f4b32ab",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": null,
+      "messages_scope_sha256": "13408c7481e8cd808d369f1e2819e312640738ddfc5f22dc36b4eb12d85fd1ea"
+    },
+    {
+      "case_id": "A6-flash",
+      "ordinal": 3,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "dcf9705f6f2f7499b3f4108c9eb3d970263781348114f199dfe7077db1d377b0",
+        "body_bytes": 12806,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "b97d5195ac69464753acc6ee8cd4e2af1a920224884cb79973bffdc627463a74",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "c3b7c949705f6b7894eb634cb5577256e9d673b1b93cb163496d2940289e65f8"
+    },
+    {
+      "case_id": "A7-flash",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "9346a5304adbd0d74d1ebc721c7a6d77114d9464afef8a7d5040368f5c7d2e5c",
+        "body_bytes": 14067,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "dff9bfe42bfac2b55c770a59e5fa726f23a95efe8255e2ae2a1ea59137ec3896",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "6adbb8e770f1d72960e71a3aaac33f5f61deca3d48ddf150c5d8af8e72e58467"
+    },
+    {
+      "case_id": "A7-flash",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "9dea1551aea790121a837f3bf3087d63698b6b8aaf7759eaf19d7c1abd310e16",
+        "body_bytes": 16880,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "ab82d36f547196710ef11f8b08060799ed2a4095ee7c2bd4466a65646e4199fa",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "f228e905f2cdae7df8535eeeac7a2c0d4de5f1ff60fd291001836a24014c9130"
+    },
+    {
+      "case_id": "A8-flash",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "82fe5214a9efe9ecbf4aff6158443a1df25c17712ce290fed5788a9c71e3d643",
+        "body_bytes": 13672,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "71e0bdaea11543e7efe76a4adafcf96af50db0eca4d7854926a2b07194ad59f7",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "d70cf55182ae4d4cd586cf5635dc43bcb598994d248b42a0864e41cd39ba4717"
+    },
+    {
+      "case_id": "A8-flash",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "a2e0a912a12b5ae294cde9521e425866cd3a936b0e4b56f8901029debce0afb8",
+        "body_bytes": 19181,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "0f7ac9bdc91532ad87ed1b07d9fea90f2a5a51c23e5f6df76c6799fa021b9451",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": null,
+      "messages_scope_sha256": "5b9422134bf0576ede49ea7afab201adf39451c18a6159776ad96b02d2143292"
+    },
+    {
+      "case_id": "A8-flash",
+      "ordinal": 3,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "de2ad04335b1c21221d0613a56e4fb4bd13d7129731fc600bed6fc40473a47a3",
+        "body_bytes": 16483,
+        "field_sha256": {
+          "model": "13d746500cee1683d3f9b4253e491616f4e40f6f12c333073df83af80c0fd0eb",
+          "messages": "c04244f4a963c0a6325d69e786f1d512f58db57d880e6efbf10ce1e0fcfebe76",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "08c46af08e6765f41e846b34dbf03178108fbb6bbfdd55c3abf51d36649751d4"
+    },
+    {
+      "case_id": "A1-pro",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "fa8acc302bac60d3b2ae970f6f6ec0664891205e1327021d6d97efdafeba8347",
+        "body_bytes": 14477,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "1c02e783f894c36913766256c95ad597cea4dc5e8888e61c6cb4e721d1a66440",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "796d95058f091259cd38d9956378db05ca262a2f4aec75a6e8f02510e1b5f41c"
+    },
+    {
+      "case_id": "A1-pro",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "9765d7528ccd8295284246cc9ae9d965becd3f71401867bd58770330f1579956",
+        "body_bytes": 17290,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "5d6f2ea365f031600b8e8e99a0659b45b348c47556597667345ed9dee349542a",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "10904384a7dede4e998920ef996fb77fbc25a53f4ce5057d97adb6400ffae8bf"
+    },
+    {
+      "case_id": "A2-pro",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "d2c1cc4e3d77d2dd5212cf804098bc5fbe13bd78cef09163c341e0b1913ea244",
+        "body_bytes": 14454,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "118e0ebd92022e8b2b334dd1423b22c8378333d63ce71524ab7f521f5364f36d",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "16c64ab43f91be0b9112db10f0fefa7db1ad9e98f7e9e2192d7cead760320002"
+    },
+    {
+      "case_id": "A2-pro",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "276a00cd2780b910daeffb98d7ab33c290e34bda5e5b346ae16ee44b3b2a9da0",
+        "body_bytes": 17265,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "c65c068db2299e925d7087e437bf56ca29a85f9524275d19ed7e6d509772840d",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "89fc63aa85dbb5dd5c717bdd4f1d227e1a6403be077fba9097f6e22ca0415b29"
+    },
+    {
+      "case_id": "A3-pro",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "2d24a9e3ec592d23a772e5bea8d790ed9238cd7508ecdd753e681d642d089590",
+        "body_bytes": 14025,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "6d49ca3ee5af0bcf2215a6167dbe4c96035fcdc97cb1e674685cc0c7a5445fa3",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "cd4ec3cedbf79408ce56e7512bf0b8f91e09b6e4c0b3b51f2487d7f57c83e778"
+    },
+    {
+      "case_id": "A3-pro",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "222fc80315a140f3c2cc00975c8055b023683ff4d4cdd3f66365b671a53e667f",
+        "body_bytes": 16675,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "f130be37f977e9aee953edf122a940825bbd154cd01d3bd7ddaba4f82061a86c",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "60d1a31679f35df48cf6c52bfb114f06120297e98faf4f4f44ba379a9fbae911"
+    },
+    {
+      "case_id": "A3-pro",
+      "ordinal": 3,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "707dd9f23208de583abfdfa94840da91089542367aabb9bdea6e105451601144",
+        "body_bytes": 21862,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "1b3f50414923fc3beb38be9e215ec63ae2a1ec58a4a1b5fda2cad5efa75d9652",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": null,
+      "messages_scope_sha256": "5d5f15ad99bddb4ae0f549497e9380b79949207f0764fef97be2a811146b6a5e"
+    },
+    {
+      "case_id": "A4-pro",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "c73cdac1c7274bc9e3e465ca7c2a1ba7f0c230f28ca0cb6d798b7be0ec65f29e",
+        "body_bytes": 13885,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "b390b73076887ef59e98a708d6befd406fc46fa1569458a6c6bc78f99c099df4",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "0f24fa302bf3e571a606fc1d2b5e25566eca092494146ea1f57a9490eb6e66c9"
+    },
+    {
+      "case_id": "A4-pro",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "0586c38fa3791f542db048c7e17159e070827efc0bacfbb26bf14431f3978517",
+        "body_bytes": 16772,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "7456b558898bef9795d83a8caf854b210964aecf59f98e69ac3ee42d889a7d45",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "f206710106ebdb6b24abe27a28670e6881a25d3ee1b4b2baaa26ae51d6d7585c"
+    },
+    {
+      "case_id": "A5-pro",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "7741dce1cc129cee2970f8e3d51b298dc1c3e7ee93ac349c5c40ddcf8c945465",
+        "body_bytes": 12845,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "83e724ae06366400a849e5ab6811e4149f04ef2695bd654dff5cbba273b021c1",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "6ea4041f1080de5bc08d3c1270361b7408502681b643bacbb6d014941502f56b"
+    },
+    {
+      "case_id": "A5-pro",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "3ac5ade3b401a27f49a1a4c5809c4bbc46334bec6d92d896a835b6a74370d1d3",
+        "body_bytes": 12686,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "0699d2a5cb8fbfb7c8168d069cbc9115af5315ef42e35ec4c0b89e73ce3a15c4",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "a80ae2ae52551edc448d6f21c4d8ed11eb7471cbece44e765dccfddc4a62df21"
+    },
+    {
+      "case_id": "A6-pro",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "574b99719e3b89e0d1686c9fac30c24f902b4224362dd741d136789cc69744d6",
+        "body_bytes": 12966,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "de7f44cd89a8f9d9655c543f19ffbbc8d3ad1de632a7a9d7e4a204e16a0b5a73",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "582fa450c78090843e3934031c8bc8f423d452e3ae0fcd5fc37a48d84cf3ddeb"
+    },
+    {
+      "case_id": "A6-pro",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "4be76acf224bed3b2ba894de05815c6d95fdf4017acc27e4ffafa64dacf5a45a",
+        "body_bytes": 12807,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "b97d5195ac69464753acc6ee8cd4e2af1a920224884cb79973bffdc627463a74",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "c3b7c949705f6b7894eb634cb5577256e9d673b1b93cb163496d2940289e65f8"
+    },
+    {
+      "case_id": "A7-pro",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "dbd0cb56b603c462ccb20e7b5f0b8ae4f46eb3ea935423ca49d2c26275ac6cf3",
+        "body_bytes": 14068,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "dff9bfe42bfac2b55c770a59e5fa726f23a95efe8255e2ae2a1ea59137ec3896",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "6adbb8e770f1d72960e71a3aaac33f5f61deca3d48ddf150c5d8af8e72e58467"
+    },
+    {
+      "case_id": "A7-pro",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "5296b0d6003ee98f7fe344ae5e20469df0731f9789fd13e5a6a6230b5521252e",
+        "body_bytes": 20595,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "e42fb776925965f0fc9921563cc7c326937d7efbb97544f26b038a4bf0e9a975",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": null,
+      "messages_scope_sha256": "5bc70897d6092980fbee05cae78d8e1ad08cf6e8429dc00f7cab7a55045bcbb3"
+    },
+    {
+      "case_id": "A7-pro",
+      "ordinal": 3,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "2712692311eb1302acfb3432cb085496e3a72793b8cb256d751d9c5f5974b7eb",
+        "body_bytes": 16881,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "ab82d36f547196710ef11f8b08060799ed2a4095ee7c2bd4466a65646e4199fa",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "f228e905f2cdae7df8535eeeac7a2c0d4de5f1ff60fd291001836a24014c9130"
+    },
+    {
+      "case_id": "A8-pro",
+      "ordinal": 1,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "7a43bbf2f3997aa265c385b7295b10ed2411a7bff27c486f1ee039596cc4d76e",
+        "body_bytes": 13673,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "71e0bdaea11543e7efe76a4adafcf96af50db0eca4d7854926a2b07194ad59f7",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "d70cf55182ae4d4cd586cf5635dc43bcb598994d248b42a0864e41cd39ba4717"
+    },
+    {
+      "case_id": "A8-pro",
+      "ordinal": 2,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "87f4193768992de371a94a770a76681b5d47880b36870404dd03f634fc7d5322",
+        "body_bytes": 16484,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "c04244f4a963c0a6325d69e786f1d512f58db57d880e6efbf10ce1e0fcfebe76",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": true,
+      "messages_scope_sha256": "08c46af08e6765f41e846b34dbf03178108fbb6bbfdd55c3abf51d36649751d4"
+    },
+    {
+      "case_id": "A8-pro",
+      "ordinal": 3,
+      "request": {
+        "url": "https://api.deepseek.com/beta/chat/completions",
+        "method": "POST",
+        "body_sha256": "4c8fb37be5d6bc8766303a55405ee08778f32874f42f6f8aab1c55244aa536f1",
+        "body_bytes": 21259,
+        "field_sha256": {
+          "model": "b4f097a356d08bf2e5e3fa4c2aedf28de05edb9f2014f6141b2226a62bf3bf78",
+          "messages": "a9e809469cad123fba4a73fd76143ec189c33e7747606886ab8c078d7aef3bc6",
+          "max_tokens": "ad5f9478d603fe97eae2bbff07f76fe7f18610343b5f3bc8e00945ee51b30d2c",
+          "stream": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "thinking": "54db89078abb57b54425f9dc0299a9114afd87c34eea65d6c7d04cd940d36052",
+          "tools": "7151c14b5a631552a05edcd3ddb5450be121c3cd4735dc2588308f84ac71caa6",
+          "tool_choice": "3c983179dde1ae40f001ebd742af47344349361fa218d603a1862c5e8df98054"
+        },
+        "unknown_field_count": 0,
+        "ssl_check_hostname": true,
+        "ssl_verify_mode": 2,
+        "proxy_implementation": "http.client direct; environment proxy variables not consumed"
+      },
+      "body_matches_saved_messages_and_frozen_schema": true,
+      "initial_messages_equal_frozen": null,
+      "messages_scope_sha256": "dcf80ad6095d44097b141d7721df5d2862f6bc14a23ab126dfa0526871f58cb5"
+    }
+  ],
+  "source_identities": [
+    {
+      "path": "model_adapter/deepseek.py",
+      "paid_sha256": "474094678be86550bc9a05d4969fd728b4b446e7983c2f5981295c09404a1f16",
+      "paid_bytes_match": true,
+      "current_sha256": "474094678be86550bc9a05d4969fd728b4b446e7983c2f5981295c09404a1f16",
+      "post_batch_changed": false
+    },
+    {
+      "path": "model_adapter/wire_observation.py",
+      "paid_sha256": "02190963fe7b6d2d125037c12b972dbf0b99bf6abf3eb7da8f922f4034657eee",
+      "paid_bytes_match": true,
+      "current_sha256": "02190963fe7b6d2d125037c12b972dbf0b99bf6abf3eb7da8f922f4034657eee",
+      "post_batch_changed": false
+    },
+    {
+      "path": "model_adapter/runtime.py",
+      "paid_sha256": "81ab9872aad89b3ba2aa6f23fda2d8b0d28d6090dea4532f7f429e41809f16e9",
+      "paid_bytes_match": true,
+      "current_sha256": "81ab9872aad89b3ba2aa6f23fda2d8b0d28d6090dea4532f7f429e41809f16e9",
+      "post_batch_changed": false
+    },
+    {
+      "path": "model_adapter/strict_review_tool.py",
+      "paid_sha256": "e07fd793cb221987690233689071a1b168571ec76e7622a20bc7e80eb00a9964",
+      "paid_bytes_match": true,
+      "current_sha256": "e07fd793cb221987690233689071a1b168571ec76e7622a20bc7e80eb00a9964",
+      "post_batch_changed": false
+    },
+    {
+      "path": "evaluation/fact_review_model_fit_v1.py",
+      "paid_sha256": "df6044023990c6db8bc7b43ed0b110ddd0aecfe6e5908136dd50844f8eec513f",
+      "paid_bytes_match": true,
+      "current_sha256": "e34202eaf35fba03ad50791c0ad387e8673ad827ab58417599cbe0709a4c7576",
+      "post_batch_changed": true
+    },
+    {
+      "path": "evaluation/strict_interface_probe_v1.py",
+      "paid_sha256": "0c15efc53a272bb2ffebefdb51c190846dbc5c8de50297a8d5bb018f0caecaa0",
+      "paid_bytes_match": true,
+      "current_sha256": "0c15efc53a272bb2ffebefdb51c190846dbc5c8de50297a8d5bb018f0caecaa0",
+      "post_batch_changed": false
+    },
+    {
+      "path": "evaluation/batch_control.py",
+      "paid_sha256": "1918fbd8a96dfa2439b5402f9ff4fe5309003a9b295121bb53f49ce68151958e",
+      "paid_bytes_match": true,
+      "current_sha256": "1918fbd8a96dfa2439b5402f9ff4fe5309003a9b295121bb53f49ce68151958e",
+      "post_batch_changed": false
+    },
+    {
+      "path": "evaluation/production_review_v2.py",
+      "paid_sha256": "1fca5fdde9c16b50d62647220311efe47159dc4e5497ca07648e7aa8530b0524",
+      "paid_bytes_match": true,
+      "current_sha256": "1fca5fdde9c16b50d62647220311efe47159dc4e5497ca07648e7aa8530b0524",
+      "post_batch_changed": false
+    },
+    {
+      "path": "agents/evidence_verification.py",
+      "paid_sha256": "bd6d7e720c0dcf5f135466cadea7f8c7ddeb4ed93bc435433506780788848b9a",
+      "paid_bytes_match": true,
+      "current_sha256": "bd6d7e720c0dcf5f135466cadea7f8c7ddeb4ed93bc435433506780788848b9a",
+      "post_batch_changed": false
+    },
+    {
+      "path": "services/review_simple_v1.py",
+      "paid_sha256": "f1e0aebee09012dcbd3dd4d8919c35ba2e46a489bcc8639d59035b04132e30fe",
+      "paid_bytes_match": true,
+      "current_sha256": "f1e0aebee09012dcbd3dd4d8919c35ba2e46a489bcc8639d59035b04132e30fe",
+      "post_batch_changed": false
+    },
+    {
+      "path": "services/review_simple_tool_v1.py",
+      "paid_sha256": "19eb60ea72ef2091e3f38341173f0b5775e5f83c16b7a2de06455803623b3f41",
+      "paid_bytes_match": true,
+      "current_sha256": "19eb60ea72ef2091e3f38341173f0b5775e5f83c16b7a2de06455803623b3f41",
+      "post_batch_changed": false
+    },
+    {
+      "path": "services/scoped_fact_execution.py",
+      "paid_sha256": "16c3e00bd6ad7cd2fd202130a5757ff915431decb7a9cc37b0267bd8e08f6b06",
+      "paid_bytes_match": true,
+      "current_sha256": "16c3e00bd6ad7cd2fd202130a5757ff915431decb7a9cc37b0267bd8e08f6b06",
+      "post_batch_changed": false
+    },
+    {
+      "path": "services/structured_model.py",
+      "paid_sha256": "936a0ae22c13faad76e22aa6921fc9cec1682cb7f9e90a5b0dbe5f1b6ba6a797",
+      "paid_bytes_match": true,
+      "current_sha256": "936a0ae22c13faad76e22aa6921fc9cec1682cb7f9e90a5b0dbe5f1b6ba6a797",
+      "post_batch_changed": false
+    }
+  ],
+  "paid_commit": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d",
+  "post_batch_boundary_patch_commit": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
+  "post_batch_paid_calls": 0,
+  "patch_note": "After all16 tasks: unknown-acceptance timeout poisons run; exhausted budget stops batch. Neither event occurred in the paid batch.45 preflight tests;47 after offline patch. Paid outputs unchanged."
+}

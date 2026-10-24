@@ -1,0 +1,936 @@
+{
+  "version": "fact-review-model-fit-v1",
+  "head": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d",
+  "selection": {
+    "checked_utc": "2026-10-24T15:43:43.171433+00:00",
+    "url": "https://api.deepseek.com/models",
+    "method": "GET",
+    "http_status": 200,
+    "credential_source": "Existing project environment loader; value never logged",
+    "requests_paid_completions": 0,
+    "known_official_models_visible": [
+      "deepseek-flash",
+      "deepseek-v4-pro"
+    ],
+    "selected": "deepseek-v4-pro"
+  },
+  "settings": {
+    "model_id": "deepseek-flash",
+    "timeout_seconds": 90,
+    "max_output_tokens": 8000,
+    "max_response_chars": 96000,
+    "endpoint": "https://api.deepseek.com",
+    "credential_env": "DEEPSEEK_API_KEY"
+  },
+  "models": {
+    "flash": "deepseek-flash",
+    "pro": "deepseek-v4-pro"
+  },
+  "cases": [
+    {
+      "id": "A1-flash",
+      "input": {
+        "case": 0,
+        "variant": "flash"
+      }
+    },
+    {
+      "id": "A1-pro",
+      "input": {
+        "case": 0,
+        "variant": "pro"
+      }
+    },
+    {
+      "id": "A2-pro",
+      "input": {
+        "case": 1,
+        "variant": "pro"
+      }
+    },
+    {
+      "id": "A2-flash",
+      "input": {
+        "case": 1,
+        "variant": "flash"
+      }
+    },
+    {
+      "id": "A3-flash",
+      "input": {
+        "case": 2,
+        "variant": "flash"
+      }
+    },
+    {
+      "id": "A3-pro",
+      "input": {
+        "case": 2,
+        "variant": "pro"
+      }
+    },
+    {
+      "id": "A4-pro",
+      "input": {
+        "case": 3,
+        "variant": "pro"
+      }
+    },
+    {
+      "id": "A4-flash",
+      "input": {
+        "case": 3,
+        "variant": "flash"
+      }
+    },
+    {
+      "id": "A5-flash",
+      "input": {
+        "case": 4,
+        "variant": "flash"
+      }
+    },
+    {
+      "id": "A5-pro",
+      "input": {
+        "case": 4,
+        "variant": "pro"
+      }
+    },
+    {
+      "id": "A6-pro",
+      "input": {
+        "case": 5,
+        "variant": "pro"
+      }
+    },
+    {
+      "id": "A6-flash",
+      "input": {
+        "case": 5,
+        "variant": "flash"
+      }
+    },
+    {
+      "id": "A7-flash",
+      "input": {
+        "case": 6,
+        "variant": "flash"
+      }
+    },
+    {
+      "id": "A7-pro",
+      "input": {
+        "case": 6,
+        "variant": "pro"
+      }
+    },
+    {
+      "id": "A8-pro",
+      "input": {
+        "case": 7,
+        "variant": "pro"
+      }
+    },
+    {
+      "id": "A8-flash",
+      "input": {
+        "case": 7,
+        "variant": "flash"
+      }
+    }
+  ],
+  "sources": {
+    "model_adapter/deepseek.py": "474094678be86550bc9a05d4969fd728b4b446e7983c2f5981295c09404a1f16",
+    "model_adapter/wire_observation.py": "02190963fe7b6d2d125037c12b972dbf0b99bf6abf3eb7da8f922f4034657eee",
+    "model_adapter/runtime.py": "81ab9872aad89b3ba2aa6f23fda2d8b0d28d6090dea4532f7f429e41809f16e9",
+    "model_adapter/strict_review_tool.py": "e07fd793cb221987690233689071a1b168571ec76e7622a20bc7e80eb00a9964",
+    "evaluation/fact_review_model_fit_v1.py": "df6044023990c6db8bc7b43ed0b110ddd0aecfe6e5908136dd50844f8eec513f",
+    "evaluation/strict_interface_probe_v1.py": "0c15efc53a272bb2ffebefdb51c190846dbc5c8de50297a8d5bb018f0caecaa0",
+    "evaluation/batch_control.py": "1918fbd8a96dfa2439b5402f9ff4fe5309003a9b295121bb53f49ce68151958e",
+    "evaluation/production_review_v2.py": "1fca5fdde9c16b50d62647220311efe47159dc4e5497ca07648e7aa8530b0524",
+    "agents/evidence_verification.py": "bd6d7e720c0dcf5f135466cadea7f8c7ddeb4ed93bc435433506780788848b9a",
+    "services/review_simple_v1.py": "f1e0aebee09012dcbd3dd4d8919c35ba2e46a489bcc8639d59035b04132e30fe",
+    "services/review_simple_tool_v1.py": "19eb60ea72ef2091e3f38341173f0b5775e5f83c16b7a2de06455803623b3f41",
+    "services/scoped_fact_execution.py": "16c3e00bd6ad7cd2fd202130a5757ff915431decb7a9cc37b0267bd8e08f6b06",
+    "services/structured_model.py": "936a0ae22c13faad76e22aa6921fc9cec1682cb7f9e90a5b0dbe5f1b6ba6a797"
+  },
+  "references": [
+    {
+      "case_id": "A1",
+      "labels": [
+        "supported",
+        "supported"
+      ],
+      "basis": [
+        "Source directly describes dynamic regulation, bandwidth and set-point/droop alternatives.",
+        "Source directly describes nominal-voltage contribution, voltage-squared capability and switching."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A2",
+      "labels": [
+        "supported",
+        "supported"
+      ],
+      "basis": [
+        "Source explicitly models MW/Mvar at the two alternative boundary locations.",
+        "Source explicitly states the two directions of avoiding excessive reactive-support dependence."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A3",
+      "labels": [
+        "supported",
+        "insufficient_evidence"
+      ],
+      "basis": [
+        "N-1 clause explicitly binds immediate performance and no operator intervention.",
+        "N-2 clause does not impose the N-1 no-operator/immediate/same-limits requirement; silence is insufficient, not an opposite engineering rule."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A4",
+      "labels": [
+        "contradicted",
+        "insufficient_evidence"
+      ],
+      "basis": [
+        "Answer says the formula explicitly retains R and B; source explicitly neglects both in this model: direct conflict.",
+        "Short-line derivation does not establish validity for arbitrary line lengths; insufficient, not contradiction."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A5",
+      "labels": [
+        "supported"
+      ],
+      "basis": [
+        "N-1 immediately/no operator/limits and both steady-state and stability are explicitly present."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A6",
+      "labels": [
+        "supported"
+      ],
+      "basis": [
+        "Short-line, neglect R/B and voltage/angle/reactance relations directly match the source."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A7",
+      "labels": [
+        "supported",
+        "insufficient_evidence"
+      ],
+      "basis": [
+        "Dynamic regulation description matches the text.",
+        "Descriptive behavior does not establish an all-fault plant guarantee; no given counterexample or negative theorem, so insufficient rather than contradicted."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A8",
+      "labels": [
+        "supported",
+        "insufficient_evidence"
+      ],
+      "basis": [
+        "Explicit MW/Mvar load representation is directly described.",
+        "No plant transformer capacity record or calculation fixes 100MVA; insufficient rather than contradicted."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    }
+  ],
+  "reference_revision": "unchanged-old-labels-reviewed-v1",
+  "schema": {
+    "type": "function",
+    "function": {
+      "name": "submit_review_result",
+      "strict": true,
+      "description": "Submit this review result only; this function performs no external action.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "judgments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "contradicted",
+                    "insufficient_evidence",
+                    "not_assessable"
+                  ]
+                },
+                "basis_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "gap_answer_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "conditions": {
+                  "type": "object",
+                  "properties": {
+                    "applicability": {
+                      "type": "string",
+                      "enum": [
+                        "none",
+                        "present",
+                        "unknown"
+                      ]
+                    },
+                    "expression": {
+                      "type": "string",
+                      "enum": [
+                        "not_applicable",
+                        "preserved",
+                        "missing",
+                        "misattached",
+                        "extended",
+                        "uncertain"
+                      ]
+                    },
+                    "instance": {
+                      "type": "string",
+                      "enum": [
+                        "not_claimed",
+                        "satisfied",
+                        "missing",
+                        "uncertain"
+                      ]
+                    },
+                    "source_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "answer_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "reason": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "applicability",
+                    "expression",
+                    "instance",
+                    "source_ids",
+                    "answer_ids",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                },
+                "inference": {
+                  "type": "string",
+                  "enum": [
+                    "preserved",
+                    "unsupported",
+                    "uncertain"
+                  ]
+                },
+                "objection": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "__NULL__"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "enum": [
+                            "fidelity",
+                            "classification",
+                            "uncertain"
+                          ]
+                        },
+                        "reason": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "reason"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "repair": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "__NULL__"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "basis_id": {
+                          "type": "string"
+                        },
+                        "replacement": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "basis_id",
+                        "replacement"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "requires_authoritative_source": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "status",
+                "basis_ids",
+                "reason",
+                "gap_answer_ids",
+                "conditions",
+                "inference",
+                "objection",
+                "repair",
+                "requires_authoritative_source"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "judgments"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "semantic_prompt_sha256": "6bc8e0cacc6fcf4098c543ebabe02bcf456257ba9f11e88bee1e0d5ff03c50b8",
+  "projection": "simple-condition-projection-v1.1",
+  "adaptation": "reuse-fixed-author-target-v2; program-bound old author drafts; not generation/extraction scores",
+  "stop_scope": "Both models share provider/account/storage/controller: any shared or unknown-acceptance fault stops all remaining tasks. Output contract failures remain case-local.",
+  "planned_tasks": 16,
+  "expected_initial_requests": 32,
+  "correction_rule": "At most one correction shared by fact/citation per task; no node allowance added; existing40 calls/800s/110s stage/90s request limits.",
+  "initial_message_identities": {
+    "A1": [
+      {
+        "messages_sha256": "1c02e783f894c36913766256c95ad597cea4dc5e8888e61c6cb4e721d1a66440",
+        "targets": [
+          {
+            "target_id": "F0C0",
+            "scope_index": 0,
+            "proposition": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F0C0:0"
+            ]
+          },
+          {
+            "target_id": "F1C0",
+            "scope_index": 0,
+            "proposition": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F1C0:0"
+            ]
+          }
+        ]
+      },
+      {
+        "messages_sha256": "5d6f2ea365f031600b8e8e99a0659b45b348c47556597667345ed9dee349542a",
+        "targets": [
+          {
+            "target_id": "R0",
+            "scope_index": 1,
+            "proposition": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。",
+            "allowed_basis_ids": [
+              "S1B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R0:0"
+            ]
+          },
+          {
+            "target_id": "R1",
+            "scope_index": 2,
+            "proposition": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+            "allowed_basis_ids": [
+              "S2B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R1:0"
+            ]
+          }
+        ]
+      }
+    ],
+    "A2": [
+      {
+        "messages_sha256": "118e0ebd92022e8b2b334dd1423b22c8378333d63ce71524ab7f521f5364f36d",
+        "targets": [
+          {
+            "target_id": "F0C0",
+            "scope_index": 0,
+            "proposition": "资料将输配边界负荷显式建模为MW和Mvar，可放在母线高压侧，也可放在降压变压器或等效配电阻抗之后。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F0C0:0"
+            ]
+          },
+          {
+            "target_id": "F1C0",
+            "scope_index": 0,
+            "proposition": "资料指出负荷不应过度依赖大电力系统的无功支撑，反过来大电力系统也不应单纯依赖负荷的无功支撑。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F1C0:0"
+            ]
+          }
+        ]
+      },
+      {
+        "messages_sha256": "c65c068db2299e925d7087e437bf56ca29a85f9524275d19ed7e6d509772840d",
+        "targets": [
+          {
+            "target_id": "R0",
+            "scope_index": 1,
+            "proposition": "资料将输配边界负荷显式建模为MW和Mvar，可放在母线高压侧，也可放在降压变压器或等效配电阻抗之后。",
+            "allowed_basis_ids": [
+              "S1B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R0:0"
+            ]
+          },
+          {
+            "target_id": "R1",
+            "scope_index": 2,
+            "proposition": "资料指出负荷不应过度依赖大电力系统的无功支撑，反过来大电力系统也不应单纯依赖负荷的无功支撑。",
+            "allowed_basis_ids": [
+              "S2B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R1:0"
+            ]
+          }
+        ]
+      }
+    ],
+    "A3": [
+      {
+        "messages_sha256": "6d49ca3ee5af0bcf2215a6167dbe4c96035fcdc97cb1e674685cc0c7a5445fa3",
+        "targets": [
+          {
+            "target_id": "F0C0",
+            "scope_index": 0,
+            "proposition": "资料对单一N-1故障要求系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F0C0:0"
+            ]
+          },
+          {
+            "target_id": "F1C0",
+            "scope_index": 0,
+            "proposition": "资料明确要求所有选定N-2故障也必须在无操作员干预下立即满足相同限值。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F1C0:0"
+            ]
+          }
+        ]
+      },
+      {
+        "messages_sha256": "f130be37f977e9aee953edf122a940825bbd154cd01d3bd7ddaba4f82061a86c",
+        "targets": [
+          {
+            "target_id": "R0",
+            "scope_index": 1,
+            "proposition": "资料对单一N-1故障要求系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内。",
+            "allowed_basis_ids": [
+              "S1B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R0:0"
+            ]
+          },
+          {
+            "target_id": "R1",
+            "scope_index": 2,
+            "proposition": "资料明确要求所有选定N-2故障也必须在无操作员干预下立即满足相同限值。",
+            "allowed_basis_ids": [
+              "S2B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R1:0"
+            ]
+          }
+        ]
+      }
+    ],
+    "A4": [
+      {
+        "messages_sha256": "b390b73076887ef59e98a708d6befd406fc46fa1569458a6c6bc78f99c099df4",
+        "targets": [
+          {
+            "target_id": "F0C0",
+            "scope_index": 0,
+            "proposition": "给定资料的无功传输表达式明确保留了线路电阻R和电容B。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F0C0:0"
+            ]
+          },
+          {
+            "target_id": "F1C0",
+            "scope_index": 0,
+            "proposition": "资料明确声明该表达式适用于任意长度的所有输电线路。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F1C0:0"
+            ]
+          }
+        ]
+      },
+      {
+        "messages_sha256": "7456b558898bef9795d83a8caf854b210964aecf59f98e69ac3ee42d889a7d45",
+        "targets": [
+          {
+            "target_id": "R0",
+            "scope_index": 1,
+            "proposition": "给定资料的无功传输表达式明确保留了线路电阻R和电容B。",
+            "allowed_basis_ids": [
+              "S1B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R0:0"
+            ]
+          },
+          {
+            "target_id": "R1",
+            "scope_index": 2,
+            "proposition": "资料明确声明该表达式适用于任意长度的所有输电线路。",
+            "allowed_basis_ids": [
+              "S2B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R1:0"
+            ]
+          }
+        ]
+      }
+    ],
+    "A5": [
+      {
+        "messages_sha256": "83e724ae06366400a849e5ab6811e4149f04ef2695bd654dff5cbba273b021c1",
+        "targets": [
+          {
+            "target_id": "F0C0",
+            "scope_index": 0,
+            "proposition": "资料要求N-1失去一个元件后，系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内，且N-1条件适用于稳态与稳定要求。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F0C0:0"
+            ]
+          }
+        ]
+      },
+      {
+        "messages_sha256": "0699d2a5cb8fbfb7c8168d069cbc9115af5315ef42e35ec4c0b89e73ce3a15c4",
+        "targets": [
+          {
+            "target_id": "R0",
+            "scope_index": 1,
+            "proposition": "资料要求N-1失去一个元件后，系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内，且N-1条件适用于稳态与稳定要求。",
+            "allowed_basis_ids": [
+              "S1B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R0:0"
+            ]
+          }
+        ]
+      }
+    ],
+    "A6": [
+      {
+        "messages_sha256": "de7f44cd89a8f9d9655c543f19ffbbc8d3ad1de632a7a9d7e4a204e16a0b5a73",
+        "targets": [
+          {
+            "target_id": "F0C0",
+            "scope_index": 0,
+            "proposition": "在忽略线路电阻R和电容B的短输电线路模型中，资料把无功传输表示为两端电压、相角差与线路电抗相关的关系。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F0C0:0"
+            ]
+          }
+        ]
+      },
+      {
+        "messages_sha256": "b97d5195ac69464753acc6ee8cd4e2af1a920224884cb79973bffdc627463a74",
+        "targets": [
+          {
+            "target_id": "R0",
+            "scope_index": 1,
+            "proposition": "在忽略线路电阻R和电容B的短输电线路模型中，资料把无功传输表示为两端电压、相角差与线路电抗相关的关系。",
+            "allowed_basis_ids": [
+              "S1B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R0:0"
+            ]
+          }
+        ]
+      }
+    ],
+    "A7": [
+      {
+        "messages_sha256": "dff9bfe42bfac2b55c770a59e5fa726f23a95efe8255e2ae2a1ea59137ec3896",
+        "targets": [
+          {
+            "target_id": "F0C0",
+            "scope_index": 0,
+            "proposition": "资料中的动态无功资源可在规定电压带宽内随电网电压变化自动实时连续调节。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F0C0:0"
+            ]
+          },
+          {
+            "target_id": "F1C0",
+            "scope_index": 0,
+            "proposition": "因此匿名厂站只要采用动态无功资源，就能保证所有故障后电压稳定。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F1C0:0"
+            ]
+          }
+        ]
+      },
+      {
+        "messages_sha256": "ab82d36f547196710ef11f8b08060799ed2a4095ee7c2bd4466a65646e4199fa",
+        "targets": [
+          {
+            "target_id": "R0",
+            "scope_index": 1,
+            "proposition": "资料中的动态无功资源可在规定电压带宽内随电网电压变化自动实时连续调节。",
+            "allowed_basis_ids": [
+              "S1B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R0:0"
+            ]
+          },
+          {
+            "target_id": "R1",
+            "scope_index": 2,
+            "proposition": "因此匿名厂站只要采用动态无功资源，就能保证所有故障后电压稳定。",
+            "allowed_basis_ids": [
+              "S2B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R1:0"
+            ]
+          }
+        ]
+      }
+    ],
+    "A8": [
+      {
+        "messages_sha256": "71e0bdaea11543e7efe76a4adafcf96af50db0eca4d7854926a2b07194ad59f7",
+        "targets": [
+          {
+            "target_id": "F0C0",
+            "scope_index": 0,
+            "proposition": "输配边界负荷在资料中显式建模为MW与Mvar。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F0C0:0"
+            ]
+          },
+          {
+            "target_id": "F1C0",
+            "scope_index": 0,
+            "proposition": "因此该匿名变压器的实际额定容量确定为100MVA。",
+            "allowed_basis_ids": [
+              "S0B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:F1C0:0"
+            ]
+          }
+        ]
+      },
+      {
+        "messages_sha256": "c04244f4a963c0a6325d69e786f1d512f58db57d880e6efbf10ce1e0fcfebe76",
+        "targets": [
+          {
+            "target_id": "R0",
+            "scope_index": 1,
+            "proposition": "输配边界负荷在资料中显式建模为MW与Mvar。",
+            "allowed_basis_ids": [
+              "S1B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R0:0"
+            ]
+          },
+          {
+            "target_id": "R1",
+            "scope_index": 2,
+            "proposition": "因此该匿名变压器的实际额定容量确定为100MVA。",
+            "allowed_basis_ids": [
+              "S2B0"
+            ],
+            "source_unit_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_unit_ids": [
+              "ANS:R1:0"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

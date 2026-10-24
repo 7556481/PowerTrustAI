@@ -1,0 +1,274 @@
+{
+  "origin": "AI-assisted direct-source development references under user supervision; not expert gold, independent holdout or general accuracy",
+  "reference_revision": "unchanged-old-labels-reviewed-v1",
+  "references": [
+    {
+      "case_id": "A1",
+      "labels": [
+        "supported",
+        "supported"
+      ],
+      "basis": [
+        "Source directly describes dynamic regulation, bandwidth and set-point/droop alternatives.",
+        "Source directly describes nominal-voltage contribution, voltage-squared capability and switching."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A2",
+      "labels": [
+        "supported",
+        "supported"
+      ],
+      "basis": [
+        "Source explicitly models MW/Mvar at the two alternative boundary locations.",
+        "Source explicitly states the two directions of avoiding excessive reactive-support dependence."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A3",
+      "labels": [
+        "supported",
+        "insufficient_evidence"
+      ],
+      "basis": [
+        "N-1 clause explicitly binds immediate performance and no operator intervention.",
+        "N-2 clause does not impose the N-1 no-operator/immediate/same-limits requirement; silence is insufficient, not an opposite engineering rule."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A4",
+      "labels": [
+        "contradicted",
+        "insufficient_evidence"
+      ],
+      "basis": [
+        "Answer says the formula explicitly retains R and B; source explicitly neglects both in this model: direct conflict.",
+        "Short-line derivation does not establish validity for arbitrary line lengths; insufficient, not contradiction."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A5",
+      "labels": [
+        "supported"
+      ],
+      "basis": [
+        "N-1 immediately/no operator/limits and both steady-state and stability are explicitly present."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A6",
+      "labels": [
+        "supported"
+      ],
+      "basis": [
+        "Short-line, neglect R/B and voltage/angle/reactance relations directly match the source."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A7",
+      "labels": [
+        "supported",
+        "insufficient_evidence"
+      ],
+      "basis": [
+        "Dynamic regulation description matches the text.",
+        "Descriptive behavior does not establish an all-fault plant guarantee; no given counterexample or negative theorem, so insufficient rather than contradicted."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    },
+    {
+      "case_id": "A8",
+      "labels": [
+        "supported",
+        "insufficient_evidence"
+      ],
+      "basis": [
+        "Explicit MW/Mvar load representation is directly described.",
+        "No plant transformer capacity record or calculation fixes 100MVA; insufficient rather than contradicted."
+      ],
+      "judgeability": "All current labels usable within supplied-text support scope; not universal engineering truth."
+    }
+  ],
+  "cases": [
+    {
+      "id": "A1",
+      "family": "local_citation",
+      "question": "按给定NERC资料分别解释动态资源的调节方式及静态资源的输出与投切方式。",
+      "units": [
+        [
+          "resources",
+          "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。"
+        ],
+        [
+          "resources",
+          "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。"
+        ]
+      ],
+      "reference": [
+        "supported",
+        "supported"
+      ]
+    },
+    {
+      "id": "A2",
+      "family": "local_citation",
+      "question": "按给定NERC资料说明输配边界负荷的建模方式，以及双方无功支撑依赖应注意什么。",
+      "units": [
+        [
+          "coordination",
+          "资料将输配边界负荷显式建模为MW和Mvar，可放在母线高压侧，也可放在降压变压器或等效配电阻抗之后。"
+        ],
+        [
+          "coordination",
+          "资料指出负荷不应过度依赖大电力系统的无功支撑，反过来大电力系统也不应单纯依赖负荷的无功支撑。"
+        ]
+      ],
+      "reference": [
+        "supported",
+        "supported"
+      ]
+    },
+    {
+      "id": "A3",
+      "family": "condition_scope",
+      "question": "按资料核对N-1与选定N-2的工况要求，区分无操作员干预这一限定的归属。",
+      "units": [
+        [
+          "contingencies",
+          "资料对单一N-1故障要求系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内。"
+        ],
+        [
+          "contingencies",
+          "资料明确要求所有选定N-2故障也必须在无操作员干预下立即满足相同限值。"
+        ]
+      ],
+      "reference": [
+        "supported",
+        "insufficient_evidence"
+      ]
+    },
+    {
+      "id": "A4",
+      "family": "condition_scope",
+      "question": "核对资料中短线路无功传输表达式的建模前提和线路适用范围。",
+      "units": [
+        [
+          "line_model",
+          "给定资料的无功传输表达式明确保留了线路电阻R和电容B。"
+        ],
+        [
+          "line_model",
+          "资料明确声明该表达式适用于任意长度的所有输电线路。"
+        ]
+      ],
+      "reference": [
+        "contradicted",
+        "insufficient_evidence"
+      ]
+    },
+    {
+      "id": "A5",
+      "family": "near_correct",
+      "question": "只解释给定资料的单一N-1故障分析要求。",
+      "units": [
+        [
+          "contingencies",
+          "资料要求N-1失去一个元件后，系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内，且N-1条件适用于稳态与稳定要求。"
+        ]
+      ],
+      "reference": [
+        "supported"
+      ]
+    },
+    {
+      "id": "A6",
+      "family": "near_correct",
+      "question": "只说明给定资料中短线路无功传输关系的前提和相关量，不计算数值。",
+      "units": [
+        [
+          "line_model",
+          "在忽略线路电阻R和电容B的短输电线路模型中，资料把无功传输表示为两端电压、相角差与线路电抗相关的关系。"
+        ]
+      ],
+      "reference": [
+        "supported"
+      ]
+    },
+    {
+      "id": "A7",
+      "family": "mixed_insufficient",
+      "question": "按资料解释动态资源特性，并核对是否能据此保证匿名厂站所有故障后均电压稳定。",
+      "units": [
+        [
+          "resources",
+          "资料中的动态无功资源可在规定电压带宽内随电网电压变化自动实时连续调节。"
+        ],
+        [
+          "resources",
+          "因此匿名厂站只要采用动态无功资源，就能保证所有故障后电压稳定。"
+        ]
+      ],
+      "reference": [
+        "supported",
+        "insufficient_evidence"
+      ]
+    },
+    {
+      "id": "A8",
+      "family": "mixed_insufficient",
+      "question": "按资料说明输配边界负荷建模，并核对某匿名变压器的额定容量是否可由此确定。",
+      "units": [
+        [
+          "coordination",
+          "输配边界负荷在资料中显式建模为MW与Mvar。"
+        ],
+        [
+          "coordination",
+          "因此该匿名变压器的实际额定容量确定为100MVA。"
+        ]
+      ],
+      "reference": [
+        "supported",
+        "insufficient_evidence"
+      ]
+    }
+  ],
+  "source_identities": {
+    "resources": {
+      "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]"
+    },
+    "contingencies": {
+      "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]"
+    },
+    "coordination": {
+      "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]"
+    },
+    "line_model": {
+      "evidence_id": "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]"
+    },
+    "locality": {
+      "evidence_id": "e-54b969cc1dbddaeb23cb13aea570062d45cd9e0de8e3e355f86dd9811161ada3",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=7;page_chars[2398:3166);page_lines[38:48]"
+    }
+  }
+}

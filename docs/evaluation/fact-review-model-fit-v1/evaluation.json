@@ -1,0 +1,1765 @@
+{
+  "origin": "AI-assisted textual review against frozen development references, not self-scored by either tested model or independent gold.",
+  "cases": [
+    {
+      "case_id": "A1-flash",
+      "model_id": "deepseek-flash",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 9592,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states dynamic reactive resources adjust reactive power output automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and that these resources operate to maintain a set point voltage or in a voltage droop mode. This matches every clause of the proposition (bandwidth, real-time continuous automatic adjustment, both operating modes). Remaining detail in the source (response times, examples) is extra and not required.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The proposition is a general descriptive characterization of dynamic reactive resources with no additional applicability conditions attached and no conditional instance application claimed; the described operating modes qualify the resource type generally, and the source states the rule without further qualifying conditions."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states static reactive resources have fixed reactive power output at their nominal voltage, their capability varies according to voltage squared, and devices are switched in or out of service based on system conditions with switching action manual or automatic. All clauses of the proposition are directly matched.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The proposition states a general property of static reactive resources (fixed output at nominal voltage, squared-voltage dependence, switching triggered by system conditions) with no further applicability condition and no claimed instance application; the 'based on system conditions' phrase is part of the described rule, not an unstated extra condition."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states dynamic reactive resources adjust reactive power output automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and operate to maintain a set point voltage or in voltage droop mode. The answer preserves all clauses (bandwidth, automatic real-time continuous adjustment, both operating modes) without narrowing or extending scope; framing is descriptive rather than a normative requirement.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [],
+            "reason": "The proposition is a general descriptive characterization of the dynamic resource class; the source attaches no extra applicability conditions to this conclusion, and the answer claims no particular instance application. The qualified object is the resource class together with its two alternative operating states, both preserved."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S1B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states static reactive resources have fixed reactive power output at their nominal voltage, capability varies according to voltage squared, and the devices are switched in or out based on system conditions with switching possibly manual or automatic. The answer preserves each clause and the optional nature of the switching mode and adds no conditions.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_ids": [],
+            "reason": "The statement is a general descriptive characterization of the static resource class; no extra applicability condition qualifies this conclusion in the source, and the answer claims no specific instance application. The qualified object is the resource class and its alternative switching modes, both preserved."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S2B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A2-flash",
+      "model_id": "deepseek-flash",
+      "execution_complete": false,
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        }
+      ],
+      "elapsed_ms": 11102,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": []
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states loads should not over-rely on reactive support (lagging or leading) from the bulk electric system and conversely that the bulk electric system should not solely depend on the load for reactive support. The answer reproduces both directions of this mutual non-dependence caution with each clause's subject and direction correctly attached; no negation or direction is inverted.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "The conclusion is an unconditional caution about mutual reactive support dependence, nested within transmission-distribution coordination but with no additional applicability condition attached; no conditional object or operating state is qualified, so expression is not_applicable. No instance application is claimed, so instance is not_claimed and no source or answer condition IDs are needed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The cited excerpt states that the transmission-operator/distribution-provider boundary is usually defined by explicit loads modeled as MW and Mvar, and that these loads may be modeled on the high side of the bus/substation or behind step-down transformers and/or equivalent distribution impedances. The answer proposition matches all clauses: explicit MW/Mvar modeling, high-voltage bus-side placement, and placement behind step-down transformers or equivalent distribution impedances. The 'may' possibility language is preserved, not turned into a requirement. Being a voluntary North American reliability guideline affects authority, not the descriptive accuracy of the extraction.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "The proposition reports modeling options as described in the source; no additional applicability condition qualifies the conclusion, and no conditional instance application is claimed. The source's placement alternatives are alternatives described, not conditions limiting the conclusion, so expression is not applicable rather than missing."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The cited excerpt states that loads should not over-rely on reactive support (lagging or leading) from the bulk electric system, and conversely that the bulk electric system should not solely depend on the load for reactive support (lagging or leading). The answer proposition preserves both directions of the reciprocal statement, including the negation and the 'over-rely' vs 'solely depend' asymmetry. The dropped lagging/leading qualifier is a detail omission rather than a change of the proposition's substance.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "The proposition restates a general reciprocal recommendation about reliance on reactive support; no extra applicability condition qualifies it and no specific instance application is claimed in the answer. The 'conversely' clause belongs to the same statement, not a separate condition."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A3-flash",
+      "model_id": "deepseek-flash",
+      "execution_complete": false,
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        }
+      ],
+      "elapsed_ms": 14894,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states that contingency analysis ensures the system stays within emergency thermal ratings and voltage limits immediately after a disturbance involving loss of a single element (N-1), without operator intervention, and that performance is required at all times. So the immediate, no-operator-intervention, emergency thermal rating and voltage limit requirement for single N-1 is present.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The statement is a rule-level requirement for the single N-1 contingency case; the source attaches the no-operator-intervention and immediacy qualifiers to that same case. No additional applicability condition beyond the single N-1 disturbance is required, and no specific instance application is claimed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "contradicted",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The source limits the N-2 statement to selected N-2 contingencies considered when determining stability limitations and to withstanding extreme disturbances without voltage collapse, cascading or instability. It does not require all selected N-2 contingencies to meet the same emergency thermal and voltage limits immediately and without operator intervention; the immediate/no-operator-intervention limit requirement is attached only to the N-1 condition. The target extends the N-1 qualifiers and requirement to all selected N-2 contingencies, which the source does not state.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "extended",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "The source's N-2 discussion carries its own scope: selected N-2 contingencies for determining stability limitations plus extreme disturbances without collapse or instability. The answer misattaches the immediacy and no-operator-intervention limit qualifiers from the N-1 requirement onto all selected N-2 cases, universalizing and extending the source's qualified, stability-focused N-2 statement. No specific instance satisfaction is claimed."
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [
+            "ANS:F1C0:0"
+          ],
+          "objection": {
+            "kind": "fidelity",
+            "reason": "The answer asserts that the material explicitly requires all selected N-2 contingencies to meet the same limits immediately and without operator intervention, whereas the bound text attaches those qualifiers only to N-1 and frames N-2 as a stability-limitation consideration."
+          },
+          "projection_reasons": [
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A4-flash",
+      "model_id": "deepseek-flash",
+      "execution_complete": false,
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        },
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        }
+      ],
+      "elapsed_ms": 13990,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "contradicted",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": []
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": []
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "contradicted",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A5-flash",
+      "model_id": "deepseek-flash",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 5717,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The source states contingency analysis ensures the system stays within emergency thermal ratings and voltage limits immediately after a disturbance involving the loss of an element (single contingency or N-1), but without operator intervention. It also states this N-1 condition applies to both steady state and stability requirements. All clauses of the proposition (loss of one element, immediately after disturbance, without operator intervention, emergency thermal ratings and voltage limits, applicability to steady state and stability) match the source. Minor attribution gap: the source is a voluntary NERC guideline for the North American BPS and has caveats (e.g., performance capability at all times, load conditions) which the answer does not misstate but also does not express; the core proposition is preserved.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The source qualifies the N-1 conclusion by setting (North American BPS, voluntary guideline) and by temporal/load conditions (capable at all times including min/max forecasted load). The answer retains the object and state attachment (system within emergency thermal ratings and voltage limits immediately after disturbance without operator intervention) and the scope to steady state and stability; it states the rule rather than claiming a specific instance satisfies it, so instance is not_claimed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "preservation_without_local_binding",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states contingency analysis ensures the system stays within emergency thermal ratings and voltage limits immediately after a disturbance involving loss of an element (single contingency or N-1), without operator intervention, within forecasted load conditions at all times, and that the N-1 condition applies to both steady state and stability requirements. All clauses of the target — loss of one element, immediate post-disturbance, no operator intervention, emergency thermal and voltage limits, and N-1 applying to steady state and stability — are each present in the source, so the complete proposition is supported. The target describes N-1 as an analytical requirement without asserting it is a binding standard; the source's voluntary-guideline status is context, not a contradiction of the proposition as phrased.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "The proposition is a general rule-restatement about N-1 contingency analysis requirements; it contains no claimed instance application (no specific system, element, or case is applied) and no additional applicability conditions beyond those stated within the proposition itself (loss of one element, no operator intervention), which the source preserves. Hence no conditional instance is claimed and no extra applicability qualifier is needed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A6-flash",
+      "model_id": "deepseek-flash",
+      "execution_complete": false,
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        }
+      ],
+      "elapsed_ms": 8151,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states that when line resistance (R) and capacitance (B) are neglected, reactive power transfer across a short transmission line can be expressed in terms of sending- and receiving-end voltage magnitudes, the phase angle difference, and the line reactance X. This matches the target's proposition that under the stated neglect assumptions the material represents reactive power transfer as a relation involving both-end voltages, angle difference, and line reactance. The target asserts no numerical values or causality, only the relational representation, which the source supplies.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F0C0:0"
+            ],
+            "reason": "The conclusion carries explicit applicability conditions — neglecting line resistance and capacitance in a short-line model — and the answer retains these qualifiers attached to the relational statement, so the conditional scope is preserved rather than dropped or extended. No specific instance application is asserted, and the source's formula is a general relation rather than an instance computation, so instance satisfaction is not claimed, consistent with the answer's non-numerical scope."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A7-flash",
+      "model_id": "deepseek-flash",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 11160,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The source states that dynamic reactive resources adjust reactive power output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes. The answer restates this with all key elements (automatic, real-time, continuous range, specified voltage bandwidth, response to grid voltage change) preserved as an asserted general characterization. Scope direction is preserved: the adjustment occurs within a specified bandwidth, not unbounded. No extra applicability conditions are introduced by the conclusion beyond the bandwidth qualifier already retained.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The conclusion is a general characterization of dynamic reactive resource behavior. The only qualifier is the voltage bandwidth, which the answer retains verbatim in attachment to the same object (dynamic reactive resources) and operating state (adjusting output in response to grid voltage). No claimed instance application is made and no additional applicability condition qualifies this conclusion, so applicability is none with expression preserved and instance not_claimed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "condition_dimension_conflict",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "contradicted",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The answer claims a sufficient condition: mere adoption of dynamic reactive resources guarantees voltage stability after all faults at an unspecified station. The source only describes dynamic reactive resources as adjusting reactive output within a specified voltage bandwidth to maintain a set-point voltage or operate in voltage droop mode; it establishes no guarantee of post-fault voltage stability for all faults, and no statement that such resources are sufficient regardless of other factors. The 'only if so, then guarantees' direction, the universal quantifier over all faults, and the extrapolation to a specific station are all unsupported and contrary to the limited scope of the source, which is also a voluntary planning guideline for a different grid region. The conditional formulation is therefore extended beyond what the basis establishes.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "extended",
+            "instance": "missing",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "The answer's conclusion carries a stated sufficient-condition qualifier (adoption of dynamic reactive resources) implying effectiveness regardless of other system conditions; the source contains no such sufficiency premise and limits the resources to voltage-bandwidth-controlled output adjustment, so the qualifier is misattached/extended. The answer also asserts an instance application to a particular unnamed station and to all faults, but the source provides no station-specific data, no fault study, and no guarantee, so instance information is missing and the universal scope cannot be confirmed."
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [
+            "ANS:F1C0:0"
+          ],
+          "objection": {
+            "kind": "classification",
+            "reason": "The answer overstates the source: it converts a description of within-bandwidth automatic voltage-responsive output adjustment into a guarantee of post-fault voltage stability for all faults at any station, a sufficiency claim the basis never makes."
+          },
+          "projection_reasons": [
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The source states that dynamic reactive resources automatically adjust reactive power output in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes. The proposition's every element (automatic, real-time, continuous, within a specified voltage bandwidth, responding to voltage changes) is matched. The source is a voluntary North American guideline, so the paraphrase carries no normative claim beyond description, which requires no engineering guarantee. The proposition does not assert any instance application, so no simulation/field data is required.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [],
+            "reason": "The proposition is an unconditional descriptive statement about dynamic reactive resource behavior; the source attaches the qualifier 'within a specified voltage bandwidth', which the proposition retains as '规定电压带宽内', so the object and operating condition are preserved. No additional applicability condition is asserted or needed, and no instance application to a specific plant is claimed, so instance data is not required."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "condition_dimension_conflict",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S1B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "contradicted",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The proposition claims that merely adopting dynamic reactive resources guarantees voltage stability after all faults at an anonymous plant. The only supplied basis describes the automatic continuous voltage-band response characteristic of dynamic reactive resources and a fast response time example; it contains nothing about fault ride-through, post-fault voltage stability, or any guarantee, nor any plant-specific information. A device description is not a sufficient condition for universal post-fault stability, and the basis gives no quantifier or assurance covering 'all faults'. The universal guarantee is therefore unsupported and contradicted by the limited scope of the basis; the source's silence on stability is not proof either way, but the assertion of guaranteed sufficiency is not established by the cited text.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "misattached",
+            "instance": "missing",
+            "source_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_ids": [
+              "ANS:R1:0"
+            ],
+            "reason": "The proposition claims a conditional-to-unconditional guarantee ('只要采用…就能保证…') applying to a specific anonymous plant and to all post-fault conditions. The source's only qualifiers are the voltage-bandwidth and set-point/droop operating context of the resource, which are attached to a device behavior statement, not to any post-fault stability conclusion; attaching a guarantee of universal post-fault voltage stability to them misattributes the qualifier's object. No information establishes that the named plant's fault cases were analyzed or that the resource suffices for them, so the claimed instance application is missing supporting information."
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [
+            "ANS:R1:0"
+          ],
+          "objection": {
+            "kind": "fidelity",
+            "reason": "The evaluated text appends a universal post-fault voltage-stability guarantee for an anonymous plant that the cited basis does not contain; the guarantee clause is not a faithful extraction or conservative paraphrase of the cited description."
+          },
+          "projection_reasons": [
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ],
+          "selected_source_ids": [
+            "SRC:S2B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A8-flash",
+      "model_id": "deepseek-flash",
+      "execution_complete": false,
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        },
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        }
+      ],
+      "elapsed_ms": 14591,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": []
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": []
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete",
+          "condition_assessment": null,
+          "inference": null,
+          "gap_answer_ids": null,
+          "objection": null,
+          "projection_reasons": null,
+          "selected_source_ids": null,
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A1-pro",
+      "model_id": "deepseek-v4-pro",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 10887,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The basis text states dynamic reactive resources adjust reactive power output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, operate to maintain a set point voltage or in a voltage droop mode. This fully supports every clause of the proposition including automatic real-time continuous adjustment within a specified voltage bandwidth in response to voltage changes and the two operating modes (set point or droop).",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The proposition is a general definitional statement about dynamic reactive resources with no conditional instance application claimed; the answer retains the same object and operating modes without adding, dropping, or misattaching any operational qualifier. The source metadata notes NERC applicability (North American bulk power system, voluntary guidance) which qualifies the provenance domain, but no conditional instance is claimed in the target."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "preservation_without_local_binding",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The basis states static reactive resources have fixed reactive power output at their nominal voltage, their capability varies according to voltage squared, and they are switched in or out of service based on system conditions, with switching action manual or automatic, providing a fixed nominal contribution once connected. This supports all clauses: fixed output at nominal voltage, capability proportional to voltage squared, and manual or automatic switching based on system conditions.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The proposition is a general definitional statement about static reactive resources without a claimed conditional instance application; the answer preserves the object and its operating characteristics (fixed output at nominal voltage, voltage-squared capability, manual/automatic switching). The source metadata's NERC applicability qualifies the domain of provenance but no conditional instance is claimed in the target."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "preservation_without_local_binding",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "insufficient_evidence",
+          "execution_placeholder": false,
+          "reason": "S1B0 states dynamic reactive resources adjust reactive power output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and operate to maintain a set point voltage or operate in a voltage droop mode. This covers every clause of the proposition: '动态无功资源', 自动实时连续调节, 规定电压带宽内随电网电压变化, 维持电压设定点或电压下垂模式.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [
+              "ANS:R0:0"
+            ],
+            "reason": "The source qualifies its content with 'in response to grid voltage changes' and 'specified voltage bandwidth', which the answer preserves as operating conditions on the adjustment行为; these qualifiers are correctly attached to the dynamic resource's output adjustment rather than drifting to a different object. No conditional instance application is claimed, so instance is not_claimed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [
+            "ANS:R0:0"
+          ],
+          "objection": null,
+          "projection_reasons": [
+            "content_or_inference_gap",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S1B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "insufficient_evidence",
+          "execution_placeholder": false,
+          "reason": "S2B0 states static reactive resources have fixed reactive power output at their nominal voltage, capability varies according to voltage squared, are switched in or out based on system conditions, and switching action can be manual or automatic. This covers all clauses: 额定电压下输出固定, 能力随电压平方变化, 按系统条件手动或自动投切.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_ids": [
+              "ANS:R1:0"
+            ],
+            "reason": "The source's qualifier 'at their nominal voltage' limits the fixed-output claim, and 'based on system conditions' limits the switching claim; the answer preserves both, attaching '额定电压下' to the fixed output and '按系统条件' to the投切 operation. No conditional instance application is claimed, so instance is not_claimed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [
+            "ANS:R1:0"
+          ],
+          "objection": null,
+          "projection_reasons": [
+            "content_or_inference_gap",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S2B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A2-pro",
+      "model_id": "deepseek-v4-pro",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 11493,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states that the TO-DP boundary is usually defined by explicit loads modeled as MW and Mvar, which may be modeled on the high side of the bus/substation or potentially modeled behind the step-down transformers and/or equivalent distribution impedances. This directly supports the complete proposition including the modeling as MW and Mvar and both placement options.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "satisfied",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F0C0:0"
+            ],
+            "reason": "The conclusion has applicability conditions: the source qualifies the statement as applying to the TO-DP boundary in power flow, stability analysis, and real-time, and as 'usually' the case. The answer retains the object (boundary load) and both placement alternatives without dropping the qualifier context. The instance information (MW/Mvar and the two placement options) is present in the source."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states that loads should not over-rely on reactive support from the BES, and conversely the BES should not solely depend on the load for reactive support. This matches both directions of the proposition, including the 'over-rely' and 'solely/单单' (solely) qualification and the parenthetical lagging/leading scope.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "satisfied",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "The conclusion carries applicability conditions: it is a recommendation qualified by lagging or leading reactive support and arises in the context of TO-DP boundary coordination. The answer preserves the bidirectional object (load vs BES) and the conditional 'should not over-rely/solely depend' framing. The instance information (reactive support, both directions) is present in the source."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states that the boundary between TO and DP is usually defined by explicit loads modeled as MW and Mvar, and that these loads may be modeled on the high side of the bus/substation or behind step-down transformers and/or equivalent distribution impedances. This directly supports both clauses: explicit MW/Mvar modeling and the two placement options. The word 'usually' slightly qualifies the source, but the answer faithfully presents the document's guidance as a summary of the material.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "satisfied",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [
+              "ANS:R0:0"
+            ],
+            "reason": "The source's applicability is North American bulk power system guidance and the described modeling practice is 'usually' applied in power flow, stability analysis, and real-time contexts. The answer retains the object/state (boundary loads modeled as MW and Mvar, with placement options) without misattaching or extending the qualification. No conditional instance application beyond the general modeling description is claimed, and the general assertion is directly stated in the source."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S1B0"
+          ],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The source states 'Loads should not over-rely on reactive support (lagging or leading) from the BES' and 'Conversely, the BES should not solely depend on the load for reactive support (lagging or leading).' The answer captures both directions of the mutual-reliance caveat accurately and without omission of the reciprocal clause.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "satisfied",
+            "source_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_ids": [
+              "ANS:R1:0"
+            ],
+            "reason": "The recommendation applies in the transmission-to-distribution coordination context of the North American BES. The answer preserves the reciprocal object/state attachment (load should not over-rely on BES; conversely BES should not solely depend on load) without extension. No instance-specific conditional application beyond the general recommendation is claimed, and both directions are directly present in the source."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S2B0"
+          ],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A3-pro",
+      "model_id": "deepseek-v4-pro",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 21973,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "原文明确陈述：扰动后（immediately after a disturbance）在单一元件丧失（single contingency or N-1）情况下系统应保持在紧急热额定值和电压限值内（stays within its emergency thermal ratings and voltage limits），且限定 but without operator intervention，同时系统应始终具备该性能。此即单一N-1故障在扰动后立即、无操作员干预下保持紧急热额定值和电压限值。方向、量词（a single contingency/N-1 condition）与无操作员干预限定均得到保留，主张成立。",
+          "condition_assessment": {
+            "applicability": "unknown",
+            "expression": "uncertain",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "该结论为规则性陈述而非具体实例应用，未主张任何运行工况实例满足条件，故instance为not_claimed。原文上下文提及at all times、including minimum and maximum forecasted load conditions等泛化适用范围，但未逐项核实其是否构成结论的额外适用条件，对是否存在额外适用性限定保持unknown；无操作员干预在原文中作为表达的一部分得到保留，但其与扰动后立即限值的完整附着关系仅依据单一摘录，标记为uncertain。"
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "condition_assessment_uncertain",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "insufficient_evidence",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "原文关于N-2的表述为：in addition to ... for single contingencies, the system should be able to withstand some selected N-2 contingencies when determining stability limitations ... without suffering voltage collapse, cascading, or instability。该句并未要求所有选定N-2故障在扰动后立即、无需操作员干预下满足与N-1相同的紧急热额定值和电压限值；其条件是针对稳定性限制（when determining stability limitations）且标准为避免电压崩溃、级联或失稳，而非立即保持在紧急热额定值与电压限值内。'所有'（all selected）与'无操作员干预下立即满足相同限值'均无依据，故证据不足。",
+          "condition_assessment": {
+            "applicability": "unknown",
+            "expression": "uncertain",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "结论声称所有选定N-2故障必修立即、无操作员干预下满足相同限值。原文仅提及N-2用于确定稳定性限制并避免电压崩溃/级联/失稳，未给出紧急热额定值和电压限值这一限定、也未提及无操作员干预，且'所有'被主张为'所有选定'。由于原文未提供足够信息判断是否存在额外适用条件以及'无操作员干预/相同限值'的附着关系，applicability与expression均标记unknown/uncertain；未主张任何具体实例，instance为not_claimed。相关限值内容在答案中缺失，列入gap。"
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [
+            "ANS:F1C0:0"
+          ],
+          "objection": null,
+          "projection_reasons": [
+            "condition_assessment_uncertain",
+            "content_or_inference_gap"
+          ],
+          "selected_source_ids": [],
+          "selected_evidence_ids": []
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "来源文本说明，单一N-1扰动（元件丢失）后立即、且无操作员干预下，系统保持在紧急热额定值和电压限值之内。命题的所有子句（单一N-1故障、立即、无操作员干预、紧急热额定值与电压限值）均获文本支持，语义方向一致。",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [
+              "ANS:R0:0"
+            ],
+            "reason": "结论为规则性声明而非具体实例声称。适用性限定存在（北美大容量系统、自愿指南、非中国标准）。无操作员干预这一限定正确附着于N-1立即性能要求上，未被误挂或扩展；未声称具体实例满足，故instance为not_claimed。"
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S1B0"
+          ],
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "contradicted",
+          "effective_status": "contradicted",
+          "execution_placeholder": false,
+          "reason": "命题声称所有选定N-2故障也须无操作员干预立即满足相同紧急热/电压限值。来源仅称在确定稳定极限时系统应能承受一些选定N-2工况，其措辞是不发生电压崩溃、级联或失稳，而非保持在紧急热额定值和电压限值内；且无操作员干预这一限定原文只附着于单一N-1扰动，未扩展到N-2。命题将仅适用于N-1的限定错误推广到N-2，并附加了原文未主张的限值结论。",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "misattached",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_ids": [
+              "ANS:R1:0"
+            ],
+            "reason": "结论带有适用性限定（北美系统、自愿指南）。无操作员干预在原文明确只修饰N-1扰动的立即性能，命题将其错接到N-2故障上属误挂；命题又为N-2附加了原文未主张的紧急热额定值和电压限值作为结论对象。未声称具体实例满足，instance为not_claimed。"
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [
+            "ANS:R1:0"
+          ],
+          "objection": null,
+          "projection_reasons": [
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ],
+          "selected_source_ids": [
+            "SRC:S2B0"
+          ],
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A4-pro",
+      "model_id": "deepseek-v4-pro",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 13489,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "contradicted",
+          "raw_status": "contradicted",
+          "effective_status": "contradicted",
+          "execution_placeholder": false,
+          "reason": "The source text states 'Neglecting line resistance (R) and capacitance (B)' before presenting the reactive power transfer expression for a short transmission line. This directly contradicts the proposition that the expression '明确保留了' (explicitly retains) R and B. The expression actually omits both R and B by assumption, and the wording '明确' (explicitly) further conflicts with the source, which provides only the simplified equation Qr = Vr/X(Vs cosδ - Vr) using only reactance X.",
+          "condition_assessment": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "No extra applicability condition beyond the factual claim about what the expression retains is being made; the proposition is an unconditional statement about the source's equation content rather than a conditional instance application, so applicability is none, expression qualification is not applicable, and no instance is claimed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "contradicted",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The source explicitly qualifies the reactive power transfer expression as applying to 'a short transmission line' (repeated in the Figure 1 caption 'Short Transmission Line'). It does not declare that the expression applies to all transmission lines of arbitrary length; on the contrary, the approximations of neglecting R and B are valid only for the short-line case, so the claim of applicability to '任意长度的所有输电线路' is directly contradicted, and the word '明确声明' (explicitly declares) finds no support.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The proposition carries a scope applicability condition (the applicable line-length range); the source does attach a length qualifier, but it is a short-line restriction rather than the claimed arbitrary-length scope, so the condition as applied to the claimed conclusion is present and misdirected. No specific instance application is claimed; the statement is a general scope declaration."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "preservation_without_local_binding"
+          ],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "contradicted",
+          "raw_status": "contradicted",
+          "effective_status": "contradicted",
+          "execution_placeholder": false,
+          "reason": "资料明确表述 'Neglecting line resistance (R) and capacitance (B)'，即无功传输表达式是在忽略线路电阻R和电容B的前提下给出的，而目标是声称该表达式'明确保留了'R和B。两者方向相反：源文本讲的是忽略，并非保留，因此该命题被所引资料直接否定。",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "satisfied",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [
+              "ANS:R0:0"
+            ],
+            "reason": "源基础附带适用性限定，指明其是北美大电网的自愿性、区域性推荐做法，并非中国运行标准；该限定并未被纳入答案。就'保留/忽略'这一核心对象附着的表述本身而言，命题对表达式的限定被忠实描述为'明确保留'，但该描述方向与源文的'忽略'相反，构成对象状态附着层面的矛盾，而非适用性条件的缺失。"
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S1B0"
+          ],
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "contradicted",
+          "effective_status": "contradicted",
+          "execution_placeholder": false,
+          "reason": "目标声称资料明确声明该表达式适用于任意长度的所有输电线路。源文本明确将该表达式限定为 'reactive power transfer across a short transmission line'（短输电线路），并以 'Figure 1: Short Transmission Line' 与整个讨论范围相互印证，并无任何涵盖任意长度或所有线路的声明。因此命题与资料直接矛盾。",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "satisfied",
+            "source_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_ids": [
+              "ANS:R1:0"
+            ],
+            "reason": "源基础带适用性限定（自愿性区域实践、非中国标准），该限定未被答案纳入。命题对'表达式适用于何种线路'这一适用范围的附带限定被忠实转述为'任意长度的所有输电线路'，但方向与源文限定的'短线路'相反，属对象状态附着层面的矛盾而非条件缺失。"
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S2B0"
+          ],
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A5-pro",
+      "model_id": "deepseek-v4-pro",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 9587,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The source states contingency analysis is conducted to ensure the system stays within emergency thermal ratings and voltage limits immediately after a disturbance involving loss of an element (single contingency or 'N-1' condition), but without operator intervention, and that this 'N-1' condition applies to both steady state and stability requirements. This matches every clause of the proposition: loss of one element (N-1), immediately after disturbance, without operator intervention, within emergency thermal ratings and voltage limits, and applicability to both steady state and stability requirements. The word '资料' (document/source) framing is also accurate since the source is a published guideline making these statements.",
+          "condition_assessment": {
+            "applicability": "unknown",
+            "expression": "uncertain",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "The source metadata notes that the recommendations are voluntary and region-specific (North American bulk power system), which may constitute an extra applicability limitation not captured in the answer's absolute '资料要求' framing. The answer does not state this regional/voluntary qualifier, so applicability of an unconditional requirement is uncertain. The proposition is a general rule statement rather than a claim that a specific instance satisfies the conditions, so no instance application is claimed. The expression of any conditions relative to the conclusion is thus uncertain because the source's scope qualifier is not attached to the answer."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "condition_assessment_uncertain",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "命题由四个相互关联的主张组成：(1) N-1单元丢失后，系统立即保持在紧急热额定值和电压限值内；(2) 无需操作员干预；(3) 在扰动之后；(4) N-1条件适用于稳态和稳定要求。源文明确指出“stays within its emergency thermal ratings and voltage limits immediately after a disturbance involving the loss of an element (single contingency or 'N-1' condition), but without operator intervention”（在涉及失去一个元件的扰动后立即保持在紧急热额定值和电压限值内，且无操作员干预），并明确说明“This 'N-1' condition applies to both steady state and stability requirements”（该N-1条件适用于稳态和稳定要求）。全部四个子条款都在所提供的出处中得到直接支持，因此该答案忠实地提取了所述要求。",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [
+              "ANS:R0:0"
+            ],
+            "reason": "答案附带了结构适用的限定条件（N-1条件适用于稳态和稳定要求），这些限定条件得以保留，并且其结论之间的附着关系（对稳态和稳定要求均适用）仍然完好。出处本身在索引元数据中带有适用性限定（北美大电网、建议性、各地区做法不一、并非中国运行标准），但这些是该文件本身的性质，而非答案文本所声明的额外条件，因此实例维度为 not_claimed。所选的 source_id 和 answer_id 对应命题中的适用性和表达维度。"
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S1B0"
+          ],
+          "selected_evidence_ids": [
+            "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A6-pro",
+      "model_id": "deepseek-v4-pro",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 9443,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The supplied NERC guideline excerpt explicitly states: 'Neglecting line resistance (R) and capacitance (B), reactive power transfer across a short transmission line can be expressed as Qr = Vr/X (Vs cos δ − Vr), where Vs and Vr are the sending- and receiving-end voltage magnitudes, X is the line reactance, and δ is the phase angle difference.' This matches every clause of the proposition: the short-line model neglecting R and B, the expression of reactive power transfer in terms of the two end voltages, the phase angle difference, and the line reactance. The target is a faithful restatement that the source represents reactive power as a function of these quantities.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "Applicability: the conclusion carries an explicit applicability condition, namely the short-transmission-line model that neglects line resistance (R) and capacitance (B); this qualifier is present in the answer and is attached to the correct object (reactive power transfer), so expression is preserved. The qualifier is not misattached or extended: it correctly binds to the short-line reactive power relationship, not to some unrelated statement. Instance: the target does not claim any numerical instance application of the formula—no specific Vs, Vr, X, or δ values are asserted—so instance is not_claimed. No unsupported content gap remains because every component of the proposition is covered by the cited source."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "preservation_without_local_binding",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The source (S1B0) states that neglecting line resistance (R) and capacitance (B), reactive power transfer across a short transmission line can be expressed as Qr = (Vr/X)(Vs·cos δ − Vr), where Vs and Vr are sending- and receiving-end voltage magnitudes, X is the line reactance, and δ is the phase angle difference between the two ends. This matches the proposition: reactive power transfer is expressed as a relationship involving the two terminal voltages, the phase angle difference, and the line reactance, under the stated short-line simplification of neglecting R and B. All claimed clauses are present.",
+          "condition_assessment": {
+            "applicability": "unknown",
+            "expression": "uncertain",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "The proposition states a modeling premise (neglecting R and B) that the source itself states, so the conclusion is the standard short-line formulation, not an extra applicability qualification beyond that premise. Whether the NERC guideline carries further regional applicability conditions (the metadata notes it is a voluntary North American practice, not a Chinese operational standard) is not established by the cited textual excerpt, so applicability is unknown. The expression dimension is uncertain because the text does not clarify whether the formula's object (reactive power) remains attached to the short-line condition beyond the sentence; however no affirmative misattachment is shown. No conditional instance application is claimed, only the general rule, so instance is not_claimed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "condition_assessment_uncertain",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A7-pro",
+      "model_id": "deepseek-v4-pro",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 19515,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "S0B0 states dynamic reactive resources adjust reactive power output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes. This matches the proposition clause-by-clause: automatic (自动), real-time (实时), continuous (连续), within a specified voltage bandwidth (规定电压带宽内), in response to grid voltage changes (随电网电压变化). The answer restates this general resource characteristic faithfully.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The source's statement about dynamic reactive resources is definitional and is itself intrinsically qualified by 'a specified voltage bandwidth' and 'in response to grid voltage changes', which are operating characteristics of the resource class rather than a separate unnamed applicability condition on this conclusion. The answer preserves the object (dynamic reactive resources) and its behavior with correct attachment. No conditional instance application to a particular station is claimed in this target, so no instance information is needed."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "preservation_without_local_binding",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "insufficient_evidence",
+          "effective_status": "insufficient_evidence",
+          "execution_placeholder": false,
+          "reason": "The proposition claims a universal causal guarantee: adopting dynamic reactive resources suffices to guarantee all post-fault voltage stability at an anonymous station. S0B0 describes the fast, continuous reactive response capability of dynamic resources but nowhere asserts that adopting them guarantees all post-fault voltage stability. Source silence on this universal sufficiency claim leaves it unsupported, not proven.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "extended",
+            "instance": "missing",
+            "source_ids": [],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "The conclusion attaches a universal guarantee over all faults to the mere adoption of dynamic reactive resources, extending the source's limited capability statement into an unconditional sufficiency guarantee not stated in S0B0. A conditional instance application (a station adopting dynamic resources) is claimed, but the instance-level information needed to show all post-fault voltages are stabilized is missing from the supplied basis."
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [
+            "ANS:F1C0:0"
+          ],
+          "objection": null,
+          "projection_reasons": [
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ],
+          "selected_source_ids": [],
+          "selected_evidence_ids": []
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The supplied basis states that dynamic reactive resources adjust reactive power output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, which matches every clause of the target proposition (动 dynamic, 自动实时 automatically in real-time, 连续 over a continuous range, 规定电压带宽内 within a specified voltage bandwidth, 随电网电压变化 in response to grid voltage changes). No extra causal or guarantee clause is asserted in this target.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [],
+            "reason": "The source states a general characteristic of dynamic reactive resources without a conditional instance application; no particular named station or plant is claimed, so instance is not_claimed. Applicability is limited to the generality of dynamic reactive resources as described (North American guideline context), but that scope is preserved in the answer's generic statement and does not add an unstated extra condition to the proposition itself."
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "preservation_without_local_binding",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S1B0"
+          ],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "insufficient_evidence",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The target asserts that merely adopting dynamic reactive resources guarantees voltage stability after all faults for an anonymous station. The supplied basis only describes how dynamic reactive resources adjust reactive output over a voltage bandwidth; it neither establishes a sufficient condition for post-fault voltage stability nor addresses any guarantee across all faults. The necessary-versus-sufficient direction and the universal 'all faults' quantifier are unsupported.",
+          "condition_assessment": {
+            "applicability": "unknown",
+            "expression": "uncertain",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [
+              "ANS:R1:0"
+            ],
+            "reason": "The basis does not state whether adopting dynamic reactive resources is subject to further applicability conditions (e.g., adequate sizing, location, or system configuration) before guaranteeing voltage stability; no instance of a specific anonymous station is actually identified, so no instance application is claimed. The conditional guarantee '只要...就能保证所有故障后电压稳定' is thus both unexpressed in the source and uncertain."
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [
+            "ANS:R1:0"
+          ],
+          "objection": null,
+          "projection_reasons": [
+            "condition_assessment_uncertain",
+            "content_or_inference_gap"
+          ],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A8-pro",
+      "model_id": "deepseek-v4-pro",
+      "execution_complete": true,
+      "execution_issues": [],
+      "elapsed_ms": 20027,
+      "targets": [
+        {
+          "interface": "fact",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "源文明确说明 TO 与 DP 之间的 boundary 在潮流、稳定分析和实时中通常由显式负荷定义，这些负荷建模为 MW 和 Mvar（'usually defined by explicit loads modeled as MW and Mvar'）。这直接支持提取的命题，即输配边界负荷在资料中显式建模为 MW 与 Mvar。表述中的限定词 'usually' 完整保留在原被评估文本中，未遗漏任何从句或方向性条件。",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F0C0:0"
+            ],
+            "reason": "该结论带有适用性条件：源文限定该建模做法适用于北美大容量电力系统（NERC 指南），且为自愿性、区域性做法可能不同，并非中国运行标准。原始表述中的 'usually'（通常）作为表达式限定词已在被评估文本中原样保留，因此表达式维度为 preserved。该命题是规则性/一般性陈述，并未声称某个具体实例满足条件，故 instance 维度为 not_claimed。适用性条件（NERC 指南范围、自愿性）在源元数据中体现，但不改变支撑事实本身的真实性。"
+          },
+          "inference": "preserved",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [],
+          "selected_source_ids": [
+            "SRC:S0B0"
+          ],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        },
+        {
+          "interface": "fact",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "insufficient_evidence",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "源文未提及任何匿名变压器的额定容量，更未提及 '100MVA' 这一数值，也未给出可由边界负荷（MW/Mvar）推导出变压器额定容量的任何换算或判定规则。命题声称由边界负荷建模'因此'确定某匿名变压器额定容量为 100MVA，这一因果结论在唯一允许的依据中没有任何衔接信息，属于完全无支撑的推断。",
+          "condition_assessment": {
+            "applicability": "unknown",
+            "expression": "uncertain",
+            "instance": "missing",
+            "source_ids": [],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "源文未提供任何确定变压器额定容量的方法、公式或数据来源，无法判断该结论是否存在附加适用性条件（applicability: unknown）。命题断言一个具体匿名变压器的实际额定容量为 100MVA，构成对实例的声称，但源文完全缺少该实例的任何信息（instance: missing）。关于额定容量数值如何附着于该变压器对象（表达式维度），因源文无相关陈述而无法判断（expression: uncertain）。没有可引用的具体来源单元或回答片段能支撑这三个维度中的任何一项。"
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [
+            "ANS:F1C0:0"
+          ],
+          "objection": null,
+          "projection_reasons": [
+            "condition_assessment_uncertain",
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ],
+          "selected_source_ids": [],
+          "selected_evidence_ids": []
+        },
+        {
+          "interface": "citation",
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "insufficient_evidence",
+          "execution_placeholder": false,
+          "reason": "The source text states 'The boundary between TO and DP in power flow, stability analysis, and real-time is usually defined by explicit loads modeled as MW and Mvar.' This directly supports the proposition that the transmission-distribution boundary load is explicitly modeled as MW and Mvar, though the source hedges with 'usually' which the answer omits.",
+          "condition_assessment": {
+            "applicability": "present",
+            "expression": "missing",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [],
+            "reason": "The source qualifies the modeling as 'usually defined by explicit loads,' introducing a typical-practice applicability condition that the answer drops by stating the fact unconditionally. The object (TO-DP boundary load) and conclusion (modeled as MW and Mvar) otherwise remain attached, but the 'usually' qualifier is missing from the answer. No conditional instance application is claimed here, so instance is not_claimed."
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [],
+          "objection": null,
+          "projection_reasons": [
+            "condition_or_instance_gap",
+            "content_or_inference_gap",
+            "raw_support_conflicts_with_declarations"
+          ],
+          "selected_source_ids": [
+            "SRC:S1B0"
+          ],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        },
+        {
+          "interface": "citation",
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "insufficient_evidence",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The proposition concludes an anonymous transformer's actual rated capacity is determined as 100MVA, presented as a consequence ('therefore'). The supplied source S2B0 discusses transmission-to-distribution coordination and MW/Mvar load modeling but contains no statement about any transformer's rated capacity, no 100MVA figure, and no anonymous transformer whose rating is determined. The causal/'therefore' link and the specific 100MVA value are unsupported and fabricate content absent from the source.",
+          "condition_assessment": {
+            "applicability": "unknown",
+            "expression": "uncertain",
+            "instance": "missing",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "The source establishes no condition under which a transformer rating could be determined, so applicability is unknown. The 100MVA conclusion has no source expression to which it attaches, leaving expression uncertain. The answer claims a specific instance (an anonymous transformer with 100MVA rating) but supplies no source-backed instance data, so instance is missing. No source or answer fragment can honestly fill these condition slots."
+          },
+          "inference": "unsupported",
+          "gap_answer_ids": [
+            "ANS:R1:0"
+          ],
+          "objection": null,
+          "projection_reasons": [
+            "condition_assessment_uncertain",
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ],
+          "selected_source_ids": [],
+          "selected_evidence_ids": [
+            "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+          ]
+        }
+      ]
+    }
+  ]
+}

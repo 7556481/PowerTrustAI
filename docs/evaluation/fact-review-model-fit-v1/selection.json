@@ -1,0 +1,13 @@
+{
+  "checked_utc": "2026-10-24T15:43:43.171433+00:00",
+  "url": "https://api.deepseek.com/models",
+  "method": "GET",
+  "http_status": 200,
+  "credential_source": "Existing project environment loader; value never logged",
+  "requests_paid_completions": 0,
+  "known_official_models_visible": [
+    "deepseek-flash",
+    "deepseek-v4-pro"
+  ],
+  "selected": "deepseek-v4-pro"
+}

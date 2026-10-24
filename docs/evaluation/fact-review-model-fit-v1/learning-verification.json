@@ -1,0 +1,14 @@
+{
+  "chapters": 20,
+  "explained_exercises": 73,
+  "build": true,
+  "source_hashes": true,
+  "links": true,
+  "folded_html": true,
+  "navigation_search": true,
+  "markdown_only": true,
+  "browser_checked": false,
+  "application_commit": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
+  "paid_commit": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d",
+  "note": "Two explained exercises; model fit and structural/semantic/effective distinctions, not entire logs."
+}

@@ -1,0 +1,30 @@
+{
+  "checked_utc": "2026-10-24T16:01:20.021423+00:00",
+  "production_model_setting": "deepseek-flash",
+  "port8765_listener": false,
+  "ready": false,
+  "preserved_stopped": true,
+  "production_configuration": {
+    "schema": 13,
+    "contract": "production",
+    "transport": "json",
+    "execution": "langgraph_v1",
+    "retrieval": "topic_v4_subject_v1"
+  },
+  "counts": {
+    "runs": 104,
+    "events": 2278,
+    "objects": 2999,
+    "reviews": 8
+  },
+  "before_counts": {
+    "runs": 104,
+    "events": 2278,
+    "objects": 2999,
+    "reviews": 8
+  },
+  "counts_unchanged": true,
+  "candidate_persistent_service_started": false,
+  "diagnostic_process_finished": true,
+  "post_batch_paid_requests": 0
+}
