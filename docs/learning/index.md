@@ -1,5 +1,9 @@
 # PowerTrustAI：从代码到判断的学习路线
 
+2026-10-24最新封存：简化合同固定批次因请求兼容故障停止，26槽未执行，不能评价自然净收益。最小工程修补仅离线1224通过，不采用生产。[完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md)。当前20章66道有解析练习，生产仍停服。
+
+2026-10-24最新教学更新：精确转录交给程序，语义判断与原文绑定分开；新增条件三维、合同—投影兼容及失败成本练习。取消固定章/题数上限，本轮融入既有章节，当前20章66题，Markdown仍为唯一正文。真实结果见后续封存报告。
+
 2026-10-24最新：审核职责边界与条件关系候选完成一次固定验证，真实执行恶化且无自然净收益，明确不采用。保留20章60自测和布局；[本轮完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md)优先于下方历史服务状态。生产当前停服且默认不切。
 
 2026-10-24：新增回答交付候选的归档断点、显式配置、固定双线净收益评价与采集停止边界。生产默认不切，实际结果及服务状态见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md)。20章、60自测及布局保持。

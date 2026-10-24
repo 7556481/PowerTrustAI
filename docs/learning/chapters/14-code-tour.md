@@ -1,5 +1,19 @@
 # 14 核心源码阅读路线：输入、调用、异常与取舍
 
+## 本轮真实验证边界
+
+【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md)。
+
+## 2026-10-24 简化合同与投影的源码入口
+
+从services/review_simple_v1.py的SimpleCatalog看起：沿既有ReviewCatalog生成SRC来源目录及ANS答案锚点，decode_wire仅程序绑定顺序身份；parse_one校验ID并明确投影三维声明。旧typed依据/authority/objection/repair继续复用，旧condition空引用投影不再复用。Factory仍注入原事实Agent，配置simple_v1显式启用，production回退，不改领域/修订资格/product政策。
+
+【待真实验证的实现检查】离线替身能通过none/not_applicable/not_claimed用例，是否证明真实模型会识别所有无条件陈述？
+
+::: answer 展开新增练习解析
+不能。它只证明程序收到该合法声明时不会走旧遗漏路径；真实模型能否作出正确声明、能否识别条件归属，需要固定真实输入逐项核验。不能将新字段或替身标签当语义成绩。
+:::
+
 ## 2026-10-24 审核链v2实证更新
 
 本轮入口services/review_scope_v2.py，经backend/config.py与ComponentFactory显式fact_review_contract=scope_v2接入services/scoped_fact_execution.py。默认production保留旧消息/解析；fact_internal_flow须仍为production且schema13。候选使用九语义字段的顺序数组，身份由程序绑定；条件关系映射至原判断再完整重审。真实验证发现逐字字段与空条件投影缺陷，代码保留作失败证据，不建议生产验收。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md)。
@@ -381,7 +395,7 @@ backend/service.py / ApplicationService._worker，实际行100–126。
 
 ### 摘录：真实装配的资源建立
 
-backend/assembly.py / ComponentFactory.create，2026-10-24当前实际行199–214。
+backend/assembly.py / ComponentFactory.create，2026-10-24当前实际行204–219。
 
 ```python
     def create(self,rid,observer):
@@ -507,7 +521,7 @@ backend/service.py / ApplicationService.result，实际行163–187。
 
 ### 关键连接：实际Harness组件注入
 
-backend/assembly.py当前实际行241–250，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
+backend/assembly.py当前实际行246–255，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
