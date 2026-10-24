@@ -1,0 +1,30 @@
+{
+  "checked_utc": "2026-10-24T15:26:55.579172+00:00",
+  "production_counts": {
+    "runs": 104,
+    "events": 2278,
+    "objects": 2999,
+    "reviews": 8
+  },
+  "observed_before_counts": {
+    "runs": 104,
+    "events": 2278,
+    "objects": 2999,
+    "reviews": 8
+  },
+  "counts_unchanged": true,
+  "port8765_listener": false,
+  "ready": false,
+  "production_preserved_stopped": true,
+  "candidate_persistent_service_started": false,
+  "production_config": {
+    "schema": 13,
+    "contract": "production",
+    "transport": "json",
+    "execution": "langgraph_v1",
+    "retrieval": "topic_v4_subject_v1"
+  },
+  "configuration_mutated": false,
+  "diagnostic_process_finished": true,
+  "no_more_requests": true
+}

@@ -1,0 +1,61 @@
+{
+  "planned_minimal": 8,
+  "executed_minimal": 8,
+  "minimal_valid": 8,
+  "planned_conditional_regressions": 4,
+  "executed_regressions": 4,
+  "business_complete": 2,
+  "business_incomplete": 2,
+  "unexecuted": 0,
+  "calls": 19,
+  "requests_accepted": 19,
+  "json_syntax_valid": 19,
+  "duplicate_keys": 0,
+  "business_schema_valid": 7,
+  "business_contract_valid": 6,
+  "business_invalid_requests": 5,
+  "root_constraints_per_distinct_request": {
+    "unexpected_fields_not_allowed": 4,
+    "selected_local_source_ids_required": 2
+  },
+  "per_line": {
+    "minimal": {
+      "calls": 8,
+      "initial": 8,
+      "corrections": 0,
+      "duration_ms": 7250,
+      "usage": {
+        "input_tokens": 3406,
+        "output_tokens": 574,
+        "total_tokens": 3980,
+        "cache_hit_tokens": 1024,
+        "cache_miss_tokens": 2382
+      }
+    },
+    "business": {
+      "calls": 11,
+      "initial": 8,
+      "corrections": 3,
+      "duration_ms": 47977,
+      "usage": {
+        "input_tokens": 49933,
+        "output_tokens": 7959,
+        "total_tokens": 57892,
+        "cache_hit_tokens": 29440,
+        "cache_miss_tokens": 20493
+      }
+    }
+  },
+  "total_usage": {
+    "input_tokens": 53339,
+    "output_tokens": 8533,
+    "total_tokens": 61872,
+    "cache_hit_tokens": 30464,
+    "cache_miss_tokens": 22875
+  },
+  "accepted_to_final_persist_seconds": 56.800865,
+  "invoice_cost": null,
+  "pricing_note": "No invoice; no monetary claim. No generation, retrieval, revision or rereview calls in this diagnostic scope.",
+  "admission": true,
+  "classification": 4
+}

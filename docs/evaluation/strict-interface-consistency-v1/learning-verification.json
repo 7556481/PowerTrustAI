@@ -1,0 +1,12 @@
+{
+  "chapters": 20,
+  "explained_self_checks": 71,
+  "build": true,
+  "source_hashes": true,
+  "local_html_links": true,
+  "folded_answers": true,
+  "navigation_search_preserved": true,
+  "actual_browser_checked": false,
+  "limit": "HTML build/source/link checks only; no new visual browser acceptance.",
+  "source_commit": "cb64b21cab7f837f777d3245217c8ed40aafb8a2"
+}

@@ -1,0 +1,139 @@
+{
+  "adaptation": "reuse-fixed-author-target-v2; program-bound targets, no natural extraction; references excluded from messages",
+  "origin": "AI-assisted direct-source development references under user supervision; not expert gold, independent holdout or general accuracy",
+  "ambiguity_rule": "Source silence about N-2 no-operator condition means insufficient support, not opposite engineering truth. A4 preserves-R/B contradicts explicit neglecting; arbitrary length is insufficient. No labels changed after prediction.",
+  "cases": [
+    {
+      "id": "A1",
+      "family": "local_citation",
+      "question": "按给定NERC资料分别解释动态资源的调节方式及静态资源的输出与投切方式。",
+      "units": [
+        [
+          "resources",
+          "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。"
+        ],
+        [
+          "resources",
+          "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。"
+        ]
+      ],
+      "reference": [
+        "supported",
+        "supported"
+      ],
+      "source_identities": [
+        {
+          "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]"
+        },
+        {
+          "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]"
+        }
+      ]
+    },
+    {
+      "id": "A3",
+      "family": "condition_scope",
+      "question": "按资料核对N-1与选定N-2的工况要求，区分无操作员干预这一限定的归属。",
+      "units": [
+        [
+          "contingencies",
+          "资料对单一N-1故障要求系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内。"
+        ],
+        [
+          "contingencies",
+          "资料明确要求所有选定N-2故障也必须在无操作员干预下立即满足相同限值。"
+        ]
+      ],
+      "reference": [
+        "supported",
+        "insufficient_evidence"
+      ],
+      "source_identities": [
+        {
+          "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]"
+        },
+        {
+          "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]"
+        }
+      ]
+    },
+    {
+      "id": "A7",
+      "family": "mixed_insufficient",
+      "question": "按资料解释动态资源特性，并核对是否能据此保证匿名厂站所有故障后均电压稳定。",
+      "units": [
+        [
+          "resources",
+          "资料中的动态无功资源可在规定电压带宽内随电网电压变化自动实时连续调节。"
+        ],
+        [
+          "resources",
+          "因此匿名厂站只要采用动态无功资源，就能保证所有故障后电压稳定。"
+        ]
+      ],
+      "reference": [
+        "supported",
+        "insufficient_evidence"
+      ],
+      "source_identities": [
+        {
+          "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]"
+        },
+        {
+          "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]"
+        }
+      ]
+    },
+    {
+      "id": "A2",
+      "family": "local_citation",
+      "question": "按给定NERC资料说明输配边界负荷的建模方式，以及双方无功支撑依赖应注意什么。",
+      "units": [
+        [
+          "coordination",
+          "资料将输配边界负荷显式建模为MW和Mvar，可放在母线高压侧，也可放在降压变压器或等效配电阻抗之后。"
+        ],
+        [
+          "coordination",
+          "资料指出负荷不应过度依赖大电力系统的无功支撑，反过来大电力系统也不应单纯依赖负荷的无功支撑。"
+        ]
+      ],
+      "reference": [
+        "supported",
+        "supported"
+      ],
+      "source_identities": [
+        {
+          "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]"
+        },
+        {
+          "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2075 @@
+{
+  "note": "All 19 original argument strings, including invalid attempts. Invalid rows are diagnostic only, not semantic scores.",
+  "requests": [
+    {
+      "case_id": "S1-direct",
+      "ordinal": 1,
+      "run_id": "eed20c34b106475c9d78a6401d68d5eb",
+      "call_number": 1,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_EJi10o8IYGEwg9bZHzZs5672",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"name\": \"alpha\", \"enabled\": false, \"kind\": \"sample\"}"
+          }
+        }
+      ],
+      "arguments_sha256": "695663abcb693de95af617efffaf5473689d20bb8947e240603f50ee53041534",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 1,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "strict-interface-consistency-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 977,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 355,
+          "output_tokens": 67,
+          "total_tokens": 422,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 355
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": null,
+        "validation_error": null,
+        "response_contract_version": null,
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 182,
+          "scope_ids": []
+        },
+        "invocation_id": "eed20c34b106475c9d78a6401d68d5eb",
+        "component": "interface_probe",
+        "answer_version": 1,
+        "network_diagnostic": null
+      }
+    },
+    {
+      "case_id": "S1-adapter",
+      "ordinal": 1,
+      "run_id": "99d3c8f13bdb4b1babd4ed0aa036cc6c",
+      "call_number": 2,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_EVYNotlrs3voAMClygYb9960",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"name\": \"alpha\", \"enabled\": false, \"kind\": \"sample\"}"
+          }
+        }
+      ],
+      "arguments_sha256": "695663abcb693de95af617efffaf5473689d20bb8947e240603f50ee53041534",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 2,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "strict-interface-consistency-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 981,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 355,
+          "output_tokens": 67,
+          "total_tokens": 422,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 128,
+          "cache_miss_tokens": 227
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 7.463399999999999e-05,
+          "usd_upper": 0.00014926799999999998,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": null,
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 182,
+          "scope_ids": []
+        },
+        "invocation_id": "99d3c8f13bdb4b1babd4ed0aa036cc6c",
+        "component": "interface_probe",
+        "answer_version": 1,
+        "network_diagnostic": null
+      }
+    },
+    {
+      "case_id": "S2-adapter",
+      "ordinal": 1,
+      "run_id": "d20f41e91e0c44e48418f7c1ff5b41b4",
+      "call_number": 3,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_igj38bKVjYDJzBgpJGgh3738",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"record\": {\"name\": \"beta\", \"enabled\": true}, \"state\": \"unknown\"}"
+          }
+        }
+      ],
+      "arguments_sha256": "f481df5c7524c428dbec2dc8c8436c46fcbbbe04c827767da8010f7e594f1f24",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 3,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "strict-interface-consistency-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 805,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 384,
+          "output_tokens": 60,
+          "total_tokens": 444,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 384
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 9.36e-05,
+          "usd_upper": 0.0001872,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": null,
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 194,
+          "scope_ids": []
+        },
+        "invocation_id": "d20f41e91e0c44e48418f7c1ff5b41b4",
+        "component": "interface_probe",
+        "answer_version": 1,
+        "network_diagnostic": null
+      }
+    },
+    {
+      "case_id": "S2-direct",
+      "ordinal": 1,
+      "run_id": "d8dbb93267a54f39a00990a7513a8740",
+      "call_number": 4,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_xK6zF8fC4Abk4EtKcShg6557",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"record\": {\"name\": \"beta\", \"enabled\": true}, \"state\": \"unknown\"}"
+          }
+        }
+      ],
+      "arguments_sha256": "f481df5c7524c428dbec2dc8c8436c46fcbbbe04c827767da8010f7e594f1f24",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 4,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "strict-interface-consistency-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 1158,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 384,
+          "output_tokens": 60,
+          "total_tokens": 444,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 128,
+          "cache_miss_tokens": 256
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": null,
+        "validation_error": null,
+        "response_contract_version": null,
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 194,
+          "scope_ids": []
+        },
+        "invocation_id": "d8dbb93267a54f39a00990a7513a8740",
+        "component": "interface_probe",
+        "answer_version": 1,
+        "network_diagnostic": null
+      }
+    },
+    {
+      "case_id": "S3-direct",
+      "ordinal": 1,
+      "run_id": "2885dd93f3ab4b5fb4ee2ef690243d69",
+      "call_number": 5,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_ESIVeJWlQNEmdS1otZFY6680",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"records\": [{\"name\": \"gamma1\", \"enabled\": false}, {\"name\": \"gamma2\", \"enabled\": true}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "4410c12d5dda53288d162666db04d75ade1784912aecc0873ebd669e8e98267e",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 5,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "strict-interface-consistency-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 781,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 382,
+          "output_tokens": 60,
+          "total_tokens": 442,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 382
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": null,
+        "validation_error": null,
+        "response_contract_version": null,
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 217,
+          "scope_ids": []
+        },
+        "invocation_id": "2885dd93f3ab4b5fb4ee2ef690243d69",
+        "component": "interface_probe",
+        "answer_version": 1,
+        "network_diagnostic": null
+      }
+    },
+    {
+      "case_id": "S3-adapter",
+      "ordinal": 1,
+      "run_id": "a9a2d71de11c418aae0f58430c71a0ae",
+      "call_number": 6,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_dmkoYnffmdwjuEdJBbVD9698",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"records\": [{\"name\": \"gamma1\", \"enabled\": false}, {\"name\": \"gamma2\", \"enabled\": true}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "4410c12d5dda53288d162666db04d75ade1784912aecc0873ebd669e8e98267e",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 6,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "strict-interface-consistency-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 558,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 382,
+          "output_tokens": 60,
+          "total_tokens": 442,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 128,
+          "cache_miss_tokens": 254
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 7.448400000000001e-05,
+          "usd_upper": 0.00014896800000000003,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": null,
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 217,
+          "scope_ids": []
+        },
+        "invocation_id": "a9a2d71de11c418aae0f58430c71a0ae",
+        "component": "interface_probe",
+        "answer_version": 1,
+        "network_diagnostic": null
+      }
+    },
+    {
+      "case_id": "S4-adapter",
+      "ordinal": 1,
+      "run_id": "089c832c3d574eaf86f6b5de40f49f55",
+      "call_number": 7,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_vWOTbd0550zrrsX1bZ0r1340",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"records\": [{\"state\": \"unknown\", \"objection\": \"__NULL__\", \"repair\": {\"basis_id\": \"r1\", \"replacement\": \"delta\"}}, {\"state\": \"known\", \"objection\": {\"kind\": \"uncertain\", \"reason\": \"epsilon\"}, \"repair\": \"__NULL__\"}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "45b6b3ac5d7736e18e72872f92fb94b7dd9293945167af7038bad41abb361380",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 7,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "strict-interface-consistency-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 977,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 582,
+          "output_tokens": 100,
+          "total_tokens": 682,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 256,
+          "cache_miss_tokens": 326
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.00010966800000000001,
+          "usd_upper": 0.00021933600000000002,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": null,
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 342,
+          "scope_ids": []
+        },
+        "invocation_id": "089c832c3d574eaf86f6b5de40f49f55",
+        "component": "interface_probe",
+        "answer_version": 1,
+        "network_diagnostic": null
+      }
+    },
+    {
+      "case_id": "S4-direct",
+      "ordinal": 1,
+      "run_id": "4228315a3f0040fb8b476827df4a1315",
+      "call_number": 8,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_VsXXmlIyszG91bewOpsr2893",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"records\": [{\"state\": \"unknown\", \"objection\": \"__NULL__\", \"repair\": {\"basis_id\": \"r1\", \"replacement\": \"delta\"}}, {\"state\": \"known\", \"objection\": {\"kind\": \"uncertain\", \"reason\": \"epsilon\"}, \"repair\": \"__NULL__\"}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "45b6b3ac5d7736e18e72872f92fb94b7dd9293945167af7038bad41abb361380",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 8,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "strict-interface-consistency-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 1013,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 582,
+          "output_tokens": 100,
+          "total_tokens": 682,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 384,
+          "cache_miss_tokens": 198
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": null,
+        "validation_error": null,
+        "response_contract_version": null,
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 342,
+          "scope_ids": []
+        },
+        "invocation_id": "4228315a3f0040fb8b476827df4a1315",
+        "component": "interface_probe",
+        "answer_version": 1,
+        "network_diagnostic": null
+      }
+    },
+    {
+      "case_id": "A1",
+      "ordinal": 1,
+      "run_id": "5d92bada92f94ceeac5cd79510fc4241",
+      "call_number": 1,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_wzHe80Wjl73EeGKG4c4g5385",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source states that dynamic reactive resources adjust reactive power output automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and that they operate to maintain a set point voltage or operate in a voltage droop mode. All clauses of the proposition — automatic real-time continuous adjustment, response to voltage changes, the voltage bandwidth qualifier, and the two operating modes as alternatives — are matched. Note the bandwidth specification qualifier is retained.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"not_claimed\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [\"ANS:F0C0:0\"], \"reason\": \"The proposition carries an applicability qualifier that adjustment occurs within a specified voltage bandwidth; the answer retains that qualifier attached to the same object (dynamic reactive resources) and the same conclusion (continuous automatic output adjustment). No specific instance application (e.g., a particular device or voltage bandwidth value) is claimed, so instance is not_claimed rather than missing.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"supported\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source states that static reactive resources have fixed reactive power output at their nominal voltage, that their capability varies according to voltage squared, and that these devices are switched in or out of service based on system conditions with switching action able to be manual or automatic. Each component of the proposition — fixed output at rated voltage, voltage-squared variation of capability, and manual or automatic switching per system conditions — corresponds to the source. The manual/automatic wording is permissive (can be), not an assertion that both always apply, and the answer's '可按' reflects permissive modality.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"not_claimed\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [\"ANS:F1C0:0\"], \"reason\": \"The fixed-output and voltage-squared statements are conditioned on nominal/rated voltage, and switching is conditioned on system conditions; both qualifiers are retained and attached to the same object (static reactive resources) and conclusions. No particular device instance or specific system condition is asserted as satisfied, so instance is not_claimed.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "ba071a6a6cd55318c686a4a03835b26a0b480d6884d3ff64779c95c1af65ca18",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 1,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 3660,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 3767,
+          "output_tokens": 605,
+          "total_tokens": 4372,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 3584,
+          "cache_miss_tokens": 183
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.00040120199999999997,
+          "usd_upper": 0.0008024039999999999,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 10596,
+          "scope_ids": []
+        },
+        "invocation_id": "5d92bada92f94ceeac5cd79510fc4241",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "fact",
+      "target_bindings": [
+        {
+          "target_id": "F0C0",
+          "scope_index": 0,
+          "proposition": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。",
+          "answer_unit_ids": [
+            "ANS:F0C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        },
+        {
+          "target_id": "F1C0",
+          "scope_index": 0,
+          "proposition": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+          "answer_unit_ids": [
+            "ANS:F1C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A1",
+      "ordinal": 2,
+      "run_id": "5d92bada92f94ceeac5cd79510fc4241",
+      "call_number": 2,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_qRwZgNVSAX0eu6seJNwB9250",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S1B0\"], \"reason\": \"Target proposition repeats two conjoined assertions: automatic real-time continuous output adjustment in response to grid voltage changes within a specified voltage bandwidth, and operation either to maintain a set point voltage or in voltage droop mode. The bound basis states both assertions directly, without added quantifiers or negation; the 'or' alternative is preserved, and both alternatives are attributed to the same dynamic-resource class. No clause is omitted or misdirected.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"none\", \"expression\": \"not_applicable\", \"instance\": \"not_claimed\", \"source_ids\": [], \"answer_ids\": [], \"reason\": \"This is a descriptive characterization of how dynamic reactive resources behave; it is not a conditional rule application and asserts no specific instance case. The only qualifier is the voltage-bandwidth scope, which the answer retains attached to the adjustment behavior. No additional applicability condition is stated by the source, so applicability is none and expression is not applicable rather than missing; no instance information is needed.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"supported\", \"basis_ids\": [\"S2B0\"], \"reason\": \"Target proposition asserts three conjoined clauses: fixed reactive power output at nominal voltage, capability varying according to voltage squared, and switching in or out based on system conditions treated as manual or automatic. The bound basis states each clause directly with the same direction (capability proportional to voltage squared) and the same manual-or-automatic alternative for switching; nothing is negated, modalized beyond the source, or extended to a different subject class.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"none\", \"expression\": \"not_applicable\", \"instance\": \"not_claimed\", \"source_ids\": [], \"answer_ids\": [], \"reason\": \"The target is a general descriptive characterization of static reactive resources, not a conditional rule and not a claim that a particular device or system satisfies switching conditions. The reference to system conditions attaches to the switching behavior and is retained in the answer; no extra applicability condition is stated. No instance application is claimed, so instance information is not required.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "314578c9cefee699ae8b48fde70e5c76d8393a3847caaf7dd3f3dc3d18edfe82",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 2,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 3618,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 4544,
+          "output_tokens": 554,
+          "total_tokens": 5098,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 4352,
+          "cache_miss_tokens": 192
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.00037425599999999995,
+          "usd_upper": 0.0007485119999999999,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 13288,
+          "scope_ids": []
+        },
+        "invocation_id": "5d92bada92f94ceeac5cd79510fc4241",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "citation",
+      "target_bindings": [
+        {
+          "target_id": "R0",
+          "scope_index": 1,
+          "proposition": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。",
+          "answer_unit_ids": [
+            "ANS:R0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S1B0"
+          ],
+          "allowed_basis_ids": [
+            "S1B0"
+          ]
+        },
+        {
+          "target_id": "R1",
+          "scope_index": 2,
+          "proposition": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+          "answer_unit_ids": [
+            "ANS:R1:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S2B0"
+          ],
+          "allowed_basis_ids": [
+            "S2B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A3",
+      "ordinal": 1,
+      "run_id": "b1a181b986d74a59a6e723a12b6fc734",
+      "call_number": 1,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_L7dPXZ3T7zyCdrIpkJex0462",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source states contingency analysis is conducted to ensure the system stays within emergency thermal ratings and voltage limits immediately after a disturbance involving the loss of an element (single contingency or N-1), but without operator intervention. The answer preserves all clauses: single N-1, immediacy, no operator intervention, and both emergency thermal and voltage limits. All elements of the proposition are directly attested.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"satisfied\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [\"ANS:F0C0:0\"], \"reason\": \"The source attaches the no-operator-intervention qualifier specifically to the N-1 post-disturbance performance requirement and specifies the operating regime (immediately after a disturbance) and the limits object (emergency thermal ratings and voltage limits). The answer retains that same attachment to the single-N-1 case without extending it; the generic instance (loss of an element) is described in the source, so no missing instance information.\", \"source_ids_marker\": null}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"contradicted\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source limits N-2 treatment to the system being able to withstand some selected N-2 contingencies when determining stability limitations and also extreme disturbances without voltage collapse, cascading or instability. It does not require that immediate post-disturbance performance within the same emergency thermal and voltage limits be achieved without operator intervention for selected N-2 faults. The answer's 'all selected N-2' and 'immediately within the same limits without operator intervention' overstate and misassign the qualifier, contradicting the source's narrower and differently framed N-2 provision.\", \"gap_answer_ids\": [\"ANS:F1C0:0\"], \"conditions\": {\"applicability\": \"present\", \"expression\": \"misattached\", \"instance\": \"missing\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [\"ANS:F1C0:0\"], \"reason\": \"The source does contain N-2 framing, but its qualifiers attach to a different object and operating state: withstanding selected N-2 contingencies for stability determination without voltage collapse, cascading or instability, not immediate performance within emergency thermal and voltage limits without operator intervention. The answer transfers the N-1 immediacy/no-operator qualifiers and limit targets onto N-2, so the qualifier expression is misattached. The source also gives no instance-level information showing that the claimed immediate no-operator limit performance is required for all selected N-2 cases, so instance satisfaction is missing.\", \"source_ids_marker\": null}, \"inference\": \"unsupported\", \"objection\": {\"kind\": \"fidelity\", \"reason\": \"The answer states an unconditional 'all selected N-2' requirement with immediacy, no operator intervention and the same emergency thermal and voltage limits, which the cited basis does not express; the N-2 clause addresses withstanding selected contingencies for stability limits without collapse, cascading or instability.\"}, \"repair\": {\"basis_id\": \"S0B0\", \"replacement\": \"资料对选定N-2故障只要求系统在确定稳定极限时能承受部分选定N-2故障及更严重但概率较低的扰动，而不发生电压崩溃、连锁故障或失稳；并未要求其立即、无操作员干预地保持在与N-1相同的紧急热额定值和电压限值内。\"}, \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "7bec2afe1979188aded0a0325787000d989f073d060327a42fdf24ef3b372d42",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": false,
+        "local_output_status": "invalid_structure",
+        "constraints": [
+          "unexpected_fields_not_allowed"
+        ]
+      },
+      "record": {
+        "call_number": 1,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 5057,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 3718,
+          "output_tokens": 830,
+          "total_tokens": 4548,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1664,
+          "cache_miss_tokens": 2054
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "invalid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.000811092,
+          "usd_upper": 0.001622184,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": {
+          "stage": "fact-review-simple-v1",
+          "field_path": "$.judgments[0].conditions",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "answer_ids",
+            "applicability",
+            "expression",
+            "instance",
+            "reason",
+            "source_ids"
+          ],
+          "required_fields": [
+            "answer_ids",
+            "applicability",
+            "expression",
+            "instance",
+            "reason",
+            "source_ids"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ],
+          "errors": [
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[0].conditions",
+              "constraint": "unexpected_fields_not_allowed",
+              "allowed_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "required_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "processing_options": [
+                "return_only_declared_fields",
+                "do_not_echo_program_binding_or_other_check_fields"
+              ]
+            },
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[1].conditions",
+              "constraint": "unexpected_fields_not_allowed",
+              "allowed_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "required_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "processing_options": [
+                "return_only_declared_fields",
+                "do_not_echo_program_binding_or_other_check_fields"
+              ]
+            }
+          ],
+          "retained_items": [],
+          "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+        },
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 10355,
+          "scope_ids": []
+        },
+        "invocation_id": "b1a181b986d74a59a6e723a12b6fc734",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "fact",
+      "target_bindings": [
+        {
+          "target_id": "F0C0",
+          "scope_index": 0,
+          "proposition": "资料对单一N-1故障要求系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内。",
+          "answer_unit_ids": [
+            "ANS:F0C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        },
+        {
+          "target_id": "F1C0",
+          "scope_index": 0,
+          "proposition": "资料明确要求所有选定N-2故障也必须在无操作员干预下立即满足相同限值。",
+          "answer_unit_ids": [
+            "ANS:F1C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A3",
+      "ordinal": 2,
+      "run_id": "b1a181b986d74a59a6e723a12b6fc734",
+      "call_number": 2,
+      "correction": true,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_4CgVg1Nbl8oSxwzkA5Cu7440",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source states contingency analysis ensures the system stays within emergency thermal ratings and voltage limits immediately after a disturbance involving the loss of an element (single contingency or N-1), but without operator intervention. The proposition preserves each clause: single N-1, immediacy, no operator intervention, and both emergency thermal and voltage limits. The generic instance of the disturbance is described in the source, so the statement is attested.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"satisfied\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [\"ANS:F0C0:0\"], \"reason\": \"The source attaches the no-operator-intervention qualifier specifically to the N-1 post-disturbance performance requirement and specifies both the operating state (immediately after a disturbance) and the object (emergency thermal ratings and voltage limits). The answer keeps that attachment on the single-N-1 case without extending it, and the source describes the generic instance of the loss of an element, so instance information is available.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"contradicted\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source confines N-2 treatment to the system being able to withstand some selected N-2 contingencies when determining stability limitations, and also extreme disturbances, without voltage collapse, cascading or instability. It does not require that immediate post-disturbance performance within the same emergency thermal and voltage limits be achieved without operator intervention for selected N-2 faults. The answer's 'all selected N-2' scope and its transfer of the immediacy/limits/no-operator qualifiers overstate and misassign what the source provides.\", \"gap_answer_ids\": [\"ANS:F1C0:0\"], \"conditions\": {\"applicability\": \"present\", \"expression\": \"misattached\", \"instance\": \"missing\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [\"ANS:F1C0:0\"], \"reason\": \"The source does contain N-2 framing, but its qualifiers attach to a different object and operating state: withstanding selected N-2 contingencies for stability determination without voltage collapse, cascading or instability, not immediate performance within emergency thermal ratings and voltage limits without operator intervention. The answer moves the N-1 immediacy, no-operator and limit qualifiers onto N-2, so the qualifier expression is misattached. The source also supplies no information showing the claimed immediate, no-operator, within-limits performance is required for all selected N-2 cases, so instance satisfaction is missing.\"}, \"inference\": \"unsupported\", \"objection\": {\"kind\": \"fidelity\", \"reason\": \"The answer asserts an unconditional 'all selected N-2' requirement with immediacy, no operator intervention and the same emergency thermal and voltage limits, which the cited basis does not express; the N-2 clause addresses withstanding selected contingencies for stability limits without collapse, cascading or instability.\"}, \"repair\": {\"basis_id\": \"S0B0\", \"replacement\": \"资料对选定N-2故障只要求系统在确定稳定极限时能承受部分选定N-2故障以及更严重但概率较低的扰动，而不发生电压崩溃、连锁故障或失稳；并未要求立即、无操作员干预地保持在与N-1相同的紧急热额定值和电压限值内。\"}, \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "c6fb4c3a22d4c1b5e6a1ad7474666bbfb77a551caceb177bc5dbddf61a9b9f22",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 2,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": true,
+        "status": "succeeded",
+        "duration_ms": 4078,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 5409,
+          "output_tokens": 813,
+          "total_tokens": 6222,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 3456,
+          "cache_miss_tokens": 1953
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.0007911179999999999,
+          "usd_upper": 0.0015822359999999999,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 17197,
+          "scope_ids": []
+        },
+        "invocation_id": "b1a181b986d74a59a6e723a12b6fc734",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "fact",
+      "target_bindings": [
+        {
+          "target_id": "F0C0",
+          "scope_index": 0,
+          "proposition": "资料对单一N-1故障要求系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内。",
+          "answer_unit_ids": [
+            "ANS:F0C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        },
+        {
+          "target_id": "F1C0",
+          "scope_index": 0,
+          "proposition": "资料明确要求所有选定N-2故障也必须在无操作员干预下立即满足相同限值。",
+          "answer_unit_ids": [
+            "ANS:F1C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A3",
+      "ordinal": 3,
+      "run_id": "b1a181b986d74a59a6e723a12b6fc734",
+      "call_number": 3,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_zWaMEGVCIQdAZzVH7knd3964",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S1B0\"], \"reason\": \"The source states that contingency analysis is conducted to ensure the system stays within its emergency thermal ratings and voltage limits immediately after a disturbance involving the loss of an element (single contingency / N-1), but without operator intervention. This covers the N-1 single-contingency scope, the immediate post-disturbance timing, the no-operator-intervention qualifier, and the emergency thermal rating and voltage limits. The answer's proposition matches these elements without extending them.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"not_claimed\", \"source_ids\": [\"SRC:S1B0\"], \"answer_ids\": [], \"reason\": \"The conclusion is qualified by an operating-condition scope: it applies to the single-contingency (N-1) condition and to the state immediately after a disturbance, subordinate to emergency thermal ratings and voltage limits. The answer retains the N-1 attachment (not generalizing to N-2) and the immediate post-disturbance timing with no operator intervention; the object is the system staying within emergency ratings and voltage limits. No separate numeric or load-condition instance claim is made by the answer, though the source notes performance at all times including extreme load conditions; that extra context is not part of the asserted proposition and creates no omission.\", \"source_ids_ignored\": []}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"contradicted\", \"basis_ids\": [\"S2B0\"], \"reason\": \"The source describes selected N-2 contingencies only as a stability-related withstand capability (the system should be able to withstand some selected N-2 contingencies when determining stability limitations and extreme disturbances without voltage collapse, cascading, or instability). The immediate/without-operator-intervention/emergency-thermal-rating-and-voltage-limit requirements are attached to the N-1 condition, not to N-2. The answer asserts that all selected N-2 contingencies must immediately meet the same limits without operator intervention, which misattaches the N-1 qualifiers to N-2, strengthens 'some selected' into 'all', and adds an immediate same-limits requirement\", \"gap_answer_ids\": [\"ANS:R1:0\"], \"conditions\": {\"applicability\": \"present\", \"expression\": \"misattached\", \"instance\": \"uncertain\", \"source_ids\": [\"SRC:S2B0\"], \"answer_ids\": [\"ANS:R1:0\"], \"reason\": \"The source does carry applicability qualifiers: the N-2 withstand requirement is limited to selected contingencies and to use in determining stability limitations, distinct from the N-1 emergency-rating/voltage-limit performance. The answer borrows the N-1 qualifiers (immediately, without operator intervention, same emergency limits) and attaches them to the N-2 case, so the qualifying object/operating state is wrongly transferred, and universal 'all' replaces 'some selected'. Whether any claimed instance (all selected N-2) satisfies the stability-limitation scope cannot be evaluated since the answer states no instance information about stability determination.\", \"source_ids_ignored\": []}, \"inference\": \"unsupported\", \"objection\": {\"kind\": \"classification\", \"reason\": \"The extraction is faithful to what the answer says, but the answer's N-2 claim is a qualifier transfer from the N-1 provision; it should be corrected rather than treated as an accurate statement about N-2 requirements.\"}, \"repair\": {\"basis_id\": \"S2B0\", \"replacement\": \"资料对N-2的要求是与N-1要求不同的：系统应能在确定稳定极限时承受部分选定的N-2故障以及极端（更严重但概率更低）扰动，而不发生电压崩溃、连锁故障或失稳；即时、无操作员干预下保持紧急热额定值和电压限值的限定适用于N-1单一故障，并非所有选定N-2故障。\"}, \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "b1d93ac14365b99f1525cb8f7088185c2ba9a211aa1851f4fb6af100d0ed4665",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": false,
+        "local_output_status": "invalid_structure",
+        "constraints": [
+          "unexpected_fields_not_allowed"
+        ]
+      },
+      "record": {
+        "call_number": 3,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 5750,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 4466,
+          "output_tokens": 910,
+          "total_tokens": 5376,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1664,
+          "cache_miss_tokens": 2802
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "invalid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.000971292,
+          "usd_upper": 0.001942584,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": {
+          "stage": "fact-review-simple-v1",
+          "field_path": "$.judgments[2].conditions",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "answer_ids",
+            "applicability",
+            "expression",
+            "instance",
+            "reason",
+            "source_ids"
+          ],
+          "required_fields": [
+            "answer_ids",
+            "applicability",
+            "expression",
+            "instance",
+            "reason",
+            "source_ids"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ],
+          "errors": [
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[2].conditions",
+              "constraint": "unexpected_fields_not_allowed",
+              "allowed_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "required_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "processing_options": [
+                "return_only_declared_fields",
+                "do_not_echo_program_binding_or_other_check_fields"
+              ]
+            },
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[3].conditions",
+              "constraint": "unexpected_fields_not_allowed",
+              "allowed_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "required_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "processing_options": [
+                "return_only_declared_fields",
+                "do_not_echo_program_binding_or_other_check_fields"
+              ]
+            }
+          ],
+          "retained_items": [],
+          "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+        },
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 12881,
+          "scope_ids": []
+        },
+        "invocation_id": "b1a181b986d74a59a6e723a12b6fc734",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "citation",
+      "target_bindings": [
+        {
+          "target_id": "R0",
+          "scope_index": 1,
+          "proposition": "资料对单一N-1故障要求系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内。",
+          "answer_unit_ids": [
+            "ANS:R0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S1B0"
+          ],
+          "allowed_basis_ids": [
+            "S1B0"
+          ]
+        },
+        {
+          "target_id": "R1",
+          "scope_index": 2,
+          "proposition": "资料明确要求所有选定N-2故障也必须在无操作员干预下立即满足相同限值。",
+          "answer_unit_ids": [
+            "ANS:R1:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S2B0"
+          ],
+          "allowed_basis_ids": [
+            "S2B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A7",
+      "ordinal": 1,
+      "run_id": "833e0fa3629644c6b95b341f63a03976",
+      "call_number": 1,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_ErDMen4TZhs7zQe2xGYo4530",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source states that dynamic reactive resources adjust reactive power output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes. All clauses of the proposition (automatic, real-time, continuous, within a specified voltage bandwidth, responsive to grid voltage changes) match the source's general description of dynamic reactive resources. The proposition is a generic characterization, not an instance application, so no additional numerical or site-specific conditions are needed. Note the source is a voluntary North American guideline, so it establishes descriptive technical content only.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"none\", \"expression\": \"not_applicable\", \"instance\": \"not_claimed\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [], \"reason\": \"The conclusion is a generic statement about the operating characteristics of dynamic reactive resources with no conditional qualifier attached; no extra applicability condition is asserted or needed, and no specific plant or device instance is claimed to satisfy a condition. The description of the operating regime (specified voltage bandwidth, droop or set-point mode) is part of the proposition itself, not an extra condition.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"contradicted\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The proposition asserts a sufficient guarantee: any plant adopting dynamic reactive resources will have voltage stability assured after all faults. The source only describes how dynamic reactive resources behave (automatic continuous real-time adjustment within a specified voltage bandwidth, set-point or droop operation, fast response in electrical cycles); it makes no claim that adopting such resources guarantees voltage stability for all post-fault conditions, and the universal quantifier over faults has no support. The strong causal/guarantee inference is an overreach beyond the descriptive material, so it is contradicted as a necessary-versus-sufficient inversion. Source silence alone would normally be insufficient rather than contradiction, but here the affirmative guarantee claim exceeds the only available descriptive basis and the proposition's universal scope cannot hold.\", \"gap_answer_ids\": [\"ANS:F1C0:0\"], \"conditions\": {\"applicability\": \"present\", \"expression\": \"misattached\", \"instance\": \"missing\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [\"ANS:F1C0:0\"], \"reason\": \"The conclusion is a conditional guarantee ('as long as dynamic reactive resources are adopted, voltage stability after all faults is assured'), which carries implicit applicability conditions: adequacy of sizing and rating, location, the type and severity of faults, interaction with other voltage-support devices, and network conditions. The source qualifies its characterization to operation within a specified voltage bandwidth and set-point/droop modes, not to a blanket post-fault stability guarantee; that qualification is attached to a descriptive capability, not to the asserted sufficiency conclusion, so the expression is misattached. No instance information is supplied showing that any particular plant's configuration satisfies the needed conditions, so the claimed instance application is missing.\"}, \"inference\": \"unsupported\", \"objection\": {\"kind\": \"classification\", \"reason\": \"The answer text is faithfully rendered from the target claim, but the recorded classification treats the sufficiency/guarantee statement as equivalent to the source's descriptive capability; the guarantee proposition is not established by the cited descriptive basis and its adequacy conditions are unattached and instance data absent.\"}, \"repair\": {\"basis_id\": \"S0B0\", \"replacement\": \"资料仅说明动态无功资源可在规定电压带宽内随电网电压变化自动、实时、连续调节，并可在设定电压或电压下垂模式下运行、在数个电气周波内快速响应；并不能据此保证采用该资源的厂站在所有故障后均保持电压稳定，实际效果还取决于资源配置与容量、安装位置、故障类型与严重程度以及系统条件。\"}, \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "15a141e84b554f591a3dd6eb9d1a87b4b5b539c2f429045fe04741e65bb514cb",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 1,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 6437,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 3681,
+          "output_tokens": 886,
+          "total_tokens": 4567,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1664,
+          "cache_miss_tokens": 2017
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.0008391420000000001,
+          "usd_upper": 0.0016782840000000002,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 10457,
+          "scope_ids": []
+        },
+        "invocation_id": "833e0fa3629644c6b95b341f63a03976",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "fact",
+      "target_bindings": [
+        {
+          "target_id": "F0C0",
+          "scope_index": 0,
+          "proposition": "资料中的动态无功资源可在规定电压带宽内随电网电压变化自动实时连续调节。",
+          "answer_unit_ids": [
+            "ANS:F0C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        },
+        {
+          "target_id": "F1C0",
+          "scope_index": 0,
+          "proposition": "因此匿名厂站只要采用动态无功资源，就能保证所有故障后电压稳定。",
+          "answer_unit_ids": [
+            "ANS:F1C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A7",
+      "ordinal": 2,
+      "run_id": "833e0fa3629644c6b95b341f63a03976",
+      "call_number": 2,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_qlpepAqMbugft3Hzy5I83297",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S1B0\"], \"reason\": \"The cited unit states that dynamic reactive resources adjust reactive power output automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes. Every clause of the proposition (automatic, real-time, continuous, within a specified voltage bandwidth, responsive to grid voltage changes) is matched with no scope extension beyond the source's own qualifier of 'specified voltage bandwidth'. The source is a voluntary North American guideline, but the proposition is a descriptive characterization of resource behavior, not a normative operational guarantee.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"not_claimed\", \"source_ids\": [\"SRC:S1B0\"], \"answer_ids\": [\"ANS:R0:0\"], \"reason\": \"The source attaches the qualifier 'within a specified voltage bandwidth' to the automatic continuous adjustment; the answer retains this bandwidth qualifier together with responsiveness to grid voltage changes, so the object (dynamic reactive resources) and operating condition (adjustment within the specified voltage bandwidth) are preserved. The proposition is a generic characterization and claims no specific plant or instance application, so no instance data are required. No further applicability conditions are introduced or dropped.\", \"reason_note\": \"\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"contradicted\", \"basis_ids\": [\"S2B0\"], \"reason\": \"The cited unit only describes that dynamic reactive resources adjust output automatically in real time over a continuous range within a specified voltage bandwidth and can respond within electrical cycles; it says nothing about guaranteeing voltage stability of a plant after all faults. The proposition asserts a sufficient guarantee ('只要...就能保证所有故障后电压稳定') applied to an anonymous plant, which the source neither states nor supports; the source's content is compatible only with the narrower descriptive claim and provides no basis for the universal post-fault stability guarantee, so the guarantee claim is contradicted by the absence of any such supporting content and by the source's own limitation to behavior within a specified voltage bandwidth.\", \"gap_answer_ids\": [\"ANS:R1:0\"], \"conditions\": {\"applicability\": \"present\", \"expression\": \"misattached\", \"instance\": \"missing\", \"source_ids\": [\"SRC:S2B0\"], \"answer_ids\": [\"ANS:R1:0\"], \"reason\": \"The source's qualifiers are about operation within a specified voltage bandwidth and fast response times; the answer misattaches a guarantee of voltage stability after all faults to the mere adoption of dynamic reactive resources, converting a bounded descriptive statement into an unconditional sufficiency claim. The claimed instance application (a particular anonymous plant adopting the resources and achieving post-fault stability for every contingency) has no supporting information in the source; no fault cases, plant data, or stability results are provided.\", \"reason_note\": \"\"}, \"inference\": \"unsupported\", \"objection\": {\"kind\": \"fidelity\", \"reason\": \"The answer's conclusion (adopting dynamic reactive resources guarantees post-fault voltage stability for all faults) is not a faithful extraction of the cited text, which describes only automatic real-time adjustment within a specified voltage bandwidth; the causal/universal guarantee is injected by the answer rather than derived from the selected basis.\"}, \"repair\": {\"basis_id\": \"S2B0\", \"replacement\": \"动态无功资源可在规定电压带宽内随电网电压变化自动实时连续调节其无功出力，部分电力电子型资源可在数周波内响应；但资料仅描述该调节特性，并未据此保证任一厂站在所有故障后均电压稳定。\"}, \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "6673bf714459dc7aaf24513510eb31fed70e5e77cabdb1e4b782251ff2b95253",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": false,
+        "local_output_status": "invalid_structure",
+        "constraints": [
+          "unexpected_fields_not_allowed"
+        ]
+      },
+      "record": {
+        "call_number": 2,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 5506,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 4459,
+          "output_tokens": 832,
+          "total_tokens": 5291,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1664,
+          "cache_miss_tokens": 2795
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "invalid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.000923442,
+          "usd_upper": 0.001846884,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": {
+          "stage": "fact-review-simple-v1",
+          "field_path": "$.judgments[2].conditions",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "answer_ids",
+            "applicability",
+            "expression",
+            "instance",
+            "reason",
+            "source_ids"
+          ],
+          "required_fields": [
+            "answer_ids",
+            "applicability",
+            "expression",
+            "instance",
+            "reason",
+            "source_ids"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ],
+          "errors": [
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[2].conditions",
+              "constraint": "unexpected_fields_not_allowed",
+              "allowed_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "required_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "processing_options": [
+                "return_only_declared_fields",
+                "do_not_echo_program_binding_or_other_check_fields"
+              ]
+            },
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[3].conditions",
+              "constraint": "unexpected_fields_not_allowed",
+              "allowed_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "required_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "processing_options": [
+                "return_only_declared_fields",
+                "do_not_echo_program_binding_or_other_check_fields"
+              ]
+            }
+          ],
+          "retained_items": [],
+          "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+        },
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 13149,
+          "scope_ids": []
+        },
+        "invocation_id": "833e0fa3629644c6b95b341f63a03976",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "citation",
+      "target_bindings": [
+        {
+          "target_id": "R0",
+          "scope_index": 1,
+          "proposition": "资料中的动态无功资源可在规定电压带宽内随电网电压变化自动实时连续调节。",
+          "answer_unit_ids": [
+            "ANS:R0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S1B0"
+          ],
+          "allowed_basis_ids": [
+            "S1B0"
+          ]
+        },
+        {
+          "target_id": "R1",
+          "scope_index": 2,
+          "proposition": "因此匿名厂站只要采用动态无功资源，就能保证所有故障后电压稳定。",
+          "answer_unit_ids": [
+            "ANS:R1:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S2B0"
+          ],
+          "allowed_basis_ids": [
+            "S2B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A7",
+      "ordinal": 3,
+      "run_id": "833e0fa3629644c6b95b341f63a03976",
+      "call_number": 3,
+      "correction": true,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_uuyPCrPijeKOtrV5yvsW0459",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S1B0\"], \"reason\": \"The cited unit states that dynamic reactive resources adjust reactive power output automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes. Every clause of the proposition (automatic, real-time, continuous, within a specified voltage bandwidth, responsive to grid voltage changes) is matched with no scope extension beyond the source's own qualifier of a specified voltage bandwidth. The source is a voluntary North American guideline, but the proposition is a descriptive characterization of resource behavior, not a normative operational guarantee.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"not_claimed\", \"source_ids\": [\"SRC:S1B0\"], \"answer_ids\": [\"ANS:R0:0\"], \"reason\": \"The source attaches the qualifier of a specified voltage bandwidth to the automatic continuous adjustment; the answer retains this bandwidth qualifier together with responsiveness to grid voltage changes, so the object (dynamic reactive resources) and the operating condition (adjustment within the specified voltage bandwidth) are preserved. The proposition is a generic characterization and claims no specific plant or instance application, so no instance data are required. No further applicability conditions are introduced or dropped.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"contradicted\", \"basis_ids\": [\"S2B0\"], \"reason\": \"The cited unit only describes that dynamic reactive resources adjust output automatically in real time over a continuous range within a specified voltage bandwidth and can respond within electrical cycles; it says nothing about guaranteeing voltage stability of a plant after all faults. The proposition asserts a sufficient guarantee applied to an anonymous plant, which the source neither states nor supports; the source's content is compatible only with the narrower descriptive claim and provides no basis for the universal post-fault stability guarantee, so the guarantee claim is contradicted by the absence of any such supporting content and by the source's own limitation to behavior within a specified voltage bandwidth.\", \"gap_answer_ids\": [\"ANS:R1:0\"], \"conditions\": {\"applicability\": \"present\", \"expression\": \"misattached\", \"instance\": \"missing\", \"source_ids\": [\"SRC:S2B0\"], \"answer_ids\": [\"ANS:R1:0\"], \"reason\": \"The source's qualifiers concern operation within a specified voltage bandwidth and fast response times; the answer misattaches a guarantee of voltage stability after all faults to the mere adoption of dynamic reactive resources, converting a bounded descriptive statement into an unconditional sufficiency claim. The claimed instance application (a particular anonymous plant adopting the resources and achieving post-fault stability for every contingency) has no supporting information in the source; no fault cases, plant data, or stability results are provided.\"}, \"inference\": \"unsupported\", \"objection\": {\"kind\": \"fidelity\", \"reason\": \"The answer's conclusion (adopting dynamic reactive resources guarantees post-fault voltage stability for all faults) is not a faithful extraction of the cited text, which describes only automatic real-time adjustment within a specified voltage bandwidth; the causal and universal guarantee is injected by the answer rather than derived from the selected basis.\"}, \"repair\": {\"basis_id\": \"S2B0\", \"replacement\": \"动态无功资源可在规定电压带宽内随电网电压变化自动实时连续调节其无功出力，部分电力电子型资源可在数周波内响应；但资料仅描述该调节特性，并未据此保证任一厂站在所有故障后均电压稳定。\"}, \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "75c5292f3be7300726b0efe17be4c209a0603ba374b4f653c47c4bb486149e48",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 3,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": true,
+        "status": "succeeded",
+        "duration_ms": 3577,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 6150,
+          "output_tokens": 805,
+          "total_tokens": 6955,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 4352,
+          "cache_miss_tokens": 1798
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.0007657559999999999,
+          "usd_upper": 0.0015315119999999998,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 20293,
+          "scope_ids": []
+        },
+        "invocation_id": "833e0fa3629644c6b95b341f63a03976",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "citation",
+      "target_bindings": [
+        {
+          "target_id": "R0",
+          "scope_index": 1,
+          "proposition": "资料中的动态无功资源可在规定电压带宽内随电网电压变化自动实时连续调节。",
+          "answer_unit_ids": [
+            "ANS:R0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S1B0"
+          ],
+          "allowed_basis_ids": [
+            "S1B0"
+          ]
+        },
+        {
+          "target_id": "R1",
+          "scope_index": 2,
+          "proposition": "因此匿名厂站只要采用动态无功资源，就能保证所有故障后电压稳定。",
+          "answer_unit_ids": [
+            "ANS:R1:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S2B0"
+          ],
+          "allowed_basis_ids": [
+            "S2B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A2",
+      "ordinal": 1,
+      "run_id": "3026882809054e62b556159221323f29",
+      "call_number": 1,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_ZGbi0qtj3XcyaVDd18ph9515",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source states that the transmission-to-distribution boundary is usually defined by explicit loads modeled as MW and Mvar, and that these loads may be modeled on the high side of the bus/substation or behind the step-down transformers and/or equivalent distribution impedances. The answer reproduces this content, including both the MW/Mvar explicit modeling and the two placement options. A noted framing difference: the source characterizes this as usual practice, while the answer states it as a general fact without hedging; this softens the 'usually' qualifier but does not invert the substance. No negation or causal direction issues.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"not_claimed\", \"source_ids\": [\"S0B0\"], \"answer_ids\": [], \"reason\": \"The source marks the modeling convention as usual rather than universal, an applicability qualifier. The answer preserves the content but drops the 'usually' hedging, so the conditional applicability is expressed only implicitly as general practice; no specific instance application is claimed, so instance is not_claimed.\", \"answer_text\": \"\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"supported\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source states that loads should not over-rely on reactive support (lagging or leading) from the BES, and conversely that the BES should not solely depend on the load for reactive support. The answer restates both directions of the mutual dependency caution, matching the reciprocity and both clauses. The lagging/leading parenthetical is omitted but does not alter the proposition's truth. The source is a voluntary guideline recommendation, and the answer's 'should not' framing matches the normative recommendation rather than asserting a hard rule.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"not_claimed\", \"source_ids\": [\"S0B0\"], \"answer_ids\": [], \"reason\": \"The source's recommendation carries an applicability context (BES coordination practice, voluntary guideline), and the answer's reciprocal 'should not' statements preserve the object attachment on both sides (loads vs. bulk system reactive support). No specific instance application is claimed, so instance is not_claimed.\", \"answer_text\": \"\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "7ff94138c79313cde82b7d8f3938b8eef390fd01a66cbf01b0e5f6a6cebd112b",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": false,
+        "local_output_status": "invalid_structure",
+        "constraints": [
+          "selected_local_source_ids_required",
+          "unexpected_fields_not_allowed"
+        ]
+      },
+      "record": {
+        "call_number": 1,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 3524,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 3781,
+          "output_tokens": 594,
+          "total_tokens": 4375,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1664,
+          "cache_miss_tokens": 2117
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "invalid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.000678942,
+          "usd_upper": 0.001357884,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": {
+          "stage": "fact-review-simple-v1",
+          "field_path": "$.judgments[0].conditions",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "answer_ids",
+            "applicability",
+            "expression",
+            "instance",
+            "reason",
+            "source_ids"
+          ],
+          "required_fields": [
+            "answer_ids",
+            "applicability",
+            "expression",
+            "instance",
+            "reason",
+            "source_ids"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ],
+          "errors": [
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[0].conditions",
+              "constraint": "unexpected_fields_not_allowed",
+              "allowed_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "required_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "processing_options": [
+                "return_only_declared_fields",
+                "do_not_echo_program_binding_or_other_check_fields"
+              ]
+            },
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[0].conditions.source_ids",
+              "constraint": "selected_local_source_ids_required"
+            },
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[1].conditions",
+              "constraint": "unexpected_fields_not_allowed",
+              "allowed_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "required_fields": [
+                "answer_ids",
+                "applicability",
+                "expression",
+                "instance",
+                "reason",
+                "source_ids"
+              ],
+              "processing_options": [
+                "return_only_declared_fields",
+                "do_not_echo_program_binding_or_other_check_fields"
+              ]
+            },
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[1].conditions.source_ids",
+              "constraint": "selected_local_source_ids_required"
+            }
+          ],
+          "retained_items": [],
+          "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+        },
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 10608,
+          "scope_ids": []
+        },
+        "invocation_id": "3026882809054e62b556159221323f29",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "fact",
+      "target_bindings": [
+        {
+          "target_id": "F0C0",
+          "scope_index": 0,
+          "proposition": "资料将输配边界负荷显式建模为MW和Mvar，可放在母线高压侧，也可放在降压变压器或等效配电阻抗之后。",
+          "answer_unit_ids": [
+            "ANS:F0C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        },
+        {
+          "target_id": "F1C0",
+          "scope_index": 0,
+          "proposition": "资料指出负荷不应过度依赖大电力系统的无功支撑，反过来大电力系统也不应单纯依赖负荷的无功支撑。",
+          "answer_unit_ids": [
+            "ANS:F1C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A2",
+      "ordinal": 2,
+      "run_id": "3026882809054e62b556159221323f29",
+      "call_number": 2,
+      "correction": true,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_skvlbFEB6mRoMjmXgMrC7214",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source describes the transmission-to-distribution boundary as usually defined by explicit loads modeled as MW and Mvar, and states such loads may be modeled on the high side of the bus/substation or behind step-down transformers and/or equivalent distribution impedances. The answer covers both the explicit MW/Mvar modeling and both placement options. The source frames this as usual practice while the answer states it flatly, softening the 'usually' hedge but not inverting the substance. No negation or causal-direction issue.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"not_claimed\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [\"ANS:F0C0:0\"], \"reason\": \"The source qualifies the modeling convention as usual rather than universal, an applicability qualifier on the modeling statement about the TO-DP boundary load representation. The answer preserves the object attachment (boundary loads as MW/Mvar at either of the two locations) but drops the 'usually' hedge, expressing it as general practice; no specific instance application is claimed, so instance is not_claimed.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"supported\", \"basis_ids\": [\"S0B0\"], \"reason\": \"The source states that loads should not over-rely on reactive support (lagging or leading) from the BES, and conversely that the BES should not solely depend on the load for reactive support. The answer restates both reciprocal directions with matching 'should not' normative framing. The lagging/leading parenthetical is omitted but does not change the proposition. The source is a voluntary reliability guideline, and the answer's recommendation form matches that rather than asserting a hard rule.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"present\", \"expression\": \"preserved\", \"instance\": \"not_claimed\", \"source_ids\": [\"SRC:S0B0\"], \"answer_ids\": [\"ANS:F1C0:0\"], \"reason\": \"The recommendation carries an applicability context (BES coordination practice under a voluntary guideline, reactive support with lagging or leading character). The answer preserves the two-sided object attachment — loads versus the bulk system as reactive-support sources — and keeps the 'should not' direction on both sides. No specific instance application is claimed, so instance is not_claimed.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "93d44ce51f7f617ea23dc2ec3aac738567d015890e6ca5d7987f02f57ad0c928",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "valid_structure",
+        "constraints": []
+      },
+      "record": {
+        "call_number": 2,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": true,
+        "status": "succeeded",
+        "duration_ms": 3456,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 5383,
+          "output_tokens": 607,
+          "total_tokens": 5990,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 3712,
+          "cache_miss_tokens": 1671
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "valid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.000625986,
+          "usd_upper": 0.001251972,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": null,
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 17133,
+          "scope_ids": []
+        },
+        "invocation_id": "3026882809054e62b556159221323f29",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "fact",
+      "target_bindings": [
+        {
+          "target_id": "F0C0",
+          "scope_index": 0,
+          "proposition": "资料将输配边界负荷显式建模为MW和Mvar，可放在母线高压侧，也可放在降压变压器或等效配电阻抗之后。",
+          "answer_unit_ids": [
+            "ANS:F0C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        },
+        {
+          "target_id": "F1C0",
+          "scope_index": 0,
+          "proposition": "资料指出负荷不应过度依赖大电力系统的无功支撑，反过来大电力系统也不应单纯依赖负荷的无功支撑。",
+          "answer_unit_ids": [
+            "ANS:F1C0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S0B0"
+          ],
+          "allowed_basis_ids": [
+            "S0B0"
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "A2",
+      "ordinal": 3,
+      "run_id": "3026882809054e62b556159221323f29",
+      "call_number": 3,
+      "correction": false,
+      "http_status": 200,
+      "model_id": "deepseek-flash",
+      "content": "",
+      "finish_reason": "tool_calls",
+      "tool_calls": [
+        {
+          "id": "call_00_hDTPUp4s0161h8NpPhNY4035",
+          "type": "function",
+          "function": {
+            "name": "submit_review_result",
+            "arguments": "{\"judgments\": [{\"status\": \"supported\", \"basis_ids\": [\"S1B0\"], \"reason\": \"The source states the TO-DP boundary is usually defined by explicit loads modeled as MW and Mvar, and that these loads may be modeled on the high side of the bus/substation or behind step-down transformers and/or equivalent distribution impedances. Both placement options and the MW/Mvar modeling are preserved; 'may/potentially' modality is retained as the answer's permissive phrasing. The proposition concerns modeling description only, with no extra instance application asserted.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"none\", \"expression\": \"not_applicable\", \"instance\": \"not_claimed\", \"source_ids\": [\"S1B0\"], \"answer_ids\": [], \"reason\": \"The proposition is a descriptive statement of modeling practice carrying no extra applicability condition beyond the described setting, and no conditional instance application is claimed by the answer; the source's optional placements are conveyed as options, not as requirements.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}, {\"status\": \"supported\", \"basis_ids\": [\"S2B0\"], \"reason\": \"The source states loads should not over-rely on reactive support (lagging or leading) from the BES and, conversely, the BES should not solely depend on the load for reactive support. The answer reproduces both directions of this reciprocal dependence caution, preserving the converse structure and the normative 'should not' direction in both clauses. The parenthetical qualifier about lagging/leading is not carried over but does not alter the core guidance; the proposition makes no instance claim.\", \"gap_answer_ids\": [], \"conditions\": {\"applicability\": \"none\", \"expression\": \"not_applicable\", \"instance\": \"not_claimed\", \"source_ids\": [\"S2B0\"], \"answer_ids\": [], \"reason\": \"The proposition is a general reciprocal guidance statement with no additional applicability conditions and no claimed instance application; the two-way 'should not over-rely / should not solely depend' relation is stated for loads and the bulk system in general, so no object-state qualification is missing.\"}, \"inference\": \"preserved\", \"objection\": \"__NULL__\", \"repair\": \"__NULL__\", \"requires_authoritative_source\": false}]}"
+          }
+        }
+      ],
+      "arguments_sha256": "06ba994bfc3fae7d20ca680e11761841fdc3dc949993693969dc20e9b36d37f2",
+      "layers": {
+        "http_status": 200,
+        "envelope_single_named_tool": true,
+        "json_syntax": true,
+        "duplicate_keys": false,
+        "schema_valid": true,
+        "local_output_status": "invalid_structure",
+        "constraints": [
+          "selected_local_source_ids_required"
+        ]
+      },
+      "record": {
+        "call_number": 3,
+        "requested_model_id": "deepseek-flash",
+        "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 3314,
+        "returned_model_id": "deepseek-flash",
+        "usage": {
+          "input_tokens": 4575,
+          "output_tokens": 523,
+          "total_tokens": 5098,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 1664,
+          "cache_miss_tokens": 2911
+        },
+        "finish_reason": "tool_calls",
+        "error_code": null,
+        "output_status": "invalid_structure",
+        "cost_estimate": {
+          "status": "off_peak_to_peak_range",
+          "price_date": "2026-10-02",
+          "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+          "usd_lower": 0.000755442,
+          "usd_upper": 0.001510884,
+          "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+        },
+        "validation_error": {
+          "stage": "fact-review-simple-v1",
+          "field_path": "$.judgments[2].conditions.source_ids",
+          "constraint": "selected_local_source_ids_required",
+          "errors": [
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[2].conditions.source_ids",
+              "constraint": "selected_local_source_ids_required"
+            },
+            {
+              "stage": "fact-review-simple-v1",
+              "field_path": "$.judgments[3].conditions.source_ids",
+              "constraint": "selected_local_source_ids_required"
+            }
+          ],
+          "retained_items": [],
+          "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+        },
+        "response_contract_version": "fact-review-simple-v1",
+        "request_metrics": {
+          "method": "literal-delivered-json-fields-v1",
+          "candidate_count": 0,
+          "evidence_chars_delivered": 0,
+          "evidence_chars_unique": 0,
+          "message_chars": 13299,
+          "scope_ids": []
+        },
+        "invocation_id": "3026882809054e62b556159221323f29",
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "network_diagnostic": null
+      },
+      "interface": "citation",
+      "target_bindings": [
+        {
+          "target_id": "R0",
+          "scope_index": 1,
+          "proposition": "资料将输配边界负荷显式建模为MW和Mvar，可放在母线高压侧，也可放在降压变压器或等效配电阻抗之后。",
+          "answer_unit_ids": [
+            "ANS:R0:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S1B0"
+          ],
+          "allowed_basis_ids": [
+            "S1B0"
+          ]
+        },
+        {
+          "target_id": "R1",
+          "scope_index": 2,
+          "proposition": "资料指出负荷不应过度依赖大电力系统的无功支撑，反过来大电力系统也不应单纯依赖负荷的无功支撑。",
+          "answer_unit_ids": [
+            "ANS:R1:0"
+          ],
+          "source_unit_ids": [
+            "SRC:S2B0"
+          ],
+          "allowed_basis_ids": [
+            "S2B0"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "tests": 44,
+  "seconds": 18.821,
+  "command": "python -X utf8 -m unittest tests.test_strict_interface_probe_v1 tests.test_deepseek tests.test_request_boundary_v1 tests.test_strict_review_tool_v1 tests.test_strict_review_tool_trial_v1 tests.test_batch_control -v",
+  "result": "OK",
+  "full_suite_rerun": false,
+  "scope": "Only opt-in adapter observation/diagnostic override and new lightweight entry. Existing production payload/default behavior checked; no reviewer or projection changes.",
+  "fixture_issue": "Temporary test archive first outside allowed diagnostic root; fixed before paid freeze. No real request was made during tests."
+}

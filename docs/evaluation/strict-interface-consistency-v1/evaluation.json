@@ -1,0 +1,364 @@
+{
+  "note": "Old development regression; raw labels only from valid retained outputs. Placeholder not_assessable is execution failure, not a model judgment. No final product policy or answer rewriting invoked.",
+  "cases": [
+    {
+      "case_id": "A1",
+      "complete": true,
+      "facts": [
+        {
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "disposition": "assessed",
+          "reason": "The source states that dynamic reactive resources adjust reactive power output automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and that they operate to maintain a set point voltage or operate in a voltage droop mode. All clauses of the proposition — automatic real-time continuous adjustment, response to voltage changes, the voltage bandwidth qualifier, and the two operating modes as alternatives — are matched. Note the bandwidth specification qualifier is retained.",
+          "conditions": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F0C0:0"
+            ],
+            "reason": "The proposition carries an applicability qualifier that adjustment occurs within a specified voltage bandwidth; the answer retains that qualifier attached to the same object (dynamic reactive resources) and the same conclusion (continuous automatic output adjustment). No specific instance application (e.g., a particular device or voltage bandwidth value) is claimed, so instance is not_claimed rather than missing."
+          },
+          "projection_reasons": [],
+          "objection": null
+        },
+        {
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "disposition": "assessed",
+          "reason": "The source states that static reactive resources have fixed reactive power output at their nominal voltage, that their capability varies according to voltage squared, and that these devices are switched in or out of service based on system conditions with switching action able to be manual or automatic. Each component of the proposition — fixed output at rated voltage, voltage-squared variation of capability, and manual or automatic switching per system conditions — corresponds to the source. The manual/automatic wording is permissive (can be), not an assertion that both always apply, and the answer's '可按' reflects permissive modality.",
+          "conditions": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "The fixed-output and voltage-squared statements are conditioned on nominal/rated voltage, and switching is conditioned on system conditions; both qualifiers are retained and attached to the same object (static reactive resources) and conclusions. No particular device instance or specific system condition is asserted as satisfied, so instance is not_claimed."
+          },
+          "projection_reasons": [],
+          "objection": null
+        }
+      ],
+      "citations": [
+        {
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "Target proposition repeats two conjoined assertions: automatic real-time continuous output adjustment in response to grid voltage changes within a specified voltage bandwidth, and operation either to maintain a set point voltage or in voltage droop mode. The bound basis states both assertions directly, without added quantifiers or negation; the 'or' alternative is preserved, and both alternatives are attributed to the same dynamic-resource class. No clause is omitted or misdirected. ",
+          "conditions": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "This is a descriptive characterization of how dynamic reactive resources behave; it is not a conditional rule application and asserts no specific instance case. The only qualifier is the voltage-bandwidth scope, which the answer retains attached to the adjustment behavior. No additional applicability condition is stated by the source, so applicability is none and expression is not applicable rather than missing; no instance information is needed."
+          },
+          "projection_reasons": []
+        },
+        {
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "Target proposition asserts three conjoined clauses: fixed reactive power output at nominal voltage, capability varying according to voltage squared, and switching in or out based on system conditions treated as manual or automatic. The bound basis states each clause directly with the same direction (capability proportional to voltage squared) and the same manual-or-automatic alternative for switching; nothing is negated, modalized beyond the source, or extended to a different subject class. ",
+          "conditions": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [],
+            "answer_ids": [],
+            "reason": "The target is a general descriptive characterization of static reactive resources, not a conditional rule and not a claim that a particular device or system satisfies switching conditions. The reference to system conditions attaches to the switching behavior and is retained in the answer; no extra applicability condition is stated. No instance application is claimed, so instance information is not required."
+          },
+          "projection_reasons": []
+        }
+      ],
+      "execution_issues": [],
+      "elapsed_ms": 7948
+    },
+    {
+      "case_id": "A3",
+      "complete": false,
+      "facts": [
+        {
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "disposition": "assessed",
+          "reason": "The source states contingency analysis ensures the system stays within emergency thermal ratings and voltage limits immediately after a disturbance involving the loss of an element (single contingency or N-1), but without operator intervention. The proposition preserves each clause: single N-1, immediacy, no operator intervention, and both emergency thermal and voltage limits. The generic instance of the disturbance is described in the source, so the statement is attested.",
+          "conditions": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "satisfied",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F0C0:0"
+            ],
+            "reason": "The source attaches the no-operator-intervention qualifier specifically to the N-1 post-disturbance performance requirement and specifies both the operating state (immediately after a disturbance) and the object (emergency thermal ratings and voltage limits). The answer keeps that attachment on the single-N-1 case without extending it, and the source describes the generic instance of the loss of an element, so instance information is available."
+          },
+          "projection_reasons": [],
+          "objection": null
+        },
+        {
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "contradicted",
+          "effective_status": "not_assessable",
+          "disposition": "review_required",
+          "reason": "The source confines N-2 treatment to the system being able to withstand some selected N-2 contingencies when determining stability limitations, and also extreme disturbances, without voltage collapse, cascading or instability. It does not require that immediate post-disturbance performance within the same emergency thermal and voltage limits be achieved without operator intervention for selected N-2 faults. The answer's 'all selected N-2' scope and its transfer of the immediacy/limits/no-operator qualifiers overstate and misassign what the source provides.",
+          "conditions": {
+            "applicability": "present",
+            "expression": "misattached",
+            "instance": "missing",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "The source does contain N-2 framing, but its qualifiers attach to a different object and operating state: withstanding selected N-2 contingencies for stability determination without voltage collapse, cascading or instability, not immediate performance within emergency thermal ratings and voltage limits without operator intervention. The answer moves the N-1 immediacy, no-operator and limit qualifiers onto N-2, so the qualifier expression is misattached. The source also supplies no information showing the claimed immediate, no-operator, within-limits performance is required for all selected N-2 cases, so instance satisfaction is missing."
+          },
+          "projection_reasons": [
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ],
+          "objection": {
+            "kind": "fidelity",
+            "reason": "The answer asserts an unconditional 'all selected N-2' requirement with immediacy, no operator intervention and the same emergency thermal and voltage limits, which the cited basis does not express; the N-2 clause addresses withstanding selected contingencies for stability limits without collapse, cascading or instability."
+          }
+        }
+      ],
+      "citations": [
+        {
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete ",
+          "conditions": null,
+          "projection_reasons": null
+        },
+        {
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete ",
+          "conditions": null,
+          "projection_reasons": null
+        }
+      ],
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        }
+      ],
+      "elapsed_ms": 15107
+    },
+    {
+      "case_id": "A7",
+      "complete": true,
+      "facts": [
+        {
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "disposition": "assessed",
+          "reason": "The source states that dynamic reactive resources adjust reactive power output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes. All clauses of the proposition (automatic, real-time, continuous, within a specified voltage bandwidth, responsive to grid voltage changes) match the source's general description of dynamic reactive resources. The proposition is a generic characterization, not an instance application, so no additional numerical or site-specific conditions are needed. Note the source is a voluntary North American guideline, so it establishes descriptive technical content only.",
+          "conditions": {
+            "applicability": "none",
+            "expression": "not_applicable",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [],
+            "reason": "The conclusion is a generic statement about the operating characteristics of dynamic reactive resources with no conditional qualifier attached; no extra applicability condition is asserted or needed, and no specific plant or device instance is claimed to satisfy a condition. The description of the operating regime (specified voltage bandwidth, droop or set-point mode) is part of the proposition itself, not an extra condition."
+          },
+          "projection_reasons": [],
+          "objection": null
+        },
+        {
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "contradicted",
+          "effective_status": "not_assessable",
+          "disposition": "review_required",
+          "reason": "The proposition asserts a sufficient guarantee: any plant adopting dynamic reactive resources will have voltage stability assured after all faults. The source only describes how dynamic reactive resources behave (automatic continuous real-time adjustment within a specified voltage bandwidth, set-point or droop operation, fast response in electrical cycles); it makes no claim that adopting such resources guarantees voltage stability for all post-fault conditions, and the universal quantifier over faults has no support. The strong causal/guarantee inference is an overreach beyond the descriptive material, so it is contradicted as a necessary-versus-sufficient inversion. Source silence alone would normally be insufficient rather than contradiction, but here the affirmative guarantee claim exceeds the only available descriptive basis and the proposition's universal scope cannot hold.",
+          "conditions": {
+            "applicability": "present",
+            "expression": "misattached",
+            "instance": "missing",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "The conclusion is a conditional guarantee ('as long as dynamic reactive resources are adopted, voltage stability after all faults is assured'), which carries implicit applicability conditions: adequacy of sizing and rating, location, the type and severity of faults, interaction with other voltage-support devices, and network conditions. The source qualifies its characterization to operation within a specified voltage bandwidth and set-point/droop modes, not to a blanket post-fault stability guarantee; that qualification is attached to a descriptive capability, not to the asserted sufficiency conclusion, so the expression is misattached. No instance information is supplied showing that any particular plant's configuration satisfies the needed conditions, so the claimed instance application is missing."
+          },
+          "projection_reasons": [
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ],
+          "objection": {
+            "kind": "classification",
+            "reason": "The answer text is faithfully rendered from the target claim, but the recorded classification treats the sufficiency/guarantee statement as equivalent to the source's descriptive capability; the guarantee proposition is not established by the cited descriptive basis and its adequacy conditions are unattached and instance data absent."
+          }
+        }
+      ],
+      "citations": [
+        {
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "execution_placeholder": false,
+          "reason": "The cited unit states that dynamic reactive resources adjust reactive power output automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes. Every clause of the proposition (automatic, real-time, continuous, within a specified voltage bandwidth, responsive to grid voltage changes) is matched with no scope extension beyond the source's own qualifier of a specified voltage bandwidth. The source is a voluntary North American guideline, but the proposition is a descriptive characterization of resource behavior, not a normative operational guarantee. ",
+          "conditions": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S1B0"
+            ],
+            "answer_ids": [
+              "ANS:R0:0"
+            ],
+            "reason": "The source attaches the qualifier of a specified voltage bandwidth to the automatic continuous adjustment; the answer retains this bandwidth qualifier together with responsiveness to grid voltage changes, so the object (dynamic reactive resources) and the operating condition (adjustment within the specified voltage bandwidth) are preserved. The proposition is a generic characterization and claims no specific plant or instance application, so no instance data are required. No further applicability conditions are introduced or dropped."
+          },
+          "projection_reasons": []
+        },
+        {
+          "unit": 1,
+          "reference": "insufficient_evidence",
+          "raw_status": "contradicted",
+          "effective_status": "not_assessable",
+          "execution_placeholder": false,
+          "reason": "The cited unit only describes that dynamic reactive resources adjust output automatically in real time over a continuous range within a specified voltage bandwidth and can respond within electrical cycles; it says nothing about guaranteeing voltage stability of a plant after all faults. The proposition asserts a sufficient guarantee applied to an anonymous plant, which the source neither states nor supports; the source's content is compatible only with the narrower descriptive claim and provides no basis for the universal post-fault stability guarantee, so the guarantee claim is contradicted by the absence of any such supporting content and by the source's own limitation to behavior within a specified voltage bandwidth. ",
+          "conditions": {
+            "applicability": "present",
+            "expression": "misattached",
+            "instance": "missing",
+            "source_ids": [
+              "SRC:S2B0"
+            ],
+            "answer_ids": [
+              "ANS:R1:0"
+            ],
+            "reason": "The source's qualifiers concern operation within a specified voltage bandwidth and fast response times; the answer misattaches a guarantee of voltage stability after all faults to the mere adoption of dynamic reactive resources, converting a bounded descriptive statement into an unconditional sufficiency claim. The claimed instance application (a particular anonymous plant adopting the resources and achieving post-fault stability for every contingency) has no supporting information in the source; no fault cases, plant data, or stability results are provided."
+          },
+          "projection_reasons": [
+            "condition_or_instance_gap",
+            "content_or_inference_gap"
+          ]
+        }
+      ],
+      "execution_issues": [],
+      "elapsed_ms": 15806
+    },
+    {
+      "case_id": "A2",
+      "complete": false,
+      "facts": [
+        {
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "disposition": "assessed",
+          "reason": "The source describes the transmission-to-distribution boundary as usually defined by explicit loads modeled as MW and Mvar, and states such loads may be modeled on the high side of the bus/substation or behind step-down transformers and/or equivalent distribution impedances. The answer covers both the explicit MW/Mvar modeling and both placement options. The source frames this as usual practice while the answer states it flatly, softening the 'usually' hedge but not inverting the substance. No negation or causal-direction issue.",
+          "conditions": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F0C0:0"
+            ],
+            "reason": "The source qualifies the modeling convention as usual rather than universal, an applicability qualifier on the modeling statement about the TO-DP boundary load representation. The answer preserves the object attachment (boundary loads as MW/Mvar at either of the two locations) but drops the 'usually' hedge, expressing it as general practice; no specific instance application is claimed, so instance is not_claimed."
+          },
+          "projection_reasons": [],
+          "objection": null
+        },
+        {
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": "supported",
+          "effective_status": "supported",
+          "disposition": "assessed",
+          "reason": "The source states that loads should not over-rely on reactive support (lagging or leading) from the BES, and conversely that the BES should not solely depend on the load for reactive support. The answer restates both reciprocal directions with matching 'should not' normative framing. The lagging/leading parenthetical is omitted but does not change the proposition. The source is a voluntary reliability guideline, and the answer's recommendation form matches that rather than asserting a hard rule.",
+          "conditions": {
+            "applicability": "present",
+            "expression": "preserved",
+            "instance": "not_claimed",
+            "source_ids": [
+              "SRC:S0B0"
+            ],
+            "answer_ids": [
+              "ANS:F1C0:0"
+            ],
+            "reason": "The recommendation carries an applicability context (BES coordination practice under a voluntary guideline, reactive support with lagging or leading character). The answer preserves the two-sided object attachment — loads versus the bulk system as reactive-support sources — and keeps the 'should not' direction on both sides. No specific instance application is claimed, so instance is not_claimed."
+          },
+          "projection_reasons": [],
+          "objection": null
+        }
+      ],
+      "citations": [
+        {
+          "unit": 0,
+          "reference": "supported",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete ",
+          "conditions": null,
+          "projection_reasons": null
+        },
+        {
+          "unit": 1,
+          "reference": "supported",
+          "raw_status": null,
+          "effective_status": "not_assessable",
+          "execution_placeholder": true,
+          "reason": "model_execution_incomplete ",
+          "conditions": null,
+          "projection_reasons": null
+        }
+      ],
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        }
+      ],
+      "elapsed_ms": 10460
+    }
+  ]
+}
