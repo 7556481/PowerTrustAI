@@ -1,0 +1,18 @@
+{
+  "checked_utc": "2026-10-24T12:59:04.214243+00:00",
+  "production_counts": {
+    "runs": 104,
+    "events": 2278,
+    "objects": 2999,
+    "reviews": 8
+  },
+  "production_counts_unchanged": true,
+  "port_8765_listener": false,
+  "health": "unreachable",
+  "ready": false,
+  "production_preserved_stopped": true,
+  "candidate_persistent_service_started": false,
+  "production_configuration_changed": false,
+  "model_requests_after_batch_stop": 0,
+  "batch_completed_no_resume": true
+}

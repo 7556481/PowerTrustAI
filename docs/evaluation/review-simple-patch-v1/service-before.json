@@ -1,0 +1,12 @@
+{
+  "checked_utc": "2026-10-24T12:41:58.091854+00:00",
+  "production_counts": {
+    "runs": 104,
+    "events": 2278,
+    "objects": 2999,
+    "reviews": 8
+  },
+  "port_8765_listener": false,
+  "health": "unreachable",
+  "started_by_work": false
+}

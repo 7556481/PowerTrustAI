@@ -1,0 +1,52 @@
+{
+  "planned": {
+    "A": 15,
+    "generation": 4,
+    "B": 8
+  },
+  "accepted": 1,
+  "unexecuted": [
+    "A2-simple_v1",
+    "A2-production",
+    "A3-simple_v1",
+    "A3-production",
+    "A4-simple_v1",
+    "A4-production",
+    "A5-simple_v1",
+    "A5-production",
+    "A6-simple_v1",
+    "A6-production",
+    "A7-simple_v1",
+    "A7-production",
+    "A8-simple_v1",
+    "A8-production",
+    "G1",
+    "B1-production",
+    "B1-simple_v1",
+    "G2",
+    "B2-simple_v1",
+    "B2-production",
+    "G3",
+    "B3-production",
+    "B3-simple_v1",
+    "G4",
+    "B4-simple_v1",
+    "B4-production"
+  ],
+  "actual_sends": 3,
+  "records": 3,
+  "by_stage": {
+    "A/simple_v1/evidence_verification/v1": {
+      "calls": 3,
+      "corrections": 1,
+      "request_duration_ms_sum_not_wallclock": 9772,
+      "input_tokens": 11136,
+      "output_tokens": 1546,
+      "total_tokens": 12682,
+      "cache_hit_tokens": 4480,
+      "cache_miss_tokens": 6656
+    }
+  },
+  "invoice_cost": null,
+  "note": "Generation counted once, B independently deducts its calls/time from original shared limits. Parallel/nested durations are not summed as wallclock. No browser paint measurement or pass-rate quality estimate."
+}

@@ -1,0 +1,62 @@
+{
+  "actual_requests": [
+    {
+      "sequence": 1,
+      "correction": false,
+      "actual_message_preflight_passed": true,
+      "response_present": true,
+      "strict_json_valid": true,
+      "diagnostic_only_duplicate_keys": [],
+      "no_judgment_extracted_from_invalid_response": true
+    },
+    {
+      "sequence": 2,
+      "correction": false,
+      "actual_message_preflight_passed": true,
+      "response_present": true,
+      "strict_json_valid": false,
+      "diagnostic_only_duplicate_keys": [
+        [
+          "reason"
+        ],
+        [
+          "reason"
+        ]
+      ],
+      "no_judgment_extracted_from_invalid_response": true
+    },
+    {
+      "sequence": 3,
+      "correction": true,
+      "actual_message_preflight_passed": true,
+      "response_present": true,
+      "strict_json_valid": false,
+      "diagnostic_only_duplicate_keys": [
+        [
+          "applicability",
+          "expression",
+          "instance",
+          "source_ids",
+          "answer_ids"
+        ],
+        [
+          "applicability",
+          "expression",
+          "instance",
+          "source_ids",
+          "answer_ids"
+        ]
+      ],
+      "no_judgment_extracted_from_invalid_response": true
+    }
+  ],
+  "http_request_rejections": 0,
+  "invalid_outputs": 2,
+  "invalid_root_constraint": "duplicate_object_keys_not_allowed",
+  "invalid_request_count_not_duplicate_field_count": 2,
+  "stop_reason": "AdmissionA1finalincomplete",
+  "later_requests_after_stop": 0,
+  "old_http_rejection_status_still_unknown": true,
+  "live_http_error_boundary_triggered": false,
+  "live_http_error_boundary_evidence": "No live request rejection occurred. Run-level fatal latch proven offline only; actual admission gate stopped remaining26 slots."
+}

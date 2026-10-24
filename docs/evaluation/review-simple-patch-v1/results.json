@@ -1,0 +1,1038 @@
+[
+  {
+    "run_id": "8e1ce5c1f1b341af8a407cda7f2b8f81",
+    "state": "execution_incomplete",
+    "answer": {
+      "answer_id": "fixed-review-v2-1",
+      "version": 1,
+      "text": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。\n\n静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+      "assumptions": [],
+      "missing_information": [],
+      "citations": [
+        {
+          "start_offset": 0,
+          "end_offset": 51,
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "start_offset": 53,
+          "end_offset": 96,
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        }
+      ]
+    },
+    "rounds": [],
+    "revisions": [],
+    "execution_issues": [
+      {
+        "component": "evidence_verification",
+        "status": "failed",
+        "code": "MODEL_OUTPUT_ERROR",
+        "message": "Compact review incomplete; valid targets retained"
+      },
+      {
+        "component": "service",
+        "code": "SERVICE_EXECUTION_FAILED",
+        "message": "Admission A1/A2 did not obtain a legal final result; remaining fixed batch stopped. No repeat.",
+        "admission_case": 1
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+        "text_sha256": "b557159c805c76178e7b1a798cb45f50e55977b6b8d8bc967adce4093ba8e34c"
+      }
+    ],
+    "fixed_interfaces": {
+      "claims": [
+        {
+          "claim_id": "claim-a94808337adfbb64451071b3",
+          "answer_id": "fixed-review-v2-1",
+          "answer_version": 1,
+          "text": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。",
+          "start_offset": 0,
+          "end_offset": 51,
+          "claim_type": "technical_fact",
+          "proposition": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。",
+          "qualifiers": [],
+          "components": [
+            {
+              "component_id": "claim-a94808337adfbb64451071b3-part-0",
+              "category": "technical_fact",
+              "proposition": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。"
+            }
+          ],
+          "anchor_group_id": "anchor-7422d4447999f4f90e5fadc2",
+          "assertion_role": "asserted",
+          "semantic_qualifiers": [],
+          "semantic_origin": "model-claims-v7-obligations",
+          "component_basis_targets": [
+            "technical_content"
+          ],
+          "component_obligations": [
+            "technical_truth"
+          ]
+        },
+        {
+          "claim_id": "claim-50c019df96529e478dab5742",
+          "answer_id": "fixed-review-v2-1",
+          "answer_version": 1,
+          "text": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+          "start_offset": 53,
+          "end_offset": 96,
+          "claim_type": "technical_fact",
+          "proposition": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+          "qualifiers": [],
+          "components": [
+            {
+              "component_id": "claim-50c019df96529e478dab5742-part-0",
+              "category": "technical_fact",
+              "proposition": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。"
+            }
+          ],
+          "anchor_group_id": "anchor-68f2436375f0e844b34d0d30",
+          "assertion_role": "asserted",
+          "semantic_qualifiers": [],
+          "semantic_origin": "model-claims-v7-obligations",
+          "component_basis_targets": [
+            "technical_content"
+          ],
+          "component_obligations": [
+            "technical_truth"
+          ]
+        }
+      ],
+      "findings": [
+        {
+          "finding_id": "finding-claim-a94808337adfbb64451071b3",
+          "claim_id": "claim-a94808337adfbb64451071b3",
+          "status": "supported",
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ],
+          "rationale": "The source states dynamic reactive resources adjust output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and operate to maintain a set point voltage or in voltage droop mode. Each clause of the proposition—automatic continuous real-time adjustment within a voltage bandwidth, responsiveness to grid voltage, and the two operating modes—is matched without adding conditions the source lacks. The source's mention of fast response is extra detail, not needed for this proposition.",
+          "checker_version": "evidence-verification-v9.14-explicit-target-basis-scope",
+          "tool_result_ids": [],
+          "excerpts": [
+            {
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+              "start_offset": 0,
+              "end_offset": 1200
+            }
+          ],
+          "applicability_conditions": [],
+          "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+          "checked_dimensions": [],
+          "claim_category": "technical_fact",
+          "assessment_basis": "typed_components",
+          "metadata_refs": [],
+          "scope_id": null,
+          "required_dimensions": [
+            "quantity",
+            "negation",
+            "causality",
+            "conditions",
+            "jurisdiction"
+          ],
+          "dimension_findings": [],
+          "bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "excerpt": {
+                "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+                "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+                "start_offset": 0,
+                "end_offset": 1200
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-7bd35014178dbbb59221229b"
+            }
+          ],
+          "component_reviews": [
+            {
+              "component_id": "claim-a94808337adfbb64451071b3-part-0",
+              "status": "supported",
+              "basis_indexes": [
+                0
+              ],
+              "rationale": "The source states dynamic reactive resources adjust output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and operate to maintain a set point voltage or in voltage droop mode. Each clause of the proposition—automatic continuous real-time adjustment within a voltage bandwidth, responsiveness to grid voltage, and the two operating modes—is matched without adding conditions the source lacks. The source's mention of fast response is extra detail, not needed for this proposition. [compact-support-assessment-v1] {\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"semantic_uncertain\":false,\"condition_bindings\":[],\"objection\":null,\"authority_missing\":false,\"repair\":null,\"raw_repair\":null,\"contract\":\"fact-review-simple-v1\",\"projection_version\":\"simple-condition-projection-v1.1\",\"projection_reasons\":[],\"condition_assessment\":{\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[],\"answer_ids\":[],\"reason\":\"This is a general characterization of dynamic reactive resources with no extra applicability precondition in the proposition beyond the stated voltage bandwidth; the answer does not claim a specific instance application. No qualifying object/state is needed beyond the stated bandwidth, so no condition source or answer fragment is selected.\"},\"inference\":\"preserved\",\"gap_answer_ids\":[],\"program_source_units\":[],\"program_answer_units\":[]}",
+              "classification_issue": null,
+              "origin": "model_judgment",
+              "reason_code": null,
+              "fidelity_status": "faithful",
+              "reviewed_assertion_role": "asserted",
+              "verification_obligation": "technical_truth",
+              "fidelity_rationale": "Model explicitly selected objection=null: answer-target semantics preserved.",
+              "raw_support_status": "supported",
+              "review_disposition": "assessed",
+              "review_projection_version": "simple-condition-projection-v1.1"
+            }
+          ]
+        },
+        {
+          "finding_id": "finding-claim-50c019df96529e478dab5742",
+          "claim_id": "claim-50c019df96529e478dab5742",
+          "status": "supported",
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ],
+          "rationale": "The source states static reactive resources have fixed reactive power output at nominal voltage, capability varies according to voltage squared, and devices are switched in or out based on system conditions, with switching manual or automatic. All clauses—fixed output at rated/nominal voltage, square-law capability, and manual/automatic switching per system conditions—are covered. Direction is preserved: fixed at nominal voltage, variation with voltage squared, switching as stated.",
+          "checker_version": "evidence-verification-v9.14-explicit-target-basis-scope",
+          "tool_result_ids": [],
+          "excerpts": [
+            {
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+              "start_offset": 0,
+              "end_offset": 1200
+            }
+          ],
+          "applicability_conditions": [],
+          "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+          "checked_dimensions": [],
+          "claim_category": "technical_fact",
+          "assessment_basis": "typed_components",
+          "metadata_refs": [],
+          "scope_id": null,
+          "required_dimensions": [
+            "quantity",
+            "negation",
+            "causality",
+            "conditions",
+            "jurisdiction"
+          ],
+          "dimension_findings": [],
+          "bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "excerpt": {
+                "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+                "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+                "start_offset": 0,
+                "end_offset": 1200
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-7bd35014178dbbb59221229b"
+            }
+          ],
+          "component_reviews": [
+            {
+              "component_id": "claim-50c019df96529e478dab5742-part-0",
+              "status": "supported",
+              "basis_indexes": [
+                0
+              ],
+              "rationale": "The source states static reactive resources have fixed reactive power output at nominal voltage, capability varies according to voltage squared, and devices are switched in or out based on system conditions, with switching manual or automatic. All clauses—fixed output at rated/nominal voltage, square-law capability, and manual/automatic switching per system conditions—are covered. Direction is preserved: fixed at nominal voltage, variation with voltage squared, switching as stated. [compact-support-assessment-v1] {\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"semantic_uncertain\":false,\"condition_bindings\":[],\"objection\":null,\"authority_missing\":false,\"repair\":null,\"raw_repair\":null,\"contract\":\"fact-review-simple-v1\",\"projection_version\":\"simple-condition-projection-v1.1\",\"projection_reasons\":[],\"condition_assessment\":{\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[],\"answer_ids\":[],\"reason\":\"This is a general characterization of static reactive resources with no additional applicability condition in the proposition; no instance application is claimed and no object/state qualifier is missing. No condition source or answer fragment is needed.\"},\"inference\":\"preserved\",\"gap_answer_ids\":[],\"program_source_units\":[],\"program_answer_units\":[]}",
+              "classification_issue": null,
+              "origin": "model_judgment",
+              "reason_code": null,
+              "fidelity_status": "faithful",
+              "reviewed_assertion_role": "asserted",
+              "verification_obligation": "technical_truth",
+              "fidelity_rationale": "Model explicitly selected objection=null: answer-target semantics preserved.",
+              "raw_support_status": "supported",
+              "review_disposition": "assessed",
+              "review_projection_version": "simple-condition-projection-v1.1"
+            }
+          ]
+        }
+      ],
+      "citation_reviews": [
+        {
+          "citation_index": 0,
+          "status": "not_assessable",
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ],
+          "excerpts": [],
+          "rationale": "model_execution_incomplete [compact-support-assessment-v1] {\"raw_model_status\":\"not_assessable\",\"effective_support_status\":\"not_assessable\",\"semantic_uncertain\":true,\"condition_bindings\":[],\"objection\":{\"kind\":\"uncertain\",\"reason\":\"model_execution_incomplete\"},\"authority_missing\":false,\"repair\":null,\"raw_repair\":null,\"contract\":\"fact-review-simple-v1\",\"projection_version\":\"simple-condition-projection-v1.1\",\"projection_reasons\":[\"condition_assessment_uncertain\",\"inference_uncertain\"],\"condition_assessment\":{\"applicability\":\"unknown\",\"expression\":\"uncertain\",\"instance\":\"not_claimed\",\"source_ids\":[],\"answer_ids\":[],\"reason\":\"model_execution_incomplete\"},\"inference\":\"uncertain\",\"gap_answer_ids\":[],\"program_source_units\":[],\"program_answer_units\":[]}",
+          "applicability_conditions": [],
+          "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+          "binding_warnings": [],
+          "claim_ids": [
+            "claim-a94808337adfbb64451071b3"
+          ],
+          "partial_claim_ids": [],
+          "coverage_issues": [],
+          "bases": []
+        },
+        {
+          "citation_index": 1,
+          "status": "not_assessable",
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ],
+          "excerpts": [],
+          "rationale": "model_execution_incomplete [compact-support-assessment-v1] {\"raw_model_status\":\"not_assessable\",\"effective_support_status\":\"not_assessable\",\"semantic_uncertain\":true,\"condition_bindings\":[],\"objection\":{\"kind\":\"uncertain\",\"reason\":\"model_execution_incomplete\"},\"authority_missing\":false,\"repair\":null,\"raw_repair\":null,\"contract\":\"fact-review-simple-v1\",\"projection_version\":\"simple-condition-projection-v1.1\",\"projection_reasons\":[\"condition_assessment_uncertain\",\"inference_uncertain\"],\"condition_assessment\":{\"applicability\":\"unknown\",\"expression\":\"uncertain\",\"instance\":\"not_claimed\",\"source_ids\":[],\"answer_ids\":[],\"reason\":\"model_execution_incomplete\"},\"inference\":\"uncertain\",\"gap_answer_ids\":[],\"program_source_units\":[],\"program_answer_units\":[]}",
+          "applicability_conditions": [],
+          "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+          "binding_warnings": [],
+          "claim_ids": [
+            "claim-50c019df96529e478dab5742"
+          ],
+          "partial_claim_ids": [],
+          "coverage_issues": [],
+          "bases": []
+        }
+      ],
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Compact review incomplete; valid targets retained"
+        }
+      ],
+      "prompt_version": "evidence-verification-v9.22.1-simple-v1"
+    },
+    "id": "A1-simple_v1",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "simple_v1"
+    },
+    "control": {
+      "case_id": "A1-simple_v1",
+      "accepted": {
+        "run_id": "8e1ce5c1f1b341af8a407cda7f2b8f81",
+        "spec": {
+          "line": "A",
+          "case": 0,
+          "variant": "simple_v1"
+        }
+      },
+      "stop": true,
+      "decision": {
+        "shared": true,
+        "reason": "shared_configuration_or_service_failure",
+        "evidence": [
+          {
+            "stage": "service",
+            "code": "SERVICE_EXECUTION_FAILED",
+            "exception_type": null
+          }
+        ]
+      }
+    },
+    "actual_question": "按给定NERC资料分别解释动态资源的调节方式及静态资源的输出与投切方式。",
+    "initial_answer": {
+      "answer_id": "fixed-review-v2-1",
+      "version": 1,
+      "text": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。\n\n静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+      "assumptions": [],
+      "missing_information": [],
+      "citations": [
+        {
+          "start_offset": 0,
+          "end_offset": 51,
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "start_offset": 53,
+          "end_offset": 96,
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        }
+      ]
+    },
+    "input_sha256": "b07de63ab802030dae3ff7cb2c17ca7e3bcc7cc9785265911a4e5b9e1fe0c875",
+    "generation_snapshot_sha256": null,
+    "observations": {
+      "first_answer_saved_ms": 23.163,
+      "browser_first_paint_ms": null,
+      "collect_elapsed_ms": 9939.145
+    },
+    "duration_ms": 9906,
+    "call_metrics": [
+      {
+        "call_number": 1,
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "prompt_version": "evidence-verification-v9.22.1-simple-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 3168,
+        "usage": {
+          "input_tokens": 2913,
+          "output_tokens": 448,
+          "total_tokens": 3361,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 0,
+          "cache_miss_tokens": 2913
+        },
+        "output_status": "valid_structure",
+        "error_code": null,
+        "validation_error": null
+      },
+      {
+        "call_number": 2,
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "prompt_version": "evidence-verification-v9.22.1-simple-v1",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 3048,
+        "usage": {
+          "input_tokens": 3690,
+          "output_tokens": 502,
+          "total_tokens": 4192,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 896,
+          "cache_miss_tokens": 2794
+        },
+        "output_status": "invalid_structure",
+        "error_code": null,
+        "validation_error": {
+          "stage": "json_parse",
+          "field_path": "$",
+          "constraint": "duplicate_object_keys_not_allowed"
+        }
+      },
+      {
+        "call_number": 3,
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "prompt_version": "evidence-verification-v9.22.1-simple-v1",
+        "correction": true,
+        "status": "succeeded",
+        "duration_ms": 3556,
+        "usage": {
+          "input_tokens": 4533,
+          "output_tokens": 596,
+          "total_tokens": 5129,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 3584,
+          "cache_miss_tokens": 949
+        },
+        "output_status": "invalid_structure",
+        "error_code": null,
+        "validation_error": {
+          "stage": "json_parse",
+          "field_path": "$",
+          "constraint": "duplicate_object_keys_not_allowed"
+        }
+      }
+    ],
+    "stage_events": [
+      {
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "duration_ms": 9906,
+        "status": "failed"
+      }
+    ]
+  },
+  {
+    "id": "A2-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A2-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A3-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A3-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A4-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A4-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A5-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A5-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A6-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A6-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A7-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A7-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A8-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "A8-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "G1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "B1-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "B1-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "G2",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "B2-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "B2-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "G3",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "B3-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "B3-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "G4",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "B4-simple_v1",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "id": "B4-production",
+    "status": "unexecuted",
+    "reason": "shared_stop"
+  },
+  {
+    "run_id": "f90745a423b249a49fe2623d2ca15d9a",
+    "state": "completed",
+    "answer": {
+      "answer_id": "fixed-review-v2-1",
+      "version": 1,
+      "text": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。\n\n静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+      "assumptions": [],
+      "missing_information": [],
+      "citations": [
+        {
+          "start_offset": 0,
+          "end_offset": 51,
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "start_offset": 53,
+          "end_offset": 96,
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        }
+      ]
+    },
+    "rounds": [],
+    "revisions": [],
+    "execution_issues": [],
+    "evidence": [
+      {
+        "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+        "text_sha256": "b557159c805c76178e7b1a798cb45f50e55977b6b8d8bc967adce4093ba8e34c"
+      }
+    ],
+    "fixed_interfaces": {
+      "claims": [
+        {
+          "claim_id": "claim-a94808337adfbb64451071b3",
+          "answer_id": "fixed-review-v2-1",
+          "answer_version": 1,
+          "text": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。",
+          "start_offset": 0,
+          "end_offset": 51,
+          "claim_type": "technical_fact",
+          "proposition": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。",
+          "qualifiers": [],
+          "components": [
+            {
+              "component_id": "claim-a94808337adfbb64451071b3-part-0",
+              "category": "technical_fact",
+              "proposition": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。"
+            }
+          ],
+          "anchor_group_id": "anchor-7422d4447999f4f90e5fadc2",
+          "assertion_role": "asserted",
+          "semantic_qualifiers": [],
+          "semantic_origin": "model-claims-v7-obligations",
+          "component_basis_targets": [
+            "technical_content"
+          ],
+          "component_obligations": [
+            "technical_truth"
+          ]
+        },
+        {
+          "claim_id": "claim-50c019df96529e478dab5742",
+          "answer_id": "fixed-review-v2-1",
+          "answer_version": 1,
+          "text": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+          "start_offset": 53,
+          "end_offset": 96,
+          "claim_type": "technical_fact",
+          "proposition": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+          "qualifiers": [],
+          "components": [
+            {
+              "component_id": "claim-50c019df96529e478dab5742-part-0",
+              "category": "technical_fact",
+              "proposition": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。"
+            }
+          ],
+          "anchor_group_id": "anchor-68f2436375f0e844b34d0d30",
+          "assertion_role": "asserted",
+          "semantic_qualifiers": [],
+          "semantic_origin": "model-claims-v7-obligations",
+          "component_basis_targets": [
+            "technical_content"
+          ],
+          "component_obligations": [
+            "technical_truth"
+          ]
+        }
+      ],
+      "findings": [
+        {
+          "finding_id": "finding-claim-a94808337adfbb64451071b3",
+          "claim_id": "claim-a94808337adfbb64451071b3",
+          "status": "supported",
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ],
+          "rationale": "The quoted NERC guideline text directly states that dynamic reactive resources adjust reactive power automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, operating to maintain a set point voltage or in voltage droop mode. The answer's Chinese proposition matches these elements.",
+          "checker_version": "evidence-verification-v9.3-target-fidelity",
+          "tool_result_ids": [],
+          "excerpts": [
+            {
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+              "start_offset": 0,
+              "end_offset": 1200
+            }
+          ],
+          "applicability_conditions": [
+            "Applies to the North American bulk power system context of the NERC Reliability Guideline; not a Chinese operational standard."
+          ],
+          "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+          "checked_dimensions": [],
+          "claim_category": "technical_fact",
+          "assessment_basis": "typed_components",
+          "metadata_refs": [],
+          "scope_id": null,
+          "required_dimensions": [
+            "quantity",
+            "negation",
+            "causality",
+            "conditions",
+            "jurisdiction"
+          ],
+          "dimension_findings": [],
+          "bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "excerpt": {
+                "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+                "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+                "start_offset": 0,
+                "end_offset": 1200
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-7bd35014178dbbb59221229b"
+            }
+          ],
+          "component_reviews": [
+            {
+              "component_id": "claim-a94808337adfbb64451071b3-part-0",
+              "status": "supported",
+              "basis_indexes": [
+                0
+              ],
+              "rationale": "The source text explicitly covers real-time continuous automatic adjustment within a specified voltage bandwidth responsive to grid voltage, plus set point voltage or voltage droop mode operation. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The quoted guideline bullet describes dynamic reactive resource behavior matching every clause of the claim.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-85ccb4f8751212c2d77b7e93-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+              "classification_issue": null,
+              "origin": "model_judgment",
+              "reason_code": null,
+              "fidelity_status": "faithful",
+              "reviewed_assertion_role": "asserted",
+              "verification_obligation": "technical_truth",
+              "fidelity_rationale": "The Chinese answer preserves the source's meaning: dynamic resources, voltage bandwidth, automatic real-time continuous response to grid voltage, and set point or droop mode.",
+              "raw_support_status": "supported",
+              "review_disposition": "assessed",
+              "review_projection_version": "independent-review-projection-v2"
+            }
+          ]
+        },
+        {
+          "finding_id": "finding-claim-50c019df96529e478dab5742",
+          "claim_id": "claim-50c019df96529e478dab5742",
+          "status": "supported",
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ],
+          "rationale": "The quoted text states static reactive resources have fixed reactive power output at nominal voltage, capability varies according to voltage squared, and switching in/out is based on system conditions and can be manual or automatic. The answer matches these clauses.",
+          "checker_version": "evidence-verification-v9.3-target-fidelity",
+          "tool_result_ids": [],
+          "excerpts": [
+            {
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+              "start_offset": 0,
+              "end_offset": 1200
+            }
+          ],
+          "applicability_conditions": [
+            "Applies to the North American bulk power system context of the NERC Reliability Guideline; not a Chinese operational standard."
+          ],
+          "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+          "checked_dimensions": [],
+          "claim_category": "technical_fact",
+          "assessment_basis": "typed_components",
+          "metadata_refs": [],
+          "scope_id": null,
+          "required_dimensions": [
+            "quantity",
+            "negation",
+            "causality",
+            "conditions",
+            "jurisdiction"
+          ],
+          "dimension_findings": [],
+          "bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "excerpt": {
+                "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+                "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+                "start_offset": 0,
+                "end_offset": 1200
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-7bd35014178dbbb59221229b"
+            }
+          ],
+          "component_reviews": [
+            {
+              "component_id": "claim-50c019df96529e478dab5742-part-0",
+              "status": "supported",
+              "basis_indexes": [
+                0
+              ],
+              "rationale": "The source explicitly states fixed output at nominal voltage, capability varying with voltage squared, and manual or automatic switching based on system conditions. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The quoted static-resource bullet covers all three clauses: fixed output at nominal voltage, voltage-squared capability variation, and manual/automatic switching per system conditions.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-85ccb4f8751212c2d77b7e93-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+              "classification_issue": null,
+              "origin": "model_judgment",
+              "reason_code": null,
+              "fidelity_status": "faithful",
+              "reviewed_assertion_role": "asserted",
+              "verification_obligation": "technical_truth",
+              "fidelity_rationale": "The Chinese answer preserves fixed nominal output, voltage-squared capability variation, and manual/automatic switching based on system conditions.",
+              "raw_support_status": "supported",
+              "review_disposition": "assessed",
+              "review_projection_version": "independent-review-projection-v2"
+            }
+          ]
+        }
+      ],
+      "citation_reviews": [
+        {
+          "citation_index": 0,
+          "status": "supported",
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ],
+          "excerpts": [
+            {
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+              "start_offset": 0,
+              "end_offset": 1200
+            }
+          ],
+          "rationale": "The bound source directly states that dynamic reactive resources adjust reactive power output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and that they operate to maintain a set-point voltage or in voltage droop mode. The answer reproduces this content for the dynamic-resource portion. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The selected NERC guideline text describes dynamic reactive resources adjusting output automatically, continuously, within a specified voltage bandwidth in response to voltage changes, and operating to maintain a voltage set point or in voltage droop mode. The answer conveys these same propositions with faithful paraphrase.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-edea7955d80e8fadcc6bf775\",\"necessity\":\"required\",\"answer_quote\":\"在规定电压带宽内\",\"relationship\":\"preserved\",\"reason\":\"The source frames automatic continuous adjustment as occurring within a specified voltage bandwidth; the answer preserves this qualifier as 规定电压带宽内.\"}],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-d6f64406938b4a219aeacdb5-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[{\"version\":\"source-condition-carriers-v1\",\"scope_id\":\"scope-d6f64406938b4a219aeacdb5\",\"quote_id\":\"scope-d6f64406938b4a219aeacdb5-0\",\"candidate_id\":\"quote-7bd35014178dbbb59221229b\",\"evidence_id\":\"e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5\",\"start_offset\":0,\"end_offset\":1200,\"source_version\":\"dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193\",\"locator\":\"pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]\",\"provenance\":{\"document_id\":\"nerc-reactive-planning-2016\",\"document_version\":\"dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193\",\"file_sha256\":\"1cefced2d010a84c7245885bc4c99df3bcc4f4bf47357d719a377794d5c3295f\",\"fragment_id\":\"f-0019cb8ce6cc38061b9e5bc019b64d40adbaa32634f74710aad5c37962f69eaf\",\"knowledge_version\":\"k-7268b72e3f29f10bee44469b24680593116feef95c4f410680392292d19ecd55\",\"start_offset\":0,\"end_offset\":1200,\"start_line\":1,\"end_line\":16,\"heading_path\":[],\"source_uri\":\"https://www.nerc.com/globalassets/who-we-are/standing-committees/rstc/sams/reliability-guideline---reactive-power-planning.pdf\",\"publisher\":\"North American Electric Reliability Corporation (NERC)\",\"publication_date\":\"2016-12\",\"document_title\":\"Reliability Guideline: Reactive Power Planning\",\"heading_levels\":[],\"file_page\":8,\"printed_page\":null,\"section\":null,\"parser_version\":\"pypdf-6.10.0/plain-pages-v1\",\"page_text_sha256\":\"d457c48dc39cd6329a3b406fb1f5c189e1cab39cb221dee86602b1ceebbdd1fb\",\"extraction_sha256\":\"7eebd32cb35270e1c90ca41646831d1c89009dbc709d2f3deec5a6a5ba21baf4\",\"text_basis\":\"pdf_extracted_page_text\",\"previous_fragment_id\":\"f-34c394888b8632250e841d43b7a470b52c923eec62b9222a114544bd16686e9d\",\"next_fragment_id\":\"f-31a783e8b03ea3f9ebb56d6fd89522c069fc8d4d8cab399c78cc1372a93215e9\",\"quality_status\":\"text_pending_review\",\"quality_warnings\":[\"extracted_text_not_visual_original\",\"layout_pending_manual_review\",\"formula_table_structure_not_interpreted\",\"possible_columns_or_table\",\"suspected_character_mapping\",\"adjacent_page_context_not_merged\"],\"splitter_version\":\"pdf-paragraphs-v2\",\"split_method\":\"fallback_bounded_window\",\"split_warnings\":[\"paragraph_boundaries_pending_manual_review\",\"unreliable_page_boundaries\",\"layout_or_character_risk_forced_fallback\",\"length_boundary_not_semantic\"]},\"text_sha256\":\"81d1ba89d51a555b8e4e385d23e6f286a23f077c288c2b7c4607c5e7339821d9\",\"knowledge_version\":null,\"answer_id\":\"fixed-review-v2-1\",\"answer_version\":1,\"condition_id\":\"condition-edea7955d80e8fadcc6bf775\",\"text\":\"Background \\n \\n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \\nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \\nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \\nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \\naround 50 ms. \\n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \\nvaries according to voltage squared.  These devices are switched in or out of service based on system \\nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \\nnominal contribution of reactive power to the grid once connected. \\n \\nStatic reactive resources generally include the following elements: \\n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \\nhave a fixed nominal rating and their reactive power production or consumption is dependent on \",\"granularity\":\"whole_existing_quote_carrier\",\"semantic_necessity_not_program_proof\":true}],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+          "applicability_conditions": [
+            "North American bulk power system context; NERC reliability guideline, recommendations voluntary and region-specific. Applies to dynamic reactive resources such as power-electronics-based devices (e.g., STATCOMs)."
+          ],
+          "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+          "binding_warnings": [],
+          "claim_ids": [
+            "claim-a94808337adfbb64451071b3"
+          ],
+          "partial_claim_ids": [],
+          "coverage_issues": [],
+          "bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "excerpt": {
+                "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+                "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+                "start_offset": 0,
+                "end_offset": 1200
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-7bd35014178dbbb59221229b"
+            }
+          ]
+        },
+        {
+          "citation_index": 1,
+          "status": "supported",
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ],
+          "excerpts": [
+            {
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+              "start_offset": 0,
+              "end_offset": 1200
+            }
+          ],
+          "rationale": "Bound source states static reactive resources have fixed reactive power output at nominal voltage, capability varies with voltage squared, and devices are switched in or out based on system conditions, manually or automatically. The answer preserves these clauses with faithful synonyms. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"Selected source paragraph directly describes static reactive resource output and switching behavior; the answer restates fixed nominal output, voltage-squared dependence, and manual/automatic switching per system conditions.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-549230d1ee8052294e0c4b2b\",\"necessity\":\"required\",\"answer_quote\":\"静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切\",\"relationship\":\"preserved\",\"reason\":\"Selected carrier states fixed output at nominal voltage, voltage-squared capability variation, and manual or automatic switching based on system conditions; answer preserves these qualifiers.\"}],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-0af0f469914dfa895b5d363b-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[{\"version\":\"source-condition-carriers-v1\",\"scope_id\":\"scope-0af0f469914dfa895b5d363b\",\"quote_id\":\"scope-0af0f469914dfa895b5d363b-0\",\"candidate_id\":\"quote-7bd35014178dbbb59221229b\",\"evidence_id\":\"e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5\",\"start_offset\":0,\"end_offset\":1200,\"source_version\":\"dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193\",\"locator\":\"pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]\",\"provenance\":{\"document_id\":\"nerc-reactive-planning-2016\",\"document_version\":\"dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193\",\"file_sha256\":\"1cefced2d010a84c7245885bc4c99df3bcc4f4bf47357d719a377794d5c3295f\",\"fragment_id\":\"f-0019cb8ce6cc38061b9e5bc019b64d40adbaa32634f74710aad5c37962f69eaf\",\"knowledge_version\":\"k-7268b72e3f29f10bee44469b24680593116feef95c4f410680392292d19ecd55\",\"start_offset\":0,\"end_offset\":1200,\"start_line\":1,\"end_line\":16,\"heading_path\":[],\"source_uri\":\"https://www.nerc.com/globalassets/who-we-are/standing-committees/rstc/sams/reliability-guideline---reactive-power-planning.pdf\",\"publisher\":\"North American Electric Reliability Corporation (NERC)\",\"publication_date\":\"2016-12\",\"document_title\":\"Reliability Guideline: Reactive Power Planning\",\"heading_levels\":[],\"file_page\":8,\"printed_page\":null,\"section\":null,\"parser_version\":\"pypdf-6.10.0/plain-pages-v1\",\"page_text_sha256\":\"d457c48dc39cd6329a3b406fb1f5c189e1cab39cb221dee86602b1ceebbdd1fb\",\"extraction_sha256\":\"7eebd32cb35270e1c90ca41646831d1c89009dbc709d2f3deec5a6a5ba21baf4\",\"text_basis\":\"pdf_extracted_page_text\",\"previous_fragment_id\":\"f-34c394888b8632250e841d43b7a470b52c923eec62b9222a114544bd16686e9d\",\"next_fragment_id\":\"f-31a783e8b03ea3f9ebb56d6fd89522c069fc8d4d8cab399c78cc1372a93215e9\",\"quality_status\":\"text_pending_review\",\"quality_warnings\":[\"extracted_text_not_visual_original\",\"layout_pending_manual_review\",\"formula_table_structure_not_interpreted\",\"possible_columns_or_table\",\"suspected_character_mapping\",\"adjacent_page_context_not_merged\"],\"splitter_version\":\"pdf-paragraphs-v2\",\"split_method\":\"fallback_bounded_window\",\"split_warnings\":[\"paragraph_boundaries_pending_manual_review\",\"unreliable_page_boundaries\",\"layout_or_character_risk_forced_fallback\",\"length_boundary_not_semantic\"]},\"text_sha256\":\"81d1ba89d51a555b8e4e385d23e6f286a23f077c288c2b7c4607c5e7339821d9\",\"knowledge_version\":null,\"answer_id\":\"fixed-review-v2-1\",\"answer_version\":1,\"condition_id\":\"condition-549230d1ee8052294e0c4b2b\",\"text\":\"Background \\n \\n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \\nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \\nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \\nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \\naround 50 ms. \\n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \\nvaries according to voltage squared.  These devices are switched in or out of service based on system \\nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \\nnominal contribution of reactive power to the grid once connected. \\n \\nStatic reactive resources generally include the following elements: \\n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \\nhave a fixed nominal rating and their reactive power production or consumption is dependent on \",\"granularity\":\"whole_existing_quote_carrier\",\"semantic_necessity_not_program_proof\":true}],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+          "applicability_conditions": [],
+          "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+          "binding_warnings": [],
+          "claim_ids": [
+            "claim-50c019df96529e478dab5742"
+          ],
+          "partial_claim_ids": [],
+          "coverage_issues": [],
+          "bases": [
+            {
+              "type": "text_excerpt",
+              "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+              "excerpt": {
+                "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+                "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+                "start_offset": 0,
+                "end_offset": 1200
+              },
+              "metadata_reference": null,
+              "snapshot_id": null,
+              "answer_excerpt": null,
+              "quote_id": "quote-7bd35014178dbbb59221229b"
+            }
+          ]
+        }
+      ],
+      "execution_issues": [],
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting"
+    },
+    "id": "A1-production",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "production"
+    },
+    "control": {
+      "case_id": "A1-production",
+      "accepted": {
+        "run_id": "f90745a423b249a49fe2623d2ca15d9a",
+        "spec": {
+          "line": "A",
+          "case": 0,
+          "variant": "production"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    "actual_question": "按给定NERC资料分别解释动态资源的调节方式及静态资源的输出与投切方式。",
+    "initial_answer": {
+      "answer_id": "fixed-review-v2-1",
+      "version": 1,
+      "text": "动态无功资源在规定电压带宽内随电网电压变化自动实时连续调节输出，可维持电压设定点或按电压下垂模式运行。\n\n静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切。",
+      "assumptions": [],
+      "missing_information": [],
+      "citations": [
+        {
+          "start_offset": 0,
+          "end_offset": 51,
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        },
+        {
+          "start_offset": 53,
+          "end_offset": 96,
+          "evidence_ids": [
+            "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+          ]
+        }
+      ]
+    },
+    "input_sha256": "b07de63ab802030dae3ff7cb2c17ca7e3bcc7cc9785265911a4e5b9e1fe0c875",
+    "generation_snapshot_sha256": null,
+    "observations": {
+      "first_answer_saved_ms": 20.138,
+      "browser_first_paint_ms": null,
+      "collect_elapsed_ms": 8041.409
+    },
+    "duration_ms": 8003,
+    "call_metrics": [
+      {
+        "call_number": 1,
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 3654,
+        "usage": {
+          "input_tokens": 7438,
+          "output_tokens": 700,
+          "total_tokens": 8138,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 7296,
+          "cache_miss_tokens": 142
+        },
+        "output_status": "valid_structure",
+        "error_code": null,
+        "validation_error": null
+      },
+      {
+        "call_number": 2,
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 2182,
+        "usage": {
+          "input_tokens": 3537,
+          "output_tokens": 350,
+          "total_tokens": 3887,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 3328,
+          "cache_miss_tokens": 209
+        },
+        "output_status": "valid_structure",
+        "error_code": null,
+        "validation_error": null
+      },
+      {
+        "call_number": 3,
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+        "correction": false,
+        "status": "succeeded",
+        "duration_ms": 1888,
+        "usage": {
+          "input_tokens": 3540,
+          "output_tokens": 303,
+          "total_tokens": 3843,
+          "cost_amount": null,
+          "currency": null,
+          "cache_hit_tokens": 3328,
+          "cache_miss_tokens": 212
+        },
+        "output_status": "valid_structure",
+        "error_code": null,
+        "validation_error": null
+      }
+    ],
+    "stage_events": [
+      {
+        "component": "evidence_verification",
+        "answer_version": 1,
+        "duration_ms": 8003,
+        "status": "succeeded"
+      }
+    ],
+    "historical_reference": true,
+    "not_same_batch_pair": true,
+    "source_report": "../review-contract-simple-v1/report.md",
+    "not_new_cost": true
+  }
+]

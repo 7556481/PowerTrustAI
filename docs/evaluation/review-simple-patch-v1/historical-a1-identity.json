@@ -1,0 +1,61 @@
+{
+  "id": "A1-production",
+  "historical_reference": true,
+  "not_same_batch_pair": true,
+  "run_id": "f90745a423b249a49fe2623d2ca15d9a",
+  "input_sha256": "b07de63ab802030dae3ff7cb2c17ca7e3bcc7cc9785265911a4e5b9e1fe0c875",
+  "matching_request_sha256": "90496622cd27bba80713afe51c495a42ce4851e1426b7dccf8c6b80f5e27ae45",
+  "model_parameters": {
+    "model_id": "deepseek-flash",
+    "max_output_tokens": 8000
+  },
+  "business_files": [
+    {
+      "path": "agents/verification_contract_v10_batched.py",
+      "sha256": "3fa147d63522b854b02306d8a880553fa09280137d0ddeecd867dac0a813a3e3"
+    },
+    {
+      "path": "agents/verification_contract_v9.py",
+      "sha256": "7928a9f59c8c8d5c6f9fac5786704f5c0ba0938ca6d82f7d80d38384ba9233ca"
+    },
+    {
+      "path": "agents/verification_contract_v9_scoped.py",
+      "sha256": "b7b1c022390f18538fd1e970cc577e2a5239ee40a0d5eaffadb6ab71ad276079"
+    },
+    {
+      "path": "services/support_relation_v6.py",
+      "sha256": "414259a5a786676469f8f1163ce5b2f473b543f99344ad18b555d1b27db43db9"
+    },
+    {
+      "path": "services/quote_candidates.py",
+      "sha256": "3f954643274ac5dba5baa54993dcb930053eb37ff918f08c6a53085ef4f95385"
+    },
+    {
+      "path": "services/scoped_candidates.py",
+      "sha256": "e1e2a40d75ca344f33dedeb16f38adff56878db7adc66fb1cd83876c4f49f396"
+    },
+    {
+      "path": "services/answer_anchors.py",
+      "sha256": "e5906c9daf580b7481b5ca59e45a6fa45c62e315ad6e3badc3ea32a9505de4ef"
+    },
+    {
+      "path": "services/claim_obligations.py",
+      "sha256": "ecdeb5719d0ade9e65e1665f55766c4d45f6c1a468713032a3d63856bf3e6fe3"
+    },
+    {
+      "path": "core/validation.py",
+      "sha256": "d5eb23fb1fab6bdd14d36722b2dea16caa8aa7105dab6a26c44afb9da1b2c4ad"
+    },
+    {
+      "path": "backend/config.py",
+      "sha256": "e99c1e3113f673419202cf36be36c5bacaa9edbeb6bdd7679689e8dcb0d74432"
+    },
+    {
+      "path": "backend/assembly.py",
+      "sha256": "0ebca110db52da6ad4e15194d485f53ff7541079196b177926e14b90ee2fd0cf"
+    }
+  ],
+  "summary_sha256": "a0dbcf6754d455309cf5ce83800e58902beb243a8428cd6e5668e13696fe2fc1",
+  "old_result_sha256": "47af421fdfd5ec7070eef163c25b19d1706342c568548bd3f98286b38500ea46",
+  "no_new_cost": true
+}

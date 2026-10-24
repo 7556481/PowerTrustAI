@@ -1,0 +1,246 @@
+{
+  "plan": {
+    "A": 15,
+    "G": 4,
+    "B": 8
+  },
+  "accepted": 1,
+  "actually_executed": 1,
+  "not_submitted_after_stop": [
+    "A2-simple_v1",
+    "A2-production",
+    "A3-simple_v1",
+    "A3-production",
+    "A4-simple_v1",
+    "A4-production",
+    "A5-simple_v1",
+    "A5-production",
+    "A6-simple_v1",
+    "A6-production",
+    "A7-simple_v1",
+    "A7-production",
+    "A8-simple_v1",
+    "A8-production",
+    "G1",
+    "B1-production",
+    "B1-simple_v1",
+    "G2",
+    "B2-simple_v1",
+    "B2-production",
+    "G3",
+    "B3-production",
+    "B3-simple_v1",
+    "G4",
+    "B4-simple_v1",
+    "B4-production"
+  ],
+  "dependent_unexecuted": [],
+  "lines": {
+    "A/simple_v1": {
+      "accepted": 1,
+      "executed": 1,
+      "execution_complete": 0,
+      "all_initial_valid_tasks": 0,
+      "duration_ms_sequential_harness_sum": 9906,
+      "revisions": 0,
+      "calls": 3,
+      "corrections": 1,
+      "initial": 2,
+      "initial_valid": 1,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "model_duration_ms_not_wallclock": 9772,
+      "input_tokens": 11136,
+      "output_tokens": 1546,
+      "total_tokens": 12682,
+      "cache_hit_tokens": 4480,
+      "cache_miss_tokens": 6656
+    }
+  },
+  "fixed_units": [
+    {
+      "id": "A1-simple_v1",
+      "unit": 0,
+      "reference": "supported",
+      "fact_executed": true,
+      "fact_raw": "supported",
+      "fact_effective": "supported",
+      "fact_assessment": {
+        "raw_model_status": "supported",
+        "effective_support_status": "supported",
+        "semantic_uncertain": false,
+        "condition_bindings": [],
+        "objection": null,
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1.1",
+        "projection_reasons": [],
+        "condition_assessment": {
+          "applicability": "none",
+          "expression": "not_applicable",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "This is a general characterization of dynamic reactive resources with no extra applicability precondition in the proposition beyond the stated voltage bandwidth; the answer does not claim a specific instance application. No qualifying object/state is needed beyond the stated bandwidth, so no condition source or answer fragment is selected."
+        },
+        "inference": "preserved",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "citation_executed": false,
+      "citation_raw": null,
+      "citation_effective": "not_assessable",
+      "citation_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1.1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "fact_reference_aligned": true,
+      "citation_reference_aligned": false
+    },
+    {
+      "id": "A1-simple_v1",
+      "unit": 1,
+      "reference": "supported",
+      "fact_executed": true,
+      "fact_raw": "supported",
+      "fact_effective": "supported",
+      "fact_assessment": {
+        "raw_model_status": "supported",
+        "effective_support_status": "supported",
+        "semantic_uncertain": false,
+        "condition_bindings": [],
+        "objection": null,
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1.1",
+        "projection_reasons": [],
+        "condition_assessment": {
+          "applicability": "none",
+          "expression": "not_applicable",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "This is a general characterization of static reactive resources with no additional applicability condition in the proposition; no instance application is claimed and no object/state qualifier is missing. No condition source or answer fragment is needed."
+        },
+        "inference": "preserved",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "citation_executed": false,
+      "citation_raw": null,
+      "citation_effective": "not_assessable",
+      "citation_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1.1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "fact_reference_aligned": true,
+      "citation_reference_aligned": false
+    }
+  ],
+  "invalid_attempts": [
+    {
+      "id": "A1-simple_v1",
+      "call": 2,
+      "prompt_version": "evidence-verification-v9.22.1-simple-v1",
+      "correction": false,
+      "constraints": [
+        "duplicate_object_keys_not_allowed"
+      ],
+      "diagnostic": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "duplicate_object_keys_not_allowed"
+      }
+    },
+    {
+      "id": "A1-simple_v1",
+      "call": 3,
+      "prompt_version": "evidence-verification-v9.22.1-simple-v1",
+      "correction": true,
+      "constraints": [
+        "duplicate_object_keys_not_allowed"
+      ],
+      "diagnostic": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "duplicate_object_keys_not_allowed"
+      }
+    }
+  ],
+  "root_constraint_request_counts": {
+    "duplicate_object_keys_not_allowed": 2
+  },
+  "branches": [
+    {
+      "id": "A1-simple_v1",
+      "state": "execution_incomplete",
+      "duration_ms": 9906,
+      "root_stage_union_ms": {
+        "initial_audit": 9906.0
+      },
+      "revision_count": 0
+    }
+  ],
+  "invoice_cost": null,
+  "timing_method": "Union of root-stage finish-minus-duration intervals; model request times and Harness totals are separate, not additive. No browser paint."
+}

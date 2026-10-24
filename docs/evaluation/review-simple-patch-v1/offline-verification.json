@@ -1,0 +1,15 @@
+{
+  "final_full_tests": 1234,
+  "final_full_seconds": 236.359,
+  "result": "OK",
+  "log_sha256": "e36f092a94cba4c18d994174982d79fc586c1ff11f9db79d5c4a82f8474253db",
+  "initial_full_tests": 1233,
+  "initial_full_seconds": 249.105,
+  "reason_for_final_full": "Corrected final-only recurrence accounting and added its regression before freeze.",
+  "adapter_related_tests": 25,
+  "entry_and_boundary_tests": 8,
+  "condition_matrix_combinations": 72,
+  "offline_real_requests": 0,
+  "windows_temporary_sqlite_renamed_after_close": true,
+  "implementation_commit": "ebf17a4114b0f537971767973687df220e33a1f2"
+}

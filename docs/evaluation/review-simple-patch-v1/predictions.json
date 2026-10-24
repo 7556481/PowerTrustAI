@@ -1,0 +1,95 @@
+[
+  {
+    "sequence": 1,
+    "run_id": "8e1ce5c1f1b341af8a407cda7f2b8f81",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "simple_v1"
+    },
+    "prompt_version": "evidence-verification-v9.22.1-simple-v1",
+    "correction": false,
+    "messages_sha256": "6369eb1aef1bb9bca8d147928c645ee6e874812f73b2f9fe01023b6a1db1a57a",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "elapsed_before_send": 0.03219150000040827,
+    "response": {
+      "text": "{\"judgments\":[{\"status\":\"supported\",\"basis_ids\":[\"S0B0\"],\"reason\":\"The source states dynamic reactive resources adjust output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and operate to maintain a set point voltage or in voltage droop mode. Each clause of the proposition—automatic continuous real-time adjustment within a voltage bandwidth, responsiveness to grid voltage, and the two operating modes—is matched without adding conditions the source lacks. The source's mention of fast response is extra detail, not needed for this proposition.\",\"gap_answer_ids\":[],\"conditions\":{\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[],\"answer_ids\":[],\"reason\":\"This is a general characterization of dynamic reactive resources with no extra applicability precondition in the proposition beyond the stated voltage bandwidth; the answer does not claim a specific instance application. No qualifying object/state is needed beyond the stated bandwidth, so no condition source or answer fragment is selected.\"},\"inference\":\"preserved\",\"objection\":null,\"repair\":null,\"requires_authoritative_source\":false},{\"status\":\"supported\",\"basis_ids\":[\"S0B0\"],\"reason\":\"The source states static reactive resources have fixed reactive power output at nominal voltage, capability varies according to voltage squared, and devices are switched in or out based on system conditions, with switching manual or automatic. All clauses—fixed output at rated/nominal voltage, square-law capability, and manual/automatic switching per system conditions—are covered. Direction is preserved: fixed at nominal voltage, variation with voltage squared, switching as stated.\",\"gap_answer_ids\":[],\"conditions\":{\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[],\"answer_ids\":[],\"reason\":\"This is a general characterization of static reactive resources with no additional applicability condition in the proposition; no instance application is claimed and no object/state qualifier is missing. No condition source or answer fragment is needed.\"},\"inference\":\"preserved\",\"objection\":null,\"repair\":null,\"requires_authoritative_source\":false}]}",
+      "model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 2913,
+        "output_tokens": 448,
+        "total_tokens": 3361,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 2913
+      },
+      "finish_reason": "stop"
+    }
+  },
+  {
+    "sequence": 2,
+    "run_id": "8e1ce5c1f1b341af8a407cda7f2b8f81",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "simple_v1"
+    },
+    "prompt_version": "evidence-verification-v9.22.1-simple-v1",
+    "correction": false,
+    "messages_sha256": "bf278f4deac276043e286766b5bc66b42b7c0d6d538071a370133e2828124b24",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "elapsed_before_send": 3.271768200000224,
+    "response": {
+      "text": "{\"judgments\":[{\"status\":\"supported\",\"basis_ids\":[\"S1B0\"],\"reason\":\"The source states that dynamic reactive resources adjust reactive power output automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and that they operate to maintain a set point voltage or in a voltage droop mode. The answer's clauses on automatic real-time continuous adjustment within a voltage bandwidth, response to grid voltage changes, and set-point/voltage-droop operation all match. This is a descriptive engineering characterization, not a normative guarantee.\",\"gap_answer_ids\":[],\"conditions\":{\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[\"SRC:S1B0\"],\"answer_ids\":[],\"reason\":\"The proposition is a general capability description without an extra applicability qualifier in the answer; no conditional instance application is claimed, so no instance information is required. The object qualified is the dynamic resource's output adjustment behavior and operating mode.\",\"reason\":\"No additional applicability condition is attached to this conclusion, no conditional instance is claimed, and no expression condition is missing.\"},\"inference\":\"preserved\",\"objection\":null,\"repair\":null,\"requires_authoritative_source\":false},{\"status\":\"supported\",\"basis_ids\":[\"S2B0\"],\"reason\":\"The source states that static reactive resources have fixed reactive power output at their nominal voltage, their capability varies according to voltage squared, and the devices are switched in or out of service based on system conditions, with switching manual or automatic. The answer's clauses on fixed nominal-voltage output, squared-voltage capability variation, and manual/automatic switching based on system conditions all match. This is descriptive, not a normative guarantee.\",\"gap_answer_ids\":[],\"conditions\":{\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[\"SRC:S2B0\"],\"answer_ids\":[],\"reason\":\"The proposition is a general capability and switching description; no extra applicability qualifier is attached and no conditional instance application is claimed, so no instance information is required. The object qualified is the static resource's fixed output capability and switching mode.\",\"reason\":\"No additional applicability condition is attached, no conditional instance is claimed, and no expression condition is missing.\"},\"inference\":\"preserved\",\"objection\":null,\"repair\":null,\"requires_authoritative_source\":false}]}",
+      "model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 3690,
+        "output_tokens": 502,
+        "total_tokens": 4192,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 896,
+        "cache_miss_tokens": 2794
+      },
+      "finish_reason": "stop"
+    }
+  },
+  {
+    "sequence": 3,
+    "run_id": "8e1ce5c1f1b341af8a407cda7f2b8f81",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "simple_v1"
+    },
+    "prompt_version": "evidence-verification-v9.22.1-simple-v1",
+    "correction": true,
+    "messages_sha256": "23708ba6f579cd9ab92c4d6e85e536bc5c770fadd771adeede1bc9dd434e824a",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "elapsed_before_send": 6.32716419999997,
+    "response": {
+      "text": "{\"judgments\":[{\"status\":\"supported\",\"basis_ids\":[\"S1B0\"],\"reason\":\"The basis states dynamic resources adjust reactive output automatically in real time over a continuous range within a specified voltage bandwidth responding to grid voltage changes, and operate to maintain a set point voltage or in voltage droop mode. Every clause of the proposition—automatic, real-time, continuous, within voltage bandwidth, in response to voltage changes, and the set-point/voltage-droop operating alternatives—is matched. The source is a descriptive guideline; no normative guarantee is claimed.\",\"gap_answer_ids\":[],\"conditions\":{\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[\"SRC:S1B0\"],\"answer_ids\":[],\"reason\":\"The proposition is a general behavioral description of dynamic resources; no extra applicability qualifier is attached to the conclusion, so applicability is none and expression is not_applicable. The object qualified is the resource's output-adjustment behavior and operating mode. No conditional instance application is claimed, so instance is not_claimed and no instance information is required. No answer unit or source unit carries a separate condition for this conclusion beyond the voltage-bandwidth scope already stated in the proposition.\",\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[\"SRC:S1B0\"],\"answer_ids\":[]},\"inference\":\"preserved\",\"objection\":null,\"repair\":null,\"requires_authoritative_source\":false},{\"status\":\"supported\",\"basis_ids\":[\"S2B0\"],\"reason\":\"The basis states static resources have fixed reactive output at nominal voltage, capability varies according to voltage squared, and devices are switched in or out based on system conditions with switching manual or automatic. All clauses of the proposition—fixed nominal-voltage output, voltage-squared capability variation, and manual/automatic switching per system conditions—are matched. Descriptive guideline content, not a normative guarantee.\",\"gap_answer_ids\":[],\"conditions\":{\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[\"SRC:S2B0\"],\"answer_ids\":[],\"reason\":\"The proposition is a general capability and switching description; no extra applicability qualifier qualifies the conclusion, so applicability is none and expression is not_applicable. The object qualified is the static resource's fixed output capability and switching mode. No conditional instance application is claimed, so instance is not_claimed and no instance data is needed. No separate condition element exists in the bound units for this conclusion.\",\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[\"SRC:S2B0\"],\"answer_ids\":[]},\"inference\":\"preserved\",\"objection\":null,\"repair\":null,\"requires_authoritative_source\":false}]}",
+      "model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 4533,
+        "output_tokens": 596,
+        "total_tokens": 5129,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 3584,
+        "cache_miss_tokens": 949
+      },
+      "finish_reason": "stop"
+    }
+  }
+]
