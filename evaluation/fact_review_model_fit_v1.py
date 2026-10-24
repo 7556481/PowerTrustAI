@@ -9,9 +9,9 @@ from evaluation.strict_interface_probe_v1 import ROOT,save,load,digest,check_sch
 from evaluation.batch_control import run_fixed
 from backend.serialization import wire
 from backend.store import RunStore
-from model_adapter.contracts import ModelSettings
+from model_adapter.contracts import ModelSettings,ModelTimeoutError,ModelConnectionError
 from model_adapter.deepseek import DeepSeekAdapter
-from model_adapter.runtime import ModelBudget,model_scope,model_invocation_scope,credential_from_environment
+from model_adapter.runtime import ModelBudget,model_scope,model_invocation_scope,credential_from_environment,current_budget
 from model_adapter.strict_review_tool import specification,NAME
 from services.review_simple_tool_v1 import ToolCatalog,SYSTEM,PROMPT
 from services.citation_workload import CitationWorkload,pack
@@ -86,6 +86,18 @@ class BoundRecorder(Recorder):
         super().__call__(stage,value)
 
 
+class ComparisonAdapter(DeepSeekAdapter):
+    """Opt-in experiment boundary: unknown acceptance poisons this run, no retry."""
+    async def complete(self,request):
+        try:return await super().complete(request)
+        except (ModelTimeoutError,asyncio.CancelledError) as exc:
+            error=ModelConnectionError(dict(version='official-network-diagnostic-v1',stage='acceptance_uncertain',exception_type=type(exc).__name__,errno=None,winerror=None))
+            budget=current_budget()
+            if budget is not None:budget.fatal_error=error
+            if isinstance(exc,asyncio.CancelledError):raise
+            raise error from None
+
+
 async def execute_async():
     f=load(LOCAL/'freeze.json');assert order()==f['cases']
     assert all(digest((ROOT/p).read_bytes())==h for p,h in f['sources'].items())
@@ -100,12 +112,13 @@ async def execute_async():
         rid=a['run_id'];spec=accepted[rid];cid=f'A{spec["case"]+1}-{spec["variant"]}';key=f'A{spec["case"]+1}';model=MODELS[spec['variant']]
         store.mark(rid,'running');start=perf_counter();inp=inputs(load(LOCAL/'materials.json'),spec['case']);assert wire(inp)==f['inputs'][key]
         diagnostics=LOCAL/'diagnostics'/cid;rec=BoundRecorder(LOCAL/'wire'/cid,model,diagnostics,f['initial_messages'][key]);settings=replace(SETTINGS,model_id=model)
-        adapter=DeepSeekAdapter(settings,strict_model_id=model,wire_observer=rec);budget=ModelBudget(40,deadline=start+800);out={}
+        adapter=ComparisonAdapter(settings,strict_model_id=model,wire_observer=rec);budget=ModelBudget(40,deadline=start+800);out={}
         try:
             from agents.evidence_verification import ModelEvidenceVerificationAgent
             agent=ModelEvidenceVerificationAgent(adapter,settings,diagnostic_dir=diagnostics,schema_version=13,review_contract='simple_v1',review_result_transport='strict_tool_v1',review_message_profile='lossless_v1',support_relation_checks=True,support_relation_version=6)
             with model_scope(budget),model_invocation_scope(rid,'evidence_verification',1):v=await asyncio.wait_for(agent.run(inp),110)
             out=dict(verification=wire(v),execution_issues=wire(v.execution_issues))
+            if any(x.code in ('MODEL_TIMEOUT','MODEL_CANCELLED','MODEL_CALL_BUDGET_EXHAUSTED') for x in v.execution_issues):out['error_code']='SERVICE_EXECUTION_FAILED'
             if any(type(x.returned_model_id) is str and x.returned_model_id!=model for x in budget.records):out['error_code']='CONFIGURATION_UNAVAILABLE'
         except Exception as exc:
             code=getattr(exc,'code','SERVICE_EXECUTION_FAILED');out=dict(error_code=code,exception_type=type(exc).__name__)

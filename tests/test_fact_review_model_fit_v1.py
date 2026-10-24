@@ -5,6 +5,7 @@ from dataclasses import replace
 from evaluation import fact_review_model_fit_v1 as m
 from model_adapter.deepseek import DeepSeekAdapter
 from model_adapter.contracts import ModelRequest,ModelMessage,ModelRequestError
+from model_adapter.contracts import ModelTimeoutError,ModelConnectionError
 from model_adapter.runtime import ModelBudget,model_scope
 from model_adapter.strict_review_tool import specification,map_null,NAME
 from tests.test_review_simple_v1 import response
@@ -89,6 +90,31 @@ class FitTests(unittest.IsolatedAsyncioTestCase):
             def close(self):pass
         with tempfile.TemporaryDirectory(dir=m.ROOT/'data/retrieval_local') as tmp,patch.object(m,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch.object(m,'credential_from_environment',return_value='fixture-private'),patch('model_adapter.deepseek.credential_from_environment',return_value='fixture-private'),patch('http.client.HTTPSConnection',Connection):
             m.save(Path(tmp)/'selection.json',dict(selected='deepseek-v4-pro'));m.freeze();r=await m.execute_async();self.assertEqual(len(posts),3);self.assertEqual(len(r['results']),2);self.assertTrue(r['controls'][-1]['stop']);self.assertFalse(r['results']['A1-flash']['execution_issues'])
+
+    async def test_unknown_acceptance_timeout_poison_prevents_second_post(self):
+        calls=[]
+        def timeout(*a):calls.append(1);raise ModelTimeoutError()
+        a=m.ComparisonAdapter(m.SETTINGS,exchange=timeout);budget=ModelBudget(40)
+        try:
+            with model_scope(budget):out=await ModelEvidenceVerificationAgent(a,m.SETTINGS,schema_version=13,review_contract='simple_v1',review_result_transport='strict_tool_v1').run(inputs(True))
+            self.assertEqual(len(calls),1);self.assertIsInstance(budget.fatal_error,ModelConnectionError);self.assertEqual(len(budget.records),1);self.assertEqual(out.execution_issues[0].code,'MODEL_CONNECTION_FAILED')
+        finally:a.close()
+
+    async def test_budget_exhaustion_is_shared_stop_not_next_task(self):
+        class HTTPResponse:
+            status=200
+            def __init__(self,data):self.data=data
+            def read(self,n):return self.data
+        posts=[]
+        class Connection:
+            def __init__(self,*a,**kw):pass
+            def connect(self):pass
+            def request(self,method,path,body,headers):
+                p=json.loads(body);posts.append(p);self.data=envelope(p['model'],json.dumps(map_null(response(json.loads(p['messages'][1]['content'])),encode=True)))
+            def getresponse(self):return HTTPResponse(self.data)
+            def close(self):pass
+        with tempfile.TemporaryDirectory(dir=m.ROOT/'data/retrieval_local') as tmp,patch.object(m,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch.object(m,'credential_from_environment',return_value='fixture-private'),patch('model_adapter.deepseek.credential_from_environment',return_value='fixture-private'),patch('http.client.HTTPSConnection',Connection),patch.object(m,'ModelBudget',side_effect=lambda *a,**kw:ModelBudget(1)):
+            m.save(Path(tmp)/'selection.json',dict(selected='deepseek-v4-pro'));m.freeze();r=await m.execute_async();self.assertEqual(len(posts),1);self.assertEqual(len(r['results']),1);self.assertTrue(r['controls'][-1]['stop'])
 
 
 if __name__=='__main__':unittest.main()
