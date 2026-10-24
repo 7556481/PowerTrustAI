@@ -34,18 +34,18 @@ def variants(c,v):return replace(c,fact_review_contract=v)
 
 class ContractRecurrence:
     """Bounded stop evidence, not a semantic classifier or a second controller."""
-    def __init__(self):self.previous=None
+    def __init__(self,variant='simple_v1',prompt=PROMPT,stages=None):self.previous=None;self.variant=variant;self.prompt=prompt;self.stages=stages or (CONTRACT,)
     def __call__(self,spec,raw):
-        if spec['variant']!='simple_v1':return None
+        if spec['variant']!=self.variant:return None
         # A bad intermediate attempt corrected successfully does not trigger this stop.
         if not raw.get('execution_issues'):self.previous=None;return None
         errors=[];final_by_group={}
         for r in raw.get('model_records',[]):
-            if r['prompt_version']==PROMPT:final_by_group[r.get('candidate_catalog_path')]=r
+            if r['prompt_version']==self.prompt:final_by_group[r.get('candidate_catalog_path')]=r
         for r in final_by_group.values():
             if not r.get('validation_error'):continue
             d=r['validation_error'];errors.extend(d.get('errors',[d]))
-        keys={(e['constraint'],re.sub(r'\[\d+\]','[]',e['field_path'])) for e in errors if e.get('stage')==CONTRACT}
+        keys={(e['constraint'],re.sub(r'\[\d+\]','[]',e['field_path'])) for e in errors if e.get('stage') in self.stages}
         current=dict(case=(spec['line'],spec['case']),constraints=keys,diagnostics=errors)
         prior=self.previous;self.previous=current
         repeated=keys.intersection(prior['constraints']) if prior and prior['case']!=current['case'] else set()

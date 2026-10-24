@@ -35,6 +35,8 @@ class ResponseDiagnostics:
                    "validation_error": diagnostic}
         if request_messages_path is not None:
             payload['request_messages_path']=request_messages_path
+        if response.result_transport is not None:
+            payload['model_result_tool']={k:response.result_transport.get(k) for k in ('version','request_id','tool_calls','content','finish_reason','envelope_error','diagnostic_gap')}
         try:
             if not self.directory.resolve().is_relative_to(LOCAL_ROOT.resolve()):
                 raise OSError()

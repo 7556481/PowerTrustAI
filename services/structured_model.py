@@ -21,7 +21,7 @@ def strict_json(text):
                           StructuredValidationError("json_parse", "$", "nonfinite_numbers_not_allowed")))
 
 
-async def structured_request(client, messages, prompt_version, parser, *, diagnostics=None, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None,max_corrections=1,max_message_chars=None,correction_context=None,correction_instruction=None):
+async def structured_request(client, messages, prompt_version, parser, *, diagnostics=None, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None,max_corrections=1,max_message_chars=None,correction_context=None,correction_instruction=None,result_tool=None):
     budget = current_budget() or ModelBudget(limit=2)
     request_numbers = []
     partial=None
@@ -29,7 +29,7 @@ async def structured_request(client, messages, prompt_version, parser, *, diagno
     for correction in ((False,True) if max_corrections else (False,)):
         if max_message_chars is not None:
             from services.citation_workload import messages_size, ReviewCapacityError
-            if messages_size(messages) > max_message_chars:
+            if messages_size(messages)+(len(json.dumps(result_tool,ensure_ascii=False)) if result_tool is not None else 0) > max_message_chars:
                 error = ReviewCapacityError('Complete review/correction message exceeds configured capacity')
                 if partial is not None:error.partial_output=partial
                 raise error
@@ -37,7 +37,7 @@ async def structured_request(client, messages, prompt_version, parser, *, diagno
         try:
             response, number = await client.complete(messages, prompt_version, budget, correction,
                                                     response_contract_version=response_contract_version,
-                                                    candidate_catalog_path=candidate_catalog_path,input_snapshot_path=input_snapshot_path)
+                                                    candidate_catalog_path=candidate_catalog_path,input_snapshot_path=input_snapshot_path,**({'result_tool':result_tool} if result_tool is not None else {}))
             request_numbers.append(number)
         except Exception as exc:
             if partial is not None:exc.partial_output=partial
@@ -50,6 +50,9 @@ async def structured_request(client, messages, prompt_version, parser, *, diagno
                 budget.annotate(record.call_number, "invalid_model_response", diagnostic, path)
             raise
         try:
+            if result_tool is not None:
+                from model_adapter.strict_review_tool import validate_response
+                validate_response(response)
             result = parser(strict_json(response.text))
         except (ContractError, ValueError, TypeError, KeyError, RecursionError) as exc:
             partial=getattr(exc,"partial_output",partial)

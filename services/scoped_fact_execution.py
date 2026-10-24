@@ -25,7 +25,8 @@ async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruc
     else:cat=catalog
     start=len(current_budget().records);current=deepcopy(cat.rows);accepted=set();issues=[];corrected=False
     facts=[t for t,x in cat.targets.items() if x['kind']=='fact'];citations=[t for t,x in cat.targets.items() if x['kind']=='citation']
-    groups,rejected=pack(citations,cat.payload,instruction,agent.citation_workload or CitationWorkload())
+    capacity_instruction=instruction+(json.dumps(cat.result_tool,ensure_ascii=False) if getattr(cat,'result_tool',None) else '')
+    groups,rejected=pack(citations,cat.payload,capacity_instruction,agent.citation_workload or CitationWorkload())
     if rejected:issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,'REVIEW_MESSAGE_CAPACITY_EXCEEDED','Complete citation scopes exceed capacity; no truncation'))
     for group in ([tuple(facts)] if facts else [])+list(groups):
         baseline={'judgments':[deepcopy(current[t]) for t in group]}
@@ -48,6 +49,7 @@ async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruc
                 diagnostics=agent.diagnostics,response_contract_version=contract_version,candidate_catalog_path=path,max_corrections=0 if corrected else 1,
                 correction_context=lambda value,diagnostic:cat.correction_context(group,value,diagnostic),
                 correction_instruction=getattr(cat,"correction_instruction",None),
+                result_tool=getattr(cat,'result_tool',None),
                 max_message_chars=None if group==tuple(facts) else (agent.citation_workload or CitationWorkload()).max_correction_message_chars)
         except asyncio.CancelledError as exc:
             if catalog is not None:

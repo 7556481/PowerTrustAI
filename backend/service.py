@@ -65,7 +65,7 @@ class ApplicationService:
         if self.config.profile=='real' and request.existing_answer and request.existing_answer.citations:
             from services.citation_workload import submission_rejections
             from core.validation import InputError
-            rejected=submission_rejections(request,knowledge,self.config.verification_schema,self.config.citation_workload,review_contract=self.config.fact_review_contract)
+            rejected=submission_rejections(request,knowledge,self.config.verification_schema,self.config.citation_workload,review_contract=self.config.fact_review_contract,review_result_transport=self.config.review_result_transport)
             if rejected:raise InputError('Complete citation scopes exceed configured capacity; citation_indexes='+str(list(rejected)))
 
         async with self.lock:

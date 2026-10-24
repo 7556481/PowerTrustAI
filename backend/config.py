@@ -16,6 +16,7 @@ class ServiceConfig:
     execution_path: str='sequential'
     fact_internal_flow: str='production'
     fact_review_contract: str='production'
+    review_result_transport: str='json'
     domain_internal_flow: str='production'
     revision_answer_delivery: str='production'
     run_db: Path=ROOT/'data/runtime_local/runs.sqlite3'
@@ -39,6 +40,8 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.review_result_transport not in ('json','strict_tool_v1'):raise ValueError('Invalid review result transport')
+        if self.review_result_transport!='json' and self.fact_review_contract!='simple_v1':raise ValueError('Strict result transport requires explicit simple_v1')
         if self.fact_review_contract not in ('production','scope_v2','simple_v1'):raise ValueError('Invalid fact review contract')
         if self.fact_review_contract!='production' and (self.profile!='real' or self.verification_schema!=13 or self.fact_internal_flow!='production'):raise ValueError('Scope contract requires explicit production schema13 Agent')
         if self.revision_answer_delivery not in ('production','answer_only_v1'):raise ValueError('Invalid revision answer delivery')
@@ -98,6 +101,7 @@ class ServiceConfig:
             revision_answer_delivery=os.environ.get('POWERTRUST_REVISION_ANSWER_DELIVERY','production'),
             fact_internal_flow=os.environ.get('POWERTRUST_FACT_INTERNAL_FLOW','production'),
             fact_review_contract=os.environ.get('POWERTRUST_FACT_REVIEW_CONTRACT','production'),
+            review_result_transport=os.environ.get('POWERTRUST_REVIEW_RESULT_TRANSPORT','json'),
             execution_path=os.environ.get('POWERTRUST_EXECUTION_PATH',orchestration.get('execution_path','sequential')),
             review_message_profile=os.environ.get('POWERTRUST_REVIEW_MESSAGE_PROFILE','lossless_v1'),
             retrieval_execution_profile=os.environ.get('POWERTRUST_RETRIEVAL_EXECUTION','topic_v4_subject_v1'),

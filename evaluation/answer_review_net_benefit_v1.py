@@ -155,6 +155,7 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
                     n=len(send_log)+1
                     row=dict(sequence=n,run_id=rid,task=spec,prompt_version=r.prompt_version,correction=r.correction,
                              messages=wire(r.messages),messages_sha256=sha(wire(r.messages)),parameters=dict(model_id=r.model_id,max_output_tokens=r.max_output_tokens),elapsed_before_send=perf_counter()-start)
+                    if r.result_tool is not None:row['parameters'].update(result_tool=r.result_tool,endpoint='https://api.deepseek.com/beta/chat/completions',tool_choice={'type':'function','function':{'name':'submit_review_result'}},thinking={'type':'disabled'})
                     write(root/'messages'/f'{n:04d}.json',row)
                     send_log.append({k:v for k,v in row.items() if k!='messages'})
                 except Exception:
@@ -163,7 +164,7 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
                 except Exception as exc:
                     if getattr(exc,'code',None) in ('MODEL_REQUEST_REJECTED','MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED','MODEL_RATE_LIMITED'):fatal=True
                     raise
-                try:write(root/'responses'/f'{n:04d}.json',dict(text=response.text,model_id=response.model_id,usage=wire(response.usage),finish_reason=response.finish_reason))
+                try:write(root/'responses'/f'{n:04d}.json',dict(text=response.text,model_id=response.model_id,usage=wire(response.usage),finish_reason=response.finish_reason,**({'result_transport':wire(response.result_transport)} if response.result_transport is not None else {})))
                 except Exception:fatal=True;raise PreSendStorageFailure({'constraint':'response_storage'}) from None
                 return response
         try:

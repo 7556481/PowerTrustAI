@@ -91,7 +91,7 @@ class ModelClient:
             raise InputError(str(exc)) from exc
         self.adapter, self.settings = adapter, settings
 
-    async def complete(self, messages, prompt_version, budget, correction=False, *, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None):
+    async def complete(self, messages, prompt_version, budget, correction=False, *, response_contract_version=None, candidate_catalog_path=None, input_snapshot_path=None,result_tool=None):
         owner = _invocation.get() or (None, None, None)
         number = budget.claim()
         started, response = perf_counter(), None
@@ -104,7 +104,7 @@ class ModelClient:
             if remaining <= 0:
                 raise ModelTimeoutError()
             request = ModelRequest(self.settings.model_id, messages, self.settings.max_output_tokens,
-                                   prompt_version, correction)
+                                   prompt_version, correction,result_tool)
             try:
                 candidate = await asyncio.wait_for(self.adapter.complete(request), remaining)
             except TimeoutError:
@@ -160,4 +160,4 @@ class ModelClient:
                 cost_estimate=None if response is None else response.cost_estimate,
                 response_contract_version=response_contract_version,candidate_catalog_path=candidate_catalog_path,input_snapshot_path=input_snapshot_path,
                 request_metrics=measure(messages),invocation_id=owner[0],component=owner[1],answer_version=owner[2],
-                network_diagnostic=network_diagnostic))
+                network_diagnostic=network_diagnostic,result_transport=None if response is None else response.result_transport))

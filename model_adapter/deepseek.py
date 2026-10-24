@@ -86,10 +86,40 @@ def _usage(value):
     return result
 
 
-def parse_response(status, body, requested_model, *, request_id=None):
+def parse_response(status, body, requested_model, *, request_id=None,result_tool=None):
     if status != 200:
         cls=ModelAuthenticationError if status in (401,403) else ModelBalanceError if status==402 else ModelRateLimitError if status==429 else ModelServiceError if status>=500 else ModelRequestError
         error=cls();error.diagnostic=safe_http_diagnostic(status,body,request_id);raise error
+    if result_tool is not None:
+        from model_adapter.strict_review_tool import VERSION
+        from services.structured_model import strict_json
+        t=dict(version=VERSION,request_id=request_id,endpoint='https://api.deepseek.com/beta/chat/completions',tool_calls=None,content=None)
+        try:
+            data=strict_json(body.decode('utf-8'));choices=data.get('choices') if type(data) is dict else None
+            if type(choices) is not list or len(choices)!=1:
+                t.update(envelope_error='choice_count',diagnostic_gap='Ambiguous envelope withheld; no choice selected.')
+                return ModelResponse('',None,result_transport=t)
+            choice=choices[0];msg=choice.get('message',{})
+            calls=msg.get('tool_calls');captured=[]
+            if type(calls) is list:
+                for c in calls:
+                    if type(c) is not dict:captured.append({});continue
+                    f=c.get('function')
+                    scalar=lambda v:v if type(v) is str else None
+                    if any(type(c.get(k)) is not str for k in ('id','type')) or type(f) is not dict or any(type(f.get(k)) is not str for k in ('name','arguments')):
+                        t.update(envelope_error='tool_field_type',diagnostic_gap='Non-string tool carrier fields withheld; identifiable argument strings retained.')
+                    captured.append(dict(id=scalar(c.get('id')),type=scalar(c.get('type')),function={k:scalar(f.get(k)) for k in ('name','arguments')} if type(f) is dict else None))
+            content=msg.get('content')
+            if content is not None and type(content) is not str:
+                t.update(envelope_error='content_type',diagnostic_gap='Non-text content withheld.')
+            finish=choice.get('finish_reason') if type(choice.get('finish_reason')) is str else None
+            t.update(content=content if type(content) is str else None,tool_calls=captured if type(calls) is list else None,finish_reason=finish)
+            args=captured[0]['function'].get('arguments') if len(captured)==1 and type(captured[0].get('function')) is dict else None
+            usage=_usage(data.get('usage'))
+            return ModelResponse(args if type(args) is str else '',data.get('model') if type(data.get('model')) is str else None,usage,finish,estimate_cost(requested_model,usage),t)
+        except (ContractError,ValueError,TypeError,KeyError,AttributeError,UnicodeError,RecursionError):
+            t.update(envelope_error='invalid_envelope',diagnostic_gap='Undecodable envelope withheld; original parameters unavailable if not identifiable.')
+            return ModelResponse('',None,result_transport=t)
     try:
         data = json.loads(body)
         require(type(data) is dict and type(data.get("choices")) is list and len(data["choices"]) == 1,
@@ -127,7 +157,7 @@ class DeepSeekAdapter:
     def __repr__(self):
         return "DeepSeekAdapter(official, credentials=private-environment, retries=0)"
 
-    def _http(self, body, timeout, byte_limit):
+    def _http(self, body, timeout, byte_limit, *, path=None):
         # Read only the one named credential, locally. No SDK/proxy/redirect/retry.
         from dataclasses import replace
         key = credential_from_environment(replace(self.settings, credential_env="DEEPSEEK_API_KEY"))
@@ -137,7 +167,7 @@ class DeepSeekAdapter:
         try:
             connection.connect()
             stage = 'send_request'
-            connection.request("POST", self._path, body=body,
+            connection.request("POST", path or self._path, body=body,
                 headers={"Authorization": "Bearer " + key, "Content-Type": "application/json", "Accept": "application/json"})
             stage = 'receive_response'
             response = connection.getresponse()
@@ -156,11 +186,12 @@ class DeepSeekAdapter:
         finally:
             connection.close()
 
-    def _work(self, body, model_id, request_id=None):
+    def _work(self, body, model_id, request_id=None,result_tool=None):
         try:
+            kwargs={'path':'/beta/chat/completions'} if result_tool is not None and self._exchange==self._http else {}
             status, raw = self._exchange(body, self.settings.timeout_seconds,
-                                         self.settings.max_response_chars * 4 + 32768)
-            return parse_response(status, raw, model_id,request_id=request_id)
+                                         self.settings.max_response_chars * 4 + 32768,**kwargs)
+            return parse_response(status, raw, model_id,request_id=request_id,result_tool=result_tool)
         except TimeoutError:
             raise ModelTimeoutError() from None
         except (OSError, http.client.HTTPException):
@@ -173,8 +204,11 @@ class DeepSeekAdapter:
         payload = {"model": request.model_id, "messages": [{"role": m.role, "content": m.content} for m in request.messages],
                    "max_tokens": request.max_output_tokens, "stream": False,
                    "response_format": {"type": "json_object"}, "thinking": {"type": "disabled"}}
+        if request.result_tool is not None:
+            from model_adapter.strict_review_tool import NAME
+            payload.pop('response_format');payload.update(tools=[request.result_tool],tool_choice={'type':'function','function':{'name':NAME}})
         # This is the sole POST for this complete call; no fallback model or retry.
-        self._active = self._executor.submit(self._work, json.dumps(payload, ensure_ascii=False).encode("utf-8"), request.model_id,uuid4().hex)
+        self._active = self._executor.submit(self._work, json.dumps(payload, ensure_ascii=False).encode("utf-8"), request.model_id,uuid4().hex,request.result_tool)
         future = asyncio.wrap_future(self._active)
         future.add_done_callback(lambda done: None if done.cancelled() else done.exception())
         return await asyncio.shield(future)
@@ -183,7 +217,12 @@ class DeepSeekAdapter:
         from model_adapter.runtime import current_budget
         budget=current_budget()
         if budget is not None:budget.raise_if_failed()
-        json_mode_preflight(request)
+        if request.result_tool is None:json_mode_preflight(request)
+        else:
+            from model_adapter.strict_review_tool import specification
+            validate_types(request,ModelRequest)
+            if request.result_tool!=specification() or request.model_id!='deepseek-flash':
+                error=ModelRequestError();error.diagnostic=dict(version='official-http-diagnostic-v1',stage='preflight',http_status=None,error_type='strict_tool_configuration',error_message='Explicit supported fixed tool/schema/model required.',request_id=uuid4().hex,provider_request_id=None,diagnostic_gap='No HTTP request sent.');raise error
 
     def close(self):
         self._closed = True

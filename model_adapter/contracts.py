@@ -86,6 +86,7 @@ class ModelRequest:
     max_output_tokens: int
     prompt_version: str
     correction: bool = False
+    result_tool: dict | None = None
 
 
 @dataclass(frozen=True)
@@ -116,6 +117,7 @@ class ModelResponse:
     usage: ModelUsage | None = None
     finish_reason: str | None = None
     cost_estimate: ModelCostEstimate | None = None
+    result_transport: dict | None = None
 
 
 @dataclass(frozen=True)
@@ -142,6 +144,7 @@ class ModelCallRecord:
     component: str | None = None
     answer_version: int | None = None
     network_diagnostic: dict | None = None
+    result_transport: dict | None = None
 
 
 class ModelAdapter(Protocol):

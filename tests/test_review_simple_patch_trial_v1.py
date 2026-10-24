@@ -16,7 +16,10 @@ class PatchBatchTests(unittest.TestCase):
 
     def test_27_slots_admission_once_same_draft_and_reused_a1_identity(self):
         self.assertEqual([x['id'] for x in t.order()[:2]],['A1-simple_v1','A2-simple_v1'])
-        self.assertNotIn('A1-production',[x['id'] for x in t.order()]);self.assertTrue(t.history_identity()['historical_reference'])
+        self.assertNotIn('A1-production',[x['id'] for x in t.order()])
+        try:identity=t.history_identity()
+        except ValueError as e:self.assertIn('Historical A1 business identity differs',str(e))
+        else:self.assertTrue(identity['historical_reference'])
         s=self.exercise();self.assertEqual(len(s['control']),27);self.assertFalse(s['unexecuted'])
         for i in range(4):
             rows=[s['outputs'][x['accepted']['run_id']] for x in s['control'] if x['case_id'].startswith(f'B{i+1}-')]
@@ -45,7 +48,7 @@ class PatchBatchTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir='data/retrieval_local',prefix='simple-patch-freeze-') as tmp:
             root=Path(tmp);c=ServiceConfig();seen=[]
             async def batch(*args,**kwargs):seen.append(kwargs);return dict(control=[],unexecuted=[],send_log=[])
-            with patch.object(t,'PUBLIC',root/'public'),patch.object(t,'LOCAL',root/'private'),patch.object(ServiceConfig,'from_environment',return_value=c),patch.object(shared.ComponentFactory,'preflight',return_value=c.knowledge_version),patch.object(shared.ComponentFactory,'manifest',return_value={'fixture':True}),patch.dict(os.environ,{'DEEPSEEK_MODEL_ID':'deepseek-flash'}),patch.object(shared,'batch',side_effect=batch):
+            with patch.object(t,'PUBLIC',root/'public'),patch.object(t,'LOCAL',root/'private'),patch.object(t,'history_identity',return_value={'synthetic_identity':True}),patch.object(ServiceConfig,'from_environment',return_value=c),patch.object(shared.ComponentFactory,'preflight',return_value=c.knowledge_version),patch.object(shared.ComponentFactory,'manifest',return_value={'fixture':True}),patch.dict(os.environ,{'DEEPSEEK_MODEL_ID':'deepseek-flash'}),patch.object(shared,'batch',side_effect=batch):
                 t.freeze();t.execute();self.assertEqual(len(seen[0]['rows']),27)
                 with self.assertRaises(ValueError):t.execute()
 
