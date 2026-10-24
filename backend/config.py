@@ -39,7 +39,7 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
-        if self.fact_review_contract not in ('production','scope_v2'):raise ValueError('Invalid fact review contract')
+        if self.fact_review_contract not in ('production','scope_v2','simple_v1'):raise ValueError('Invalid fact review contract')
         if self.fact_review_contract!='production' and (self.profile!='real' or self.verification_schema!=13 or self.fact_internal_flow!='production'):raise ValueError('Scope contract requires explicit production schema13 Agent')
         if self.revision_answer_delivery not in ('production','answer_only_v1'):raise ValueError('Invalid revision answer delivery')
         if self.revision_answer_delivery!='production' and self.profile!='real':raise ValueError('Revision candidate requires actual Factory')

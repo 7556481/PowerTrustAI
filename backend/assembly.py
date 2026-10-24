@@ -194,6 +194,11 @@ class ComponentFactory:
             manifest['prompts']['verification']=PROMPT
             manifest['contracts']['verification']=CONTRACT
             manifest['template_sha256']={k:hashlib.sha256(SYSTEM.encode()).hexdigest() for k in ('independent','original_citation')}
+        if self.config.fact_review_contract=='simple_v1':
+            from services.review_simple_v1 import PROMPT,CONTRACT,SYSTEM
+            manifest['prompts']['verification']=PROMPT
+            manifest['contracts']['verification']=CONTRACT
+            manifest['template_sha256']={k:hashlib.sha256(SYSTEM.encode()).hexdigest() for k in ('independent','original_citation')}
         return manifest
 
     def create(self,rid,observer):

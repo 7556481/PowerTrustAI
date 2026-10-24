@@ -200,7 +200,7 @@ class ReviewCatalog:
                 if tid not in assessments:parts.append(r);continue
                 a=assessments[tid];obj=a['objection'];parts.append(FidelityComponentReview(**{fld.name:getattr(r,fld.name) for fld in fields(r)},
                     fidelity_status='uncertain' if obj and obj['kind']=='uncertain' else 'disputed' if obj else 'faithful',reviewed_assertion_role=c.assertion_role,verification_obligation=c.component_obligations[pi],
-                    fidelity_rationale=obj['reason'] if obj else 'Model explicitly selected objection=null: answer-target semantics preserved.',raw_support_status=a['raw_model_status'],review_disposition='review_required' if a['semantic_uncertain'] else 'assessed',review_projection_version='compact-review-projection-v1'))
+                    fidelity_rationale=obj['reason'] if obj else 'Model explicitly selected objection=null: answer-target semantics preserved.',raw_support_status=a['raw_model_status'],review_disposition='review_required' if a['semantic_uncertain'] else 'assessed',review_projection_version=a.get('projection_version','compact-review-projection-v1')))
                 parts[-1]=replace(parts[-1],status=V(a['effective_support_status']),rationale=r.rationale+MARKER+json.dumps(a,ensure_ascii=False,separators=(',',':')))
             fs.append(replace(f,component_reviews=tuple(parts),status=aggregate_status(parts)))
         citations=tuple(replace(c,status=V(assessments['R'+str(c.citation_index)]['effective_support_status']),rationale=c.rationale+MARKER+json.dumps(assessments['R'+str(c.citation_index)],ensure_ascii=False,separators=(',',':'))) for c in out.citation_reviews)

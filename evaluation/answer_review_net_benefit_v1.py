@@ -107,7 +107,7 @@ def freeze():
     print('Frozen 8 capability + 4 generation + 8 natural audit tasks; zero sends.',flush=True)
 
 
-async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None):
+async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None):
     """Submission/persistence/stop is exclusively run_fixed; collection runs Harness."""
     rows=rows or order();generated={};outputs={};send_log=[];fatal=False
     store=RunStore(root/'runs.sqlite3')
@@ -178,6 +178,9 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
             # Unknown errors stop; never discover sharedness by spending again.
             if any(x['code'] not in known for x in raw['execution_issues']):
                 raw['execution_issues'].append(dict(component='harness',code='SERVICE_EXECUTION_FAILED',message='Unknown or shared issue stops remaining sends'))
+            if result_guard is not None:
+                stop_issue=result_guard(spec,raw)
+                if stop_issue:raw['execution_issues'].append(stop_issue);fatal=True
             outputs[rid]=raw
             write(directory/'input.json',dict(request=wire(req),generation_snapshot=wire(snapshot),budget=wire(budget)))
             write(directory/'result.json',raw)

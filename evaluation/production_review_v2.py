@@ -108,35 +108,38 @@ async def task_runner(h,req,budget,**kw):
 def variants(c,v):return replace(c,fact_review_contract=v)
 
 
-def freeze():
-    if (PUBLIC/'freeze.json').exists() or (LOCAL/'attempt.json').exists():raise ValueError('Fresh fixed batch only')
+def freeze(*,public=None,local=None,materials_factory=None,order_factory=None,version='production-review-net-benefit-v2'):
+    public=public or PUBLIC;local=local or LOCAL
+    rows=(order_factory or order)()
+    if (public/'freeze.json').exists() or (local/'attempt.json').exists():raise ValueError('Fresh fixed batch only')
     c=ServiceConfig.from_environment()
     if any((c.verification_schema!=13,c.fact_internal_flow!='production',c.fact_review_contract!='production',c.domain_internal_flow!='production',c.revision_answer_delivery!='production')):raise ValueError('Production baseline required')
     if os.environ.get('DEEPSEEK_MODEL_ID')!='deepseek-flash':raise ValueError('Confirmed model required')
-    f=ComponentFactory(c);k=f.preflight();m=materials()
+    f=ComponentFactory(c);k=f.preflight();m=(materials_factory or materials)()
     for i in range(8):fixed_input(request(m,i,draft=True))
     paths=sorted(p for folder in ('agents','backend','core','harness','model_adapter','rag','services','evaluation','tests','tools') for p in (ROOT/folder).glob('*.py'))
-    frozen=dict(version='production-review-net-benefit-v2',owner_authorized=True,no_resume=True,configuration=config_identity(c),manifest=f.manifest(k),model='deepseek-flash',order=order(),materials_sha256=sha(m),
+    frozen=dict(version=version,owner_authorized=True,no_resume=True,configuration=config_identity(c),manifest=f.manifest(k),model='deepseek-flash',order=rows,materials_sha256=sha(m),
         files=[dict(path=p.relative_to(ROOT).as_posix(),sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in paths],
         budget='Original shared40/800s, finite correction and oneRevision. Each B independently deducts actual G calls/time. A fact/citation interface only; whole-task coverage separate.',
         evaluation_scope='A fixed current authored targets, no model extraction/domain/revision. B production RAG generation once then isolated complete double-review/revision on same actual delivery, no further audit retrieval. No production configuration change.',
         stop='Single final model output failure continues; shared/unknown program/config/identity/budget ownership/connection/storage stops. No replay/resume/resubmit.')
-    write(LOCAL/'materials.json',m);write(LOCAL/'freeze.json',frozen);write(PUBLIC/'freeze.json',frozen)
-    write(PUBLIC/'materials-reference.json',{k:v for k,v in m.items() if k!='sources'} | dict(sources={k:{f:e.get(f) for f in ('evidence_id','source_id','source_version','locator','provenance')} | dict(text_sha256=sha(e['text'])) for k,e in m['sources'].items()}))
-    print('Frozen A16 + G6 + B12; zero sends.',flush=True)
+    write(local/'materials.json',m);write(local/'freeze.json',frozen);write(public/'freeze.json',frozen)
+    write(public/'materials-reference.json',{k:v for k,v in m.items() if k!='sources'} | dict(sources={k:{f:e.get(f) for f in ('evidence_id','source_id','source_version','locator','provenance')} | dict(text_sha256=sha(e['text'])) for k,e in m['sources'].items()}))
+    print(f'Frozen {len(rows)} slots; zero sends.',flush=True)
 
 
-def execute():
-    f=read(PUBLIC/'freeze.json')
-    if f!=read(LOCAL/'freeze.json') or (LOCAL/'attempt.json').exists():raise ValueError('No changed freeze or resume')
+def execute(*,public=None,local=None,order_factory=None,variants_factory=None,result_guard=None):
+    public=public or PUBLIC;local=local or LOCAL
+    f=read(public/'freeze.json')
+    if f!=read(local/'freeze.json') or (local/'attempt.json').exists():raise ValueError('No changed freeze or resume')
     for x in f['files']:
         if hashlib.sha256((ROOT/x['path']).read_bytes()).hexdigest()!=x['sha256']:raise ValueError('Frozen source mismatch')
-    m=read(LOCAL/'materials.json');c=ServiceConfig.from_environment()
+    m=read(local/'materials.json');c=ServiceConfig.from_environment()
     if sha(m)!=f['materials_sha256'] or config_identity(c)!=f['configuration'] or os.environ.get('DEEPSEEK_MODEL_ID')!=f['model']:raise ValueError('Frozen inputs/configuration mismatch')
     ComponentFactory(c).preflight()
     from model_adapter.deepseek import create_adapter
-    write(LOCAL/'attempt.json',dict(freeze_sha256=sha(f),resume_allowed=False))
-    s=asyncio.run(batch(c,m,LOCAL/'batch',create_adapter,rows=order(),request_builder=request,variant_config=variants,task_runner=task_runner))
+    write(local/'attempt.json',dict(freeze_sha256=sha(f),resume_allowed=False))
+    s=asyncio.run(batch(c,m,local/'batch',create_adapter,rows=(order_factory or order)(),request_builder=request,variant_config=variants_factory or variants,task_runner=task_runner,result_guard=result_guard))
     print(json.dumps(dict(accepted=len(s['control']),unexecuted=s['unexecuted'],sends=len(s['send_log']))),flush=True)
 
 
