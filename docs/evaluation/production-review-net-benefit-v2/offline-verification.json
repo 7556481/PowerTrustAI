@@ -1,0 +1,9 @@
+{
+  "offline_tests": 1209,
+  "offline_seconds": 228.595,
+  "full_result": "OK",
+  "offline_real_requests": 0,
+  "full_log_sha256": "10146bb6895618bb8a7fd2db360eb35baa623a78ed8181d688e79da05c7dc7ea",
+  "targeted_checks": "26 initial related passed; 18 full-entry/old-entry gates passed; final9 scoped checks passed before full",
+  "failure": "Initial candidate prompt version did not enter existing v9 typed validation family; kept typed validation and corrected version prefix. No semantic gate relaxed."
+}

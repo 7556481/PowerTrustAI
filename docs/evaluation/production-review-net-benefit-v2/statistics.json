@@ -1,0 +1,151 @@
+{
+  "planned": {
+    "A": 16,
+    "generation": 6,
+    "B": 12
+  },
+  "accepted": 34,
+  "unexecuted": [
+    "B2-scope_v2",
+    "B2-production"
+  ],
+  "actual_sends": 116,
+  "records": 116,
+  "by_stage": {
+    "A/production/evidence_verification/v1": {
+      "calls": 23,
+      "corrections": 1,
+      "request_duration_ms_sum_not_wallclock": 68666,
+      "input_tokens": 112326,
+      "output_tokens": 10331,
+      "total_tokens": 122657,
+      "cache_hit_tokens": 48512,
+      "cache_miss_tokens": 63814
+    },
+    "A/scope_v2/evidence_verification/v1": {
+      "calls": 24,
+      "corrections": 8,
+      "request_duration_ms_sum_not_wallclock": 76620,
+      "input_tokens": 63910,
+      "output_tokens": 12731,
+      "total_tokens": 76641,
+      "cache_hit_tokens": 32128,
+      "cache_miss_tokens": 31782
+    },
+    "G/production/generation/vNone": {
+      "calls": 7,
+      "corrections": 1,
+      "request_duration_ms_sum_not_wallclock": 18742,
+      "input_tokens": 78482,
+      "output_tokens": 2049,
+      "total_tokens": 80531,
+      "cache_hit_tokens": 19072,
+      "cache_miss_tokens": 59410
+    },
+    "B/production/claim_extraction/v1": {
+      "calls": 6,
+      "corrections": 1,
+      "request_duration_ms_sum_not_wallclock": 23524,
+      "input_tokens": 11096,
+      "output_tokens": 5150,
+      "total_tokens": 16246,
+      "cache_hit_tokens": 7936,
+      "cache_miss_tokens": 3160
+    },
+    "B/production/power_domain_review/v1": {
+      "calls": 5,
+      "corrections": 0,
+      "request_duration_ms_sum_not_wallclock": 24550,
+      "input_tokens": 72790,
+      "output_tokens": 3966,
+      "total_tokens": 76756,
+      "cache_hit_tokens": 25728,
+      "cache_miss_tokens": 47062
+    },
+    "B/production/evidence_verification/v1": {
+      "calls": 19,
+      "corrections": 3,
+      "request_duration_ms_sum_not_wallclock": 96974,
+      "input_tokens": 245800,
+      "output_tokens": 17221,
+      "total_tokens": 263021,
+      "cache_hit_tokens": 73088,
+      "cache_miss_tokens": 172712
+    },
+    "B/scope_v2/claim_extraction/v1": {
+      "calls": 5,
+      "corrections": 0,
+      "request_duration_ms_sum_not_wallclock": 20088,
+      "input_tokens": 8410,
+      "output_tokens": 4828,
+      "total_tokens": 13238,
+      "cache_hit_tokens": 6656,
+      "cache_miss_tokens": 1754
+    },
+    "B/scope_v2/power_domain_review/v1": {
+      "calls": 6,
+      "corrections": 1,
+      "request_duration_ms_sum_not_wallclock": 29087,
+      "input_tokens": 89862,
+      "output_tokens": 5143,
+      "total_tokens": 95005,
+      "cache_hit_tokens": 50688,
+      "cache_miss_tokens": 39174
+    },
+    "B/scope_v2/evidence_verification/v1": {
+      "calls": 15,
+      "corrections": 5,
+      "request_duration_ms_sum_not_wallclock": 101493,
+      "input_tokens": 161238,
+      "output_tokens": 19395,
+      "total_tokens": 180633,
+      "cache_hit_tokens": 72448,
+      "cache_miss_tokens": 88790
+    },
+    "B/production/revision/v1": {
+      "calls": 1,
+      "corrections": 0,
+      "request_duration_ms_sum_not_wallclock": 4950,
+      "input_tokens": 27306,
+      "output_tokens": 792,
+      "total_tokens": 28098,
+      "cache_hit_tokens": 512,
+      "cache_miss_tokens": 26794
+    },
+    "B/production/claim_extraction/v2": {
+      "calls": 1,
+      "corrections": 0,
+      "request_duration_ms_sum_not_wallclock": 2596,
+      "input_tokens": 1667,
+      "output_tokens": 507,
+      "total_tokens": 2174,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 387
+    },
+    "B/production/power_domain_review/v2": {
+      "calls": 1,
+      "corrections": 0,
+      "request_duration_ms_sum_not_wallclock": 4329,
+      "input_tokens": 14497,
+      "output_tokens": 640,
+      "total_tokens": 15137,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 13217
+    },
+    "B/production/evidence_verification/v2": {
+      "calls": 3,
+      "corrections": 0,
+      "request_duration_ms_sum_not_wallclock": 12002,
+      "input_tokens": 41129,
+      "output_tokens": 2001,
+      "total_tokens": 43130,
+      "cache_hit_tokens": 6144,
+      "cache_miss_tokens": 34985
+    }
+  },
+  "invoice_cost": null,
+  "note": "Generation counted once, B independently deducts its calls/time from original shared limits. Parallel/nested durations are not summed as wallclock. No browser paint measurement or pass-rate quality estimate.",
+  "not_submitted_after_shared_stop": [],
+  "actually_executed_tasks": 32,
+  "invalid_attempts": 47
+}

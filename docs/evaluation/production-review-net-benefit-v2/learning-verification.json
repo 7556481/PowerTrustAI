@@ -1,0 +1,14 @@
+{
+  "checked_utc": "2026-10-24T10:18:35.593747+00:00",
+  "command": "python -m tools.learning_checks",
+  "passed": true,
+  "chapters": 20,
+  "folded_answers": 60,
+  "source_hashes_verified": true,
+  "local_links_verified": true,
+  "browser_new_acceptance": false,
+  "public_report_links_verified": true,
+  "exported_json_credential_keys_found": 0,
+  "application_commit": "e399e87047b3f7d7a573eaf9a08564300951a59a",
+  "source_excerpt_note": "Refreshed six affected excerpts against actual code; pre-existing scoped execution excerpt budget expression was stale and also corrected."
+}

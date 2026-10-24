@@ -1,0 +1,17 @@
+{
+  "checked_utc": "2026-10-24T10:16:50.575354+00:00",
+  "production_counts": {
+    "runs": 104,
+    "events": 2278,
+    "objects": 2999,
+    "reviews": 8
+  },
+  "unchanged_from_before": true,
+  "port_8765_listener": false,
+  "health": "unreachable, independently checked with approved PowerShell",
+  "production_ready": false,
+  "production_preserved_stopped": true,
+  "candidate_persistent_service_started": false,
+  "production_configuration_changed": false,
+  "batch_completed_no_more_requests": true
+}

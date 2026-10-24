@@ -1,0 +1,19 @@
+{
+  "checked_utc": "2026-10-24T06:55:09.885109+00:00",
+  "production_counts": {
+    "runs": 104,
+    "events": 2278,
+    "objects": 2999,
+    "reviews": 8
+  },
+  "managed_orchestration": {
+    "version": "service-orchestration-v1",
+    "execution_path": "langgraph_v1"
+  },
+  "managed_knowledge": {
+    "version": "daily-knowledge-v1",
+    "index_db": "data/retrieval_local/industry-corpus-v1/published-complete-identity-v2.sqlite3",
+    "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e"
+  },
+  "started_by_this_work": false
+}
