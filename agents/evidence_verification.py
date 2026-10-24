@@ -291,7 +291,9 @@ def _parse_normalized(value, inputs, *, schema_version=None):
 class ModelEvidenceVerificationAgent:
     uses_model_adapter = True
 
-    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4, citation_workload=None, support_relation_checks=False, support_relation_version=1,review_message_profile='baseline_v1', correction_accounting='shared_slice_v1'):
+    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4, citation_workload=None, support_relation_checks=False, support_relation_version=1,review_message_profile='baseline_v1', correction_accounting='shared_slice_v1',review_contract='production'):
+        require(review_contract in ('production','scope_v2') and (review_contract=='production' or schema_version==13), 'Invalid explicit review contract')
+        self.review_contract=review_contract
         if schema_version not in (4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14):
             raise ValueError("Live review supports explicit v4/v5/v6 only")
         self.schema_version = schema_version
@@ -322,6 +324,9 @@ class ModelEvidenceVerificationAgent:
             from agents.verification_contract_v14 import run
             return await run(self,inputs)
         if self.schema_version == 13:
+            if self.review_contract=='scope_v2':
+                from services.review_scope_v2 import run
+                return await run(self,inputs)
             from agents.verification_contract_v10_batched import run
             return await run(self, inputs)
         if self.schema_version in (10,11,12):

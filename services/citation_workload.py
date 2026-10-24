@@ -40,9 +40,15 @@ def pack(items, payload, instruction, limits):
     if current: groups.append(tuple(current))
     return tuple(groups), tuple(rejected)
 
-def submission_rejections(request,knowledge_version,schema,limits):
+def submission_rejections(request,knowledge_version,schema,limits,*,review_contract='production'):
     """Capacity preflight uses the same protocol payload as the actual reviewer."""
     answer=request.existing_answer
+    if review_contract=='scope_v2':
+        from agents.contracts import ReliabilityVerificationInput
+        from services.review_scope_v2 import ScopeCatalog,SYSTEM
+        catalog=ScopeCatalog(ReliabilityVerificationInput(request,answer,(),(),knowledge_version=knowledge_version,original_evidence=request.provided_evidence))
+        _,rejected=pack(tuple(catalog.targets),catalog.payload,SYSTEM,limits)
+        return tuple(catalog.targets[t]['citation_index'] for t in rejected)
     if schema==14:
         from agents.contracts import ReliabilityVerificationInput
         from agents.verification_contract_v14 import ReviewCatalog,SYSTEM

@@ -103,6 +103,7 @@ class ComponentFactory:
             'model_id':os.environ.get('DEEPSEEK_MODEL_ID') if self.config.profile=='real' else None,
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
             'fact_internal_flow':self.config.fact_internal_flow,
+            'fact_review_contract':self.config.fact_review_contract,
             'domain_internal_flow':self.config.domain_internal_flow,
             'revision_answer_delivery':self.config.revision_answer_delivery,
             'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':self.config.verification_schema,'domain_review':5,'revision':2},
@@ -188,6 +189,11 @@ class ComponentFactory:
             from services.domain_business_v1 import PROMPT,VERSION
             manifest['prompts']['domain']=PROMPT
             manifest['contracts']['domain']=VERSION
+        if self.config.fact_review_contract=='scope_v2':
+            from services.review_scope_v2 import PROMPT,CONTRACT,SYSTEM
+            manifest['prompts']['verification']=PROMPT
+            manifest['contracts']['verification']=CONTRACT
+            manifest['template_sha256']={k:hashlib.sha256(SYSTEM.encode()).hexdigest() for k in ('independent','original_citation')}
         return manifest
 
     def create(self,rid,observer):
@@ -233,7 +239,7 @@ class ComponentFactory:
                 corpus=seal(store,self.config.knowledge_version)
                 corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile),
+                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),

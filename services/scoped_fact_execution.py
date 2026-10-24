@@ -43,7 +43,8 @@ async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruc
                 await cat.prepare_stage(agent,group,max_corrections=0 if corrected else 1)
                 corrected=corrected or any(r.correction for r in current_budget().records[before:])
                 payload=cat.payload(group)
-            await structured_request(agent.client,(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),prompt_version,isolation.parse,
+            parse_response=(lambda value:isolation.parse(cat.decode_wire(value,group))) if hasattr(cat,'decode_wire') else isolation.parse
+            await structured_request(agent.client,(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),prompt_version,parse_response,
                 diagnostics=agent.diagnostics,response_contract_version=contract_version,candidate_catalog_path=path,max_corrections=0 if corrected else 1,
                 correction_context=lambda value,diagnostic:cat.correction_context(group,value,diagnostic),
                 correction_instruction=getattr(cat,"correction_instruction",None),

@@ -13,11 +13,15 @@ def review_projection(r):
         rounds.append(dict(answer=rr['answer'],claims=v['claims'],findings=v['findings'],
             citation_reviews=v['citation_reviews'],domain_findings=d['findings'],
             decision=rr['report']['decision'],verification_issues=v['execution_issues'],domain_issues=d['execution_issues']))
-    return dict(run_id=r['run_id'],state=r['state'],answer=r.get('answer'),rounds=rounds,
+    result=dict(run_id=r['run_id'],state=r['state'],answer=r.get('answer'),rounds=rounds,
         revisions=[dict(answer=v['answer'],finding_actions=v.get('finding_actions',[]),changes=v.get('changes',[]),
             unresolved_finding_ids=v.get('unresolved_finding_ids',[])) for v in r.get('revision_outputs',[])],
         execution_issues=r.get('execution_issues',[]),
         evidence=[dict(evidence_id=e['evidence_id'],source_id=e['source_id'],source_version=e['source_version'],locator=e['locator'],text_sha256=sha(e['text'])) for e in r.get('evidence',[])])
+    if not rounds and r.get('verification_output'):
+        v=r['verification_output']
+        result['fixed_interfaces']={k:v[k] for k in ('claims','findings','citation_reviews','execution_issues','prompt_version')}
+    return result
 
 
 def audit():
@@ -73,7 +77,8 @@ def report():
         predictions.append(sent | dict(response=read(p) if p.exists() else None))
     write(PUBLIC/'predictions.json',predictions)
     write(PUBLIC/'results.json',branches)
-    statistics=dict(planned=dict(A=8,generation=4,B=8),accepted=len(s['control']),unexecuted=s['unexecuted'],actual_sends=len(predictions),
+    planned={name:sum(x['input']['line']==line for x in s['planned']) for name,line in (('A','A'),('generation','G'),('B','B'))}
+    statistics=dict(planned=planned,accepted=len(s['control']),unexecuted=s['unexecuted'],actual_sends=len(predictions),
         records=sum(x['calls'] for x in usage.values()),by_stage=dict(usage),invoice_cost=None,
         note='Generation counted once, B independently deducts its calls/time from original shared limits. Parallel/nested durations are not summed as wallclock. No browser paint measurement or pass-rate quality estimate.')
     write(PUBLIC/'statistics.json',statistics)

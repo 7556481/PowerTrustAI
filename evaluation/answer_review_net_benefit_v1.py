@@ -107,7 +107,7 @@ def freeze():
     print('Frozen 8 capability + 4 generation + 8 natural audit tasks; zero sends.',flush=True)
 
 
-async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None):
+async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None):
     """Submission/persistence/stop is exclusively run_fixed; collection runs Harness."""
     rows=rows or order();generated={};outputs={};send_log=[];fatal=False
     store=RunStore(root/'runs.sqlite3')
@@ -122,13 +122,13 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
         if line=='B' and (i not in generated or not generated[i].generation_output or not generated[i].generation_output.substantive_answer):
             result=dict(run_id=rid,execution_issues=[],state='unexecuted',reason='no_substantive_natural_draft')
             store.mark(rid,'finished',result=result);outputs[rid]=result;return result
-        req=initial_request(m,i,draft=line=='A');snapshot=None;budget=c.budget
+        req=(request_builder or initial_request)(m,i,draft=line=='A');snapshot=None;budget=c.budget
         if line=='B':
             g=generated[i];snapshot=g.generation_output.evidence_snapshot
             req=replace(req,mode=TaskMode.ASSESS_EXISTING,existing_answer=g.answer,provided_evidence=g.evidence)
             budget=replace(budget,max_model_calls=budget.max_model_calls-len(g.model_records),
                            max_duration_seconds=max(.001,budget.max_duration_seconds-g.duration_ms/1000))
-        cfg=replace(c,revision_answer_delivery=spec['variant'])
+        cfg=variant_config(c,spec['variant']) if variant_config else replace(c,revision_answer_delivery=spec['variant'])
         factory=factory_type(cfg);bundle=None
         observations={'first_answer_saved_ms':None,'browser_first_paint_ms':None}
         def observe(value):
@@ -169,7 +169,8 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
                 # Fixed-evidence evaluation seam, never saved to production configuration.
                 bundle.harness.retriever=None
                 bundle.harness.subject_supplement=False
-            result=await bundle.harness.run(req,budget,knowledge_version=c.knowledge_version if line in ('G','B') else None,
+            run=task_runner if task_runner else lambda h,*args,**kw:h.run(*args,**kw)
+            result=await run(bundle.harness,req,budget,knowledge_version=c.knowledge_version if line in ('G','B') else None,
                 generation_only=line=='G',generation_snapshot=snapshot,run_id=rid)
             raw=wire(result)
             if fatal:raw['execution_issues'].append(dict(component='harness',code='DIAGNOSTIC_STORAGE_FAILED',message='pre-send or response persistence failed'))
