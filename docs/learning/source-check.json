@@ -71,9 +71,27 @@
       "file_sha256": "7d5eb32cf5a5a708f2d539ff001ab5ff1819b9f564b2cf7d225a4a7568c5a014",
       "source_text_lf_sha256": "50b5b7392d6398438256da2cf6664742ee82d4b13f279a3435f416531be647a7",
       "excerpt_sha256": "73321a4e7463ce367e9085ad5df2a6a652ae1f0da848d65ff6e0aaec678975da"
+    },
+    {
+      "file": "model_adapter/deepseek.py",
+      "symbol": "json_mode_preflight",
+      "start_line": 27,
+      "end_line": 38,
+      "file_sha256": "f8b6e3f3fde925d3670b3daede900735cd53136d710ccbccccef997257c088e2",
+      "source_text_lf_sha256": "7e99dd7fc2f14d24be17a432e703fa3562f98fe93a0b662fe11bdfbd2f000aff",
+      "excerpt_sha256": "2a4b7a349e7b9f7157ce306bff222aec7b38a5b975aa804f1ce515e537f4808d"
+    },
+    {
+      "file": "model_adapter/runtime.py",
+      "symbol": "raise_if_failed",
+      "start_line": 35,
+      "end_line": 36,
+      "file_sha256": "dacd888dbad75102cb8422c2a754f022d69e1d1f65283ffd2350a63bf6bf3a65",
+      "source_text_lf_sha256": "3be77773d43fce3141690eb82a82df409d81cb4a5f3b4091eb729e999a2ea819",
+      "excerpt_sha256": "1aaa4c175067d1f44bacd07745aa8c15895808463247f8919472c7a63a3e6ea1"
     }
   ],
-  "application_commit": "88281c910403e69be71963e0b1e3d39d4e70e253",
+  "application_commit": "ebf17a4114b0f537971767973687df220e33a1f2",
   "new_agent": false,
   "old_pdfs_unchanged": true,
   "request_route_excerpts": [

@@ -1,5 +1,9 @@
 # 11 监督数据、家族划分、泄漏和评测分母
 
+## 历史参考与真实接入结果
+
+【真实失败】本批3调用有返回：两个事实判断合法，引用初始及唯一纠正均重复键，停止剩余26槽。无效正文里的supported不能评分。旧原版A1身份相符，可以节省重测，但须标为历史参考并排除新费用，不能叫同批严格配对。自然生成未运行就没有正文净收益成绩，不能把未发生误改记成安全性提升。[本批完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-simple-patch-v1/report.md)。
+
 ## 本轮真实验证边界
 
 【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md)。

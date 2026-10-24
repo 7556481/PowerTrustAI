@@ -1,72 +1,74 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>08 事实支持、提取忠实性和审核协议复杂度 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 88281c910403 · learning-site-v4.6 simplified review contract, 2026-10-24 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">08 事实支持、提取忠实性和审核协议复杂度</h1>
-<h2 id="section-2">本轮真实验证边界</h2>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>08 事实支持、提取忠实性和审核协议复杂度 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 ebf17a4114b0 · learning-site-v4.7 patched simple_v1 request boundary validation, 2026-10-24 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">08 事实支持、提取忠实性和审核协议复杂度</h1>
+<h2 id="section-2">修补版保持的判断边界</h2>
+<p>simple_v1仍沿用v9.22.1提示和投影v1.1，不继续增加语义字段。72个声明组合的离线核对只证明程序转换：无额外条件可以与实例资料缺失并存；无条件也必须有合法依据，不能自动支持。真实语义是否改善，应分别比较完整事实与原引用，并保留误认可、误判矛盾、正确内容误拦和最终正文变化。新接入批次的A1/A2也属于正式任务，不能成功后再发送一遍。</p>
+<h2 id="section-3">本轮真实验证边界</h2>
 <p>【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.html" rel="noreferrer noopener">完整响应、依据与版本边界</a>。</p>
-<h2 id="section-3">2026-10-24 条件存在、表达与实例满足</h2>
+<h2 id="section-4">2026-10-24 条件存在、表达与实例满足</h2>
 <p>三个问题要分别回答：当前结论是否有额外适用条件；答案是否保留条件及其所属对象/工况/结论；当前实例是否有满足条件所需的信息。无条件不等于遗漏，规则复述不等于实例已满足。数值或术语出自正文属于来源关系，也不自动成为需重复的条件。simple_v1要求三维声明及理由，不从空列表判定完整。来源条件没有找到时允许如实未知，不能选个相关句凑数。</p>
 <p>【教学构造】来源规则为“若故障后电压满足边界，可按该规则继续分析”。回答仅复述该条件句，没有给厂站数据。应怎样区分三维？</p>
 <details class="self-answer"><summary>展开新增练习解析</summary><p>条件存在；若对象与工况未被更换，表达可以保留；没有主张具体厂站已经满足，实例维度可为未声称适用。若回答进一步称“所以该厂站已满足”，则实例输入不足，不能用正确规则复述证明实例结论。</p></details>
-<h2 id="section-4">2026-10-24 审核链v2实证更新</h2>
+<h2 id="section-5">2026-10-24 审核链v2实证更新</h2>
 <p>条件属于具体对象、工况和结论；源文N-1无操作员干预不能凭关键词推广到N-2。scope_v2真实失败暴露两点：逐字字段不能容忍模型把PDF断词规范化；无条件命题的关系行进入旧投影可能错误降级。程序能校验原文绑定，不能据结构直接证明必要/充分、否定或因果语义。候选不采用。 <a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.html" rel="noreferrer noopener">完整预测、理由和成本</a>。</p>
-<h2 id="section-5">2026-10-24 raw/effective支持仍可能误判</h2>
+<h2 id="section-6">2026-10-24 raw/effective支持仍可能误判</h2>
 <p>本轮自然B4把N-1无操作员干预条件一并套给选定N-2，且将稳态/稳定表述为暂态；实际选段没有建立完整命题，两路模型raw/effective却都supported。整体因其他不足/执行失败未认可，不等于正确检出这个缺陷。B2原引用的raw supported与非空missing_clauses并存，缺口却来自其他答案单元或来源额外内容，程序有效降级不自动成为事实真值。不可凭关键词改分类或按pass率掩盖这些疑点；完整原文与理由见<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.html" rel="noreferrer noopener">本轮报告</a>。</p>
-<h2 id="section-6">2026-10-23 事实审核内部流程候选</h2>
+<h2 id="section-7">2026-10-23 事实审核内部流程候选</h2>
 <p>题设目录、组件提取时选择、审核实际依赖是三组不同集合。旧B要求后两组相等，不是要求目录全集。新候选让模型选择实际依赖子集，程序检查合法绑定。文献规则不因和实例同段而需要题设；应用须相关规则与题设。classification_objection与fidelity分别记录：答案说反可以忠实提取，正确性由支持判断；改变义务必须明确异议并保留复核，不能静默改类别通过。</p>
 <p>完整材料见<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.html" rel="noreferrer noopener">候选报告</a>。生产未切换，本轮0真实调用。</p>
-<h2 id="section-7">四分类不是四档置信度</h2>
+<h2 id="section-8">四分类不是四档置信度</h2>
 <p>supported表示给定完整命题受到实际依据支持；contradicted表示有依据冲突；insufficient_evidence表示依据不足以支持/反驳；not_assessable表示该对象不能有效评估或分类/绑定存在异议。它们不是从0到100的概率档位。没有证据不能当contradicted；接口失败也不能当事实错误。</p>
 <p>同一主张可能独立supported但原引用insufficient，因为另找到正确来源不代表原引用正确。technical_truth必须由技术正文或对应合法工具核验；metadata只证明登记字段。网页标题、索引维护applicability和原文不能互换。</p>
-<h2 id="section-8">忠实性：比较哪两个对象</h2>
+<h2 id="section-9">忠实性：比较哪两个对象</h2>
 <p>忠实性比较答案实际锚点与冻结提取命题。检查立场、否定、数量、条件、因果主体/方向和义务是否改变。事实支持比较提取对象与实际Evidence。回答本来错了，提取却可以faithful；来源不同因果归因不是提取不忠实的充分理由。</p>
 <p>教学构造：回答“所有细菌都产氧”，提取保持原句，来源反驳全称；结果可faithful+contradicted。回答“仅在干燥路面刹车距离较短”，提取删条件；即使来源支持原回答，提取应保留disputed。回答和提取均“花岗岩是火成岩”，来源相应支持，正常核验。程序不能根据这几个例子强制模型所有任务faithful。</p>
-<h2 id="section-9">必要条件和因果方向</h2>
+<h2 id="section-10">必要条件和因果方向</h2>
 <p>“在正弦稳态、固定有功和端电压下”限制公式应用。审核详情补写条件不等于答案正文已限定。忠实同义表达允许，但不能用模糊匹配程序宣布等价；模型若不确定就保留。P/S定义与cosφ位移因数在非正弦情况下不能无条件混同。</p>
 <p>原文“不当补偿可能使谐波增大”，不能推成“功率因数低导致谐波增大”；原文“A导致B”不推出“B导致A”，也不推出“没有A就没有B”。表格出现术语、思考题询问关系和正文解释关系不同；真实数据表可支持有边界的测量值，不机械全拒表格。</p>
-<h2 id="section-10">程序与模型的边界</h2>
+<h2 id="section-11">程序与模型的边界</h2>
 <p>程序管理ID、版本、字符区间、候选catalog、实际交付、选择绑定和派生处置。模型管理支持关系、理由、条件必要性和真实语义异议。quote_id指本次作用域候选，不是数据库任意Evidence。原引用每项有独立scope，文字相同也不能跨scope借用。</p>
 <p>6108030日常schema13，输出v9.11，支持关系v5，提示v9.12。条件使用完整quote载体ID，程序绑定实际正文和range；不是让模型自由复写来源精确摘录。载体不等于程序证明的最小必要条件，必要性仍由模型判断。原始支持与有效处置分别保存，分类异议不能迫使模型重复输出派生状态。</p>
-<h2 id="section-11">四层定位：不能跳过实际请求</h2>
+<h2 id="section-12">四层定位：不能跳过实际请求</h2>
 <div class="table-scroll"><table><thead><tr><th>层次</th><th>先核对什么</th><th>教学例</th></tr></thead><tbody><tr><td>交付</td><td>需要的正文是否实际进入本次输入</td><td>库内第11，实际只给前三</td></tr><tr><td>对象</td><td>核验是否仍是用户断言</td><td>技术真假被改成“答案写了什么”</td></tr><tr><td>协议</td><td>本目标ID、类型及已选正文关系是否合法</td><td>条件借另一目标正文ID</td></tr><tr><td>语义</td><td>完整命题、条件及因果是否受支持</td><td>不当补偿被改成低功率因数致谐波</td></tr></tbody></table></div>
 <p>一层成功不证明下一层成功。真实问题推动协议增加义务、条件、忠实性等有价值区别；若又让模型重复程序已知类型、索引、父子派生状态，就增加结构负担，未必改善语义。schema14让程序管理绑定，不是删条件或宽松解析。</p>
-<h2 id="section-12">为什么严格协议仍反复失败</h2>
+<h2 id="section-13">为什么严格协议仍反复失败</h2>
 <p>结构字段越多、同义判断越重复，模型跨字段一致性负担越大。例如bases选了一组quote，support_relation又重复quote_ids，answer_conditions再选择condition_id；whole_claim_supported、missing_clauses、conditions_preserved和status可能表达重叠判断。完全一致只证明合同自洽，不证明语义正确；少一个字段也可能让全部合法部分丢失。</p>
 <p>共同根因必须分三类：程序接线把正确结构读错；协议过复杂让模型重复状态或错误字段；模型语义误判如把问题标题当因果支持。前两类可以工程简化，后一类不能只靠放宽parser“修好”。本轮新接口将以真实失败汇总另版，在本章末尾补实际变化；旧记录仍按旧协议解释。</p>
-<h2 id="section-13">正确的失败隔离与简化原则</h2>
+<h2 id="section-14">正确的失败隔离与简化原则</h2>
 <p>未知ID、缺必需对象、错误类型、跨版本/作用域必须拒绝；不能自动填来源句或用相似字符串匹配。程序可以从明确合法选择确定性生成内部结构，这与猜模型遗漏不同。新的小型输出可以让模型只选择当前target_id及basis_id，由程序附加answer_version和正式claim身份；模型仍必须覆盖所有目标并给支持判断。</p>
 <p>减少重复字段应减少一个字段的责任，不能删掉必要条件义务。只要有未解决真实异议，有效处置不能通过；模型提出异议本身是合法结果而非结构失败。结构初次成功、一次纠正后完整执行、语义正确、错误放行分开测量。</p>
-<h2 id="section-14">验证、练习与面试</h2>
+<h2 id="section-15">验证、练习与面试</h2>
 <p>公开回归包含错ID、跨scope、元数据走正文、非法字段、漏目标、真实异议、条件缺失和因果方向。真实批次事前冻结题目与评价，不把预期标签放进提示；失败单题隔离，共享服务故障停止；批次中不改代码换题。</p>
 <p>练习：选择正确quote_id但解释“主题相关所以支持”，是否满足技术支持？参考：定位正确不等于支持关系；必须解释完整命题、必要条件和适用范围怎样被原文支持。parser无法证明全部语义，需评测与用户监督。</p>
 <p>面试可说：“我没有把严格JSON当正确率。身份定位交给程序、语义交给模型，合法异议保存，原始与派生结果分离。协议简化以真实错误分布为依据，同时保留严格证据门禁。”</p>
-<h2 id="section-15">learning-audit-v1历史原型：为什么更短的输出仍未完成验收</h2>
+<h2 id="section-16">learning-audit-v1历史原型：为什么更短的输出仍未完成验收</h2>
 <p>新schema14以judgments数组审核程序生成的target目录。每目标只输出status、basis_ids、reason、conditions、objection、repair和是否需要权威来源，另加target_id身份选择。程序生成父结论、正式类型、basis_indexes、原文区间、版本和保守有效处置；移除模型source_kind与authority_scope两个容易混淆的枚举。候选仍严格限当前目标，不能借另一scope或猜非法字段。</p>
 <p>必要条件用已选body的basis_id绑定，required/preserved可为真正未知null；答案摘录必须来自实际正文。合法objection不导致非法JSON，原始支持先独立typed验证，再保留異议和有效not_assessable。静默补非法选择与从明确合法选择派生正式对象是不同操作。</p>
 <p>但是实际Harness仍只将schema9–13输入包装成ReliabilityVerificationInput。新14在真实运行接到基础对象，没有tool_results，Fact请求尚未发出就AttributeError。直接组件测试传入扩展输入走通，未证明装配路线正确。真实12题0完整，未达到11/12；没有继续修复重跑。日常恢复原13，新14只作未验收原型。</p>
 <p>这次教训不是“简化没有价值”，而是少字段和真实接线是两项义务。验证应该从实际Harness输出进入新parser，再走保存/API；不能只测内部函数。下次修复须另行授权，历史本轮仍保留执行失败。</p>
-<h2 id="section-16">条件逻辑纠正：充分不等于必要</h2>
+<h2 id="section-17">条件逻辑纠正：充分不等于必要</h2>
 <p>来源只给(C∧D)→A，说明C与D合起来是A的充分条件，不能直接推出D是A的必要条件。D必要应另有A→D（或在特定范围C内A→D）的依据。把来源前提D删除后，现有论证不再足以推出C→A，但这不自动证明C→A为假。</p>
 <p>教学反模型1：C真、D假、A假，(C∧D)→A仍真，C→A却假，说明来源不能蕴含删条件的新命题。反模型2：C真、D假、A真，来源也真，C→A也真，说明来源不能蕴含新命题的否定，也不能证明D必要。A→(C∧D)是逆命题，不由原式推出。</p>
 <p>因此只有来源明确排除无D成立、给出反例或相应否定依据时，才可进一步判断contradicted；仅论证缺口一般是insufficient_evidence。真实材料如果明确写“必须/仅当/必要”，要核验其范围和语义，不把所有if前提一概称必要。独立审核对象仍是当前交付，不是整个快照的存在证明。</p>
-<h2 id="section-17">2026-10-07 集成修复与新的烟测边界</h2>
+<h2 id="section-18">2026-10-07 集成修复与新的烟测边界</h2>
 <p>显式review_input_type修复实际输入包装，旧schema13保持兼容且仍是日常默认。真实Factory/service/Harness/parser/Store/API离线回归覆盖两种入口、工具、原引用分组及一次Revision全重审。新烟测634a22…Fact已真实调用，无旧tool_results接线异常，但条件引用不在选中依据，纠正又选非法ID；3个有效组件保留、1个未完成，原引用supported，最终执行未完成。没有放宽作用域、改写旧0/12或再跑；接线修复不代表模型协议稳定。</p>
-<h2 id="section-18">2026-10-07 schema13/14对照与选择</h2>
+<h2 id="section-19">2026-10-07 schema13/14对照与选择</h2>
 <p>历史0/12是接线缺tool_results，已修复；上一烟测条件借用正文ID属于输出作用域失败，不能混称同一问题。新提示v9.14为每个target声明basis_types/condition_basis_ids/repair_basis_ids，纠正提供原作用域及已选择合法正文ID；没有增加模型必填字段，也不替换非法ID。conditions和repair仍须来自当前已选正文。</p>
 <p>同一固定快照/模型，8题主契约：13初次7/8、纠正后7/8；14初次6/8、纠正后8/8。14正常回答raw supported但必要条件answer_quote为空导致保守降级，真实语义优势未确立，日常13保持且不称稳定。错误引用、缺条件、因果、缺证据和工程项多处为not_assessable，合法完成不等于已有效区分语义。</p>
 <p>实际no_evidence对照的raw_model_status为insufficient_evidence，所选正文条件被标required=true、preserved=null，程序派生not_assessable，objection=null。这是原始支持—条件—有效状态的交互，不宜一律赞为正确谨慎；也不能把所有未知一概改成已确认误判。需分别看合理异议、不必要异议、未知条件与准备无效，旧判断不改。单位工具准备失败，两版都不得以常识批准，不能据此比较合法工具能力。另两项完整13服务正常通过、局部2ω纠为ω且全重审；工程goal非法未受理。小型开发预期为AI辅助用户监督，非独立专家准确率。</p>
-<h2 id="section-19">核心审核修复v1的当前边界</h2>
+<h2 id="section-20">核心审核修复v1的当前边界</h2>
 <p>本轮v1.5不再把所有review_required当提取异议；原危险Fact仍可因条件未知有效不评估，但独立领域安全记录绑定原句/源/规则后禁止采用。源支持与建议危害分别判断，来源不足不代表无危险。</p>
-<h2 id="section-20">2026-10-08 当前行为核对</h2>
+<h2 id="section-21">2026-10-08 当前行为核对</h2>
 <p>ordinary-chain-v2保留schema13/响应v9.11，提示v9.16区分repair整体null和对象中的非空当前已选载体ID。严格拒错ID，不自动替换。提取不得新增隐含数学比较；真实原错误只提取两实际断言，频率矛盾有正文修正载体，一次实质Revision并完整重审通过。危险例同组件quote选择仍非法，执行未完，但既有领域危险判断与禁止采用保存。</p>
-<h2 id="section-21">三道自测：先作答，再展开</h2>
-<h3 id="section-22">自测1：(C且D)推出A能否说明D必要？</h3>
+<h2 id="section-22">三道自测：先作答，再展开</h2>
+<h3 id="section-23">自测1：(C且D)推出A能否说明D必要？</h3>
 <details class="self-answer"><summary>展开参考答案1</summary><p>不能；必要性要A推出D或明确范围内的对应依据。</p></details>
-<h3 id="section-23">自测2：删D是否自动contradicted？</h3>
+<h3 id="section-24">自测2：删D是否自动contradicted？</h3>
 <details class="self-answer"><summary>展开参考答案2</summary><p>不；仅有充分条件论证通常只是支持不足。</p></details>
-<h3 id="section-24">自测3：分类异议为什么可合法返回？</h3>
+<h3 id="section-25">自测3：分类异议为什么可合法返回？</h3>
 <details class="self-answer"><summary>展开参考答案3</summary><p>它是模型真实判断，程序保留并禁止用未解决异议放行。</p></details>
-<h2 id="section-25">2026-10-08 首版收尾核对</h2>
+<h2 id="section-26">2026-10-08 首版收尾核对</h2>
 <p>schema13未换。任务范围由既有Domain的analysis_scope新增task_scope字段同次判断，结合实际问题/回答，程序记录原goal、身份/哈希/理由；缺goal不默认工程或概念，conceptual不能豁免工程承诺，真实异议/范围不确定保留复核。见 <code>services/task_applicability.py</code>、<code>agents/domain_contract_v3.py</code> 和 <code>agents/power_domain_review.program_findings</code>。同组件关系v6取消模型重复quote_ids，由合法局部bases/indexes程序绑定；条件/repair不得借未选正文或别的作用域，旧v5按旧接口保存，新增输出v9.12显式标记。见 <code>services/support_relation_v6.py</code>，危险规则未扩。</p>
 <p>4题各一次全部阶段完成：新概念通过、特定100kVA不足被识别、危险事实矛盾与来源绑定高风险完整且禁止采用；工程题不编造，但长回答/拒答及建议边界仍复核。16调用/0纠正/0修订不能称通用稳定；本批没有真实Revision，既有成功与Factory完整重审另列。实际浏览器和重启保存已核对，旧失败和完整库不变。进入限定个人最终试用，工程自动定值/认证未提供；详见项目 <code>docs/audit-closeout-v1.md</code>。</p>
-<h2 id="section-26">2026-10-08 首版冻结补记</h2>
+<h2 id="section-27">2026-10-08 首版冻结补记</h2>
 <p>本人最后新例的“所有熔断器/所有断路器/任何情况更快”三项均insufficient_evidence，95.854秒完整执行、无修订、人工复核。指出全称范围缺证据是本例成功，不证明所有同类命题必假或旧误放行已被回填；模型语义仍不稳定。</p>
-<h2 id="section-27">2026-10-09 第二版定向补记</h2>
-<p>第二版lossless_v1通过共享表减少重复输入值；当前请求保留全部必要正文、metadata、作用域。共享标记不是合法依据ID，离线expand应逐字还原。schema13仍严格拒绝非法字段/ID，不替换ID，不自动修JSON，同级保留、共享一次纠正。组件尚未闭合就关数组是JSON语法失败；合法JSON仍超过用户字数则是长度契约失败，两者不能混淆。结构/引用可回查均不等于语义正确。</p></article><footer><a href="07-corpus.html">← 07 大语料：流式构建、去重、事务和稳定身份</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">本轮真实验证边界</a><a href="#section-3">2026-10-24 条件存在、表达与实例满足</a><a href="#section-4">2026-10-24 审核链v2实证更新</a><a href="#section-5">2026-10-24 raw/effective支持仍可能误判</a><a href="#section-6">2026-10-23 事实审核内部流程候选</a><a href="#section-7">四分类不是四档置信度</a><a href="#section-8">忠实性：比较哪两个对象</a><a href="#section-9">必要条件和因果方向</a><a href="#section-10">程序与模型的边界</a><a href="#section-11">四层定位：不能跳过实际请求</a><a href="#section-12">为什么严格协议仍反复失败</a><a href="#section-13">正确的失败隔离与简化原则</a><a href="#section-14">验证、练习与面试</a><a href="#section-15">learning-audit-v1历史原型：为什么更短的输出仍未完成验收</a><a href="#section-16">条件逻辑纠正：充分不等于必要</a><a href="#section-17">2026-10-07 集成修复与新的烟测边界</a><a href="#section-18">2026-10-07 schema13/14对照与选择</a><a href="#section-19">核心审核修复v1的当前边界</a><a href="#section-20">2026-10-08 当前行为核对</a><a href="#section-21">三道自测：先作答，再展开</a><a href="#section-22">自测1：(C且D)推出A能否说明D必要？</a><a href="#section-23">自测2：删D是否自动contradicted？</a><a href="#section-24">自测3：分类异议为什么可合法返回？</a><a href="#section-25">2026-10-08 首版收尾核对</a><a href="#section-26">2026-10-08 首版冻结补记</a><a href="#section-27">2026-10-09 第二版定向补记</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<h2 id="section-28">2026-10-09 第二版定向补记</h2>
+<p>第二版lossless_v1通过共享表减少重复输入值；当前请求保留全部必要正文、metadata、作用域。共享标记不是合法依据ID，离线expand应逐字还原。schema13仍严格拒绝非法字段/ID，不替换ID，不自动修JSON，同级保留、共享一次纠正。组件尚未闭合就关数组是JSON语法失败；合法JSON仍超过用户字数则是长度契约失败，两者不能混淆。结构/引用可回查均不等于语义正确。</p></article><footer><a href="07-corpus.html">← 07 大语料：流式构建、去重、事务和稳定身份</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">修补版保持的判断边界</a><a href="#section-3">本轮真实验证边界</a><a href="#section-4">2026-10-24 条件存在、表达与实例满足</a><a href="#section-5">2026-10-24 审核链v2实证更新</a><a href="#section-6">2026-10-24 raw/effective支持仍可能误判</a><a href="#section-7">2026-10-23 事实审核内部流程候选</a><a href="#section-8">四分类不是四档置信度</a><a href="#section-9">忠实性：比较哪两个对象</a><a href="#section-10">必要条件和因果方向</a><a href="#section-11">程序与模型的边界</a><a href="#section-12">四层定位：不能跳过实际请求</a><a href="#section-13">为什么严格协议仍反复失败</a><a href="#section-14">正确的失败隔离与简化原则</a><a href="#section-15">验证、练习与面试</a><a href="#section-16">learning-audit-v1历史原型：为什么更短的输出仍未完成验收</a><a href="#section-17">条件逻辑纠正：充分不等于必要</a><a href="#section-18">2026-10-07 集成修复与新的烟测边界</a><a href="#section-19">2026-10-07 schema13/14对照与选择</a><a href="#section-20">核心审核修复v1的当前边界</a><a href="#section-21">2026-10-08 当前行为核对</a><a href="#section-22">三道自测：先作答，再展开</a><a href="#section-23">自测1：(C且D)推出A能否说明D必要？</a><a href="#section-24">自测2：删D是否自动contradicted？</a><a href="#section-25">自测3：分类异议为什么可合法返回？</a><a href="#section-26">2026-10-08 首版收尾核对</a><a href="#section-27">2026-10-08 首版冻结补记</a><a href="#section-28">2026-10-09 第二版定向补记</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

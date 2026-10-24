@@ -692,3 +692,33 @@ async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruc
     for group in ([tuple(facts)] if facts else [])+list(groups):
         baseline={'judgments':[deepcopy(current[t]) for t in group]}
 ```
+
+
+## 实际发送前的JSON检查
+
+model_adapter/deepseek.py / json_mode_preflight，实际行27–38。程序检查实际消息与运行状态，不改模型语义标签；只摘录入口，沿源码继续读。
+
+```python
+def json_mode_preflight(request):
+    """Check actual initial/correction/citation messages, never edit them."""
+    validate_types(request, ModelRequest)
+    texts=[m.content for m in request.messages if m.role in ('system','user')]
+    valid=any(re.search(r'\bjson\b',t,re.I) for t in texts)
+    example=True
+    if request.prompt_version.startswith('evidence-verification-v9.22'):
+        example=False
+        for t in texts:
+            for match in re.finditer(r'\{"judgments"\s*:',t):
+                try:value,_=json.JSONDecoder().raw_decode(t[match.start():])
+                except ValueError:continue
+```
+
+
+## 同运行预算的故障状态
+
+model_adapter/runtime.py / raise_if_failed，实际行35–36。程序检查实际消息与运行状态，不改模型语义标签；只摘录入口，沿源码继续读。
+
+```python
+    def raise_if_failed(self):
+        if self.fatal_error is not None:raise self.fatal_error
+```
