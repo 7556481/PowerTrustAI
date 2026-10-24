@@ -1,4 +1,10 @@
-# 当前状态（2026-10-24，simple_v1修补接入封存）
+# 当前状态（2026-10-24，严格工具载体停止封存）
+
+## 最新核验
+
+只新增strict-review-tool-v1载体，simple_v1业务/投影v1.1不改。按官方文档走deepseek-flash非思考/Beta/单一具名strict工具，nullable两字段用__NULL__双向映射；原始arguments不经SDK丢键，既有重复键/ID/作用域/投影检查保留。1247全套离线通过242.530秒。唯一28槽批次先A1/A3；A1三次都返回指定单工具/tool_calls，但参数2次重复键、1次多闭合括号，0/3合法，接入门禁停止余27槽。3调用（2初始/1纠正）14879token，费用账单未知；自然线未执行，不能评价业务净收益。不采用、不继续服务验收，不换参数/接口或补跑。
+
+393源码冻结一致、旧67私有文件不变；生产默认schema13/production/json不切，8765仍停服，四表104/2278/2999/8不变，无常驻候选。学习站20章69题，构建/引用/链接/HTML检查通过，浏览器未新增验收，已有研究/论文未提交。 候选回退review_result_transport=json且fact_review_contract=production，生产从未切换。实际Schema、原始参数、未执行分母与成本见[报告](evaluation/strict-review-tool-v1/report.md)。下方更早状态保留历史含义。
 
 ## 最新核验
 

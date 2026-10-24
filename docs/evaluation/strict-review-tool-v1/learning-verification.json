@@ -1,0 +1,19 @@
+{
+  "checked_utc": "2026-10-24T14:36:54.821519+00:00",
+  "passed": true,
+  "chapters": 20,
+  "explained_exercises": 69,
+  "hard_coded_counts": false,
+  "source_hashes_verified": true,
+  "local_links_verified": true,
+  "html_fold_and_navigation_render_verified": true,
+  "markdown_unique_body": true,
+  "browser_visual_acceptance": false,
+  "public_report_and_compatibility_links_verified": true,
+  "public_json_credential_keys_found": 0,
+  "raw_tool_parameters_preserved": 3,
+  "invalid_argument_labels_not_scored": true,
+  "total_result_slots": 28,
+  "unexecuted_new_slots": 27,
+  "implementation_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5"
+}

@@ -1,0 +1,279 @@
+{
+  "plan": {
+    "A": 16,
+    "G": 4,
+    "B": 8
+  },
+  "accepted": 1,
+  "actually_executed": 1,
+  "not_submitted_after_stop": [
+    "A3-strict_tool_v1",
+    "A1-production",
+    "A2-strict_tool_v1",
+    "A2-production",
+    "A3-production",
+    "A4-strict_tool_v1",
+    "A4-production",
+    "A5-strict_tool_v1",
+    "A5-production",
+    "A6-strict_tool_v1",
+    "A6-production",
+    "A7-strict_tool_v1",
+    "A7-production",
+    "A8-strict_tool_v1",
+    "A8-production",
+    "G1",
+    "B1-production",
+    "B1-strict_tool_v1",
+    "G2",
+    "B2-strict_tool_v1",
+    "B2-production",
+    "G3",
+    "B3-production",
+    "B3-strict_tool_v1",
+    "G4",
+    "B4-strict_tool_v1",
+    "B4-production"
+  ],
+  "dependent_unexecuted": [],
+  "lines": {
+    "A/strict_tool_v1": {
+      "accepted": 1,
+      "executed": 1,
+      "execution_complete": 0,
+      "all_initial_valid_tasks": 0,
+      "duration_ms_sequential_harness_sum": 10057,
+      "revisions": 0,
+      "calls": 3,
+      "corrections": 1,
+      "initial": 2,
+      "initial_valid": 0,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "model_duration_ms_not_wallclock": 9987,
+      "input_tokens": 13040,
+      "output_tokens": 1839,
+      "total_tokens": 14879,
+      "cache_hit_tokens": 5376,
+      "cache_miss_tokens": 7664
+    }
+  },
+  "fixed_units": [
+    {
+      "id": "A1-strict_tool_v1",
+      "unit": 0,
+      "reference": "supported",
+      "fact_executed": false,
+      "fact_raw": null,
+      "fact_effective": "not_assessable",
+      "fact_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1.1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "citation_executed": false,
+      "citation_raw": null,
+      "citation_effective": "not_assessable",
+      "citation_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1.1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "fact_reference_aligned": false,
+      "citation_reference_aligned": false
+    },
+    {
+      "id": "A1-strict_tool_v1",
+      "unit": 1,
+      "reference": "supported",
+      "fact_executed": false,
+      "fact_raw": null,
+      "fact_effective": "not_assessable",
+      "fact_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1.1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "citation_executed": false,
+      "citation_raw": null,
+      "citation_effective": "not_assessable",
+      "citation_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1.1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "fact_reference_aligned": false,
+      "citation_reference_aligned": false
+    }
+  ],
+  "invalid_attempts": [
+    {
+      "id": "A1-strict_tool_v1",
+      "call": 1,
+      "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+      "correction": false,
+      "constraints": [
+        "duplicate_object_keys_not_allowed"
+      ],
+      "diagnostic": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "duplicate_object_keys_not_allowed"
+      }
+    },
+    {
+      "id": "A1-strict_tool_v1",
+      "call": 2,
+      "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+      "correction": true,
+      "constraints": [
+        "duplicate_object_keys_not_allowed"
+      ],
+      "diagnostic": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "duplicate_object_keys_not_allowed"
+      }
+    },
+    {
+      "id": "A1-strict_tool_v1",
+      "call": 3,
+      "prompt_version": "evidence-verification-v9.22.1-simple-strict-tool-v1",
+      "correction": false,
+      "constraints": [
+        "valid_json_required"
+      ],
+      "diagnostic": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "valid_json_required",
+        "line": 1,
+        "column": 2565,
+        "nesting_position": 2564,
+        "actual_closer": "}",
+        "expected_closer": null
+      }
+    }
+  ],
+  "root_constraint_request_counts": {
+    "duplicate_object_keys_not_allowed": 2,
+    "valid_json_required": 1
+  },
+  "branches": [
+    {
+      "id": "A1-strict_tool_v1",
+      "state": "execution_incomplete",
+      "duration_ms": 10057,
+      "root_stage_union_ms": {
+        "initial_audit": 10057.0
+      },
+      "revision_count": 0
+    }
+  ],
+  "invoice_cost": null,
+  "timing_method": "Union of root-stage finish-minus-duration intervals; model request times and Harness totals are separate, not additive. No browser paint."
+}

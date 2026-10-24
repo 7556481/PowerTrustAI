@@ -1,0 +1,19 @@
+{
+  "final_full_tests": 1247,
+  "final_full_seconds": 242.53,
+  "result": "OK",
+  "log_sha256": "95ca6fe2639600273799256ebebbe2cee15caddf431ce761ec6f51ee535ff841",
+  "related_tests": 24,
+  "entry_and_compatibility_tests": 17,
+  "final_tool_tests": 10,
+  "final_entry_tests": 3,
+  "offline_real_requests": 0,
+  "legacy_optional_result_transport": "Old records restore with None; old values and failed constraints unchanged.",
+  "failure_history": [
+    "First full1246 failed only because historical optional metadata allowlist lacked result_transport; extended unknown-only compatibility assertion.",
+    "Then1246 passed; undecodable-envelope identity handling and its test were completed before final1247 pass."
+  ],
+  "final_stop_scope": "Transport-envelope/json_parse constraints included in consecutive final-failure guard; full entry rehearsal and read-only accounting fixture passed.",
+  "implementation_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
+  "accounting_fixture_note": "A synthetic record initially omitted required call_number; corrected the fixture and read-only malformed-envelope/recurrence accounting passed. No model or business output modified."
+}

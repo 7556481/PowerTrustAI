@@ -1,0 +1,104 @@
+{
+  "actual_requests": [
+    {
+      "sequence": 1,
+      "correction": false,
+      "tool_id": "call_00_eETqKmw2y1fvYfzFh35k0776",
+      "request_id": "9e3a83a152f84873a814cfc66ec0ce5b",
+      "name": "submit_review_result",
+      "finish_reason": "tool_calls",
+      "content": "",
+      "arguments_utf8_sha256": "f1e432403d4800433765ec6e6c41c25bd079835a94c7bd9e8438984a34e31a26",
+      "response_text_matches_raw_arguments": true,
+      "frozen_schema_matches": true,
+      "strict_requested": true,
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "endpoint_recorded": "https://api.deepseek.com/beta/chat/completions",
+      "diagnostic": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "duplicate_object_keys_not_allowed"
+      },
+      "diagnostic_only_duplicate_keys": [
+        [
+          "instance",
+          "answer_ids"
+        ],
+        [
+          "instance",
+          "answer_ids"
+        ]
+      ],
+      "no_business_labels_scored": true
+    },
+    {
+      "sequence": 2,
+      "correction": true,
+      "tool_id": "call_00_PXd2zOEgZLS8SFKcj8Gi1839",
+      "request_id": "ad6e0657b5bb473abdcd38d82b33b455",
+      "name": "submit_review_result",
+      "finish_reason": "tool_calls",
+      "content": "",
+      "arguments_utf8_sha256": "1f56e9d839822d55c8d3119d9260633ce39c708525aa116cb64afec11a2d770a",
+      "response_text_matches_raw_arguments": true,
+      "frozen_schema_matches": true,
+      "strict_requested": true,
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "endpoint_recorded": "https://api.deepseek.com/beta/chat/completions",
+      "diagnostic": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "duplicate_object_keys_not_allowed"
+      },
+      "diagnostic_only_duplicate_keys": [
+        [
+          "instance",
+          "answer_ids"
+        ],
+        [
+          "instance",
+          "answer_ids"
+        ]
+      ],
+      "no_business_labels_scored": true
+    },
+    {
+      "sequence": 3,
+      "correction": false,
+      "tool_id": "call_00_FH8yj9egMQCDvARi14tA2789",
+      "request_id": "1ab3a33b3f354545aa87ca7dee80f17f",
+      "name": "submit_review_result",
+      "finish_reason": "tool_calls",
+      "content": "",
+      "arguments_utf8_sha256": "638a6fcbda8e0488eca67b85a343223f15cfd7ff6a678cac029e5d012eed9fbf",
+      "response_text_matches_raw_arguments": true,
+      "frozen_schema_matches": true,
+      "strict_requested": true,
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "endpoint_recorded": "https://api.deepseek.com/beta/chat/completions",
+      "diagnostic": {
+        "constraint": "valid_json_required"
+      },
+      "diagnostic_only_duplicate_keys": [],
+      "no_business_labels_scored": true
+    }
+  ],
+  "server_strict_enforcement": "Unknown: API returned the requested tool envelope, but argument strings failed local strict JSON. Acceptance does not prove server-side enforcement or its internal cause.",
+  "raw_parameters_preserved": 3,
+  "not_an_sdk_parsing_artifact": "No SDK used; raw inner argument strings equal saved response text before mapping. Duplicate keys/bracket error precede null mapping and projection."
+}
