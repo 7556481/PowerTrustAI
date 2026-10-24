@@ -1,5 +1,7 @@
 # PowerTrustAI：从代码到判断的学习路线
 
+2026-10-25最新：事实审核模型对照16任务完成。Pro结构更完整，但正确内容误拦和不足/矛盾混淆仍阻止采用；生产不切换，20章73道解析练习。[模型选型、完整参数及结论](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-review-model-fit-v1/report.md)。下方旧批保留历史身份。
+
 2026-10-24最新：合成接口8项合法、四对正文相同；旧业务回归4项仅2完整，复杂输出及不足/矛盾判断仍失败，不进完整服务验收。20章71道解析练习，生产保持停服和原配置。[最小复现、旧题用途与全部证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-interface-consistency-v1/report.md)。下方为旧批历史。
 
 2026-10-24最新：严格工具Beta载体完成实际接入，3份信封符合要求但参数0合法，停止27槽；没有业务/自然净收益成绩，不进服务验收。新增结果工具与Schema分层、两道解析题，现20章69题。[完整Schema和实际原文](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-review-tool-v1/report.md)。生产默认保持JSON且停服。
