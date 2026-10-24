@@ -318,3 +318,12 @@ harness.execution_path = "langgraph_v1"  # 安装可选依赖后，仅开发验�
 阶段一选择每个命题实际依赖的正文与题设；阶段二仍接收实际回答与全部合法正文，能反对阶段一。条件在答案中出现、实例满足条件、完整结论受支持分别记录。数值来源不是额外适用条件，标量排序不认证工程关系。分类冲突和 unknown 进入复核，不静默通过。每事实组多一次初始请求；两个阶段共用一次纠正，原引用不增加规划调用。固定 F01—F08 是已见开发材料，F05 是预置分类诊断，不能称独立测试或从单次随机输出推断架构优势。
 
 实现入口：`services/fact_two_stage_v1.py`；共享请求循环：`services/scoped_fact_execution.py`；固定批控制器：`evaluation/fact_two_stage_trial_v1.py`。结果与必要预测见 `docs/evaluation/fact-two-stage-v1/`。离线通过只证明工程契约，不证明语义正确，也不是工程安全认证。
+
+
+## 2026-10-24 Agent业务收敛
+
+事实两阶段未证明收益，暂不采用，研究实现与历史响应保留。事实支持、原文忠实性、分类义务、工程前提和程序失败分别解释；组件有效支持还不是整机最终政策处置。
+
+领域开发候选 `POWERTRUST_DOMAIN_INTERNAL_FLOW=business_v1`，回退 `production` 或移除变量。生产仍langgraph_v1/production/schema13。内部流程先绑定实际工具能力，再用原一次领域调用按范围→必需输入→分析能力→适用约束/来源危险→汇总输出业务记录，最后交既有政策。无新增规划模型/调用/纠正额度。模型负责相关性和领域语义；程序约束身份、工具记录和流程。概念不机械要求厂站参数，缺输入不自动升级高风险，事实supported不证明现场安全；引用反驳危险建议不能按词触发。成功标量计算也不是工程仿真。
+
+生成与修订已共享answer_units、answer_constraints、make_snapshot和structured_request；当前未新增伪公共封装，不改提示或政策。固定六类12分支及两项服务任务属于已见开发/集成材料，不作独立语义成绩。完整报告：docs/evaluation/domain-business-v1/。

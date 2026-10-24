@@ -1,0 +1,8 @@
+{
+  "planned": 2,
+  "accepted": 0,
+  "model_calls": 0,
+  "status": "blocked_before_admission",
+  "reason": "Collector expected execution-freeze-v1.json but independent entry stored service-freeze.json; shared program fault; no retry/resume",
+  "production_candidate_switch": false
+}

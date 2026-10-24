@@ -1,0 +1,36 @@
+{
+  "baseline": {
+    "planned": 6,
+    "complete": 6,
+    "first_valid": 6,
+    "calls": 6,
+    "corrections": 0,
+    "usage": {
+      "input_tokens": 19100,
+      "output_tokens": 2188,
+      "total_tokens": 21288,
+      "cache_hit_tokens": 7680,
+      "cache_miss_tokens": 11420
+    },
+    "model_seconds": 14.619,
+    "branch_seconds": 14.78688990000228,
+    "cost": "unknown"
+  },
+  "candidate": {
+    "planned": 6,
+    "complete": 6,
+    "first_valid": 6,
+    "calls": 6,
+    "corrections": 0,
+    "usage": {
+      "input_tokens": 21098,
+      "output_tokens": 3428,
+      "total_tokens": 24526,
+      "cache_hit_tokens": 8832,
+      "cache_miss_tokens": 12266
+    },
+    "model_seconds": 22.375,
+    "branch_seconds": 22.681298799987417,
+    "cost": "unknown"
+  }
+}

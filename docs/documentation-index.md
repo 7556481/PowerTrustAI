@@ -1,5 +1,10 @@
 # 文档索引
 
+## 2026-10-24 领域业务候选与事实收尾
+
+事实两阶段未证明收益、暂不采用，保留研究代码与旧归档，不改事实政策。新增domain_internal_flow=business_v1开发装配，生产仍langgraph_v1/production/schema13；一次领域调用按范围/输入/能力/约束组织，无新增规划模型、调用或纠正额度。1187全套离线通过193.070秒；六类12分支唯一真实对照全部首次有效完成，12调用0纠正45814token，无共享故障或重跑，语义未证明提升。两项服务验收随后在受理前因冻结文件名与复用采集器不一致失败，受理0/调用0，按共享程序故障停止，不补跑；修复未来冻结命名后4专项通过7.142秒，原冻结/响应保持。未完成服务真实验收，不采用生产。正常生产服务已恢复并按授权空闲重启；状态和历史SHA核对见最终报告。工具浏览器未登录，合并一次人工清单。生成/修订盘点确认现有公共模块已复用，不强行封装丢失参数。学习站20章60自测、构建/源码/链接通过；无ZIP/数据库副本/重建索引/环境。详见[evaluation/domain-business-v1/report.md](evaluation/domain-business-v1/report.md)、predictions.json、statistics.json、fact-closeout.md及generation-revision-audit.md。
+
+
 ## 2026-10-24 当前两阶段开发对照
 
 - [完整报告与边界](evaluation/fact-two-stage-v1/report.md)：唯一16分支、27调用、原始/有效参考差异、继续候选建议。

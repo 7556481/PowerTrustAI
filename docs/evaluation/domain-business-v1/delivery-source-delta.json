@@ -1,0 +1,14 @@
+[
+  {
+    "path": "evaluation\\domain_business_service_v1.py",
+    "frozen_sha256": "627e1d6a5d4ceb8e02d1dfc7c8cc478af5aace177f364b4b57ad33774daf012a",
+    "delivery_sha256": "01f6ac1f570dee0fb460deee3e24b86da21a25b90483b6d62019b525973dbefa",
+    "reason": "Post-run service collector filename repair and offline regression; no model resend"
+  },
+  {
+    "path": "tests\\test_domain_business_v1.py",
+    "frozen_sha256": "f0e5dcf2e452ebe265d86b86c4d3bb8239f4652615e9b2abcf29967a3a84fe86",
+    "delivery_sha256": "eb28f45222fe21fc368d62d8dea27448f03a04ed2e5da33f22db240df9653816",
+    "reason": "Post-run service collector filename repair and offline regression; no model resend"
+  }
+]

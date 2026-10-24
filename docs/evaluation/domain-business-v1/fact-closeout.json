@@ -1,0 +1,333 @@
+[
+  {
+    "branch": "F01-v2",
+    "component_id": "claim-5bfdd77c611f7115260ebaa9-part-0",
+    "object_kind": "literature_rule",
+    "stage_one": null,
+    "raw_support": "supported",
+    "effective_support": "supported",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "规则与应用差异改变当前实例/题设义务；阶段二反对第一阶段，保守复核。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F01-v2",
+    "component_id": "claim-5bfdd77c611f7115260ebaa9-part-1",
+    "object_kind": "rule_application",
+    "stage_one": null,
+    "raw_support": "supported",
+    "effective_support": "supported",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "规则与应用差异改变当前实例/题设义务；阶段二反对第一阶段，保守复核。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F01-two_stage",
+    "component_id": "claim-5bfdd77c611f7115260ebaa9-part-0",
+    "object_kind": "literature_rule",
+    "stage_one": {
+      "target_id": "F0C0",
+      "object_kind": "rule_application",
+      "dependencies": [
+        "S0B0"
+      ],
+      "classification_objection": null,
+      "uncertainty": null,
+      "reason": "命题复述规则内容（至少18岁可借阅但非必须），来源为S0B0规则文本；规则本身无须实例证明。"
+    },
+    "raw_support": "supported",
+    "effective_support": "not_assessable",
+    "classification_objection": "该命题仅是规则文本复述，不涉及具体读者实例，stage_one定为rule_application不当，应为literature_rule。",
+    "fidelity": "faithful",
+    "reason": "规则与应用差异改变当前实例/题设义务；阶段二反对第一阶段，保守复核。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F01-two_stage",
+    "component_id": "claim-5bfdd77c611f7115260ebaa9-part-1",
+    "object_kind": "rule_application",
+    "stage_one": {
+      "target_id": "F0C1",
+      "object_kind": "rule_application",
+      "dependencies": [
+        "S0B0",
+        "P0"
+      ],
+      "classification_objection": null,
+      "uncertainty": null,
+      "reason": "将规则阈值与读者年龄19岁（P0）结合，得出可借阅；依赖规则S0B0与年龄事实P0，P1（卡片颜色）与借阅资格无关。"
+    },
+    "raw_support": "supported",
+    "effective_support": "supported",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "规则与应用差异改变当前实例/题设义务；阶段二反对第一阶段，保守复核。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F02-two_stage",
+    "component_id": "claim-e43e114c76ba9b25bd5f0a7f-part-0",
+    "object_kind": "rule_application",
+    "stage_one": {
+      "target_id": "F0C0",
+      "object_kind": "rule_application",
+      "dependencies": [
+        "S0B0",
+        "P0"
+      ],
+      "classification_objection": null,
+      "uncertainty": null,
+      "reason": "该命题将阈值规则（仅温度≤4度才允许入库）应用于样本的实测温度（8度）。两条依据均被实际使用：规则来自S0B0，数值8度来自P0。"
+    },
+    "raw_support": "contradicted",
+    "effective_support": "contradicted",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "类型一致；条件已表达但实例不满足，内容矛盾。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F02-v2",
+    "component_id": "claim-e43e114c76ba9b25bd5f0a7f-part-0",
+    "object_kind": "rule_application",
+    "stage_one": null,
+    "raw_support": "contradicted",
+    "effective_support": "contradicted",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "类型一致；条件已表达但实例不满足，内容矛盾。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F03-v2",
+    "component_id": "claim-e8e47aef6c760ae3cac1e15c-part-0",
+    "object_kind": "rule_application",
+    "stage_one": null,
+    "raw_support": "supported",
+    "effective_support": "supported",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "类型一致；仅相关题设P0是义务，无关题设不纳入。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F03-two_stage",
+    "component_id": "claim-e8e47aef6c760ae3cac1e15c-part-0",
+    "object_kind": "rule_application",
+    "stage_one": {
+      "target_id": "F0C0",
+      "object_kind": "rule_application",
+      "dependencies": [
+        "S0B0",
+        "P0"
+      ],
+      "classification_objection": null,
+      "uncertainty": null,
+      "reason": "该主张将报名规则（至少20学分）应用于学分为24这一前提，得出结论：满足报名条件；因此它是一项规则应用，依赖规则S0B0和学分前提P0。"
+    },
+    "raw_support": "supported",
+    "effective_support": "supported",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "类型一致；仅相关题设P0是义务，无关题设不纳入。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F04-two_stage",
+    "component_id": "claim-fe9c21d193dac3cffe5bf3ba-part-0",
+    "object_kind": "numeric_comparison",
+    "stage_one": {
+      "target_id": "F0C0",
+      "object_kind": "numeric_comparison",
+      "dependencies": [
+        "S0B0",
+        "P0"
+      ],
+      "classification_objection": null,
+      "uncertainty": null,
+      "reason": "该命题仅比较两个数值：题设分数71（来自P0）和正文基准64（来自S0B0）；P1关于姓名，与此数值比较无关。"
+    },
+    "raw_support": "supported",
+    "effective_support": "supported",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "数值比较保留两个来源；不增加工程适用条件或关系认证。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F04-v2",
+    "component_id": "claim-fe9c21d193dac3cffe5bf3ba-part-0",
+    "object_kind": "numeric_comparison",
+    "stage_one": null,
+    "raw_support": "supported",
+    "effective_support": "supported",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "数值比较保留两个来源；不增加工程适用条件或关系认证。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F05-v2",
+    "component_id": "claim-20018051d5b1950d63332b00-part-0",
+    "object_kind": "rule_application",
+    "stage_one": null,
+    "raw_support": "supported",
+    "effective_support": "not_assessable",
+    "classification_objection": "目标分类为input_evidence_coverage/input_provided，但内容实为规则文本引用与条件性许可的复述，属rule_application而非输入证据覆盖判断；需人工复核分类。",
+    "fidelity": "faithful",
+    "reason": "预置input_evidence_coverage错误会改变题设/正文义务；两阶段改为规则但保留冲突，v2仍称应用。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F05-two_stage",
+    "component_id": "claim-20018051d5b1950d63332b00-part-0",
+    "object_kind": "literature_rule",
+    "stage_one": {
+      "target_id": "F0C0",
+      "object_kind": "rule_application",
+      "dependencies": [
+        "S0B0"
+      ],
+      "classification_objection": null,
+      "uncertainty": null,
+      "reason": "该主张在制度条件层面将档案规则（至少2页允许编号）作概括性重述；仅依赖规则文本S0B0，不依赖实例前提P0。"
+    },
+    "raw_support": "supported",
+    "effective_support": "not_assessable",
+    "classification_objection": "stage_one将该主张定为rule_application并只依赖规则文本S0B0，但又承认其是规则概括性重述、不依赖实例前提P0；既然未将规则应用到P0所述“本次记录有3页”的具体实例，就不构成rule_application，应作为literature_rule（档案规则复述）判断。该分类异议独立于内容支持，内容仍判为支持但需进入复核。",
+    "fidelity": "faithful",
+    "reason": "预置input_evidence_coverage错误会改变题设/正文义务；两阶段改为规则但保留冲突，v2仍称应用。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F06-two_stage",
+    "component_id": "claim-f605242d26b816534ad14d5c-part-0",
+    "object_kind": "uncertain",
+    "stage_one": {
+      "target_id": "F0C0",
+      "object_kind": "uncertain",
+      "dependencies": [],
+      "classification_objection": null,
+      "uncertainty": "所列依据均未说明额定承载能力：S0B0明确称无承载数据，P0仅涉及标签颜色，故900千克断言缺乏支撑；但按本任务不作最终支持判断，仅标注依据缺失与不确定性。",
+      "reason": "该主张是技术事实断言，所需依据应为含承载数据的说明或规则；可用的S0B0否定了承载数据存在，P0与承载能力无关，二者均不提供相关依据。"
+    },
+    "raw_support": "insufficient_evidence",
+    "effective_support": "not_assessable",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "本质是缺额定数据；external_fact/uncertain及颜色依赖分歧不是新增证据，不能用分类修复不足。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F06-v2",
+    "component_id": "claim-f605242d26b816534ad14d5c-part-0",
+    "object_kind": "external_fact",
+    "stage_one": null,
+    "raw_support": "insufficient_evidence",
+    "effective_support": "not_assessable",
+    "classification_objection": "技术事实需权威来源支撑，但现有开放语料无法作为额定承载能力的最终权威；该判定依赖真实设备规格，应标记为需权威来源。",
+    "fidelity": "faithful",
+    "reason": "本质是缺额定数据；external_fact/uncertain及颜色依赖分歧不是新增证据，不能用分类修复不足。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F07-v2",
+    "component_id": "claim-0cf326cfffc41f09b86a9aa2-part-0",
+    "object_kind": "premise_restatement",
+    "stage_one": null,
+    "raw_support": "supported",
+    "effective_support": "not_assessable",
+    "classification_objection": "该目标复述题设前提，而非输入证据覆盖类技术事实，分类宜为premise_restatement。",
+    "fidelity": "faithful",
+    "reason": "题设转述与外部事实的区别改变核对来源；v2不必要异议及两阶段第二项冲突都导致复核，原始支持仍正确。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F07-v2",
+    "component_id": "claim-0cf326cfffc41f09b86a9aa2-part-1",
+    "object_kind": "premise_restatement",
+    "stage_one": null,
+    "raw_support": "contradicted",
+    "effective_support": "not_assessable",
+    "classification_objection": "该目标同样复述题设前提，而非输入证据覆盖，分类宜为premise_restatement。",
+    "fidelity": "faithful",
+    "reason": "题设转述与外部事实的区别改变核对来源；v2不必要异议及两阶段第二项冲突都导致复核，原始支持仍正确。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F07-two_stage",
+    "component_id": "claim-0cf326cfffc41f09b86a9aa2-part-0",
+    "object_kind": "premise_restatement",
+    "stage_one": {
+      "target_id": "F0C0",
+      "object_kind": "premise_restatement",
+      "dependencies": [
+        "P0"
+      ],
+      "classification_objection": null,
+      "uncertainty": null,
+      "reason": "命题“题设记录数量为12”直接复述了任务前提 P0 的文本内容。"
+    },
+    "raw_support": "supported",
+    "effective_support": "supported",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "题设转述与外部事实的区别改变核对来源；v2不必要异议及两阶段第二项冲突都导致复核，原始支持仍正确。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F07-two_stage",
+    "component_id": "claim-0cf326cfffc41f09b86a9aa2-part-1",
+    "object_kind": "premise_restatement",
+    "stage_one": {
+      "target_id": "F0C1",
+      "object_kind": "external_fact",
+      "dependencies": [],
+      "classification_objection": "该命题断言记录数量为21，而给定证据中没有任何依据支持该数值；它既不是前提复述，也无法基于可用基础推导。",
+      "uncertainty": "答案文本包含两个互相冲突的数量陈述，无法确认21是否对应任何底层记录。",
+      "reason": "命题“题设记录数量为21”与前提 P0（12）冲突，且不属于规则应用或数值比较，只能作为缺乏依据的外部事实主张处理。"
+    },
+    "raw_support": "contradicted",
+    "effective_support": "not_assessable",
+    "classification_objection": "不同意stage_one归为external_fact且依赖为空：该命题是对题设数量记录的复述主张，其判定直接依赖前提P0。",
+    "fidelity": "faithful",
+    "reason": "题设转述与外部事实的区别改变核对来源；v2不必要异议及两阶段第二项冲突都导致复核，原始支持仍正确。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F08-two_stage",
+    "component_id": "claim-d6755aa68cae9bdf1a114a69-part-0",
+    "object_kind": "uncertain",
+    "stage_one": {
+      "target_id": "F0C0",
+      "object_kind": "uncertain",
+      "dependencies": [
+        "S0B0",
+        "P0"
+      ],
+      "classification_objection": "The proposition pairs an asserted current value with an asserted 50-year lifetime as if a derivation exists, but no lifetime model or mapping from current to lifetime is given; it is not a rule application or numeric comparison supported by any stated relation.",
+      "uncertainty": "No engineering relation or rule linking 5 A to 50 years is provided, so the claimed inference cannot be classified as engineering_relation or rule_application and the conclusion is unsupported.",
+      "reason": "P0 supplies only the premise that current is 5 A, and S0B0 explicitly states that no lifetime model, temperature, or test data are given; therefore the claimed 'therefore 50 years' is not a derivable technical fact from the allowed bases and remains an unsupported/uncertain assertion."
+    },
+    "raw_support": "insufficient_evidence",
+    "effective_support": "not_assessable",
+    "classification_objection": "命题把“5安”与“50年寿命”以“因此”连接，声称存在推导关系，但所给依据中无寿命模型或电流-寿命映射；既非可核验的工程关系，也非规则适用或数值比较，按技术事实判定依据不足，应以 uncertain 表达未决。",
+    "fidelity": "faithful",
+    "reason": "本质缺寿命模型/工程工具；engineering_relation/uncertain不解除证据和能力缺口。",
+    "execution_failed": false
+  },
+  {
+    "branch": "F08-v2",
+    "component_id": "claim-d6755aa68cae9bdf1a114a69-part-0",
+    "object_kind": "engineering_relation",
+    "stage_one": null,
+    "raw_support": "insufficient_evidence",
+    "effective_support": "insufficient_evidence",
+    "classification_objection": null,
+    "fidelity": "faithful",
+    "reason": "本质缺寿命模型/工程工具；engineering_relation/uncertain不解除证据和能力缺口。",
+    "execution_failed": false
+  }
+]

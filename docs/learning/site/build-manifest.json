@@ -67,13 +67,13 @@
     },
     {
       "source": "docs/learning/chapters/03-agents.md",
-      "characters": 5871,
-      "sha256": "698738cf516ada7cd6c9bf76105cf402e112420eb76217d13d1c13fd69d1392c"
+      "characters": 6439,
+      "sha256": "4a876befc3595d1bcaa76b8c468b048f2520f19acd8f8c630f49be81c5efea63"
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 10726,
-      "sha256": "d287a585ef3d9114c5fe89f816e20d4d9d57793c0b760e6d1683ed90cf795012"
+      "characters": 11294,
+      "sha256": "91c3cd5d70158e997748e82966c47c4483c4977e04ba20d282177fd479039268"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -161,6 +161,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 139106,
+  "markdown_characters": 140242,
   "network_dependencies": false
 }

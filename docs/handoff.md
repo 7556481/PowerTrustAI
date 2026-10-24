@@ -1,5 +1,10 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-24 领域业务候选与事实收尾
+
+事实两阶段未证明收益、暂不采用，保留研究代码与旧归档，不改事实政策。新增domain_internal_flow=business_v1开发装配，生产仍langgraph_v1/production/schema13；一次领域调用按范围/输入/能力/约束组织，无新增规划模型、调用或纠正额度。1187全套离线通过193.070秒；六类12分支唯一真实对照全部首次有效完成，12调用0纠正45814token，无共享故障或重跑，语义未证明提升。两项服务验收随后在受理前因冻结文件名与复用采集器不一致失败，受理0/调用0，按共享程序故障停止，不补跑；修复未来冻结命名后4专项通过7.142秒，原冻结/响应保持。未完成服务真实验收，不采用生产。正常生产服务已恢复并按授权空闲重启；状态和历史SHA核对见最终报告。工具浏览器未登录，合并一次人工清单。生成/修订盘点确认现有公共模块已复用，不强行封装丢失参数。学习站20章60自测、构建/源码/链接通过；无ZIP/数据库副本/重建索引/环境。详见[evaluation/domain-business-v1/report.md](evaluation/domain-business-v1/report.md)、predictions.json、statistics.json、fact-closeout.md及generation-revision-audit.md。
+
+
 ## 2026-10-24 两阶段候选开发与唯一整批对照
 
 起始89c980a、干净工作区。新增two_stage_v1，保留joint_v2开发基线；Factory/API显式接线，默认production/schema13和外层langgraph_v1未变。复用原子图/目录/适配器/共享一次纠正；阶段二收到实际正文，可反对阶段一，冲突/未知保守复核。1184离线通过218.463秒，新增3专项验证八例实际消息及单例继续/共享停止。一次冻结唯一实跑16/16完整，24初始+3纠正=27调用，55257token；v2/两阶段首次契约6/8与7/8，常规原始9/9均对齐，有效6/9与5/9。F05单列；4两阶段冲突保留。继续候选，增加调用尚不值得采用，不切生产、不重跑。全部响应、无效尝试和逐项依据见[evaluation/fact-two-stage-v1/report.md](evaluation/fact-two-stage-v1/report.md)、predictions.json、results.json、statistics.json；私有输入输出及attempt留data忽略目录。内部阶段二独立墙钟未单独保存；两阶段全问答服务真实验收及专属失败组合覆盖仍有限。8765拒绝连接，未启动服务，配置只读确认。其他Agent盘点优先领域、生成、修订；学习站20章60自测和构建/源码/链接通过。无ZIP/下载/索引/独立历史仓库改动。提交远端以本轮最终交付为准。

@@ -1,0 +1,26 @@
+{
+  "full_regression": {
+    "tests": 1187,
+    "seconds": 193.07,
+    "status": "passed",
+    "private_log_sha256": "11ae11723a92731f1e0d76bfc1bb155a98c5e41d883c85d174e567b5957af8c5"
+  },
+  "final_related": {
+    "tests": 4,
+    "seconds": 7.142,
+    "status": "passed"
+  },
+  "learning": {
+    "chapters": 20,
+    "self_checks": 60,
+    "build": true,
+    "source_identity": true,
+    "local_links": true
+  },
+  "service_real": {
+    "planned": 2,
+    "accepted": 0,
+    "model_calls": 0,
+    "reason": "shared collector freeze filename fault before admission"
+  }
+}

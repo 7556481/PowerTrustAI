@@ -1,5 +1,10 @@
 # PowerTrustAI
 
+## 2026-10-24 当前状态
+
+生产保持LangGraph/schema13及原事实审核；事实两阶段未证明收益，暂不采用。领域business_v1为显式开发候选，12分支真实组件对照完成；两项完整服务验收在受理前被采集器冻结文件名故障阻断，0服务任务/0服务模型调用，未补跑。修复与离线验证不替代真实服务验收，不自动切换候选。见[完整报告、响应、统计及回退](docs/evaluation/domain-business-v1/report.md)。
+
+
 ## 2026-10-23 当前默认与验收
 
 **本机受管默认已切为LangGraph（langgraph_v1）**，正常服务ready；公共源码无配置回退仍sequential，环境变量优先。剩余五项固定服务验收全部完成，32调用／413,018 token，两项诊断实际一次修订及完整重审；语义待复核、待补充保留。日常历史104运行、2278事件、2999版本/证据对象、8反馈及行哈希启动前后不变。旧首项不重发、旧失败记录不改。见[后续验收与回退](docs/evaluation/langgraph-service-continuation-v1/results-v1.md)、[小统计](docs/evaluation/langgraph-service-continuation-v1/results-v1.json)、[切换核对](docs/evaluation/langgraph-service-continuation-v1/switch-verification-v1.json)。

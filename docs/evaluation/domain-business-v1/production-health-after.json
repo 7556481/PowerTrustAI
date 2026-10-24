@@ -1,0 +1,8 @@
+{
+  "status": "ready",
+  "active_run": false,
+  "health_model_requests": 0,
+  "profile": "real",
+  "storage_healthy": true,
+  "normal_restart_confirmed": true
+}

@@ -1,0 +1,12 @@
+{
+  "execution_path": "langgraph_v1",
+  "fact_internal_flow": "production",
+  "domain_internal_flow": "production",
+  "verification_schema": 13,
+  "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+  "decision_policy": "product-v1",
+  "retrieval_mode": "bm25",
+  "retrieval_execution_profile": "topic_v4_subject_v1",
+  "fact_strategy": "aggregate",
+  "model_id": "deepseek-flash"
+}
