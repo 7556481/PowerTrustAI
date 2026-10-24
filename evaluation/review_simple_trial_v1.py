@@ -39,9 +39,11 @@ class ContractRecurrence:
         if spec['variant']!='simple_v1':return None
         # A bad intermediate attempt corrected successfully does not trigger this stop.
         if not raw.get('execution_issues'):self.previous=None;return None
-        errors=[]
+        errors=[];final_by_group={}
         for r in raw.get('model_records',[]):
-            if r['prompt_version']!=PROMPT or not r.get('validation_error'):continue
+            if r['prompt_version']==PROMPT:final_by_group[r.get('candidate_catalog_path')]=r
+        for r in final_by_group.values():
+            if not r.get('validation_error'):continue
             d=r['validation_error'];errors.extend(d.get('errors',[d]))
         keys={(e['constraint'],re.sub(r'\[\d+\]','[]',e['field_path'])) for e in errors if e.get('stage')==CONTRACT}
         current=dict(case=(spec['line'],spec['case']),constraints=keys,diagnostics=errors)

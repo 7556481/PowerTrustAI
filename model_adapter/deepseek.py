@@ -5,6 +5,9 @@ import http.client
 import json
 import socket
 import ssl
+import re
+import hashlib
+from uuid import uuid4
 from urllib.parse import urlsplit
 
 from core.validation import InputError, ContractError, require, validate_types
@@ -19,6 +22,41 @@ PRICE_SOURCE = "https://api-docs.deepseek.com/quick_start/pricing/"
 # USD per million tokens, cache-hit / cache-miss / output, peak. Off-peak is half.
 # Provider connector metadata only; model IDs never hard-coded in generation logic.
 PEAK_PRICES = {"deepseek-flash": (0.006, 0.30, 1.20), "deepseek-v4-pro": (0.044, 1.32, 3.96)}
+
+
+def json_mode_preflight(request):
+    """Check actual initial/correction/citation messages, never edit them."""
+    validate_types(request, ModelRequest)
+    texts=[m.content for m in request.messages if m.role in ('system','user')]
+    valid=any(re.search(r'\bjson\b',t,re.I) for t in texts)
+    example=True
+    if request.prompt_version.startswith('evidence-verification-v9.22'):
+        example=False
+        for t in texts:
+            for match in re.finditer(r'\{"judgments"\s*:',t):
+                try:value,_=json.JSONDecoder().raw_decode(t[match.start():])
+                except ValueError:continue
+                if isinstance(value,dict) and isinstance(value.get('judgments'),list):example=True
+    if not valid or not example:
+        error=ModelRequestError();error.diagnostic=dict(version='official-http-diagnostic-v1',stage='preflight',http_status=None,error_type='json_mode_configuration',error_message='Actual messages lack required JSON instruction or declared example.',request_id=uuid4().hex,provider_request_id=None,diagnostic_gap='No HTTP request sent; no provider error exists.')
+        raise error
+
+
+def safe_http_diagnostic(status,body,request_id=None):
+    """Allowlisted categories and canonical messages; no raw error/header persistence."""
+    kind='unclassified_provider_error';provider_id=None;gap='Raw provider message withheld because it may echo private input or credentials.'
+    if isinstance(body,bytes) and len(body)<=8192:
+        try:value=json.loads(body)
+        except (ValueError,UnicodeError):value={}
+        if isinstance(value,dict):
+            err=value.get('error',{})
+            if isinstance(err,dict) and err.get('type') in ('invalid_request_error','authentication_error','insufficient_balance','rate_limit_error','server_error'):kind=err['type']
+            rid=value.get('request_id')
+            if isinstance(rid,str) and re.fullmatch(r'(?:req-)?[a-fA-F0-9-]{16,64}',rid):provider_id='sha256:'+hashlib.sha256(rid.encode()).hexdigest()
+    if provider_id is None:gap+=' Provider correlation ID unavailable or not safe to retain.'
+    else:gap+=' Provider correlation ID retained only as a hash.'
+    messages={400:'Provider rejected request parameters.',401:'Provider authentication failed.',402:'Provider balance insufficient.',403:'Provider denied access.',422:'Provider rejected request parameters.',429:'Provider rate limited request.'}
+    return dict(version='official-http-diagnostic-v1',stage='receive_response',http_status=status,error_type=kind,error_message=messages.get(status,'Provider returned a non-success HTTP status.'),request_id=request_id or uuid4().hex,provider_request_id=provider_id,diagnostic_gap=gap)
 
 
 def estimate_cost(model_id, usage):
@@ -48,18 +86,10 @@ def _usage(value):
     return result
 
 
-def parse_response(status, body, requested_model):
-    # Never decode/forward server error bodies, which may echo sensitive headers.
-    if status in (401, 403):
-        raise ModelAuthenticationError()
-    if status == 402:
-        raise ModelBalanceError()
-    if status == 429:
-        raise ModelRateLimitError()
-    if status >= 500:
-        raise ModelServiceError()
+def parse_response(status, body, requested_model, *, request_id=None):
     if status != 200:
-        raise ModelRequestError()
+        cls=ModelAuthenticationError if status in (401,403) else ModelBalanceError if status==402 else ModelRateLimitError if status==429 else ModelServiceError if status>=500 else ModelRequestError
+        error=cls();error.diagnostic=safe_http_diagnostic(status,body,request_id);raise error
     try:
         data = json.loads(body)
         require(type(data) is dict and type(data.get("choices")) is list and len(data["choices"]) == 1,
@@ -112,7 +142,7 @@ class DeepSeekAdapter:
             stage = 'receive_response'
             response = connection.getresponse()
             stage = 'read_response'
-            data = response.read(byte_limit + 1) if response.status == 200 else b""
+            data = response.read(byte_limit + 1) if response.status == 200 else response.read(8193)
             if len(data) > byte_limit:
                 raise ModelOutputError()
             return response.status, data
@@ -126,28 +156,34 @@ class DeepSeekAdapter:
         finally:
             connection.close()
 
-    def _work(self, body, model_id):
+    def _work(self, body, model_id, request_id=None):
         try:
             status, raw = self._exchange(body, self.settings.timeout_seconds,
                                          self.settings.max_response_chars * 4 + 32768)
-            return parse_response(status, raw, model_id)
+            return parse_response(status, raw, model_id,request_id=request_id)
         except TimeoutError:
             raise ModelTimeoutError() from None
         except (OSError, http.client.HTTPException):
             raise ModelConnectionError() from None
 
     async def complete(self, request):
-        validate_types(request, ModelRequest)
+        self.validate_request(request)
         if self._closed or (self._active is not None and not self._active.done()):
             raise ModelConnectionError()
         payload = {"model": request.model_id, "messages": [{"role": m.role, "content": m.content} for m in request.messages],
                    "max_tokens": request.max_output_tokens, "stream": False,
                    "response_format": {"type": "json_object"}, "thinking": {"type": "disabled"}}
         # This is the sole POST for this complete call; no fallback model or retry.
-        self._active = self._executor.submit(self._work, json.dumps(payload, ensure_ascii=False).encode("utf-8"), request.model_id)
+        self._active = self._executor.submit(self._work, json.dumps(payload, ensure_ascii=False).encode("utf-8"), request.model_id,uuid4().hex)
         future = asyncio.wrap_future(self._active)
         future.add_done_callback(lambda done: None if done.cancelled() else done.exception())
         return await asyncio.shield(future)
+
+    def validate_request(self,request):
+        from model_adapter.runtime import current_budget
+        budget=current_budget()
+        if budget is not None:budget.raise_if_failed()
+        json_mode_preflight(request)
 
     def close(self):
         self._closed = True

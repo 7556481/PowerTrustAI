@@ -143,6 +143,8 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
             async def complete(self,r):
                 nonlocal fatal
                 if fatal:raise PreSendStorageFailure({'constraint':'shared_stop'})
+                validate=getattr(self.delegate,'validate_request',None)
+                if validate is not None:validate(r)
                 try:
                     if r.model_id!=os.environ.get('DEEPSEEK_MODEL_ID') or r.max_output_tokens!=8000:raise ValueError('Frozen model mismatch')
                     for msg in r.messages:
@@ -157,7 +159,10 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
                     send_log.append({k:v for k,v in row.items() if k!='messages'})
                 except Exception:
                     fatal=True;raise PreSendStorageFailure({'constraint':'frozen_identity_or_message_storage'}) from None
-                response=await self.delegate.complete(r)
+                try:response=await self.delegate.complete(r)
+                except Exception as exc:
+                    if getattr(exc,'code',None) in ('MODEL_REQUEST_REJECTED','MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED','MODEL_RATE_LIMITED'):fatal=True
+                    raise
                 try:write(root/'responses'/f'{n:04d}.json',dict(text=response.text,model_id=response.model_id,usage=wire(response.usage),finish_reason=response.finish_reason))
                 except Exception:fatal=True;raise PreSendStorageFailure({'constraint':'response_storage'}) from None
                 return response

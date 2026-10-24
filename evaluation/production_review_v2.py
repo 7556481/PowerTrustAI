@@ -108,7 +108,7 @@ async def task_runner(h,req,budget,**kw):
 def variants(c,v):return replace(c,fact_review_contract=v)
 
 
-def freeze(*,public=None,local=None,materials_factory=None,order_factory=None,version='production-review-net-benefit-v2'):
+def freeze(*,public=None,local=None,materials_factory=None,order_factory=None,version='production-review-net-benefit-v2',additional_identity=None):
     public=public or PUBLIC;local=local or LOCAL
     rows=(order_factory or order)()
     if (public/'freeze.json').exists() or (local/'attempt.json').exists():raise ValueError('Fresh fixed batch only')
@@ -123,6 +123,7 @@ def freeze(*,public=None,local=None,materials_factory=None,order_factory=None,ve
         budget='Original shared40/800s, finite correction and oneRevision. Each B independently deducts actual G calls/time. A fact/citation interface only; whole-task coverage separate.',
         evaluation_scope='A fixed current authored targets, no model extraction/domain/revision. B production RAG generation once then isolated complete double-review/revision on same actual delivery, no further audit retrieval. No production configuration change.',
         stop='Single final model output failure continues; shared/unknown program/config/identity/budget ownership/connection/storage stops. No replay/resume/resubmit.')
+    if additional_identity is not None:frozen['additional_identity']=additional_identity
     write(local/'materials.json',m);write(local/'freeze.json',frozen);write(public/'freeze.json',frozen)
     write(public/'materials-reference.json',{k:v for k,v in m.items() if k!='sources'} | dict(sources={k:{f:e.get(f) for f in ('evidence_id','source_id','source_version','locator','provenance')} | dict(text_sha256=sha(e['text'])) for k,e in m['sources'].items()}))
     print(f'Frozen {len(rows)} slots; zero sends.',flush=True)

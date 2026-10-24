@@ -57,6 +57,24 @@ class SimpleTests(unittest.TestCase):
             out,_,_=self.exercise(mutate);self.assertFalse(out.execution_issues);self.assertEqual(out.findings[0].status,expect)
             self.assertEqual(out.findings[0].component_reviews[0].raw_support_status,'supported')
 
+    def test_declared_condition_combination_matrix_and_no_source_is_not_support(self):
+        # Contract expectations, with program IDs supplied by the synthetic locator.
+        table={('none','not_applicable'):V.SUPPORTED,('present','preserved'):V.SUPPORTED,
+            ('present','missing'):V.INSUFFICIENT_EVIDENCE,('present','misattached'):V.INSUFFICIENT_EVIDENCE,
+            ('present','extended'):V.INSUFFICIENT_EVIDENCE}
+        cat=SimpleCatalog(inputs(False));payload=cat.payload(['F0C0']);t=payload['targets'][0]
+        for ap in ('none','present','unknown'):
+            for ex in ('not_applicable','preserved','missing','misattached','extended','uncertain'):
+                for inst in ('not_claimed','satisfied','missing','uncertain'):
+                    row=response(payload)['judgments'][0];row['target_id']='F0C0'
+                    row['conditions'].update(applicability=ap,expression=ex,instance=inst,source_ids=t['source_unit_ids'][:1],answer_ids=t['answer_unit_ids'][:1])
+                    expected=table.get((ap,ex),V.NOT_ASSESSABLE)
+                    if inst=='uncertain':expected=V.NOT_ASSESSABLE
+                    elif inst=='missing' and expected==V.SUPPORTED:expected=V.INSUFFICIENT_EVIDENCE
+                    self.assertEqual(cat.parse_one(row,cat.targets['F0C0'],'$.judgments[0]')['effective_support_status'],expected.value,(ap,ex,inst))
+        def mutate(v,d,c):v['judgments'][0]['basis_ids']=[]
+        out,_,_=self.exercise(mutate);self.assertTrue(out.execution_issues);self.assertNotEqual(out.findings[0].status,V.SUPPORTED)
+
     def test_no_empty_arrays_waive_unknown_or_unbound_preservation(self):
         for condition in ({'applicability':'unknown','expression':'uncertain'},{'applicability':'present','expression':'preserved'}):
             def mutate(v,d,c):v['judgments'][0]['conditions'].update(condition)

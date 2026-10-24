@@ -30,8 +30,13 @@ class ModelBudget:
         self.limit, self.deadline, self.reserve = limit, deadline, reserve
         self.used = 0
         self.records = []
+        self.fatal_error = None
+
+    def raise_if_failed(self):
+        if self.fatal_error is not None:raise self.fatal_error
 
     def claim(self):
+        self.raise_if_failed()
         if self.deadline is not None and perf_counter() >= self.deadline:
             raise ModelTimeoutError()
         if self.used >= self.limit:
@@ -136,9 +141,13 @@ class ModelClient:
         except Exception as exc:
             status = ExecutionStatus.TIMED_OUT if isinstance(exc, TimeoutError) else ExecutionStatus.FAILED
             code = getattr(exc, "code", "MODEL_CONNECTION_FAILED")
+            if isinstance(exc,(ModelConnectionError,ModelRateLimitError)):
+                budget.fatal_error=exc
             diagnostic=getattr(exc,'diagnostic',None)
             if isinstance(diagnostic,dict) and diagnostic.get('version')=='official-network-diagnostic-v1':
                 network_diagnostic={k:diagnostic.get(k) for k in ('version','stage','exception_type','errno','winerror')}
+            elif isinstance(diagnostic,dict) and diagnostic.get('version')=='official-http-diagnostic-v1':
+                network_diagnostic={k:diagnostic.get(k) for k in ('version','stage','http_status','error_type','error_message','request_id','provider_request_id','diagnostic_gap')}
             exc.model_call_number = number
             raise
         finally:
