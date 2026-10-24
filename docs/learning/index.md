@@ -1,5 +1,7 @@
 # PowerTrustAI：从代码到判断的学习路线
 
+2026-10-24最新：严格工具Beta载体完成实际接入，3份信封符合要求但参数0合法，停止27槽；没有业务/自然净收益成绩，不进服务验收。新增结果工具与Schema分层、两道解析题，现20章69题。[完整Schema和实际原文](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-review-tool-v1/report.md)。生产默认保持JSON且停服。
+
 2026-10-24最新：simple_v1修补请求实际有返回，但原引用重复键经有限纠正仍失败，接入门禁停止26槽；自然线未运行，不进生产验收。公共边界与合同稳定性分开。当前20章67题，[完整原文、历史参考和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-simple-patch-v1/report.md)。生产仍停服。
 
 2026-10-24最新封存：简化合同固定批次因请求兼容故障停止，26槽未执行，不能评价自然净收益。最小工程修补仅离线1224通过，不采用生产。[完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md)。当前20章66道有解析练习，生产仍停服。

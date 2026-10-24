@@ -341,7 +341,7 @@ backend/service.py / ApplicationService.submit，实际行56–81。
         if self.config.profile=='real' and request.existing_answer and request.existing_answer.citations:
             from services.citation_workload import submission_rejections
             from core.validation import InputError
-            rejected=submission_rejections(request,knowledge,self.config.verification_schema,self.config.citation_workload,review_contract=self.config.fact_review_contract)
+            rejected=submission_rejections(request,knowledge,self.config.verification_schema,self.config.citation_workload,review_contract=self.config.fact_review_contract,review_result_transport=self.config.review_result_transport)
             if rejected:raise InputError('Complete citation scopes exceed configured capacity; citation_indexes='+str(list(rejected)))
 
         async with self.lock:
@@ -395,7 +395,7 @@ backend/service.py / ApplicationService._worker，实际行100–126。
 
 ### 摘录：真实装配的资源建立
 
-backend/assembly.py / ComponentFactory.create，2026-10-24当前实际行204–219。
+backend/assembly.py / ComponentFactory.create，2026-10-24当前实际行211–226。
 
 ```python
     def create(self,rid,observer):
@@ -521,11 +521,11 @@ backend/service.py / ApplicationService.result，实际行163–187。
 
 ### 关键连接：实际Harness组件注入
 
-backend/assembly.py当前实际行246–255，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
+backend/assembly.py当前实际行253–262，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
+                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
@@ -687,10 +687,10 @@ async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruc
     else:cat=catalog
     start=len(current_budget().records);current=deepcopy(cat.rows);accepted=set();issues=[];corrected=False
     facts=[t for t,x in cat.targets.items() if x['kind']=='fact'];citations=[t for t,x in cat.targets.items() if x['kind']=='citation']
-    groups,rejected=pack(citations,cat.payload,instruction,agent.citation_workload or CitationWorkload())
+    capacity_instruction=instruction+(json.dumps(cat.result_tool,ensure_ascii=False) if getattr(cat,'result_tool',None) else '')
+    groups,rejected=pack(citations,cat.payload,capacity_instruction,agent.citation_workload or CitationWorkload())
     if rejected:issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,'REVIEW_MESSAGE_CAPACITY_EXCEEDED','Complete citation scopes exceed capacity; no truncation'))
     for group in ([tuple(facts)] if facts else [])+list(groups):
-        baseline={'judgments':[deepcopy(current[t]) for t in group]}
 ```
 
 
@@ -721,4 +721,28 @@ model_adapter/runtime.py / raise_if_failed，实际行35–36。程序检查实�
 ```python
     def raise_if_failed(self):
         if self.fatal_error is not None:raise self.fatal_error
+```
+
+
+## 唯一结果提交函数
+
+model_adapter/strict_review_tool.py / specification，实际行25–26。载体只提交数据，不执行外部动作；摘录入口，完整定义沿源文件阅读。
+
+```python
+def specification():
+    return dict(type='function',function=dict(name=NAME,strict=True,description='Submit this review result only; this function performs no external action.',parameters=schema()))
+```
+
+
+## 传输标记还原与原解析入口
+
+services/review_simple_tool_v1.py / decode_wire，实际行16–21。载体只提交数据，不执行外部动作；摘录入口，完整定义沿源文件阅读。
+
+```python
+    def decode_wire(self,value,group):
+        data=deepcopy(value)
+        if type(data) is dict and type(data.get('judgments')) is list:
+            for row in data['judgments']:
+                if type(row) is dict and any(k in row and row[k] is None for k in ('objection','repair')):row['_native_null_transport_error']=True
+        return super().decode_wire(map_null(data),group)
 ```
