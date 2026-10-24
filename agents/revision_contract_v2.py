@@ -12,6 +12,21 @@ from services.validation_diagnostics import ErrorCollector
 PROMPT_VERSION="bounded-revision-v2-source-bound-repair-body-conditions-v1"
 CONTRACT_VERSION="revision-output-v2"
 ID_CLEAN_PROMPT_VERSION='bounded-revision-v2-source-bound-repair-clean-answer-body-v1'
+ANSWER_ONLY_PROMPT_VERSION='bounded-revision-v2-answer-delivery-v1'
+
+ANSWER_ONLY_INSTRUCTIONS='''
+Answer delivery v1: answer_units is the complete replacement answer to the original
+question. Put the history of edits, comparisons with the frozen draft, and reasons
+for accepting or disputing findings ONLY in finding_actions.explanation. Do not add
+revision-process claims such as "the previous answer said", "now corrected", or
+"the review confirms" to the answer body unless the original question explicitly
+asks for that history. A technical contrast requested by the question is still
+part of the answer. Keep all requested subquestions, correct explanations, source
+conditions and concrete unresolved gaps in the answer body; moving change history
+is not permission to shorten away useful content. Reviews are not factual sources.
+This does not change modified/retained/unresolved, revision eligibility, or the
+requirement for a substantive edit and complete independent re-review.
+'''
 
 
 def catalog(inputs):
@@ -68,6 +83,8 @@ def parse(value,inputs,*,clean_body=False):
 
 async def run(agent,inputs):
     prompt_version=ID_CLEAN_PROMPT_VERSION if getattr(agent,'clean_answer_body',False) else PROMPT_VERSION
+    answer_only=getattr(agent,'answer_delivery','production')=='answer_only_v1'
+    if answer_only:prompt_version=ANSWER_ONLY_PROMPT_VERSION
     rows=catalog(inputs)
     context={"frozen_answer":asdict(inputs.answer),"finding_catalog":rows,"revision_limit":1,
         "review_rules":[asdict(r) for r in inputs.domain_review.rules],
@@ -116,6 +133,7 @@ Complete shape example; provide one action for EVERY actual program finding:
 "finding_actions":[{"finding_id":"actual_input_ID","action":"modified","explanation":"Removed unsupported assurance."}]}
 """
     if getattr(agent,'clean_answer_body',False):system+='\nInternal Evidence IDs belong ONLY in evidence_ids; never put IDs in answer text. Rewrite the same complete technical answer, preserving all subquestions and necessary conditions, not deleting content to hide IDs.\n'
+    if answer_only:system+=ANSWER_ONLY_INSTRUCTIONS
     output,records=await structured_request(agent.client,(ModelMessage("system",system),ModelMessage("user",json.dumps(payload,ensure_ascii=False))),
         prompt_version,lambda v:parse(v,inputs,clean_body=getattr(agent,'clean_answer_body',False)),diagnostics=agent.diagnostics,response_contract_version=CONTRACT_VERSION,input_snapshot_path=path)
     snapshot=make_snapshot(output.answer,inputs.allowed_evidence,inputs.knowledge_version,request=inputs.request,

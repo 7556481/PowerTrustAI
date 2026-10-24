@@ -63,8 +63,11 @@ class ModelRevisionAgent:
     uses_model_adapter=True
     bounded_real_revision=True
 
-    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1,clean_answer_body=False):
+    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1,clean_answer_body=False,answer_delivery='production'):
         require(protocol_version in (1,2),"Unknown revision protocol")
+        require(answer_delivery in ('production','answer_only_v1'), 'Unknown revision answer delivery')
+        require(answer_delivery=='production' or protocol_version==2, 'Answer delivery candidate requires revision v2')
+        self.answer_delivery=answer_delivery
         self.protocol_version=protocol_version
         self.clean_answer_body=clean_answer_body
         self.client=ModelClient(adapter,settings)

@@ -16,6 +16,7 @@ class ServiceConfig:
     execution_path: str='sequential'
     fact_internal_flow: str='production'
     domain_internal_flow: str='production'
+    revision_answer_delivery: str='production'
     run_db: Path=ROOT/'data/runtime_local/runs.sqlite3'
     token_file: Path=ROOT/'data/runtime_local/access-token'
     index_db: Path=ROOT/'data/retrieval_local/semantic/corpus.sqlite3'
@@ -37,6 +38,8 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.revision_answer_delivery not in ('production','answer_only_v1'):raise ValueError('Invalid revision answer delivery')
+        if self.revision_answer_delivery!='production' and self.profile!='real':raise ValueError('Revision candidate requires actual Factory')
         if self.domain_internal_flow not in ('production','business_v1'):raise ValueError('Invalid domain flow')
         if self.domain_internal_flow!='production' and self.profile!='real':raise ValueError('Domain candidate requires actual Factory')
         if self.fact_internal_flow not in ('production','langgraph_candidate_v1','joint_v2','two_stage_v1'):raise ValueError('Invalid fact internal flow')
@@ -89,6 +92,7 @@ class ServiceConfig:
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
             domain_internal_flow=os.environ.get('POWERTRUST_DOMAIN_INTERNAL_FLOW','production'),
+            revision_answer_delivery=os.environ.get('POWERTRUST_REVISION_ANSWER_DELIVERY','production'),
             fact_internal_flow=os.environ.get('POWERTRUST_FACT_INTERNAL_FLOW','production'),
             execution_path=os.environ.get('POWERTRUST_EXECUTION_PATH',orchestration.get('execution_path','sequential')),
             review_message_profile=os.environ.get('POWERTRUST_REVIEW_MESSAGE_PROFILE','lossless_v1'),

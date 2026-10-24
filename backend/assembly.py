@@ -95,6 +95,8 @@ class ComponentFactory:
         hashes.update({str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
                        for p in (ROOT/'backend/static').glob('*') if p.is_file()})
         from agents.revision_contract_v2 import ID_CLEAN_PROMPT_VERSION as REVISION_PROMPT_VERSION
+        if self.config.revision_answer_delivery=='answer_only_v1':
+            from agents.revision_contract_v2 import ANSWER_ONLY_PROMPT_VERSION as REVISION_PROMPT_VERSION
         manifest={'schema_version':'local-review-service-v1','profile':self.config.profile,
             'execution_path':self.config.execution_path,
             'components':'simulated_synthetic_fixture' if self.config.profile=='synthetic_fixture' else 'real_model_with_demo_domain_rules',
@@ -102,6 +104,7 @@ class ComponentFactory:
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
             'fact_internal_flow':self.config.fact_internal_flow,
             'domain_internal_flow':self.config.domain_internal_flow,
+            'revision_answer_delivery':self.config.revision_answer_delivery,
             'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':self.config.verification_schema,'domain_review':5,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
             'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-faithful-assertions-v2' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
@@ -232,7 +235,7 @@ class ComponentFactory:
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
                 FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
-                ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
+                ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
