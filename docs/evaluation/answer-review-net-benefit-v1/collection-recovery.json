@@ -1,0 +1,554 @@
+{
+  "archive": "data/evaluation_local/langgraph-service-integration-v1/batch-v1/LSI-01-S/recovered-readonly-after-stop.json",
+  "archive_sha256": "f80e368fe327134f727da1a930da1000beecb896e8bac884f62bb9380a265cda",
+  "recovery": "Read-only persisted records after stop; no re-execution or approval to continue batch",
+  "storage_status": "finished",
+  "diagnosis": {
+    "run_id": "a83c9966ad034532954127b6958b075b",
+    "state": "completed",
+    "answer": {
+      "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+      "version": 1,
+      "text": "NWS 文献将可测降水定义为大于或等于 0.01 英寸的液态降水量（或冻结降水的液态当量）。",
+      "assumptions": [],
+      "missing_information": [],
+      "citations": [
+        {
+          "start_offset": 0,
+          "end_offset": 46,
+          "evidence_ids": [
+            "user-5719069db46b498599873a86181354e3"
+          ]
+        }
+      ]
+    },
+    "rounds": [
+      {
+        "answer": {
+          "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+          "version": 1,
+          "text": "NWS 文献将可测降水定义为大于或等于 0.01 英寸的液态降水量（或冻结降水的液态当量）。",
+          "assumptions": [],
+          "missing_information": [],
+          "citations": [
+            {
+              "start_offset": 0,
+              "end_offset": 46,
+              "evidence_ids": [
+                "user-5719069db46b498599873a86181354e3"
+              ]
+            }
+          ]
+        },
+        "claims": [
+          {
+            "claim_id": "claim-dd81ce74292e820ec176c670",
+            "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+            "answer_version": 1,
+            "text": "NWS 文献将可测降水定义为大于或等于 0.01 英寸的液态降水量（或冻结降水的液态当量）。",
+            "start_offset": 0,
+            "end_offset": 46,
+            "claim_type": "technical_fact",
+            "proposition": "NWS文献将可测降水定义为大于或等于0.01英寸的液态降水量（或冻结降水的液态当量）。",
+            "qualifiers": [],
+            "components": [
+              {
+                "component_id": "claim-dd81ce74292e820ec176c670-part-0",
+                "category": "technical_fact",
+                "proposition": "NWS文献将可测降水的阈值定义为大于或等于0.01英寸。"
+              },
+              {
+                "component_id": "claim-dd81ce74292e820ec176c670-part-1",
+                "category": "technical_fact",
+                "proposition": "可测降水指液态降水量，或冻结降水的液态当量。"
+              }
+            ],
+            "anchor_group_id": "anchor-48fc5dfcc35b792453a9dedf",
+            "assertion_role": "asserted",
+            "semantic_qualifiers": [
+              "NWS文献作为定义来源",
+              "适用于液态降水",
+              "冻结降水按液态当量计"
+            ],
+            "semantic_origin": "model-claims-v7-obligations",
+            "component_basis_targets": [
+              "technical_content",
+              "technical_content"
+            ],
+            "component_obligations": [
+              "technical_truth",
+              "technical_truth"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "finding_id": "finding-claim-dd81ce74292e820ec176c670",
+            "claim_id": "claim-dd81ce74292e820ec176c670",
+            "status": "supported",
+            "evidence_ids": [
+              "user-5719069db46b498599873a86181354e3"
+            ],
+            "rationale": "The supplied user-reference paragraph states measurability threshold at or above 0.01 inches for liquid precipitation or frozen water equivalent, matching both components.",
+            "checker_version": "evidence-verification-v9.3-target-fidelity",
+            "tool_result_ids": [],
+            "excerpts": [
+              {
+                "evidence_id": "user-5719069db46b498599873a86181354e3",
+                "text": "The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \"on and off\" nature.",
+                "start_offset": 0,
+                "end_offset": 628
+              }
+            ],
+            "applicability_conditions": [
+              "Definition attributed to the supplied NWS forecast-terms text; original source unverified."
+            ],
+            "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+            "checked_dimensions": [],
+            "claim_category": "technical_fact",
+            "assessment_basis": "typed_components",
+            "metadata_refs": [],
+            "scope_id": null,
+            "required_dimensions": [
+              "quantity",
+              "negation",
+              "causality",
+              "conditions",
+              "jurisdiction"
+            ],
+            "dimension_findings": [],
+            "bases": [
+              {
+                "type": "text_excerpt",
+                "evidence_id": "user-5719069db46b498599873a86181354e3",
+                "excerpt": {
+                  "evidence_id": "user-5719069db46b498599873a86181354e3",
+                  "text": "The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \"on and off\" nature.",
+                  "start_offset": 0,
+                  "end_offset": 628
+                },
+                "metadata_reference": null,
+                "snapshot_id": null,
+                "answer_excerpt": null,
+                "quote_id": "quote-55292e286ef86cba52b06fdb"
+              }
+            ],
+            "component_reviews": [
+              {
+                "component_id": "claim-dd81ce74292e820ec176c670-part-0",
+                "status": "supported",
+                "basis_indexes": [
+                  0
+                ],
+                "rationale": "Body states measurable precipitation is equal to or greater than 0.01 inches. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The user-supplied NWS forecast-terms paragraph defines measurable precipitation at the inclusive 0.01-inch threshold.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-aef23b60edfb330f862705c9\",\"necessity\":\"required\",\"answer_quote\":\"大于或等于 0.01 英寸\",\"relationship\":\"preserved\",\"reason\":\"The source threshold is an inclusive lower bound of 0.01 inches, matching the answer.\"}],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-9099c1cd6654f04aa958c059-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[{\"version\":\"source-condition-carriers-v1\",\"scope_id\":\"scope-9099c1cd6654f04aa958c059\",\"quote_id\":\"scope-9099c1cd6654f04aa958c059-0\",\"candidate_id\":\"quote-55292e286ef86cba52b06fdb\",\"evidence_id\":\"user-5719069db46b498599873a86181354e3\",\"start_offset\":0,\"end_offset\":628,\"source_version\":\"unverified\",\"locator\":\"https://www.weather.gov/ppg/forecast_terms :: Precipitation Probability heading; complete body paragraph including following on/off sentence\",\"provenance\":null,\"text_sha256\":\"320dd854bee60780ed75175abb41bdc17da331064461519596817cc660440694\",\"knowledge_version\":\"kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e\",\"answer_id\":\"ef37029ee15344ca9f8b418d084490c2-answer\",\"answer_version\":1,\"condition_id\":\"condition-aef23b60edfb330f862705c9\",\"text\":\"The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \\\"on and off\\\" nature.\",\"granularity\":\"whole_existing_quote_carrier\",\"semantic_necessity_not_program_proof\":true}],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                "classification_issue": null,
+                "origin": "model_judgment",
+                "reason_code": null,
+                "fidelity_status": "faithful",
+                "reviewed_assertion_role": "asserted",
+                "verification_obligation": "technical_truth",
+                "fidelity_rationale": "Threshold value, unit and inclusive inequality preserved.",
+                "raw_support_status": "supported",
+                "review_disposition": "assessed",
+                "review_projection_version": "independent-review-projection-v2"
+              },
+              {
+                "component_id": "claim-dd81ce74292e820ec176c670-part-1",
+                "status": "supported",
+                "basis_indexes": [
+                  0
+                ],
+                "rationale": "Body specifies liquid precipitation or the water equivalent of frozen precipitation. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The paragraph defines measurable amount as liquid precipitation or the water equivalent of frozen precipitation.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-aef23b60edfb330f862705c9\",\"necessity\":\"required\",\"answer_quote\":\"或冻结降水的液态当量\",\"relationship\":\"preserved\",\"reason\":\"The source includes frozen precipitation measured as water equivalent, matching the answer's parenthetical.\"}],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-9099c1cd6654f04aa958c059-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[{\"version\":\"source-condition-carriers-v1\",\"scope_id\":\"scope-9099c1cd6654f04aa958c059\",\"quote_id\":\"scope-9099c1cd6654f04aa958c059-0\",\"candidate_id\":\"quote-55292e286ef86cba52b06fdb\",\"evidence_id\":\"user-5719069db46b498599873a86181354e3\",\"start_offset\":0,\"end_offset\":628,\"source_version\":\"unverified\",\"locator\":\"https://www.weather.gov/ppg/forecast_terms :: Precipitation Probability heading; complete body paragraph including following on/off sentence\",\"provenance\":null,\"text_sha256\":\"320dd854bee60780ed75175abb41bdc17da331064461519596817cc660440694\",\"knowledge_version\":\"kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e\",\"answer_id\":\"ef37029ee15344ca9f8b418d084490c2-answer\",\"answer_version\":1,\"condition_id\":\"condition-aef23b60edfb330f862705c9\",\"text\":\"The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \\\"on and off\\\" nature.\",\"granularity\":\"whole_existing_quote_carrier\",\"semantic_necessity_not_program_proof\":true}],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+                "classification_issue": null,
+                "origin": "model_judgment",
+                "reason_code": null,
+                "fidelity_status": "faithful",
+                "reviewed_assertion_role": "asserted",
+                "verification_obligation": "technical_truth",
+                "fidelity_rationale": "The liquid-or-frozen-water-equivalent scope is retained.",
+                "raw_support_status": "supported",
+                "review_disposition": "assessed",
+                "review_projection_version": "independent-review-projection-v2"
+              }
+            ]
+          }
+        ],
+        "citation_reviews": [
+          {
+            "citation_index": 0,
+            "status": "supported",
+            "evidence_ids": [
+              "user-5719069db46b498599873a86181354e3"
+            ],
+            "excerpts": [
+              {
+                "evidence_id": "user-5719069db46b498599873a86181354e3",
+                "text": "The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \"on and off\" nature.",
+                "start_offset": 0,
+                "end_offset": 628
+              }
+            ],
+            "rationale": "The bound source explicitly defines measurable precipitation as equal to or greater than 0.01 inches, and the answer states this threshold in inches, including the liquid-equivalent qualification. [source-support-relation-v6] {\"source_kind\":\"explanatory_body\",\"explanation\":\"The bound NWS paragraph defines measurable precipitation as equal to or greater than 0.01 inches, expressed as liquid precipitation or water equivalent of frozen precipitation; the answer restates this same threshold and unit.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-6c3e5930df8a2741202b833f\",\"necessity\":\"required\",\"answer_quote\":\"大于或等于 0.01 英寸\",\"relationship\":\"preserved\",\"reason\":\"The selected carrier supplies the 0.01-inch threshold and the liquid-or-liquid-equivalent scope, which the answer reproduces.\"}],\"causal_direction_preserved\":true,\"repair\":null,\"quote_ids\":[\"scope-c96fa2aa92581bc7582f669a-0\"],\"raw_model_status\":\"supported\",\"effective_support_status\":\"supported\",\"condition_bindings\":[{\"version\":\"source-condition-carriers-v1\",\"scope_id\":\"scope-c96fa2aa92581bc7582f669a\",\"quote_id\":\"scope-c96fa2aa92581bc7582f669a-0\",\"candidate_id\":\"quote-55292e286ef86cba52b06fdb\",\"evidence_id\":\"user-5719069db46b498599873a86181354e3\",\"start_offset\":0,\"end_offset\":628,\"source_version\":\"unverified\",\"locator\":\"https://www.weather.gov/ppg/forecast_terms :: Precipitation Probability heading; complete body paragraph including following on/off sentence\",\"provenance\":null,\"text_sha256\":\"320dd854bee60780ed75175abb41bdc17da331064461519596817cc660440694\",\"knowledge_version\":\"kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e\",\"answer_id\":\"ef37029ee15344ca9f8b418d084490c2-answer\",\"answer_version\":1,\"condition_id\":\"condition-6c3e5930df8a2741202b833f\",\"text\":\"The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \\\"on and off\\\" nature.\",\"granularity\":\"whole_existing_quote_carrier\",\"semantic_necessity_not_program_proof\":true}],\"condition_candidates_version\":\"source-condition-carriers-v1\",\"raw_repair\":null,\"semantic_uncertain\":false,\"authority_missing\":false,\"source_selection_version\":\"program-local-selected-bases-v6\"}",
+            "applicability_conditions": [],
+            "check_method": "llm_text_comparison_plus_literal_quote_validation_v1",
+            "binding_warnings": [],
+            "claim_ids": [
+              "claim-dd81ce74292e820ec176c670"
+            ],
+            "partial_claim_ids": [],
+            "coverage_issues": [],
+            "bases": [
+              {
+                "type": "text_excerpt",
+                "evidence_id": "user-5719069db46b498599873a86181354e3",
+                "excerpt": {
+                  "evidence_id": "user-5719069db46b498599873a86181354e3",
+                  "text": "The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \"on and off\" nature.",
+                  "start_offset": 0,
+                  "end_offset": 628
+                },
+                "metadata_reference": null,
+                "snapshot_id": null,
+                "answer_excerpt": null,
+                "quote_id": "quote-55292e286ef86cba52b06fdb"
+              }
+            ]
+          }
+        ],
+        "domain_findings": [
+          {
+            "finding_id": "domain-engineering_inputs",
+            "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+            "answer_version": 1,
+            "claim_ids": [],
+            "severity": "none",
+            "category": "engineering_inputs",
+            "rationale": "Current question/answer and domain applicability are conceptual; no plant study inputs required.",
+            "rule_ids": [
+              "engineering_inputs"
+            ],
+            "evidence_ids": [],
+            "tool_result_ids": [],
+            "missing_prerequisites": [],
+            "check_status": "not_applicable",
+            "basis_kind": "engineering_rule",
+            "origin": "program_rule",
+            "bases": []
+          },
+          {
+            "finding_id": "domain-input_units:units-input",
+            "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+            "answer_version": 1,
+            "claim_ids": [],
+            "severity": "none",
+            "category": "input_units:units-input",
+            "rationale": "Conceptual request contains no structured quantities; actual answer quantity assertions are reviewed separately.",
+            "rule_ids": [
+              "input_units"
+            ],
+            "evidence_ids": [],
+            "tool_result_ids": [],
+            "missing_prerequisites": [],
+            "check_status": "not_applicable",
+            "basis_kind": "engineering_rule",
+            "origin": "program_rule",
+            "bases": []
+          },
+          {
+            "finding_id": "domain-simulation_boundary",
+            "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+            "answer_version": 1,
+            "claim_ids": [],
+            "severity": "none",
+            "category": "simulation_boundary",
+            "rationale": "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review.",
+            "rule_ids": [
+              "simulation_boundary"
+            ],
+            "evidence_ids": [],
+            "tool_result_ids": [],
+            "missing_prerequisites": [],
+            "check_status": "not_applicable",
+            "basis_kind": "engineering_rule",
+            "origin": "program_rule",
+            "bases": []
+          },
+          {
+            "finding_id": "domain-answer_units",
+            "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+            "answer_version": 1,
+            "claim_ids": [
+              "claim-dd81ce74292e820ec176c670"
+            ],
+            "severity": "none",
+            "category": "answer_units",
+            "rationale": "答案保留原单位英寸，0.01 英寸阈值与用户提供的 NWS 引文一致，未做单位换算或伪造换算。",
+            "rule_ids": [
+              "answer_units"
+            ],
+            "evidence_ids": [
+              "user-5719069db46b498599873a86181354e3"
+            ],
+            "tool_result_ids": [],
+            "missing_prerequisites": [],
+            "check_status": "no_issue",
+            "basis_kind": "literature",
+            "origin": "model_judgment",
+            "bases": [
+              {
+                "type": "text_excerpt",
+                "evidence_id": "user-5719069db46b498599873a86181354e3",
+                "excerpt": {
+                  "evidence_id": "user-5719069db46b498599873a86181354e3",
+                  "text": "The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \"on and off\" nature.",
+                  "start_offset": 0,
+                  "end_offset": 628
+                },
+                "metadata_reference": null,
+                "snapshot_id": null,
+                "answer_excerpt": null,
+                "quote_id": "quote-55292e286ef86cba52b06fdb"
+              }
+            ]
+          },
+          {
+            "finding_id": "domain-analysis_scope",
+            "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+            "answer_version": 1,
+            "claim_ids": [
+              "claim-dd81ce74292e820ec176c670"
+            ],
+            "severity": "none",
+            "category": "analysis_scope",
+            "rationale": "用户仅要求解释给定 NWS 文献中可测降水阈值的概念性定义，答案只陈述该定义（≥0.01 英寸液态或冻结降水液态当量），未作天气判断、电厂研究或工程保证，范围一致。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户仅要求解释给定 NWS 文献中可测降水阈值的概念性定义，答案只陈述该定义（≥0.01 英寸液态或冻结降水液态当量），未作天气判断、电厂研究或工程保证，范围一致。\", \"answer_id\": \"ef37029ee15344ca9f8b418d084490c2-answer\", \"answer_version\": 1, \"answer_sha256\": \"7791d4f65ec84626bc52d67cb918db23768f0aa605fa33621b02d72c68390883\", \"question_sha256\": \"bb1c67455ad737854c80ff3fd60a3276fa1a1e273a03bd8f6a21c461e11a1837\", \"structured_goal\": \"conceptual\"}",
+            "rule_ids": [
+              "analysis_scope"
+            ],
+            "evidence_ids": [
+              "user-5719069db46b498599873a86181354e3"
+            ],
+            "tool_result_ids": [],
+            "missing_prerequisites": [],
+            "check_status": "no_issue",
+            "basis_kind": "literature",
+            "origin": "model_judgment",
+            "bases": [
+              {
+                "type": "text_excerpt",
+                "evidence_id": "user-5719069db46b498599873a86181354e3",
+                "excerpt": {
+                  "evidence_id": "user-5719069db46b498599873a86181354e3",
+                  "text": "The probability of precipitation (POP), is defined as the likelihood of occurrence (expressed as a percent) of a measurable amount of liquid precipitation (or the water equivalent of frozen precipitation) during a specified period of time at any given point in the forecast area. Measurable precipitation is equal to or greater than 0.01 inches. Unless specified otherwise, the time period is normally 12 hours. NWS forecasts use such categorical terms as occasional, intermittent, or periods of to describe a precipitation event that has a high probability of occurrence (80%+), but is expected to be of an \"on and off\" nature.",
+                  "start_offset": 0,
+                  "end_offset": 628
+                },
+                "metadata_reference": null,
+                "snapshot_id": null,
+                "answer_excerpt": null,
+                "quote_id": "quote-55292e286ef86cba52b06fdb"
+              }
+            ]
+          },
+          {
+            "finding_id": "domain-operating_prerequisites",
+            "answer_id": "ef37029ee15344ca9f8b418d084490c2-answer",
+            "answer_version": 1,
+            "claim_ids": [],
+            "severity": "none",
+            "category": "operating_prerequisites",
+            "rationale": "纯定义解释，不涉及设备操作、整定或运行建议，无运行前提需列明。",
+            "rule_ids": [
+              "operating_prerequisites"
+            ],
+            "evidence_ids": [],
+            "tool_result_ids": [],
+            "missing_prerequisites": [],
+            "check_status": "not_applicable",
+            "basis_kind": "engineering_rule",
+            "origin": "model_judgment",
+            "bases": []
+          }
+        ],
+        "decision": {
+          "kind": "pass",
+          "reasons": [
+            "All applicable checks complete with supported claims and no blocking findings",
+            "Automatic approval is bounded to this task; not engineering safety certification"
+          ],
+          "policy_version": "product-decision-v1.5",
+          "unresolved_finding_ids": [],
+          "execution_integrity": "complete",
+          "risk_level": "low",
+          "resolution": "complete",
+          "reason_codes": [
+            "ALL_REQUIRED_CHECKS_COMPLETE"
+          ],
+          "applicable_checks": [
+            [
+              "fact_support",
+              "applicable",
+              "Every extracted claim must have independent verification"
+            ],
+            [
+              "original_citations",
+              "applicable",
+              "Separate original citation judgments"
+            ],
+            [
+              "claim-dd81ce74292e820ec176c670/claim-dd81ce74292e820ec176c670-part-0",
+              "applicable",
+              "Required basis target: technical_content; original technical truth obligation cannot be bypassed"
+            ],
+            [
+              "claim-dd81ce74292e820ec176c670/claim-dd81ce74292e820ec176c670-part-1",
+              "applicable",
+              "Required basis target: technical_content; original technical truth obligation cannot be bypassed"
+            ],
+            [
+              "engineering_inputs",
+              "not_applicable",
+              "Current question/answer and domain applicability are conceptual; no plant study inputs required."
+            ],
+            [
+              "input_units:units-input",
+              "not_applicable",
+              "Conceptual request contains no structured quantities; actual answer quantity assertions are reviewed separately."
+            ],
+            [
+              "simulation_boundary",
+              "not_applicable",
+              "simulation_not_run: no engineering computation; conceptual explanation is not a plant feasibility or safety certification. Actual overclaims remain subject to independent analysis_scope review."
+            ],
+            [
+              "answer_units",
+              "no_issue",
+              "答案保留原单位英寸，0.01 英寸阈值与用户提供的 NWS 引文一致，未做单位换算或伪造换算。"
+            ],
+            [
+              "analysis_scope",
+              "no_issue",
+              "用户仅要求解释给定 NWS 文献中可测降水阈值的概念性定义，答案只陈述该定义（≥0.01 英寸液态或冻结降水液态当量），未作天气判断、电厂研究或工程保证，范围一致。 [missing-information-applicability-v1] [] [task-applicability-v1] {\"version\": \"task-applicability-v1\", \"scope\": \"conceptual\", \"reason\": \"用户仅要求解释给定 NWS 文献中可测降水阈值的概念性定义，答案只陈述该定义（≥0.01 英寸液态或冻结降水液态当量），未作天气判断、电厂研究或工程保证，范围一致。\", \"answer_id\": \"ef37029ee15344ca9f8b418d084490c2-answer\", \"answer_version\": 1, \"answer_sha256\": \"7791d4f65ec84626bc52d67cb918db23768f0aa605fa33621b02d72c68390883\", \"question_sha256\": \"bb1c67455ad737854c80ff3fd60a3276fa1a1e273a03bd8f6a21c461e11a1837\", \"structured_goal\": \"conceptual\"}"
+            ],
+            [
+              "operating_prerequisites",
+              "not_applicable",
+              "纯定义解释，不涉及设备操作、整定或运行建议，无运行前提需列明。"
+            ]
+          ],
+          "classification_basis": [
+            "Model-reviewed requested/asserted scope: conceptual; 用户仅要求解释给定 NWS 文献中可测降水阈值的概念性定义，答案只陈述该定义（≥0.01 英寸液态或冻结降水液态当量），未作天气判断、电厂研究或工程保证，范围一致。",
+            "Claim components and independent analysis_scope check retain technical truth obligations",
+            "Classification is fallible; scope alone never overrides an adverse finding",
+            "claim-dd81ce74292e820ec176c670: type=technical_fact; assertion_role=asserted; model classification is not proof",
+            "claim-dd81ce74292e820ec176c670-part-0: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint",
+            "claim-dd81ce74292e820ec176c670-part-1: task hint=conceptual_or_literature_fact; regional rules/settings and plant guarantees require independently assessed scope, never inferred safe from this hint"
+          ]
+        },
+        "verification_issues": [],
+        "domain_issues": []
+      }
+    ],
+    "revisions": [],
+    "execution_issues": [],
+    "evidence": [
+      {
+        "evidence_id": "user-5719069db46b498599873a86181354e3",
+        "source_id": "user_supplied",
+        "source_version": "unverified",
+        "locator": "https://www.weather.gov/ppg/forecast_terms :: Precipitation Probability heading; complete body paragraph including following on/off sentence",
+        "text_sha256": "a84f21e1cb966af4c4e333d0ef776c2322d40756cccb9f41452d0c3f6b849afc"
+      },
+      {
+        "evidence_id": "e-2a05b3c6d755c3ff13d37ff2b21e54f0cb974a0b550543b4301afe55752ab36e",
+        "source_id": "dataset-record-c2c22723f36aa666a82a14dc3f088361414d58a53a299204a3dc4ad5848da7c2",
+        "source_version": "b474699b979f2da47b76bcd575909b2d8c756b713e4cfba94367aed536d0e93a",
+        "locator": "shard=chinese/middle/rank_00416.parquet;row=100500;record=668300016178;chars[13624:14770)",
+        "text_sha256": "c02c3f83a60e1816cc338735211d66c06943f6078901eb1a4cd609c6c3b7cfe9"
+      },
+      {
+        "evidence_id": "e-2d7aa646f419b840dd8842b7af3b300d2e2f06eca975ae58e3c01acbf2d9eda8",
+        "source_id": "dataset-record-c0d89e6d2a0aa7f1d2fc6f3ee23017bb714b6615963cef644e15d85f72ee06e5",
+        "source_version": "2da5c0eab26a6fd21e864f53a4287626285965588da274a226056ff828851b05",
+        "locator": "shard=chinese/high/rank_00040.parquet;row=74252;record=198300007423;chars[1128:2069)",
+        "text_sha256": "791a5614f2b793fb562a915e8e44a683602f7351912effaf9d56f0b6b75ddfea"
+      },
+      {
+        "evidence_id": "e-7c44dfbd070a1ca7f014baf4a691f1e05c2c58c83b08ec992c5c13584cc199f7",
+        "source_id": "dataset-record-7b168a940bb6be3b864262e27e74512714e6eb622b646a0e34fd64d5af5cf00f",
+        "source_version": "4558c619f8c31e4d08c85e4aeea12489781549e81cd0608d2077548ed1fd3ecf",
+        "locator": "shard=chinese/high/rank_00039.parquet;row=216370;record=251500008277;chars[0:1181)",
+        "text_sha256": "68e2e54decd7df083aafbfec03353e7694960c3104aef0f50a3870759a14434d"
+      },
+      {
+        "evidence_id": "e-bd9ce6cd066ba11f4638214b6bb52d0eaa084e4b6734fdd21fd83f063ebec9af",
+        "source_id": "dataset-record-c2c22723f36aa666a82a14dc3f088361414d58a53a299204a3dc4ad5848da7c2",
+        "source_version": "b474699b979f2da47b76bcd575909b2d8c756b713e4cfba94367aed536d0e93a",
+        "locator": "shard=chinese/middle/rank_00416.parquet;row=100500;record=668300016178;chars[12433:13624)",
+        "text_sha256": "9f1658aa6ef12b75cd8768277b486dc4a2abaab346dc5fccd519de22692af12a"
+      },
+      {
+        "evidence_id": "e-1a972195bc9b9030d73755b098d9bc712832c513c9885b41641b3428f5edf7bf",
+        "source_id": "dataset-record-c2c22723f36aa666a82a14dc3f088361414d58a53a299204a3dc4ad5848da7c2",
+        "source_version": "b474699b979f2da47b76bcd575909b2d8c756b713e4cfba94367aed536d0e93a",
+        "locator": "shard=chinese/middle/rank_00416.parquet;row=100500;record=668300016178;chars[14770:15916)",
+        "text_sha256": "014496ec089f5e1b986e03e21b96b660baae099c0800a98347a298fe62b7f57b"
+      },
+      {
+        "evidence_id": "e-462d4edc6eea936751eaaca5eba77660b3e560f6ed0317d797bbe961d6e2aa5d",
+        "source_id": "dataset-record-935f4b06200b03cc2458c40724f3dc4ea5c425e4b6f43910cdb1ce4b6d3e92f1",
+        "source_version": "338a04516224a1525d3fb864139e5ab3a474a10212b08cbab30832d5dc8d1853",
+        "locator": "shard=chinese/high/rank_00040.parquet;row=212521;record=1178500002788;chars[5503:6572)",
+        "text_sha256": "a4046cc2aef88b5dc3067529b4e269fc3f46b8c9af8c1f3ac2e9745ae737b25e"
+      },
+      {
+        "evidence_id": "e-fc192aa09ec5d96d5e672489f0650d47017e9fa1559be8689f28d79d6f4849bc",
+        "source_id": "dataset-record-79bbeee06d84ae883b7b999f2d42f1927feefe48120530eac69042f77bf34c42",
+        "source_version": "7e2a7bc8b11945d864a40a56d8bddc956c5b9d00acb6c1e532fde94258feee5e",
+        "locator": "shard=english/high/rank_00940.parquet;row=97836;record=industrycorpus2:row-v1:3eb7b0cc585ce6c201a7f7cb8636ba3e585320bdbae9518649deb24aa71568d2;chars[71510:72710)",
+        "text_sha256": "f48b3d74b3e87e9d3eb6d5b1ce6ea81d2c20792b05c8a8189b95dfa4ee38b3fb"
+      },
+      {
+        "evidence_id": "e-4237be39edeb4251f7af6d550716883193630661801128cde7f13bcbe30745cb",
+        "source_id": "dataset-record-bd8ecc129d8457686471d1135579d540917561c4d1a5e3d9bde376848381792b",
+        "source_version": "dce037058c6c56bfd62dfc3c432ab3b0074bc3d2a84268dec0e4ae558f6ed029",
+        "locator": "shard=chinese/middle/rank_00418.parquet;row=412687;record=1501900001841;chars[0:1190)",
+        "text_sha256": "2f9efec5f4af01fadb6a90cb906b7c4d5ce8bb03877d7ec508125c895130339e"
+      },
+      {
+        "evidence_id": "e-48bef8e84d95a2c941d219582a9a49a6ddd83e675b3e737e0b4719f74973267e",
+        "source_id": "dataset-record-935f4b06200b03cc2458c40724f3dc4ea5c425e4b6f43910cdb1ce4b6d3e92f1",
+        "source_version": "338a04516224a1525d3fb864139e5ab3a474a10212b08cbab30832d5dc8d1853",
+        "locator": "shard=chinese/high/rank_00040.parquet;row=212521;record=1178500002788;chars[4437:5503)",
+        "text_sha256": "ddc7c9b252d28e2c4b7141c38e385ee49555dfc889ac276e3ea2f2acc83f5286"
+      },
+      {
+        "evidence_id": "e-078613b900517806a1de07fb78bde3b6e8dd6474fb43fe9d7ddd91fdf45d92c1",
+        "source_id": "dataset-record-935f4b06200b03cc2458c40724f3dc4ea5c425e4b6f43910cdb1ce4b6d3e92f1",
+        "source_version": "338a04516224a1525d3fb864139e5ab3a474a10212b08cbab30832d5dc8d1853",
+        "locator": "shard=chinese/high/rank_00040.parquet;row=212521;record=1178500002788;chars[6572:7353)",
+        "text_sha256": "4451bec67e8ebf406466f8253fdf8a436a523097804523cffee4c829509410b5"
+      },
+      {
+        "evidence_id": "e-9ef4051fa7b3b8735d039951fcc6959fc4ce081310d9b3d098c2a4ebac6a38ba",
+        "source_id": "dataset-record-02bcfd1c1460cd2916c223312b55bc3ca579f125e0261ff04bac2a4ca68d3511",
+        "source_version": "a756e7e1800b5227ff6e8fa20ac2d7dea08298928311624d186d5e616f8152a2",
+        "locator": "shard=chinese/high/rank_00038.parquet;row=59826;record=1670600000398;chars[5791:6095)",
+        "text_sha256": "91fac180675fc0edc2fe55f6c2bf36d0b91f750c9cac4d6a85d8e037944e246b"
+      },
+      {
+        "evidence_id": "e-4f85af07f502e8e971f4509023e740ff1f413cd3b9c3b51ed2396c1d9818ba1d",
+        "source_id": "dataset-record-cfa7f6fc2f4645399957d67bae487accd7a1ac34b5f1ef27bb45f53e18e3a02c",
+        "source_version": "a371379378b006b4f23669d3e4b0d1249c8a9b02234a83dade048a77be68e9a6",
+        "locator": "shard=chinese/high/rank_00037.parquet;row=56144;record=175200008366;chars[3288:4351)",
+        "text_sha256": "57fe3c485cf1b48bf3d276bf5f7e5b5ce472b27a2a71b7402db61ab0b4c04929"
+      },
+      {
+        "evidence_id": "e-11207bd34779f108e0bfdfe2db396f91e9761c762049ea7d481571a5d760605b",
+        "source_id": "dataset-record-02bcfd1c1460cd2916c223312b55bc3ca579f125e0261ff04bac2a4ca68d3511",
+        "source_version": "a756e7e1800b5227ff6e8fa20ac2d7dea08298928311624d186d5e616f8152a2",
+        "locator": "shard=chinese/high/rank_00038.parquet;row=59826;record=1670600000398;chars[4673:5791)",
+        "text_sha256": "eb29a2ea5277e4ff1843f59873fa204c9b3ea0304901d75f5d49e01924ceb976"
+      }
+    ]
+  }
+}

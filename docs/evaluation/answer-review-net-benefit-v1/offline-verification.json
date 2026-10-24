@@ -1,0 +1,18 @@
+{
+  "full_offline": {
+    "tests": 1197,
+    "seconds": 197.256,
+    "result": "OK",
+    "log_sha256": "f722c1e9cc73e004b70cc9da6ef8fa97f103451cc3a80d096703321934b3357d",
+    "log_private": "data\\runtime_local\\answer-review-net-benefit-v1-full-tests.log"
+  },
+  "targeted": {
+    "final_new_tests": 9,
+    "revision_and_existing_control_checks": "27 initially, 1 fixture failure; repaired fixture and 9 final entry/candidate checks passed before full regression"
+  },
+  "failures_preserved": [
+    "Sandbox asyncio startup stalled; same interpreter worked under tool approval; no environment/permission changes",
+    "Initial new fixture attempted graph lazy import inside cleared environment and schema13 revision provider lacked adverse output; initialized locked graph before environment fixture and reused SubjectProvider for schema13 source-bound revision. These are test-fixture failures, not semantic scores."
+  ],
+  "real_model_calls_during_offline": 0
+}

@@ -1,0 +1,55 @@
+{
+  "version": "answer-review-materials-v1",
+  "source_archive_sha256": "42eb12e21d2166793b8c0bbe70d735f6e67b09b086ab24345078c0e2f0109cd8",
+  "questions": [
+    "按给定NERC资料解释动态无功资源如何调节输出，以及两种运行方式。",
+    "按给定NERC资料解释静态无功资源在额定电压下的输出及其电压依赖，并说明如何投切。",
+    "按给定NERC资料解释静态无功资源的电压依赖；这些资料能否给出某匿名厂站所需补偿容量？",
+    "按给定NERC资料比较动态与静态无功资源的调节方式，并说明这一区别能否单独保证某厂站在故障后电压稳定。"
+  ],
+  "drafts": [
+    "动态无功资源一旦并网就固定输出，不能随电网电压变化连续调节；它只采用固定电压设定点运行。",
+    "按该资料，静态无功资源在额定电压下有固定的无功输出，其能力随电压平方变化；可根据系统条件手动或自动投切，接入后提供固定的额定无功贡献。",
+    "按该资料，静态无功资源的能力随电压平方变化。给定资料没有该匿名厂站的网络模型、运行点与补偿目标，不能据此给出具体补偿容量。",
+    "动态无功资源输出固定，静态无功资源能实时连续自动调节。因此只要选用静态无功资源，就能保证匿名厂站故障后电压稳定。"
+  ],
+  "reference": [
+    [
+      "动态：响应电网电压变化、在规定电压带宽内实时自动连续调节",
+      "运行方式：维持电压设定点或电压下垂模式"
+    ],
+    [
+      "额定电压下固定输出",
+      "能力随电压平方变化",
+      "按系统条件手动或自动投切；接入后额定贡献固定"
+    ],
+    [
+      "静态能力随电压平方变化",
+      "未给该厂站数据不能确定具体容量；具体缺口不得变成已完成计算"
+    ],
+    [
+      "动态自动连续调节与静态投切/固定额定贡献分别说明",
+      "能力的电压依赖保留",
+      "不能单凭类型保证厂站故障后稳定，需相应工况/故障分析，未执行不得声称完成"
+    ]
+  ],
+  "reference_origin": "AI-assisted source reading under user supervision; development validation, not expert gold or independent holdout",
+  "allowed": "Equivalent correct expressions; no exact wording score. Technical comparisons allowed; revision history is not requested.",
+  "boundaries": "No universal response-time guarantee, plant capacity or safety certification. Missing input and unexecuted analysis remain gaps.",
+  "sources": [
+    {
+      "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+      "text_sha256": "b557159c805c76178e7b1a798cb45f50e55977b6b8d8bc967adce4093ba8e34c"
+    },
+    {
+      "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+      "text_sha256": "601b9edd729b4ff9e093d6bdaa38b7cfdf117ea519821a2a072263624f0004a5"
+    }
+  ]
+}

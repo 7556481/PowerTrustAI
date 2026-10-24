@@ -1,0 +1,56 @@
+{
+  "checked_utc": "2026-10-24T05:28:21.348972+00:00",
+  "health": "connection_refused_or_unavailable",
+  "listener_8765": false,
+  "service_started_by_this_work": false,
+  "candidate_started": false,
+  "tables": {
+    "runs": {
+      "rows": 104
+    },
+    "events": {
+      "rows": 2278
+    },
+    "objects": {
+      "rows": 2999
+    },
+    "reviews": {
+      "rows": 8
+    }
+  },
+  "last_saved_manifest": {
+    "profile": "real",
+    "execution_path": null,
+    "fact_internal_flow": null,
+    "domain_internal_flow": null,
+    "protocols": {
+      "generation": 3,
+      "claim_extraction": 7,
+      "evidence_verification": 13,
+      "domain_review": 5,
+      "revision": 2
+    },
+    "prompts": {
+      "generation": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+      "extraction": "atomic-claims-v7-obligations-faithful-assertions-v2",
+      "verification": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "domain": "power-domain-review-v3.5-task-obligations",
+      "revision": "bounded-revision-v2-source-bound-repair-clean-answer-body-v1"
+    },
+    "model_id": "deepseek-flash",
+    "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+    "policy": "product-decision-v1.5",
+    "fact_retrieval_strategy": "aggregate",
+    "retrieval_mode": "bm25"
+  },
+  "managed_orchestration": {
+    "version": "service-orchestration-v1",
+    "execution_path": "langgraph_v1"
+  },
+  "managed_knowledge": {
+    "version": "daily-knowledge-v1",
+    "index_db": "data/retrieval_local/industry-corpus-v1/published-complete-identity-v2.sqlite3",
+    "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e"
+  },
+  "note": "Stored/managed configuration is not a running process attestation. No production restart; original stopped state preserved."
+}

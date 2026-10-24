@@ -1,0 +1,14 @@
+{
+  "chapters": 20,
+  "self_checks": 60,
+  "build": "passed",
+  "source_hashes": "passed",
+  "local_site_links": "passed",
+  "report_local_links": "passed",
+  "frozen_source_identities": 375,
+  "source_identity_mismatches": 0,
+  "public_credential_key_scan": "passed",
+  "browser": "not newly accepted; no UI change",
+  "first_learning_check": "failed on changed backend/assembly.py source hash; rebound both actual AST/connection excerpts and hashes, then build/source/link checks passed",
+  "business_full_regression_repeated_after_docs": false
+}

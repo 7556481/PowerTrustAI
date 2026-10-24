@@ -1,0 +1,1428 @@
+{
+  "by_line_variant": {
+    "A/production": {
+      "runs": 4,
+      "harness_ms_sum_sequential_tasks": 108240,
+      "execution_incomplete": 0,
+      "revision_outputs": 2,
+      "initial_audit_root_interval_union_ms_sum": 43337.0,
+      "revision_root_interval_union_ms_sum": 8795.0,
+      "rereview_root_interval_union_ms_sum": 54431.0,
+      "calls": 30,
+      "initial_calls": 28,
+      "corrections": 2,
+      "revision_calls": 2,
+      "rereview_calls": 11,
+      "input_tokens": 200407,
+      "output_tokens": 24282,
+      "total_tokens": 224689,
+      "cache_hit_tokens": 79616,
+      "cache_miss_tokens": 120791
+    },
+    "A/answer_only_v1": {
+      "runs": 4,
+      "harness_ms_sum_sequential_tasks": 66095,
+      "execution_incomplete": 1,
+      "revision_outputs": 1,
+      "initial_audit_root_interval_union_ms_sum": 39778.0,
+      "calls": 23,
+      "initial_calls": 22,
+      "corrections": 1,
+      "revision_calls": 1,
+      "rereview_calls": 5,
+      "input_tokens": 132435,
+      "output_tokens": 14593,
+      "total_tokens": 147028,
+      "cache_hit_tokens": 55040,
+      "cache_miss_tokens": 77395,
+      "revision_root_interval_union_ms_sum": 4050.0,
+      "rereview_root_interval_union_ms_sum": 21183.0
+    },
+    "G/production": {
+      "runs": 4,
+      "harness_ms_sum_sequential_tasks": 24791,
+      "execution_incomplete": 0,
+      "revision_outputs": 0,
+      "retrieval_root_interval_union_ms_sum": 14717.0,
+      "generation_root_interval_union_ms_sum": 9772.0,
+      "calls": 4,
+      "initial_calls": 4,
+      "corrections": 0,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "input_tokens": 42807,
+      "output_tokens": 1147,
+      "total_tokens": 43954,
+      "cache_hit_tokens": 5120,
+      "cache_miss_tokens": 37687
+    },
+    "B/production": {
+      "runs": 4,
+      "harness_ms_sum_sequential_tasks": 124388,
+      "execution_incomplete": 1,
+      "revision_outputs": 0,
+      "initial_audit_root_interval_union_ms_sum": 123016.0,
+      "calls": 25,
+      "initial_calls": 20,
+      "corrections": 5,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "input_tokens": 341020,
+      "output_tokens": 29346,
+      "total_tokens": 370366,
+      "cache_hit_tokens": 177280,
+      "cache_miss_tokens": 163740
+    },
+    "B/answer_only_v1": {
+      "runs": 4,
+      "harness_ms_sum_sequential_tasks": 127244,
+      "execution_incomplete": 3,
+      "revision_outputs": 0,
+      "initial_audit_root_interval_union_ms_sum": 125800.0,
+      "calls": 24,
+      "initial_calls": 20,
+      "corrections": 4,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "input_tokens": 311537,
+      "output_tokens": 29398,
+      "total_tokens": 340935,
+      "cache_hit_tokens": 149504,
+      "cache_miss_tokens": 162033
+    }
+  },
+  "total": {
+    "runs": 20,
+    "harness_ms_sum_sequential_tasks": 450758,
+    "revision_outputs": 3,
+    "initial_audit_root_interval_union_ms_sum": 331931.0,
+    "revision_root_interval_union_ms_sum": 12845.0,
+    "rereview_root_interval_union_ms_sum": 75614.0,
+    "calls": 106,
+    "initial_calls": 94,
+    "corrections": 12,
+    "revision_calls": 3,
+    "rereview_calls": 16,
+    "input_tokens": 1028206,
+    "output_tokens": 98766,
+    "total_tokens": 1126972,
+    "cache_hit_tokens": 466560,
+    "cache_miss_tokens": 561646,
+    "execution_incomplete": 5,
+    "retrieval_root_interval_union_ms_sum": 14717.0,
+    "generation_root_interval_union_ms_sum": 9772.0
+  },
+  "branch_latency": [
+    {
+      "id": "A1-production",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 10227.0,
+        "revision": 4065.0,
+        "rereview": 15685.0
+      },
+      "harness_ms": 30630,
+      "observation": {
+        "first_answer_saved_ms": 54.106,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 30701.075
+      }
+    },
+    {
+      "id": "A1-answer_only_v1",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 12192.0
+      },
+      "harness_ms": 12324,
+      "observation": {
+        "first_answer_saved_ms": 24.911,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 12360.019
+      }
+    },
+    {
+      "id": "A2-answer_only_v1",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 10415.0
+      },
+      "harness_ms": 10592,
+      "observation": {
+        "first_answer_saved_ms": 23.598,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 10628.897
+      }
+    },
+    {
+      "id": "A2-production",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 10613.0
+      },
+      "harness_ms": 10794,
+      "observation": {
+        "first_answer_saved_ms": 22.882,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 10831.529
+      }
+    },
+    {
+      "id": "A3-production",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 8033.0
+      },
+      "harness_ms": 8169,
+      "observation": {
+        "first_answer_saved_ms": 22.64,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 8204.585
+      }
+    },
+    {
+      "id": "A3-answer_only_v1",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 7802.0
+      },
+      "harness_ms": 7949,
+      "observation": {
+        "first_answer_saved_ms": 24.238,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 7983.216
+      }
+    },
+    {
+      "id": "A4-answer_only_v1",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 9369.0,
+        "revision": 4050.0,
+        "rereview": 21183.0
+      },
+      "harness_ms": 35230,
+      "observation": {
+        "first_answer_saved_ms": 24.511,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 35290.693
+      }
+    },
+    {
+      "id": "A4-production",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 14464.0,
+        "revision": 4730.0,
+        "rereview": 38746.0
+      },
+      "harness_ms": 58647,
+      "observation": {
+        "first_answer_saved_ms": 23.083,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 58699.654
+      }
+    },
+    {
+      "id": "G1",
+      "root_stage_interval_union_ms": {
+        "retrieval": 4298.0,
+        "generation": 2358.0
+      },
+      "harness_ms": 6739,
+      "observation": {
+        "first_answer_saved_ms": 6743.225,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 6766.651
+      }
+    },
+    {
+      "id": "B1-production",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 18014.0
+      },
+      "harness_ms": 18321,
+      "observation": {
+        "first_answer_saved_ms": 62.2,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 18405.13
+      }
+    },
+    {
+      "id": "B1-answer_only_v1",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 20078.0
+      },
+      "harness_ms": 20408,
+      "observation": {
+        "first_answer_saved_ms": 32.669,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 20474.0
+      }
+    },
+    {
+      "id": "G2",
+      "root_stage_interval_union_ms": {
+        "retrieval": 1397.0,
+        "generation": 2371.0
+      },
+      "harness_ms": 3843,
+      "observation": {
+        "first_answer_saved_ms": 3843.501,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 3875.517
+      }
+    },
+    {
+      "id": "B2-answer_only_v1",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 35350.0
+      },
+      "harness_ms": 35685,
+      "observation": {
+        "first_answer_saved_ms": 38.127,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 35753.117
+      }
+    },
+    {
+      "id": "B2-production",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 31774.0
+      },
+      "harness_ms": 32119,
+      "observation": {
+        "first_answer_saved_ms": 32.024,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 32177.255
+      }
+    },
+    {
+      "id": "G3",
+      "root_stage_interval_union_ms": {
+        "retrieval": 7171.0,
+        "generation": 2476.0
+      },
+      "harness_ms": 9710,
+      "observation": {
+        "first_answer_saved_ms": 9713.142,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 9738.548
+      }
+    },
+    {
+      "id": "B3-production",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 18814.0
+      },
+      "harness_ms": 19121,
+      "observation": {
+        "first_answer_saved_ms": 32.223,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 19178.511
+      }
+    },
+    {
+      "id": "B3-answer_only_v1",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 23872.0
+      },
+      "harness_ms": 24227,
+      "observation": {
+        "first_answer_saved_ms": 48.914,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 24283.953
+      }
+    },
+    {
+      "id": "G4",
+      "root_stage_interval_union_ms": {
+        "retrieval": 1851.0,
+        "generation": 2567.0
+      },
+      "harness_ms": 4499,
+      "observation": {
+        "first_answer_saved_ms": 4499.301,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 4525.974
+      }
+    },
+    {
+      "id": "B4-answer_only_v1",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 46500.0
+      },
+      "harness_ms": 46924,
+      "observation": {
+        "first_answer_saved_ms": 35.823,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 46994.147
+      }
+    },
+    {
+      "id": "B4-production",
+      "root_stage_interval_union_ms": {
+        "initial_audit": 54414.0
+      },
+      "harness_ms": 54827,
+      "observation": {
+        "first_answer_saved_ms": 31.86,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 54890.448
+      }
+    }
+  ],
+  "invalid_attempts": [
+    {
+      "id": "A1-answer_only_v1",
+      "call_number": 4,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "valid_json_required",
+        "line": 1,
+        "column": 2317,
+        "nesting_position": 2316,
+        "actual_closer": "]",
+        "expected_closer": "}"
+      }
+    },
+    {
+      "id": "A1-answer_only_v1",
+      "call_number": 5,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": true,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "valid_json_required",
+        "line": 1,
+        "column": 2281,
+        "nesting_position": 2280,
+        "actual_closer": "]",
+        "expected_closer": "}"
+      }
+    },
+    {
+      "id": "A4-production",
+      "call_number": 4,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "valid_json_required",
+        "line": 1,
+        "column": 2694,
+        "nesting_position": 2693,
+        "actual_closer": "]",
+        "expected_closer": "}"
+      }
+    },
+    {
+      "id": "A4-production",
+      "call_number": 8,
+      "component": "evidence_verification",
+      "answer_version": 2,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "valid_json_required",
+        "line": 1,
+        "column": 4921,
+        "nesting_position": 4920,
+        "actual_closer": "]",
+        "expected_closer": "}"
+      }
+    },
+    {
+      "id": "B2-answer_only_v1",
+      "call_number": 2,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "evidence_verification",
+        "field_path": "$.findings[6].component_reviews[0].basis_indexes",
+        "constraint": "component_requires_corresponding_basis_text_excerpt",
+        "component_category": "technical_fact",
+        "required_basis_type": "text_excerpt",
+        "selected_basis_types": [
+          "metadata_reference"
+        ],
+        "processing_options": [
+          "select_an_existing_matching_basis",
+          "add_an_exact_allowed_basis_if_available",
+          "otherwise_insufficient_evidence_or_not_assessable",
+          "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+        ],
+        "errors": [
+          {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[6].component_reviews[0].basis_indexes",
+            "constraint": "component_requires_corresponding_basis_text_excerpt",
+            "component_category": "technical_fact",
+            "required_basis_type": "text_excerpt",
+            "selected_basis_types": [
+              "metadata_reference"
+            ],
+            "processing_options": [
+              "select_an_existing_matching_basis",
+              "add_an_exact_allowed_basis_if_available",
+              "otherwise_insufficient_evidence_or_not_assessable",
+              "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+            ]
+          },
+          {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[6].component_reviews[1].basis_indexes",
+            "constraint": "component_requires_corresponding_basis_text_excerpt",
+            "component_category": "technical_fact",
+            "required_basis_type": "text_excerpt",
+            "selected_basis_types": [
+              "metadata_reference"
+            ],
+            "processing_options": [
+              "select_an_existing_matching_basis",
+              "add_an_exact_allowed_basis_if_available",
+              "otherwise_insufficient_evidence_or_not_assessable",
+              "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+            ]
+          },
+          {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[7].component_reviews[0].basis_indexes",
+            "constraint": "snapshot_not_support_for_other_claim_types"
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "findings",
+            "id": "claim-9061a8f313c2cb6105962250",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-6185b533d0047a7c90539772",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-2b9c2a807ccbfe1b41cca408",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-da452f0d51c2916a94d37a16",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-e847cafb95eea5bc1175ad26",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-33ee6258128b7d7fc6242f5a",
+            "response_attempt": 1
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "id": "B2-answer_only_v1",
+      "call_number": 4,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": true,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "evidence_verification",
+        "field_path": "$.findings[7].component_reviews[0].basis_indexes",
+        "constraint": "snapshot_not_support_for_other_claim_types",
+        "errors": [
+          {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[7].component_reviews[0].basis_indexes",
+            "constraint": "snapshot_not_support_for_other_claim_types"
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "findings",
+            "id": "claim-9061a8f313c2cb6105962250",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-6185b533d0047a7c90539772",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-2b9c2a807ccbfe1b41cca408",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-da452f0d51c2916a94d37a16",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-e847cafb95eea5bc1175ad26",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-33ee6258128b7d7fc6242f5a",
+            "response_attempt": 2
+          },
+          {
+            "group": "findings",
+            "id": "claim-a277923d21ec687bb16474ea",
+            "response_attempt": 2
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "id": "B2-production",
+      "call_number": 3,
+      "component": "power_domain_review",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "power_domain_review",
+        "field_path": "$.checks[1].quote_ids",
+        "constraint": "existing_input_ids_required",
+        "errors": [
+          {
+            "stage": "power_domain_review",
+            "field_path": "$.checks[1].quote_ids",
+            "constraint": "existing_input_ids_required"
+          },
+          {
+            "stage": "review_isolation",
+            "field_path": "$.safety_reviews",
+            "constraint": "each_frozen_item_must_be_supplied"
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "checks",
+            "id": "answer_units",
+            "response_attempt": 1
+          },
+          {
+            "group": "checks",
+            "id": "operating_prerequisites",
+            "response_attempt": 1
+          },
+          {
+            "group": "missing_information_review",
+            "id": 0,
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-04f2ef6e43c0415081a6a986",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-7d7ccc88745483b763e4e7f4",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-31f4d40f264ad7355157ffd6",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-3a6be7d66a869ab6348ede9d",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-96b8091737e073167d88bb76",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-c3abd6239213c572fc55ff51",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-0fc65769acb180063ef61603",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-c792105aded2150217ec470f",
+            "response_attempt": 1
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "id": "B2-production",
+      "call_number": 4,
+      "component": "power_domain_review",
+      "answer_version": 1,
+      "correction": true,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "review_isolation",
+        "field_path": "$.safety_reviews",
+        "constraint": "each_frozen_item_must_be_supplied",
+        "errors": [
+          {
+            "stage": "review_isolation",
+            "field_path": "$.safety_reviews",
+            "constraint": "each_frozen_item_must_be_supplied"
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "checks",
+            "id": "answer_units",
+            "response_attempt": 2
+          },
+          {
+            "group": "checks",
+            "id": "analysis_scope",
+            "response_attempt": 2
+          },
+          {
+            "group": "checks",
+            "id": "operating_prerequisites",
+            "response_attempt": 2
+          },
+          {
+            "group": "missing_information_review",
+            "id": 0,
+            "response_attempt": 2
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-04f2ef6e43c0415081a6a986",
+            "response_attempt": 2
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-7d7ccc88745483b763e4e7f4",
+            "response_attempt": 2
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-31f4d40f264ad7355157ffd6",
+            "response_attempt": 2
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-3a6be7d66a869ab6348ede9d",
+            "response_attempt": 2
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-96b8091737e073167d88bb76",
+            "response_attempt": 2
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-c3abd6239213c572fc55ff51",
+            "response_attempt": 2
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-0fc65769acb180063ef61603",
+            "response_attempt": 2
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-c792105aded2150217ec470f",
+            "response_attempt": 2
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "id": "B2-production",
+      "call_number": 2,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "evidence_verification",
+        "field_path": "$.findings[6].component_reviews[0].basis_indexes",
+        "constraint": "component_requires_corresponding_basis_text_excerpt",
+        "component_category": "technical_fact",
+        "required_basis_type": "text_excerpt",
+        "selected_basis_types": [
+          "metadata_reference"
+        ],
+        "processing_options": [
+          "select_an_existing_matching_basis",
+          "add_an_exact_allowed_basis_if_available",
+          "otherwise_insufficient_evidence_or_not_assessable",
+          "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+        ],
+        "errors": [
+          {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[6].component_reviews[0].basis_indexes",
+            "constraint": "component_requires_corresponding_basis_text_excerpt",
+            "component_category": "technical_fact",
+            "required_basis_type": "text_excerpt",
+            "selected_basis_types": [
+              "metadata_reference"
+            ],
+            "processing_options": [
+              "select_an_existing_matching_basis",
+              "add_an_exact_allowed_basis_if_available",
+              "otherwise_insufficient_evidence_or_not_assessable",
+              "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+            ]
+          },
+          {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[7].component_reviews[0].basis_indexes",
+            "constraint": "component_requires_corresponding_basis_text_excerpt",
+            "component_category": "technical_fact",
+            "required_basis_type": "text_excerpt",
+            "selected_basis_types": [
+              "metadata_reference"
+            ],
+            "processing_options": [
+              "select_an_existing_matching_basis",
+              "add_an_exact_allowed_basis_if_available",
+              "otherwise_insufficient_evidence_or_not_assessable",
+              "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+            ]
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "findings",
+            "id": "claim-04f2ef6e43c0415081a6a986",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-7d7ccc88745483b763e4e7f4",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-31f4d40f264ad7355157ffd6",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-3a6be7d66a869ab6348ede9d",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-96b8091737e073167d88bb76",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-c3abd6239213c572fc55ff51",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-8643aae727f91f02e5136ff7",
+            "response_attempt": 1
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "id": "B3-answer_only_v1",
+      "call_number": 5,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "source-support-relation-v5",
+        "field_path": "$.citation_reviews[0].support_relation[0]",
+        "constraint": "known_source_kind_required",
+        "errors": [
+          {
+            "stage": "source-support-relation-v5",
+            "field_path": "$.citation_reviews[0].support_relation[0]",
+            "constraint": "known_source_kind_required"
+          }
+        ],
+        "retained_items": [],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "id": "B3-answer_only_v1",
+      "call_number": 6,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": true,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "source-support-relation-v5",
+        "field_path": "$.citation_reviews[0].support_relation[0]",
+        "constraint": "known_source_kind_required",
+        "errors": [
+          {
+            "stage": "source-support-relation-v5",
+            "field_path": "$.citation_reviews[0].support_relation[0]",
+            "constraint": "known_source_kind_required"
+          }
+        ],
+        "retained_items": [],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "id": "B4-answer_only_v1",
+      "call_number": 1,
+      "component": "claim_extraction",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "claim_extraction_v6",
+        "field_path": "$.claims[10].components[0].basis_target",
+        "constraint": "declared_target_category_must_agree",
+        "legal_target_categories": {
+          "document_body": "technical_fact",
+          "technical_content": "technical_fact",
+          "mathematical_relation": "technical_fact",
+          "index_metadata": "source_quality_metadata",
+          "input_snapshot": "input_evidence_coverage",
+          "answer_text": "answer_scope",
+          "recommendation": "review_recommendation"
+        },
+        "processing_options": [
+          "identify whether the assertion concerns official body, maintained metadata, supplied input, or mathematics",
+          "keep literal anchor unchanged",
+          "split mixed assertions; never convert a body assertion into an index-field assertion to obtain support"
+        ],
+        "errors": [
+          {
+            "stage": "claim_extraction_v6",
+            "field_path": "$.claims[10].components[0].basis_target",
+            "constraint": "declared_target_category_must_agree",
+            "legal_target_categories": {
+              "document_body": "technical_fact",
+              "technical_content": "technical_fact",
+              "mathematical_relation": "technical_fact",
+              "index_metadata": "source_quality_metadata",
+              "input_snapshot": "input_evidence_coverage",
+              "answer_text": "answer_scope",
+              "recommendation": "review_recommendation"
+            },
+            "processing_options": [
+              "identify whether the assertion concerns official body, maintained metadata, supplied input, or mathematics",
+              "keep literal anchor unchanged",
+              "split mixed assertions; never convert a body assertion into an index-field assertion to obtain support"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "B4-answer_only_v1",
+      "call_number": 3,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "json_parse",
+        "field_path": "$",
+        "constraint": "valid_json_required",
+        "line": 1,
+        "column": 3900,
+        "nesting_position": 3899,
+        "actual_closer": "]",
+        "expected_closer": "}"
+      }
+    },
+    {
+      "id": "B4-answer_only_v1",
+      "call_number": 5,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": true,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "evidence_verification",
+        "field_path": "$.findings[11].bases[0][0].field_path",
+        "constraint": "actual_nonnull_metadata_field_required",
+        "allowed_nonnull_field_paths": [
+          "applicability",
+          "provenance.document_id",
+          "provenance.document_title",
+          "provenance.document_version",
+          "provenance.end_line",
+          "provenance.end_offset",
+          "provenance.extraction_sha256",
+          "provenance.file_page",
+          "provenance.file_sha256",
+          "provenance.fragment_id",
+          "provenance.heading_levels",
+          "provenance.heading_path",
+          "provenance.knowledge_version",
+          "provenance.next_fragment_id",
+          "provenance.page_text_sha256",
+          "provenance.parser_version",
+          "provenance.previous_fragment_id",
+          "provenance.publication_date",
+          "provenance.publisher",
+          "provenance.quality_status",
+          "provenance.quality_warnings",
+          "provenance.source_uri",
+          "provenance.split_method",
+          "provenance.split_warnings",
+          "provenance.splitter_version",
+          "provenance.start_line",
+          "provenance.start_offset",
+          "provenance.text_basis",
+          "source_id",
+          "source_type",
+          "source_version"
+        ],
+        "processing_options": [
+          "select_an_actual_allowed_field_only_if_its_value_supports_the_claim",
+          "otherwise_insufficient_evidence_or_not_assessable",
+          "do_not_invent_or_auto_replace_metadata_fields"
+        ],
+        "errors": [
+          {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[11].bases[0][0].field_path",
+            "constraint": "actual_nonnull_metadata_field_required",
+            "allowed_nonnull_field_paths": [
+              "applicability",
+              "provenance.document_id",
+              "provenance.document_title",
+              "provenance.document_version",
+              "provenance.end_line",
+              "provenance.end_offset",
+              "provenance.extraction_sha256",
+              "provenance.file_page",
+              "provenance.file_sha256",
+              "provenance.fragment_id",
+              "provenance.heading_levels",
+              "provenance.heading_path",
+              "provenance.knowledge_version",
+              "provenance.next_fragment_id",
+              "provenance.page_text_sha256",
+              "provenance.parser_version",
+              "provenance.previous_fragment_id",
+              "provenance.publication_date",
+              "provenance.publisher",
+              "provenance.quality_status",
+              "provenance.quality_warnings",
+              "provenance.source_uri",
+              "provenance.split_method",
+              "provenance.split_warnings",
+              "provenance.splitter_version",
+              "provenance.start_line",
+              "provenance.start_offset",
+              "provenance.text_basis",
+              "source_id",
+              "source_type",
+              "source_version"
+            ],
+            "processing_options": [
+              "select_an_actual_allowed_field_only_if_its_value_supports_the_claim",
+              "otherwise_insufficient_evidence_or_not_assessable",
+              "do_not_invent_or_auto_replace_metadata_fields"
+            ]
+          },
+          {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[11].component_reviews[0].basis_indexes",
+            "constraint": "component_requires_corresponding_basis_text_excerpt",
+            "component_category": "technical_fact",
+            "required_basis_type": "text_excerpt",
+            "selected_basis_types": [
+              "metadata_reference"
+            ],
+            "processing_options": [
+              "select_an_existing_matching_basis",
+              "add_an_exact_allowed_basis_if_available",
+              "otherwise_insufficient_evidence_or_not_assessable",
+              "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+            ]
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "findings",
+            "id": "claim-5ea4e80c43021572b82338ee",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-fd2f629a8fb9d734421ddeb8",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-c15c314ec3ce90ca015661dc",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-c21683b0d316f6318e8ff580",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-6c09ef29c95535c40828d343",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-0395457ce1180425b7c479a9",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-16c861f47998655268e0981a",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-240af72cbc2046ab5760dc81",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-ec5e2590989f63d16e8d45ed",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-4f47a8613342a49aab7001ba",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-9200c22edccbf11670712e3e",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-33874f1fafb9a7b4c64d7288",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-54f2a789e0b830d6583ec5fa",
+            "response_attempt": 1
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "id": "B4-production",
+      "call_number": 1,
+      "component": "claim_extraction",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "claim_extraction_v6",
+        "field_path": "$.claims[8].components[0].basis_target",
+        "constraint": "declared_target_category_must_agree",
+        "legal_target_categories": {
+          "document_body": "technical_fact",
+          "technical_content": "technical_fact",
+          "mathematical_relation": "technical_fact",
+          "index_metadata": "source_quality_metadata",
+          "input_snapshot": "input_evidence_coverage",
+          "answer_text": "answer_scope",
+          "recommendation": "review_recommendation"
+        },
+        "processing_options": [
+          "identify whether the assertion concerns official body, maintained metadata, supplied input, or mathematics",
+          "keep literal anchor unchanged",
+          "split mixed assertions; never convert a body assertion into an index-field assertion to obtain support"
+        ],
+        "errors": [
+          {
+            "stage": "claim_extraction_v6",
+            "field_path": "$.claims[8].components[0].basis_target",
+            "constraint": "declared_target_category_must_agree",
+            "legal_target_categories": {
+              "document_body": "technical_fact",
+              "technical_content": "technical_fact",
+              "mathematical_relation": "technical_fact",
+              "index_metadata": "source_quality_metadata",
+              "input_snapshot": "input_evidence_coverage",
+              "answer_text": "answer_scope",
+              "recommendation": "review_recommendation"
+            },
+            "processing_options": [
+              "identify whether the assertion concerns official body, maintained metadata, supplied input, or mathematics",
+              "keep literal anchor unchanged",
+              "split mixed assertions; never convert a body assertion into an index-field assertion to obtain support"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "B4-production",
+      "call_number": 4,
+      "component": "power_domain_review",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "power_domain_review_v3",
+        "field_path": "$.checks[0]",
+        "constraint": "unexpected_fields_not_allowed",
+        "allowed_fields": [
+          "basis_kind",
+          "check_id",
+          "claim_ids",
+          "missing_prerequisites",
+          "quote_ids",
+          "rationale",
+          "status"
+        ],
+        "required_fields": [
+          "basis_kind",
+          "check_id",
+          "claim_ids",
+          "missing_prerequisites",
+          "quote_ids",
+          "rationale",
+          "status"
+        ],
+        "processing_options": [
+          "return_only_declared_fields",
+          "do_not_echo_program_binding_or_other_check_fields"
+        ],
+        "errors": [
+          {
+            "stage": "power_domain_review_v3",
+            "field_path": "$.checks[0]",
+            "constraint": "unexpected_fields_not_allowed",
+            "allowed_fields": [
+              "basis_kind",
+              "check_id",
+              "claim_ids",
+              "missing_prerequisites",
+              "quote_ids",
+              "rationale",
+              "status"
+            ],
+            "required_fields": [
+              "basis_kind",
+              "check_id",
+              "claim_ids",
+              "missing_prerequisites",
+              "quote_ids",
+              "rationale",
+              "status"
+            ],
+            "processing_options": [
+              "return_only_declared_fields",
+              "do_not_echo_program_binding_or_other_check_fields"
+            ]
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "checks",
+            "id": "analysis_scope",
+            "response_attempt": 1
+          },
+          {
+            "group": "checks",
+            "id": "operating_prerequisites",
+            "response_attempt": 1
+          },
+          {
+            "group": "missing_information_review",
+            "id": 0,
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-5ea4e80c43021572b82338ee",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-fd2f629a8fb9d734421ddeb8",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-de25ddeccd802ae8d2a7eb20",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-f050b74253db48148f2aa0c3",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-2b033f291e443cac5018e85f",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-086f97a3b0cd8c54310609ee",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-4f47a8613342a49aab7001ba",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-7f7abf2e51aec997ede2c54d",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-4c06564e37e7a35f6d0ca880",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-33874f1fafb9a7b4c64d7288",
+            "response_attempt": 1
+          },
+          {
+            "group": "safety_reviews",
+            "id": "claim-5e5153733c796b38b1c5093f",
+            "response_attempt": 1
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    },
+    {
+      "id": "B4-production",
+      "call_number": 3,
+      "component": "evidence_verification",
+      "answer_version": 1,
+      "correction": false,
+      "output_status": "invalid_structure",
+      "validation_error": {
+        "stage": "evidence_verification",
+        "field_path": "$.findings[8].component_reviews[0].basis_indexes",
+        "constraint": "component_requires_corresponding_basis_text_excerpt",
+        "component_category": "technical_fact",
+        "required_basis_type": "text_excerpt",
+        "selected_basis_types": [
+          "metadata_reference"
+        ],
+        "processing_options": [
+          "select_an_existing_matching_basis",
+          "add_an_exact_allowed_basis_if_available",
+          "otherwise_insufficient_evidence_or_not_assessable",
+          "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+        ],
+        "errors": [
+          {
+            "stage": "evidence_verification",
+            "field_path": "$.findings[8].component_reviews[0].basis_indexes",
+            "constraint": "component_requires_corresponding_basis_text_excerpt",
+            "component_category": "technical_fact",
+            "required_basis_type": "text_excerpt",
+            "selected_basis_types": [
+              "metadata_reference"
+            ],
+            "processing_options": [
+              "select_an_existing_matching_basis",
+              "add_an_exact_allowed_basis_if_available",
+              "otherwise_insufficient_evidence_or_not_assessable",
+              "category_disagreement_requires_explicit_classification_issue_and_not_assessable"
+            ]
+          }
+        ],
+        "retained_items": [
+          {
+            "group": "findings",
+            "id": "claim-5ea4e80c43021572b82338ee",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-fd2f629a8fb9d734421ddeb8",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-de25ddeccd802ae8d2a7eb20",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-f050b74253db48148f2aa0c3",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-2b033f291e443cac5018e85f",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-086f97a3b0cd8c54310609ee",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-4f47a8613342a49aab7001ba",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-7f7abf2e51aec997ede2c54d",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-33874f1fafb9a7b4c64d7288",
+            "response_attempt": 1
+          },
+          {
+            "group": "findings",
+            "id": "claim-5e5153733c796b38b1c5093f",
+            "response_attempt": 1
+          }
+        ],
+        "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+      }
+    }
+  ],
+  "latency_method": "Union of root-stage [event UTC completion minus duration_ms, completion] intervals per phase. Durations are rounded and event timestamps are completion observations; approximate phase wall intervals, not exact nested request sums. No browser paint or isolated preflight timing."
+}

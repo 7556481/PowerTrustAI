@@ -1,0 +1,33 @@
+{
+  "checked_utc": "2026-10-24T05:54:49.830090+00:00",
+  "tables": {
+    "runs": {
+      "rows": 104
+    },
+    "events": {
+      "rows": 2278
+    },
+    "objects": {
+      "rows": 2999
+    },
+    "reviews": {
+      "rows": 8
+    }
+  },
+  "managed_orchestration": {
+    "version": "service-orchestration-v1",
+    "execution_path": "langgraph_v1"
+  },
+  "managed_knowledge": {
+    "version": "daily-knowledge-v1",
+    "index_db": "data/retrieval_local/industry-corpus-v1/published-complete-identity-v2.sqlite3",
+    "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e"
+  },
+  "candidate_persistent_service": false,
+  "normal_bundle_and_store_closed": true,
+  "health_probe": "HttpRequestException; no listener found on 8765 in approved read-only check",
+  "service_started_by_this_work": false,
+  "listener_8765": false,
+  "ready": false,
+  "stored_queued_or_running": 0
+}
