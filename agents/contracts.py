@@ -178,3 +178,9 @@ class FactFlowOutput(PremiseVerificationOutput):
     flow_protocol: str = 'fact-internal-flow-v1'
     object_reviews: tuple = ()
     flow_trace: tuple = ()
+
+
+@dataclass(frozen=True)
+class BusinessDomainOutput(SafetyDomainReviewOutput):
+    business_assessment: dict | None = None
+    business_trace: tuple = ()

@@ -62,7 +62,7 @@ def validate_types(value, annotation=None, path="value"):
         else:
             allowed_subtypes={'AuditDecision':'ProductDecision','ComponentReview':'FidelityComponentReview','Claim':'ContextualClaim','TypedBasis':'CalculationBasis','EvidenceVerificationInput':'ReliabilityVerificationInput',
                 'EvidenceVerificationOutput':'ReliabilityVerificationOutput','PowerDomainReviewInput':'ReliabilityDomainInput','PowerDomainReviewOutput':'SafetyDomainReviewOutput','HarnessResult':'ToolHarnessResult'}
-            extensions={'Claim':('ContextualClaim','BasisAwareClaim','ObligationClaim','PremiseBoundClaim'),
+            extensions={'PowerDomainReviewOutput':('SafetyDomainReviewOutput','BusinessDomainOutput'), 'Claim':('ContextualClaim','BasisAwareClaim','ObligationClaim','PremiseBoundClaim'),
                 'TypedBasis':('CalculationBasis','TaskPremiseBasis'), 'TaskRequest':('PremiseTaskRequest',),
                 'EvidenceVerificationOutput':('ReliabilityVerificationOutput','PremiseVerificationOutput','FactFlowOutput')}
             if isinstance(annotation,type) and is_dataclass(annotation) and type(value).__name__ in extensions.get(annotation.__name__,(allowed_subtypes.get(annotation.__name__),)) and type(value).__module__==annotation.__module__ and isinstance(value,annotation):

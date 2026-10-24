@@ -54,7 +54,7 @@ class ComponentFactory:
             if hasattr(resource.encoder,'close'):resource.encoder.close()
             self.semantic_resource=None
     def preflight(self):
-        if self.config.execution_path=='langgraph_v1' or self.config.fact_internal_flow!='production':
+        if self.config.execution_path=='langgraph_v1' or self.config.fact_internal_flow!='production' or self.config.domain_internal_flow!='production':
             try:
                 from harness.graph_runtime_v1 import validate_versions,build_graph
                 validate_versions();build_graph()
@@ -101,6 +101,7 @@ class ComponentFactory:
             'model_id':os.environ.get('DEEPSEEK_MODEL_ID') if self.config.profile=='real' else None,
             'knowledge_version':knowledge_version,'budget':asdict(self.config.budget),
             'fact_internal_flow':self.config.fact_internal_flow,
+            'domain_internal_flow':self.config.domain_internal_flow,
             'protocols':{'generation':3,'claim_extraction':7,'evidence_verification':self.config.verification_schema,'domain_review':5,'revision':2},
             'citation_workload':asdict(self.config.citation_workload),
             'prompts':{'generation':'evidence-bound-generation-v3-answer-units-product-v1' if self.config.decision_policy=='product-v1' else 'evidence-bound-generation-v3-answer-units','extraction':'atomic-claims-v7-obligations-faithful-assertions-v2' if self.config.decision_policy=='product-v1' else 'atomic-claims-v7-obligations',
@@ -180,6 +181,10 @@ class ComponentFactory:
             manifest['review_transport']='target-scoped-catalog-v1'
             manifest['fact_flow_protocol']=VERSION
             manifest['template_sha256']={k:hashlib.sha256(SYSTEM.encode()).hexdigest() for k in ('independent','original_citation')}
+        if self.config.domain_internal_flow=='business_v1':
+            from services.domain_business_v1 import PROMPT,VERSION
+            manifest['prompts']['domain']=PROMPT
+            manifest['contracts']['domain']=VERSION
         return manifest
 
     def create(self,rid,observer):
@@ -200,6 +205,8 @@ class ComponentFactory:
                 from services.fact_two_stage_v1 import create_agent as FactAgent
         else:FactAgent=ModelEvidenceVerificationAgent
         from agents.power_domain_review import ModelPowerDomainReviewAgent
+        if self.config.domain_internal_flow=='business_v1':
+            from services.domain_business_v1 import create_agent as ModelPowerDomainReviewAgent
         from agents.revision import ModelRevisionAgent
         from services.claim_extractor import ModelClaimExtractor
         from tools.unit_conversion import UnitConversionTool

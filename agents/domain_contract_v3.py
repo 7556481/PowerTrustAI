@@ -137,6 +137,12 @@ or citation obligations, and has no access to the other reviewer judgments.\n'''
         from services.task_applicability import INSTRUCTION
         instruction+=INSTRUCTION
         payload['TASK_APPLICABILITY_VERSION']='task-applicability-v1'
+    if getattr(agent,'business_flow',False):
+        from services.domain_business_v1 import wrap_parser,INSTRUCTION as BUSINESS,PROMPT,VERSION
+        next(r for r in wire['checks'] if r['check_id']=='analysis_scope')['business_assessment']={'scope':{'kind':'uncertain','reason':'model_execution_incomplete'},'input_requirements':[],'analysis_capability':{'status':'uncertain','reason':'model_execution_incomplete'},'constraints':{'applicable':False,'reason':'model_execution_incomplete'},'summary':'model_execution_incomplete'}
+        parser=wrap_parser(parser,inputs);isolation=WireIsolation(wire,parser,groups,mark)
+        instruction+=BUSINESS;prompt_version=PROMPT;contract_version=VERSION
+        payload['ACTUAL_CAPABILITIES']={'scalar_conversion_only':True,'engineering_simulation':False}
     try:
         output,records=await structured_request(agent.client,(ModelMessage('system',instruction),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),prompt_version,isolation.parse,
             diagnostics=agent.diagnostics,response_contract_version=contract_version,candidate_catalog_path=path)
