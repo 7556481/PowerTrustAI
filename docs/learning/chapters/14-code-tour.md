@@ -395,7 +395,7 @@ backend/service.py / ApplicationService._worker，实际行100–126。
 
 ### 摘录：真实装配的资源建立
 
-backend/assembly.py / ComponentFactory.create，2026-10-24当前实际行211–226。
+backend/assembly.py / ComponentFactory.create，2026-10-25当前实际行214–229。
 
 ```python
     def create(self,rid,observer):
@@ -521,7 +521,7 @@ backend/service.py / ApplicationService.result，实际行163–187。
 
 ### 关键连接：实际Harness组件注入
 
-backend/assembly.py当前实际行253–262，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
+backend/assembly.py当前实际行256–265，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),

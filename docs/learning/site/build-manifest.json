@@ -1,33 +1,33 @@
 {
   "version": {
-    "application_commit": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
-    "document_version": "learning-site-v5.0 model fit: carrier, semantics and deployment, 2026-10-25",
+    "application_commit": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
+    "document_version": "learning-site-v5.1 bound target versus semantic gap,2026-10-25",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
     "compact_schema14": "v9.14 scope guidance; fixed8 corrected8/8 but semantic reservations; daily13; not declared stable",
-    "documentation_parent_commit": "3b3a151371714c52658da14450df9d4fb0637fd2",
+    "documentation_parent_commit": "bcea296f33894fea9830f6ffb24e58c09246d66e",
     "final_delivery_ref": "release-v2-20261009",
     "default_retrieval": "topic_v4_subject_v1",
     "default_review_message_profile": "lossless_v1",
-    "previous_application_commit": "cb64b21cab7f837f777d3245217c8ed40aafb8a2",
+    "previous_application_commit": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
     "execution_path_default": "langgraph_v1",
     "optional_development_execution_path": "langgraph_v1",
     "langgraph_version": "1.2.16",
     "production_switch": false,
-    "new_live_model_calls": 41,
-    "validation_commit": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
-    "offline_unittest_count": 47,
+    "new_live_model_calls": 56,
+    "validation_commit": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
+    "offline_unittest_count": 1268,
     "live_graph_service_runs": 0,
     "live_planned_service_runs": 0,
     "live_accepted_service_runs": 0,
     "previous_validation_commit": "6ed4c9576dc3515c8ecff56027fb74cd93133aff",
-    "full_offline_validation_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
+    "full_offline_validation_commit": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
     "optional_service_execution_path": "langgraph_v1",
-    "validation_note": "Fixed8 x2 models16 tasks; Flash3/8 complete,Pro8/8. Pro11/18 supported targets downgraded; no service acceptance or switch. Paid code1c5d5b0 differs from offline guard1917ae3.",
+    "validation_note": "A8+G3+B6 all17 executed/56Flash requests. Candidate4/4 mechanism, no natural pass. G retrieval allowance omission in paid collector fixed offline only, no rerun.",
     "public_unconfigured_fallback": "sequential",
-    "total_fixed_plan_model_calls": 41,
-    "new_live_model_tokens": 196986,
+    "total_fixed_plan_model_calls": 56,
+    "new_live_model_tokens": 688531,
     "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1",
     "fact_internal_flow_candidate": {
       "version": "fact-internal-flow-v1",
@@ -137,7 +137,7 @@
       "adoption": "not_adopt_complex_contract_and_semantic_failures",
       "report": "docs/evaluation/strict-interface-consistency-v1/report.md"
     },
-    "offline_validation_scope": "45 targeted before paid,47 after offline-only stop guard; no full suite rerun",
+    "offline_validation_scope": "1268 full before paid;14 relevant post-batch retrieval-allowance tests",
     "model_fit_v1": {
       "paid_implementation": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d",
       "offline_boundary_patch": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
@@ -150,13 +150,24 @@
       "production_switch": false,
       "adoption": "keep_current_pro_experimental_only_no_service_acceptance",
       "report": "docs/evaluation/fact-review-model-fit-v1/report.md"
+    },
+    "review_unblock_v1": {
+      "paid_implementation": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
+      "post_batch_budget_patch": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
+      "contract": "simple_bound_v1",
+      "projection": "simple-condition-projection-v1.2-target-bound",
+      "model": "deepseek-flash",
+      "new_pro_calls": 0,
+      "production_enabled": false,
+      "adoption": "retain_candidate_no_production_acceptance",
+      "report": "docs/evaluation/review-delivery-unblock-v1/report.md"
     }
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 5342,
-      "sha256": "a783488dc543a719199d42842142e73332a22796b85abd5c0d711733fe8382e8"
+      "characters": 5558,
+      "sha256": "e522ca1d298337a3b311195c0877b896a52430c39f931d4f4159b2fce48d0d84"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -195,8 +206,8 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 9066,
-      "sha256": "27e1d47897e723f7fba5bdcd5b6da9fb7be7cb4a29d45140d3e2e0b219b9e2ed"
+      "characters": 9620,
+      "sha256": "68bf50bc5e02e1ead2627568167eab049d57b574f6e2ceadc470fec5ff2b8f4f"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -226,7 +237,7 @@
     {
       "source": "docs/learning/chapters/14-code-tour.md",
       "characters": 40971,
-      "sha256": "6d2cbcc95d0358ecfcb09d37c4cce87e25c280504ad1bbe8db1a7be4cfa13893"
+      "sha256": "35de8f31d840966da251031fe7bec1eb0a57dd1339aa3007103aaa8f1acf6aa9"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -255,8 +266,8 @@
     },
     {
       "source": "docs/learning/chapters/20-workshops.md",
-      "characters": 3740,
-      "sha256": "5b513703e6758e1ce7a8e2be3acaefdbee4844e8badf8d933821f2987013f971"
+      "characters": 4269,
+      "sha256": "a38837aed2c82fb9bf4772a87f94e065bdd50854146b68b329f8c833a5858d6d"
     },
     {
       "source": "docs/learning/questions-for-chatgpt.md",
@@ -264,6 +275,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 157937,
+  "markdown_characters": 159236,
   "network_dependencies": false
 }
