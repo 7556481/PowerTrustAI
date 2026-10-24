@@ -46,6 +46,10 @@ class DeliveryTests(unittest.TestCase):
                         self.assertEqual(values[0]['review_rounds'][0]['answer'],values[1]['review_rounds'][0]['answer'])
                         frozen=[json.loads((root/'batch'/x['accepted']['run_id']/'input.json').read_text(encoding='utf-8')) for x in controls]
                         self.assertEqual(frozen[0]['generation_snapshot'],frozen[1]['generation_snapshot']);self.assertEqual(frozen[0]['budget'],frozen[1]['budget'])
+                        generation=next(s['outputs'][x['accepted']['run_id']] for x in s['control'] if x['case_id']==f'G{i+1}')
+                        charged=generation['retrieval_records'][-1] if generation['retrieval_records'] else {}
+                        self.assertEqual(frozen[0]['budget']['max_retrieval_calls'],c.budget.max_retrieval_calls-charged.get('calls_used',0))
+                        self.assertEqual(frozen[0]['budget']['max_retrieval_chars_total'],c.budget.max_retrieval_chars_total-charged.get('cumulative_chars',0))
                 (root/'batch/runs.sqlite3').rename(root/'closed.sqlite3')
 
 

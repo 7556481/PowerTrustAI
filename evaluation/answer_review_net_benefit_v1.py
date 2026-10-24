@@ -126,8 +126,11 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
         if line=='B':
             g=generated[i];snapshot=g.generation_output.evidence_snapshot
             req=replace(req,mode=TaskMode.ASSESS_EXISTING,existing_answer=g.answer,provided_evidence=g.evidence)
+            generation_retrieval=g.retrieval_records[-1] if g.retrieval_records else None
             budget=replace(budget,max_model_calls=budget.max_model_calls-len(g.model_records),
-                           max_duration_seconds=max(.001,budget.max_duration_seconds-g.duration_ms/1000))
+                           max_duration_seconds=max(.001,budget.max_duration_seconds-g.duration_ms/1000),
+                           max_retrieval_calls=budget.max_retrieval_calls-(generation_retrieval.calls_used if generation_retrieval else 0),
+                           max_retrieval_chars_total=budget.max_retrieval_chars_total-(generation_retrieval.cumulative_chars if generation_retrieval else 0))
         cfg=variant_config(c,spec['variant']) if variant_config else replace(c,revision_answer_delivery=spec['variant'])
         factory=factory_type(cfg);bundle=None
         observations={'first_answer_saved_ms':None,'browser_first_paint_ms':None}
