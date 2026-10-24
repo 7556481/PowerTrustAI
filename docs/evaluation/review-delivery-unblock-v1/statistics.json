@@ -1,0 +1,345 @@
+{
+  "planned": {
+    "mechanism": 8,
+    "generation": 3,
+    "delivery": 6
+  },
+  "executed": 17,
+  "unexecuted": [],
+  "groups": {
+    "A-before": {
+      "tasks": 4,
+      "complete": 1,
+      "calls": 12,
+      "initial": 8,
+      "corrections": 4,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "usage": {
+        "input_tokens": 49089,
+        "output_tokens": 6981,
+        "total_tokens": 56070,
+        "cache_hit_tokens": 34304,
+        "cache_miss_tokens": 14785
+      },
+      "model_ms": 40175,
+      "harness_ms": 40961,
+      "collect_ms": 41138.837,
+      "root_constraints": {
+        "unexpected_fields_not_allowed": 5,
+        "valid_json_required": 2,
+        "required_field_missing": 1
+      },
+      "invalid_requests": 7
+    },
+    "A-bound": {
+      "tasks": 4,
+      "complete": 4,
+      "calls": 10,
+      "initial": 8,
+      "corrections": 2,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "usage": {
+        "input_tokens": 38938,
+        "output_tokens": 5769,
+        "total_tokens": 44707,
+        "cache_hit_tokens": 19328,
+        "cache_miss_tokens": 19610
+      },
+      "model_ms": 35106,
+      "harness_ms": 35701,
+      "collect_ms": 35847.705,
+      "root_constraints": {
+        "duplicate_object_keys_not_allowed": 1,
+        "valid_json_required": 1
+      },
+      "invalid_requests": 2
+    },
+    "G-production": {
+      "tasks": 3,
+      "complete": 3,
+      "calls": 3,
+      "initial": 3,
+      "corrections": 0,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "usage": {
+        "input_tokens": 33057,
+        "output_tokens": 959,
+        "total_tokens": 34016,
+        "cache_hit_tokens": 30592,
+        "cache_miss_tokens": 2465
+      },
+      "model_ms": 7058,
+      "harness_ms": 15274,
+      "collect_ms": 15359.249,
+      "root_constraints": {},
+      "invalid_requests": 0
+    },
+    "B-before": {
+      "tasks": 3,
+      "complete": 1,
+      "calls": 15,
+      "initial": 12,
+      "corrections": 3,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "usage": {
+        "input_tokens": 277366,
+        "output_tokens": 19816,
+        "total_tokens": 297182,
+        "cache_hit_tokens": 104064,
+        "cache_miss_tokens": 173302
+      },
+      "model_ms": 94296,
+      "harness_ms": 166114,
+      "collect_ms": 166374.25799999997,
+      "root_constraints": {
+        "selected_local_source_ids_required": 1,
+        "unexpected_fields_not_allowed": 2,
+        "exact_ordered_target_count_required": 1,
+        "duplicate_object_keys_not_allowed": 1,
+        "known_support_status_required": 1,
+        "required_field_missing": 1
+      },
+      "invalid_requests": 5
+    },
+    "B-bound": {
+      "tasks": 3,
+      "complete": 1,
+      "calls": 16,
+      "initial": 12,
+      "corrections": 4,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "usage": {
+        "input_tokens": 239762,
+        "output_tokens": 16794,
+        "total_tokens": 256556,
+        "cache_hit_tokens": 97536,
+        "cache_miss_tokens": 142226
+      },
+      "model_ms": 82170,
+      "harness_ms": 146088,
+      "collect_ms": 146346.74599999998,
+      "root_constraints": {
+        "duplicate_object_keys_not_allowed": 2,
+        "unexpected_fields_not_allowed": 1,
+        "required_field_missing": 2,
+        "valid_json_required": 1
+      },
+      "invalid_requests": 6
+    }
+  },
+  "calls": 56,
+  "total_tokens": 688531,
+  "acceptance_to_final_persist_seconds": 406.22383,
+  "invoice_cost": null,
+  "automatic_price_estimate_used": false,
+  "revise_or_rereview_triggered": false,
+  "post_batch_budget_limitation": "G model/time charged, G retrieval allowances omitted in paid executor; actual totals under original caps. See budget-audit.json; patched offline, no rerun.",
+  "model_components_cumulative": {
+    "evidence_verification": {
+      "calls": 40,
+      "corrections": 12,
+      "model_ms": 198257
+    },
+    "generation": {
+      "calls": 3,
+      "corrections": 0,
+      "model_ms": 7058
+    },
+    "claim_extraction": {
+      "calls": 7,
+      "corrections": 1,
+      "model_ms": 24773
+    },
+    "power_domain_review": {
+      "calls": 6,
+      "corrections": 0,
+      "model_ms": 28717
+    }
+  },
+  "usage_reported_requests": 56,
+  "retrieval_timings": [
+    {
+      "case_id": "G1",
+      "records": [
+        {
+          "purpose": "generation",
+          "duration_ms": 3955,
+          "calls_used": 1,
+          "cumulative_chars": 5369,
+          "accepted_chars": 5369
+        }
+      ]
+    },
+    {
+      "case_id": "B1-before",
+      "records": [
+        {
+          "purpose": "verification",
+          "duration_ms": 22134,
+          "calls_used": 1,
+          "cumulative_chars": 5546,
+          "accepted_chars": 5546
+        },
+        {
+          "purpose": "domain_review",
+          "duration_ms": 13746,
+          "calls_used": 2,
+          "cumulative_chars": 10685,
+          "accepted_chars": 5139
+        }
+      ]
+    },
+    {
+      "case_id": "B1-bound",
+      "records": [
+        {
+          "purpose": "verification",
+          "duration_ms": 12688,
+          "calls_used": 1,
+          "cumulative_chars": 5546,
+          "accepted_chars": 5546
+        },
+        {
+          "purpose": "domain_review",
+          "duration_ms": 13708,
+          "calls_used": 2,
+          "cumulative_chars": 10685,
+          "accepted_chars": 5139
+        }
+      ]
+    },
+    {
+      "case_id": "G2",
+      "records": [
+        {
+          "purpose": "generation",
+          "duration_ms": 905,
+          "calls_used": 1,
+          "cumulative_chars": 5771,
+          "accepted_chars": 5771
+        }
+      ]
+    },
+    {
+      "case_id": "B2-bound",
+      "records": [
+        {
+          "purpose": "verification",
+          "duration_ms": 9896,
+          "calls_used": 1,
+          "cumulative_chars": 5837,
+          "accepted_chars": 5837
+        },
+        {
+          "purpose": "verification",
+          "duration_ms": 371,
+          "calls_used": 2,
+          "cumulative_chars": 8470,
+          "accepted_chars": 2633
+        },
+        {
+          "purpose": "domain_review",
+          "duration_ms": 4272,
+          "calls_used": 3,
+          "cumulative_chars": 14307,
+          "accepted_chars": 5837
+        }
+      ]
+    },
+    {
+      "case_id": "B2-before",
+      "records": [
+        {
+          "purpose": "verification",
+          "duration_ms": 3920,
+          "calls_used": 1,
+          "cumulative_chars": 5837,
+          "accepted_chars": 5837
+        },
+        {
+          "purpose": "verification",
+          "duration_ms": 354,
+          "calls_used": 2,
+          "cumulative_chars": 8470,
+          "accepted_chars": 2633
+        },
+        {
+          "purpose": "domain_review",
+          "duration_ms": 4450,
+          "calls_used": 3,
+          "cumulative_chars": 14307,
+          "accepted_chars": 5837
+        }
+      ]
+    },
+    {
+      "case_id": "G3",
+      "records": [
+        {
+          "purpose": "generation",
+          "duration_ms": 2999,
+          "calls_used": 1,
+          "cumulative_chars": 4761,
+          "accepted_chars": 4761
+        }
+      ]
+    },
+    {
+      "case_id": "B3-before",
+      "records": [
+        {
+          "purpose": "verification",
+          "duration_ms": 13596,
+          "calls_used": 1,
+          "cumulative_chars": 5091,
+          "accepted_chars": 5091
+        },
+        {
+          "purpose": "verification",
+          "duration_ms": 475,
+          "calls_used": 2,
+          "cumulative_chars": 9255,
+          "accepted_chars": 4164
+        },
+        {
+          "purpose": "domain_review",
+          "duration_ms": 13144,
+          "calls_used": 3,
+          "cumulative_chars": 14250,
+          "accepted_chars": 4995
+        }
+      ]
+    },
+    {
+      "case_id": "B3-bound",
+      "records": [
+        {
+          "purpose": "verification",
+          "duration_ms": 11070,
+          "calls_used": 1,
+          "cumulative_chars": 5091,
+          "accepted_chars": 5091
+        },
+        {
+          "purpose": "verification",
+          "duration_ms": 485,
+          "calls_used": 2,
+          "cumulative_chars": 9255,
+          "accepted_chars": 4164
+        },
+        {
+          "purpose": "domain_review",
+          "duration_ms": 13128,
+          "calls_used": 3,
+          "cumulative_chars": 14250,
+          "accepted_chars": 4995
+        }
+      ]
+    }
+  ]
+}

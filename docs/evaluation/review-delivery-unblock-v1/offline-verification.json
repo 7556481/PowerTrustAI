@@ -1,0 +1,17 @@
+{
+  "full_unittest_count": 1268,
+  "full_seconds": 272.588,
+  "result": "OK",
+  "new_mechanism_tests": 4,
+  "rehearsal_tests": 2,
+  "partial_rereview_factory_store_api": true,
+  "normal_retrieval_retained_in_rehearsal": true,
+  "browser_checked": false,
+  "semantic_score": false,
+  "post_batch_collector_tests": {
+    "count": 14,
+    "seconds": 45.909,
+    "result": "OK",
+    "scope": "Generation retrieval allowance charge; no repeat of unrelated full suite, no paid retry."
+  }
+}

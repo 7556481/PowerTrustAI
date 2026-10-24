@@ -1,0 +1,155 @@
+{
+  "scope": "Read-only projection of actual batch records through existing ApplicationService.result. In-memory adapter supplies saved TaskRequest and frozen config because batch store request is an experiment spec. No new HTTP task or browser check, no stored row changed.",
+  "views": [
+    {
+      "case_id": "B1-before",
+      "approved": false,
+      "decision": "review_required",
+      "presentation": {
+        "run_ended": true,
+        "reasons": [
+          "人工复核：分类、严重度或审核判断存在不确定性。",
+          "Component classification or literal fidelity is uncertain",
+          "Automatic approval is bounded to this task; not engineering safety certification"
+        ],
+        "next_steps": [
+          "对照原文、组件和版本判断；可追加反馈，不覆盖原结论。"
+        ],
+        "unresolved": [
+          {
+            "sentence": "按NERC《无功规划》指南，动态无功资源随电网电压变化在指定电压带宽内连续、实时自动调节出力，可维持设定电压或按电压下垂特性运行；采用电力电子装置的设备调节可在电气周波级完成（如STATCOM响应约50 ms，属该设备示例，非通用指标）。",
+            "status": "not_assessable",
+            "reason": "The source states dynamic reactive resources adjust reactive power output automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes. The proposition's core assertion (automatic, continuous, real-time response to grid voltage) matches; the target omits the bandwidth qualifier but does not negate or reverse the direction. No causal misdirection.; The dynamic-versus-static reactive resource description in the answer, including the STATCOM example figure, corresponds to the fragment whose provenance metadata identifies the NERC Reliability Guideline: Reactive Power Planning (2016-12). The attribution claim is therefore supported by the document identity. S0B1 through S0B11 discuss unrelated topics (reliability criteria, transmission reliability indices, NERC organization, compensation devices) and give no basis for this attribution.",
+            "finding_id": "finding-claim-7672269c5eeb5a0835d9c4bc"
+          },
+          {
+            "sentence": "该对比属概念层面；具体设备响应时间与投切策略取决于设备类型和运行条件。",
+            "status": "not_assessable",
+            "reason": "The dependency claim is present in the bound answer text, but the supplied corpus is unverified general material and does not establish the dependency of specific device response times on device type and operating conditions in any checkable way. The answer text reference alone cannot be treated as external technical evidence, and silence of the sources is not proof of the opposite.; The dependency claim about switching strategy is present in the bound answer text, but the supplied corpus is unverified general material and does not establish that specific switching strategy depends on device type and operating conditions in a checkable way. Answer-text references are not external evidence, and source silence does not prove the contrary.",
+            "finding_id": "finding-claim-228943847ae14da06615fc8e"
+          }
+        ],
+        "saved": "已保存 1 个独立回答版本；原版发现与反馈保留。"
+      },
+      "required_stages_complete": true,
+      "all_required_checks_assessed": true,
+      "review_contract": "simple_v1",
+      "result_transport": "strict_tool_v1"
+    },
+    {
+      "case_id": "B1-bound",
+      "approved": false,
+      "decision": "execution_incomplete",
+      "presentation": {
+        "run_ended": true,
+        "answer_unavailable_reason": null,
+        "reasons": [
+          "执行未完成：事实审核阶段失败（模型输出未满足结构要求），已有回答仍可阅读，但没有完整审核结论。"
+        ],
+        "next_steps": [
+          "查看终端或执行详情的失败阶段；本记录保留，不自动重发。"
+        ],
+        "saved": "已完成的回答与阶段记录保留；执行失败不是事实矛盾。"
+      },
+      "required_stages_complete": false,
+      "all_required_checks_assessed": false,
+      "review_contract": "simple_bound_v1",
+      "result_transport": "strict_tool_v1"
+    },
+    {
+      "case_id": "B2-bound",
+      "approved": false,
+      "decision": "review_required",
+      "presentation": {
+        "run_ended": true,
+        "reasons": [
+          "人工复核：分类、严重度或审核判断存在不确定性。",
+          "Component classification or literal fidelity is uncertain",
+          "Automatic approval is bounded to this task; not engineering safety certification"
+        ],
+        "next_steps": [
+          "对照原文、组件和版本判断；可追加反馈，不覆盖原结论。"
+        ],
+        "unresolved": [
+          {
+            "sentence": "边界所建负荷功率因数（LPF）会影响大电力系统的电压与无功表现，故TO与DP须协调确定峰、轻载等临界负荷水平处的LPF。",
+            "status": "not_assessable",
+            "reason": "S0B0 states the voltage and reactive power performance of the BES can be impacted by the LPF modeled across the TO-DP boundary, which is the claim that the boundary LPF affects bulk power system voltage and reactive behavior. The causal direction (LPF affects performance) is preserved.; S0B0 states coordination between TO and DP is important in determining what the proposed LPF should be at critical load levels (e.g., peak and light load). The answer's claim that TO and DP must coordinate to determine LPF at critical levels such as peak and light load matches this, though the source says coordination is 'important' rather than an absolute 'must'—a close but slightly stronger modality.",
+            "finding_id": "finding-claim-a9663d53c4e27999f1554b47"
+          },
+          {
+            "sentence": "边界所建负荷功率因数（LPF）会影响大电力系统的电压与无功表现，故TO与DP须协调确定峰、轻载等临界负荷水平处的LPF。",
+            "status": "not_assessable",
+            "reason": "程序有效判断：来源条件必要性或保留关系尚不确定；原始模型判断 supported，原理由：The source states BES voltage and reactive power performance can be impacted by the LPF modeled across the TO-DP boundary, and that coordination between TO and DP is important in determining the proposed LPF at critical load levels such as peak and light load. The answer's causal framing tracks the source's directionality; its stronger modality slightly overstates the voluntary guideline's importance-of-coordination language. [compact-support-assessment-v1] {\"raw_model_status\":\"supported\",\"effective_support_status\":\"not_assessable\",\"semantic_uncertain\":true,\"condition_bindings\":[],\"objection\":{\"kind\":\"uncertain\",\"reason\":\"The answer renders the source's importance-of-coordination statement as a mandatory requirement, a stronger modality than the voluntary guideline semantics; classification of this strengthening is uncertain rather than a clear fidelity failure.\"},\"authority_missing\":false,\"repair\":null,\"raw_repair\":null,\"contract\":\"fact-review-simple-bound-answer-v1\",\"projection_version\":\"simple-condition-projection-v1.2-target-bound\",\"projection_reasons\":[],\"condition_assessment\":{\"applicability\":\"none\",\"expression\":\"not_applicable\",\"instance\":\"not_claimed\",\"source_ids\":[],\"reason\":\"The proposition is a general coordination need tied to the TO-DP boundary and critical load levels; no additional precondition qualifies the conclusion, and the peak/light-load illustration is retained. No conditional instance application is claimed, so no instance data is needed and no qualifying source condition was needed beyond the cited basis.\"},\"inference\":\"preserved\",\"gap_answer_ids\":[],\"program_source_units\":[],\"program_answer_units\":[{\"unit_id\":\"ANS:R1:0\",\"text\":\"边界所建负荷功率因数（LPF）会影响大电力系统的电压与无功表现，故TO与DP须协调确定峰、轻载等临界负荷水平处的LPF。\",\"start_offset\":65,\"end_offset\":125,\"parent_anchor\":\"answer-anchor-0db933011e9f82dfa800e2c8\",\"answer_id\":\"natural-2-answer\",\"answer_version\":1,\"answer_sha256\":\"cbd53d1bc28f9d7f00e6a671ba72c08453d8544611c502cfc3eb7b4f45df2708\",\"target_id\":\"R1\",\"scope_index\":2}],\"answer_binding_kind\":\"program_target_scope_not_semantic_condition_location\"}",
+            "citation_index": 1
+          }
+        ],
+        "saved": "已保存 1 个独立回答版本；原版发现与反馈保留。"
+      },
+      "required_stages_complete": true,
+      "all_required_checks_assessed": true,
+      "review_contract": "simple_bound_v1",
+      "result_transport": "strict_tool_v1"
+    },
+    {
+      "case_id": "B2-before",
+      "approved": false,
+      "decision": "execution_incomplete",
+      "presentation": {
+        "run_ended": true,
+        "answer_unavailable_reason": null,
+        "reasons": [
+          "执行未完成：事实审核阶段失败（模型输出未满足结构要求），已有回答仍可阅读，但没有完整审核结论。"
+        ],
+        "next_steps": [
+          "查看终端或执行详情的失败阶段；本记录保留，不自动重发。"
+        ],
+        "saved": "已完成的回答与阶段记录保留；执行失败不是事实矛盾。"
+      },
+      "required_stages_complete": false,
+      "all_required_checks_assessed": false,
+      "review_contract": "simple_v1",
+      "result_transport": "strict_tool_v1"
+    },
+    {
+      "case_id": "B3-before",
+      "approved": false,
+      "decision": "execution_incomplete",
+      "presentation": {
+        "run_ended": true,
+        "answer_unavailable_reason": null,
+        "reasons": [
+          "执行未完成：事实审核阶段失败（模型输出未满足结构要求），已有回答仍可阅读，但没有完整审核结论。"
+        ],
+        "next_steps": [
+          "查看终端或执行详情的失败阶段；本记录保留，不自动重发。"
+        ],
+        "saved": "已完成的回答与阶段记录保留；执行失败不是事实矛盾。"
+      },
+      "required_stages_complete": false,
+      "all_required_checks_assessed": false,
+      "review_contract": "simple_v1",
+      "result_transport": "strict_tool_v1"
+    },
+    {
+      "case_id": "B3-bound",
+      "approved": false,
+      "decision": "execution_incomplete",
+      "presentation": {
+        "run_ended": true,
+        "answer_unavailable_reason": null,
+        "reasons": [
+          "执行未完成：事实审核阶段失败（模型输出未满足结构要求），已有回答仍可阅读，但没有完整审核结论。"
+        ],
+        "next_steps": [
+          "查看终端或执行详情的失败阶段；本记录保留，不自动重发。"
+        ],
+        "saved": "已完成的回答与阶段记录保留；执行失败不是事实矛盾。"
+      },
+      "required_stages_complete": false,
+      "all_required_checks_assessed": false,
+      "review_contract": "simple_bound_v1",
+      "result_transport": "strict_tool_v1"
+    }
+  ]
+}

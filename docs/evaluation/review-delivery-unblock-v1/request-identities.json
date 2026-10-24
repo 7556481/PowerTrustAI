@@ -1,0 +1,1052 @@
+{
+  "model": "deepseek-flash",
+  "calls": 56,
+  "identities": [
+    {
+      "sequence": 1,
+      "case_id": "A1-before",
+      "messages_sha256": "5b4f1ec9dad1d4e641e52715950e654170cd0c21e6368a6b8467f10457a28871",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "9199e36a820404f00c4e727e0bbc643365fa0f0c70abbbdc3cd211a2059a5605"
+    },
+    {
+      "sequence": 2,
+      "case_id": "A1-before",
+      "messages_sha256": "8f62d75ae8abd51cf41c47c9f6f453f86a7c1cb4b4c57c64a7c13931c4cff61e",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "0098b4f9caa67193114b106fdd07d90c5df9c74740b9880701d8594aeef9bf97"
+    },
+    {
+      "sequence": 3,
+      "case_id": "A1-before",
+      "messages_sha256": "ad2b279adc0bcca3dfabcc6c0b9e9a879937e7c1d4570ed46fc0bbb37c603b48",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "7a898913c8709becf1e37f0bf14d09e998a393537bbd9d2c7ca883b27fdd6f84"
+    },
+    {
+      "sequence": 4,
+      "case_id": "A1-bound",
+      "messages_sha256": "a138ba5bbaf44c967238827e5360f90bae303e041cd70a4b6f035047dcdb3449",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "dac4a140ef8dab099d9f0196fe1bec260e4ea8010225b11c4c5a8d2fbc4b274c"
+    },
+    {
+      "sequence": 5,
+      "case_id": "A1-bound",
+      "messages_sha256": "9dc3cdf5b885325b94d065b73b4fb63ebcdd65ca74d767d71c3ab8e935c02917",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "e4d8068b40548ca0748372fbf41be8379c5b98c54e47c2ff8d7260bfc94f6a0a"
+    },
+    {
+      "sequence": 6,
+      "case_id": "A1-bound",
+      "messages_sha256": "ee22b88df991163eae0d1f0e31f549cd28b4abd936cd9defabdffdc64498e4d5",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "3a796d3954170dd10ca3d4b10d2fe225a6028e1c7a081ffb9ac15c4bf756ec86"
+    },
+    {
+      "sequence": 7,
+      "case_id": "A2-bound",
+      "messages_sha256": "7a11015ab16c504814b327976fcd2bf1d256b6a3e06306cc585a818b4d80700d",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "5f6d51f1edeb5dad25156ae28a02cc221ff75fdd4e3683a1dd1c92963b41915c"
+    },
+    {
+      "sequence": 8,
+      "case_id": "A2-bound",
+      "messages_sha256": "c1b948511ad9dd1a58e3a1d58aaf20ac1ea1582335a64813a3508dd231aa6cc9",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "1ab2fb8e8f6e0d7a1315df5b81161898d37e5a0d846b37cef321265561122825"
+    },
+    {
+      "sequence": 9,
+      "case_id": "A2-before",
+      "messages_sha256": "d785d74bf060ff0e2c387975ea6c106291625bce044c24cdd35225b8e723a71c",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "9aaeb26d4cff2f9aba38602e5d07b5ab793ce8f8759db3c2b5a6bf16498c487e"
+    },
+    {
+      "sequence": 10,
+      "case_id": "A2-before",
+      "messages_sha256": "0dc8d6b6587879bc17494d93a6f89ba16e077b557c2f98ca29bec8cf20881b9b",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "b8aed8538230c0b31cd69ea82a95b4b66dde36751dd0c49a50092aed88fa50c5"
+    },
+    {
+      "sequence": 11,
+      "case_id": "A2-before",
+      "messages_sha256": "472f45007e421abc88250f1814325e8f023da5b1843f3b68527fea5a447b23d4",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "eddbccbbc037c3245ebb796339b5f965c56128cc1f1443f3fe5d2a9adcd4c641"
+    },
+    {
+      "sequence": 12,
+      "case_id": "A3-before",
+      "messages_sha256": "bc1a33ec428bcd7bc6d2a62a4a13fee5c25ba8430cdabc693677ac9ebca7fc25",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "0ccb10d951e314f1b054f1b2363ad0b4ef12e93c2f19e3da3cce41a39d7c5a3a"
+    },
+    {
+      "sequence": 13,
+      "case_id": "A3-before",
+      "messages_sha256": "dfbdb8a6e574fa1fe3ab873a2997d5821b9ebacd412f1295d099a8b20dd54774",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "7cafb8bdab397eb2c613d517302e76ff530f4d70721177a1a77ae401749762b5"
+    },
+    {
+      "sequence": 14,
+      "case_id": "A3-before",
+      "messages_sha256": "c292fadfb406e286be1c01987cddfa97b4fcbc755b39a777ad990d8ddefbdb93",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "3827aca0aef6d26c6ed960fe12b905b4134104985a3ba94d9befbbb0c616e1b8"
+    },
+    {
+      "sequence": 15,
+      "case_id": "A3-bound",
+      "messages_sha256": "12980abb67c3b195fcfff8755a29fca598a2804b4ad97a932ca7e5ac3f414468",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "790991f9d9a00419022a014b823641ddcc6aab92cad64da62ec0001ce0ea6682"
+    },
+    {
+      "sequence": 16,
+      "case_id": "A3-bound",
+      "messages_sha256": "98e04a7a8402fbce942eb05f5ea00a8263a5fb12c25aafe8357170bae5afe850",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "501cb6943bcce78a6f4de308dfcc7657a63675e34eac0b2c5463b9057576f343"
+    },
+    {
+      "sequence": 17,
+      "case_id": "A4-bound",
+      "messages_sha256": "93da44d60810eefdf804dd91ab2cb5052ef826f3cde86d7ad92087b415970566",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "31119f5e926ce43af5e2c3120fa4d9244443ab9c06c92598af741469b2285a02"
+    },
+    {
+      "sequence": 18,
+      "case_id": "A4-bound",
+      "messages_sha256": "a63d62a713c951ef0b5d90584bdac124756339fc77399fe38db5101b9c28317e",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "4989440104458cac8f0be931863c5785fb480e0e7368c2159aff70ee8ee623cc"
+    },
+    {
+      "sequence": 19,
+      "case_id": "A4-bound",
+      "messages_sha256": "a7315ad01f4aa67f1861be28c8b51bd4fd66f4bbf3b3f409db27f140d8eb3076",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "8c2abbeda27cd12c7d011578cc272063f5ff055acfe6b246e3c6c2b747241f71"
+    },
+    {
+      "sequence": 20,
+      "case_id": "A4-before",
+      "messages_sha256": "a5074d91b143d24316142838aa93cd915b0bf311946f28faf52abc6c5a680420",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "61506fe6c6c532ccb07efc1940a6dee36bc316001db500b8293d7b0fc574e2d7"
+    },
+    {
+      "sequence": 21,
+      "case_id": "A4-before",
+      "messages_sha256": "d1907dde4f8c8e51fe7a02891c56d8a258861dd87ca4670ccf94d7f6592fe37e",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "0d31fb5633314af5ae8245587aa063dc7bebc067d29fc6aac8c15753e0147afa"
+    },
+    {
+      "sequence": 22,
+      "case_id": "A4-before",
+      "messages_sha256": "01ab3efde199dc7ff7e62a47e6bd432c8e321d52146ab2e732d9ffdbd47faec3",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "6880c529e32b62778f5308d0c727a3bf4b7f75e451084e299b59ae66a6f50651"
+    },
+    {
+      "sequence": 23,
+      "case_id": "G1",
+      "messages_sha256": "5da92ac3e9fe0a7c70fbed1791be634e71ec1114873813902f69762ab55e3236",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "e646f893f3118c3a664609be0b656e2b656026d00e5ee65a4b16ced9a11a30a9"
+    },
+    {
+      "sequence": 24,
+      "case_id": "B1-before",
+      "messages_sha256": "963a55c5f7b99e23c417d5e4214b570c93d6cb169d6a8ac615abda9bcebefc51",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "5389b9eeca9d68dd1f5c926e47492d478fbf047db10187d28493aa443a0163dd"
+    },
+    {
+      "sequence": 25,
+      "case_id": "B1-before",
+      "messages_sha256": "783f24aef2bf7bf1229f28dca41412987c87b0bf592664f813da69ab21df6e11",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "f4efb132571f0383304ba2ffeca6a67f492cea00efd25807390457a922b951e0"
+    },
+    {
+      "sequence": 26,
+      "case_id": "B1-before",
+      "messages_sha256": "e7585d640e31466bcb0757b03286ccd62aa81a8b7db79e6a9c055808757b9b97",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "bd312ca5aa356dee3f35babe696c76d83d7cdca6489943e36caa4545503580b5"
+    },
+    {
+      "sequence": 27,
+      "case_id": "B1-before",
+      "messages_sha256": "4a6f9ce2b9ab49747f044742fab94918c9ef68d9f13d32adf5c0f0982ede3c26",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "380c5bdc6d66c5d0df835eb107f5930a0cc849d1dfc4722024aa4305f2cb592d"
+    },
+    {
+      "sequence": 28,
+      "case_id": "B1-before",
+      "messages_sha256": "b3e4f11fc3714451a956c515466ea5111ec0925aa25f44214611f62026cf9e51",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "1a374a81fd56d7dff7adb0d44f81879eec71f8c5eb2dd35ff43a90fa37c81c1b"
+    },
+    {
+      "sequence": 29,
+      "case_id": "B1-bound",
+      "messages_sha256": "963a55c5f7b99e23c417d5e4214b570c93d6cb169d6a8ac615abda9bcebefc51",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "8aafd8ba93972ae732dc92d9ba620954ceae10a859689b54c471087961af126e"
+    },
+    {
+      "sequence": 30,
+      "case_id": "B1-bound",
+      "messages_sha256": "77512e64a4ed82add27ed246842b3dd339d12b7caa4f200b2bbc35d83ed2f69a",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "1177603349ac9e351982356ca75bad12ac47e92b3c133eddedd9fe541783467d"
+    },
+    {
+      "sequence": 31,
+      "case_id": "B1-bound",
+      "messages_sha256": "ba08adce255bafc4893f63e68b862fd2b48adbad95ab0d1c12a1ef84143e5ce6",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "8d093cec4e7488e2fecb75b18b89d825c3ddb41285470c730b382fc2f14dfc24"
+    },
+    {
+      "sequence": 32,
+      "case_id": "B1-bound",
+      "messages_sha256": "03e352557a839521104007bf0b4e67c09275e753e795e04fb36e262e7067f6dd",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "de28aad5946c174fad92b1e407005a81bb60bb66d3252ec3bb11de02987e5cf2"
+    },
+    {
+      "sequence": 33,
+      "case_id": "B1-bound",
+      "messages_sha256": "0d44b767f7b35a1abd32333b9a4af7d1f50993c118a451b80e5535f4c0bac14a",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "3b95df24a5875ee50597b2f74cfc0c9b412c92333a485710d64bd54ba09682c6"
+    },
+    {
+      "sequence": 34,
+      "case_id": "G2",
+      "messages_sha256": "190a94af1c2535a26c3d06a67de2c86821bec0a54ce59ce4ef441e0046b05858",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "214ab72999a91a09411f5b21184aa3b21610f97dc340719c954b9022a44201aa"
+    },
+    {
+      "sequence": 35,
+      "case_id": "B2-bound",
+      "messages_sha256": "5a1063eaeec83a50884806169776b834e705d7548c1a9acc2403e458bf0d0a2a",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "d323dd84fe86c2a6f5f265a8e8853fb50faa54aaea1efd51a6a3c26c061ae649"
+    },
+    {
+      "sequence": 36,
+      "case_id": "B2-bound",
+      "messages_sha256": "43cf5be9d199fdf02c810aae5981c8400fe7557a2f4dddca4787b052a3b1721b",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "eadbfced65219073c09dc5de90023a112991e198bedcdf069dfaf6f197f85917"
+    },
+    {
+      "sequence": 37,
+      "case_id": "B2-bound",
+      "messages_sha256": "b233a2672bdf80d9eea415d16d3053becc079e7c199e32bf45d55568bd06fe70",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "f387ecf8ce6285347112dd51006920fd442bc75337398eceb72bc00cbd00b2b6"
+    },
+    {
+      "sequence": 38,
+      "case_id": "B2-bound",
+      "messages_sha256": "50d25a4ecca0d8a0e3a52edaad78202e92e0b5f75af2bf2c1fb8ac6355ce0417",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "e0a27315d7b99ac73199932085c41408d82e942aba529471f09bf2de6f0e77c6"
+    },
+    {
+      "sequence": 39,
+      "case_id": "B2-bound",
+      "messages_sha256": "e178aec63f43533f4ce3c35fbfc2c9c196c71cc26e75bfaac47050b391594666",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "8bd32bf3548530f6940281cb0b45ef3748694389ad38aa3717a01c43313f5bf7"
+    },
+    {
+      "sequence": 40,
+      "case_id": "B2-before",
+      "messages_sha256": "5a1063eaeec83a50884806169776b834e705d7548c1a9acc2403e458bf0d0a2a",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "cc60fc1e9c9989574270a5d8d2c8731154b3d10198881d3afb0de493f7d3bc5e"
+    },
+    {
+      "sequence": 41,
+      "case_id": "B2-before",
+      "messages_sha256": "4926a5f72c1bd81c0d57d04dabe8cc95fb425e7340730ca48afdc15129e3b191",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "959305659c4cf23f4e966b70f73b05a16d40ff882ce71690c4b9ff3159b8e7d8"
+    },
+    {
+      "sequence": 42,
+      "case_id": "B2-before",
+      "messages_sha256": "ddfce95184525d9fd6caf37987b0e12372af2838bc3612083cfc1a5d63e0cb98",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "505ddc39968746cd627e1a92d96ea589c62958072c77cf534cc7b4c8ca33bdc7"
+    },
+    {
+      "sequence": 43,
+      "case_id": "B2-before",
+      "messages_sha256": "3063af5cd6f4b050526415510f5c21fa7d8c1729659accf98c632fbdac694a3f",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "4f928088b00e9a56e32ddbed5a860fc164ee18c863f0132b5775a8d35d76ca16"
+    },
+    {
+      "sequence": 44,
+      "case_id": "B2-before",
+      "messages_sha256": "116a2f723c7dddc3c9b534aa8936083ad11703f35963e6e49a571b1b982cc9a2",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "e35c15bdc1bef5f39ca30a218fc2087e0988f512015bf9bdabf7688a362681b3"
+    },
+    {
+      "sequence": 45,
+      "case_id": "G3",
+      "messages_sha256": "709d8a7c11850de23851c7af18d02a5f888c5628640aee7727e68ae8fe7a498c",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "1043941eaef60ad399a8f7432d415f0aeb969f2e83f09b76d3d0a787e01b0a98"
+    },
+    {
+      "sequence": 46,
+      "case_id": "B3-before",
+      "messages_sha256": "b2d1a09ac61d768a39633473b3fa7d1cb85f73fa0d426ffceaaad538fa7ce13c",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "49a8311d8435c001259c62ad828480e425b08ad8ca86d5087ca603faa600a4c5"
+    },
+    {
+      "sequence": 47,
+      "case_id": "B3-before",
+      "messages_sha256": "304d064c2451167dcbdb337d89a7a1c267ae1486eca702afbf5e97d7127ec0d8",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "1e18319749d9ade4c68ed2583b378cba77fd05e33302d44e66cf04a181663f4a"
+    },
+    {
+      "sequence": 48,
+      "case_id": "B3-before",
+      "messages_sha256": "f3a7b1059b57c1a9f68ef58004e1c04f00e453f6d4f9b291ed849a42369347e7",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "15b9a6c21a8f96e326aa79569eb425b765f75ac00c291d68a5b676d29e858839"
+    },
+    {
+      "sequence": 49,
+      "case_id": "B3-before",
+      "messages_sha256": "bb4a439072b664dfcd848c9cb582b72a44360a4fe8d9578d0cc10d9b9ffd6ddf",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "8a653987fe1c85b4e658f632093fe0f4268ca66bc3be7245bd49f31675fbb3d0"
+    },
+    {
+      "sequence": 50,
+      "case_id": "B3-before",
+      "messages_sha256": "5e00a592bb8d6589dac5398fb478213b721b7449caff6ea0ad1168b24f8ec0b7",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "before",
+        "result_tool_sha256": "3dc20e46429899510093f762297c9113396ade1e55cb4ce05163a7a51546a31b"
+      },
+      "response_file_sha256": "de7382f825e0ccc8d3dcf6c456b149c927c0e1d25c38bcee775cf64fb03d0e20"
+    },
+    {
+      "sequence": 51,
+      "case_id": "B3-bound",
+      "messages_sha256": "b2d1a09ac61d768a39633473b3fa7d1cb85f73fa0d426ffceaaad538fa7ce13c",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "76cfc7daf9aff38deacacc86bcb151ffbdc282a1723f0b0f13ad80f0794e23aa"
+    },
+    {
+      "sequence": 52,
+      "case_id": "B3-bound",
+      "messages_sha256": "4c287d3a39aab7d889040ac2e301afffeb4ccd7a2f3da65c4516bfc968bd3cc1",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "dd95e36e27befb792a9bec461850700f68da3a4faa1330f2aa1453f12fa59d4c"
+    },
+    {
+      "sequence": 53,
+      "case_id": "B3-bound",
+      "messages_sha256": "d24e9d666d4c10db70c25940e51c1ec461882dd0037d5dbd99ae1210e9714de3",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "7491512f5878b38c5a01aaad5e0a6e1ece0636653ec76492d4e470eaf85b9c96"
+    },
+    {
+      "sequence": 54,
+      "case_id": "B3-bound",
+      "messages_sha256": "7e915be832438df1dce6c73c65fbeec47c6b09ee7d0d4e7218da8a50cfb202eb",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000
+      },
+      "response_file_sha256": "0d93ca81323e93ae615e92475f6d8b903152fc65aac84e95709da2d317a5cb30"
+    },
+    {
+      "sequence": 55,
+      "case_id": "B3-bound",
+      "messages_sha256": "16224d2848ffba6a337a6cd90d6e5b47e3f3b7ea599adc555074785c1d4240c9",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "2a753d7150f17f6a8743dae08584e804285513236c26565f951e1c532ad4817a"
+    },
+    {
+      "sequence": 56,
+      "case_id": "B3-bound",
+      "messages_sha256": "5a33853aba45a19185aaa78d4d353357cfe8113eff370b337928e2dd229c6403",
+      "parameters": {
+        "model_id": "deepseek-flash",
+        "max_output_tokens": 8000,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "tool_choice": {
+          "type": "function",
+          "function": {
+            "name": "submit_review_result"
+          }
+        },
+        "thinking": {
+          "type": "disabled"
+        },
+        "result_tool_reference": "bound",
+        "result_tool_sha256": "2a5bac1165bc3618f933f4c1988f3e33bd4bc78844c872ae0d867f2cda269269"
+      },
+      "response_file_sha256": "af586454365ee6e5b92377ce9b2bf744fac0636dcd93319a858ab8273b1825ae"
+    }
+  ],
+  "frozen_source_count": 402,
+  "new_pro_requests": 0,
+  "identity_boundary": "Messages/parameters stored by reused Guard immediately before delegate.complete; unchanged stdlib serialization and Beta routing are covered by adapter tests. No new per-request wire observer; do not claim independent server-side body observation.",
+  "paid_source_bytes_match": true,
+  "post_batch_current_source_changes": 2,
+  "source_audit": "source-identities.json"
+}

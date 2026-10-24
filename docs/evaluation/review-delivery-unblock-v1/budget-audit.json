@@ -1,0 +1,86 @@
+{
+  "note": "Post-batch finding: paid B deducts generation model/time, but omitted retrieval allowance deduction. All actual combined usage stayed under original limits; configuration is not a fully equivalent shared allowance.14 related offline tests passed45.909s; patch not live-retested, no paid rerun.",
+  "rows": [
+    {
+      "question": 1,
+      "generation_retrieval_calls": 1,
+      "generation_retrieval_chars": 5369,
+      "branches": [
+        {
+          "case_id": "B1-before",
+          "frozen_remaining_calls": 12,
+          "correct_remaining_calls": 11,
+          "frozen_remaining_chars": 160000,
+          "correct_remaining_chars": 154631,
+          "actual_total_calls": 3,
+          "actual_total_chars": 16054,
+          "actual_original_limits_exceeded": false
+        },
+        {
+          "case_id": "B1-bound",
+          "frozen_remaining_calls": 12,
+          "correct_remaining_calls": 11,
+          "frozen_remaining_chars": 160000,
+          "correct_remaining_chars": 154631,
+          "actual_total_calls": 3,
+          "actual_total_chars": 16054,
+          "actual_original_limits_exceeded": false
+        }
+      ]
+    },
+    {
+      "question": 2,
+      "generation_retrieval_calls": 1,
+      "generation_retrieval_chars": 5771,
+      "branches": [
+        {
+          "case_id": "B2-bound",
+          "frozen_remaining_calls": 12,
+          "correct_remaining_calls": 11,
+          "frozen_remaining_chars": 160000,
+          "correct_remaining_chars": 154229,
+          "actual_total_calls": 4,
+          "actual_total_chars": 20078,
+          "actual_original_limits_exceeded": false
+        },
+        {
+          "case_id": "B2-before",
+          "frozen_remaining_calls": 12,
+          "correct_remaining_calls": 11,
+          "frozen_remaining_chars": 160000,
+          "correct_remaining_chars": 154229,
+          "actual_total_calls": 4,
+          "actual_total_chars": 20078,
+          "actual_original_limits_exceeded": false
+        }
+      ]
+    },
+    {
+      "question": 3,
+      "generation_retrieval_calls": 1,
+      "generation_retrieval_chars": 4761,
+      "branches": [
+        {
+          "case_id": "B3-before",
+          "frozen_remaining_calls": 12,
+          "correct_remaining_calls": 11,
+          "frozen_remaining_chars": 160000,
+          "correct_remaining_chars": 155239,
+          "actual_total_calls": 4,
+          "actual_total_chars": 19011,
+          "actual_original_limits_exceeded": false
+        },
+        {
+          "case_id": "B3-bound",
+          "frozen_remaining_calls": 12,
+          "correct_remaining_calls": 11,
+          "frozen_remaining_chars": 160000,
+          "correct_remaining_chars": 155239,
+          "actual_total_calls": 4,
+          "actual_total_chars": 19011,
+          "actual_original_limits_exceeded": false
+        }
+      ]
+    }
+  ]
+}

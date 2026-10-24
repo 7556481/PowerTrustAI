@@ -1,0 +1,837 @@
+{
+  "origin": "AI-assisted direct-text review of actual drafts, supplied evidence and fixed requirements; not expert gold.",
+  "generations": [
+    {
+      "question_index": 0,
+      "question": "按给定NERC资料比较动态与静态无功资源的调节方式、运行方式和电压依赖。",
+      "requirements": [
+        "动态在规定带宽内实时连续自动调节、设定点或下垂",
+        "静态额定电压固定贡献、平方依赖、按系统条件投切；不写恒定实际出力"
+      ],
+      "draft": {
+        "answer_id": "natural-1-answer",
+        "version": 1,
+        "text": "按NERC《无功规划》指南，动态无功资源随电网电压变化在指定电压带宽内连续、实时自动调节出力，可维持设定电压或按电压下垂特性运行；采用电力电子装置的设备调节可在电气周波级完成（如STATCOM响应约50 ms，属该设备示例，非通用指标）。\n\n静态无功资源在额定电压下出力固定，容量随电压平方变化，按系统条件手动或自动投切，接入后提供固定的额定无功贡献。\n\n该对比属概念层面；具体设备响应时间与投切策略取决于设备类型和运行条件。",
+        "assumptions": [],
+        "missing_information": [
+          "给定NERC资料未给出各类静态装置的具体投切判据与电压整定值；如需具体数值需另附资料。"
+        ],
+        "citations": [
+          {
+            "start_offset": 0,
+            "end_offset": 119,
+            "evidence_ids": [
+              "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+            ]
+          },
+          {
+            "start_offset": 121,
+            "end_offset": 176,
+            "evidence_ids": [
+              "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+            ]
+          }
+        ]
+      },
+      "snapshot_sha256": "4a55f3b5c010817d720dd31015919eed81d88e52753f34687f6ee4c01c522d26",
+      "evidence_identities": [
+        {
+          "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]"
+        },
+        {
+          "evidence_id": "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5",
+          "source_id": "dataset-record-5bd52bd6ebbc91adc209add1a72fff37a599418aa5759c0df0569a3ab12f929c",
+          "source_version": "7739d519837e485a38c518c42d7cca25cf85db55489259eeae56b74eeff5daa7",
+          "locator": "shard=chinese/high/rank_00041.parquet;row=4195;record=598600033938;chars[0:1200)"
+        },
+        {
+          "evidence_id": "e-89d42189844749cd0d5ed330a9f663a5ad47cc649f5c9cf1d8e14ca2f03a852d",
+          "source_id": "dataset-record-825a1d3a4ee3c81c6ab9fe9c514e24e41953961c49bae9bfb8079c0f1a0fd356",
+          "source_version": "f033734f8ffc5fe09a9ea924f19b81ce2105a045b0953058cf966f0a905578c9",
+          "locator": "shard=chinese/high/rank_00038.parquet;row=182015;record=415200050058;chars[0:1182)"
+        },
+        {
+          "evidence_id": "e-2e6efa466a9f1a6db0d10f0b39b53f86194793543725a104480fbfe57e222a3f",
+          "source_id": "dataset-record-5a8c2d5da89c7656b60b4967ecbcdc74b616af3f71f41315f9ca68c1f4d099fe",
+          "source_version": "c27ba8dbad9b86e8d569fadcbcce1ea5fc0ffa3b62e1545faeaa737ea6047d63",
+          "locator": "shard=chinese/middle/rank_00421.parquet;row=16532;record=152700006063;chars[0:1032)"
+        },
+        {
+          "evidence_id": "e-8f7f9d02b8cfc7aec7c36def5c34fbe644b578d2911f89c0efbe3eba23ce7228",
+          "source_id": "dataset-record-5bd52bd6ebbc91adc209add1a72fff37a599418aa5759c0df0569a3ab12f929c",
+          "source_version": "7739d519837e485a38c518c42d7cca25cf85db55489259eeae56b74eeff5daa7",
+          "locator": "shard=chinese/high/rank_00041.parquet;row=4195;record=598600033938;chars[1200:1344)"
+        },
+        {
+          "evidence_id": "e-c2db03ff79e25be9ff241395b5868fa0d70ae0130da05bbe4a595f77abd31cba",
+          "source_id": "dataset-record-825a1d3a4ee3c81c6ab9fe9c514e24e41953961c49bae9bfb8079c0f1a0fd356",
+          "source_version": "f033734f8ffc5fe09a9ea924f19b81ce2105a045b0953058cf966f0a905578c9",
+          "locator": "shard=chinese/high/rank_00038.parquet;row=182015;record=415200050058;chars[1182:2203)"
+        },
+        {
+          "evidence_id": "e-8909b6c9e480706da008c9e40eb76d5191275dfb1e3ea4ced6e199a6e918911f",
+          "source_id": "dataset-record-5a8c2d5da89c7656b60b4967ecbcdc74b616af3f71f41315f9ca68c1f4d099fe",
+          "source_version": "c27ba8dbad9b86e8d569fadcbcce1ea5fc0ffa3b62e1545faeaa737ea6047d63",
+          "locator": "shard=chinese/middle/rank_00421.parquet;row=16532;record=152700006063;chars[1032:1822)"
+        }
+      ],
+      "generation_calls": 1,
+      "generation_duration_ms": 6686,
+      "observations": {
+        "first_answer_saved_ms": 6694.99,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 6717.041
+      },
+      "branches": [
+        {
+          "case_id": "B1-before",
+          "budget": {
+            "max_revision_rounds": 1,
+            "max_model_calls": 39,
+            "max_tool_calls": 40,
+            "max_retrieval_calls": 12,
+            "max_duration_seconds": 793.314,
+            "max_transient_retries": 0,
+            "step_timeout_seconds": 110,
+            "max_retrieval_chars_per_call": 16000,
+            "max_retrieval_chars_total": 160000
+          },
+          "snapshot_same": true,
+          "final_text_unchanged": true,
+          "final_answer": {
+            "answer_id": "natural-1-answer",
+            "version": 1,
+            "text": "按NERC《无功规划》指南，动态无功资源随电网电压变化在指定电压带宽内连续、实时自动调节出力，可维持设定电压或按电压下垂特性运行；采用电力电子装置的设备调节可在电气周波级完成（如STATCOM响应约50 ms，属该设备示例，非通用指标）。\n\n静态无功资源在额定电压下出力固定，容量随电压平方变化，按系统条件手动或自动投切，接入后提供固定的额定无功贡献。\n\n该对比属概念层面；具体设备响应时间与投切策略取决于设备类型和运行条件。",
+            "assumptions": [],
+            "missing_information": [
+              "给定NERC资料未给出各类静态装置的具体投切判据与电压整定值；如需具体数值需另附资料。"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 119,
+                "evidence_ids": [
+                  "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+                ]
+              },
+              {
+                "start_offset": 121,
+                "end_offset": 176,
+                "evidence_ids": [
+                  "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+                ]
+              }
+            ]
+          },
+          "decision": "review_required",
+          "revision_outputs": [],
+          "retrieval_summary": [
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 1,
+              "cumulative_chars": 5546,
+              "duration_ms": 22134,
+              "accepted_chars": 5546,
+              "offered_chars": 5546,
+              "outcome": "hits",
+              "query_sha256": "28c46dbafed24dfe4fc447d27a15cfe3698195261ecbb71d2a5d5056b685d688",
+              "hit_evidence_ids": [
+                "e-e08fc87c5f1ef08267cf81822abf780d0a7286148c45aa9eaeaf9c3fdf45c707",
+                "e-c1315685e1c08a9428e8958d86592a016622278afdf5e73a2ab8fc00a7853afe",
+                "e-50d926f9c7686fae4539a1293d0ab7d00a15588cf84e1c530532ca30c8c75506"
+              ]
+            },
+            {
+              "purpose": "domain_review",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 2,
+              "cumulative_chars": 10685,
+              "duration_ms": 13746,
+              "accepted_chars": 5139,
+              "offered_chars": 5139,
+              "outcome": "hits",
+              "query_sha256": "0536c8ae7632421cb5a56e1eac3d33ce30caf623ca6a5df4be4e8d2159c0a49f",
+              "hit_evidence_ids": [
+                "e-50d926f9c7686fae4539a1293d0ab7d00a15588cf84e1c530532ca30c8c75506",
+                "e-6399d964cdd5cddc2d016caab05fcd24fe1551d550ed271529e8fb001e206ec2",
+                "e-fe899056c7006f670da486b000ac75434e86b3aa72b857ceebf3574bd9477079"
+              ]
+            }
+          ]
+        },
+        {
+          "case_id": "B1-bound",
+          "budget": {
+            "max_revision_rounds": 1,
+            "max_model_calls": 39,
+            "max_tool_calls": 40,
+            "max_retrieval_calls": 12,
+            "max_duration_seconds": 793.314,
+            "max_transient_retries": 0,
+            "step_timeout_seconds": 110,
+            "max_retrieval_chars_per_call": 16000,
+            "max_retrieval_chars_total": 160000
+          },
+          "snapshot_same": true,
+          "final_text_unchanged": true,
+          "final_answer": {
+            "answer_id": "natural-1-answer",
+            "version": 1,
+            "text": "按NERC《无功规划》指南，动态无功资源随电网电压变化在指定电压带宽内连续、实时自动调节出力，可维持设定电压或按电压下垂特性运行；采用电力电子装置的设备调节可在电气周波级完成（如STATCOM响应约50 ms，属该设备示例，非通用指标）。\n\n静态无功资源在额定电压下出力固定，容量随电压平方变化，按系统条件手动或自动投切，接入后提供固定的额定无功贡献。\n\n该对比属概念层面；具体设备响应时间与投切策略取决于设备类型和运行条件。",
+            "assumptions": [],
+            "missing_information": [
+              "给定NERC资料未给出各类静态装置的具体投切判据与电压整定值；如需具体数值需另附资料。"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 119,
+                "evidence_ids": [
+                  "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+                ]
+              },
+              {
+                "start_offset": 121,
+                "end_offset": 176,
+                "evidence_ids": [
+                  "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+                ]
+              }
+            ]
+          },
+          "decision": "execution_incomplete",
+          "revision_outputs": [],
+          "retrieval_summary": [
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 1,
+              "cumulative_chars": 5546,
+              "duration_ms": 12688,
+              "accepted_chars": 5546,
+              "offered_chars": 5546,
+              "outcome": "hits",
+              "query_sha256": "e3248ad4ce2b2c6eae036e7d399d3ad24850306606c2dd7ce06789a53efefeb0",
+              "hit_evidence_ids": [
+                "e-e08fc87c5f1ef08267cf81822abf780d0a7286148c45aa9eaeaf9c3fdf45c707",
+                "e-c1315685e1c08a9428e8958d86592a016622278afdf5e73a2ab8fc00a7853afe",
+                "e-50d926f9c7686fae4539a1293d0ab7d00a15588cf84e1c530532ca30c8c75506"
+              ]
+            },
+            {
+              "purpose": "domain_review",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 2,
+              "cumulative_chars": 10685,
+              "duration_ms": 13708,
+              "accepted_chars": 5139,
+              "offered_chars": 5139,
+              "outcome": "hits",
+              "query_sha256": "c7002f534946f9cb19b4c0b71de5579c7304428d697c749f725bf1e88231b6b9",
+              "hit_evidence_ids": [
+                "e-50d926f9c7686fae4539a1293d0ab7d00a15588cf84e1c530532ca30c8c75506",
+                "e-6399d964cdd5cddc2d016caab05fcd24fe1551d550ed271529e8fb001e206ec2",
+                "e-fe899056c7006f670da486b000ac75434e86b3aa72b857ceebf3574bd9477079"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_index": 1,
+      "question": "按给定NERC资料解释输配边界负荷怎样建模，以及负荷功率因数与双方无功支撑协调有什么关系。",
+      "requirements": [
+        "MW/Mvar显式建模及两类位置",
+        "负荷功率因数影响电压/无功，双方不应过度单向依赖、需协调"
+      ],
+      "draft": {
+        "answer_id": "natural-2-answer",
+        "version": 1,
+        "text": "按该NERC准则，输配（TO-DP）边界通常用有功与无功明负荷表示，可置于变电站高压侧，也可置于降压变压器及等效配电阻抗之后。\n\n边界所建负荷功率因数（LPF）会影响大电力系统的电压与无功表现，故TO与DP须协调确定峰、轻载等临界负荷水平处的LPF。\n\n双向要求：负荷不应过度依赖BES的滞后或超前无功支撑，BES也不应单独依赖负荷提供无功支撑。",
+        "assumptions": [
+          "仅依据所给的NERC《Reactive Power Planning》准则第37页文字作答。",
+          "该准则为北美大电力系统的自愿性建议，非中国强制标准。"
+        ],
+        "missing_information": [
+          "给定资料仅显示该页前半部分，规划部分后续关于LPF建模的具体做法未提取到。"
+        ],
+        "citations": [
+          {
+            "start_offset": 0,
+            "end_offset": 63,
+            "evidence_ids": [
+              "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+            ]
+          },
+          {
+            "start_offset": 65,
+            "end_offset": 125,
+            "evidence_ids": [
+              "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+            ]
+          },
+          {
+            "start_offset": 127,
+            "end_offset": 173,
+            "evidence_ids": [
+              "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+            ]
+          }
+        ]
+      },
+      "snapshot_sha256": "4c4559737a83e68521d178c32bca9707fdf467f26e707cd826fb270ee82c37d9",
+      "evidence_identities": [
+        {
+          "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]"
+        },
+        {
+          "evidence_id": "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5",
+          "source_id": "dataset-record-5bd52bd6ebbc91adc209add1a72fff37a599418aa5759c0df0569a3ab12f929c",
+          "source_version": "7739d519837e485a38c518c42d7cca25cf85db55489259eeae56b74eeff5daa7",
+          "locator": "shard=chinese/high/rank_00041.parquet;row=4195;record=598600033938;chars[0:1200)"
+        },
+        {
+          "evidence_id": "e-40b306c38bf8c01882195fc7cb0dd8501a1621f71ecf6da6909329a54aeb7584",
+          "source_id": "dataset-record-66edb20bc4d639eafe32638a331b815003b0729d2829d39343068afacf19d906",
+          "source_version": "4d1c037deda7ed8152884d00bfe2385269ad773548def3e9cabf7065e3c44495",
+          "locator": "shard=chinese/high/rank_00038.parquet;row=193852;record=280300007655;chars[1076:2262)"
+        },
+        {
+          "evidence_id": "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140",
+          "source_id": "dataset-record-eb646d26de0626d5f5609d11a1adc4ac5b93f5b0838fa0faed1eda141ef0ec03",
+          "source_version": "e15146cdf43916c5833e6ff91c1956ecec6f596717bbf74915e7332662db4662",
+          "locator": "shard=chinese/middle/rank_00415.parquet;row=67967;record=397600026370;chars[2101:3158)"
+        },
+        {
+          "evidence_id": "e-8f7f9d02b8cfc7aec7c36def5c34fbe644b578d2911f89c0efbe3eba23ce7228",
+          "source_id": "dataset-record-5bd52bd6ebbc91adc209add1a72fff37a599418aa5759c0df0569a3ab12f929c",
+          "source_version": "7739d519837e485a38c518c42d7cca25cf85db55489259eeae56b74eeff5daa7",
+          "locator": "shard=chinese/high/rank_00041.parquet;row=4195;record=598600033938;chars[1200:1344)"
+        },
+        {
+          "evidence_id": "e-159835799ff1e2db036d5d8c4b2a3009a00ccc125b4cc430bfd2d77873db4a61",
+          "source_id": "dataset-record-66edb20bc4d639eafe32638a331b815003b0729d2829d39343068afacf19d906",
+          "source_version": "4d1c037deda7ed8152884d00bfe2385269ad773548def3e9cabf7065e3c44495",
+          "locator": "shard=chinese/high/rank_00038.parquet;row=193852;record=280300007655;chars[0:1076)"
+        },
+        {
+          "evidence_id": "e-1fb428725ffceb0227185322ecd2a33265a8aadd027224fa8a190bde634635de",
+          "source_id": "dataset-record-66edb20bc4d639eafe32638a331b815003b0729d2829d39343068afacf19d906",
+          "source_version": "4d1c037deda7ed8152884d00bfe2385269ad773548def3e9cabf7065e3c44495",
+          "locator": "shard=chinese/high/rank_00038.parquet;row=193852;record=280300007655;chars[2262:3370)"
+        }
+      ],
+      "generation_calls": 1,
+      "generation_duration_ms": 3354,
+      "observations": {
+        "first_answer_saved_ms": 3356.336,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 3380.74
+      },
+      "branches": [
+        {
+          "case_id": "B2-bound",
+          "budget": {
+            "max_revision_rounds": 1,
+            "max_model_calls": 39,
+            "max_tool_calls": 40,
+            "max_retrieval_calls": 12,
+            "max_duration_seconds": 796.646,
+            "max_transient_retries": 0,
+            "step_timeout_seconds": 110,
+            "max_retrieval_chars_per_call": 16000,
+            "max_retrieval_chars_total": 160000
+          },
+          "snapshot_same": true,
+          "final_text_unchanged": true,
+          "final_answer": {
+            "answer_id": "natural-2-answer",
+            "version": 1,
+            "text": "按该NERC准则，输配（TO-DP）边界通常用有功与无功明负荷表示，可置于变电站高压侧，也可置于降压变压器及等效配电阻抗之后。\n\n边界所建负荷功率因数（LPF）会影响大电力系统的电压与无功表现，故TO与DP须协调确定峰、轻载等临界负荷水平处的LPF。\n\n双向要求：负荷不应过度依赖BES的滞后或超前无功支撑，BES也不应单独依赖负荷提供无功支撑。",
+            "assumptions": [
+              "仅依据所给的NERC《Reactive Power Planning》准则第37页文字作答。",
+              "该准则为北美大电力系统的自愿性建议，非中国强制标准。"
+            ],
+            "missing_information": [
+              "给定资料仅显示该页前半部分，规划部分后续关于LPF建模的具体做法未提取到。"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 63,
+                "evidence_ids": [
+                  "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+                ]
+              },
+              {
+                "start_offset": 65,
+                "end_offset": 125,
+                "evidence_ids": [
+                  "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+                ]
+              },
+              {
+                "start_offset": 127,
+                "end_offset": 173,
+                "evidence_ids": [
+                  "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+                ]
+              }
+            ]
+          },
+          "decision": "review_required",
+          "revision_outputs": [],
+          "retrieval_summary": [
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 1,
+              "cumulative_chars": 5837,
+              "duration_ms": 9896,
+              "accepted_chars": 5837,
+              "offered_chars": 5837,
+              "outcome": "hits",
+              "query_sha256": "6cffca3e2dfe13e21fec8aedf60d053a39f6cb71c402aaa464fa2f3eab28928b",
+              "hit_evidence_ids": [
+                "e-12841ba00d6f3a2ac72c86687f18b2e4a233e2e6af59b1637854b5aca09abe5b",
+                "e-effc4aab766329bf1efa2dbd7c6158bf3a8a94a608cd8522a3a498c9fd663db0",
+                "e-6a7a103fdda95366e064210d9bff5f5d22d102e6eceda0f4e52673ae202d1ffc"
+              ]
+            },
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 2,
+              "cumulative_chars": 8470,
+              "duration_ms": 371,
+              "accepted_chars": 2633,
+              "offered_chars": 2633,
+              "outcome": "hits",
+              "query_sha256": "8069ebdaec82b4b946681af52854a8b8ebbf125370af0f66267ac2ce795712b3",
+              "hit_evidence_ids": [
+                "e-dd78c8794dcb9c6861db1ff4bcd0bab4f98c2e9f00194f046356d746b408d4d1",
+                "e-4628dd1d6b1dbd9f9c7218aa818a41e26614e61a8a819f15cd0d9f35889bb13d",
+                "e-53c8784e4ea02eb46fad5f320db9b060369ee16784b25a4157eb4869fa9fb6e1"
+              ]
+            },
+            {
+              "purpose": "domain_review",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 3,
+              "cumulative_chars": 14307,
+              "duration_ms": 4272,
+              "accepted_chars": 5837,
+              "offered_chars": 5837,
+              "outcome": "hits",
+              "query_sha256": "414719099ee9ea7b5a3e2e79aa3546531aad540b358979ccae0947fea286576d",
+              "hit_evidence_ids": [
+                "e-12841ba00d6f3a2ac72c86687f18b2e4a233e2e6af59b1637854b5aca09abe5b",
+                "e-6a7a103fdda95366e064210d9bff5f5d22d102e6eceda0f4e52673ae202d1ffc",
+                "e-effc4aab766329bf1efa2dbd7c6158bf3a8a94a608cd8522a3a498c9fd663db0"
+              ]
+            }
+          ]
+        },
+        {
+          "case_id": "B2-before",
+          "budget": {
+            "max_revision_rounds": 1,
+            "max_model_calls": 39,
+            "max_tool_calls": 40,
+            "max_retrieval_calls": 12,
+            "max_duration_seconds": 796.646,
+            "max_transient_retries": 0,
+            "step_timeout_seconds": 110,
+            "max_retrieval_chars_per_call": 16000,
+            "max_retrieval_chars_total": 160000
+          },
+          "snapshot_same": true,
+          "final_text_unchanged": true,
+          "final_answer": {
+            "answer_id": "natural-2-answer",
+            "version": 1,
+            "text": "按该NERC准则，输配（TO-DP）边界通常用有功与无功明负荷表示，可置于变电站高压侧，也可置于降压变压器及等效配电阻抗之后。\n\n边界所建负荷功率因数（LPF）会影响大电力系统的电压与无功表现，故TO与DP须协调确定峰、轻载等临界负荷水平处的LPF。\n\n双向要求：负荷不应过度依赖BES的滞后或超前无功支撑，BES也不应单独依赖负荷提供无功支撑。",
+            "assumptions": [
+              "仅依据所给的NERC《Reactive Power Planning》准则第37页文字作答。",
+              "该准则为北美大电力系统的自愿性建议，非中国强制标准。"
+            ],
+            "missing_information": [
+              "给定资料仅显示该页前半部分，规划部分后续关于LPF建模的具体做法未提取到。"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 63,
+                "evidence_ids": [
+                  "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+                ]
+              },
+              {
+                "start_offset": 65,
+                "end_offset": 125,
+                "evidence_ids": [
+                  "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+                ]
+              },
+              {
+                "start_offset": 127,
+                "end_offset": 173,
+                "evidence_ids": [
+                  "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+                ]
+              }
+            ]
+          },
+          "decision": "execution_incomplete",
+          "revision_outputs": [],
+          "retrieval_summary": [
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 1,
+              "cumulative_chars": 5837,
+              "duration_ms": 3920,
+              "accepted_chars": 5837,
+              "offered_chars": 5837,
+              "outcome": "hits",
+              "query_sha256": "c94913bc49b9b1fdf63c4fb8ff7f4a2432692f223ed1cd844917e0e201c2f71b",
+              "hit_evidence_ids": [
+                "e-12841ba00d6f3a2ac72c86687f18b2e4a233e2e6af59b1637854b5aca09abe5b",
+                "e-effc4aab766329bf1efa2dbd7c6158bf3a8a94a608cd8522a3a498c9fd663db0",
+                "e-6a7a103fdda95366e064210d9bff5f5d22d102e6eceda0f4e52673ae202d1ffc"
+              ]
+            },
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 2,
+              "cumulative_chars": 8470,
+              "duration_ms": 354,
+              "accepted_chars": 2633,
+              "offered_chars": 2633,
+              "outcome": "hits",
+              "query_sha256": "8069ebdaec82b4b946681af52854a8b8ebbf125370af0f66267ac2ce795712b3",
+              "hit_evidence_ids": [
+                "e-dd78c8794dcb9c6861db1ff4bcd0bab4f98c2e9f00194f046356d746b408d4d1",
+                "e-4628dd1d6b1dbd9f9c7218aa818a41e26614e61a8a819f15cd0d9f35889bb13d",
+                "e-53c8784e4ea02eb46fad5f320db9b060369ee16784b25a4157eb4869fa9fb6e1"
+              ]
+            },
+            {
+              "purpose": "domain_review",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 3,
+              "cumulative_chars": 14307,
+              "duration_ms": 4450,
+              "accepted_chars": 5837,
+              "offered_chars": 5837,
+              "outcome": "hits",
+              "query_sha256": "6b352c5926ce8fe4fc9b1252239dd0e7fccb84862a3e0b79e3e14d303ef41c8a",
+              "hit_evidence_ids": [
+                "e-12841ba00d6f3a2ac72c86687f18b2e4a233e2e6af59b1637854b5aca09abe5b",
+                "e-6a7a103fdda95366e064210d9bff5f5d22d102e6eceda0f4e52673ae202d1ffc",
+                "e-effc4aab766329bf1efa2dbd7c6158bf3a8a94a608cd8522a3a498c9fd663db0"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_index": 2,
+      "question": "按给定NERC资料分别说明N-1与选定N-2的要求；无操作员干预这一限定在所给段落中具体绑定哪种工况？",
+      "requirements": [
+        "N-1立即、无操作员干预、限值/稳态稳定",
+        "选定N-2等另外说明，不把N-1限定无据扩展至N-2"
+      ],
+      "draft": {
+        "answer_id": "natural-3-answer",
+        "version": 1,
+        "text": "按NERC《无功规划》指南：N-1指失去单个元件后，系统在无操作员干预下仍应处于应急热额定值与电压限值内，并同时适用于稳态与稳定要求。\n\nN-2仅涉及“选定”的部分双重故障，用于确定稳定极限，且应能承受极端扰动而不发生电压崩溃、连锁或失稳。\n\n“无操作员干预”在段落中明确绑定的是N-1（单一故障）后的即时性能要求，而非N-2或正常工况。",
+        "assumptions": [
+          "依据为NERC2016年《Reliability Guideline: Reactive Power Planning》第21页，属自愿性指南，非中国运行标准。"
+        ],
+        "missing_information": [],
+        "citations": [
+          {
+            "start_offset": 0,
+            "end_offset": 67,
+            "evidence_ids": [
+              "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+            ]
+          },
+          {
+            "start_offset": 69,
+            "end_offset": 120,
+            "evidence_ids": [
+              "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+            ]
+          },
+          {
+            "start_offset": 122,
+            "end_offset": 169,
+            "evidence_ids": [
+              "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+            ]
+          }
+        ]
+      },
+      "snapshot_sha256": "97c7f1d8f1f231ab2e79072bd620b8bbe6eacab477c785c51d401fec56c2da7c",
+      "evidence_identities": [
+        {
+          "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]"
+        },
+        {
+          "evidence_id": "e-bf21e6462ce5bc5ec6ea5dc8ff0c4d7e076c7f747f2bce8fa1793c3fbdda37f9",
+          "source_id": "dataset-record-ed3b60519d971934c447b1d7094c70214b38e497d7ebd93ddfe2ec997a60c52e",
+          "source_version": "675d4e657087abe0a78b06da6665edf563015225974b7638a22dd7187190f7bf",
+          "locator": "shard=chinese/middle/rank_00412.parquet;row=185444;record=226200022486;chars[3541:4698)"
+        },
+        {
+          "evidence_id": "e-a9a10f3b4632239347fd66d8d8ecc9550b484fc63388d32df113e2ff2bbf3d0b",
+          "source_id": "dataset-record-8d6e58d2650dc20378efcb679421c7beb2bcc0d589f5e81ee51292ec2b9f379f",
+          "source_version": "a6806a2d15d885b6b7010c6825ffa2d52aa32d1b74ba888c51d5f869940f4b40",
+          "locator": "shard=chinese/middle/rank_00417.parquet;row=274938;record=365300030674;chars[2015:2880)"
+        },
+        {
+          "evidence_id": "e-213a27697dc1de235231e46736fa7f3d5dfaddde6a91ee92f5242b801214f936",
+          "source_id": "dataset-record-e0a8a3a7ca7446f4bee3e8f982d3eaa2d91a57daa0a826e03ae34f13951baaca",
+          "source_version": "71c70d07e3c9369f5aaee4d238c82120536de946789efd6f54e5825ce25e7e5c",
+          "locator": "shard=chinese/middle/rank_00419.parquet;row=8851;record=150100013350;chars[0:410)"
+        },
+        {
+          "evidence_id": "e-e2a4dd735f517ad50e5193e3d05f95d4a957cad1f4fa25f6ccd91acd5d929d23",
+          "source_id": "dataset-record-ed3b60519d971934c447b1d7094c70214b38e497d7ebd93ddfe2ec997a60c52e",
+          "source_version": "675d4e657087abe0a78b06da6665edf563015225974b7638a22dd7187190f7bf",
+          "locator": "shard=chinese/middle/rank_00412.parquet;row=185444;record=226200022486;chars[2361:3541)"
+        },
+        {
+          "evidence_id": "e-856e477c4fea6b9197a447ad8506c1f2af54fdd4edb4259061bf528e8f830847",
+          "source_id": "dataset-record-ed3b60519d971934c447b1d7094c70214b38e497d7ebd93ddfe2ec997a60c52e",
+          "source_version": "675d4e657087abe0a78b06da6665edf563015225974b7638a22dd7187190f7bf",
+          "locator": "shard=chinese/middle/rank_00412.parquet;row=185444;record=226200022486;chars[4698:5847)"
+        }
+      ],
+      "generation_calls": 1,
+      "generation_duration_ms": 5234,
+      "observations": {
+        "first_answer_saved_ms": 5240.013,
+        "browser_first_paint_ms": null,
+        "collect_elapsed_ms": 5261.468
+      },
+      "branches": [
+        {
+          "case_id": "B3-before",
+          "budget": {
+            "max_revision_rounds": 1,
+            "max_model_calls": 39,
+            "max_tool_calls": 40,
+            "max_retrieval_calls": 12,
+            "max_duration_seconds": 794.766,
+            "max_transient_retries": 0,
+            "step_timeout_seconds": 110,
+            "max_retrieval_chars_per_call": 16000,
+            "max_retrieval_chars_total": 160000
+          },
+          "snapshot_same": true,
+          "final_text_unchanged": true,
+          "final_answer": {
+            "answer_id": "natural-3-answer",
+            "version": 1,
+            "text": "按NERC《无功规划》指南：N-1指失去单个元件后，系统在无操作员干预下仍应处于应急热额定值与电压限值内，并同时适用于稳态与稳定要求。\n\nN-2仅涉及“选定”的部分双重故障，用于确定稳定极限，且应能承受极端扰动而不发生电压崩溃、连锁或失稳。\n\n“无操作员干预”在段落中明确绑定的是N-1（单一故障）后的即时性能要求，而非N-2或正常工况。",
+            "assumptions": [
+              "依据为NERC2016年《Reliability Guideline: Reactive Power Planning》第21页，属自愿性指南，非中国运行标准。"
+            ],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 67,
+                "evidence_ids": [
+                  "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+                ]
+              },
+              {
+                "start_offset": 69,
+                "end_offset": 120,
+                "evidence_ids": [
+                  "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+                ]
+              },
+              {
+                "start_offset": 122,
+                "end_offset": 169,
+                "evidence_ids": [
+                  "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+                ]
+              }
+            ]
+          },
+          "decision": "execution_incomplete",
+          "revision_outputs": [],
+          "retrieval_summary": [
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 1,
+              "cumulative_chars": 5091,
+              "duration_ms": 13596,
+              "accepted_chars": 5091,
+              "offered_chars": 5091,
+              "outcome": "hits",
+              "query_sha256": "6f50fa55c64432027fe1cc32b84fc038b0f9d9f8cd0986d26a55a556a1346148",
+              "hit_evidence_ids": [
+                "e-e8ab26b37f583adf72826bbeb3617acff8636a92137a0827cba64e13882433a1",
+                "e-3242f54e6d9ecdf3f2d0d060119be0d627fb3cae04a0ba2b7e9309b6e36565c8",
+                "e-190265368258989a5e96d7e08598a34bbd892f15044661ac2bd1b20a2d11c46c"
+              ]
+            },
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 2,
+              "cumulative_chars": 9255,
+              "duration_ms": 475,
+              "accepted_chars": 4164,
+              "offered_chars": 4164,
+              "outcome": "hits",
+              "query_sha256": "79b12a36436e6691ab1d23b3064875b30ec609c90304b4e18c59ea95e22d790b",
+              "hit_evidence_ids": [
+                "e-c189a99122df0149e1e1ff9309d25677c37b210551032ec599d542c1c3f4bfc7",
+                "e-ae87f08b8c75924ea95935e80904249b11466668a4616e2d043a492853c2f9a0",
+                "e-769d210ae2b1d1f5acd386a321227a5c77704a2d074d4fe6927346b0dca5a0fd"
+              ]
+            },
+            {
+              "purpose": "domain_review",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 3,
+              "cumulative_chars": 14250,
+              "duration_ms": 13144,
+              "accepted_chars": 4995,
+              "offered_chars": 4995,
+              "outcome": "hits",
+              "query_sha256": "cdbceaff8db2295e765f87bbec9d661d9b7acc337f049378e8ab354ae6951452",
+              "hit_evidence_ids": [
+                "e-3242f54e6d9ecdf3f2d0d060119be0d627fb3cae04a0ba2b7e9309b6e36565c8",
+                "e-3ea054187f8836bd9ecaaff25b5b7b52d72b6bd3583fc060b800d2caad24b9bb",
+                "e-e8ab26b37f583adf72826bbeb3617acff8636a92137a0827cba64e13882433a1"
+              ]
+            }
+          ]
+        },
+        {
+          "case_id": "B3-bound",
+          "budget": {
+            "max_revision_rounds": 1,
+            "max_model_calls": 39,
+            "max_tool_calls": 40,
+            "max_retrieval_calls": 12,
+            "max_duration_seconds": 794.766,
+            "max_transient_retries": 0,
+            "step_timeout_seconds": 110,
+            "max_retrieval_chars_per_call": 16000,
+            "max_retrieval_chars_total": 160000
+          },
+          "snapshot_same": true,
+          "final_text_unchanged": true,
+          "final_answer": {
+            "answer_id": "natural-3-answer",
+            "version": 1,
+            "text": "按NERC《无功规划》指南：N-1指失去单个元件后，系统在无操作员干预下仍应处于应急热额定值与电压限值内，并同时适用于稳态与稳定要求。\n\nN-2仅涉及“选定”的部分双重故障，用于确定稳定极限，且应能承受极端扰动而不发生电压崩溃、连锁或失稳。\n\n“无操作员干预”在段落中明确绑定的是N-1（单一故障）后的即时性能要求，而非N-2或正常工况。",
+            "assumptions": [
+              "依据为NERC2016年《Reliability Guideline: Reactive Power Planning》第21页，属自愿性指南，非中国运行标准。"
+            ],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 67,
+                "evidence_ids": [
+                  "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+                ]
+              },
+              {
+                "start_offset": 69,
+                "end_offset": 120,
+                "evidence_ids": [
+                  "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+                ]
+              },
+              {
+                "start_offset": 122,
+                "end_offset": 169,
+                "evidence_ids": [
+                  "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+                ]
+              }
+            ]
+          },
+          "decision": "execution_incomplete",
+          "revision_outputs": [],
+          "retrieval_summary": [
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 1,
+              "cumulative_chars": 5091,
+              "duration_ms": 11070,
+              "accepted_chars": 5091,
+              "offered_chars": 5091,
+              "outcome": "hits",
+              "query_sha256": "5752dc07726d79560cf8480fd7a97e4d1f141c50b7914af7b52bff1ed5e2a394",
+              "hit_evidence_ids": [
+                "e-e8ab26b37f583adf72826bbeb3617acff8636a92137a0827cba64e13882433a1",
+                "e-3242f54e6d9ecdf3f2d0d060119be0d627fb3cae04a0ba2b7e9309b6e36565c8",
+                "e-190265368258989a5e96d7e08598a34bbd892f15044661ac2bd1b20a2d11c46c"
+              ]
+            },
+            {
+              "purpose": "verification",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 2,
+              "cumulative_chars": 9255,
+              "duration_ms": 485,
+              "accepted_chars": 4164,
+              "offered_chars": 4164,
+              "outcome": "hits",
+              "query_sha256": "79b12a36436e6691ab1d23b3064875b30ec609c90304b4e18c59ea95e22d790b",
+              "hit_evidence_ids": [
+                "e-c189a99122df0149e1e1ff9309d25677c37b210551032ec599d542c1c3f4bfc7",
+                "e-ae87f08b8c75924ea95935e80904249b11466668a4616e2d043a492853c2f9a0",
+                "e-769d210ae2b1d1f5acd386a321227a5c77704a2d074d4fe6927346b0dca5a0fd"
+              ]
+            },
+            {
+              "purpose": "domain_review",
+              "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+              "calls_used": 3,
+              "cumulative_chars": 14250,
+              "duration_ms": 13128,
+              "accepted_chars": 4995,
+              "offered_chars": 4995,
+              "outcome": "hits",
+              "query_sha256": "08800480e930e43a1eddca8ce1028cded921e311358a8ff3590e8d948f9f4e6c",
+              "hit_evidence_ids": [
+                "e-3242f54e6d9ecdf3f2d0d060119be0d627fb3cae04a0ba2b7e9309b6e36565c8",
+                "e-3ea054187f8836bd9ecaaff25b5b7b52d72b6bd3583fc060b800d2caad24b9bb",
+                "e-e8ab26b37f583adf72826bbeb3617acff8636a92137a0827cba64e13882433a1"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

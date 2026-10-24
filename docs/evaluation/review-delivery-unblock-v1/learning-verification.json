@@ -1,0 +1,13 @@
+{
+  "chapters": 20,
+  "explained_self_checks": 75,
+  "markdown_only": true,
+  "build": true,
+  "source_hashes": true,
+  "local_links": true,
+  "folded_html": true,
+  "navigation_search": true,
+  "browser_checked": false,
+  "paid_implementation": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
+  "current_implementation": "ebb6fb974655406b73a87d1a64d84f49b52d275f"
+}
