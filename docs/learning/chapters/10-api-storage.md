@@ -1,5 +1,13 @@
 # 10 API、UI、队列、SQLite与本机会话
 
+本轮实际结果：A8/G4/B8固定批次106请求、1126972token，5条审核执行不完整；候选仅A4进入新修订提示，原版也纠正且没有目标历史叙述，自然8路正文不变。未证明候选净收益，不采用生产；N-1/N-2条件外推和原引用跨单元缺口疑点保留。实际8765保持原停服，无常驻候选。
+
+## 2026-10-24 候选配置与采集边界
+
+ServiceConfig.revision_answer_delivery和Factory清单显式记录修订正文提示候选，旧记录不迁移；页面仍按已保存版本、完整阶段及政策处置展示，不因候选提示或modified动作把未认可草稿显示为通过。候选的真实Factory/图路径/Store/API离线夹具验证包含两版本与失败；本轮未重新设计UI，也不把离线/API检查说成新浏览器验收。
+
+本批使用独立小型运行库，SQLite连接在所属事件循环创建、使用、关闭；复用saved_result另开显式关闭只读连接收集，Windows临时文件释放及响应/最终存储失败后停止已演练。旧生产库/历史attempt不修改、不复制。实际服务状态以[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md)为准，旧章节ready是当时状态。
+
 ## 2026-10-23 事实审核内部流程候选
 
 候选服务使用原Factory、worker、Store和API；新增受服务配置控制的premise_declarations，声明只能精确绑定当前question/user_context。FactFlowOutput单独保存object_reviews与flow_trace，API的fact_internal_flow展示两轴异议和节点诊断。旧记录继续可读。服务manifest记录实际候选prompt/contract，不把schema13数字等同本次实际协议。

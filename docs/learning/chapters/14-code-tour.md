@@ -1,5 +1,7 @@
 # 14 核心源码阅读路线：输入、调用、异常与取舍
 
+2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见[报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md)。
+
 2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
 ## 一页请求对象流：先认对象，再读源码
@@ -375,25 +377,25 @@ backend/service.py / ApplicationService._worker，实际行100–126。
 
 ### 摘录：真实装配的资源建立
 
-backend/assembly.py / ComponentFactory.create，实际行143–158。
+backend/assembly.py / ComponentFactory.create，2026-10-24当前实际行193–208。
 
 ```python
     def create(self,rid,observer):
         if self.config.profile=='synthetic_fixture':
             from agents.fakes import make_fake_harness
-            harness=make_fake_harness();harness.observer=observer
+            harness=make_fake_harness();harness.observer=observer;harness.execution_path=self.config.execution_path
             if self.config.decision_policy=='product-v1':
                 from harness.product_policy import ProductAuditPolicy
                 harness.policy=ProductAuditPolicy(synthetic_fixture=True)
             return Bundle(harness)
         from agents.generation import EvidenceGenerationAgent
         from agents.evidence_verification import ModelEvidenceVerificationAgent
-        from agents.power_domain_review import ModelPowerDomainReviewAgent
-        from agents.revision import ModelRevisionAgent
-        from services.claim_extractor import ModelClaimExtractor
-        from tools.unit_conversion import UnitConversionTool
-        from model_adapter.contracts import ModelSettings
-        from model_adapter.deepseek import create_adapter
+        if self.config.fact_internal_flow!='production':
+            from agents.fact_flow_v1 import FactFlowAgent as FactAgent
+            if self.config.fact_internal_flow=='joint_v2':
+                from services.fact_flow_protocol_v2 import create_agent as FactAgent
+            elif self.config.fact_internal_flow=='two_stage_v1':
+                from services.fact_two_stage_v1 import create_agent as FactAgent
 ```
 只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
@@ -501,17 +503,17 @@ backend/service.py / ApplicationService.result，实际行163–187。
 
 ### 关键连接：实际Harness组件注入
 
-backend/assembly.py实际行201–210，仅连接处摘录，周围初始化/后续逻辑省略；当前工厂没有传图路径，仍使用默认顺序驱动。
+backend/assembly.py当前实际行235–244，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                ModelEvidenceVerificationAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile),
+                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
-                ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True),
+                ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
-                generation_corpus_english=corpus_english)
+                generation_corpus_english=corpus_english,execution_path=self.config.execution_path)
             harness.subject_supplement=True
             return Bundle(harness,resources)
 ```

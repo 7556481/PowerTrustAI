@@ -1,5 +1,13 @@
 # 04 Harness：状态机、并发、有限纠正与完整重审
 
+本轮实际结果：A8/G4/B8固定批次106请求、1126972token，5条审核执行不完整；候选仅A4进入新修订提示，原版也纠正且没有目标历史叙述，自然8路正文不变。未证明候选净收益，不采用生产；N-1/N-2条件外推和原引用跨单元缺口疑点保留。实际8765保持原停服，无常驻候选。
+
+## 2026-10-24 一次修订与交付净收益
+
+候选复用原Factory、OfflineHarness、四职责、双审核和共享阶段。revision-output-v2的逐ID动作与“至少一项modified且正文改变”门禁没有放宽：归档两条实际Revision都有成立的阈值错误，不能只看条件存在便声称迫使错误改写。modified只是提议改动，retained解释保留，unresolved说明无法解决；任何动作都不代替新版本重新提取与完整双审。
+
+开发入口revision_answer_delivery=answer_only_v1仅改变修订提示，默认production；回退选择production即可，原输出与旧记录兼容。完整离线1197项通过197.256秒，仅证明程序行为。新批使用已有run_fixed、RunStore与独立关闭的只读采集器；单例最终结构失败继续，共享/未知故障停止，已受理不重复提交。真实语义、成本和未执行槽见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md)。
+
 ## 2026-10-23 契约审计与v2离线候选
 
 首真实内部候选对照已按F05最终失败停止：12调用、3纠正，后6分支未发送，生产未切。审计实际消息发现旧objection字段要求与新字段禁止并存，以及必填repair缺失、纠正提示禁止复制文本与字面quote字段的歧义。v2使用唯一字段规范供初始/纠正消息共用；程序检查preserved=true必须有回答原片段，并拒绝技术对象以ordinary静默绕过义务；明确异议后ordinary仍可合法转复核。程序不猜分类、不补理由或条件片段。

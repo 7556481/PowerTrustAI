@@ -1,7 +1,7 @@
 {
   "version": {
-    "application_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
-    "document_version": "learning-site-v4.3 local managed LangGraph default, 2026-10-23",
+    "application_commit": "bc55a4b20bc72f795a2cb9a110fc8b5cb1488651",
+    "document_version": "learning-site-v4.4 answer delivery net benefit v1, 2026-10-24",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
@@ -10,14 +10,14 @@
     "final_delivery_ref": "release-v2-20261009",
     "default_retrieval": "topic_v4_subject_v1",
     "default_review_message_profile": "lossless_v1",
-    "previous_application_commit": "9f0e491ad41e8b1beb4d2d9bd45eff2755163d4c",
+    "previous_application_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
     "execution_path_default": "langgraph_v1",
     "optional_development_execution_path": "langgraph_v1",
     "langgraph_version": "1.2.16",
     "production_switch": true,
-    "new_live_model_calls": 32,
+    "new_live_model_calls": 106,
     "validation_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
-    "offline_unittest_count": 1136,
+    "offline_unittest_count": 1197,
     "live_graph_service_runs": 3,
     "live_planned_service_runs": 6,
     "live_accepted_service_runs": 6,
@@ -47,13 +47,26 @@
       "full_offline_seconds": 164.132,
       "entry": "services.fact_flow_protocol_v2.create_agent",
       "prior_v1_live_result": "docs/evaluation/fact-internal-flow-v1/live-report-v1.md"
+    },
+    "answer_delivery_candidate": {
+      "version": "answer_only_v1",
+      "production_default": "production",
+      "application_commit": "bc55a4b20bc72f795a2cb9a110fc8b5cb1488651",
+      "offline_tests": 1197,
+      "offline_seconds": 197.256,
+      "report": "docs/evaluation/answer-review-net-benefit-v1/report.md",
+      "actual_model_calls": 106,
+      "total_tokens": 1126972,
+      "adoption": "retain_candidate_no_production_switch",
+      "natural_revisions": 0,
+      "execution_incomplete_audits": 5
     }
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 3723,
-      "sha256": "f3532327c8faad1ea14bcbaa6da7fcaea125f9f1e270fd90f811b085d6fd2d26"
+      "characters": 3918,
+      "sha256": "67965dc8d41b8e58d6d8fc1b7372cdc415f878028965b48c206e4dcf1c2f6332"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -67,13 +80,13 @@
     },
     {
       "source": "docs/learning/chapters/03-agents.md",
-      "characters": 6439,
-      "sha256": "4a876befc3595d1bcaa76b8c468b048f2520f19acd8f8c630f49be81c5efea63"
+      "characters": 7110,
+      "sha256": "f951f5e41718141b466866e08a3332c37ffd3bb2325ca743c42a8c2ea555cbe6"
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 11294,
-      "sha256": "91c3cd5d70158e997748e82966c47c4483c4977e04ba20d282177fd479039268"
+      "characters": 11982,
+      "sha256": "a4afb08ea3e9ea4f2b8c6503f9b4a95fd9c6f97af174eacfb9fd2257a24db31d"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -92,8 +105,8 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 6378,
-      "sha256": "6bd6490eb5617c3af5dd5384a1e257b38ff4aef0269e939f8036888790e0a989"
+      "characters": 6748,
+      "sha256": "34122b6692dd71cf7f47c98b56fabb01fdf9e3a06bad92a4f1f303f9e9c129ef"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -102,13 +115,13 @@
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 3394,
-      "sha256": "f651597e748c5047dec2a63a8a399d18d6eddf3ab667cc812175327751238e88"
+      "characters": 4011,
+      "sha256": "6ceef12d104a015ab04c21bd3426537625c215df54599a3c9ffe3ec7f0589fe1"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
-      "characters": 3661,
-      "sha256": "069cb9a2835d952b8bcb8bd22587f1f4d1d925a96534c8162eb513381a7ddf64"
+      "characters": 4312,
+      "sha256": "5e5279af4954b8845a667effe2bbee9f68877c468ec75d82bfcfb44f1eb3a1c7"
     },
     {
       "source": "docs/learning/chapters/12-training-nli.md",
@@ -122,8 +135,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 37142,
-      "sha256": "450d12604fac60dc01417e827192cfb914b9a1193cd8431c274b784639d38ff1"
+      "characters": 37627,
+      "sha256": "24ffeeec276e4209d9dd9260b0a6b6d55220f24acc2d09515def08f836cad7e0"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -161,6 +174,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 140242,
+  "markdown_characters": 143919,
   "network_dependencies": false
 }
