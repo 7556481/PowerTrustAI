@@ -1,0 +1,512 @@
+{
+  "plan": {
+    "A": 16,
+    "G": 4,
+    "B": 8
+  },
+  "accepted": 2,
+  "actually_executed": 2,
+  "not_submitted_after_stop": [
+    "A2-simple_v1",
+    "A2-production",
+    "A3-production",
+    "A3-simple_v1",
+    "A4-simple_v1",
+    "A4-production",
+    "A5-production",
+    "A5-simple_v1",
+    "A6-simple_v1",
+    "A6-production",
+    "A7-production",
+    "A7-simple_v1",
+    "A8-simple_v1",
+    "A8-production",
+    "G1",
+    "B1-production",
+    "B1-simple_v1",
+    "G2",
+    "B2-simple_v1",
+    "B2-production",
+    "G3",
+    "B3-production",
+    "B3-simple_v1",
+    "G4",
+    "B4-simple_v1",
+    "B4-production"
+  ],
+  "dependent_unexecuted": [],
+  "lines": {
+    "A/production": {
+      "accepted": 1,
+      "executed": 1,
+      "execution_complete": 1,
+      "all_initial_valid_tasks": 1,
+      "duration_ms_sequential_harness_sum": 8003,
+      "revisions": 0,
+      "calls": 3,
+      "corrections": 0,
+      "initial": 3,
+      "initial_valid": 3,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "model_duration_ms_not_wallclock": 7724,
+      "input_tokens": 14515,
+      "output_tokens": 1353,
+      "total_tokens": 15868,
+      "cache_hit_tokens": 13952,
+      "cache_miss_tokens": 563
+    },
+    "A/simple_v1": {
+      "accepted": 1,
+      "executed": 1,
+      "execution_complete": 0,
+      "all_initial_valid_tasks": 0,
+      "duration_ms_sequential_harness_sum": 443,
+      "revisions": 0,
+      "calls": 2,
+      "corrections": 0,
+      "initial": 2,
+      "initial_valid": 0,
+      "revision_calls": 0,
+      "rereview_calls": 0,
+      "model_duration_ms_not_wallclock": 356,
+      "input_tokens_unknown_records": 2,
+      "output_tokens_unknown_records": 2,
+      "total_tokens_unknown_records": 2,
+      "cache_hit_tokens_unknown_records": 2,
+      "cache_miss_tokens_unknown_records": 2
+    }
+  },
+  "fixed_units": [
+    {
+      "id": "A1-production",
+      "unit": 0,
+      "reference": "supported",
+      "fact_executed": true,
+      "fact_raw": "supported",
+      "fact_effective": "supported",
+      "fact_assessment": {
+        "source_kind": "explanatory_body",
+        "explanation": "The quoted guideline bullet describes dynamic reactive resource behavior matching every clause of the claim.",
+        "whole_claim_supported": true,
+        "missing_clauses": [],
+        "conditions_preserved": true,
+        "authority_scope": "explanation",
+        "answer_conditions": [],
+        "causal_direction_preserved": true,
+        "repair": null,
+        "quote_ids": [
+          "scope-85ccb4f8751212c2d77b7e93-0"
+        ],
+        "raw_model_status": "supported",
+        "effective_support_status": "supported",
+        "condition_bindings": [],
+        "condition_candidates_version": "source-condition-carriers-v1",
+        "raw_repair": null,
+        "semantic_uncertain": false,
+        "authority_missing": false,
+        "source_selection_version": "program-local-selected-bases-v6"
+      },
+      "citation_executed": true,
+      "citation_raw": "supported",
+      "citation_effective": "supported",
+      "citation_assessment": {
+        "source_kind": "explanatory_body",
+        "explanation": "The selected NERC guideline text describes dynamic reactive resources adjusting output automatically, continuously, within a specified voltage bandwidth in response to voltage changes, and operating to maintain a voltage set point or in voltage droop mode. The answer conveys these same propositions with faithful paraphrase.",
+        "whole_claim_supported": true,
+        "missing_clauses": [],
+        "conditions_preserved": true,
+        "authority_scope": "explanation",
+        "answer_conditions": [
+          {
+            "condition_id": "condition-edea7955d80e8fadcc6bf775",
+            "necessity": "required",
+            "answer_quote": "在规定电压带宽内",
+            "relationship": "preserved",
+            "reason": "The source frames automatic continuous adjustment as occurring within a specified voltage bandwidth; the answer preserves this qualifier as 规定电压带宽内."
+          }
+        ],
+        "causal_direction_preserved": true,
+        "repair": null,
+        "quote_ids": [
+          "scope-d6f64406938b4a219aeacdb5-0"
+        ],
+        "raw_model_status": "supported",
+        "effective_support_status": "supported",
+        "condition_bindings": [
+          {
+            "version": "source-condition-carriers-v1",
+            "scope_id": "scope-d6f64406938b4a219aeacdb5",
+            "quote_id": "scope-d6f64406938b4a219aeacdb5-0",
+            "candidate_id": "quote-7bd35014178dbbb59221229b",
+            "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+            "start_offset": 0,
+            "end_offset": 1200,
+            "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+            "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+            "provenance": {
+              "document_id": "nerc-reactive-planning-2016",
+              "document_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "file_sha256": "1cefced2d010a84c7245885bc4c99df3bcc4f4bf47357d719a377794d5c3295f",
+              "fragment_id": "f-0019cb8ce6cc38061b9e5bc019b64d40adbaa32634f74710aad5c37962f69eaf",
+              "knowledge_version": "k-7268b72e3f29f10bee44469b24680593116feef95c4f410680392292d19ecd55",
+              "start_offset": 0,
+              "end_offset": 1200,
+              "start_line": 1,
+              "end_line": 16,
+              "heading_path": [],
+              "source_uri": "https://www.nerc.com/globalassets/who-we-are/standing-committees/rstc/sams/reliability-guideline---reactive-power-planning.pdf",
+              "publisher": "North American Electric Reliability Corporation (NERC)",
+              "publication_date": "2016-12",
+              "document_title": "Reliability Guideline: Reactive Power Planning",
+              "heading_levels": [],
+              "file_page": 8,
+              "printed_page": null,
+              "section": null,
+              "parser_version": "pypdf-6.10.0/plain-pages-v1",
+              "page_text_sha256": "d457c48dc39cd6329a3b406fb1f5c189e1cab39cb221dee86602b1ceebbdd1fb",
+              "extraction_sha256": "7eebd32cb35270e1c90ca41646831d1c89009dbc709d2f3deec5a6a5ba21baf4",
+              "text_basis": "pdf_extracted_page_text",
+              "previous_fragment_id": "f-34c394888b8632250e841d43b7a470b52c923eec62b9222a114544bd16686e9d",
+              "next_fragment_id": "f-31a783e8b03ea3f9ebb56d6fd89522c069fc8d4d8cab399c78cc1372a93215e9",
+              "quality_status": "text_pending_review",
+              "quality_warnings": [
+                "extracted_text_not_visual_original",
+                "layout_pending_manual_review",
+                "formula_table_structure_not_interpreted",
+                "possible_columns_or_table",
+                "suspected_character_mapping",
+                "adjacent_page_context_not_merged"
+              ],
+              "splitter_version": "pdf-paragraphs-v2",
+              "split_method": "fallback_bounded_window",
+              "split_warnings": [
+                "paragraph_boundaries_pending_manual_review",
+                "unreliable_page_boundaries",
+                "layout_or_character_risk_forced_fallback",
+                "length_boundary_not_semantic"
+              ]
+            },
+            "text_sha256": "81d1ba89d51a555b8e4e385d23e6f286a23f077c288c2b7c4607c5e7339821d9",
+            "knowledge_version": null,
+            "answer_id": "fixed-review-v2-1",
+            "answer_version": 1,
+            "condition_id": "condition-edea7955d80e8fadcc6bf775",
+            "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+            "granularity": "whole_existing_quote_carrier",
+            "semantic_necessity_not_program_proof": true
+          }
+        ],
+        "condition_candidates_version": "source-condition-carriers-v1",
+        "raw_repair": null,
+        "semantic_uncertain": false,
+        "authority_missing": false,
+        "source_selection_version": "program-local-selected-bases-v6"
+      },
+      "fact_reference_aligned": true,
+      "citation_reference_aligned": true
+    },
+    {
+      "id": "A1-production",
+      "unit": 1,
+      "reference": "supported",
+      "fact_executed": true,
+      "fact_raw": "supported",
+      "fact_effective": "supported",
+      "fact_assessment": {
+        "source_kind": "explanatory_body",
+        "explanation": "The quoted static-resource bullet covers all three clauses: fixed output at nominal voltage, voltage-squared capability variation, and manual/automatic switching per system conditions.",
+        "whole_claim_supported": true,
+        "missing_clauses": [],
+        "conditions_preserved": true,
+        "authority_scope": "explanation",
+        "answer_conditions": [],
+        "causal_direction_preserved": true,
+        "repair": null,
+        "quote_ids": [
+          "scope-85ccb4f8751212c2d77b7e93-0"
+        ],
+        "raw_model_status": "supported",
+        "effective_support_status": "supported",
+        "condition_bindings": [],
+        "condition_candidates_version": "source-condition-carriers-v1",
+        "raw_repair": null,
+        "semantic_uncertain": false,
+        "authority_missing": false,
+        "source_selection_version": "program-local-selected-bases-v6"
+      },
+      "citation_executed": true,
+      "citation_raw": "supported",
+      "citation_effective": "supported",
+      "citation_assessment": {
+        "source_kind": "explanatory_body",
+        "explanation": "Selected source paragraph directly describes static reactive resource output and switching behavior; the answer restates fixed nominal output, voltage-squared dependence, and manual/automatic switching per system conditions.",
+        "whole_claim_supported": true,
+        "missing_clauses": [],
+        "conditions_preserved": true,
+        "authority_scope": "explanation",
+        "answer_conditions": [
+          {
+            "condition_id": "condition-549230d1ee8052294e0c4b2b",
+            "necessity": "required",
+            "answer_quote": "静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切",
+            "relationship": "preserved",
+            "reason": "Selected carrier states fixed output at nominal voltage, voltage-squared capability variation, and manual or automatic switching based on system conditions; answer preserves these qualifiers."
+          }
+        ],
+        "causal_direction_preserved": true,
+        "repair": null,
+        "quote_ids": [
+          "scope-0af0f469914dfa895b5d363b-0"
+        ],
+        "raw_model_status": "supported",
+        "effective_support_status": "supported",
+        "condition_bindings": [
+          {
+            "version": "source-condition-carriers-v1",
+            "scope_id": "scope-0af0f469914dfa895b5d363b",
+            "quote_id": "scope-0af0f469914dfa895b5d363b-0",
+            "candidate_id": "quote-7bd35014178dbbb59221229b",
+            "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+            "start_offset": 0,
+            "end_offset": 1200,
+            "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+            "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+            "provenance": {
+              "document_id": "nerc-reactive-planning-2016",
+              "document_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "file_sha256": "1cefced2d010a84c7245885bc4c99df3bcc4f4bf47357d719a377794d5c3295f",
+              "fragment_id": "f-0019cb8ce6cc38061b9e5bc019b64d40adbaa32634f74710aad5c37962f69eaf",
+              "knowledge_version": "k-7268b72e3f29f10bee44469b24680593116feef95c4f410680392292d19ecd55",
+              "start_offset": 0,
+              "end_offset": 1200,
+              "start_line": 1,
+              "end_line": 16,
+              "heading_path": [],
+              "source_uri": "https://www.nerc.com/globalassets/who-we-are/standing-committees/rstc/sams/reliability-guideline---reactive-power-planning.pdf",
+              "publisher": "North American Electric Reliability Corporation (NERC)",
+              "publication_date": "2016-12",
+              "document_title": "Reliability Guideline: Reactive Power Planning",
+              "heading_levels": [],
+              "file_page": 8,
+              "printed_page": null,
+              "section": null,
+              "parser_version": "pypdf-6.10.0/plain-pages-v1",
+              "page_text_sha256": "d457c48dc39cd6329a3b406fb1f5c189e1cab39cb221dee86602b1ceebbdd1fb",
+              "extraction_sha256": "7eebd32cb35270e1c90ca41646831d1c89009dbc709d2f3deec5a6a5ba21baf4",
+              "text_basis": "pdf_extracted_page_text",
+              "previous_fragment_id": "f-34c394888b8632250e841d43b7a470b52c923eec62b9222a114544bd16686e9d",
+              "next_fragment_id": "f-31a783e8b03ea3f9ebb56d6fd89522c069fc8d4d8cab399c78cc1372a93215e9",
+              "quality_status": "text_pending_review",
+              "quality_warnings": [
+                "extracted_text_not_visual_original",
+                "layout_pending_manual_review",
+                "formula_table_structure_not_interpreted",
+                "possible_columns_or_table",
+                "suspected_character_mapping",
+                "adjacent_page_context_not_merged"
+              ],
+              "splitter_version": "pdf-paragraphs-v2",
+              "split_method": "fallback_bounded_window",
+              "split_warnings": [
+                "paragraph_boundaries_pending_manual_review",
+                "unreliable_page_boundaries",
+                "layout_or_character_risk_forced_fallback",
+                "length_boundary_not_semantic"
+              ]
+            },
+            "text_sha256": "81d1ba89d51a555b8e4e385d23e6f286a23f077c288c2b7c4607c5e7339821d9",
+            "knowledge_version": null,
+            "answer_id": "fixed-review-v2-1",
+            "answer_version": 1,
+            "condition_id": "condition-549230d1ee8052294e0c4b2b",
+            "text": "Background \n \n• Dynamic reactive resources  adjust reactive power output automatically in real-time over a c ontinuous \nrange within a specified voltage bandwidth in response to grid voltage changes. These resources operate \nto maintain a set point voltage or operate in a voltage droop mode. Many dynamic reactive resources, \nparticularly newer ones employing power e lectronics, can respond within electrical cycles using fast -\nacting controls. For example, Static Synchronous Compensators ( STATCOMs) have a response time of \naround 50 ms. \n• Static reactive resources have fixed reactive power output at their nominal voltage, and their capability \nvaries according to voltage squared.  These devices are switched in or out of service based on system \nconditions. Switching action can be manual or automatic , but this type of  resource provides a fixed \nnominal contribution of reactive power to the grid once connected. \n \nStatic reactive resources generally include the following elements: \n• Fixed Shunt Devices: fixed shunt reactive devices include shunt capacitors and reactors. These devices \nhave a fixed nominal rating and their reactive power production or consumption is dependent on ",
+            "granularity": "whole_existing_quote_carrier",
+            "semantic_necessity_not_program_proof": true
+          }
+        ],
+        "condition_candidates_version": "source-condition-carriers-v1",
+        "raw_repair": null,
+        "semantic_uncertain": false,
+        "authority_missing": false,
+        "source_selection_version": "program-local-selected-bases-v6"
+      },
+      "fact_reference_aligned": true,
+      "citation_reference_aligned": true
+    },
+    {
+      "id": "A1-simple_v1",
+      "unit": 0,
+      "reference": "supported",
+      "fact_executed": false,
+      "fact_raw": null,
+      "fact_effective": "not_assessable",
+      "fact_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "citation_executed": false,
+      "citation_raw": null,
+      "citation_effective": "not_assessable",
+      "citation_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "fact_reference_aligned": false,
+      "citation_reference_aligned": false
+    },
+    {
+      "id": "A1-simple_v1",
+      "unit": 1,
+      "reference": "supported",
+      "fact_executed": false,
+      "fact_raw": null,
+      "fact_effective": "not_assessable",
+      "fact_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "citation_executed": false,
+      "citation_raw": null,
+      "citation_effective": "not_assessable",
+      "citation_assessment": {
+        "raw_model_status": "not_assessable",
+        "effective_support_status": "not_assessable",
+        "semantic_uncertain": true,
+        "condition_bindings": [],
+        "objection": {
+          "kind": "uncertain",
+          "reason": "model_execution_incomplete"
+        },
+        "authority_missing": false,
+        "repair": null,
+        "raw_repair": null,
+        "contract": "fact-review-simple-v1",
+        "projection_version": "simple-condition-projection-v1",
+        "projection_reasons": [
+          "condition_assessment_uncertain",
+          "inference_uncertain"
+        ],
+        "condition_assessment": {
+          "applicability": "unknown",
+          "expression": "uncertain",
+          "instance": "not_claimed",
+          "source_ids": [],
+          "answer_ids": [],
+          "reason": "model_execution_incomplete"
+        },
+        "inference": "uncertain",
+        "gap_answer_ids": [],
+        "program_source_units": [],
+        "program_answer_units": []
+      },
+      "fact_reference_aligned": false,
+      "citation_reference_aligned": false
+    }
+  ],
+  "invalid_attempts": [],
+  "root_constraint_request_counts": {},
+  "branches": [
+    {
+      "id": "A1-production",
+      "state": "completed",
+      "duration_ms": 8003,
+      "root_stage_union_ms": {
+        "initial_audit": 8003.0
+      },
+      "revision_count": 0
+    },
+    {
+      "id": "A1-simple_v1",
+      "state": "execution_incomplete",
+      "duration_ms": 443,
+      "root_stage_union_ms": {
+        "initial_audit": 443.0
+      },
+      "revision_count": 0
+    }
+  ],
+  "invoice_cost": null,
+  "timing_method": "Union of root-stage finish-minus-duration intervals; model request times and Harness totals are separate, not additive. No browser paint."
+}

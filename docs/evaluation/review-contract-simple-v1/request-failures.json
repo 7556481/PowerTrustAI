@@ -1,0 +1,69 @@
+{
+  "actual_requests": [
+    {
+      "sequence": 1,
+      "task": {
+        "line": "A",
+        "case": 0,
+        "variant": "production"
+      },
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "json_word_in_actual_messages": true,
+      "message_file_sha256": "2d3539441efa4043f671014f811fa6b98df667351be2613b0e7984b081e6d7ab",
+      "response_present": true
+    },
+    {
+      "sequence": 2,
+      "task": {
+        "line": "A",
+        "case": 0,
+        "variant": "production"
+      },
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "json_word_in_actual_messages": true,
+      "message_file_sha256": "ad83b8287ffd15d9cfafe46f7440d9e711bdf8402534ce6d3d010d40a54bc06f",
+      "response_present": true
+    },
+    {
+      "sequence": 3,
+      "task": {
+        "line": "A",
+        "case": 0,
+        "variant": "production"
+      },
+      "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+      "json_word_in_actual_messages": true,
+      "message_file_sha256": "0603af08ba5b70a61b084bbc6fd54eb7a96b5b9f7ca04198c4d264f247cd8dcf",
+      "response_present": true
+    },
+    {
+      "sequence": 4,
+      "task": {
+        "line": "A",
+        "case": 0,
+        "variant": "simple_v1"
+      },
+      "prompt_version": "evidence-verification-v9.22-simple-v1",
+      "json_word_in_actual_messages": false,
+      "message_file_sha256": "f06ba67c858bcf71c8ab72dbb05b17e572429535db5311b373c13ee8745fff2f",
+      "response_present": false
+    },
+    {
+      "sequence": 5,
+      "task": {
+        "line": "A",
+        "case": 0,
+        "variant": "simple_v1"
+      },
+      "prompt_version": "evidence-verification-v9.22-simple-v1",
+      "json_word_in_actual_messages": false,
+      "message_file_sha256": "93315455bf48beca4aa8c71c1bc4d10bad392eabb698f6cc84696c623272aef9",
+      "response_present": false
+    }
+  ],
+  "official_json_mode_requirement": "https://api-docs.deepseek.com/guides/json_mode/",
+  "verified_requirement": "JSON Output requires json word in system or user messages plus an example.",
+  "inference": "Both candidate messages omit json; strongly consistent with rejected JSON-mode request. Adapter discards non-200 response body and maps non-special statuses to MODEL_REQUEST_REJECTED, so exact status/reason cannot be recovered or asserted.",
+  "failure_boundary": "Two candidate groups were sent before batch-level stop because shared scope loop did not treat request rejection as a fatal request code. Catalog-specific immediate break added after this completed batch, offline only. No real resend.",
+  "unavailable": "No model response text or usage for requests4/5. Do not manufacture an invalid JSON response, zero usage or an HTTP400 record."
+}

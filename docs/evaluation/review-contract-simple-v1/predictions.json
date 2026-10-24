@@ -1,0 +1,131 @@
+[
+  {
+    "sequence": 1,
+    "run_id": "f90745a423b249a49fe2623d2ca15d9a",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "production"
+    },
+    "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+    "correction": false,
+    "messages_sha256": "2e1955fc9a353a4b0aa5e8b65b683cac606e60d7ce4e439ae22576b797c8cfdc",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "elapsed_before_send": 0.055829200000061974,
+    "response": {
+      "text": "{\"findings\":[{\"claim_id\":\"claim-a94808337adfbb64451071b3\",\"rationale\":\"The quoted NERC guideline text directly states that dynamic reactive resources adjust reactive power automatically in real time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, operating to maintain a set point voltage or in voltage droop mode. The answer's Chinese proposition matches these elements.\",\"applicability_conditions\":[\"Applies to the North American bulk power system context of the NERC Reliability Guideline; not a Chinese operational standard.\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-85ccb4f8751212c2d77b7e93-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"The source text explicitly covers real-time continuous automatic adjustment within a specified voltage bandwidth responsive to grid voltage, plus set point voltage or voltage droop mode operation.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"The Chinese answer preserves the source's meaning: dynamic resources, voltage bandwidth, automatic real-time continuous response to grid voltage, and set point or droop mode.\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"The quoted guideline bullet describes dynamic reactive resource behavior matching every clause of the claim.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]},{\"claim_id\":\"claim-50c019df96529e478dab5742\",\"rationale\":\"The quoted text states static reactive resources have fixed reactive power output at nominal voltage, capability varies according to voltage squared, and switching in/out is based on system conditions and can be manual or automatic. The answer matches these clauses.\",\"applicability_conditions\":[\"Applies to the North American bulk power system context of the NERC Reliability Guideline; not a Chinese operational standard.\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-85ccb4f8751212c2d77b7e93-0\"}],\"component_reviews\":[{\"component_index\":0,\"status\":\"supported\",\"basis_indexes\":[0],\"rationale\":\"The source explicitly states fixed output at nominal voltage, capability varying with voltage squared, and manual or automatic switching based on system conditions.\",\"semantic_review\":{\"fidelity\":\"faithful\",\"assertion_role\":\"asserted\",\"verification_obligation\":\"technical_truth\",\"rationale\":\"The Chinese answer preserves fixed nominal output, voltage-squared capability variation, and manual/automatic switching based on system conditions.\"},\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"The quoted static-resource bullet covers all three clauses: fixed output at nominal voltage, voltage-squared capability variation, and manual/automatic switching per system conditions.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[],\"causal_direction_preserved\":true,\"repair\":null}}]}]}",
+      "model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 7438,
+        "output_tokens": 700,
+        "total_tokens": 8138,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 7296,
+        "cache_miss_tokens": 142
+      },
+      "finish_reason": "stop"
+    }
+  },
+  {
+    "sequence": 2,
+    "run_id": "f90745a423b249a49fe2623d2ca15d9a",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "production"
+    },
+    "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+    "correction": false,
+    "messages_sha256": "dee4de956099f584a1c79a8d5a9999cadc90ba61d40d3dcfd4d7c8d7fe5727d1",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "elapsed_before_send": 3.773962400000073,
+    "response": {
+      "text": "{\"citation_reviews\":[{\"citation_index\":0,\"status\":\"supported\",\"rationale\":\"The bound source directly states that dynamic reactive resources adjust reactive power output automatically in real-time over a continuous range within a specified voltage bandwidth in response to grid voltage changes, and that they operate to maintain a set-point voltage or in voltage droop mode. The answer reproduces this content for the dynamic-resource portion.\",\"applicability_conditions\":[\"North American bulk power system context; NERC reliability guideline, recommendations voluntary and region-specific. Applies to dynamic reactive resources such as power-electronics-based devices (e.g., STATCOMs).\"],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-d6f64406938b4a219aeacdb5-0\"}],\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"The selected NERC guideline text describes dynamic reactive resources adjusting output automatically, continuously, within a specified voltage bandwidth in response to voltage changes, and operating to maintain a voltage set point or in voltage droop mode. The answer conveys these same propositions with faithful paraphrase.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-edea7955d80e8fadcc6bf775\",\"necessity\":\"required\",\"answer_quote\":\"在规定电压带宽内\",\"relationship\":\"preserved\",\"reason\":\"The source frames automatic continuous adjustment as occurring within a specified voltage bandwidth; the answer preserves this qualifier as 规定电压带宽内.\"}],\"causal_direction_preserved\":true,\"repair\":null}}]}",
+      "model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 3537,
+        "output_tokens": 350,
+        "total_tokens": 3887,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 3328,
+        "cache_miss_tokens": 209
+      },
+      "finish_reason": "stop"
+    }
+  },
+  {
+    "sequence": 3,
+    "run_id": "f90745a423b249a49fe2623d2ca15d9a",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "production"
+    },
+    "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+    "correction": false,
+    "messages_sha256": "4ddbb2cd34384b5527093cbacb3d0717238d1ef717e189fc70d641fe1f817744",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "elapsed_before_send": 6.028909099999964,
+    "response": {
+      "text": "{\"citation_reviews\":[{\"citation_index\":1,\"status\":\"supported\",\"rationale\":\"Bound source states static reactive resources have fixed reactive power output at nominal voltage, capability varies with voltage squared, and devices are switched in or out based on system conditions, manually or automatically. The answer preserves these clauses with faithful synonyms.\",\"applicability_conditions\":[],\"bases\":[{\"type\":\"text_excerpt\",\"quote_id\":\"scope-0af0f469914dfa895b5d363b-0\"}],\"support_relation\":{\"source_kind\":\"explanatory_body\",\"explanation\":\"Selected source paragraph directly describes static reactive resource output and switching behavior; the answer restates fixed nominal output, voltage-squared dependence, and manual/automatic switching per system conditions.\",\"whole_claim_supported\":true,\"missing_clauses\":[],\"conditions_preserved\":true,\"authority_scope\":\"explanation\",\"answer_conditions\":[{\"condition_id\":\"condition-549230d1ee8052294e0c4b2b\",\"necessity\":\"required\",\"answer_quote\":\"静态无功资源在额定电压下输出固定，其能力随电压平方变化，并可按系统条件手动或自动投切\",\"relationship\":\"preserved\",\"reason\":\"Selected carrier states fixed output at nominal voltage, voltage-squared capability variation, and manual or automatic switching based on system conditions; answer preserves these qualifiers.\"}],\"causal_direction_preserved\":true,\"repair\":null}}]}",
+      "model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 3540,
+        "output_tokens": 303,
+        "total_tokens": 3843,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 3328,
+        "cache_miss_tokens": 212
+      },
+      "finish_reason": "stop"
+    }
+  },
+  {
+    "sequence": 4,
+    "run_id": "0c2a6e6317d34537a05e37a82417d57f",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "simple_v1"
+    },
+    "prompt_version": "evidence-verification-v9.22-simple-v1",
+    "correction": false,
+    "messages_sha256": "02aacfa561a70abb8b8fda51be161aaaca44b13ca4a7921a445bffa8e68dc510",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "elapsed_before_send": 0.020184900000003836,
+    "response": null
+  },
+  {
+    "sequence": 5,
+    "run_id": "0c2a6e6317d34537a05e37a82417d57f",
+    "task": {
+      "line": "A",
+      "case": 0,
+      "variant": "simple_v1"
+    },
+    "prompt_version": "evidence-verification-v9.22-simple-v1",
+    "correction": false,
+    "messages_sha256": "61bcfd33a510d7b33d6c9724a5be8cb014e9d1e75448d31b6219bd08a7f76c93",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "elapsed_before_send": 0.21131980000018302,
+    "response": null
+  }
+]

@@ -1,0 +1,55 @@
+{
+  "frozen_source_copies": [
+    {
+      "original": "services/review_simple_v1.py",
+      "preserved": "data/retrieval_local/review-contract-simple-v1/frozen-source-before-postrun-fix/services/review_simple_v1.py",
+      "sha256": "2b82e2aa98c219b8396af42005f6a0579557cd8b9c00bbe0beb0359cee6894e6"
+    },
+    {
+      "original": "services/scoped_fact_execution.py",
+      "preserved": "data/retrieval_local/review-contract-simple-v1/frozen-source-before-postrun-fix/services/scoped_fact_execution.py",
+      "sha256": "a4f1a081aaf03d0007778965460172078eaf6224e226107b21b8337044515e46"
+    },
+    {
+      "original": "tests/test_review_simple_v1.py",
+      "preserved": "data/retrieval_local/review-contract-simple-v1/frozen-source-before-postrun-fix/tests/test_review_simple_v1.py",
+      "sha256": "c378a1964030348a87f4cd3ea18787431507b7e606403a2cf9101dcd36b17bb6"
+    }
+  ],
+  "synthetic_not_model_output": true,
+  "case": "No extra applicability condition, faithful expression, but data for a claimed instance missing",
+  "raw": {
+    "status": "supported",
+    "basis_ids": [
+      "S0B0"
+    ],
+    "reason": "Synthetic complete local proposition support judgment.",
+    "gap_answer_ids": [],
+    "conditions": {
+      "applicability": "none",
+      "expression": "not_applicable",
+      "instance": "missing",
+      "source_ids": [],
+      "answer_ids": [],
+      "reason": "Synthetic explicit no extra condition, no expression obligation and no instance claim."
+    },
+    "inference": "preserved",
+    "objection": null,
+    "repair": null,
+    "requires_authoritative_source": false,
+    "target_id": "F0C0"
+  },
+  "pre_fix_projection": "not_assessable",
+  "pre_fix_reasons": [
+    "condition_dimension_conflict",
+    "condition_or_instance_gap",
+    "raw_support_conflicts_with_declarations"
+  ],
+  "finding": "none and instance-information missing should remain separate; old conjunction labels it an internal dimension conflict. Offline discovery, not a measured live semantic outcome.",
+  "post_fix_projection": "insufficient_evidence",
+  "post_fix_reasons": [
+    "condition_or_instance_gap",
+    "raw_support_conflicts_with_declarations"
+  ],
+  "no_new_model_request": true
+}

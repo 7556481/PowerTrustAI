@@ -1,0 +1,22 @@
+{
+  "full_tests": 1222,
+  "full_seconds": 231.973,
+  "result": "OK",
+  "log_sha256": "6cecd3b87fb4c36bfa84647356865eddc09165488c288cea5d8ec3879989a5f5",
+  "targeted_tests": 13,
+  "targeted_seconds": 16.168,
+  "real_model_requests": 0,
+  "reporting_readonly_compatibility": "Old34 records/28 fixed units/47 invalid requests accounted without model or history mutation",
+  "documentation_tooling": "Removed20/60 hard caps; chapter has at least one explained exercise and exact rendered folding count. Separate rendering tests, not business change.",
+  "postbatch_fixes": {
+    "targeted_tests": 24,
+    "targeted_seconds": 19.578,
+    "full_tests": 1224,
+    "full_seconds": 234.165,
+    "result": "OK",
+    "full_log_sha256": "ef0b91c2e7d9c024ee0489f89436c547949ba8537cc371410a5ed645503c0fb9",
+    "real_requests": 0,
+    "implementation_commit": "88281c910403e69be71963e0b1e3d39d4e70e253",
+    "reason_for_second_full_run": "Real request rejection and postbatch independent-dimension diagnosis required code repairs. Repeated full suite is justified by new changes, not documentation."
+  }
+}
