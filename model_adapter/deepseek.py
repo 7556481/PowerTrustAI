@@ -139,7 +139,7 @@ def parse_response(status, body, requested_model, *, request_id=None,result_tool
 
 
 class DeepSeekAdapter:
-    def __init__(self, settings, *, exchange=None,diagnostic_tool=None,wire_observer=None):
+    def __init__(self, settings, *, exchange=None,diagnostic_tool=None,wire_observer=None,strict_model_id='deepseek-flash'):
         validate_types(settings, ModelSettings)
         base = settings.endpoint or "https://api.deepseek.com"
         url = urlsplit(base)
@@ -149,6 +149,9 @@ class DeepSeekAdapter:
         if settings.credential_env not in (None, "DEEPSEEK_API_KEY"):
             raise InputError("Official connector reads DEEPSEEK_API_KEY only")
         self.settings = settings
+        if strict_model_id not in ('deepseek-flash','deepseek-v4-pro') or strict_model_id!='deepseek-flash' and settings.model_id!=strict_model_id:
+            raise InputError('Explicit official strict model identity required')
+        self._strict_model_id=strict_model_id
         self._diagnostic_tool,self._wire_observer=diagnostic_tool,wire_observer
         self._path = url.path.rstrip("/") + "/chat/completions"
         self._exchange = exchange or self._http
@@ -231,7 +234,7 @@ class DeepSeekAdapter:
             from model_adapter.strict_review_tool import specification
             validate_types(request,ModelRequest)
             expected=self._diagnostic_tool if self._diagnostic_tool is not None else specification()
-            if request.result_tool!=expected or request.model_id!='deepseek-flash':
+            if request.result_tool!=expected or request.model_id!=self._strict_model_id:
                 error=ModelRequestError();error.diagnostic=dict(version='official-http-diagnostic-v1',stage='preflight',http_status=None,error_type='strict_tool_configuration',error_message='Explicit supported fixed tool/schema/model required.',request_id=uuid4().hex,provider_request_id=None,diagnostic_gap='No HTTP request sent.');raise error
 
     def close(self):
