@@ -29,9 +29,25 @@ class SimpleTests(unittest.TestCase):
 
     def test_none_is_explicit_and_no_old_empty_quote_projection(self):
         out,seen,_=self.exercise();self.assertFalse(out.execution_issues);self.assertEqual(out.findings[0].status,V.SUPPORTED)
-        self.assertEqual(out.findings[0].component_reviews[0].review_projection_version,'simple-condition-projection-v1')
+        self.assertEqual(out.findings[0].component_reviews[0].review_projection_version,'simple-condition-projection-v1.1')
         self.assertEqual(seen[1][1]['review_object'],'original_citation')
         self.assertIn('CONTEXT ONLY',SYSTEM);self.assertNotIn('source_subject',SYSTEM)
+        self.assertIn('json',SYSTEM.lower())
+
+    def test_no_extra_condition_and_instance_data_missing_are_independent(self):
+        def mutate(v,d,c):v['judgments'][0]['conditions']['instance']='missing'
+        out,_,_=self.exercise(mutate)
+        self.assertFalse(out.execution_issues);self.assertEqual(out.findings[0].status,V.INSUFFICIENT_EVIDENCE)
+
+    def test_request_rejection_stops_before_next_scope_no_correction(self):
+        from model_adapter.contracts import ModelRequestError
+        calls=[]
+        class Rejected:
+            async def complete(self,r):calls.append(r);raise ModelRequestError()
+        async def go():
+            with model_scope(ModelBudget(8)):
+                return await ModelEvidenceVerificationAgent(Rejected(),ModelSettings('synthetic_fixture'),schema_version=13,review_contract='simple_v1').run(inputs(True))
+        out=asyncio.run(go());self.assertEqual(len(calls),1);self.assertEqual(out.execution_issues[0].code,'MODEL_REQUEST_REJECTED')
 
     def test_three_dimensions_preservation_missing_and_instance(self):
         cases=[('present','preserved','not_claimed',V.SUPPORTED),('present','missing','not_claimed',V.INSUFFICIENT_EVIDENCE),('present','misattached','not_claimed',V.INSUFFICIENT_EVIDENCE),('present','extended','not_claimed',V.INSUFFICIENT_EVIDENCE),('present','preserved','missing',V.INSUFFICIENT_EVIDENCE),('present','preserved','uncertain',V.NOT_ASSESSABLE),('unknown','uncertain','not_claimed',V.NOT_ASSESSABLE),('none','missing','not_claimed',V.NOT_ASSESSABLE)]

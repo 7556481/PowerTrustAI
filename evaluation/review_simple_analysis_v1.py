@@ -28,14 +28,17 @@ def analyze(local,public):
         if r['state']=='unexecuted':metric['dependent_unexecuted']+=1;continue
         metric['executed']+=1;metric['execution_complete']+=not bool(r.get('execution_issues')) and r['state']!='failed'
         records=r.get('model_records',[]);initial=[x for x in records if not x['correction']]
-        metric['all_initial_valid_tasks']+=all(not x.get('validation_error') for x in initial)
+        metric['all_initial_valid_tasks']+=bool(initial) and all(x.get('output_status')=='valid_structure' for x in initial)
         metric['duration_ms_sequential_harness_sum']+=r.get('duration_ms',0)
         metric['revisions']+=len(r.get('revision_outputs',[]))
         for rec in records:
-            metric['calls']+=1;metric['corrections']+=rec['correction'];metric['initial']+=not rec['correction'];metric['initial_valid']+=not rec['correction'] and not rec.get('validation_error')
+            metric['calls']+=1;metric['corrections']+=rec['correction'];metric['initial']+=not rec['correction'];metric['initial_valid']+=not rec['correction'] and rec.get('output_status')=='valid_structure'
             stage=rec.get('component');metric['revision_calls']+=stage=='revision';metric['rereview_calls']+=stage in ('claim_extraction','evidence_verification','power_domain_review') and (rec.get('answer_version') or 1)>1
             metric['model_duration_ms_not_wallclock']+=rec['duration_ms']
-            for key in ('input_tokens','output_tokens','total_tokens','cache_hit_tokens','cache_miss_tokens'):metric[key]+=(rec.get('usage') or {}).get(key) or 0
+            for key in ('input_tokens','output_tokens','total_tokens','cache_hit_tokens','cache_miss_tokens'):
+                value=(rec.get('usage') or {}).get(key)
+                if value is None:metric[key+'_unknown_records']+=1
+                else:metric[key]+=value
             if rec.get('validation_error'):
                 d=rec['validation_error'];invalid.append(dict(id=c['case_id'],call=rec['call_number'],prompt_version=rec['prompt_version'],correction=rec['correction'],constraints=sorted({e['constraint'] for e in d.get('errors',[d])}),diagnostic=d))
         intervals=defaultdict(list)

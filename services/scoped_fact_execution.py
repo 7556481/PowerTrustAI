@@ -60,7 +60,7 @@ async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruc
         except Exception as exc:
             if not getattr(exc,'code',None):raise
             issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,exc.code,'Compact review incomplete; valid targets retained'))
-            if exc.code in ('MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED'):break
+            if exc.code in ('MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED')+getattr(cat,'fatal_request_codes',()):break
         finally:
             corrected=corrected or any(r.correction and (catalog is None or r.prompt_version==prompt_version) for r in current_budget().records[before:])
             for (_,tid),row in isolation.accepted.items():current[tid]=row;accepted.add(tid)
