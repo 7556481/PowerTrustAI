@@ -77,8 +77,8 @@
       "symbol": "json_mode_preflight",
       "start_line": 27,
       "end_line": 38,
-      "file_sha256": "5da5be380d1a97cc6389f5bada3d1451436bcdd841eee0acb9f268a13849f858",
-      "source_text_lf_sha256": "2d89060293f91468973c1694f6dfbbd8f1dbfe7d23ef0bebb0087bfd6ae0db31",
+      "file_sha256": "c364c7733580a5db7dc0c579101af6ea298a3f5c0137b8b4034f16ea7500c36b",
+      "source_text_lf_sha256": "790882e9aae32cd781ec1e72e9d04c3b67e914be46cd3a6e5c5ac432eee639e9",
       "excerpt_sha256": "2a4b7a349e7b9f7157ce306bff222aec7b38a5b975aa804f1ce515e537f4808d"
     },
     {
@@ -109,7 +109,7 @@
       "excerpt_sha256": "8141014ad43104cd36412b088bc159aff080b34f02046a050d663f68a81df060"
     }
   ],
-  "application_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
+  "application_commit": "cb64b21cab7f837f777d3245217c8ed40aafb8a2",
   "new_agent": false,
   "old_pdfs_unchanged": true,
   "request_route_excerpts": [
@@ -368,5 +368,5 @@
       "excerpt_sha256": "ae180faa320c914c19207e35e4a696d9a1b3ddcb849e7ac4b851c75e667269cb"
     }
   ],
-  "previous_application_commit": "9d363efdbe3a92dd7f9b8779c350e7d47cfad58a"
+  "previous_application_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5"
 }

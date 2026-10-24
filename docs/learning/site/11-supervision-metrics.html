@@ -1,27 +1,31 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11 监督数据、家族划分、泄漏和评测分母 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 0ea0982fdd77 · learning-site-v4.8 strict result carrier, 2026-10-24 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">11 监督数据、家族划分、泄漏和评测分母</h1>
-<h2 id="section-2">输出机制与业务效果分开</h2>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>11 监督数据、家族划分、泄漏和评测分母 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 cb64b21cab7f · learning-site-v4.9 strict interface isolation and old-input regression, 2026-10-24 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">11 监督数据、家族划分、泄漏和评测分母</h1>
+<h2 id="section-2">旧验证集用于防退步，不重新成为未见样本</h2>
+<p>【真实回归】A1/A3/A7/A2已经参与开发，本轮保留旧问题、答案、证据与参考，接口准入后各执行一次。它们仍能揭示局部引用、条件归属、证据不足等问题，但不能作为新的独立成绩。CT/TR/SW/RC、EIA/NRC与四来源24回答组件的旧协议各异，评测v7不能直接充当生产schema13；输入映射需另版、禁止夹带参考。<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-interface-consistency-v1/report.html" rel="noreferrer noopener">复用盘点</a>。</p>
+<p>【教学构造】八项合成结构合法，四项业务回归两项完整；无据保证被有效状态阻止认可，但原始判断是contradicted、参考是insufficient_evidence。可否说严格结构稳定且缺陷全部识别正确？</p>
+<details class="self-answer"><summary>展开回归用途练习解析</summary><p>不能。合成接口与复杂业务分母分开，两项业务不完整仍要保留。整体阻止认可不等于按正确类别识别具体错误，不足与矛盾的混淆必须报告；执行占位也不是模型合法无法评估。旧题可检查退步，但不是独立留出，不据历史非配对结果计算提升率，也不把失败导致少纠正或少重审当效率收益。</p></details>
+<h2 id="section-3">输出机制与业务效果分开</h2>
 <p>【真实失败】本批工具信封3/3符合要求，合法参数0/3，最终接入0/1；28槽只执行A1，余27未发送。应保留全部分母，不能把3次函数返回当审核成功。没有合法事实/引用判断，也没有自然初稿，就不能评价错误认可或净收益；14,879token的低总量由停止造成，不是效率升级。<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-review-tool-v1/report.html" rel="noreferrer noopener">原参数和统计</a>。</p>
-<h2 id="section-3">历史参考与真实接入结果</h2>
+<h2 id="section-4">历史参考与真实接入结果</h2>
 <p>【真实失败】本批3调用有返回：两个事实判断合法，引用初始及唯一纠正均重复键，停止剩余26槽。无效正文里的supported不能评分。旧原版A1身份相符，可以节省重测，但须标为历史参考并排除新费用，不能叫同批严格配对。自然生成未运行就没有正文净收益成绩，不能把未发生误改记成安全性提升。<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-simple-patch-v1/report.html" rel="noreferrer noopener">本批完整证据</a>。</p>
-<h2 id="section-4">本轮真实验证边界</h2>
+<h2 id="section-5">本轮真实验证边界</h2>
 <p>【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.html" rel="noreferrer noopener">完整响应、依据与版本边界</a>。</p>
-<h2 id="section-5">2026-10-24 失败实验的成本与净收益</h2>
+<h2 id="section-6">2026-10-24 失败实验的成本与净收益</h2>
 <p>失败更早、少走修订重审可能降低调用和token，不能算效率提升。需要保留计划分母、执行完整度、各接口支持判断、正确内容误拦和初稿到最终变化。结构合法只说明合同通过；语义可靠性还需逐项依据，整体未认可不能充当每个具体错误的检出。上轮scope_v2是明确负结果，38次逐字重抄失败与合法投影误降级分开。</p>
 <p>【教学构造】候选只完成两题，原版完成八题。候选token只有原版一半，可以说节省一半且安全性提升吗？</p>
 <details class="self-answer"><summary>展开新增练习解析</summary><p>不能。先报告八题计划及六题失败/未执行、逐项错误认可与误拦。若少执行、少修订造成低成本，就不是等量服务下效率收益。失败可以有诊断价值，但不构成采用证据。</p></details>
-<h2 id="section-6">2026-10-24 审核链v2实证更新</h2>
+<h2 id="section-7">2026-10-24 审核链v2实证更新</h2>
 <p>固定审核线16分支，原版8/8完整、候选0/8；自然6份计划初稿仅5份有效，10条实际后续审核中候选五路全不完整、无修订净收益。原版B5的澄清不可归给候选。116调用含20纠正、47无效尝试，1,013,267 token；账单金额未知。整体拦截不能算具体错误检出，执行占位也不是模型判断。不采用候选，不称独立留出准确率。 <a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.html" rel="noreferrer noopener">完整预测、理由和成本</a>。</p>
 <p>本轮实际结果：A8/G4/B8固定批次106请求、1126972token，5条审核执行不完整；候选仅A4进入新修订提示，原版也纠正且没有目标历史叙述，自然8路正文不变。未证明候选净收益，不采用生产；N-1/N-2条件外推和原引用跨单元缺口疑点保留。实际8765保持原停服，无常驻候选。</p>
-<h2 id="section-7">2026-10-24 两条净收益线</h2>
+<h2 id="section-8">2026-10-24 两条净收益线</h2>
 <p>固定回答能力线是4组原/候各一次共8分支，混入正确与部分缺据回答；自然线每题仅生成一次，共4份真实初稿，再从相同初稿/实际证据/快照分别审核修订，共8分支。材料是本轮设计与AI辅助来源审阅的开发验证，不是独立留出或专家金标准。自然生成沿当前RAG，后续成对审核固定其实际交付；生产检索默认不改。没有目标错误或没有Revision都保留，不人为改坏自然初稿或补题。</p>
 <p>比较完整正文的纠错、漏修、新错、正确内容损失、必答点增减、合理收窄及不必要拒答；正文不变的合理核验与错误降级分开。参考支持、原始模型判断、程序有效判断和政策处置是四层，不能用pass/结构合法/发现记账替代答案质量。生成调用只计一次；两路各自扣除其已用生成预算，独立保留余量。并行与嵌套计时不直接相加，保存可见时间不是浏览器首绘，没有账单费用未知。完整分母及必要原文见<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.html" rel="noreferrer noopener">本轮报告</a>。</p>
-<h2 id="section-8">标签来源与质量版本</h2>
+<h2 id="section-9">标签来源与质量版本</h2>
 <p>AI辅助建议、用户逐项确认、质量复核、原模型预测是不同层。confirmed表示用户按实际模板授权，不等于专家金标准。pending/hold不直接训练，建议不能覆盖复核包具体标签。任务ID、task哈希和依据子集需要逐项核对，确认事件另存，不改原pending或历史响应。</p>
 <p>evaluation/support_training.py的confirm_template、select_materials、check_partition等维护这些约束。公开阅读权限不自动等于训练许可；AEMO材料曾按明确许可筛选，其他材料不能因已下载就进入训练。正文训练、元数据辅助和缺上下文hold分流。</p>
-<h2 id="section-9">为什么按家族而非随机行划分</h2>
+<h2 id="section-10">为什么按家族而非随机行划分</h2>
 <p>原命题、删条件、反转数量等变体共享原证据与父谱系。随机逐行拆分，训练可见几乎相同命题，测试分数被高估。合并同概念、父关系、近重复和共享依据形成关联家族，再固定train/validation/holdout。家族划分是在模型预测前做，不根据成绩把难题移出测试。</p>
 <p>文档留出进一步隔离另一份资料。扩大NLI用55开发、13关联家族，43训练/12验证；SSIAG33只留出，不能选模型、调参数或checkpoint。旧5题已被查看，是开发对照，不再称独立验收。即使同文档不同家族，也应报告共享正文风险，不用“随机seed固定”代替泄漏分析。</p>
-<h2 id="section-10">数据泄漏的几种形式</h2>
+<h2 id="section-11">数据泄漏的几种形式</h2>
 <ul>
 <li>输入含标签或旧模型理由：直接泄漏。</li>
 <li>premise按监督basis_ids挑正确证据：给了模型标注者答案线索。</li>
@@ -31,7 +35,7 @@
 <li>用元数据适用性写成正文：不是传统标签泄漏，却改变了可判断依据。</li>
 </ul>
 <p>真实NLI适配器使用全部实际交付正文，监督basis_ids只作监督说明；正文与行政元数据分开，完整token预检，无静默截断。有效集合事前固定，基座与微调模型用同集合比较。</p>
-<h2 id="section-11">分类指标：先写混淆矩阵方向</h2>
+<h2 id="section-12">分类指标：先写混淆矩阵方向</h2>
 <p>三类supported/contradicted/insufficient。矩阵行是真值、列是预测。对某类TP是对角线，FP是该列其他行之和，FN是该行其他列之和。</p>
 <pre><code class="language-text">precision = TP/(TP+FP)
 recall    = TP/(TP+FN)
@@ -40,32 +44,32 @@ macro-F1  = 三类F1的算术平均
 accuracy  = 对角线之和/有效样本数
 coverage  = 有效预测样本数/全部冻结样本数</code></pre>
 <p>当分母0时需明确实现约定，不私自移除难类。macro-F1让稀少类有同等权重，accuracy容易被多数类主导；两者都不描述工程风险成本。not_assessable不在三类NLI范围，不能把生产四分类直接当同一任务。</p>
-<h2 id="section-12">两个错误支持分母</h2>
+<h2 id="section-13">两个错误支持分母</h2>
 <p>教学兼真实扩大NLI矩阵见第12章。错误supported有4个、非supported真值23个、supported预测14个，则“非支持被误支持率”=4/23=17.39%；“支持预测中的错误比例”=4/14=28.57%。它们回答不同问题：前者看所有应不支持材料被误放多少，后者看每次显示supported有多少不该支持。不能互换，更不能写“准确率82.61%所以可靠”。</p>
 <p>教学反例：33项中10项真值supported，若把33项全判supported，支持召回是10/10=100%，支持precision却只有10/33，非支持误放23/23。该构造不是实验结果，说明召回不能掩盖错误支持。真实SSIAG实验的4/23与4/14分别以非支持真值和支持预测为分母，必须并列读第12章矩阵。</p>
-<h2 id="section-13">检索指标与unknown</h2>
+<h2 id="section-14">检索指标与unknown</h2>
 <p>Hit@k问前k是否至少一个相关；MRR用首相关名次倒数；Recall@k需要相关全集定义；nDCG考虑分级相关和位置折扣。项目只对已标候选池Recall，不代表全语料召回。必要组覆盖要求一组成员齐全，范围完整还受原可回答性和条件充分性约束。</p>
 <p>unknown保留实际名次，不记0，也不删除后顺延。教学构造：排名[unknown,不相关,相关]，MRR下界1/3，上界1，因为unknown可能相关。前二Hit下界0，上界1。点估计仅在明确已知覆盖时用，并报告n；不同n的均值不能直接比较收益。</p>
-<h2 id="section-14">验证与面试</h2>
+<h2 id="section-15">验证与面试</h2>
 <p>验收应先冻结样本、预期、版本和停止条件。结构成功率、执行完成率、解决问题、语义误判及错误放行单列。无效样本不悄悄消失；覆盖低时高F1可能只来自容易项。人工评价仍写AI辅助用户监督。</p>
 <p>练习：10条中只有8有效，7条正确，accuracy是多少？参考：有效accuracy=7/8，覆盖8/10，同时报告全批7/10的正确完成比例；不能只报87.5%而隐藏两失败。</p>
 <p>面试可说：“我按谱系/文档留出，锁定输入与监督版本，保留unknown及分母。macro-F1提高同时误支持增加，所以没有把NLI当最终审核器。”</p>
-<h2 id="section-15">nDCG手算：背景相关也可能贡献，但不是直接支持</h2>
+<h2 id="section-16">nDCG手算：背景相关也可能贡献，但不是直接支持</h2>
 <p>教学构造，前三等级为[1,3,0]，gain=2^grade-1，DCG=1/log₂2+7/log₂3+0/log₂4≈5.4165。理想排序[3,1,0]的IDCG=7+1/log₂3≈7.6309，nDCG≈0.7098。grade1背景也贡献1，但并不包含回答必要结论。某排序nDCG高，不代表条件和结论组合齐全。</p>
 <p>若所有候选grade0，IDCG=0，该题nDCG没有普通比值定义，实际评测应明确约定及有效n，不随意把它计为高或低。候选池只覆盖已标材料，未标正例不凭空进入分母。项目报告对unknown更保守，某些Hit/MRR只在top5无unknown时输出点值，教学上下界不能冒充程序已有字段。</p>
-<h2 id="section-16">家族并集为什么会改变划分</h2>
+<h2 id="section-17">家族并集为什么会改变划分</h2>
 <p>教学构造：任务A/B同父，B/C共享同一必要条件，C/D近重复，则关联家族通过并集传递把A,B,C,D合并，即使A与D字面差很大。拆开它们可能泄漏共享模式。按家族分配会牺牲简单类别比例均衡，但保持隔离；数据量小时要同时报告实际标签分布和家族数，不能说“分层随机”就没有关联。</p>
 <p>partition文件应保存原旧划分和新版本理由，不覆盖历史test归属；旧五题即使后来并入训练，仍说明曾被看过，不能对另一份报告重新称独立测试。监督版本和task哈希分开：相同任务可有质量版本变化，任务原文不应因改标签而悄悄变哈希。</p>
-<h2 id="section-17">审核产品的指标表怎么设计</h2>
+<h2 id="section-18">审核产品的指标表怎么设计</h2>
 <p>结构初次成功率分母可以是所有模型审核请求，也可以是12个run，必须明确；一次格式纠正后完整执行率用全12个run。回答解决问题评价包括直接性、语言、必要条件、引用及覆盖；错误放行指实际pass的回答包含已确认阻断错误，不等于某个组件raw supported错误。</p>
 <p>修订单独统计：自然触发数、产出新版本数、实质改正数、完整重审数、最终合理处置数。Revision API成功但漏了工程重审，不算闭环。模型把错误改成无关拒答，不算解决原问题。若未触发就写0，不捏造after表。</p>
-<h2 id="section-18">历史实验分母与风险措辞</h2>
+<h2 id="section-19">历史实验分母与风险措辞</h2>
 <p>0/23是support-nli-expanded-v3的官方基座在该33条SSIAG留出中、23条非支持真值里未观测到错误支持，不是零风险保证。4/23是同实验微调checkpoint的条件化误支持比例，不是所有问题、设备或工程总体风险率；4/14则是14个supported预测中错误占比。实验为单种子、单文档、小样本、AI辅助用户监督。</p>
 <p>Tiny报告出处docs/support-finetune-v1.md：19材料、11/3/5，5条已见开发对照；MiniLM选型/首调出处docs/support-nli-v1.md：同19、11/3/5，不查看5条测试选模型；扩大版出处docs/support-nli-expanded-v3.md：43/12/33、全部有效。教学混淆矩阵算术说明指标定义，不是新增运行，也不与不同集合直接比大小。</p>
-<h2 id="section-19">三道自测：先作答，再展开</h2>
-<h3 id="section-20">自测1：unknown能否当0或删除？</h3>
+<h2 id="section-20">三道自测：先作答，再展开</h2>
+<h3 id="section-21">自测1：unknown能否当0或删除？</h3>
 <details class="self-answer"><summary>展开参考答案1</summary><p>不能；保留实际名次，注明指标有效分母/界限。</p></details>
-<h3 id="section-21">自测2：4/23与4/14相同吗？</h3>
+<h3 id="section-22">自测2：4/23与4/14相同吗？</h3>
 <details class="self-answer"><summary>展开参考答案2</summary><p>前者非支持真值中的误支持，后者支持预测中的错误比例。</p></details>
-<h3 id="section-22">自测3：已看五题可叫独立验收吗？</h3>
-<details class="self-answer"><summary>展开参考答案3</summary><p>不可；属于已见开发对照。</p></details></article><footer><a href="10-api-storage.html">← 10 API、UI、队列、SQLite与本机会话</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">输出机制与业务效果分开</a><a href="#section-3">历史参考与真实接入结果</a><a href="#section-4">本轮真实验证边界</a><a href="#section-5">2026-10-24 失败实验的成本与净收益</a><a href="#section-6">2026-10-24 审核链v2实证更新</a><a href="#section-7">2026-10-24 两条净收益线</a><a href="#section-8">标签来源与质量版本</a><a href="#section-9">为什么按家族而非随机行划分</a><a href="#section-10">数据泄漏的几种形式</a><a href="#section-11">分类指标：先写混淆矩阵方向</a><a href="#section-12">两个错误支持分母</a><a href="#section-13">检索指标与unknown</a><a href="#section-14">验证与面试</a><a href="#section-15">nDCG手算：背景相关也可能贡献，但不是直接支持</a><a href="#section-16">家族并集为什么会改变划分</a><a href="#section-17">审核产品的指标表怎么设计</a><a href="#section-18">历史实验分母与风险措辞</a><a href="#section-19">三道自测：先作答，再展开</a><a href="#section-20">自测1：unknown能否当0或删除？</a><a href="#section-21">自测2：4/23与4/14相同吗？</a><a href="#section-22">自测3：已看五题可叫独立验收吗？</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<h3 id="section-23">自测3：已看五题可叫独立验收吗？</h3>
+<details class="self-answer"><summary>展开参考答案3</summary><p>不可；属于已见开发对照。</p></details></article><footer><a href="10-api-storage.html">← 10 API、UI、队列、SQLite与本机会话</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">旧验证集用于防退步，不重新成为未见样本</a><a href="#section-3">输出机制与业务效果分开</a><a href="#section-4">历史参考与真实接入结果</a><a href="#section-5">本轮真实验证边界</a><a href="#section-6">2026-10-24 失败实验的成本与净收益</a><a href="#section-7">2026-10-24 审核链v2实证更新</a><a href="#section-8">2026-10-24 两条净收益线</a><a href="#section-9">标签来源与质量版本</a><a href="#section-10">为什么按家族而非随机行划分</a><a href="#section-11">数据泄漏的几种形式</a><a href="#section-12">分类指标：先写混淆矩阵方向</a><a href="#section-13">两个错误支持分母</a><a href="#section-14">检索指标与unknown</a><a href="#section-15">验证与面试</a><a href="#section-16">nDCG手算：背景相关也可能贡献，但不是直接支持</a><a href="#section-17">家族并集为什么会改变划分</a><a href="#section-18">审核产品的指标表怎么设计</a><a href="#section-19">历史实验分母与风险措辞</a><a href="#section-20">三道自测：先作答，再展开</a><a href="#section-21">自测1：unknown能否当0或删除？</a><a href="#section-22">自测2：4/23与4/14相同吗？</a><a href="#section-23">自测3：已看五题可叫独立验收吗？</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

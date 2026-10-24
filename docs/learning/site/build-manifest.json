@@ -1,33 +1,33 @@
 {
   "version": {
-    "application_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
-    "document_version": "learning-site-v4.8 strict result carrier, 2026-10-24",
+    "application_commit": "cb64b21cab7f837f777d3245217c8ed40aafb8a2",
+    "document_version": "learning-site-v4.9 strict interface isolation and old-input regression, 2026-10-24",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
     "compact_schema14": "v9.14 scope guidance; fixed8 corrected8/8 but semantic reservations; daily13; not declared stable",
-    "documentation_parent_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
+    "documentation_parent_commit": "6761497040ee6bb2f09f597795ba5603b4638c7e",
     "final_delivery_ref": "release-v2-20261009",
     "default_retrieval": "topic_v4_subject_v1",
     "default_review_message_profile": "lossless_v1",
-    "previous_application_commit": "88281c910403e69be71963e0b1e3d39d4e70e253",
+    "previous_application_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
     "execution_path_default": "langgraph_v1",
     "optional_development_execution_path": "langgraph_v1",
     "langgraph_version": "1.2.16",
     "production_switch": false,
-    "new_live_model_calls": 3,
-    "validation_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
-    "offline_unittest_count": 1247,
+    "new_live_model_calls": 19,
+    "validation_commit": "cb64b21cab7f837f777d3245217c8ed40aafb8a2",
+    "offline_unittest_count": 44,
     "live_graph_service_runs": 0,
     "live_planned_service_runs": 0,
     "live_accepted_service_runs": 0,
     "previous_validation_commit": "6ed4c9576dc3515c8ecff56027fb74cd93133aff",
     "full_offline_validation_commit": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
     "optional_service_execution_path": "langgraph_v1",
-    "validation_note": "Strict tool fixed28 plan: A1 only,3 expected tool envelopes but0 valid argument JSON;27 unexecuted, no natural result. No service acceptance or production switch.",
+    "validation_note": "8 minimal valid;4 old regressions,2 complete. No natural tasks.44 targeted offline tests; prior full1247 suite not rerun for this opt-in diagnostic scope.",
     "public_unconfigured_fallback": "sequential",
-    "total_fixed_plan_model_calls": 3,
-    "new_live_model_tokens": 14879,
+    "total_fixed_plan_model_calls": 19,
+    "new_live_model_tokens": 61872,
     "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1",
     "fact_internal_flow_candidate": {
       "version": "fact-internal-flow-v1",
@@ -124,13 +124,26 @@
       "request_rejections": 0,
       "adoption": "not_adopt_no_usable_review_result",
       "report": "docs/evaluation/strict-review-tool-v1/report.md"
-    }
+    },
+    "strict_interface_consistency": {
+      "implementation": "cb64b21cab7f837f777d3245217c8ed40aafb8a2",
+      "minimal_valid": 8,
+      "minimal_planned": 8,
+      "regression_complete": 2,
+      "regression_planned": 4,
+      "new_live_requests": 19,
+      "offline_targeted_tests": 44,
+      "production_enabled": false,
+      "adoption": "not_adopt_complex_contract_and_semantic_failures",
+      "report": "docs/evaluation/strict-interface-consistency-v1/report.md"
+    },
+    "offline_validation_scope": "targeted opt-in transport/entry; previous full suite1247 retained in history"
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 4909,
-      "sha256": "dc802e85984e4f9374eae80e589921ac665464ec7bd30e408dc06ecc90d4ae58"
+      "characters": 5135,
+      "sha256": "a0d998efa733eeeb1c6d6a89e247c05ad61a68540dd2cec91b6ec846720381ee"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -184,8 +197,8 @@
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
-      "characters": 5767,
-      "sha256": "1efbafd91c5689f85a7504a1d279ce06dd893f8f63db376f9271dd7a1dbb73eb"
+      "characters": 6334,
+      "sha256": "b697b71e80d5a827e0e266f846e8eefb229530d6c88554970e8bbc77a2b0cc3c"
     },
     {
       "source": "docs/learning/chapters/12-training-nli.md",
@@ -219,8 +232,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 6405,
-      "sha256": "5004886612d4b036ee5d405f10fca119ca031641aa51b21ac65e64f98f882a0d"
+      "characters": 7070,
+      "sha256": "ae1a67626fdac93c0abc3b2d815faddb958df0d6b8f53fe3d7f8bbad0df9688c"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -238,6 +251,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 155091,
+  "markdown_characters": 156549,
   "network_dependencies": false
 }
