@@ -139,7 +139,7 @@ def parse_response(status, body, requested_model, *, request_id=None,result_tool
 
 
 class DeepSeekAdapter:
-    def __init__(self, settings, *, exchange=None):
+    def __init__(self, settings, *, exchange=None,diagnostic_tool=None,wire_observer=None):
         validate_types(settings, ModelSettings)
         base = settings.endpoint or "https://api.deepseek.com"
         url = urlsplit(base)
@@ -149,6 +149,7 @@ class DeepSeekAdapter:
         if settings.credential_env not in (None, "DEEPSEEK_API_KEY"):
             raise InputError("Official connector reads DEEPSEEK_API_KEY only")
         self.settings = settings
+        self._diagnostic_tool,self._wire_observer=diagnostic_tool,wire_observer
         self._path = url.path.rstrip("/") + "/chat/completions"
         self._exchange = exchange or self._http
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="deepseek-http")
@@ -161,8 +162,11 @@ class DeepSeekAdapter:
         # Read only the one named credential, locally. No SDK/proxy/redirect/retry.
         from dataclasses import replace
         key = credential_from_environment(replace(self.settings, credential_env="DEEPSEEK_API_KEY"))
-        connection = http.client.HTTPSConnection("api.deepseek.com", timeout=timeout,
-                                                 context=ssl.create_default_context())
+        context=ssl.create_default_context()
+        if self._wire_observer is not None:
+            from model_adapter.wire_observation import request_view
+            self._wire_observer('request',request_view(body,path or self._path,context))
+        connection = http.client.HTTPSConnection("api.deepseek.com", timeout=timeout,context=context)
         stage = 'connect_tls'
         try:
             connection.connect()
@@ -175,6 +179,9 @@ class DeepSeekAdapter:
             data = response.read(byte_limit + 1) if response.status == 200 else response.read(8193)
             if len(data) > byte_limit:
                 raise ModelOutputError()
+            if self._wire_observer is not None:
+                from model_adapter.wire_observation import response_view
+                self._wire_observer('response',response_view(response.status,data))
             return response.status, data
         except (TimeoutError, socket.timeout):
             raise ModelTimeoutError() from None
@@ -191,7 +198,9 @@ class DeepSeekAdapter:
             kwargs={'path':'/beta/chat/completions'} if result_tool is not None and self._exchange==self._http else {}
             status, raw = self._exchange(body, self.settings.timeout_seconds,
                                          self.settings.max_response_chars * 4 + 32768,**kwargs)
-            return parse_response(status, raw, model_id,request_id=request_id,result_tool=result_tool)
+            out=parse_response(status, raw, model_id,request_id=request_id,result_tool=result_tool)
+            if self._wire_observer is not None:self._wire_observer('decoded',dict(text=out.text,result_transport=out.result_transport))
+            return out
         except TimeoutError:
             raise ModelTimeoutError() from None
         except (OSError, http.client.HTTPException):
@@ -221,7 +230,8 @@ class DeepSeekAdapter:
         else:
             from model_adapter.strict_review_tool import specification
             validate_types(request,ModelRequest)
-            if request.result_tool!=specification() or request.model_id!='deepseek-flash':
+            expected=self._diagnostic_tool if self._diagnostic_tool is not None else specification()
+            if request.result_tool!=expected or request.model_id!='deepseek-flash':
                 error=ModelRequestError();error.diagnostic=dict(version='official-http-diagnostic-v1',stage='preflight',http_status=None,error_type='strict_tool_configuration',error_message='Explicit supported fixed tool/schema/model required.',request_id=uuid4().hex,provider_request_id=None,diagnostic_gap='No HTTP request sent.');raise error
 
     def close(self):
