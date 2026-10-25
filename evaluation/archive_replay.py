@@ -39,6 +39,9 @@ def restore(value, cls):
     if isinstance(cls, type) and issubclass(cls, Enum):
         return cls(value)
     if is_dataclass(cls):
+        if type(value) is dict and cls.__name__=='RevisionOutput' and value.get('local_protocol')=='local-revision-source-actions-v2':
+            from agents.contracts import ScopedLocalRevisionOutput
+            cls=ScopedLocalRevisionOutput
         if type(value) is dict and cls.__name__=='EvidenceVerificationOutput' and value.get('literal_protocol')=='literal-review-v1':
             from agents.contracts import LiteralVerificationOutput
             cls=LiteralVerificationOutput

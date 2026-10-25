@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-25 局部修订离线整改结果
+
+[短报告](evaluation/local-revision-offline-redesign-v1/report.md) · [实现前职责表](evaluation/local-revision-offline-redesign-v1/design.md) · [8旧拒绝核查](evaluation/local-revision-offline-redesign-v1/historical-contract-audit.json) · [真实投影统计](evaluation/local-revision-offline-redesign-v1/projection-verification.json) · [三个静态例/反例](evaluation/local-revision-offline-redesign-v1/static-examples.md) · [验证](evaluation/local-revision-offline-redesign-v1/verification.json)。D/O分责、非互斥依赖、来源供给和一次聚合纠正的新接口默认关闭；22专项/1296完整离线通过，项目模型0、不加载根.env。旧8响应拒绝和阶段0/4保持，新合同不兼容不算恢复成绩。只建议设计审阅后另行决定小范围验证；不自动付费/采用，不扩学习站。
+
 ## 2026-10-25 原文审核第一阶段结果
 
 [完整报告](evaluation/literal-review-stage1-v1/report.md) · [实现/预算/故障边界](evaluation/literal-review-stage1-v1/implementation.md) · [全部28槽前后文本](evaluation/literal-review-stage1-v1/cases.md) · [131份必要预测](evaluation/literal-review-stage1-v1/predictions.json) · [实际用量](evaluation/literal-review-stage1-v1/statistics.json) · [独立文本复核](evaluation/literal-review-stage1-v1/text-review.json)。代码c098b5d，1285离线通过；唯一28槽131Flash请求，费用金额未知。候选0/4实质修复（四次Revision均非法），三正确稿保护、不足稿执行失败；生产A2改对/A4 mixed，自然无正文变化且保留“仅用于”无据认可。候选不采用，阶段封存，无第二批或生产切换。学习站04章定向失败案例/源码导读与两道练习，实际工程贯通不冒充模型成功。

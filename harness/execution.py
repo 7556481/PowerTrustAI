@@ -491,18 +491,19 @@ class RunExecution:
         if self.rounds >= self.budget.max_revision_rounds:
             raise ContractError('Policy attempted revision beyond limit')
         self.transition(RunState.REVISING)
+        revision_input=RevisionInput(self.request,self.answer,self.verification,self.domain,self.evidence,self.decision.reasons,self.bindings,self.knowledge_version if self.retrieval else None)
 
         def check_revision(output):
             self.guard_agent_evidence(output, self.evidence)
             from agents.contracts import LocalRevisionOutput
             if isinstance(output,LocalRevisionOutput):
                 require(output.bound_defects==self.verification.literal_defects,'Local revision changed the source-bound defect catalog')
-            validate_revision(output, self.answer, self.evidence, self.verification.findings + self.domain.findings)
+            validate_revision(output, self.answer, self.evidence, self.verification.findings + self.domain.findings,revision_context=revision_input)
             if getattr(output, 'evidence_snapshot', None) is not None:
                 from services.evidence_scope import validate_snapshot
                 validate_snapshot(output.evidence_snapshot, output.answer)
                 require(output.evidence_snapshot.evidence == self.evidence, 'Revision snapshot changed allowed evidence')
-        revised, issue = await self.invoke('revision', self.harness.revision.run, RevisionInput(self.request, self.answer, self.verification, self.domain, self.evidence, self.decision.reasons, self.bindings, self.knowledge_version if self.retrieval else None), check_revision, True, getattr(self.harness.revision, 'uses_model_adapter', False))
+        revised, issue = await self.invoke('revision', self.harness.revision.run, revision_input, check_revision, True, getattr(self.harness.revision, 'uses_model_adapter', False))
         if issue or revised.execution_issues:
             self.issues.extend((issue,) if issue else revised.execution_issues)
             if self.product_policy:

@@ -1,7 +1,7 @@
 """Explicit input/output interfaces for the four agents."""
 
 from core.models import HazardAssessment, TaskPremise
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Protocol, Tuple
 
 from core.models import (
@@ -202,3 +202,10 @@ class LocalRevisionOutput(RevisionOutput):
     replacements: tuple[dict, ...] = ()
     preservation: tuple[dict, ...] = ()
     bound_defects: tuple[LiteralDefect, ...] = ()
+
+
+@dataclass(frozen=True)
+class ScopedLocalRevisionOutput(LocalRevisionOutput):
+    context_id: str = ''
+    transport_output: dict = field(default_factory=dict)
+    edit_links: tuple[dict, ...] = ()

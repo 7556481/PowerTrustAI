@@ -19,6 +19,7 @@ class ServiceConfig:
     review_result_transport: str='json'
     domain_internal_flow: str='production'
     revision_answer_delivery: str='production'
+    local_revision_interface: str='production'
     run_db: Path=ROOT/'data/runtime_local/runs.sqlite3'
     token_file: Path=ROOT/'data/runtime_local/access-token'
     index_db: Path=ROOT/'data/retrieval_local/semantic/corpus.sqlite3'
@@ -41,6 +42,8 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.local_revision_interface not in ('production','source_actions_v2'):raise ValueError('Invalid local revision interface')
+        if self.local_revision_interface!='production' and (self.fact_review_contract!='literal_v1' or self.profile!='real'):raise ValueError('V2 revision requires explicit literal fact candidate')
         if self.extraction_message_profile not in ('production','unified_v1'):raise ValueError('Invalid extraction message profile')
         if self.review_result_transport not in ('json','strict_tool_v1'):raise ValueError('Invalid review result transport')
         if self.review_result_transport!='json' and self.fact_review_contract not in ('simple_v1','simple_bound_v1'):raise ValueError('Strict result transport requires explicit simple contract')
@@ -103,6 +106,7 @@ class ServiceConfig:
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
             domain_internal_flow=os.environ.get('POWERTRUST_DOMAIN_INTERNAL_FLOW','production'),
             revision_answer_delivery=os.environ.get('POWERTRUST_REVISION_ANSWER_DELIVERY','production'),
+            local_revision_interface=os.environ.get('POWERTRUST_LOCAL_REVISION_INTERFACE','production'),
             fact_internal_flow=os.environ.get('POWERTRUST_FACT_INTERNAL_FLOW','production'),
             fact_review_contract=os.environ.get('POWERTRUST_FACT_REVIEW_CONTRACT','production'),
             review_result_transport=os.environ.get('POWERTRUST_REVIEW_RESULT_TRANSPORT','json'),

@@ -1,0 +1,83 @@
+{
+  "protocol": "local-revision-source-actions-v2",
+  "real_project_model_requests": 0,
+  "env_loaded": false,
+  "projections": [
+    {
+      "sequence": 10,
+      "old_message_characters": 60682,
+      "new_message_characters": 12404,
+      "counting": "system+initial user Unicode chars, not tokens; equal complete source text fields, not paraphrases",
+      "old_allowed_evidence": 1,
+      "new_unique_sources": 1,
+      "necessary_sources_preserved": [
+        "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2"
+      ],
+      "source_counts": [
+        {
+          "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+          "text_sha256": "8035814bead5cf935dc1053839d0dc45abdd83c496ca6b90913062f2ae102d33",
+          "old_exact_body_text_fields": 10,
+          "new_exact_body_text_fields": 1
+        }
+      ]
+    },
+    {
+      "sequence": 15,
+      "old_message_characters": 50997,
+      "new_message_characters": 11875,
+      "counting": "system+initial user Unicode chars, not tokens; equal complete source text fields, not paraphrases",
+      "old_allowed_evidence": 1,
+      "new_unique_sources": 1,
+      "necessary_sources_preserved": [
+        "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde"
+      ],
+      "source_counts": [
+        {
+          "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+          "text_sha256": "fa82733c8f82156be9f7c39f11bd8b6afbc7a527073c597d64b955a9fd9c83ff",
+          "old_exact_body_text_fields": 10,
+          "new_exact_body_text_fields": 1
+        }
+      ]
+    },
+    {
+      "sequence": 37,
+      "old_message_characters": 62027,
+      "new_message_characters": 12201,
+      "counting": "system+initial user Unicode chars, not tokens; equal complete source text fields, not paraphrases",
+      "old_allowed_evidence": 1,
+      "new_unique_sources": 1,
+      "necessary_sources_preserved": [
+        "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5"
+      ],
+      "source_counts": [
+        {
+          "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+          "text_sha256": "81d1ba89d51a555b8e4e385d23e6f286a23f077c288c2b7c4607c5e7339821d9",
+          "old_exact_body_text_fields": 10,
+          "new_exact_body_text_fields": 1
+        }
+      ]
+    },
+    {
+      "sequence": 42,
+      "old_message_characters": 64760,
+      "new_message_characters": 13372,
+      "counting": "system+initial user Unicode chars, not tokens; equal complete source text fields, not paraphrases",
+      "old_allowed_evidence": 1,
+      "new_unique_sources": 1,
+      "necessary_sources_preserved": [
+        "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce"
+      ],
+      "source_counts": [
+        {
+          "evidence_id": "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce",
+          "text_sha256": "46d376598d22ef999fa03fc93ee0a156745c796ca46b5a70c3e99292219c1bb1",
+          "old_exact_body_text_fields": 13,
+          "new_exact_body_text_fields": 1
+        }
+      ]
+    }
+  ]
+}

@@ -65,7 +65,8 @@ def validate_types(value, annotation=None, path="value"):
             extensions={'PowerDomainReviewOutput':('SafetyDomainReviewOutput','BusinessDomainOutput'), 'Claim':('ContextualClaim','BasisAwareClaim','ObligationClaim','PremiseBoundClaim'),
                 'TypedBasis':('CalculationBasis','TaskPremiseBasis'), 'TaskRequest':('PremiseTaskRequest',),
                 'EvidenceVerificationOutput':('ReliabilityVerificationOutput','PremiseVerificationOutput','FactFlowOutput','LiteralVerificationOutput'),
-                'RevisionOutput':('LocalRevisionOutput',)}
+                'RevisionOutput':('LocalRevisionOutput','ScopedLocalRevisionOutput'),
+                'LocalRevisionOutput':('ScopedLocalRevisionOutput',)}
             if annotation is AuditReport:
                 from core.literal_review import LiteralAuditReport
                 if type(value) is LiteralAuditReport:
@@ -343,7 +344,14 @@ def validate_finding_basis(finding, output, evidence, path):
         require(finding.scope_id is None, "unexpected generation scope", path=f"{path}.scope_id")
 
 
-def validate_revision(output, previous, evidence, findings):
+def validate_revision(output, previous, evidence, findings, *, revision_context=None):
+    from agents.contracts import ScopedLocalRevisionOutput
+    if isinstance(output,ScopedLocalRevisionOutput):
+        from services.local_revision_v2 import validate_output
+        require(revision_context is not None and revision_context.answer==previous and revision_context.allowed_evidence==evidence,'V2 requires matching frozen revision context')
+        require(tuple(findings)==revision_context.verification.findings+revision_context.domain_review.findings,'V2 opinion context changed')
+        validate_types(output,ScopedLocalRevisionOutput)
+        validate_output(output,revision_context);return
     from agents.contracts import LocalRevisionOutput
     if isinstance(output,LocalRevisionOutput):
         from services.literal_review_v1 import validate_local_revision

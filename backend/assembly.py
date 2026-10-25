@@ -221,6 +221,11 @@ class ComponentFactory:
             manifest['protocols'].update(evidence_verification=VERSION,revision=REVISION)
             manifest['policy']=POLICY
             manifest['template_sha256']={'literal':hashlib.sha256(SYSTEM.encode()).hexdigest(),'local_revision':hashlib.sha256(REVISION_SYSTEM.encode()).hexdigest()}
+        if self.config.local_revision_interface=='source_actions_v2':
+            from services.local_revision_v2 import VERSION,system
+            manifest['local_revision_interface']=self.config.local_revision_interface
+            manifest['prompts']['revision']=manifest['contracts']['revision']=manifest['protocols']['revision']=VERSION
+            manifest['template_sha256']['local_revision']=hashlib.sha256(system().encode()).hexdigest()
         return manifest
 
     def create(self,rid,observer):
@@ -246,6 +251,8 @@ class ComponentFactory:
         from agents.revision import ModelRevisionAgent
         if self.config.fact_review_contract=='literal_v1':
             from services.literal_review_v1 import LiteralReviewAgent as FactAgent, LocalRevisionAgent as ModelRevisionAgent
+            if self.config.local_revision_interface=='source_actions_v2':
+                from services.local_revision_v2 import ScopedLocalRevisionAgent as ModelRevisionAgent
         from services.claim_extractor import ModelClaimExtractor
         from tools.unit_conversion import UnitConversionTool
         from model_adapter.contracts import ModelSettings
