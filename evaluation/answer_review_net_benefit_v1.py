@@ -107,13 +107,14 @@ def freeze():
     print('Frozen 8 capability + 4 generation + 8 natural audit tasks; zero sends.',flush=True)
 
 
-async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None,fixed_audit_delivery=True):
+async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None,fixed_audit_delivery=True,initial_generated=None,before_submit=None):
     """Submission/persistence/stop is exclusively run_fixed; collection runs Harness."""
-    rows=rows or order();generated={};outputs={};send_log=[];fatal=False
+    rows=rows or order();generated=dict(initial_generated or {});outputs={};send_log=[];fatal=False
     store=RunStore(root/'runs.sqlite3')
     async def submit(spec):
         rid=uuid4().hex
         if fatal:raise RuntimeError('Shared stop')
+        if before_submit is not None:await before_submit(spec,outputs)
         store.create(rid,spec,dict(configuration=frozen_config(c),variant=spec['variant']))
         return dict(run_id=rid,spec=spec)
     async def collect(a):

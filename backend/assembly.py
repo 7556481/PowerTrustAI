@@ -153,6 +153,11 @@ class ComponentFactory:
             manifest['retrieval_mode']='none';manifest['scoring_method']=None
         manifest['retrieval_execution_profile']=self.config.retrieval_execution_profile
         manifest['configured_review_message_profile']=self.config.review_message_profile
+        manifest['extraction_message_profile']=self.config.extraction_message_profile
+        if self.config.extraction_message_profile=='unified_v1':
+            from services.claim_message_v1 import system, VERSION as extraction_version
+            manifest['prompts']['extraction']=extraction_version
+            manifest['extraction_message_sha256']=hashlib.sha256(system(self.config.decision_policy=='product-v1').encode()).hexdigest()
         manifest['review_message_profile']=self.config.review_message_profile if self.config.verification_schema==13 else 'baseline_v1'
         if self.config.review_message_profile=='lossless_v1' and self.config.verification_schema==13:
             manifest['review_transport']='review-lossless-shared-values-v1'
@@ -257,7 +262,7 @@ class ComponentFactory:
                 FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
-                ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
+                ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
                 generation_corpus_english=corpus_english,execution_path=self.config.execution_path)

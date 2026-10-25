@@ -28,6 +28,7 @@ class ServiceConfig:
     retrieval_mode: str='bm25'
     retrieval_execution_profile: str='topic_v4_subject_v1'
     review_message_profile: str='lossless_v1'
+    extraction_message_profile: str='production'
     embedding_model_dir: Path=ROOT/'data/retrieval_local/semantic/e5-small'
     vector_db: Path=ROOT/'data/retrieval_local/semantic/vectors.sqlite3'
     nli_enabled: bool=False
@@ -40,6 +41,7 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.extraction_message_profile not in ('production','unified_v1'):raise ValueError('Invalid extraction message profile')
         if self.review_result_transport not in ('json','strict_tool_v1'):raise ValueError('Invalid review result transport')
         if self.review_result_transport!='json' and self.fact_review_contract not in ('simple_v1','simple_bound_v1'):raise ValueError('Strict result transport requires explicit simple contract')
         if self.fact_review_contract=='simple_bound_v1' and self.review_result_transport!='strict_tool_v1':raise ValueError('Bound candidate requires explicit strict transport')
@@ -105,6 +107,7 @@ class ServiceConfig:
             review_result_transport=os.environ.get('POWERTRUST_REVIEW_RESULT_TRANSPORT','json'),
             execution_path=os.environ.get('POWERTRUST_EXECUTION_PATH',orchestration.get('execution_path','sequential')),
             review_message_profile=os.environ.get('POWERTRUST_REVIEW_MESSAGE_PROFILE','lossless_v1'),
+            extraction_message_profile=os.environ.get('POWERTRUST_EXTRACTION_MESSAGE_PROFILE','production'),
             retrieval_execution_profile=os.environ.get('POWERTRUST_RETRIEVAL_EXECUTION','topic_v4_subject_v1'),
             index_db=Path(os.environ.get('POWERTRUST_INDEX_DB',daily.get('index_db',str(cls().index_db)))),
             decision_policy=os.environ.get('POWERTRUST_DECISION_POLICY','product-v1'),
