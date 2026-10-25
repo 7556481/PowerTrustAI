@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-26 修订v2四例真实验证结果
+
+[完整报告及四例初末全文](evaluation/local-revision-v2-flash-check-v1/report.md)：合法应用/目标改对/正确内容保留/真实重审Store闭合均4/4；固定历史首轮免费回放，16次新Flash、82,465token，金额未知。附冻结、全部实际预测、逐请求费用状态、独立文本复核、9专项/1305全套及生产/历史保留证据。A2排他误读风险和未验证复杂依赖保持；不推自然收益、不改旧0/4、不生产采用，停止交设计审阅。
+
 ## 2026-10-25 局部修订离线整改结果
 
 [短报告](evaluation/local-revision-offline-redesign-v1/report.md) · [实现前职责表](evaluation/local-revision-offline-redesign-v1/design.md) · [8旧拒绝核查](evaluation/local-revision-offline-redesign-v1/historical-contract-audit.json) · [真实投影统计](evaluation/local-revision-offline-redesign-v1/projection-verification.json) · [三个静态例/反例](evaluation/local-revision-offline-redesign-v1/static-examples.md) · [验证](evaluation/local-revision-offline-redesign-v1/verification.json)。D/O分责、非互斥依赖、来源供给和一次聚合纠正的新接口默认关闭；22专项/1296完整离线通过，项目模型0、不加载根.env。旧8响应拒绝和阶段0/4保持，新合同不兼容不算恢复成绩。只建议设计审阅后另行决定小范围验证；不自动付费/采用，不扩学习站。

@@ -1,0 +1,832 @@
+{
+  "new_requests": 16,
+  "initial": 16,
+  "corrections": 0,
+  "responses": 16,
+  "model_records": 16,
+  "models": {
+    "deepseek-flash": 16
+  },
+  "by_prompt": {
+    "local-revision-source-actions-v2": 4,
+    "atomic-claims-v7-obligations-faithful-assertions-v2": 4,
+    "literal-review-v1": 4,
+    "power-domain-review-v3.5-task-obligations": 4
+  },
+  "usage": {
+    "input_tokens": 72863,
+    "output_tokens": 9602,
+    "total_tokens": 82465,
+    "cache_hit_tokens": 13312,
+    "cache_miss_tokens": 59551
+  },
+  "usage_unknown_sends": 0,
+  "cost_status": "Actual amount/currency unknown: no invoice/provider cost_amount. Legacy record estimates are dated ranges, not current actual cost; not used as actual charge.",
+  "background_requests": 12,
+  "historical_background_recharged": false,
+  "unexecuted": [],
+  "per_chain": [
+    {
+      "case": "A1",
+      "new_requests": 4,
+      "harness_duration_ms": 10703,
+      "collect_elapsed_ms": 10748.116
+    },
+    {
+      "case": "A2",
+      "new_requests": 4,
+      "harness_duration_ms": 11944,
+      "collect_elapsed_ms": 11980.9
+    },
+    {
+      "case": "A3",
+      "new_requests": 4,
+      "harness_duration_ms": 9977,
+      "collect_elapsed_ms": 10014.381
+    },
+    {
+      "case": "A4",
+      "new_requests": 4,
+      "harness_duration_ms": 9752,
+      "collect_elapsed_ms": 9792.565
+    }
+  ],
+  "stop_records": [
+    {
+      "case_id": "A1",
+      "accepted": {
+        "run_id": "8b56ab5dc86e4094bd853374f184124c",
+        "spec": {
+          "line": "A",
+          "case": 0,
+          "variant": "source_actions_v2",
+          "historical_source": {
+            "origin": "historical_replay",
+            "case": "A1",
+            "source_revision_request_sequence": 10,
+            "source_run_id": "cc647b8025084a9390f7ed700ba8b705",
+            "source_input_sha256": "2c7cbc6a04bdc73b5aed80d2d8e31234e71d4dc69dc3a7dbbe60955dd2085bf1",
+            "initial_review_sha256": "b04f2bd5a279b10462139f2f99ecc550446231a159f6f7d6fcce8af7be40afa5",
+            "message_sha256": "20e00509c2216e347755a4db0b2e4208a9773be7a0e99fd82d4ca511ab819f93",
+            "restored_revision_sha256": "6df4cfabf17e744fda14b9424f74ec18084b0a77b9e42b1387ec1ec63cb21885",
+            "new_projection_sha256": "cfcc18d64fc94da20457109509dc7fed7dab3091f0bb322d06e0ab1b753f33b5",
+            "bindings_origin": "original runs.result.evidence_bindings",
+            "instructions_origin": "review_rounds[0].report.decision.reasons",
+            "knowledge_version": null,
+            "knowledge_origin": "all original trace events; fixed A runner",
+            "generation_snapshot": null,
+            "snapshot_origin": "original input.json explicit null; no generation_output",
+            "historical_background_records": [
+              {
+                "call_number": 1,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "atomic-claims-v7-obligations-faithful-assertions-v2",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 3027,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 1612,
+                  "output_tokens": 715,
+                  "total_tokens": 2327,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 1408,
+                  "cache_miss_tokens": 204
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.000463824,
+                  "usd_upper": 0.000927648,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\cc647b8025084a9390f7ed700ba8b705\\response-5d36a6d093aa41c1b4cb96d411fc5dc9.json",
+                "response_contract_version": "atomic-claims-v7",
+                "candidate_catalog_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\cc647b8025084a9390f7ed700ba8b705\\scope-e8a1f0e736314d74bbc2fa07639527ad.json",
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 0,
+                  "evidence_chars_unique": 0,
+                  "message_chars": 7143,
+                  "scope_ids": []
+                },
+                "invocation_id": "5862f1de1f344f3dac64e3933da56402",
+                "component": "claim_extraction",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              },
+              {
+                "call_number": 3,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "power-domain-review-v3.5-task-obligations",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 3693,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 6201,
+                  "output_tokens": 593,
+                  "total_tokens": 6794,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 3456,
+                  "cache_miss_tokens": 2745
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.0007779180000000001,
+                  "usd_upper": 0.0015558360000000001,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\cc647b8025084a9390f7ed700ba8b705\\response-6d781a6695304889b6d68db7a75d64e8.json",
+                "response_contract_version": "power-domain-review-output-v3.4",
+                "candidate_catalog_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\cc647b8025084a9390f7ed700ba8b705\\scope-9afde788b2e049a3b92a3ddb8b9173dc.json",
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 1,
+                  "evidence_chars_delivered": 1193,
+                  "evidence_chars_unique": 1193,
+                  "message_chars": 22416,
+                  "scope_ids": [
+                    "scope-9a2ad22f2c8c7359a2e2830a"
+                  ]
+                },
+                "invocation_id": "66b4d7da841e403b847760eb4d18e017",
+                "component": "power_domain_review",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              },
+              {
+                "call_number": 2,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "literal-review-v1",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 3821,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 6815,
+                  "output_tokens": 625,
+                  "total_tokens": 7440,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 0,
+                  "cache_miss_tokens": 6815
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.00139725,
+                  "usd_upper": 0.0027945,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\cc647b8025084a9390f7ed700ba8b705\\response-e2abef5a60c84fdc87057872f23dce00.json",
+                "response_contract_version": "literal-review-v1",
+                "candidate_catalog_path": null,
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 7949,
+                  "evidence_chars_unique": 5563,
+                  "message_chars": 21732,
+                  "scope_ids": []
+                },
+                "invocation_id": "be2414895bce4ce8a4bb957c9fe44cd6",
+                "component": "evidence_verification",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              }
+            ],
+            "count_historical_as_new": false,
+            "files": [
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/cc647b8025084a9390f7ed700ba8b705/input.json",
+                "sha256": "c42a6f36f13ca12bf4a61eae1f73dd4bfcac3033874165cc026151806154170c"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0010.json",
+                "sha256": "47ad9151522ae11d85f066df80323d7769aa03d7f5e5d55a4e3d16165e08b2ab"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0010.json",
+                "sha256": "18f5bfbd456a32b588f0c10ab3250e28a09c558ff1a0b9fd59b4240b088c2db2"
+              }
+            ]
+          }
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "A2",
+      "accepted": {
+        "run_id": "140d0c38001f456c86ea989f0bcdad2c",
+        "spec": {
+          "line": "A",
+          "case": 1,
+          "variant": "source_actions_v2",
+          "historical_source": {
+            "origin": "historical_replay",
+            "case": "A2",
+            "source_revision_request_sequence": 15,
+            "source_run_id": "84d9f0b716ef49d883d7adbfbee7664a",
+            "source_input_sha256": "7d848ac9cfc679c3fbe3e733086a0bfccd5dae41d6f6f7e5bc3491fd11997d86",
+            "initial_review_sha256": "d2f46b261b317bd49ba5c1ea78c8958c7b16a0677e7ef4e930643a15241c9fc2",
+            "message_sha256": "4a80cb2df5e7638e6b1b0ac512700ff5e233f502d851611c605c2b854b0f6ef5",
+            "restored_revision_sha256": "d10b9c5c6f8dd651b849160538206641bbd8f7d94633eb10c8d9943fa2184a10",
+            "new_projection_sha256": "ad2590eeddc914b89dc12ef4dda4f8e849140553d17e000b93630dfcbf04d9da",
+            "bindings_origin": "original runs.result.evidence_bindings",
+            "instructions_origin": "review_rounds[0].report.decision.reasons",
+            "knowledge_version": null,
+            "knowledge_origin": "all original trace events; fixed A runner",
+            "generation_snapshot": null,
+            "snapshot_origin": "original input.json explicit null; no generation_output",
+            "historical_background_records": [
+              {
+                "call_number": 1,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "atomic-claims-v7-obligations-faithful-assertions-v2",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 3350,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 1629,
+                  "output_tokens": 838,
+                  "total_tokens": 2467,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 1280,
+                  "cache_miss_tokens": 349
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.00055899,
+                  "usd_upper": 0.00111798,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\84d9f0b716ef49d883d7adbfbee7664a\\response-07e7bc7080624a64979d1f20a443a80d.json",
+                "response_contract_version": "atomic-claims-v7",
+                "candidate_catalog_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\84d9f0b716ef49d883d7adbfbee7664a\\scope-5d6537ddbddb4e259bdbee548f38878d.json",
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 0,
+                  "evidence_chars_unique": 0,
+                  "message_chars": 7172,
+                  "scope_ids": []
+                },
+                "invocation_id": "07cba18561e845cd921597ade6053627",
+                "component": "claim_extraction",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              },
+              {
+                "call_number": 2,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "literal-review-v1",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 4080,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 5443,
+                  "output_tokens": 700,
+                  "total_tokens": 6143,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 256,
+                  "cache_miss_tokens": 5187
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.001198818,
+                  "usd_upper": 0.002397636,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\84d9f0b716ef49d883d7adbfbee7664a\\response-3ad6d34901854cf096ad436dfc6d6ab2.json",
+                "response_contract_version": "literal-review-v1",
+                "candidate_catalog_path": null,
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 5167,
+                  "evidence_chars_unique": 2065,
+                  "message_chars": 18218,
+                  "scope_ids": []
+                },
+                "invocation_id": "ddd844573128481fbb777866ca39907e",
+                "component": "evidence_verification",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              },
+              {
+                "call_number": 3,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "power-domain-review-v3.5-task-obligations",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 4295,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 6379,
+                  "output_tokens": 716,
+                  "total_tokens": 7095,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 1280,
+                  "cache_miss_tokens": 5099
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.0011982899999999999,
+                  "usd_upper": 0.0023965799999999997,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\84d9f0b716ef49d883d7adbfbee7664a\\response-91d0d80d99f34af4ac2fe5f2b1d3f497.json",
+                "response_contract_version": "power-domain-review-output-v3.4",
+                "candidate_catalog_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\84d9f0b716ef49d883d7adbfbee7664a\\scope-75fa0528c734498f85320f140fd7d026.json",
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 1,
+                  "evidence_chars_delivered": 1034,
+                  "evidence_chars_unique": 1034,
+                  "message_chars": 23860,
+                  "scope_ids": [
+                    "scope-24a3632daa7bb4f48f4b52db"
+                  ]
+                },
+                "invocation_id": "20081cdf415c40e48153ed97f98d88e8",
+                "component": "power_domain_review",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              }
+            ],
+            "count_historical_as_new": false,
+            "files": [
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/84d9f0b716ef49d883d7adbfbee7664a/input.json",
+                "sha256": "fbd6a9127452aad4f291460d3a856b991d8fab2e6909a0fd6b2e4f3355c1ec90"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0015.json",
+                "sha256": "6e5c651cdfb2b1728023b2b2bcb181c05cd72233f8f182b2252e492130e5e02a"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0015.json",
+                "sha256": "974d3d70f265ea1b2b31447bb36bff980c8b6d6f94e0ef1c0bd83f86f18fd2df"
+              }
+            ]
+          }
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "A3",
+      "accepted": {
+        "run_id": "dad9c76fa14741c8bf548f3576803c2d",
+        "spec": {
+          "line": "A",
+          "case": 2,
+          "variant": "source_actions_v2",
+          "historical_source": {
+            "origin": "historical_replay",
+            "case": "A3",
+            "source_revision_request_sequence": 37,
+            "source_run_id": "31234a87fc714bf0bc0d5288037dce44",
+            "source_input_sha256": "7192e6f46571afb19763f699df25cf393d96ed6a5efa23ea8b115ec5f5288604",
+            "initial_review_sha256": "745fb8a86055dcd64076d3f6bd4efc1d5a95b4c046a1935a29757c9604d41be6",
+            "message_sha256": "216f595442ca1f2e5b19c4e98e9565446c55065484c6ffe59cb816468637e423",
+            "restored_revision_sha256": "9d8432bdd2d79597edf5344401510f63f4a58bb3d9ec2e6884202a8e64b8b093",
+            "new_projection_sha256": "a271de287224ffb3d07bede5ac55d9bc6295e681aa3fc62f45282fabb0ac1eea",
+            "bindings_origin": "original runs.result.evidence_bindings",
+            "instructions_origin": "review_rounds[0].report.decision.reasons",
+            "knowledge_version": null,
+            "knowledge_origin": "all original trace events; fixed A runner",
+            "generation_snapshot": null,
+            "snapshot_origin": "original input.json explicit null; no generation_output",
+            "historical_background_records": [
+              {
+                "call_number": 1,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "atomic-claims-v7-obligations-faithful-assertions-v2",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 3402,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 1588,
+                  "output_tokens": 951,
+                  "total_tokens": 2539,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 1408,
+                  "cache_miss_tokens": 180
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.000601824,
+                  "usd_upper": 0.001203648,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\31234a87fc714bf0bc0d5288037dce44\\response-1683b9cbca4647f794f8379d9f5fbd03.json",
+                "response_contract_version": "atomic-claims-v7",
+                "candidate_catalog_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\31234a87fc714bf0bc0d5288037dce44\\scope-ccc8ddc139dd4ad6a47b675ccc59eddf.json",
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 0,
+                  "evidence_chars_unique": 0,
+                  "message_chars": 7118,
+                  "scope_ids": []
+                },
+                "invocation_id": "8526ef69e82a42b38d4204eb370cc460",
+                "component": "claim_extraction",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              },
+              {
+                "call_number": 2,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "literal-review-v1",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 3597,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 6527,
+                  "output_tokens": 620,
+                  "total_tokens": 7147,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 256,
+                  "cache_miss_tokens": 6271
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.0013134180000000002,
+                  "usd_upper": 0.0026268360000000004,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\31234a87fc714bf0bc0d5288037dce44\\response-7a4b3c185e104cf9b56686791a1dbfc9.json",
+                "response_contract_version": "literal-review-v1",
+                "candidate_catalog_path": null,
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 6924,
+                  "evidence_chars_unique": 3324,
+                  "message_chars": 21216,
+                  "scope_ids": []
+                },
+                "invocation_id": "d36c692ea642416f95d620f9e907ec86",
+                "component": "evidence_verification",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              },
+              {
+                "call_number": 3,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "power-domain-review-v3.5-task-obligations",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 4378,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 6781,
+                  "output_tokens": 765,
+                  "total_tokens": 7546,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 2944,
+                  "cache_miss_tokens": 3837
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.001043382,
+                  "usd_upper": 0.002086764,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\31234a87fc714bf0bc0d5288037dce44\\response-614ac0ccadfc4211a28b3356c492c7c1.json",
+                "response_contract_version": "power-domain-review-output-v3.4",
+                "candidate_catalog_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\31234a87fc714bf0bc0d5288037dce44\\scope-596a05943d2a4ca3847f503015d0c1de.json",
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 1,
+                  "evidence_chars_delivered": 1200,
+                  "evidence_chars_unique": 1200,
+                  "message_chars": 24190,
+                  "scope_ids": [
+                    "scope-40c15e48d8951d2a6c11629d"
+                  ]
+                },
+                "invocation_id": "6a12b27475104cb991a06eb75b00d82e",
+                "component": "power_domain_review",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              }
+            ],
+            "count_historical_as_new": false,
+            "files": [
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/31234a87fc714bf0bc0d5288037dce44/input.json",
+                "sha256": "264c1004e63fab8e24eba3dcaca2c568c0d96d40f37e0adc4fbcb8effd213e59"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0037.json",
+                "sha256": "661742b2facdfcc41a1aae54ab100e9da01d14e6139fbe3e42bcf6f219aaa482"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0037.json",
+                "sha256": "6f898f723d4868955a3987269bc6e360fefec3c19f4d6ad18c4316b1cc4d165d"
+              }
+            ]
+          }
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "A4",
+      "accepted": {
+        "run_id": "1421845ce3ed41ba9a0ec31c1705c5c3",
+        "spec": {
+          "line": "A",
+          "case": 3,
+          "variant": "source_actions_v2",
+          "historical_source": {
+            "origin": "historical_replay",
+            "case": "A4",
+            "source_revision_request_sequence": 42,
+            "source_run_id": "e768653fc49c47e6831949ec41811f8b",
+            "source_input_sha256": "573081a503abcf58cb2468dcccbaaabbf202e9fc06893add38da1466eb0dd1e8",
+            "initial_review_sha256": "6b849fb4183ba2cda7ec78340f09e9f0b548b34dd008f3ae4736ea9ce64f7e67",
+            "message_sha256": "a4562a4e9671c95b8857c5eef321d5d651eb2d9679c7dd90dace0f62ceacf3a9",
+            "restored_revision_sha256": "245731d5039286594ac216dbf0ffc504bb26734f7862228030e2312d02500d8a",
+            "new_projection_sha256": "d67228cc115ebdb400fe48ade7ab5f7ef8f6af808b519628acf6c741d93f28c5",
+            "bindings_origin": "original runs.result.evidence_bindings",
+            "instructions_origin": "review_rounds[0].report.decision.reasons",
+            "knowledge_version": null,
+            "knowledge_origin": "all original trace events; fixed A runner",
+            "generation_snapshot": null,
+            "snapshot_origin": "original input.json explicit null; no generation_output",
+            "historical_background_records": [
+              {
+                "call_number": 1,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "atomic-claims-v7-obligations-faithful-assertions-v2",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 2550,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 1644,
+                  "output_tokens": 586,
+                  "total_tokens": 2230,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 1280,
+                  "cache_miss_tokens": 364
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.00041003999999999997,
+                  "usd_upper": 0.0008200799999999999,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\e768653fc49c47e6831949ec41811f8b\\response-6129f6a6b4934eada41656e0ba9a8146.json",
+                "response_contract_version": "atomic-claims-v7",
+                "candidate_catalog_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\e768653fc49c47e6831949ec41811f8b\\scope-ef49765cf7044d15ad4667f754334017.json",
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 0,
+                  "evidence_chars_unique": 0,
+                  "message_chars": 7226,
+                  "scope_ids": []
+                },
+                "invocation_id": "2fddb86dd130406d9507d0abd0cff882",
+                "component": "claim_extraction",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              },
+              {
+                "call_number": 3,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "power-domain-review-v3.5-task-obligations",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 3504,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 5958,
+                  "output_tokens": 624,
+                  "total_tokens": 6582,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 1280,
+                  "cache_miss_tokens": 4678
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.0010799400000000002,
+                  "usd_upper": 0.0021598800000000003,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\e768653fc49c47e6831949ec41811f8b\\response-808d416ddbb5449392310b79c0a1fe4b.json",
+                "response_contract_version": "power-domain-review-output-v3.4",
+                "candidate_catalog_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\e768653fc49c47e6831949ec41811f8b\\scope-310caf45e9334c73beb6e7aeb59ff946.json",
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 1,
+                  "evidence_chars_delivered": 1199,
+                  "evidence_chars_unique": 1199,
+                  "message_chars": 21669,
+                  "scope_ids": [
+                    "scope-d9f62a0ba0f9394f854a8b6f"
+                  ]
+                },
+                "invocation_id": "cb1e474454dd4087b42692630e34dee6",
+                "component": "power_domain_review",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              },
+              {
+                "call_number": 2,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "literal-review-v1",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 4733,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 7243,
+                  "output_tokens": 900,
+                  "total_tokens": 8143,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 256,
+                  "cache_miss_tokens": 6987
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.001588818,
+                  "usd_upper": 0.003177636,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\e768653fc49c47e6831949ec41811f8b\\response-7fbe82dccde84bfbb6f1b8f927749b85.json",
+                "response_contract_version": "literal-review-v1",
+                "candidate_catalog_path": null,
+                "input_snapshot_path": null,
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 8386,
+                  "evidence_chars_unique": 4789,
+                  "message_chars": 21960,
+                  "scope_ids": []
+                },
+                "invocation_id": "3374c29f906b4008abbbfbda6c239a53",
+                "component": "evidence_verification",
+                "answer_version": 1,
+                "network_diagnostic": null,
+                "result_transport": null
+              }
+            ],
+            "count_historical_as_new": false,
+            "files": [
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/e768653fc49c47e6831949ec41811f8b/input.json",
+                "sha256": "864a4798ca734702e57f5b10f6cc0d76e49b82e1a51afd330a6f640162aa709c"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0042.json",
+                "sha256": "336553df49ff9335fb6c5d0576204cbb3ee8ebc838e727a2952d24d22be4eafb"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0042.json",
+                "sha256": "824456c8b35ce1f39f5f4ace7d602bd2cd26a42587c9e7928658796187de44b1"
+              }
+            ]
+          }
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    }
+  ]
+}
