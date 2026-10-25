@@ -1,0 +1,23 @@
+{
+  "this_round": {
+    "tests": 26,
+    "seconds": 69.94,
+    "result": "OK",
+    "modules": [
+      "tests.test_natural_answer_benefit_v3",
+      "tests.test_literal_review_v1",
+      "tests.test_local_revision_v2_flash_check_v1"
+    ],
+    "log_path": "data\\natural_answer_benefit_v3_final_precheck.log",
+    "log_sha256": "a8433a15826f99706c6600d379dfce97a3a603e1c4c1c9407a74477f724149e3",
+    "env_loaded": false,
+    "project_requests": 0
+  },
+  "reused_full_suite": {
+    "source": "docs/evaluation/local-revision-v2-flash-check-v1/verification.json",
+    "tests": 1305,
+    "seconds": 348.209,
+    "repeated_this_round": false
+  },
+  "reason": "Only evaluation wiring/materials/tests changed; shared business/core/Factory/Harness/Store unchanged. Offline substitutes do not score semantics."
+}

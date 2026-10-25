@@ -107,7 +107,7 @@ def freeze():
     print('Frozen 8 capability + 4 generation + 8 natural audit tasks; zero sends.',flush=True)
 
 
-async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None,fixed_audit_delivery=True,initial_generated=None,before_submit=None,send_guard=None,budget_for=None,local_issue_codes=()):
+async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None,fixed_audit_delivery=True,initial_generated=None,before_submit=None,send_guard=None,budget_for=None,local_issue_codes=(),independent_audit_budget=False):
     """Submission/persistence/stop is exclusively run_fixed; collection runs Harness."""
     rows=rows or order();generated=dict(initial_generated or {});outputs={};send_log=[];fatal=False
     store=RunStore(root/'runs.sqlite3')
@@ -128,7 +128,7 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
             g=generated[i];snapshot=g.generation_output.evidence_snapshot
             req=replace(req,mode=TaskMode.ASSESS_EXISTING,existing_answer=g.answer,provided_evidence=g.evidence)
             generation_retrieval=g.retrieval_records[-1] if g.retrieval_records else None
-            budget=replace(budget,max_model_calls=budget.max_model_calls-len(g.model_records),
+            if not independent_audit_budget:budget=replace(budget,max_model_calls=budget.max_model_calls-len(g.model_records),
                            max_duration_seconds=max(.001,budget.max_duration_seconds-g.duration_ms/1000),
                            max_retrieval_calls=budget.max_retrieval_calls-(generation_retrieval.calls_used if generation_retrieval else 0),
                            max_retrieval_chars_total=budget.max_retrieval_chars_total-(generation_retrieval.cumulative_chars if generation_retrieval else 0))
@@ -188,7 +188,7 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
                 bundle.harness.retriever=None
                 bundle.harness.subject_supplement=False
             run=task_runner if task_runner else lambda h,*args,**kw:h.run(*args,**kw)
-            result=await run(bundle.harness,req,budget,knowledge_version=c.knowledge_version if line in ('G','B') else None,
+            result=await run(bundle.harness,req,budget,knowledge_version=(snapshot.knowledge_version if line=='B' and independent_audit_budget else c.knowledge_version) if line in ('G','B') else None,
                 generation_only=line=='G',generation_snapshot=snapshot,run_id=rid)
             raw=wire(result)
             if fatal:raw['execution_issues'].append(dict(component='harness',code='DIAGNOSTIC_STORAGE_FAILED',message='pre-send or response persistence failed'))
