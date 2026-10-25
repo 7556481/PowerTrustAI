@@ -1,0 +1,114 @@
+{
+  "planned_slots": 28,
+  "control_records": 28,
+  "persisted_outputs": 28,
+  "unexecuted": [],
+  "calls": 131,
+  "model_records": 131,
+  "response_files": 131,
+  "initial": 119,
+  "corrections": 12,
+  "accepted_revision_outputs": 2,
+  "revision_business_attempts": 6,
+  "revision_requests": 10,
+  "successful_no_change_outputs": 0,
+  "invalid_responses": 22,
+  "execution_incomplete": [
+    "A1-production",
+    "A1-literal_v1",
+    "A2-literal_v1",
+    "A3-production",
+    "A3-literal_v1",
+    "A4-literal_v1",
+    "A7-production",
+    "A8-literal_v1",
+    "B2-production"
+  ],
+  "groups": {
+    "A-production": {
+      "calls": 57,
+      "corrections": 4,
+      "tokens": {
+        "input_tokens": 317678,
+        "output_tokens": 42165,
+        "total_tokens": 359843,
+        "cache_hit_tokens": 120704,
+        "cache_miss_tokens": 196974
+      },
+      "cumulative_model_ms": 220963
+    },
+    "A-literal_v1": {
+      "calls": 33,
+      "corrections": 5,
+      "tokens": {
+        "input_tokens": 266351,
+        "output_tokens": 21585,
+        "total_tokens": 287936,
+        "cache_hit_tokens": 107008,
+        "cache_miss_tokens": 159343
+      },
+      "cumulative_model_ms": 113802
+    },
+    "G-production": {
+      "calls": 4,
+      "corrections": 0,
+      "tokens": {
+        "input_tokens": 43478,
+        "output_tokens": 1194,
+        "total_tokens": 44672,
+        "cache_hit_tokens": 40320,
+        "cache_miss_tokens": 3158
+      },
+      "cumulative_model_ms": 9609
+    },
+    "B-production": {
+      "calls": 25,
+      "corrections": 3,
+      "tokens": {
+        "input_tokens": 309362,
+        "output_tokens": 23684,
+        "total_tokens": 333046,
+        "cache_hit_tokens": 128000,
+        "cache_miss_tokens": 181362
+      },
+      "cumulative_model_ms": 119411
+    },
+    "B-literal_v1": {
+      "calls": 12,
+      "corrections": 0,
+      "tokens": {
+        "input_tokens": 153688,
+        "output_tokens": 9894,
+        "total_tokens": 163582,
+        "cache_hit_tokens": 30848,
+        "cache_miss_tokens": 122840
+      },
+      "cumulative_model_ms": 53689
+    }
+  },
+  "billing_amount": null,
+  "billing_status": "unknown_no_bill; token usage is not currency cost",
+  "model": "deepseek-flash",
+  "other_models": 0,
+  "freeze_code_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
+  "source_hashes_match": true,
+  "total_usage": {
+    "input_tokens": 1090557,
+    "output_tokens": 98522,
+    "total_tokens": 1189079,
+    "cache_hit_tokens": 426880,
+    "cache_miss_tokens": 663677
+  },
+  "last_send_offset_seconds": 450.2253282999991,
+  "maximum_new_requests_per_audit": 11,
+  "maximum_generation_requests": 1,
+  "maximum_harness_seconds": 39.672,
+  "harness_duration_sum_seconds": 450.681,
+  "cumulative_model_seconds": 517.474,
+  "correction_owners": {
+    "evidence_verification": 6,
+    "revision": 4,
+    "power_domain_review": 2
+  },
+  "maximum_fact_corrections_per_invocation": 1
+}

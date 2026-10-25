@@ -1,0 +1,10 @@
+{
+  "build": "python -m tools.learning_checks",
+  "chapters": 20,
+  "explained_questions": 79,
+  "source_identities_and_local_links": true,
+  "static_rendered_answers": true,
+  "browser_acceptance": false,
+  "directed_content": "docs/learning/chapters/04-harness.md: one original-review/local-revision failure case, source tour and two exercises",
+  "source_version_sha256": "7c7e3cf19288b8fd182bb9fefbe84ea2242a3774767e6afa1727d74adc622291"
+}

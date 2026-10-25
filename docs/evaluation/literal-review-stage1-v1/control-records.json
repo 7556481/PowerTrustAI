@@ -1,0 +1,478 @@
+[
+  {
+    "case_id": "A1-production",
+    "accepted": {
+      "run_id": "46b3d6195182491fa9be25322ca2274c",
+      "spec": {
+        "line": "A",
+        "case": 0,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A1-literal_v1",
+    "accepted": {
+      "run_id": "cc647b8025084a9390f7ed700ba8b705",
+      "spec": {
+        "line": "A",
+        "case": 0,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A2-literal_v1",
+    "accepted": {
+      "run_id": "84d9f0b716ef49d883d7adbfbee7664a",
+      "spec": {
+        "line": "A",
+        "case": 1,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A2-production",
+    "accepted": {
+      "run_id": "1a1a875076bf4bab9fa9a8331c2ca0d2",
+      "spec": {
+        "line": "A",
+        "case": 1,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A3-production",
+    "accepted": {
+      "run_id": "813a878cc3b04e428cd6d3f345e0f805",
+      "spec": {
+        "line": "A",
+        "case": 2,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A3-literal_v1",
+    "accepted": {
+      "run_id": "31234a87fc714bf0bc0d5288037dce44",
+      "spec": {
+        "line": "A",
+        "case": 2,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A4-literal_v1",
+    "accepted": {
+      "run_id": "e768653fc49c47e6831949ec41811f8b",
+      "spec": {
+        "line": "A",
+        "case": 3,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A4-production",
+    "accepted": {
+      "run_id": "10b6dded9ac140fa904b8e3ae8af3bb6",
+      "spec": {
+        "line": "A",
+        "case": 3,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A5-production",
+    "accepted": {
+      "run_id": "461eef592a144b1fbdb8d3f4cbee2a4c",
+      "spec": {
+        "line": "A",
+        "case": 4,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A5-literal_v1",
+    "accepted": {
+      "run_id": "e84f15b7ef41468f97f19d3b983c025f",
+      "spec": {
+        "line": "A",
+        "case": 4,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A6-literal_v1",
+    "accepted": {
+      "run_id": "a706e11fe6114c9ab967d64313f28ea5",
+      "spec": {
+        "line": "A",
+        "case": 5,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A6-production",
+    "accepted": {
+      "run_id": "4d3b6927a9de4fdc9cdfe408abf1b1c4",
+      "spec": {
+        "line": "A",
+        "case": 5,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A7-production",
+    "accepted": {
+      "run_id": "6e40e11dc7944b77865dfabb0a4e7472",
+      "spec": {
+        "line": "A",
+        "case": 6,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A7-literal_v1",
+    "accepted": {
+      "run_id": "47f6e0df07d740bfa18005e10bed43a4",
+      "spec": {
+        "line": "A",
+        "case": 6,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A8-literal_v1",
+    "accepted": {
+      "run_id": "50b7917e5273459db0f4eceeead9af64",
+      "spec": {
+        "line": "A",
+        "case": 7,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "A8-production",
+    "accepted": {
+      "run_id": "450615b01ce7434ab4c57346e0fbbff7",
+      "spec": {
+        "line": "A",
+        "case": 7,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "G1",
+    "accepted": {
+      "run_id": "7b84e42d08dd43359516f11cc2e97ee4",
+      "spec": {
+        "line": "G",
+        "case": 0,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "B1-production",
+    "accepted": {
+      "run_id": "8b89e146d7484d5ca23f314c9b8dc9dd",
+      "spec": {
+        "line": "B",
+        "case": 0,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "B1-literal_v1",
+    "accepted": {
+      "run_id": "3307755d1dd844ab9e50aefc370d941e",
+      "spec": {
+        "line": "B",
+        "case": 0,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "G2",
+    "accepted": {
+      "run_id": "dc1c51880138407f9dc98ed4f04b9abf",
+      "spec": {
+        "line": "G",
+        "case": 1,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "B2-literal_v1",
+    "accepted": {
+      "run_id": "7591a3497711438b81d00354584c1887",
+      "spec": {
+        "line": "B",
+        "case": 1,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "B2-production",
+    "accepted": {
+      "run_id": "29c6768836e64165846414b7239e4016",
+      "spec": {
+        "line": "B",
+        "case": 1,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "G3",
+    "accepted": {
+      "run_id": "85a65cdad38743d7bd9915a329ed9e2f",
+      "spec": {
+        "line": "G",
+        "case": 2,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "B3-production",
+    "accepted": {
+      "run_id": "6baaddf166cb4239abdaf395f551f51c",
+      "spec": {
+        "line": "B",
+        "case": 2,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "B3-literal_v1",
+    "accepted": {
+      "run_id": "dd0846ac74184bba9e61e23450d4f21f",
+      "spec": {
+        "line": "B",
+        "case": 2,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "G4",
+    "accepted": {
+      "run_id": "a530d58b649d4a2e8c19f1f89c559955",
+      "spec": {
+        "line": "G",
+        "case": 3,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "B4-literal_v1",
+    "accepted": {
+      "run_id": "d9f1bfce66e94d589bc93d77b4b85c93",
+      "spec": {
+        "line": "B",
+        "case": 3,
+        "variant": "literal_v1"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  },
+  {
+    "case_id": "B4-production",
+    "accepted": {
+      "run_id": "ce412ec191b94c06a69ff6a2e70bcadb",
+      "spec": {
+        "line": "B",
+        "case": 3,
+        "variant": "production"
+      }
+    },
+    "stop": false,
+    "decision": {
+      "shared": false,
+      "reason": "case_local_result",
+      "evidence": []
+    }
+  }
+]

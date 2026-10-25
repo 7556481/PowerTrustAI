@@ -1,0 +1,202 @@
+{
+  "origin": "AI-assisted source-first independent development text review, user supervision; not expert gold or true blinded trial",
+  "method": "Actual sources then initial/final text; routes and model reasons hidden from read-only reviewer; root maps IDs and adds execution/citation diagnostics. No new project model calls.",
+  "per_case": [
+    {
+      "id": "A1-production",
+      "review_id": "ec86520bebed",
+      "conclusion": "漏修；事实格式失败，强制义务保留。",
+      "changed": false,
+      "execution_complete": false
+    },
+    {
+      "id": "A1-literal_v1",
+      "review_id": "c10be680c395",
+      "conclusion": "漏修；初审差异成立，Revision初始和纠正均非法，原稿保留。",
+      "changed": false,
+      "execution_complete": false
+    },
+    {
+      "id": "A2-literal_v1",
+      "review_id": "c458e4e820cc",
+      "conclusion": "漏修；Revision关联集合混入领域ID，原N-2错误保留。",
+      "changed": false,
+      "execution_complete": false
+    },
+    {
+      "id": "A2-production",
+      "review_id": "675fc96becaf",
+      "conclusion": "实质改对；无干预/立即限定回归N-1，全部必答点保留，完整重审通过；厂站记录为额外范围附注。",
+      "changed": true,
+      "execution_complete": true
+    },
+    {
+      "id": "A3-production",
+      "review_id": "29a9f1d57576",
+      "conclusion": "漏修；事实执行失败，任何电压/无带宽限制保留。",
+      "changed": false,
+      "execution_complete": false
+    },
+    {
+      "id": "A3-literal_v1",
+      "review_id": "6ce95cf6db1c",
+      "conclusion": "漏修；Revision额外body及非法关联ID，原错保留。",
+      "changed": false,
+      "execution_complete": false
+    },
+    {
+      "id": "A4-literal_v1",
+      "review_id": "35802c94a9a4",
+      "conclusion": "漏修；自身缺陷被标dependent，合同拒绝，初稿两错误保留。",
+      "changed": false,
+      "execution_complete": false
+    },
+    {
+      "id": "A4-production",
+      "review_id": "c95fef27a952",
+      "conclusion": "mixed；目标影响顺序及耦合结论修复，前提/变量保留；新增互为因果是来源未建立的因果强化，不能算纯净成功。",
+      "changed": true,
+      "execution_complete": true
+    },
+    {
+      "id": "A5-production",
+      "review_id": "281672b02383",
+      "conclusion": "正确文本/必答点保留，完整审核。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "A5-literal_v1",
+      "review_id": "1a3af545a10a",
+      "conclusion": "正确同义保护成功，未误改。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "A6-literal_v1",
+      "review_id": "b75e73722cee",
+      "conclusion": "明确上下文归属保留，保护成功。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "A6-production",
+      "review_id": "1c30ba8d8554",
+      "conclusion": "正确跨句限定/解释保留，完整审核。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "A7-production",
+      "review_id": "7424542c93e4",
+      "conclusion": "正确文本保留，但审核失败，不算审核成功。",
+      "changed": false,
+      "execution_complete": false
+    },
+    {
+      "id": "A7-literal_v1",
+      "review_id": "566fd4f250d7",
+      "conclusion": "三单元正确解释及必答点保留，保护成功。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "A8-literal_v1",
+      "review_id": "abb8e65597d3",
+      "conclusion": "执行失败；空依据defect被拒、无效引用响应把不足写矛盾，不能计合理未解决。",
+      "changed": false,
+      "execution_complete": false
+    },
+    {
+      "id": "A8-production",
+      "review_id": "abbdb00d2a1b",
+      "conclusion": "有用解释保留，100MVA仍无据，review_required不是已合理回答缺口。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "B1-production",
+      "review_id": "350b9eb93ea0",
+      "conclusion": "正文不变，无收益；实时未明确写出属初稿覆盖细节。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "B1-literal_v1",
+      "review_id": "ab30485d4e85",
+      "conclusion": "正文不变，无收益；主要信息有据，实时未明确写出。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "B2-literal_v1",
+      "review_id": "ebdb668dedf3",
+      "conclusion": "正文不变；语气疑点保留，原引用以元数据代正文的支持认可存在问题。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "B2-production",
+      "review_id": "5c6aa392b7b6",
+      "conclusion": "正文不变；应共同确定有语气疑点，但结合自愿性不计A1式强制误改。审核失败。",
+      "changed": false,
+      "execution_complete": false
+    },
+    {
+      "id": "B3-production",
+      "review_id": "3f34ae30c216",
+      "conclusion": "正文不变，原有仅用于排他限定无据，未修。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "B3-literal_v1",
+      "review_id": "da41b01fbedb",
+      "conclusion": "正文不变，原有仅用于排他限定无据仍获有效支持/整体通过，属于错误认可，非修订新写入。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "B4-literal_v1",
+      "review_id": "4a17f3796e72",
+      "conclusion": "短线路公式/前提/变量/相对影响保留，无收益。",
+      "changed": false,
+      "execution_complete": true
+    },
+    {
+      "id": "B4-production",
+      "review_id": "0de5d683889c",
+      "conclusion": "短线路公式/前提/变量/相对影响保留，无收益。",
+      "changed": false,
+      "execution_complete": true
+    }
+  ],
+  "capability": {
+    "candidate_fixed": 0,
+    "denominator": 4,
+    "candidate_missed": 4,
+    "production_fixed": 2,
+    "production_pure": 1,
+    "production_mixed": 1
+  },
+  "protection": {
+    "candidate_correct_protected": 3,
+    "denominator": 3,
+    "candidate_insufficient": "execution_incomplete_not_success"
+  },
+  "harm": {
+    "candidate_revision_new_errors": 0,
+    "candidate_revision_required_point_deletion": 0,
+    "limitation": "No candidate revision applied; zeros do not establish safe revision.",
+    "production_new_unsupported_causal_strengthening": 1
+  },
+  "natural": {
+    "drafts": 4,
+    "paired_chains": 8,
+    "changed": 0,
+    "repair": 0,
+    "residual_exclusivity_families": 1,
+    "candidate_approved_exclusivity_gap": 1
+  },
+  "conclusion": "Candidate did not form required capability; stop stage1, no adoption or second batch"
+}

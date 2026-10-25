@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-25 原文审核第一阶段结果
+
+[完整报告](evaluation/literal-review-stage1-v1/report.md) · [实现/预算/故障边界](evaluation/literal-review-stage1-v1/implementation.md) · [全部28槽前后文本](evaluation/literal-review-stage1-v1/cases.md) · [131份必要预测](evaluation/literal-review-stage1-v1/predictions.json) · [实际用量](evaluation/literal-review-stage1-v1/statistics.json) · [独立文本复核](evaluation/literal-review-stage1-v1/text-review.json)。代码c098b5d，1285离线通过；唯一28槽131Flash请求，费用金额未知。候选0/4实质修复（四次Revision均非法），三正确稿保护、不足稿执行失败；生产A2改对/A4 mixed，自然无正文变化且保留“仅用于”无据认可。候选不采用，阶段封存，无第二批或生产切换。学习站04章定向失败案例/源码导读与两道练习，实际工程贯通不冒充模型成功。
+
 ## 2026-10-25 自然问答审核接缝与交付
 
 [结论与全部材料](evaluation/natural-review-seam-v1/report.md)：统一提取消息而不改合同；旧稿6链/28Flash调用、候选N-2错挂认可触发新主题准入停止，不采用。

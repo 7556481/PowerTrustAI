@@ -1,0 +1,18 @@
+{
+  "source_files_match_freeze": true,
+  "planned_slots": 28,
+  "request_response_record_ledger_count": 131,
+  "budget_checks": true,
+  "source_full_body_export": false,
+  "credential_fields_export": false,
+  "production_database_and_configuration_unchanged": true,
+  "production_listening_8765": false,
+  "normal_store_readback": true,
+  "run_database_release_rename": true,
+  "run_database_sha256": "de43cc823aa3ee12c0204ac9ee87473fb6ef5b985335e75d4540e3836c037e1d",
+  "public_links_valid": true,
+  "source_bodies_compared": 24,
+  "browser_acceptance": false,
+  "paid_reruns": 0,
+  "second_batch": false
+}
