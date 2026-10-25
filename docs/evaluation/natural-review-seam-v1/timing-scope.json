@@ -1,0 +1,8 @@
+{
+  "first_line_accepted_to_last_result_seconds": 324.66835260391235,
+  "accepted_to_summary_including_in_turn_admission_seconds": 441.235515832901,
+  "preflight_seconds": null,
+  "browser_first_paint": null,
+  "historical_generation_in_new_wall_clock": false,
+  "no_nested_or_parallel_time_addition": true
+}

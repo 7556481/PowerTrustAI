@@ -1,0 +1,181 @@
+{
+  "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378": {
+    "type": "function",
+    "function": {
+      "name": "submit_review_result",
+      "strict": true,
+      "description": "Submit this review result only; this function performs no external action.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "judgments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "contradicted",
+                    "insufficient_evidence",
+                    "not_assessable"
+                  ]
+                },
+                "basis_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "gap_answer_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "conditions": {
+                  "type": "object",
+                  "properties": {
+                    "applicability": {
+                      "type": "string",
+                      "enum": [
+                        "none",
+                        "present",
+                        "unknown"
+                      ]
+                    },
+                    "expression": {
+                      "type": "string",
+                      "enum": [
+                        "not_applicable",
+                        "preserved",
+                        "missing",
+                        "misattached",
+                        "extended",
+                        "uncertain"
+                      ]
+                    },
+                    "instance": {
+                      "type": "string",
+                      "enum": [
+                        "not_claimed",
+                        "satisfied",
+                        "missing",
+                        "uncertain"
+                      ]
+                    },
+                    "source_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "reason": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "applicability",
+                    "expression",
+                    "instance",
+                    "source_ids",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                },
+                "inference": {
+                  "type": "string",
+                  "enum": [
+                    "preserved",
+                    "unsupported",
+                    "uncertain"
+                  ]
+                },
+                "objection": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "__NULL__"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "kind": {
+                          "type": "string",
+                          "enum": [
+                            "fidelity",
+                            "classification",
+                            "uncertain"
+                          ]
+                        },
+                        "reason": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "reason"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "repair": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "__NULL__"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "basis_id": {
+                          "type": "string"
+                        },
+                        "replacement": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "basis_id",
+                        "replacement"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "requires_authoritative_source": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "status",
+                "basis_ids",
+                "reason",
+                "gap_answer_ids",
+                "conditions",
+                "inference",
+                "objection",
+                "repair",
+                "requires_authoritative_source"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "judgments"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

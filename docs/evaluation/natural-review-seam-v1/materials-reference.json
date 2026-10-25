@@ -1,0 +1,150 @@
+{
+  "version": "natural-review-seam-v1",
+  "B": [
+    {
+      "question": "按给定NERC资料比较动态与静态无功资源的调节方式、运行方式和电压依赖。",
+      "sources": [
+        "resources"
+      ],
+      "requirements": [
+        "动态在规定带宽内实时连续自动调节、设定点或下垂",
+        "静态额定电压固定贡献、平方依赖、按系统条件投切；不写恒定实际出力"
+      ]
+    },
+    {
+      "question": "按给定NERC资料解释输配边界负荷怎样建模，以及负荷功率因数与双方无功支撑协调有什么关系。",
+      "sources": [
+        "coordination"
+      ],
+      "requirements": [
+        "MW/Mvar显式建模及两类位置",
+        "负荷功率因数影响电压/无功，双方不应过度单向依赖、需协调"
+      ]
+    },
+    {
+      "question": "按给定NERC资料分别说明N-1与选定N-2的要求；无操作员干预这一限定在所给段落中具体绑定哪种工况？",
+      "sources": [
+        "contingencies"
+      ],
+      "requirements": [
+        "N-1立即、无操作员干预、限值/稳态稳定",
+        "选定N-2等另外说明，不把N-1限定无据扩展至N-2"
+      ]
+    },
+    {
+      "question": "根据给定ABB低压手册，隔离开关在什么位置满足怎样的功能要求？这一定义本身能否证明其可以开断任意故障电流？只解释资料含义，不给操作步骤。",
+      "sources": [
+        "SW-001-E1"
+      ],
+      "requirements": [
+        "分闸位置满足规定隔离功能",
+        "定义不足以证明任意故障开断能力；不自动断言所有电流都不能开断"
+      ],
+      "reference": "E1原文明确in the open position及isolating function；未定义完整开断能力。不作现行标准或现场安全判断。"
+    },
+    {
+      "question": "只按给定OSHA固定条文解释：live parts指什么？1910.303(g)(2)(iii)对哪类场所的什么位置提出何种标志要求？请保留上位电压范围，不把它推广为所有电气场所，也不作现场合规结论。",
+      "sources": [
+        "RC-001-E1",
+        "RC-001-E2",
+        "RC-001-SCOPE"
+      ],
+      "requirements": [
+        "已带电导电部件定义",
+        "含外露live parts的房间及其他有防护场所入口、醒目标志、禁止不合格人员进入",
+        "对地标称600V及以下；仅给定美国条文理解，不等于所有场所或现场认证"
+      ],
+      "reference": "E1完整术语；E2完整编号段；SCOPE完整上位范围。无需推断匿名实例或新增规定，标志不构成安全保证。"
+    }
+  ],
+  "reference_origin": "AI-assisted supervised development checks. Old sources reused; no independent holdout, no expert gold.",
+  "source_cards": [
+    {
+      "path": "data\\evaluation_local\\evidence-bound-v1\\SW-001.owner-confirmed-v1.json",
+      "sha256": "ef2e4cfb52f00428cefb28cf31c3d275d006519077b4f48276451b3218b0014e"
+    },
+    {
+      "path": "data\\evaluation_local\\evidence-bound-v1\\RC-001.offline-card-v2.json",
+      "sha256": "e729daec52aef74c3ccf31de22e8001b13c0686880c1fc04f1cf08e39da2bdd4"
+    }
+  ],
+  "sources": {
+    "resources": {
+      "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+      "text_sha256": "81d1ba89d51a555b8e4e385d23e6f286a23f077c288c2b7c4607c5e7339821d9"
+    },
+    "contingencies": {
+      "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+      "text_sha256": "fa82733c8f82156be9f7c39f11bd8b6afbc7a527073c597d64b955a9fd9c83ff"
+    },
+    "coordination": {
+      "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+      "text_sha256": "8035814bead5cf935dc1053839d0dc45abdd83c496ca6b90913062f2ae102d33"
+    },
+    "line_model": {
+      "evidence_id": "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+      "text_sha256": "46d376598d22ef999fa03fc93ee0a156745c796ca46b5a70c3e99292219c1bb1"
+    },
+    "locality": {
+      "evidence_id": "e-54b969cc1dbddaeb23cb13aea570062d45cd9e0de8e3e355f86dd9811161ada3",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=7;page_chars[2398:3166);page_lines[38:48]",
+      "text_sha256": "b8577bbf0cdc762b4f2ccab6f2ce9bac3513ba7da108bb707bba4e521af37177"
+    },
+    "SW-001-E1": {
+      "evidence_id": "seam-SW-001-E1",
+      "source_id": "abb-fixed-2006",
+      "source_version": "9c24403252072fd11cdf79ee5aada7e6a6fcee7732d9df2d6e95d530062431f9",
+      "locator": "PDF page28;original pypdf chars[1319:1446)",
+      "text_sha256": "88947c2a6710cf08637765a3efb060c8fb24550e656c203753c2e7671e52a951"
+    },
+    "SW-001-E2": {
+      "evidence_id": "seam-SW-001-E2",
+      "source_id": "abb-fixed-2006",
+      "source_version": "9c24403252072fd11cdf79ee5aada7e6a6fcee7732d9df2d6e95d530062431f9",
+      "locator": "PDF page28;original pypdf chars[261:518)",
+      "text_sha256": "5cba3525daa48f735efb71a4c48abcc2d385468ef5674855a13b01a3f3d1151e"
+    },
+    "SW-001-E3": {
+      "evidence_id": "seam-SW-001-E3",
+      "source_id": "abb-fixed-2006",
+      "source_version": "9c24403252072fd11cdf79ee5aada7e6a6fcee7732d9df2d6e95d530062431f9",
+      "locator": "PDF page29;original pypdf chars[1751:1919)",
+      "text_sha256": "6e98404dec167d31755436859cf9eb6dabb35c32a5f5f17a3494390e3c67857c"
+    },
+    "RC-001-E1": {
+      "evidence_id": "seam-RC-001-E1",
+      "source_id": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.399",
+      "source_version": "1263bf022864ea2d8d43d5382c506fecc50a4a9074c8819c95e3f8ff563c9d40",
+      "locator": "Live parts definition;historical browser-visible manually recorded derivative",
+      "text_sha256": "6b48ea0c4c3d7077d65ace652957b426db759a8c2463f6bd91a377006228adf3"
+    },
+    "RC-001-E2": {
+      "evidence_id": "seam-RC-001-E2",
+      "source_id": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.303",
+      "source_version": "1756e692510d7dcbf64121f3d4c7218bf0780479e138746d9a0f617060bce4b0",
+      "locator": "1910.303(g)(2)(iii);historical browser-visible manually recorded derivative",
+      "text_sha256": "a29ba6c50f8bb47a879ff4e3b713e9f602ef3df0730eb7ad0358054b3e11a1b3"
+    },
+    "RC-001-SCOPE": {
+      "evidence_id": "seam-RC-001-SCOPE",
+      "source_id": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.303",
+      "source_version": "1f1e484bc9edde2eb6b544c1a1b6193a7aff136ee4396ebb3d87ef45a8f16491",
+      "locator": "1910.303(g) heading;historical recorded derivative",
+      "text_sha256": "b8721300acc8f808b6f01ce7b1a011f9b8d359557b53d820fdd018690b3ab226"
+    }
+  }
+}

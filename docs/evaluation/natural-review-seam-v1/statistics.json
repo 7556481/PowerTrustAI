@@ -1,0 +1,118 @@
+{
+  "plan": {
+    "old_chains": 6,
+    "new_generation": 2,
+    "new_chains": 4,
+    "total": 12
+  },
+  "accepted": 6,
+  "executed": 6,
+  "control_records": 7,
+  "unexecuted": [
+    "G4",
+    "B4-seam",
+    "B4-before",
+    "G5",
+    "B5-before",
+    "B5-seam"
+  ],
+  "raw_controller_unexecuted": [
+    "B4-seam",
+    "B4-before",
+    "G5",
+    "B5-before",
+    "B5-seam"
+  ],
+  "raw_console_executed": 7,
+  "admission": {
+    "outputs_sha256": "4f8ba679082b9dec83143be88651f2bbc5c5d12127873634afab69456e283f2e",
+    "continue_": false,
+    "continue": false,
+    "decision": "do_not_admit_dependent_new_theme_line",
+    "reason": "B3-seam valid effective supported explicitly accepts N-2 condition misattachment that its reason acknowledges as slight overreach. Source has parallel selected N-2 and extreme-disturbance requirements. Pre-frozen boundary rejects this nested attribution.",
+    "comparison_limit": "Before counterpart is an execution placeholder, not a correct semantic detection; no causal superiority or strict semantic error-rate difference claimed. B2 must-coordination approval is common to both, not candidate-added.",
+    "shared_program_fault": false,
+    "model_judge_used": false,
+    "source_review": "AI-assisted direct-text adjudication under user supervision, not expert gold"
+  },
+  "groups": {
+    "old-before": {
+      "tasks": 3,
+      "complete": 1,
+      "states": {
+        "execution_incomplete": 2,
+        "review_required": 1
+      },
+      "calls": 14,
+      "initial": 12,
+      "corrections": 2,
+      "invalid_requests": 4,
+      "root_constraints": {
+        "unexpected_fields_not_allowed": 3,
+        "selected_local_source_ids_required": 2,
+        "valid_json_required": 1
+      },
+      "usage": {
+        "input_tokens": 269973,
+        "output_tokens": 19538,
+        "total_tokens": 289511,
+        "cache_hit_tokens": 146176,
+        "cache_miss_tokens": 123797
+      },
+      "unknown_usage_requests": 0,
+      "request_ms": 87480,
+      "harness_ms": 163877,
+      "collect_ms": 164610.91700000002,
+      "revision_calls": 0,
+      "rereview_calls": 0
+    },
+    "old-seam": {
+      "tasks": 3,
+      "complete": 2,
+      "states": {
+        "execution_incomplete": 1,
+        "review_required": 2
+      },
+      "calls": 14,
+      "initial": 12,
+      "corrections": 2,
+      "invalid_requests": 3,
+      "root_constraints": {
+        "selected_local_source_ids_required": 1,
+        "duplicate_object_keys_not_allowed": 2
+      },
+      "usage": {
+        "input_tokens": 277513,
+        "output_tokens": 18914,
+        "total_tokens": 296427,
+        "cache_hit_tokens": 113280,
+        "cache_miss_tokens": 164233
+      },
+      "unknown_usage_requests": 0,
+      "request_ms": 90521,
+      "harness_ms": 157519,
+      "collect_ms": 158270.975,
+      "revision_calls": 0,
+      "rereview_calls": 0
+    }
+  },
+  "model_calls": 28,
+  "initial_calls": 24,
+  "correction_calls": 4,
+  "model_ids": {
+    "deepseek-flash": 28
+  },
+  "correction_owners": {
+    "evidence_verification": 4
+  },
+  "roles": {
+    "claim_extraction": 6,
+    "evidence_verification": 16,
+    "power_domain_review": 6
+  },
+  "invoice_cost": null,
+  "currency": null,
+  "price_estimate": null,
+  "timing_scope": "Request durations are cumulative work, not critical-path latency. Harness, stages and collect are nested; never sum them. Historical generation is charged, not included in new wall clock. Preflight not separately timed. No browser first paint.",
+  "accepted_to_final_persist_seconds": 441.235515832901
+}

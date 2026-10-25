@@ -1,0 +1,114 @@
+{
+  "records": [
+    {
+      "case_id": "B1-before",
+      "accepted": {
+        "run_id": "c86d6f9f1a6f457689fde2bb95313956",
+        "spec": {
+          "line": "B",
+          "case": 0,
+          "variant": "before"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "B1-seam",
+      "accepted": {
+        "run_id": "589beb7a19a64b8eb2650c2ed937ddc5",
+        "spec": {
+          "line": "B",
+          "case": 0,
+          "variant": "seam"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "B2-seam",
+      "accepted": {
+        "run_id": "992ad75ef51c473b894e5ee6ff0a66f4",
+        "spec": {
+          "line": "B",
+          "case": 1,
+          "variant": "seam"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "B2-before",
+      "accepted": {
+        "run_id": "fd6ff0ba3b634a53b7a9b0ace35ab930",
+        "spec": {
+          "line": "B",
+          "case": 1,
+          "variant": "before"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "B3-before",
+      "accepted": {
+        "run_id": "6f04e59a5f9245d0a6b49219050e95ad",
+        "spec": {
+          "line": "B",
+          "case": 2,
+          "variant": "before"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "B3-seam",
+      "accepted": {
+        "run_id": "af532024ddf04c9ea856444580c4e2ea",
+        "spec": {
+          "line": "B",
+          "case": 2,
+          "variant": "seam"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "G4",
+      "phase": "submit",
+      "stop": true,
+      "reason": "submission_state_unknown",
+      "exception_type": "AssertionError"
+    }
+  ],
+  "interpretation": "G4 pre-submit admission assertion occurred before RunStore.create and before any model request. Generic submission_state_unknown is the controller exception category, not evidence of an unknown network acceptance. Six accepted chains, not seven executed tasks; G4 belongs in six unsent slots."
+}

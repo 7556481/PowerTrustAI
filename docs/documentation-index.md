@@ -1,5 +1,13 @@
 # 文档索引
 
+## 2026-10-25 自然问答审核接缝与交付
+
+[结论与全部材料](evaluation/natural-review-seam-v1/report.md)：统一提取消息而不改合同；旧稿6链/28Flash调用、候选N-2错挂认可触发新主题准入停止，不采用。
+
+- [旧B1—B3断点与选项比较](evaluation/natural-review-seam-v1/diagnosis.md)、[完整原批断点表与勘误](evaluation/natural-review-seam-v1/previous-breakpoints.json)。
+- [真实原始参数和失效尝试](evaluation/natural-review-seam-v1/predictions.json)、[逐目标与最终答案](evaluation/natural-review-seam-v1/results.json)、[统计及计划分母](evaluation/natural-review-seam-v1/statistics.json)。
+- [冻结](evaluation/natural-review-seam-v1/freeze.json)、[准入](evaluation/natural-review-seam-v1/line1-admission.json)、[控制记录口径](evaluation/natural-review-seam-v1/control-records.json)、[离线](evaluation/natural-review-seam-v1/offline-verification.json)、[服务](evaluation/natural-review-seam-v1/service-status.json)。
+
 ## 2026-10-25 审核误拦修复与回答交付
 
 [完整报告、56旧目标根因表、唯一合同/投影变化、56份新输出、逐题交付、预算限制及成本](evaluation/review-delivery-unblock-v1/report.md)：统一Flash，Pro新增0调用。只移除候选conditions.answer_ids，由程序绑定当前目标范围；条件三维、来源、gap、异议与危险门禁不变，显式simple_bound_v1/投影v1.2，生产不切换。1268完整离线通过；固定A8+G3+B6全部执行56调用、688531token。A候选4/4完整、原版1/4，保护反例未错误支持；自然两路均0通过、1复核/2执行不完整，正文不变、无Revision/重审，未证明产品交付净收益，保留候选、不进生产验收。 批后检索额度缺口与离线修补单列；学习站20章75解析题，生产保持停服，浏览器未新增验收。

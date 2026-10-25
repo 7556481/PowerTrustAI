@@ -1,0 +1,486 @@
+[
+  {
+    "sequence": 1,
+    "case": "B1-before",
+    "messages_sha256": "963a55c5f7b99e23c417d5e4214b570c93d6cb169d6a8ac615abda9bcebefc51",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "10f89fdd10a9aa80b4216ef6c48b288d335e9722af6cf54a1aec19a6d44d6517",
+    "system_chars": 6673
+  },
+  {
+    "sequence": 2,
+    "case": "B1-before",
+    "messages_sha256": "26665dc50aac5563a4cd83d1af82d8db2eb3eb4184e18f1dca7eed42ba374186",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 3,
+    "case": "B1-before",
+    "messages_sha256": "e162f86126b4b65663aa67affbf2b8bc82a55031b39ebfa5a4a940bdf8e88dae",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "e33e0bb06dc550c843786c6762a9b710d5d6d4c9a091554382799aef380a2327",
+    "system_chars": 6929
+  },
+  {
+    "sequence": 4,
+    "case": "B1-before",
+    "messages_sha256": "b7d97ba60c8a6a4ebb59745553e20427c6e2f19e151a0a6b2f9838804b0e0a00",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 5,
+    "case": "B1-before",
+    "messages_sha256": "03e352557a839521104007bf0b4e67c09275e753e795e04fb36e262e7067f6dd",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 6,
+    "case": "B1-seam",
+    "messages_sha256": "88e93d08bbc8c19d0150ea0fee10a6adbd949be8538d7bdaf21f97837d22fd85",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "7ce40406ae8cd30851ad637e9ffe852433ab72f8fcf8e155b3334c1f2cf61e02",
+    "system_chars": 6488
+  },
+  {
+    "sequence": 7,
+    "case": "B1-seam",
+    "messages_sha256": "2ecd4c25a58acefb1657ea47133627adcd964daacf938c31fb4f95443138f0d8",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 8,
+    "case": "B1-seam",
+    "messages_sha256": "788e94d467eeab75a885a67265be796b91a9fe83bd96410bb998e6a2acd5189c",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "e33e0bb06dc550c843786c6762a9b710d5d6d4c9a091554382799aef380a2327",
+    "system_chars": 6929
+  },
+  {
+    "sequence": 9,
+    "case": "B1-seam",
+    "messages_sha256": "ad7c2632a6d224bd9d93f9e0be5c88604fbc2c24895e1818ab5bc442ae621105",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 10,
+    "case": "B1-seam",
+    "messages_sha256": "03e352557a839521104007bf0b4e67c09275e753e795e04fb36e262e7067f6dd",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 11,
+    "case": "B2-seam",
+    "messages_sha256": "ad9607ae37c9354a2750ae1a176e4eb3988d227ddeb3bc8deeb8b7082cd8e199",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "7ce40406ae8cd30851ad637e9ffe852433ab72f8fcf8e155b3334c1f2cf61e02",
+    "system_chars": 6488
+  },
+  {
+    "sequence": 12,
+    "case": "B2-seam",
+    "messages_sha256": "ee041d7f9979c8a134db896890864dc77b5ce688994293604dc7a4f2b65774cf",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 13,
+    "case": "B2-seam",
+    "messages_sha256": "64f1d82ffb343b2ad4d983018a496fbb19735ac28193f263d03bd4e9cd54239c",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "e33e0bb06dc550c843786c6762a9b710d5d6d4c9a091554382799aef380a2327",
+    "system_chars": 6929
+  },
+  {
+    "sequence": 14,
+    "case": "B2-seam",
+    "messages_sha256": "50d25a4ecca0d8a0e3a52edaad78202e92e0b5f75af2bf2c1fb8ac6355ce0417",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 15,
+    "case": "B2-seam",
+    "messages_sha256": "bd55d9baa4b322f3ff78dac596d6ae8dffca1a9d44011b8fa931fbc827cea9c7",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 16,
+    "case": "B2-before",
+    "messages_sha256": "5a1063eaeec83a50884806169776b834e705d7548c1a9acc2403e458bf0d0a2a",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "10f89fdd10a9aa80b4216ef6c48b288d335e9722af6cf54a1aec19a6d44d6517",
+    "system_chars": 6673
+  },
+  {
+    "sequence": 17,
+    "case": "B2-before",
+    "messages_sha256": "4d530bb2fc243ec7d163392a0446d4b36b4ff75e932d731c635d86207fa34d40",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 18,
+    "case": "B2-before",
+    "messages_sha256": "b0421af529e1179388798f98e34ec6fff51924e6dcc37e4a26e3aa0ff1ff8742",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "e33e0bb06dc550c843786c6762a9b710d5d6d4c9a091554382799aef380a2327",
+    "system_chars": 6929
+  },
+  {
+    "sequence": 19,
+    "case": "B2-before",
+    "messages_sha256": "50d25a4ecca0d8a0e3a52edaad78202e92e0b5f75af2bf2c1fb8ac6355ce0417",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 20,
+    "case": "B3-before",
+    "messages_sha256": "b2d1a09ac61d768a39633473b3fa7d1cb85f73fa0d426ffceaaad538fa7ce13c",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "10f89fdd10a9aa80b4216ef6c48b288d335e9722af6cf54a1aec19a6d44d6517",
+    "system_chars": 6673
+  },
+  {
+    "sequence": 21,
+    "case": "B3-before",
+    "messages_sha256": "616176b39cc541194918183d8e6acecfa106d35e854df69893e1a04c82a03daf",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 22,
+    "case": "B3-before",
+    "messages_sha256": "153cf8a5cb35e700c62fc95228a5165db18cf9fd25a8bdbfd404d21e2aa74736",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "e33e0bb06dc550c843786c6762a9b710d5d6d4c9a091554382799aef380a2327",
+    "system_chars": 6929
+  },
+  {
+    "sequence": 23,
+    "case": "B3-before",
+    "messages_sha256": "c0ba6a406de299ca59a65c6b487e473da26b69a9ce54b6d6b9819bc847d3adfd",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 24,
+    "case": "B3-before",
+    "messages_sha256": "5a33853aba45a19185aaa78d4d353357cfe8113eff370b337928e2dd229c6403",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 25,
+    "case": "B3-seam",
+    "messages_sha256": "4c6271220ae8e852a5e6c5e0d229a44c50aeafbb674a36e7090bb8f743a51596",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "7ce40406ae8cd30851ad637e9ffe852433ab72f8fcf8e155b3334c1f2cf61e02",
+    "system_chars": 6488
+  },
+  {
+    "sequence": 26,
+    "case": "B3-seam",
+    "messages_sha256": "3c7b8d5f829825cfd37c0f2fa0dfd55d8b2b0448674fd0a3d0548ae72da5c9de",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  },
+  {
+    "sequence": 27,
+    "case": "B3-seam",
+    "messages_sha256": "50b7c4110ad234bcd5ecde1efb724bd0ec7186f1211ea74ee831f2e201b5a75e",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000
+    },
+    "system_sha256": "e33e0bb06dc550c843786c6762a9b710d5d6d4c9a091554382799aef380a2327",
+    "system_chars": 6929
+  },
+  {
+    "sequence": 28,
+    "case": "B3-seam",
+    "messages_sha256": "5a33853aba45a19185aaa78d4d353357cfe8113eff370b337928e2dd229c6403",
+    "parameters": {
+      "model_id": "deepseek-flash",
+      "max_output_tokens": 8000,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "submit_review_result"
+        }
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "result_tool_sha256": "c6f01922573d54895973a005a79558bca0a5e88df77285dd9788e431d62e7378"
+    },
+    "system_sha256": "fa77339fbc8030c2b8dc528e9e1bcd3342f9c65332ae3cbbdcd72b7ff88d0547",
+    "system_chars": 5496
+  }
+]

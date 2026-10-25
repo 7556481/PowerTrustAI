@@ -1,0 +1,14 @@
+{
+  "implementation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
+  "full_tests": 1274,
+  "seconds": 275.842,
+  "result": "OK",
+  "related_tests": 6,
+  "related_seconds": 10.284,
+  "semantic_score": false,
+  "real_saved_B_inputs_checked": true,
+  "initial_correction_same_shape": true,
+  "full_revision_reextract_both_audits": true,
+  "shared_failure_and_response_storage_stop": true,
+  "browser_checked": false
+}

@@ -1,0 +1,30 @@
+{
+  "implementation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
+  "frozen_python_files": 405,
+  "all_match": true,
+  "historical_files": 224,
+  "historical_unchanged": true,
+  "reference_boundaries_sha256": "653377035ae16c017a2f00486bd51849f1ca8026640df1e01038486faf38d3c8",
+  "source_audit": {
+    "ABB_pdf_sha256": "9c24403252072fd11cdf79ee5aada7e6a6fcee7732d9df2d6e95d530062431f9",
+    "RC_local_files": [
+      {
+        "id": "RC-001-E1",
+        "sha256": "1263bf022864ea2d8d43d5382c506fecc50a4a9074c8819c95e3f8ff563c9d40",
+        "basis": "complete definition or numbered paragraph from browser-visible official page; manually recorded derivative; whitespace normalized"
+      },
+      {
+        "id": "RC-001-E2",
+        "sha256": "1756e692510d7dcbf64121f3d4c7218bf0780479e138746d9a0f617060bce4b0",
+        "basis": "complete definition or numbered paragraph from browser-visible official page; manually recorded derivative; whitespace normalized"
+      },
+      {
+        "id": "RC-001-SCOPE",
+        "sha256": "1f1e484bc9edde2eb6b544c1a1b6193a7aff136ee4396ebb3d87ef45a8f16491",
+        "basis": "complete definition or numbered paragraph from browser-visible official page; manually recorded derivative; whitespace normalized"
+      }
+    ],
+    "official_current_validity_rechecked": false,
+    "scope": "Frozen historical source reading, not current legal guidance. No new download or index changes."
+  }
+}

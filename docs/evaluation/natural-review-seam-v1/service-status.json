@@ -1,0 +1,24 @@
+{
+  "checked_utc": "2026-10-25T00:27:50.193427+00:00",
+  "production_counts": {
+    "runs": 104,
+    "events": 2278,
+    "objects": 2999,
+    "reviews": 8
+  },
+  "counts_unchanged": true,
+  "production_database_sha256_unchanged": true,
+  "production_port8765_listener": false,
+  "production_ready": false,
+  "production_schema": 13,
+  "production_contract": "production",
+  "production_extraction_profile": "production",
+  "candidate_persistent_service_started": false,
+  "all_candidate_resources_closed": true,
+  "new_pro_requests": 0,
+  "production_port_probe_connect_ex": 10035,
+  "candidate_sqlite_rename_close_check": true,
+  "system_listener_inspection_succeeded": true,
+  "system_listener_port8765": false,
+  "socket_probe_interpretation": "10035 is inconclusive; stopped/not-ready based on successful system listening-table inspection, not this socket code."
+}
