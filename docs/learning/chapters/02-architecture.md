@@ -1,6 +1,6 @@
 # 02 全系统架构和一次请求的数据流
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
 ## 是什么：把判断、流程和展示分开
 
@@ -411,7 +411,7 @@ Harness可以使用图作为底层编排运行时。`backend/assembly.py`仍构�
 
 ComponentFactory读取ServiceConfig.execution_path，把同一个配置传给原OfflineHarness；worker、observer、RunStore及API沿用原链路。图调用七个共享阶段，不复制Agent或政策；双审继续在一个阶段内部并行。服务运行清单保存实际编排，旧记录缺该字段按sequential读取，查询/重启不补算。默认是否切换以本轮集成验收报告为准；可选接线不等于切换成功。
 
-当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md)。
+当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
 
 ## 三道自测：先作答，再展开
 

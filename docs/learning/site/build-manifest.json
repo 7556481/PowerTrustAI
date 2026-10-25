@@ -1,33 +1,33 @@
 {
   "version": {
-    "application_commit": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
-    "document_version": "learning-site-v5.1 bound target versus semantic gap,2026-10-25",
+    "application_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
+    "document_version": "learning-site-v5.2 natural seams and delivery admission,2026-10-25",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
     "compact_schema14": "v9.14 scope guidance; fixed8 corrected8/8 but semantic reservations; daily13; not declared stable",
-    "documentation_parent_commit": "bcea296f33894fea9830f6ffb24e58c09246d66e",
+    "documentation_parent_commit": "62db6ff1b11cb54b8f6048631373b3d5fd5182e3",
     "final_delivery_ref": "release-v2-20261009",
     "default_retrieval": "topic_v4_subject_v1",
     "default_review_message_profile": "lossless_v1",
-    "previous_application_commit": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
+    "previous_application_commit": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
     "execution_path_default": "langgraph_v1",
     "optional_development_execution_path": "langgraph_v1",
     "langgraph_version": "1.2.16",
     "production_switch": false,
-    "new_live_model_calls": 56,
-    "validation_commit": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
-    "offline_unittest_count": 1268,
+    "new_live_model_calls": 28,
+    "validation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
+    "offline_unittest_count": 1274,
     "live_graph_service_runs": 0,
     "live_planned_service_runs": 0,
     "live_accepted_service_runs": 0,
-    "previous_validation_commit": "6ed4c9576dc3515c8ecff56027fb74cd93133aff",
-    "full_offline_validation_commit": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
+    "previous_validation_commit": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
+    "full_offline_validation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
     "optional_service_execution_path": "langgraph_v1",
-    "validation_note": "A8+G3+B6 all17 executed/56Flash requests. Candidate4/4 mechanism, no natural pass. G retrieval allowance omission in paid collector fixed offline only, no rerun.",
+    "validation_note": "Six old-draft chains/28Flash calls; dependent2generation+4chains not sent after candidate accepted N-2 misattachment. Extraction initial both3/3; no delivery pass orRevision; do not adopt.",
     "public_unconfigured_fallback": "sequential",
-    "total_fixed_plan_model_calls": 56,
-    "new_live_model_tokens": 688531,
+    "total_fixed_plan_model_calls": null,
+    "new_live_model_tokens": 585938,
     "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1",
     "fact_internal_flow_candidate": {
       "version": "fact-internal-flow-v1",
@@ -87,8 +87,8 @@
     "chapter_count_fixed": false,
     "exercise_count_fixed": false,
     "actual_chapters": 20,
-    "actual_explained_exercises": 69,
-    "known_model_tokens": 14879,
+    "actual_explained_exercises": 77,
+    "known_model_tokens": 585938,
     "token_usage_unknown_requests": 0,
     "simple_review_candidate": {
       "implementation": "ebf17a4114b0f537971767973687df220e33a1f2",
@@ -137,7 +137,7 @@
       "adoption": "not_adopt_complex_contract_and_semantic_failures",
       "report": "docs/evaluation/strict-interface-consistency-v1/report.md"
     },
-    "offline_validation_scope": "1268 full before paid;14 relevant post-batch retrieval-allowance tests",
+    "offline_validation_scope": "1274 full offline before paid;6 focused rehearsal tests; only documentation changes after paid, no repeated full suite.",
     "model_fit_v1": {
       "paid_implementation": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d",
       "offline_boundary_patch": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
@@ -161,33 +161,48 @@
       "production_enabled": false,
       "adoption": "retain_candidate_no_production_acceptance",
       "report": "docs/evaluation/review-delivery-unblock-v1/report.md"
-    }
+    },
+    "planned_task_slots": 12,
+    "natural_review_seam_v1": {
+      "implementation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
+      "contract": "simple_bound_v1",
+      "extraction_message_profile": "unified_v1",
+      "model": "deepseek-flash",
+      "executed_old_chains": 6,
+      "planned_new_generation": 2,
+      "executed_new_generation": 0,
+      "planned_new_chains": 4,
+      "executed_new_chains": 0,
+      "adoption": "do_not_adopt_no_production_acceptance",
+      "report": "docs/evaluation/natural-review-seam-v1/report.md"
+    },
+    "default_extraction_message_profile": "production"
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 5558,
-      "sha256": "e522ca1d298337a3b311195c0877b896a52430c39f931d4f4159b2fce48d0d84"
+      "characters": 5881,
+      "sha256": "2870c7cc432ee9ef523c49d490f4946bcc7b5c560801c52f67aa5a654c13d578"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
-      "characters": 4171,
-      "sha256": "1b3e95e817525b406a9a9e99a3b86a98bb2528743d6364a4e3f03b05a34fb56d"
+      "characters": 4173,
+      "sha256": "84ce1e466ff6fe62a3112b8a368249b78e92d49ceb29b62ba2c20716cdf4669a"
     },
     {
       "source": "docs/learning/chapters/02-architecture.md",
-      "characters": 9059,
-      "sha256": "997d864a874763b9c456953992c0d323af5c125902ed751a21ccf494c864ad5d"
+      "characters": 9061,
+      "sha256": "7670c9930b1101a9d2fce413b2e51bf82e902d3a9a7cd2b21637fa21edab5bc2"
     },
     {
       "source": "docs/learning/chapters/03-agents.md",
-      "characters": 7861,
-      "sha256": "ac84cc1712b709f7d2ad285631c6c22925699d3ad38600391be83b33898fa285"
+      "characters": 7866,
+      "sha256": "b76ba9eb57876fcbd99358b9df2185e9c3f4fd7dafea3afce52b963fe20e03ff"
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 12565,
-      "sha256": "c2eac2fabfab136ae8d585593b2b8bf42a48ff723ab4e931aa9df2e9e57467f7"
+      "characters": 13026,
+      "sha256": "3eadf692644b3e94d8d9145178561cc243075f8297d032e3739074f0fb8df606"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -206,23 +221,23 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 9620,
-      "sha256": "68bf50bc5e02e1ead2627568167eab049d57b574f6e2ceadc470fec5ff2b8f4f"
+      "characters": 10453,
+      "sha256": "6904dd915b0aeed2ed05ff6d03c69076f9cc481feb747320dadcf6e08f212a68"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
-      "characters": 3786,
-      "sha256": "d882b5110354b14f6b153a98b5d98cd0ba547a9b20f11d8ca82baa54ba1529c4"
+      "characters": 3787,
+      "sha256": "e4e8dffd16c32e9af8ae843efc4520209a7c1bea7c479d21178f338194d1f6ab"
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 4912,
-      "sha256": "edb6e33f472be67911ca045090616e1608ac3c619c9f62834fc1a30584c30084"
+      "characters": 4916,
+      "sha256": "cdff3ce09c2223e6f7c5de18e44ba846d155870a0d7b92a1c6e34b126c887eb9"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
-      "characters": 6334,
-      "sha256": "b697b71e80d5a827e0e266f846e8eefb229530d6c88554970e8bbc77a2b0cc3c"
+      "characters": 6761,
+      "sha256": "3531c45702060f050f9528c4e35228868ffb077e1488215d30aec6fbca583194"
     },
     {
       "source": "docs/learning/chapters/12-training-nli.md",
@@ -236,18 +251,18 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 40971,
-      "sha256": "35de8f31d840966da251031fe7bec1eb0a57dd1339aa3007103aaa8f1acf6aa9"
+      "characters": 41371,
+      "sha256": "b75fe9fdd8fea700b991705668122e84ecc3f1687f79acd20cf022c1de0b7ea7"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
-      "characters": 5863,
-      "sha256": "4cb2d8dc38e9d4c7ec942e3b224a57f9d17bcd34130feec599a8af9fd6c90741"
+      "characters": 5864,
+      "sha256": "62bc4ddba994fe976c35b7d185efece616c524b25753d9e5e6723ca36d9f2b19"
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 5888,
-      "sha256": "081be1d478a1ab8ce6735c1c53766429e5b9bda6cc9755b5ac30d1e1d9c3c786"
+      "characters": 5889,
+      "sha256": "8db3d45d5f577e523ba1130a575cfb4bc7efc2257d25b1ac7920d73ec0e439f8"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -256,8 +271,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 7070,
-      "sha256": "ae1a67626fdac93c0abc3b2d815faddb958df0d6b8f53fe3d7f8bbad0df9688c"
+      "characters": 7075,
+      "sha256": "feb5e8d3314b16ee0c5ff78041ec7b7c9c8d20c7bead72fa093eaf24d5d4b769"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -266,8 +281,8 @@
     },
     {
       "source": "docs/learning/chapters/20-workshops.md",
-      "characters": 4269,
-      "sha256": "a38837aed2c82fb9bf4772a87f94e065bdd50854146b68b329f8c833a5858d6d"
+      "characters": 4270,
+      "sha256": "d302e4c25a37dac43521efacb1b5f09da1d6ab0059621091c9674374577550e4"
     },
     {
       "source": "docs/learning/questions-for-chatgpt.md",
@@ -275,6 +290,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 159236,
+  "markdown_characters": 161702,
   "network_dependencies": false
 }

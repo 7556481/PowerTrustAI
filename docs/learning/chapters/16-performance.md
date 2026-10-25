@@ -2,7 +2,7 @@
 
 ## 模型选择：同合同对照与真实代价
 
-【真实观察】本批同服务Flash/Pro使用相同消息、Schema、Beta工具和非思考设置，只改变model。Pro19请求、Flash22请求；Pro较少纠正，但模型累计114.856秒，高于Flash87.529秒。两路缓存比例和价格不同，账单未知，不能按token更少宣称费用更低。单批已见材料也不证明模型普遍优越。[选型与成本记录](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-review-model-fit-v1/report.md)。
+【真实观察】本批同服务Flash/Pro使用相同消息、Schema、Beta工具和非思考设置，只改变model。Pro19请求、Flash22请求；Pro较少纠正，但模型累计114.856秒，高于Flash87.529秒。两路缓存比例和价格不同，账单未知，不能按token更少宣称费用更低。单批已见材料也不证明模型普遍优越。[选型与成本记录](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-review-model-fit-v1/report.md#)。
 
 选型先看正式接口能力及本机安全配置是否可用，不能凭名称猜兼容；目录可见仍需正式任务确认接受。若模型不得不使用不同载体，应称两种可部署配置对照；即使接口相同，也要保留采样、时点、缓存和版本边界。不要把多个内部计时相加成问答延迟，更不能称为浏览器首绘。
 

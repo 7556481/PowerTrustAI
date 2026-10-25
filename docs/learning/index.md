@@ -1,26 +1,28 @@
 # PowerTrustAI：从代码到判断的学习路线
 
-2026-10-25最新：重复答案定位移交程序，候选small-contract接入原产品路径；机制线更完整，自然交付仍无通过，保留候选不进生产验收。所有新请求Flash；20章75道带解析练习。[根因与完整结果](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-delivery-unblock-v1/report.md)。
+2026-10-25本轮：自然提取消息收敛为同一v7字段表，Flash/simple_bound固定；6条旧稿链28调用，候选出现N-2错挂有效认可，依赖的新主题6槽未发送，不采用、不切生产。两路提取首次均合法，结构整理未证明产品净收益。现20章77道带解析练习，重点看真实输入接缝、合理异议与误拦、发现到修订及分支预算。[完整证据与停止边界](https://github.com/7556481/PowerTrustAI/blob/62db6ff1b11cb54b8f6048631373b3d5fd5182e3/docs/evaluation/natural-review-seam-v1/report.md#)。
 
-2026-10-25最新：事实审核模型对照16任务完成。Pro结构更完整，但正确内容误拦和不足/矛盾混淆仍阻止采用；生产不切换，20章73道解析练习。[模型选型、完整参数及结论](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-review-model-fit-v1/report.md)。下方旧批保留历史身份。
+2026-10-25最新：重复答案定位移交程序，候选small-contract接入原产品路径；机制线更完整，自然交付仍无通过，保留候选不进生产验收。所有新请求Flash；20章75道带解析练习。[根因与完整结果](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-delivery-unblock-v1/report.md#)。
 
-2026-10-24最新：合成接口8项合法、四对正文相同；旧业务回归4项仅2完整，复杂输出及不足/矛盾判断仍失败，不进完整服务验收。20章71道解析练习，生产保持停服和原配置。[最小复现、旧题用途与全部证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-interface-consistency-v1/report.md)。下方为旧批历史。
+2026-10-25最新：事实审核模型对照16任务完成。Pro结构更完整，但正确内容误拦和不足/矛盾混淆仍阻止采用；生产不切换，20章73道解析练习。[模型选型、完整参数及结论](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-review-model-fit-v1/report.md#)。下方旧批保留历史身份。
 
-2026-10-24最新：严格工具Beta载体完成实际接入，3份信封符合要求但参数0合法，停止27槽；没有业务/自然净收益成绩，不进服务验收。新增结果工具与Schema分层、两道解析题，现20章69题。[完整Schema和实际原文](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-review-tool-v1/report.md)。生产默认保持JSON且停服。
+2026-10-24最新：合成接口8项合法、四对正文相同；旧业务回归4项仅2完整，复杂输出及不足/矛盾判断仍失败，不进完整服务验收。20章71道解析练习，生产保持停服和原配置。[最小复现、旧题用途与全部证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-interface-consistency-v1/report.md#)。下方为旧批历史。
 
-2026-10-24最新：simple_v1修补请求实际有返回，但原引用重复键经有限纠正仍失败，接入门禁停止26槽；自然线未运行，不进生产验收。公共边界与合同稳定性分开。当前20章67题，[完整原文、历史参考和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-simple-patch-v1/report.md)。生产仍停服。
+2026-10-24最新：严格工具Beta载体完成实际接入，3份信封符合要求但参数0合法，停止27槽；没有业务/自然净收益成绩，不进服务验收。新增结果工具与Schema分层、两道解析题，现20章69题。[完整Schema和实际原文](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-review-tool-v1/report.md#)。生产默认保持JSON且停服。
 
-2026-10-24最新封存：简化合同固定批次因请求兼容故障停止，26槽未执行，不能评价自然净收益。最小工程修补仅离线1224通过，不采用生产。[完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md)。当前20章66道有解析练习，生产仍停服。
+2026-10-24最新：simple_v1修补请求实际有返回，但原引用重复键经有限纠正仍失败，接入门禁停止26槽；自然线未运行，不进生产验收。公共边界与合同稳定性分开。当前20章67题，[完整原文、历史参考和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-simple-patch-v1/report.md#)。生产仍停服。
+
+2026-10-24最新封存：简化合同固定批次因请求兼容故障停止，26槽未执行，不能评价自然净收益。最小工程修补仅离线1224通过，不采用生产。[完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md#)。当前20章66道有解析练习，生产仍停服。
 
 2026-10-24最新教学更新：精确转录交给程序，语义判断与原文绑定分开；新增条件三维、合同—投影兼容及失败成本练习。取消固定章/题数上限，本轮融入既有章节，当前20章66题，Markdown仍为唯一正文。真实结果见后续封存报告。
 
-2026-10-24最新：审核职责边界与条件关系候选完成一次固定验证，真实执行恶化且无自然净收益，明确不采用。保留20章60自测和布局；[本轮完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md)优先于下方历史服务状态。生产当前停服且默认不切。
+2026-10-24最新：审核职责边界与条件关系候选完成一次固定验证，真实执行恶化且无自然净收益，明确不采用。保留20章60自测和布局；[本轮完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#)优先于下方历史服务状态。生产当前停服且默认不切。
 
-2026-10-24：新增回答交付候选的归档断点、显式配置、固定双线净收益评价与采集停止边界。生产默认不切，实际结果及服务状态见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md)。20章、60自测及布局保持。
+2026-10-24：新增回答交付候选的归档断点、显式配置、固定双线净收益评价与采集停止边界。生产默认不切，实际结果及服务状态见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#)。20章、60自测及布局保持。
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
-2026-10-22更新：服务图接线与产品入口已收敛，默认仍sequential；真实图验收未完成，A/B未采用。1136项离线通过；首项真实原路径5调用，收集失败即停。见[集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md)。
+2026-10-22更新：服务图接线与产品入口已收敛，默认仍sequential；真实图验收未完成，A/B未采用。1136项离线通过；首项真实原路径5调用，收集失败即停。见[集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
 
 这是一份给项目所有者的中文工程教材，不是运行报告合集。你只需要会Python的函数、类、字典、异常和基本文件操作。学习目标是能沿一条真实请求解释：哪些文本送进模型，哪些关系由程序验证，模型错了会发生什么，为什么某个分数提高仍不能自动采纳。
 
@@ -76,4 +78,4 @@
 最终默认v4＋lossless、schema13/flash/政策1.5/完整库/aggregate/NLI关闭；短答案上限严格，75%仅建议余量，失败不截断。两题最终组合已运行：69/89字，首次API14.923/3.204秒、总44.454/28.068秒，11调用125538token，零纠正/Revision，程序pass；公式全称表述仍有语义疑点、浏览器自动连接核查未完成，故冻结但验收未全部通过。旧v5的3.69秒不可归给此默认组合。20章/60自测保留，独立读站不需业务data，构建只需Python标准库。详见源码目录`docs/release-freeze-v2.md`与`docs/learning-site-sync-v2.md`。
 
 
-事实审核内部流程已提供显式开发候选，生产不切换；学习重点是合法身份不等于语义判断、分类异议与忠实性分轴。见[完整交付](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md)。
+事实审核内部流程已提供显式开发候选，生产不切换；学习重点是合法身份不等于语义判断、分类异议与忠实性分轴。见[完整交付](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md#)。

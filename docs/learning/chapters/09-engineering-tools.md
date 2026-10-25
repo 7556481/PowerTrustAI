@@ -4,7 +4,7 @@
 
 71来自题设、64来自正文时，71>64必须保留两来源。程序可用Decimal复核有限标量比较，不能证明单位语义一致、数值实际可靠或设备关系。候选不暴露新工具，只使用已交付的成功标量工具结果；工程关系明确没有工程计算器。依据相关性、必要条件和因果方向仍由模型负责。
 
-完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md)。生产未切换，本轮0真实调用。
+完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
 
 ## 为什么需要独立工程审核
 

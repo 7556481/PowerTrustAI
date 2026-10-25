@@ -2,7 +2,7 @@
 
 ## 本轮真实验证边界
 
-【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md)。
+【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md#)。
 
 ## 2026-10-24 简化合同与投影的源码入口
 
@@ -16,11 +16,11 @@
 
 ## 2026-10-24 审核链v2实证更新
 
-本轮入口services/review_scope_v2.py，经backend/config.py与ComponentFactory显式fact_review_contract=scope_v2接入services/scoped_fact_execution.py。默认production保留旧消息/解析；fact_internal_flow须仍为production且schema13。候选使用九语义字段的顺序数组，身份由程序绑定；条件关系映射至原判断再完整重审。真实验证发现逐字字段与空条件投影缺陷，代码保留作失败证据，不建议生产验收。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md)。
+本轮入口services/review_scope_v2.py，经backend/config.py与ComponentFactory显式fact_review_contract=scope_v2接入services/scoped_fact_execution.py。默认production保留旧消息/解析；fact_internal_flow须仍为production且schema13。候选使用九语义字段的顺序数组，身份由程序绑定；条件关系映射至原判断再完整重审。真实验证发现逐字字段与空条件投影缺陷，代码保留作失败证据，不建议生产验收。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#)。
 
-2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见[报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md)。
+2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见[报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
 ## 一页请求对象流：先认对象，再读源码
 
@@ -395,7 +395,7 @@ backend/service.py / ApplicationService._worker，实际行100–126。
 
 ### 摘录：真实装配的资源建立
 
-backend/assembly.py / ComponentFactory.create，2026-10-25当前实际行214–229。
+backend/assembly.py / ComponentFactory.create，2026-10-25当前实际行219–234。
 
 ```python
     def create(self,rid,observer):
@@ -419,7 +419,7 @@ backend/assembly.py / ComponentFactory.create，2026-10-25当前实际行214–2
 
 ### 摘录：原锚点输入与实际解析选择
 
-services/claim_extractor.py / ModelClaimExtractor.extract，实际行142–157。
+services/claim_extractor.py / ModelClaimExtractor.extract，实际行145–165。
 
 ```python
     async def extract(self, answer):
@@ -431,12 +431,17 @@ services/claim_extractor.py / ModelClaimExtractor.extract，实际行142–157�
                 from services.claim_obligations import parse,SYSTEM as anchor_system
                 if self.daily_guidance:
                     from services.claim_obligations import DAILY_SYSTEM as anchor_system
+            unified=self.message_profile=='unified_v1'
+            if unified:
+                from services.claim_message_v1 import system, VERSION, correction_instruction
+                anchor_system=system(self.daily_guidance)
             payload={'answer_id':answer.answer_id,'answer_version':answer.version,'ANSWER_ANCHORS':anchors(answer),
                 'assumptions':answer.assumptions,'missing_information':answer.missing_information}
             path=None if self.diagnostics is None else self.diagnostics.save_scope(payload)
             output,_=await structured_request(self.client,(ModelMessage('system',anchor_system),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),
-                ('atomic-claims-v7-obligations-faithful-assertions-v2' if self.daily_guidance else 'atomic-claims-v7-obligations') if self.protocol_version==7 else 'atomic-claims-v6-basis-target-anchors' if self.protocol_version==6 else 'atomic-claims-v5-program-anchors',lambda v:parse(v,answer),diagnostics=self.diagnostics,
-                response_contract_version='atomic-claims-v'+str(self.protocol_version),candidate_catalog_path=path)
+                VERSION if unified else ('atomic-claims-v7-obligations-faithful-assertions-v2' if self.daily_guidance else 'atomic-claims-v7-obligations') if self.protocol_version==7 else 'atomic-claims-v6-basis-target-anchors' if self.protocol_version==6 else 'atomic-claims-v5-program-anchors',lambda v:parse(v,answer),diagnostics=self.diagnostics,
+                response_contract_version='atomic-claims-v'+str(self.protocol_version),candidate_catalog_path=path,
+                correction_instruction=correction_instruction() if unified else None)
             return output
 ```
 只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
@@ -521,14 +526,14 @@ backend/service.py / ApplicationService.result，实际行163–187。
 
 ### 关键连接：实际Harness组件注入
 
-backend/assembly.py当前实际行256–265，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
+backend/assembly.py当前实际行261–270，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
                 FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
-                ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1'),
+                ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
                 generation_corpus_english=corpus_english,execution_path=self.config.execution_path)

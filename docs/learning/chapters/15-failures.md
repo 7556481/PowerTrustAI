@@ -4,7 +4,7 @@
 
 内部候选的合成替身回归证明接线、作用域、有限纠正和失败保存，不证明模型语义改善。首轮1158项中两项旧源码冻结门禁拒绝源码演进，历史冻结未修改；测试分开检查旧拒绝与冻结夹具行为。真实对照尚未付费，旧版缺快照零调用不得计成本优势或审核成功。
 
-完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md)。生产未切换，本轮0真实调用。
+完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
 
 ## 为什么失败案例比成功截图更有教学价值
 

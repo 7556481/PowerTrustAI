@@ -1,0 +1,16 @@
+{
+  "chapters": 20,
+  "explained_exercises": 77,
+  "html_pages": 22,
+  "build": true,
+  "source_references": true,
+  "local_links": true,
+  "static_render_checks": true,
+  "folded_answers": true,
+  "search_navigation_preserved": true,
+  "new_report_links_pinned_commit": "62db6ff1b11cb54b8f6048631373b3d5fd5182e3",
+  "external_markdown_link_targets_preserved": true,
+  "external_HTTP_links_fetched": false,
+  "browser_checked": false,
+  "paid_source_405_unchanged_after_documentation": true
+}
