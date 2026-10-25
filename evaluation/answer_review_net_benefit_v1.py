@@ -107,7 +107,7 @@ def freeze():
     print('Frozen 8 capability + 4 generation + 8 natural audit tasks; zero sends.',flush=True)
 
 
-async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None,fixed_audit_delivery=True,initial_generated=None,before_submit=None):
+async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None,fixed_audit_delivery=True,initial_generated=None,before_submit=None,send_guard=None,budget_for=None,local_issue_codes=()):
     """Submission/persistence/stop is exclusively run_fixed; collection runs Harness."""
     rows=rows or order();generated=dict(initial_generated or {});outputs={};send_log=[];fatal=False
     store=RunStore(root/'runs.sqlite3')
@@ -123,7 +123,7 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
         if line=='B' and (i not in generated or not generated[i].generation_output or not generated[i].generation_output.substantive_answer):
             result=dict(run_id=rid,execution_issues=[],state='unexecuted',reason='no_substantive_natural_draft')
             store.mark(rid,'finished',result=result);outputs[rid]=result;return result
-        req=(request_builder or initial_request)(m,i,draft=line=='A');snapshot=None;budget=c.budget
+        req=(request_builder or initial_request)(m,i,draft=line=='A');snapshot=None;budget=budget_for(spec,c.budget) if budget_for else c.budget
         if line=='B':
             g=generated[i];snapshot=g.generation_output.evidence_snapshot
             req=replace(req,mode=TaskMode.ASSESS_EXISTING,existing_answer=g.answer,provided_evidence=g.evidence)
@@ -157,6 +157,7 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
                             except ValueError:continue
                             assert_no_evaluator_keys(v)
                     n=len(send_log)+1
+                    if send_guard is not None:send_guard(spec,r,n)
                     row=dict(sequence=n,run_id=rid,task=spec,prompt_version=r.prompt_version,correction=r.correction,
                              messages=wire(r.messages),messages_sha256=sha(wire(r.messages)),parameters=dict(model_id=r.model_id,max_output_tokens=r.max_output_tokens),elapsed_before_send=perf_counter()-start)
                     if r.result_tool is not None:row['parameters'].update(result_tool=r.result_tool,endpoint='https://api.deepseek.com/beta/chat/completions',tool_choice={'type':'function','function':{'name':'submit_review_result'}},thinking={'type':'disabled'})
@@ -164,8 +165,15 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
                     send_log.append({k:v for k,v in row.items() if k!='messages'})
                 except Exception:
                     fatal=True;raise PreSendStorageFailure({'constraint':'frozen_identity_or_message_storage'}) from None
-                try:response=await self.delegate.complete(r)
+                try:
+                    if send_guard is not None and hasattr(send_guard,'remaining_seconds'):
+                        response=await asyncio.wait_for(self.delegate.complete(r),send_guard.remaining_seconds())
+                    else:response=await self.delegate.complete(r)
+                except asyncio.CancelledError:
+                    if send_guard is not None:fatal=True
+                    raise
                 except Exception as exc:
+                    if send_guard is not None and isinstance(exc,TimeoutError):fatal=True
                     if getattr(exc,'code',None) in ('MODEL_REQUEST_REJECTED','MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED','MODEL_RATE_LIMITED'):fatal=True
                     raise
                 try:write(root/'responses'/f'{n:04d}.json',dict(text=response.text,model_id=response.model_id,usage=wire(response.usage),finish_reason=response.finish_reason,**({'result_transport':wire(response.result_transport)} if response.result_transport is not None else {})))
@@ -185,6 +193,7 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
             raw=wire(result)
             if fatal:raw['execution_issues'].append(dict(component='harness',code='DIAGNOSTIC_STORAGE_FAILED',message='pre-send or response persistence failed'))
             known={'MODEL_OUTPUT_ERROR','MODEL_TIMEOUT','TIMEOUT','BUDGET_EXHAUSTED','CANCELLED'}
+            known.update(local_issue_codes)
             # Unknown errors stop; never discover sharedness by spending again.
             if any(x['code'] not in known for x in raw['execution_issues']):
                 raw['execution_issues'].append(dict(component='harness',code='SERVICE_EXECUTION_FAILED',message='Unknown or shared issue stops remaining sends'))

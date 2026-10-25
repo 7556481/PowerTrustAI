@@ -64,7 +64,12 @@ def validate_types(value, annotation=None, path="value"):
                 'EvidenceVerificationOutput':'ReliabilityVerificationOutput','PowerDomainReviewInput':'ReliabilityDomainInput','PowerDomainReviewOutput':'SafetyDomainReviewOutput','HarnessResult':'ToolHarnessResult'}
             extensions={'PowerDomainReviewOutput':('SafetyDomainReviewOutput','BusinessDomainOutput'), 'Claim':('ContextualClaim','BasisAwareClaim','ObligationClaim','PremiseBoundClaim'),
                 'TypedBasis':('CalculationBasis','TaskPremiseBasis'), 'TaskRequest':('PremiseTaskRequest',),
-                'EvidenceVerificationOutput':('ReliabilityVerificationOutput','PremiseVerificationOutput','FactFlowOutput')}
+                'EvidenceVerificationOutput':('ReliabilityVerificationOutput','PremiseVerificationOutput','FactFlowOutput','LiteralVerificationOutput'),
+                'RevisionOutput':('LocalRevisionOutput',)}
+            if annotation is AuditReport:
+                from core.literal_review import LiteralAuditReport
+                if type(value) is LiteralAuditReport:
+                    validate_types(value);return
             if isinstance(annotation,type) and is_dataclass(annotation) and type(value).__name__ in extensions.get(annotation.__name__,(allowed_subtypes.get(annotation.__name__),)) and type(value).__module__==annotation.__module__ and isinstance(value,annotation):
                 validate_types(value);return
             require(isinstance(value, annotation) if isinstance(annotation, type) and issubclass(annotation, Enum)
@@ -201,6 +206,10 @@ def validate_request(request, budget):
 def validate_review(output, answer, claims, evidence, verification):
     from agents.contracts import EvidenceVerificationOutput, PowerDomainReviewOutput
     validate_types(output, EvidenceVerificationOutput if verification else PowerDomainReviewOutput, path="$")
+    from agents.contracts import LiteralVerificationOutput
+    if verification and isinstance(output,LiteralVerificationOutput):
+        from services.literal_review_v1 import validate_output
+        validate_output(output,answer,claims,evidence);return
     require((output.answer_id, output.answer_version) == (answer.answer_id, answer.version), "review answer version mismatch", path="$.answer_version")
     known_evidence = {e.evidence_id for e in merge_evidence(evidence, output.evidence)}
     known_claims = {c.claim_id for c in claims}
@@ -335,6 +344,11 @@ def validate_finding_basis(finding, output, evidence, path):
 
 
 def validate_revision(output, previous, evidence, findings):
+    from agents.contracts import LocalRevisionOutput
+    if isinstance(output,LocalRevisionOutput):
+        from services.literal_review_v1 import validate_local_revision
+        validate_types(output,LocalRevisionOutput)
+        validate_local_revision(output,previous,evidence,findings);return
     from agents.contracts import RevisionOutput
     validate_types(output, RevisionOutput)
     validate_answer(output.answer, merge_evidence(evidence, output.evidence))
@@ -396,12 +410,26 @@ def validate_report(report):
     for name in ("report_id", "task_id"):
         nonempty(getattr(report, name), name)
     nonempty(report.decision.policy_version, "policy_version")
-    require(set(report.decision.unresolved_finding_ids) <= {f.finding_id for f in all_findings}, "decision references unknown finding")
+    literal_defects=getattr(report,'literal_defects',())
+    if getattr(report,'literal_protocol',None)=='literal-review-v1':
+        from services.answer_anchors import anchors
+        ac={a['anchor_id']:a for a in anchors(report.answer)}
+        rows=report.literal_reviews
+        require(len(rows)==len(ac) and {r.anchor_id for r in rows}==set(ac),'Literal report coverage incomplete')
+        for r in rows:
+            a=ac[r.anchor_id]
+            require((r.text,r.start_offset,r.end_offset)==(a['text'],a['start_offset'],a['end_offset']),'Literal report binding changed')
+            validate_excerpts(r.sources,evidence,'$.literal_reviews')
+        unique(literal_defects,'finding_id')
+        for f in literal_defects:
+            require(f.anchor_id in ac and report.answer.text[f.start_offset:f.end_offset]==f.original_text,'Literal report defect binding changed')
+            validate_excerpts(f.sources,evidence,'$.literal_defects')
+    require(set(report.decision.unresolved_finding_ids) <= {f.finding_id for f in all_findings+literal_defects}, "decision references unknown finding")
     require(bool(report.decision.reasons), "decision requires reasons")
     from core.models import ProductDecision, DecisionKind
     if isinstance(report.decision, ProductDecision):
         d=report.decision
-        require(d.policy_version in ('product-decision-v1','product-decision-v1.1','product-decision-v1.2','product-decision-v1.3','product-decision-v1.4','product-decision-v1.5'),'Unknown product policy version')
+        require(d.policy_version in ('product-decision-v1','product-decision-v1.1','product-decision-v1.2','product-decision-v1.3','product-decision-v1.4','product-decision-v1.5','product-decision-literal-v1'),'Unknown product policy version')
         require(d.execution_integrity in ('complete','incomplete'),'Unknown execution integrity')
         require(d.risk_level in ('low','medium','high','unknown'),'Unknown risk level')
         require(d.resolution in ('complete','partial','unable_to_answer'),'Unknown resolution')
@@ -409,5 +437,9 @@ def validate_report(report):
         require(all(len(c)==3 and all(c) for c in d.applicable_checks),'Check applicability reason required')
         if d.kind==DecisionKind.PASS:
             require(d.execution_integrity=='complete' and d.risk_level=='low','Pass requires complete checks and bounded low risk')
-            require(bool(report.claims) and bool(report.verification_findings) and bool(report.domain_findings),'Empty audit cannot pass')
+            literal=getattr(report,'literal_reviews',())
+            require(bool(report.claims) and bool(report.verification_findings or literal) and bool(report.domain_findings),'Empty audit cannot pass')
+            if literal:
+                from services.answer_anchors import anchors
+                require(len(literal)==len(anchors(report.answer)) and all(r.status=='supported' and r.source_reliability=='adequate' for r in literal) and not literal_defects,'Literal pass requires complete support without defects')
             require(not report.execution_issues and all(f.status==VerificationStatus.SUPPORTED for f in report.verification_findings),'Incomplete or unsupported audit cannot pass')

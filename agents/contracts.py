@@ -184,3 +184,21 @@ class FactFlowOutput(PremiseVerificationOutput):
 class BusinessDomainOutput(SafetyDomainReviewOutput):
     business_assessment: dict | None = None
     business_trace: tuple = ()
+
+
+from core.literal_review import LiteralUnitReview, LiteralDefect
+
+
+@dataclass(frozen=True)
+class LiteralVerificationOutput(ReliabilityVerificationOutput):
+    literal_protocol: str = 'literal-review-v1'
+    literal_reviews: tuple[LiteralUnitReview, ...] = ()
+    literal_defects: tuple[LiteralDefect, ...] = ()
+
+
+@dataclass(frozen=True)
+class LocalRevisionOutput(RevisionOutput):
+    local_protocol: str = 'literal-local-revision-v1'
+    replacements: tuple[dict, ...] = ()
+    preservation: tuple[dict, ...] = ()
+    bound_defects: tuple[LiteralDefect, ...] = ()

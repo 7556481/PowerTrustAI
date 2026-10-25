@@ -23,6 +23,10 @@ class ProductAuditPolicy:
 
     def decide_context(self, verification, domain, budget, revision_round, *, request,
                        answer, claims, extraction, issues, retrieval):
+        from agents.contracts import LiteralVerificationOutput
+        if isinstance(verification,LiteralVerificationOutput):
+            from services.literal_policy_v1 import decide
+            return decide(self,verification,domain,budget,revision_round,request=request,answer=answer,claims=claims,extraction=extraction,issues=issues,retrieval=retrieval)
         facts, findings = verification.findings, domain.findings
         ids = tuple(f.finding_id for f in facts if f.status != V.SUPPORTED) + tuple(
             f.finding_id for f in findings if f.check_status in ('warning', 'not_assessable')

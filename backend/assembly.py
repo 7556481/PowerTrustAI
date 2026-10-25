@@ -214,6 +214,13 @@ class ComponentFactory:
             manifest['prompts']['verification']=PROMPT
             manifest['result_transport']=dict(version=VERSION,tool=specification(),endpoint='https://api.deepseek.com/beta/chat/completions')
             manifest['template_sha256']={k:hashlib.sha256(SYSTEM.encode()).hexdigest() for k in ('independent','original_citation')}
+        if self.config.fact_review_contract=='literal_v1':
+            from services.literal_review_v1 import VERSION,REVISION,POLICY,SYSTEM,REVISION_SYSTEM
+            manifest['prompts'].update(verification=VERSION,revision=REVISION)
+            manifest['contracts'].update(verification=VERSION,revision=REVISION)
+            manifest['protocols'].update(evidence_verification=VERSION,revision=REVISION)
+            manifest['policy']=POLICY
+            manifest['template_sha256']={'literal':hashlib.sha256(SYSTEM.encode()).hexdigest(),'local_revision':hashlib.sha256(REVISION_SYSTEM.encode()).hexdigest()}
         return manifest
 
     def create(self,rid,observer):
@@ -237,6 +244,8 @@ class ComponentFactory:
         if self.config.domain_internal_flow=='business_v1':
             from services.domain_business_v1 import create_agent as ModelPowerDomainReviewAgent
         from agents.revision import ModelRevisionAgent
+        if self.config.fact_review_contract=='literal_v1':
+            from services.literal_review_v1 import LiteralReviewAgent as FactAgent, LocalRevisionAgent as ModelRevisionAgent
         from services.claim_extractor import ModelClaimExtractor
         from tools.unit_conversion import UnitConversionTool
         from model_adapter.contracts import ModelSettings

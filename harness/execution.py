@@ -162,6 +162,11 @@ class RunExecution:
 
     def make_report(self, decision):
         result = AuditReport(uuid4().hex, self.request.task_id, self.answer, self.claims, self.evidence, () if self.verification is None else self.verification.findings, () if self.domain is None else self.domain.findings, tuple(self.issues), decision, self.bindings)
+        from agents.contracts import LiteralVerificationOutput
+        if isinstance(self.verification,LiteralVerificationOutput):
+            from core.literal_review import LiteralAuditReport
+            from dataclasses import fields
+            result=LiteralAuditReport(**{f.name:getattr(result,f.name) for f in fields(result)},literal_reviews=self.verification.literal_reviews,literal_defects=self.verification.literal_defects)
         validate_report(result)
         return result
 
@@ -482,12 +487,16 @@ class RunExecution:
 
     async def revise(self):
         """Validate a bounded revision; return whether a full re-audit can run."""
+        from dataclasses import replace
         if self.rounds >= self.budget.max_revision_rounds:
             raise ContractError('Policy attempted revision beyond limit')
         self.transition(RunState.REVISING)
 
         def check_revision(output):
             self.guard_agent_evidence(output, self.evidence)
+            from agents.contracts import LocalRevisionOutput
+            if isinstance(output,LocalRevisionOutput):
+                require(output.bound_defects==self.verification.literal_defects,'Local revision changed the source-bound defect catalog')
             validate_revision(output, self.answer, self.evidence, self.verification.findings + self.domain.findings)
             if getattr(output, 'evidence_snapshot', None) is not None:
                 from services.evidence_scope import validate_snapshot
@@ -504,6 +513,15 @@ class RunExecution:
             self.report = self.make_report(self.decision)
             self.reason = self.decision.reasons[0]
             self.transition(RunState.EXECUTION_INCOMPLETE if self.product_policy else RunState.REVIEW_REQUIRED)
+            return False
+        from agents.contracts import LocalRevisionOutput
+        if isinstance(revised,LocalRevisionOutput) and not revised.replacements:
+            self.rounds += 1
+            self.revision_outputs.append(revised)
+            self.decision=replace(self.decision,kind=DecisionKind.REVIEW_REQUIRED,reasons=('Local revision retained the original answer; unresolved findings remain, attempt exhausted',),reason_codes=('LOCAL_REVISION_NO_CHANGE',))
+            self.report=self.make_report(self.decision)
+            self.reason=self.decision.reasons[0]
+            self.transition(RunState.REVIEW_REQUIRED)
             return False
         self.answer = revised.answer
         self.revision_outputs.append(revised)
