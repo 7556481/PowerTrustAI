@@ -1,0 +1,26 @@
+{
+  "targeted": {
+    "tests": 9,
+    "seconds": 25.427,
+    "result": "OK"
+  },
+  "full": {
+    "tests": 1305,
+    "seconds": 348.209,
+    "result": "OK"
+  },
+  "logs": [
+    {
+      "path": "data/local_revision_v2_flash_final_precheck.log",
+      "sha256": "275dc834dbbbe4a799255e268dd4a47ed7caa3e426ce4d4fc88e6cb8284a0026"
+    },
+    {
+      "path": "data/local_revision_v2_flash_full_tests.log",
+      "sha256": "c25a45de2ea36ac72623665abbcea5e2efa582e8b0f84f9392afbdddeaabdf34"
+    }
+  ],
+  "offline_project_requests": 0,
+  "offline_project_env_loaded": false,
+  "scope": "Mechanical Factory fixed-Evidence seam, historical replay, LangGraph/normal Harness, real-delegate substitute re-audit, Store identity/event/result readback, local and global stops, exclusive freeze and no resume. Final entry guard tightening additionally covered by final targeted suite; business agents unchanged.",
+  "semantic_score": false
+}
