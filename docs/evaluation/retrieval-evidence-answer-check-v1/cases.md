@@ -287,4 +287,3 @@ NERC资料给出的短输电线路无功传输式为 Qr = (Vr/X)(Vs·cosδ − V
 **missing_information**：无
 
 实际来源：nerc-reactive-planning-2016@dbf1bc7c3e57 / pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]；nerc-reactive-planning-2016@dbf1bc7c3e57 / pdf_extracted_text:file_page=8;page_chars[1200:2381);page_lines[16:29]；nerc-reactive-planning-2016@dbf1bc7c3e57 / pdf_extracted_text:file_page=50;page_chars[2084:2681);page_lines[30:37]；nerc-reactive-planning-2016@dbf1bc7c3e57 / pdf_extracted_text:file_page=7;page_chars[0:1199);page_lines[1:19]；nerc-reactive-planning-2016@dbf1bc7c3e57 / pdf_extracted_text:file_page=7;page_chars[2398:3166);page_lines[38:48]；nerc-reactive-planning-2016@dbf1bc7c3e57 / pdf_extracted_text:file_page=51;page_chars[0:63);page_lines[1:3]
-
