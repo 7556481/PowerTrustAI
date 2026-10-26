@@ -1,0 +1,38 @@
+{
+  "final": {
+    "tests": 1285,
+    "seconds": 282.329,
+    "result": "OK"
+  },
+  "initial": {
+    "tests": 1283,
+    "seconds": 310.58,
+    "result": "OK"
+  },
+  "targeted": {
+    "tests": 11,
+    "seconds": 13.224,
+    "result": "OK"
+  },
+  "rehearsal": {
+    "logical_slots": 28,
+    "synthetic_sends": 98,
+    "shared_failure_stopped_at_slot": 1,
+    "real_requests": 0
+  },
+  "limitations": "Local substitutes establish engineering behavior only, no semantic score; no browser acceptance",
+  "logs": [
+    {
+      "path": "data/literal-stage1-offline-regression.log",
+      "sha256": "e204f7f14e864bc27093688b7a4bd8a6f94cd081424cc54d5fa7ced82163950f"
+    },
+    {
+      "path": "data/literal-stage1-final-regression.log",
+      "sha256": "cca06df7b3a08b55fe8192efd227bb2569abb47fbf33a3375d5f3151cbd7de0e"
+    },
+    {
+      "path": "data/literal-stage1-targeted.log",
+      "sha256": "1317bb5260c779b5f9de5309c1681bc84dd03208ccd2e897ab95c5421ad44f70"
+    }
+  ]
+}

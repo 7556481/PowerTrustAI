@@ -1,5 +1,29 @@
 # 文档索引
 
+## 2026-10-26 中文主线跨语言检索封存（已执行）
+
+[报告](evaluation/chinese-first-cross-language-retrieval-v1/report.md) · [三路36槽](evaluation/chinese-first-cross-language-retrieval-v1/retrieval-results.json) · [语言依据](evaluation/chinese-first-cross-language-retrieval-v1/language-audit.json) · [8条转换原预测](evaluation/chinese-first-cross-language-retrieval-v1/predictions.json) · [门槛](evaluation/chinese-first-cross-language-retrieval-v1/evidence-gate.json) · [独立源/翻译复核](evaluation/chinese-first-cross-language-retrieval-v1/independent-source-review.md) · [成本延迟](evaluation/chinese-first-cross-language-retrieval-v1/statistics.json) · [验证](evaluation/chinese-first-cross-language-retrieval-v1/verification.json)。A/B/C所问原文槽实际覆盖0/6/25（总25），C的N6转换实质换义失败单列；有效C>A7/8、C>B5/8，门槛未全满足，回答阶段未启动。8Flash/1359token、金额未知；每触发题+1请求、C-B均值+1.748秒。1324最终离线通过，默认关闭、无生产切换/第二批。下方“尚未执行”保留任务编写时状态，以本封存记录为准。
+
+## 2026-10-26 检索交付定位封存（本轮已执行）
+
+[检索交付修复v1报告](evaluation/retrieval-delivery-repair-v1/report.md) · [逐题MATCH与实际交付](evaluation/retrieval-delivery-repair-v1/diagnosis.json) · [原文身份与计时](evaluation/retrieval-delivery-repair-v1/identity-check.json) · [独立复核](evaluation/retrieval-delivery-repair-v1/independent-review.md) · [验证及停止](evaluation/retrieval-delivery-repair-v1/verification.json)。正确版本268片段已参与native FTS，八题参考段实际MATCH全0，六题去主题仍无词项；不能归因未向量化。依任务第3节停止分支，无候选/最终检索对照/付费批，改善未测得、回答收益未证明，新请求0。下方“下一轮/尚未执行”保留任务编写时状态，以本封存记录为准；被替代审核重构未执行。
+
+## 2026-10-26 自然答案改善v3结果
+
+[完整报告与全部初末全文](evaluation/natural-answer-benefit-v3/report.md) · [遮蔽复核及双轴判断](evaluation/natural-answer-benefit-v3/text-review.md) · [49次实际预测](evaluation/natural-answer-benefit-v3/predictions.json) · [用量分账](evaluation/natural-answer-benefit-v3/statistics.json)。N0改善/0恶化/8相当，8题目标源未交付；N4有据可修的“大”限定漏检。H0改善/3相当/1执行不可评价，H3 when→only误认仍在。49新Flash、579,406token、实际金额未知，12链无Revision触发；不达门槛、不生产采用，不改旧0/4与固定初审4/4。26专项及复用1305全套、Store/冻结/328历史文件和生产保留证据齐全，停止交设计审阅。
+
+## 2026-10-26 修订v2四例真实验证结果
+
+[完整报告及四例初末全文](evaluation/local-revision-v2-flash-check-v1/report.md)：合法应用/目标改对/正确内容保留/真实重审Store闭合均4/4；固定历史首轮免费回放，16次新Flash、82,465token，金额未知。附冻结、全部实际预测、逐请求费用状态、独立文本复核、9专项/1305全套及生产/历史保留证据。A2排他误读风险和未验证复杂依赖保持；不推自然收益、不改旧0/4、不生产采用，停止交设计审阅。
+
+## 2026-10-25 局部修订离线整改结果
+
+[短报告](evaluation/local-revision-offline-redesign-v1/report.md) · [实现前职责表](evaluation/local-revision-offline-redesign-v1/design.md) · [8旧拒绝核查](evaluation/local-revision-offline-redesign-v1/historical-contract-audit.json) · [真实投影统计](evaluation/local-revision-offline-redesign-v1/projection-verification.json) · [三个静态例/反例](evaluation/local-revision-offline-redesign-v1/static-examples.md) · [验证](evaluation/local-revision-offline-redesign-v1/verification.json)。D/O分责、非互斥依赖、来源供给和一次聚合纠正的新接口默认关闭；22专项/1296完整离线通过，项目模型0、不加载根.env。旧8响应拒绝和阶段0/4保持，新合同不兼容不算恢复成绩。只建议设计审阅后另行决定小范围验证；不自动付费/采用，不扩学习站。
+
+## 2026-10-25 原文审核第一阶段结果
+
+[完整报告](evaluation/literal-review-stage1-v1/report.md) · [实现/预算/故障边界](evaluation/literal-review-stage1-v1/implementation.md) · [全部28槽前后文本](evaluation/literal-review-stage1-v1/cases.md) · [131份必要预测](evaluation/literal-review-stage1-v1/predictions.json) · [实际用量](evaluation/literal-review-stage1-v1/statistics.json) · [独立文本复核](evaluation/literal-review-stage1-v1/text-review.json)。代码c098b5d，1285离线通过；唯一28槽131Flash请求，费用金额未知。候选0/4实质修复（四次Revision均非法），三正确稿保护、不足稿执行失败；生产A2改对/A4 mixed，自然无正文变化且保留“仅用于”无据认可。候选不采用，阶段封存，无第二批或生产切换。学习站04章定向失败案例/源码导读与两道练习，实际工程贯通不冒充模型成功。
+
 ## 2026-10-25 自然问答审核接缝与交付
 
 [结论与全部材料](evaluation/natural-review-seam-v1/report.md)：统一提取消息而不改合同；旧稿6链/28Flash调用、候选N-2错挂认可触发新主题准入停止，不采用。

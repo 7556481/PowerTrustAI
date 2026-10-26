@@ -1,0 +1,96 @@
+{
+  "real_project_model_requests": 0,
+  "new_project_api_cost": 0,
+  "project_root_env_loaded": false,
+  "service_started": false,
+  "paid_probe": false,
+  "new_batch": false,
+  "tests": [
+    {
+      "path": "data/local-revision-v2-targeted.log",
+      "sha256": "adf52839769909b4fbd3a0b3d730f594b763e8e6ec2dca8a4e45d85a9671e173",
+      "tests": 22,
+      "seconds": 21.081,
+      "result": "OK"
+    },
+    {
+      "path": "data/local-revision-v2-full.log",
+      "sha256": "ded4ed5eedd9f20f3e7bdb7736948e83314809dbc4369dbb3d1e9912803564f0",
+      "tests": 1296,
+      "seconds": 300.502,
+      "result": "OK"
+    },
+    {
+      "path": "data/local-revision-v2-final-full.log",
+      "sha256": "4c5f7c3bd91a252cf6ed3ffcf5f54e7790b0041eaf07d7dc413054b46afca53c",
+      "tests": 1296,
+      "seconds": 265.009,
+      "result": "OK"
+    }
+  ],
+  "old_response_message_files_unchanged": 16,
+  "old_refusals_reproduced": 8,
+  "unchanged_old_responses_in_new_contract": "8 incompatible; no new prediction score",
+  "real_input_projections": 4,
+  "synthetic_static_examples": 3,
+  "synthetic_invalid_counterexamples": 1,
+  "source_bodies_preserved": true,
+  "real_source_full_body_export": false,
+  "default_and_old_literal_semantics_changed": false,
+  "old_literal_and_shared_parser_files_unchanged": [
+    "services/literal_review_v1.py",
+    "services/literal_policy_v1.py",
+    "services/structured_model.py",
+    "services/validation_diagnostics.py"
+  ],
+  "historical_result_directory_unchanged": true,
+  "normal_factory_graph_reaudit_store": true,
+  "no_change_and_reverse_citation_order": true,
+  "budget_timeout_cancel_and_shared_storage_stop": true,
+  "independent_review": "read-only AI-assisted, not expert gold or model efficacy evidence",
+  "local_report_links": true,
+  "learning_site_expanded": false,
+  "browser_acceptance": false,
+  "implementation_sources": [
+    {
+      "path": "services/local_revision_v2.py",
+      "sha256": "b7a5d691ed8ca9927a2e2513b32a7e5ce6a0d485b3c4086c21a7662ecbe1cd20"
+    },
+    {
+      "path": "agents/contracts.py",
+      "sha256": "e28f7aa2f8c0b3607cd5199bc7297500eb63078040a98d55d5ca044a045c8fbc"
+    },
+    {
+      "path": "backend/config.py",
+      "sha256": "f15ebc5568f6754a826c6e88d9ced46ee13ac3106a0a4be2d2c4297150d15717"
+    },
+    {
+      "path": "backend/assembly.py",
+      "sha256": "34b97418cb5db68e71ed0222cd7210dedf4b6ed0c48f53bf941b9769a7faadec"
+    },
+    {
+      "path": "core/validation.py",
+      "sha256": "a8104b7d8aefecff3f1f3433ed4c1659445ff93c325b3eca5b9facc338a0f9fe"
+    },
+    {
+      "path": "harness/execution.py",
+      "sha256": "7f8943c5520ac86a6230bf4acadab233638e1bbd30ec01e337032c7b2d5a3ee7"
+    },
+    {
+      "path": "evaluation/archive_replay.py",
+      "sha256": "8381ef6b2cbd077a217edb558975880d88d4f242303458a9e5eea57215d220e9"
+    },
+    {
+      "path": "evaluation/local_revision_offline_v1.py",
+      "sha256": "ee6603ca8bc1bd1008e416ddfc8cced28cd94971773f88dd85ea23327fb3ae70"
+    },
+    {
+      "path": "evaluation/local_revision_static_examples_v2.py",
+      "sha256": "fb4e9bc3a879c7684405cf08b3e1de9b3463486011bec4e9a9f3d4a27c60eb17"
+    },
+    {
+      "path": "tests/test_local_revision_v2.py",
+      "sha256": "6f67a9c4f9e1bd9d1cbe47bead89ebf333dea221514ce2fdc37f30596f9c15b2"
+    }
+  ]
+}

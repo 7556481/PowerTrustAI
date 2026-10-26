@@ -1,6 +1,6 @@
 {
-  "application_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-  "document_version": "learning-site-v5.2 natural seams and delivery admission,2026-10-25",
+  "application_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
+  "document_version": "learning-site-v5.3 literal original review and failed local revision,2026-10-25",
   "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
   "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
   "daily_schema": 13,
@@ -9,14 +9,14 @@
   "final_delivery_ref": "release-v2-20261009",
   "default_retrieval": "topic_v4_subject_v1",
   "default_review_message_profile": "lossless_v1",
-  "previous_application_commit": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
+  "previous_application_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
   "execution_path_default": "langgraph_v1",
   "optional_development_execution_path": "langgraph_v1",
   "langgraph_version": "1.2.16",
   "production_switch": false,
-  "new_live_model_calls": 28,
-  "validation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-  "offline_unittest_count": 1274,
+  "new_live_model_calls": 131,
+  "validation_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
+  "offline_unittest_count": 1285,
   "live_graph_service_runs": 0,
   "live_planned_service_runs": 0,
   "live_accepted_service_runs": 0,
@@ -175,5 +175,20 @@
     "adoption": "do_not_adopt_no_production_acceptance",
     "report": "docs/evaluation/natural-review-seam-v1/report.md"
   },
-  "default_extraction_message_profile": "production"
+  "default_extraction_message_profile": "production",
+  "literal_review_stage1": {
+    "report": "docs/evaluation/literal-review-stage1-v1/report.md",
+    "logical_slots": 28,
+    "normal_factory_runs": 28,
+    "model": "deepseek-flash",
+    "calls": 131,
+    "candidate_fixed": 0,
+    "error_drafts": 4,
+    "correct_protection": 3,
+    "insufficient_protection": "execution_incomplete",
+    "natural_changed": 0,
+    "adoption": "do_not_adopt_stop_stage1",
+    "billing_amount": null,
+    "browser_acceptance": false
+  }
 }

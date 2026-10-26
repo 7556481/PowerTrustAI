@@ -162,10 +162,21 @@ class RunExecution:
 
     def make_report(self, decision):
         result = AuditReport(uuid4().hex, self.request.task_id, self.answer, self.claims, self.evidence, () if self.verification is None else self.verification.findings, () if self.domain is None else self.domain.findings, tuple(self.issues), decision, self.bindings)
+        from agents.contracts import LiteralVerificationOutput
+        if isinstance(self.verification,LiteralVerificationOutput):
+            from core.literal_review import LiteralAuditReport
+            from dataclasses import fields
+            result=LiteralAuditReport(**{f.name:getattr(result,f.name) for f in fields(result)},literal_reviews=self.verification.literal_reviews,literal_defects=self.verification.literal_defects)
         validate_report(result)
         return result
 
     async def retrieve_for(self, purpose, query_override=None):
+        if getattr(self.harness.retriever,'manages_query_conversion',False):
+            with model_scope(self.model_budget), model_invocation_scope(uuid4().hex,'retrieval_'+purpose.value,None if self.answer is None else self.answer.version):
+                return await self._retrieve_for(purpose,query_override)
+        return await self._retrieve_for(purpose,query_override)
+
+    async def _retrieve_for(self, purpose, query_override=None):
         started = perf_counter()
         try:
             if purpose == RetrievalPurpose.VERIFICATION and self.harness.retrieval_settings.fact_strategy == 'per_claim_v1':
@@ -482,18 +493,23 @@ class RunExecution:
 
     async def revise(self):
         """Validate a bounded revision; return whether a full re-audit can run."""
+        from dataclasses import replace
         if self.rounds >= self.budget.max_revision_rounds:
             raise ContractError('Policy attempted revision beyond limit')
         self.transition(RunState.REVISING)
+        revision_input=RevisionInput(self.request,self.answer,self.verification,self.domain,self.evidence,self.decision.reasons,self.bindings,self.knowledge_version if self.retrieval else None)
 
         def check_revision(output):
             self.guard_agent_evidence(output, self.evidence)
-            validate_revision(output, self.answer, self.evidence, self.verification.findings + self.domain.findings)
+            from agents.contracts import LocalRevisionOutput
+            if isinstance(output,LocalRevisionOutput):
+                require(output.bound_defects==self.verification.literal_defects,'Local revision changed the source-bound defect catalog')
+            validate_revision(output, self.answer, self.evidence, self.verification.findings + self.domain.findings,revision_context=revision_input)
             if getattr(output, 'evidence_snapshot', None) is not None:
                 from services.evidence_scope import validate_snapshot
                 validate_snapshot(output.evidence_snapshot, output.answer)
                 require(output.evidence_snapshot.evidence == self.evidence, 'Revision snapshot changed allowed evidence')
-        revised, issue = await self.invoke('revision', self.harness.revision.run, RevisionInput(self.request, self.answer, self.verification, self.domain, self.evidence, self.decision.reasons, self.bindings, self.knowledge_version if self.retrieval else None), check_revision, True, getattr(self.harness.revision, 'uses_model_adapter', False))
+        revised, issue = await self.invoke('revision', self.harness.revision.run, revision_input, check_revision, True, getattr(self.harness.revision, 'uses_model_adapter', False))
         if issue or revised.execution_issues:
             self.issues.extend((issue,) if issue else revised.execution_issues)
             if self.product_policy:
@@ -504,6 +520,15 @@ class RunExecution:
             self.report = self.make_report(self.decision)
             self.reason = self.decision.reasons[0]
             self.transition(RunState.EXECUTION_INCOMPLETE if self.product_policy else RunState.REVIEW_REQUIRED)
+            return False
+        from agents.contracts import LocalRevisionOutput
+        if isinstance(revised,LocalRevisionOutput) and not revised.replacements:
+            self.rounds += 1
+            self.revision_outputs.append(revised)
+            self.decision=replace(self.decision,kind=DecisionKind.REVIEW_REQUIRED,reasons=('Local revision retained the original answer; unresolved findings remain, attempt exhausted',),reason_codes=('LOCAL_REVISION_NO_CHANGE',))
+            self.report=self.make_report(self.decision)
+            self.reason=self.decision.reasons[0]
+            self.transition(RunState.REVIEW_REQUIRED)
             return False
         self.answer = revised.answer
         self.revision_outputs.append(revised)

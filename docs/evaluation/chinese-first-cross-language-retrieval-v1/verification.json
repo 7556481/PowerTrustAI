@@ -1,0 +1,393 @@
+{
+  "version": "chinese-first-cross-language-retrieval-v1",
+  "frozen_code_commit": "667cbe0b8fb10cdf7ea6dfc1be53abfeb2df043a",
+  "sources_unchanged": true,
+  "materials_unchanged": true,
+  "full_offline_tests": {
+    "tests": 1324,
+    "seconds": 338.071,
+    "status": "OK",
+    "log_sha256": "108c1dab5eb4f8a0fabb4f9de3a2416b92a3bb2654a6000b11551fe87a170b8d"
+  },
+  "preflight_specialized": {
+    "tests": 10,
+    "seconds": 3.493,
+    "status": "OK",
+    "scope": "Including production LangGraph 16 generation substitutes, Store/replay and shared-network-stop"
+  },
+  "earlier_failures": [
+    {
+      "stage": "offline fixture",
+      "cause": "Response diagnostics temporary path outside required ignored data directory",
+      "resolution": "Use permitted ignored temporary directory; no production change"
+    },
+    {
+      "stage": "offline assertion",
+      "cause": "Expected completed but generation_only correctly returns generated",
+      "resolution": "Correct fixture assertion; unchanged Harness semantics"
+    }
+  ],
+  "retrieval_slots": 36,
+  "retrieval_store_readback_equal": true,
+  "initial_messages_checked": 8,
+  "question_only_conversion_inputs": true,
+  "model_records": [
+    {
+      "call_number": 1,
+      "requested_model_id": "deepseek-flash",
+      "prompt_version": "generation-cross-language-query-v1",
+      "correction": false,
+      "status": "succeeded",
+      "duration_ms": 1155,
+      "returned_model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 131,
+        "output_tokens": 36,
+        "total_tokens": 167,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 131
+      },
+      "finish_reason": "stop",
+      "error_code": null,
+      "output_status": "valid_structure",
+      "validation_error": null,
+      "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\chinese-first-cross-language-retrieval-v1\\batch\\query-diagnostics\\response-d96911fa43924c9e97057417d8727ff7.json",
+      "response_contract_version": "generation-cross-language-query-v1",
+      "candidate_catalog_path": null,
+      "input_snapshot_path": null,
+      "request_metrics": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 0,
+        "evidence_chars_delivered": 0,
+        "evidence_chars_unique": 0,
+        "message_chars": 463,
+        "scope_ids": []
+      },
+      "invocation_id": "95cb818f5e5f4faea274ad15c3131ba7",
+      "component": "query_conversion",
+      "answer_version": null,
+      "network_diagnostic": null,
+      "result_transport": null
+    },
+    {
+      "call_number": 1,
+      "requested_model_id": "deepseek-flash",
+      "prompt_version": "generation-cross-language-query-v1",
+      "correction": false,
+      "status": "succeeded",
+      "duration_ms": 1051,
+      "returned_model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 130,
+        "output_tokens": 33,
+        "total_tokens": 163,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 130
+      },
+      "finish_reason": "stop",
+      "error_code": null,
+      "output_status": "valid_structure",
+      "validation_error": null,
+      "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\chinese-first-cross-language-retrieval-v1\\batch\\query-diagnostics\\response-8b919fec2a9a44109f3366a98c338393.json",
+      "response_contract_version": "generation-cross-language-query-v1",
+      "candidate_catalog_path": null,
+      "input_snapshot_path": null,
+      "request_metrics": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 0,
+        "evidence_chars_delivered": 0,
+        "evidence_chars_unique": 0,
+        "message_chars": 464,
+        "scope_ids": []
+      },
+      "invocation_id": "687704aebd6b4582a85c08cf7c4f6ea5",
+      "component": "query_conversion",
+      "answer_version": null,
+      "network_diagnostic": null,
+      "result_transport": null
+    },
+    {
+      "call_number": 1,
+      "requested_model_id": "deepseek-flash",
+      "prompt_version": "generation-cross-language-query-v1",
+      "correction": false,
+      "status": "succeeded",
+      "duration_ms": 956,
+      "returned_model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 129,
+        "output_tokens": 29,
+        "total_tokens": 158,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 129
+      },
+      "finish_reason": "stop",
+      "error_code": null,
+      "output_status": "valid_structure",
+      "validation_error": null,
+      "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\chinese-first-cross-language-retrieval-v1\\batch\\query-diagnostics\\response-2993aae3e3e640948dc5b3779a6d3011.json",
+      "response_contract_version": "generation-cross-language-query-v1",
+      "candidate_catalog_path": null,
+      "input_snapshot_path": null,
+      "request_metrics": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 0,
+        "evidence_chars_delivered": 0,
+        "evidence_chars_unique": 0,
+        "message_chars": 461,
+        "scope_ids": []
+      },
+      "invocation_id": "46c01f9fa11f4f67b7369ae2d4876952",
+      "component": "query_conversion",
+      "answer_version": null,
+      "network_diagnostic": null,
+      "result_transport": null
+    },
+    {
+      "call_number": 1,
+      "requested_model_id": "deepseek-flash",
+      "prompt_version": "generation-cross-language-query-v1",
+      "correction": false,
+      "status": "succeeded",
+      "duration_ms": 1198,
+      "returned_model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 143,
+        "output_tokens": 36,
+        "total_tokens": 179,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 143
+      },
+      "finish_reason": "stop",
+      "error_code": null,
+      "output_status": "valid_structure",
+      "validation_error": null,
+      "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\chinese-first-cross-language-retrieval-v1\\batch\\query-diagnostics\\response-d124f4673c99494c85ffb8ae6ea7faf7.json",
+      "response_contract_version": "generation-cross-language-query-v1",
+      "candidate_catalog_path": null,
+      "input_snapshot_path": null,
+      "request_metrics": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 0,
+        "evidence_chars_delivered": 0,
+        "evidence_chars_unique": 0,
+        "message_chars": 481,
+        "scope_ids": []
+      },
+      "invocation_id": "53d82bcec61048cd9ed09e83aaf223c5",
+      "component": "query_conversion",
+      "answer_version": null,
+      "network_diagnostic": null,
+      "result_transport": null
+    },
+    {
+      "call_number": 1,
+      "requested_model_id": "deepseek-flash",
+      "prompt_version": "generation-cross-language-query-v1",
+      "correction": false,
+      "status": "succeeded",
+      "duration_ms": 1021,
+      "returned_model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 129,
+        "output_tokens": 32,
+        "total_tokens": 161,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 129
+      },
+      "finish_reason": "stop",
+      "error_code": null,
+      "output_status": "valid_structure",
+      "validation_error": null,
+      "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\chinese-first-cross-language-retrieval-v1\\batch\\query-diagnostics\\response-0bf64ac284474e2c8b4bbc6b0bdd793e.json",
+      "response_contract_version": "generation-cross-language-query-v1",
+      "candidate_catalog_path": null,
+      "input_snapshot_path": null,
+      "request_metrics": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 0,
+        "evidence_chars_delivered": 0,
+        "evidence_chars_unique": 0,
+        "message_chars": 463,
+        "scope_ids": []
+      },
+      "invocation_id": "aa11861ae24247589d2d6717b50af4e5",
+      "component": "query_conversion",
+      "answer_version": null,
+      "network_diagnostic": null,
+      "result_transport": null
+    },
+    {
+      "call_number": 1,
+      "requested_model_id": "deepseek-flash",
+      "prompt_version": "generation-cross-language-query-v1",
+      "correction": false,
+      "status": "succeeded",
+      "duration_ms": 875,
+      "returned_model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 138,
+        "output_tokens": 48,
+        "total_tokens": 186,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 138
+      },
+      "finish_reason": "stop",
+      "error_code": null,
+      "output_status": "valid_structure",
+      "validation_error": null,
+      "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\chinese-first-cross-language-retrieval-v1\\batch\\query-diagnostics\\response-ccafa20ad66a4e25b51be7d2f53f2174.json",
+      "response_contract_version": "generation-cross-language-query-v1",
+      "candidate_catalog_path": null,
+      "input_snapshot_path": null,
+      "request_metrics": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 0,
+        "evidence_chars_delivered": 0,
+        "evidence_chars_unique": 0,
+        "message_chars": 475,
+        "scope_ids": []
+      },
+      "invocation_id": "d10050b60bc943e588271ca076966ad9",
+      "component": "query_conversion",
+      "answer_version": null,
+      "network_diagnostic": null,
+      "result_transport": null
+    },
+    {
+      "call_number": 1,
+      "requested_model_id": "deepseek-flash",
+      "prompt_version": "generation-cross-language-query-v1",
+      "correction": false,
+      "status": "succeeded",
+      "duration_ms": 862,
+      "returned_model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 131,
+        "output_tokens": 27,
+        "total_tokens": 158,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 131
+      },
+      "finish_reason": "stop",
+      "error_code": null,
+      "output_status": "valid_structure",
+      "validation_error": null,
+      "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\chinese-first-cross-language-retrieval-v1\\batch\\query-diagnostics\\response-8389c24fc8a14ec8bcd4c0f5494a20fa.json",
+      "response_contract_version": "generation-cross-language-query-v1",
+      "candidate_catalog_path": null,
+      "input_snapshot_path": null,
+      "request_metrics": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 0,
+        "evidence_chars_delivered": 0,
+        "evidence_chars_unique": 0,
+        "message_chars": 461,
+        "scope_ids": []
+      },
+      "invocation_id": "9030a8b96185420080505ddb16cf6236",
+      "component": "query_conversion",
+      "answer_version": null,
+      "network_diagnostic": null,
+      "result_transport": null
+    },
+    {
+      "call_number": 1,
+      "requested_model_id": "deepseek-flash",
+      "prompt_version": "generation-cross-language-query-v1",
+      "correction": false,
+      "status": "succeeded",
+      "duration_ms": 905,
+      "returned_model_id": "deepseek-flash",
+      "usage": {
+        "input_tokens": 141,
+        "output_tokens": 46,
+        "total_tokens": 187,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 0,
+        "cache_miss_tokens": 141
+      },
+      "finish_reason": "stop",
+      "error_code": null,
+      "output_status": "valid_structure",
+      "validation_error": null,
+      "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\chinese-first-cross-language-retrieval-v1\\batch\\query-diagnostics\\response-fb98a36398424cecacde327354bc774c.json",
+      "response_contract_version": "generation-cross-language-query-v1",
+      "candidate_catalog_path": null,
+      "input_snapshot_path": null,
+      "request_metrics": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 0,
+        "evidence_chars_delivered": 0,
+        "evidence_chars_unique": 0,
+        "message_chars": 481,
+        "scope_ids": []
+      },
+      "invocation_id": "6b51cacd26bf441b9cabd67e77595028",
+      "component": "query_conversion",
+      "answer_version": null,
+      "network_diagnostic": null,
+      "result_transport": null
+    }
+  ],
+  "schema_valid_conversion_outputs": 8,
+  "semantically_faithful": 7,
+  "semantic_failures": [
+    "N6"
+  ],
+  "global_new_requests": 8,
+  "answer_generation_requests": 0,
+  "first_model_unknown_acceptance": false,
+  "network_failures": 0,
+  "no_retries": true,
+  "no_second_batch": true,
+  "final_status": {
+    "status": "evidence_gate_not_met",
+    "sent": 8,
+    "no_generation": true
+  },
+  "preservation": {
+    "files": {
+      "data/runtime_local/runs.sqlite3": "53273988827f38ceecc98e0956eec875ed0c88bcc7c34a4950a4bef805612b3e",
+      "data/runtime_local/orchestration.json": "5546973984813b01e08972ad94a37486a1430d508fcab3833f06bd7c2a069c06",
+      "data/runtime_local/daily-knowledge.json": "f77330bfe08862c89a33e769cff57fb9347b8de41b8f398dae8818519249d03c",
+      "data/retrieval_local/natural-answer-benefit-v3/batch/summary.json": "395383e88748e4e535366a4eccbeb34b83307e6104b2f8e7af392289e18986f6",
+      "data/retrieval_local/natural-answer-benefit-v3/materials.json": "bf029ab59b255a22985d2393787dc4bf163da7bafc20eb08a483ee14f2ae365e",
+      "data/retrieval_local/natural-answer-benefit-v3/freeze.json": "4a1364fea16a350b282ab220eb0d91cb312c8a41d85fb789dba64d9dba48bb71"
+    },
+    "counts": {
+      "runs": 104,
+      "objects": 2999,
+      "events": 2278,
+      "reviews": 8
+    },
+    "scope": "Small production database/configuration plus three named previous archive files; no 328-file rescan",
+    "listening_8765": 0
+  },
+  "publication": {
+    "full_reference_paragraphs_absent": true,
+    "raw_messages_and_headers_not_published": true
+  },
+  "published_index": {
+    "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+    "seal_seconds": 189.78610459999982,
+    "database_bytes": 70847647744,
+    "closing_whole_file_rescan": false
+  },
+  "public_projection": "Service usage/validation records retained; historical price estimates excluded, full records stay private."
+}

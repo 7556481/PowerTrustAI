@@ -1,0 +1,1190 @@
+{
+  "code_commit": "db80621c11f7fdbb930b09be2cab1b59d075ae5e",
+  "frozen_sources_match": true,
+  "materials_match": true,
+  "send_count": 49,
+  "ledger_count": 49,
+  "unexecuted": [],
+  "global_stop": null,
+  "last_send_elapsed_seconds": 161.73272309999447,
+  "generation": [
+    {
+      "case": "N1",
+      "run_id": "2a74e4c731de4218bb298f27dbda626f",
+      "new_calls": 1,
+      "duration_ms": 9976,
+      "reference_document_delivered": false,
+      "evidence_count": 5,
+      "retrieval_records": [
+        {
+          "retrieval_id": "a9b6b2d357aa490599ceac4a11ac08ad",
+          "purpose": "generation",
+          "query": "NERC资料如何描述输电运营方TO与配电提供方DP边界负荷的建模，以及建模位置有哪些选择？",
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "answer_version": null,
+          "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+          "status": "succeeded",
+          "outcome": "hits",
+          "hits": [
+            {
+              "evidence_id": "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140",
+              "fragment_id": "fc-f7257fa428b4b4c9ab548f1f046592e689bc6af772a2e2603f17f46cbbe5bd15",
+              "rank": 1,
+              "score": 56.728054467657095,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-fc51a20f2069080c9e3c118e6bc9628f4c60bc05fc60423fcbc97e09275a36e6",
+              "fragment_id": "fc-39ccbc678f610d84f4e9e1f2453d5b504adeaca53e5e9bd7b00eed8b262235eb",
+              "rank": 2,
+              "score": 48.02013811208509,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-3f64870195f0d6c7f724259471e7e1ea89bb33195e6291e7dc571de6251fcf33",
+              "fragment_id": "fc-cd3bcb285a3ae045af0111bb54e5272fb18cd131164715fb61e6a34e47a65361",
+              "rank": 3,
+              "score": 46.321562426478636,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            }
+          ],
+          "core_evidence_ids": [
+            "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140",
+            "e-fc51a20f2069080c9e3c118e6bc9628f4c60bc05fc60423fcbc97e09275a36e6",
+            "e-3f64870195f0d6c7f724259471e7e1ea89bb33195e6291e7dc571de6251fcf33"
+          ],
+          "context_evidence_ids": [
+            "e-6705bed99f9fbd0ed209c71ef7f181c48bfa79947c8ef6b2469ee15628972400",
+            "e-ed5fcdacd1b7e75058dc211bc2aaa034b272576b05d6d283a5eb129b972ecd4a"
+          ],
+          "omitted_evidence_ids": [],
+          "offered_chars": 5615,
+          "accepted_chars": 5615,
+          "cumulative_chars": 5615,
+          "calls_used": 1,
+          "duration_ms": 8059,
+          "reason": "Validated against frozen index; relevance is not factual support",
+          "context_omissions": [
+            "character_limit:fc-ff845aab8660753ae397e33ce22c1a241d555dd22bbee2972dff7876940c2e79",
+            "character_limit:fc-d122f3cd6849e6585bd38370a2d87e457419770d96ae5fa1576f8a3bbe02cc68"
+          ],
+          "answer_id": null,
+          "reused_from_retrieval_id": null,
+          "fact_bindings": [],
+          "omission_reasons": [],
+          "offered_context_links": [
+            [
+              "e-6705bed99f9fbd0ed209c71ef7f181c48bfa79947c8ef6b2469ee15628972400",
+              [
+                "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140"
+              ]
+            ],
+            [
+              "e-ed5fcdacd1b7e75058dc211bc2aaa034b272576b05d6d283a5eb129b972ecd4a",
+              [
+                "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140"
+              ]
+            ]
+          ],
+          "request_options": {
+            "scenario_id": "voltage_stability_reactive_support",
+            "max_results": 3,
+            "context_options": {
+              "max_chars": 2400,
+              "max_fragments": 6,
+              "depth": 1,
+              "allow_cross_page": true,
+              "priority": "storage_order"
+            },
+            "execution_profile": "topic_v4_subject_v1"
+          }
+        }
+      ],
+      "query_conversion_calls": 0,
+      "store_result_verified": true
+    },
+    {
+      "case": "N2",
+      "run_id": "97ce66b258924a51a708c9a69c338e97",
+      "new_calls": 1,
+      "duration_ms": 2784,
+      "reference_document_delivered": false,
+      "evidence_count": 5,
+      "retrieval_records": [
+        {
+          "retrieval_id": "95f22979ac7940b5ae749c24c8684d35",
+          "purpose": "generation",
+          "query": "结合NERC资料，说明边界负荷功率因数、双方无功支撑关系与关键负荷水平下的协调如何联系起来。",
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "answer_version": null,
+          "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+          "status": "succeeded",
+          "outcome": "hits",
+          "hits": [
+            {
+              "evidence_id": "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5",
+              "fragment_id": "fc-8d8cc856e5e0eb1f64ba2923f5537db799da072857a25a5b1bb8416193f80b45",
+              "rank": 1,
+              "score": 41.08523405980077,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-a4725c266cc3e1fa6e60c740e0bc3bb58b3d432f09440aaf490091aa42fef74a",
+              "fragment_id": "fc-b22351fab59c8effa934f5be44dd6ab66b51c902657392e455b5307d2ac1f695",
+              "rank": 2,
+              "score": 38.40385159439472,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-ea344ccb8583905dbd57eaf82c84ebfec4096d614d0af55ec65db8d1af2e2152",
+              "fragment_id": "fc-e1b31db1de82e494273cb9c908d7faf60a9d94bf9e19c00f3f2b0765eef9efca",
+              "rank": 3,
+              "score": 34.884731003648156,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            }
+          ],
+          "core_evidence_ids": [
+            "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5",
+            "e-a4725c266cc3e1fa6e60c740e0bc3bb58b3d432f09440aaf490091aa42fef74a",
+            "e-ea344ccb8583905dbd57eaf82c84ebfec4096d614d0af55ec65db8d1af2e2152"
+          ],
+          "context_evidence_ids": [
+            "e-8f7f9d02b8cfc7aec7c36def5c34fbe644b578d2911f89c0efbe3eba23ce7228",
+            "e-53edce237d1e2e2e4a31a6e1d5d348f3fabc6734c1fea2edabfbef8d7092b157"
+          ],
+          "omitted_evidence_ids": [],
+          "offered_chars": 4776,
+          "accepted_chars": 4776,
+          "cumulative_chars": 4776,
+          "calls_used": 1,
+          "duration_ms": 831,
+          "reason": "Validated against frozen index; relevance is not factual support",
+          "context_omissions": [
+            "character_limit:fc-d3993045cfbe4bb8f14f0613d53be202038467a7ba92faec51440371149554b0"
+          ],
+          "answer_id": null,
+          "reused_from_retrieval_id": null,
+          "fact_bindings": [],
+          "omission_reasons": [],
+          "offered_context_links": [
+            [
+              "e-8f7f9d02b8cfc7aec7c36def5c34fbe644b578d2911f89c0efbe3eba23ce7228",
+              [
+                "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5"
+              ]
+            ],
+            [
+              "e-53edce237d1e2e2e4a31a6e1d5d348f3fabc6734c1fea2edabfbef8d7092b157",
+              [
+                "e-a4725c266cc3e1fa6e60c740e0bc3bb58b3d432f09440aaf490091aa42fef74a"
+              ]
+            ]
+          ],
+          "request_options": {
+            "scenario_id": "voltage_stability_reactive_support",
+            "max_results": 3,
+            "context_options": {
+              "max_chars": 2400,
+              "max_fragments": 6,
+              "depth": 1,
+              "allow_cross_page": true,
+              "priority": "storage_order"
+            },
+            "execution_profile": "topic_v4_subject_v1"
+          }
+        }
+      ],
+      "query_conversion_calls": 0,
+      "store_result_verified": true
+    },
+    {
+      "case": "N3",
+      "run_id": "20393df4a4fc4fc18f5c61e4414e9b73",
+      "new_calls": 2,
+      "duration_ms": 7960,
+      "reference_document_delivered": false,
+      "evidence_count": 6,
+      "retrieval_records": [
+        {
+          "retrieval_id": "3b80b64ff3d049c08ee7f43cd8a21b76",
+          "purpose": "generation",
+          "query": "NERC事故分析段落如何描述失去一个元件后的系统表现？请交代适用的分析类型和负荷条件。",
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "answer_version": null,
+          "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+          "status": "succeeded",
+          "outcome": "hits",
+          "hits": [
+            {
+              "evidence_id": "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5",
+              "fragment_id": "fc-8d8cc856e5e0eb1f64ba2923f5537db799da072857a25a5b1bb8416193f80b45",
+              "rank": 1,
+              "score": 43.637896993838446,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-e4018c1237fb78d5a4761a8e82d2110a0075eca0f0732e29a0368b829e57233d",
+              "fragment_id": "fc-c3badc04d1df157550e764665acdf9a9d10eb389d3d16483bcae3e1b1dc6d191",
+              "rank": 2,
+              "score": 42.05230439303146,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140",
+              "fragment_id": "fc-f7257fa428b4b4c9ab548f1f046592e689bc6af772a2e2603f17f46cbbe5bd15",
+              "rank": 3,
+              "score": 40.19187615548993,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            }
+          ],
+          "core_evidence_ids": [
+            "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5",
+            "e-e4018c1237fb78d5a4761a8e82d2110a0075eca0f0732e29a0368b829e57233d",
+            "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140"
+          ],
+          "context_evidence_ids": [
+            "e-8f7f9d02b8cfc7aec7c36def5c34fbe644b578d2911f89c0efbe3eba23ce7228",
+            "e-81eee3d1688bd31d42625ba6ccfd68b5e01ac3cdf8c8b563187739777198ad6b",
+            "e-60fcee83c57a87ec177f57d437f0ee6ec72b6d273ac5960ce2a478803558b71e"
+          ],
+          "omitted_evidence_ids": [],
+          "offered_chars": 5621,
+          "accepted_chars": 5621,
+          "cumulative_chars": 5621,
+          "calls_used": 1,
+          "duration_ms": 3197,
+          "reason": "Validated against frozen index; relevance is not factual support",
+          "context_omissions": [
+            "character_limit:fc-ffc4750c36c5769369bf55615071e162e439eec3f984b99e998556fe9391895b",
+            "character_limit:fc-3ada0c2a11babe00644d0acb29e5e0e9a0f30003d91eb5f2efc7bd3613f9fb54"
+          ],
+          "answer_id": null,
+          "reused_from_retrieval_id": null,
+          "fact_bindings": [],
+          "omission_reasons": [],
+          "offered_context_links": [
+            [
+              "e-8f7f9d02b8cfc7aec7c36def5c34fbe644b578d2911f89c0efbe3eba23ce7228",
+              [
+                "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5"
+              ]
+            ],
+            [
+              "e-81eee3d1688bd31d42625ba6ccfd68b5e01ac3cdf8c8b563187739777198ad6b",
+              [
+                "e-e4018c1237fb78d5a4761a8e82d2110a0075eca0f0732e29a0368b829e57233d"
+              ]
+            ],
+            [
+              "e-60fcee83c57a87ec177f57d437f0ee6ec72b6d273ac5960ce2a478803558b71e",
+              [
+                "e-e4018c1237fb78d5a4761a8e82d2110a0075eca0f0732e29a0368b829e57233d"
+              ]
+            ]
+          ],
+          "request_options": {
+            "scenario_id": "voltage_stability_reactive_support",
+            "max_results": 3,
+            "context_options": {
+              "max_chars": 2400,
+              "max_fragments": 6,
+              "depth": 1,
+              "allow_cross_page": true,
+              "priority": "storage_order"
+            },
+            "execution_profile": "topic_v4_subject_v1"
+          }
+        }
+      ],
+      "query_conversion_calls": 0,
+      "store_result_verified": true
+    },
+    {
+      "case": "N4",
+      "run_id": "d531c6518c3247d4991b7e5ba18937ee",
+      "new_calls": 1,
+      "duration_ms": 4801,
+      "reference_document_delivered": false,
+      "evidence_count": 4,
+      "retrieval_records": [
+        {
+          "retrieval_id": "26e65432292345a59aac19f1ce4eb090",
+          "purpose": "generation",
+          "query": "按NERC资料比较正常运行、单一故障、选定N-2及极端扰动的描述，说明它们在热额定值、电压限值与稳定性讨论中分别处于什么位置。",
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "answer_version": null,
+          "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+          "status": "succeeded",
+          "outcome": "hits",
+          "hits": [
+            {
+              "evidence_id": "e-fe9192679fca525348736c2728a0a3b598567c487dc27ec4afaf9bfaedddd10d",
+              "fragment_id": "fc-fd5261ab3ffcf70447e44a480f7dd3bec5e5a8f85de5e76c6651e0b71b07d82e",
+              "rank": 1,
+              "score": 46.843398872140284,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-8aa4c5f69a47eb6bcf773d9a8eef47895cd8a37bb851bf295c793cdc2a0852b6",
+              "fragment_id": "fc-5a3d6aeee0fa80b93d8e436266d91c8c00e0213caddbce05c5f8a57a80158c8f",
+              "rank": 2,
+              "score": 46.764352434339166,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-d55b52eee0a0096e658171c84e18deb036d3f8059159b6a02a0028f1565afaa8",
+              "fragment_id": "fc-ae608524e6971a77516bda2ecfff9e44fa2cec5e9c4f80c6e52fd01d2c6cd9ab",
+              "rank": 3,
+              "score": 45.262157194466916,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            }
+          ],
+          "core_evidence_ids": [
+            "e-fe9192679fca525348736c2728a0a3b598567c487dc27ec4afaf9bfaedddd10d",
+            "e-8aa4c5f69a47eb6bcf773d9a8eef47895cd8a37bb851bf295c793cdc2a0852b6",
+            "e-d55b52eee0a0096e658171c84e18deb036d3f8059159b6a02a0028f1565afaa8"
+          ],
+          "context_evidence_ids": [
+            "e-c20c2e0505408ecc50a799bb9316bd3f3ffa271fdd07e8cdfea273f7c419c0be"
+          ],
+          "omitted_evidence_ids": [],
+          "offered_chars": 3804,
+          "accepted_chars": 3804,
+          "cumulative_chars": 3804,
+          "calls_used": 1,
+          "duration_ms": 2314,
+          "reason": "Validated against frozen index; relevance is not factual support",
+          "context_omissions": [],
+          "answer_id": null,
+          "reused_from_retrieval_id": null,
+          "fact_bindings": [],
+          "omission_reasons": [],
+          "offered_context_links": [
+            [
+              "e-c20c2e0505408ecc50a799bb9316bd3f3ffa271fdd07e8cdfea273f7c419c0be",
+              [
+                "e-8aa4c5f69a47eb6bcf773d9a8eef47895cd8a37bb851bf295c793cdc2a0852b6"
+              ]
+            ]
+          ],
+          "request_options": {
+            "scenario_id": "voltage_stability_reactive_support",
+            "max_results": 3,
+            "context_options": {
+              "max_chars": 2400,
+              "max_fragments": 6,
+              "depth": 1,
+              "allow_cross_page": true,
+              "priority": "storage_order"
+            },
+            "execution_profile": "topic_v4_subject_v1"
+          }
+        }
+      ],
+      "query_conversion_calls": 0,
+      "store_result_verified": true
+    },
+    {
+      "case": "N5",
+      "run_id": "c3e316a0feeb415c9b69e551bf3e4fa1",
+      "new_calls": 1,
+      "duration_ms": 11586,
+      "reference_document_delivered": false,
+      "evidence_count": 5,
+      "retrieval_records": [
+        {
+          "retrieval_id": "fbd6a6d7381349298392f5672a3ab24e",
+          "purpose": "generation",
+          "query": "NERC资料中的动态无功资源怎样随电网电压变化调整输出？这种资源的电压控制运行方式有哪些？",
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "answer_version": null,
+          "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+          "status": "succeeded",
+          "outcome": "hits",
+          "hits": [
+            {
+              "evidence_id": "e-bc283ec7620d3227be7e2d6abe45047e14235f7cfb898563eae12e384c5ab96f",
+              "fragment_id": "fc-5c18cd1a94bf1a11047804645b7f40396a05a77a6f7513f57a5aa693911a7c84",
+              "rank": 1,
+              "score": 64.4973323790063,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-98dd197d1fd7207beaaa67ecdd0463a673accb799d3d09646e128b3e9da68b6a",
+              "fragment_id": "fc-c7b960a1f70fb633e3fe7b6dd816f26204becd7f8fb15f29db4a306719ced535",
+              "rank": 2,
+              "score": 62.85187449928956,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-fb0a2a003ad9f83872457bf91eafada1d6c9ad332c149564daa6155ca34726c2",
+              "fragment_id": "fc-c4c79003f55c9c5f2f12fd2fb2f4e040aed9f67551eeb3139cfed9ced0eb82a8",
+              "rank": 3,
+              "score": 58.66663427542893,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            }
+          ],
+          "core_evidence_ids": [
+            "e-bc283ec7620d3227be7e2d6abe45047e14235f7cfb898563eae12e384c5ab96f",
+            "e-98dd197d1fd7207beaaa67ecdd0463a673accb799d3d09646e128b3e9da68b6a",
+            "e-fb0a2a003ad9f83872457bf91eafada1d6c9ad332c149564daa6155ca34726c2"
+          ],
+          "context_evidence_ids": [
+            "e-38e4edc0c3c6952cf866a409bd6fbc9d47dfe80dde023ce9cc44f7fc71144288",
+            "e-9c38d820b56032c54a811f0ae8a383cb0ed9a26766bee4858a9eb1dfc9288cd3"
+          ],
+          "omitted_evidence_ids": [],
+          "offered_chars": 4722,
+          "accepted_chars": 4722,
+          "cumulative_chars": 4722,
+          "calls_used": 1,
+          "duration_ms": 8627,
+          "reason": "Validated against frozen index; relevance is not factual support",
+          "context_omissions": [
+            "character_limit:fc-63bdfae38d83f7d2ae5b657e0b50a630aea5bc8a64649e930e7329c19d90b372"
+          ],
+          "answer_id": null,
+          "reused_from_retrieval_id": null,
+          "fact_bindings": [],
+          "omission_reasons": [],
+          "offered_context_links": [
+            [
+              "e-38e4edc0c3c6952cf866a409bd6fbc9d47dfe80dde023ce9cc44f7fc71144288",
+              [
+                "e-bc283ec7620d3227be7e2d6abe45047e14235f7cfb898563eae12e384c5ab96f"
+              ]
+            ],
+            [
+              "e-9c38d820b56032c54a811f0ae8a383cb0ed9a26766bee4858a9eb1dfc9288cd3",
+              [
+                "e-98dd197d1fd7207beaaa67ecdd0463a673accb799d3d09646e128b3e9da68b6a"
+              ]
+            ]
+          ],
+          "request_options": {
+            "scenario_id": "voltage_stability_reactive_support",
+            "max_results": 3,
+            "context_options": {
+              "max_chars": 2400,
+              "max_fragments": 6,
+              "depth": 1,
+              "allow_cross_page": true,
+              "priority": "storage_order"
+            },
+            "execution_profile": "topic_v4_subject_v1"
+          }
+        }
+      ],
+      "query_conversion_calls": 0,
+      "store_result_verified": true
+    },
+    {
+      "case": "N6",
+      "run_id": "3d056b284d9b4742ae0869bbcb6be122",
+      "new_calls": 1,
+      "duration_ms": 6516,
+      "reference_document_delivered": false,
+      "evidence_count": 5,
+      "retrieval_records": [
+        {
+          "retrieval_id": "103a9bece82e410fbd3b1d5f24f096f6",
+          "purpose": "generation",
+          "query": "按NERC资料，从接入后的输出特性与投入退出操作看，动态和静态无功资源有什么不同？额定电压在这种比较中有什么意义？",
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "answer_version": null,
+          "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+          "status": "succeeded",
+          "outcome": "hits",
+          "hits": [
+            {
+              "evidence_id": "e-07d0511aaac573120a78042c708075ecc08a627fa590e60ba83dee0028eca8d2",
+              "fragment_id": "fc-13c4f7f9fc25182149a37a11fb5ab0b16dfaf1f52411839e85ab0d111510c984",
+              "rank": 1,
+              "score": 63.78338163809521,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-314497ea9c2dd436abb493b9db51335bb5f41781f53fdae73573775b5d1bbc19",
+              "fragment_id": "fc-abfe5c337db83de2095c5e69a5d077f7fe63a63a43c4717bdb3c4adce130e13a",
+              "rank": 2,
+              "score": 62.44001301465394,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-42efdc87f5a5605c6e86a036d808264efd68f8428745412b0454ad14d86d0908",
+              "fragment_id": "fc-a80f85c38488b7a9ac482db3e3a9178696d3efd822e2ad0db812cd8d536095cc",
+              "rank": 3,
+              "score": 61.62262222733464,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            }
+          ],
+          "core_evidence_ids": [
+            "e-07d0511aaac573120a78042c708075ecc08a627fa590e60ba83dee0028eca8d2",
+            "e-314497ea9c2dd436abb493b9db51335bb5f41781f53fdae73573775b5d1bbc19",
+            "e-42efdc87f5a5605c6e86a036d808264efd68f8428745412b0454ad14d86d0908"
+          ],
+          "context_evidence_ids": [
+            "e-1560492c461158b1db4b3174e5282bdf05e31d5ddf9629a089258c4ba3d6e847",
+            "e-7c3dcf062c7a87f39121d8b8f67926c3eb324e4f2bdfc3dfbc20e77aeb8e7278"
+          ],
+          "omitted_evidence_ids": [],
+          "offered_chars": 5017,
+          "accepted_chars": 5017,
+          "cumulative_chars": 5017,
+          "calls_used": 1,
+          "duration_ms": 3822,
+          "reason": "Validated against frozen index; relevance is not factual support",
+          "context_omissions": [
+            "character_limit:fc-2278c20ad4eefed8fbed8fe64eea61f3edae7505c17032e8873a2ab4fcf0ba4c"
+          ],
+          "answer_id": null,
+          "reused_from_retrieval_id": null,
+          "fact_bindings": [],
+          "omission_reasons": [],
+          "offered_context_links": [
+            [
+              "e-1560492c461158b1db4b3174e5282bdf05e31d5ddf9629a089258c4ba3d6e847",
+              [
+                "e-07d0511aaac573120a78042c708075ecc08a627fa590e60ba83dee0028eca8d2"
+              ]
+            ],
+            [
+              "e-7c3dcf062c7a87f39121d8b8f67926c3eb324e4f2bdfc3dfbc20e77aeb8e7278",
+              [
+                "e-42efdc87f5a5605c6e86a036d808264efd68f8428745412b0454ad14d86d0908"
+              ]
+            ]
+          ],
+          "request_options": {
+            "scenario_id": "voltage_stability_reactive_support",
+            "max_results": 3,
+            "context_options": {
+              "max_chars": 2400,
+              "max_fragments": 6,
+              "depth": 1,
+              "allow_cross_page": true,
+              "priority": "storage_order"
+            },
+            "execution_profile": "topic_v4_subject_v1"
+          }
+        }
+      ],
+      "query_conversion_calls": 0,
+      "store_result_verified": true
+    },
+    {
+      "case": "N7",
+      "run_id": "9bd67e046a664c9b9906305b5ce346ba",
+      "new_calls": 1,
+      "duration_ms": 2728,
+      "reference_document_delivered": false,
+      "evidence_count": 5,
+      "retrieval_records": [
+        {
+          "retrieval_id": "aee3784e32ce4380933b63a8c66bc1b8",
+          "purpose": "generation",
+          "query": "请用文字解释NERC资料所列短输电线路无功传输式的模型假设与各符号含义，不作数值计算。",
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "answer_version": null,
+          "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+          "status": "succeeded",
+          "outcome": "hits",
+          "hits": [
+            {
+              "evidence_id": "e-1a073bf8dd409457072642924a9bf7d9f85ad994c7fa08040f419fffe0380b37",
+              "fragment_id": "fc-26b653cbf4e72a15b1146bee7ad9ef2bfde95bac8a7cf3620ab69e03a4ddb064",
+              "rank": 1,
+              "score": 59.102329048920836,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-80b5acc2d796e562989c49166516df2b245e756b4fd510e78553b48dc2fbaf08",
+              "fragment_id": "fc-45990f1b0f43800ab8d2ead58dead56c62430a26380390547778b23c28f08d4e",
+              "rank": 2,
+              "score": 54.79177946806022,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-1310104e897d929f23c9ca5712a9e1877725f2ec7020ad784c56173099b4aa9b",
+              "fragment_id": "fc-a58ca945731f20d862bfa2f7f4f1181dbd7fcc8acbbf98e24ca5a411a21f0d50",
+              "rank": 3,
+              "score": 54.64579643296584,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            }
+          ],
+          "core_evidence_ids": [
+            "e-1a073bf8dd409457072642924a9bf7d9f85ad994c7fa08040f419fffe0380b37",
+            "e-80b5acc2d796e562989c49166516df2b245e756b4fd510e78553b48dc2fbaf08",
+            "e-1310104e897d929f23c9ca5712a9e1877725f2ec7020ad784c56173099b4aa9b"
+          ],
+          "context_evidence_ids": [
+            "e-d5c302d1098472c7860172d7872af7f1336ee84b70c58a7d8c00599b7ae58495",
+            "e-b24dc9cc08022e7c546d2969215c21158d4c252854d5eccfad8ad23a7c5087f4"
+          ],
+          "omitted_evidence_ids": [],
+          "offered_chars": 5165,
+          "accepted_chars": 5165,
+          "cumulative_chars": 5165,
+          "calls_used": 1,
+          "duration_ms": 1243,
+          "reason": "Validated against frozen index; relevance is not factual support",
+          "context_omissions": [],
+          "answer_id": null,
+          "reused_from_retrieval_id": null,
+          "fact_bindings": [],
+          "omission_reasons": [],
+          "offered_context_links": [
+            [
+              "e-d5c302d1098472c7860172d7872af7f1336ee84b70c58a7d8c00599b7ae58495",
+              [
+                "e-1a073bf8dd409457072642924a9bf7d9f85ad994c7fa08040f419fffe0380b37",
+                "e-1310104e897d929f23c9ca5712a9e1877725f2ec7020ad784c56173099b4aa9b"
+              ]
+            ],
+            [
+              "e-b24dc9cc08022e7c546d2969215c21158d4c252854d5eccfad8ad23a7c5087f4",
+              [
+                "e-80b5acc2d796e562989c49166516df2b245e756b4fd510e78553b48dc2fbaf08"
+              ]
+            ]
+          ],
+          "request_options": {
+            "scenario_id": "voltage_stability_reactive_support",
+            "max_results": 3,
+            "context_options": {
+              "max_chars": 2400,
+              "max_fragments": 6,
+              "depth": 1,
+              "allow_cross_page": true,
+              "priority": "storage_order"
+            },
+            "execution_profile": "topic_v4_subject_v1"
+          }
+        }
+      ],
+      "query_conversion_calls": 0,
+      "store_result_verified": true
+    },
+    {
+      "case": "N8",
+      "run_id": "54ee3b78b7f14978868aface054b12c5",
+      "new_calls": 1,
+      "duration_ms": 6683,
+      "reference_document_delivered": false,
+      "evidence_count": 5,
+      "retrieval_records": [
+        {
+          "retrieval_id": "4d9ee71adb0f447c8c8904f612d87940",
+          "purpose": "generation",
+          "query": "为什么NERC资料在讨论无功传输时把电压控制与无功控制联系起来？请结合短线路模型中各驱动量的相对作用解释，并交代模型适用条件。",
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "answer_version": null,
+          "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+          "status": "succeeded",
+          "outcome": "hits",
+          "hits": [
+            {
+              "evidence_id": "e-2ab041fe786cff2f65347291ebe3748432e35c199b57bba1a50889a233445138",
+              "fragment_id": "fc-f92b77db371b49381f637d54052632db3565f2d827f39f8758132fbe2508b055",
+              "rank": 1,
+              "score": 67.29879146417484,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-8d5b8252ef462e38e8996b7d1acf0d0ab5d67ef121f73b2925874a4579c502d7",
+              "fragment_id": "fc-0fceaa927d2a1a4079cda7ecee9ece5f5c8cec464bac5fe17624fb4bfe3213fc",
+              "rank": 2,
+              "score": 66.81897299317899,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            },
+            {
+              "evidence_id": "e-3237a7c740a66fa463625c18fd1f945c237c0d92e0ee39b3644d64e042f71056",
+              "fragment_id": "fc-bdb68dc64333a91bed90b3dcb906c509db94fa705de353ef52b44ca0855e39c2",
+              "rank": 3,
+              "score": 64.15704886506421,
+              "scoring_method": "fts-subject-constrained-bm25-v1"
+            }
+          ],
+          "core_evidence_ids": [
+            "e-2ab041fe786cff2f65347291ebe3748432e35c199b57bba1a50889a233445138",
+            "e-8d5b8252ef462e38e8996b7d1acf0d0ab5d67ef121f73b2925874a4579c502d7",
+            "e-3237a7c740a66fa463625c18fd1f945c237c0d92e0ee39b3644d64e042f71056"
+          ],
+          "context_evidence_ids": [
+            "e-72c720aec69303c762844a07bd1c17902743d9d989e72f65aae588081ca9cdeb",
+            "e-0e0b3331b567c48eee1c7e0c5c0a311c87f5cff074802bf4a4cedcccd4f0bcf9"
+          ],
+          "omitted_evidence_ids": [],
+          "offered_chars": 4885,
+          "accepted_chars": 4885,
+          "cumulative_chars": 4885,
+          "calls_used": 1,
+          "duration_ms": 4433,
+          "reason": "Validated against frozen index; relevance is not factual support",
+          "context_omissions": [
+            "character_limit:fc-79527e5db3e971b33c82420ec9c57924a4133577ae0701a658e0d41513816756"
+          ],
+          "answer_id": null,
+          "reused_from_retrieval_id": null,
+          "fact_bindings": [],
+          "omission_reasons": [],
+          "offered_context_links": [
+            [
+              "e-72c720aec69303c762844a07bd1c17902743d9d989e72f65aae588081ca9cdeb",
+              [
+                "e-2ab041fe786cff2f65347291ebe3748432e35c199b57bba1a50889a233445138"
+              ]
+            ],
+            [
+              "e-0e0b3331b567c48eee1c7e0c5c0a311c87f5cff074802bf4a4cedcccd4f0bcf9",
+              [
+                "e-8d5b8252ef462e38e8996b7d1acf0d0ab5d67ef121f73b2925874a4579c502d7"
+              ]
+            ]
+          ],
+          "request_options": {
+            "scenario_id": "voltage_stability_reactive_support",
+            "max_results": 3,
+            "context_options": {
+              "max_chars": 2400,
+              "max_fragments": 6,
+              "depth": 1,
+              "allow_cross_page": true,
+              "priority": "storage_order"
+            },
+            "execution_profile": "topic_v4_subject_v1"
+          }
+        }
+      ],
+      "query_conversion_calls": 0,
+      "store_result_verified": true
+    }
+  ],
+  "audits": [
+    {
+      "case": "N1",
+      "run_id": "0de29a6fb2df43458bc52b501ab2e39f",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 3,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "review_required",
+      "duration_ms": 6230,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "N2",
+      "run_id": "323171938e384eab963e4d74e23c2458",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 3,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "review_required",
+      "duration_ms": 7538,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "N3",
+      "run_id": "24e0cc95ca50486c8c5ab6fe8b69b7d9",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 3,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "review_required",
+      "duration_ms": 9580,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "N4",
+      "run_id": "3f15632b54a3496cabe9ccd339434504",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 3,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "review_required",
+      "duration_ms": 9122,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "N5",
+      "run_id": "69f99e3c9c824e5d87e8d0f5eba6af50",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 2
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 4,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "review_required",
+      "duration_ms": 15787,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "N6",
+      "run_id": "bfac48622fee4fa0857356a6d6a2db28",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 2,
+        "evidence_verification": 1,
+        "power_domain_review": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 4,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "review_required",
+      "duration_ms": 16144,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "N7",
+      "run_id": "db732fb7803946cbb61ed08f529dbbc9",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 3,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "review_required",
+      "duration_ms": 5906,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "N8",
+      "run_id": "f17c05a2bb944b09ab5fb1cbccdc2874",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 3,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "review_required",
+      "duration_ms": 8466,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "H1",
+      "run_id": "60b079d9db284aec8b0dcc33b1a86968",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 2,
+        "power_domain_review": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 4,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "ModelOutputError: literal-review-v1: $: unexpected_fields_not_allowed"
+        }
+      ],
+      "state": "execution_incomplete",
+      "duration_ms": 10152,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "H2",
+      "run_id": "d2eb132b2c6c4be9af52da8774af3eb4",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 3,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "completed",
+      "duration_ms": 9446,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "H3",
+      "run_id": "ef61851e9b9e408db297189541accd23",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "power_domain_review": 1,
+        "evidence_verification": 1
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 3,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "completed",
+      "duration_ms": 7830,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    },
+    {
+      "case": "H4",
+      "run_id": "aa3658cde43443a9b2a7ab60a060eb97",
+      "executed": true,
+      "initial_new_call_components": {
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 2
+      },
+      "no_initial_review_replay": true,
+      "independent_budget": 24,
+      "snapshot_knowledge_preserved": true,
+      "new_calls": 4,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "initial_final_text_equal": true,
+      "execution_issues": [],
+      "state": "completed",
+      "duration_ms": 12156,
+      "stages": [
+        {
+          "component": "claim_extraction",
+          "answer_version": 1
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1
+        }
+      ],
+      "store_result_verified": true
+    }
+  ],
+  "store_independent_readback": true,
+  "public_full_source_bodies_absent": true
+}

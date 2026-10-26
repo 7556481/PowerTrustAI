@@ -1,0 +1,107 @@
+{
+  "new_requests": 8,
+  "conversion_requests": 8,
+  "generation_requests": 0,
+  "corrections": 0,
+  "unexecuted_answer_slots": 16,
+  "other_models": 0,
+  "usage": {
+    "input_tokens": 1072,
+    "output_tokens": 287,
+    "total_tokens": 1359,
+    "cache_hit_tokens": 0,
+    "cache_miss_tokens": 1072
+  },
+  "actual_cost_amount": null,
+  "actual_cost_currency": null,
+  "cost_status": "Unknown actual invoice; no historical price estimate counted as actual cost",
+  "latency_N": {
+    "A": {
+      "mean_seconds": 3.998985887499998,
+      "median_seconds": 3.4551056999998764,
+      "per_case_seconds": [
+        7.965263600000071,
+        0.8563830000002781,
+        3.1409395999999106,
+        2.3224074999998265,
+        8.320770499999526,
+        3.769271799999842,
+        1.2350090999998429,
+        4.381842000000688
+      ]
+    },
+    "B": {
+      "mean_seconds": 0.2835059125002317,
+      "median_seconds": 0.03219119999994291,
+      "per_case_seconds": [
+        1.05600400000003,
+        0.028015200000481855,
+        0.029891000000134227,
+        1.029739999999947,
+        0.02680030000010447,
+        0.03493860000071436,
+        0.028166800000690273,
+        0.03449139999975159
+      ]
+    },
+    "C": {
+      "mean_seconds": 2.0318315875000508,
+      "median_seconds": 2.0302465000004304,
+      "per_case_seconds": [
+        2.1896882000000915,
+        2.08205259999977,
+        2.0001876000005723,
+        2.226737900000444,
+        2.0603054000002885,
+        1.8894216999997298,
+        1.8774985000000015,
+        1.928760799999509
+      ]
+    }
+  },
+  "conversion_latency": {
+    "mean_seconds": 0.9960080875001722,
+    "median_seconds": 0.9856837000002088,
+    "per_case_seconds": [
+      1.145382100000461,
+      1.0484631999997873,
+      0.9528594000003068,
+      1.1921758000007685,
+      1.0185080000001108,
+      0.8524175000002288,
+      0.8589815999994244,
+      0.8992771000002904
+    ]
+  },
+  "incremental_C_over_B": {
+    "per_trigger_extra_requests": 1,
+    "mean_seconds": 1.748325674999819,
+    "median_seconds": 1.8743762499993863
+  },
+  "cold_seal_seconds": 189.78610459999982,
+  "last_request_return_seconds_after_first_send": 40.81295760000012,
+  "limit": {
+    "total": 44,
+    "conversion": 12,
+    "generation": 32
+  },
+  "stage_status": {
+    "status": "evidence_gate_not_met",
+    "sent": 8,
+    "no_generation": true
+  },
+  "evidence_coverage_observed": {
+    "A": 0,
+    "B": 6,
+    "C": 25,
+    "total_required": 25
+  },
+  "effective_case_improvements": {
+    "C_over_A": 7,
+    "C_over_B": 5,
+    "translation_failure": [
+      "N6"
+    ]
+  },
+  "scope": "Single seen development batch. Collection times include conversion and strict validation, cold seal separate. Fixed A/B/C order, no repeated performance study. B six N empty. No generated answers or online end-to-end timing."
+}

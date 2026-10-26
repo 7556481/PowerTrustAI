@@ -32,9 +32,9 @@
       "symbol": "RunStore.tx",
       "start_line": 50,
       "end_line": 56,
-      "file_sha256": "ed695812b0e950b4ebeffc436ecc23ed26dd54d2f0f4107fdf54555f2c51788f",
-      "excerpt_sha256": "a147a0de482cb0fdc50b6c0d748ff113291ba65b649db53a42eeb21a8fc770ca",
-      "source_text_lf_sha256": "d2d76914595ed289215565f0ae535c0bd3f20f7fc160cbd41138d3247e66fb33"
+      "file_sha256": "25bbce91e015d381b0b89119a94607db650d47db2c6c9231d0dd3cd47939d916",
+      "excerpt_sha256": "d6f7070c9348855e5a2d0a736966d6ea957c070507931e0d0fd82b085907662f",
+      "source_text_lf_sha256": "4b35e9e84e89eba171b3574fad6186cc3e6400b6948c3b2d1e2888e2d606e38d"
     },
     {
       "file": "services/bounded_repair.py",
@@ -59,9 +59,9 @@
       "symbol": "RunStore.recover",
       "start_line": 58,
       "end_line": 60,
-      "file_sha256": "ed695812b0e950b4ebeffc436ecc23ed26dd54d2f0f4107fdf54555f2c51788f",
-      "excerpt_sha256": "81c466174821c6394822f496e87bb78476f7be272641608277fc47edca0a5372",
-      "source_text_lf_sha256": "d2d76914595ed289215565f0ae535c0bd3f20f7fc160cbd41138d3247e66fb33"
+      "file_sha256": "25bbce91e015d381b0b89119a94607db650d47db2c6c9231d0dd3cd47939d916",
+      "excerpt_sha256": "034b62f171574af1e13f1b8b0375f9f279a673f28d6933568ed574e6e6553e78",
+      "source_text_lf_sha256": "4b35e9e84e89eba171b3574fad6186cc3e6400b6948c3b2d1e2888e2d606e38d"
     },
     {
       "file": "agents/revision_contract_v2.py",
@@ -156,12 +156,12 @@
     {
       "file": "backend/assembly.py",
       "symbol": "ComponentFactory.create",
-      "start_line": 219,
-      "end_line": 234,
-      "function_end_line": 273,
-      "excerpt_sha256": "8a4f3ce510a356a9418f57a88e962edbcb0cfe418f9534d4464b8c0f542cb36f",
-      "file_sha256": "c33002c7904fd0da2742409b37cd452559f74c40769d1be25756791a72e207fc",
-      "source_text_lf_sha256": "78728f10a6a85dee018a6a326526972dd8682403cf29ee292ec56b090f5ffd55"
+      "start_line": 226,
+      "end_line": 241,
+      "function_end_line": 282,
+      "excerpt_sha256": "034d08fb21bf43a2a3259ac84eb6de9f6bf7ea8c479f689c0a38a24a17415780",
+      "file_sha256": "cb2d080080eb482b362aa535b1736c2970f15c6f9ba374062a0ec02cc11b49a0",
+      "source_text_lf_sha256": "a524fb115e5c3ad0265b6deffc96817ec78cd1d843d553732a06faf63eb04f44"
     },
     {
       "file": "services/claim_extractor.py",
@@ -178,20 +178,20 @@
       "symbol": "ProductAuditPolicy.decide_context",
       "start_line": 24,
       "end_line": 40,
-      "function_end_line": 173,
-      "excerpt_sha256": "9a9d5c59ee687fc735edeeb69eb5b55f8fca650dbba5be494ce0b001e62af128",
-      "file_sha256": "f8a93873e1876f7870acb4674841ff225ebd9d586d4a51275f86b8a61d308922",
-      "source_text_lf_sha256": "b24130f3462977b9e0bba3c0b87cc9a97964473c0fac075eed902f2262cb54b8"
+      "function_end_line": 177,
+      "excerpt_sha256": "b5d95ade28f22675a980ee8080de73803bd188298a12f808017ae59117e3ff1b",
+      "file_sha256": "3de8c2915b54e1b6ba39c89cf49620aa62948488d1b7b8305dab63a2f9dfb898",
+      "source_text_lf_sha256": "abc1c7606f44531918ca52e293f1c5bb9afc81e79709587ae043c335c3f9cb46"
     },
     {
       "file": "backend/store.py",
       "symbol": "RunStore.checkpoint",
       "start_line": 89,
       "end_line": 100,
-      "function_end_line": 100,
-      "excerpt_sha256": "15c9ae1c83136fdf3a0dcab6ad0df4caf969efec64bf00ccc733e5772c7c6362",
-      "file_sha256": "ed695812b0e950b4ebeffc436ecc23ed26dd54d2f0f4107fdf54555f2c51788f",
-      "source_text_lf_sha256": "d2d76914595ed289215565f0ae535c0bd3f20f7fc160cbd41138d3247e66fb33"
+      "function_end_line": 102,
+      "excerpt_sha256": "059a7bf28a24bf0154eff731e3132bcd43d512a10dab72654cdc13135bffc71b",
+      "file_sha256": "25bbce91e015d381b0b89119a94607db650d47db2c6c9231d0dd3cd47939d916",
+      "source_text_lf_sha256": "4b35e9e84e89eba171b3574fad6186cc3e6400b6948c3b2d1e2888e2d606e38d"
     },
     {
       "file": "backend/service.py",
@@ -208,38 +208,38 @@
     {
       "file": "backend/assembly.py",
       "symbol": "harness=OfflineHarness",
-      "start_line": 261,
-      "end_line": 270,
-      "excerpt_sha256": "63c1a14b3f4ec00ed336bb60a874433cf396fd355603b9f802d33753886f5151",
-      "file_sha256": "c33002c7904fd0da2742409b37cd452559f74c40769d1be25756791a72e207fc",
-      "source_text_lf_sha256": "78728f10a6a85dee018a6a326526972dd8682403cf29ee292ec56b090f5ffd55"
+      "start_line": 270,
+      "end_line": 279,
+      "excerpt_sha256": "0183a65bbc0691e49ae59fccbfdc0e3a8670c21a20432d588a9d426d655f77f5",
+      "file_sha256": "cb2d080080eb482b362aa535b1736c2970f15c6f9ba374062a0ec02cc11b49a0",
+      "source_text_lf_sha256": "a524fb115e5c3ad0265b6deffc96817ec78cd1d843d553732a06faf63eb04f44"
     },
     {
       "file": "harness/execution.py",
       "symbol": "RunExecution.prepare_review",
-      "start_line": 345,
-      "end_line": 375,
-      "excerpt_sha256": "78b055340eee162ce45350c25ad50e5926380227630841cf0e869fb2175823be",
-      "file_sha256": "06e162cc3ce92b18f6423846cf75b1c104f6541c0cc27334183302a2d4ac353a",
-      "source_text_lf_sha256": "7eb2f5acbd2941fb3dadf34e6089154a423e76700af15bd95a3ace8fc64ea2b2"
+      "start_line": 350,
+      "end_line": 380,
+      "excerpt_sha256": "d85f0081f6af7126f9a0d41b4d79728cc73e303ccd1ecab2797d9aa9592f3e1d",
+      "file_sha256": "227624bd99d678dd85a3c6ce0efc76d1ae5ebe5a6a117d91eb67d196f978809d",
+      "source_text_lf_sha256": "561368f661c3003137f302252f12b70d836288d6ce49f4b358494cae47d7a79b"
     },
     {
       "file": "harness/execution.py",
       "symbol": "RunExecution.review_pair",
-      "start_line": 377,
-      "end_line": 424,
-      "excerpt_sha256": "53575ec48036863d2b838a607f45957a81610bc04b9f4f761efb0822734914e5",
-      "file_sha256": "06e162cc3ce92b18f6423846cf75b1c104f6541c0cc27334183302a2d4ac353a",
-      "source_text_lf_sha256": "7eb2f5acbd2941fb3dadf34e6089154a423e76700af15bd95a3ace8fc64ea2b2"
+      "start_line": 382,
+      "end_line": 429,
+      "excerpt_sha256": "cda46153d0f3869226cb911e4d9d0c7c9a14c544b1153b45bd50f54d863e6d0a",
+      "file_sha256": "227624bd99d678dd85a3c6ce0efc76d1ae5ebe5a6a117d91eb67d196f978809d",
+      "source_text_lf_sha256": "561368f661c3003137f302252f12b70d836288d6ce49f4b358494cae47d7a79b"
     },
     {
       "file": "harness/execution.py",
       "symbol": "RunExecution.revise",
-      "start_line": 483,
-      "end_line": 517,
-      "excerpt_sha256": "04caf40f243bcea51611c0d350bfa1f691d438a63c2060518185fdab0509dd39",
-      "file_sha256": "06e162cc3ce92b18f6423846cf75b1c104f6541c0cc27334183302a2d4ac353a",
-      "source_text_lf_sha256": "7eb2f5acbd2941fb3dadf34e6089154a423e76700af15bd95a3ace8fc64ea2b2"
+      "start_line": 488,
+      "end_line": 522,
+      "excerpt_sha256": "4c84420d62abc13eb1951656a2b5dde71c27ee6f49fae1b755fac6c63d7ff6a5",
+      "file_sha256": "227624bd99d678dd85a3c6ce0efc76d1ae5ebe5a6a117d91eb67d196f978809d",
+      "source_text_lf_sha256": "561368f661c3003137f302252f12b70d836288d6ce49f4b358494cae47d7a79b"
     }
   ],
   "documentation_source_hash_method": "source_text_lf_sha256: CRLF to LF only; original raw file_sha256 retained; not an Evidence hashing rule",
@@ -289,20 +289,20 @@
     {
       "file": "harness/execution.py",
       "symbol": "RunExecution.run_stages",
-      "start_line": 519,
-      "end_line": 533,
-      "excerpt_sha256": "259ba7d87c57f86311849ae32e26646449b3ef890213b4c90afac53d19e091d6",
-      "file_sha256": "06e162cc3ce92b18f6423846cf75b1c104f6541c0cc27334183302a2d4ac353a",
-      "source_text_lf_sha256": "7eb2f5acbd2941fb3dadf34e6089154a423e76700af15bd95a3ace8fc64ea2b2"
+      "start_line": 537,
+      "end_line": 551,
+      "excerpt_sha256": "4e6a8a5acc12bbd9b39c09f002e5533b6c67ec6f82c00c98875585cee83bde9b",
+      "file_sha256": "227624bd99d678dd85a3c6ce0efc76d1ae5ebe5a6a117d91eb67d196f978809d",
+      "source_text_lf_sha256": "561368f661c3003137f302252f12b70d836288d6ce49f4b358494cae47d7a79b"
     },
     {
       "file": "harness/execution.py",
       "symbol": "RunExecution.run",
-      "start_line": 535,
-      "end_line": 571,
-      "excerpt_sha256": "324f4768d68414682e1c7820c09e26e98b78c09a496cab91e964f46a6bcea212",
-      "file_sha256": "06e162cc3ce92b18f6423846cf75b1c104f6541c0cc27334183302a2d4ac353a",
-      "source_text_lf_sha256": "7eb2f5acbd2941fb3dadf34e6089154a423e76700af15bd95a3ace8fc64ea2b2"
+      "start_line": 553,
+      "end_line": 589,
+      "excerpt_sha256": "f857fb7a772e66fb63e5cc588c91d14b99e8f73e4f25d9d7cf62add43ecbb849",
+      "file_sha256": "227624bd99d678dd85a3c6ce0efc76d1ae5ebe5a6a117d91eb67d196f978809d",
+      "source_text_lf_sha256": "561368f661c3003137f302252f12b70d836288d6ce49f4b358494cae47d7a79b"
     },
     {
       "file": "harness/graph_runtime_v1.py",

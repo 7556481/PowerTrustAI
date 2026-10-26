@@ -73,7 +73,7 @@ class ComponentFactory:
         self.initialize_retrieval()
         return self.config.knowledge_version
 
-    def manifest(self,knowledge_version):
+    def manifest(self,knowledge_version,*,fixed_evidence_only=False):
         from agents.review_templates_v3 import INDEPENDENT
         from services.review_fidelity import INDEPENDENT_JUDGMENTS
         INDEPENDENT=INDEPENDENT.replace('These are model judgments, NOT mechanical proofs. Unresolved fidelity/stance/obligation disagreement\nrequires not_assessable; never supported or contradicted.','These are independent raw model judgments; program computes the effective disposition for unresolved objections.').replace('Same-category uncertainty needs no issue: not_assessable with a specific reason.','Same-category uncertainty needs no issue: preserve actual support and semantic judgments independently.')
@@ -127,7 +127,7 @@ class ComponentFactory:
             scoring_method=SCORING_METHOD if self.config.retrieval_mode=='bm25' else RRF_VERSION if self.config.retrieval_mode=='hybrid' else 'Dense-cosine-v1(positive-only)')
         manifest['retrieval']='fixed-index '+self.config.retrieval_mode+'; full result replay validation'
         manifest['performance_profile']='validated-pdf-report-cache-v1: connection-local immutable body verification only; full ranking replay retained' if self.config.retrieval_mode=='bm25' else 'legacy-semantic-full-replay'
-        if self.config.profile=='real' and self.config.retrieval_mode=='bm25':
+        if self.config.profile=='real' and self.config.retrieval_mode=='bm25' and not fixed_evidence_only:
             from rag.storage import KnowledgeStore
             from rag.corpus_index import seal,SCORING
             with KnowledgeStore(self.config.index_db,readonly=True) as store:
@@ -152,6 +152,15 @@ class ComponentFactory:
             manifest['configured_retrieval_mode']=manifest['retrieval_mode']
             manifest['retrieval_mode']='none';manifest['scoring_method']=None
         manifest['retrieval_execution_profile']=self.config.retrieval_execution_profile
+        if self.config.retrieval_execution_profile=='chinese_first_cross_language_v1':
+            manifest['candidate_retrieval']={'version':'chinese_first_cross_language_v1',
+                'source_scope':'literal catalog title/institution aliases; all matching documents/versions',
+                'conversion':'existing generation-cross-language-query-v1; Chinese + scoped English body; once; 1000 output tokens; 0 corrections',
+                'ranking':'same scoped original/English lexical BM25; depth20 each; RRF k60; fragment ID ties; final top3',
+                'limits':{'documents':12,'fragments':10000,'bytes':104857600},
+                'ordinary_chinese':'original topic_v4_subject_v1 fallback',
+                'context':'unchanged 2400 chars /6 fragments/depth1/cross-page/storage-order'}
+            manifest['generation_query_conversion']='candidate scoped eager conversion; old empty-result fallback disabled in this profile'
         manifest['configured_review_message_profile']=self.config.review_message_profile
         manifest['extraction_message_profile']=self.config.extraction_message_profile
         if self.config.extraction_message_profile=='unified_v1':
@@ -214,9 +223,23 @@ class ComponentFactory:
             manifest['prompts']['verification']=PROMPT
             manifest['result_transport']=dict(version=VERSION,tool=specification(),endpoint='https://api.deepseek.com/beta/chat/completions')
             manifest['template_sha256']={k:hashlib.sha256(SYSTEM.encode()).hexdigest() for k in ('independent','original_citation')}
+        if self.config.fact_review_contract=='literal_v1':
+            from services.literal_review_v1 import VERSION,REVISION,POLICY,SYSTEM,REVISION_SYSTEM
+            manifest['prompts'].update(verification=VERSION,revision=REVISION)
+            manifest['contracts'].update(verification=VERSION,revision=REVISION)
+            manifest['protocols'].update(evidence_verification=VERSION,revision=REVISION)
+            manifest['policy']=POLICY
+            manifest['template_sha256']={'literal':hashlib.sha256(SYSTEM.encode()).hexdigest(),'local_revision':hashlib.sha256(REVISION_SYSTEM.encode()).hexdigest()}
+        if self.config.local_revision_interface=='source_actions_v2':
+            from services.local_revision_v2 import VERSION,system
+            manifest['local_revision_interface']=self.config.local_revision_interface
+            manifest['prompts']['revision']=manifest['contracts']['revision']=manifest['protocols']['revision']=VERSION
+            manifest['template_sha256']['local_revision']=hashlib.sha256(system().encode()).hexdigest()
         return manifest
 
-    def create(self,rid,observer):
+    def create(self,rid,observer,*,fixed_evidence_only=False):
+        """Fixed Evidence evaluation may skip index resources; defaults unchanged."""
+        if type(fixed_evidence_only) is not bool:raise ConfigurationError('Boolean fixed evidence mode required')
         if self.config.profile=='synthetic_fixture':
             from agents.fakes import make_fake_harness
             harness=make_fake_harness();harness.observer=observer;harness.execution_path=self.config.execution_path
@@ -237,6 +260,10 @@ class ComponentFactory:
         if self.config.domain_internal_flow=='business_v1':
             from services.domain_business_v1 import create_agent as ModelPowerDomainReviewAgent
         from agents.revision import ModelRevisionAgent
+        if self.config.fact_review_contract=='literal_v1':
+            from services.literal_review_v1 import LiteralReviewAgent as FactAgent, LocalRevisionAgent as ModelRevisionAgent
+            if self.config.local_revision_interface=='source_actions_v2':
+                from services.local_revision_v2 import ScopedLocalRevisionAgent as ModelRevisionAgent
         from services.claim_extractor import ModelClaimExtractor
         from tools.unit_conversion import UnitConversionTool
         from model_adapter.contracts import ModelSettings
@@ -245,28 +272,38 @@ class ComponentFactory:
         from services.generation_query import GenerationQueryConverter, english_fallback_available
         from rag.storage import KnowledgeStore
         settings=ModelSettings(os.environ['DEEPSEEK_MODEL_ID'],90,8000,96000,'https://api.deepseek.com','DEEPSEEK_API_KEY')
+        diag=ROOT/'data/retrieval_local/service_private'/rid
         resources=[]
         try:
             model=create_adapter(settings,**({'review_contract':'simple_bound_v1'} if self.config.fact_review_contract=='simple_bound_v1' else {}));resources.append(model)
             domain_model=create_adapter(settings);resources.append(domain_model)
-            if self.config.retrieval_mode=='bm25':
-                retriever=AsyncSQLiteBM25Retriever(self.config.index_db,execution_profile=self.config.retrieval_execution_profile);resources.append(retriever)
+            if fixed_evidence_only:
+                retriever=None
+            elif self.config.retrieval_mode=='bm25':
+                if self.config.retrieval_execution_profile=='chinese_first_cross_language_v1':
+                    from dataclasses import replace
+                    from rag.chinese_first import ChineseFirstRetriever
+                    retriever=ChineseFirstRetriever(self.config.index_db,self.config.knowledge_version,
+                        GenerationQueryConverter(model,replace(settings,max_output_tokens=1000),diag))
+                else:retriever=AsyncSQLiteBM25Retriever(self.config.index_db,execution_profile=self.config.retrieval_execution_profile)
+                resources.append(retriever)
             else:
                 self.initialize_retrieval();retriever=self.semantic_resource;resources.append(RetrieverLease(retriever))
-            diag=ROOT/'data/retrieval_local/service_private'/rid
-            with KnowledgeStore(self.config.index_db, readonly=True) as store:
-                from rag.corpus_index import seal
-                corpus=seal(store,self.config.knowledge_version)
-                corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
+            corpus_english=False
+            if not fixed_evidence_only:
+                with KnowledgeStore(self.config.index_db, readonly=True) as store:
+                    from rag.corpus_index import seal
+                    corpus=seal(store,self.config.knowledge_version)
+                    corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
                 FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
-                generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
+                generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1' else None,
                 generation_corpus_english=corpus_english,execution_path=self.config.execution_path)
-            harness.subject_supplement=True
+            harness.subject_supplement=not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
             return Bundle(harness,resources)
         except Exception:
             for resource in resources:resource.close()

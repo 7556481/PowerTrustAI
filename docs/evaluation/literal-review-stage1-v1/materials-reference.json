@@ -1,0 +1,300 @@
+{
+  "version": "literal-review-stage1-v1",
+  "A": [
+    {
+      "id": "LR-A1-v1",
+      "family": "obligation",
+      "question": "按给定资料说明输配边界负荷的建模位置、双方无功支撑关系，以及确定关键负荷水平的建议负荷功率因数时协调的地位。",
+      "units": [
+        [
+          "coordination",
+          "输配边界负荷通常显式建模为MW和Mvar，可位于母线高压侧，或降压变压器及等效配电阻抗之后。"
+        ],
+        [
+          "coordination",
+          "资料明确规定：在确定峰荷和轻载等关键负荷水平的建议负荷功率因数时，TO与DP之间的协调是必须履行的强制义务。负荷不应过度依赖BES的无功支撑，BES也不应仅依赖负荷提供无功支撑。"
+        ]
+      ],
+      "target": "important被增强为强制义务；仅纠正该义务强度，不否定协调的重要性或擅自认定无需协调",
+      "requirements": [
+        "MW/Mvar及两类位置",
+        "协调对关键负荷水平的建议LPF重要",
+        "双方不应过度单向依赖"
+      ],
+      "preserve": [
+        "两种建模位置",
+        "双向依赖限制"
+      ],
+      "kind": "repairable_error"
+    },
+    {
+      "id": "LR-A2-v1",
+      "family": "condition_owner",
+      "question": "按给定资料分别解释N-1、选定N-2及极端扰动要求，明确无操作员干预限定的归属。",
+      "units": [
+        [
+          "contingencies",
+          "N-1指失去一个元件，要求系统在扰动后立即、无操作员干预下保持在紧急热额定值和电压限值内，且用于稳态与稳定要求。"
+        ],
+        [
+          "contingencies",
+          "在确定稳定极限时，资料又要求系统承受选定的N-2故障；这里的每一种选定N-2故障，均被原文明确要求在无操作员干预下立即满足上述紧急热额定值和电压限值。系统还应承受更严重但较不可能的极端扰动，避免电压崩溃、级联或失稳。"
+        ]
+      ],
+      "target": "明确把N-1的无干预/立即限值移给每个选定N-2；应删除该无据扩张，保留选定N-2与极端扰动并列要求",
+      "requirements": [
+        "N-1立即/无干预/限值/稳态稳定",
+        "确定稳定极限时的选定N-2",
+        "极端扰动及避免崩溃级联失稳"
+      ],
+      "preserve": [
+        "首单元N-1",
+        "选定N-2及极端扰动"
+      ],
+      "kind": "repairable_error",
+      "parent_note": "旧B3有主语歧义，本稿另立身份，明确每一种选定N-2；不改旧标签"
+    },
+    {
+      "id": "LR-A3-v1",
+      "family": "necessary_qualifier",
+      "question": "按给定资料解释动态无功资源调节的电压适用范围、方式及两种运行方式。",
+      "units": [
+        [
+          "resources",
+          "动态无功资源在任何电网电压下都能响应电压变化，自动、实时、连续调节无功输出，不受指定电压带宽限制；可维持电压设定点或按电压下垂模式运行。"
+        ],
+        [
+          "resources",
+          "静态无功资源在额定电压下贡献固定，其能力随电压平方变化，可按系统条件手动或自动投切。"
+        ]
+      ],
+      "target": "指定电压带宽是必要限定，不能改成任何电压且不受带宽限制",
+      "requirements": [
+        "指定电压带宽",
+        "自动实时连续",
+        "设定点或下垂"
+      ],
+      "preserve": [
+        "两种运行方式",
+        "静态资源正确解释"
+      ],
+      "kind": "repairable_error"
+    },
+    {
+      "id": "LR-A4-v1",
+      "family": "causal_dependence",
+      "question": "解释给定短线路无功传输关系的前提、相关量及相角差与电压差/阻抗的相对影响，并据此说明资料为何将电压与无功控制紧密联系。不要数值计算。",
+      "units": [
+        [
+          "line_model",
+          "在忽略线路电阻R和电容B的短输电线路模型中，无功传输与两端电压、相角差和线路电抗有关。"
+        ],
+        [
+          "line_model",
+          "资料指出相角差是最强的驱动量，而电压差和阻抗的影响相对很小。"
+        ],
+        [
+          "line_model",
+          "因此，该资料把无功控制主要归结为相角差控制，电压控制与无功控制并不紧密耦合。"
+        ]
+      ],
+      "target": "相对影响颠倒，及由此前提推出不紧密耦合的直接依赖结论；二者须同时纠正",
+      "requirements": [
+        "短线路/忽略R和B",
+        "相关量",
+        "相角差相对小而电压差/阻抗更强",
+        "电压与无功控制紧密耦合"
+      ],
+      "preserve": [
+        "首单元模型前提与变量"
+      ],
+      "kind": "repairable_error"
+    },
+    {
+      "id": "LR-A5-v1",
+      "family": "correct_equivalence",
+      "question": "按给定资料概括动态与静态无功资源的特性。",
+      "units": [
+        [
+          "resources",
+          "在规定电压带宽内，动态无功资源能随电网电压改变而自动、实时地连续调整输出；它可以以维持电压设定点为运行目标，也可以按电压下垂方式运行。"
+        ],
+        [
+          "resources",
+          "静态无功资源在额定电压下给出固定的额定贡献，能力则随电压平方变化；按系统条件手动或自动接入、退出。"
+        ]
+      ],
+      "target": null,
+      "requirements": [
+        "带宽/自动实时连续/两种方式",
+        "静态额定贡献/平方/投切"
+      ],
+      "preserve": [
+        "全部正确含义和必答点"
+      ],
+      "kind": "correct_protection"
+    },
+    {
+      "id": "LR-A6-v1",
+      "family": "distributed_context",
+      "question": "只解释资料中的短线路模型前提及其无功关系，不推广到任意长度线路。",
+      "units": [
+        [
+          "line_model",
+          "以下解释仅限给定资料忽略线路电阻R和电容B的短输电线路模型。"
+        ],
+        [
+          "line_model",
+          "在上述模型中，无功传输与电压差、相角差及电气阻抗有关；相角差影响相对较小，电压差与阻抗则是更强的驱动量，因此电压控制与无功控制紧密耦合。"
+        ]
+      ],
+      "target": null,
+      "requirements": [
+        "上下文明确绑定短线路及忽略R/B",
+        "相关量与相对影响",
+        "耦合"
+      ],
+      "preserve": [
+        "跨句前提的正确归属"
+      ],
+      "kind": "correct_protection"
+    },
+    {
+      "id": "LR-A7-v1",
+      "family": "multiunit_correct",
+      "question": "按给定资料说明输配边界负荷的建模、负荷功率因数的影响与双方支撑协调。",
+      "units": [
+        [
+          "coordination",
+          "边界通常用MW和Mvar显式负荷建模，可放在母线高压侧，或降压变压器及等效配电阻抗之后。"
+        ],
+        [
+          "coordination",
+          "边界建模采用的负荷功率因数会影响BES的电压与无功表现；在峰荷、轻载等关键负荷水平确定建议LPF时，TO与DP间的协调很重要。"
+        ],
+        [
+          "coordination",
+          "负荷不应过度依赖BES的无功支撑，反向而言BES也不应仅依赖负荷的无功支撑。"
+        ]
+      ],
+      "target": null,
+      "requirements": [
+        "两类位置",
+        "LPF影响电压和无功",
+        "协调重要",
+        "双方依赖限制"
+      ],
+      "preserve": [
+        "全部三个单元"
+      ],
+      "kind": "correct_protection"
+    },
+    {
+      "id": "LR-A8-v1",
+      "family": "insufficient",
+      "question": "按资料解释动态无功资源的调节特性；另核验所给资料是否足以确定匿名变压器的实际额定容量。",
+      "units": [
+        [
+          "resources",
+          "动态无功资源在指定电压带宽内响应电网电压变化，自动实时连续调节，可维持设定电压或按电压下垂方式运行。"
+        ],
+        [
+          "resources",
+          "该匿名变压器的实际额定容量为100MVA。"
+        ]
+      ],
+      "target": "没有匿名设备资料，100MVA无支持但不存在可据此确定实际容量的反证或可填数值；保留有用资源解释并合理未解决",
+      "requirements": [
+        "动态特性",
+        "不能据此确定匿名容量，不编数值"
+      ],
+      "preserve": [
+        "第一单元完整解释"
+      ],
+      "kind": "insufficient"
+    }
+  ],
+  "B": [
+    {
+      "question": "按给定NERC资料比较动态与静态无功资源的调节方式、运行方式和电压依赖。",
+      "sources": [
+        "resources"
+      ],
+      "requirements": [
+        "动态在规定带宽内实时连续自动调节、设定点或下垂",
+        "静态额定电压固定贡献、平方依赖、按系统条件投切；不写恒定实际出力"
+      ]
+    },
+    {
+      "question": "按给定NERC资料解释输配边界负荷怎样建模，以及负荷功率因数与双方无功支撑协调有什么关系。",
+      "sources": [
+        "coordination"
+      ],
+      "requirements": [
+        "MW/Mvar显式建模及两类位置",
+        "负荷功率因数影响电压/无功，双方不应过度单向依赖；协调很重要，不增强为强制义务"
+      ]
+    },
+    {
+      "question": "按给定NERC资料分别说明N-1与选定N-2的要求；无操作员干预这一限定在所给段落中具体绑定哪种工况？",
+      "sources": [
+        "contingencies"
+      ],
+      "requirements": [
+        "N-1立即、无操作员干预、限值/稳态稳定",
+        "选定N-2等另外说明，不把N-1限定无据扩展至N-2"
+      ]
+    },
+    {
+      "question": "按给定NERC资料说明短线路无功传输关系用了哪些建模前提、受哪些量影响；不要做数值计算或推广到任意长线路。",
+      "sources": [
+        "line_model"
+      ],
+      "requirements": [
+        "忽略R和B、短线路",
+        "电压/相角/电抗相关及相对影响，保持来源范围"
+      ]
+    }
+  ],
+  "reference_origin": "AI-assisted construction and direct source review under user supervision; NOT individually owner-confirmed labels, expert gold or independent holdout",
+  "identities": "New authored drafts, no historical generation snapshot; old references/results unchanged.",
+  "source_archive_sha256": "42eb12e21d2166793b8c0bbe70d735f6e67b09b086ab24345078c0e2f0109cd8",
+  "allowed": "Equivalent correct expression, no fixed-answer string score. Correct content/required points preserved; mixed results separate.",
+  "sources": {
+    "resources": {
+      "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+      "text_sha256": "81d1ba89d51a555b8e4e385d23e6f286a23f077c288c2b7c4607c5e7339821d9"
+    },
+    "contingencies": {
+      "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+      "text_sha256": "fa82733c8f82156be9f7c39f11bd8b6afbc7a527073c597d64b955a9fd9c83ff"
+    },
+    "coordination": {
+      "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+      "text_sha256": "8035814bead5cf935dc1053839d0dc45abdd83c496ca6b90913062f2ae102d33"
+    },
+    "line_model": {
+      "evidence_id": "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+      "text_sha256": "46d376598d22ef999fa03fc93ee0a156745c796ca46b5a70c3e99292219c1bb1"
+    },
+    "locality": {
+      "evidence_id": "e-54b969cc1dbddaeb23cb13aea570062d45cd9e0de8e3e355f86dd9811161ada3",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=7;page_chars[2398:3166);page_lines[38:48]",
+      "text_sha256": "b8577bbf0cdc762b4f2ccab6f2ce9bac3513ba7da108bb707bba4e521af37177"
+    }
+  }
+}

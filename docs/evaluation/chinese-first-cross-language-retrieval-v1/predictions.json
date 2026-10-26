@@ -1,0 +1,82 @@
+[
+  {
+    "sequence": 1,
+    "question": "NERC资料如何描述输电运营方TO与配电提供方DP边界负荷的建模，以及建模位置有哪些选择？",
+    "prompt_version": "generation-cross-language-query-v1",
+    "response_text": "{\"query\": \"How do NERC materials describe modeling of boundary load between Transmission Operators (TO) and Distribution Providers (DP), and what location options exist for the modeling?\"}",
+    "finish_reason": "stop",
+    "returned_model": "deepseek-flash",
+    "semantic_fidelity": "passed",
+    "note": "Raw output unchanged; N6 semantic failure does not overwrite valid JSON/model status"
+  },
+  {
+    "sequence": 2,
+    "question": "结合NERC资料，说明边界负荷功率因数、双方无功支撑关系与关键负荷水平下的协调如何联系起来。",
+    "prompt_version": "generation-cross-language-query-v1",
+    "response_text": "{\"query\": \"How are boundary load power factor, reactive power support relationship between both parties, and coordination under critical load levels linked according to NERC materials?\"}",
+    "finish_reason": "stop",
+    "returned_model": "deepseek-flash",
+    "semantic_fidelity": "passed",
+    "note": "Raw output unchanged; N6 semantic failure does not overwrite valid JSON/model status"
+  },
+  {
+    "sequence": 3,
+    "question": "NERC事故分析段落如何描述失去一个元件后的系统表现？请交代适用的分析类型和负荷条件。",
+    "prompt_version": "generation-cross-language-query-v1",
+    "response_text": "{\"query\": \"How does the NERC incident analysis paragraph describe system performance after losing one element, including applicable analysis type and load conditions?\"}",
+    "finish_reason": "stop",
+    "returned_model": "deepseek-flash",
+    "semantic_fidelity": "passed",
+    "note": "Raw output unchanged; N6 semantic failure does not overwrite valid JSON/model status"
+  },
+  {
+    "sequence": 4,
+    "question": "按NERC资料比较正常运行、单一故障、选定N-2及极端扰动的描述，说明它们在热额定值、电压限值与稳定性讨论中分别处于什么位置。",
+    "prompt_version": "generation-cross-language-query-v1",
+    "response_text": "{\"query\": \"How do NERC materials position normal operation, single contingency, selected N-2, and extreme disturbances in thermal ratings, voltage limits, and stability discussions?\"}",
+    "finish_reason": "stop",
+    "returned_model": "deepseek-flash",
+    "semantic_fidelity": "passed",
+    "note": "Raw output unchanged; N6 semantic failure does not overwrite valid JSON/model status"
+  },
+  {
+    "sequence": 5,
+    "question": "NERC资料中的动态无功资源怎样随电网电压变化调整输出？这种资源的电压控制运行方式有哪些？",
+    "prompt_version": "generation-cross-language-query-v1",
+    "response_text": "{\"query\": \"How do dynamic reactive resources in NERC materials adjust output with grid voltage changes, and what voltage control operating modes do these resources have?\"}",
+    "finish_reason": "stop",
+    "returned_model": "deepseek-flash",
+    "semantic_fidelity": "passed",
+    "note": "Raw output unchanged; N6 semantic failure does not overwrite valid JSON/model status"
+  },
+  {
+    "sequence": 6,
+    "question": "按NERC资料，从接入后的输出特性与投入退出操作看，动态和静态无功资源有什么不同？额定电压在这种比较中有什么意义？",
+    "prompt_version": "generation-cross-language-query-v1",
+    "response_text": "{\"query\": \"According to NERC, what are the differences between dynamic and static reactive power resources in terms of post-connection output characteristics and commissioning/decommissioning operations, and what is the significance of rated voltage in this comparison?\"}",
+    "finish_reason": "stop",
+    "returned_model": "deepseek-flash",
+    "semantic_fidelity": "failed",
+    "note": "Raw output unchanged; N6 semantic failure does not overwrite valid JSON/model status"
+  },
+  {
+    "sequence": 7,
+    "question": "请用文字解释NERC资料所列短输电线路无功传输式的模型假设与各符号含义，不作数值计算。",
+    "prompt_version": "generation-cross-language-query-v1",
+    "response_text": "{\"query\": \"NERC document short transmission line reactive power transfer formula model assumptions and symbol meanings explained in words, no numerical calculation\"}",
+    "finish_reason": "stop",
+    "returned_model": "deepseek-flash",
+    "semantic_fidelity": "passed",
+    "note": "Raw output unchanged; N6 semantic failure does not overwrite valid JSON/model status"
+  },
+  {
+    "sequence": 8,
+    "question": "为什么NERC资料在讨论无功传输时把电压控制与无功控制联系起来？请结合短线路模型中各驱动量的相对作用解释，并交代模型适用条件。",
+    "prompt_version": "generation-cross-language-query-v1",
+    "response_text": "{\"query\": \"Why does NERC material link voltage control with reactive power control when discussing reactive power transmission, explained via the relative roles of driving quantities in the short-line model, and what are the model's applicability conditions?\"}",
+    "finish_reason": "stop",
+    "returned_model": "deepseek-flash",
+    "semantic_fidelity": "passed",
+    "note": "Raw output unchanged; N6 semantic failure does not overwrite valid JSON/model status"
+  }
+]

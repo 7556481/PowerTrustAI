@@ -19,6 +19,7 @@ class ServiceConfig:
     review_result_transport: str='json'
     domain_internal_flow: str='production'
     revision_answer_delivery: str='production'
+    local_revision_interface: str='production'
     run_db: Path=ROOT/'data/runtime_local/runs.sqlite3'
     token_file: Path=ROOT/'data/runtime_local/access-token'
     index_db: Path=ROOT/'data/retrieval_local/semantic/corpus.sqlite3'
@@ -41,11 +42,14 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.local_revision_interface not in ('production','source_actions_v2'):raise ValueError('Invalid local revision interface')
+        if self.local_revision_interface!='production' and (self.fact_review_contract!='literal_v1' or self.profile!='real'):raise ValueError('V2 revision requires explicit literal fact candidate')
         if self.extraction_message_profile not in ('production','unified_v1'):raise ValueError('Invalid extraction message profile')
         if self.review_result_transport not in ('json','strict_tool_v1'):raise ValueError('Invalid review result transport')
         if self.review_result_transport!='json' and self.fact_review_contract not in ('simple_v1','simple_bound_v1'):raise ValueError('Strict result transport requires explicit simple contract')
         if self.fact_review_contract=='simple_bound_v1' and self.review_result_transport!='strict_tool_v1':raise ValueError('Bound candidate requires explicit strict transport')
-        if self.fact_review_contract not in ('production','scope_v2','simple_v1','simple_bound_v1'):raise ValueError('Invalid fact review contract')
+        if self.fact_review_contract not in ('production','scope_v2','simple_v1','simple_bound_v1','literal_v1'):raise ValueError('Invalid fact review contract')
+        if self.fact_review_contract=='literal_v1' and (self.review_result_transport!='json' or self.decision_policy!='product-v1' or self.revision_answer_delivery!='production'):raise ValueError('Literal candidate requires its paired revision/policy and JSON transport')
         if self.fact_review_contract!='production' and (self.profile!='real' or self.verification_schema!=13 or self.fact_internal_flow!='production'):raise ValueError('Scope contract requires explicit production schema13 Agent')
         if self.revision_answer_delivery not in ('production','answer_only_v1'):raise ValueError('Invalid revision answer delivery')
         if self.revision_answer_delivery!='production' and self.profile!='real':raise ValueError('Revision candidate requires actual Factory')
@@ -56,7 +60,7 @@ class ServiceConfig:
         if self.fact_internal_flow!='production' and self.verification_schema!=13:raise ValueError('Candidate requires explicit schema13 baseline')
         if self.execution_path not in ('sequential','langgraph_v1'):raise ValueError('Invalid execution path')
         if self.review_message_profile not in ('baseline_v1','lossless_v1'):raise ValueError('Invalid review message profile')
-        if self.retrieval_execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1'):raise ValueError('Invalid retrieval execution profile')
+        if self.retrieval_execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1','chinese_first_cross_language_v1'):raise ValueError('Invalid retrieval execution profile')
         if type(self.verification_schema) is not int or self.verification_schema not in (13,14):raise ValueError('Explicit schema13 or schema14 required')
         if self.decision_policy not in ('product-v1','legacy-v1'):raise ValueError('Unknown decision policy')
         if type(self.nli_enabled) is not bool or not 0<float(self.nli_timeout_seconds)<=60:
@@ -102,6 +106,7 @@ class ServiceConfig:
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
             domain_internal_flow=os.environ.get('POWERTRUST_DOMAIN_INTERNAL_FLOW','production'),
             revision_answer_delivery=os.environ.get('POWERTRUST_REVISION_ANSWER_DELIVERY','production'),
+            local_revision_interface=os.environ.get('POWERTRUST_LOCAL_REVISION_INTERFACE','production'),
             fact_internal_flow=os.environ.get('POWERTRUST_FACT_INTERNAL_FLOW','production'),
             fact_review_contract=os.environ.get('POWERTRUST_FACT_REVIEW_CONTRACT','production'),
             review_result_transport=os.environ.get('POWERTRUST_REVIEW_RESULT_TRANSPORT','json'),

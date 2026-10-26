@@ -1,0 +1,46 @@
+{
+  "manifest_revision": "96b6534db7d0fafdf45c10a460901f46ab5ab1eb",
+  "published_records": 8630479,
+  "published_chunks": 24620273,
+  "valid_shards": 73,
+  "valid_path_language_counts": {
+    "chinese": 19,
+    "english": 54
+  },
+  "processed_input_rows_by_path": {
+    "chinese": 7373300,
+    "english": 6962877
+  },
+  "excluded_shards": [
+    [
+      "english/high/rank_00941.parquet",
+      "5dfbd49d8231de66b2f358a12bdba245a5af3a8818708c53706f264e4ec1b617",
+      "ArrowInvalid",
+      "verified_bytes_unreadable_parquet"
+    ],
+    [
+      "english/high/rank_00942.parquet",
+      "48c862c0e7b2c4f78eefbc99f0b6b569cad0adccf98909b9f97094a46be26acf",
+      "ArrowInvalid",
+      "verified_bytes_unreadable_parquet"
+    ],
+    [
+      "english/high/rank_00956.parquet",
+      "93eb8d597aba70ed1d7d9effb88d82c0f0df2758f228a924171aa328aac0275c",
+      "ArrowInvalid",
+      "verified_bytes_unreadable_parquet"
+    ]
+  ],
+  "has_english": true,
+  "catalog_documents": 12,
+  "catalog_fragments": 674,
+  "catalog_script_counts": {
+    "chinese": 3,
+    "english": 3,
+    "mixed": 6,
+    "unknown": 0
+  },
+  "english_body_documents": 3,
+  "note": "Manifest shard paths are import partitions, not measured publication/body language proportions. Mixed script includes formulas/acronyms; publisher language/authority not certified. No whole-corpus sample or scan.",
+  "english_trigger": "Existing english_corpus gate: a native body fragment with >=100 Latin letters and zero CJK; no assumption from publisher/title alone."
+}

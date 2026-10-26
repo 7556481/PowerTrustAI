@@ -1,5 +1,7 @@
 # PowerTrustAI：从代码到判断的学习路线
 
+2026-10-25第一阶段：原文审核能定位差异，但四次候选局部修订均未合法应用，实质修复0/4，候选不采用。唯一28槽131Flash请求，三正确保护稿成功、不足稿执行失败，自然正文不变且保留无据排他限定。04章新增一个失败案例/源码导读及两道练习，现20章79题；账单金额未知、生产8765停服，无新增浏览器验收。[完整结果与前后案例](https://github.com/7556481/PowerTrustAI/blob/codex/literal-review-stage1-v1/docs/evaluation/literal-review-stage1-v1/report.md#)。
+
 2026-10-25本轮：自然提取消息收敛为同一v7字段表，Flash/simple_bound固定；6条旧稿链28调用，候选出现N-2错挂有效认可，依赖的新主题6槽未发送，不采用、不切生产。两路提取首次均合法，结构整理未证明产品净收益。现20章77道带解析练习，重点看真实输入接缝、合理异议与误拦、发现到修订及分支预算。[完整证据与停止边界](https://github.com/7556481/PowerTrustAI/blob/62db6ff1b11cb54b8f6048631373b3d5fd5182e3/docs/evaluation/natural-review-seam-v1/report.md#)。
 
 2026-10-25最新：重复答案定位移交程序，候选small-contract接入原产品路径；机制线更完整，自然交付仍无通过，保留候选不进生产验收。所有新请求Flash；20章75道带解析练习。[根因与完整结果](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-delivery-unblock-v1/report.md#)。

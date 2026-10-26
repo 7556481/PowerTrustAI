@@ -1,0 +1,850 @@
+{
+  "planned_slots": 20,
+  "control_records": 20,
+  "unexecuted": [],
+  "new_sends": 49,
+  "initial": 44,
+  "corrections": 5,
+  "received_responses": 49,
+  "unknown_usage": 0,
+  "models": {
+    "deepseek-flash": 49
+  },
+  "record_count": 49,
+  "cost_status": "Actual amount/currency unknown; no provider invoice/cost_amount. Legacy dated adapter estimates are not actual charge.",
+  "by_slot": {
+    "generation": {
+      "sends": 9,
+      "usage": {
+        "input_tokens": 82327,
+        "output_tokens": 2766,
+        "total_tokens": 85093,
+        "cache_hit_tokens": 20480,
+        "cache_miss_tokens": 61847
+      }
+    },
+    "audit": {
+      "sends": 40,
+      "usage": {
+        "input_tokens": 460778,
+        "output_tokens": 33535,
+        "total_tokens": 494313,
+        "cache_hit_tokens": 128896,
+        "cache_miss_tokens": 331882
+      }
+    }
+  },
+  "controls": [
+    {
+      "case_id": "N1-G",
+      "accepted": {
+        "run_id": "2a74e4c731de4218bb298f27dbda626f",
+        "spec": {
+          "line": "G",
+          "case": 0,
+          "variant": "generation",
+          "group": "N",
+          "id": "N1"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N1-audit",
+      "accepted": {
+        "run_id": "0de29a6fb2df43458bc52b501ab2e39f",
+        "spec": {
+          "line": "B",
+          "case": 0,
+          "variant": "candidate",
+          "group": "N",
+          "id": "N1"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N2-G",
+      "accepted": {
+        "run_id": "97ce66b258924a51a708c9a69c338e97",
+        "spec": {
+          "line": "G",
+          "case": 1,
+          "variant": "generation",
+          "group": "N",
+          "id": "N2"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N2-audit",
+      "accepted": {
+        "run_id": "323171938e384eab963e4d74e23c2458",
+        "spec": {
+          "line": "B",
+          "case": 1,
+          "variant": "candidate",
+          "group": "N",
+          "id": "N2"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N3-G",
+      "accepted": {
+        "run_id": "20393df4a4fc4fc18f5c61e4414e9b73",
+        "spec": {
+          "line": "G",
+          "case": 2,
+          "variant": "generation",
+          "group": "N",
+          "id": "N3"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N3-audit",
+      "accepted": {
+        "run_id": "24e0cc95ca50486c8c5ab6fe8b69b7d9",
+        "spec": {
+          "line": "B",
+          "case": 2,
+          "variant": "candidate",
+          "group": "N",
+          "id": "N3"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N4-G",
+      "accepted": {
+        "run_id": "d531c6518c3247d4991b7e5ba18937ee",
+        "spec": {
+          "line": "G",
+          "case": 3,
+          "variant": "generation",
+          "group": "N",
+          "id": "N4"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N4-audit",
+      "accepted": {
+        "run_id": "3f15632b54a3496cabe9ccd339434504",
+        "spec": {
+          "line": "B",
+          "case": 3,
+          "variant": "candidate",
+          "group": "N",
+          "id": "N4"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N5-G",
+      "accepted": {
+        "run_id": "c3e316a0feeb415c9b69e551bf3e4fa1",
+        "spec": {
+          "line": "G",
+          "case": 4,
+          "variant": "generation",
+          "group": "N",
+          "id": "N5"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N5-audit",
+      "accepted": {
+        "run_id": "69f99e3c9c824e5d87e8d0f5eba6af50",
+        "spec": {
+          "line": "B",
+          "case": 4,
+          "variant": "candidate",
+          "group": "N",
+          "id": "N5"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N6-G",
+      "accepted": {
+        "run_id": "3d056b284d9b4742ae0869bbcb6be122",
+        "spec": {
+          "line": "G",
+          "case": 5,
+          "variant": "generation",
+          "group": "N",
+          "id": "N6"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N6-audit",
+      "accepted": {
+        "run_id": "bfac48622fee4fa0857356a6d6a2db28",
+        "spec": {
+          "line": "B",
+          "case": 5,
+          "variant": "candidate",
+          "group": "N",
+          "id": "N6"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N7-G",
+      "accepted": {
+        "run_id": "9bd67e046a664c9b9906305b5ce346ba",
+        "spec": {
+          "line": "G",
+          "case": 6,
+          "variant": "generation",
+          "group": "N",
+          "id": "N7"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N7-audit",
+      "accepted": {
+        "run_id": "db732fb7803946cbb61ed08f529dbbc9",
+        "spec": {
+          "line": "B",
+          "case": 6,
+          "variant": "candidate",
+          "group": "N",
+          "id": "N7"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N8-G",
+      "accepted": {
+        "run_id": "54ee3b78b7f14978868aface054b12c5",
+        "spec": {
+          "line": "G",
+          "case": 7,
+          "variant": "generation",
+          "group": "N",
+          "id": "N8"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "N8-audit",
+      "accepted": {
+        "run_id": "f17c05a2bb944b09ab5fb1cbccdc2874",
+        "spec": {
+          "line": "B",
+          "case": 7,
+          "variant": "candidate",
+          "group": "N",
+          "id": "N8"
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "H1-audit",
+      "accepted": {
+        "run_id": "60b079d9db284aec8b0dcc33b1a86968",
+        "spec": {
+          "line": "B",
+          "case": 8,
+          "variant": "candidate",
+          "group": "H",
+          "id": "H1",
+          "historical_origin": {
+            "id": "H1",
+            "old_generation_run": "7b84e42d08dd43359516f11cc2e97ee4",
+            "old_literal_audit_run": "3307755d1dd844ab9e50aefc370d941e",
+            "initial_input_sha256": "3e569cfdf7bef980a02e2cf84afea02cacb918d49aacb4c38fe88405e85cfa41",
+            "answer_sha256": "43885f7febc4b69b385742eab66dc70845bae90789d7a73ec6f7f38388389de0",
+            "evidence_sha256": "f31f125a0ed3ddac18c79e9d2e64630b2feeaf938e888da91291e35e8f731b27",
+            "snapshot_sha256": "ce72a57754bc7d45472afb0624b6714851d829d0fe17fcc69e2719bd80e42b03",
+            "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+            "old_generation_background_records": [
+              {
+                "call_number": 1,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 2267,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 11110,
+                  "output_tokens": 279,
+                  "total_tokens": 11389,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 10240,
+                  "cache_miss_tokens": 870
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.00032862,
+                  "usd_upper": 0.00065724,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\7b84e42d08dd43359516f11cc2e97ee4\\response-e088d4ce505b405193284a57a11bf01c.json",
+                "response_contract_version": "generation-output-v3",
+                "candidate_catalog_path": null,
+                "input_snapshot_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\7b84e42d08dd43359516f11cc2e97ee4\\generation-input-dd426a86ceac43569bfb8deda2dba7b7.json",
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 6569,
+                  "evidence_chars_unique": 6569,
+                  "message_chars": 31475,
+                  "scope_ids": []
+                },
+                "invocation_id": "434a931a12d64170ba201f173ba74847",
+                "component": "generation",
+                "answer_version": null,
+                "network_diagnostic": null,
+                "result_transport": null
+              }
+            ],
+            "historical_cost_recounted": false,
+            "no_historical_audit_replay": true,
+            "files": [
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/3307755d1dd844ab9e50aefc370d941e/input.json",
+                "sha256": "62102dd7ff0085e8494df1d91d4babca77051c7c9dbf897ad02841ab73693caa"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/7b84e42d08dd43359516f11cc2e97ee4/result.json",
+                "sha256": "fd566598b92883a3098766923e19e5bfaf01fe88062d1ca3f165a84b988d20ea"
+              }
+            ],
+            "frozen_reference": {
+              "question": "按给定NERC资料比较动态与静态无功资源的调节方式、运行方式和电压依赖。",
+              "sources": [
+                "resources"
+              ],
+              "requirements": [
+                "动态在规定带宽内实时连续自动调节、设定点或下垂",
+                "静态额定电压固定贡献、平方依赖、按系统条件投切；不写恒定实际出力"
+              ]
+            }
+          }
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "H2-audit",
+      "accepted": {
+        "run_id": "d2eb132b2c6c4be9af52da8774af3eb4",
+        "spec": {
+          "line": "B",
+          "case": 9,
+          "variant": "candidate",
+          "group": "H",
+          "id": "H2",
+          "historical_origin": {
+            "id": "H2",
+            "old_generation_run": "dc1c51880138407f9dc98ed4f04b9abf",
+            "old_literal_audit_run": "7591a3497711438b81d00354584c1887",
+            "initial_input_sha256": "73776b2ed3531d6c8ba0283973cd2118a2e7c70ab9370e32b32e67b03ab59788",
+            "answer_sha256": "629066356d89727473872763fe28f714e6e647b33cc34f5d9f308a745e078435",
+            "evidence_sha256": "c55b1bf2674534d4df2a08ad968af355f62cd204f0f3862f35682ca32398823b",
+            "snapshot_sha256": "e67c5031fa7118b5244956a6efb0fe1bcfc542bc47761ae4623e133f81375242",
+            "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+            "old_generation_background_records": [
+              {
+                "call_number": 1,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 2544,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 11430,
+                  "output_tokens": 308,
+                  "total_tokens": 11738,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 10624,
+                  "cache_miss_tokens": 806
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.000337572,
+                  "usd_upper": 0.000675144,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\dc1c51880138407f9dc98ed4f04b9abf\\response-47f98d29f6ea4bf3b9184efde7b59486.json",
+                "response_contract_version": "generation-output-v3",
+                "candidate_catalog_path": null,
+                "input_snapshot_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\dc1c51880138407f9dc98ed4f04b9abf\\generation-input-a6d2819516fa4b89a1b26339eb86ab23.json",
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 6964,
+                  "evidence_chars_unique": 6964,
+                  "message_chars": 31993,
+                  "scope_ids": []
+                },
+                "invocation_id": "d4bf64b731024d988a041ab0cb832427",
+                "component": "generation",
+                "answer_version": null,
+                "network_diagnostic": null,
+                "result_transport": null
+              }
+            ],
+            "historical_cost_recounted": false,
+            "no_historical_audit_replay": true,
+            "files": [
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/7591a3497711438b81d00354584c1887/input.json",
+                "sha256": "3f95e010bce29c7d9d6cfef6b164feac4be2c88bded29f743e41efa983f70da2"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/dc1c51880138407f9dc98ed4f04b9abf/result.json",
+                "sha256": "f82722751876f8674a25a14cb492ed3e5e3c01364ca8066e1f5d16cf36c5804d"
+              }
+            ],
+            "frozen_reference": {
+              "question": "按给定NERC资料解释输配边界负荷怎样建模，以及负荷功率因数与双方无功支撑协调有什么关系。",
+              "sources": [
+                "coordination"
+              ],
+              "requirements": [
+                "MW/Mvar显式建模及两类位置",
+                "负荷功率因数影响电压/无功，双方不应过度单向依赖；协调很重要，不增强为强制义务"
+              ]
+            },
+            "source_boundary_review": "Voluntary/non-Chinese-standard metadata is separate from technical body and original citation support; coordination important does not establish mandatory duty."
+          }
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "H3-audit",
+      "accepted": {
+        "run_id": "ef61851e9b9e408db297189541accd23",
+        "spec": {
+          "line": "B",
+          "case": 10,
+          "variant": "candidate",
+          "group": "H",
+          "id": "H3",
+          "historical_origin": {
+            "id": "H3",
+            "old_generation_run": "85a65cdad38743d7bd9915a329ed9e2f",
+            "old_literal_audit_run": "dd0846ac74184bba9e61e23450d4f21f",
+            "initial_input_sha256": "c5fcd1687e0c361735a08d0af86cca951fc0a14426f4a287976a541fb91e7eff",
+            "answer_sha256": "6162b3e39f35a7ec9d51f232a05be98b25f6575a0563628bc0c150d8790c5751",
+            "evidence_sha256": "ff86d119d880fb6f128ef957fd7f6db3db4f0822fc79dbcd8d12a27a0a25bb26",
+            "snapshot_sha256": "998fc603a83c6bda2fc8f15f8891d4c2e6583a1b0fcf34b594bde9517df2d887",
+            "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+            "old_generation_background_records": [
+              {
+                "call_number": 1,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 2667,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 10489,
+                  "output_tokens": 319,
+                  "total_tokens": 10808,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 9728,
+                  "cache_miss_tokens": 761
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.00033473400000000005,
+                  "usd_upper": 0.0006694680000000001,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\85a65cdad38743d7bd9915a329ed9e2f\\response-c73ac79b89854936829055d261fbd616.json",
+                "response_contract_version": "generation-output-v3",
+                "candidate_catalog_path": null,
+                "input_snapshot_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\85a65cdad38743d7bd9915a329ed9e2f\\generation-input-8c83c8108a61425ba7086311e74a4597.json",
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 5795,
+                  "evidence_chars_unique": 5795,
+                  "message_chars": 28457,
+                  "scope_ids": []
+                },
+                "invocation_id": "9d0b8851fb204c08818fe1923dbebdf0",
+                "component": "generation",
+                "answer_version": null,
+                "network_diagnostic": null,
+                "result_transport": null
+              }
+            ],
+            "historical_cost_recounted": false,
+            "no_historical_audit_replay": true,
+            "files": [
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/dd0846ac74184bba9e61e23450d4f21f/input.json",
+                "sha256": "9ef9a78e52ff73ac05b176ae69809b5fc5d11bd0a4c3a23e823984be0d49a2df"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/85a65cdad38743d7bd9915a329ed9e2f/result.json",
+                "sha256": "f108111875611933076bd697b67ba694e1056cf9af3e49583325f59e6a024afd"
+              }
+            ],
+            "frozen_reference": {
+              "question": "按给定NERC资料分别说明N-1与选定N-2的要求；无操作员干预这一限定在所给段落中具体绑定哪种工况？",
+              "sources": [
+                "contingencies"
+              ],
+              "requirements": [
+                "N-1立即、无操作员干预、限值/稳态稳定",
+                "选定N-2等另外说明，不把N-1限定无据扩展至N-2"
+              ]
+            },
+            "source_boundary_review": "Source when is not only. N-1 immediate/no-intervention conditions are not all N-2 requirements; source silence is not engineering nonexistence."
+          }
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    },
+    {
+      "case_id": "H4-audit",
+      "accepted": {
+        "run_id": "aa3658cde43443a9b2a7ab60a060eb97",
+        "spec": {
+          "line": "B",
+          "case": 11,
+          "variant": "candidate",
+          "group": "H",
+          "id": "H4",
+          "historical_origin": {
+            "id": "H4",
+            "old_generation_run": "a530d58b649d4a2e8c19f1f89c559955",
+            "old_literal_audit_run": "d9f1bfce66e94d589bc93d77b4b85c93",
+            "initial_input_sha256": "9471b1b9cd267a67c89483d51917b4497392281b14565b5e1ce1cafd2e2bd75c",
+            "answer_sha256": "6092697d0a5d367fe15ba519bdb3e58e564f4e46c802f954ac86a13c5299a233",
+            "evidence_sha256": "350484f2872889f7a3cefe586e6de2ce41b7dc2362facf0e6d92df55d7906cce",
+            "snapshot_sha256": "1d7cce5f198e3462c1dfd7d1899c28d3b31c2af057ae2f1011e90955780810db",
+            "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+            "old_generation_background_records": [
+              {
+                "call_number": 1,
+                "requested_model_id": "deepseek-flash",
+                "prompt_version": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+                "correction": false,
+                "status": "succeeded",
+                "duration_ms": 2131,
+                "returned_model_id": "deepseek-flash",
+                "usage": {
+                  "input_tokens": 10449,
+                  "output_tokens": 288,
+                  "total_tokens": 10737,
+                  "cost_amount": null,
+                  "currency": null,
+                  "cache_hit_tokens": 9728,
+                  "cache_miss_tokens": 721
+                },
+                "finish_reason": "stop",
+                "error_code": null,
+                "output_status": "valid_structure",
+                "cost_estimate": {
+                  "status": "off_peak_to_peak_range",
+                  "price_date": "2026-10-02",
+                  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+                  "usd_lower": 0.000310134,
+                  "usd_upper": 0.000620268,
+                  "note": "USD range from verified off-peak/peak rates; completion billing tier unverified, not an invoice"
+                },
+                "validation_error": null,
+                "diagnostic_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\a530d58b649d4a2e8c19f1f89c559955\\response-d0329c4e89e74685b7095a186d773164.json",
+                "response_contract_version": "generation-output-v3",
+                "candidate_catalog_path": null,
+                "input_snapshot_path": "D:\\PowerTrustAI\\data\\retrieval_local\\service_private\\a530d58b649d4a2e8c19f1f89c559955\\generation-input-1e5bc14de1fe4ae99430ecfc10c53a86.json",
+                "request_metrics": {
+                  "method": "literal-delivered-json-fields-v1",
+                  "candidate_count": 0,
+                  "evidence_chars_delivered": 6220,
+                  "evidence_chars_unique": 6220,
+                  "message_chars": 29024,
+                  "scope_ids": []
+                },
+                "invocation_id": "ce3bd7b94f9a4becbf3ec3d1c2723229",
+                "component": "generation",
+                "answer_version": null,
+                "network_diagnostic": null,
+                "result_transport": null
+              }
+            ],
+            "historical_cost_recounted": false,
+            "no_historical_audit_replay": true,
+            "files": [
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/d9f1bfce66e94d589bc93d77b4b85c93/input.json",
+                "sha256": "db18101f1ab7abb7e4c2769e6e62d32962f19970667caf39938970931d99015f"
+              },
+              {
+                "path": "data/retrieval_local/literal-review-stage1-v1/batch/a530d58b649d4a2e8c19f1f89c559955/result.json",
+                "sha256": "793df20ab8e006d96684e88317aa2c1fd67a7a657521f0fbcb23197256f74a76"
+              }
+            ],
+            "frozen_reference": {
+              "question": "按给定NERC资料说明短线路无功传输关系用了哪些建模前提、受哪些量影响；不要做数值计算或推广到任意长线路。",
+              "sources": [
+                "line_model"
+              ],
+              "requirements": [
+                "忽略R和B、短线路",
+                "电压/相角/电抗相关及相对影响，保持来源范围"
+              ]
+            }
+          }
+        }
+      },
+      "stop": false,
+      "decision": {
+        "shared": false,
+        "reason": "case_local_result",
+        "evidence": []
+      }
+    }
+  ],
+  "usage": {
+    "input_tokens": 543105,
+    "output_tokens": 36301,
+    "total_tokens": 579406,
+    "cache_hit_tokens": 149376,
+    "cache_miss_tokens": 393729
+  },
+  "case_calls": [
+    {
+      "case": "N1",
+      "generation": 1,
+      "audit": 3,
+      "audit_state": "review_required",
+      "generation_duration_ms": 9976,
+      "audit_duration_ms": 6230
+    },
+    {
+      "case": "N2",
+      "generation": 1,
+      "audit": 3,
+      "audit_state": "review_required",
+      "generation_duration_ms": 2784,
+      "audit_duration_ms": 7538
+    },
+    {
+      "case": "N3",
+      "generation": 2,
+      "audit": 3,
+      "audit_state": "review_required",
+      "generation_duration_ms": 7960,
+      "audit_duration_ms": 9580
+    },
+    {
+      "case": "N4",
+      "generation": 1,
+      "audit": 3,
+      "audit_state": "review_required",
+      "generation_duration_ms": 4801,
+      "audit_duration_ms": 9122
+    },
+    {
+      "case": "N5",
+      "generation": 1,
+      "audit": 4,
+      "audit_state": "review_required",
+      "generation_duration_ms": 11586,
+      "audit_duration_ms": 15787
+    },
+    {
+      "case": "N6",
+      "generation": 1,
+      "audit": 4,
+      "audit_state": "review_required",
+      "generation_duration_ms": 6516,
+      "audit_duration_ms": 16144
+    },
+    {
+      "case": "N7",
+      "generation": 1,
+      "audit": 3,
+      "audit_state": "review_required",
+      "generation_duration_ms": 2728,
+      "audit_duration_ms": 5906
+    },
+    {
+      "case": "N8",
+      "generation": 1,
+      "audit": 3,
+      "audit_state": "review_required",
+      "generation_duration_ms": 6683,
+      "audit_duration_ms": 8466
+    },
+    {
+      "case": "H1",
+      "generation": 0,
+      "audit": 4,
+      "audit_state": "execution_incomplete",
+      "generation_duration_ms": null,
+      "audit_duration_ms": 10152
+    },
+    {
+      "case": "H2",
+      "generation": 0,
+      "audit": 3,
+      "audit_state": "completed",
+      "generation_duration_ms": null,
+      "audit_duration_ms": 9446
+    },
+    {
+      "case": "H3",
+      "generation": 0,
+      "audit": 3,
+      "audit_state": "completed",
+      "generation_duration_ms": null,
+      "audit_duration_ms": 7830
+    },
+    {
+      "case": "H4",
+      "generation": 0,
+      "audit": 4,
+      "audit_state": "completed",
+      "generation_duration_ms": null,
+      "audit_duration_ms": 12156
+    }
+  ]
+}

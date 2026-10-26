@@ -1,0 +1,1148 @@
+[
+  {
+    "id": "single-error",
+    "origin": "HANDWRITTEN SYNTHETIC NEW OBJECT: not cleaned historical output or real delivery",
+    "actual_message_input": {
+      "contract": "local-revision-source-actions-v2",
+      "task": {
+        "task_id": "handwritten",
+        "question": "Explain the given setting and retain the relay fact.",
+        "user_context": "",
+        "scenario_id": "concept",
+        "engineering_context": {
+          "goal": "conceptual",
+          "network_model": null,
+          "operating_point": null,
+          "limits": null,
+          "contingencies": [],
+          "quantities": [],
+          "origin": "user_input_unverified"
+        }
+      },
+      "answer": {
+        "answer_id": "new-handwritten-fixture",
+        "version": 1,
+        "text": "Under C, the permitted setting is 9 kV.\n\nThe relay has two terminals.",
+        "assumptions": [],
+        "missing_information": []
+      },
+      "units": [
+        {
+          "unit_ref": "U0",
+          "anchor_id": "answer-anchor-073f3a0d054cd81262929b42",
+          "text": "Under C, the permitted setting is 9 kV.",
+          "start_offset": 0,
+          "end_offset": 39,
+          "prior_support": [
+            {
+              "role": "prior_review_selection",
+              "source_range": [
+                0,
+                64
+              ],
+              "source_ref": "S0"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 0,
+              "answer_range": [
+                0,
+                39
+              ],
+              "source_range": [
+                0,
+                64
+              ],
+              "source_ref": "S0"
+            }
+          ]
+        },
+        {
+          "unit_ref": "U1",
+          "anchor_id": "answer-anchor-33ece00816011011bc37c752",
+          "text": "The relay has two terminals.",
+          "start_offset": 41,
+          "end_offset": 69,
+          "prior_support": [
+            {
+              "role": "prior_review_selection",
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 1,
+              "answer_range": [
+                41,
+                69
+              ],
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            }
+          ]
+        }
+      ],
+      "authorizations": [
+        {
+          "authorization_ref": "D0",
+          "real_defect_id": "defect-setting",
+          "unit_ref": "U0",
+          "original_text": "9 kV",
+          "answer_range": [
+            34,
+            38
+          ],
+          "difference": "Source states 3 not9 under C.",
+          "correction_boundary": "Correct setting only; retain relay fact.",
+          "source_spans": [
+            {
+              "source_ref": "S0",
+              "start_offset": 0,
+              "end_offset": 64,
+              "text_sha256": "9c9ddbab31cbec6718aa72146d3eae609d7badc67d0e66067a06c7e576302e4a"
+            }
+          ]
+        }
+      ],
+      "opinions": [
+        {
+          "opinion_ref": "O0",
+          "origin": "source_bound_fact_defect",
+          "real_finding_id": "defect-setting",
+          "authorization_ref": "D0"
+        },
+        {
+          "opinion_ref": "O1",
+          "origin": "domain_opinion",
+          "real_finding_id": "domain-scope",
+          "category": "analysis_scope",
+          "status": "warning",
+          "severity": "low",
+          "reason": "Correct the same overly broad setting assertion.",
+          "missing_prerequisites": [],
+          "source_refs": []
+        }
+      ],
+      "sources": [
+        {
+          "source_ref": "S0",
+          "evidence_id": "limit",
+          "source_id": "synthetic",
+          "source_version": "v1",
+          "locator": "fixture limit",
+          "source_type": "synthetic_fixture",
+          "applicability": [],
+          "text": "Under C, the permitted setting is 3 kV. It does not exceed 5 kV.",
+          "provenance": null
+        },
+        {
+          "source_ref": "S1",
+          "evidence_id": "relay",
+          "source_id": "synthetic-relay",
+          "source_version": "v1",
+          "locator": "fixture relay",
+          "source_type": "synthetic_fixture",
+          "applicability": [],
+          "text": "The relay has two terminals.",
+          "provenance": null
+        }
+      ],
+      "context_id": "revision-context-49ad150ea97cf65af3418305e0660dd4d9d2c544367c99ee3c786b3f3a2801bd"
+    },
+    "proposed_output": {
+      "context_id": "revision-context-49ad150ea97cf65af3418305e0660dd4d9d2c544367c99ee3c786b3f3a2801bd",
+      "edits": [
+        {
+          "unit_ref": "U0",
+          "authorization_refs": [
+            "D0"
+          ],
+          "text": "Under C, the permitted setting is 3 kV.",
+          "support_refs": [
+            "S0"
+          ],
+          "dependencies": []
+        }
+      ],
+      "opinion_actions": [
+        {
+          "opinion_ref": "O0",
+          "action": "modified",
+          "edit_indices": [
+            0
+          ],
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        },
+        {
+          "opinion_ref": "O1",
+          "action": "modified",
+          "edit_indices": [
+            0
+          ],
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        }
+      ]
+    },
+    "program_derived": {
+      "answer": {
+        "answer_id": "new-handwritten-fixture",
+        "version": 2,
+        "text": "Under C, the permitted setting is 3 kV.\n\nThe relay has two terminals.",
+        "assumptions": [],
+        "missing_information": [],
+        "citations": [
+          {
+            "start_offset": 0,
+            "end_offset": 39,
+            "evidence_ids": [
+              "limit"
+            ]
+          },
+          {
+            "start_offset": 41,
+            "end_offset": 69,
+            "evidence_ids": [
+              "relay"
+            ]
+          }
+        ]
+      },
+      "edit_links": [
+        {
+          "edit_index": 0,
+          "target_anchor": "answer-anchor-073f3a0d054cd81262929b42",
+          "authorization_ids": [
+            "defect-setting"
+          ],
+          "same_location": [
+            "defect-setting"
+          ],
+          "other_location": [],
+          "dependencies": [],
+          "support_evidence_ids": [
+            "limit"
+          ]
+        }
+      ],
+      "preservation": [
+        {
+          "anchor_id": "answer-anchor-33ece00816011011bc37c752",
+          "old_start": 41,
+          "new_start": 41,
+          "text_sha256": "72bb9af7fb145d451e256e076d21505b2829a4baca4343db5672858afa529bfc"
+        }
+      ],
+      "finding_actions": [
+        {
+          "finding_id": "defect-setting",
+          "action": "modified",
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        },
+        {
+          "finding_id": "domain-scope",
+          "action": "modified",
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        }
+      ]
+    },
+    "subsequent_checks": [
+      "unchanged Harness/graph re-extraction",
+      "full original literal fact review",
+      "full original domain review",
+      "normal Store readback; IDs and byte preservation do not prove semantics"
+    ]
+  },
+  {
+    "id": "mixed-and-domain",
+    "origin": "HANDWRITTEN SYNTHETIC NEW OBJECT: not cleaned historical output or real delivery",
+    "actual_message_input": {
+      "contract": "local-revision-source-actions-v2",
+      "task": {
+        "task_id": "handwritten",
+        "question": "Explain the given setting and retain the relay fact.",
+        "user_context": "",
+        "scenario_id": "concept",
+        "engineering_context": {
+          "goal": "conceptual",
+          "network_model": null,
+          "operating_point": null,
+          "limits": null,
+          "contingencies": [],
+          "quantities": [],
+          "origin": "user_input_unverified"
+        }
+      },
+      "answer": {
+        "answer_id": "new-handwritten-fixture",
+        "version": 1,
+        "text": "Under C, the permitted setting is 9 kV. The relay has two terminals.\n\nThe relay has two terminals.",
+        "assumptions": [],
+        "missing_information": []
+      },
+      "units": [
+        {
+          "unit_ref": "U0",
+          "anchor_id": "answer-anchor-0514dcb67e7dd27e812e83cd",
+          "text": "Under C, the permitted setting is 9 kV. The relay has two terminals.",
+          "start_offset": 0,
+          "end_offset": 68,
+          "prior_support": [
+            {
+              "role": "prior_review_selection",
+              "source_range": [
+                0,
+                64
+              ],
+              "source_ref": "S0"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 0,
+              "answer_range": [
+                0,
+                68
+              ],
+              "source_range": [
+                0,
+                64
+              ],
+              "source_ref": "S0"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 0,
+              "answer_range": [
+                0,
+                68
+              ],
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            }
+          ]
+        },
+        {
+          "unit_ref": "U1",
+          "anchor_id": "answer-anchor-faee8be31336cdd41c4d14cc",
+          "text": "The relay has two terminals.",
+          "start_offset": 70,
+          "end_offset": 98,
+          "prior_support": [
+            {
+              "role": "prior_review_selection",
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 1,
+              "answer_range": [
+                70,
+                98
+              ],
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            }
+          ]
+        }
+      ],
+      "authorizations": [
+        {
+          "authorization_ref": "D0",
+          "real_defect_id": "defect-setting",
+          "unit_ref": "U0",
+          "original_text": "9 kV",
+          "answer_range": [
+            34,
+            38
+          ],
+          "difference": "Source states 3 not9 under C.",
+          "correction_boundary": "Correct setting only; retain relay fact.",
+          "source_spans": [
+            {
+              "source_ref": "S0",
+              "start_offset": 0,
+              "end_offset": 64,
+              "text_sha256": "9c9ddbab31cbec6718aa72146d3eae609d7badc67d0e66067a06c7e576302e4a"
+            }
+          ]
+        }
+      ],
+      "opinions": [
+        {
+          "opinion_ref": "O0",
+          "origin": "source_bound_fact_defect",
+          "real_finding_id": "defect-setting",
+          "authorization_ref": "D0"
+        },
+        {
+          "opinion_ref": "O1",
+          "origin": "domain_opinion",
+          "real_finding_id": "domain-scope",
+          "category": "analysis_scope",
+          "status": "warning",
+          "severity": "low",
+          "reason": "Correct the same overly broad setting assertion.",
+          "missing_prerequisites": [],
+          "source_refs": []
+        }
+      ],
+      "sources": [
+        {
+          "source_ref": "S0",
+          "evidence_id": "limit",
+          "source_id": "synthetic",
+          "source_version": "v1",
+          "locator": "fixture limit",
+          "source_type": "synthetic_fixture",
+          "applicability": [],
+          "text": "Under C, the permitted setting is 3 kV. It does not exceed 5 kV.",
+          "provenance": null
+        },
+        {
+          "source_ref": "S1",
+          "evidence_id": "relay",
+          "source_id": "synthetic-relay",
+          "source_version": "v1",
+          "locator": "fixture relay",
+          "source_type": "synthetic_fixture",
+          "applicability": [],
+          "text": "The relay has two terminals.",
+          "provenance": null
+        }
+      ],
+      "context_id": "revision-context-692e5079eac7bbcc8197a05cb56a22fe7429bf640ae08a9f9de3489f9aea59f3"
+    },
+    "proposed_output": {
+      "context_id": "revision-context-692e5079eac7bbcc8197a05cb56a22fe7429bf640ae08a9f9de3489f9aea59f3",
+      "edits": [
+        {
+          "unit_ref": "U0",
+          "authorization_refs": [
+            "D0"
+          ],
+          "text": "Under C, the permitted setting is 3 kV. The relay has two terminals.",
+          "support_refs": [
+            "S0",
+            "S1"
+          ],
+          "dependencies": []
+        }
+      ],
+      "opinion_actions": [
+        {
+          "opinion_ref": "O0",
+          "action": "modified",
+          "edit_indices": [
+            0
+          ],
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        },
+        {
+          "opinion_ref": "O1",
+          "action": "modified",
+          "edit_indices": [
+            0
+          ],
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        }
+      ]
+    },
+    "program_derived": {
+      "answer": {
+        "answer_id": "new-handwritten-fixture",
+        "version": 2,
+        "text": "Under C, the permitted setting is 3 kV. The relay has two terminals.\n\nThe relay has two terminals.",
+        "assumptions": [],
+        "missing_information": [],
+        "citations": [
+          {
+            "start_offset": 0,
+            "end_offset": 68,
+            "evidence_ids": [
+              "limit",
+              "relay"
+            ]
+          },
+          {
+            "start_offset": 70,
+            "end_offset": 98,
+            "evidence_ids": [
+              "relay"
+            ]
+          }
+        ]
+      },
+      "edit_links": [
+        {
+          "edit_index": 0,
+          "target_anchor": "answer-anchor-0514dcb67e7dd27e812e83cd",
+          "authorization_ids": [
+            "defect-setting"
+          ],
+          "same_location": [
+            "defect-setting"
+          ],
+          "other_location": [],
+          "dependencies": [],
+          "support_evidence_ids": [
+            "limit",
+            "relay"
+          ]
+        }
+      ],
+      "preservation": [
+        {
+          "anchor_id": "answer-anchor-faee8be31336cdd41c4d14cc",
+          "old_start": 70,
+          "new_start": 70,
+          "text_sha256": "72bb9af7fb145d451e256e076d21505b2829a4baca4343db5672858afa529bfc"
+        }
+      ],
+      "finding_actions": [
+        {
+          "finding_id": "defect-setting",
+          "action": "modified",
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        },
+        {
+          "finding_id": "domain-scope",
+          "action": "modified",
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        }
+      ]
+    },
+    "subsequent_checks": [
+      "unchanged Harness/graph re-extraction",
+      "full original literal fact review",
+      "full original domain review",
+      "normal Store readback; IDs and byte preservation do not prove semantics"
+    ]
+  },
+  {
+    "id": "own-error-and-premise",
+    "origin": "HANDWRITTEN SYNTHETIC NEW OBJECT: not cleaned historical output or real delivery",
+    "actual_message_input": {
+      "contract": "local-revision-source-actions-v2",
+      "task": {
+        "task_id": "handwritten",
+        "question": "Explain the given setting and retain the relay fact.",
+        "user_context": "",
+        "scenario_id": "concept",
+        "engineering_context": {
+          "goal": "conceptual",
+          "network_model": null,
+          "operating_point": null,
+          "limits": null,
+          "contingencies": [],
+          "quantities": [],
+          "origin": "user_input_unverified"
+        }
+      },
+      "answer": {
+        "answer_id": "new-handwritten-fixture",
+        "version": 1,
+        "text": "Under C, the permitted setting is 9 kV. The relay has two terminals.\n\nThe permitted setting exceeds 5 kV.\n\nThe relay has two terminals.",
+        "assumptions": [],
+        "missing_information": []
+      },
+      "units": [
+        {
+          "unit_ref": "U0",
+          "anchor_id": "answer-anchor-12321e7bc188493908117b66",
+          "text": "Under C, the permitted setting is 9 kV. The relay has two terminals.",
+          "start_offset": 0,
+          "end_offset": 68,
+          "prior_support": [
+            {
+              "role": "prior_review_selection",
+              "source_range": [
+                0,
+                64
+              ],
+              "source_ref": "S0"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 0,
+              "answer_range": [
+                0,
+                68
+              ],
+              "source_range": [
+                0,
+                64
+              ],
+              "source_ref": "S0"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 0,
+              "answer_range": [
+                0,
+                68
+              ],
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            }
+          ]
+        },
+        {
+          "unit_ref": "U1",
+          "anchor_id": "answer-anchor-30269a088f03601bb06a4a6a",
+          "text": "The permitted setting exceeds 5 kV.",
+          "start_offset": 70,
+          "end_offset": 105,
+          "prior_support": [
+            {
+              "role": "prior_review_selection",
+              "source_range": [
+                0,
+                64
+              ],
+              "source_ref": "S0"
+            }
+          ]
+        },
+        {
+          "unit_ref": "U2",
+          "anchor_id": "answer-anchor-ca9c75fa23be70a089e08ce2",
+          "text": "The relay has two terminals.",
+          "start_offset": 107,
+          "end_offset": 135,
+          "prior_support": [
+            {
+              "role": "prior_review_selection",
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 1,
+              "answer_range": [
+                107,
+                135
+              ],
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            }
+          ]
+        }
+      ],
+      "authorizations": [
+        {
+          "authorization_ref": "D0",
+          "real_defect_id": "defect-conclusion",
+          "unit_ref": "U1",
+          "original_text": "The permitted setting exceeds 5 kV.",
+          "answer_range": [
+            70,
+            105
+          ],
+          "difference": "Source states it does not exceed5.",
+          "correction_boundary": "Correct conclusion consistently with premise.",
+          "source_spans": [
+            {
+              "source_ref": "S0",
+              "start_offset": 0,
+              "end_offset": 64,
+              "text_sha256": "9c9ddbab31cbec6718aa72146d3eae609d7badc67d0e66067a06c7e576302e4a"
+            }
+          ]
+        },
+        {
+          "authorization_ref": "D1",
+          "real_defect_id": "defect-setting",
+          "unit_ref": "U0",
+          "original_text": "9 kV",
+          "answer_range": [
+            34,
+            38
+          ],
+          "difference": "Source states 3 not9 under C.",
+          "correction_boundary": "Correct setting only; retain relay fact.",
+          "source_spans": [
+            {
+              "source_ref": "S0",
+              "start_offset": 0,
+              "end_offset": 64,
+              "text_sha256": "9c9ddbab31cbec6718aa72146d3eae609d7badc67d0e66067a06c7e576302e4a"
+            }
+          ]
+        }
+      ],
+      "opinions": [
+        {
+          "opinion_ref": "O0",
+          "origin": "source_bound_fact_defect",
+          "real_finding_id": "defect-conclusion",
+          "authorization_ref": "D0"
+        },
+        {
+          "opinion_ref": "O1",
+          "origin": "source_bound_fact_defect",
+          "real_finding_id": "defect-setting",
+          "authorization_ref": "D1"
+        },
+        {
+          "opinion_ref": "O2",
+          "origin": "domain_opinion",
+          "real_finding_id": "domain-scope",
+          "category": "analysis_scope",
+          "status": "warning",
+          "severity": "low",
+          "reason": "Correct the same overly broad setting assertion.",
+          "missing_prerequisites": [],
+          "source_refs": []
+        }
+      ],
+      "sources": [
+        {
+          "source_ref": "S0",
+          "evidence_id": "limit",
+          "source_id": "synthetic",
+          "source_version": "v1",
+          "locator": "fixture limit",
+          "source_type": "synthetic_fixture",
+          "applicability": [],
+          "text": "Under C, the permitted setting is 3 kV. It does not exceed 5 kV.",
+          "provenance": null
+        },
+        {
+          "source_ref": "S1",
+          "evidence_id": "relay",
+          "source_id": "synthetic-relay",
+          "source_version": "v1",
+          "locator": "fixture relay",
+          "source_type": "synthetic_fixture",
+          "applicability": [],
+          "text": "The relay has two terminals.",
+          "provenance": null
+        }
+      ],
+      "context_id": "revision-context-87e4cbac7dd0fe71e2138a22054b9be20270746f9c4cad8ec3971a41353ec6ca"
+    },
+    "proposed_output": {
+      "context_id": "revision-context-87e4cbac7dd0fe71e2138a22054b9be20270746f9c4cad8ec3971a41353ec6ca",
+      "edits": [
+        {
+          "unit_ref": "U0",
+          "authorization_refs": [
+            "D1"
+          ],
+          "text": "Under C, the permitted setting is 3 kV. The relay has two terminals.",
+          "support_refs": [
+            "S0",
+            "S1"
+          ],
+          "dependencies": []
+        },
+        {
+          "unit_ref": "U1",
+          "authorization_refs": [
+            "D0",
+            "D1"
+          ],
+          "text": "The permitted setting does not exceed 5 kV.",
+          "support_refs": [
+            "S0"
+          ],
+          "dependencies": [
+            {
+              "unit_ref": "U0",
+              "reason": "The conclusion depends on the corrected setting in U0 as well as having its own sourced defect."
+            }
+          ]
+        }
+      ],
+      "opinion_actions": [
+        {
+          "opinion_ref": "O0",
+          "action": "modified",
+          "edit_indices": [
+            1
+          ],
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        },
+        {
+          "opinion_ref": "O1",
+          "action": "modified",
+          "edit_indices": [
+            0,
+            1
+          ],
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        },
+        {
+          "opinion_ref": "O2",
+          "action": "modified",
+          "edit_indices": [
+            0
+          ],
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        }
+      ]
+    },
+    "program_derived": {
+      "answer": {
+        "answer_id": "new-handwritten-fixture",
+        "version": 2,
+        "text": "Under C, the permitted setting is 3 kV. The relay has two terminals.\n\nThe permitted setting does not exceed 5 kV.\n\nThe relay has two terminals.",
+        "assumptions": [],
+        "missing_information": [],
+        "citations": [
+          {
+            "start_offset": 0,
+            "end_offset": 68,
+            "evidence_ids": [
+              "limit",
+              "relay"
+            ]
+          },
+          {
+            "start_offset": 70,
+            "end_offset": 113,
+            "evidence_ids": [
+              "limit"
+            ]
+          },
+          {
+            "start_offset": 115,
+            "end_offset": 143,
+            "evidence_ids": [
+              "relay"
+            ]
+          }
+        ]
+      },
+      "edit_links": [
+        {
+          "edit_index": 0,
+          "target_anchor": "answer-anchor-12321e7bc188493908117b66",
+          "authorization_ids": [
+            "defect-setting"
+          ],
+          "same_location": [
+            "defect-setting"
+          ],
+          "other_location": [],
+          "dependencies": [],
+          "support_evidence_ids": [
+            "limit",
+            "relay"
+          ]
+        },
+        {
+          "edit_index": 1,
+          "target_anchor": "answer-anchor-30269a088f03601bb06a4a6a",
+          "authorization_ids": [
+            "defect-conclusion",
+            "defect-setting"
+          ],
+          "same_location": [
+            "defect-conclusion"
+          ],
+          "other_location": [
+            "defect-setting"
+          ],
+          "dependencies": [
+            {
+              "anchor_id": "answer-anchor-12321e7bc188493908117b66",
+              "reason": "The conclusion depends on the corrected setting in U0 as well as having its own sourced defect."
+            }
+          ],
+          "support_evidence_ids": [
+            "limit"
+          ]
+        }
+      ],
+      "preservation": [
+        {
+          "anchor_id": "answer-anchor-ca9c75fa23be70a089e08ce2",
+          "old_start": 107,
+          "new_start": 115,
+          "text_sha256": "72bb9af7fb145d451e256e076d21505b2829a4baca4343db5672858afa529bfc"
+        }
+      ],
+      "finding_actions": [
+        {
+          "finding_id": "defect-conclusion",
+          "action": "modified",
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        },
+        {
+          "finding_id": "defect-setting",
+          "action": "modified",
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        },
+        {
+          "finding_id": "domain-scope",
+          "action": "modified",
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        }
+      ]
+    },
+    "subsequent_checks": [
+      "unchanged Harness/graph re-extraction",
+      "full original literal fact review",
+      "full original domain review",
+      "normal Store readback; IDs and byte preservation do not prove semantics"
+    ]
+  },
+  {
+    "id": "domain-opinion-cannot-authorize",
+    "origin": "HANDWRITTEN SYNTHETIC INVALID COUNTEREXAMPLE",
+    "actual_message_input": {
+      "contract": "local-revision-source-actions-v2",
+      "task": {
+        "task_id": "handwritten",
+        "question": "Explain the given setting and retain the relay fact.",
+        "user_context": "",
+        "scenario_id": "concept",
+        "engineering_context": {
+          "goal": "conceptual",
+          "network_model": null,
+          "operating_point": null,
+          "limits": null,
+          "contingencies": [],
+          "quantities": [],
+          "origin": "user_input_unverified"
+        }
+      },
+      "answer": {
+        "answer_id": "new-handwritten-fixture",
+        "version": 1,
+        "text": "Under C, the permitted setting is 9 kV. The relay has two terminals.\n\nThe relay has two terminals.",
+        "assumptions": [],
+        "missing_information": []
+      },
+      "units": [
+        {
+          "unit_ref": "U0",
+          "anchor_id": "answer-anchor-0514dcb67e7dd27e812e83cd",
+          "text": "Under C, the permitted setting is 9 kV. The relay has two terminals.",
+          "start_offset": 0,
+          "end_offset": 68,
+          "prior_support": [
+            {
+              "role": "prior_review_selection",
+              "source_range": [
+                0,
+                64
+              ],
+              "source_ref": "S0"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 0,
+              "answer_range": [
+                0,
+                68
+              ],
+              "source_range": [
+                0,
+                64
+              ],
+              "source_ref": "S0"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 0,
+              "answer_range": [
+                0,
+                68
+              ],
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            }
+          ]
+        },
+        {
+          "unit_ref": "U1",
+          "anchor_id": "answer-anchor-faee8be31336cdd41c4d14cc",
+          "text": "The relay has two terminals.",
+          "start_offset": 70,
+          "end_offset": 98,
+          "prior_support": [
+            {
+              "role": "prior_review_selection",
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            },
+            {
+              "role": "original_citation_candidate",
+              "citation_index": 1,
+              "answer_range": [
+                70,
+                98
+              ],
+              "source_range": [
+                0,
+                28
+              ],
+              "source_ref": "S1"
+            }
+          ]
+        }
+      ],
+      "authorizations": [
+        {
+          "authorization_ref": "D0",
+          "real_defect_id": "defect-setting",
+          "unit_ref": "U0",
+          "original_text": "9 kV",
+          "answer_range": [
+            34,
+            38
+          ],
+          "difference": "Source states 3 not9 under C.",
+          "correction_boundary": "Correct setting only; retain relay fact.",
+          "source_spans": [
+            {
+              "source_ref": "S0",
+              "start_offset": 0,
+              "end_offset": 64,
+              "text_sha256": "9c9ddbab31cbec6718aa72146d3eae609d7badc67d0e66067a06c7e576302e4a"
+            }
+          ]
+        }
+      ],
+      "opinions": [
+        {
+          "opinion_ref": "O0",
+          "origin": "source_bound_fact_defect",
+          "real_finding_id": "defect-setting",
+          "authorization_ref": "D0"
+        },
+        {
+          "opinion_ref": "O1",
+          "origin": "domain_opinion",
+          "real_finding_id": "domain-scope",
+          "category": "analysis_scope",
+          "status": "warning",
+          "severity": "low",
+          "reason": "Correct the same overly broad setting assertion.",
+          "missing_prerequisites": [],
+          "source_refs": []
+        }
+      ],
+      "sources": [
+        {
+          "source_ref": "S0",
+          "evidence_id": "limit",
+          "source_id": "synthetic",
+          "source_version": "v1",
+          "locator": "fixture limit",
+          "source_type": "synthetic_fixture",
+          "applicability": [],
+          "text": "Under C, the permitted setting is 3 kV. It does not exceed 5 kV.",
+          "provenance": null
+        },
+        {
+          "source_ref": "S1",
+          "evidence_id": "relay",
+          "source_id": "synthetic-relay",
+          "source_version": "v1",
+          "locator": "fixture relay",
+          "source_type": "synthetic_fixture",
+          "applicability": [],
+          "text": "The relay has two terminals.",
+          "provenance": null
+        }
+      ],
+      "context_id": "revision-context-692e5079eac7bbcc8197a05cb56a22fe7429bf640ae08a9f9de3489f9aea59f3"
+    },
+    "proposed_output": {
+      "context_id": "revision-context-692e5079eac7bbcc8197a05cb56a22fe7429bf640ae08a9f9de3489f9aea59f3",
+      "edits": [
+        {
+          "unit_ref": "U0",
+          "authorization_refs": [
+            "O1"
+          ],
+          "text": "Under C, the permitted setting is 3 kV. The relay has two terminals.",
+          "support_refs": [
+            "S0",
+            "S1"
+          ],
+          "dependencies": []
+        }
+      ],
+      "opinion_actions": [
+        {
+          "opinion_ref": "O0",
+          "action": "modified",
+          "edit_indices": [
+            0
+          ],
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        },
+        {
+          "opinion_ref": "O1",
+          "action": "modified",
+          "edit_indices": [
+            0
+          ],
+          "explanation": "Handwritten proposed edit addresses this opinion, not proof of resolution."
+        }
+      ]
+    },
+    "program_derived": {
+      "applied": false,
+      "diagnostic": {
+        "stage": "local-revision-source-actions-v2",
+        "field_path": "$.edits[0].authorization_refs[0]",
+        "constraint": "legal_authorization_ref_required",
+        "id_role": "authorization_ref",
+        "allowed_ids": [
+          "D0"
+        ],
+        "errors": [
+          {
+            "stage": "local-revision-source-actions-v2",
+            "field_path": "$.edits[0].authorization_refs[0]",
+            "constraint": "legal_authorization_ref_required",
+            "id_role": "authorization_ref",
+            "allowed_ids": [
+              "D0"
+            ]
+          },
+          {
+            "stage": "local-revision-source-actions-v2",
+            "field_path": "$.opinion_actions[0].edit_indices",
+            "constraint": "fact_opinion_edit_requires_its_authority"
+          }
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "origin": "Independent read-only AI-assisted source-first review plus primary-agent review; user-supervised development references, not expert gold or an online judge model",
+  "review_order": "Original Evidence and frozen reference/initial text, then final text, then system reasons",
+  "denominator": 4,
+  "legal_application": 4,
+  "target_corrected": 4,
+  "correct_and_required_content_preserved": 4,
+  "full_real_reaudit_and_store_closed": 4,
+  "critical_new_errors_observed": 0,
+  "system_agreement": "All final pass decisions agree with source-first text review within these four fixed source-local tasks; pass is not engineering certification",
+  "cases": [
+    {
+      "case": "A1",
+      "target_corrected": true,
+      "preserved": "MW/Mvar、两种建模位置、双向不应过度/单独依赖限制",
+      "basis": "正文important对应“协调是重要的”；不再写必须履行的强制义务",
+      "new_claim_review": "终稿没有新增整个指南自愿性/法律效力结论；不靠applicability元数据证明技术正文",
+      "critical_new_error": false
+    },
+    {
+      "case": "A2",
+      "target_corrected": true,
+      "preserved": "N-1立即/无操作员干预/紧急热额定值和电压限值/稳态与稳定、确定稳定极限时承受选定N-2、极端扰动和避免崩溃/级联/失稳",
+      "basis": "删除把N-1限定转移给每个选定N-2的错误；该段N-2未附同样条件",
+      "new_claim_review": "“对选定N-2故障仅要求系统能承受，未附加……”在前文“资料又要求”和题目“给定资料”范围内理解为本段陈述，可接受；没有写N-2仅用于稳定或只在稳定极限时考虑",
+      "residual_wording_risk": "“仅”脱离本段资料范围可能被读成全部N-2工程要求的排他结论。未修改真实终稿，明确保留风险；不能推广到其他标准、完整性能要求或具体工程。",
+      "critical_new_error": false
+    },
+    {
+      "case": "A3",
+      "target_corrected": true,
+      "preserved": "自动/实时/连续、电压设定点和下垂两种方式、完整静态资源段落",
+      "basis": "任何电压/不受带宽限制改为指定电压带宽范围内，匹配来源限定",
+      "new_claim_review": "未新增响应时间、厂站保证等主张",
+      "critical_new_error": false
+    },
+    {
+      "case": "A4",
+      "target_corrected": true,
+      "preserved": "短线路、忽略R/B、两端电压/相角差/线路电抗及定性范围",
+      "basis": "相角差影响较小、电压差/阻抗强得多；电压与无功控制紧密耦合，反之亦然",
+      "new_claim_review": "未写互为因果。两个编辑均以各自D授权，dependencies均为空，不能据此宣称真实模型已验证复杂跨单元依赖表达能力。",
+      "critical_new_error": false
+    }
+  ],
+  "limits": "Historical legal first reviews are fixed inputs, not newly proved initial-review accuracy. Four previously seen cases do not estimate general success or natural QA benefit. Old stage1 0/4 and A8/B2/B3 unresolved findings remain unchanged."
+}

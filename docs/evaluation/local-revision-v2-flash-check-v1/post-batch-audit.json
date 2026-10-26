@@ -1,0 +1,220 @@
+{
+  "code_commit": "1a7346c8e6b4d0161286f620c4f5fb09eef825ed",
+  "all_frozen_sources_match": true,
+  "restored_input_hash_matches": true,
+  "references_hash_matches": true,
+  "new_sends": 16,
+  "send_ledger_exclusive_contiguous": true,
+  "unknown_usage": 0,
+  "no_corrections": true,
+  "no_shared_stop": true,
+  "no_unexecuted": true,
+  "no_resume_or_second_batch": true,
+  "production_default_changed": false,
+  "private_database_reopened_readonly_and_closed": true,
+  "last_send_elapsed_seconds": 38.15859209999326,
+  "sum_chain_collection_seconds": 42.535962,
+  "public_source_bodies_absent": true,
+  "cases": [
+    {
+      "case": "A1",
+      "run_id": "8b56ab5dc86e4094bd853374f184124c",
+      "store_result_equals_file": true,
+      "store_historical_origin_equals_archive": true,
+      "review_versions": [
+        1,
+        2
+      ],
+      "new_snapshot_id": "generation-input-23df519faa4498414893ed79c4fac32f7b64a1ba93fb85862cbbf743ad688ede",
+      "historical_snapshot": null,
+      "new_records": 4,
+      "current_reaudit_versions": [
+        2,
+        2,
+        2
+      ],
+      "stages": [
+        {
+          "answer_version": 1,
+          "component": "claim_extraction"
+        },
+        {
+          "answer_version": 1,
+          "component": "evidence_verification"
+        },
+        {
+          "answer_version": 1,
+          "component": "power_domain_review"
+        },
+        {
+          "answer_version": 1,
+          "component": "revision"
+        },
+        {
+          "answer_version": 2,
+          "component": "claim_extraction"
+        },
+        {
+          "answer_version": 2,
+          "component": "evidence_verification"
+        },
+        {
+          "answer_version": 2,
+          "component": "power_domain_review"
+        }
+      ],
+      "final_decision": "pass",
+      "execution_issues": []
+    },
+    {
+      "case": "A2",
+      "run_id": "140d0c38001f456c86ea989f0bcdad2c",
+      "store_result_equals_file": true,
+      "store_historical_origin_equals_archive": true,
+      "review_versions": [
+        1,
+        2
+      ],
+      "new_snapshot_id": "generation-input-379b52034b04341bdc4d2c98717d316ff322b1ddf76accde9eeb30768f06003a",
+      "historical_snapshot": null,
+      "new_records": 4,
+      "current_reaudit_versions": [
+        2,
+        2,
+        2
+      ],
+      "stages": [
+        {
+          "answer_version": 1,
+          "component": "claim_extraction"
+        },
+        {
+          "answer_version": 1,
+          "component": "evidence_verification"
+        },
+        {
+          "answer_version": 1,
+          "component": "power_domain_review"
+        },
+        {
+          "answer_version": 1,
+          "component": "revision"
+        },
+        {
+          "answer_version": 2,
+          "component": "claim_extraction"
+        },
+        {
+          "answer_version": 2,
+          "component": "evidence_verification"
+        },
+        {
+          "answer_version": 2,
+          "component": "power_domain_review"
+        }
+      ],
+      "final_decision": "pass",
+      "execution_issues": []
+    },
+    {
+      "case": "A3",
+      "run_id": "dad9c76fa14741c8bf548f3576803c2d",
+      "store_result_equals_file": true,
+      "store_historical_origin_equals_archive": true,
+      "review_versions": [
+        1,
+        2
+      ],
+      "new_snapshot_id": "generation-input-c28adc4fe58ced96c0476fdfb0ecc5451cd8926175b8cb8b71ff21030f11f524",
+      "historical_snapshot": null,
+      "new_records": 4,
+      "current_reaudit_versions": [
+        2,
+        2,
+        2
+      ],
+      "stages": [
+        {
+          "answer_version": 1,
+          "component": "claim_extraction"
+        },
+        {
+          "answer_version": 1,
+          "component": "evidence_verification"
+        },
+        {
+          "answer_version": 1,
+          "component": "power_domain_review"
+        },
+        {
+          "answer_version": 1,
+          "component": "revision"
+        },
+        {
+          "answer_version": 2,
+          "component": "claim_extraction"
+        },
+        {
+          "answer_version": 2,
+          "component": "evidence_verification"
+        },
+        {
+          "answer_version": 2,
+          "component": "power_domain_review"
+        }
+      ],
+      "final_decision": "pass",
+      "execution_issues": []
+    },
+    {
+      "case": "A4",
+      "run_id": "1421845ce3ed41ba9a0ec31c1705c5c3",
+      "store_result_equals_file": true,
+      "store_historical_origin_equals_archive": true,
+      "review_versions": [
+        1,
+        2
+      ],
+      "new_snapshot_id": "generation-input-2223d874c1f442e3a60bce943c35caa99bff675a9ff3c91478d996bbe09dffb1",
+      "historical_snapshot": null,
+      "new_records": 4,
+      "current_reaudit_versions": [
+        2,
+        2,
+        2
+      ],
+      "stages": [
+        {
+          "answer_version": 1,
+          "component": "claim_extraction"
+        },
+        {
+          "answer_version": 1,
+          "component": "evidence_verification"
+        },
+        {
+          "answer_version": 1,
+          "component": "power_domain_review"
+        },
+        {
+          "answer_version": 1,
+          "component": "revision"
+        },
+        {
+          "answer_version": 2,
+          "component": "claim_extraction"
+        },
+        {
+          "answer_version": 2,
+          "component": "evidence_verification"
+        },
+        {
+          "answer_version": 2,
+          "component": "power_domain_review"
+        }
+      ],
+      "final_decision": "pass",
+      "execution_issues": []
+    }
+  ]
+}

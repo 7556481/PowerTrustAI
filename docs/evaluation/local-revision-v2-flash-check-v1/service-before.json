@@ -1,0 +1,141 @@
+{
+  "database_sha256": "53273988827f38ceecc98e0956eec875ed0c88bcc7c34a4950a4bef805612b3e",
+  "counts": {
+    "runs": 104,
+    "objects": 2999,
+    "events": 2278,
+    "reviews": 8
+  },
+  "listening_8765": 0,
+  "configuration_sha256": {
+    "orchestration.json": "5546973984813b01e08972ad94a37486a1430d508fcab3833f06bd7c2a069c06",
+    "daily-knowledge.json": "f77330bfe08862c89a33e769cff57fb9347b8de41b8f398dae8818519249d03c"
+  },
+  "service_started": false,
+  "history_files": [
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0010.json",
+      "sha256": "47ad9151522ae11d85f066df80323d7769aa03d7f5e5d55a4e3d16165e08b2ab"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0010.json",
+      "sha256": "18f5bfbd456a32b588f0c10ab3250e28a09c558ff1a0b9fd59b4240b088c2db2"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0011.json",
+      "sha256": "ad94f8f14a28c070bfd44ab4aa3a3b71506a1b49629d36f26c64091aa06875c4"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0011.json",
+      "sha256": "07bd18e8771db7516e67fc649ea6ccb51ba98fa92d364115214324b5aa8ca140"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0015.json",
+      "sha256": "6e5c651cdfb2b1728023b2b2bcb181c05cd72233f8f182b2252e492130e5e02a"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0015.json",
+      "sha256": "974d3d70f265ea1b2b31447bb36bff980c8b6d6f94e0ef1c0bd83f86f18fd2df"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0016.json",
+      "sha256": "c8d99b5a072616c767717419f30c982860bb9fd134df9d7f7427f30c2b9efb7c"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0016.json",
+      "sha256": "3aa27e76c16ad7840d44b19983d91086944fd0c8726d0c9d15bd704c5796bad0"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0037.json",
+      "sha256": "661742b2facdfcc41a1aae54ab100e9da01d14e6139fbe3e42bcf6f219aaa482"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0037.json",
+      "sha256": "6f898f723d4868955a3987269bc6e360fefec3c19f4d6ad18c4316b1cc4d165d"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0038.json",
+      "sha256": "a250aeaf42397b382c54a39a57392ab556b42901f0a4ecd1955fa7f68eee9da5"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0038.json",
+      "sha256": "7356294035fdaaa2b06c66759fd2cb30b91cc103f6da1a333d7a32471f143efa"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0042.json",
+      "sha256": "336553df49ff9335fb6c5d0576204cbb3ee8ebc838e727a2952d24d22be4eafb"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0042.json",
+      "sha256": "824456c8b35ce1f39f5f4ace7d602bd2cd26a42587c9e7928658796187de44b1"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/messages/0043.json",
+      "sha256": "9366df7656d58ce12a2281caa801dec3a87827d47e472ec05784b32d9a05a7c8"
+    },
+    {
+      "path": "data/retrieval_local/literal-review-stage1-v1/batch/responses/0043.json",
+      "sha256": "f3cc79a0b0b8547353f5b5f1b8e48ada3058156e470609405681d70501aa3b52"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/artifact-verification.json",
+      "sha256": "6df376cdc08d96d1c482dbb6e027d034617ac9e0f767be7f7a044d8c869fabdc"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/cases.md",
+      "sha256": "c25b75abcbab757197e740ae4ba3c07470a1df2446525f6670d5d87fc063ddc9"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/control-records.json",
+      "sha256": "507421d2be81da5505aef4a2da82d6b6cd7e2ce8e7b7db4ffc6113ca73c58a9b"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/freeze.json",
+      "sha256": "22131c3b877672c4b7a445e89c862f4036d75117492ca2bca53166432c481e72"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/implementation.md",
+      "sha256": "1af55a1b15df41d4a4c8b0960cdac504dddc00d3840b0b1b72084246be61039b"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/learning-verification.json",
+      "sha256": "ba4d446909f2aedcb124c92167a2184815b7ddb108930ecf4ddd34ebfb51b556"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/materials-reference.json",
+      "sha256": "84f96f9040bb9e775c95c68f27b0041b367fc79cf9640da9c2891d1b93393213"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/offline-verification.json",
+      "sha256": "55a8754342d9d17ac433333b7eea391217cafab6e6bf156f6a8c508a618c380f"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/predictions.json",
+      "sha256": "cfd37c8047ee6ca0e81d14a50c92cd493a2a7e7fba3517789a2cfc25ef7edd64"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/report.md",
+      "sha256": "121a80b943622bd0a837f81be8bb0b231a7069f79f8ecff06dc85811e3491fe8"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/results.json",
+      "sha256": "5b3dc391ef6dc1f77bd9d5fa573b530d0db3c9c1537458cf14a3ecdc79589ecd"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/service-after.json",
+      "sha256": "a7aabc5510d353bb51205b6f54d9a347b19be8fbcf96111a7bf90a76e0717eed"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/service-before.json",
+      "sha256": "2192e9892e5bea8072ec02fc7e28b327c29a550adf739d5144e1266a2d18fb6f"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/statistics.json",
+      "sha256": "132a6b0b5223e865b3a214442f4e12a6a7fdb43d6cee280466d4c492d82481d2"
+    },
+    {
+      "path": "docs/evaluation/literal-review-stage1-v1/text-review.json",
+      "sha256": "ff5566096985e7f0005063459ff9d36d6dabaf480c51592780addc404e60c2a5"
+    }
+  ]
+}

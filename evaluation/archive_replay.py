@@ -39,7 +39,21 @@ def restore(value, cls):
     if isinstance(cls, type) and issubclass(cls, Enum):
         return cls(value)
     if is_dataclass(cls):
-        extensions={'ComponentReview':('fidelity_status','core.models','FidelityComponentReview'),'Claim':('assertion_role','core.models','ContextualClaim'),'TypedBasis':('calculation_result_id','core.models','CalculationBasis'),
+        if type(value) is dict and cls.__name__=='RevisionOutput' and value.get('local_protocol')=='local-revision-source-actions-v2':
+            from agents.contracts import ScopedLocalRevisionOutput
+            cls=ScopedLocalRevisionOutput
+        if type(value) is dict and cls.__name__=='EvidenceVerificationOutput' and value.get('literal_protocol')=='literal-review-v1':
+            from agents.contracts import LiteralVerificationOutput
+            cls=LiteralVerificationOutput
+        if type(value) is dict and cls.__name__=='RevisionOutput' and value.get('local_protocol')=='literal-local-revision-v1':
+            from agents.contracts import LocalRevisionOutput
+            cls=LocalRevisionOutput
+        if type(value) is dict and cls.__name__=='AuditReport' and value.get('literal_protocol')=='literal-review-v1':
+            from core.literal_review import LiteralAuditReport
+            cls=LiteralAuditReport
+        extensions={'AuditDecision':('execution_integrity','core.models','ProductDecision'),
+            'PowerDomainReviewOutput':('safety_reviews','agents.contracts','SafetyDomainReviewOutput'),
+            'ComponentReview':('fidelity_status','core.models','FidelityComponentReview'),'Claim':('assertion_role','core.models','ContextualClaim'),'TypedBasis':('calculation_result_id','core.models','CalculationBasis'),
             'EvidenceVerificationInput':('tool_results','agents.contracts','ReliabilityVerificationInput'),
             'EvidenceVerificationOutput':('tool_results','agents.contracts','ReliabilityVerificationOutput'),
             'PowerDomainReviewInput':('tool_results','agents.contracts','ReliabilityDomainInput'),'HarnessResult':('tool_results','harness.contracts','ToolHarnessResult')}

@@ -1,0 +1,643 @@
+{
+  "origin": "Unchanged old refusal replay and raw compatibility, not new model scores",
+  "rows": [
+    {
+      "sequence": 10,
+      "task": {
+        "line": "A",
+        "case": 0,
+        "variant": "literal_v1"
+      },
+      "message_file_sha256": "47ad9151522ae11d85f066df80323d7769aa03d7f5e5d55a4e3d16165e08b2ab",
+      "response_file_sha256": "18f5bfbd456a32b588f0c10ab3250e28a09c558ff1a0b9fd59b4240b088c2db2",
+      "message_identity_matches_public": true,
+      "text_matches_public": true,
+      "old_first_error": {
+        "stage": "literal-review-v1",
+        "field_path": "$",
+        "constraint": "unexpected_fields_not_allowed"
+      },
+      "old_diagnostic": {
+        "independently_observable": [
+          {
+            "path": "$",
+            "constraint": "extra_root_field",
+            "field_name_json": "\"type\""
+          },
+          {
+            "path": "$.replacements[0].finding_ids[1]",
+            "constraint": "opinion_id_is_not_source_authority"
+          }
+        ],
+        "opinion_accounting_complete": true,
+        "unknown_accounting_ids": []
+      },
+      "new_contract": "incompatible_not_a_prediction",
+      "new_contract_errors": [
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "context_id",
+            "edits",
+            "opinion_actions"
+          ],
+          "unknown_field_names": [
+            "\"finding_actions\"",
+            "\"replacements\"",
+            "\"type\""
+          ],
+          "unknown_field_count": 3
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "answer_version_context_mismatch"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "array_required"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "array_required"
+        }
+      ]
+    },
+    {
+      "sequence": 11,
+      "task": {
+        "line": "A",
+        "case": 0,
+        "variant": "literal_v1"
+      },
+      "message_file_sha256": "ad94f8f14a28c070bfd44ab4aa3a3b71506a1b49629d36f26c64091aa06875c4",
+      "response_file_sha256": "07bd18e8771db7516e67fc649ea6ccb51ba98fa92d364115214324b5aa8ca140",
+      "message_identity_matches_public": true,
+      "text_matches_public": true,
+      "old_first_error": {
+        "stage": "literal-review-v1",
+        "field_path": "$",
+        "constraint": "unexpected_fields_not_allowed"
+      },
+      "old_diagnostic": {
+        "independently_observable": [
+          {
+            "path": "$",
+            "constraint": "extra_root_field",
+            "field_name_json": "\"type\""
+          },
+          {
+            "path": "$.replacements[0].finding_ids[1]",
+            "constraint": "opinion_id_is_not_source_authority"
+          }
+        ],
+        "opinion_accounting_complete": true,
+        "unknown_accounting_ids": []
+      },
+      "new_contract": "incompatible_not_a_prediction",
+      "new_contract_errors": [
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "context_id",
+            "edits",
+            "opinion_actions"
+          ],
+          "unknown_field_names": [
+            "\"finding_actions\"",
+            "\"replacements\"",
+            "\"type\""
+          ],
+          "unknown_field_count": 3
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "answer_version_context_mismatch"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "array_required"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "array_required"
+        }
+      ]
+    },
+    {
+      "sequence": 15,
+      "task": {
+        "line": "A",
+        "case": 1,
+        "variant": "literal_v1"
+      },
+      "message_file_sha256": "6e5c651cdfb2b1728023b2b2bcb181c05cd72233f8f182b2252e492130e5e02a",
+      "response_file_sha256": "974d3d70f265ea1b2b31447bb36bff980c8b6d6f94e0ef1c0bd83f86f18fd2df",
+      "message_identity_matches_public": true,
+      "text_matches_public": true,
+      "old_first_error": {
+        "stage": "literal-review-v1",
+        "field_path": "$",
+        "constraint": "unexpected_fields_not_allowed"
+      },
+      "old_diagnostic": {
+        "independently_observable": [
+          {
+            "path": "$",
+            "constraint": "extra_root_field",
+            "field_name_json": "\"type\""
+          },
+          {
+            "path": "$.replacements[0].relation",
+            "constraint": "v1_dependent_with_own_defect"
+          },
+          {
+            "path": "$.replacements[0].finding_ids[1]",
+            "constraint": "opinion_id_is_not_source_authority"
+          }
+        ],
+        "opinion_accounting_complete": true,
+        "unknown_accounting_ids": []
+      },
+      "new_contract": "incompatible_not_a_prediction",
+      "new_contract_errors": [
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "context_id",
+            "edits",
+            "opinion_actions"
+          ],
+          "unknown_field_names": [
+            "\"finding_actions\"",
+            "\"replacements\"",
+            "\"type\""
+          ],
+          "unknown_field_count": 3
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "answer_version_context_mismatch"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "array_required"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "array_required"
+        }
+      ]
+    },
+    {
+      "sequence": 16,
+      "task": {
+        "line": "A",
+        "case": 1,
+        "variant": "literal_v1"
+      },
+      "message_file_sha256": "c8d99b5a072616c767717419f30c982860bb9fd134df9d7f7427f30c2b9efb7c",
+      "response_file_sha256": "3aa27e76c16ad7840d44b19983d91086944fd0c8726d0c9d15bd704c5796bad0",
+      "message_identity_matches_public": true,
+      "text_matches_public": true,
+      "old_first_error": {
+        "stage": "literal-review-v1",
+        "field_path": "$",
+        "constraint": "legal_local_source_ids_required"
+      },
+      "old_diagnostic": {
+        "independently_observable": [
+          {
+            "path": "$.replacements[0].relation",
+            "constraint": "v1_dependent_with_own_defect"
+          },
+          {
+            "path": "$.replacements[0].finding_ids[1]",
+            "constraint": "opinion_id_is_not_source_authority"
+          }
+        ],
+        "opinion_accounting_complete": true,
+        "unknown_accounting_ids": []
+      },
+      "new_contract": "incompatible_not_a_prediction",
+      "new_contract_errors": [
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "context_id",
+            "edits",
+            "opinion_actions"
+          ],
+          "unknown_field_names": [
+            "\"finding_actions\"",
+            "\"replacements\""
+          ],
+          "unknown_field_count": 2
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "answer_version_context_mismatch"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "array_required"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "array_required"
+        }
+      ]
+    },
+    {
+      "sequence": 37,
+      "task": {
+        "line": "A",
+        "case": 2,
+        "variant": "literal_v1"
+      },
+      "message_file_sha256": "661742b2facdfcc41a1aae54ab100e9da01d14e6139fbe3e42bcf6f219aaa482",
+      "response_file_sha256": "6f898f723d4868955a3987269bc6e360fefec3c19f4d6ad18c4316b1cc4d165d",
+      "message_identity_matches_public": true,
+      "text_matches_public": true,
+      "old_first_error": {
+        "stage": "literal-review-v1",
+        "field_path": "$",
+        "constraint": "unexpected_fields_not_allowed"
+      },
+      "old_diagnostic": {
+        "independently_observable": [
+          {
+            "path": "$",
+            "constraint": "extra_root_field",
+            "field_name_json": "\"body\""
+          },
+          {
+            "path": "$.replacements[0].finding_ids[1]",
+            "constraint": "opinion_id_is_not_source_authority"
+          }
+        ],
+        "opinion_accounting_complete": true,
+        "unknown_accounting_ids": []
+      },
+      "new_contract": "incompatible_not_a_prediction",
+      "new_contract_errors": [
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "context_id",
+            "edits",
+            "opinion_actions"
+          ],
+          "unknown_field_names": [
+            "\"body\"",
+            "\"finding_actions\"",
+            "\"replacements\""
+          ],
+          "unknown_field_count": 3
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "answer_version_context_mismatch"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "array_required"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "array_required"
+        }
+      ]
+    },
+    {
+      "sequence": 38,
+      "task": {
+        "line": "A",
+        "case": 2,
+        "variant": "literal_v1"
+      },
+      "message_file_sha256": "a250aeaf42397b382c54a39a57392ab556b42901f0a4ecd1955fa7f68eee9da5",
+      "response_file_sha256": "7356294035fdaaa2b06c66759fd2cb30b91cc103f6da1a333d7a32471f143efa",
+      "message_identity_matches_public": true,
+      "text_matches_public": true,
+      "old_first_error": {
+        "stage": "literal-review-v1",
+        "field_path": "$",
+        "constraint": "legal_local_source_ids_required"
+      },
+      "old_diagnostic": {
+        "independently_observable": [
+          {
+            "path": "$.replacements[0].finding_ids[1]",
+            "constraint": "opinion_id_is_not_source_authority"
+          }
+        ],
+        "opinion_accounting_complete": true,
+        "unknown_accounting_ids": []
+      },
+      "new_contract": "incompatible_not_a_prediction",
+      "new_contract_errors": [
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "context_id",
+            "edits",
+            "opinion_actions"
+          ],
+          "unknown_field_names": [
+            "\"finding_actions\"",
+            "\"replacements\""
+          ],
+          "unknown_field_count": 2
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "answer_version_context_mismatch"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "array_required"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "array_required"
+        }
+      ]
+    },
+    {
+      "sequence": 42,
+      "task": {
+        "line": "A",
+        "case": 3,
+        "variant": "literal_v1"
+      },
+      "message_file_sha256": "336553df49ff9335fb6c5d0576204cbb3ee8ebc838e727a2952d24d22be4eafb",
+      "response_file_sha256": "824456c8b35ce1f39f5f4ace7d602bd2cd26a42587c9e7928658796187de44b1",
+      "message_identity_matches_public": true,
+      "text_matches_public": true,
+      "old_first_error": {
+        "stage": "literal-review-v1",
+        "field_path": "$",
+        "constraint": "unexpected_fields_not_allowed"
+      },
+      "old_diagnostic": {
+        "independently_observable": [
+          {
+            "path": "$",
+            "constraint": "extra_root_field",
+            "field_name_json": "\"type\""
+          },
+          {
+            "path": "$.replacements[1].relation",
+            "constraint": "v1_dependent_with_own_defect"
+          }
+        ],
+        "opinion_accounting_complete": true,
+        "unknown_accounting_ids": []
+      },
+      "new_contract": "incompatible_not_a_prediction",
+      "new_contract_errors": [
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "context_id",
+            "edits",
+            "opinion_actions"
+          ],
+          "unknown_field_names": [
+            "\"finding_actions\"",
+            "\"replacements\"",
+            "\"type\""
+          ],
+          "unknown_field_count": 3
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "answer_version_context_mismatch"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "array_required"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "array_required"
+        }
+      ]
+    },
+    {
+      "sequence": 43,
+      "task": {
+        "line": "A",
+        "case": 3,
+        "variant": "literal_v1"
+      },
+      "message_file_sha256": "9366df7656d58ce12a2281caa801dec3a87827d47e472ec05784b32d9a05a7c8",
+      "response_file_sha256": "f3cc79a0b0b8547353f5b5f1b8e48ada3058156e470609405681d70501aa3b52",
+      "message_identity_matches_public": true,
+      "text_matches_public": true,
+      "old_first_error": {
+        "stage": "literal-review-v1",
+        "field_path": "$",
+        "constraint": "dependent_requires_other_unit"
+      },
+      "old_diagnostic": {
+        "independently_observable": [
+          {
+            "path": "$.replacements[1].relation",
+            "constraint": "v1_dependent_with_own_defect"
+          }
+        ],
+        "opinion_accounting_complete": true,
+        "unknown_accounting_ids": []
+      },
+      "new_contract": "incompatible_not_a_prediction",
+      "new_contract_errors": [
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "required_field_missing"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "context_id",
+            "edits",
+            "opinion_actions"
+          ],
+          "unknown_field_names": [
+            "\"finding_actions\"",
+            "\"replacements\""
+          ],
+          "unknown_field_count": 2
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.context_id",
+          "constraint": "answer_version_context_mismatch"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.edits",
+          "constraint": "array_required"
+        },
+        {
+          "stage": "local-revision-source-actions-v2",
+          "field_path": "$.opinion_actions",
+          "constraint": "array_required"
+        }
+      ]
+    }
+  ]
+}

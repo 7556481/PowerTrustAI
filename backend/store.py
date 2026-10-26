@@ -98,6 +98,8 @@ class RunStore:
                 answer=v['stage_output'];aid=answer['answer_id'];version=answer['answer_version']
                 for f in answer['findings']:
                     self.index(rid,dict(f,answer_id=aid,answer_version=version))
+                for f in answer.get('literal_defects',[]):
+                    self.index(rid,dict(f,answer_id=aid,answer_version=version))
 
     def mark(self,rid,status,*,error_code=None,result=None):
         with self.tx():

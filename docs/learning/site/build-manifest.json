@@ -1,7 +1,7 @@
 {
   "version": {
-    "application_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-    "document_version": "learning-site-v5.2 natural seams and delivery admission,2026-10-25",
+    "application_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
+    "document_version": "learning-site-v5.3 literal original review and failed local revision,2026-10-25",
     "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
     "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
     "daily_schema": 13,
@@ -10,14 +10,14 @@
     "final_delivery_ref": "release-v2-20261009",
     "default_retrieval": "topic_v4_subject_v1",
     "default_review_message_profile": "lossless_v1",
-    "previous_application_commit": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
+    "previous_application_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
     "execution_path_default": "langgraph_v1",
     "optional_development_execution_path": "langgraph_v1",
     "langgraph_version": "1.2.16",
     "production_switch": false,
-    "new_live_model_calls": 28,
-    "validation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-    "offline_unittest_count": 1274,
+    "new_live_model_calls": 131,
+    "validation_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
+    "offline_unittest_count": 1285,
     "live_graph_service_runs": 0,
     "live_planned_service_runs": 0,
     "live_accepted_service_runs": 0,
@@ -176,13 +176,28 @@
       "adoption": "do_not_adopt_no_production_acceptance",
       "report": "docs/evaluation/natural-review-seam-v1/report.md"
     },
-    "default_extraction_message_profile": "production"
+    "default_extraction_message_profile": "production",
+    "literal_review_stage1": {
+      "report": "docs/evaluation/literal-review-stage1-v1/report.md",
+      "logical_slots": 28,
+      "normal_factory_runs": 28,
+      "model": "deepseek-flash",
+      "calls": 131,
+      "candidate_fixed": 0,
+      "error_drafts": 4,
+      "correct_protection": 3,
+      "insufficient_protection": "execution_incomplete",
+      "natural_changed": 0,
+      "adoption": "do_not_adopt_stop_stage1",
+      "billing_amount": null,
+      "browser_acceptance": false
+    }
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 5881,
-      "sha256": "2870c7cc432ee9ef523c49d490f4946bcc7b5c560801c52f67aa5a654c13d578"
+      "characters": 6183,
+      "sha256": "394ec6c5e6e28a03eb3b6c0d62931a83730567a586cc8b5c53c9ea633b7c29d9"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -201,8 +216,8 @@
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 13026,
-      "sha256": "3eadf692644b3e94d8d9145178561cc243075f8297d032e3739074f0fb8df606"
+      "characters": 14944,
+      "sha256": "cb0a325d2f0d3b358a1b864f93a467832784fda988e6e048873b423a15419e3d"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -290,6 +305,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 161702,
+  "markdown_characters": 163922,
   "network_dependencies": false
 }
