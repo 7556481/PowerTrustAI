@@ -1,0 +1,1581 @@
+{
+  "version": "retrieval-evidence-answer-check-v1",
+  "cases": [
+    {
+      "id": "N1",
+      "family": "coordination",
+      "question": "NERC资料如何描述输电运营方TO与配电提供方DP边界负荷的建模，以及建模位置有哪些选择？",
+      "required": [
+        "边界通常用MW和Mvar显式负荷建模",
+        "母线高压侧，或降压变压器及/或等效配电阻抗之后"
+      ],
+      "critical": [
+        "把通常改成全部唯一位置",
+        "漏掉一类建模位置",
+        "MW/Mvar角色错误"
+      ],
+      "faithful_translation_subset": true,
+      "classification": "improved",
+      "variants": {
+        "A": {
+          "run_id": "f7dc7f6eb45b40e8a73e8d26c15ead75",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N1-answer",
+            "version": 1,
+            "text": "所给NERC相关资料只涉及电网运行安全角色与要求（如电力传输运营商等责任实体），未描述TO与DP边界负荷的建模方法，也未列出建模位置选项，因此无法据此回答。",
+            "assumptions": [],
+            "missing_information": [
+              "NERC相应标准或指南中关于TO与DP边界负荷建模的原文条款",
+              "边界负荷可选的建模位置清单"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 78,
+                "evidence_ids": [
+                  "e-6705bed99f9fbd0ed209c71ef7f181c48bfa79947c8ef6b2469ee15628972400",
+                  "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": false,
+          "complete_correct_required_slots": 0,
+          "total_required_slots": 2,
+          "partial_coverage": [
+            "有据二手补充不一概计错；详见评语，未完成的目标槽不等于其全部文字错误"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140",
+              "source_id": "dataset-record-eb646d26de0626d5f5609d11a1adc4ac5b93f5b0838fa0faed1eda141ef0ec03",
+              "source_version": "e15146cdf43916c5833e6ff91c1956ecec6f596717bbf74915e7332662db4662",
+              "locator": "shard=chinese/middle/rank_00415.parquet;row=67967;record=397600026370;chars[2101:3158)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-fc51a20f2069080c9e3c118e6bc9628f4c60bc05fc60423fcbc97e09275a36e6",
+              "source_id": "dataset-record-88a3b4e2204fa5c2677900cad27f6ec3e134a9ce9a15279e6430be8af64b0da5",
+              "source_version": "b223f395d832f28bef7f9774706669a4519b63241ba7a0f373dbb7f4db72582d",
+              "locator": "shard=chinese/middle/rank_00417.parquet;row=314089;record=358800040502;chars[0:1144)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-3f64870195f0d6c7f724259471e7e1ea89bb33195e6291e7dc571de6251fcf33",
+              "source_id": "dataset-record-0e1f87cd860220c223302f8ccb6bd373fa519848be9993daf4d3cade9bd22c67",
+              "source_version": "b6a5a2f9ede2060564ce06f8adfd0dcf21c388e9ad17e6efb04ff34fc6cc3e21",
+              "locator": "shard=chinese/high/rank_00041.parquet;row=4086;record=598600026193;chars[0:1200)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-6705bed99f9fbd0ed209c71ef7f181c48bfa79947c8ef6b2469ee15628972400",
+              "source_id": "dataset-record-eb646d26de0626d5f5609d11a1adc4ac5b93f5b0838fa0faed1eda141ef0ec03",
+              "source_version": "e15146cdf43916c5833e6ff91c1956ecec6f596717bbf74915e7332662db4662",
+              "locator": "shard=chinese/middle/rank_00415.parquet;row=67967;record=397600026370;chars[1039:2101)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-ed5fcdacd1b7e75058dc211bc2aaa034b272576b05d6d283a5eb129b972ecd4a",
+              "source_id": "dataset-record-eb646d26de0626d5f5609d11a1adc4ac5b93f5b0838fa0faed1eda141ef0ec03",
+              "source_version": "e15146cdf43916c5833e6ff91c1956ecec6f596717bbf74915e7332662db4662",
+              "locator": "shard=chinese/middle/rank_00415.parquet;row=67967;record=397600026370;chars[3158:4310)",
+              "source_type": "industry_corpus_unverified"
+            }
+          ],
+          "archived_evidence_sha256": "ab53412f8067a54736f9d5e0f07dbe3fe44a29a150295d88104da197a8ec9aba",
+          "archived_bindings_sha256": "9845febc34f8270b85830eabceca2a592e841520db1eb3babbb9e62044e800af",
+          "archived_retrieval_id": "2188b1c25140409d8cc04644de426fe1",
+          "generation_snapshot_sha256": "d977c74c527249a88500f2ab27192153437edaa6d87ed55839cc44d05f86003c",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 2013
+        },
+        "C": {
+          "run_id": "ab2d55acdd994b4782b0fb4abeaf72a8",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N1-answer",
+            "version": 1,
+            "text": "NERC指南指出，TO与DP在潮流、稳定分析和实时运行中的边界通常用显式负荷（以MW和Mvar表示）定义。建模位置可选：直接放在母线/变电站高压侧，或放在降压变压器之后和/或等效配电阻抗之后。\n\n跨边界建模的负荷功率因数（LPF）会影响BES的电压与无功表现；负荷不应过度依赖BES的无功支撑，BES也不应仅依赖负荷的无功支撑。",
+            "assumptions": [],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 96,
+                "evidence_ids": [
+                  "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247"
+                ]
+              },
+              {
+                "start_offset": 98,
+                "end_offset": 164,
+                "evidence_ids": [
+                  "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": true,
+          "complete_correct_required_slots": 2,
+          "total_required_slots": 2,
+          "partial_coverage": [],
+          "sources": [
+            {
+              "evidence_id": "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-8f93ddb20aa8034c9f46c2083fdeb66975f243b9baf26dd13d022c9cd819f5cf",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=37;page_chars[1193:2392);page_lines[21:34]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-4c63a5ad4f14595d093a062340fc67dac9dfb3b1357757cfe6770ca0cd22d6b9",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=38;page_chars[1230:1503);page_lines[20:23]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-d564149d06848f0961ed41f9ad94d3da66d41be9e3df3db03d1f4dd79b5a43f3",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=36;page_chars[1505:1568);page_lines[23:24]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-4e7bd4d8ea440ffbb05c7db907b3876d7b4266b4bc0cc12dd749c03230c852cb",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=37;page_chars[2392:3587);page_lines[34:47]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-adaaebb34c0755f2b874e9035001871b3d9e479a64e2aabbe9d74d980d316d1a",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=38;page_chars[656:1230);page_lines[13:19]",
+              "source_type": "guideline"
+            }
+          ],
+          "archived_evidence_sha256": "e86a7255cd7acfa57e4d68a23df792627e175f0af2f706ae7542a402b94ae113",
+          "archived_bindings_sha256": "2dbfccc3e466161a27e92d26395958bb8ef7f83b1a63aa97456813bd8612d9b5",
+          "archived_retrieval_id": "f72813472d5e47e49e275886719e07da",
+          "generation_snapshot_sha256": "e5b0946ae77cd2160bb597f4c350ba0ed2a8b0c4c49d7b4303d96c3249dd5a92",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 2410
+        }
+      },
+      "source_first_judgment": "A按自身完整输入合理说明缺TO-DP建模资料；C正确保留通常性、MW/Mvar、两类位置及and/or。相关LPF补充有据。",
+      "C_new_critical_error": null,
+      "answer_coverage_method": "Strict complete-and-correct semantic slots; partial correct content retained separately. Residual omissions alone do not create a new contradictory claim. Source insufficiency judged against each branch actual input."
+    },
+    {
+      "id": "N2",
+      "family": "coordination",
+      "question": "结合NERC资料，说明边界负荷功率因数、双方无功支撑关系与关键负荷水平下的协调如何联系起来。",
+      "required": [
+        "边界LPF影响BES电压和无功表现",
+        "负荷不应过度依赖BES支撑，BES不应仅依赖负荷支撑",
+        "确定峰荷/轻载等关键负荷水平建议LPF时，TO与DP协调重要"
+      ],
+      "critical": [
+        "把重要增强为必须履行的强制义务",
+        "把不应过度依赖写成禁止任何支撑",
+        "混淆正文与元数据法律效力"
+      ],
+      "faithful_translation_subset": true,
+      "classification": "mixed",
+      "variants": {
+        "A": {
+          "run_id": "bf371d371c524ce7813b58294d636171",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N2-answer",
+            "version": 1,
+            "text": "所给NERC资料未涉及边界负荷功率因数、双方无功支撑关系或关键负荷水平下的协调，无法据此建立联系。\n\n资料仅指出可靠性准则要求无功备用电据（含正常及事故情况下为保持电压水平的备用及其装设地点）与控制区内电压控制设备间的协调，这是最低运行要求。",
+            "assumptions": [
+              "问题为概念性解释，未指定具体电网模型或运行点。"
+            ],
+            "missing_information": [
+              "边界负荷功率因数的定义与取值",
+              "双方无功支撑关系的具体机制",
+              "关键负荷水平的界定及其协调规则"
+            ],
+            "citations": [
+              {
+                "start_offset": 51,
+                "end_offset": 121,
+                "evidence_ids": [
+                  "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5",
+                  "e-8f7f9d02b8cfc7aec7c36def5c34fbe644b578d2911f89c0efbe3eba23ce7228"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": false,
+          "complete_correct_required_slots": 0,
+          "total_required_slots": 3,
+          "partial_coverage": [
+            "有据二手补充不一概计错；详见评语，未完成的目标槽不等于其全部文字错误"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5",
+              "source_id": "dataset-record-5bd52bd6ebbc91adc209add1a72fff37a599418aa5759c0df0569a3ab12f929c",
+              "source_version": "7739d519837e485a38c518c42d7cca25cf85db55489259eeae56b74eeff5daa7",
+              "locator": "shard=chinese/high/rank_00041.parquet;row=4195;record=598600033938;chars[0:1200)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-a4725c266cc3e1fa6e60c740e0bc3bb58b3d432f09440aaf490091aa42fef74a",
+              "source_id": "dataset-record-727a59bd4e3d14c8effb23cc666620e6fc9f031e7ec2c0973072db9bbf739e3d",
+              "source_version": "f098f0c742198b42d0135aeea87b5b17ff883b1ad094300cec43067a7b722bc3",
+              "locator": "shard=chinese/high/rank_00038.parquet;row=144142;record=1164700002921;chars[2312:3411)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-ea344ccb8583905dbd57eaf82c84ebfec4096d614d0af55ec65db8d1af2e2152",
+              "source_id": "dataset-record-4ff54fb78f15fb9e3b7c75397073972b69452cd5f058d5518aef807ef3af7e74",
+              "source_version": "a33155566225124dd62df7009bdf87b96fbf5282024abb4c3dfd7f05c4d3dc50",
+              "locator": "shard=chinese/middle/rank_00418.parquet;row=27508;record=602400030103;chars[0:1153)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-8f7f9d02b8cfc7aec7c36def5c34fbe644b578d2911f89c0efbe3eba23ce7228",
+              "source_id": "dataset-record-5bd52bd6ebbc91adc209add1a72fff37a599418aa5759c0df0569a3ab12f929c",
+              "source_version": "7739d519837e485a38c518c42d7cca25cf85db55489259eeae56b74eeff5daa7",
+              "locator": "shard=chinese/high/rank_00041.parquet;row=4195;record=598600033938;chars[1200:1344)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-53edce237d1e2e2e4a31a6e1d5d348f3fabc6734c1fea2edabfbef8d7092b157",
+              "source_id": "dataset-record-727a59bd4e3d14c8effb23cc666620e6fc9f031e7ec2c0973072db9bbf739e3d",
+              "source_version": "f098f0c742198b42d0135aeea87b5b17ff883b1ad094300cec43067a7b722bc3",
+              "locator": "shard=chinese/high/rank_00038.parquet;row=144142;record=1164700002921;chars[1132:2312)",
+              "source_type": "industry_corpus_unverified"
+            }
+          ],
+          "archived_evidence_sha256": "54dfd1e12101dcff1b0c19c71598969478403daafceb7f9cd5d5fd4e1ec82ed0",
+          "archived_bindings_sha256": "6721c8328b20e19a75e85e27fdebd3bc9e9784a56d5830d8520b9a00078c3322",
+          "archived_retrieval_id": "8657506836034cfb99da381b950c98dc",
+          "generation_snapshot_sha256": "9ccc4a6e0f35a76b1172a9c296fc96a15f1d0d7d7cb76783cc1a30ba308c9626",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 2417
+        },
+        "C": {
+          "run_id": "2c237dd641824bd4bccb1817e672073c",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N2-answer",
+            "version": 1,
+            "text": "NERC指南将三者联系在TO与DP的边界协调上：边界负荷功率因数（LPF）影响BES的电压与无功表现，负荷不应过度依赖BES的滞后或超前无功支撑，BES也不应单独依赖负荷提供无功。\n\n因此双方需联合确定临界负荷水平（如峰荷与轻荷）下商定的LPF最小/最大带宽，并明确计入边界两侧的无功补偿与相关故障情景；超出带宽时由DP在其无功计划中纠正。",
+            "assumptions": [
+              "按概念性说明处理，不涉及具体电网参数或运行点。"
+            ],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 90,
+                "evidence_ids": [
+                  "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247"
+                ]
+              },
+              {
+                "start_offset": 92,
+                "end_offset": 170,
+                "evidence_ids": [
+                  "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247",
+                  "e-8f93ddb20aa8034c9f46c2083fdeb66975f243b9baf26dd13d022c9cd819f5cf"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": true,
+          "complete_correct_required_slots": 2,
+          "total_required_slots": 3,
+          "partial_coverage": [
+            "关键负荷协调槽包含峰/轻荷，但要求强度错误，不计完整正确槽"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-8f93ddb20aa8034c9f46c2083fdeb66975f243b9baf26dd13d022c9cd819f5cf",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=37;page_chars[1193:2392);page_lines[21:34]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-7862df55d36f42de2bbe03131b305e3b377b8c66f81240e4c76357d4a1fb14d0",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=43;page_chars[3716:4786);page_lines[43:54]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-d564149d06848f0961ed41f9ad94d3da66d41be9e3df3db03d1f4dd79b5a43f3",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=36;page_chars[1505:1568);page_lines[23:24]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-4e7bd4d8ea440ffbb05c7db907b3876d7b4266b4bc0cc12dd749c03230c852cb",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=37;page_chars[2392:3587);page_lines[34:47]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-8c413ceb0aca1d801eac50b795de5ac1f3a85727d55f99ebf13a4f3984738562",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=43;page_chars[3054:3716);page_lines[36:42]",
+              "source_type": "guideline"
+            }
+          ],
+          "archived_evidence_sha256": "ba12c9e46d6e4fcf6dad1472d8c9b89a760d762ebbf0a3837cebae99ed92ef0d",
+          "archived_bindings_sha256": "1e2886fda0afdce19caf2f0399e6414321e25600a6159b1529b8f234aa362124",
+          "archived_retrieval_id": "8fe91de52b604afcb7d47628b79c4adc",
+          "generation_snapshot_sha256": "21750d0fb47f49c1337721594281c0edef3cfc1280ad4217a9b20c6f7c46c5fb",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 2545
+        }
+      },
+      "source_first_judgment": "A合理缺目标段，保留一般无功备用/协调背景。C补LPF与双方支撑，但把is important / joint studies may be required强化为无条件双方需联合确定，新增关键要求强度错误。",
+      "C_new_critical_error": "要求强度增强",
+      "answer_coverage_method": "Strict complete-and-correct semantic slots; partial correct content retained separately. Residual omissions alone do not create a new contradictory claim. Source insufficiency judged against each branch actual input."
+    },
+    {
+      "id": "N3",
+      "family": "contingencies",
+      "question": "NERC事故分析段落如何描述失去一个元件后的系统表现？请交代适用的分析类型和负荷条件。",
+      "required": [
+        "N-1失去一个元件，立即且无操作员干预，紧急热额定值和电压限值内",
+        "适用稳态和稳定要求",
+        "包括预测最小和最大负荷条件，性能应始终具备"
+      ],
+      "critical": [
+        "把无干预或立即条件漏失/反转",
+        "仅用于稳态或仅用于稳定",
+        "把紧急限值写成正常额定值"
+      ],
+      "faithful_translation_subset": true,
+      "classification": "improved",
+      "variants": {
+        "A": {
+          "run_id": "aee53bafb9d74aeeb7d801097b0915c1",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N3-answer",
+            "version": 1,
+            "text": "资料未给出NERC“事故分析段落”原文，仅有准则要求：应在最严重的单一故障和多重故障下不发生失去稳定、不可控解列或连锁反应导致的大面积停电，其分析属可靠性/安全性准则层面；文中未交代负荷水平与故障后具体系统响应。\n\n相关实证来自华东电网：高峰时段受入7200 MW，任一外区直流故障将引发频率大幅下降，扰动初期（2 min内）恢复依赖一次、二次频率调节和AGC，但这是特定大功率缺失场景，不能直接推为NERC的一般描述。\n\n此外，动态ACE触发可能使部分联络线超稳定极限跳闸，加剧功率缺额并引发连锁跳闸；正常裕度不足是必要前提。",
+            "assumptions": [
+              "“失去一个元件”按NERC准则中的单一故障（N-1）理解。",
+              "所引内容为未核实来源的行业语料，仅作概念性说明。"
+            ],
+            "missing_information": [
+              "NERC事故分析段落原文及其对应的分析类型（如稳定分析）与负荷条件。"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 106,
+                "evidence_ids": [
+                  "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5"
+                ]
+              },
+              {
+                "start_offset": 108,
+                "end_offset": 210,
+                "evidence_ids": [
+                  "e-e4018c1237fb78d5a4761a8e82d2110a0075eca0f0732e29a0368b829e57233d"
+                ]
+              },
+              {
+                "start_offset": 212,
+                "end_offset": 264,
+                "evidence_ids": [
+                  "e-60fcee83c57a87ec177f57d437f0ee6ec72b6d273ac5960ce2a478803558b71e"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": false,
+          "complete_correct_required_slots": 0,
+          "total_required_slots": 3,
+          "partial_coverage": [
+            "有据二手补充不一概计错；详见评语，未完成的目标槽不等于其全部文字错误"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-2fc093bbe0fa5095e0fb2c286cfc66e8d0c6b087fd2a2ddc68bb549fadee18a5",
+              "source_id": "dataset-record-5bd52bd6ebbc91adc209add1a72fff37a599418aa5759c0df0569a3ab12f929c",
+              "source_version": "7739d519837e485a38c518c42d7cca25cf85db55489259eeae56b74eeff5daa7",
+              "locator": "shard=chinese/high/rank_00041.parquet;row=4195;record=598600033938;chars[0:1200)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-e4018c1237fb78d5a4761a8e82d2110a0075eca0f0732e29a0368b829e57233d",
+              "source_id": "dataset-record-00c2de5f3f6d01ee96a5915ef4b2f176a5623c51b1d65787eefe9cd784f99c50",
+              "source_version": "70e4d4886495195db21fab550deafae936431dd6e7eceb46db52ee326cbc0f5e",
+              "locator": "shard=chinese/high/rank_00037.parquet;row=112780;record=418800015203;chars[2187:3243)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140",
+              "source_id": "dataset-record-eb646d26de0626d5f5609d11a1adc4ac5b93f5b0838fa0faed1eda141ef0ec03",
+              "source_version": "e15146cdf43916c5833e6ff91c1956ecec6f596717bbf74915e7332662db4662",
+              "locator": "shard=chinese/middle/rank_00415.parquet;row=67967;record=397600026370;chars[2101:3158)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-8f7f9d02b8cfc7aec7c36def5c34fbe644b578d2911f89c0efbe3eba23ce7228",
+              "source_id": "dataset-record-5bd52bd6ebbc91adc209add1a72fff37a599418aa5759c0df0569a3ab12f929c",
+              "source_version": "7739d519837e485a38c518c42d7cca25cf85db55489259eeae56b74eeff5daa7",
+              "locator": "shard=chinese/high/rank_00041.parquet;row=4195;record=598600033938;chars[1200:1344)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-81eee3d1688bd31d42625ba6ccfd68b5e01ac3cdf8c8b563187739777198ad6b",
+              "source_id": "dataset-record-00c2de5f3f6d01ee96a5915ef4b2f176a5623c51b1d65787eefe9cd784f99c50",
+              "source_version": "70e4d4886495195db21fab550deafae936431dd6e7eceb46db52ee326cbc0f5e",
+              "locator": "shard=chinese/high/rank_00037.parquet;row=112780;record=418800015203;chars[1193:2187)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-60fcee83c57a87ec177f57d437f0ee6ec72b6d273ac5960ce2a478803558b71e",
+              "source_id": "dataset-record-00c2de5f3f6d01ee96a5915ef4b2f176a5623c51b1d65787eefe9cd784f99c50",
+              "source_version": "70e4d4886495195db21fab550deafae936431dd6e7eceb46db52ee326cbc0f5e",
+              "locator": "shard=chinese/high/rank_00037.parquet;row=112780;record=418800015203;chars[3243:4413)",
+              "source_type": "industry_corpus_unverified"
+            }
+          ],
+          "archived_evidence_sha256": "027ad4911039a8e1b92c67b129be71dd169e325f906c9cb963c111604047b33d",
+          "archived_bindings_sha256": "b5ce7bc11be4189cc3b52b6707d107f4cc9268bc4b4f6a207495c3026b770f34",
+          "archived_retrieval_id": "d1e3451dd1fb490495174d8173a5135a",
+          "generation_snapshot_sha256": "3e4bdfa130056aeef3cb10b57146a42929e959a944faec7edbf7b5492fad380b",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 3291
+        },
+        "C": {
+          "run_id": "05a6f4d3c22e4f2f87624ffab1b32310",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N3-answer",
+            "version": 1,
+            "text": "该段落属“Contingency Analysis”（N-1）：在失去一个元件的扰动后、无操作员干预情况下，系统应保持在紧急热额定值和电压限值内，兼具稳态与稳定要求。\n\n系统应在最小和最大预测负荷条件下均具备这一表现；电压准则同时检查电压跌落与扰动后绝对电压限值。",
+            "assumptions": [
+              "所给资料为该NERC导则的抽取段落，具体区域限值取值由区域/公用事业确定。"
+            ],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 83,
+                "evidence_ids": [
+                  "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8"
+                ]
+              },
+              {
+                "start_offset": 85,
+                "end_offset": 132,
+                "evidence_ids": [
+                  "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+                  "e-1b1648a67248a5546f64d0369709ff02d899bc3e9e6fbe737b6199de86746151"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": true,
+          "complete_correct_required_slots": 1,
+          "total_required_slots": 3,
+          "partial_coverage": [
+            "N-1立即性表达不充分；保持含义可容许计第二槽，保守未计",
+            "预测最小/最大负荷明确，但始终性未清楚表达"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-06d59feb89717a0854b29185b1ac0fae960e7b6640023adbc28ce880aed9b54e",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=42;page_chars[1192:2391);page_lines[37:51]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-71a37cdd77f5ef49a00d426471b870b4227c95dce4ddb78756e234277ea61764",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=49;page_chars[2136:3326);page_lines[29:41]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-5455726c3e51b79d90acb008ad54a3e3935ee88ba1c9cf5480fe8c9c11ef39fe",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=21;page_chars[43:292);page_lines[4:7]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-1b1648a67248a5546f64d0369709ff02d899bc3e9e6fbe737b6199de86746151",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=21;page_chars[1326:1907);page_lines[20:26]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-f74c616b8bc6b728ee96305c10527f6f13987570fa4f5a99734e317e1922aac0",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=42;page_chars[0:1192);page_lines[1:37]",
+              "source_type": "guideline"
+            }
+          ],
+          "archived_evidence_sha256": "a09dc26255a618901044b0389e9f71a50292f5bc39c1efe01225a6348e25753a",
+          "archived_bindings_sha256": "83475bd9d17a42a3ebb10d073352243a723f45bc3c6261a8694041771dd9236c",
+          "archived_retrieval_id": "a4090a975a394467bc461cb32c32f4ad",
+          "generation_snapshot_sha256": "338a0adbc7b11e824b9d84d42faf224b8a348748367643db2759c6383e943be6",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 2296
+        }
+      },
+      "source_first_judgment": "A无原NERC段，其不足成立；二手华东运行例不可全算错，但正常裕度不足是必要前提超出情景来源。C补N-1主体/双分析/负荷端点，扰动后保持没有明确反转立即性，但立即/始终表达不充分；属残余遗漏，净改善未完整答对。",
+      "C_new_critical_error": null,
+      "answer_coverage_method": "Strict complete-and-correct semantic slots; partial correct content retained separately. Residual omissions alone do not create a new contradictory claim. Source insufficiency judged against each branch actual input."
+    },
+    {
+      "id": "N4",
+      "family": "contingencies",
+      "question": "按NERC资料比较正常运行、单一故障、选定N-2及极端扰动的描述，说明它们在热额定值、电压限值与稳定性讨论中分别处于什么位置。",
+      "required": [
+        "全部计划元件在役时正常热额定值/电压限值",
+        "N-1立即无干预的紧急热额定值/电压限值及稳态稳定要求",
+        "确定稳定极限时承受选定N-2",
+        "极端扰动较严重较不可能，避免电压崩溃/级联/失稳"
+      ],
+      "critical": [
+        "将N-1限定无据转移全部N-2",
+        "when变成only：N-2仅用于稳定/仅在稳定极限考虑",
+        "本段未规定变成工程上不存在其他要求"
+      ],
+      "faithful_translation_subset": true,
+      "classification": "mixed",
+      "variants": {
+        "A": {
+          "run_id": "926c225e27c34297b2e4ae6d96f4634b",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N4-answer",
+            "version": 1,
+            "text": "所给资料只完整覆盖两类运行方式：无故障正常方式下，设备功率与电压须在额定范围内，对应热约束与电压约束；单一设备（线路、变压器或发电机）停运的N-1条件下，系统须能吸收动态功率振荡以维持稳定，且振荡平息、调度调整前设备功率与电压须在紧急额定范围内。\n\n资料未给出选定N-2与极端扰动在热额定值、电压限值和稳定性讨论中的具体定位（如是否属规划或运行标准），无法补足。",
+            "assumptions": [
+              "问题中的“选定N-2”与“极端扰动”指NERC相关分类标准，但所给资料未直接述及。"
+            ],
+            "missing_information": [
+              "NERC对选定N-2事件与极端扰动的定义、所属类别及其与热额定值、电压限值和稳定性判据的对应关系。"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 123,
+                "evidence_ids": [
+                  "e-8aa4c5f69a47eb6bcf773d9a8eef47895cd8a37bb851bf295c793cdc2a0852b6"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": false,
+          "complete_correct_required_slots": 1,
+          "total_required_slots": 4,
+          "partial_coverage": [
+            "有据二手补充不一概计错；详见评语，未完成的目标槽不等于其全部文字错误"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-fe9192679fca525348736c2728a0a3b598567c487dc27ec4afaf9bfaedddd10d",
+              "source_id": "dataset-record-d4b189885b19b3643aac90cf7a42e008b0f91f857b048a767eaceb0e9e4712e1",
+              "source_version": "36bbe4a715bd594789bbc56efa773541ecdcb815eb561557371c32630cbbbb1e",
+              "locator": "shard=chinese/middle/rank_00411.parquet;row=94416;record=400500011218;chars[0:463)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-8aa4c5f69a47eb6bcf773d9a8eef47895cd8a37bb851bf295c793cdc2a0852b6",
+              "source_id": "dataset-record-832e15ad194077de2b57f901a56f345281c37bc34688426f204c51200d14b7d8",
+              "source_version": "a7ea0807c62840a00d4079bbf6edf0a26f4e53a07c79e5f2120c6a9a3ac1924c",
+              "locator": "shard=chinese/high/rank_00041.parquet;row=48296;record=91100000152;chars[1200:2225)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-d55b52eee0a0096e658171c84e18deb036d3f8059159b6a02a0028f1565afaa8",
+              "source_id": "dataset-record-ae0d379bb13aa5b498b787fe3ea2a4c92d4844f84fc1ee4723f409d8a4394226",
+              "source_version": "458cdbf566f0046aab0c21c557d2aea92c3ea8a9645befe4d878050a9e381707",
+              "locator": "shard=chinese/high/rank_00040.parquet;row=77784;record=546800029753;chars[0:1116)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-c20c2e0505408ecc50a799bb9316bd3f3ffa271fdd07e8cdfea273f7c419c0be",
+              "source_id": "dataset-record-832e15ad194077de2b57f901a56f345281c37bc34688426f204c51200d14b7d8",
+              "source_version": "a7ea0807c62840a00d4079bbf6edf0a26f4e53a07c79e5f2120c6a9a3ac1924c",
+              "locator": "shard=chinese/high/rank_00041.parquet;row=48296;record=91100000152;chars[0:1200)",
+              "source_type": "industry_corpus_unverified"
+            }
+          ],
+          "archived_evidence_sha256": "89bd2c07459095777204dd5134bb7fcb8f27f7f3841da31f5fbe40efb9cd927f",
+          "archived_bindings_sha256": "6214ac7bf0298ed9a69007b1aa6d1427324efe93f4cdf7fa7929cf0186c90601",
+          "archived_retrieval_id": "893dd9e766ab4171b27ea039eec14f46",
+          "generation_snapshot_sha256": "2451c1933c8b3d3d835466581cc06f99dd2147834bd82ebe9689b07c1d4e9e13",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 3034
+        },
+        "C": {
+          "run_id": "6b731e4dcfc143a69db1da85e0d1fa32",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N4-answer",
+            "version": 1,
+            "text": "NERC指南将四种情形分层：正常运行须使全部计划元件在役时满足设备正常热额定值与系统电压限值；单一故障（N-1）须在无人工干预下立即满足应急热额定值与电压限值，且同时适用于稳态与稳定性要求。\n\n部分选定N-2并非用于热额定值考核，而是用于确定稳定性限制；更严重但概率更低的极端扰动则要求不出现电压崩溃、级联或失稳。\n\n电压准则检验通常同时考核电压跌落准则与故障后绝对电压上下限，后者示例为0.95 pu与1.05 pu；正常与应急电压限值示例见分时段限值表。\n\n资料未给出各情形下具体的热额定值数值，也未说明N-2热额定值考核要求。",
+            "assumptions": [
+              "按NERC 2016无功规划指南的概念框架作一般性比较，不涉及具体电网或运行点。"
+            ],
+            "missing_information": [
+              "各情形的具体热额定值数值及N-2热额定值考核要求未在资料中给出。"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 95,
+                "evidence_ids": [
+                  "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8"
+                ]
+              },
+              {
+                "start_offset": 97,
+                "end_offset": 157,
+                "evidence_ids": [
+                  "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8"
+                ]
+              },
+              {
+                "start_offset": 159,
+                "end_offset": 229,
+                "evidence_ids": [
+                  "e-1b1648a67248a5546f64d0369709ff02d899bc3e9e6fbe737b6199de86746151",
+                  "e-c45c179851bd4c0b4776b3fa3425b495da99e97e9c9ec82388e852c66a3ffd8f"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": true,
+          "complete_correct_required_slots": 3,
+          "total_required_slots": 4,
+          "partial_coverage": [
+            "稳定极限时选定N-2被排他性断言污染"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-c45c179851bd4c0b4776b3fa3425b495da99e97e9c9ec82388e852c66a3ffd8f",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=34;page_chars[0:1198);page_lines[1:73]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-fd35dc27e32af1269dbb3dc600b2a3d8ea7e8ee56bb9b5d873cf32b29a92ef31",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=28;page_chars[945:1440);page_lines[14:19]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-cd8fb77e6d726d5d7079c93ca409d9c0893e9bcc3a3da6b3fc34907589fe8d12",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=33;page_chars[1193:1256);page_lines[19:20]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-b9abb1bba57e720c8239079fa1b4998f3de4d7f1a3370918b1dfcff3488107f4",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=34;page_chars[1198:2397);page_lines[73:87]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-5455726c3e51b79d90acb008ad54a3e3935ee88ba1c9cf5480fe8c9c11ef39fe",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=21;page_chars[43:292);page_lines[4:7]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-1b1648a67248a5546f64d0369709ff02d899bc3e9e6fbe737b6199de86746151",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=21;page_chars[1326:1907);page_lines[20:26]",
+              "source_type": "guideline"
+            }
+          ],
+          "archived_evidence_sha256": "29165ff18d0e1ed8a47b7c83814a075820e2669b0613cd05c60209fa81173fd6",
+          "archived_bindings_sha256": "1368cdb843120c82d1996a2658499f3f7f96c257542ef2e8afb81b4c94cf478e",
+          "archived_retrieval_id": "248abe41b5cd4d43a78bb0c1b4889891",
+          "generation_snapshot_sha256": "72e5af79774621b251fd8c7b7c2fba8eaa5dc3cb74c393d570ef42e2bd6d24a9",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 3512
+        }
+      },
+      "source_first_judgment": "A二手正常/N-1概述有据，缺N-2/极端扰动合理。C补3完整槽，却将when确定稳定极限改为并非用于热额定值考核而是稳定限制；末尾未说明热考核不撤回前述排他断言，新增关键范围错误。",
+      "C_new_critical_error": "N-2热考核排他断言",
+      "answer_coverage_method": "Strict complete-and-correct semantic slots; partial correct content retained separately. Residual omissions alone do not create a new contradictory claim. Source insufficiency judged against each branch actual input."
+    },
+    {
+      "id": "N5",
+      "family": "resources",
+      "question": "NERC资料中的动态无功资源怎样随电网电压变化调整输出？这种资源的电压控制运行方式有哪些？",
+      "required": [
+        "指定电压带宽内响应电网电压变化",
+        "自动、实时、连续范围调节无功输出",
+        "维持电压设定点或电压下垂模式"
+      ],
+      "critical": [
+        "任何电压无限带宽",
+        "漏带宽或自动实时连续关键限定",
+        "遗漏一种运行方式",
+        "把部分设备周波级响应泛化全部设备"
+      ],
+      "faithful_translation_subset": true,
+      "classification": "improved",
+      "variants": {
+        "A": {
+          "run_id": "8a2dbfb5d28840a08b78be3954b1e24a",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N5-answer",
+            "version": 1,
+            "text": "所给资料未标注来自NERC，且无NERC关于动态无功资源的原文，以下仅为概念性解释。\n\n资料以同步调相机为例：过励磁运行时向系统供给感性无功、提高系统电压；欠励磁运行时从系统吸收感性无功、降低系统电压。\n\n静止无功补偿器输出随系统特定控制参数变化，可按系统无功需求或电压变化自动跟踪补偿；统一潮流控制器可连续改变输出电压幅值和相位并控制线路无功、有功潮流。\n\n具体控制律、电压设定点及死区、增益等运行参数资料未给出。",
+            "assumptions": [
+              "将“动态无功资源”按资料中的同步调相机、静止无功补偿器和统一潮流控制器作概念性理解。"
+            ],
+            "missing_information": [
+              "所给资料无NERC文件原文，未给出具体控制律、电压设定点、死区与增益等运行参数。"
+            ],
+            "citations": [
+              {
+                "start_offset": 44,
+                "end_offset": 101,
+                "evidence_ids": [
+                  "e-98dd197d1fd7207beaaa67ecdd0463a673accb799d3d09646e128b3e9da68b6a"
+                ]
+              },
+              {
+                "start_offset": 103,
+                "end_offset": 178,
+                "evidence_ids": [
+                  "e-98dd197d1fd7207beaaa67ecdd0463a673accb799d3d09646e128b3e9da68b6a"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": true,
+          "complete_correct_required_slots": 0,
+          "total_required_slots": 3,
+          "partial_coverage": [
+            "有据二手补充不一概计错；详见评语，未完成的目标槽不等于其全部文字错误"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-bc283ec7620d3227be7e2d6abe45047e14235f7cfb898563eae12e384c5ab96f",
+              "source_id": "dataset-record-246b586bce2567d228a5d25d4b391573fc54196d95f61c26afbe09f9c82492c2",
+              "source_version": "c8eb1548a93204dce77a7b3659f5bae6516e62590ef77c523f9d76a245700a57",
+              "locator": "shard=chinese/high/rank_00041.parquet;row=51732;record=866800041405;chars[0:1134)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-98dd197d1fd7207beaaa67ecdd0463a673accb799d3d09646e128b3e9da68b6a",
+              "source_id": "dataset-record-5d0c8313e4c8a02dea5cc15cb43000e9b8bf73de24f65b35baaa9d49da16777b",
+              "source_version": "0eee612dbac8b848d540fe6abe3e2b7a943ca2ef276e876072385282c8f95202",
+              "locator": "shard=chinese/high/rank_00037.parquet;row=126360;record=1796300014052;chars[1139:2268)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-fb0a2a003ad9f83872457bf91eafada1d6c9ad332c149564daa6155ca34726c2",
+              "source_id": "dataset-record-f28d1c18c9a4a5643012bee632ab3eb56f77441827a9e3de606b36d11c73b9aa",
+              "source_version": "e04875698ceb4d749a7fec6c9bed491295119326cba905fea4ed885f8c200a3e",
+              "locator": "shard=chinese/middle/rank_00420.parquet;row=64097;record=247600027071;chars[2400:3527)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-38e4edc0c3c6952cf866a409bd6fbc9d47dfe80dde023ce9cc44f7fc71144288",
+              "source_id": "dataset-record-246b586bce2567d228a5d25d4b391573fc54196d95f61c26afbe09f9c82492c2",
+              "source_version": "c8eb1548a93204dce77a7b3659f5bae6516e62590ef77c523f9d76a245700a57",
+              "locator": "shard=chinese/high/rank_00041.parquet;row=51732;record=866800041405;chars[1134:1327)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-9c38d820b56032c54a811f0ae8a383cb0ed9a26766bee4858a9eb1dfc9288cd3",
+              "source_id": "dataset-record-5d0c8313e4c8a02dea5cc15cb43000e9b8bf73de24f65b35baaa9d49da16777b",
+              "source_version": "0eee612dbac8b848d540fe6abe3e2b7a943ca2ef276e876072385282c8f95202",
+              "locator": "shard=chinese/high/rank_00037.parquet;row=126360;record=1796300014052;chars[0:1139)",
+              "source_type": "industry_corpus_unverified"
+            }
+          ],
+          "archived_evidence_sha256": "e4675dc32ff0a7d34f31fca0ad5059848dbadc7952b85e04cca709679c3eefd4",
+          "archived_bindings_sha256": "535e038332b8612235cce91d53b4b3f040acf8af87fa263b29b3f18ff32942e9",
+          "archived_retrieval_id": "c4fb0cec7cc94f08b2f099d326acc1ae",
+          "generation_snapshot_sha256": "935221486a2e107850d740486aa04a67cdfd2888ad6eb2e484d6c31a9a2a8328",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 2771
+        },
+        "C": {
+          "run_id": "0da8f9e5d9ca4ba5891728a2851a10e9",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N5-answer",
+            "version": 1,
+            "text": "按NERC指南，动态无功资源在规定的电压区间内随电网电压变化，于连续范围内实时自动调节无功输出；运行方式为维持设定点电压，或运行于电压下垂模式。\n\n具体要求哪种资源类型（如STATCOM）在给定电网条件下的调节特性，需补充装置模型与运行点。",
+            "assumptions": [],
+            "missing_information": [
+              "具体装置类型及其控制参数（电压区间、整定值、下垂系数）在资料片段中未给出。"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 72,
+                "evidence_ids": [
+                  "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": true,
+          "complete_correct_required_slots": 3,
+          "total_required_slots": 3,
+          "partial_coverage": [],
+          "sources": [
+            {
+              "evidence_id": "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-4f3f571368b67c7b835d150e1aaac57f79f3bba60d1ceeec1d026bc07d42a65f",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=18;page_chars[1457:1542);page_lines[19:20]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-fae09448eb835734a19e98037d051a60e2be0a4ad86ce3ea758015ec8ba6858a",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=7;page_chars[2398:3166);page_lines[38:48]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-c3a0161dbab3e154204c7596e3e7447ae2a326c10e199ca30f4cf55cf1a63b10",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=8;page_chars[1200:2381);page_lines[16:29]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-68ff56adb73b9b9ac1c9088dc075061f5d5ce61eb679a24845cc25fdf6822ae9",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=18;page_chars[263:1457);page_lines[7:19]",
+              "source_type": "guideline"
+            }
+          ],
+          "archived_evidence_sha256": "583223868c8556a5ac9f0a44182e2dd747eedad816414fd8b1e5aefb2f0a47ec",
+          "archived_bindings_sha256": "76bc5a4e2e5c9c046c4e3dd241f7b33d216bb912f74a49b39625ec6966108a4b",
+          "archived_retrieval_id": "fde292e8cd8e4a3b8317d40b299dd64d",
+          "generation_snapshot_sha256": "4a46ea8e3d2500aecf0a238126c841277522ca09ed16b79dc48462144677875f",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 2062
+        }
+      },
+      "source_first_judgment": "A设备例子在自身资料有据，自动跟踪为部分信息，缺NERC带宽/完整自动实时连续及两模式。C完整3槽，附加具体设备参数缺口提示略泛但非关键错误。",
+      "C_new_critical_error": null,
+      "answer_coverage_method": "Strict complete-and-correct semantic slots; partial correct content retained separately. Residual omissions alone do not create a new contradictory claim. Source insufficiency judged against each branch actual input."
+    },
+    {
+      "id": "N6",
+      "family": "resources",
+      "question": "按NERC资料，从接入后的输出特性与投入退出操作看，动态和静态无功资源有什么不同？额定电压在这种比较中有什么意义？",
+      "required": [
+        "动态在指定带宽内自动实时连续调节以响应电网电压",
+        "静态额定电压下固定额定输出，能力随电压平方变化",
+        "静态按系统条件手动或自动投切，接入后固定额定贡献"
+      ],
+      "critical": [
+        "静态任意电压实际输出恒定",
+        "静态连续调节与动态投切混淆",
+        "漏平方依赖或手动自动投切",
+        "额定贡献变成固定实际出力"
+      ],
+      "faithful_translation_subset": false,
+      "classification": "mixed",
+      "variants": {
+        "A": {
+          "run_id": "de31a89c78ce4adb890ee5ad367a1562",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N6-answer",
+            "version": 1,
+            "text": "所给资料均非NERC文献，无法按NERC资料作比较。\n\n资料仅提到：静止补偿器可按母线电压高低自动控制可调电抗器吸收的感性无功，从而稳定电压。\n\n投切式低压电容器组随用电设备同时投入、停运而退出；高压电容器组按无功潮流变化操作。\n\n未给出动态与静态资源的输出特性对比，也未说明额定电压的作用。",
+            "assumptions": [],
+            "missing_information": [
+              "NERC关于动态与静态无功资源输出特性及投入退出操作的原文，以及额定电压在该比较中的说明。"
+            ],
+            "citations": [
+              {
+                "start_offset": 28,
+                "end_offset": 71,
+                "evidence_ids": [
+                  "e-07d0511aaac573120a78042c708075ecc08a627fa590e60ba83dee0028eca8d2"
+                ]
+              },
+              {
+                "start_offset": 73,
+                "end_offset": 114,
+                "evidence_ids": [
+                  "e-07d0511aaac573120a78042c708075ecc08a627fa590e60ba83dee0028eca8d2",
+                  "e-42efdc87f5a5605c6e86a036d808264efd68f8428745412b0454ad14d86d0908"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": false,
+          "complete_correct_required_slots": 0,
+          "total_required_slots": 3,
+          "partial_coverage": [
+            "有据二手补充不一概计错；详见评语，未完成的目标槽不等于其全部文字错误"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-07d0511aaac573120a78042c708075ecc08a627fa590e60ba83dee0028eca8d2",
+              "source_id": "dataset-record-1e494242600f338c5b169159139f5458455dfc3f2e80d5fd960b105b059753d0",
+              "source_version": "fe9b69df5c813126a660df40fea347e5585a3db3fc175008299d43a3e093d1db",
+              "locator": "shard=chinese/high/rank_00038.parquet;row=80333;record=1557800010583;chars[1032:2158)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-314497ea9c2dd436abb493b9db51335bb5f41781f53fdae73573775b5d1bbc19",
+              "source_id": "dataset-record-f306a7e415cee65e74fb2dc4cad24af4d8e2ebd8f863e8a6620e24b8e7791c49",
+              "source_version": "30b342f2af8ae60dfa167f77ec66bb4d546e421346a984e8f659ad0b95cd9d8a",
+              "locator": "shard=chinese/middle/rank_00411.parquet;row=25277;record=1248700011977;chars[0:641)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-42efdc87f5a5605c6e86a036d808264efd68f8428745412b0454ad14d86d0908",
+              "source_id": "dataset-record-f66886d92d290663acbe3632ddec86539fdef0ca06b0bc7e37d30cbd8b060c80",
+              "source_version": "0efcb5585e3e2248c1f62ced3ce3f9cee37baa97a3f05fc067f1879a4308b7a7",
+              "locator": "shard=chinese/middle/rank_00418.parquet;row=427909;record=204600023930;chars[3377:4564)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-1560492c461158b1db4b3174e5282bdf05e31d5ddf9629a089258c4ba3d6e847",
+              "source_id": "dataset-record-1e494242600f338c5b169159139f5458455dfc3f2e80d5fd960b105b059753d0",
+              "source_version": "fe9b69df5c813126a660df40fea347e5585a3db3fc175008299d43a3e093d1db",
+              "locator": "shard=chinese/high/rank_00038.parquet;row=80333;record=1557800010583;chars[0:1032)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-7c3dcf062c7a87f39121d8b8f67926c3eb324e4f2bdfc3dfbc20e77aeb8e7278",
+              "source_id": "dataset-record-f66886d92d290663acbe3632ddec86539fdef0ca06b0bc7e37d30cbd8b060c80",
+              "source_version": "0efcb5585e3e2248c1f62ced3ce3f9cee37baa97a3f05fc067f1879a4308b7a7",
+              "locator": "shard=chinese/middle/rank_00418.parquet;row=427909;record=204600023930;chars[2346:3377)",
+              "source_type": "industry_corpus_unverified"
+            }
+          ],
+          "archived_evidence_sha256": "6ad50d3d99ae09fd3619365ff9e182aca2e147279cd717a0d356af0fbb6a5aed",
+          "archived_bindings_sha256": "744b63b2ddaa057ef6526ffd31f569161ea58d2d31c0f447df26721c3fffcdd3",
+          "archived_retrieval_id": "885f27cf398146cfb9b261c4b0e666c6",
+          "generation_snapshot_sha256": "3e469b892fc874a9459b1731cdff1748a307ff5956588a2517eff203791aa93f",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 2636
+        },
+        "C": {
+          "run_id": "3bbbba935d2a451192d4a40d2cea607c",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N6-answer",
+            "version": 1,
+            "text": "NERC按并网后无功输出的可控性区分动静资源：动态资源在指定电压带宽内实时连续调节无功以维持电压或功率设定值（或电压下垂模式），部分电力电子型可在数个周波内响应；静态资源并网后提供固定额定贡献，其能力随电压平方变化，靠投切（手动或自动）改变。因此静态资源在预想事故前投入，过度依赖可能造成事故后电压不可接受。\n\n额定电压的意义在于：静态资源标称无功对应其额定电压，而实际输出随电压平方变化，故不能把铭牌值当作任意电压下的输出；动态资源则在此带宽内连续调节。具体数值依设备型号与运行条件而异。",
+            "assumptions": [
+              "比较限于所给NERC 2016年《Reactive Power Planning》指南中的概念性定义，未涉及具体电厂参数。"
+            ],
+            "missing_information": [
+              "所给资料未给出各类资源的具体响应时间、电压带宽、投切阈值等数值，也未说明额定电压“平方律”条件之外的适用范围。",
+              "所给文本为PDF抽取，公式与表格结构未解释，若需定量关系需核对原文。"
+            ],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 154,
+                "evidence_ids": [
+                  "e-70339b3b564d657e6b64e1d7f21aa3988a19ccbb85e0717e525b8f6c8fff9164",
+                  "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859",
+                  "e-8e45875687fcc78d4e2a188d55b17efc6877cac29d44fc034e476c33fd7bef95"
+                ]
+              },
+              {
+                "start_offset": 156,
+                "end_offset": 245,
+                "evidence_ids": [
+                  "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": true,
+          "complete_correct_required_slots": 1,
+          "total_required_slots": 3,
+          "partial_coverage": [
+            "动态指定带宽/实时连续/控制目标明确，但正文未明示自动",
+            "手动/自动投切和额定贡献明确，日常按系统条件与规划范围未区分"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-fae09448eb835734a19e98037d051a60e2be0a4ad86ce3ea758015ec8ba6858a",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=7;page_chars[2398:3166);page_lines[38:48]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-70339b3b564d657e6b64e1d7f21aa3988a19ccbb85e0717e525b8f6c8fff9164",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=31;page_chars[2524:3574);page_lines[33:44]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-8e45875687fcc78d4e2a188d55b17efc6877cac29d44fc034e476c33fd7bef95",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=32;page_chars[209:1404);page_lines[6:16]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+              "source_type": "guideline"
+            }
+          ],
+          "archived_evidence_sha256": "ddeb69f8b70be5ca5407383b076a972ca257b97cb3c6b0ac212f0e77a9e138f7",
+          "archived_bindings_sha256": "3445f0483c391903a4a1267f7532deec2022af69ea6c8d892f568b4fb880f906",
+          "archived_retrieval_id": "ce506bc560c24f1c90638b21493428f2",
+          "generation_snapshot_sha256": "f36327fb74a336eafb031770e9b31b1a99a3b060d162962443e5e2e238a638ca",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 3497
+        }
+      },
+      "source_first_judgment": "A投切/控制说明有二手来源、缺目标比较合理。C正确额定电压与平方依赖、手动自动投切，没有引入调试/退役；但未明确动态自动和按日常系统条件投切，并把规划研究事故前投入安排以因此接到一般日常定义后，保守记新增关键范围泛化。",
+      "C_new_critical_error": "规划研究条件丢失并泛化日常投入",
+      "answer_coverage_method": "Strict complete-and-correct semantic slots; partial correct content retained separately. Residual omissions alone do not create a new contradictory claim. Source insufficiency judged against each branch actual input."
+    },
+    {
+      "id": "N7",
+      "family": "line_model",
+      "question": "请用文字解释NERC资料所列短输电线路无功传输式的模型假设与各符号含义，不作数值计算。",
+      "required": [
+        "短线路、忽略线路R和B",
+        "Vs/Vr为送端/受端电压幅值，X为线路电抗",
+        "δ为两端相角差，式子描述无功传输"
+      ],
+      "critical": [
+        "保留R/B或适用任意长线",
+        "Vs/Vr或X/δ含义颠倒",
+        "凭空数值或工程保证"
+      ],
+      "faithful_translation_subset": true,
+      "classification": "improved",
+      "variants": {
+        "A": {
+          "run_id": "43b00fbeecac4472b3fdcc8329ab7646",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N7-answer",
+            "version": 1,
+            "text": "所给资料均为电工图形与文字符号说明，未包含NERC短输电线路无功传输式，因此无法解释其模型假设与各符号含义。",
+            "assumptions": [],
+            "missing_information": [
+              "NERC资料中短输电线路无功传输公式的原文及其模型假设、符号定义。"
+            ],
+            "citations": []
+          },
+          "evidence_sufficient": false,
+          "complete_correct_required_slots": 0,
+          "total_required_slots": 3,
+          "partial_coverage": [
+            "有据二手补充不一概计错；详见评语，未完成的目标槽不等于其全部文字错误"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-1a073bf8dd409457072642924a9bf7d9f85ad994c7fa08040f419fffe0380b37",
+              "source_id": "dataset-record-3f319bb1673e6992db5948d9b4f434fb519dddba80d90a1416e6a177f8520b36",
+              "source_version": "a5c75b6fe523627b3ee066632363947314cc4aab61ab534664d40c2f3b582f9c",
+              "locator": "shard=chinese/middle/rank_00414.parquet;row=16158;record=777300016324;chars[2010:2946)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-80b5acc2d796e562989c49166516df2b245e756b4fd510e78553b48dc2fbaf08",
+              "source_id": "dataset-record-7953534c4f46eb58ca9eea52cfd48e89c6ef525138094eabb03aacc341fccb54",
+              "source_version": "da6b01849a716b6aa47a9d9ce99a3ac998f1bc35de46757002878e1e5dd0c896",
+              "locator": "shard=chinese/high/rank_00037.parquet;row=190752;record=1664600017518;chars[0:1156)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-1310104e897d929f23c9ca5712a9e1877725f2ec7020ad784c56173099b4aa9b",
+              "source_id": "dataset-record-3f319bb1673e6992db5948d9b4f434fb519dddba80d90a1416e6a177f8520b36",
+              "source_version": "a5c75b6fe523627b3ee066632363947314cc4aab61ab534664d40c2f3b582f9c",
+              "locator": "shard=chinese/middle/rank_00414.parquet;row=16158;record=777300016324;chars[0:990)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-d5c302d1098472c7860172d7872af7f1336ee84b70c58a7d8c00599b7ae58495",
+              "source_id": "dataset-record-3f319bb1673e6992db5948d9b4f434fb519dddba80d90a1416e6a177f8520b36",
+              "source_version": "a5c75b6fe523627b3ee066632363947314cc4aab61ab534664d40c2f3b582f9c",
+              "locator": "shard=chinese/middle/rank_00414.parquet;row=16158;record=777300016324;chars[990:2010)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-b24dc9cc08022e7c546d2969215c21158d4c252854d5eccfad8ad23a7c5087f4",
+              "source_id": "dataset-record-7953534c4f46eb58ca9eea52cfd48e89c6ef525138094eabb03aacc341fccb54",
+              "source_version": "da6b01849a716b6aa47a9d9ce99a3ac998f1bc35de46757002878e1e5dd0c896",
+              "locator": "shard=chinese/high/rank_00037.parquet;row=190752;record=1664600017518;chars[1156:2219)",
+              "source_type": "industry_corpus_unverified"
+            }
+          ],
+          "archived_evidence_sha256": "205958fcdb4e2514a8ee47a4ea44e32284f7f4bc3825c9d642c352bba87c36ea",
+          "archived_bindings_sha256": "20ba415f0fb0cdbc21dbc13ecff7f32dc0848ff447d41832b60d62ccbc9601c0",
+          "archived_retrieval_id": "ca7a7581262e40be9d286d11bfcba0ba",
+          "generation_snapshot_sha256": "0f566191ce07875e2c2f834be0eb0a0254a56af2a96ddd1e45f26ccac3a13e64",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 1913
+        },
+        "C": {
+          "run_id": "49e05da2137244c2ba3aa09fbed706e1",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N7-answer",
+            "version": 1,
+            "text": "NERC资料给出的短输电线路无功传输式为 Qr = (Vr/X)(Vs·cosδ − Vr)。其假设是忽略线路电阻R和电容B，故仅以线路电抗X建模。\n\n符号含义：Vs、Vr分别为送端与受端电压幅值；X为线路电抗；δ为两端相角差（即“功角”，图中记作φ1−φ2）；Qr为受端无功功率。\n\n原文据此指出无功取决于电压差、角差与阻抗，其中角差影响相对较小，电压差与阻抗是更强的因素。该式属理想化近似模型，不等同于实际设备。",
+            "assumptions": [
+              "按NERC 2016年《Reactive Power Planning》指南中的概念性说明解释，不作数值计算。"
+            ],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 74,
+                "evidence_ids": [
+                  "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251"
+                ]
+              },
+              {
+                "start_offset": 76,
+                "end_offset": 141,
+                "evidence_ids": [
+                  "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251"
+                ]
+              },
+              {
+                "start_offset": 143,
+                "end_offset": 208,
+                "evidence_ids": [
+                  "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": true,
+          "complete_correct_required_slots": 3,
+          "total_required_slots": 3,
+          "partial_coverage": [],
+          "sources": [
+            {
+              "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-523eb120b89196b47fb823f21e8cb5d965798a80d0a55e831480dc9b67c99613",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=14;page_chars[2449:3649);page_lines[34:47]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-82b0c55739662fea1ff60cea2f53439529b4c5f801c7b549fac2f064f32c6246",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=15;page_chars[2633:3736);page_lines[39:52]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-e22a3e32bd770326e2210b8da2fe236a2ba3a2f638543e81d0ece27dd665691b",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=7;page_chars[0:1199);page_lines[1:19]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-fae09448eb835734a19e98037d051a60e2be0a4ad86ce3ea758015ec8ba6858a",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=7;page_chars[2398:3166);page_lines[38:48]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-58d68171c185864237dddd9b4647b17c62c07fb453f1956ab18905c9a12e29a7",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=14;page_chars[3649:3681);page_lines[47:48]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-219dba0cc9382f667b574f67c45c76ad69c2a6869f9a792889c93e243d0b3a43",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=15;page_chars[2330:2633);page_lines[34:38]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-f5c9bee0b8c9ee6ab91434b4a6c1a2cd6a561ea82f58d892820ec73c8d736a46",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=16;page_chars[0:60);page_lines[1:4]",
+              "source_type": "guideline"
+            }
+          ],
+          "archived_evidence_sha256": "58c1f9a55646893545a8928c49ac3b19806b62df5d844dfecb82377fc778d2d3",
+          "archived_bindings_sha256": "ddb9fca6fbe0df39148ef1ddbd3418aa047eb0b8a762a40d37f5b108570396d6",
+          "archived_retrieval_id": "f7fbbd24680340ac84d3e9002b98a091",
+          "generation_snapshot_sha256": "2f21fc9e694dbad36045a021f242602c94668ca938114763d6953a14ce7eb147",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 4138
+        }
+      },
+      "source_first_judgment": "A确无公式，合理不足；C完整短线忽略R/B、Vs/Vr/X/δ及无功传输，未做数值计算。Qr受端意义为符号合理推释，非新增保证。",
+      "C_new_critical_error": null,
+      "answer_coverage_method": "Strict complete-and-correct semantic slots; partial correct content retained separately. Residual omissions alone do not create a new contradictory claim. Source insufficiency judged against each branch actual input."
+    },
+    {
+      "id": "N8",
+      "family": "line_model",
+      "question": "为什么NERC资料在讨论无功传输时把电压控制与无功控制联系起来？请结合短线路模型中各驱动量的相对作用解释，并交代模型适用条件。",
+      "required": [
+        "短线路且忽略R/B",
+        "无功受电压差、相角差、电气阻抗影响",
+        "相角差影响相对小，电压差/阻抗强得多",
+        "电压与无功控制紧密耦合，反之亦然"
+      ],
+      "critical": [
+        "强弱方向颠倒",
+        "紧密耦合强化为互为因果或单一控制量",
+        "漏模型边界或推至任意线路"
+      ],
+      "faithful_translation_subset": true,
+      "classification": "improved",
+      "variants": {
+        "A": {
+          "run_id": "7228b858cd21454bb837138d592dbaa4",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N8-answer",
+            "version": 1,
+            "text": "所给资料未出现NERC资料，也未给出短线路模型各驱动量的公式或相对作用，因此无法基于这些证据解释NERC为何把电压控制与无功控制联系起来，也无法按要求结合短线路模型。\n\n只能确认一般性联系：线路和变压器电抗需要无功，感性负荷吸收无功、电容器发出无功；提高功率因数可减少线路上传输的无功Q，在R、X、I为定值时，Q越小电压损失越小，从而改善电压质量。\n\n该解释属于源文未核验的通用说明，其条件为定值R、X、I并保持有功不变；不适用于替代NERC原文结论或短线路模型的具体分析。",
+            "assumptions": [
+              "问题所问的NERC资料应指北美电力可靠性公司（NERC）的相关文件。",
+              "短线路模型应指以串联阻抗为主的简化交流线路模型。"
+            ],
+            "missing_information": [
+              "NERC讨论无功传输与电压控制的原文章节或段落。",
+              "短线路模型的具体表达式及各驱动量的相对作用说明。"
+            ],
+            "citations": [
+              {
+                "start_offset": 85,
+                "end_offset": 174,
+                "evidence_ids": [
+                  "e-3237a7c740a66fa463625c18fd1f945c237c0d92e0ee39b3644d64e042f71056",
+                  "e-0e0b3331b567c48eee1c7e0c5c0a311c87f5cff074802bf4a4cedcccd4f0bcf9",
+                  "e-72c720aec69303c762844a07bd1c17902743d9d989e72f65aae588081ca9cdeb"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": false,
+          "complete_correct_required_slots": 0,
+          "total_required_slots": 4,
+          "partial_coverage": [
+            "有据二手补充不一概计错；详见评语，未完成的目标槽不等于其全部文字错误"
+          ],
+          "sources": [
+            {
+              "evidence_id": "e-2ab041fe786cff2f65347291ebe3748432e35c199b57bba1a50889a233445138",
+              "source_id": "dataset-record-741f3cf5bd55e8339ef7a6a1bed5982e3c6e7ba1f8cac8d7b983cb67ca0af0ef",
+              "source_version": "f2827bb9bf5b61f916d23a4d2d685496c63217b229449dc1e2570ad7bb2b3d21",
+              "locator": "shard=chinese/high/rank_00038.parquet;row=116438;record=1816800003164;chars[0:1120)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-8d5b8252ef462e38e8996b7d1acf0d0ab5d67ef121f73b2925874a4579c502d7",
+              "source_id": "dataset-record-08e977c4ab4be6c59d7f869a8f761285681433151dec35a3b6bf2bf3360ee494",
+              "source_version": "ae138146151bebb699d6e6b2bad3d2b59cd8a0bc2bc786882f3deede8b57afca",
+              "locator": "shard=chinese/high/rank_00037.parquet;row=200076;record=1531200006747;chars[0:1145)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-3237a7c740a66fa463625c18fd1f945c237c0d92e0ee39b3644d64e042f71056",
+              "source_id": "dataset-record-adbfc50bdd65b7db079a030d121ff38286274cf02a48344279cb78fb16e60a14",
+              "source_version": "5529b96f9f55926aa26716918c1c1d177340d39d9430e2dd692dc5a86c4e0860",
+              "locator": "shard=chinese/high/rank_00038.parquet;row=80344;record=1557800010596;chars[0:1190)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-72c720aec69303c762844a07bd1c17902743d9d989e72f65aae588081ca9cdeb",
+              "source_id": "dataset-record-741f3cf5bd55e8339ef7a6a1bed5982e3c6e7ba1f8cac8d7b983cb67ca0af0ef",
+              "source_version": "f2827bb9bf5b61f916d23a4d2d685496c63217b229449dc1e2570ad7bb2b3d21",
+              "locator": "shard=chinese/high/rank_00038.parquet;row=116438;record=1816800003164;chars[1120:1816)",
+              "source_type": "industry_corpus_unverified"
+            },
+            {
+              "evidence_id": "e-0e0b3331b567c48eee1c7e0c5c0a311c87f5cff074802bf4a4cedcccd4f0bcf9",
+              "source_id": "dataset-record-08e977c4ab4be6c59d7f869a8f761285681433151dec35a3b6bf2bf3360ee494",
+              "source_version": "ae138146151bebb699d6e6b2bad3d2b59cd8a0bc2bc786882f3deede8b57afca",
+              "locator": "shard=chinese/high/rank_00037.parquet;row=200076;record=1531200006747;chars[1145:1879)",
+              "source_type": "industry_corpus_unverified"
+            }
+          ],
+          "archived_evidence_sha256": "725bb29c6977afd6e503d5f94536cc17a8b7de5a0121a6b67e0c48992b9a4eff",
+          "archived_bindings_sha256": "b3b58309dcd8cec813da9d93b96cb91ac19b0f00f60244d4cb5076c3fbe3db76",
+          "archived_retrieval_id": "fb23e4d7a64a4e3b91defeefdb82f9a5",
+          "generation_snapshot_sha256": "8ffd677abd7191407aa07d0e8929d99abda8ca6357eeeec9b034140ee5054ba9",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 3316
+        },
+        "C": {
+          "run_id": "ff83abdbd59c4fa2a7b7ec4e2cf09802",
+          "state": "generated",
+          "execution_issues": [],
+          "answer": {
+            "answer_id": "retrieval-evidence-answer-check-v1-N8-answer",
+            "version": 1,
+            "text": "在忽略线路电阻R和电容B的短线路模型中，Qr=(Vr/X)(Vs·cosδ−Vr)。因此无功传输受电压差、功角差和阻抗影响，但NERC指出功角差影响相对小，电压差与阻抗是强得多的驱动量，所以电压控制与无功控制紧密耦合。\n\n该式基于正弦稳态短线路近似（R、B可忽略），且为概念性关系，不适用于长线路或需计电阻、对地电容的场合。",
+            "assumptions": [
+              "按所给资料作概念性解释，不针对具体电网或运行点。"
+            ],
+            "missing_information": [],
+            "citations": [
+              {
+                "start_offset": 0,
+                "end_offset": 109,
+                "evidence_ids": [
+                  "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251"
+                ]
+              },
+              {
+                "start_offset": 111,
+                "end_offset": 162,
+                "evidence_ids": [
+                  "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251"
+                ]
+              }
+            ]
+          },
+          "evidence_sufficient": true,
+          "complete_correct_required_slots": 4,
+          "total_required_slots": 4,
+          "partial_coverage": [],
+          "sources": [
+            {
+              "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-c3a0161dbab3e154204c7596e3e7447ae2a326c10e199ca30f4cf55cf1a63b10",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=8;page_chars[1200:2381);page_lines[16:29]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-637e69d22ab2ee5217717f4fda6c9c57852298177b4e8a897e15ba4803994b7d",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=50;page_chars[2084:2681);page_lines[30:37]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-e22a3e32bd770326e2210b8da2fe236a2ba3a2f638543e81d0ece27dd665691b",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=7;page_chars[0:1199);page_lines[1:19]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-fae09448eb835734a19e98037d051a60e2be0a4ad86ce3ea758015ec8ba6858a",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=7;page_chars[2398:3166);page_lines[38:48]",
+              "source_type": "guideline"
+            },
+            {
+              "evidence_id": "e-029f668089ff5a20a98bbc7ce4ff8e783c2253448ccd5345cb7c716ca885cc04",
+              "source_id": "nerc-reactive-planning-2016",
+              "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+              "locator": "pdf_extracted_text:file_page=51;page_chars[0:63);page_lines[1:3]",
+              "source_type": "guideline"
+            }
+          ],
+          "archived_evidence_sha256": "8e205d0e70b92ef375b2e89231603ae78b7d3fb9b385784bdc4e1553f9bfa99c",
+          "archived_bindings_sha256": "aab8cbbed0c3cc26da7b75050426f75d37d7d7e2f97303ef06cd47d162edd246",
+          "archived_retrieval_id": "8df5dcab46e74f72b462147435113c23",
+          "generation_snapshot_sha256": "da6340c86e2651b714c8c107b9ef18f80c274ddea9086f7ab41dcaccc2d5acfc",
+          "generation_prompt": "evidence-bound-generation-v3-answer-units-product-v1-question-language-v11-length-planning",
+          "model_calls": 1,
+          "duration_ms": 2339
+        }
+      },
+      "source_first_judgment": "A一般Q-V联系有二手出处，不把其R/X/I文字歧义判确定错误；C完整边界/驱动/强弱/耦合4槽，没有互为因果强化。正弦稳态/对地电容为模型解释补充，未由片段逐字说明，保留界限。",
+      "C_new_critical_error": null,
+      "answer_coverage_method": "Strict complete-and-correct semantic slots; partial correct content retained separately. Residual omissions alone do not create a new contradictory claim. Source insufficiency judged against each branch actual input."
+    }
+  ],
+  "strata": {
+    "all_8": {
+      "n": 8,
+      "counts": {
+        "improved": 5,
+        "equivalent": 0,
+        "worse": 0,
+        "mixed": 3,
+        "unevaluable": 0
+      },
+      "A_correct_slots": 1,
+      "C_correct_slots": 19,
+      "required_slots": 25
+    },
+    "faithful_7": {
+      "n": 7,
+      "counts": {
+        "improved": 5,
+        "equivalent": 0,
+        "worse": 0,
+        "mixed": 2,
+        "unevaluable": 0
+      },
+      "A_correct_slots": 1,
+      "C_correct_slots": 18,
+      "required_slots": 22,
+      "selection": "Already-known faithful subset; seen/post hoc stratification, not independent holdout"
+    },
+    "N6": {
+      "n": 1,
+      "counts": {
+        "improved": 0,
+        "equivalent": 0,
+        "worse": 0,
+        "mixed": 1,
+        "unevaluable": 0
+      },
+      "A_correct_slots": 0,
+      "C_correct_slots": 1,
+      "required_slots": 3,
+      "original_question_preserved": true,
+      "bad_retrieval_query_in_generation_messages": false,
+      "lifecycle_commissioning_or_retirement_content_in_answer": false,
+      "daily_switching_manual_automatic_present": true,
+      "rated_voltage_and_square_dependence_correct": true,
+      "old_translation_status": "failed, unchanged",
+      "new_range_problem": "Planning-study pre-contingency commitment presented as general daily-operation implication",
+      "qualification": "If read as an unmarked planning supplement, this can be scope ambiguity rather than a universal rule; conservative main score remains mixed under daily-operation question."
+    }
+  },
+  "full_required_coverage_C": [
+    "N1",
+    "N5",
+    "N7",
+    "N8"
+  ],
+  "pure_improvement_families": 4,
+  "adoption_criterion_met": false,
+  "decision": "Five observed question-level text improvements coexist with three new critical errors; the no-new-critical-error group criterion fails in both all8 and faithful7. No production adoption or conversion reliability claim.",
+  "judgment_origin": "Main source-first assessment plus two independent X/Y readers; AI-assisted/user-supervised, not expert gold. Main executor not blind; branch/status/reasons hidden from independent readers until final judgments. Initial union-only scope packet supplemented with per-answer complete input IDs before final judgment and unblinding."
+}

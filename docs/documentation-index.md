@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-26 固定证据回答诊断封存（已执行）
+
+[报告](evaluation/retrieval-evidence-answer-check-v1/report.md) · [16完整正文](evaluation/retrieval-evidence-answer-check-v1/cases.md) / [三分层结果与完整对象](evaluation/retrieval-evidence-answer-check-v1/cases.json) · [输入恢复](evaluation/retrieval-evidence-answer-check-v1/input-recovery.json) · [独立文本复核](evaluation/retrieval-evidence-answer-check-v1/text-review.md) · [16预测](evaluation/retrieval-evidence-answer-check-v1/predictions.json) · [统计](evaluation/retrieval-evidence-answer-check-v1/statistics.json) · [验证](evaluation/retrieval-evidence-answer-check-v1/verification.json)。全部8题5改善/3混合，忠实7题5改善/2混合，N6混合且未出现调试退役；旧转换失败不回写。16Flash/147049token、金额未知，0新检索/转换/审核/Revision，旧8转换不重计。N2模态/N4排他/N6规划范围新错使整组门槛未达，不采用。10专项及复用旧1324全套、Store/消息/快照核查齐全，下方“尚未执行”保留任务编写时状态，以本封存为准。
+
 ## 2026-10-26 中文主线跨语言检索封存（已执行）
 
 [报告](evaluation/chinese-first-cross-language-retrieval-v1/report.md) · [三路36槽](evaluation/chinese-first-cross-language-retrieval-v1/retrieval-results.json) · [语言依据](evaluation/chinese-first-cross-language-retrieval-v1/language-audit.json) · [8条转换原预测](evaluation/chinese-first-cross-language-retrieval-v1/predictions.json) · [门槛](evaluation/chinese-first-cross-language-retrieval-v1/evidence-gate.json) · [独立源/翻译复核](evaluation/chinese-first-cross-language-retrieval-v1/independent-source-review.md) · [成本延迟](evaluation/chinese-first-cross-language-retrieval-v1/statistics.json) · [验证](evaluation/chinese-first-cross-language-retrieval-v1/verification.json)。A/B/C所问原文槽实际覆盖0/6/25（总25），C的N6转换实质换义失败单列；有效C>A7/8、C>B5/8，门槛未全满足，回答阶段未启动。8Flash/1359token、金额未知；每触发题+1请求、C-B均值+1.748秒。1324最终离线通过，默认关闭、无生产切换/第二批。下方“尚未执行”保留任务编写时状态，以本封存记录为准。
