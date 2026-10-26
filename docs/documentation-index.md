@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-26 自然答案改善v3结果
+
+[完整报告与全部初末全文](evaluation/natural-answer-benefit-v3/report.md) · [遮蔽复核及双轴判断](evaluation/natural-answer-benefit-v3/text-review.md) · [49次实际预测](evaluation/natural-answer-benefit-v3/predictions.json) · [用量分账](evaluation/natural-answer-benefit-v3/statistics.json)。N0改善/0恶化/8相当，8题目标源未交付；N4有据可修的“大”限定漏检。H0改善/3相当/1执行不可评价，H3 when→only误认仍在。49新Flash、579,406token、实际金额未知，12链无Revision触发；不达门槛、不生产采用，不改旧0/4与固定初审4/4。26专项及复用1305全套、Store/冻结/328历史文件和生产保留证据齐全，停止交设计审阅。
+
 ## 2026-10-26 修订v2四例真实验证结果
 
 [完整报告及四例初末全文](evaluation/local-revision-v2-flash-check-v1/report.md)：合法应用/目标改对/正确内容保留/真实重审Store闭合均4/4；固定历史首轮免费回放，16次新Flash、82,465token，金额未知。附冻结、全部实际预测、逐请求费用状态、独立文本复核、9专项/1305全套及生产/历史保留证据。A2排他误读风险和未验证复杂依赖保持；不推自然收益、不改旧0/4、不生产采用，停止交设计审阅。

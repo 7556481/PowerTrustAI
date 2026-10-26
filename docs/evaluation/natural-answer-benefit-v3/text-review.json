@@ -1,0 +1,371 @@
+{
+  "origin": "Two independent read-only AI-assisted source-first reviewers, user-supervised development reference, not expert gold or paid online judge",
+  "method": {
+    "reviewers_read_only_packets": [
+      "blind-N.json",
+      "blind-H.json"
+    ],
+    "hidden": [
+      "answer_id",
+      "answer_version",
+      "initial/final order",
+      "execution status",
+      "system decisions and reasons"
+    ],
+    "actual_masking": "Deterministic alternating X/Y order; both candidates retained exactly. Reviewers inspected only assigned packet before feedback. Primary executor not blind; no claim of formal double-blind experiment.",
+    "mask_key_sha256": "5e3ee6f0579b246e428379e8e439f332c1c502358ff6b87c30662c27c4abd45a",
+    "unmasking": "After independent feedback, primary compared execution and system reasons. N4 severity was source-only independently rechecked before revealing order."
+  },
+  "N": {
+    "denominator": 8,
+    "terminal_counts": {
+      "improved": 0,
+      "equivalent": 8,
+      "worse": 0,
+      "mixed": 0,
+      "unevaluable": 0
+    },
+    "complete_original_question_benefit_unevaluable": 8,
+    "delivered_target_document": 0,
+    "repairable_key_error_initial_drafts": 1,
+    "key_errors_corrected": 0,
+    "fully_correct_complete_initial_drafts": 0,
+    "fully_correct_complete_initial_drafts_protected": 0,
+    "no_revision": 8,
+    "no_change_reasons": {
+      "source_insufficient_without_confirmed_key_error": 7,
+      "source_insufficient_and_key_error_missed": 1
+    },
+    "important": "Equivalent means equal before/after, not correct or complete. Eight source-insufficient cases remain N denominator. N4 is a visible available-source key repair opportunity despite broader missing target document."
+  },
+  "H": {
+    "denominator": 4,
+    "terminal_counts": {
+      "improved": 0,
+      "equivalent": 3,
+      "worse": 0,
+      "mixed": 0,
+      "unevaluable": 1
+    },
+    "pair_text_equal": 4,
+    "repairable_key_error_initial_drafts": 1,
+    "key_errors_corrected": 0,
+    "initial_drafts_without_key_body_error": 3,
+    "complete_audit_preserved_without_key_body_error": 2,
+    "body_preservation_cases": [
+      "H2",
+      "H4"
+    ],
+    "citation_boundary_caveat": "H2 metadata/body citation distinction remains; 2 is body-content preservation, not blanket citation correctness certification.",
+    "execution_failed_and_not_counted_protection": [
+      "H1"
+    ],
+    "no_revision": 4
+  },
+  "stage_goal_met": false,
+  "no_production_adoption": true,
+  "cases": [
+    {
+      "case": "N1",
+      "group": "N",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": false,
+      "frozen_reference_source_available": false,
+      "delivered_target_document": false,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "retrieval_target_source_missing",
+      "assessment": "实际交付是组织/工控安全资料；建模方式和两类位置均未答。",
+      "risk_or_disagreement": "缺目标文献，不是与冻结正文矛盾。",
+      "frozen_source": {
+        "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]"
+      },
+      "specific_comparison_evidence": []
+    },
+    {
+      "case": "N2",
+      "group": "N",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": false,
+      "frozen_reference_source_available": false,
+      "delivered_target_document": false,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "retrieval_target_source_missing",
+      "assessment": "交付的一般无功备用/监视协调不能补齐边界LPF、双向支撑和关键负荷协调。",
+      "risk_or_disagreement": "“须协调”略强但不计新的关键强制义务错误。",
+      "frozen_source": {
+        "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]"
+      },
+      "specific_comparison_evidence": []
+    },
+    {
+      "case": "N3",
+      "group": "N",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": false,
+      "frozen_reference_source_available": false,
+      "delivered_target_document": false,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "retrieval_target_source_missing",
+      "assessment": "未交付事故分析原段，立即/无干预/紧急限值、稳态稳定及最小最大负荷均缺。",
+      "risk_or_disagreement": "“作为支撑条件”概括有弱依据；未明称必要/充分，仅次要疑点。",
+      "frozen_source": {
+        "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]"
+      },
+      "specific_comparison_evidence": []
+    },
+    {
+      "case": "N4",
+      "group": "N",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": false,
+      "frozen_reference_source_available": false,
+      "delivered_target_document": false,
+      "repairable_key_error": true,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "initial_review_missed_range_narrowing_with_uncertain_source",
+      "assessment": "正常/N-1有部分资料，选定N-2及极端扰动目标原段仍缺；“单一大设备”无据缩窄原交付的“单一设备”。",
+      "risk_or_disagreement": "核心故障范围错误，可据实际交付资料删“大”修复；初末均未修。",
+      "frozen_source": {
+        "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]"
+      },
+      "specific_comparison_evidence": [
+        {
+          "evidence_id": "e-8aa4c5f69a47eb6bcf773d9a8eef47895cd8a37bb851bf295c793cdc2a0852b6",
+          "source_id": "dataset-record-832e15ad194077de2b57f901a56f345281c37bc34688426f204c51200d14b7d8",
+          "source_version": "a7ea0807c62840a00d4079bbf6edf0a26f4e53a07c79e5f2120c6a9a3ac1924c",
+          "locator": "shard=chinese/high/rank_00041.parquet;row=48296;record=91100000152;chars[1200:2225)",
+          "short_source_text": "单一设备(如输电线,变压器或发电机)停运",
+          "excerpt_range": [
+            834,
+            854
+          ],
+          "source_text_sha256": "1c336381a8ac93062cca7e8b1764a592b259adf07c3995d11f04b2e73454f207"
+        }
+      ]
+    },
+    {
+      "case": "N5",
+      "group": "N",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": false,
+      "frozen_reference_source_available": false,
+      "delivered_target_document": false,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "retrieval_target_source_missing",
+      "assessment": "非NERC行业语料的一般补偿器说明有据，但不替代指定带宽、自动实时连续与两种模式定义。",
+      "risk_or_disagreement": "不把源文中的同步调相机说法额外升级为专家确认的工程真值；原题仍未完成。",
+      "frozen_source": {
+        "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]"
+      },
+      "specific_comparison_evidence": []
+    },
+    {
+      "case": "N6",
+      "group": "N",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": false,
+      "frozen_reference_source_available": false,
+      "delivered_target_document": false,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "retrieval_target_source_missing",
+      "assessment": "投退/额定容量有部分资料，未给NERC动态静态分类、平方依赖、手动自动投切及额定电压含义。",
+      "risk_or_disagreement": "没有将静止补偿器直接混同NERC静态资源；元数据只说明出处。",
+      "frozen_source": {
+        "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]"
+      },
+      "specific_comparison_evidence": []
+    },
+    {
+      "case": "N7",
+      "group": "N",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": false,
+      "frozen_reference_source_available": false,
+      "delivered_target_document": false,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "retrieval_target_source_missing",
+      "assessment": "只交付图形/文字符号资料，未交付短线路式及变量定义；未答原题。",
+      "risk_or_disagreement": "没有凭空填式子、符号或数值，是资料不足。",
+      "frozen_source": {
+        "evidence_id": "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]"
+      },
+      "specific_comparison_evidence": []
+    },
+    {
+      "case": "N8",
+      "group": "N",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": false,
+      "frozen_reference_source_available": false,
+      "delivered_target_document": false,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "retrieval_target_source_missing",
+      "assessment": "只提供一般无功/电压损失关联，未提供所问模型边界、三驱动强弱及双向紧密耦合。",
+      "risk_or_disagreement": "源文“R,XI”残缺，参数条件表述保留提取/语义疑点，不计关键反转或因果强化。",
+      "frozen_source": {
+        "evidence_id": "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]"
+      },
+      "specific_comparison_evidence": []
+    },
+    {
+      "case": "H1",
+      "group": "H",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "unevaluable",
+      "target_question_benefit_evaluable": false,
+      "frozen_reference_source_available": true,
+      "delivered_target_document": true,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "initial_fact_format_failed_after_one_correction",
+      "assessment": "主要技术含义有据；未逐字写“实时”但快速响应语境可接受，无关键错误。",
+      "risk_or_disagreement": "揭盲后执行失败：事实审核两次额外type，不能算正确稿审核保护成功。",
+      "frozen_source": {
+        "evidence_id": "e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]"
+      },
+      "specific_comparison_evidence": []
+    },
+    {
+      "case": "H2",
+      "group": "H",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": true,
+      "frozen_reference_source_available": true,
+      "delivered_target_document": true,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": null,
+      "assessment": "建模/LPF/协调及元数据适用性总体有据，无关键正文错误。",
+      "risk_or_disagreement": "自愿性/非中国标准来自applicability，非第37页技术正文；整体Evidence支持不等于原引用正文支持。",
+      "frozen_source": {
+        "evidence_id": "e-052ea023d61cea2d25d6193f9c84194548aec762fdc146b0eaacb6d49d4939e2",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]"
+      },
+      "specific_comparison_evidence": []
+    },
+    {
+      "case": "H3",
+      "group": "H",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": true,
+      "frozen_reference_source_available": true,
+      "delivered_target_document": true,
+      "repairable_key_error": true,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": "initial_review_missed_only",
+      "assessment": "“选定N-2仅用于确定稳定极限”是关键排他扩大；when不推出only，实际来源已交付，可修而未修。",
+      "risk_or_disagreement": "该段“无干预”绑定N-1不等于其他标准下N-2允许人工干预。",
+      "frozen_source": {
+        "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]"
+      },
+      "specific_comparison_evidence": [
+        {
+          "evidence_id": "e-38d427eb90b5026a4ccac127c04b5b11c0e211aac700421c01638df034e35bde",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+          "short_source_text": "when determining stability limitations",
+          "excerpt_range": [
+            865,
+            903
+          ],
+          "source_text_sha256": "fa82733c8f82156be9f7c39f11bd8b6afbc7a527073c597d64b955a9fd9c83ff"
+        }
+      ]
+    },
+    {
+      "case": "H4",
+      "group": "H",
+      "pair_text_comparison": "equivalent",
+      "terminal_label": "equivalent",
+      "target_question_benefit_evaluable": true,
+      "frozen_reference_source_available": true,
+      "delivered_target_document": true,
+      "repairable_key_error": false,
+      "key_error_corrected": false,
+      "new_key_error_or_required_point_loss": false,
+      "initial_final_exact_object_equal": true,
+      "first_breakpoint": null,
+      "assessment": "短线路/忽略R/B/公式变量与强弱方向均有据，范围保留，未见关键错误。",
+      "risk_or_disagreement": "不做数值计算及不外推正确，具体参数缺口不阻碍文献概念解释。",
+      "frozen_source": {
+        "evidence_id": "e-9d1e06ec1d4d2ee1f7c4b85c52dc1acb1d35672c9fb2d6584afcadb8d59384ce",
+        "source_id": "nerc-reactive-planning-2016",
+        "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+        "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]"
+      },
+      "specific_comparison_evidence": []
+    }
+  ]
+}

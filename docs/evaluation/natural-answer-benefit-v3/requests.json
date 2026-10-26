@@ -1,0 +1,1510 @@
+[
+  {
+    "sequence": 1,
+    "case": "N1",
+    "slot": "generation",
+    "run_id": "2a74e4c731de4218bb298f27dbda626f",
+    "component": "generation",
+    "answer_version": null,
+    "correction": false,
+    "duration_ms": 1820,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 9260,
+      "output_tokens": 178,
+      "total_tokens": 9438,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 7980
+    },
+    "messages_sha256": "4450ca02765156b93c01af13504463d4829276cb4ffb76f5662f5491d7ebd6d1",
+    "response_sha256": "c8178717c30a96ff85a0c6a1cda6d8c0644788e039c430f617633481ccef57a3"
+  },
+  {
+    "sequence": 2,
+    "case": "N1",
+    "slot": "audit",
+    "run_id": "0de29a6fb2df43458bc52b501ab2e39f",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 2458,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1621,
+      "output_tokens": 512,
+      "total_tokens": 2133,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1152,
+      "cache_miss_tokens": 469
+    },
+    "messages_sha256": "52c4e7a6bbded5fc5e71274addd544ce52a19bfa36931110eb132beefecef587",
+    "response_sha256": "b3dec28952b016d65b64deafc34013490686d480025175b7048d8a5673662f32"
+  },
+  {
+    "sequence": 3,
+    "case": "N1",
+    "slot": "audit",
+    "run_id": "0de29a6fb2df43458bc52b501ab2e39f",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 2822,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 16080,
+      "output_tokens": 512,
+      "total_tokens": 16592,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 256,
+      "cache_miss_tokens": 15824
+    },
+    "messages_sha256": "5d8b7e58c67d7221f40578bb47c8af586da7dd34f8e5d8a9c5d66daa4d3db3f5",
+    "response_sha256": "cf022f55c8f54985b3843c4d7b906761f487760d3ccbda05fa4e5d7dd3f1f543"
+  },
+  {
+    "sequence": 4,
+    "case": "N1",
+    "slot": "audit",
+    "run_id": "0de29a6fb2df43458bc52b501ab2e39f",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3357,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 11814,
+      "output_tokens": 646,
+      "total_tokens": 12460,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 10534
+    },
+    "messages_sha256": "e2c1cca0ab979398e566952aa1ed7115812bad284e156db5060dd4839780ede6",
+    "response_sha256": "9e45c388fd9f3f0d92dc1a0b8bf8b5ebc7180c0a97892e4ac25f65c5a6f310d8"
+  },
+  {
+    "sequence": 5,
+    "case": "N2",
+    "slot": "generation",
+    "run_id": "97ce66b258924a51a708c9a69c338e97",
+    "component": "generation",
+    "answer_version": null,
+    "correction": false,
+    "duration_ms": 1868,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 8771,
+      "output_tokens": 252,
+      "total_tokens": 9023,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 7491
+    },
+    "messages_sha256": "e55cd59c396c0044b82c3cade71ca07931474b3b457f25ec246d757208a87f7d",
+    "response_sha256": "ed1d916c4e8050c31dbf43a0684e2e37e81e06a81af702ce6b63c672effade2c"
+  },
+  {
+    "sequence": 6,
+    "case": "N2",
+    "slot": "audit",
+    "run_id": "323171938e384eab963e4d74e23c2458",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3415,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1617,
+      "output_tokens": 872,
+      "total_tokens": 2489,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 337
+    },
+    "messages_sha256": "2c41fd874b6962a81d7eb460945688fe8a633b71a9db3cf7db005476eea007de",
+    "response_sha256": "0a15c70fd6933ed2be3506eb6000d760fbe9bb713c40618df480e3a0fe753c4e"
+  },
+  {
+    "sequence": 7,
+    "case": "N2",
+    "slot": "audit",
+    "run_id": "323171938e384eab963e4d74e23c2458",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 1952,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 15902,
+      "output_tokens": 282,
+      "total_tokens": 16184,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 256,
+      "cache_miss_tokens": 15646
+    },
+    "messages_sha256": "ce848d3c54284f7ec6a3c9f7d99b3cf577c7d99345fbfe434ba73856f4322897",
+    "response_sha256": "a7b4ef8cb063e899132ffece7581d6960b31ef9dda92b82c7e1845a4723a16db"
+  },
+  {
+    "sequence": 8,
+    "case": "N2",
+    "slot": "audit",
+    "run_id": "323171938e384eab963e4d74e23c2458",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3621,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 12524,
+      "output_tokens": 717,
+      "total_tokens": 13241,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 11244
+    },
+    "messages_sha256": "1c4715cde62abda6f973562d006c3c70af71f739e255f7fe1f3ebbf92abd612c",
+    "response_sha256": "dc258e0c29f72002e4782f1180cc235a899ee545b90a0d1d2d231536ddccccb6"
+  },
+  {
+    "sequence": 9,
+    "case": "N3",
+    "slot": "generation",
+    "run_id": "20393df4a4fc4fc18f5c61e4414e9b73",
+    "component": "generation",
+    "answer_version": null,
+    "correction": false,
+    "duration_ms": 2429,
+    "status": "succeeded",
+    "output_status": "invalid_structure",
+    "validation_error": {
+      "stage": "generation",
+      "field_path": "$.answer_units[1].evidence_ids",
+      "constraint": "existing_input_evidence_ids_required",
+      "errors": [
+        {
+          "stage": "generation",
+          "field_path": "$.answer_units[1].evidence_ids",
+          "constraint": "existing_input_evidence_ids_required"
+        }
+      ]
+    },
+    "usage": {
+      "input_tokens": 10272,
+      "output_tokens": 406,
+      "total_tokens": 10678,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 8992
+    },
+    "messages_sha256": "628c07885f775282d68ebddf46d6db8ea6fdcb7c1632059be3a62c9bc93663c2",
+    "response_sha256": "70a479aa4535db5ba4ad172be717b13ee39fa2f2026c0aeb2edbe22af14e96d5"
+  },
+  {
+    "sequence": 10,
+    "case": "N3",
+    "slot": "generation",
+    "run_id": "20393df4a4fc4fc18f5c61e4414e9b73",
+    "component": "generation",
+    "answer_version": null,
+    "correction": true,
+    "duration_ms": 2230,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 10883,
+      "output_tokens": 355,
+      "total_tokens": 11238,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 10240,
+      "cache_miss_tokens": 643
+    },
+    "messages_sha256": "3fd322101446df16388de7de0a385ffebf8b3e44501af8b489254df2f66748f7",
+    "response_sha256": "dfd645badefd9950e214e1b9c901a6b86c078daca5608544e2193876f63f1cb2"
+  },
+  {
+    "sequence": 11,
+    "case": "N3",
+    "slot": "audit",
+    "run_id": "24e0cc95ca50486c8c5ab6fe8b69b7d9",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4177,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1738,
+      "output_tokens": 1055,
+      "total_tokens": 2793,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 458
+    },
+    "messages_sha256": "da36a4f66bc4ba7c6bb618eab16d45acd48726324c251faadbb0bc703a315374",
+    "response_sha256": "e8e64abc2aec2d7cc7bd04d52a4073a891d7983464c95f2a22391d5975d0a722"
+  },
+  {
+    "sequence": 12,
+    "case": "N3",
+    "slot": "audit",
+    "run_id": "24e0cc95ca50486c8c5ab6fe8b69b7d9",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4825,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 19104,
+      "output_tokens": 806,
+      "total_tokens": 19910,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 256,
+      "cache_miss_tokens": 18848
+    },
+    "messages_sha256": "67f0b34eda93f949d6ae01a8b91dd81c793cae2d1baed4fa4b0e8cd67fdf3c71",
+    "response_sha256": "9bf7256a1a362744c83ba8cc6c836e04d599f7566616cd448225d48a9b21402f"
+  },
+  {
+    "sequence": 13,
+    "case": "N3",
+    "slot": "audit",
+    "run_id": "24e0cc95ca50486c8c5ab6fe8b69b7d9",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4889,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 14283,
+      "output_tokens": 1038,
+      "total_tokens": 15321,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 13003
+    },
+    "messages_sha256": "8743de0081d5b87f0469dd7dc2757b7c493d281536d063f974ec16930d3af962",
+    "response_sha256": "42e7cd8aa7f7ea3145bd9f1fead015c0e2cd5eb146bf51b6b82e990af5e3ef11"
+  },
+  {
+    "sequence": 14,
+    "case": "N4",
+    "slot": "generation",
+    "run_id": "d531c6518c3247d4991b7e5ba18937ee",
+    "component": "generation",
+    "answer_version": null,
+    "correction": false,
+    "duration_ms": 2305,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 7076,
+      "output_tokens": 352,
+      "total_tokens": 7428,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 5796
+    },
+    "messages_sha256": "a5cceb77ed67c0824164dcf9e158b45ae30f9df64c5eef982bc4ae4e7a2db847",
+    "response_sha256": "5bbbc4e8fa819a3e805cf5316200b9e47fbe80b67c28c9da2d66bcee66a6aa72"
+  },
+  {
+    "sequence": 15,
+    "case": "N4",
+    "slot": "audit",
+    "run_id": "3f15632b54a3496cabe9ccd339434504",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3904,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1751,
+      "output_tokens": 985,
+      "total_tokens": 2736,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 471
+    },
+    "messages_sha256": "4f9e5db0b3de6751806e4740f6f4357befc37f6f34451c471656ba25071276d1",
+    "response_sha256": "f2ad2ab6d0673e1bb6be79d271d8ed3bbc92e96fcfce824a49b7531bdaea2a42"
+  },
+  {
+    "sequence": 16,
+    "case": "N4",
+    "slot": "audit",
+    "run_id": "3f15632b54a3496cabe9ccd339434504",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4348,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 13464,
+      "output_tokens": 711,
+      "total_tokens": 14175,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 256,
+      "cache_miss_tokens": 13208
+    },
+    "messages_sha256": "4057b50fc40e4fa8cba15117ccfe087fd39c57b8674cb300496aab0b4035392f",
+    "response_sha256": "e65c352cdcd64eb35d11f703df4988dd5e9fcd8e66b13ea0a8358a8602b65b19"
+  },
+  {
+    "sequence": 17,
+    "case": "N4",
+    "slot": "audit",
+    "run_id": "3f15632b54a3496cabe9ccd339434504",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4614,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 11077,
+      "output_tokens": 908,
+      "total_tokens": 11985,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 9797
+    },
+    "messages_sha256": "d6e5726544698e13618a8a74c314385361a0f5f7fc4e4c0f8b915b6b7c3db1ab",
+    "response_sha256": "d9472ca89756a7851ea2b60f5178fffb1df30b81665e3b63763f68d3deec1e74"
+  },
+  {
+    "sequence": 18,
+    "case": "N5",
+    "slot": "generation",
+    "run_id": "c3e316a0feeb415c9b69e551bf3e4fa1",
+    "component": "generation",
+    "answer_version": null,
+    "correction": false,
+    "duration_ms": 2851,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 8769,
+      "output_tokens": 398,
+      "total_tokens": 9167,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 7489
+    },
+    "messages_sha256": "dc63c5dd870bb0e756d99eb283502a632c47817c503762d62ba39e8fa1f5ce89",
+    "response_sha256": "4c65033b150ad20a353690a0ce5eab72d7b5c251d7ea9d5ada8280c73840b24c"
+  },
+  {
+    "sequence": 19,
+    "case": "N5",
+    "slot": "audit",
+    "run_id": "69f99e3c9c824e5d87e8d0f5eba6af50",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4710,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1826,
+      "output_tokens": 1458,
+      "total_tokens": 3284,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 546
+    },
+    "messages_sha256": "b707e10f602340910abb5c6a200225f11776c6a435a03506a10d13890b0af1f2",
+    "response_sha256": "652df002862b1f4059997f56f0cc488d58feb62652a5c3c8905bc5ce18d63757"
+  },
+  {
+    "sequence": 20,
+    "case": "N5",
+    "slot": "audit",
+    "run_id": "69f99e3c9c824e5d87e8d0f5eba6af50",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4177,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 17774,
+      "output_tokens": 733,
+      "total_tokens": 18507,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 256,
+      "cache_miss_tokens": 17518
+    },
+    "messages_sha256": "5de15745a7b1cf589d2f95e0937992ab32999a2c41bc3e46416729ce3f27c114",
+    "response_sha256": "5e876fc02dee1ad152be7332aaa1beb3c9d8f046751310b524a39c0880eb3720"
+  },
+  {
+    "sequence": 21,
+    "case": "N5",
+    "slot": "audit",
+    "run_id": "69f99e3c9c824e5d87e8d0f5eba6af50",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 6125,
+    "status": "succeeded",
+    "output_status": "invalid_structure",
+    "validation_error": {
+      "stage": "power_domain_review",
+      "field_path": "$.checks[2].claim_ids",
+      "constraint": "existing_input_ids_required",
+      "errors": [
+        {
+          "stage": "power_domain_review",
+          "field_path": "$.checks[2].claim_ids",
+          "constraint": "existing_input_ids_required"
+        }
+      ],
+      "retained_items": [
+        {
+          "group": "checks",
+          "id": "answer_units",
+          "response_attempt": 1
+        },
+        {
+          "group": "checks",
+          "id": "analysis_scope",
+          "response_attempt": 1
+        },
+        {
+          "group": "missing_information_review",
+          "id": 0,
+          "response_attempt": 1
+        },
+        {
+          "group": "missing_information_review",
+          "id": 1,
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-08ba5057193b1e78f040f803",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-d2a5e5c664653d56735280d5",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-239730202bb2bc8714e657d9",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-6cc549ab819b250fdae5e432",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-8f5208db7568afaee3a12efe",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-c18e80ae409adaf75b7a12f8",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-edb5568e0af3484c694e82c7",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-b0ed620104124b07de8d413a",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-8cc46bc712753ac732bf886f",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-c5c01d0ee381d148d0a95a03",
+          "response_attempt": 1
+        },
+        {
+          "group": "safety_reviews",
+          "id": "claim-5114fb0010ddd233a1878dc7",
+          "response_attempt": 1
+        }
+      ],
+      "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+    },
+    "usage": {
+      "input_tokens": 13724,
+      "output_tokens": 1163,
+      "total_tokens": 14887,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 12444
+    },
+    "messages_sha256": "9ac3bb0a1250f012a21b8ff0cb3aa02711b842f3712d6248d8d1d788320bd569",
+    "response_sha256": "4004fbe63b3f85957714e5b7fc42e4b60db52ad92153d811c0b9613a83f8c840"
+  },
+  {
+    "sequence": 22,
+    "case": "N5",
+    "slot": "audit",
+    "run_id": "69f99e3c9c824e5d87e8d0f5eba6af50",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": true,
+    "duration_ms": 4137,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 15747,
+      "output_tokens": 1162,
+      "total_tokens": 16909,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 13696,
+      "cache_miss_tokens": 2051
+    },
+    "messages_sha256": "e42fec6aa8b6a92f04e4d6aa2c718694d4775de9dcd2513db7e0e4d4929f37a8",
+    "response_sha256": "2a9e034bcb9e4053a4a0ff9c054c934d21e5cdc4101f41c031377ca8f6810046"
+  },
+  {
+    "sequence": 23,
+    "case": "N6",
+    "slot": "generation",
+    "run_id": "3d056b284d9b4742ae0869bbcb6be122",
+    "component": "generation",
+    "answer_version": null,
+    "correction": false,
+    "duration_ms": 2615,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 9012,
+      "output_tokens": 391,
+      "total_tokens": 9403,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 7732
+    },
+    "messages_sha256": "a4d59099aea1809414cb332ffc38102f52972fab236093c740ceea2a8d815572",
+    "response_sha256": "63b4a87c67d492c5de8455617691577df7e16a2542787e158ce7d8c4aeb7644f"
+  },
+  {
+    "sequence": 24,
+    "case": "N6",
+    "slot": "audit",
+    "run_id": "bfac48622fee4fa0857356a6d6a2db28",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4611,
+    "status": "succeeded",
+    "output_status": "invalid_structure",
+    "validation_error": {
+      "stage": "claim_extraction_v5",
+      "field_path": "$.claims[9].assertion_role",
+      "constraint": "declared_semantic_role_required",
+      "errors": [
+        {
+          "stage": "claim_extraction_v5",
+          "field_path": "$.claims[9].assertion_role",
+          "constraint": "declared_semantic_role_required"
+        }
+      ]
+    },
+    "usage": {
+      "input_tokens": 1786,
+      "output_tokens": 1328,
+      "total_tokens": 3114,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 506
+    },
+    "messages_sha256": "13e1c4e601822ac021064719081037fd318dc13df46d019fb9f36081158af8d5",
+    "response_sha256": "2cbda0801085388fdbb41b317e4b73a208bb883b9b5ad38a8667f4cdd404a682"
+  },
+  {
+    "sequence": 25,
+    "case": "N6",
+    "slot": "audit",
+    "run_id": "bfac48622fee4fa0857356a6d6a2db28",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": true,
+    "duration_ms": 4420,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 3536,
+      "output_tokens": 1329,
+      "total_tokens": 4865,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1664,
+      "cache_miss_tokens": 1872
+    },
+    "messages_sha256": "7e7a0c1f00b1fa79dc84c51945502967f82195ef61cf5290dae0972a231637e3",
+    "response_sha256": "def6a386abcada626e9f3e9f86d1faa5a036970fa6d42a8a3491c3a01f02dd49"
+  },
+  {
+    "sequence": 26,
+    "case": "N6",
+    "slot": "audit",
+    "run_id": "bfac48622fee4fa0857356a6d6a2db28",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3420,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 18032,
+      "output_tokens": 638,
+      "total_tokens": 18670,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 256,
+      "cache_miss_tokens": 17776
+    },
+    "messages_sha256": "9b2965624fb4d58dcc5e875969bc607b32aba5c7b2366e3a56f71eddb30b1929",
+    "response_sha256": "61b627700c87a25e612e97df74a7067980c19a266a6c963d4ea4fc4dad26bf83"
+  },
+  {
+    "sequence": 27,
+    "case": "N6",
+    "slot": "audit",
+    "run_id": "bfac48622fee4fa0857356a6d6a2db28",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 6389,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 13644,
+      "output_tokens": 1174,
+      "total_tokens": 14818,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 12364
+    },
+    "messages_sha256": "2f06ec7424c4eb570a2a8a9a42d105b84e2ac4010fd61da57567003f460a3b44",
+    "response_sha256": "781990997c671d34884c5bbd513a39b2ce7a50810807a4f70ea862a1cc4b5511"
+  },
+  {
+    "sequence": 28,
+    "case": "N7",
+    "slot": "generation",
+    "run_id": "9bd67e046a664c9b9906305b5ce346ba",
+    "component": "generation",
+    "answer_version": null,
+    "correction": false,
+    "duration_ms": 1394,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 9266,
+      "output_tokens": 118,
+      "total_tokens": 9384,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 7986
+    },
+    "messages_sha256": "a7107f58c85ee20fa82de76a601314854d715c6fca72b09b0f5d3397c4601bdd",
+    "response_sha256": "aca503a6528236f00f1671e0bd8e90f52ebb679aa10850ff84cbe7853e018372"
+  },
+  {
+    "sequence": 29,
+    "case": "N7",
+    "slot": "audit",
+    "run_id": "db732fb7803946cbb61ed08f529dbbc9",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 2275,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1600,
+      "output_tokens": 576,
+      "total_tokens": 2176,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 320
+    },
+    "messages_sha256": "5944b7a40f17ddc9887cab183ac29fe2255b5e5af3cb1a017a06ea178365a382",
+    "response_sha256": "f89a395dbf47ed6037563eef579dfa822c5ae734b7acaeaf8c52f36c964f2174"
+  },
+  {
+    "sequence": 30,
+    "case": "N7",
+    "slot": "audit",
+    "run_id": "db732fb7803946cbb61ed08f529dbbc9",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 2225,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 16237,
+      "output_tokens": 400,
+      "total_tokens": 16637,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 256,
+      "cache_miss_tokens": 15981
+    },
+    "messages_sha256": "70d540db68430bd0a384bd6f6f77936b8879ca6d8d047f5f398c7f9e4f23f98e",
+    "response_sha256": "9e17f7cb30a59de729f9c22570cd84899cf49639d1c9feb21e5fac9eac998399"
+  },
+  {
+    "sequence": 31,
+    "case": "N7",
+    "slot": "audit",
+    "run_id": "db732fb7803946cbb61ed08f529dbbc9",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3228,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 11878,
+      "output_tokens": 619,
+      "total_tokens": 12497,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 10598
+    },
+    "messages_sha256": "aba6da60f4529599854be990acc85c5615f3df03be174f8336e419a301743020",
+    "response_sha256": "b5dc2417b2a1d3c114d2990d5f82e732926fa06d0592b0286869a3249dec9803"
+  },
+  {
+    "sequence": 32,
+    "case": "N8",
+    "slot": "generation",
+    "run_id": "54ee3b78b7f14978868aface054b12c5",
+    "component": "generation",
+    "answer_version": null,
+    "correction": false,
+    "duration_ms": 2166,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 9018,
+      "output_tokens": 316,
+      "total_tokens": 9334,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 7738
+    },
+    "messages_sha256": "d4d29b14bedfe27bded34cc274b1d4c295f86130008fc725aab9385cdea3195d",
+    "response_sha256": "c5658e060c4334183f629628e66aa521dfce1a3b9887abfc9f3633b01e4ae3f7"
+  },
+  {
+    "sequence": 33,
+    "case": "N8",
+    "slot": "audit",
+    "run_id": "f17c05a2bb944b09ab5fb1cbccdc2874",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3031,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1675,
+      "output_tokens": 887,
+      "total_tokens": 2562,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 395
+    },
+    "messages_sha256": "6af8801c61da62ea76c457ef724f1c1cb819e60eaaae170f5b4c3f26b1d2da26",
+    "response_sha256": "8e63d2838f7bdf0a839260844e0e3723e205c34cf6fb0bcdb8ac5085500762eb"
+  },
+  {
+    "sequence": 34,
+    "case": "N8",
+    "slot": "audit",
+    "run_id": "f17c05a2bb944b09ab5fb1cbccdc2874",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3006,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 17016,
+      "output_tokens": 520,
+      "total_tokens": 17536,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 256,
+      "cache_miss_tokens": 16760
+    },
+    "messages_sha256": "a32990205f656852741b1365ff005bdb400781c7bc2f74714acac1964008899f",
+    "response_sha256": "014b9777694037521895df49f4956b7490e2491a4b71d9ffe9100bb83c98b7c6"
+  },
+  {
+    "sequence": 35,
+    "case": "N8",
+    "slot": "audit",
+    "run_id": "f17c05a2bb944b09ab5fb1cbccdc2874",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4925,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 12921,
+      "output_tokens": 984,
+      "total_tokens": 13905,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1280,
+      "cache_miss_tokens": 11641
+    },
+    "messages_sha256": "1b625d613a0ff3771e0b908b890fec3b62f27932412677810e3d575afdd65aca",
+    "response_sha256": "d588998575fee12e00ef15763c0833b058715ccb62631667a9f1716e62019e6d"
+  },
+  {
+    "sequence": 36,
+    "case": "H1",
+    "slot": "audit",
+    "run_id": "60b079d9db284aec8b0dcc33b1a86968",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3420,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1711,
+      "output_tokens": 865,
+      "total_tokens": 2576,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1536,
+      "cache_miss_tokens": 175
+    },
+    "messages_sha256": "85df3fe0168cfd9cf2a5d1f2c92890dc7c0b60e8a4ed77b0ae2dba848b3ce575",
+    "response_sha256": "6fef9aef3fa805ade302e5bc0b59546e253d0bbfa1ebbb762a54fa1a2bbeb6f5"
+  },
+  {
+    "sequence": 37,
+    "case": "H1",
+    "slot": "audit",
+    "run_id": "60b079d9db284aec8b0dcc33b1a86968",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3514,
+    "status": "succeeded",
+    "output_status": "invalid_structure",
+    "validation_error": {
+      "stage": "literal-review-v1",
+      "field_path": "$",
+      "constraint": "unexpected_fields_not_allowed"
+    },
+    "usage": {
+      "input_tokens": 20797,
+      "output_tokens": 679,
+      "total_tokens": 21476,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1408,
+      "cache_miss_tokens": 19389
+    },
+    "messages_sha256": "97644633cba104ed69d1c415d4d421f1947b8b3491bdda29f4a677165ec04504",
+    "response_sha256": "ce62e783e133dbaa352a87e96f91174957e14aa75b436d06d7e0dc2aad0f7872"
+  },
+  {
+    "sequence": 38,
+    "case": "H1",
+    "slot": "audit",
+    "run_id": "60b079d9db284aec8b0dcc33b1a86968",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3751,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 14523,
+      "output_tokens": 766,
+      "total_tokens": 15289,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 11136,
+      "cache_miss_tokens": 3387
+    },
+    "messages_sha256": "e68e8505d287a4ef4e8f74d3266e5096efcd8c272e075aad658f91f59679b76d",
+    "response_sha256": "f03585b69e44062f4d85d0cd519698273c5d795805acd44f9617c760e51e3ede"
+  },
+  {
+    "sequence": 39,
+    "case": "H1",
+    "slot": "audit",
+    "run_id": "60b079d9db284aec8b0dcc33b1a86968",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": true,
+    "duration_ms": 2895,
+    "status": "succeeded",
+    "output_status": "invalid_structure",
+    "validation_error": {
+      "stage": "literal-review-v1",
+      "field_path": "$",
+      "constraint": "unexpected_fields_not_allowed"
+    },
+    "usage": {
+      "input_tokens": 21669,
+      "output_tokens": 731,
+      "total_tokens": 22400,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 20736,
+      "cache_miss_tokens": 933
+    },
+    "messages_sha256": "3f33cf1e0b8c7595e5d44ddb9fa77a90fce7a4cbe130a7cd74515d9fb6ab0e1a",
+    "response_sha256": "6367773114a21334044ff4aa005a4b5019ad7c444d1ab673f04a66b0f88050b5"
+  },
+  {
+    "sequence": 40,
+    "case": "H2",
+    "slot": "audit",
+    "run_id": "d2eb132b2c6c4be9af52da8774af3eb4",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4049,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1703,
+      "output_tokens": 1208,
+      "total_tokens": 2911,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1536,
+      "cache_miss_tokens": 167
+    },
+    "messages_sha256": "2c0a7bcd011443e4670add009757364808476483886dc93bca4ebc60520600d7",
+    "response_sha256": "1b26548fd390187cb8a754cf8f43577a8568e91f51e7020d32be3bc19341e49a"
+  },
+  {
+    "sequence": 41,
+    "case": "H2",
+    "slot": "audit",
+    "run_id": "d2eb132b2c6c4be9af52da8774af3eb4",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3433,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 23891,
+      "output_tokens": 563,
+      "total_tokens": 24454,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1536,
+      "cache_miss_tokens": 22355
+    },
+    "messages_sha256": "9b7daffeb5854bb9987deba094caac43d35cf979a6b643666225293784d793fc",
+    "response_sha256": "66ecd05da21c7c24b403856aceee11284e7f02fe2b2cab9f6d27d974a6438878"
+  },
+  {
+    "sequence": 42,
+    "case": "H2",
+    "slot": "audit",
+    "run_id": "d2eb132b2c6c4be9af52da8774af3eb4",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4812,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 15995,
+      "output_tokens": 931,
+      "total_tokens": 16926,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 11520,
+      "cache_miss_tokens": 4475
+    },
+    "messages_sha256": "4a3a0f35ec6805a70cf0d80fc990b863c398c8a52ccc602ab8b8a94b9f0335d6",
+    "response_sha256": "077232df1b7a7b46e20eb6ade79b1e673f7a417c0f859e0fc73f16263f3f5ab7"
+  },
+  {
+    "sequence": 43,
+    "case": "H3",
+    "slot": "audit",
+    "run_id": "ef61851e9b9e408db297189541accd23",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3825,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1715,
+      "output_tokens": 1058,
+      "total_tokens": 2773,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1536,
+      "cache_miss_tokens": 179
+    },
+    "messages_sha256": "e8ae06a2f0c0a5ff0cf50748f162ed053240483b9cafeb32225bd344d026e458",
+    "response_sha256": "0818529cd361ea340f0d7f37ec9d3afaa008618a9c2e28a5f4f9771bab7b72a4"
+  },
+  {
+    "sequence": 44,
+    "case": "H3",
+    "slot": "audit",
+    "run_id": "ef61851e9b9e408db297189541accd23",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3737,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 20407,
+      "output_tokens": 705,
+      "total_tokens": 21112,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1408,
+      "cache_miss_tokens": 18999
+    },
+    "messages_sha256": "fe01374df3a0b2c4b7df8640d386aa2e27d519f3fa322e77c9dac5f16eda61d0",
+    "response_sha256": "0a2572efe26f9f0e5eab46f7a0b4233c96d7644d2be7efccd269135e71318e5c"
+  },
+  {
+    "sequence": 45,
+    "case": "H3",
+    "slot": "audit",
+    "run_id": "ef61851e9b9e408db297189541accd23",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3424,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 14279,
+      "output_tokens": 736,
+      "total_tokens": 15015,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 10496,
+      "cache_miss_tokens": 3783
+    },
+    "messages_sha256": "a274fedeb7f00b78b0edb0e938003d49c1a20c8d1004eb62f9296e142317507a",
+    "response_sha256": "3194872019b07d0d5bdba34700438a87f908e27855195fc3925f92d8a80c474b"
+  },
+  {
+    "sequence": 46,
+    "case": "H4",
+    "slot": "audit",
+    "run_id": "aa3658cde43443a9b2a7ab60a060eb97",
+    "component": "claim_extraction",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 3932,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 1671,
+      "output_tokens": 982,
+      "total_tokens": 2653,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1536,
+      "cache_miss_tokens": 135
+    },
+    "messages_sha256": "6300aadad602676d85b608d8ee7aa9fb5db87a597107b268085946fa82d9eb3b",
+    "response_sha256": "eb7bdbe1d01fef03a5da419bcbd75da501730dd7ac46d8e7258b9ba2ddcdc30a"
+  },
+  {
+    "sequence": 47,
+    "case": "H4",
+    "slot": "audit",
+    "run_id": "aa3658cde43443a9b2a7ab60a060eb97",
+    "component": "evidence_verification",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 2975,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 21942,
+      "output_tokens": 473,
+      "total_tokens": 22415,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 1536,
+      "cache_miss_tokens": 20406
+    },
+    "messages_sha256": "824e3ec96397a4084f41d05e696d2baaee9b1196f025457fac0b0cbc1daf6f7c",
+    "response_sha256": "6cc523a3d4eba46ed460f71d93e08b10239fcf620b3635537dfecfed8e3814cf"
+  },
+  {
+    "sequence": 48,
+    "case": "H4",
+    "slot": "audit",
+    "run_id": "aa3658cde43443a9b2a7ab60a060eb97",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": false,
+    "duration_ms": 4404,
+    "status": "succeeded",
+    "output_status": "invalid_structure",
+    "validation_error": {
+      "stage": "operational-hazard-screen-v1",
+      "field_path": "$.safety_reviews[0]",
+      "constraint": "unexpected_fields_not_allowed",
+      "allowed_fields": [
+        "claim_id",
+        "reason",
+        "source_ids",
+        "verdict"
+      ],
+      "required_fields": [
+        "claim_id",
+        "reason",
+        "source_ids",
+        "verdict"
+      ],
+      "processing_options": [
+        "return_only_declared_fields",
+        "do_not_echo_program_binding_or_other_check_fields"
+      ],
+      "errors": [
+        {
+          "stage": "operational-hazard-screen-v1",
+          "field_path": "$.safety_reviews[0]",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "required_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ]
+        },
+        {
+          "stage": "operational-hazard-screen-v1",
+          "field_path": "$.safety_reviews[1]",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "required_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ]
+        },
+        {
+          "stage": "operational-hazard-screen-v1",
+          "field_path": "$.safety_reviews[2]",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "required_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ]
+        },
+        {
+          "stage": "operational-hazard-screen-v1",
+          "field_path": "$.safety_reviews[3]",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "required_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ]
+        },
+        {
+          "stage": "operational-hazard-screen-v1",
+          "field_path": "$.safety_reviews[4]",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "required_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ]
+        },
+        {
+          "stage": "operational-hazard-screen-v1",
+          "field_path": "$.safety_reviews[5]",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "required_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ]
+        },
+        {
+          "stage": "operational-hazard-screen-v1",
+          "field_path": "$.safety_reviews[6]",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "required_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ]
+        },
+        {
+          "stage": "operational-hazard-screen-v1",
+          "field_path": "$.safety_reviews[7]",
+          "constraint": "unexpected_fields_not_allowed",
+          "allowed_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "required_fields": [
+            "claim_id",
+            "reason",
+            "source_ids",
+            "verdict"
+          ],
+          "processing_options": [
+            "return_only_declared_fields",
+            "do_not_echo_program_binding_or_other_check_fields"
+          ]
+        }
+      ],
+      "retained_items": [
+        {
+          "group": "checks",
+          "id": "answer_units",
+          "response_attempt": 1
+        },
+        {
+          "group": "checks",
+          "id": "analysis_scope",
+          "response_attempt": 1
+        },
+        {
+          "group": "checks",
+          "id": "operating_prerequisites",
+          "response_attempt": 1
+        },
+        {
+          "group": "missing_information_review",
+          "id": 0,
+          "response_attempt": 1
+        }
+      ],
+      "isolation_boundary": "whole finding/check, including all local bases and component indexes"
+    },
+    "usage": {
+      "input_tokens": 14510,
+      "output_tokens": 988,
+      "total_tokens": 15498,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 10752,
+      "cache_miss_tokens": 3758
+    },
+    "messages_sha256": "8de0a9a999a9d083164ac938b1991fe682a48e13e376d7ac6d7c4097fcee25ea",
+    "response_sha256": "7cb345930fd6794d33e8ee3af6f52aeb77584ceafe4c3392700ba48ddd63b7f0"
+  },
+  {
+    "sequence": 49,
+    "case": "H4",
+    "slot": "audit",
+    "run_id": "aa3658cde43443a9b2a7ab60a060eb97",
+    "component": "power_domain_review",
+    "answer_version": 1,
+    "correction": true,
+    "duration_ms": 3104,
+    "status": "succeeded",
+    "output_status": "valid_structure",
+    "validation_error": null,
+    "usage": {
+      "input_tokens": 17594,
+      "output_tokens": 835,
+      "total_tokens": 18429,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 14464,
+      "cache_miss_tokens": 3130
+    },
+    "messages_sha256": "f3a7beb3b2229d544f9237d1127f4b010c62a7a2a4acbc874c0e3c1f1bd5de1c",
+    "response_sha256": "85b9e22954b783eafcb58ebc50c88cddc89c190a6ff14f501ce541e9e387c81a"
+  }
+]

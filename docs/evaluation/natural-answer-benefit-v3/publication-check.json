@@ -1,0 +1,11 @@
+{
+  "public_scope": "Complete initial/final answer texts and necessary prediction texts, source identity/location/hash, findings/status/usage only; explicitly authorized by task section8. No full source bodies, complete actual input or request/response envelopes.",
+  "source_bodies_checked": 58,
+  "full_source_bodies_found": 0,
+  "necessary_prediction_texts_match_private_responses": 49,
+  "invalid_predictions_preserved": true,
+  "private_inputs_snapshots_diagnostics_envelopes_remain_ignored": true,
+  "public_cases_projection_bytes": 389467,
+  "all_public_markdown_links_resolve": true,
+  "private_batch_not_modified": true
+}
