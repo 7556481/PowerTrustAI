@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-26 检索交付定位封存（本轮已执行）
+
+[检索交付修复v1报告](evaluation/retrieval-delivery-repair-v1/report.md) · [逐题MATCH与实际交付](evaluation/retrieval-delivery-repair-v1/diagnosis.json) · [原文身份与计时](evaluation/retrieval-delivery-repair-v1/identity-check.json) · [独立复核](evaluation/retrieval-delivery-repair-v1/independent-review.md) · [验证及停止](evaluation/retrieval-delivery-repair-v1/verification.json)。正确版本268片段已参与native FTS，八题参考段实际MATCH全0，六题去主题仍无词项；不能归因未向量化。依任务第3节停止分支，无候选/最终检索对照/付费批，改善未测得、回答收益未证明，新请求0。下方“下一轮/尚未执行”保留任务编写时状态，以本封存记录为准；被替代审核重构未执行。
+
 ## 2026-10-26 自然答案改善v3结果
 
 [完整报告与全部初末全文](evaluation/natural-answer-benefit-v3/report.md) · [遮蔽复核及双轴判断](evaluation/natural-answer-benefit-v3/text-review.md) · [49次实际预测](evaluation/natural-answer-benefit-v3/predictions.json) · [用量分账](evaluation/natural-answer-benefit-v3/statistics.json)。N0改善/0恶化/8相当，8题目标源未交付；N4有据可修的“大”限定漏检。H0改善/3相当/1执行不可评价，H3 when→only误认仍在。49新Flash、579,406token、实际金额未知，12链无Revision触发；不达门槛、不生产采用，不改旧0/4与固定初审4/4。26专项及复用1305全套、Store/冻结/328历史文件和生产保留证据齐全，停止交设计审阅。

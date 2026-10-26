@@ -1,0 +1,85 @@
+{
+  "reference_native_identity": [
+    {
+      "family": "coordination",
+      "fragment_id": "f-7fb2662c9be1ffe504b3061fe9d4d0d822f91c896bbb87b07609c26fb1c151f5",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+      "exact_text_equal": true,
+      "text_sha256": "8035814bead5cf935dc1053839d0dc45abdd83c496ca6b90913062f2ae102d33"
+    },
+    {
+      "family": "contingencies",
+      "fragment_id": "f-fab8250199c2179f3757ca8a10d8513316226c94d0ceafdcc274cdc7d87e60ee",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+      "exact_text_equal": true,
+      "text_sha256": "fa82733c8f82156be9f7c39f11bd8b6afbc7a527073c597d64b955a9fd9c83ff"
+    },
+    {
+      "family": "resources",
+      "fragment_id": "f-0019cb8ce6cc38061b9e5bc019b64d40adbaa32634f74710aad5c37962f69eaf",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+      "exact_text_equal": true,
+      "text_sha256": "81d1ba89d51a555b8e4e385d23e6f286a23f077c288c2b7c4607c5e7339821d9"
+    },
+    {
+      "family": "line_model",
+      "fragment_id": "f-56986651aea9dbcdc37f3e66fd6720ee80be0c84a7841bc1f281c39e21fbb91e",
+      "source_id": "nerc-reactive-planning-2016",
+      "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+      "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+      "exact_text_equal": true,
+      "text_sha256": "46d376598d22ef999fa03fc93ee0a156745c796ca46b5a70c3e99292219c1bb1"
+    }
+  ],
+  "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+  "queries": 11,
+  "query_seconds": [
+    {
+      "number": 2,
+      "seconds": 0.17661360000010973
+    },
+    {
+      "number": 3,
+      "seconds": 0.07667199999968943
+    },
+    {
+      "number": 4,
+      "seconds": 0.44309690000000046
+    },
+    {
+      "number": 5,
+      "seconds": 0.4850154000000657
+    },
+    {
+      "number": 6,
+      "seconds": 0.3395767999995769
+    },
+    {
+      "number": 7,
+      "seconds": 0.5934416000000056
+    },
+    {
+      "number": 8,
+      "seconds": 0.4534396999997625
+    },
+    {
+      "number": 9,
+      "seconds": 0.537327699999878
+    },
+    {
+      "number": 10,
+      "seconds": 0.5354303999997683
+    },
+    {
+      "number": 11,
+      "seconds": 0.5618356999998468
+    }
+  ],
+  "seal_seconds": 198.35530849999986
+}

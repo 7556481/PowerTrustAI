@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-26",
+  "baseline": "998a8813562fbd47a5c72701c4fe2544b8359361",
+  "status": "stopped_under_task_section_3_semantic_recall_exception",
+  "candidate_implemented": false,
+  "development_candidate_runs": 0,
+  "final_paired_retrieval_runs": 0,
+  "counterexample_runs": 0,
+  "answer_slots": 0,
+  "new_model_requests": 0,
+  "new_tokens": 0,
+  "new_model_cost": 0,
+  "root_dotenv_loaded": false,
+  "production_switched": false,
+  "tests": {
+    "command": "D:/PowerTrustAI/.venv/Scripts/python.exe -X utf8 -m unittest discover -s tests -v",
+    "tests": 1314,
+    "seconds": 350.533,
+    "result": "OK",
+    "log_sha256": "e395db0a5815577294bc9a5da054d99764820f522f1cb701b1c790f23f0bce8b",
+    "prior_sandbox_attempt": "3 new diagnostics passed; existing temporary fixture setup/cleanup failed with WinError 5; rerun through tool approval using original environment"
+  },
+  "failures": [
+    {
+      "stage": "diagnostic archival assembly",
+      "error": "KeyError: input; historical control stores accepted.spec",
+      "repair": "Correct accessor; reuse saved query results; normal second seal, no semantic rerun"
+    },
+    {
+      "stage": "sandbox tests",
+      "error": "WinError 5 in temporary fixtures",
+      "repair": "Tool-approved original interpreter run; no permission changes/environment rebuild"
+    }
+  ],
+  "diagnostic_queries": 11,
+  "seal_verifications": 2,
+  "first_seal_seconds": null,
+  "second_seal_seconds": 198.35530849999986,
+  "source_identity_check": "4 exact original texts equal native fragments",
+  "message_check": "9 old generation messages (8 initial and N3 correction) equal actual delivery; target source absent",
+  "preservation": {
+    "files": {
+      "data/runtime_local/runs.sqlite3": "53273988827f38ceecc98e0956eec875ed0c88bcc7c34a4950a4bef805612b3e",
+      "data/runtime_local/orchestration.json": "5546973984813b01e08972ad94a37486a1430d508fcab3833f06bd7c2a069c06",
+      "data/runtime_local/daily-knowledge.json": "f77330bfe08862c89a33e769cff57fb9347b8de41b8f398dae8818519249d03c",
+      "data/retrieval_local/natural-answer-benefit-v3/batch/summary.json": "395383e88748e4e535366a4eccbeb34b83307e6104b2f8e7af392289e18986f6",
+      "data/retrieval_local/natural-answer-benefit-v3/materials.json": "bf029ab59b255a22985d2393787dc4bf163da7bafc20eb08a483ee14f2ae365e",
+      "data/retrieval_local/natural-answer-benefit-v3/freeze.json": "4a1364fea16a350b282ab220eb0d91cb312c8a41d85fb789dba64d9dba48bb71"
+    },
+    "counts": {
+      "runs": 104,
+      "objects": 2999,
+      "events": 2278,
+      "reviews": 8
+    },
+    "scope": "Small production database/configuration and three named historical archive files only; no 328-file rescan or closing whole-corpus hash",
+    "rechecked_files_equal": true,
+    "listening_8765": 0
+  },
+  "publication": {
+    "full_reference_texts_absent": true,
+    "no_actual_messages_or_headers_published": true
+  },
+  "scope": "No full ranking replay; no 328-file rescan; no closing whole-corpus hash. No candidate or final paired evaluation; retrieval/answer improvement unmeasured, not zero-effect experiment."
+}
