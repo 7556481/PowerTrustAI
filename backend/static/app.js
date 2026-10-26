@@ -8,7 +8,7 @@ let answerFocused=false;
 let connected = false, sessionConnected = false;
 const hasConnection=()=>Boolean(token||sessionConnected);
 const connectionMemory=window.PowerTrustConnectionMemory?.create()||{load:()=>null,save:()=>false,forget:()=>true};
-let token = '', selected = '', profile = null, result = null, timer = null, epoch = 0, reading = false, posting = false, uncertainPost = false, feedbackPosting = false, offset = 0, nextOffset = null;
+let token = '', selected = '', profile = null, result = null, timer = null, epoch = 0, reading = false, posting = false, uncertainPost = false, feedbackPosting = false, cancelPosting = false, historySerial = 0, offset = 0, nextOffset = null;
 function node(tag,text,cls){const n=document.createElement(tag);if(text!=null)n.textContent=String(text);if(cls)n.className=cls;return n;}
 function clear(id){$(id).replaceChildren();}
 function tell(text,error=false){$('notice').textContent=text;$('notice').className='notice'+(error?' error':'');}
@@ -16,11 +16,11 @@ function jsonBox(value){return node('pre',JSON.stringify(value,null,2),'json');}
 function fields(parent,items){const dl=node('dl');for(const [key,value] of items){dl.append(node('dt',key),node('dd',value==null?'未提供':typeof value==='object'?JSON.stringify(value):tr(value)));}parent.append(dl);}
 function badge(value){return node('span',tr(value),'badge'+(['contradicted','failed','timed_out','reject','rejected','execution_incomplete'].includes(value)?' issue':['insufficient_evidence','needs_information','not_assessable','interrupted','review_required','unknown'].includes(value)?' warning':''));}
 class ApiError extends Error {constructor(status,data){super('API error');this.status=status;this.code=data?.code||data?.detail?.code;}}
-async function api(path,body){const ctl=new AbortController();const timeout=setTimeout(()=>ctl.abort(),15000);try{const headers={};const requestToken=token;if(requestToken)headers.Authorization='Bearer '+requestToken;if(body!==undefined)headers['Content-Type']='application/json';const r=await fetch(path,{method:body===undefined?'GET':'POST',headers,body:body===undefined?undefined:JSON.stringify(body),signal:ctl.signal,cache:'no-store',credentials:'same-origin',redirect:'error'});const data=await r.json();if(!r.ok){if(r.status===401&&token===requestToken)invalidateConnection();throw new ApiError(r.status,data);}return data;}finally{clearTimeout(timeout);}}
-function errorText(e){if(!(e instanceof ApiError))return '网络中断或请求超时：状态未知。任务可能已被服务接收；不会自动重新提交，请用已有 run_id 或运行列表查询。';const byCode={CONFIGURATION_UNAVAILABLE:'真实模型配置或固定知识库缺失，未接受任务；不会切换演示组件。',RUN_STORAGE_FAILED:'运行存储不可用，保存未确认。请检查服务端存储。',SERVICE_UNAVAILABLE:'服务当前不接受任务。',SAME_ORIGIN_REQUIRED:'请求来源不符合本机同源要求。'};return byCode[e.code]||({401:'令牌无效或已失效；已清除页面连接与浏览器记忆，请核对本机固定令牌后重新连接。',409:'回答版本或 finding 关联冲突，未保存意见。请刷新后选择实际版本。',429:'等待队列已满，未接受本次任务。请等待后手动提交。',422:'输入验证失败，请检查必填项、长度与实际版本。',404:'该运行或关联记录未找到；仅在收到明确 404 时作此判断。',503:'服务不可用，未确认接受或保存。',403:'仅允许本机同源访问。'}[e.status]||`HTTP ${e.status}：操作未确认成功。`);}
-function controls(){ $('lookup').disabled=!connected||!hasConnection()||reading; $('submit').disabled=!connected||!hasConnection()||profile===null||posting||uncertainPost;$('refresh').disabled=!connected||!hasConnection()||!selected||reading;$('cancel').disabled=!connected||!hasConnection()||!selected||!['queued','running'].includes(result?.execution?.status);$('review-submit').disabled=!connected||!hasConnection()||!selected||!$('review-answer').value||feedbackPosting;}
+async function api(path,body){const ctl=new AbortController();const timeout=setTimeout(()=>ctl.abort(),15000);try{const headers={};const requestToken=token;const requestEpoch=epoch;if(requestToken)headers.Authorization='Bearer '+requestToken;if(body!==undefined)headers['Content-Type']='application/json';const r=await fetch(path,{method:body===undefined?'GET':'POST',headers,body:body===undefined?undefined:JSON.stringify(body),signal:ctl.signal,cache:'no-store',credentials:'same-origin',redirect:'error'});const data=await r.json();if(!r.ok){if(r.status===401&&token===requestToken&&epoch===requestEpoch)invalidateConnection();throw new ApiError(r.status,data);}return data;}finally{clearTimeout(timeout);}}
+function errorText(e,write=false){if(!(e instanceof ApiError))return !write?'只读查询失败或超时；未提交新任务。已暂停自动查询，可手动查询状态或刷新运行列表。':'网络中断或请求超时：状态未知。任务可能已被服务接收；不会自动重新提交，请用已有 run_id 或运行列表查询。';const byCode={CONFIGURATION_UNAVAILABLE:'真实模型配置或固定知识库缺失，未接受任务；不会切换演示组件。',RUN_STORAGE_FAILED:'运行存储不可用，保存未确认。请检查服务端存储。',SERVICE_UNAVAILABLE:'服务当前不接受任务。',SAME_ORIGIN_REQUIRED:'请求来源不符合本机同源要求。'};return byCode[e.code]||({401:'令牌无效或已失效；已清除页面连接与浏览器记忆，请核对本机固定令牌后重新连接。',409:'回答版本或 finding 关联冲突，未保存意见。请刷新后选择实际版本。',429:'等待队列已满，未接受本次任务。请等待后手动提交。',422:'输入验证失败，请检查必填项、长度与实际版本。',404:'该运行或关联记录未找到；仅在收到明确 404 时作此判断。',503:'服务不可用，未确认接受或保存。',403:'仅允许本机同源访问。'}[e.status]||`HTTP ${e.status}：操作未确认成功。`);}
+function controls(){ $('lookup').disabled=!connected||!hasConnection()||reading; $('submit').disabled=!connected||!hasConnection()||profile===null||posting||uncertainPost;$('refresh').disabled=!connected||!hasConnection()||!selected||reading;$('cancel').disabled=!connected||!hasConnection()||!selected||cancelPosting||!['queued','running'].includes(result?.execution?.status);$('review-submit').disabled=!connected||!hasConnection()||!selected||!$('review-answer').value||feedbackPosting;}
 function stop(){clearTimeout(timer);timer=null;}
-async function health(){try{const h=await api('/health');profile=h.profile;$('nli-enabled').disabled=!h.local_nli?.available;if(!h.local_nli?.available)$('nli-enabled').checked=false;$('nli-availability').textContent=h.local_nli?.note||'本地NLI不可用';const demo=profile==='synthetic_fixture';$('service-mode').className='mode-banner'+(demo?' demo':'');$('service-mode').textContent=demo?'演示模式 · synthetic_fixture\n假组件、零付费调用，不代表真实模型能力。':'真实模式 · DeepSeek\n提交任务会调用付费模型。领域检查含演示规则及来源绑定安全筛查；均非工程认证。';$('connection').textContent=`服务：${h.status} · 单活动运行 · 等待 ${h.queued}/${h.queue_capacity}`+(h.configuration_ready?'':' · 配置未就绪');}catch(e){profile=null;$('service-mode').textContent='服务不可用 · 模式未确认';throw e;}finally{controls();}}
+async function health(){const stamp=epoch;try{const h=await api('/health');if(stamp!==epoch)return;profile=h.profile;$('nli-enabled').disabled=!h.local_nli?.available;if(!h.local_nli?.available)$('nli-enabled').checked=false;$('nli-availability').textContent=h.local_nli?.note||'本地NLI不可用';const demo=profile==='synthetic_fixture';$('service-mode').className='mode-banner'+(demo?' demo':'');$('service-mode').textContent=demo?'演示模式 · synthetic_fixture\n假组件、零付费调用，不代表真实模型能力。':'真实模式 · DeepSeek\n提交任务会调用付费模型。领域检查含演示规则及来源绑定安全筛查；均非工程认证。';$('connection').textContent=`服务：${h.status} · 单活动运行 · 等待 ${h.queued}/${h.queue_capacity}`+(h.configuration_ready?'':' · 配置未就绪');}catch(e){if(stamp!==epoch)return;profile=null;$('service-mode').textContent='服务不可用 · 模式未确认';throw e;}finally{if(stamp===epoch)controls();}}
 function current(s){$('phase').textContent=['queued','running'].includes(s.status)?'当前阶段：'+tr(s.harness_state||s.status)+'（以实际阶段为准）':'任务'+tr(s.status)+'，回答与处置见下方。';clear('current');const parent=$('current');parent.className='';parent.append(badge(s.status),node('span',s.profile==='synthetic_fixture'?'synthetic_fixture 演示记录':'真实运行记录','badge'));fields(parent,[['run_id',s.run_id],['当前阶段',s.harness_state],['创建时间 UTC',s.created_utc],['结束时间 UTC',s.ended_utc],['结果持久化',s.persistence_confirmed],['错误代码',s.error_code],['固定知识版本',s.knowledge_version]]);if(s.cancel_requested)parent.append(node('p','已请求取消，以下状态以服务确认结果为准。','hint'));}
 function renderTrace(trace){clear('progress');clear('trace');const events=trace.events||[];if(!events.length)$('progress').append(node('p','阶段信息未提供，无进度百分比。','hint'));for(const item of events){const e=item.event;const card=node('div',null,'stage');card.append(node('strong',tr(e.component)+' · '+tr(e.state||e.status||e.kind)));card.append(jsonBox(e));$('trace').append(card);}if(events.length){const e=events.at(-1).event;$('progress').append(node('p',`最近阶段：${tr(e.component)} · 已记录 ${events.length} 个事件。`,'hint'));}}
 function renderAnswers(r){
@@ -50,11 +50,59 @@ function reviewFindings(){const answer=JSON.parse($('review-answer').value||'nul
 function reviewOptions(r){const old=$('review-answer').value;options($('review-answer'),(r.answer?.versions||[]).map(a=>[JSON.stringify({answer_id:a.answer_id,version:a.version}),`v${a.version} · ${a.answer_id}`]),old);reviewFindings();}
 function renderReviews(reviews){clear('reviews');$('reviews').append(node('h3','已保存的追加意见'));for(const f of reviews){const c=node('div',null,'card');c.append(badge(f.action),node('pre',f.note||'无说明'));fields(c,[['run_id',f.run_id],['回答版本',`${f.answer_id} / v${f.answer_version}`],['关联 finding',f.finding_id],['来源',f.source],['复核者声明',f.reviewer_id],['创建时间 UTC',f.created_utc]]);c.append(node('p','已追加保存；不改变模型判断，不是专家金标准。','hint'));$('reviews').append(c);}if(!reviews.length)$('reviews').append(node('p','暂无反馈','hint'));}
 function renderLocalNLI(value){clear('local-nli');const area=$('local-nli');area.append(node('p',value.risk_note,'hint'));if(value.pending)area.append(node('p','本地NLI诊断处理中，原审核已经独立结束。','hint'));if(!value.records?.length&&!value.pending)area.append(node('p',value.enabled?'本次没有已保存诊断；缺少可安全转换的交付时跳过，历史查询不会补算。':'本次未选择本地NLI，不执行推理；服务可复用此前已加载模型。','hint'));for(const r of value.records||[]){const c=node('div',null,'card');c.append(node('h3',`v${r.answer_version??'未知'} · ${r.component_id||'无支持组件'}`),badge(r.status));fields(c,[['NLI三类诊断',r.nli_three_class_result],['原事实判断',r.comparison_source==='fact_agent'?r.production_status:'未提供（比较项为已有用户监督，不是事实Agent）'],['已见用户监督',r.comparison_source==='user_supervision_replay'?r.production_status:null],['分歧',r.disagreement===null?'无法比较':r.disagreement?'有分歧':'无分歧'],['跳过/失败原因',tr(r.reason)],['完整输入token',r.tokens],['输入身份',r.input_id]]);const d=node('details');d.append(node('summary','模型版本、原始logits及实际输入（诊断详情）'),jsonBox(r));c.append(d);area.append(c);}if(value.error_code)area.append(node('p',value.error_code,'notice'));}
-async function load(){let nliPending=false;if(!hasConnection()||!selected||reading)return;stop();reading=true;controls();const stamp=epoch;const rid=selected;let s;try{s=await api('/runs/'+encodeURIComponent(rid));if(stamp!==epoch)return;current(s);const r=await api(`/runs/${encodeURIComponent(rid)}/result`);if(stamp!==epoch)return;result=r;if(r.answer){renderAnswers(r);if(!answerFocused&&r.answer.final?.text){answerFocused=true;$('answers').scrollIntoView({block:'start'});}renderFactDelivery(r);renderFindings(r);renderEvidence(r);reviewOptions(r);}else{clear('decision');$('decision').append(node('p','尚无阶段结果，未提供业务结论。','hint'));}try{const diagnostic=await api(`/runs/${encodeURIComponent(rid)}/nli`);nliPending=diagnostic.pending;renderLocalNLI(diagnostic);}catch(_){clear('local-nli');$('local-nli').append(node('p','诊断查询失败；原审核结果仍照常展示。','hint'));}const trace=await api(`/runs/${encodeURIComponent(rid)}/trace`);if(stamp!==epoch)return;renderTrace(trace);const reviews=await api(`/runs/${encodeURIComponent(rid)}/reviews`);if(stamp!==epoch)return;renderReviews(reviews);tell(`已查询 ${rid} · ${tr(s.status)}。`);if(['queued','running'].includes(s.status)||nliPending)timer=setTimeout(load,1800);}catch(e){if(stamp===epoch){tell(errorText(e),true);$('progress').textContent='当前网络查询状态未知；上方保留最近已确认的结果。自动轮询已暂停，可手动查询。';}}finally{reading=false;controls();}}
-async function selectRun(rid){if(!/^[A-Za-z0-9_-]{1,150}$/.test(rid)){tell('run_id 格式无效。',true);return;}if(reading){tell('当前查询尚未结束，请稍后选择任务。',true);return;}stop();epoch++;selected=rid;answerFocused=false;result=null;$('run-id').value=rid;for(const id of ['current','progress','trace','decision','answers','usage','findings','evidence','evidence-detail','reviews','local-nli'])clear(id);$('review-answer').replaceChildren();reviewFindings();await load();if(result?.answer)$('answers').scrollIntoView({block:'start'});}
-async function history(page=0){const data=await api('/runs/page/'+page);offset=page;nextOffset=data.next_offset;clear('history');for(const r of data.items){const btn=node('button',`${tr(r.mode)} · ${tr(r.status)} · ${r.profile}\n${r.run_id}`,'quiet');btn.type='button';btn.addEventListener('click',()=>selectRun(r.run_id));$('history').append(btn);}$('history-next').hidden=nextOffset===null;if(!data.items.length)$('history').append(node('p','暂无运行','hint'));}
+async function load(){
+ if(!hasConnection()||!selected||reading)return;
+ stop();const owner={};reading=owner;controls();
+ const stamp=epoch;const rid=selected;let nliPending=false;
+ try{
+  const status=await api('/runs/'+encodeURIComponent(rid));
+  if(stamp!==epoch)return;current(status);
+  const value=await api(`/runs/${encodeURIComponent(rid)}/result`);
+  if(stamp!==epoch)return;result=value;
+  if(value.answer){
+   renderAnswers(value);
+   if(!answerFocused&&value.answer.final?.text){answerFocused=true;$('answers').scrollIntoView({block:'start'});}
+   renderFactDelivery(value);renderFindings(value);renderEvidence(value);reviewOptions(value);
+  }else{clear('decision');$('decision').append(node('p','尚无阶段结果，未提供业务结论。','hint'));}
+  try{
+   const diagnostic=await api(`/runs/${encodeURIComponent(rid)}/nli`);
+   if(stamp!==epoch)return;nliPending=diagnostic.pending;renderLocalNLI(diagnostic);
+  }catch(_){
+   if(stamp!==epoch)return;clear('local-nli');$('local-nli').append(node('p','诊断查询失败；原审核结果仍照常展示。','hint'));
+  }
+  const trace=await api(`/runs/${encodeURIComponent(rid)}/trace`);
+  if(stamp!==epoch)return;renderTrace(trace);
+  const reviews=await api(`/runs/${encodeURIComponent(rid)}/reviews`);
+  if(stamp!==epoch)return;renderReviews(reviews);
+  tell(`已查询 ${rid} · ${tr(status.status)}。`);
+  if(['queued','running'].includes(status.status)||nliPending)timer=setTimeout(load,1800);
+ }catch(e){
+  if(stamp===epoch){tell(errorText(e),true);$('progress').textContent='只读查询失败；保留最近确认结果。自动轮询已暂停，可手动查询。';}
+ }finally{
+  if(reading===owner){reading=false;controls();}
+ }
+}
+async function selectRun(rid){
+ if(!/^[A-Za-z0-9_-]{1,150}$/.test(rid)){tell('run_id 格式无效。',true);return;}
+ stop();const stamp=++epoch;reading=false;selected=rid;answerFocused=false;result=null;$('run-id').value=rid;
+ for(const id of ['current','progress','trace','decision','answers','usage','findings','evidence','evidence-detail','reviews','local-nli'])clear(id);
+ $('review-answer').replaceChildren();reviewFindings();await load();
+ if(stamp===epoch&&result?.answer)$('answers').scrollIntoView({block:'start'});
+}
+async function history(page=0){
+ const stamp=epoch;const request=++historySerial;let data;
+ try{data=await api('/runs/page/'+page);}catch(e){if(stamp!==epoch||request!==historySerial)return;throw e;}
+ if(stamp!==epoch||request!==historySerial)return;
+ offset=page;nextOffset=data.next_offset;clear('history');
+ for(const row of data.items){
+  const btn=node('button',`${tr(row.mode)} · ${tr(row.status)} · ${row.profile}\n${row.run_id}`,'quiet');
+  btn.type='button';btn.addEventListener('click',()=>selectRun(row.run_id));$('history').append(btn);
+ }
+ $('history-next').hidden=nextOffset===null;
+ if(!data.items.length)$('history').append(node('p','暂无运行','hint'));
+}
 function forgetConnection(message='已忘记连接：浏览器保存项与页面内存均已清除。'){
- stop();epoch++;connected=false;sessionConnected=false;token='';const deleted=connectionMemory.forget();$('remember-connection').checked=false;$('token').value='';$('token').required=true;tell(deleted?message:'页面连接已清除，但浏览器拒绝删除保存项；请在浏览器站点设置中手动清除此地址的数据。',!deleted);controls();
+ stop();epoch++;historySerial++;reading=false;connected=false;sessionConnected=false;token='';const deleted=connectionMemory.forget();$('remember-connection').checked=false;$('token').value='';$('token').required=true;tell(deleted?message:'页面连接已清除，但浏览器拒绝删除保存项；请在浏览器站点设置中手动清除此地址的数据。',!deleted);controls();
 }
 function invalidateConnection(){forgetConnection('连接已失效：已清除页面记忆。请双击启动入口重新自动连接，或展开高级手动连接。');}
 async function connect(value){
@@ -79,27 +127,33 @@ $('submit-form').addEventListener('submit',async e=>{
  const payload={local_nli_enabled:$('nli-enabled').checked,engineering_context:{goal:$('task-scope').value},mode,question:$('question').value.trim(),user_context:$('context').value,answer_requirements:requirements};
  if(mode==='assess_existing')payload.existing_answer=$('existing').value;
  if($('reference').value.trim())payload.references=[{label:$('reference-label').value||'用户参考（未核实）',text:$('reference').value}];
- posting=true;controls();tell('正在提交一次任务，请勿重复提交。');let accepted;
- try{const before=profile;await health();if(profile!==before){tell('服务模式已变化，请核对页面模式标识后再次手动提交。',true);}else accepted=await api('/runs',payload);}catch(err){
-   if(!(err instanceof ApiError)){uncertainPost=true;tell(errorText(err)+' 提交已锁定，请重新连接并核对运行列表后再决定。',true);}else tell(errorText(err),true);
+ const stamp=epoch;posting=true;controls();tell('正在提交一次任务，请勿重复提交。');let accepted;let sent=false;
+ try{const before=profile;await health();if(stamp!==epoch)return;if(profile!==before){tell('服务模式已变化，请核对页面模式标识后再次手动提交。',true);}else{sent=true;accepted=await api('/runs',payload);}}catch(err){
+   if(!(err instanceof ApiError)&&sent){uncertainPost=true;tell(errorText(err,true)+' 提交已锁定，请重新连接并核对运行列表后再决定。',true);}else tell(errorText(err),true);
  }finally{posting=false;controls();}
- if(accepted){$('run-id').value=accepted.run_id;tell(`任务已接受：${accepted.run_id}`);await selectRun(accepted.run_id);try{await history();}catch(err){tell(`任务已接受：${accepted.run_id}，运行列表暂时无法查询。`+errorText(err),true);}}
+ if(accepted&&stamp===epoch){$('run-id').value=accepted.run_id;tell(`任务已接受：${accepted.run_id}`);await selectRun(accepted.run_id);try{await history();}catch(err){tell(`任务已接受：${accepted.run_id}，运行列表暂时无法查询。`+errorText(err),true);}}
 });
 $('lookup-form').addEventListener('submit',e=>{e.preventDefault();selectRun($('run-id').value.trim());});
 $('refresh').addEventListener('click',load);
-$('cancel').addEventListener('click',async()=>{const btn=$('cancel');btn.disabled=true;const rid=selected;try{await api(`/runs/${encodeURIComponent(rid)}/cancel`,{});tell('已请求取消，等待服务确认实际状态。');await load();}catch(err){tell(errorText(err),true);}finally{controls();}});
+$('cancel').addEventListener('click',async()=>{
+ if(cancelPosting||!selected)return;
+ cancelPosting=true;controls();const rid=selected;const stamp=epoch;
+ try{await api(`/runs/${encodeURIComponent(rid)}/cancel`,{});if(stamp!==epoch)return;tell('已请求取消，等待服务确认实际状态。');await load();}
+ catch(err){if(stamp===epoch)tell(errorText(err,true),true);}
+ finally{cancelPosting=false;controls();}
+});
 $('history-refresh').addEventListener('click',()=>history(0).catch(e=>tell(errorText(e),true)));
 $('history-next').addEventListener('click',()=>{if(nextOffset!==null)history(nextOffset).catch(e=>tell(errorText(e),true));});
 $('review-answer').addEventListener('change',reviewFindings);
 $('review-form').addEventListener('submit',async e=>{
  e.preventDefault();if(feedbackPosting||!hasConnection()||!selected||!$('review-answer').value)return;
- const a=JSON.parse($('review-answer').value);const rid=selected;const note=$('review-note').value;
+ const a=JSON.parse($('review-answer').value);const rid=selected;const stamp=epoch;const note=$('review-note').value;
  const payload={answer_id:a.answer_id,answer_version:a.version,finding_id:$('review-finding').value||null,action:$('review-action').value,source:$('review-source').value,reviewer_id:$('reviewer').value,note};
  feedbackPosting=true;controls();let saved=false;
- try{await api(`/runs/${encodeURIComponent(rid)}/reviews`,payload);saved=true;tell('复核意见已追加保存；模型判断保持原样。');if(selected===rid&&$('review-note').value===note)$('review-note').value='';}
- catch(err){tell(errorText(err)+' 输入已保留；未确认保存成功，请先查询已有反馈再决定是否重试。',true);}
+ try{await api(`/runs/${encodeURIComponent(rid)}/reviews`,payload);saved=true;if(stamp!==epoch)return;tell('复核意见已追加保存；模型判断保持原样。');if(selected===rid&&$('review-note').value===note)$('review-note').value='';}
+ catch(err){if(stamp===epoch)tell(errorText(err,true)+' 输入已保留；未确认保存成功，请先查询已有反馈再决定是否重试。',true);}
  finally{feedbackPosting=false;controls();}
- if(saved&&selected===rid){try{renderReviews(await api(`/runs/${encodeURIComponent(rid)}/reviews`));}catch(err){tell('意见已保存，但反馈列表暂时无法查询。'+errorText(err),true);}}
+ if(saved&&stamp===epoch&&selected===rid){try{const reviews=await api(`/runs/${encodeURIComponent(rid)}/reviews`);if(stamp===epoch)renderReviews(reviews);}catch(err){tell('意见已保存，但反馈列表暂时无法查询。'+errorText(err),true);}}
 });
 function renderFactDelivery(r){const d=node("details");d.append(node("summary","事实检索模式、知识版本、逐主张交付与省略（详情）"),jsonBox({mode:r.configuration?.retrieval_mode,strategy:r.configuration?.fact_retrieval_strategy,knowledge_version:r.configuration?.knowledge_version,embedding_profile:r.configuration?.embedding_profile,scoring_method:r.configuration?.scoring_method,records:r.retrieval}));$("usage").append(d);}
 window.addEventListener('pagehide',()=>{stop();token='';});
