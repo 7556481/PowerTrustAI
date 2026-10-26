@@ -1,0 +1,370 @@
+{
+  "origins": [
+    {
+      "id": "N1-A",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N1-A.json",
+      "file_sha256": "68a3a4755843f70c3b65154a3d4506744f557cbe8b928abf7decc3da5c99c3b2",
+      "delivery_sha256": "8c8f0b0b5427f0d79863c28600de573886b49341bc1cc93a5baca91d9c7a8567",
+      "evidence_sha256": "ab53412f8067a54736f9d5e0f07dbe3fe44a29a150295d88104da197a8ec9aba",
+      "bindings_sha256": "9845febc34f8270b85830eabceca2a592e841520db1eb3babbb9e62044e800af",
+      "record_sha256": "6036c2322d2d220d18c4f77248e29dadab2f07bcd0e608ebac8f56a43ddd8cc9",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "2188b1c25140409d8cc04644de426fe1",
+      "evidence_count": 5,
+      "chars": 5615
+    },
+    {
+      "id": "N1-C",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N1-C.json",
+      "file_sha256": "968f00a0ad0b1b150d6ec357230c70a9c7ab11b35d16259e1380cf329daed58c",
+      "delivery_sha256": "ecc25e5b0b99b64c020755c30caecc6dd4a2615180908c8df725a35493f5acb2",
+      "evidence_sha256": "e86a7255cd7acfa57e4d68a23df792627e175f0af2f706ae7542a402b94ae113",
+      "bindings_sha256": "2dbfccc3e466161a27e92d26395958bb8ef7f83b1a63aa97456813bd8612d9b5",
+      "record_sha256": "9cb63370678f13fc2eec898e8555e9181b20b959ae03e3fef5706c3fad40b9af",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "f72813472d5e47e49e275886719e07da",
+      "evidence_count": 6,
+      "chars": 4497
+    },
+    {
+      "id": "N2-A",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N2-A.json",
+      "file_sha256": "5bf939190717edbff52488b51965b2796d324957768d73663e3852452f54865e",
+      "delivery_sha256": "af63fca0406c69a3014fb71f1508d16529903720947e804753c27a0b8a579b6a",
+      "evidence_sha256": "54dfd1e12101dcff1b0c19c71598969478403daafceb7f9cd5d5fd4e1ec82ed0",
+      "bindings_sha256": "6721c8328b20e19a75e85e27fdebd3bc9e9784a56d5830d8520b9a00078c3322",
+      "record_sha256": "b6e94b25584ab7d1458d3fa47e3dd5e43e8280be4cce0574f2639f074222c097",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "8657506836034cfb99da381b950c98dc",
+      "evidence_count": 5,
+      "chars": 4776
+    },
+    {
+      "id": "N2-C",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N2-C.json",
+      "file_sha256": "3584eccb298a9db2d3ff6bb838c82e0ba5e168e69093f370cfda982202602526",
+      "delivery_sha256": "89ade0f3477416ac54e7e26b335d451825c6e09607597a3e516b5ebc6093506e",
+      "evidence_sha256": "ba12c9e46d6e4fcf6dad1472d8c9b89a760d762ebbf0a3837cebae99ed92ef0d",
+      "bindings_sha256": "1e2886fda0afdce19caf2f0399e6414321e25600a6159b1529b8f234aa362124",
+      "record_sha256": "226b5a0fbb42e31b2769e788a074c30a4eb714cd69e22d964ff87946c88f72a1",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "8fe91de52b604afcb7d47628b79c4adc",
+      "evidence_count": 6,
+      "chars": 5382
+    },
+    {
+      "id": "N3-A",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N3-A.json",
+      "file_sha256": "57a2c3b7b3e709836e6410ceedcb46301bd936c778c5b0f5929e428aea3ec497",
+      "delivery_sha256": "a9e1a2c1cd8f909a8a549a7b0599c41ed036d504e52837bc0ffcaf5f4e5bce47",
+      "evidence_sha256": "027ad4911039a8e1b92c67b129be71dd169e325f906c9cb963c111604047b33d",
+      "bindings_sha256": "b5ce7bc11be4189cc3b52b6707d107f4cc9268bc4b4f6a207495c3026b770f34",
+      "record_sha256": "b21f0a0e39aa485249eff75c67e446ad4445b9ddb38bdda015d878bebcc17afa",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "d1e3451dd1fb490495174d8173a5135a",
+      "evidence_count": 6,
+      "chars": 5621
+    },
+    {
+      "id": "N3-C",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N3-C.json",
+      "file_sha256": "13cff211d591316d0782637fc57c0ab4627378fb63cc02f7ca375a792e365e56",
+      "delivery_sha256": "2c8af844e89e0be4eabca75ed1220b4ac27d7336b0af6663b4b4b014e8edb949",
+      "evidence_sha256": "a09dc26255a618901044b0389e9f71a50292f5bc39c1efe01225a6348e25753a",
+      "bindings_sha256": "83475bd9d17a42a3ebb10d073352243a723f45bc3c6261a8694041771dd9236c",
+      "record_sha256": "e2862164114f42d0a46811aa4eaf2ecc60d9bb45f83477d334acbc8219e71b3f",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "a4090a975a394467bc461cb32c32f4ad",
+      "evidence_count": 6,
+      "chars": 5445
+    },
+    {
+      "id": "N4-A",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N4-A.json",
+      "file_sha256": "92923c3b115afb0db37721c2b2290d000dff13da77cdef20a28448b8f6275512",
+      "delivery_sha256": "c159c338216b7cc7acf84a22ff36f9dbd54d02762500d7e607a4a3ceaed9577d",
+      "evidence_sha256": "89bd2c07459095777204dd5134bb7fcb8f27f7f3841da31f5fbe40efb9cd927f",
+      "bindings_sha256": "6214ac7bf0298ed9a69007b1aa6d1427324efe93f4cdf7fa7929cf0186c90601",
+      "record_sha256": "d1664b8166169868897ba32da007c8587cd7f23b01815fa1703d40a5c846bf23",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "893dd9e766ab4171b27ea039eec14f46",
+      "evidence_count": 4,
+      "chars": 3804
+    },
+    {
+      "id": "N4-C",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N4-C.json",
+      "file_sha256": "045d698a4082bf252ab79747aed5ce635facc5fda3c92259536a3990f86f1fa6",
+      "delivery_sha256": "b3956695d038bc524d5f00af20477eacb569119f9ab4cc246049dd03818027aa",
+      "evidence_sha256": "29165ff18d0e1ed8a47b7c83814a075820e2669b0613cd05c60209fa81173fd6",
+      "bindings_sha256": "1368cdb843120c82d1996a2658499f3f7f96c257542ef2e8afb81b4c94cf478e",
+      "record_sha256": "d3a7d0f24d3b1d17aa7b834cabef852d3465a35032b4138879eec28bf40527d0",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "248abe41b5cd4d43a78bb0c1b4889891",
+      "evidence_count": 7,
+      "chars": 4819
+    },
+    {
+      "id": "N5-A",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N5-A.json",
+      "file_sha256": "fd9111df6ce03bf5ba577ac5429bd0e103da3d385957cef38763a698a0746a7d",
+      "delivery_sha256": "18102604ff6b3c409699fe53d5a0cf013d53af26a2835747640e1b939af4f888",
+      "evidence_sha256": "e4675dc32ff0a7d34f31fca0ad5059848dbadc7952b85e04cca709679c3eefd4",
+      "bindings_sha256": "535e038332b8612235cce91d53b4b3f040acf8af87fa263b29b3f18ff32942e9",
+      "record_sha256": "0af1eba75c23e07d9c336a31294e453750a60d9b00323e464500f0f6e5267d74",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "c4fb0cec7cc94f08b2f099d326acc1ae",
+      "evidence_count": 5,
+      "chars": 4722
+    },
+    {
+      "id": "N5-C",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N5-C.json",
+      "file_sha256": "4e62118878ef484ded003fcfc41eaa0b9beb9633dc3c5b7fff303c400d557d39",
+      "delivery_sha256": "aa0d7776478494a7b289ab70f96b4dc1bb230ef6cc11c0f8ee56aaf7e3275315",
+      "evidence_sha256": "583223868c8556a5ac9f0a44182e2dd747eedad816414fd8b1e5aefb2f0a47ec",
+      "bindings_sha256": "76bc5a4e2e5c9c046c4e3dd241f7b33d216bb912f74a49b39625ec6966108a4b",
+      "record_sha256": "b0b225ab461fab11a8f7d1bfdbc72617686929cb31c8fbe63d6646869fcac1ee",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "fde292e8cd8e4a3b8317d40b299dd64d",
+      "evidence_count": 5,
+      "chars": 4428
+    },
+    {
+      "id": "N6-A",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N6-A.json",
+      "file_sha256": "7989a2c62aa66b95ed08a4eb71c902be814705960927f9d0ad1f3848e2ce3c2f",
+      "delivery_sha256": "3302bb8d50dcad6873153744d1f720ff194ce6b57811950d8c0a94ebe086ca49",
+      "evidence_sha256": "6ad50d3d99ae09fd3619365ff9e182aca2e147279cd717a0d356af0fbb6a5aed",
+      "bindings_sha256": "744b63b2ddaa057ef6526ffd31f569161ea58d2d31c0f447df26721c3fffcdd3",
+      "record_sha256": "67b4c725fb22d3e081468b0b9334cae9d3aa39d00507ea8e3bac0baa5680eec3",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "885f27cf398146cfb9b261c4b0e666c6",
+      "evidence_count": 5,
+      "chars": 5017
+    },
+    {
+      "id": "N6-C",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N6-C.json",
+      "file_sha256": "1252372e6c4078798b8a2312a30e8f9db40ebef894eef73c2879b093bfdcf4df",
+      "delivery_sha256": "3fadbf5616a08e9ae71d61c95bf87c030792438859cf5602c82e588ad92540bd",
+      "evidence_sha256": "ddeb69f8b70be5ca5407383b076a972ca257b97cb3c6b0ac212f0e77a9e138f7",
+      "bindings_sha256": "3445f0483c391903a4a1267f7532deec2022af69ea6c8d892f568b4fb880f906",
+      "record_sha256": "e7a15400c517a5f864c18a049387e8a5156fa546553ffa80147d5c44ae20698e",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "ce506bc560c24f1c90638b21493428f2",
+      "evidence_count": 5,
+      "chars": 5412
+    },
+    {
+      "id": "N7-A",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N7-A.json",
+      "file_sha256": "ad790c728c28d291f7482640200d9718795fe17fdad644209a495bfe1d8cea45",
+      "delivery_sha256": "a13595a8b125fb7ad102b2490f4448f8107fc6c05a33bf1be0b228237a76cdcb",
+      "evidence_sha256": "205958fcdb4e2514a8ee47a4ea44e32284f7f4bc3825c9d642c352bba87c36ea",
+      "bindings_sha256": "20ba415f0fb0cdbc21dbc13ecff7f32dc0848ff447d41832b60d62ccbc9601c0",
+      "record_sha256": "92317b4277d9ef3df5c30bb8c927e20331023ae73260b7746f9c3a551978b766",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "ca7a7581262e40be9d286d11bfcba0ba",
+      "evidence_count": 5,
+      "chars": 5165
+    },
+    {
+      "id": "N7-C",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N7-C.json",
+      "file_sha256": "ce13fd4f5e6f3256370532d09a399d8317e860f65ec6f86f9681c6430d406820",
+      "delivery_sha256": "958c57cc3afc25fecab4f2365d192bb936f2031f22404dbb9d1f9240fbc0b884",
+      "evidence_sha256": "58c1f9a55646893545a8928c49ac3b19806b62df5d844dfecb82377fc778d2d3",
+      "bindings_sha256": "ddb9fca6fbe0df39148ef1ddbd3418aa047eb0b8a762a40d37f5b108570396d6",
+      "record_sha256": "ffd9392c15821bf39ab3dced1cba3d1b77aa7649ebbf702b2682d9af5409eef9",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "f7fbbd24680340ac84d3e9002b98a091",
+      "evidence_count": 8,
+      "chars": 5864
+    },
+    {
+      "id": "N8-A",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N8-A.json",
+      "file_sha256": "0ab0d0c4afec901347205d5e3408862ddd79d78d46987b3b96a81caaa94cad9a",
+      "delivery_sha256": "e0ee301675204a53633d304f8742f39b1d8d9b83d975ea8010c1038a44fd57e9",
+      "evidence_sha256": "725bb29c6977afd6e503d5f94536cc17a8b7de5a0121a6b67e0c48992b9a4eff",
+      "bindings_sha256": "b3b58309dcd8cec813da9d93b96cb91ac19b0f00f60244d4cb5076c3fbe3db76",
+      "record_sha256": "a8e1a370330a5ca9eab6f3144c019a3ed8aae6f365c40d6fb778f47fea5456e5",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "fb23e4d7a64a4e3b91defeefdb82f9a5",
+      "evidence_count": 5,
+      "chars": 4885
+    },
+    {
+      "id": "N8-C",
+      "path": "data/retrieval_local/chinese-first-cross-language-retrieval-v1/batch/retrieval/N8-C.json",
+      "file_sha256": "b320e1820c90c40d63481129e160b617389528736810e6817abb73ff4e99fb66",
+      "delivery_sha256": "8258d2f80ac4564852fb62067837cbbdc4b64a18a8e490b8fdf0c7eef9860952",
+      "evidence_sha256": "8e205d0e70b92ef375b2e89231603ae78b7d3fb9b385784bdc4e1553f9bfa99c",
+      "bindings_sha256": "aab8cbbed0c3cc26da7b75050426f75d37d7d7e2f97303ef06cd47d162edd246",
+      "record_sha256": "76262cb589bbaa05091ad02c6a3116ce9f60a0708f31c916ece177d6f2bb39da",
+      "knowledge_version": "kc-c25c9521cb746bef8c725edeb8bfa170efbb44fe5bb431c4d394634215a63a5e",
+      "archived_retrieval_id": "8df5dcab46e74f72b462147435113c23",
+      "evidence_count": 6,
+      "chars": 5007
+    }
+  ],
+  "pairs": [
+    {
+      "id": "N1",
+      "same_system_and_question_messages": true,
+      "message_shape": [
+        "system",
+        "user",
+        "user"
+      ],
+      "input_sha256": {
+        "A": "d604d109a31268dabd5418faddd9fada2e6f1c6128f0863469e9816c46235c4a",
+        "C": "c7cceeeb459b0e20ee4c64e734484910213e022036ad0ff2a216b38a06d2e2ed"
+      },
+      "document_message_fields": [
+        "evidence",
+        "origins",
+        "section"
+      ],
+      "query_plan_in_message": false
+    },
+    {
+      "id": "N2",
+      "same_system_and_question_messages": true,
+      "message_shape": [
+        "system",
+        "user",
+        "user"
+      ],
+      "input_sha256": {
+        "A": "e4cd7c712d1d555876cf4c3dca86fa963d4ff24745eed5bb374a53827c2edf02",
+        "C": "7cfbe9778859475c7879fdbe0464faebbef0d59e2df0dc7b71c76caea5cec6ac"
+      },
+      "document_message_fields": [
+        "evidence",
+        "origins",
+        "section"
+      ],
+      "query_plan_in_message": false
+    },
+    {
+      "id": "N3",
+      "same_system_and_question_messages": true,
+      "message_shape": [
+        "system",
+        "user",
+        "user"
+      ],
+      "input_sha256": {
+        "A": "c1e07aa80603e94f602261f2181a65ee64000e780dc4500b0aa3d3821c4c48f4",
+        "C": "d2b9fc46adae1d857e08636b3f887a36b70920ec305fb9a81d3b18fd7b3432c5"
+      },
+      "document_message_fields": [
+        "evidence",
+        "origins",
+        "section"
+      ],
+      "query_plan_in_message": false
+    },
+    {
+      "id": "N4",
+      "same_system_and_question_messages": true,
+      "message_shape": [
+        "system",
+        "user",
+        "user"
+      ],
+      "input_sha256": {
+        "A": "fd1e75c1b20f43387c5af34c1d4a13178fdbb6df29000b7441e6758759261833",
+        "C": "93cadc67f88149db459fcd45bfa105cea297b8ec26daa6aa176925dda1c30e26"
+      },
+      "document_message_fields": [
+        "evidence",
+        "origins",
+        "section"
+      ],
+      "query_plan_in_message": false
+    },
+    {
+      "id": "N5",
+      "same_system_and_question_messages": true,
+      "message_shape": [
+        "system",
+        "user",
+        "user"
+      ],
+      "input_sha256": {
+        "A": "45d137c0d67e26fe47c3f37b129efcc6ea036939a64f6982df1f007e62ced875",
+        "C": "f4e3314bd5bf466bcbf8c3c9baffdb81752ee1121626bbfd79d7704510d39970"
+      },
+      "document_message_fields": [
+        "evidence",
+        "origins",
+        "section"
+      ],
+      "query_plan_in_message": false
+    },
+    {
+      "id": "N6",
+      "same_system_and_question_messages": true,
+      "message_shape": [
+        "system",
+        "user",
+        "user"
+      ],
+      "input_sha256": {
+        "A": "1e18213d516b272b5d69e3d7878b7ccec9bf43bd8485207110338b29e5c2fc0c",
+        "C": "b12744d073397f64c984576d0037a59d82d991ecfa2bfcf9494d298cf3267bd6"
+      },
+      "document_message_fields": [
+        "evidence",
+        "origins",
+        "section"
+      ],
+      "query_plan_in_message": false
+    },
+    {
+      "id": "N7",
+      "same_system_and_question_messages": true,
+      "message_shape": [
+        "system",
+        "user",
+        "user"
+      ],
+      "input_sha256": {
+        "A": "fb01ece5212473bf88e464b5b246a11645921366385473e6729afb9c5b5be228",
+        "C": "65194ce189a2aa5efe00844a05f598940e7d10e54100050f439bdd6f8aa90f50"
+      },
+      "document_message_fields": [
+        "evidence",
+        "origins",
+        "section"
+      ],
+      "query_plan_in_message": false
+    },
+    {
+      "id": "N8",
+      "same_system_and_question_messages": true,
+      "message_shape": [
+        "system",
+        "user",
+        "user"
+      ],
+      "input_sha256": {
+        "A": "e2f5d3de465bb437ecd6e500cf2123b2c9787965b1884d35ea61acb573ba39b8",
+        "C": "fc2a316354a07ec1c2d864cb03311aba2bfbd42646e3188e69f20e962b38aef6"
+      },
+      "document_message_fields": [
+        "evidence",
+        "origins",
+        "section"
+      ],
+      "query_plan_in_message": false
+    }
+  ],
+  "old_gate_passed": false,
+  "old_gate_unchanged": true,
+  "new_retrieval_calls": 0,
+  "scope": "All sixteen actual complete deliveries restored and matched to old Store/file/public body hashes; no index or seal opened"
+}
