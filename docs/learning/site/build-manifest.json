@@ -1,258 +1,300 @@
 {
   "version": {
-    "application_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
-    "document_version": "learning-site-v5.3 literal original review and failed local revision,2026-10-25",
-    "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
-    "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
-    "daily_schema": 13,
-    "compact_schema14": "v9.14 scope guidance; fixed8 corrected8/8 but semantic reservations; daily13; not declared stable",
-    "documentation_parent_commit": "62db6ff1b11cb54b8f6048631373b3d5fd5182e3",
-    "final_delivery_ref": "release-v2-20261009",
-    "default_retrieval": "topic_v4_subject_v1",
-    "default_review_message_profile": "lossless_v1",
-    "previous_application_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-    "execution_path_default": "langgraph_v1",
-    "optional_development_execution_path": "langgraph_v1",
-    "langgraph_version": "1.2.16",
-    "production_switch": false,
-    "new_live_model_calls": 131,
-    "validation_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
-    "offline_unittest_count": 1285,
-    "live_graph_service_runs": 0,
-    "live_planned_service_runs": 0,
-    "live_accepted_service_runs": 0,
-    "previous_validation_commit": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
-    "full_offline_validation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-    "optional_service_execution_path": "langgraph_v1",
-    "validation_note": "Six old-draft chains/28Flash calls; dependent2generation+4chains not sent after candidate accepted N-2 misattachment. Extraction initial both3/3; no delivery pass orRevision; do not adopt.",
-    "public_unconfigured_fallback": "sequential",
-    "total_fixed_plan_model_calls": null,
-    "new_live_model_tokens": 585938,
-    "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1",
-    "fact_internal_flow_candidate": {
-      "version": "fact-internal-flow-v1",
-      "base_commit": "efbc2840938f26ac006b88a098d5214ba9e69f8e",
-      "implementation_commit": "c81c8c5fe2fe3b92c78d212dd76d873f55c5a7c8",
-      "production_enabled": false,
-      "new_live_calls": 0,
-      "full_offline_tests": 1158,
-      "full_offline_seconds": 166.597
+    "application_commit": "1a92d03da49ae25f311e950373003d6ab32d09f5",
+    "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
+    "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
+    "documentation_parent_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
+    "document_version": "learning-site-v6 natural audit and retrieval learning sync,2026-10-26",
+    "production": {
+      "schema": 13,
+      "managed_execution": "langgraph_v1",
+      "unconfigured_fallback": "sequential",
+      "service_8765": "stopped",
+      "default_retrieval": "topic_v4_subject_v1",
+      "cross_language_candidate_default": false,
+      "literal_source_actions_candidate_default": false,
+      "nli": "off",
+      "switched": false
     },
-    "fact_internal_flow_v2_candidate": {
-      "protocol": "fact-internal-flow-v2",
-      "implementation_commit": "a16eeb994c3a815fa1d219e6925ee7ddd31d2230",
-      "production_enabled": false,
-      "real_calls": 0,
-      "full_offline_tests": 1174,
-      "full_offline_seconds": 164.132,
-      "entry": "services.fact_flow_protocol_v2.create_agent",
-      "prior_v1_live_result": "docs/evaluation/fact-internal-flow-v1/live-report-v1.md"
+    "validation": {
+      "reused_full": {
+        "commit": "667cbe0b8fb10cdf7ea6dfc1be53abfeb2df043a",
+        "tests": 1324,
+        "seconds": 338.071
+      },
+      "current_specialized": {
+        "commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
+        "tests": 14,
+        "seconds": 11.462
+      }
     },
-    "answer_delivery_candidate": {
-      "version": "answer_only_v1",
-      "production_default": "production",
-      "application_commit": "bc55a4b20bc72f795a2cb9a110fc8b5cb1488651",
-      "offline_tests": 1197,
-      "offline_seconds": 197.256,
-      "report": "docs/evaluation/answer-review-net-benefit-v1/report.md",
-      "actual_model_calls": 106,
-      "total_tokens": 1126972,
-      "adoption": "retain_candidate_no_production_switch",
-      "natural_revisions": 0,
-      "execution_incomplete_audits": 5
-    },
-    "review_scope_v2_candidate": {
-      "production_enabled": false,
-      "adoption": "reject_no_natural_net_benefit",
-      "actual_requests": 116,
-      "invalid_attempts": 47,
-      "report": "docs/evaluation/production-review-net-benefit-v2/report.md"
-    },
-    "historical_service_validation": {
-      "production_switch": true,
-      "validation_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
-      "live_graph_service_runs": 3,
-      "live_planned_service_runs": 6,
-      "live_accepted_service_runs": 6,
-      "total_fixed_plan_model_calls": 37
-    },
-    "current_fixed_run_library": {
-      "new_plan": 28,
-      "accepted_local_records": 1,
-      "actually_executed": 1,
-      "not_submitted_after_admission_stop": 27,
-      "historical_reference_count": 0,
-      "not_real_http_service_acceptance": true
+    "experiment_batches": [
+      {
+        "version": "literal-review-stage1-v1",
+        "requests": 131,
+        "total_tokens": 1189079,
+        "note": "Verified literal-review-stage1-v1/report.md total table: input1090557/output98522."
+      },
+      {
+        "version": "local-revision-v2-flash-check-v1",
+        "requests": 16,
+        "total_tokens": 82465
+      },
+      {
+        "version": "natural-answer-benefit-v3",
+        "requests": 49,
+        "total_tokens": 579406
+      },
+      {
+        "version": "retrieval-delivery-repair-v1",
+        "requests": 0,
+        "total_tokens": 0
+      },
+      {
+        "version": "chinese-first-cross-language-retrieval-v1",
+        "requests": 8,
+        "total_tokens": 1359
+      },
+      {
+        "version": "retrieval-evidence-answer-check-v1",
+        "requests": 16,
+        "total_tokens": 147049
+      },
+      {
+        "version": "natural-draft-audit-v1",
+        "requests": 32,
+        "total_tokens": 380949
+      },
+      {
+        "version": "natural-review-seam-v1",
+        "requests": 28,
+        "total_tokens": 585938
+      }
+    ],
+    "metadata_correction": "Prior flat new_live_model_calls=131 belonged to literal stage1; 585938 token belonged to natural-review-seam-v1, NOT that same batch. Per-batch values below are checked against reports; no synthetic mixed sum.",
+    "historical_metadata_source_commit": "1a92d03da49ae25f311e950373003d6ab32d09f5",
+    "historical_candidates": {
+      "fact_internal_flow_candidate": {
+        "version": "fact-internal-flow-v1",
+        "base_commit": "efbc2840938f26ac006b88a098d5214ba9e69f8e",
+        "implementation_commit": "c81c8c5fe2fe3b92c78d212dd76d873f55c5a7c8",
+        "production_enabled": false,
+        "new_live_calls": 0,
+        "full_offline_tests": 1158,
+        "full_offline_seconds": 166.597
+      },
+      "fact_internal_flow_v2_candidate": {
+        "protocol": "fact-internal-flow-v2",
+        "implementation_commit": "a16eeb994c3a815fa1d219e6925ee7ddd31d2230",
+        "production_enabled": false,
+        "real_calls": 0,
+        "full_offline_tests": 1174,
+        "full_offline_seconds": 164.132,
+        "entry": "services.fact_flow_protocol_v2.create_agent",
+        "prior_v1_live_result": "docs/evaluation/fact-internal-flow-v1/live-report-v1.md"
+      },
+      "answer_delivery_candidate": {
+        "version": "answer_only_v1",
+        "production_default": "production",
+        "application_commit": "bc55a4b20bc72f795a2cb9a110fc8b5cb1488651",
+        "offline_tests": 1197,
+        "offline_seconds": 197.256,
+        "report": "docs/evaluation/answer-review-net-benefit-v1/report.md",
+        "actual_model_calls": 106,
+        "total_tokens": 1126972,
+        "adoption": "retain_candidate_no_production_switch",
+        "natural_revisions": 0,
+        "execution_incomplete_audits": 5
+      },
+      "review_scope_v2_candidate": {
+        "production_enabled": false,
+        "adoption": "reject_no_natural_net_benefit",
+        "actual_requests": 116,
+        "invalid_attempts": 47,
+        "report": "docs/evaluation/production-review-net-benefit-v2/report.md"
+      },
+      "historical_service_validation": {
+        "production_switch": true,
+        "validation_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
+        "live_graph_service_runs": 3,
+        "live_planned_service_runs": 6,
+        "live_accepted_service_runs": 6,
+        "total_fixed_plan_model_calls": 37
+      },
+      "current_fixed_run_library": {
+        "new_plan": 28,
+        "accepted_local_records": 1,
+        "actually_executed": 1,
+        "not_submitted_after_admission_stop": 27,
+        "historical_reference_count": 0,
+        "not_real_http_service_acceptance": true
+      },
+      "simple_review_candidate": {
+        "implementation": "ebf17a4114b0f537971767973687df220e33a1f2",
+        "prompt": "v9.22.1",
+        "projection": "simple-condition-projection-v1.1",
+        "production_enabled": false,
+        "actual_requests": 3,
+        "request_rejections": 0,
+        "invalid_outputs": 2,
+        "admission_complete": false,
+        "adoption": "not_adopt_incomplete_admission_no_natural_evidence",
+        "report": "docs/evaluation/review-simple-patch-v1/report.md"
+      },
+      "previous_simple_review_candidate": {
+        "paid_implementation": "f08b672bc24fe01aa804d74afbc7140f6e833c13",
+        "offline_fix_implementation": "88281c910403e69be71963e0b1e3d39d4e70e253",
+        "paid_prompt": "v9.22",
+        "offline_prompt": "v9.22.1",
+        "projection": "simple-condition-projection-v1.1",
+        "production_enabled": false,
+        "adoption": "not_adopt_no_real_candidate_output",
+        "report": "docs/evaluation/review-contract-simple-v1/report.md"
+      },
+      "strict_tool_carrier": {
+        "implementation": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
+        "transport": "strict-review-tool-v1",
+        "business_contract": "fact-review-simple-v1",
+        "projection": "simple-condition-projection-v1.1",
+        "production_enabled": false,
+        "actual_requests": 3,
+        "tool_envelopes": 3,
+        "valid_arguments": 0,
+        "request_rejections": 0,
+        "adoption": "not_adopt_no_usable_review_result",
+        "report": "docs/evaluation/strict-review-tool-v1/report.md"
+      },
+      "strict_interface_consistency": {
+        "implementation": "cb64b21cab7f837f777d3245217c8ed40aafb8a2",
+        "minimal_valid": 8,
+        "minimal_planned": 8,
+        "regression_complete": 2,
+        "regression_planned": 4,
+        "new_live_requests": 19,
+        "offline_targeted_tests": 44,
+        "production_enabled": false,
+        "adoption": "not_adopt_complex_contract_and_semantic_failures",
+        "report": "docs/evaluation/strict-interface-consistency-v1/report.md"
+      },
+      "model_fit_v1": {
+        "paid_implementation": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d",
+        "offline_boundary_patch": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
+        "models": [
+          "deepseek-flash",
+          "deepseek-v4-pro"
+        ],
+        "tasks": 16,
+        "calls": 41,
+        "production_switch": false,
+        "adoption": "keep_current_pro_experimental_only_no_service_acceptance",
+        "report": "docs/evaluation/fact-review-model-fit-v1/report.md"
+      },
+      "review_unblock_v1": {
+        "paid_implementation": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
+        "post_batch_budget_patch": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
+        "contract": "simple_bound_v1",
+        "projection": "simple-condition-projection-v1.2-target-bound",
+        "model": "deepseek-flash",
+        "new_pro_calls": 0,
+        "production_enabled": false,
+        "adoption": "retain_candidate_no_production_acceptance",
+        "report": "docs/evaluation/review-delivery-unblock-v1/report.md"
+      },
+      "natural_review_seam_v1": {
+        "implementation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
+        "contract": "simple_bound_v1",
+        "extraction_message_profile": "unified_v1",
+        "model": "deepseek-flash",
+        "executed_old_chains": 6,
+        "planned_new_generation": 2,
+        "executed_new_generation": 0,
+        "planned_new_chains": 4,
+        "executed_new_chains": 0,
+        "adoption": "do_not_adopt_no_production_acceptance",
+        "report": "docs/evaluation/natural-review-seam-v1/report.md"
+      },
+      "literal_review_stage1": {
+        "report": "docs/evaluation/literal-review-stage1-v1/report.md",
+        "logical_slots": 28,
+        "normal_factory_runs": 28,
+        "model": "deepseek-flash",
+        "calls": 131,
+        "candidate_fixed": 0,
+        "error_drafts": 4,
+        "correct_protection": 3,
+        "insufficient_protection": "execution_incomplete",
+        "natural_changed": 0,
+        "adoption": "do_not_adopt_stop_stage1",
+        "billing_amount": null,
+        "browser_acceptance": false
+      }
     },
     "chapter_count_fixed": false,
     "exercise_count_fixed": false,
+    "update_policy": "Markdown authoritative, actual source snippets/build/search verified; browser acceptance separate.",
     "actual_chapters": 20,
-    "actual_explained_exercises": 77,
-    "known_model_tokens": 585938,
-    "token_usage_unknown_requests": 0,
-    "simple_review_candidate": {
-      "implementation": "ebf17a4114b0f537971767973687df220e33a1f2",
-      "prompt": "v9.22.1",
-      "projection": "simple-condition-projection-v1.1",
-      "production_enabled": false,
-      "actual_requests": 3,
-      "request_rejections": 0,
-      "invalid_outputs": 2,
-      "admission_complete": false,
-      "adoption": "not_adopt_incomplete_admission_no_natural_evidence",
-      "report": "docs/evaluation/review-simple-patch-v1/report.md"
-    },
-    "previous_simple_review_candidate": {
-      "paid_implementation": "f08b672bc24fe01aa804d74afbc7140f6e833c13",
-      "offline_fix_implementation": "88281c910403e69be71963e0b1e3d39d4e70e253",
-      "paid_prompt": "v9.22",
-      "offline_prompt": "v9.22.1",
-      "projection": "simple-condition-projection-v1.1",
-      "production_enabled": false,
-      "adoption": "not_adopt_no_real_candidate_output",
-      "report": "docs/evaluation/review-contract-simple-v1/report.md"
-    },
-    "strict_tool_carrier": {
-      "implementation": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
-      "transport": "strict-review-tool-v1",
-      "business_contract": "fact-review-simple-v1",
-      "projection": "simple-condition-projection-v1.1",
-      "production_enabled": false,
-      "actual_requests": 3,
-      "tool_envelopes": 3,
-      "valid_arguments": 0,
-      "request_rejections": 0,
-      "adoption": "not_adopt_no_usable_review_result",
-      "report": "docs/evaluation/strict-review-tool-v1/report.md"
-    },
-    "strict_interface_consistency": {
-      "implementation": "cb64b21cab7f837f777d3245217c8ed40aafb8a2",
-      "minimal_valid": 8,
-      "minimal_planned": 8,
-      "regression_complete": 2,
-      "regression_planned": 4,
-      "new_live_requests": 19,
-      "offline_targeted_tests": 44,
-      "production_enabled": false,
-      "adoption": "not_adopt_complex_contract_and_semantic_failures",
-      "report": "docs/evaluation/strict-interface-consistency-v1/report.md"
-    },
-    "offline_validation_scope": "1274 full offline before paid;6 focused rehearsal tests; only documentation changes after paid, no repeated full suite.",
-    "model_fit_v1": {
-      "paid_implementation": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d",
-      "offline_boundary_patch": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
-      "models": [
-        "deepseek-flash",
-        "deepseek-v4-pro"
-      ],
-      "tasks": 16,
-      "calls": 41,
-      "production_switch": false,
-      "adoption": "keep_current_pro_experimental_only_no_service_acceptance",
-      "report": "docs/evaluation/fact-review-model-fit-v1/report.md"
-    },
-    "review_unblock_v1": {
-      "paid_implementation": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
-      "post_batch_budget_patch": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
-      "contract": "simple_bound_v1",
-      "projection": "simple-condition-projection-v1.2-target-bound",
-      "model": "deepseek-flash",
-      "new_pro_calls": 0,
-      "production_enabled": false,
-      "adoption": "retain_candidate_no_production_acceptance",
-      "report": "docs/evaluation/review-delivery-unblock-v1/report.md"
-    },
-    "planned_task_slots": 12,
-    "natural_review_seam_v1": {
-      "implementation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-      "contract": "simple_bound_v1",
-      "extraction_message_profile": "unified_v1",
-      "model": "deepseek-flash",
-      "executed_old_chains": 6,
-      "planned_new_generation": 2,
-      "executed_new_generation": 0,
-      "planned_new_chains": 4,
-      "executed_new_chains": 0,
-      "adoption": "do_not_adopt_no_production_acceptance",
-      "report": "docs/evaluation/natural-review-seam-v1/report.md"
-    },
-    "default_extraction_message_profile": "production",
-    "literal_review_stage1": {
-      "report": "docs/evaluation/literal-review-stage1-v1/report.md",
-      "logical_slots": 28,
-      "normal_factory_runs": 28,
-      "model": "deepseek-flash",
-      "calls": 131,
-      "candidate_fixed": 0,
-      "error_drafts": 4,
-      "correct_protection": 3,
-      "insufficient_protection": "execution_incomplete",
-      "natural_changed": 0,
-      "adoption": "do_not_adopt_stop_stage1",
-      "billing_amount": null,
-      "browser_acceptance": false
-    }
+    "actual_explained_exercises": 88
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 6183,
-      "sha256": "394ec6c5e6e28a03eb3b6c0d62931a83730567a586cc8b5c53c9ea633b7c29d9"
+      "characters": 7312,
+      "sha256": "bcd4d2f7b3ed73cbb47464713ccfaa75ebb49dc7241b7022e16c8d2a63fb85f4"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
-      "characters": 4173,
-      "sha256": "84ce1e466ff6fe62a3112b8a368249b78e92d49ceb29b62ba2c20716cdf4669a"
+      "characters": 5178,
+      "sha256": "c77fe3a8da13bb733030d8edb01fa1c05f70bf5f299644021aefc3d32724463d"
     },
     {
       "source": "docs/learning/chapters/02-architecture.md",
-      "characters": 9061,
-      "sha256": "7670c9930b1101a9d2fce413b2e51bf82e902d3a9a7cd2b21637fa21edab5bc2"
+      "characters": 9129,
+      "sha256": "a51c6e6339d84388f8a06d519e1abea3aa8512a088831b8ecfe69848e0f52f4c"
     },
     {
       "source": "docs/learning/chapters/03-agents.md",
-      "characters": 7866,
-      "sha256": "b76ba9eb57876fcbd99358b9df2185e9c3f4fd7dafea3afce52b963fe20e03ff"
+      "characters": 8482,
+      "sha256": "d35c812dbd07c75d2c7278115976678e8c7df23405b84e71b46fa29158372397"
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 14944,
-      "sha256": "cb0a325d2f0d3b358a1b864f93a467832784fda988e6e048873b423a15419e3d"
+      "characters": 16714,
+      "sha256": "3ecbb752f04b489890d1a0ec1d2f7756956b73510ddc77014c9a78e6500ce0d8"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 4644,
-      "sha256": "7168630fb940a9d0b53db8603e8ea94aff6c4d6139c390f81a2bf3053256abde"
+      "characters": 6469,
+      "sha256": "fcdfbd72ca7a4806a7a2f3e9ac196626df73954413bd45fe9b28f26c3c9dda68"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
-      "characters": 4936,
-      "sha256": "fef95c85bf7a02c904396cf43b7d48aa9c224493c9d9f20294474f6e683fdf4d"
+      "characters": 5770,
+      "sha256": "ca36eae2f02bb898541c76a5c82c2a22e5c224e30be416a3beb325399fe3359e"
     },
     {
       "source": "docs/learning/chapters/07-corpus.md",
-      "characters": 3753,
-      "sha256": "c3d266da92f036eabff6d5d7270f2e0c87359167570f7456e5243c014e4de0fc"
+      "characters": 4517,
+      "sha256": "e6fe3adc8cfe131ff624dfc249a64e0fdcab983cc0b2eda600ab7dfc5a7029fb"
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 10453,
-      "sha256": "6904dd915b0aeed2ed05ff6d03c69076f9cc481feb747320dadcf6e08f212a68"
+      "characters": 12710,
+      "sha256": "2950b3b2c1c849e202ba7deb19b2066fa75e497729f742b58e336452dc4ae327"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
-      "characters": 3787,
-      "sha256": "e4e8dffd16c32e9af8ae843efc4520209a7c1bea7c479d21178f338194d1f6ab"
+      "characters": 3821,
+      "sha256": "7493d1b6e8d991a3c0a2a90c5cad6d8cf43144e37e1d762f5b866732c54f6604"
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 4916,
-      "sha256": "cdff3ce09c2223e6f7c5de18e44ba846d155870a0d7b92a1c6e34b126c887eb9"
+      "characters": 5052,
+      "sha256": "c022c0b15aabe2c5478d509f0e486bb74d76afdcdb12c485bfb5a981571df811"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
-      "characters": 6761,
-      "sha256": "3531c45702060f050f9528c4e35228868ffb077e1488215d30aec6fbca583194"
+      "characters": 7848,
+      "sha256": "fdf9a6b766274e99004a53fe9f17333cfeb87931feb66aec3a6511e2a67b1f73"
     },
     {
       "source": "docs/learning/chapters/12-training-nli.md",
@@ -266,28 +308,28 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 41371,
-      "sha256": "b75fe9fdd8fea700b991705668122e84ecc3f1687f79acd20cf022c1de0b7ea7"
+      "characters": 22776,
+      "sha256": "9282dfb0d210e392ea984aa905fa08b95ba04a80ba0026aad54af96384a62b7a"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
-      "characters": 5864,
-      "sha256": "62bc4ddba994fe976c35b7d185efece616c524b25753d9e5e6723ca36d9f2b19"
+      "characters": 6356,
+      "sha256": "c6aafdfcb568afe5c3c8bfc1b62ad4a365e949880838180a50e45edf062d8ef2"
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 5889,
-      "sha256": "8db3d45d5f577e523ba1130a575cfb4bc7efc2257d25b1ac7920d73ec0e439f8"
+      "characters": 6832,
+      "sha256": "548658642b66a05d8fd4ed086509602763894ae0f73ecacedfad5100852d0ef2"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
-      "characters": 3746,
-      "sha256": "19bc51e997091fe76748d570a2ce38cc4e1925424cc22429ff79276272f37d2f"
+      "characters": 4683,
+      "sha256": "2630d37804c03deefeca82c8ba264b460ace6fed44fb1186740310be744265fb"
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 7075,
-      "sha256": "feb5e8d3314b16ee0c5ff78041ec7b7c9c8d20c7bead72fa093eaf24d5d4b769"
+      "characters": 7245,
+      "sha256": "0417c244189684bca0bd747f5956bc4acf88ff2936bd2416c545f250794fe1c6"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -296,8 +338,8 @@
     },
     {
       "source": "docs/learning/chapters/20-workshops.md",
-      "characters": 4270,
-      "sha256": "d302e4c25a37dac43521efacb1b5f09da1d6ab0059621091c9674374577550e4"
+      "characters": 4955,
+      "sha256": "94e6a0dc939d4c1fefc97337a0e939ef5204c0b59e480be4bf05668e53e0a0b4"
     },
     {
       "source": "docs/learning/questions-for-chatgpt.md",
@@ -305,6 +347,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 163922,
+  "markdown_characters": 160079,
   "network_dependencies": false
 }

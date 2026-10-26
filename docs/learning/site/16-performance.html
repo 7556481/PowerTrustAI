@@ -1,56 +1,60 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 性能与可观测性：测量到底属于谁 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 c098b5d48d12 · learning-site-v5.3 literal original review and failed local revision,2026-10-25 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">16 性能与可观测性：测量到底属于谁</h1>
-<h2 id="section-2">模型选择：同合同对照与真实代价</h2>
-<p>【真实观察】本批同服务Flash/Pro使用相同消息、Schema、Beta工具和非思考设置，只改变model。Pro19请求、Flash22请求；Pro较少纠正，但模型累计114.856秒，高于Flash87.529秒。两路缓存比例和价格不同，账单未知，不能按token更少宣称费用更低。单批已见材料也不证明模型普遍优越。<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-review-model-fit-v1/report.md#" rel="noreferrer noopener">选型与成本记录</a>。</p>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>16 性能与可观测性：测量到底属于谁 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 1a92d03da49a · learning-site-v6 natural audit and retrieval learning sync,2026-10-26 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">16 性能与可观测性：测量到底属于谁</h1>
+<h2 id="section-2">收益与花费按批次记账</h2>
+<div class="table-scroll"><table><thead><tr><th>批次</th><th>新增请求</th><th>新增token</th><th>能回答的问题</th></tr></thead><tbody><tr><td>历史修订v2</td><td>16</td><td>82465</td><td>给定已成立发现，修订能否合法保留并重审</td></tr><tr><td>自然v3</td><td>49</td><td>579406</td><td>自然生成及审核，未见改善</td></tr><tr><td>有界资料定位</td><td>0</td><td>0</td><td>目标在哪一层丢失</td></tr><tr><td>A/B/C跨语言</td><td>8</td><td>1359</td><td>召回改善及转换忠实性</td></tr><tr><td>固定证据回答</td><td>16</td><td>147049</td><td>原中文＋交付材料后的回答变化</td></tr><tr><td>本轮固定自然稿审核</td><td>32</td><td>380949</td><td>同稿真实初审、一次修订与完整重审</td></tr></tbody></table></div>
+<p>跨语言平均A3.999秒、B0.284秒、C2.032秒；C−B增加1.748秒（转换平均0.996秒，其余含检索开销），独立冷封189.786秒不混入在线均值。固定回答Harness A2.674秒、C2.850秒仅为已归档Evidence的生成耗时，不能当线上全链时延。金额无账单为未知，缓存命中与估算区间不是实付。<a href="https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#" rel="noreferrer noopener">完整证据</a>；<a href="https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#" rel="noreferrer noopener">完整证据</a>；<a href="https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#" rel="noreferrer noopener">完整证据</a>。</p>
+<h2 id="section-3">历史说明与基础知识（保留原日期，当前状态以上文为准）</h2>
+<h2 id="section-4">模型选择：同合同对照与真实代价</h2>
+<p>【真实观察】本批同服务Flash/Pro使用相同消息、Schema、Beta工具和非思考设置，只改变model。Pro19请求、Flash22请求；Pro较少纠正，但模型累计114.856秒，高于Flash87.529秒。两路缓存比例和价格不同，账单未知，不能按token更少宣称费用更低。单批已见材料也不证明模型普遍优越。<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-review-model-fit-v1/report.md#" rel="noreferrer noopener">选型与成本记录</a>。</p>
 <p>选型先看正式接口能力及本机安全配置是否可用，不能凭名称猜兼容；目录可见仍需正式任务确认接受。若模型不得不使用不同载体，应称两种可部署配置对照；即使接口相同，也要保留采样、时点、缓存和版本边界。不要把多个内部计时相加成问答延迟，更不能称为浏览器首绘。</p>
 <p>【教学构造】乙比甲少3次纠正、总token更少，但需要更长模型时间，且有据内容误拦更多。没有账单时能否据此称乙更省、更适合部署？</p>
 <details class="self-answer"><summary>展开模型成本练习解析</summary><p>不能。不同模型的输入/输出及缓存价格不同，token不是跨模型金额；账单缺失应记未知，估算须另列日期与公式。少调用也可能来自失败、少重审或不同任务完成度。应分别报告结构收益、语义损害、请求和墙钟，在用户目标上判断是否值得；结构更好仍可能不值得推进服务验收。</p></details>
-<h2 id="section-3">端到端时间不是模型推理时间</h2>
+<h2 id="section-5">端到端时间不是模型推理时间</h2>
 <p>用户从提交到答案包含排队、检索、查询转换、生成、提取、工具、双审、可能的纠正/Revision、持久化和页面轮询。第一次反馈只是用户看到已接收或阶段，不是答案完成。冷启动包含模型加载、数据库封印检查和FTS打开，与热请求不能混平均。</p>
 <p>教学构造：排队2秒、检索0.4、生成8、提取4、Fact12/Domain10并发、保存0.2，关键路径约26.6秒，而不是把两个审核相加36.6秒。调用量仍生成/提取/双审4次，不因并发减半。若Fact纠正又12秒，关键路径增长；要保存初次结构成功与纠正成本。</p>
-<h2 id="section-4">请求归属：避免全运行列表切片重叠</h2>
+<h2 id="section-6">请求归属：避免全运行列表切片重叠</h2>
 <p>model_adapter/runtime.py使用ContextVar保存invocation_id、component和answer_version，实际call_number全运行唯一。并发审核共享预算records，但不能用“开始时len到结束时len”切片推断阶段请求；两个阶段并行观察可能重叠，曾出现2调用/3轨迹。当前按实际调用归属记录，不按提示文本猜，也不删重复观察隐藏错误。</p>
 <p>Trace的stage duration、ModelUsage的elapsed和服务端created/ended时间可能不同。供应商只给usage时，不应从字符数伪造token数；失败usage未知就未知。cache_hit_tokens与cache_miss_tokens、output_tokens分开，缓存命中也不表示总请求免费或语义正确。</p>
-<h2 id="section-5">哪些开销适合优化</h2>
+<h2 id="section-7">哪些开销适合优化</h2>
 <p>同知识版本、同配置、同查询可复用已验证检索结果；答案版本或候选scope变化要重新绑定。请求内重复Evidence可按身份去重，不能把同文字不同来源强合并。原文完整性校验可在构建/发布/打开分层，命中严格回查，避免每query全库SHA扫描。</p>
 <p>大库采用倒排而非全快照扫描是规模优化，不是改变排名试验。冷启动数据库字节封印检查移到启动线程，避免健康页面超时，但仍需完成验证才ready。缓存仅改善重复工作，不减少必需覆盖或条件。</p>
-<h2 id="section-6">不该为了速度做什么</h2>
+<h2 id="section-8">不该为了速度做什么</h2>
 <p>不能静默截断Evidence、删难组件、减少双审、用旧v1判断审核v2、只验证原修复句或提高通过率。不适用检查应由任务范围有理由地标记，不是程序不调用就默认通过。模型请求可批量的对象有有界分组，但每项scope独立，分组过大又会造成响应容量和漏项。</p>
 <p>采集器也是被测工程：先保存已受理身份与有效部分，采集共享故障后不能盲重发。离线恢复既有响应只恢复记录，不产生新模型观察；未知token只能写未知，不能把缺用量归为模型审核失败。一次快失败也不能宣传更快，必须固定完成义务与答案质量。</p>
-<h2 id="section-7">资源测量与真实记录</h2>
+<h2 id="section-9">资源测量与真实记录</h2>
 <p>RSS是进程驻留内存，WorkingSet也是时点观测；训练采样峰值不等于整机峰值。父venv进程几MB不代表实际训练只用几MB，应检查子进程。CPU线程限制4不是“使用了4个独立Agent”。本地NLI加载、推理、服务内存另计，不把网络等待的墙钟说成CPU计算速度。</p>
 <p>真实扩大MiniLM训练112.8836秒含验证/保存；加载0.1332秒另计；SSIAG微调推理3.8054秒是33小文本，不可推断长工程问答端到端。ab338…4请求18.089秒是已有回答审核、不含Generation，与6请求问答不能直接称优化了多少。</p>
-<h2 id="section-8">一批固定题如何报告</h2>
+<h2 id="section-10">一批固定题如何报告</h2>
 <p>每题记录原始耗时、请求/纠正次数、token、阶段和执行问题，汇总中位数/范围有明确样本数。12题不足以把P95当稳定SLA；单题的首反馈、端到端及阶段可同时报告。源代码/配置/知识固定，批次中不能修一个bug后将新旧结果混为同一版。</p>
 <p>性能与质量一起看：一个题更快却只返回拒答模板，不算高质量提速；平均请求少因5题审核失败，也不能称性能提高。结构完整、解决问题、错误放行先分层，再解释成本。</p>
-<h2 id="section-9">面试练习</h2>
+<h2 id="section-11">面试练习</h2>
 <p>练习：一题没有usage，但响应已收到并结构失败，如何记token？参考：实际请求计入，token按供应商usage未知，不估成0；原始响应、校验诊断和有限纠正保留。</p>
 <p>面试说法：“我用阶段invocation归属解释并发成本，区分冷启动、推理和端到端。优化重复校验和大库查询，而不是截断证据或减少义务；小样本性能只报告实际值。”</p>
-<h2 id="section-10">本轮12题为什么不能称性能提升</h2>
+<h2 id="section-12">本轮12题为什么不能称性能提升</h2>
 <p>12题累计131.31秒、中位12.49、范围5.80–15.09秒，共32请求，只有生成8、提取12、领域12，事实0。它们比某些完整审核更快，是因为Fact在模型调用前接线失败，不是有效优化。因此不与此前完整链路作“速度提高”比值，完整率是0/12。</p>
 <p>初次Fact结构成功率没有分母，不能写0/0=100%。语义未审、Revision未触发，耗时只描述失败路径。批次没有改代码/换题/重发，但共享停止条件遗漏也必须报告。真实用户性能只有在相同完成义务和合理答案质量下才可比较。</p>
-<h2 id="section-11">缓存与回退：本轮源码核对结论</h2>
+<h2 id="section-13">缓存与回退：本轮源码核对结论</h2>
 <p>真实Dense/Hybrid启动：ComponentFactory.initialize_retrieval→VectorIndex.load，profile/knowledge/source fingerprint/成员/向量完整性不匹配拒绝，不自动降级BM25。BM25是显式配置分支，不需要匹配向量；管理员另选BM25不是缓存失效后的隐式回退。</p>
 <p>当前query_cache只属于RetrievalSession，fact_query=True才使用，键为(knowledge_version,retriever.cache_identity,query,max_results,实际context)。SemanticRetriever身份含mode和profile_id；每run重建session，跨回答版本可命中同查询结果但重新生成交付/映射并按(version,evidence_id)计交付预算，不复用旧版本判决。aggregate路径不启用它。命中仍执行validate_result；语义检索/旧小库继续完整重放，完整FTS的新即时证书分支见下文。aggregate本身仍不使用这个fact_query跨阶段缓存。</p>
 <p>retrieve_facts.deliveries仅在一次逐组件调用按完整query去重。PDF报告缓存是只读连接局部，带SQLite data_version/total_changes、knowledge/document/version/file_hash，外部提交或新连接不会错用；不是排名缓存。corpus_index._OPENED是已验证文件打开身份与stamp记忆，变化拒绝，逐命中仍回查。</p>
 <p>未实现的建议仍包括跨服务检索缓存、全面取消排名重放和模型答案缓存。下文即时证书仅避免同次完整FTS检索紧接的重复排序，不能扩大称这些建议都已实现。</p>
-<h2 id="section-12">本轮对照的时间解释</h2>
+<h2 id="section-14">本轮对照的时间解释</h2>
 <p>固定主要Fact契约13共14请求、37.811秒，14共15请求、23.840秒；前者含一个执行失败，不能把该总耗时当同质量速度比较。已记录token分别79677与29798，13最早3请求token采集失败未知，不能给虚假的精确总计。另两项完整服务14请求165405token，不与仅Fact时间混算。实际运行阶段与端到端/冷启动分开，未用小样本P95宣传性能。</p>
-<h2 id="section-13">三道自测：先作答，再展开</h2>
-<h3 id="section-14">自测1：缓存命中是否跳过重放？</h3>
+<h2 id="section-15">三道自测：先作答，再展开</h2>
+<h3 id="section-16">自测1：缓存命中是否跳过重放？</h3>
 <details class="self-answer"><summary>展开参考答案1</summary><p>仍调用validate_result；完整FTS若恰有同请求程序证书，比较完整结果并seal/逐原文回查，不再重复排名。小库、语义路径或没有该证书时照旧重放。</p></details>
-<h3 id="section-15">自测2：失败路径更快可称优化吗？</h3>
+<h3 id="section-17">自测2：失败路径更快可称优化吗？</h3>
 <details class="self-answer"><summary>展开参考答案2</summary><p>不可；完成义务不同，不能比成功端到端。</p></details>
-<h3 id="section-16">自测3：RSS时点观测等于整机峰值吗？</h3>
+<h3 id="section-18">自测3：RSS时点观测等于整机峰值吗？</h3>
 <details class="self-answer"><summary>展开参考答案3</summary><p>不是；需说明采样、进程和测量范围。</p></details>
-<h2 id="section-17">2026-10-08 完整库接入核对</h2>
+<h2 id="section-19">2026-10-08 完整库接入核对</h2>
 <p>完整有效分片FTS已独立发布并接入日常，旧prefix历史保留。新进程仍读取约70.85GB做全文件SHA，sidecar与库内封印严格一致；字节一致时复用发布时结构/FTS/成员核验，未发布fixture仍直接检查SQL。进程内_OPENED只记路径/知识及size/mtime_ns，变化拒绝；没有跨进程跳过SHA的缓存。命中原文、字符区间、哈希仍验证。首启约52秒，后续正常重启43.5秒；未清OS缓存，不能称物理冷机或稳定SLA。四主题FTS查询0.11–4.76秒，命中不等于回答正确。唯一概念任务双审完整而业务待补充，知识接入与审核适用性问题分开。当前接入记录见项目源码目录的 <code>docs/full-corpus-adoption-v1.md</code>。</p>
-<h2 id="section-18">2026-10-08 本人试用的性能证据与即时证书</h2>
+<h2 id="section-20">2026-10-08 本人试用的性能证据与即时证书</h2>
 <p>三题后台225.4、250.605、346.649秒，累计检索都约204–208秒。生成实际有1.7秒与含纠正40秒两种情况，不能只凭体感归因。完整库进程内seal不每任务重SHA；每次查询后再做相同FTS排名是确定性重复。<code>AsyncSQLiteBM25Retriever._work</code>的新即时证书只绑定刚完成的完整RetrievalRequest与完整RetrievalResult，不缓存模型判断。单工作线程中seal校验已发布身份/文件stamp，比较hits/分数/正文/上下文全部字段，再逐Evidence验证原文、区间、hash；请求/配置不同仍完整重放，下一次查询与close清除。答案/引用的作用域及交付预算照旧。</p>
 <p>同完整库四条固定查询，原校验排名重放3.265/7.923/22.967/50.884秒，新严格验证0.007–0.012秒，排名与全文身份一致。不是省略核验或缩库。改变SQL为rank游标实测更慢，未采用；宽泛OR第一次排名仍需处理很多命中，并非采用FTS就无成本。首查含70.85GB进程SHA，不能混入热检索对照；OS缓存未清。每新进程全SHA的本轮独立样本95.94秒，旧44–52秒只是当时测量。</p>
 <p>唯一新主题75字，API首见12.942秒、观察总48.501秒，5请求87900token/全部阶段完成。先顺序Generation/Fact/Domain检索，再模型双审并发；不把两支审核耗时相加。浏览器实际观察答案/来源/自动连接和重启恢复，但没有精确首绘计时；历史三题页面显示差值未知。服务进程峰值约129MiB含启动，不是整机或单任务瞬时峰值。不能用不同问题或单次远程波动宣布固定倍数提速。原熔断器裸数值泛化有错误放行，性能改善不能掩盖语义失误。记录见 <code>docs/performance-closeout-v1.md</code> 与私有对照归档。</p>
-<h2 id="section-19">2026-10-08 首版冻结补记</h2>
+<h2 id="section-21">2026-10-08 首版冻结补记</h2>
 <p>用户最后既有run总95.854秒、检索累计85.910秒、4模型请求58169 token/Domain纠正1、0Revision；本轮未重发。用户确认体感改善，但已有回答入口无Generation，不能和问答生成混算。首题浏览器精确首绘仍未知。7–12ms是即时证书的严格验证，不是宽泛FTS首次排序、全SHA启动或端到端时间。原误放行保留；性能进步不能替代语义验收。</p>
-<h2 id="section-20">2026-10-09 第二版定向补记</h2>
+<h2 id="section-22">2026-10-09 第二版定向补记</h2>
 <p>第二版唯一默认v4＋lossless；v5的3.69秒不能算最终组合成绩。首次API发现已保存答案、完整审核结束、浏览器首绘分别记录；首绘未知就保留未知。SQL匹配/BM25/排序/取回合计，EXPLAIN不推秒数，嵌套不重复加、并行不相加为端到端。字符包装减少不代表实际token、费用或纠正率下降，不承诺全部10秒；两题最终验收单列，失败快速停止不当成功。</p>
-<h2 id="section-21">最终组合两题实测</h2>
-<p>2026-10-09 v4＋lossless：电流互感器69字/API14.923秒/总44.454秒；正弦功率因数89字/API3.204秒/总28.068秒。11调用125538token，0纠正/0Revision，执行完整、程序pass；不把小样本零纠正说发生率下降。第二题附加公式全称范围需复核，自动连接/答案浏览器核查因file协议限制未完成，冻结但验收未全部通过；首绘未知、C1&gt;10秒，历史长度失败保留。两题预期只本地，源码相同，不换题刷结果。</p></article><footer><a href="15-failures.html">← 15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="17-interview.html">17 深入面试、公式和代码练习 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">模型选择：同合同对照与真实代价</a><a href="#section-3">端到端时间不是模型推理时间</a><a href="#section-4">请求归属：避免全运行列表切片重叠</a><a href="#section-5">哪些开销适合优化</a><a href="#section-6">不该为了速度做什么</a><a href="#section-7">资源测量与真实记录</a><a href="#section-8">一批固定题如何报告</a><a href="#section-9">面试练习</a><a href="#section-10">本轮12题为什么不能称性能提升</a><a href="#section-11">缓存与回退：本轮源码核对结论</a><a href="#section-12">本轮对照的时间解释</a><a href="#section-13">三道自测：先作答，再展开</a><a href="#section-14">自测1：缓存命中是否跳过重放？</a><a href="#section-15">自测2：失败路径更快可称优化吗？</a><a href="#section-16">自测3：RSS时点观测等于整机峰值吗？</a><a href="#section-17">2026-10-08 完整库接入核对</a><a href="#section-18">2026-10-08 本人试用的性能证据与即时证书</a><a href="#section-19">2026-10-08 首版冻结补记</a><a href="#section-20">2026-10-09 第二版定向补记</a><a href="#section-21">最终组合两题实测</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<h2 id="section-23">最终组合两题实测</h2>
+<p>2026-10-09 v4＋lossless：电流互感器69字/API14.923秒/总44.454秒；正弦功率因数89字/API3.204秒/总28.068秒。11调用125538token，0纠正/0Revision，执行完整、程序pass；不把小样本零纠正说发生率下降。第二题附加公式全称范围需复核，自动连接/答案浏览器核查因file协议限制未完成，冻结但验收未全部通过；首绘未知、C1&gt;10秒，历史长度失败保留。两题预期只本地，源码相同，不换题刷结果。</p></article><footer><a href="15-failures.html">← 15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="17-interview.html">17 深入面试、公式和代码练习 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">收益与花费按批次记账</a><a href="#section-3">历史说明与基础知识（保留原日期，当前状态以上文为准）</a><a href="#section-4">模型选择：同合同对照与真实代价</a><a href="#section-5">端到端时间不是模型推理时间</a><a href="#section-6">请求归属：避免全运行列表切片重叠</a><a href="#section-7">哪些开销适合优化</a><a href="#section-8">不该为了速度做什么</a><a href="#section-9">资源测量与真实记录</a><a href="#section-10">一批固定题如何报告</a><a href="#section-11">面试练习</a><a href="#section-12">本轮12题为什么不能称性能提升</a><a href="#section-13">缓存与回退：本轮源码核对结论</a><a href="#section-14">本轮对照的时间解释</a><a href="#section-15">三道自测：先作答，再展开</a><a href="#section-16">自测1：缓存命中是否跳过重放？</a><a href="#section-17">自测2：失败路径更快可称优化吗？</a><a href="#section-18">自测3：RSS时点观测等于整机峰值吗？</a><a href="#section-19">2026-10-08 完整库接入核对</a><a href="#section-20">2026-10-08 本人试用的性能证据与即时证书</a><a href="#section-21">2026-10-08 首版冻结补记</a><a href="#section-22">2026-10-09 第二版定向补记</a><a href="#section-23">最终组合两题实测</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

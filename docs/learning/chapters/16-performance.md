@@ -1,8 +1,23 @@
 # 16 性能与可观测性：测量到底属于谁
 
+## 收益与花费按批次记账
+
+|批次|新增请求|新增token|能回答的问题|
+|---|---:|---:|---|
+|历史修订v2|16|82465|给定已成立发现，修订能否合法保留并重审|
+|自然v3|49|579406|自然生成及审核，未见改善|
+|有界资料定位|0|0|目标在哪一层丢失|
+|A/B/C跨语言|8|1359|召回改善及转换忠实性|
+|固定证据回答|16|147049|原中文＋交付材料后的回答变化|
+|本轮固定自然稿审核|32|380949|同稿真实初审、一次修订与完整重审|
+
+跨语言平均A3.999秒、B0.284秒、C2.032秒；C−B增加1.748秒（转换平均0.996秒，其余含检索开销），独立冷封189.786秒不混入在线均值。固定回答Harness A2.674秒、C2.850秒仅为已归档Evidence的生成耗时，不能当线上全链时延。金额无账单为未知，缓存命中与估算区间不是实付。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
+
+## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+
 ## 模型选择：同合同对照与真实代价
 
-【真实观察】本批同服务Flash/Pro使用相同消息、Schema、Beta工具和非思考设置，只改变model。Pro19请求、Flash22请求；Pro较少纠正，但模型累计114.856秒，高于Flash87.529秒。两路缓存比例和价格不同，账单未知，不能按token更少宣称费用更低。单批已见材料也不证明模型普遍优越。[选型与成本记录](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-review-model-fit-v1/report.md#)。
+【真实观察】本批同服务Flash/Pro使用相同消息、Schema、Beta工具和非思考设置，只改变model。Pro19请求、Flash22请求；Pro较少纠正，但模型累计114.856秒，高于Flash87.529秒。两路缓存比例和价格不同，账单未知，不能按token更少宣称费用更低。单批已见材料也不证明模型普遍优越。[选型与成本记录](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-review-model-fit-v1/report.md#)。
 
 选型先看正式接口能力及本机安全配置是否可用，不能凭名称猜兼容；目录可见仍需正式任务确认接受。若模型不得不使用不同载体，应称两种可部署配置对照；即使接口相同，也要保留采样、时点、缓存和版本边界。不要把多个内部计时相加成问答延迟，更不能称为浏览器首绘。
 

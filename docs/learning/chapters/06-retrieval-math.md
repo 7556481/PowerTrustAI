@@ -1,5 +1,21 @@
 # 06 BM25、Dense/E5、余弦、RRF与reranker
 
+## A/B/C比较如何分离原因
+
+|路径|来源范围|查询|结果与解释|
+|---|---|---|---|
+|A|原全库topic_v4主体策略|中文原问题|现有基线|
+|B|目录限定机构文档，取消subject硬约束|中文原问题|N1/N4完整，6/25必答槽|
+|C|与B同范围|原查询＋一次英文转换，词项各top20后RRF60、最终3并补邻段|原始25/25，但N6换义|
+
+C比A有忠实的7题改善、跨4类主题；C比B有效5题。N6“投入退出”变commissioning/decommissioning，不计忠实转换成功。RRF只融合排名；命中所有槽不保证后续保留条件。旧“8题转换全无失败”的门槛为false，并未因后来的回答诊断被改写。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)。
+
+::: answer 新增：C更快且覆盖更好，能否全归功于翻译？
+不能。A→B同时缩小范围、取消subject；B→C才是在同一范围上加入跨语言词项。A平均3.999秒、B0.284、C2.032，C相对B增加1.748秒，范围收益不能记作翻译收益。N6即使覆盖涨也因换义不能算有效成功。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)
+:::
+
+## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+
 ## 为什么要学公式，而不是只记名称
 
 BM25评价词项相关性，Dense评价编码空间的相似性，RRF合并名次，reranker重新比较候选文本。它们都不直接证明事实支持。懂公式能解释“为什么长正文降到后面”“为什么两路融合挤掉必要条件”，也能避免把分数包装成可信概率。

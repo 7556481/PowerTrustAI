@@ -1,5 +1,11 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-26 自然C稿审核与学习站v6已封存
+
+本轮唯一8链32 Flash/380949token，N2要求增强/N4排他断言均被supported认可，无D无修订，事前门槛失败；7正文不变，N8一次修订及完整重审，局部边界表达收益有复核分歧，严格关键错修复0/宽松局部1，必答19/25不变。N5领域纠正后仍非法，N4领域待补充不能冒充检出。N3残余、N6保守/歧义双解释及旧gate=false保留。无检索/转换/重新生成/补跑/新模型/生产切换；实际费用未知。实现babdfe1，评测归档865eb65，14专项11.462秒、明确复用旧1324全套。见[evaluation/natural-draft-audit-v1/report.md](evaluation/natural-draft-audit-v1/report.md)。
+
+学习站主执行独立维护，20章88解析题；连通检索/生成/审核三笔收益，N1/N4/A3完整案例、面试口述与源码14实际摘录；批次元数据131/1189079与28/585938分账。构建/源身份/链接通过，实际浏览器桌面1280及窄屏390、搜索/导航/折叠/局部代码滚动通过，无整页横溢。任务自启8770已释放，8765仍停服；start-learning.cmd重开，见[同步验收](learning/sync-v6.md)。预存研究论文/文档未覆盖或全量暂存。不要续跑本批或启动旧source-comparison任务。
+
 ## 2026-10-26 固定归档Evidence回答诊断完成并停止
 
 另立retrieval-evidence-answer-check-v1，不恢复三路旧attempt或回写gate。源码冻结59d9f32db41573507432f033a212ce3069a336a0，正常Factory/LangGraph/Harness/Store，完整16份A/C旧Delivery与真实bindings/知识身份恢复，新记录archived_retrieval/0新检索，新快照由实际生成形成。实际8对初始消息除Evidence/origins外完全一致，N6错误英文query未进入生成；无索引/seal/排名/转换/审核/Revision/在线裁判。

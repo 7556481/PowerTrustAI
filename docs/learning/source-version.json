@@ -1,194 +1,236 @@
 {
-  "application_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
-  "document_version": "learning-site-v5.3 literal original review and failed local revision,2026-10-25",
-  "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
-  "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
-  "daily_schema": 13,
-  "compact_schema14": "v9.14 scope guidance; fixed8 corrected8/8 but semantic reservations; daily13; not declared stable",
-  "documentation_parent_commit": "62db6ff1b11cb54b8f6048631373b3d5fd5182e3",
-  "final_delivery_ref": "release-v2-20261009",
-  "default_retrieval": "topic_v4_subject_v1",
-  "default_review_message_profile": "lossless_v1",
-  "previous_application_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-  "execution_path_default": "langgraph_v1",
-  "optional_development_execution_path": "langgraph_v1",
-  "langgraph_version": "1.2.16",
-  "production_switch": false,
-  "new_live_model_calls": 131,
-  "validation_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
-  "offline_unittest_count": 1285,
-  "live_graph_service_runs": 0,
-  "live_planned_service_runs": 0,
-  "live_accepted_service_runs": 0,
-  "previous_validation_commit": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
-  "full_offline_validation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-  "optional_service_execution_path": "langgraph_v1",
-  "validation_note": "Six old-draft chains/28Flash calls; dependent2generation+4chains not sent after candidate accepted N-2 misattachment. Extraction initial both3/3; no delivery pass orRevision; do not adopt.",
-  "public_unconfigured_fallback": "sequential",
-  "total_fixed_plan_model_calls": null,
-  "new_live_model_tokens": 585938,
-  "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1",
-  "fact_internal_flow_candidate": {
-    "version": "fact-internal-flow-v1",
-    "base_commit": "efbc2840938f26ac006b88a098d5214ba9e69f8e",
-    "implementation_commit": "c81c8c5fe2fe3b92c78d212dd76d873f55c5a7c8",
-    "production_enabled": false,
-    "new_live_calls": 0,
-    "full_offline_tests": 1158,
-    "full_offline_seconds": 166.597
+  "application_commit": "1a92d03da49ae25f311e950373003d6ab32d09f5",
+  "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
+  "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
+  "documentation_parent_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
+  "document_version": "learning-site-v6 natural audit and retrieval learning sync,2026-10-26",
+  "production": {
+    "schema": 13,
+    "managed_execution": "langgraph_v1",
+    "unconfigured_fallback": "sequential",
+    "service_8765": "stopped",
+    "default_retrieval": "topic_v4_subject_v1",
+    "cross_language_candidate_default": false,
+    "literal_source_actions_candidate_default": false,
+    "nli": "off",
+    "switched": false
   },
-  "fact_internal_flow_v2_candidate": {
-    "protocol": "fact-internal-flow-v2",
-    "implementation_commit": "a16eeb994c3a815fa1d219e6925ee7ddd31d2230",
-    "production_enabled": false,
-    "real_calls": 0,
-    "full_offline_tests": 1174,
-    "full_offline_seconds": 164.132,
-    "entry": "services.fact_flow_protocol_v2.create_agent",
-    "prior_v1_live_result": "docs/evaluation/fact-internal-flow-v1/live-report-v1.md"
+  "validation": {
+    "reused_full": {
+      "commit": "667cbe0b8fb10cdf7ea6dfc1be53abfeb2df043a",
+      "tests": 1324,
+      "seconds": 338.071
+    },
+    "current_specialized": {
+      "commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
+      "tests": 14,
+      "seconds": 11.462
+    }
   },
-  "answer_delivery_candidate": {
-    "version": "answer_only_v1",
-    "production_default": "production",
-    "application_commit": "bc55a4b20bc72f795a2cb9a110fc8b5cb1488651",
-    "offline_tests": 1197,
-    "offline_seconds": 197.256,
-    "report": "docs/evaluation/answer-review-net-benefit-v1/report.md",
-    "actual_model_calls": 106,
-    "total_tokens": 1126972,
-    "adoption": "retain_candidate_no_production_switch",
-    "natural_revisions": 0,
-    "execution_incomplete_audits": 5
-  },
-  "review_scope_v2_candidate": {
-    "production_enabled": false,
-    "adoption": "reject_no_natural_net_benefit",
-    "actual_requests": 116,
-    "invalid_attempts": 47,
-    "report": "docs/evaluation/production-review-net-benefit-v2/report.md"
-  },
-  "historical_service_validation": {
-    "production_switch": true,
-    "validation_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
-    "live_graph_service_runs": 3,
-    "live_planned_service_runs": 6,
-    "live_accepted_service_runs": 6,
-    "total_fixed_plan_model_calls": 37
-  },
-  "current_fixed_run_library": {
-    "new_plan": 28,
-    "accepted_local_records": 1,
-    "actually_executed": 1,
-    "not_submitted_after_admission_stop": 27,
-    "historical_reference_count": 0,
-    "not_real_http_service_acceptance": true
+  "experiment_batches": [
+    {
+      "version": "literal-review-stage1-v1",
+      "requests": 131,
+      "total_tokens": 1189079,
+      "note": "Verified literal-review-stage1-v1/report.md total table: input1090557/output98522."
+    },
+    {
+      "version": "local-revision-v2-flash-check-v1",
+      "requests": 16,
+      "total_tokens": 82465
+    },
+    {
+      "version": "natural-answer-benefit-v3",
+      "requests": 49,
+      "total_tokens": 579406
+    },
+    {
+      "version": "retrieval-delivery-repair-v1",
+      "requests": 0,
+      "total_tokens": 0
+    },
+    {
+      "version": "chinese-first-cross-language-retrieval-v1",
+      "requests": 8,
+      "total_tokens": 1359
+    },
+    {
+      "version": "retrieval-evidence-answer-check-v1",
+      "requests": 16,
+      "total_tokens": 147049
+    },
+    {
+      "version": "natural-draft-audit-v1",
+      "requests": 32,
+      "total_tokens": 380949
+    },
+    {
+      "version": "natural-review-seam-v1",
+      "requests": 28,
+      "total_tokens": 585938
+    }
+  ],
+  "metadata_correction": "Prior flat new_live_model_calls=131 belonged to literal stage1; 585938 token belonged to natural-review-seam-v1, NOT that same batch. Per-batch values below are checked against reports; no synthetic mixed sum.",
+  "historical_metadata_source_commit": "1a92d03da49ae25f311e950373003d6ab32d09f5",
+  "historical_candidates": {
+    "fact_internal_flow_candidate": {
+      "version": "fact-internal-flow-v1",
+      "base_commit": "efbc2840938f26ac006b88a098d5214ba9e69f8e",
+      "implementation_commit": "c81c8c5fe2fe3b92c78d212dd76d873f55c5a7c8",
+      "production_enabled": false,
+      "new_live_calls": 0,
+      "full_offline_tests": 1158,
+      "full_offline_seconds": 166.597
+    },
+    "fact_internal_flow_v2_candidate": {
+      "protocol": "fact-internal-flow-v2",
+      "implementation_commit": "a16eeb994c3a815fa1d219e6925ee7ddd31d2230",
+      "production_enabled": false,
+      "real_calls": 0,
+      "full_offline_tests": 1174,
+      "full_offline_seconds": 164.132,
+      "entry": "services.fact_flow_protocol_v2.create_agent",
+      "prior_v1_live_result": "docs/evaluation/fact-internal-flow-v1/live-report-v1.md"
+    },
+    "answer_delivery_candidate": {
+      "version": "answer_only_v1",
+      "production_default": "production",
+      "application_commit": "bc55a4b20bc72f795a2cb9a110fc8b5cb1488651",
+      "offline_tests": 1197,
+      "offline_seconds": 197.256,
+      "report": "docs/evaluation/answer-review-net-benefit-v1/report.md",
+      "actual_model_calls": 106,
+      "total_tokens": 1126972,
+      "adoption": "retain_candidate_no_production_switch",
+      "natural_revisions": 0,
+      "execution_incomplete_audits": 5
+    },
+    "review_scope_v2_candidate": {
+      "production_enabled": false,
+      "adoption": "reject_no_natural_net_benefit",
+      "actual_requests": 116,
+      "invalid_attempts": 47,
+      "report": "docs/evaluation/production-review-net-benefit-v2/report.md"
+    },
+    "historical_service_validation": {
+      "production_switch": true,
+      "validation_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
+      "live_graph_service_runs": 3,
+      "live_planned_service_runs": 6,
+      "live_accepted_service_runs": 6,
+      "total_fixed_plan_model_calls": 37
+    },
+    "current_fixed_run_library": {
+      "new_plan": 28,
+      "accepted_local_records": 1,
+      "actually_executed": 1,
+      "not_submitted_after_admission_stop": 27,
+      "historical_reference_count": 0,
+      "not_real_http_service_acceptance": true
+    },
+    "simple_review_candidate": {
+      "implementation": "ebf17a4114b0f537971767973687df220e33a1f2",
+      "prompt": "v9.22.1",
+      "projection": "simple-condition-projection-v1.1",
+      "production_enabled": false,
+      "actual_requests": 3,
+      "request_rejections": 0,
+      "invalid_outputs": 2,
+      "admission_complete": false,
+      "adoption": "not_adopt_incomplete_admission_no_natural_evidence",
+      "report": "docs/evaluation/review-simple-patch-v1/report.md"
+    },
+    "previous_simple_review_candidate": {
+      "paid_implementation": "f08b672bc24fe01aa804d74afbc7140f6e833c13",
+      "offline_fix_implementation": "88281c910403e69be71963e0b1e3d39d4e70e253",
+      "paid_prompt": "v9.22",
+      "offline_prompt": "v9.22.1",
+      "projection": "simple-condition-projection-v1.1",
+      "production_enabled": false,
+      "adoption": "not_adopt_no_real_candidate_output",
+      "report": "docs/evaluation/review-contract-simple-v1/report.md"
+    },
+    "strict_tool_carrier": {
+      "implementation": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
+      "transport": "strict-review-tool-v1",
+      "business_contract": "fact-review-simple-v1",
+      "projection": "simple-condition-projection-v1.1",
+      "production_enabled": false,
+      "actual_requests": 3,
+      "tool_envelopes": 3,
+      "valid_arguments": 0,
+      "request_rejections": 0,
+      "adoption": "not_adopt_no_usable_review_result",
+      "report": "docs/evaluation/strict-review-tool-v1/report.md"
+    },
+    "strict_interface_consistency": {
+      "implementation": "cb64b21cab7f837f777d3245217c8ed40aafb8a2",
+      "minimal_valid": 8,
+      "minimal_planned": 8,
+      "regression_complete": 2,
+      "regression_planned": 4,
+      "new_live_requests": 19,
+      "offline_targeted_tests": 44,
+      "production_enabled": false,
+      "adoption": "not_adopt_complex_contract_and_semantic_failures",
+      "report": "docs/evaluation/strict-interface-consistency-v1/report.md"
+    },
+    "model_fit_v1": {
+      "paid_implementation": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d",
+      "offline_boundary_patch": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
+      "models": [
+        "deepseek-flash",
+        "deepseek-v4-pro"
+      ],
+      "tasks": 16,
+      "calls": 41,
+      "production_switch": false,
+      "adoption": "keep_current_pro_experimental_only_no_service_acceptance",
+      "report": "docs/evaluation/fact-review-model-fit-v1/report.md"
+    },
+    "review_unblock_v1": {
+      "paid_implementation": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
+      "post_batch_budget_patch": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
+      "contract": "simple_bound_v1",
+      "projection": "simple-condition-projection-v1.2-target-bound",
+      "model": "deepseek-flash",
+      "new_pro_calls": 0,
+      "production_enabled": false,
+      "adoption": "retain_candidate_no_production_acceptance",
+      "report": "docs/evaluation/review-delivery-unblock-v1/report.md"
+    },
+    "natural_review_seam_v1": {
+      "implementation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
+      "contract": "simple_bound_v1",
+      "extraction_message_profile": "unified_v1",
+      "model": "deepseek-flash",
+      "executed_old_chains": 6,
+      "planned_new_generation": 2,
+      "executed_new_generation": 0,
+      "planned_new_chains": 4,
+      "executed_new_chains": 0,
+      "adoption": "do_not_adopt_no_production_acceptance",
+      "report": "docs/evaluation/natural-review-seam-v1/report.md"
+    },
+    "literal_review_stage1": {
+      "report": "docs/evaluation/literal-review-stage1-v1/report.md",
+      "logical_slots": 28,
+      "normal_factory_runs": 28,
+      "model": "deepseek-flash",
+      "calls": 131,
+      "candidate_fixed": 0,
+      "error_drafts": 4,
+      "correct_protection": 3,
+      "insufficient_protection": "execution_incomplete",
+      "natural_changed": 0,
+      "adoption": "do_not_adopt_stop_stage1",
+      "billing_amount": null,
+      "browser_acceptance": false
+    }
   },
   "chapter_count_fixed": false,
   "exercise_count_fixed": false,
+  "update_policy": "Markdown authoritative, actual source snippets/build/search verified; browser acceptance separate.",
   "actual_chapters": 20,
-  "actual_explained_exercises": 77,
-  "known_model_tokens": 585938,
-  "token_usage_unknown_requests": 0,
-  "simple_review_candidate": {
-    "implementation": "ebf17a4114b0f537971767973687df220e33a1f2",
-    "prompt": "v9.22.1",
-    "projection": "simple-condition-projection-v1.1",
-    "production_enabled": false,
-    "actual_requests": 3,
-    "request_rejections": 0,
-    "invalid_outputs": 2,
-    "admission_complete": false,
-    "adoption": "not_adopt_incomplete_admission_no_natural_evidence",
-    "report": "docs/evaluation/review-simple-patch-v1/report.md"
-  },
-  "previous_simple_review_candidate": {
-    "paid_implementation": "f08b672bc24fe01aa804d74afbc7140f6e833c13",
-    "offline_fix_implementation": "88281c910403e69be71963e0b1e3d39d4e70e253",
-    "paid_prompt": "v9.22",
-    "offline_prompt": "v9.22.1",
-    "projection": "simple-condition-projection-v1.1",
-    "production_enabled": false,
-    "adoption": "not_adopt_no_real_candidate_output",
-    "report": "docs/evaluation/review-contract-simple-v1/report.md"
-  },
-  "strict_tool_carrier": {
-    "implementation": "0ea0982fdd770e3a019bfb1b536b559a5592ebc5",
-    "transport": "strict-review-tool-v1",
-    "business_contract": "fact-review-simple-v1",
-    "projection": "simple-condition-projection-v1.1",
-    "production_enabled": false,
-    "actual_requests": 3,
-    "tool_envelopes": 3,
-    "valid_arguments": 0,
-    "request_rejections": 0,
-    "adoption": "not_adopt_no_usable_review_result",
-    "report": "docs/evaluation/strict-review-tool-v1/report.md"
-  },
-  "strict_interface_consistency": {
-    "implementation": "cb64b21cab7f837f777d3245217c8ed40aafb8a2",
-    "minimal_valid": 8,
-    "minimal_planned": 8,
-    "regression_complete": 2,
-    "regression_planned": 4,
-    "new_live_requests": 19,
-    "offline_targeted_tests": 44,
-    "production_enabled": false,
-    "adoption": "not_adopt_complex_contract_and_semantic_failures",
-    "report": "docs/evaluation/strict-interface-consistency-v1/report.md"
-  },
-  "offline_validation_scope": "1274 full offline before paid;6 focused rehearsal tests; only documentation changes after paid, no repeated full suite.",
-  "model_fit_v1": {
-    "paid_implementation": "1c5d5b08854ce6bfd948bea1eb457e4ec49e360d",
-    "offline_boundary_patch": "1917ae3512b41ef0791b6d2d3e424e61a180f805",
-    "models": [
-      "deepseek-flash",
-      "deepseek-v4-pro"
-    ],
-    "tasks": 16,
-    "calls": 41,
-    "production_switch": false,
-    "adoption": "keep_current_pro_experimental_only_no_service_acceptance",
-    "report": "docs/evaluation/fact-review-model-fit-v1/report.md"
-  },
-  "review_unblock_v1": {
-    "paid_implementation": "89ddb0f2e8be9628e704b37a5dd9b93ad8786209",
-    "post_batch_budget_patch": "ebb6fb974655406b73a87d1a64d84f49b52d275f",
-    "contract": "simple_bound_v1",
-    "projection": "simple-condition-projection-v1.2-target-bound",
-    "model": "deepseek-flash",
-    "new_pro_calls": 0,
-    "production_enabled": false,
-    "adoption": "retain_candidate_no_production_acceptance",
-    "report": "docs/evaluation/review-delivery-unblock-v1/report.md"
-  },
-  "planned_task_slots": 12,
-  "natural_review_seam_v1": {
-    "implementation_commit": "f105f13a985cfd516ecf8d95ed468c748f71cc0c",
-    "contract": "simple_bound_v1",
-    "extraction_message_profile": "unified_v1",
-    "model": "deepseek-flash",
-    "executed_old_chains": 6,
-    "planned_new_generation": 2,
-    "executed_new_generation": 0,
-    "planned_new_chains": 4,
-    "executed_new_chains": 0,
-    "adoption": "do_not_adopt_no_production_acceptance",
-    "report": "docs/evaluation/natural-review-seam-v1/report.md"
-  },
-  "default_extraction_message_profile": "production",
-  "literal_review_stage1": {
-    "report": "docs/evaluation/literal-review-stage1-v1/report.md",
-    "logical_slots": 28,
-    "normal_factory_runs": 28,
-    "model": "deepseek-flash",
-    "calls": 131,
-    "candidate_fixed": 0,
-    "error_drafts": 4,
-    "correct_protection": 3,
-    "insufficient_protection": "execution_incomplete",
-    "natural_changed": 0,
-    "adoption": "do_not_adopt_stop_stage1",
-    "billing_amount": null,
-    "browser_acceptance": false
-  }
+  "actual_explained_exercises": 88
 }

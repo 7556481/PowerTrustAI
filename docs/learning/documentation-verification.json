@@ -1,171 +1,131 @@
 {
-  "source_commit": "74d7a0e6aa1b25f81d8610d2dd6e7511af9ef5df",
-  "previous_source_commit": "d3ace11aad71fc5a1dcf2aa43afe7f9fe994fcd6",
+  "application_commit": "1a92d03da49ae25f311e950373003d6ab32d09f5",
+  "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
   "chapters": [
     {
       "file": "01-product.md",
-      "characters": 4171,
-      "cjk_characters": 2777,
-      "h2_sections": 11,
+      "characters": 5178,
       "self_checks": 3,
-      "sha256": "1b3e95e817525b406a9a9e99a3b86a98bb2528743d6364a4e3f03b05a34fb56d"
+      "sha256": "c77fe3a8da13bb733030d8edb01fa1c05f70bf5f299644021aefc3d32724463d"
     },
     {
       "file": "02-architecture.md",
-      "characters": 9059,
-      "cjk_characters": 2318,
-      "h2_sections": 10,
+      "characters": 9129,
       "self_checks": 3,
-      "sha256": "997d864a874763b9c456953992c0d323af5c125902ed751a21ccf494c864ad5d"
+      "sha256": "a51c6e6339d84388f8a06d519e1abea3aa8512a088831b8ecfe69848e0f52f4c"
     },
     {
       "file": "03-agents.md",
-      "characters": 4384,
-      "cjk_characters": 2633,
-      "h2_sections": 13,
-      "self_checks": 3,
-      "sha256": "43c65e80e41a08a606ef9b1aa0af93d77474443cf6cfdc6f800d6d208dcd0dfd"
+      "characters": 8482,
+      "self_checks": 4,
+      "sha256": "d35c812dbd07c75d2c7278115976678e8c7df23405b84e71b46fa29158372397"
     },
     {
       "file": "04-harness.md",
-      "characters": 9267,
-      "cjk_characters": 2959,
-      "h2_sections": 11,
-      "self_checks": 3,
-      "sha256": "a79aca57a7a5ac26e6135b5b144a247a7bf06d93b944cad26866cb52cd0f28f2"
+      "characters": 16714,
+      "self_checks": 7,
+      "sha256": "3ecbb752f04b489890d1a0ec1d2f7756956b73510ddc77014c9a78e6500ce0d8"
     },
     {
       "file": "05-rag.md",
-      "characters": 4644,
-      "cjk_characters": 2651,
-      "h2_sections": 14,
-      "self_checks": 3,
-      "sha256": "7168630fb940a9d0b53db8603e8ea94aff6c4d6139c390f81a2bf3053256abde"
+      "characters": 6469,
+      "self_checks": 4,
+      "sha256": "fcdfbd72ca7a4806a7a2f3e9ac196626df73954413bd45fe9b28f26c3c9dda68"
     },
     {
       "file": "06-retrieval-math.md",
-      "characters": 4936,
-      "cjk_characters": 2252,
-      "h2_sections": 13,
-      "self_checks": 3,
-      "sha256": "fef95c85bf7a02c904396cf43b7d48aa9c224493c9d9f20294474f6e683fdf4d"
+      "characters": 5770,
+      "self_checks": 4,
+      "sha256": "ca36eae2f02bb898541c76a5c82c2a22e5c224e30be416a3beb325399fe3359e"
     },
     {
       "file": "07-corpus.md",
-      "characters": 3753,
-      "cjk_characters": 2222,
-      "h2_sections": 12,
-      "self_checks": 3,
-      "sha256": "c3d266da92f036eabff6d5d7270f2e0c87359167570f7456e5243c014e4de0fc"
+      "characters": 4517,
+      "self_checks": 4,
+      "sha256": "e6fe3adc8cfe131ff624dfc249a64e0fdcab983cc0b2eda600ab7dfc5a7029fb"
     },
     {
       "file": "08-verification.md",
-      "characters": 6039,
-      "cjk_characters": 3500,
-      "h2_sections": 18,
-      "self_checks": 3,
-      "sha256": "307ce5ee70a234f54836f9a86750ed255697ac457fb62fe7f5eedc3907589e84"
+      "characters": 12710,
+      "self_checks": 9,
+      "sha256": "2950b3b2c1c849e202ba7deb19b2066fa75e497729f742b58e336452dc4ae327"
     },
     {
       "file": "09-engineering-tools.md",
-      "characters": 3497,
-      "cjk_characters": 2121,
-      "h2_sections": 10,
+      "characters": 3821,
       "self_checks": 3,
-      "sha256": "26f773a31cf6b3f929b8e1b1642812038557e7d9506bf196aa13ba61efd67192"
+      "sha256": "7493d1b6e8d991a3c0a2a90c5cad6d8cf43144e37e1d762f5b866732c54f6604"
     },
     {
       "file": "10-api-storage.md",
-      "characters": 3003,
-      "cjk_characters": 1652,
-      "h2_sections": 10,
-      "self_checks": 3,
-      "sha256": "5245552e150b76df20d137781112e2a1f7046626b337a31405aaf7df4faeb859"
+      "characters": 5052,
+      "self_checks": 4,
+      "sha256": "c022c0b15aabe2c5478d509f0e486bb74d76afdcdb12c485bfb5a981571df811"
     },
     {
       "file": "11-supervision-metrics.md",
-      "characters": 3661,
-      "cjk_characters": 2038,
-      "h2_sections": 12,
-      "self_checks": 3,
-      "sha256": "069cb9a2835d952b8bcb8bd22587f1f4d1d925a96534c8162eb513381a7ddf64"
+      "characters": 7848,
+      "self_checks": 7,
+      "sha256": "fdf9a6b766274e99004a53fe9f17333cfeb87931feb66aec3a6511e2a67b1f73"
     },
     {
       "file": "12-training-nli.md",
       "characters": 6313,
-      "cjk_characters": 2453,
-      "h2_sections": 15,
       "self_checks": 3,
       "sha256": "cda87df86b3b00cb03dc5551e6766131d51a7e696a1ca874eaf6b9ba808eb659"
     },
     {
       "file": "13-local-nli.md",
       "characters": 2169,
-      "cjk_characters": 1134,
-      "h2_sections": 7,
       "self_checks": 3,
       "sha256": "05837850582b5c37b1cb84ee515be18f72fef1e83a76c43c74bc243ad8137444"
     },
     {
       "file": "14-code-tour.md",
-      "characters": 33432,
-      "cjk_characters": 5046,
-      "h2_sections": 15,
-      "self_checks": 3,
-      "sha256": "6a4c8bcac56962921b4905d61c9fb6c996b2006efeb296b0cccedf5352215721"
+      "characters": 22776,
+      "self_checks": 6,
+      "sha256": "9282dfb0d210e392ea984aa905fa08b95ba04a80ba0026aad54af96384a62b7a"
     },
     {
       "file": "15-failures.md",
-      "characters": 5587,
-      "cjk_characters": 3584,
-      "h2_sections": 19,
+      "characters": 6356,
       "self_checks": 3,
-      "sha256": "9b72fef0a4daae89fbace03543bb7a43a17b169fdfbf4d753b13a15974578514"
+      "sha256": "c6aafdfcb568afe5c3c8bfc1b62ad4a365e949880838180a50e45edf062d8ef2"
     },
     {
       "file": "16-performance.md",
-      "characters": 5242,
-      "cjk_characters": 2912,
-      "h2_sections": 16,
-      "self_checks": 3,
-      "sha256": "5562790e3170519915a09c2566c36bdc45713d68d2a8451b347eec12dc18e747"
+      "characters": 6832,
+      "self_checks": 4,
+      "sha256": "548658642b66a05d8fd4ed086509602763894ae0f73ecacedfad5100852d0ef2"
     },
     {
       "file": "17-interview.md",
-      "characters": 3746,
-      "cjk_characters": 2383,
-      "h2_sections": 11,
+      "characters": 4683,
       "self_checks": 3,
-      "sha256": "19bc51e997091fe76748d570a2ce38cc4e1925424cc22429ff79276272f37d2f"
+      "sha256": "2630d37804c03deefeca82c8ba264b460ace6fed44fb1186740310be744265fb"
     },
     {
       "file": "18-operations.md",
-      "characters": 5041,
-      "cjk_characters": 2272,
-      "h2_sections": 14,
-      "self_checks": 3,
-      "sha256": "9913f97131752815a54b13468b97664b7515a1e185f63fc2346de8f57a619a16"
+      "characters": 7245,
+      "self_checks": 6,
+      "sha256": "0417c244189684bca0bd747f5956bc4acf88ff2936bd2416c545f250794fe1c6"
     },
     {
       "file": "19-glossary.md",
       "characters": 4259,
-      "cjk_characters": 2132,
-      "h2_sections": 6,
       "self_checks": 3,
       "sha256": "c77078bf4c2f772963dccb5fe35cde517cf3ae94a7b75c3c1322b40d221c63c7"
     },
     {
       "file": "20-workshops.md",
-      "characters": 3740,
-      "cjk_characters": 2215,
-      "h2_sections": 11,
-      "self_checks": 3,
-      "sha256": "5b513703e6758e1ce7a8e2be3acaefdbee4844e8badf8d933821f2987013f971"
+      "characters": 4955,
+      "self_checks": 5,
+      "sha256": "94e6a0dc939d4c1fefc97337a0e939ef5204c0b59e480be4bf05668e53e0a0b4"
     }
   ],
   "chapter_count": 20,
-  "self_checks": 60,
-  "verification": "tools.learning_checks: 20 chapters /60 folded answers /source hashes /local links",
-  "browser": "Entry and collapsed diagnostic checked on current graph service; authenticated views pending owner manual check, no file restriction bypass.",
-  "continuation_implementation_commit": "efdb366749400d0fbef8198c5a904e9bb00652b1"
+  "self_checks": 88,
+  "source_snippets": 14,
+  "source_verification": "AST actual spans, exact Markdown code blocks and all hashes checked",
+  "browser": "separate browser-acceptance.json; not inferred from build"
 }

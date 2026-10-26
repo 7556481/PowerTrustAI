@@ -1,8 +1,15 @@
 # 14 核心源码阅读路线：输入、调用、异常与取舍
 
-## 本轮真实验证边界
+## 2026-10-26当前源码身份与读法
 
-【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md#)。
+应用基线1a92d03；本轮评测入口冻结babdfe1，未改共享业务。先读evaluation/natural_draft_audit_v1.py的recover与batch：前者恢复实际8稿及快照，后者接入原Factory/Harness并统一预发送扣额。参考只进离线分析，不进模型。再读rag/chinese_first.py，区分目录范围、语言触发与实际Evidence。候选默认关闭，生产schema13、受管langgraph_v1，源码fallback sequential，8765停服。
+
+以下仅摘函数开头最多18行，明确不是完整函数；所有记录按AST限定符定位，保留完整函数终点、实际文件LF身份与片段哈希。长函数的后续分支必须继续读源码，不以开头代替证明。旧摘录已重新从实际文件取文，历史运行身份仍见原提交。
+
+
+## 2026-10-24历史真实验证边界
+
+【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-contract-simple-v1/report.md#)。
 
 ## 2026-10-24 简化合同与投影的源码入口
 
@@ -16,11 +23,11 @@
 
 ## 2026-10-24 审核链v2实证更新
 
-本轮入口services/review_scope_v2.py，经backend/config.py与ComponentFactory显式fact_review_contract=scope_v2接入services/scoped_fact_execution.py。默认production保留旧消息/解析；fact_internal_flow须仍为production且schema13。候选使用九语义字段的顺序数组，身份由程序绑定；条件关系映射至原判断再完整重审。真实验证发现逐字字段与空条件投影缺陷，代码保留作失败证据，不建议生产验收。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#)。
+本轮入口services/review_scope_v2.py，经backend/config.py与ComponentFactory显式fact_review_contract=scope_v2接入services/scoped_fact_execution.py。默认production保留旧消息/解析；fact_internal_flow须仍为production且schema13。候选使用九语义字段的顺序数组，身份由程序绑定；条件关系映射至原判断再完整重审。真实验证发现逐字字段与空条件投影缺陷，代码保留作失败证据，不建议生产验收。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/production-review-net-benefit-v2/report.md#)。
 
-2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见[报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
+2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见[报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。这是2026-10-23历史服务记录；当前8765停服，以本章开头状态为准。
 
 ## 一页请求对象流：先认对象，再读源码
 
@@ -44,7 +51,7 @@
 
 先看backend/__main__.py和assembly.py，再读OfflineHarness.run，最后才深入当前Agent协议。目录里旧v4/v6/v9不是多个并行审核器，而是历史契约保留。当前manifest明确schema和prompt；不要凭文件名最大数字猜采用版本。
 
-本章代码摘录由write-excerpts脚本按AST函数/实际行号读取当前源码，记录文件及片段SHA。省略的部分明确是摘录，不当完整函数。你可以从同名函数继续读上下文。正文解释的是责任，代码才是异常和字段的最终依据。
+本章代码摘录按AST函数/实际行号读取当前源码，记录文件及片段SHA。省略的部分明确是摘录，不当完整函数。你可以从同名函数继续读上下文。正文解释的是责任，代码才是异常和字段的最终依据。
 
 在learning-audit-v1历史版本中，新增紧凑协议入口agents/verification_contract_v14.py的ReviewCatalog/run只通过直接组件回归，真实Harness输入包装遗漏导致12题失败；默认日常仍13。查看learning-audit-v1冻结源码中harness/runtime.py的历史schema9–13包装分支，可以定位当时14缺tool_results；当前已改用显式输入能力和services/review_inputs.build，不把历史分支当现行源码。那个批次没有在当轮自动补后重跑，见第15章。
 
@@ -88,13 +95,12 @@ RunStore.tx管理短写事务，index保存版本化对象，result经backend.pr
 
 面试说法：“我能从API沿submit/worker/Harness读到审核解析，解释每个边界可证明什么。代码摘录绑定实际版本和哈希，历史协议不冒充当前默认。”
 
-## 实际代码摘录
 
-以下段落由程序读取源码生成，并由source-check.json核对；不是手写伪代码。
+## 实际代码摘录（本轮重新核对）
 
-### 重复键、非有限值与严格JSON
+### 严格JSON只验证结构
 
-路径 services/structured_model.py，函数 strict_json，行18–21。
+路径 services/structured_model.py，函数 strict_json，行18–21；完整函数至21行，完整定义。
 
 ```python
 def strict_json(text):
@@ -103,11 +109,11 @@ def strict_json(text):
                           StructuredValidationError("json_parse", "$", "nonfinite_numbers_not_allowed")))
 ```
 
-输入是模型响应字符串，输出JSON对象；异常仍进入有限纠正，绝不把解析失败变业务通过。
+片段SHA256：76dd2f489da70c1558dd13cb5f101317b869c9ca56842a563dac6970ebe94200。
 
-### 名次融合不验证事实
+### RRF融合不保证支持
 
-路径 rag/semantic.py，函数 fuse_ranks，行149–154。
+路径 rag/semantic.py，函数 fuse_ranks，行149–154；完整函数至154行，完整定义。
 
 ```python
 def fuse_ranks(bm25, dense, *, constant=60):
@@ -118,11 +124,11 @@ def fuse_ranks(bm25, dense, *, constant=60):
     return scores
 ```
 
-输入是两路固定排名，输出各片段RRF分；未出现的路不贡献，名次从1。
+片段SHA256：9f646b4b29742ebf72bb5eb3db8128c250360dbb855b5e6c9896640dd7ad4f18。
 
-### 原ID和内部ID分离
+### 来源身份不等于权威
 
-路径 rag/corpus_build.py，函数 source_identity，行10–14。
+路径 rag/corpus_build.py，函数 source_identity，行10–14；完整函数至14行，完整定义。
 
 ```python
 def source_identity(row,revision,shard,row_number):
@@ -132,11 +138,11 @@ def source_identity(row,revision,shard,row_number):
     return 'industrycorpus2:row-v1:'+digest(canonical([revision,shard,row_number]).encode()),True
 ```
 
-输入含可缺失_id的记录、revision、分片和绝对行号；输出身份和missing标志，不猜出版机构。
+片段SHA256：58f3c8dd93e5a6c23b7b5edbe2112c3ae1bfc686917a07a38e2f684b2c5e35d7。
 
-### 短事务的commit与rollback
+### 短事务边界
 
-路径 backend/store.py，函数 RunStore.tx，行50–56。
+路径 backend/store.py，函数 RunStore.tx，行50–56；完整函数至56行，完整定义。
 
 ```python
     def tx(self):
@@ -148,51 +154,11 @@ def source_identity(row,revision,shard,row_number):
             raise
 ```
 
-写入中异常回滚，SQLite错误转StorageError；网络调用在事务外。
+片段SHA256：dad37aa75bf1c5e6c3552cf4ebe57685a07f4328d5ff92f9b2452f058782739f。
 
-### 一次修订资格不是修订成功
+### 恢复不自动续跑
 
-路径 services/bounded_repair.py，函数 eligible_repairs，行21–31。
-
-```python
-def eligible_repairs(finding):
-    """At least one faithful adverse component; other gaps remain untouched."""
-    from dataclasses import replace
-    rows=getattr(finding,'component_reviews',())
-    if not rows:return repair_proposals(finding)
-    proposals=[]
-    for row in rows:
-        if row.status.value not in ('insufficient_evidence','contradicted'):continue
-        if row.classification_issue or row.fidelity_status!='faithful':continue
-        proposals.extend(repair_proposals(replace(finding,status=row.status,component_reviews=(row,))))
-    return tuple(proposals)
-```
-
-输入是当前finding，输出可用原文绑定建议；faithful并且adverse才考虑，repair=null不会自动造建议。
-
-### 确定性标量计算的边界
-
-路径 tools/unit_conversion.py，函数 compute，行14–24。
-
-```python
-def compute(payload):
-    if set(payload)!={'value','from_unit','to_unit','claim_id'}:raise ValueError('unit_conversion.input: exact declared fields required')
-    value=payload['value'];a,b=payload['from_unit'],payload['to_unit']
-    if type(value) not in (int,float) or not math.isfinite(value):raise ValueError('unit_conversion.value: finite scalar required')
-    if a not in PAIRS or b not in PAIRS or PAIRS[a][0]!=PAIRS[b][0]:raise ValueError('unit_conversion.units: known same-dimension units required')
-    if type(payload['claim_id']) is not str:raise ValueError('unit_conversion.claim_id: program claim binding required')
-    converted=value*PAIRS[a][1]/PAIRS[b][1]
-    if not math.isfinite(converted):raise ValueError('unit_conversion.output: finite result required')
-    return {'input':dict(payload),'output_value':converted,'output_unit':b,'quantity_kind':PAIRS[a][0],
-        'scope':'scalar SI conversion only; user data unverified; no stability, equipment suitability or simulation result',
-        'rule_source':'SI prefix scale whitelist in tools/unit_conversion.py; program rule, not an electrical operating standard'}
-```
-
-完整函数可看有限单位表和类别校验；不做潮流或厂站性能分析。
-
-### 恢复状态但不重发
-
-路径 backend/store.py，函数 RunStore.recover，行58–60。
+路径 backend/store.py，函数 RunStore.recover，行58–60；完整函数至60行，完整定义。
 
 ```python
     def recover(self):
@@ -200,205 +166,16 @@ def compute(payload):
             self.db.execute("UPDATE runs SET status='interrupted',ended=?,error_code='PROCESS_INTERRUPTED' WHERE status IN ('queued','running')",(now(),))
 ```
 
-SQL只将未完成标interrupted，没有模型调用；已有结果保持原版本。
+片段SHA256：e053039f0449359a72a0d0f7685aaaba2289e17e2832a5b51c22b11a54271334。
 
-## 沿一条实际请求完整阅读：谁创建对象，谁保存事实
+### 复用装配与固定Evidence入口
 
-以下基于当前函数，不是另建示意调度器。先看教学对象，再沿十步追字段；schema14上轮包装遗漏在真实Harness中，直接组件测试绕过该输入构造。日常仍默认13。integration-learning-v2历史阶段统一输入能力并完成Factory回归；该轮唯一烟测634a22…已发Fact请求，但条件/basis ID非法而未完整，当轮未开启新批次。后续schema-choice-v1已完成固定8题13/14对照，并另列正常服务及2ω→ω实质修订全重审；详见[第08章后续对照](08-verification.md)。这里的“唯一烟测”只指历史阶段，不代表至今只有一次验证。
-
-### 一个贯穿对象的synthetic摘要
-
-```json
-{
-  "example_kind": "synthetic_fixture, 教学对象摘要，不是完整API wire",
-  "task": {"task_id": "synthetic-task-01", "mode": "question_answer", "question": "只解释这个教学装置在条件C下的许可电压"},
-  "evidence": {"evidence_id": "synthetic-evidence-01", "source_type": "synthetic_fixture", "text": "在条件C下，这个教学装置的许可电压为3kV。", "locator": "教学正文字符[0,n)"},
-  "answer": {"answer_id": "synthetic-answer-01", "version": 1, "text": "在条件C下，教学装置的许可电压为3kV。", "citation": "绑定同一正文单元与synthetic-evidence-01"},
-  "claim": {"claim_id": "synthetic-claim-01", "component_id": "synthetic-part-01", "proposition": "在条件C下，教学装置的许可电压为3kV。", "basis_target": "technical_content", "verification_obligation": "technical_truth"},
-  "finding": {"finding_id": "synthetic-finding-01", "answer_version": 1, "status": "supported", "basis": "当前实际交付正文中程序绑定的quote", "reason": "教学固定响应保留相同装置、数值和条件"},
-  "disposition": {"kind": "pass仅在所需检查/原引用完成且无阻断时", "resolution": "完整", "execution_integrity": "complete"}
-}
-```
-
-这些是教学身份和固定判断，不冒充原始官方资料或真实模型正确率。现实ID/哈希/区间由程序产生。许可值的正文依据与3kV→3000V单位工具是两个对象：工具只验证前缀换算，不能证明装置许可值。若独立/原引用或领域义务没完成，即使这个finding为supported，处置也不能pass。
-
-### 1 API：普通字段变成任务，不把浏览器当路径输入器
-
-backend/api.py的Submit是严格Pydantic模型，未知字段拒绝。Submit.task检查两种mode与existing_answer一致，建立task_id；已有回答也建立answer_id、version1，indexed引用按fragment ID回查转正式Evidence。create_app内submit路由先校验现有引用区间/固定库，调用service.submit后返回202/run_id。浏览器不设置本机模型路径，也不拿DeepSeek密钥。
-
-### 2 接受：先持久化，再让worker取任务
-
-ApplicationService.submit验证TaskRequest/预算、配置preflight及队列；rid=uuid4产生run_id，factory.manifest记录代码/知识/协议，RunStore.create保存request/config。async lock保护队列接收与状态；保存失败不能返回假接受。先生成run_id不是完成审核，UI随后GET状态。任务和运行身份分开，原问题相同也不是同一run。
-
-### 3 worker与Factory：装配真实组件，而非模拟回退
-
-ApplicationService._worker取得队列项，mark running，factory.create(rid, observer)产生Bundle；observer是lambda snapshot: store.checkpoint(rid,snapshot)。ComponentFactory.create建立两个适配器、固定Retriever、四Agent、Extractor、单位工具和Product政策，注入已有OfflineHarness。它不调用evaluation脚本，也不另建业务调度器；构造失败清资源并ConfigurationError。
-
-### 4 Harness输入与冻结：版本对象的起点
-
-OfflineHarness.run收到TaskRequest、RunBudget、knowledge_version和run_id。问答检索/生成，已有回答直接用原AnswerDraft。invoke统一预算、deadline、ModelContext和异常；record产生事件并通知observer。Generation快照须保留实际Evidence与知识版本。无实质回答有明确不适用终态，不能把程序拒答当真实答题继续审核。
-
-### 5 提取：原锚点→规范命题→组件
-
-ModelClaimExtractor.extract(protocol7)由answer_anchors提供原文锚点，模型选anchor_id，程序绑定区间。parse_extraction/claim_obligations检查覆盖、立场和义务，不能悄悄改错答案。这里生成的claim_id/component_id属于当前answer版本；对象与输入原文不同步会成为忠实性异议。
-
-### 6 工具与交付：类型成立才可作为依据
-
-requests_for按受支持数值/单位组织真实工具调用，保存ToolResult/current_tools；这不是通用P/Q求解。retrieve_for分别组织Verification/Domain用途交付，保留每版本的EvidenceBinding与RetrievalRecord。独立审核只收到这一轮允许资料，不把全部库或旧运行池借过来。
-
-### 7 双审输入和并发：上轮遗漏恰在这里
-
-基础EvidenceVerificationInput只有request/answer/claims/evidence/快照；ReliabilityVerificationInput另含tool_results、delivery_summary和fact_retrieval_bindings。上轮runtime只按schema9–13做包装，14在ModelAgent开始前就缺字段。组件测试手工给扩展输入绕过了这一行。
-
-事实与领域输入绑定同一answer/claims，各自允许不同Evidence用途。reviewers通过create_task/gather并发等待；异常不能使有效peer变无效。schema13/14决定解析入口，不应让散落版本条件决定是否携带本该提供的数据。本轮由ModelAgent.review_input_type声明扩展类型，services/review_inputs.build构造输入；历史未声明的注入组件在同处保留兼容映射。已用Factory→Harness→真实parser的synthetic贯通核对，而不是声称一个内部函数成功就接好线。
-
-### 8 政策：读有效发现，不再问模型投票
-
-ProductAuditPolicy.decide_context读取执行问题、typed支持、异议、原引用与领域范围。parent状态由组件聚合；支持、严重度、处置、解决程度分开。缺执行先禁止放行，未解决异议复核；明确已选原文的可修复缺陷可一次Revision，真正缺输入仍保留。raw supported不覆盖保守effective状态。
-
-### 9 Revision：新对象重建，旧版不抹去
-
-RevisionInput包含当前发现和合法依据，check_revision检查实际修改/绑定。成功后answer=revised.answer，version递增，保存revision_outputs和旧ReviewRound；循环回提取，current_tools和审核对象按新版本重建。verification/domain/report临时清空，防v1结论沿用v2。对象索引按run/answer/version保存，旧错误与反馈继续可读。
-
-### 10 observer、事务、结果与UI
-
-record给observer一个阶段快照，包括事件、已完成对象、review_rounds、usage和执行问题。RunStore.checkpoint在短tx中写event、snapshot并index对象，tx的BEGIN IMMEDIATE/commit/rollback不跨网络等待。observer异常转HarnessObserverError，不能称保存完成。
-
-worker最终store.mark保存result，ApplicationService.result经store读取/结果投影，API GET result和trace返回安全视图。backend/static/app.js的renderAnswers/renderTrace及结果装载中的decision区域构建用保存结果展示；GET/刷新不启动Harness、Revision或NLI补算。UI展示改善和旧结论不修改是两种责任。
-
-### 如何亲自验证这条路线
-
-对同一synthetic任务记录Factory实际组件类、Harness收到/转成的输入类、真正parser收的payload、Trace状态、Store对象和API结果。问答与已有回答都走，不模拟替换Harness本身；测试有成功工具basis、多个原引用scope、Revision后两轮提取/双审和不同版本保存。捕获共享装配故障时，提交执行器应先落已发请求/部分结果再停止后续，而非把AttributeError当单题语义差。
-
-## 本轮完整路线的实际代码摘录
-
-每段给出实际行号，短段结束明确标“后续行省略”；省略不改变语义判断，不是可独立运行的全部函数。
-
-### 摘录：Task/Answer身份与引用绑定
-
-backend/api.py / Submit.task，实际行54–67。
+路径 backend/assembly.py，函数 ComponentFactory.create，行240–257；完整函数至310行，局部摘录。
 
 ```python
-    def task(self,indexed_evidence=()):
-        if not self.question.strip() or self.existing_answer is not None and not self.existing_answer.strip():raise InputError('Nonempty question/answer required')
-        if (self.mode=='assess_existing')!=(self.existing_answer is not None):raise InputError('Existing answer required only for assess_existing')
-        if self.existing_citations and self.mode!='assess_existing':raise InputError('Citation bindings require existing answer')
-        if any(len(s)>4000 for s in self.answer_requirements):raise InputError('Answer requirement too long')
-        aid=uuid4().hex
-        by_fragment={e.provenance.fragment_id:e.evidence_id for e in indexed_evidence}
-        citations=tuple(CitationBinding(c.start_offset,c.end_offset,tuple(by_fragment[f] for f in c.fragment_ids)) for c in self.existing_citations)
-        answer=None if self.existing_answer is None else AnswerDraft(aid,1,self.existing_answer,citations=citations)
-        refs=tuple(Evidence('user-'+uuid4().hex,'user_supplied','unverified',r.label,r.text,'user_reference') for r in self.references)
-        e=self.engineering_context
-        engineering=None if e is None else EngineeringContext(e.goal,e.network_model,e.operating_point,e.limits,
-            tuple(e.contingencies),tuple(EngineeringQuantity(uuid4().hex,q.kind,q.value,q.unit,q.reference) for q in e.quantities))
-        args=(uuid4().hex,TaskMode(self.mode),'voltage_stability_reactive_support',self.question,self.user_context,answer,refs+tuple(indexed_evidence),engineering)
-```
-只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
-
-### 摘录：API接收与异常返回
-
-backend/api.py / create_app.submit，实际行228–247。
-
-```python
-    async def submit(body:Submit,request:Request):
-        try:
-            if body.premise_declarations and config.fact_internal_flow!='langgraph_candidate_v1':raise InputError('Explicit premises require candidate flow')
-            indexed=()
-            if body.existing_citations:
-                if config.profile!='real':raise InputError('Indexed references require real knowledge snapshot')
-                if body.mode!='assess_existing' or body.existing_answer is None:raise InputError('Existing answer required')
-                for c in body.existing_citations:
-                    if not 0<=c.start_offset<c.end_offset<=len(body.existing_answer):raise InputError('Citation span outside answer')
-                import asyncio
-                def resolve():
-                    from rag.storage import KnowledgeStore
-                    ids=tuple(dict.fromkeys(f for c in body.existing_citations for f in c.fragment_ids))
-                    with KnowledgeStore(config.index_db,readonly=True) as index:
-                        return tuple(index.evidence(f,config.knowledge_version) for f in ids)
-                indexed=await asyncio.to_thread(resolve)
-            rid=await svc(request).submit(body.task(indexed),answer_requirements=tuple(body.answer_requirements),
-                indexed_reference_ids=tuple(e.evidence_id for e in indexed),nli_enabled=body.local_nli_enabled)
-        except InputError as exc:
-            if str(exc).startswith('Complete citation scopes exceed configured capacity; citation_indexes='):
-```
-只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
-
-### 摘录：保存接受和队列
-
-backend/service.py / ApplicationService.submit，实际行56–81。
-
-```python
-    async def submit(self,request,*,answer_requirements=(),indexed_reference_ids=(),nli_enabled=None):
-        validate_request(request,self.config.budget)
-        selected=self.config.nli_enabled if nli_enabled is None else nli_enabled
-        if type(selected) is not bool:raise ValueError('NLI selection must be boolean')
-        if selected and nli_enabled is not None:
-            from core.validation import InputError
-            if not self.nli_capability()['available']:raise InputError('Local NLI not configured/available; disable the optional selection')
-            await self.ensure_nli() # A load failure is diagnostic only; the audit still runs.
-        knowledge=self.factory.preflight()
-        if self.config.profile=='real' and request.existing_answer and request.existing_answer.citations:
-            from services.citation_workload import submission_rejections
-            from core.validation import InputError
-            rejected=submission_rejections(request,knowledge,self.config.verification_schema,self.config.citation_workload,review_contract=self.config.fact_review_contract,review_result_transport=self.config.review_result_transport)
-            if rejected:raise InputError('Complete citation scopes exceed configured capacity; citation_indexes='+str(list(rejected)))
-
-        async with self.lock:
-            if self.closing or self.storage_fault:raise ServiceUnavailable('Service not accepting work')
-            if self.queue.full():raise QueueFullError('Waiting queue is full')
-            rid=uuid4().hex;manifest=self.factory.manifest(knowledge)
-            manifest['answer_requirements']=answer_requirements
-            manifest['indexed_reference_ids']=indexed_reference_ids
-            manifest['local_nli_diagnostic']={'version':'local-nli-task-selection-v1','enabled':selected,'authority':'diagnostic_only','affects_decision':False}
-            manifest['local_nli_diagnostic'].update(load_status='ready' if selected and self.nli and self.nli.identity and not self.nli.failure else 'failed' if selected else 'not_requested',load_error=self.nli.failure if selected and self.nli else None)
-            self.store.create(rid,request,manifest)
-            self.queue.put_nowait((rid,request,knowledge,answer_requirements,indexed_reference_ids))
-        return rid
-```
-只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
-
-### 摘录：worker装配和最终保存
-
-backend/service.py / ApplicationService._worker，实际行100–126。
-
-```python
-    async def _worker(self):
-        while not self.closing:
-            if self.storage_fault:return
-            rid,request,knowledge,requirements,indexed_ids=await self.queue.get()
-            bundle=None
-            from rag.timing import capture_timing
-            timing_manager=capture_timing(run_id=rid);timing_log=timing_manager.__enter__()
-            try:
-                if self.store.get(rid)['status']!='queued':continue
-                self.active=rid;self.store.mark(rid,'running')
-                bundle=self.factory.create(rid,lambda snapshot:self.store.checkpoint(rid,snapshot))
-                self.active_bundle=bundle
-                result=await bundle.harness.run(request,self.config.budget,knowledge_version=knowledge,
-                    answer_requirements=tuple(requirements),indexed_reference_ids=tuple(indexed_ids),run_id=rid)
-                status='interrupted' if self.closing else 'cancelled' if result.state.value=='cancelled' else 'failed' if result.state.value=='failed' else 'finished'
-                self.store.mark(rid,status,error_code='PROCESS_INTERRUPTED' if self.closing else None,result=result)
-                if self.nli and not self.closing and self.store.get(rid)['config'].get('local_nli_diagnostic',{}).get('enabled',self.config.nli_enabled):
-                    task=asyncio.create_task(self.diagnose_completed(rid,wire(result)),name='local-nli:'+rid)
-                    self.nli_tasks.add(task);task.add_done_callback(self.nli_tasks.discard)
-            except asyncio.CancelledError:
-                try:self.store.mark(rid,'interrupted',error_code='PROCESS_INTERRUPTED')
-                except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-                raise
-            except (StorageError,HarnessObserverError):
-                self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-                try:self.store.mark(rid,'interrupted',error_code='RUN_STORAGE_FAILED')
-                except StorageError:pass
-```
-只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
-
-### 摘录：真实装配的资源建立
-
-backend/assembly.py / ComponentFactory.create，2026-10-25当前实际行219–234。
-
-```python
-    def create(self,rid,observer):
+    def create(self,rid,observer,*,fixed_evidence_only=False):
+        """Fixed Evidence evaluation may skip index resources; defaults unchanged."""
+        if type(fixed_evidence_only) is not bool:raise ConfigurationError('Boolean fixed evidence mode required')
         if self.config.profile=='synthetic_fixture':
             from agents.fakes import make_fake_harness
             harness=make_fake_harness();harness.observer=observer;harness.execution_path=self.config.execution_path
@@ -415,44 +192,47 @@ backend/assembly.py / ComponentFactory.create，2026-10-25当前实际行219–2
             elif self.config.fact_internal_flow=='two_stage_v1':
                 from services.fact_two_stage_v1 import create_agent as FactAgent
 ```
-只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
-### 摘录：原锚点输入与实际解析选择
+片段SHA256：90c30e41b968135fa24d44bf40d33f767e4ac80d3a4bd4f0848188937aac21bb。
 
-services/claim_extractor.py / ModelClaimExtractor.extract，实际行145–165。
+### 受预算约束的完整闭环
+
+路径 harness/runtime.py，函数 OfflineHarness.run，行43–60；完整函数至62行，局部摘录。
 
 ```python
-    async def extract(self, answer):
-        if self.protocol_version in (5,6,7):
-            from services.answer_anchors import anchors,parse,SYSTEM as anchor_system
-            if self.protocol_version==6:
-                from services.answer_basis_targets import parse,SYSTEM as anchor_system
-            if self.protocol_version==7:
-                from services.claim_obligations import parse,SYSTEM as anchor_system
-                if self.daily_guidance:
-                    from services.claim_obligations import DAILY_SYSTEM as anchor_system
-            unified=self.message_profile=='unified_v1'
-            if unified:
-                from services.claim_message_v1 import system, VERSION, correction_instruction
-                anchor_system=system(self.daily_guidance)
-            payload={'answer_id':answer.answer_id,'answer_version':answer.version,'ANSWER_ANCHORS':anchors(answer),
-                'assumptions':answer.assumptions,'missing_information':answer.missing_information}
-            path=None if self.diagnostics is None else self.diagnostics.save_scope(payload)
-            output,_=await structured_request(self.client,(ModelMessage('system',anchor_system),ModelMessage('user',json.dumps(payload,ensure_ascii=False))),
-                VERSION if unified else ('atomic-claims-v7-obligations-faithful-assertions-v2' if self.daily_guidance else 'atomic-claims-v7-obligations') if self.protocol_version==7 else 'atomic-claims-v6-basis-target-anchors' if self.protocol_version==6 else 'atomic-claims-v5-program-anchors',lambda v:parse(v,answer),diagnostics=self.diagnostics,
-                response_contract_version='atomic-claims-v'+str(self.protocol_version),candidate_catalog_path=path,
-                correction_instruction=correction_instruction() if unified else None)
-            return output
+    async def run(self, request, budget, *, knowledge_version=None, generation_only=False, answer_requirements=(),
+                  evidence_only=False, indexed_reference_ids=(), generation_snapshot=None, run_id=None):
+        if self.execution_path not in ("sequential", "langgraph_v1"):
+            raise InputError("Unknown Harness execution path")
+        driver = None
+        if self.execution_path == "langgraph_v1":
+            # Optional dependencies are never imported by the default path.
+            try:
+                from harness.graph_runtime_v1 import run_graph, validate_versions
+            except ImportError as exc:
+                raise InputError("Optional LangGraph dependencies unavailable; install requirements-langgraph.lock.txt") from exc
+            validate_versions()
+            driver = run_graph
+        execution = RunExecution(
+            self, request, budget, knowledge_version=knowledge_version,
+            generation_only=generation_only, answer_requirements=answer_requirements,
+            evidence_only=evidence_only, indexed_reference_ids=indexed_reference_ids,
+            generation_snapshot=generation_snapshot, run_id=run_id,
 ```
-只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
-### 摘录：政策上下文，不是另一个模型
+片段SHA256：e63611d2194634a77c92814d4afdc25f3659c5fbbc0d33e07db0c083239ca525。
 
-harness/product_policy.py / ProductAuditPolicy.decide_context，实际行24–40。
+### 确定性政策与执行完整性
+
+路径 harness/product_policy.py，函数 ProductAuditPolicy.decide_context，行24–41；完整函数至177行，局部摘录。
 
 ```python
     def decide_context(self, verification, domain, budget, revision_round, *, request,
                        answer, claims, extraction, issues, retrieval):
+        from agents.contracts import LiteralVerificationOutput
+        if isinstance(verification,LiteralVerificationOutput):
+            from services.literal_policy_v1 import decide
+            return decide(self,verification,domain,budget,revision_round,request=request,answer=answer,claims=claims,extraction=extraction,issues=issues,retrieval=retrieval)
         facts, findings = verification.findings, domain.findings
         ids = tuple(f.finding_id for f in facts if f.status != V.SUPPORTED) + tuple(
             f.finding_id for f in findings if f.check_status in ('warning', 'not_assessable')
@@ -465,289 +245,174 @@ harness/product_policy.py / ProductAuditPolicy.decide_context，实际行24–40
                  'Claim components and independent analysis_scope check retain technical truth obligations',
                  'Classification is fallible; scope alone never overrides an adverse finding')
         checks = [('fact_support', 'applicable', 'Every extracted claim must have independent verification'),
-                  ('original_citations', 'applicable' if answer.citations else 'not_applicable',
-                   'Separate original citation judgments' if answer.citations else 'No original citations')]
-        for claim in claims:
 ```
-只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
-### 摘录：阶段与对象短事务
+片段SHA256：723110fc5ff83741dba7a3c4727ba3085b2db5f456fcd9d069ccbec474c6daf3。
 
-backend/store.py / RunStore.checkpoint，实际行89–100。
+### D/O/S/U修订上下文
+
+路径 services/local_revision_v2.py，函数 plan，行79–96；完整函数至144行，局部摘录。
 
 ```python
-    def checkpoint(self,rid,snapshot):
-        v=wire(snapshot);event=v['event']
-        with self.tx():
-            ordinal=self.db.execute('SELECT COUNT(*) FROM events WHERE run_id=?',(rid,)).fetchone()[0]+1
-            self.db.execute('INSERT INTO events VALUES (?,?,?,?,?)',(rid,event['event_id'],ordinal,dumps(event),dumps(v.get('stage_output'))))
-            self.db.execute('UPDATE runs SET snapshot=?,harness_state=? WHERE id=?',(dumps(v),v['state'],rid))
-            # Bind domain finding IDs to this frozen answer; domain findings already have explicit bindings.
-            self.index(rid,v)
-            if v.get('stage_output') and event['component']=='evidence_verification':
-                answer=v['stage_output'];aid=answer['answer_id'];version=answer['answer_version']
-                for f in answer['findings']:
-                    self.index(rid,dict(f,answer_id=aid,answer_version=version))
+def plan(inputs):
+    """Program-owned projection; no credential loading, retrieval or semantic inference."""
+    validate_types(inputs,RevisionInput)
+    v=inputs.verification;answer=inputs.answer
+    require(isinstance(v,LiteralVerificationOutput),'V2 revision requires literal review output')
+    require((v.answer_id,v.answer_version)==(answer.answer_id,answer.version),'Revision input version conflict')
+    require(not v.execution_issues and not inputs.domain_review.execution_issues,'Incomplete review cannot authorize revision')
+    require((inputs.domain_review.answer_id,inputs.domain_review.answer_version)==(answer.answer_id,answer.version),'Domain version conflict')
+    require(len({e.evidence_id for e in inputs.allowed_evidence})==len(inputs.allowed_evidence),'Duplicate allowed evidence identity')
+    validate_answer(answer,inputs.allowed_evidence)
+    av={e.evidence_id:e for e in inputs.allowed_evidence};aa=anchors(answer)
+    units={f'U{i}':a for i,a in enumerate(aa)};unit_by_anchor={a['anchor_id']:k for k,a in units.items()}
+    require(len(unit_by_anchor)==len(aa),'Duplicate answer anchor')
+    authorities={f'D{i}':d for i,d in enumerate(sorted(v.literal_defects,key=lambda d:d.finding_id))}
+    require(len({d.finding_id for d in authorities.values()})==len(authorities),'Duplicate authority')
+    vr={r.anchor_id:r for r in v.literal_reviews}
+    require(len(vr)==len(v.literal_reviews) and set(vr)==set(unit_by_anchor),'Prior literal review coverage/identity conflict')
+    prior={u:[] for u in units};used=set()
 ```
-只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
-### 摘录：保存结果到安全投影
+片段SHA256：c28fdfa8e6ad60f7adbe6a53ceb78054de90f99e78cd7b8c39438de699148910。
 
-backend/service.py / ApplicationService.result，实际行163–187。
+### 修改授权与意见记账
+
+路径 services/local_revision_v2.py，函数 parse，行171–188；完整函数至241行，局部摘录。
 
 ```python
-    def result(self,rid):
-        row=self.store.get(rid);raw=row['result'] or row['snapshot']
-        if raw is None:return {'execution':self.state(rid),'result_available':False,'reason':'No stage result persisted yet'}
-        raw=dict(raw)
-        if row['result'] is None:
-            # Use already persisted valid sibling outputs, not a second execution.
-            names={'generation':'generation_output','claim_extraction':'extraction_output',
-                   'evidence_verification':'verification_output','power_domain_review':'domain_output'}
-            for stage in self.store.events(rid):
-                name=names.get(stage['event']['component']);output=stage['stage_output']
-                if not name or not isinstance(output,dict):continue
-                if output.get('answer_version') is not None and raw.get('answer') and output['answer_version']!=raw['answer']['version']:continue
-                if raw.get(name) is None:raw[name]=output
-        report=raw.get('report');decision=None if not report else report['decision']
-        rounds=raw.get('review_rounds',[])
-        issues=list(raw.get('execution_issues',[]))
-        for output in (raw.get('verification_output'),raw.get('domain_output')):
-            if output:issues+=output.get('execution_issues',[])
-        current_version=(raw.get('answer') or {}).get('version')
-        no_answer=(raw.get('generation_output') or {}).get('substantive_answer') is False
-        if no_answer and not issues:complete=True
-        complete=bool(rounds) and rounds[-1]['answer']['version']==current_version and all(not r[k].get('execution_issues') for r in rounds for k in ('verification','domain_review')) and not issues
-        verification=raw.get('verification_output') or {};domain=raw.get('domain_output') or {}
-        original=row['request'].get('existing_answer')
-        if original is None and raw.get('generation_output'):original=raw['generation_output']['answer']
+def parse(value,p):
+    ec=Errors()
+    if not ec.fields(value,'root','$'):ec.finish()
+    ec.check(value.get('context_id')==p.payload['context_id'],'$.context_id','answer_version_context_mismatch')
+    edits=value.get('edits');actions=value.get('opinion_actions');good_edits=[];targets={};used_d=set();action_rows=[];seen_o=set()
+    if ec.check(type(edits) is list,'$.edits','array_required'):
+        for i,e in enumerate(edits):
+            path=f'$.edits[{i}]'
+            if not ec.fields(e,'edit',path):continue
+            u=e.get('unit_ref');valid_u=type(u) is str and u in p.units
+            ec.check(valid_u,path+'.unit_ref','current_unit_ref_required')
+            if valid_u:
+                ec.check(u not in targets,path+'.unit_ref','conflicting_unit_replacement');targets[u]=i
+            ds=ec.refs(e.get('authorization_refs'),p.authorities,path+'.authorization_refs','authorization_ref',nonempty=True)
+            used_d.update(ds)
+            legal={k for k,s in p.sources.items() if valid_u and any(s.evidence_id==x['evidence_id'] for x in p.prior[u]) or any(s.evidence_id==q.evidence_id for d in ds for q in p.authorities[d].sources)}
+            ss=ec.refs(e.get('support_refs'),legal,path+'.support_refs','support_source_ref',nonempty=True)
+            for d in ds:
 ```
-只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
-### 关键连接：实际Harness组件注入
+片段SHA256：fde156157edada85f95c68411719d42b920d829d7d0989fbc93ae99a7f6c55b6。
 
-backend/assembly.py当前实际行261–270，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
+### 跨语言词项入口
+
+路径 rag/chinese_first.py，函数 lexical，行26–27；完整函数至27行，完整定义。
 
 ```python
-            harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
-                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
-                ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
-                ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
-                policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
-                generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
-                generation_corpus_english=corpus_english,execution_path=self.config.execution_path)
-            harness.subject_supplement=True
-            return Bundle(harness,resources)
+def lexical(text):
+    return tokenize(text) + tuple(w.casefold() for w in re.findall(r'[\u0370-\u03ff]+|[=+*/^<>≤≥−]', text))
 ```
 
-### 关键连接：按输入契约包装，而非散落版本条件
+片段SHA256：34eac82ab0a0f0c47de7edafd71fc66321aa0f691bc60f11ef4d0eb50650fffd。
 
-以下为共享阶段抽取前固定提交`1d5528f`的harness/runtime.py行432–438历史摘录。当前同一职责在harness/execution.py的prepare_review；保留旧片段帮助理解移动前后的连接，不能拿旧行号定位现行代码。
+### 恢复实际输入与知识身份
+
+路径 evaluation/natural_draft_audit_v1.py，函数 recover，行27–44；完整函数至45行，局部摘录。
 
 ```python
-                from services.review_inputs import build as build_review_input
-                summary=lambda delivery:__import__('json').dumps(__import__('dataclasses').asdict(delivery.record)) if retrieval else ''
-                v_input=build_review_input(self.verification,v_input,tool_results=current_tools,
-                    delivery_summary=summary(vd) if retrieval else '',
-                    fact_retrieval_bindings=vd.record.fact_bindings if retrieval else ())
-                d_input=build_review_input(self.domain_review,d_input,tool_results=current_tools,
-                    delivery_summary=summary(dd) if retrieval and not evidence_only else '')
+def recover():
+    summary=load(OLD/'batch/summary.json');generated={};origins=[]
+    with closing(sqlite3.connect((OLD/'batch/runs.sqlite3').as_uri()+'?mode=ro',uri=True)) as db:
+        for i in range(8):
+            ident=f'N{i+1}-C';control=next(r for r in summary['control'] if r['case_id']==ident);rid=control['accepted']['run_id']
+            raw=summary['outputs'][rid];path=OLD/'batch'/rid/'result.json';inp=load(OLD/'batch'/rid/'input.json')
+            require(load(path)==raw and json.loads(db.execute('SELECT result FROM runs WHERE id=?',(rid,)).fetchone()[0])==raw,'Historical result/Store mismatch')
+            req=restore(inp['request'],TaskRequest);gen=restore(raw['generation_output'],GenerationOutput)
+            validate_snapshot(gen.evidence_snapshot,gen.answer)
+            require(wire(gen.answer)==raw['answer'] and wire(gen.evidence_snapshot.evidence)==raw['evidence'],'Historical natural draft/snapshot mismatch')
+            require(wire(gen.evidence_snapshot.evidence_bindings)==raw['evidence_bindings'],'Historical role/binding mismatch')
+            require(gen.evidence_snapshot.question==req.question and gen.evidence_snapshot.user_context==req.user_context and gen.evidence_snapshot.engineering_context==req.engineering_context,'Historical question/context mismatch')
+            generated[i]=SimpleNamespace(answer=gen.answer,evidence=gen.evidence_snapshot.evidence,generation_output=replace(gen,model_records=()),model_records=(),duration_ms=0,retrieval_records=())
+            origins.append(dict(id=f'N{i+1}',old_run_id=rid,request=wire(req),answer_sha256=sha(raw['answer']),evidence_sha256=sha(raw['evidence']),
+                bindings_sha256=sha(raw['evidence_bindings']),snapshot_sha256=sha(raw['generation_output']['evidence_snapshot']),
+                knowledge_version=gen.evidence_snapshot.knowledge_version,old_generation_records=raw['model_records'],historical_cost_recounted=False,
+                origin='archived_natural_generation_only; all initial extraction/fact/domain audits must be fresh',
+                files=[dict(path=p.relative_to(ROOT).as_posix(),sha256=digest(p)) for p in (path,OLD/'batch'/rid/'input.json')]))
 ```
 
-### 关键连接：并发双审和异常收尾
+片段SHA256：0aafb6e57a7f5b5ed99e5510729a7a8cb2bf889033eaacd3c596d693f241ba54。
 
-以下为固定提交`1d5528f`的harness/runtime.py行477–488历史摘录；当前在harness/execution.py的review_pair，仍是一个阶段内部并发双审，不因图适配改为两个图节点。
+### 一次有界审核批次
+
+路径 evaluation/natural_draft_audit_v1.py，函数 batch，行88–105；完整函数至108行，局部摘录。
 
 ```python
-                reviewers = [asyncio.create_task(job) for job in (
-                    review("evidence_verification", self.verification, v_input, merge_evidence(v_evidence, original_evidence), True, v_retrieval_issue),
-                    review("power_domain_review", self.domain_review, d_input, d_evidence, False, d_retrieval_issue),
-                )]
-                try:
-                    (verification, v_issue), (domain, d_issue) = await asyncio.gather(*reviewers)
-                except BaseException:
-                    for reviewer in reviewers:
-                        reviewer.cancel()
-                    await asyncio.gather(*reviewers,return_exceptions=True)
-                    raise
-                if v_issue:
+async def batch(c,m,generated,root,provider,*,limit=None):
+    limit=limit or SendLimit(root)
+    async def runner(h,req,budget,**kw):
+        i=next(i for i,row in enumerate(m['origins']) if row['request']['question']==req.question);origin=m['origins'][i]
+        require(req.existing_answer==generated[i].answer and req.provided_evidence==generated[i].evidence,'Fixed natural input differs')
+        require(sha(kw['generation_snapshot'])==origin['snapshot_sha256'],'Real generation snapshot differs')
+        require(h.retriever is None and not h.subject_supplement and kw['knowledge_version']==origin['knowledge_version'],'Unexpected retrieval/snapshot scope')
+        save(root/kw['run_id']/'audit-origin.json',dict(origin=origin,new_run_id=kw['run_id'],initial_audits='all_fresh',
+            archived_generation_bindings_preserved_in_snapshot=True,current_provided_evidence_roles='normal fixed-evidence Harness user_reference; distinct from archived generation core/adjacent roles',
+            no_historical_audit_replay=True,historical_cost_recounted=False))
+        return await h.run(req,budget,**kw)
+    def guard(spec,raw):
+        if any(x['code'] in ('MODEL_TIMEOUT','TIMEOUT','MODEL_CANCELLED','CANCELLED') for x in raw.get('execution_issues',[])):
+            return dict(component='service',code='SERVICE_EXECUTION_FAILED',message='Shared timeout/unknown acceptance; stop new sends')
+        if raw.get('generation_output') or raw.get('retrieval_records'):
+            return dict(component='service',code='SERVICE_EXECUTION_FAILED',message='Unexpected generation/retrieval')
+    rows=[dict(id=f'N{i+1}',input=dict(id=f'N{i+1}',line='B',case=i,variant='candidate')) for i in range(8)]
+    return await shared.batch(c,m,root,provider,factory_type=Factory,rows=rows,request_builder=request,variant_config=lambda cfg,v:cfg,
 ```
 
-### 关键连接：修订后重建与旧轮次保留
+片段SHA256：02992c4f6c2777c98590b491f3c7ea98ed33bdaed94359d697e52cb2696429ae。
 
-以下为固定提交`1d5528f`的harness/runtime.py行600–613历史摘录；当前在harness/execution.py的revise和外层run异常边界，不因修订而覆盖旧轮次。
+### 固定证据生成诊断入口
+
+路径 evaluation/retrieval_evidence_answer_check_v1.py，函数 run，行186–203；完整函数至216行，局部摘录。
 
 ```python
-                answer = revised.answer
-                revision_outputs.append(revised)
-                active_snapshot = revised.evidence_snapshot
-                evidence = merge_evidence(evidence, revised.evidence)
-                collect_agent_evidence(revised.evidence)
-                record("revision_changes", ExecutionStatus.SUCCEEDED, perf_counter(),
-                       "; ".join(change.description for change in revised.changes),
-                       outputs=(f"{answer.answer_id}@{answer.version}",))
-                rounds += 1
-                verification = domain = None
-                report = None
-        except HarnessObserverError:
-            raise
-        except RequiredRetrievalFailure as exc:
+async def run():
+    require(not (LOCAL/'attempt.json').exists(),'Unique new attempt only; no resume')
+    require(not subprocess.check_output(['git','status','--porcelain','--','agents','backend','core','harness','model_adapter','rag','services','evaluation','tests','tools'],cwd=ROOT,text=True).strip(),'Commit sources first')
+    require(not subprocess.check_output(['git','diff',BASE,'--','agents','backend','core','harness','model_adapter','rag','services','tools'],cwd=ROOT),'Business semantics changed')
+    m=load(LOCAL/'materials.json');recovered,origins=recover();require(origins==load(LOCAL/'origins.json'),'Prepared origins changed')
+    original_materials=load(OLD/'materials.json')
+    for key in ('N','rules','reference_sources'):
+        require(m[key]==original_materials[key],'Frozen original reference changed: '+key)
+    c=ServiceConfig.from_environment()  # sole real-run root .env loader
+    require(os.environ.get('DEEPSEEK_MODEL_ID')=='deepseek-flash','Flash only')
+    previous=load(OLD/'freeze.json')
+    for key in ('profile','decision_policy','execution_path','verification_schema','retrieval_mode','retrieval_execution_profile',
+        'fact_strategy','fact_review_contract','local_revision_interface','revision_answer_delivery','review_result_transport',
+        'fact_internal_flow','domain_internal_flow','extraction_message_profile','review_message_profile','knowledge_version'):
+        require(getattr(c,key)==previous['configuration'][key],'Original configuration differs: '+key)
+    c=replace(c,run_db=LOCAL/'batch/runs.sqlite3',budget=replace(c.budget,max_model_calls=2,max_duration_seconds=800,max_transient_retries=0))
+    manifest=ComponentFactory(c).manifest(c.knowledge_version,fixed_evidence_only=True)
+    require(manifest['prompts']['generation']==previous['manifest']['prompts']['generation'],'Generation prompt differs')
 ```
 
-## 2026-10-22现行连接：共享阶段与可选图
+片段SHA256：25f9bd3f284cb5574787e52d9d8d53f5df3d0aa86422c901ef757e5529a4c6f0。
 
-图适配应用源码绑定提交`9f0e491`，`docs/learning/source-check.json`保留上述旧连接记录并新增当前阶段/图函数的行号与文本哈希。先看harness/runtime.py的OfflineHarness.run：只有显式选`langgraph_v1`才加载可选依赖并传入图driver；默认路径不需要图依赖，也没有API载荷开关。
+::: answer 新源码核对练习：测试14项通过能证明N2被识别吗？
+不能。专项证明恢复身份、真初审路径、预算与Store等接缝；自然语义判断必须看实际预测和原文。N2的审核supported恰好表明程序接线正确也可能语义漏检。检查文件哈希能证明教材读的是这份源码，不能证明模型结论正确。
+:::
 
-接着看harness/execution.py：run_stages保留原顺序驱动，run(driver=...)只选择一个driver，并共用同一套异常、取消、observer、注册清理和结果组装。harness/graph_runtime_v1.py的build_graph定义7节点和条件边；run_graph调用ainvoke，不调用run_stages。节点每次只执行一个共享阶段，通过状态更新提供下一阶段标签，条件边实际完成路由。
+## 既有源码练习（历史题保留）
 
-调试时可对照tests/test_langgraph_runtime_v1.py：让run_stages直接抛错，图仍完成7阶段和修订回环；图失败则检查旧驱动没有执行。预算、调用归属和部分结果通过同一输入的差分核对。evaluation/reviewer_graph_v1.py包装独立评审组件，evaluation/langgraph_replay_v1.py只返回绑定消息哈希的历史响应，不创建真实供应商适配器。
-
-与第04章的节点图一起阅读，并区分代码已存在、离线通过和真实运行验证。当前只完成前两项；v7历史响应回放不是新的模型生成成绩，生产组装仍为schema13及默认顺序路径。
-
-## 2026-10-22 服务图接线阅读点
-
-先看backend/config.py的服务端execution_path，再看backend/assembly.py的preflight、manifest和create。worker依然只调用同一个Harness，图和原驱动均调用harness/execution.py七共享阶段。API/SQLite保存编排身份，历史默认原路；正常Factory不注入A/B候选。服务收集器曾跨线程读SQLite，已改只读独立连接，修复不代表恢复已停止批次。
-
-## 三道自测：先作答，再展开
-
-### 自测1：为什么直接组件测试不够？
+::: answer 展开新增练习解析
+不能。它只证明程序收到该合法声明时不会走旧遗漏路径；真实模型能否作出正确声明、能否识别条件归属，需要固定真实输入逐项核验。不能将新字段或替身标签当语义成绩。
+:::
 
 ::: answer 展开参考答案1
 它可能手工传扩展输入，遗漏真实Factory/Harness构造分支。
 :::
 
-### 自测2：task_id和run_id在哪里产生？
-
 ::: answer 展开参考答案2
 Submit.task构造任务身份；ApplicationService.submit生成运行身份。
 :::
 
-### 自测3：observer失败还能声称结果保存吗？
-
 ::: answer 展开参考答案3
 不能；抛HarnessObserverError并报告持久化失败。
 :::
-
-## 2026-10-08 首版收尾核对
-
-schema13未换。任务范围由既有Domain的analysis_scope新增task_scope字段同次判断，结合实际问题/回答，程序记录原goal、身份/哈希/理由；缺goal不默认工程或概念，conceptual不能豁免工程承诺，真实异议/范围不确定保留复核。见 `services/task_applicability.py`、`agents/domain_contract_v3.py` 和 `agents/power_domain_review.program_findings`。同组件关系v6取消模型重复quote_ids，由合法局部bases/indexes程序绑定；条件/repair不得借未选正文或别的作用域，旧v5按旧接口保存，新增输出v9.12显式标记。见 `services/support_relation_v6.py`，危险规则未扩。
-
-4题各一次全部阶段完成：新概念通过、特定100kVA不足被识别、危险事实矛盾与来源绑定高风险完整且禁止采用；工程题不编造，但长回答/拒答及建议边界仍复核。16调用/0纠正/0修订不能称通用稳定；本批没有真实Revision，既有成功与Factory完整重审另列。实际浏览器和重启保存已核对，旧失败和完整库不变。进入限定个人最终试用，工程自动定值/认证未提供；详见项目 `docs/audit-closeout-v1.md`。
-
-
-## 事实审核内部候选源码：FactFlowAgent.run
-
-路径 agents/fact_flow_v1.py，函数 FactFlowAgent.run，行21–33。
-
-```python
-    async def run(self,inputs):
-        from harness.graph_runtime_v1 import validate_versions
-        validate_versions()
-        from core.validation import merge_evidence, require
-        from services.evidence_scope import validate_snapshot
-        merge_evidence(inputs.seed_evidence,inputs.original_evidence)
-        if inputs.generation_snapshot is not None:
-            validate_snapshot(inputs.generation_snapshot,inputs.answer)
-            merge_evidence(inputs.seed_evidence,inputs.original_evidence,inputs.generation_snapshot.evidence)
-            require(inputs.knowledge_version is None or inputs.generation_snapshot.knowledge_version==inputs.knowledge_version,'knowledge version mismatch')
-        async def prepare(state):
-            # Existing binder rejects stale source identities and scopes.
-            cat=Catalog(state['inputs'])
-```
-
-
-## 事实审核内部候选源码：Catalog.parse_one
-
-路径 services/fact_flow_protocol_v1.py，函数 Catalog.parse_one，行113–125。
-
-```python
-    def parse_one(self,row,target,path):
-        ec=ErrorCollector(VERSION)
-        required={'target_id','status','basis_ids','reason','conditions','repair','requires_authoritative_source',
-                  'object_kind','classification_objection','fidelity','fidelity_reason','dependencies','comparison'}
-        if not ec.fields(row,required,set(),path):ec.finish()
-        kind=row['object_kind'];obj=row['classification_objection'];ids=row['basis_ids'];deps=row['dependencies']
-        ec.check(type(kind) is str and kind in KINDS,path+'.object_kind','known_object_kind')
-        ec.check(obj is None or type(obj) is str and bool(obj.strip()),path+'.classification_objection','null_or_explicit_objection')
-        ec.check(row['fidelity'] in ('faithful','disputed','uncertain'),path+'.fidelity','independent_fidelity_required')
-        ec.check(type(row['fidelity_reason']) is str and bool(row['fidelity_reason'].strip()),path+'.fidelity_reason','fidelity_reason_required')
-        ec.check(type(ids) is list and all(type(b) is str and b in target['allowed_basis_ids'] for b in ids),path+'.basis_ids','legal_scoped_ids')
-        ec.check(type(deps) is list and all(type(b) is str and type(ids) is list and b in ids for b in deps) and len(set(deps))==len(deps),path+'.dependencies','selected_dependency_subset')
-        ec.finish()
-```
-
-
-## 事实审核内部候选源码：execute
-
-路径 services/scoped_fact_execution.py，函数 execute，行19–31。
-
-```python
-async def execute(agent,inputs,*,catalog,prompt_version,contract_version,instruction):
-    if current_budget() is None:
-        with model_scope(ModelBudget((3 if hasattr(catalog,"prepare_stage") else 2)+len(inputs.answer.citations))):return await execute(agent,inputs,catalog=catalog,prompt_version=prompt_version,contract_version=contract_version,instruction=instruction)
-    if catalog is None:
-        from agents.verification_contract_v14 import ReviewCatalog
-        cat=ReviewCatalog(inputs)
-    else:cat=catalog
-    start=len(current_budget().records);current=deepcopy(cat.rows);accepted=set();issues=[];corrected=False
-    facts=[t for t,x in cat.targets.items() if x['kind']=='fact'];citations=[t for t,x in cat.targets.items() if x['kind']=='citation']
-    capacity_instruction=instruction+(json.dumps(cat.result_tool,ensure_ascii=False) if getattr(cat,'result_tool',None) else '')
-    groups,rejected=pack(citations,cat.payload,capacity_instruction,agent.citation_workload or CitationWorkload())
-    if rejected:issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,'REVIEW_MESSAGE_CAPACITY_EXCEEDED','Complete citation scopes exceed capacity; no truncation'))
-    for group in ([tuple(facts)] if facts else [])+list(groups):
-```
-
-
-## 实际发送前的JSON检查
-
-model_adapter/deepseek.py / json_mode_preflight，实际行27–38。程序检查实际消息与运行状态，不改模型语义标签；只摘录入口，沿源码继续读。
-
-```python
-def json_mode_preflight(request):
-    """Check actual initial/correction/citation messages, never edit them."""
-    validate_types(request, ModelRequest)
-    texts=[m.content for m in request.messages if m.role in ('system','user')]
-    valid=any(re.search(r'\bjson\b',t,re.I) for t in texts)
-    example=True
-    if request.prompt_version.startswith('evidence-verification-v9.22'):
-        example=False
-        for t in texts:
-            for match in re.finditer(r'\{"judgments"\s*:',t):
-                try:value,_=json.JSONDecoder().raw_decode(t[match.start():])
-                except ValueError:continue
-```
-
-
-## 同运行预算的故障状态
-
-model_adapter/runtime.py / raise_if_failed，实际行35–36。程序检查实际消息与运行状态，不改模型语义标签；只摘录入口，沿源码继续读。
-
-```python
-    def raise_if_failed(self):
-        if self.fatal_error is not None:raise self.fatal_error
-```
-
-
-## 唯一结果提交函数
-
-model_adapter/strict_review_tool.py / specification，实际行25–26。载体只提交数据，不执行外部动作；摘录入口，完整定义沿源文件阅读。
-
-```python
-def specification():
-    return dict(type='function',function=dict(name=NAME,strict=True,description='Submit this review result only; this function performs no external action.',parameters=schema()))
-```
-
-
-## 传输标记还原与原解析入口
-
-services/review_simple_tool_v1.py / decode_wire，实际行16–21。载体只提交数据，不执行外部动作；摘录入口，完整定义沿源文件阅读。
-
-```python
-    def decode_wire(self,value,group):
-        data=deepcopy(value)
-        if type(data) is dict and type(data.get('judgments')) is list:
-            for row in data['judgments']:
-                if type(row) is dict and any(k in row and row[k] is None for k in ('objection','repair')):row['_native_null_transport_error']=True
-        return super().decode_wire(map_null(data),group)
-```

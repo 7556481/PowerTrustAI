@@ -2,7 +2,7 @@
 
 ## 最小复现先隔离接口，再检查业务
 
-【真实观察】本轮四种短合成Schema分别走直接HTTP与项目适配器，实际正文逐字节相同，八项都合法。之后旧业务回归出现嵌套conditions额外字段及来源ID错误，只有两项执行完整。没有发现客户端差异，也不能因此认定服务端严格约束始终生效；未知内部原因应保留。[证据与版本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-interface-consistency-v1/report.md#)。
+【真实观察】本轮四种短合成Schema分别走直接HTTP与项目适配器，实际正文逐字节相同，八项都合法。之后旧业务回归出现嵌套conditions额外字段及来源ID错误，只有两项执行完整。没有发现客户端差异，也不能因此认定服务端严格约束始终生效；未知内部原因应保留。[证据与版本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-interface-consistency-v1/report.md#)。
 
 诊断应记录真正交给连接的URL、参数和正文身份，以及接收时arguments与解析后字符串是否相同。只比较构造函数不能排除后续改写。Schema约束对象形状，业务还要检查ID是否属于当前来源目录、条件归属和引用范围。结构合法的S1B0也可能不是要求的SRC:S1B0；程序不能替模型换成正确ID。
 
@@ -14,7 +14,7 @@
 
 ## 上一严格载体批次的停止与回退
 
-【真实失败】实际API未拒绝请求，但参数严格解析失败，唯一纠正后仍未完成；按A1/A3准入规则封存，不换参数、接口或模型试到成功。原始调用ID、参数、结束、用量和本地关联可回查；不能自动去重或剥离多余括号。本轮没有合法结果，不继续服务验收；生产默认JSON不变。[实际证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-review-tool-v1/report.md#)。
+【真实失败】实际API未拒绝请求，但参数严格解析失败，唯一纠正后仍未完成；按A1/A3准入规则封存，不换参数、接口或模型试到成功。原始调用ID、参数、结束、用量和本地关联可回查；不能自动去重或剥离多余括号。本轮没有合法结果，不继续服务验收；生产默认JSON不变。[实际证据](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-review-tool-v1/report.md#)。
 
 ## Beta与显式回退
 
@@ -28,7 +28,7 @@ strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实
 
 ## 实际接入没有完成时
 
-【真实失败】v9.22.1三次实际消息均通过JSON模式检查并有返回，没有请求拒绝；原引用输出重复键，唯一纠正仍失败，正式A1接入门禁停止后续26槽。不要改用“最后一个同名字段”为准，也不要把部分合法事实变成整答通过。本批没有实际HTTP拒绝，相关故障状态只由离线替身验证；停止后不另发付费探测。[原文及版本边界](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-simple-patch-v1/report.md#)。
+【真实失败】v9.22.1三次实际消息均通过JSON模式检查并有返回，没有请求拒绝；原引用输出重复键，唯一纠正仍失败，正式A1接入门禁停止后续26槽。不要改用“最后一个同名字段”为准，也不要把部分合法事实变成整答通过。本批没有实际HTTP拒绝，相关故障状态只由离线替身验证；停止后不另发付费探测。[原文及版本边界](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-simple-patch-v1/report.md#)。
 
 ## 公共请求边界：额度、故障与纠正
 
@@ -42,7 +42,7 @@ strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实
 不能。HTTP422是请求级故障，本运行后续引用、纠正和下游模型都应停止，批次也按共享故障规则停止。HTTP200的结构失败可以使用原有有限纠正额度；不能因为有余额就重试被拒绝的请求，也不能把已接受结果丢掉。这里是离线行为检查，不是故意付费制造故障。
 :::
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
 ## 三种入口，互不打断
 
@@ -121,7 +121,7 @@ Git可把Windows工作区CRLF检出为Linux LF；直接比较工作区原字节S
 
 默认是否已切换、真实付费完成数量及未验收项见本轮集成报告。完整发布库每个新进程保留首次字节SHA检查，不能以启动慢为由跳过或改成mtime认证。学习站由Markdown构建，20章和60折叠自测保持；不手工维护第二份HTML正文。
 
-当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
+当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
 
 ## 三道自测：先作答，再展开
 

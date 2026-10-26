@@ -1,8 +1,42 @@
 # 08 事实支持、提取忠实性和审核协议复杂度
 
+## 同一自然稿审核：真正的识别收益怎样计算
+
+本轮固定C-N1—N8及原始真实生成快照，全部重新提取、事实/原引用和领域审核；未回放历史发现。32次Flash，8链保留分母。N2“双方需联合确定”增强要求、N4“并非用于热额定值考核”把when改成排他，初审仍判supported，二者都无D、无修订，门槛失败。
+
+N3必答的“立即/始终”残余未补齐。N6规划研究限定泛化按保守解释仍是错误，宽松解释保留争议，两者都不改变N2/N4失败。N5领域纠正后非法，执行不完整；N4合法返回信息不足，不能当它抓对排他错误。N8唯一修改并完整重审；复核对原长线路限制是否过强有分歧，保留为局部边界改善争议，严格已证实关键错修复0、宽松局部改善1，两口径均未达门槛。不能由pass推断改对。[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
+
+### 完整案例二：N4，更多正确内容也会伴随新错
+
+原问题比较正常、N-1、选定N-2、极端扰动及电压准则。下列是上轮固定生成A→C，C又成为本轮自然审核输入；不是本轮重新生成。
+
+A全文：
+
+所给资料只完整覆盖两类运行方式：无故障正常方式下，设备功率与电压须在额定范围内，对应热约束与电压约束；单一设备（线路、变压器或发电机）停运的N-1条件下，系统须能吸收动态功率振荡以维持稳定，且振荡平息、调度调整前设备功率与电压须在紧急额定范围内。
+
+资料未给出选定N-2与极端扰动在热额定值、电压限值和稳定性讨论中的具体定位（如是否属规划或运行标准），无法补足。
+
+C全文：
+
+NERC指南将四种情形分层：正常运行须使全部计划元件在役时满足设备正常热额定值与系统电压限值；单一故障（N-1）须在无人工干预下立即满足应急热额定值与电压限值，且同时适用于稳态与稳定性要求。
+
+部分选定N-2并非用于热额定值考核，而是用于确定稳定性限制；更严重但概率更低的极端扰动则要求不出现电压崩溃、级联或失稳。
+
+电压准则检验通常同时考核电压跌落准则与故障后绝对电压上下限，后者示例为0.95 pu与1.05 pu；正常与应急电压限值示例见分时段限值表。
+
+资料未给出各情形下具体的热额定值数值，也未说明N-2热额定值考核要求。
+
+实际C来源：NERC 2016 Contingency Analysis，Evidence e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8；电压准则 e-1b1648a67248a5546f64d0369709ff02d899bc3e9e6fbe737b6199de86746151及限值表示例，主体原文定位PDF抽取文件第21页page_chars[292:1326)、page_lines[8:19]；其他页/字符及引用见归档。原文在确定稳定性限制时考察选定N-2，没有排除热额定值考核。末尾“未说明”不能撤回前面的“并非”。本轮literal理由明确以“未列入”认可该否定，最早断点是语义识别，正文原样交付。[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
+
+::: answer 新增：审核标needs_information，算修好N4吗？
+不算。先比较初末全文，排他错误未变；再查发现理由，审核反而认可了排他句。领域信息不足是另一处置，不能冒充定位成立错误。只有有据改正、正确部分保留、必答未删失并完整重审，才可能记修复；执行失败也留在8题分母。[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)
+:::
+
+## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+
 ## 程序定位与语义缺口不是一回事
 
-【真实断点】Flash旧A5原文及实际正文均含必要限定，模型声明条件已保留、无缺口/异议，却因重复答案ID为空被降级。simple_bound_v1只删除这项重复输出，由程序绑定当前完整目标；source_ids和条件存在/表达/实例三维仍由模型判断，条件真实遗漏、错挂、扩大、未知及gap/异议仍阻断。记录明确标注绑定只是目标上下文，不是自动找到了语义条件。[逐项证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-delivery-unblock-v1/report.md#)。
+【真实断点】Flash旧A5原文及实际正文均含必要限定，模型声明条件已保留、无缺口/异议，却因重复答案ID为空被降级。simple_bound_v1只删除这项重复输出，由程序绑定当前完整目标；source_ids和条件存在/表达/实例三维仍由模型判断，条件真实遗漏、错挂、扩大、未知及gap/异议仍阻断。记录明确标注绑定只是目标上下文，不是自动找到了语义条件。[逐项证据](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-delivery-unblock-v1/report.md#)。
 
 【教学构造】答案位置由程序提供后，能否自动把“条件缺失”改成“条件已保留”，或把理由说有据而gap非空的结果放行？
 
@@ -12,7 +46,7 @@
 
 ## 模型适配性要看原始与有效判断
 
-【真实开发回归】同一simple_v1合同、引用范围和投影，Flash完成3/8、Pro完成8/8。Pro取得更多正确不足判断及直接矛盾判断，但18个有据目标中11个被不必要降级。A1原始supported、理由说子句齐全，却同时缺少声明保留条件的答案绑定或填写内容缺口，既有投影因矛盾声明转为复核/不足。不能修改投影替模型消除异议，也不能把完成视为认可。[完整分母和理由](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-review-model-fit-v1/report.md#)。
+【真实开发回归】同一simple_v1合同、引用范围和投影，Flash完成3/8、Pro完成8/8。Pro取得更多正确不足判断及直接矛盾判断，但18个有据目标中11个被不必要降级。A1原始supported、理由说子句齐全，却同时缺少声明保留条件的答案绑定或填写内容缺口，既有投影因矛盾声明转为复核/不足。不能修改投影替模型消除异议，也不能把完成视为认可。[完整分母和理由](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-review-model-fit-v1/report.md#)。
 
 【教学构造】模型甲结构失败多，剩下有效结果误拦3个；乙全部有效却误拦11个。乙是否应直接替换甲？
 
@@ -22,7 +56,7 @@
 
 ## 本批实测：声明与可用结果
 
-【真实失败】按官方严格工具配置的三个返回均有一个指定调用并以tool_calls结束，参数却两次重复键、一次多闭合括号，0份进入合法审核。服务端如何实施strict的内部原因未知；不能把文档声明当已观察到的保证。错误发生在nullable映射和业务投影之前，无效参数中的supported不作语义成绩。[完整反例](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-review-tool-v1/report.md#)。
+【真实失败】按官方严格工具配置的三个返回均有一个指定调用并以tool_calls结束，参数却两次重复键、一次多闭合括号，0份进入合法审核。服务端如何实施strict的内部原因未知；不能把文档声明当已观察到的保证。错误发生在nullable映射和业务投影之前，无效参数中的supported不作语义成绩。[完整反例](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-review-tool-v1/report.md#)。
 
 ## JSON语法、Schema与业务校验
 
@@ -40,7 +74,7 @@ simple_v1仍沿用v9.22.1提示和投影v1.1，不继续增加语义字段。72�
 
 ## 本轮真实验证边界
 
-【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md#)。
+【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-contract-simple-v1/report.md#)。
 
 ## 2026-10-24 条件存在、表达与实例满足
 
@@ -54,17 +88,17 @@ simple_v1仍沿用v9.22.1提示和投影v1.1，不继续增加语义字段。72�
 
 ## 2026-10-24 审核链v2实证更新
 
-条件属于具体对象、工况和结论；源文N-1无操作员干预不能凭关键词推广到N-2。scope_v2真实失败暴露两点：逐字字段不能容忍模型把PDF断词规范化；无条件命题的关系行进入旧投影可能错误降级。程序能校验原文绑定，不能据结构直接证明必要/充分、否定或因果语义。候选不采用。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#)。
+条件属于具体对象、工况和结论；源文N-1无操作员干预不能凭关键词推广到N-2。scope_v2真实失败暴露两点：逐字字段不能容忍模型把PDF断词规范化；无条件命题的关系行进入旧投影可能错误降级。程序能校验原文绑定，不能据结构直接证明必要/充分、否定或因果语义。候选不采用。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/production-review-net-benefit-v2/report.md#)。
 
 ## 2026-10-24 raw/effective支持仍可能误判
 
-本轮自然B4把N-1无操作员干预条件一并套给选定N-2，且将稳态/稳定表述为暂态；实际选段没有建立完整命题，两路模型raw/effective却都supported。整体因其他不足/执行失败未认可，不等于正确检出这个缺陷。B2原引用的raw supported与非空missing_clauses并存，缺口却来自其他答案单元或来源额外内容，程序有效降级不自动成为事实真值。不可凭关键词改分类或按pass率掩盖这些疑点；完整原文与理由见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
+本轮自然B4把N-1无操作员干预条件一并套给选定N-2，且将稳态/稳定表述为暂态；实际选段没有建立完整命题，两路模型raw/effective却都supported。整体因其他不足/执行失败未认可，不等于正确检出这个缺陷。B2原引用的raw supported与非空missing_clauses并存，缺口却来自其他答案单元或来源额外内容，程序有效降级不自动成为事实真值。不可凭关键词改分类或按pass率掩盖这些疑点；完整原文与理由见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
 
 ## 2026-10-23 事实审核内部流程候选
 
 题设目录、组件提取时选择、审核实际依赖是三组不同集合。旧B要求后两组相等，不是要求目录全集。新候选让模型选择实际依赖子集，程序检查合法绑定。文献规则不因和实例同段而需要题设；应用须相关规则与题设。classification_objection与fidelity分别记录：答案说反可以忠实提取，正确性由支持判断；改变义务必须明确异议并保留复核，不能静默改类别通过。
 
-完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
+完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
 
 ## 四分类不是四档置信度
 

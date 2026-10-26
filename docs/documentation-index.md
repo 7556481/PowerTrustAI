@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-26 自然同稿审核与学习站完整同步
+
+- [固定自然稿审核报告](evaluation/natural-draft-audit-v1/report.md)：8链32请求，N2/N4识别失败，N8边界改写争议，N5执行失败；初末全文/原预测含无效/冻结/用量/独立复核/Store齐全。
+- [学习站v6同步与真实浏览器验收](learning/sync-v6.md)：20章88题，N1/N4/A3完整案例、14处实际源码摘录及分批元数据，桌面/窄屏/搜索/导航/解析验证。
+- [学习站首页正文](learning/index.md)、[源码与批次身份](learning/source-version.json)、[浏览器记录](learning/browser-acceptance.json)。start-learning.cmd可重开8770；当前生产8765停服，schema13不变。
+
 ## 2026-10-26 固定证据回答诊断封存（已执行）
 
 [报告](evaluation/retrieval-evidence-answer-check-v1/report.md) · [16完整正文](evaluation/retrieval-evidence-answer-check-v1/cases.md) / [三分层结果与完整对象](evaluation/retrieval-evidence-answer-check-v1/cases.json) · [输入恢复](evaluation/retrieval-evidence-answer-check-v1/input-recovery.json) · [独立文本复核](evaluation/retrieval-evidence-answer-check-v1/text-review.md) · [16预测](evaluation/retrieval-evidence-answer-check-v1/predictions.json) · [统计](evaluation/retrieval-evidence-answer-check-v1/statistics.json) · [验证](evaluation/retrieval-evidence-answer-check-v1/verification.json)。全部8题5改善/3混合，忠实7题5改善/2混合，N6混合且未出现调试退役；旧转换失败不回写。16Flash/147049token、金额未知，0新检索/转换/审核/Revision，旧8转换不重计。N2模态/N4排他/N6规划范围新错使整组门槛未达，不采用。10专项及复用旧1324全套、Store/消息/快照核查齐全，下方“尚未执行”保留任务编写时状态，以本封存为准。

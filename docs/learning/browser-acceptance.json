@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-26",
+  "url": "http://127.0.0.1:8770/",
+  "desktop": {
+    "viewport": [
+      1280,
+      720
+    ],
+    "document_client_width": 1265,
+    "document_scroll_width": 1265
+  },
+  "narrow": {
+    "viewport": [
+      390,
+      844
+    ],
+    "document_client_width": 375,
+    "document_scroll_width": 375
+  },
+  "pages": [
+    "index",
+    "04-harness",
+    "05-rag",
+    "06-retrieval-math",
+    "08-verification",
+    "14-code-tour"
+  ],
+  "complete_cases": [
+    "N1",
+    "N4",
+    "historical-A3"
+  ],
+  "search": [
+    "库内存在 -> 05/15 -> clicked05",
+    "D与O ->04 -> opened new explanation"
+  ],
+  "folds_verified": [
+    "05库内存在",
+    "06三路归因",
+    "04D/O"
+  ],
+  "chapter_navigation": true,
+  "narrow_menu_aria_expanded": true,
+  "code_blocks": 14,
+  "code_local_scroll": true,
+  "console_errors_warnings": [],
+  "screenshots": [
+    {
+      "file": "data/retrieval_local/natural-draft-audit-v1/audit-narrow.png",
+      "sha256": "d2fbd0df99e6b7e34e7cdd7fd1b3db64ce3946c64388df33ec172e718cc7c803"
+    },
+    {
+      "file": "data/retrieval_local/natural-draft-audit-v1/case-A3-desktop.png",
+      "sha256": "f25ca95f466943466f2fe510964aa80998a8b7837c4842e0e06e80acd0205289"
+    },
+    {
+      "file": "data/retrieval_local/natural-draft-audit-v1/case-N1-desktop.png",
+      "sha256": "9f1d88216134fca3510608989e6b9a58682fae94a269d35118d92a74ca0c9421"
+    },
+    {
+      "file": "data/retrieval_local/natural-draft-audit-v1/case-N4-desktop.png",
+      "sha256": "f3eb2d4bd0cfd00a4e34885bdf22e5337d549a30703cc8521c9fbb5c788b376f"
+    },
+    {
+      "file": "data/retrieval_local/natural-draft-audit-v1/home-desktop.png",
+      "sha256": "93072a884ca0e6390b81b0b43489c4435a1fa1b72d1ff4ec4ecc7fc64788a195"
+    },
+    {
+      "file": "data/retrieval_local/natural-draft-audit-v1/home-narrow.png",
+      "sha256": "980009948ce7539d55fef7153e0296d41a67b4dfbe0633e99828dfe799252d14"
+    },
+    {
+      "file": "data/retrieval_local/natural-draft-audit-v1/retrieval-narrow.png",
+      "sha256": "c2514345dcca31b2d1dd4e3eb9d3e026d0a63d04c0609f9d9123861d9ab70b23"
+    }
+  ],
+  "viewport_reset": true,
+  "server_lifecycle": "Task-owned loopback static server, release after acceptance; no8765/model backend",
+  "build_manifest_sha256": "348b895dee0d48472c5f65590ed7254ed97f0334a472da210bd96abcb30c55a1",
+  "server_released": true,
+  "ports_8765_8770_listening_at_close": false
+}

@@ -1,8 +1,20 @@
 # 11 监督数据、家族划分、泄漏和评测分母
 
+## 增量评价保留四个独立分母
+
+第一层检索必答槽，第二层同问题生成A→C，第三层同C稿审核前→后，第四层完整执行及存储。上轮16次生成是5净改善/3混合；忠实转换7题子集5改善/2混合，N6单列混合。正确完整必答槽A1/25→C19/25，C只有N1/N5/N7/N8完整覆盖。N3时点和始终要求仍残余；N2/N4/N6不能靠其他正确内容抵消关键错误。
+
+本轮事前标准要求N2/N4均完整修对且至少2题完整改善、其他题无新增关键错误/删失，实际未达到。全部8份已见开发稿，AI辅助/用户监督复核，不能叫专家金标准或泛化准确率。[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
+
+::: answer 新增：为何N4不能记净改善？
+它得到更多正确材料，正确槽比A多，但新增无据排他限定；这是mixed。净改善要求整体收益不被关键新增错误破坏。应同时报覆盖增益与错误，不用平均分掩盖风险。本轮若正文没变，审核也不能继承上轮覆盖增益。[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)
+:::
+
+## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+
 ## 旧验证集用于防退步，不重新成为未见样本
 
-【真实回归】A1/A3/A7/A2已经参与开发，本轮保留旧问题、答案、证据与参考，接口准入后各执行一次。它们仍能揭示局部引用、条件归属、证据不足等问题，但不能作为新的独立成绩。CT/TR/SW/RC、EIA/NRC与四来源24回答组件的旧协议各异，评测v7不能直接充当生产schema13；输入映射需另版、禁止夹带参考。[复用盘点](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-interface-consistency-v1/report.md#)。
+【真实回归】A1/A3/A7/A2已经参与开发，本轮保留旧问题、答案、证据与参考，接口准入后各执行一次。它们仍能揭示局部引用、条件归属、证据不足等问题，但不能作为新的独立成绩。CT/TR/SW/RC、EIA/NRC与四来源24回答组件的旧协议各异，评测v7不能直接充当生产schema13；输入映射需另版、禁止夹带参考。[复用盘点](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-interface-consistency-v1/report.md#)。
 
 【教学构造】八项合成结构合法，四项业务回归两项完整；无据保证被有效状态阻止认可，但原始判断是contradicted、参考是insufficient_evidence。可否说严格结构稳定且缺陷全部识别正确？
 
@@ -12,15 +24,15 @@
 
 ## 输出机制与业务效果分开
 
-【真实失败】本批工具信封3/3符合要求，合法参数0/3，最终接入0/1；28槽只执行A1，余27未发送。应保留全部分母，不能把3次函数返回当审核成功。没有合法事实/引用判断，也没有自然初稿，就不能评价错误认可或净收益；14,879token的低总量由停止造成，不是效率升级。[原参数和统计](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-review-tool-v1/report.md#)。
+【真实失败】本批工具信封3/3符合要求，合法参数0/3，最终接入0/1；28槽只执行A1，余27未发送。应保留全部分母，不能把3次函数返回当审核成功。没有合法事实/引用判断，也没有自然初稿，就不能评价错误认可或净收益；14,879token的低总量由停止造成，不是效率升级。[原参数和统计](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-review-tool-v1/report.md#)。
 
 ## 历史参考与真实接入结果
 
-【真实失败】本批3调用有返回：两个事实判断合法，引用初始及唯一纠正均重复键，停止剩余26槽。无效正文里的supported不能评分。旧原版A1身份相符，可以节省重测，但须标为历史参考并排除新费用，不能叫同批严格配对。自然生成未运行就没有正文净收益成绩，不能把未发生误改记成安全性提升。[本批完整证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-simple-patch-v1/report.md#)。
+【真实失败】本批3调用有返回：两个事实判断合法，引用初始及唯一纠正均重复键，停止剩余26槽。无效正文里的supported不能评分。旧原版A1身份相符，可以节省重测，但须标为历史参考并排除新费用，不能叫同批严格配对。自然生成未运行就没有正文净收益成绩，不能把未发生误改记成安全性提升。[本批完整证据](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-simple-patch-v1/report.md#)。
 
 ## 本轮真实验证边界
 
-【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md#)。
+【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。[完整响应、依据与版本边界](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-contract-simple-v1/report.md#)。
 
 ## 2026-10-24 失败实验的成本与净收益
 
@@ -34,7 +46,7 @@
 
 ## 2026-10-24 审核链v2实证更新
 
-固定审核线16分支，原版8/8完整、候选0/8；自然6份计划初稿仅5份有效，10条实际后续审核中候选五路全不完整、无修订净收益。原版B5的澄清不可归给候选。116调用含20纠正、47无效尝试，1,013,267 token；账单金额未知。整体拦截不能算具体错误检出，执行占位也不是模型判断。不采用候选，不称独立留出准确率。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#)。
+固定审核线16分支，原版8/8完整、候选0/8；自然6份计划初稿仅5份有效，10条实际后续审核中候选五路全不完整、无修订净收益。原版B5的澄清不可归给候选。116调用含20纠正、47无效尝试，1,013,267 token；账单金额未知。整体拦截不能算具体错误检出，执行占位也不是模型判断。不采用候选，不称独立留出准确率。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/production-review-net-benefit-v2/report.md#)。
 
 本轮实际结果：A8/G4/B8固定批次106请求、1126972token，5条审核执行不完整；候选仅A4进入新修订提示，原版也纠正且没有目标历史叙述，自然8路正文不变。未证明候选净收益，不采用生产；N-1/N-2条件外推和原引用跨单元缺口疑点保留。实际8765保持原停服，无常驻候选。
 
@@ -42,7 +54,7 @@
 
 固定回答能力线是4组原/候各一次共8分支，混入正确与部分缺据回答；自然线每题仅生成一次，共4份真实初稿，再从相同初稿/实际证据/快照分别审核修订，共8分支。材料是本轮设计与AI辅助来源审阅的开发验证，不是独立留出或专家金标准。自然生成沿当前RAG，后续成对审核固定其实际交付；生产检索默认不改。没有目标错误或没有Revision都保留，不人为改坏自然初稿或补题。
 
-比较完整正文的纠错、漏修、新错、正确内容损失、必答点增减、合理收窄及不必要拒答；正文不变的合理核验与错误降级分开。参考支持、原始模型判断、程序有效判断和政策处置是四层，不能用pass/结构合法/发现记账替代答案质量。生成调用只计一次；两路各自扣除其已用生成预算，独立保留余量。并行与嵌套计时不直接相加，保存可见时间不是浏览器首绘，没有账单费用未知。完整分母及必要原文见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
+比较完整正文的纠错、漏修、新错、正确内容损失、必答点增减、合理收窄及不必要拒答；正文不变的合理核验与错误降级分开。参考支持、原始模型判断、程序有效判断和政策处置是四层，不能用pass/结构合法/发现记账替代答案质量。生成调用只计一次；两路各自扣除其已用生成预算，独立保留余量。并行与嵌套计时不直接相加，保存可见时间不是浏览器首绘，没有账单费用未知。完整分母及必要原文见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
 
 ## 标签来源与质量版本
 

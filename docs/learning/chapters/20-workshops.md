@@ -1,8 +1,18 @@
 # 20 八个综合工作坊：把概念落到对象和失败
 
+## 新实验练习：错误查询与最终答案分账
+
+N6原中文问运行投切，转换成生命周期commissioning/decommissioning。后续固定生成仍读原中文问题和实际Evidence，没有把查询当事实来源；最终没有重现生命周期换义，但规划研究条件仍被泛化。
+
+::: answer 新增：最终答案没有生命周期错误，是否可把N6转换改判成功？
+不能。转换忠实性以转换时的原问/查询判断，旧gate=false保持；最终答案以原中文及实际来源另评。N6最终mixed还包含规划研究范围问题及必答残余，即使两步某些信息正确也不能净改善。分别列请求数：历史转换8、本轮审核32，绝不重算旧成本。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)
+:::
+
+## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+
 ## 从模型完成率走到回答交付
 
-【真实结果】本轮只用Flash。固定机制任务候选4/4完整、原版1/4，但三份自然初稿的两路交付都没有通过：各1复核、2执行不完整，正文未修订。B1有提取组件遗漏原文限定，B2有推荐语气变成“须协调”的异议，不能为了减少误拦一律放行。模型对照和字段完成率只是诊断手段，产品目标仍是有据、完整且处置合理的答案。[完整正文与处置](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-delivery-unblock-v1/report.md#)。
+【真实结果】本轮只用Flash。固定机制任务候选4/4完整、原版1/4，但三份自然初稿的两路交付都没有通过：各1复核、2执行不完整，正文未修订。B1有提取组件遗漏原文限定，B2有推荐语气变成“须协调”的异议，不能为了减少误拦一律放行。模型对照和字段完成率只是诊断手段，产品目标仍是有据、完整且处置合理的答案。[完整正文与处置](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-delivery-unblock-v1/report.md#)。
 
 【教学构造】候选让更多有据目标完成审核，草稿没有被删改，但最终仍未认可，且批后发现生成检索额度未从后续分支扣除。可以说产品已获净收益并补跑证明吗？
 
