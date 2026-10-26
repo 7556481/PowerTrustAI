@@ -1,5 +1,19 @@
 # 文档索引
 
+## 2026-10-27 阶段封版交付（已执行）
+
+[当前README](../README.md) · [阶段清单/能力边界/分批用量/入口](project-status-20261027.md) · [学习站演示路线](learning/index.md) · [17章求职表述](learning/chapters/17-interview.md) · [本次验证范围](learning/closeout-20261027-verification.json)。20章88题保持，新增项目请求0；本轮非全套/全站重验，旧v6记录明确复用。阶段可展示不等于审核研究目标完成。
+
+### 当前任务入口状态（下方历史交办不再作当前待办）
+
+|入口|当前状态|
+|---|---|
+|literal-stage1、offline-redesign、revision-v2、natural-v3|已执行封存，各自失败及回放边界保持|
+|retrieval-delivery-repair、chinese-first、retrieval-evidence-answer-check、natural-draft-audit|已执行封存；旧条件槽未启动不恢复，N6旧gate=false保持|
+|source-comparison-review-v2-task-v1|已被检索定位任务替代，未执行，不恢复为待办|
+|answer-review-improvement-checklist-v1、论文清单/综合等未跟踪材料|暂存设计/研究，非新执行授权，未删除或擅自提交|
+|project-closeout-20261027|本次已执行阶段收尾；无待运行批次，完成远端核对即停止|
+
 ## 2026-10-26 自然同稿审核与学习站完整同步
 
 - [固定自然稿审核报告](evaluation/natural-draft-audit-v1/report.md)：8链32请求，N2/N4识别失败，N8边界改写争议，N5执行失败；初末全文/原预测含无效/冻结/用量/独立复核/Store齐全。

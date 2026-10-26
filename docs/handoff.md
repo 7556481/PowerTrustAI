@@ -1,5 +1,23 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-27 阶段封存、可演示、审核收益待研究
+
+已完成README首屏重整并折叠保留旧全文、既有学习站7分钟N1→A3→N4→返回路线、17章三条简历及口述提纲、一份[阶段状态清单](project-status-20261027.md)。项目模型请求0/费用0，未读.env、不改业务候选/提示/合同、不实验/全库向量化/切生产；8765停服，任务自启8770验收后释放。20章88题保持，build/learning_checks、源身份与链接/锚点通过，桌面与390窄屏抽查路线，未重跑1324全套或全站浏览器。验收明细见[封版验证](learning/closeout-20261027-verification.json)。
+
+真实收益/失败不改：A/C生成5净改善/3混合、正确完整语义槽1/25→19/25，无B回答组；历史成立发现给定后修订4/4不是发现率；自然C稿N2/N4未修、19/25不变、N8争议局部/N5执行失败。唯一下一研发议题为支持关系判断的要求强度及“未说明→排除”误判，只有待决问题，没有新批次或旧任务自动授权。当前分支codex/project-closeout-20261027，完整提交以Git和最终远端核对为准。
+
+### 任务入口状态（取代下方历史“下一轮/尚未执行”作为当前待办）
+
+|入口|当前状态|
+|---|---|
+|literal-stage1、offline-redesign、revision-v2、natural-v3|已执行封存，各自失败及回放边界保持|
+|retrieval-delivery-repair、chinese-first、retrieval-evidence-answer-check、natural-draft-audit|已执行封存；旧条件槽未启动不恢复，N6旧gate=false保持|
+|source-comparison-review-v2-task-v1|已被检索定位任务替代，未执行，不恢复为待办|
+|answer-review-improvement-checklist-v1、论文清单/综合等未跟踪材料|暂存设计/研究，非新执行授权，未删除或擅自提交|
+|project-closeout-20261027|本次已执行阶段收尾；无待运行批次，完成远端核对即停止|
+
+原未提交研究/论文/交接段落保留。下方历史记录按原日期阅读，不是并行执行队列。完成后停止。
+
 ## 2026-10-26 自然C稿审核与学习站v6已封存
 
 本轮唯一8链32 Flash/380949token，N2要求增强/N4排他断言均被supported认可，无D无修订，事前门槛失败；7正文不变，N8一次修订及完整重审，局部边界表达收益有复核分歧，严格关键错修复0/宽松局部1，必答19/25不变。N5领域纠正后仍非法，N4领域待补充不能冒充检出。N3残余、N6保守/歧义双解释及旧gate=false保留。无检索/转换/重新生成/补跑/新模型/生产切换；实际费用未知。实现babdfe1，评测归档865eb65，14专项11.462秒、明确复用旧1324全套。见[evaluation/natural-draft-audit-v1/report.md](evaluation/natural-draft-audit-v1/report.md)。

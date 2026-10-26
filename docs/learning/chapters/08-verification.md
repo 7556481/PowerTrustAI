@@ -32,6 +32,8 @@ NERC指南将四种情形分层：正常运行须使全部计划元件在役时�
 不算。先比较初末全文，排他错误未变；再查发现理由，审核反而认可了排他句。领域信息不足是另一处置，不能冒充定位成立错误。只有有据改正、正确部分保留、必答未删失并完整重审，才可能记修复；执行失败也留在8题分母。[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)
 :::
 
+[演示上一站：A3修订](04-harness.html#section-3) · [结束：求职口述](17-interview.html#section-2) · [返回7分钟路线](index.html#section-2)
+
 ## 历史说明与基础知识（保留原日期，当前状态以上文为准）
 
 ## 程序定位与语义缺口不是一回事

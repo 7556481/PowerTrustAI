@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-27",
+  "baseline": "112733ddb6cc2931e97e03b46d391c427a7c65f2",
+  "project_model_requests": 0,
+  "project_model_tokens": 0,
+  "project_model_cost": 0,
+  "env_loaded": false,
+  "business_code_changed": false,
+  "launcher_scripts_changed": false,
+  "production_preservation": {
+    "start-learning.cmd": true,
+    "start-powertrustai.cmd": true,
+    "data/runtime_local/orchestration.json": true,
+    "data/runtime_local/daily-knowledge.json": true,
+    "data/runtime_local/runs.sqlite3": true
+  },
+  "README_status_local_links": 41,
+  "site_links_and_anchors": true,
+  "chapter_count": 20,
+  "folded_answers": 88,
+  "build_checks": "tools.learning_checks passed; no full1324 retest",
+  "browser": {
+    "route": [
+      "home",
+      "N1",
+      "A3",
+      "N4",
+      "17 resume",
+      "home return"
+    ],
+    "measures": [
+      {
+        "client": 1265,
+        "page": "/",
+        "scroll": 1265,
+        "viewport": [
+          1280,
+          720
+        ]
+      },
+      {
+        "client": 1265,
+        "page": "/05-rag.html",
+        "scroll": 1265,
+        "viewport": [
+          1280,
+          720
+        ]
+      },
+      {
+        "client": 1265,
+        "page": "/08-verification.html",
+        "scroll": 1265,
+        "viewport": [
+          1280,
+          720
+        ]
+      },
+      {
+        "client": 375,
+        "page": "/index.html",
+        "scroll": 375,
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      {
+        "client": 375,
+        "page": "/05-rag.html",
+        "scroll": 375,
+        "viewport": [
+          390,
+          844
+        ]
+      }
+    ],
+    "screenshots": [
+      {
+        "file": "data/closeout_local/20261027/N1-narrow-final.png",
+        "sha256": "1645957973f2f9e7d760f3272f7ede519726959d795cfc17909c81b7a0bbedab"
+      },
+      {
+        "file": "data/closeout_local/20261027/N1-narrow.png",
+        "sha256": "576e85a5df5a783b1289ee88b640cdf87d730c334f655298d34d912dd6784992"
+      },
+      {
+        "file": "data/closeout_local/20261027/route-desktop-final.png",
+        "sha256": "e6133ce40f2f4b65daeb403dadea5fe28e0c7c74b15c85ddda7f5c674e1d977c"
+      },
+      {
+        "file": "data/closeout_local/20261027/route-desktop.png",
+        "sha256": "514b5763ca1d427e185eb3389f104ff997b8986dd4c495dcf1e7546d283ad04e"
+      },
+      {
+        "file": "data/closeout_local/20261027/route-narrow.png",
+        "sha256": "4035c143b3b4d270bc3d60926b2819d2a81e53c4cc3eee5307ab21ca5fbeb815"
+      }
+    ],
+    "locator_note": "Playwright link click had no effect; documented AX element clicks succeeded; no site/script workaround",
+    "console_errors": [],
+    "viewport_reset": true,
+    "task_server_released": true,
+    "service_8765_started": false,
+    "N1_source_identity_final_rechecked": true,
+    "N1_final_narrow": {
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  "historical_browser_reused": "docs/learning/browser-acceptance.json from v6; other pages/search/all folds not revalidated today",
+  "no_new_abilities": true,
+  "build_manifest_sha256": "a1982b4a121aefddf86ec07e631eacff02695f88ab7acb08e192d442b3e75256",
+  "markdown_characters": 162416
+}

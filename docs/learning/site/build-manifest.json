@@ -3,8 +3,8 @@
     "application_commit": "1a92d03da49ae25f311e950373003d6ab32d09f5",
     "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "documentation_parent_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "document_version": "learning-site-v6 natural audit and retrieval learning sync,2026-10-26",
+    "documentation_parent_commit": "112733ddb6cc2931e97e03b46d391c427a7c65f2",
+    "document_version": "learning-site-v6.1 stage closeout and archived demo,2026-10-27",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -22,10 +22,15 @@
         "tests": 1324,
         "seconds": 338.071
       },
-      "current_specialized": {
+      "prior_audit_specialized": {
         "commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
         "tests": 14,
         "seconds": 11.462
+      },
+      "current_documentation": {
+        "scope": "README/status links, build/learning_checks, source identity and archived-demo browser navigation only; no full1324 or ability retest",
+        "project_model_calls": 0,
+        "project_model_cost": 0
       }
     },
     "experiment_batches": [
@@ -233,13 +238,15 @@
     "exercise_count_fixed": false,
     "update_policy": "Markdown authoritative, actual source snippets/build/search verified; browser acceptance separate.",
     "actual_chapters": 20,
-    "actual_explained_exercises": 88
+    "actual_explained_exercises": 88,
+    "learning_v6_archive_commit": "112733ddb6cc2931e97e03b46d391c427a7c65f2",
+    "closeout_state": "stage_archived_demonstrable_audit_benefit_unproven"
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 7312,
-      "sha256": "bcd4d2f7b3ed73cbb47464713ccfaa75ebb49dc7241b7022e16c8d2a63fb85f4"
+      "characters": 7990,
+      "sha256": "9f1a32ec3b2b1efd6070f43df4eb2e83e5873e3e43f3c77dd0eb41f4a8c953d0"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -258,13 +265,13 @@
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 16714,
-      "sha256": "3ecbb752f04b489890d1a0ec1d2f7756956b73510ddc77014c9a78e6500ce0d8"
+      "characters": 16834,
+      "sha256": "bd49559d9b4b57a1055e2ca9cac8753f8d157ef43aabb100c672fa4df4fd7aa1"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 6469,
-      "sha256": "fcdfbd72ca7a4806a7a2f3e9ac196626df73954413bd45fe9b28f26c3c9dda68"
+      "characters": 7155,
+      "sha256": "59a20e383c08694d67ad59570891b0f8405323d591f4d89dac9d10eb47f96b19"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -278,8 +285,8 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 12710,
-      "sha256": "2950b3b2c1c849e202ba7deb19b2066fa75e497729f742b58e336452dc4ae327"
+      "characters": 12826,
+      "sha256": "ab5b6a9ee3c92a046a9cb9fbdb79a99c926250cb033bc2804a9f498e6591a2e2"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -323,8 +330,8 @@
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
-      "characters": 4683,
-      "sha256": "2630d37804c03deefeca82c8ba264b460ace6fed44fb1186740310be744265fb"
+      "characters": 5420,
+      "sha256": "78880c1fea9edda7a444d4a03f62fd6d44c7db5e63f248d6e113a9098bac3992"
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
@@ -347,6 +354,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 160079,
+  "markdown_characters": 162416,
   "network_dependencies": false
 }

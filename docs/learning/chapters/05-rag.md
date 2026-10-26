@@ -26,6 +26,10 @@ NERC指南指出，TO与DP在潮流、稳定分析和实时运行中的边界通
 
 A没有读到目标段，说明不足合理，不能称错误拒答。C的完整来源为NERC 2016 Reactive Power Planning，Transmission to Distribution Coordination / Modeling，Evidence e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247；实际抽取文件第37页，page_chars[0:1193)、page_lines[1:21]；目录、版本及引用绑定见[冻结案例](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/cases.md#)。两类位置及and/or保留，必答2/2。改善属于资料交付后的生成，本轮审核未增加正文收益。
 
+归档身份核对：A运行f7dc7f6eb45b40e8a73e8d26c15ead75，实际来源示例为dataset-record-eb646d26de0626d5f5609d11a1adc4ac5b93f5b0838fa0faed1eda141ef0ec03，版本e15146cdf43916c5833e6ff91c1956ecec6f596717bbf74915e7332662db4662，Evidence e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140，定位shard=chinese/middle/rank_00415.parquet;row=67967;record=397600026370;chars[2101:3158)，类型industry_corpus_unverified；不是NERC官方建模段。C运行ab2d55acdd994b4782b0fb4abeaf72a8，实际来源nerc-reactive-planning-2016，版本dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193；上述页37原文Evidence来自它。示例不能冒充全部来源，逐Evidence映射及实际快照哈希见冻结案例；今天只读公开归档，不重检索或生成。
+
+[演示下一站：A3修订](04-harness.html#section-3) · [返回7分钟路线](index.html#section-2)
+
 ## 历史说明与基础知识（保留原日期，当前状态以上文为准）
 
 ## RAG是什么，为什么不能只存embedding

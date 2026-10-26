@@ -28,6 +28,8 @@ D只授权把“任何电压、不受带宽限制”改回指定带宽；O仍记
 若O说缺少网络模型，但D已定位“任意电压”与指定带宽矛盾，可以仅凭D及S改电压范围，并将缺参数O保留或解释其概念任务适用性。不能凭O发明网络参数；也不能为消除O删掉正确静态资源段。最多一次业务Revision，改后重新提取、双审及原引用核验，不能只看modified。[完整证据](https://github.com/7556481/PowerTrustAI/blob/73c25ca0af9ba9fd5143527c6341aae52170fffd/docs/evaluation/local-revision-v2-flash-check-v1/report.md#)
 :::
 
+[演示上一站：N1资料交付](05-rag.html#section-3) · [演示下一站：N4漏错](08-verification.html#section-3) · [返回7分钟路线](index.html#section-2)
+
 ## 历史说明与基础知识（保留原日期，当前状态以上文为准）
 
 ## 2026-10-24 可审计的停止规则

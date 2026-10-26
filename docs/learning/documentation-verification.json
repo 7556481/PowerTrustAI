@@ -22,15 +22,15 @@
     },
     {
       "file": "04-harness.md",
-      "characters": 16714,
+      "characters": 16834,
       "self_checks": 7,
-      "sha256": "3ecbb752f04b489890d1a0ec1d2f7756956b73510ddc77014c9a78e6500ce0d8"
+      "sha256": "bd49559d9b4b57a1055e2ca9cac8753f8d157ef43aabb100c672fa4df4fd7aa1"
     },
     {
       "file": "05-rag.md",
-      "characters": 6469,
+      "characters": 7155,
       "self_checks": 4,
-      "sha256": "fcdfbd72ca7a4806a7a2f3e9ac196626df73954413bd45fe9b28f26c3c9dda68"
+      "sha256": "59a20e383c08694d67ad59570891b0f8405323d591f4d89dac9d10eb47f96b19"
     },
     {
       "file": "06-retrieval-math.md",
@@ -46,9 +46,9 @@
     },
     {
       "file": "08-verification.md",
-      "characters": 12710,
+      "characters": 12826,
       "self_checks": 9,
-      "sha256": "2950b3b2c1c849e202ba7deb19b2066fa75e497729f742b58e336452dc4ae327"
+      "sha256": "ab5b6a9ee3c92a046a9cb9fbdb79a99c926250cb033bc2804a9f498e6591a2e2"
     },
     {
       "file": "09-engineering-tools.md",
@@ -100,9 +100,9 @@
     },
     {
       "file": "17-interview.md",
-      "characters": 4683,
+      "characters": 5420,
       "self_checks": 3,
-      "sha256": "2630d37804c03deefeca82c8ba264b460ace6fed44fb1186740310be744265fb"
+      "sha256": "78880c1fea9edda7a444d4a03f62fd6d44c7db5e63f248d6e113a9098bac3992"
     },
     {
       "file": "18-operations.md",
@@ -127,5 +127,7 @@
   "self_checks": 88,
   "source_snippets": 14,
   "source_verification": "AST actual spans, exact Markdown code blocks and all hashes checked",
-  "browser": "separate browser-acceptance.json; not inferred from build"
+  "browser": "separate browser-acceptance.json; not inferred from build",
+  "documentation_parent_commit": "112733ddb6cc2931e97e03b46d391c427a7c65f2",
+  "current_check": "2026-10-27 closeout: source hashes/build/88-fold counts and route only, v6 broader browser separate"
 }

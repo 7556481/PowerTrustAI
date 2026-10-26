@@ -1,9 +1,13 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PowerTrustAI：从代码到判断的学习路线 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 1a92d03da49a · learning-site-v6 natural audit and retrieval learning sync,2026-10-26 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">PowerTrustAI：从代码到判断的学习路线</h1>
-<h2 id="section-2">截至2026-10-26：现在能证明什么</h2>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PowerTrustAI：从代码到判断的学习路线 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 1a92d03da49a · learning-site-v6.1 stage closeout and archived demo,2026-10-27 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">PowerTrustAI：从代码到判断的学习路线</h1>
+<h2 id="section-2">5—8分钟归档演示路线（2026-10-27）</h2>
+<p>只读历史公开案例，不做现场生成；不需要70GB数据库、.env或模型网络。每站先读完整两稿，再解释来源身份、动作及失败，不把教学构造当真实运行。</p>
+<div class="table-scroll"><table><thead><tr><th>时间</th><th>点击阅读</th><th>讲解与追问</th></tr></thead><tbody><tr><td>0:00—0:45</td><td>本页当前边界</td><td>中文电力原型；四职责、LangGraph/Harness；schema13保留，8765停服</td></tr><tr><td>0:45—2:30</td><td><a href="05-rag.html#section-3" rel="noreferrer noopener">第一站N1：资料不足到有据回答</a></td><td>两稿都是归档生成；A缺目标建模段而合理不足，C读到Modeling页37，2/2槽完整；改善属于资料交付后的生成</td></tr><tr><td>2:30—4:30</td><td><a href="04-harness.html#section-3" rel="noreferrer noopener">第二站A3：给定发现后的修订</a></td><td>任何电压→指定带宽内；正确方式/静态段保留，D授权/O记账、版本与引用、一次完整重审；初审发现来自历史回放</td></tr><tr><td>4:30—6:30</td><td><a href="08-verification.html#section-3" rel="noreferrer noopener">第三站N4：更多资料仍生成并漏过排他错误</a></td><td>完整两稿及页21定位；when不支持排除热考核，literal却认可；引用可查/结构合法/pass都不保证语义正确</td></tr><tr><td>6:30—7:00</td><td><a href="17-interview.html#section-2" rel="noreferrer noopener">口述与简历提纲</a></td><td>生成5改善/3混合与审核无已证实关键修复分账；以支持关系语义判断瓶颈结束</td></tr></tbody></table></div>
+<p>每个案例末有下一站/返回链接。其他章节、搜索与解析沿用v6；本轮不新增题目或能力实验。</p>
+<h2 id="section-3">截至2026-10-26：现在能证明什么</h2>
 <p>资料交付改善了固定8题中的5份回答，3份混合；必答正确完整槽1/25→19/25。同一8份C自然稿再审核，N2要求增强和N4排他断言仍未改，0份已证实净改善；N8局部边界改写有复核分歧。不能把生成收益归给审核，也不能声称稳定消除幻觉。</p>
 <p>当前生产schema13、受管配置langgraph_v1，源码无配置fallback为sequential；8765停服。默认检索topic_v4_subject_v1，跨语言profile及literal/source_actions_v2候选未切生产；NLI关闭。N6转换换义和旧gate=false均保留。</p>
 <p><a href="06-retrieval-math.html" rel="noreferrer noopener">三路检索与成本</a> · <a href="08-verification.html" rel="noreferrer noopener">本轮审核与完整N4案例</a> · <a href="05-rag.html" rel="noreferrer noopener">N1资料交付案例</a> · <a href="04-harness.html" rel="noreferrer noopener">历史A3修订与一次重审</a> · <a href="17-interview.html" rel="noreferrer noopener">当前面试口述</a></p>
-<h2 id="section-3">推荐学习路径</h2>
+<h2 id="section-4">推荐学习路径</h2>
 <ul>
 <li>产品与职责：01→03→04→08，先区分生成、发现、修订和重审。</li>
 <li>检索与数据：05→06→07→11，分开在库、召回、交付和回答正确。</li>
@@ -25,25 +29,25 @@
 <p>2026-10-22更新：服务图接线与产品入口已收敛，默认仍sequential；真实图验收未完成，A/B未采用。1136项离线通过；首项真实原路径5调用，收集失败即停。见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-integration-v1/results-v1.md#" rel="noreferrer noopener">集成报告</a>。</p></details>
 <p>这是一份给项目所有者的中文工程教材，不是运行报告合集。你只需要会Python的函数、类、字典、异常和基本文件操作。学习目标是能沿一条真实请求解释：哪些文本送进模型，哪些关系由程序验证，模型错了会发生什么，为什么某个分数提高仍不能自动采纳。</p>
 <p>正文唯一来源是 chapters 下的Markdown。页面是这些文件的静态派生物；改Markdown后运行构建器，搜索和导航一起更新。无需文档云、账号、付费API或新的训练环境。右侧是本章目录，左侧是全书目录，上方可搜索中文术语、函数名和公式。双击项目根目录 start-learning.cmd 打开8770学习服务，不会重启8765日常审核服务，也不读取其令牌或数据库。也可以直接打开 site/index.html 离线阅读，搜索无需fetch。</p>
-<h2 id="section-4">先建立四个判断层次</h2>
+<h2 id="section-5">先建立四个判断层次</h2>
 <p>程序成功返回JSON，只说明协议可解析；完整执行表示必需步骤完成；supported是给定对象与实际证据之间的模型判断；pass是政策对当前任务的处置。四者不能互换。程序能证明原文区间和ID一致，不能因此证明原文正确、命题被支持或厂站安全。</p>
 <p>本书每个公式算例标为“教学构造”，不会伪装成实验结果。真实实验有独立版本、样本数量和分母；监督来源写作AI辅助、用户监督。生产行为依据正文标记的代码版本，历史描述保留当时含义。原始响应、全文库、数据库、凭据和权重不进入本学习站。</p>
-<h2 id="section-5">三条阅读路线</h2>
+<h2 id="section-6">三条阅读路线</h2>
 <ul>
 <li>第一次理解产品：01→02→03→04→08→09→10，先读用户问题如何变成审核对象。</li>
 <li>算法与实验：05→06→07→11→12→13，亲手计算BM25、RRF、混淆矩阵，再看为何实验没有改变默认配置。</li>
 <li>面试与排障：14→15→16→17→18，拿着代码追一条请求，练习回答“失败在哪里、凭什么这样判断”。</li>
 </ul>
 <p>每章都包含概念、工程取舍、代码入口、验证方法、坑和面试说法。不要一次记住所有协议版本；先理解对象，再理解它为什么需要版本。</p>
-<h2 id="section-6">早期边界记录（按原日期阅读，当前状态以上方为准）</h2>
+<h2 id="section-7">早期边界记录（按原日期阅读，当前状态以上方为准）</h2>
 <p>2026-10-22更新：<a href="02-architecture.html" rel="noreferrer noopener">第02章</a>区分Agent、编排运行时与Harness；<a href="03-agents.html" rel="noreferrer noopener">第03章</a>说明已有定制和工具授权；<a href="04-harness.html" rel="noreferrer noopener">第04章</a>补入已实现的可选LangGraph路径、实际阶段图、离线差分、历史响应回放及编排开销。原顺序路径默认、schema13生产基线不改，没有真实模型回归或生产切换。历史“尚未实现图适配”的段落按当时含义保留；当前状态以本次补记为准。</p>
 <p>当前日常采用已核验发布的完整有效分片FTS快照、BM25/FTS倒排及aggregate交付，本地NLI默认关闭且没有决策权。可选Dense/RRF存在，历史reranker实验未采用。项目执行有限标量换算，没有潮流、短路或动态稳定仿真。全量有效分片构建/核验/独立发布和日常接入已完成，旧部分库保留；不是全量向量或全部知识覆盖。schema13在schema-choice-v1中已真实将2ω修订为ω，保留条件并完成重提取、双审和原引用检查。identity-fidelity-v1历史阶段的ab338原功率因数题仍0Revision；局部成功不回填旧失败，也不证明所有错误可修复。</p>
 <p>2026-10-08 ordinary-chain-v2补记：普通概念36字及原频率错误一次实质修订/完整重审已在固定开发例成功；危险仍禁止采用但Fact契约失败、不足路由不精确，尚未稳定验收。前置主体补检、显式长度与提取忠实性详见第05/08/15章；语料仍独立续建，未切日常。</p>
 <p>本站绑定source-version.json记录的实际提交。第08、15、16章保留learning-audit-v1历史接线失败（0/12）及后续修复；<a href="08-verification.html" rel="noreferrer noopener">第08章</a>说明后续固定8题对照和日常13选择，不将早期失败说成当前接线状态。代码摘录与版本清单由构建核对记录保存；“待核对”只用于没有证据的内容，不作为空章节的替代。</p>
-<h2 id="section-7">如何和ChatGPT继续完善</h2>
+<h2 id="section-8">如何和ChatGPT继续完善</h2>
 <p>请将具体章节Markdown及 questions-for-chatgpt.md 一起提供。优先补项目所有者当时的决策动机、替代方案和面试表达；新增事实必须给代码、原始报告或明确标为个人反思。不要把模型生成的解释升级成实验真值。可以加练习和推导，不能改写历史失败。</p>
 <p>正文章节完整保留两本旧手册的合理基础内容，但用当前源码重新核对：旧版“未微调”“schema12当前”“没有中文页面”等只能作为历史。没有把旧PDF转换成网页就称正式完成。</p>
-<h2 id="section-8">渐进阅读计划：六次短学习，再一条请求</h2>
+<h2 id="section-9">渐进阅读计划：六次短学习，再一条请求</h2>
 <ul>
 <li>第1次：01–03，画task/answer/claim/Evidence关系，能区分通过与执行完成。</li>
 <li>第2次：04、10，追状态、队列、observer和短事务，解释重启为何不重发。</li>
@@ -53,8 +57,8 @@
 <li>第6次：14–18，沿API到UI读实际代码，写一个失败复盘和两分钟诚实面试介绍。</li>
 </ul>
 <p>每章末有三道自测，网页答案默认折叠；先答再展开。完成后用synthetic对象案例走一次全链路，不调用真实模型。代码已有、离线验证、真实烟测和个人反思分别标注，卡住的个人动机写入待ChatGPT清单。</p>
-<h2 id="section-9">首版冻结的阅读背景（2026-10-08）</h2>
+<h2 id="section-10">首版冻结的阅读背景（2026-10-08）</h2>
 <p>首版仅作为有界学习/演示原型。本人新全称比较案例95.854秒完整执行，三项事实依据不足、人工复核；旧熔断器误放行不能回填。重复排名验证优化不是所有检索毫秒化或固定端到端承诺；用户确认体感提速，语义风险及宽泛查询限制保留。现有验收、配置与限制详见源码目录 <code>docs/release-freeze-v1.md</code>。无新模型批次或训练。</p>
-<h2 id="section-10">第二版限定性能原型（2026-10-09）</h2>
+<h2 id="section-11">第二版限定性能原型（2026-10-09）</h2>
 <p>最终默认v4＋lossless、schema13/flash/政策1.5/完整库/aggregate/NLI关闭；短答案上限严格，75%仅建议余量，失败不截断。两题最终组合已运行：69/89字，首次API14.923/3.204秒、总44.454/28.068秒，11调用125538token，零纠正/Revision，程序pass；公式全称表述仍有语义疑点、浏览器自动连接核查未完成，故冻结但验收未全部通过。旧v5的3.69秒不可归给此默认组合。20章/60自测保留，独立读站不需业务data，构建只需Python标准库。详见源码目录<code>docs/release-freeze-v2.md</code>与<code>docs/learning-site-sync-v2.md</code>。</p>
-<p>事实审核内部流程已提供显式开发候选，生产不切换；学习重点是合法身份不等于语义判断、分类异议与忠实性分轴。见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v1/README.md#" rel="noreferrer noopener">完整交付</a>。</p></article><footer><a href="01-product.html">01 产品目标、入口和处置含义 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">截至2026-10-26：现在能证明什么</a><a href="#section-3">推荐学习路径</a><a href="#section-4">先建立四个判断层次</a><a href="#section-5">三条阅读路线</a><a href="#section-6">早期边界记录（按原日期阅读，当前状态以上方为准）</a><a href="#section-7">如何和ChatGPT继续完善</a><a href="#section-8">渐进阅读计划：六次短学习，再一条请求</a><a href="#section-9">首版冻结的阅读背景（2026-10-08）</a><a href="#section-10">第二版限定性能原型（2026-10-09）</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<p>事实审核内部流程已提供显式开发候选，生产不切换；学习重点是合法身份不等于语义判断、分类异议与忠实性分轴。见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v1/README.md#" rel="noreferrer noopener">完整交付</a>。</p></article><footer><a href="01-product.html">01 产品目标、入口和处置含义 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">5—8分钟归档演示路线（2026-10-27）</a><a href="#section-3">截至2026-10-26：现在能证明什么</a><a href="#section-4">推荐学习路径</a><a href="#section-5">先建立四个判断层次</a><a href="#section-6">三条阅读路线</a><a href="#section-7">早期边界记录（按原日期阅读，当前状态以上方为准）</a><a href="#section-8">如何和ChatGPT继续完善</a><a href="#section-9">渐进阅读计划：六次短学习，再一条请求</a><a href="#section-10">首版冻结的阅读背景（2026-10-08）</a><a href="#section-11">第二版限定性能原型（2026-10-09）</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
