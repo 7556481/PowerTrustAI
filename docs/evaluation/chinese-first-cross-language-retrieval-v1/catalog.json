@@ -1,0 +1,210 @@
+[
+  {
+    "document_id": "nerc-reactive-planning-2016",
+    "version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+    "title": "Reliability Guideline: Reactive Power Planning",
+    "publisher": "North American Electric Reliability Corporation (NERC)",
+    "title_aliases": [
+      "Reactive Power Planning",
+      "Reliability Guideline: Reactive Power Planning"
+    ],
+    "institution_aliases": [
+      "NERC",
+      "North American Electric Reliability Corporation",
+      "North American Electric Reliability Corporation (NERC)"
+    ],
+    "language": "english",
+    "english_body_available": true,
+    "fragments": 268,
+    "text_sha256": "425edbbc663bac3fe8f719de03025c4e64a9a1b43b71a1fa386946d82829c1f1"
+  },
+  {
+    "document_id": "nerc-var-001-5",
+    "version": "602918a4cb9393ef0171c1241428a47d1cfc26651d8b72aaa5225a66ad45d949",
+    "title": "VAR-001-5 — Voltage and Reactive Control",
+    "publisher": "North American Electric Reliability Corporation (NERC)",
+    "title_aliases": [
+      "VAR-001-5",
+      "VAR-001-5 — Voltage and Reactive Control"
+    ],
+    "institution_aliases": [
+      "NERC",
+      "North American Electric Reliability Corporation",
+      "North American Electric Reliability Corporation (NERC)"
+    ],
+    "language": "english",
+    "english_body_available": true,
+    "fragments": 40,
+    "text_sha256": "eafd1a19b58c8116f265906ef261cf8f623ade3072d4ffe8d78ae1767d3bb37d"
+  },
+  {
+    "document_id": "pnnl-35221",
+    "version": "f85861f2d700e7e85eca68ab8990eb831897ea4013f17cfdbdfdbdfc42ac1d55",
+    "title": "Online Monitoring Applications Enabled by Phasor Measurement Units: Technical Assistance to the Power Sectors of Southeast Asia",
+    "publisher": "Pacific Northwest National Laboratory (PNNL), operated by Battelle for the U.S. Department of Energy",
+    "title_aliases": [
+      "Online Monitoring Applications Enabled by Phasor Measurement Units: Technical Assistance to the Power Sectors of Southeast Asia",
+      "Technical Assistance to the Power Sectors of Southeast Asia"
+    ],
+    "institution_aliases": [
+      "PNNL",
+      "Pacific Northwest National Laboratory",
+      "Pacific Northwest National Laboratory (PNNL), operated by Battelle for the U.S. Department of Energy"
+    ],
+    "language": "english",
+    "english_body_available": true,
+    "fragments": 116,
+    "text_sha256": "7cfb4e9bc804f05370b6c5e261a50625cd2d3f8f335373384b9949264f6064ef"
+  },
+  {
+    "document_id": "tup-095824-definition-excerpt",
+    "version": "d670a53eaf74e823692f6ab8de346a7b809c22f36660bd208e7a3fb504ddae82",
+    "title": "无功功率：教材原文小节",
+    "publisher": "清华大学出版社（原PDF托管方）",
+    "title_aliases": [
+      "无功功率：教材原文小节"
+    ],
+    "institution_aliases": [
+      "清华大学出版社",
+      "清华大学出版社（原PDF托管方）"
+    ],
+    "language": "mixed",
+    "english_body_available": false,
+    "fragments": 1,
+    "text_sha256": "ad18929c39e09f1d96e88f6c9c2d05c75fb64dad40fc658bf2a14feda6257406"
+  },
+  {
+    "document_id": "tup-096768-power-factor-excerpt",
+    "version": "6ae8e6b28441d27a3ab1bbf50ba90f72881c02125c1658777243acb52cbbacdc",
+    "title": "提高功率因数的意义：教材原文小节",
+    "publisher": "清华大学出版社（原PDF托管方）",
+    "title_aliases": [
+      "提高功率因数的意义：教材原文小节"
+    ],
+    "institution_aliases": [
+      "清华大学出版社",
+      "清华大学出版社（原PDF托管方）"
+    ],
+    "language": "mixed",
+    "english_body_available": false,
+    "fragments": 1,
+    "text_sha256": "cc9998096ac1e6294586d39716e4b86641f84f0a3e58e14060d055666899d6ee"
+  },
+  {
+    "document_id": "tup-096768-reactive-excerpt",
+    "version": "e1a8e8dd0d3170d82c4907cc45b1dc5579545997fbedeee82b12b6465bbcf3b8",
+    "title": "无功功率：教材原文小节",
+    "publisher": "清华大学出版社（原PDF托管方）",
+    "title_aliases": [
+      "无功功率：教材原文小节"
+    ],
+    "institution_aliases": [
+      "清华大学出版社",
+      "清华大学出版社（原PDF托管方）"
+    ],
+    "language": "chinese",
+    "english_body_available": false,
+    "fragments": 1,
+    "text_sha256": "f259c2589784de8c7a3db649c5b1013825d7cfe49747f6701f247bd97ae30303"
+  },
+  {
+    "document_id": "tup-circuit-095824",
+    "version": "18d2dc2e9e142d46815f0ca9799c011279fc18e55ed925d1abff2355c4c8d293",
+    "title": "正弦稳态电路分析（出版社公开样章095824）",
+    "publisher": "清华大学出版社（公开样章托管方）",
+    "title_aliases": [
+      "正弦稳态电路分析（出版社公开样章095824）"
+    ],
+    "institution_aliases": [
+      "清华大学出版社",
+      "清华大学出版社（公开样章托管方）"
+    ],
+    "language": "mixed",
+    "english_body_available": false,
+    "fragments": 45,
+    "text_sha256": "3d1a5cdb1d995fed29d878ec556421262f1f1658523e50b319197c2592ece0e7"
+  },
+  {
+    "document_id": "tup-circuit-096768",
+    "version": "392d9138c331c2f27da7da996b27579c710d251a7f67f0114fbd64d5c453da03",
+    "title": "正弦稳态电路分析（出版社公开样章096768）",
+    "publisher": "清华大学出版社（公开样章托管方）",
+    "title_aliases": [
+      "正弦稳态电路分析（出版社公开样章096768）"
+    ],
+    "institution_aliases": [
+      "清华大学出版社",
+      "清华大学出版社（公开样章托管方）"
+    ],
+    "language": "mixed",
+    "english_body_available": false,
+    "fragments": 80,
+    "text_sha256": "b25db437b3903d8a37f6c1f2807bcbf2ad690b0648691e560154dff31f761a3e"
+  },
+  {
+    "document_id": "yangtze-voltage-balance-page60-excerpt",
+    "version": "a202947e3f009853d29a0c2127fe8f31ffea0dcd5c174207cf914b38be79dacf",
+    "title": "9.3 电力系统无功功率平衡和电压调整实验",
+    "publisher": "长江大学电信学院自动化系电气工程课程组",
+    "title_aliases": [
+      "9.3 电力系统无功功率平衡和电压调整实验"
+    ],
+    "institution_aliases": [
+      "长江大学电信学院自动化系电气工程课程组"
+    ],
+    "language": "chinese",
+    "english_body_available": false,
+    "fragments": 1,
+    "text_sha256": "558788e9b849f5d39e859506f7f845021a54d0d25ac6c3aee5c1163b65695f26"
+  },
+  {
+    "document_id": "zh-ces-vsvc-2023-introduction",
+    "version": "0ae038014dd5fbbc4bd9172beef64f4ce5c020ed6b270a12b3a63e97a99133be",
+    "title": "基于旋转移相变压器的电压源型无功补偿器及其控制策略",
+    "publisher": "中国电工技术学会《电工技术学报》；华北电力大学等作者",
+    "title_aliases": [
+      "基于旋转移相变压器的电压源型无功补偿器及其控制策略"
+    ],
+    "institution_aliases": [
+      "中国电工技术学会",
+      "中国电工技术学会《电工技术学报》；华北电力大学等作者",
+      "华北电力大学等作者"
+    ],
+    "language": "mixed",
+    "english_body_available": false,
+    "fragments": 3,
+    "text_sha256": "1426e7f67080999e710ecad6f92c093471217462ca30153f25cc268f45a30c04"
+  },
+  {
+    "document_id": "zh-ndrc-power-quality-2023",
+    "version": "85e8d58f9c3835225cf64e5e1c80e3a1f66186f278fc6e0c57fcd5fe0080d404",
+    "title": "电能质量管理办法（暂行）",
+    "publisher": "国家发展和改革委员会",
+    "title_aliases": [
+      "电能质量管理办法（暂行）"
+    ],
+    "institution_aliases": [
+      "国家发展和改革委员会"
+    ],
+    "language": "chinese",
+    "english_body_available": false,
+    "fragments": 11,
+    "text_sha256": "32777e271e4a407a1855c80f2912b6cc8cd7413931f00abde3bd59c3cd0bcd72"
+  },
+  {
+    "document_id": "zh-yangtze-power-lab",
+    "version": "fde47ea757e2d0bda4ebb00cf48500aa25d6106224f75d237b3d50035c783d97",
+    "title": "电力系统及自动化综合实验指导书",
+    "publisher": "长江大学电信学院自动化系电气工程课程组",
+    "title_aliases": [
+      "电力系统及自动化综合实验指导书"
+    ],
+    "institution_aliases": [
+      "长江大学电信学院自动化系电气工程课程组"
+    ],
+    "language": "mixed",
+    "english_body_available": false,
+    "fragments": 107,
+    "text_sha256": "21ffb226aa3a9e3671eb199e3f37f40b2a4709e439721ce6b9febea30e4e1b73"
+  }
+]

@@ -23,8 +23,8 @@ def tokenize(text: str) -> tuple[str, ...]:
     return tuple(tokens)
 
 
-def score_corpus(query: str, corpus: list[tuple[str, ...]]) -> list[float]:
-    terms = set(tokenize(query))
+def score_corpus(query: str, corpus: list[tuple[str, ...]], *, query_tokens=None) -> list[float]:
+    terms = set(tokenize(query) if query_tokens is None else query_tokens)
     counts = [Counter(tokens) for tokens in corpus]
     n = len(counts)
     average = sum(map(len, corpus)) / n if n else 0

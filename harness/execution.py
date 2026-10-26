@@ -171,6 +171,12 @@ class RunExecution:
         return result
 
     async def retrieve_for(self, purpose, query_override=None):
+        if getattr(self.harness.retriever,'manages_query_conversion',False):
+            with model_scope(self.model_budget), model_invocation_scope(uuid4().hex,'retrieval_'+purpose.value,None if self.answer is None else self.answer.version):
+                return await self._retrieve_for(purpose,query_override)
+        return await self._retrieve_for(purpose,query_override)
+
+    async def _retrieve_for(self, purpose, query_override=None):
         started = perf_counter()
         try:
             if purpose == RetrievalPurpose.VERIFICATION and self.harness.retrieval_settings.fact_strategy == 'per_claim_v1':

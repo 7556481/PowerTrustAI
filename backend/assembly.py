@@ -152,6 +152,15 @@ class ComponentFactory:
             manifest['configured_retrieval_mode']=manifest['retrieval_mode']
             manifest['retrieval_mode']='none';manifest['scoring_method']=None
         manifest['retrieval_execution_profile']=self.config.retrieval_execution_profile
+        if self.config.retrieval_execution_profile=='chinese_first_cross_language_v1':
+            manifest['candidate_retrieval']={'version':'chinese_first_cross_language_v1',
+                'source_scope':'literal catalog title/institution aliases; all matching documents/versions',
+                'conversion':'existing generation-cross-language-query-v1; Chinese + scoped English body; once; 1000 output tokens; 0 corrections',
+                'ranking':'same scoped original/English lexical BM25; depth20 each; RRF k60; fragment ID ties; final top3',
+                'limits':{'documents':12,'fragments':10000,'bytes':104857600},
+                'ordinary_chinese':'original topic_v4_subject_v1 fallback',
+                'context':'unchanged 2400 chars /6 fragments/depth1/cross-page/storage-order'}
+            manifest['generation_query_conversion']='candidate scoped eager conversion; old empty-result fallback disabled in this profile'
         manifest['configured_review_message_profile']=self.config.review_message_profile
         manifest['extraction_message_profile']=self.config.extraction_message_profile
         if self.config.extraction_message_profile=='unified_v1':
@@ -263,6 +272,7 @@ class ComponentFactory:
         from services.generation_query import GenerationQueryConverter, english_fallback_available
         from rag.storage import KnowledgeStore
         settings=ModelSettings(os.environ['DEEPSEEK_MODEL_ID'],90,8000,96000,'https://api.deepseek.com','DEEPSEEK_API_KEY')
+        diag=ROOT/'data/retrieval_local/service_private'/rid
         resources=[]
         try:
             model=create_adapter(settings,**({'review_contract':'simple_bound_v1'} if self.config.fact_review_contract=='simple_bound_v1' else {}));resources.append(model)
@@ -270,10 +280,15 @@ class ComponentFactory:
             if fixed_evidence_only:
                 retriever=None
             elif self.config.retrieval_mode=='bm25':
-                retriever=AsyncSQLiteBM25Retriever(self.config.index_db,execution_profile=self.config.retrieval_execution_profile);resources.append(retriever)
+                if self.config.retrieval_execution_profile=='chinese_first_cross_language_v1':
+                    from dataclasses import replace
+                    from rag.chinese_first import ChineseFirstRetriever
+                    retriever=ChineseFirstRetriever(self.config.index_db,self.config.knowledge_version,
+                        GenerationQueryConverter(model,replace(settings,max_output_tokens=1000),diag))
+                else:retriever=AsyncSQLiteBM25Retriever(self.config.index_db,execution_profile=self.config.retrieval_execution_profile)
+                resources.append(retriever)
             else:
                 self.initialize_retrieval();retriever=self.semantic_resource;resources.append(RetrieverLease(retriever))
-            diag=ROOT/'data/retrieval_local/service_private'/rid
             corpus_english=False
             if not fixed_evidence_only:
                 with KnowledgeStore(self.config.index_db, readonly=True) as store:
@@ -286,9 +301,9 @@ class ComponentFactory:
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
-                generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' and not fixed_evidence_only else None,
+                generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1' else None,
                 generation_corpus_english=corpus_english,execution_path=self.config.execution_path)
-            harness.subject_supplement=not fixed_evidence_only
+            harness.subject_supplement=not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
             return Bundle(harness,resources)
         except Exception:
             for resource in resources:resource.close()
