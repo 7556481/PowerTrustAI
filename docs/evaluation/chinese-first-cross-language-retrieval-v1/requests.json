@@ -1,0 +1,226 @@
+[
+  {
+    "sequence": 1,
+    "phase": "conversion",
+    "slot": [
+      "conversion",
+      "NERC资料如何描述输电运营方TO与配电提供方DP边界负荷的建模，以及建模位置有哪些选择？"
+    ],
+    "question": "NERC资料如何描述输电运营方TO与配电提供方DP边界负荷的建模，以及建模位置有哪些选择？",
+    "correction": false,
+    "prompt_version": "generation-cross-language-query-v1",
+    "model_id": "deepseek-flash",
+    "max_output_tokens": 1000,
+    "elapsed_before_send": 7.499999810534064e-06,
+    "messages_sha256": "71b7f766fe415abb0767f624b099ccaf1d219a125b2ad55776c70190b8c5a789",
+    "status": "response_saved",
+    "seconds": 1.145382100000461,
+    "usage": {
+      "input_tokens": 131,
+      "output_tokens": 36,
+      "total_tokens": 167,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 131
+    },
+    "returned_model": "deepseek-flash",
+    "response_sha256": "d7ac1ed44602360bc28ed4ecd8625749365f92407fef9f4fc636478b93032a80"
+  },
+  {
+    "sequence": 2,
+    "phase": "conversion",
+    "slot": [
+      "conversion",
+      "结合NERC资料，说明边界负荷功率因数、双方无功支撑关系与关键负荷水平下的协调如何联系起来。"
+    ],
+    "question": "结合NERC资料，说明边界负荷功率因数、双方无功支撑关系与关键负荷水平下的协调如何联系起来。",
+    "correction": false,
+    "prompt_version": "generation-cross-language-query-v1",
+    "model_id": "deepseek-flash",
+    "max_output_tokens": 1000,
+    "elapsed_before_send": 3.1202230999997482,
+    "messages_sha256": "26da530fcb374450a34f43e9f5645e052be50eb3868566f6fde35f5e17c89930",
+    "status": "response_saved",
+    "seconds": 1.0484631999997873,
+    "usage": {
+      "input_tokens": 130,
+      "output_tokens": 33,
+      "total_tokens": 163,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 130
+    },
+    "returned_model": "deepseek-flash",
+    "response_sha256": "b294fbe9e048c6f6c475e4bf471f83ad36c5a0e821a9ed2dc55b1596bedd5c88"
+  },
+  {
+    "sequence": 3,
+    "phase": "conversion",
+    "slot": [
+      "conversion",
+      "NERC事故分析段落如何描述失去一个元件后的系统表现？请交代适用的分析类型和负荷条件。"
+    ],
+    "question": "NERC事故分析段落如何描述失去一个元件后的系统表现？请交代适用的分析类型和负荷条件。",
+    "correction": false,
+    "prompt_version": "generation-cross-language-query-v1",
+    "model_id": "deepseek-flash",
+    "max_output_tokens": 1000,
+    "elapsed_before_send": 8.420331299999816,
+    "messages_sha256": "33ba7a37b2901305a68ad2858f8be31f1d227996de74312a9d66f00aa8949bd8",
+    "status": "response_saved",
+    "seconds": 0.9528594000003068,
+    "usage": {
+      "input_tokens": 129,
+      "output_tokens": 29,
+      "total_tokens": 158,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 129
+    },
+    "returned_model": "deepseek-flash",
+    "response_sha256": "d90fb6ed6ad133a384dcde3c0dfc31d90d1176233bb6262037eef5ddb8157fb2"
+  },
+  {
+    "sequence": 4,
+    "phase": "conversion",
+    "slot": [
+      "conversion",
+      "按NERC资料比较正常运行、单一故障、选定N-2及极端扰动的描述，说明它们在热额定值、电压限值与稳定性讨论中分别处于什么位置。"
+    ],
+    "question": "按NERC资料比较正常运行、单一故障、选定N-2及极端扰动的描述，说明它们在热额定值、电压限值与稳定性讨论中分别处于什么位置。",
+    "correction": false,
+    "prompt_version": "generation-cross-language-query-v1",
+    "model_id": "deepseek-flash",
+    "max_output_tokens": 1000,
+    "elapsed_before_send": 13.834659099999953,
+    "messages_sha256": "9b96438809740bfc978a690e09bb68ec400d5573d5e6633fa149e47e8013f418",
+    "status": "response_saved",
+    "seconds": 1.1921758000007685,
+    "usage": {
+      "input_tokens": 143,
+      "output_tokens": 36,
+      "total_tokens": 179,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 143
+    },
+    "returned_model": "deepseek-flash",
+    "response_sha256": "f8958c263b24f45e76261c88355a1c964f39322ea8d346f5911794fea6a9c238"
+  },
+  {
+    "sequence": 5,
+    "phase": "conversion",
+    "slot": [
+      "conversion",
+      "NERC资料中的动态无功资源怎样随电网电压变化调整输出？这种资源的电压控制运行方式有哪些？"
+    ],
+    "question": "NERC资料中的动态无功资源怎样随电网电压变化调整输出？这种资源的电压控制运行方式有哪些？",
+    "correction": false,
+    "prompt_version": "generation-cross-language-query-v1",
+    "model_id": "deepseek-flash",
+    "max_output_tokens": 1000,
+    "elapsed_before_send": 24.470334499999808,
+    "messages_sha256": "a32b701eb287b55c1e1222fca08780b0b93f9b7a878d3501849a5265efd1473f",
+    "status": "response_saved",
+    "seconds": 1.0185080000001108,
+    "usage": {
+      "input_tokens": 129,
+      "output_tokens": 32,
+      "total_tokens": 161,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 129
+    },
+    "returned_model": "deepseek-flash",
+    "response_sha256": "70cf3c13a1d46c07721c5d7fa28d14d109358c396a2214cd877f2a2e66e1ab88"
+  },
+  {
+    "sequence": 6,
+    "phase": "conversion",
+    "slot": [
+      "conversion",
+      "按NERC资料，从接入后的输出特性与投入退出操作看，动态和静态无功资源有什么不同？额定电压在这种比较中有什么意义？"
+    ],
+    "question": "按NERC资料，从接入后的输出特性与投入退出操作看，动态和静态无功资源有什么不同？额定电压在这种比较中有什么意义？",
+    "correction": false,
+    "prompt_version": "generation-cross-language-query-v1",
+    "model_id": "deepseek-flash",
+    "max_output_tokens": 1000,
+    "elapsed_before_send": 30.379649499999687,
+    "messages_sha256": "f4b030be563b1fda0058a15a194da8725bc1e6cba4e98e47eb867565282487e0",
+    "status": "response_saved",
+    "seconds": 0.8524175000002288,
+    "usage": {
+      "input_tokens": 138,
+      "output_tokens": 48,
+      "total_tokens": 186,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 138
+    },
+    "returned_model": "deepseek-flash",
+    "response_sha256": "12625896955885ee010a7bb0ad3715b223d137e8f94fa3542fd8f253534e88bf"
+  },
+  {
+    "sequence": 7,
+    "phase": "conversion",
+    "slot": [
+      "conversion",
+      "请用文字解释NERC资料所列短输电线路无功传输式的模型假设与各符号含义，不作数值计算。"
+    ],
+    "question": "请用文字解释NERC资料所列短输电线路无功传输式的模型假设与各符号含义，不作数值计算。",
+    "correction": false,
+    "prompt_version": "generation-cross-language-query-v1",
+    "model_id": "deepseek-flash",
+    "max_output_tokens": 1000,
+    "elapsed_before_send": 33.57199199999923,
+    "messages_sha256": "65fcb8a3505ea91d06ddac1e91fe038cc2973d669b522c7e61ea7a9ddfd1356f",
+    "status": "response_saved",
+    "seconds": 0.8589815999994244,
+    "usage": {
+      "input_tokens": 131,
+      "output_tokens": 27,
+      "total_tokens": 158,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 131
+    },
+    "returned_model": "deepseek-flash",
+    "response_sha256": "771fac77b33caf8794c33051f0db404d6b31c7cc5dea2946e3e03a00a32aafb9"
+  },
+  {
+    "sequence": 8,
+    "phase": "conversion",
+    "slot": [
+      "conversion",
+      "为什么NERC资料在讨论无功传输时把电压控制与无功控制联系起来？请结合短线路模型中各驱动量的相对作用解释，并交代模型适用条件。"
+    ],
+    "question": "为什么NERC资料在讨论无功传输时把电压控制与无功控制联系起来？请结合短线路模型中各驱动量的相对作用解释，并交代模型适用条件。",
+    "correction": false,
+    "prompt_version": "generation-cross-language-query-v1",
+    "model_id": "deepseek-flash",
+    "max_output_tokens": 1000,
+    "elapsed_before_send": 39.91368049999983,
+    "messages_sha256": "2e7d5e3fdce08a48265588a29cb4b5da1220cdc314f3d5fd564090e59ef47241",
+    "status": "response_saved",
+    "seconds": 0.8992771000002904,
+    "usage": {
+      "input_tokens": 141,
+      "output_tokens": 46,
+      "total_tokens": 187,
+      "cost_amount": null,
+      "currency": null,
+      "cache_hit_tokens": 0,
+      "cache_miss_tokens": 141
+    },
+    "returned_model": "deepseek-flash",
+    "response_sha256": "038959b019cdea060fc81bdf35e09d9c6a9a1dcd0fe6099f21f7f5e242a28baa"
+  }
+]

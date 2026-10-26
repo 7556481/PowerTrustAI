@@ -1,0 +1,546 @@
+{
+  "version": "chinese-first-cross-language-retrieval-v1",
+  "freeze_sha256": "984cd6ec154ec54c78c5e8879a46925a71acc8bc1b858c3e95724b1bbe5b54c3",
+  "passed": false,
+  "N": [
+    {
+      "id": "N1",
+      "family": "coordination",
+      "required_count": 2,
+      "A_qualified_source_coverage": 0,
+      "B_observed_coverage": 2,
+      "C_observed_coverage": 2,
+      "C_over_A": true,
+      "C_over_B": false,
+      "raw_C_over_A": true,
+      "raw_C_over_B": false,
+      "key_A_loss": false,
+      "C_mechanical_execution_complete": true,
+      "C_execution_complete": true,
+      "conversion_faithful": true,
+      "conversion_review": "原问核心与限定保留；不以格式合法代替语义评价",
+      "coverage_review": "人工按原文核对所有必答语义；同题完整参考段实际交付，并非按关键词命中评分",
+      "slot_support": [
+        {
+          "required": "边界通常用MW和Mvar显式负荷建模",
+          "evidence_id": "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+          "evidence_chars": [
+            0,
+            1193
+          ]
+        },
+        {
+          "required": "母线高压侧，或降压变压器及/或等效配电阻抗之后",
+          "evidence_id": "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+          "evidence_chars": [
+            0,
+            1193
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N2",
+      "family": "coordination",
+      "required_count": 3,
+      "A_qualified_source_coverage": 0,
+      "B_observed_coverage": 0,
+      "C_observed_coverage": 3,
+      "C_over_A": true,
+      "C_over_B": true,
+      "raw_C_over_A": true,
+      "raw_C_over_B": true,
+      "key_A_loss": false,
+      "C_mechanical_execution_complete": true,
+      "C_execution_complete": true,
+      "conversion_faithful": true,
+      "conversion_review": "原问核心与限定保留；不以格式合法代替语义评价",
+      "coverage_review": "人工按原文核对所有必答语义；同题完整参考段实际交付，并非按关键词命中评分",
+      "slot_support": [
+        {
+          "required": "边界LPF影响BES电压和无功表现",
+          "evidence_id": "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+          "evidence_chars": [
+            0,
+            1193
+          ]
+        },
+        {
+          "required": "负荷不应过度依赖BES支撑，BES不应仅依赖负荷支撑",
+          "evidence_id": "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+          "evidence_chars": [
+            0,
+            1193
+          ]
+        },
+        {
+          "required": "确定峰荷/轻载等关键负荷水平建议LPF时，TO与DP协调重要",
+          "evidence_id": "e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=37;page_chars[0:1193);page_lines[1:21]",
+          "evidence_chars": [
+            0,
+            1193
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N3",
+      "family": "contingencies",
+      "required_count": 3,
+      "A_qualified_source_coverage": 0,
+      "B_observed_coverage": 0,
+      "C_observed_coverage": 3,
+      "C_over_A": true,
+      "C_over_B": true,
+      "raw_C_over_A": true,
+      "raw_C_over_B": true,
+      "key_A_loss": false,
+      "C_mechanical_execution_complete": true,
+      "C_execution_complete": true,
+      "conversion_faithful": true,
+      "conversion_review": "原问核心与限定保留；不以格式合法代替语义评价",
+      "coverage_review": "人工按原文核对所有必答语义；同题完整参考段实际交付，并非按关键词命中评分",
+      "slot_support": [
+        {
+          "required": "N-1失去一个元件，立即且无操作员干预，紧急热额定值和电压限值内",
+          "evidence_id": "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+          "evidence_chars": [
+            0,
+            1034
+          ]
+        },
+        {
+          "required": "适用稳态和稳定要求",
+          "evidence_id": "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+          "evidence_chars": [
+            0,
+            1034
+          ]
+        },
+        {
+          "required": "包括预测最小和最大负荷条件，性能应始终具备",
+          "evidence_id": "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+          "evidence_chars": [
+            0,
+            1034
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N4",
+      "family": "contingencies",
+      "required_count": 4,
+      "A_qualified_source_coverage": 0,
+      "B_observed_coverage": 4,
+      "C_observed_coverage": 4,
+      "C_over_A": true,
+      "C_over_B": false,
+      "raw_C_over_A": true,
+      "raw_C_over_B": false,
+      "key_A_loss": false,
+      "C_mechanical_execution_complete": true,
+      "C_execution_complete": true,
+      "conversion_faithful": true,
+      "conversion_review": "原问核心与限定保留；不以格式合法代替语义评价",
+      "coverage_review": "人工按原文核对所有必答语义；同题完整参考段实际交付，并非按关键词命中评分",
+      "slot_support": [
+        {
+          "required": "全部计划元件在役时正常热额定值/电压限值",
+          "evidence_id": "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+          "evidence_chars": [
+            0,
+            1034
+          ]
+        },
+        {
+          "required": "N-1立即无干预的紧急热额定值/电压限值及稳态稳定要求",
+          "evidence_id": "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+          "evidence_chars": [
+            0,
+            1034
+          ]
+        },
+        {
+          "required": "确定稳定极限时承受选定N-2",
+          "evidence_id": "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+          "evidence_chars": [
+            0,
+            1034
+          ]
+        },
+        {
+          "required": "极端扰动较严重较不可能，避免电压崩溃/级联/失稳",
+          "evidence_id": "e-84209067faad9fa750da62bb46ef8c0882b295d2b695ea17f70e369d8a7a15c8",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=21;page_chars[292:1326);page_lines[8:19]",
+          "evidence_chars": [
+            0,
+            1034
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N5",
+      "family": "resources",
+      "required_count": 3,
+      "A_qualified_source_coverage": 0,
+      "B_observed_coverage": 0,
+      "C_observed_coverage": 3,
+      "C_over_A": true,
+      "C_over_B": true,
+      "raw_C_over_A": true,
+      "raw_C_over_B": true,
+      "key_A_loss": false,
+      "C_mechanical_execution_complete": true,
+      "C_execution_complete": true,
+      "conversion_faithful": true,
+      "conversion_review": "原问核心与限定保留；不以格式合法代替语义评价",
+      "coverage_review": "人工按原文核对所有必答语义；同题完整参考段实际交付，并非按关键词命中评分",
+      "slot_support": [
+        {
+          "required": "指定电压带宽内响应电网电压变化",
+          "evidence_id": "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+          "evidence_chars": [
+            0,
+            1200
+          ]
+        },
+        {
+          "required": "自动、实时、连续范围调节无功输出",
+          "evidence_id": "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+          "evidence_chars": [
+            0,
+            1200
+          ]
+        },
+        {
+          "required": "维持电压设定点或电压下垂模式",
+          "evidence_id": "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+          "evidence_chars": [
+            0,
+            1200
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N6",
+      "family": "resources",
+      "required_count": 3,
+      "A_qualified_source_coverage": 0,
+      "B_observed_coverage": 0,
+      "C_observed_coverage": 3,
+      "C_over_A": false,
+      "C_over_B": false,
+      "raw_C_over_A": true,
+      "raw_C_over_B": true,
+      "key_A_loss": false,
+      "C_mechanical_execution_complete": true,
+      "C_execution_complete": false,
+      "conversion_faithful": false,
+      "conversion_review": "实质不忠实：运行投切改为commissioning/decommissioning投运调试/退役",
+      "coverage_review": "人工按原文核对所有必答语义；同题完整参考段实际交付，并非按关键词命中评分",
+      "slot_support": [
+        {
+          "required": "动态在指定带宽内自动实时连续调节以响应电网电压",
+          "evidence_id": "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+          "evidence_chars": [
+            0,
+            1200
+          ]
+        },
+        {
+          "required": "静态额定电压下固定额定输出，能力随电压平方变化",
+          "evidence_id": "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+          "evidence_chars": [
+            0,
+            1200
+          ]
+        },
+        {
+          "required": "静态按系统条件手动或自动投切，接入后固定额定贡献",
+          "evidence_id": "e-298894c3f482069934b54303a54e8f458b668b62b0f9dd0cfa20ed82a0e69859",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=8;page_chars[0:1200);page_lines[1:16]",
+          "evidence_chars": [
+            0,
+            1200
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N7",
+      "family": "line_model",
+      "required_count": 3,
+      "A_qualified_source_coverage": 0,
+      "B_observed_coverage": 0,
+      "C_observed_coverage": 3,
+      "C_over_A": true,
+      "C_over_B": true,
+      "raw_C_over_A": true,
+      "raw_C_over_B": true,
+      "key_A_loss": false,
+      "C_mechanical_execution_complete": true,
+      "C_execution_complete": true,
+      "conversion_faithful": true,
+      "conversion_review": "原问核心与限定保留；不以格式合法代替语义评价",
+      "coverage_review": "人工按原文核对所有必答语义；同题完整参考段实际交付，并非按关键词命中评分",
+      "slot_support": [
+        {
+          "required": "短线路、忽略线路R和B",
+          "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+          "evidence_chars": [
+            0,
+            1199
+          ]
+        },
+        {
+          "required": "Vs/Vr为送端/受端电压幅值，X为线路电抗",
+          "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+          "evidence_chars": [
+            0,
+            1199
+          ]
+        },
+        {
+          "required": "δ为两端相角差，式子描述无功传输",
+          "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+          "evidence_chars": [
+            0,
+            1199
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N8",
+      "family": "line_model",
+      "required_count": 4,
+      "A_qualified_source_coverage": 0,
+      "B_observed_coverage": 0,
+      "C_observed_coverage": 4,
+      "C_over_A": true,
+      "C_over_B": true,
+      "raw_C_over_A": true,
+      "raw_C_over_B": true,
+      "key_A_loss": false,
+      "C_mechanical_execution_complete": true,
+      "C_execution_complete": true,
+      "conversion_faithful": true,
+      "conversion_review": "原问核心与限定保留；不以格式合法代替语义评价",
+      "coverage_review": "人工按原文核对所有必答语义；同题完整参考段实际交付，并非按关键词命中评分",
+      "slot_support": [
+        {
+          "required": "短线路且忽略R/B",
+          "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+          "evidence_chars": [
+            0,
+            1199
+          ]
+        },
+        {
+          "required": "无功受电压差、相角差、电气阻抗影响",
+          "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+          "evidence_chars": [
+            0,
+            1199
+          ]
+        },
+        {
+          "required": "相角差影响相对小，电压差/阻抗强得多",
+          "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+          "evidence_chars": [
+            0,
+            1199
+          ]
+        },
+        {
+          "required": "电压与无功控制紧密耦合，反之亦然",
+          "evidence_id": "e-43a09bb3cdd0b93b0906bf115248a8e6709c5a7530a8a8ebcecf6e7ead5f4251",
+          "source_id": "nerc-reactive-planning-2016",
+          "source_version": "dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193",
+          "locator": "pdf_extracted_text:file_page=7;page_chars[1199:2398);page_lines[19:38]",
+          "evidence_chars": [
+            0,
+            1199
+          ]
+        }
+      ]
+    }
+  ],
+  "extra": [
+    {
+      "id": "E1",
+      "passed": true,
+      "reference": [
+        "没有明确来源，B/C沿原中文路径且不转换，不强定NERC"
+      ],
+      "B_C_evidence_identical": true,
+      "conversion_calls": 0,
+      "actual_scope": null,
+      "new_wrong_attribution": false,
+      "unwarranted_version_selection": false
+    },
+    {
+      "id": "E2",
+      "passed": true,
+      "reference": [
+        "同名标题有两份选段；保留095824与096768来源，不擅选，不转换"
+      ],
+      "B_C_evidence_identical": true,
+      "conversion_calls": 0,
+      "actual_scope": {
+        "status": "title",
+        "members": [
+          [
+            "tup-095824-definition-excerpt",
+            "d670a53eaf74e823692f6ab8de346a7b809c22f36660bd208e7a3fb504ddae82"
+          ],
+          [
+            "tup-096768-reactive-excerpt",
+            "e1a8e8dd0d3170d82c4907cc45b1dc5579545997fbedeee82b12b6465bbcf3b8"
+          ]
+        ],
+        "aliases": [
+          "无功功率：教材原文小节",
+          "清华大学出版社"
+        ],
+        "english": false,
+        "message": "保留全部匹配文献/版本；2项，未擅选唯一资料。"
+      },
+      "new_wrong_attribution": false,
+      "unwarranted_version_selection": false
+    },
+    {
+      "id": "E3",
+      "passed": true,
+      "reference": [
+        "明确未找到所指标题，不用行业或其他资料替代，不转换"
+      ],
+      "B_C_evidence_identical": true,
+      "conversion_calls": 0,
+      "actual_scope": {
+        "status": "source_not_found",
+        "members": [],
+        "aliases": [],
+        "english": false,
+        "message": "未找到所指资料：并不存在的跨区域无功资源导则2026-ZZZ；可检查当前目录标题。"
+      },
+      "new_wrong_attribution": false,
+      "unwarranted_version_selection": false
+    },
+    {
+      "id": "E4",
+      "passed": true,
+      "reference": [
+        "仅所指国家发展和改革委员会真实文献，中文不转换，不误归NERC"
+      ],
+      "B_C_evidence_identical": true,
+      "conversion_calls": 0,
+      "actual_scope": {
+        "status": "title",
+        "members": [
+          [
+            "zh-ndrc-power-quality-2023",
+            "85e8d58f9c3835225cf64e5e1c80e3a1f66186f278fc6e0c57fcd5fe0080d404"
+          ]
+        ],
+        "aliases": [
+          "国家发展和改革委员会",
+          "电能质量管理办法（暂行）"
+        ],
+        "english": false,
+        "message": "保留全部匹配文献/版本；1项，未擅选唯一资料。"
+      },
+      "new_wrong_attribution": false,
+      "unwarranted_version_selection": false
+    }
+  ],
+  "reason": "N6 substantive translation drift is a failed C slot under the predeclared rule; the all-eight-C-success requirement fails despite correct source delivery. No answers, retranslation, retry or second batch.",
+  "raw_observed_coverage": {
+    "A": 0,
+    "B": 6,
+    "C": 25,
+    "total_required": 25
+  },
+  "valid_C_over_A_cases": 7,
+  "valid_C_over_B_cases": 5,
+  "valid_families": 4,
+  "semantic_failure_cases": [
+    "N6"
+  ],
+  "new_answer_generation_authorized_by_gate": false,
+  "judgment_origin": "Main source-first review + independent nonblind source review; separate context-limited N6 translation reviewer without retrieval/gate outcome; AI-assisted/user-supervised, not expert gold",
+  "review_disagreement": "First independent source-review impression called N6 a wording risk; after checking question/source operational switching context it was corrected to substantive drift; all initial and final positions retained in review report."
+}

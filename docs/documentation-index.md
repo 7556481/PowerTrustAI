@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-26 中文主线跨语言检索封存（已执行）
+
+[报告](evaluation/chinese-first-cross-language-retrieval-v1/report.md) · [三路36槽](evaluation/chinese-first-cross-language-retrieval-v1/retrieval-results.json) · [语言依据](evaluation/chinese-first-cross-language-retrieval-v1/language-audit.json) · [8条转换原预测](evaluation/chinese-first-cross-language-retrieval-v1/predictions.json) · [门槛](evaluation/chinese-first-cross-language-retrieval-v1/evidence-gate.json) · [独立源/翻译复核](evaluation/chinese-first-cross-language-retrieval-v1/independent-source-review.md) · [成本延迟](evaluation/chinese-first-cross-language-retrieval-v1/statistics.json) · [验证](evaluation/chinese-first-cross-language-retrieval-v1/verification.json)。A/B/C所问原文槽实际覆盖0/6/25（总25），C的N6转换实质换义失败单列；有效C>A7/8、C>B5/8，门槛未全满足，回答阶段未启动。8Flash/1359token、金额未知；每触发题+1请求、C-B均值+1.748秒。1324最终离线通过，默认关闭、无生产切换/第二批。下方“尚未执行”保留任务编写时状态，以本封存记录为准。
+
 ## 2026-10-26 检索交付定位封存（本轮已执行）
 
 [检索交付修复v1报告](evaluation/retrieval-delivery-repair-v1/report.md) · [逐题MATCH与实际交付](evaluation/retrieval-delivery-repair-v1/diagnosis.json) · [原文身份与计时](evaluation/retrieval-delivery-repair-v1/identity-check.json) · [独立复核](evaluation/retrieval-delivery-repair-v1/independent-review.md) · [验证及停止](evaluation/retrieval-delivery-repair-v1/verification.json)。正确版本268片段已参与native FTS，八题参考段实际MATCH全0，六题去主题仍无词项；不能归因未向量化。依任务第3节停止分支，无候选/最终检索对照/付费批，改善未测得、回答收益未证明，新请求0。下方“下一轮/尚未执行”保留任务编写时状态，以本封存记录为准；被替代审核重构未执行。
