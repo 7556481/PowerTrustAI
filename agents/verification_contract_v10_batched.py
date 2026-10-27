@@ -111,9 +111,15 @@ async def run(agent,inputs):
             'REVIEW_MESSAGE_CAPACITY_EXCEEDED',
             'Complete original citation scope exceeds capacity; unprocessed citation_indexes='+str(list(rejected))))
     work=[None]+list(groups)
-    for citation in work:
+    parallel=getattr(agent,'review_execution_profile','serial_v1')=='citation_pair_v1'
+    if parallel:
+        from agents.schema13_concurrency_v1 import CorrectionOrder,waves
+        order=CorrectionOrder(agent.client,len(work))
+    async def check(citation,ordinal):
+        nonlocal correction_used,shortfall_reported
+        local_issues=[];fatal=False
         group='findings' if citation is None else 'citation_reviews'
-        if citation is None and not wire[group]:continue
+        if citation is None and not wire[group]:return None,local_issues,False
         selected={group:deepcopy(wire[group] if citation is None else [wire[group][i] for i in citation])}
         def strict(value):
             if agent.support_relation_checks:
@@ -173,19 +179,19 @@ async def run(agent,inputs):
         else:delivered=payload
         messages=(ModelMessage('system',instruction),ModelMessage('user',json.dumps(delivered,ensure_ascii=False,separators=(',',':')) if compact else json.dumps(delivered,ensure_ascii=False)))
         if citation is not None and messages_size(messages)>limits.max_message_chars:
-            issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,
+            local_issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,
                 'REVIEW_MESSAGE_CAPACITY_EXCEEDED','Complete original citation group exceeds capacity; items remain unassessed'))
-            continue
+            return None,local_issues,False
         remaining=current_budget().limit-current_budget().used
         # Known outstanding initial calls, NOT a guarantee about correction or later Revision.
         outstanding=sum(1 for item in work[work.index(citation):] if item is not None or wire['findings'])
         if remaining<outstanding and not shortfall_reported:
-            issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,
+            local_issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,
                 'REVIEW_WORKLOAD_BUDGET_SHORTFALL',
                 'Known remaining initial review requests='+str(outstanding)+'; available calls='+str(remaining)+
                 '; validated partial results retained; correction/Revision cost not yet known'))
             shortfall_reported=True
-        if remaining==0:break
+        if remaining==0:return None,local_issues,False
         path=None if agent.diagnostics is None else agent.diagnostics.save_scope(payload);before=len(current_budget().records)
         result=None
         def correction_guidance(response,diagnostic):
@@ -194,20 +200,31 @@ async def run(agent,inputs):
             value=selection_guidance(scopes,response,citation) if agent.support_relation_version==6 else repair_guidance(scopes,citation)
             return dict(value,output_contract=payload['MODEL_OUTPUT_CONTRACT'],retained_items=diagnostic.get('retained_items',[]),note_output='Return every required item using exact output fields; input carrier objects are not output. Illegal IDs/fields remain invalid, never substitute them.')
         try:
-            result,_=await structured_request(agent.client,messages,
+            result,_=await structured_request(order.for_item(ordinal) if parallel else agent.client,messages,
                 prompt_version,isolation.parse,diagnostics=agent.diagnostics,response_contract_version=contract_version,candidate_catalog_path=path,max_corrections=0 if correction_used else 1,max_message_chars=None if citation is None else limits.max_correction_message_chars,
                 correction_context=correction_guidance if new_interface else None)
         except Exception as exc:
             if not getattr(exc,'code',None):raise
-            result=getattr(exc,'partial_output',None);issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,exc.code,'Scoped semantic check incomplete; valid peers retained'))
-            if exc.code in ('MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED'):break
+            result=getattr(exc,'partial_output',None);local_issues.append(ExecutionIssue('evidence_verification',ExecutionStatus.FAILED,exc.code,'Scoped semantic check incomplete; valid peers retained'))
+            if exc.code in ('MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED'):fatal=True
         finally:
             correction_used=correction_used or any(r.correction and (not scoped or
                 (r.invocation_id==owner[0] and r.component==owner[1] and r.answer_version==owner[2]
                  and r.prompt_version==prompt_version)) for r in current_budget().records[before:])
-        if result is None:continue
-        if citation is None:combined=replace(combined,findings=result.findings)
-        else:combined=replace(combined,citation_reviews=tuple(result.citation_reviews[i] if i in citation else c for i,c in enumerate(combined.citation_reviews)))
+        return None if fatal and not parallel else result,local_issues,fatal
+    def merge(citation,outcome):
+        nonlocal combined
+        result,local_issues,fatal=outcome;issues.extend(local_issues)
+        if result is not None:
+            if citation is None:combined=replace(combined,findings=result.findings)
+            else:combined=replace(combined,citation_reviews=tuple(result.citation_reviews[i] if i in citation else c for i,c in enumerate(combined.citation_reviews)))
+    if parallel:
+        async for batch in waves(work,check,order):
+            for citation,outcome in batch:merge(citation,outcome)
+    else:
+        for ordinal,citation in enumerate(work):
+            outcome=await check(citation,ordinal);merge(citation,outcome)
+            if outcome[2] or (citation is not None or wire['findings']) and current_budget().used>=current_budget().limit:break
     from services.evidence_scope import citation_coverage
     combined=replace(combined,execution_issues=tuple(issues),citation_reviews=tuple(replace(c,
         partial_claim_ids=citation_coverage(inputs.answer,inputs.claims,c.citation_index,combined.findings)[0],

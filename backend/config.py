@@ -15,6 +15,7 @@ class ServiceConfig:
     verification_schema: int=13
     execution_path: str='sequential'
     fact_internal_flow: str='production'
+    fact_review_execution: str='serial_v1'
     fact_review_contract: str='production'
     review_result_transport: str='json'
     domain_internal_flow: str='production'
@@ -42,6 +43,8 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.fact_review_execution not in ('serial_v1','citation_pair_v1'):raise ValueError('Invalid fact execution candidate')
+        if self.fact_review_execution!='serial_v1' and (self.profile!='real' or self.verification_schema!=13 or self.fact_internal_flow!='production' or self.fact_review_contract!='production' or self.review_result_transport!='json'):raise ValueError('Candidate requires original schema13 fact contract')
         if self.local_revision_interface not in ('production','source_actions_v2'):raise ValueError('Invalid local revision interface')
         if self.local_revision_interface!='production' and (self.fact_review_contract!='literal_v1' or self.profile!='real'):raise ValueError('V2 revision requires explicit literal fact candidate')
         if self.extraction_message_profile not in ('production','unified_v1'):raise ValueError('Invalid extraction message profile')
@@ -108,6 +111,7 @@ class ServiceConfig:
             revision_answer_delivery=os.environ.get('POWERTRUST_REVISION_ANSWER_DELIVERY','production'),
             local_revision_interface=os.environ.get('POWERTRUST_LOCAL_REVISION_INTERFACE','production'),
             fact_internal_flow=os.environ.get('POWERTRUST_FACT_INTERNAL_FLOW','production'),
+            fact_review_execution=os.environ.get('POWERTRUST_FACT_REVIEW_EXECUTION','serial_v1'),
             fact_review_contract=os.environ.get('POWERTRUST_FACT_REVIEW_CONTRACT','production'),
             review_result_transport=os.environ.get('POWERTRUST_REVIEW_RESULT_TRANSPORT','json'),
             execution_path=os.environ.get('POWERTRUST_EXECUTION_PATH',orchestration.get('execution_path','sequential')),

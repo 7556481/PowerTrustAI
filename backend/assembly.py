@@ -181,6 +181,8 @@ class ComponentFactory:
             manifest['prompts']['extraction']=extraction_version
             manifest['extraction_message_sha256']=hashlib.sha256(system(self.config.decision_policy=='product-v1').encode()).hexdigest()
         manifest['review_message_profile']=self.config.review_message_profile if self.config.verification_schema==13 else 'baseline_v1'
+        if self.config.fact_review_execution!='serial_v1':
+            manifest['fact_review_execution']={'version':'schema13-citation-pair-v1','profile':self.config.fact_review_execution,'fact_http_limit':2,'task_http_limit':3,'correction_accounting':'invocation_scoped_v1','enabled_by_default':False}
         if self.config.review_message_profile=='lossless_v1' and self.config.verification_schema==13:
             manifest['review_transport']='review-lossless-shared-values-v1'
             from services.review_transport import INSTRUCTION as transport_instruction,NESTING
@@ -288,7 +290,11 @@ class ComponentFactory:
         diag=ROOT/'data/retrieval_local/service_private'/rid
         resources=[]
         try:
-            model=create_adapter(settings,**({'review_contract':'simple_bound_v1'} if self.config.fact_review_contract=='simple_bound_v1' else {}));resources.append(model)
+            if self.config.fact_review_execution=='citation_pair_v1':
+                from model_adapter.bounded_pair_v1 import create_pair
+                model=create_pair(settings,create_adapter)
+            else:model=create_adapter(settings,**({'review_contract':'simple_bound_v1'} if self.config.fact_review_contract=='simple_bound_v1' else {}))
+            resources.append(model)
             domain_model=create_adapter(settings);resources.append(domain_model)
             if fixed_evidence_only:
                 retriever=None
@@ -309,7 +315,7 @@ class ComponentFactory:
                     corpus=seal(store,self.config.knowledge_version)
                     corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
+                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_execution_profile':self.config.fact_review_execution} if self.config.fact_review_execution!='serial_v1' else {}),**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),

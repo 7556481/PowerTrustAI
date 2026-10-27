@@ -99,14 +99,14 @@ class SubjectProvider(SyntheticProvider):
   return await super().complete(r)
 
 class FactoryFlowTests(unittest.TestCase):
- def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False,objection=False,illegal=False,hazard=False,negated=False,quoted=False,subject=False,concept=False,no_goal=False,task_scope='conceptual',guarantee=False,evidence_gap=False,scope_note=False,premises=False):
+ def exercise(self,*,schema=14,existing=False,revision=False,two=False,conversion=False,fault=False,objection=False,illegal=False,hazard=False,negated=False,quoted=False,subject=False,concept=False,no_goal=False,task_scope='conceptual',guarantee=False,evidence_gap=False,scope_note=False,premises=False,fact_execution='serial_v1'):
   with synthetic_diagnostics() as temp:
    root=Path(temp);doc=root/'fixture.md';doc.write_text('# Synthetic voltage\n\n'+GOOD+'\nThe synthetic setting applies under condition C.\n'+CONVERT,encoding='utf-8')
    if subject:doc.write_text('# Synthetic definition\n\n'+GOOD_FREQUENCY+'\n\n'+'\n\n'.join('Background unrelated item '+str(i) for i in range(80))+'\n\n'+'\n\n'.join('A device can turn50Hz into60Hz. Converter background detail '+str(i) for i in range(12)),encoding='utf-8')
    with KnowledgeStore(root/'knowledge.sqlite3') as knowledge:
     k=knowledge.ingest(doc,'synthetic-fixture',SourceMetadata(source_type='synthetic_fixture')).knowledge_version
     fragment=knowledge.rows(k)[0]['fragment_id']
-   config=ServiceConfig(index_db=root/'knowledge.sqlite3',knowledge_version=k,run_db=root/'runs.sqlite3',token_file=root/'token',verification_schema=schema,citation_workload=CitationWorkload(max_items=1))
+   config=ServiceConfig(index_db=root/'knowledge.sqlite3',knowledge_version=k,run_db=root/'runs.sqlite3',token_file=root/'token',verification_schema=schema,citation_workload=CitationWorkload(max_items=1),fact_review_execution=fact_execution)
    factory=ComponentFactory(config);provider=SyntheticProvider(revision=revision,two=two,conversion=conversion,objection=objection,illegal=illegal,hazard=hazard,negated=negated,quoted=quoted)
    if subject:provider=SubjectProvider()
    # Patch only the external provider creation and the isolated diagnostic root.

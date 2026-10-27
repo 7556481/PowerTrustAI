@@ -291,7 +291,11 @@ def _parse_normalized(value, inputs, *, schema_version=None):
 class ModelEvidenceVerificationAgent:
     uses_model_adapter = True
 
-    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4, citation_workload=None, support_relation_checks=False, support_relation_version=1,review_message_profile='baseline_v1', correction_accounting='shared_slice_v1',review_contract='production',review_result_transport='json'):
+    def __init__(self, adapter, settings, *, diagnostic_dir=None, schema_version=4, citation_workload=None, support_relation_checks=False, support_relation_version=1,review_message_profile='baseline_v1', correction_accounting='shared_slice_v1',review_contract='production',review_result_transport='json',review_execution_profile='serial_v1'):
+        require(review_execution_profile in ('serial_v1','citation_pair_v1'),'Invalid review execution profile')
+        require(review_execution_profile=='serial_v1' or (schema_version==13 and review_contract=='production' and review_result_transport=='json'),'Parallel candidate requires unchanged schema13 production contract')
+        self.review_execution_profile=review_execution_profile
+        if review_execution_profile=='citation_pair_v1':correction_accounting='invocation_scoped_v1'
         require(review_contract in ('production','scope_v2','simple_v1','simple_bound_v1') and (review_contract=='production' or schema_version==13), 'Invalid explicit review contract')
         require(review_result_transport in ('json','strict_tool_v1') and (review_result_transport=='json' or review_contract in ('simple_v1','simple_bound_v1')),'Invalid result transport')
         require(review_contract!='simple_bound_v1' or review_result_transport=='strict_tool_v1','Bound candidate requires explicit strict transport')
