@@ -1,0 +1,387 @@
+{
+  "base_commit": "4a5f728435b8771c7072b71edcdda6c22381892c",
+  "source_commits": [
+    "80ca34d7e096fc9759cc5482b0d4c26001d67b47 Keep answer controls stable when only usage records change",
+    "dc1db15a3fce764dd37ab29a0b30232c0fa0c24e Restore feedback before auxiliary waits can overwrite new edits",
+    "43cb051df16d5e4a4bde1f93dfe5288ae2d23403 Avoid full result decoding for existence and state reads",
+    "489a210c2e90920a73d9e7ef1cdaec56650f9f1c Isolate auxiliary read failures and preserve in-progress UI controls",
+    "c00a89233e9c038c00b7d5a889bb07bc3442397f Bind in-page feedback drafts and stale write responses to their run"
+  ],
+  "model_requests": 0,
+  "model_fees": 0,
+  "production_switch": false,
+  "full_offline": {
+    "tests": 1340,
+    "seconds": 372.516,
+    "source_at_start": "43cb051df16d5e4a4bde1f93dfe5288ae2d23403",
+    "note": "one full run after Store changes; frontend delayed-restoration fix dc1db15 separately rechecked with actual JS probes"
+  },
+  "targeted": {
+    "tests": 10,
+    "seconds": 10.155
+  },
+  "actual_client_probe": {
+    "groups": 19,
+    "all_passed": true
+  },
+  "legacy_post_security_probe": "passed",
+  "performance": {
+    "before": {
+      "model_requests": 0,
+      "warmups": 1,
+      "repetitions": 5,
+      "database_bytes": 4255744,
+      "large_structure": "answer 524286 UTF8 bytes + evidence 524286 bytes, both result and snapshot; plus indexed objects",
+      "records": [
+        {
+          "sample": "normal",
+          "endpoint": "state",
+          "sql_count": 1,
+          "json_decodes": 4,
+          "large_decodes": 0,
+          "decoded_bytes": 8702,
+          "median_ms": 0.12599999990925426,
+          "times_ms": [
+            0.2471999996487284,
+            0.13429999989966745,
+            0.1142999999501626,
+            0.10999999994965037,
+            0.12599999990925426
+          ],
+          "output_bytes": 437,
+          "output_sha256": "d29672d49f7cfb1947e5454da2fd9323cb16957798545c2e17006a6aaf98a6bc"
+        },
+        {
+          "sample": "normal",
+          "endpoint": "result",
+          "sql_count": 8,
+          "json_decodes": 22,
+          "large_decodes": 0,
+          "decoded_bytes": 47756,
+          "median_ms": 0.6935999999768683,
+          "times_ms": [
+            0.8065000001806766,
+            0.8204000000660017,
+            0.6935999999768683,
+            0.6800999999541091,
+            0.6850999998277985
+          ],
+          "output_bytes": 8826,
+          "output_sha256": "e69c50edfb76883dfa86f3a15a867c8b5c7c2d154db854983f49cc6792918089"
+        },
+        {
+          "sample": "normal",
+          "endpoint": "trace",
+          "sql_count": 2,
+          "json_decodes": 4,
+          "large_decodes": 0,
+          "decoded_bytes": 8702,
+          "median_ms": 0.09020000015880214,
+          "times_ms": [
+            0.10609999981170404,
+            0.09020000015880214,
+            0.08479999996779952,
+            0.08389999993596575,
+            0.09709999994811369
+          ],
+          "output_bytes": 2,
+          "output_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "sample": "normal",
+          "endpoint": "reviews",
+          "sql_count": 2,
+          "json_decodes": 4,
+          "large_decodes": 0,
+          "decoded_bytes": 8702,
+          "median_ms": 0.09839999984251335,
+          "times_ms": [
+            0.09839999984251335,
+            0.08509999997841078,
+            0.0922000003811263,
+            0.1712999996925646,
+            0.14239999973142403
+          ],
+          "output_bytes": 2,
+          "output_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "sample": "large",
+          "endpoint": "state",
+          "sql_count": 1,
+          "json_decodes": 4,
+          "large_decodes": 2,
+          "decoded_bytes": 2097657,
+          "median_ms": 11.754900000141788,
+          "times_ms": [
+            11.895900000126858,
+            11.700999999902706,
+            11.754900000141788,
+            11.783099999775004,
+            10.939799999960087
+          ],
+          "output_bytes": 436,
+          "output_sha256": "52f9a3242d7842801f92189b82c565207f6f3acda984c4ba603712df4822f4ea"
+        },
+        {
+          "sample": "large",
+          "endpoint": "result",
+          "sql_count": 8,
+          "json_decodes": 22,
+          "large_decodes": 12,
+          "decoded_bytes": 11537009,
+          "median_ms": 77.0039000003635,
+          "times_ms": [
+            66.0862999998244,
+            74.93120000026465,
+            77.0039000003635,
+            79.8624000003656,
+            85.0839999998243
+          ],
+          "output_bytes": 1575542,
+          "output_sha256": "ab6ab934e5c91d0569c6096338917b6e05b1b77448b40c643dcff6660933f1db"
+        },
+        {
+          "sample": "large",
+          "endpoint": "trace",
+          "sql_count": 2,
+          "json_decodes": 4,
+          "large_decodes": 2,
+          "decoded_bytes": 2097657,
+          "median_ms": 12.41489999983969,
+          "times_ms": [
+            13.581799999883515,
+            12.41489999983969,
+            10.997699999734323,
+            12.334000000009837,
+            12.43690000001152
+          ],
+          "output_bytes": 2,
+          "output_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "sample": "large",
+          "endpoint": "reviews",
+          "sql_count": 2,
+          "json_decodes": 4,
+          "large_decodes": 2,
+          "decoded_bytes": 2097657,
+          "median_ms": 13.122800000019197,
+          "times_ms": [
+            14.02619999998933,
+            12.364199999865377,
+            13.122800000019197,
+            11.370499999884487,
+            18.412099999750353
+          ],
+          "output_bytes": 2,
+          "output_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      ]
+    },
+    "after": {
+      "model_requests": 0,
+      "warmups": 1,
+      "repetitions": 5,
+      "database_bytes": 4255744,
+      "large_structure": "answer 524286 UTF8 bytes + evidence 524286 bytes, both result and snapshot; plus indexed objects",
+      "records": [
+        {
+          "sample": "normal",
+          "endpoint": "state",
+          "sql_count": 1,
+          "json_decodes": 1,
+          "large_decodes": 0,
+          "decoded_bytes": 66,
+          "median_ms": 0.1689000000624219,
+          "times_ms": [
+            0.2570999999988999,
+            0.16240000013567624,
+            0.15769999981785077,
+            0.1689000000624219,
+            0.17909999996845727
+          ],
+          "output_bytes": 437,
+          "output_sha256": "d29672d49f7cfb1947e5454da2fd9323cb16957798545c2e17006a6aaf98a6bc"
+        },
+        {
+          "sample": "normal",
+          "endpoint": "result",
+          "sql_count": 8,
+          "json_decodes": 7,
+          "large_decodes": 0,
+          "decoded_bytes": 13014,
+          "median_ms": 0.4942000000482949,
+          "times_ms": [
+            0.629900000149064,
+            0.5006999999750406,
+            0.48859999969863566,
+            0.4791000001205248,
+            0.4942000000482949
+          ],
+          "output_bytes": 8826,
+          "output_sha256": "e69c50edfb76883dfa86f3a15a867c8b5c7c2d154db854983f49cc6792918089"
+        },
+        {
+          "sample": "normal",
+          "endpoint": "trace",
+          "sql_count": 2,
+          "json_decodes": 0,
+          "large_decodes": 0,
+          "decoded_bytes": 0,
+          "median_ms": 0.024599999960628338,
+          "times_ms": [
+            0.035200000183976954,
+            0.02629999971759389,
+            0.024599999960628338,
+            0.02410000024610781,
+            0.02409999979136046
+          ],
+          "output_bytes": 2,
+          "output_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "sample": "normal",
+          "endpoint": "reviews",
+          "sql_count": 2,
+          "json_decodes": 0,
+          "large_decodes": 0,
+          "decoded_bytes": 0,
+          "median_ms": 0.02370000038354192,
+          "times_ms": [
+            0.027300000056129647,
+            0.023799999780749204,
+            0.023400000372930663,
+            0.023499999770137947,
+            0.02370000038354192
+          ],
+          "output_bytes": 2,
+          "output_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "sample": "large",
+          "endpoint": "state",
+          "sql_count": 1,
+          "json_decodes": 1,
+          "large_decodes": 0,
+          "decoded_bytes": 66,
+          "median_ms": 0.06359999997584964,
+          "times_ms": [
+            0.0804999999672873,
+            0.06919999987076153,
+            0.06359999997584964,
+            0.061299999742914224,
+            0.060400000165827805
+          ],
+          "output_bytes": 436,
+          "output_sha256": "52f9a3242d7842801f92189b82c565207f6f3acda984c4ba603712df4822f4ea"
+        },
+        {
+          "sample": "large",
+          "endpoint": "result",
+          "sql_count": 8,
+          "json_decodes": 7,
+          "large_decodes": 4,
+          "decoded_bytes": 3146447,
+          "median_ms": 21.067499999844586,
+          "times_ms": [
+            20.506899999872985,
+            22.819499999968684,
+            20.809099999951286,
+            21.067499999844586,
+            22.29380000017045
+          ],
+          "output_bytes": 1575542,
+          "output_sha256": "ab6ab934e5c91d0569c6096338917b6e05b1b77448b40c643dcff6660933f1db"
+        },
+        {
+          "sample": "large",
+          "endpoint": "trace",
+          "sql_count": 2,
+          "json_decodes": 0,
+          "large_decodes": 0,
+          "decoded_bytes": 0,
+          "median_ms": 0.02569999969637138,
+          "times_ms": [
+            0.2247999996143335,
+            0.03990000004705507,
+            0.02569999969637138,
+            0.024699999812582973,
+            0.024700000267330324
+          ],
+          "output_bytes": 2,
+          "output_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "sample": "large",
+          "endpoint": "reviews",
+          "sql_count": 2,
+          "json_decodes": 0,
+          "large_decodes": 0,
+          "decoded_bytes": 0,
+          "median_ms": 0.023799999780749204,
+          "times_ms": [
+            0.025800000003073364,
+            0.02369999992879457,
+            0.023499999770137947,
+            0.03409999999348656,
+            0.023799999780749204
+          ],
+          "output_bytes": 2,
+          "output_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      ]
+    },
+    "output_hashes_equal": true
+  },
+  "browser": {
+    "environment": "tools.ui_fixture / temporary synthetic Store / 8766 / NLI off",
+    "accepted": [
+      "A draft action/source/version/finding remains in A; B defaults empty; return restores A",
+      "saved feedback readback contains exact run/answer/version/finding and original source",
+      "B draft survives A save and return; final dc1db15 source rechecked",
+      "historical v1 copy success and offline-e1 run-scoped raw evidence lookup",
+      "synthetic submitted task visibly running then finished",
+      "desktop document client/scroll width both1265;390 viewport both375; no global overflow",
+      "learning10/14 current identity dc1db15 and read-path explanation"
+    ],
+    "fault_injection": "No browser interception capability advertised; auxiliary failures/delays, manual recovery, focus identity and stale401/write callbacks verified only by actual app.js controlled DOM/GET probe, not browser faults",
+    "console_errors": [],
+    "temporary_viewport_reset": true,
+    "task_services_stopped": true
+  },
+  "protected_files": {
+    "start-learning.cmd": {
+      "sha256": "82011cca2ba20f0c821dbd73e634979f578da66399934749a8c81de127fe50d4",
+      "unchanged": true
+    },
+    "start-powertrustai.cmd": {
+      "sha256": "aa63112c9ef41ee865e4033e680a560391caad9abde2e94d63da70bc422102b7",
+      "unchanged": true
+    },
+    "data/runtime_local/runs.sqlite3": {
+      "sha256": "53273988827f38ceecc98e0956eec875ed0c88bcc7c34a4950a4bef805612b3e",
+      "unchanged": true
+    },
+    "data/runtime_local/orchestration.json": {
+      "sha256": "5546973984813b01e08972ad94a37486a1430d508fcab3833f06bd7c2a069c06",
+      "unchanged": true
+    },
+    "data/runtime_local/daily-knowledge.json": {
+      "sha256": "f77330bfe08862c89a33e769cff57fb9347b8de41b8f398dae8818519249d03c",
+      "unchanged": true
+    }
+  },
+  "learning": {
+    "chapters": 20,
+    "folded_answers": 88,
+    "exact_source_snippets": 14,
+    "build_checks_passed": true,
+    "browser_pages": [
+      10,
+      14
+    ]
+  },
+  "private_evidence_directory": "data/maintenance_local/read-path-v2",
+  "ports_listening_at_closeout": []
+}

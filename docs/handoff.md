@@ -1,5 +1,11 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-27 反馈归属与读取容错v2已完成
+
+本轮已完成，不恢复下方历史“未执行”任务。真实app.js旧基线新增7组失败断言先复现，按run_id页面草稿/版本finding重核、旧写响应归属、辅助读取失败暂停且主状态继续、相同控件保留；最终19组通过。Store轻量存在性/state必要列优化有固定2样本前后测量，8份输出SHA相同；大样本result77.004→21.067ms，小样本state无提速保留。完整离线1340项/372.516秒，最终前端时序修正另专项通过。详见[短报告](maintenance/read-path-feedback-polish-v2.md)与[机器记录](maintenance/read-path-feedback-polish-v2-verification.json)。
+
+模型/费用0，无.env/真实模型/NLI/大索引；生产与历史、6534126基点及原未提交材料保持。8766合成浏览器反馈归属/版本原文/运行到完成/桌面390通过；辅助故障因无浏览器拦截只由真实JS探针验证。学习站10/14章、源码身份与14摘录同步，20章88题/构建检查通过，只抽查受影响页面。自启8766/8770已释放、8765停服。普通分支codex/read-path-feedback-polish-v2提交推送核对后停止，不新开能力实验。
+
 ## 2026-10-27 体验/UI/代码维护完成（不改实验成绩）
 
 按小问题→业务UI→有限清理依次落地，三个可回退提交：890273c（异步归属与只读错误提示）、3d277af（问答工作台/版本复制/证据直达/历史摘要及隔离入口）、4e41620（5死导入与未读分页状态）。[maintenance/product-polish-ui-code-hygiene-v1.md](maintenance/product-polish-ui-code-hygiene-v1.md)列前后合成截图、依赖分类与保留原因；[验证](maintenance/product-polish-ui-code-hygiene-v1-verification.json)记录1337全套399.514秒、专项及实际桌面/390窄屏。只读代理负责依赖审计，主执行单写UI。

@@ -1,9 +1,9 @@
 {
-  "application_commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
+  "application_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
   "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-  "documentation_parent_commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
-  "document_version": "learning-site-v6.3 business UI maintenance source sync,2026-10-27",
+  "documentation_parent_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
+  "document_version": "learning-site-v6.4 read-path and feedback maintenance,2026-10-27",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -32,6 +32,12 @@
       "project_model_cost": 0
     },
     "current_full_offline": {
+      "commit": "43cb051df16d5e4a4bde1f93dfe5288ae2d23403",
+      "tests": 1340,
+      "seconds": 372.516,
+      "scope": "single full offline run after shared Store changes; final frontend delayed-restore fix separately rechecked with 19 actual-client probes"
+    },
+    "pre_read_path_full_offline": {
       "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
       "tests": 1337,
       "seconds": 399.514,
@@ -252,6 +258,12 @@
     "bugfix": "890273c29c26e4c178a0fd8c45bfecc3218234a6",
     "ui": "3d277af4efb4f4e28d605e6ed24748daea8f89c5",
     "cleanup": "4e41620614fffbb8a71582a1053e873acaa9b688",
+    "project_model_requests": 0,
+    "production_switch": false
+  },
+  "read_path_maintenance": {
+    "base_commit": "4a5f728435b8771c7072b71edcdda6c22381892c",
+    "implementation_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
     "project_model_requests": 0,
     "production_switch": false
   }

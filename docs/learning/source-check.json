@@ -1,5 +1,5 @@
 {
-  "application_commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
+  "application_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
   "evaluation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "method": "AST exact qualified symbol, actual LF excerpt, partial spans explicit; all snippets verified against Markdown",
   "excerpts": [
@@ -43,8 +43,8 @@
       "end_line": 56,
       "function_end_line": 56,
       "partial": false,
-      "file_sha256": "c50f6b4041d3878af41e8da81051ce40cdafd23030c231c95886cc19bb0b4e74",
-      "source_text_lf_sha256": "29d339666297b0a1ea067bde60845a5f4af0885d4ddf3232b86736a48c929bab",
+      "file_sha256": "16bf7c988feea200bbe153c29af5d669e0a7485808382031630836d80c5d3ad4",
+      "source_text_lf_sha256": "1040b6658adbf42b165d321fed772b9b9d635d928e9a739a9e8524d8ba967b86",
       "excerpt_sha256": "dad37aa75bf1c5e6c3552cf4ebe57685a07f4328d5ff92f9b2452f058782739f"
     },
     {
@@ -54,8 +54,8 @@
       "end_line": 60,
       "function_end_line": 60,
       "partial": false,
-      "file_sha256": "c50f6b4041d3878af41e8da81051ce40cdafd23030c231c95886cc19bb0b4e74",
-      "source_text_lf_sha256": "29d339666297b0a1ea067bde60845a5f4af0885d4ddf3232b86736a48c929bab",
+      "file_sha256": "16bf7c988feea200bbe153c29af5d669e0a7485808382031630836d80c5d3ad4",
+      "source_text_lf_sha256": "1040b6658adbf42b165d321fed772b9b9d635d928e9a739a9e8524d8ba967b86",
       "excerpt_sha256": "e053039f0449359a72a0d0f7685aaaba2289e17e2832a5b51c22b11a54271334"
     },
     {

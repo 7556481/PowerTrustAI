@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-27 反馈归属与读取容错v2（已执行）
+
+- [短报告](maintenance/read-path-feedback-polish-v2.md)：修前失败断言、局部修复、同样本性能前后表、跳过项与浏览器范围。
+- [机器可读验证](maintenance/read-path-feedback-polish-v2-verification.json)：19组真实JS探针、1340全套、2条合成Store测量与8份输出SHA等价、生产保护及源码身份。
+- 学习站10/14章已同步，20章88题保持；项目模型0，辅助故障以探针验证，8766/8770验收后停服，完成即停止。
+
 ## 2026-10-27 业务UI与有限清理（已执行）
 
 - [维护说明与合成UI前后图](maintenance/product-polish-ui-code-hygiene-v1.md)：五项异步/错误提示复现修复、版本选择/对应正文复制、证据直达、历史摘要、有限依赖清理及必须保留的旧代码。
