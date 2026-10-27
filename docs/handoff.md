@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-28 最后一轮审核检索诊断完成，无安全候选
+
+基线9309ad3，独立codex/audit-retrieval-final-optimization-v1；诊断4724774。同五条中事实最慢/次慢及较快组，原请求3/3/2只读执行一次，正常70GB全字节封印197.682秒单列，性能区间81.549秒。三组34.764/39.326/7.364秒，FTS占99.55%/99.65%/98.73%；连接/schema各5–12ms，证书8/8、验证重排0、已有数字缓存命中1。历史记录与交付正文/身份/预算保持，生成缓存未恢复，不冒称完整历史回放或A/B提速。非FTS全消除也不足0.158秒，未找到本轮可达门槛的安全改动，实现候选0、配对执行0，不采用、不部署。模型/token/费用0，无.env/生产代码与配置/8765/master/README改动。专项102项24.311秒通过，首次合成零键及测试导入失败保留；仅诊断代码不重跑本地全套，不拿旧1389冒称新结果。学习站仅16及诊断源码身份同步，完成归档推送/最终CI后停止，无待执行付费批次。见[报告](maintenance/audit-retrieval-final-optimization-v1.md)和[验证](maintenance/audit-retrieval-final-optimization-v1-verification.json)。
+
 ## 2026-10-27 schema13有界并发候选完成（默认关闭）
 
 接续v7的6b87207，分支codex/schema13-bounded-concurrency-v1。独立事实先串行、原引用两项一波；原适配器双通道与领域一路，实际在途最多2/3。范围/消息/合同/覆盖/纠正与完整重审保留，纠正索引确定性、scoped归属，超时取消后等实际线程完成再释放。最近最多五条元数据只读定位，无问答正文/密钥/.env读取；本轮模型0，未触碰8765/生产配置/master。模拟理想1650→850ms，单次本地2.0618→1.2802秒，只证离线调度；现有引用潜在节省0–2.272秒，不宣称一分钟已解决。完整验证、失败及最多16次Flash待批准对照方案见[报告](maintenance/schema13-bounded-concurrency-v1.md)和[验证](maintenance/schema13-bounded-concurrency-v1-verification.json)。学习站14/16及源码身份必要同步；原研究/设计未提交材料保留，最终推送与对应SHA的CI核验后停止。

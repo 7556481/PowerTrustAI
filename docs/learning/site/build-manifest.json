@@ -3,8 +3,8 @@
     "application_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
     "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "documentation_parent_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
-    "document_version": "learning-site-v6.10 schema13 bounded concurrency candidate,2026-10-27",
+    "documentation_parent_commit": "47247745b5cdb4f185ac8de9a71efe3024b6b640",
+    "document_version": "learning-site-v6.11 final audit retrieval diagnosis,2026-10-28",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -344,6 +344,21 @@
         "seconds": 384.223,
         "status": "passed"
       }
+    },
+    "audit_retrieval_final_v1": {
+      "base_delivery_commit": "9309ad3c10e22a4d5d908662a4597cba1e3c73cd",
+      "diagnostic_implementation_commit": "47247745b5cdb4f185ac8de9a71efe3024b6b640",
+      "diagnostic_source_lf_sha256": "bae17410e0ca74ff4bdd4584cfd874c669d3121180debc36a84d3d7b73de2193",
+      "production_application_unchanged": true,
+      "model_calls": 0,
+      "diagnostic_groups": 3,
+      "diagnostic_queries": 8,
+      "candidates_implemented": 0,
+      "adopted": false,
+      "targeted_tests": 102,
+      "targeted_seconds": 24.311,
+      "full_local_rerun": false,
+      "report": "docs/maintenance/audit-retrieval-final-optimization-v1.md"
     }
   },
   "chapters": [
@@ -429,8 +444,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 8032,
-      "sha256": "c3015369972362a7002b0664b1c39b7a8df661173a6b2f419fa52fbe8edaf3ca"
+      "characters": 8612,
+      "sha256": "209d66667cbd016ccaf06729ae33afe71895f611fc2841a4f95683f08a25a7aa"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -458,6 +473,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 172703,
+  "markdown_characters": 173283,
   "network_dependencies": false
 }

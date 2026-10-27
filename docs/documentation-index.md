@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-28 审核检索最终诊断完成
+
+[报告](maintenance/audit-retrieval-final-optimization-v1.md)、[验证](maintenance/audit-retrieval-final-optimization-v1-verification.json)：固定3组8查询，分解/身份及预算保持，FTS主导、连接毫秒，无安全可达门槛候选，0配对/0模型；102专项通过。生产执行不改，源码身份与16章必要同步，完成推送/CI后停止。
+
 ## 2026-10-27 schema13有界并发候选
 
 [短报告与真实验证方案](maintenance/schema13-bounded-concurrency-v1.md)、[离线验证](maintenance/schema13-bounded-concurrency-v1-verification.json)：五条白名单元数据、独立依赖、双HTTP通道、索引确定性纠正、取消drain、完整发现/引用/正文/修订对照及模拟收益边界。默认关闭、0新增模型、未动8765/master；学习站14/16必要同步。
