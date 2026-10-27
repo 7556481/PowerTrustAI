@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-27 后端生命周期一致性v4（已执行）
+
+- [维护报告](maintenance/backend-lifecycle-consistency-v4.md)：修前/修后、故障处置、原结果保护、两执行路径无实质回答表、停止边界。
+- [机器验证](maintenance/backend-lifecycle-consistency-v4-verification.json)：最终全套1360、首次失败与修正、32影响范围专项、真实API/浏览器及0模型隔离证据。
+- 学习站10/14/18与源码身份同步；无生产库读取/改写、无自动worker重启或重放，完成后停止。
+
 ## 2026-10-27 慢辅助隔离与页面性能v3（已执行）
 
 - [维护短报告](maintenance/slow-auxiliary-page-performance-v3.md)：修前挂起/回读重叠、有限slot生命周期、固定非空样本各层性能、渲染去重及未改善项。

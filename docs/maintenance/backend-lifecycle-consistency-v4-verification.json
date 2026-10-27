@@ -1,0 +1,258 @@
+{
+  "base_commit": "e5360c3fb0d839533817a372d0a174adf4140cde",
+  "source_commits": [
+    "902cf65a350383f9d524a7a34ea5728173b93701 Treat partial construction cleanup faults as service lifecycle failures",
+    "2a4c3ea949fb9afe6f5acc62f094d4d9be7d7a70 Project no-answer stage completion without claiming substantive audit",
+    "d6739a812b0b9cef3561efd019b96e58fc58c057 Fail closed on worker lifecycle faults and finalize queued work safely"
+  ],
+  "project_model_requests": 0,
+  "tokens": 0,
+  "fees": 0,
+  "production_switch": false,
+  "production_database_opened_or_hashed": false,
+  "production_history_protection": "Isolation: explicit temporary RunStore only; production DB not queried, hashed, copied or rewritten",
+  "protected_config_and_launchers": {
+    "start-learning.cmd": {
+      "sha256": "82011cca2ba20f0c821dbd73e634979f578da66399934749a8c81de127fe50d4",
+      "unchanged": true
+    },
+    "start-powertrustai.cmd": {
+      "sha256": "aa63112c9ef41ee865e4033e680a560391caad9abde2e94d63da70bc422102b7",
+      "unchanged": true
+    },
+    "data/runtime_local/orchestration.json": {
+      "sha256": "5546973984813b01e08972ad94a37486a1430d508fcab3833f06bd7c2a069c06",
+      "unchanged": true
+    },
+    "data/runtime_local/daily-knowledge.json": {
+      "sha256": "f77330bfe08862c89a33e769cff57fb9347b8de41b8f398dae8818519249d03c",
+      "unchanged": true
+    }
+  },
+  "baseline": {
+    "tests": 2,
+    "failures": 2,
+    "seconds": 0.651,
+    "close_fault": {
+      "worker_done": true,
+      "active_stale": true,
+      "queued": 1,
+      "storage_fault": false,
+      "new_submission_rejected": false
+    },
+    "no_answer": {
+      "status": "finished",
+      "complete": false,
+      "decision": "needs_information",
+      "decision_integrity": "complete",
+      "rounds": 0
+    }
+  },
+  "followup_baseline": {
+    "case": "partial construction resource cleanup error treated as ordinary task failure",
+    "test_failed": true
+  },
+  "lifecycle_verification": {
+    "affected_tests": 32,
+    "seconds": 10.618,
+    "passed": true,
+    "cases": [
+      "close RuntimeError preserves saved raw result, versions/findings and retires waiting",
+      "drain RuntimeError defers resource close; safe explicit stop retry; no force-close",
+      "all resources attempted after one close failure; controlled original exception types",
+      "retrieval-timing StorageError stays a storage fault and does not replace saved result",
+      "unwritable queued termination reports unconfirmed pending interruption, explicit new Store/start recovers without replay",
+      "unexpected worker return/error/cancellation closes admission and retires waiting",
+      "ordinary component failure does not disable next task",
+      "same-task timing context exit and exactly once timing record/queue join",
+      "admission checks before preparation and after awaited preparation",
+      "normal active/queued cancellation and shutdown, repeated stop, startup failure cleanup",
+      "isolated actual ASGI degraded health/503, result readback, feedback binding",
+      "partial construction cleanup fault differs from ordinary component failure"
+    ]
+  },
+  "no_answer_projection": [
+    {
+      "path": "sequential",
+      "case": "no_answer",
+      "status": "finished",
+      "no_answer": true,
+      "complete": true,
+      "checked": false,
+      "decision": "needs_information",
+      "audit_status": "not_applicable"
+    },
+    {
+      "path": "sequential",
+      "case": "generation_failure",
+      "status": "failed",
+      "no_answer": false,
+      "complete": false,
+      "checked": false,
+      "decision": "execution_incomplete",
+      "audit_status": "not_completed"
+    },
+    {
+      "path": "sequential",
+      "case": "after_generation_cancel",
+      "status": "interrupted",
+      "no_answer": true,
+      "complete": false,
+      "checked": false,
+      "decision": "needs_information",
+      "audit_status": "not_completed"
+    },
+    {
+      "path": "sequential",
+      "case": "snapshot_only",
+      "status": "interrupted",
+      "no_answer": true,
+      "complete": false,
+      "checked": false,
+      "decision": "needs_information",
+      "audit_status": "not_completed"
+    },
+    {
+      "path": "sequential",
+      "case": "ordinary_complete",
+      "status": "finished",
+      "no_answer": false,
+      "complete": true,
+      "checked": true,
+      "decision": "pass",
+      "audit_status": "completed"
+    },
+    {
+      "path": "sequential",
+      "case": "partial_audit_failure",
+      "status": "finished",
+      "no_answer": false,
+      "complete": false,
+      "checked": false,
+      "decision": "review_required",
+      "audit_status": "not_completed"
+    },
+    {
+      "path": "langgraph_v1",
+      "case": "no_answer",
+      "status": "finished",
+      "no_answer": true,
+      "complete": true,
+      "checked": false,
+      "decision": "needs_information",
+      "audit_status": "not_applicable"
+    },
+    {
+      "path": "langgraph_v1",
+      "case": "generation_failure",
+      "status": "failed",
+      "no_answer": false,
+      "complete": false,
+      "checked": false,
+      "decision": "execution_incomplete",
+      "audit_status": "not_completed"
+    },
+    {
+      "path": "langgraph_v1",
+      "case": "after_generation_cancel",
+      "status": "interrupted",
+      "no_answer": true,
+      "complete": false,
+      "checked": false,
+      "decision": "needs_information",
+      "audit_status": "not_completed"
+    },
+    {
+      "path": "langgraph_v1",
+      "case": "snapshot_only",
+      "status": "interrupted",
+      "no_answer": true,
+      "complete": false,
+      "checked": false,
+      "decision": "needs_information",
+      "audit_status": "not_completed"
+    },
+    {
+      "path": "langgraph_v1",
+      "case": "ordinary_complete",
+      "status": "finished",
+      "no_answer": false,
+      "complete": true,
+      "checked": true,
+      "decision": "pass",
+      "audit_status": "completed"
+    },
+    {
+      "path": "langgraph_v1",
+      "case": "partial_audit_failure",
+      "status": "finished",
+      "no_answer": false,
+      "complete": false,
+      "checked": false,
+      "decision": "review_required",
+      "audit_status": "not_completed"
+    }
+  ],
+  "full_offline": {
+    "first": {
+      "source": "2a4c3ea949fb9afe6f5acc62f094d4d9be7d7a70",
+      "tests": 1359,
+      "seconds": 390.789,
+      "failures": 1,
+      "failure": "test_ui_render used required_stages_complete=false for a normal no-answer fixture; corrected to true and retained explicit false counterexample"
+    },
+    "final": {
+      "source": "902cf65a350383f9d524a7a34ea5728173b93701",
+      "tests": 1360,
+      "seconds": 363.08,
+      "passed": true
+    },
+    "final_rerun_reason": "First full failed legacy fixture and final shared backend construction-cleanup branch was added; final suite validates stable final source, not repeated for count"
+  },
+  "frontend": {
+    "async_groups": 20,
+    "slow_groups": 12,
+    "post_security_passed": true,
+    "corrected_legacy_render_passed": true
+  },
+  "browser": {
+    "source_at_launch": "2a4c3ea949fb9afe6f5acc62f094d4d9be7d7a70",
+    "environment": "tools.ui_lifecycle_fixture_v4, loopback8766, temp Store and existing fake graph, NLI off",
+    "accepted": [
+      "normal no-answer shows needs-information/not-applicable, not approved",
+      "historical v1/v2, copied v1 and offline-e1 original lookup",
+      "feedback appended with correct version",
+      "next synthetic run saved result then injected close error",
+      "next UI submit refused: degraded and service not accepting work",
+      "no-answer historical result still readable after service fault"
+    ],
+    "screenshots": [
+      "data/maintenance_local/backend-lifecycle-v4/no-answer-browser.png",
+      "data/maintenance_local/backend-lifecycle-v4/fault-browser.png"
+    ],
+    "console_js_errors": [],
+    "scope_limit": "close fault actually seen in browser; drain/storage/construction fault and queued cases verified by API/async tests, not claimed visually; final construction-boundary change has no UI change"
+  },
+  "learning": {
+    "chapters": 20,
+    "folds": 88,
+    "exact_ast_snippets": 14,
+    "affected_pages": [
+      10,
+      14,
+      18
+    ],
+    "build_checks_passed": true,
+    "browser_checked_pages": [
+      10,
+      14,
+      18
+    ]
+  },
+  "limits": [
+    "Drain can still wait for real underlying work without deadline; no unsafe force-close/remote cancellation claim",
+    "Unconfirmed storage writes remain unconfirmed; recovery requires an explicit later normal start, never automatic replay",
+    "Synthetic fault injection proves error handling only, not evidence of a production incident or model accuracy"
+  ],
+  "ports_at_closeout": []
+}

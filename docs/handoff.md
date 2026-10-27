@@ -1,5 +1,13 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-27 后端生命周期与无实质回答一致性v4完成
+
+基于e5360c3，独立codex/backend-lifecycle-consistency-v4。旧2项先复现：资源close后worker退出仍接单/active残留；合法资料不足完整性投影被覆盖。现按独立生命周期故障拒单、health degraded、等待项可写时interrupted，存储失败明确未确认；计时退出/落库/active/queue记账互不跳过。已存raw答案/原审核/版本/发现不重写；drain未确认不强关。装配清理边界另复现后修正，未自动重启或重放。
+
+无实质回答经sequential/langgraph各6场景与API验证：合法finished为适用阶段完整、实质审核not_applicable/checked=false、仍needs_information；失败/取消快照不完整，原处置保留。最终全套1360项/363.080秒通过；首次1359仅旧UI夹具语义失败已修正，原日志保留，最终相关32项与20/12 JS保障通过。见[短报告](maintenance/backend-lifecycle-consistency-v4.md)和[验证](maintenance/backend-lifecycle-consistency-v4-verification.json)。
+
+模型/token/费用0，无.env/真实模型/NLI/大索引，不读写或哈希生产运行库，配置/历史/6534126保持。8766实际浏览器资料不足、故障拒单后历史可读、普通版本/原文/反馈通过；其他故障按API/异步验证。学习站10/14/18及14摘录同步，20章88题，受影响页面抽查。自启8766/8770释放、8765停服；原未提交研究/设计/任务书保持，推送核对后停止。
+
 ## 2026-10-27 慢辅助隔离与完整页面测量v3完成
 
 基于3494be9，独立codex/slow-auxiliary-page-performance-v3。修前4组失败先证，主state/result不再await辅助；单一调度、主1在途＋辅助每端点1在途，旧epoch/revision丢弃及失效GET取消。终态详情收敛，NLI最多10次终态检查；reviews反馈回读复用slot。最终12慢辅助/渲染＋旧19探针及POST保障通过。固定非空样本14服务/HTTP输出SHA相同，大样本相同轨迹重建约6ms，只做展示去重；首次/展开无稳定收益，跳过延迟JSON。

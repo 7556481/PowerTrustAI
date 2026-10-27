@@ -1,5 +1,12 @@
 # 18 环境、启动、Git、迁移与排障
 
+## 2026-10-27工作循环故障的运维边界
+
+health.service_lifecycle区分worker_running、accepting_work、fault_code及受控异常类别；不含原始异常消息/堆栈。配置齐全、SQLite可读不再等于ready。资源清理失败后停止接单并明确处置等待项，不自动重启worker或重放付费任务。正常运行取消/服务关闭与worker非预期退出分开；启动失败释放已取得的资源，重复stop不重复正常关闭。
+
+drain表示底层工作仍可能活跃，抛错时保留未确认资源，不强关；关闭时可再次尝试安全drain。若一直未结束，仍可能等待，没有强制终止/远端取消保证；本轮没有引入超时硬杀。只读历史结果、版本、证据及追加意见继续可用。故障浏览器入口为显式隔离CLI tools.ui_lifecycle_fixture_v4，普通入口仍tools.ui_fixture；两者都是8766，不是生产8765，正式API无故障注入开关。
+
+
 ## 2026-10-27工程维护补记
 
 零付费业务UI验收可使用 `.venv\Scripts\python.exe -m tools.ui_fixture --port 8766`，先看根页未连接状态，再访问/fixture/connect进入本机一次性会话。该入口只装配synthetic_fixture，临时库/令牌由进程管理，NLI关闭，不读.env或70GB；Ctrl+C释放。不要直接运行默认指向生产Store的旧ui_demo_scenarios。日常start-powertrustai.cmd和独立8770学习站用途不变。

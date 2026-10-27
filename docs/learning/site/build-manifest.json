@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "6c9354d7250091ff9cb093760c7e4f2cc1e349f7",
+    "application_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
     "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "documentation_parent_commit": "6c9354d7250091ff9cb093760c7e4f2cc1e349f7",
-    "document_version": "learning-site-v6.5 bounded auxiliary reads and measured page rendering,2026-10-27",
+    "documentation_parent_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
+    "document_version": "learning-site-v6.6 backend lifecycle and applicable-stage completion,2026-10-27",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -33,16 +33,22 @@
         "project_model_cost": 0
       },
       "current_full_offline": {
-        "commit": "43cb051df16d5e4a4bde1f93dfe5288ae2d23403",
-        "tests": 1340,
-        "seconds": 372.516,
-        "scope": "single full offline run after shared Store changes; final frontend delayed-restore fix separately rechecked with 19 actual-client probes"
+        "commit": "902cf65a350383f9d524a7a34ea5728173b93701",
+        "tests": 1360,
+        "seconds": 363.08,
+        "scope": "final full offline run after prior full attempt had one corrected legacy UI fixture failure and final construction-cleanup boundary fix; no paid calls"
       },
       "pre_read_path_full_offline": {
         "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
         "tests": 1337,
         "seconds": 399.514,
         "scope": "full unittest once after stable UI/shared summary/dead-import changes; offline, no model requests"
+      },
+      "pre_backend_lifecycle_full_offline": {
+        "commit": "43cb051df16d5e4a4bde1f93dfe5288ae2d23403",
+        "tests": 1340,
+        "seconds": 372.516,
+        "scope": "single full offline run after shared Store changes; final frontend delayed-restore fix separately rechecked with 19 actual-client probes"
       }
     },
     "experiment_batches": [
@@ -278,6 +284,12 @@
         "seconds": 372.516,
         "delivery_commit": "3494be9e6724a52a093a52493867f61b132e22d7"
       }
+    },
+    "backend_lifecycle_maintenance": {
+      "implementation_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
+      "project_model_requests": 0,
+      "production_switch": false,
+      "automatic_worker_restart": false
     }
   },
   "chapters": [
@@ -333,8 +345,8 @@
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 6062,
-      "sha256": "ea224515a708c2c01bd67c3f78b7a657d67c4df418b49d192b2f3180cd80a357"
+      "characters": 6732,
+      "sha256": "254cc598599d267edbfb31c180891b3b0f104ea50348e9e94e8a452610411831"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
@@ -353,8 +365,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 23056,
-      "sha256": "8415ce5a9e79d0bac5f748469df575aa0a52283b73803e56433dfdc2fee1e19b"
+      "characters": 23201,
+      "sha256": "ec1705eb689bb177a29526616eacb56305114099ba76cf933404b1af2fcc91b2"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -373,8 +385,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 7518,
-      "sha256": "4991258b911cf0fa116831c4e756f1af01029d7a8a2ba052a0de0b10e1e66601"
+      "characters": 7957,
+      "sha256": "2722e53baa60f902dbf94ceedcc53f10095b49d29328a4561c7f341bc6a7ba16"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -392,6 +404,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 164502,
+  "markdown_characters": 165756,
   "network_dependencies": false
 }

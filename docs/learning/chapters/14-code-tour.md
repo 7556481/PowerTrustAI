@@ -4,7 +4,7 @@
 
 历史评测应用基线1a92d03、入口babdfe1保持冻结；2026-10-27工程维护源码身份见source-version，未改历史合同/政策。先读evaluation/natural_draft_audit_v1.py的recover与batch：前者恢复实际8稿及快照，后者接入原Factory/Harness并统一预发送扣额。参考只进离线分析，不进模型。再读rag/chinese_first.py，区分目录范围、语言触发与实际Evidence。候选默认关闭，生产schema13、受管langgraph_v1，源码fallback sequential，8765停服。
 
-本次可从backend/static/app.js的reviewDrafts/load/requestAuxiliary看草稿归属、主周期与辅助slot独立、revision和终态收敛，从backend/store.py的require_run/state_row看测量支持的轻量读取（get完整恢复仍保留）；list_runs保留兼容的120字问题摘要；tools/ui_fixture.py仅用于隔离合成8766，不是生产入口。五个死导入的清理不改变摘录函数体。
+后端本轮先读backend/service.py的_worker/_run_one/lifecycle_status及result，区分资源故障、排队终态和无实质回答适用阶段；backend/assembly.py的close_resources会尝试全部资源，不强行越过未确认drain。前端可从backend/static/app.js的reviewDrafts/load/requestAuxiliary看草稿归属、主周期与辅助slot独立、revision和终态收敛，从backend/store.py的require_run/state_row看测量支持的轻量读取（get完整恢复仍保留）；list_runs保留兼容的120字问题摘要；tools/ui_fixture.py仅用于隔离合成8766，不是生产入口。五个死导入的清理不改变摘录函数体。
 
 以下仅摘函数开头最多18行，明确不是完整函数；所有记录按AST限定符定位，保留完整函数终点、实际文件LF身份与片段哈希。长函数的后续分支必须继续读源码，不以开头代替证明。旧摘录已重新从实际文件取文，历史运行身份仍见原提交。
 
@@ -172,7 +172,7 @@ def source_identity(row,revision,shard,row_number):
 
 ### 复用装配与固定Evidence入口
 
-路径 backend/assembly.py，函数 ComponentFactory.create，行239–256；完整函数至309行，局部摘录。
+路径 backend/assembly.py，函数 ComponentFactory.create，行253–270；完整函数至323行，局部摘录。
 
 ```python
     def create(self,rid,observer,*,fixed_evidence_only=False):

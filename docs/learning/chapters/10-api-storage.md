@@ -1,5 +1,12 @@
 # 10 API、UI、队列、SQLite与本机会话
 
+## 2026-10-27后端生命周期与无实质回答
+
+服务ready必须同时满足配置、可读存储与存活且可接单的worker。资源drain/close故障触发独立生命周期故障，health degraded、新POST 503；队列等待任务在可写时落interrupted/SERVICE_LIFECYCLE_FAILED，不自动执行或重放。存储写失败则persistence_confirmed=false及pending_terminal_status=interrupted，不能把内存处置称落库成功。当前已保存答案/report/版本/发现不因收尾故障改写；普通组件单任务失败且资源清理正常，下一任务仍可执行。计时退出、资源尝试、queue.task_done与active清理各自收尾。
+
+合法无实质回答只有正常finished、最终结果已存、实际Harness needs_information及NO_SUBSTANTIVE_ANSWER完整处置且生成无错误时，required_stages_complete=true；all_required_checks_assessed=false，substantive_audit_status=not_applicable，仍待补充，不是pass。生成失败、生成后中断和只有快照时仍不完整；冻结快照中的旧处置不重写。普通完整双审与部分审核失败沿原义。两个执行路径sequential/langgraph_v1均有Service/Harness/Store/API反例验证。
+
+
 ## 2026-10-27慢辅助读取隔离
 
 v2失败暂停不能解决“尚未失败的慢请求”。v3仍单一主state/result周期和唯一1800ms调度，但NLI/trace/reviews独立slot，各最多1在途，手动刷新最多排1次；旧epoch/revision结果丢弃，切换/离页取消GET。终态轨迹/反馈最后收敛，NLI pending最多10次终态检查后提示手动恢复。反馈保存推进reviews revision，复用slot回读，不与旧列表争写。POST不重试、草稿归属不变；同内容轨迹/反馈只跳过DOM重建，不缓存响应。

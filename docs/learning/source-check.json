@@ -1,5 +1,5 @@
 {
-  "application_commit": "6c9354d7250091ff9cb093760c7e4f2cc1e349f7",
+  "application_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
   "evaluation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "method": "AST exact qualified symbol, actual LF excerpt, partial spans explicit; all snippets verified against Markdown",
   "excerpts": [
@@ -61,12 +61,12 @@
     {
       "file": "backend/assembly.py",
       "symbol": "ComponentFactory.create",
-      "start_line": 239,
-      "end_line": 256,
-      "function_end_line": 309,
+      "start_line": 253,
+      "end_line": 270,
+      "function_end_line": 323,
       "partial": true,
-      "file_sha256": "99ad8e7691478aa03842487717af2b282c1f2c0286a3830976a1e91fb01385cf",
-      "source_text_lf_sha256": "f66176aed08de1826eb7630ffefdcd2ea9a4cca3b8600ed3eadb2d6c5785866f",
+      "file_sha256": "150ac78655223711f7f05036ef9adf1d11573b2b1aa0a672abda639442b33e93",
+      "source_text_lf_sha256": "f5675961d3546195e5fe67d5a07b6cfec24ad1388f93f8b2d7159f2ee47c73f6",
       "excerpt_sha256": "90c30e41b968135fa24d44bf40d33f767e4ac80d3a4bd4f0848188937aac21bb"
     },
     {
