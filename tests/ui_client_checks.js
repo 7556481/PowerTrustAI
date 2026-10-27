@@ -11,6 +11,7 @@ class Element {
  append(...items){this.children.push(...items);if(this.tag==='select'&&!this.value)this.value=this.children[0]?.value||'';}
  replaceChildren(...items){this.children=items;this._text='';if(this.tag==='select')this.value='';}
  addEventListener(name,fn){this.listeners[name]=fn;}
+ scrollIntoView(){}
  fire(name){return this.listeners[name]?.({preventDefault(){}});}
 }
 const html=fs.readFileSync('backend/static/index.html','utf8');

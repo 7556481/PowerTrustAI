@@ -31,7 +31,8 @@ class UITests(unittest.TestCase):
         self.assertEqual(len(first['items']),20);self.assertEqual(len(second['items']),1)
         self.assertEqual(first['next_offset'],20);self.assertIsNone(second['next_offset'])
         self.assertFalse({r['run_id'] for r in first['items']}&{r['run_id'] for r in second['items']})
-        self.assertEqual(set(first['items'][0]),{'run_id','status','created_utc','mode','profile'})
+        self.assertEqual(set(first['items'][0]),{'run_id','status','created_utc','mode','profile','question_summary'})
+        self.assertLessEqual(len(first['items'][0]['question_summary']),120)
         self.assertEqual(self.client.get('/runs/page/-1',headers=self.headers).status_code,422)
 
     def test_feedback_targets_preserve_historical_version_bindings(self):

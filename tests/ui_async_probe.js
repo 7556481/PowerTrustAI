@@ -18,9 +18,10 @@ const fallback=p=>p==='/health'?response({profile:'synthetic_fixture',status:'re
 async function client(handler){
  const ids=[...fs.readFileSync('backend/static/index.html','utf8').matchAll(/<([a-z]+)[^>]*\bid="([^"]+)"/g)];
  const elements=Object.fromEntries(ids.map(([,tag,id])=>[id,new Element(tag)]));
- const context={document:{getElementById:id=>elements[id],createElement:tag=>new Element(tag)},window:{addEventListener(){}},URL,AbortController,setTimeout,clearTimeout,console,fetch:handler};
- const source=fs.readFileSync('backend/static/app.js','utf8').replace(/restoreConnection\(\)\.catch\(e=>tell\(errorText\(e\),true\)\);/,"window.testClient={selectRun,forgetConnection,history,connect,api,errorText,state:()=>({reading,selected,connected})};");
- vm.runInNewContext(source,context);await context.window.testClient.connect('synthetic_fixture_not_a_secret');return {ui:elements,api:context.window.testClient};
+ const copied=[];
+ const context={document:{getElementById:id=>elements[id],createElement:tag=>new Element(tag)},navigator:{clipboard:{writeText:async t=>copied.push(t)}},window:{addEventListener(){}},URL,AbortController,setTimeout,clearTimeout,console,fetch:handler};
+ const source=fs.readFileSync('backend/static/app.js','utf8').replace(/restoreConnection\(\)\.catch\(e=>tell\(errorText\(e\),true\)\);/,"window.testClient={selectRun,forgetConnection,history,connect,api,errorText,renderAnswers,state:()=>({reading,selected,connected})};");
+ vm.runInNewContext(source,context);await context.window.testClient.connect('synthetic_fixture_not_a_secret');return {ui:elements,api:context.window.testClient,copied};
 }
 const tests=[];const test=(name,fn)=>tests.push([name,fn]);
 test('disconnect rejects delayed NLI',async()=>{
@@ -51,5 +52,16 @@ test('old unauthorized read cannot revoke reconnected session',async()=>{
 });
 test('GET failure does not imply task acceptance or resubmission',async()=>{
  const h=await client(async p=>fallback(p));assert(!/任务可能已被服务接收/.test(h.api.errorText(Error('offline'))));
+});
+test('version selection copies only selected plain text and scopes citations',async()=>{
+ const h=await client(async p=>fallback(p));
+ const v1={answer_id:'versioned',version:1,text:'<script>original only</script>',citations:[{evidence_ids:['old-source']}]};
+ const v2={answer_id:'versioned',version:2,text:'current only',citations:[{evidence_ids:['current-source']}]};
+ h.api.renderAnswers({execution:{status:'finished',required_stages_complete:true},answer:{original:v1,final:v2,versions:[v1,v2]},decision:{kind:'pass'},evidence:[]});
+ const all=e=>[e,...e.children.flatMap(all)];
+ let nodes=all(h.ui.answers);await nodes.find(x=>x.tag==='button'&&x.textContent==='复制所选正文').listeners.click();assert.equal(h.copied[0],'current only');
+ const picker=nodes.find(x=>x.tag==='select');picker.value='1';picker.listeners.change();nodes=all(h.ui.answers);
+ assert(nodes.some(x=>x.tag==='pre'&&x.textContent===v1.text));assert(nodes.some(x=>x.tag==='button'&&x.textContent==='查看引用 old-source'));assert(!nodes.some(x=>x.tag==='button'&&x.textContent==='查看引用 current-source'));
+ await nodes.find(x=>x.tag==='button'&&x.textContent==='复制所选正文').listeners.click();assert.deepEqual(h.copied,['current only',v1.text]);
 });
 (async()=>{let failed=0;for(const [name,fn] of tests){try{await fn();console.log('PASS '+name);}catch(e){failed++;console.error('FAIL '+name+': '+e.message);}}if(failed)process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=1;});

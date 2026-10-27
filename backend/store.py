@@ -125,7 +125,8 @@ class RunStore:
         rows=self.db.execute('SELECT id,status,created,request,config FROM runs ORDER BY created DESC,id DESC LIMIT ? OFFSET ?',
                              (limit+1,offset)).fetchall()
         items=[{'run_id':r['id'],'status':r['status'],'created_utc':r['created'],
-                'mode':json.loads(r['request'])['mode'],'profile':json.loads(r['config'])['profile']} for r in rows[:limit]]
+                'mode':json.loads(r['request'])['mode'],'profile':json.loads(r['config'])['profile'],
+                'question_summary':' '.join(json.loads(r['request']).get('question','').split())[:120]} for r in rows[:limit]]
         return {'items':items,'offset':offset,'next_offset':offset+limit if len(rows)>limit else None}
 
     @read_boundary
