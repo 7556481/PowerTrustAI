@@ -50,6 +50,8 @@ README从历史日志重写为产品流程、实际Mermaid、公开零调用启�
 
 最终完整离线1363项/384.149秒全部通过，日志user-ui-v6-full-verified.log。最终影响范围18项/5.185秒通过，学习站20章88题/14原摘录身份和本地链接通过。默认发布为CI修复904e187及首页67857adcc5079（完整SHA以Git为准），新版业务未合并。默认/工作分支提交CI及远端ref/blob核对记录随最终收尾落在忽略目录；最终SHA的远端CI必须据Actions实际结果报告，不能拿本地通过代替。为避免报告自指产生无限新提交，最后提交自己的CI结果在远端Actions与收尾remote-check.json记录，最终答复分别列工作分支、默认首页、最终SHA检查状态。
 
+首次远端发布复核：[工作分支6a546a4](https://github.com/7556481/PowerTrustAI/actions/runs/40493104817)全部步骤通过；[默认首页67857ad](https://github.com/7556481/PowerTrustAI/actions/runs/40493130694)公开回归1324项/60.789秒通过（70明确跳过），Fake演示通过，学习站失败Stale source reference: backend/assembly.py。继续核对发现assembly/execution共7处身份及位置过期，不能只改哈希放行；9767975fdca8d814556cc056d58540a6e03ca73c按实际AST重摘、将新片段核对入Markdown、更新身份及构建，未修改业务代码或校验标准。默认原20章79题保持其既有版本，工作分支20章88题保持，不把两树混称。最终检查以9767975及本报告收尾提交的实际Actions为准。
+
 ## 验证与停止边界
 
 真实主DOM探针不补造缺失节点，验证conceptual payload、初稿/终态/无实质回答/取消、复制引用、按需历史、诊断链接、拒单和未知POST锁。旧20异步、26服务状态、12慢辅助、POST/纯文本安全与会话保障继续执行；反馈探针明确使用真实诊断HTML及输入模块。新静态入口仍受CSP、query拒绝和API鉴权测试约束。测试通过不代表语义正确或工程安全。
