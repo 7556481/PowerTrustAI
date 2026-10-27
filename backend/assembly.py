@@ -11,14 +11,29 @@ from harness.contracts import RetrievalSettings
 class ConfigurationError(RuntimeError):
     code='CONFIGURATION_UNAVAILABLE'
 
+class ResourceCleanupError(RuntimeError):
+    def __init__(self,failures):
+        super().__init__('Resource cleanup failed')
+        self.failures=tuple(failures) # Controlled categories only, no exception messages.
+
+def close_resources(resources):
+    failures=[];cancelled=None
+    for resource in resources:
+        try:resource.close()
+        except asyncio.CancelledError as exc:cancelled=exc
+        except Exception as exc:failures.append(type(exc).__name__)
+    if cancelled is not None:raise cancelled
+    if failures:raise ResourceCleanupError(failures)
+
 class Bundle:
-    def __init__(self,harness,resources=()):self.harness=harness;self.resources=resources
+    def __init__(self,harness,resources=()):self.harness=harness;self.resources=resources;self._close_attempted=False
     async def drain(self):
         # Await completion, not termination. Cancelled shielded workers may still be active.
         while any(getattr(r,'_active',None) is not None and not r._active.done() for r in self.resources):
             await asyncio.sleep(.05)
     def close(self):
-        for resource in self.resources:resource.close()
+        if self._close_attempted:return
+        self._close_attempted=True;close_resources(self.resources)
 
 class ComponentFactory:
     def __init__(self,config):self.config=config;self.semantic_resource=None;self.retrieval_metrics=None
@@ -49,9 +64,8 @@ class ComponentFactory:
             await Bundle(None,(resource,)).drain()
             self.retrieval_metrics={'query_encodings':resource.query_encodings,
                 'validation_replays':resource.validation_replays,'encoding_seconds':resource.encoder.encoding_seconds}
-            resource.close()
-            if hasattr(resource.encoder,'close'):resource.encoder.close()
-            self.semantic_resource=None
+            try:close_resources((resource,resource.encoder) if hasattr(resource.encoder,'close') else (resource,))
+            finally:self.semantic_resource=None
     def preflight(self):
         if self.config.execution_path=='langgraph_v1' or self.config.fact_internal_flow!='production' or self.config.domain_internal_flow!='production':
             try:
@@ -305,7 +319,8 @@ class ComponentFactory:
             harness.subject_supplement=not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
             return Bundle(harness,resources)
         except Exception:
-            for resource in resources:resource.close()
+            try:close_resources(resources)
+            except Exception:pass # Preserve the construction failure, after trying every resource.
             raise ConfigurationError('Required component could not be constructed') from None
 
     def product_policy(self):

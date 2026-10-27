@@ -16,25 +16,102 @@ class ApplicationService:
         self.config=config;self.store=store;self.factory=factory or ComponentFactory(config)
         self.queue=asyncio.Queue(config.queue_capacity);self.lock=asyncio.Lock()
         self.worker=None;self.active=None;self.active_bundle=None;self.closing=False;self.storage_fault=False
+        self.started=False;self.lifecycle_fault=None;self.lifecycle_diagnostics=[];self.pending_interruptions={}
+        self.undrained_bundles=[];self._stop_complete=False
         self.volatile_errors={}
         self.nli=None;self.nli_tasks=set();self.nli_errors={};self.nli_start_lock=asyncio.Lock()
     async def start(self):
-        if hasattr(self.factory,'initialize_retrieval'):self.factory.initialize_retrieval()
-        self.store.recover();self.worker=asyncio.create_task(self._worker())
-        if self.config.nli_enabled:
-            from services.local_nli import LocalNLI
-            self.nli=LocalNLI(self.config);await self.nli.start()
+        if self.worker is not None or self.closing:raise ServiceUnavailable('Service cannot restart automatically')
+        try:
+            if hasattr(self.factory,'initialize_retrieval'):self.factory.initialize_retrieval()
+            self.store.recover()
+            if self.config.nli_enabled:
+                from services.local_nli import LocalNLI
+                self.nli=LocalNLI(self.config);await self.nli.start()
+            self.worker=asyncio.create_task(self._worker());self.worker.add_done_callback(self._worker_done)
+            self.started=True
+        except BaseException as exc:
+            if isinstance(exc,StorageError):self.storage_fault=True
+            self._lifecycle_failure('SERVICE_START_FAILED',exc)
+            await self.stop();raise
+
+    def _lifecycle_failure(self,code,exc):
+        if self.lifecycle_fault is None:self.lifecycle_fault=code
+        if len(self.lifecycle_diagnostics)<12:
+            self.lifecycle_diagnostics.append({'code':code,'exception_type':type(exc).__name__[:80]})
+
+    def lifecycle_status(self):
+        running=self.worker is not None and not self.worker.done()
+        return {'worker_running':running,'accepting_work':bool(self.started and running and not self.closing and not self.storage_fault and not self.lifecycle_fault),
+            'closing':self.closing,'fault_code':self.lifecycle_fault,
+            'diagnostics':list(self.lifecycle_diagnostics),'undrained_bundles':len(self.undrained_bundles)}
+
+    def require_accepting(self):
+        if not self.lifecycle_status()['accepting_work']:raise ServiceUnavailable('Service not accepting work')
+
+    def _interrupt_unfinished(self,rid,code):
+        try:
+            if self.store.state_row(rid)['status'] in ('queued','running'):
+                self.store.mark(rid,'interrupted',error_code=code)
+        except StorageError:
+            self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+            self.pending_interruptions[rid]=code
+        except Exception as exc:
+            self._lifecycle_failure('QUEUE_RETIRE_FAILED',exc)
+            self.volatile_errors[rid]='SERVICE_LIFECYCLE_FAILED';self.pending_interruptions[rid]=code
+
+    def _retire_waiting(self,code):
+        while not self.queue.empty():
+            item=self.queue.get_nowait()
+            try:self._interrupt_unfinished(item[0],code)
+            finally:self.queue.task_done()
+
+    def _worker_done(self,worker):
+        if worker.cancelled():exc=asyncio.CancelledError()
+        else:exc=worker.exception()
+        if not self.closing and not self.storage_fault and not self.lifecycle_fault:
+            self._lifecycle_failure('WORKER_UNEXPECTED_EXIT',exc or RuntimeError())
+        self._retire_waiting('PROCESS_INTERRUPTED' if self.closing else 'SERVICE_LIFECYCLE_FAILED' if self.lifecycle_fault else 'RUN_STORAGE_FAILED')
+
     async def stop(self):
+        if self._stop_complete:return
         self.closing=True
+        cancelled=None
         for task in self.nli_tasks:task.cancel()
-        if self.nli_tasks:await asyncio.gather(*self.nli_tasks,return_exceptions=True)
-        if self.nli:await self.nli.close()
-        if self.active_bundle:await self.active_bundle.harness.cancel(self.active)
+        if self.nli_tasks:
+            try:await asyncio.gather(*self.nli_tasks,return_exceptions=True)
+            except asyncio.CancelledError as exc:cancelled=exc
+        if self.active_bundle:
+            try:await self.active_bundle.harness.cancel(self.active)
+            except asyncio.CancelledError as exc:cancelled=exc
+            except Exception as exc:self._lifecycle_failure('ACTIVE_CANCEL_FAILED',exc)
         if self.worker:
             self.worker.cancel()
-            await asyncio.gather(self.worker,return_exceptions=True)
-        self.store.recover() # queued/running become interrupted; no auto-enqueue
-        if hasattr(self.factory,'close'):await self.factory.close()
+            try:await asyncio.gather(self.worker,return_exceptions=True)
+            except asyncio.CancelledError as exc:cancelled=exc
+        self._retire_waiting('PROCESS_INTERRUPTED')
+        # An unproven drain never licenses closing resources still in use.
+        remaining=[]
+        for bundle in self.undrained_bundles:
+            try:await bundle.drain()
+            except asyncio.CancelledError as exc:cancelled=exc;remaining.append(bundle)
+            except Exception as exc:self._lifecycle_failure('RESOURCE_DRAIN_FAILED',exc);remaining.append(bundle)
+            else:
+                try:bundle.close()
+                except asyncio.CancelledError as exc:cancelled=exc
+                except Exception as exc:self._lifecycle_failure('RESOURCE_CLOSE_FAILED',exc)
+        self.undrained_bundles=remaining
+        if self.nli:
+            nli,self.nli=self.nli,None
+            try:await nli.close()
+            except asyncio.CancelledError as exc:cancelled=exc
+            except Exception as exc:self._lifecycle_failure('NLI_CLOSE_FAILED',exc)
+        if not remaining and hasattr(self.factory,'close'):
+            try:await self.factory.close()
+            except asyncio.CancelledError as exc:cancelled=exc
+            except Exception as exc:self._lifecycle_failure('FACTORY_CLOSE_FAILED',exc)
+        self._stop_complete=not remaining
+        if cancelled is not None:raise cancelled
 
     def nli_capability(self):
         paths=(self.config.nli_python,self.config.nli_checkpoint,self.config.nli_profile)
@@ -54,6 +131,7 @@ class ApplicationService:
             return bool(self.nli.identity and not self.nli.failure)
 
     async def submit(self,request,*,answer_requirements=(),indexed_reference_ids=(),nli_enabled=None):
+        self.require_accepting()
         validate_request(request,self.config.budget)
         selected=self.config.nli_enabled if nli_enabled is None else nli_enabled
         if type(selected) is not bool:raise ValueError('NLI selection must be boolean')
@@ -61,6 +139,7 @@ class ApplicationService:
             from core.validation import InputError
             if not self.nli_capability()['available']:raise InputError('Local NLI not configured/available; disable the optional selection')
             await self.ensure_nli() # A load failure is diagnostic only; the audit still runs.
+        self.require_accepting()
         knowledge=self.factory.preflight()
         if self.config.profile=='real' and request.existing_answer and request.existing_answer.citations:
             from services.citation_workload import submission_rejections
@@ -69,7 +148,7 @@ class ApplicationService:
             if rejected:raise InputError('Complete citation scopes exceed configured capacity; citation_indexes='+str(list(rejected)))
 
         async with self.lock:
-            if self.closing or self.storage_fault:raise ServiceUnavailable('Service not accepting work')
+            self.require_accepting()
             if self.queue.full():raise QueueFullError('Waiting queue is full')
             rid=uuid4().hex;manifest=self.factory.manifest(knowledge)
             manifest['answer_requirements']=answer_requirements
@@ -98,43 +177,83 @@ class ApplicationService:
             'termination_guaranteed':False,'note':'Cooperative cancellation; sent remote requests or worker threads may remain active.'}
 
     async def _worker(self):
-        while not self.closing:
-            if self.storage_fault:return
-            rid,request,knowledge,requirements,indexed_ids=await self.queue.get()
-            bundle=None
-            from rag.timing import capture_timing
-            timing_manager=capture_timing(run_id=rid);timing_log=timing_manager.__enter__()
+        rid=None
+        try:
+            while not self.closing and not self.storage_fault and not self.lifecycle_fault:
+                item=await self.queue.get();rid=item[0]
+                try:await self._run_one(item)
+                finally:
+                    self.active=None;self.active_bundle=None;self.queue.task_done()
+                rid=None
+        except asyncio.CancelledError as exc:
+            if not self.closing:self._lifecycle_failure('WORKER_UNEXPECTED_EXIT',exc)
+            if rid:self._interrupt_unfinished(rid,'PROCESS_INTERRUPTED' if self.closing else 'SERVICE_LIFECYCLE_FAILED')
+            raise
+        except Exception as exc:
+            self._lifecycle_failure('WORKER_UNEXPECTED_EXIT',exc)
+            if rid:self._interrupt_unfinished(rid,'SERVICE_LIFECYCLE_FAILED')
+        finally:
+            self._retire_waiting('PROCESS_INTERRUPTED' if self.closing else 'SERVICE_LIFECYCLE_FAILED' if self.lifecycle_fault else 'RUN_STORAGE_FAILED')
+
+    async def _run_one(self,item):
+        rid,request,knowledge,requirements,indexed_ids=item
+        bundle=None;persisted=False
+        from rag.timing import capture_timing
+        timing_manager=capture_timing(run_id=rid);timing_log=timing_manager.__enter__()
+        try:
+            if self.store.get(rid)['status']!='queued':return
+            self.active=rid;self.store.mark(rid,'running')
+            bundle=self.factory.create(rid,lambda snapshot:self.store.checkpoint(rid,snapshot))
+            self.active_bundle=bundle
+            result=await bundle.harness.run(request,self.config.budget,knowledge_version=knowledge,
+                answer_requirements=tuple(requirements),indexed_reference_ids=tuple(indexed_ids),run_id=rid)
+            current=asyncio.current_task()
+            if current.cancelling() and not self.closing:
+                if self.store.state_row(rid)['cancel_requested']:
+                    while current.cancelling():current.uncancel() # Explicit per-run cancellation, not worker failure.
+                else:self._lifecycle_failure('WORKER_UNEXPECTED_EXIT',asyncio.CancelledError())
+            status='interrupted' if self.closing else 'cancelled' if result.state.value=='cancelled' else 'failed' if result.state.value=='failed' else 'finished'
+            self.store.mark(rid,status,error_code='PROCESS_INTERRUPTED' if self.closing else None,result=result)
+            persisted=True
+            if self.nli and not self.closing and self.store.get(rid)['config'].get('local_nli_diagnostic',{}).get('enabled',self.config.nli_enabled):
+                task=asyncio.create_task(self.diagnose_completed(rid,wire(result)),name='local-nli:'+rid)
+                self.nli_tasks.add(task);task.add_done_callback(self.nli_tasks.discard)
+        except asyncio.CancelledError:
             try:
-                if self.store.get(rid)['status']!='queued':continue
-                self.active=rid;self.store.mark(rid,'running')
-                bundle=self.factory.create(rid,lambda snapshot:self.store.checkpoint(rid,snapshot))
-                self.active_bundle=bundle
-                result=await bundle.harness.run(request,self.config.budget,knowledge_version=knowledge,
-                    answer_requirements=tuple(requirements),indexed_reference_ids=tuple(indexed_ids),run_id=rid)
-                status='interrupted' if self.closing else 'cancelled' if result.state.value=='cancelled' else 'failed' if result.state.value=='failed' else 'finished'
-                self.store.mark(rid,status,error_code='PROCESS_INTERRUPTED' if self.closing else None,result=result)
-                if self.nli and not self.closing and self.store.get(rid)['config'].get('local_nli_diagnostic',{}).get('enabled',self.config.nli_enabled):
-                    task=asyncio.create_task(self.diagnose_completed(rid,wire(result)),name='local-nli:'+rid)
-                    self.nli_tasks.add(task);task.add_done_callback(self.nli_tasks.discard)
-            except asyncio.CancelledError:
-                try:self.store.mark(rid,'interrupted',error_code='PROCESS_INTERRUPTED')
-                except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-                raise
-            except (StorageError,HarnessObserverError):
-                self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-                try:self.store.mark(rid,'interrupted',error_code='RUN_STORAGE_FAILED')
-                except StorageError:pass
-            except Exception:
-                try:self.store.mark(rid,'failed',error_code='SERVICE_EXECUTION_FAILED')
-                except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-            finally:
-                if bundle:
-                    try:await bundle.drain()
-                    finally:bundle.close()
-                timing_manager.__exit__(None,None,None)
-                try:self.store.add_retrieval_timing(rid,timing_log.records)
-                except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-                self.active=None;self.active_bundle=None;self.queue.task_done()
+                if not persisted:self.store.mark(rid,'interrupted',error_code='PROCESS_INTERRUPTED')
+            except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+            raise
+        except (StorageError,HarnessObserverError):
+            self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+            try:
+                if not persisted:self.store.mark(rid,'interrupted',error_code='RUN_STORAGE_FAILED')
+            except StorageError:pass
+        except Exception:
+            try:
+                if not persisted:self.store.mark(rid,'failed',error_code='SERVICE_EXECUTION_FAILED')
+            except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+        finally:
+            cancelled=None
+            if bundle:
+                drained=False
+                try:await bundle.drain();drained=True
+                except asyncio.CancelledError as exc:
+                    cancelled=exc
+                    if not self.closing:self._lifecycle_failure('RESOURCE_DRAIN_FAILED',exc)
+                except Exception as exc:self._lifecycle_failure('RESOURCE_DRAIN_FAILED',exc)
+                if drained:
+                    try:bundle.close()
+                    except asyncio.CancelledError as exc:
+                        cancelled=exc
+                        if not self.closing:self._lifecycle_failure('RESOURCE_CLOSE_FAILED',exc)
+                    except Exception as exc:self._lifecycle_failure('RESOURCE_CLOSE_FAILED',exc)
+                else:self.undrained_bundles.append(bundle)
+            try:timing_manager.__exit__(None,None,None)
+            except Exception as exc:self._lifecycle_failure('TIMING_CONTEXT_FAILED',exc)
+            try:self.store.add_retrieval_timing(rid,timing_log.records)
+            except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+            except Exception as exc:self._lifecycle_failure('TIMING_PERSIST_FAILED',exc)
+            if cancelled is not None:raise cancelled
 
     def state(self,rid):
         row=self.store.state_row(rid)
@@ -144,7 +263,9 @@ class ApplicationService:
             'error_code':self.volatile_errors.get(rid) or row['error_code'],'profile':row['config']['profile'],
             'knowledge_version':row['config']['knowledge_version'],'persisted_result_available':row['result'] is not None,
             'execution_path':row['config'].get('execution_path','sequential'),
-            'partial_result_available':row['snapshot'] is not None,'persistence_confirmed':rid not in self.volatile_errors})
+            'partial_result_available':row['snapshot'] is not None,'persistence_confirmed':rid not in self.volatile_errors,
+            'pending_terminal_status':'interrupted' if rid in self.pending_interruptions else None,
+            'service_fault_code':self.lifecycle_fault})
 
     async def diagnose_completed(self,rid,raw):
         # Audit has already terminated. Never pass diagnostics to a Harness input.
