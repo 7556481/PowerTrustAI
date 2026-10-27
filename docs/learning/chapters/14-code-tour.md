@@ -1,5 +1,7 @@
 # 14 核心源码阅读路线：输入、调用、异常与取舍
 
+v6界面入口：backend/static/index.html为单列用户问答，diagnostics.html为历史与专业诊断；diagnostic_input.js独占工程背景及已有回答payload。共享app.js用实际DOM职责选择渲染/辅助读取，但认证、请求归属和主轮询只有一套。tests/ui_question_probe.js用真实主页ID创建DOM，不补造诊断节点；旧异步/反馈探针明确针对诊断页继续执行。backend/api.py只把三个确切新静态资源加入白名单，未放宽任意路径、query或运行API鉴权。
+
 ## 当前源码身份与读法（2026-10-27维护同步）
 
 历史评测应用基线1a92d03、入口babdfe1保持冻结；2026-10-27工程维护源码身份见source-version，未改历史合同/政策。先读evaluation/natural_draft_audit_v1.py的recover与batch：前者恢复实际8稿及快照，后者接入原Factory/Harness并统一预发送扣额。参考只进离线分析，不进模型。再读rag/chinese_first.py，区分目录范围、语言触发与实际Evidence。候选默认关闭，生产schema13、受管langgraph_v1，源码fallback sequential，8765停服。

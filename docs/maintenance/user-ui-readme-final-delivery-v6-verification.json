@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-27",
+  "branch": "codex/user-ui-readme-final-delivery-v6",
+  "base": "52287a5099ef3a58b403c562fbeba85f069da978",
+  "implementation": "09d67936c5502422cedf5ba98cd45d4a585438b9",
+  "project_model_requests": 0,
+  "project_model_tokens": 0,
+  "project_model_cost": 0,
+  "root_env_loaded": false,
+  "production_store_opened": false,
+  "production_configuration_changed": false,
+  "full_offline": {"tests": 1363, "seconds": 384.149, "result": "OK", "log": "data/maintenance_local/user-ui-v6-full-verified.log"},
+  "final_impact": {"tests": 18, "seconds": 5.185, "result": "OK"},
+  "clean_default_repair": {"tests": 50, "seconds": 12.794, "skipped_private_archive": 24, "result": "OK"},
+  "preserved_failed_attempts": [
+    {"scope": "initial full, OS temporary path violates diagnostics boundary", "tests": 1362, "seconds": 257.320, "failures": 43, "errors": 7},
+    {"scope": "second full, legacy layout assertion required migration to diagnostic DOM", "tests": 1363, "seconds": 460.456, "failures": 1},
+    {"scope": "clean default public tree, incomplete private prerequisites", "tests": 1324, "seconds": 275.407, "errors": 17, "skipped": 53}
+  ],
+  "browser": {
+    "fixture_port": 8766,
+    "desktop": [1280, 960],
+    "mobile": [390, 844],
+    "mobile_client_and_scroll_width": [375, 375],
+    "verified": ["question to draft to audit terminal", "demand-loaded history", "versions 1/2", "copy selected text", "bound original evidence", "diagnostic hash and same-origin session", "append feedback", "saved insufficient-evidence, failed and cancelled states", "keyboard health GET"],
+    "learning_pages_checked": [10, 14, 18],
+    "screenshots": ["docs/assets/user-ui-v6-desktop.png", "data/maintenance_local/user-ui-v6-mobile.jpg"],
+    "quality_evidence": false
+  },
+  "learning": {"chapters": 20, "folded_answers": 88, "source_excerpts": 14, "build_and_identity_links": "passed"},
+  "audit_speed": {"new_benchmark": false, "inference_speedup_proven": false, "existing_parallel_reviews": true},
+  "default_release": {"base": "09c6b9876237b027f2c28390aebf7bee75bb0034", "ci_fix": "904e187", "homepage_commit": "67857adcc5079abd6267d8ea9175b975a830b794", "includes_work_branch_business_code": false},
+  "final_remote_ci_and_refs": "GitHub Actions for final commit; exact closeout saved to data/maintenance_local/user-ui-v6-remote-check.json after push, never inferred from local tests"
+}

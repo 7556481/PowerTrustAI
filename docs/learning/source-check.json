@@ -1,5 +1,5 @@
 {
-  "application_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+  "application_commit": "09d67936c5502422cedf5ba98cd45d4a585438b9",
   "evaluation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "method": "AST exact qualified symbol, actual LF excerpt, partial spans explicit; all snippets verified against Markdown",
   "excerpts": [

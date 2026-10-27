@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-27 产品首页与CI最终交付v6
+
+[用户UI、README与CI报告](maintenance/user-ui-readme-final-delivery-v6.md)：模块去留、审核时序边界、历史README迁移、实际GitHub失败日志、逐项CI修复、验证失败及修正；最终远端ref/提交CI以收尾Actions为准。新版默认问答与独立诊断，模型0，不恢复付费批次。README仅产品总览，后续维护进交接和专题报告。
+
 ## 2026-10-27 服务状态恢复UI v5（已执行）
 
 - [维护报告](maintenance/service-status-recovery-ui-v5.md)：修前失败、接单与读取分离、待中断未确认、只读检查、轮询停止与兼容边界。

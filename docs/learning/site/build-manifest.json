@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+    "application_commit": "09d67936c5502422cedf5ba98cd45d4a585438b9",
     "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "documentation_parent_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
-    "document_version": "learning-site-v6.7 service status and saved-result recovery UI,2026-10-27",
+    "documentation_parent_commit": "09d67936c5502422cedf5ba98cd45d4a585438b9",
+    "document_version": "learning-site-v6.8 user question / separate diagnostics / public CI prerequisites, 2026-10-27",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -310,6 +310,12 @@
       "production_switch": false,
       "automatic_restart": false,
       "replay": false
+    },
+    "user_ui_readme_v6": {
+      "implementation_commit": "09d67936c5502422cedf5ba98cd45d4a585438b9",
+      "project_model_requests": 0,
+      "production_switch": false,
+      "scope": "10/14/18 and source identity; final verification in maintenance report and ignored closeout record"
     }
   },
   "chapters": [
@@ -365,8 +371,8 @@
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 7202,
-      "sha256": "af0d3f22df38750fbe5c91c648d18e4860cd2a4dea9e0a5fe3d30587727db54a"
+      "characters": 7551,
+      "sha256": "5bcaa79cf3cc942e686e15b09fe852b6536b66329276f02f2d7d67514dfc2dc7"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
@@ -385,8 +391,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 23201,
-      "sha256": "ec1705eb689bb177a29526616eacb56305114099ba76cf933404b1af2fcc91b2"
+      "characters": 23469,
+      "sha256": "1fb96a6009f3717f35f2783ac57976f167f81d6e5034d7e91a84a0f6bbc050f2"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -405,8 +411,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 8397,
-      "sha256": "12737733ba96c4251d2a414b09f00632bdef2c554143bc8eab41c54c01d8c58c"
+      "characters": 8808,
+      "sha256": "fdd7394c663578ffc71a6e0fb15d0a4272538e2cb423d0a61da1e1a8eefb8091"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -424,6 +430,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 166666,
+  "markdown_characters": 167694,
   "network_dependencies": false
 }
