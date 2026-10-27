@@ -1,5 +1,13 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-27 体验/UI/代码维护完成（不改实验成绩）
+
+按小问题→业务UI→有限清理依次落地，三个可回退提交：890273c（异步归属与只读错误提示）、3d277af（问答工作台/版本复制/证据直达/历史摘要及隔离入口）、4e41620（5死导入与未读分页状态）。[maintenance/product-polish-ui-code-hygiene-v1.md](maintenance/product-polish-ui-code-hygiene-v1.md)列前后合成截图、依赖分类与保留原因；[验证](maintenance/product-polish-ui-code-hygiene-v1-verification.json)记录1337全套399.514秒、专项及实际桌面/390窄屏。只读代理负责依赖审计，主执行单写UI。
+
+项目模型请求/费用0，未加载.env、未改提示/合同/政策/检索边界；生产库/配置与两个原启动器哈希保持，schema13/受管图/默认关闭候选及8765停服不变。专用`.venv\Scripts\python.exe -m tools.ui_fixture --port 8766`只装配合成Factory、临时库/令牌、NLI关闭；/fixture/connect只在隔离工具中提供正常一次性会话引导。任务自启8766/8770均释放，学习站只同步10/14/18章路径/身份，20章88题保持。6534126封版基点保留，不重开支持关系语义实验。
+
+旧support_relation_v5、事实流v1/v2/two_stage、runtime公共异常再导出、冻结evaluation/CLI均有兼容或动态调用用途，未按版本名/零引用删除。当前普通分支codex/product-polish-ui-code-hygiene-v1，定向推送与完整SHA以最终交付为准；未提交研究论文/旧设计/原交接修改保留。下方“尚未执行”是原交办时记录，非当前任务队列。至此停止本轮维护。
+
 ## 2026-10-27 阶段封存、可演示、审核收益待研究
 
 已完成README首屏重整并折叠保留旧全文、既有学习站7分钟N1→A3→N4→返回路线、17章三条简历及口述提纲、一份[阶段状态清单](project-status-20261027.md)。项目模型请求0/费用0，未读.env、不改业务候选/提示/合同、不实验/全库向量化/切生产；8765停服，任务自启8770验收后释放。20章88题保持，build/learning_checks、源身份与链接/锚点通过，桌面与390窄屏抽查路线，未重跑1324全套或全站浏览器。验收明细见[封版验证](learning/closeout-20261027-verification.json)。

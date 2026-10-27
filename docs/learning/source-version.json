@@ -1,9 +1,9 @@
 {
-  "application_commit": "1a92d03da49ae25f311e950373003d6ab32d09f5",
+  "application_commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
   "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-  "documentation_parent_commit": "112733ddb6cc2931e97e03b46d391c427a7c65f2",
-  "document_version": "learning-site-v6.1 stage closeout and archived demo,2026-10-27",
+  "documentation_parent_commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
+  "document_version": "learning-site-v6.3 business UI maintenance source sync,2026-10-27",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -26,10 +26,16 @@
       "tests": 14,
       "seconds": 11.462
     },
-    "current_documentation": {
+    "stage_closeout_documentation": {
       "scope": "README/status links, build/learning_checks, source identity and archived-demo browser navigation only; no full1324 or ability retest",
       "project_model_calls": 0,
       "project_model_cost": 0
+    },
+    "current_full_offline": {
+      "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
+      "tests": 1337,
+      "seconds": 399.514,
+      "scope": "full unittest once after stable UI/shared summary/dead-import changes; offline, no model requests"
     }
   },
   "experiment_batches": [
@@ -239,5 +245,14 @@
   "actual_chapters": 20,
   "actual_explained_exercises": 88,
   "learning_v6_archive_commit": "112733ddb6cc2931e97e03b46d391c427a7c65f2",
-  "closeout_state": "stage_archived_demonstrable_audit_benefit_unproven"
+  "closeout_state": "stage_archived_demonstrable_audit_benefit_unproven",
+  "pre_maintenance_application_commit": "1a92d03da49ae25f311e950373003d6ab32d09f5",
+  "stage_closeout_commit": "653412642dc065c39ed6721a64dd55303c45be6b",
+  "maintenance": {
+    "bugfix": "890273c29c26e4c178a0fd8c45bfecc3218234a6",
+    "ui": "3d277af4efb4f4e28d605e6ed24748daea8f89c5",
+    "cleanup": "4e41620614fffbb8a71582a1053e873acaa9b688",
+    "project_model_requests": 0,
+    "production_switch": false
+  }
 }

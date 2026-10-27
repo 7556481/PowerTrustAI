@@ -4,6 +4,8 @@
 
 **阶段封存、可演示、审核收益待研究（2026-10-27）。** 生产schema13及原默认保留，8765停服；跨语言检索与literal/source_actions候选默认关闭，NLI关闭。未宣称稳定消除幻觉、普遍准确率或工程安全认证。
 
+2026-10-27后续[工程维护](docs/maintenance/product-polish-ui-code-hygiene-v1.md)已改进业务UI；可用 `python -m tools.ui_fixture --port 8766` 在隔离零付费合成环境体验。它与下方8770归档学习站不同，未改变上述研究结论或生产默认。
+
 ## 先看7分钟归档演示：无需密钥、大库或模型请求
 
 1. 双击[start-learning.cmd](start-learning.cmd)，打开静态学习站[127.0.0.1:8770](http://127.0.0.1:8770/)。或直接用浏览器打开[离线首页](docs/learning/site/index.html)。

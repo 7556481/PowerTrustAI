@@ -1,5 +1,5 @@
 {
-  "application_commit": "1a92d03da49ae25f311e950373003d6ab32d09f5",
+  "application_commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
   "chapters": [
     {
@@ -58,9 +58,9 @@
     },
     {
       "file": "10-api-storage.md",
-      "characters": 5052,
+      "characters": 5224,
       "self_checks": 4,
-      "sha256": "c022c0b15aabe2c5478d509f0e486bb74d76afdcdb12c485bfb5a981571df811"
+      "sha256": "3398566f86c7970ffb9df4800b63650b25ab1be591b795c3a8431597aa618ad8"
     },
     {
       "file": "11-supervision-metrics.md",
@@ -82,9 +82,9 @@
     },
     {
       "file": "14-code-tour.md",
-      "characters": 22776,
+      "characters": 22964,
       "self_checks": 6,
-      "sha256": "9282dfb0d210e392ea984aa905fa08b95ba04a80ba0026aad54af96384a62b7a"
+      "sha256": "4afe17acf3ba0398cb88b3dc56a55d1f9c6533286fb2ef884cb88f137938de14"
     },
     {
       "file": "15-failures.md",
@@ -106,9 +106,9 @@
     },
     {
       "file": "18-operations.md",
-      "characters": 7245,
+      "characters": 7518,
       "self_checks": 6,
-      "sha256": "0417c244189684bca0bd747f5956bc4acf88ff2936bd2416c545f250794fe1c6"
+      "sha256": "4991258b911cf0fa116831c4e756f1af01029d7a8a2ba052a0de0b10e1e66601"
     },
     {
       "file": "19-glossary.md",
@@ -128,6 +128,6 @@
   "source_snippets": 14,
   "source_verification": "AST actual spans, exact Markdown code blocks and all hashes checked",
   "browser": "separate browser-acceptance.json; not inferred from build",
-  "documentation_parent_commit": "112733ddb6cc2931e97e03b46d391c427a7c65f2",
-  "current_check": "2026-10-27 closeout: source hashes/build/88-fold counts and route only, v6 broader browser separate"
+  "documentation_parent_commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
+  "current_check": "Maintenance: actual AST/source identity, build/88 folds; relevant code page only, not all chapters browser retest"
 }

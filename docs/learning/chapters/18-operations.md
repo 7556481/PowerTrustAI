@@ -1,5 +1,9 @@
 # 18 环境、启动、Git、迁移与排障
 
+## 2026-10-27工程维护补记
+
+零付费业务UI验收可使用 `.venv\Scripts\python.exe -m tools.ui_fixture --port 8766`，先看根页未连接状态，再访问/fixture/connect进入本机一次性会话。该入口只装配synthetic_fixture，临时库/令牌由进程管理，NLI关闭，不读.env或70GB；Ctrl+C释放。不要直接运行默认指向生产Store的旧ui_demo_scenarios。日常start-powertrustai.cmd和独立8770学习站用途不变。
+
 ## 最小复现先隔离接口，再检查业务
 
 【真实观察】本轮四种短合成Schema分别走直接HTTP与项目适配器，实际正文逐字节相同，八项都合法。之后旧业务回归出现嵌套conditions额外字段及来源ID错误，只有两项执行完整。没有发现客户端差异，也不能因此认定服务端严格约束始终生效；未知内部原因应保留。[证据与版本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-interface-consistency-v1/report.md#)。

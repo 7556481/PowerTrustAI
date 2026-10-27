@@ -1,5 +1,9 @@
 # 10 API、UI、队列、SQLite与本机会话
 
+## 2026-10-27工程维护补记
+
+本轮工程维护只为鉴权后的历史列表增加question_summary（压空白、最多120字符），不返回完整request/config、不改Store schema或旧对象。旧服务没有此字段时客户端回退到模式名。UI读取按任务epoch与请求身份丢弃过期结果，不重发POST；这不提高事实判断能力。
+
 ## 工具参数的原义与审计
 
 标准库HTTP先解析响应信封，保留arguments字符串，既有strict_json再检查参数中的重复键。不得让SDK提前解析成字典后只剩最后一个同名键。严格Schema文档未列null，本轮只在objection/repair使用__NULL__传输标记并精确还原业务None；unknown、布尔和对象不改。可识别原参数、调用ID、结束和用量保留；无法安全识别时明确记缺口，不保存完整失败响应作为兜底。

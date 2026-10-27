@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-27 业务UI与有限清理（已执行）
+
+- [维护说明与合成UI前后图](maintenance/product-polish-ui-code-hygiene-v1.md)：五项异步/错误提示复现修复、版本选择/对应正文复制、证据直达、历史摘要、有限依赖清理及必须保留的旧代码。
+- [验证与提交身份](maintenance/product-polish-ui-code-hygiene-v1-verification.json)：1337全套399.514秒，合成8766桌面/窄屏/反馈/取消/分页/安全渲染，0项目模型；学习站源码同步、20章88题保持。
+- [隔离业务UI入口](../tools/ui_fixture.py)：原环境`python -m tools.ui_fixture --port 8766`，不读.env/生产库/大索引；不同于8770学习站和真实8765入口。封版6534126及历史收益/失败不改，不新启旧能力任务。
+
 ## 2026-10-27 阶段封版交付（已执行）
 
 [当前README](../README.md) · [阶段清单/能力边界/分批用量/入口](project-status-20261027.md) · [学习站演示路线](learning/index.md) · [17章求职表述](learning/chapters/17-interview.md) · [本次验证范围](learning/closeout-20261027-verification.json)。20章88题保持，新增项目请求0；本轮非全套/全站重验，旧v6记录明确复用。阶段可展示不等于审核研究目标完成。
