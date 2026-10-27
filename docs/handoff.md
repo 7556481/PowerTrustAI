@@ -1,5 +1,11 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-27 慢辅助隔离与完整页面测量v3完成
+
+基于3494be9，独立codex/slow-auxiliary-page-performance-v3。修前4组失败先证，主state/result不再await辅助；单一调度、主1在途＋辅助每端点1在途，旧epoch/revision丢弃及失效GET取消。终态详情收敛，NLI最多10次终态检查；reviews反馈回读复用slot。最终12慢辅助/渲染＋旧19探针及POST保障通过。固定非空样本14服务/HTTP输出SHA相同，大样本相同轨迹重建约6ms，只做展示去重；首次/展开无稳定收益，跳过延迟JSON。
+
+[短报告](maintenance/slow-auxiliary-page-performance-v3.md)及[机器记录](maintenance/slow-auxiliary-page-performance-v3-verification.json)分列服务/HTTP/实际浏览器，全部原5次保留。项目模型/token/费用0，生产/历史与6534126保持。纯前端及隔离工具修改，复用旧1340全套、不冒称本轮重跑；专项8通过、新夹具跨线程测试错误修正后1项通过。浏览器正常网络桌面/390、草稿/保存/版本/证据/详情通过，慢故障只由真实JS探针验证。学习站10/14/16和身份同步，20章88题保持。自启8766/8770释放，8765停服，原未提交材料不动；推送核对即停止。
+
 ## 2026-10-27 反馈归属与读取容错v2已完成
 
 本轮已完成，不恢复下方历史“未执行”任务。真实app.js旧基线新增7组失败断言先复现，按run_id页面草稿/版本finding重核、旧写响应归属、辅助读取失败暂停且主状态继续、相同控件保留；最终19组通过。Store轻量存在性/state必要列优化有固定2样本前后测量，8份输出SHA相同；大样本result77.004→21.067ms，小样本state无提速保留。完整离线1340项/372.516秒，最终前端时序修正另专项通过。详见[短报告](maintenance/read-path-feedback-polish-v2.md)与[机器记录](maintenance/read-path-feedback-polish-v2-verification.json)。

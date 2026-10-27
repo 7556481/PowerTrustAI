@@ -1,5 +1,12 @@
 # 16 性能与可观测性：测量到底属于谁
 
+## 2026-10-27完整页面合成性能的边界
+
+固定normal/large均有非空轨迹、发现、证据、两版本和反馈；large最长答案3311字，不用单字段百万字造倍率。实际HTTP result627327bytes、trace507626bytes、reviews13081bytes，前后不变。服务投影、loopback HTTP、response.json等待、同步渲染函数、两次requestAnimationFrame后DOM可见分别记录，重叠时间不相加；两帧不是实际paint/FCP。
+
+大样本重复刷新时renderTrace约6ms占同步渲染函数大头，故只去重相同trace/reviews的DOM重建：已计时渲染函数合计7.6→0.6ms，全部GET收敛及两帧246.4→133.0ms（包含并发收益，非纯渲染）。初次正文两帧148.7→155.7ms、展开详情60.9→66.3ms未改善，保留并跳过延迟JSON等改造。DOM仍3869；无模型、缓存或后端优化，不能外推模型/检索速度。原5次和各层边界见docs/maintenance/slow-auxiliary-page-performance-v3.md。
+
+
 ## 收益与花费按批次记账
 
 |批次|新增请求|新增token|能回答的问题|

@@ -1,9 +1,9 @@
 {
-  "application_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
+  "application_commit": "6c9354d7250091ff9cb093760c7e4f2cc1e349f7",
   "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-  "documentation_parent_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
-  "document_version": "learning-site-v6.4 read-path and feedback maintenance,2026-10-27",
+  "documentation_parent_commit": "6c9354d7250091ff9cb093760c7e4f2cc1e349f7",
+  "document_version": "learning-site-v6.5 bounded auxiliary reads and measured page rendering,2026-10-27",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -266,5 +266,16 @@
     "implementation_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
     "project_model_requests": 0,
     "production_switch": false
+  },
+  "slow_auxiliary_maintenance": {
+    "implementation_commit": "6c9354d7250091ff9cb093760c7e4f2cc1e349f7",
+    "model_requests": 0,
+    "full_rerun": false,
+    "reused_full": {
+      "commit": "43cb051df16d5e4a4bde1f93dfe5288ae2d23403",
+      "tests": 1340,
+      "seconds": 372.516,
+      "delivery_commit": "3494be9e6724a52a093a52493867f61b132e22d7"
+    }
   }
 }

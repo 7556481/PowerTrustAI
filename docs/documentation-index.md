@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-27 慢辅助隔离与页面性能v3（已执行）
+
+- [维护短报告](maintenance/slow-auxiliary-page-performance-v3.md)：修前挂起/回读重叠、有限slot生命周期、固定非空样本各层性能、渲染去重及未改善项。
+- [验证机器记录](maintenance/slow-auxiliary-page-performance-v3-verification.json)：前后14输出SHA、5次HTTP/实际浏览器原值、12新/19旧探针、专项错误及修正、复用1340边界。
+- 学习站仅10/14/16与源码身份；项目模型0，生产/历史保持，自启服务已释放，完成后停止。
+
 ## 2026-10-27 反馈归属与读取容错v2（已执行）
 
 - [短报告](maintenance/read-path-feedback-polish-v2.md)：修前失败断言、局部修复、同样本性能前后表、跳过项与浏览器范围。

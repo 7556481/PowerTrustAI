@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
+    "application_commit": "6c9354d7250091ff9cb093760c7e4f2cc1e349f7",
     "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "documentation_parent_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
-    "document_version": "learning-site-v6.4 read-path and feedback maintenance,2026-10-27",
+    "documentation_parent_commit": "6c9354d7250091ff9cb093760c7e4f2cc1e349f7",
+    "document_version": "learning-site-v6.5 bounded auxiliary reads and measured page rendering,2026-10-27",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -267,6 +267,17 @@
       "implementation_commit": "80ca34d7e096fc9759cc5482b0d4c26001d67b47",
       "project_model_requests": 0,
       "production_switch": false
+    },
+    "slow_auxiliary_maintenance": {
+      "implementation_commit": "6c9354d7250091ff9cb093760c7e4f2cc1e349f7",
+      "model_requests": 0,
+      "full_rerun": false,
+      "reused_full": {
+        "commit": "43cb051df16d5e4a4bde1f93dfe5288ae2d23403",
+        "tests": 1340,
+        "seconds": 372.516,
+        "delivery_commit": "3494be9e6724a52a093a52493867f61b132e22d7"
+      }
     }
   },
   "chapters": [
@@ -322,8 +333,8 @@
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 5793,
-      "sha256": "0a14cd084735000e274eee93e5ceccd7a35b53cb45756c74647ac318506d3249"
+      "characters": 6062,
+      "sha256": "ea224515a708c2c01bd67c3f78b7a657d67c4df418b49d192b2f3180cd80a357"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
@@ -342,8 +353,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 23021,
-      "sha256": "dfabb2ef8beae66e1a7ef8192b6c750d6d8c443d81e30ced77f19a76cffc5135"
+      "characters": 23056,
+      "sha256": "8415ce5a9e79d0bac5f748469df575aa0a52283b73803e56433dfdc2fee1e19b"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -352,8 +363,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 6832,
-      "sha256": "548658642b66a05d8fd4ed086509602763894ae0f73ecacedfad5100852d0ef2"
+      "characters": 7355,
+      "sha256": "4d5bdea23d6a061fecaac4fd7345e818ace401f7a031bf6537f510da89e1cbb7"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -381,6 +392,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 163675,
+  "markdown_characters": 164502,
   "network_dependencies": false
 }
