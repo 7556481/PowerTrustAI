@@ -216,7 +216,7 @@ def source_identity(row,revision,shard,row_number):
 
 ### 复用装配与固定Evidence入口
 
-路径 backend/assembly.py，函数 ComponentFactory.create，行253–270；完整函数至323行，局部摘录。
+路径 backend/assembly.py，函数 ComponentFactory.create，行255–272；完整函数至329行，局部摘录。
 
 ```python
     def create(self,rid,observer,*,fixed_evidence_only=False):
@@ -462,3 +462,57 @@ Submit.task构造任务身份；ApplicationService.submit生成运行身份。
 ::: answer 展开参考答案3
 不能；抛HarnessObserverError并报告持久化失败。
 :::
+
+## schema13双通道候选的源码边界
+
+候选仍走原Factory和Harness，不另设运行编排。事实先行、引用两项一波；晚索引非法先返回也不能抢先纠正，结果按原次序合并后做覆盖检查。实际HTTP容量由两个原单线程适配器保证，取消await不等于线程已停止。默认serial_v1及v7只读标注不改，真实收益未验证。
+
+### waves
+
+路径 agents/schema13_concurrency_v1.py，实际行33–50，局部摘录，完整函数至63行；取消后的租约归还需继续阅读函数finally。
+
+```python
+async def waves(work, check, order):
+    """First independent review is serial; later citation waves contain <=2 tasks."""
+    async def perform(index):
+        try:
+            return await check(work[index], index)
+        finally:
+            order.done[index].set()
+    first = await perform(0)
+    yield [(work[0], first)]
+    if first[2] or current_budget().fatal_error is not None:
+        return
+    start = 1
+    while start < len(work):
+        remaining = current_budget().limit - current_budget().used
+        # With insufficient slack preserve canonical serial correction priority.
+        width = 2 if remaining >= len(work) - start + (not order.used) else 1
+        indexes = list(range(start, min(start + width, len(work))))
+        tasks = [asyncio.create_task(perform(i)) for i in indexes]
+```
+
+### BoundedPairAdapter.complete
+
+路径 model_adapter/bounded_pair_v1.py，实际行17–34，局部摘录，完整函数至43行；取消后的租约归还需继续阅读函数finally。
+
+```python
+    async def complete(self, request):
+        from model_adapter.contracts import ModelConnectionError
+        if self._closed:
+            raise ModelConnectionError()
+        if self.available is None:
+            self.available = asyncio.Queue()
+            for child in self.children:
+                self.available.put_nowait(child)
+        child = await self.available.get()
+        loop = asyncio.get_running_loop()
+        def release():
+            if not self._closed:
+                self.available.put_nowait(child)
+        try:
+            if self._closed:
+                raise ModelConnectionError()
+            return await child.complete(request)
+        finally:
+```

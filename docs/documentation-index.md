@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-27 schema13有界并发候选
+
+[短报告与真实验证方案](maintenance/schema13-bounded-concurrency-v1.md)、[离线验证](maintenance/schema13-bounded-concurrency-v1-verification.json)：五条白名单元数据、独立依赖、双HTTP通道、索引确定性纠正、取消drain、完整发现/引用/正文/修订对照及模拟收益边界。默认关闭、0新增模型、未动8765/master；学习站14/16必要同步。
+
 ## 2026-10-27 正文审核标注v7交付
 
 [报告](maintenance/answer-inline-review-marking-v7.md)及[验证](maintenance/answer-inline-review-marking-v7-verification.json)：安全原文/身份定位、同句合并/重叠分段、未定位回退、当前/历史版本隔离、明确未修改与已有修订，0模型；包含离线/API/浏览器及失败修正边界。仅同步学习站10/14，不更新README或master，不重跑用户问题。

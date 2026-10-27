@@ -1,0 +1,242 @@
+{
+  "version": "schema13-citation-pair-v1",
+  "new_live_model_calls": 0,
+  "existing_metadata_summary": [
+    {
+      "run_prefix": "47cd0746",
+      "wall_seconds": 92.704,
+      "model": "deepseek-flash",
+      "schema": 13,
+      "execution_path": "langgraph_v1",
+      "review_message_profile": "lossless_v1",
+      "retrieval_mode": "bm25",
+      "fact_strategy": "aggregate",
+      "calls": 8,
+      "generation": 1,
+      "extraction": 1,
+      "independent_initial": 1,
+      "independent_correction": 1,
+      "citation_initial": 2,
+      "citation_correction": 0,
+      "domain_initial": 1,
+      "domain_correction": 1,
+      "translation": 0,
+      "revision": 0,
+      "independent_ms": 24338,
+      "citation_initial_ms": [
+        2065,
+        2963
+      ],
+      "same_latency_ideal_citation_saving_ms": 2065,
+      "retrieval_outer_ms": {
+        "retrieval_generation": 9723,
+        "retrieval_verification": 32108,
+        "retrieval_domain_review": 45
+      }
+    },
+    {
+      "run_prefix": "43de6dbb",
+      "wall_seconds": 85.485,
+      "model": "deepseek-flash",
+      "schema": 13,
+      "execution_path": "langgraph_v1",
+      "review_message_profile": "lossless_v1",
+      "retrieval_mode": "bm25",
+      "fact_strategy": "aggregate",
+      "calls": 9,
+      "generation": 1,
+      "extraction": 1,
+      "independent_initial": 1,
+      "independent_correction": 1,
+      "citation_initial": 3,
+      "citation_correction": 0,
+      "domain_initial": 1,
+      "domain_correction": 1,
+      "translation": 0,
+      "revision": 0,
+      "independent_ms": 21968,
+      "citation_initial_ms": [
+        2641,
+        2272,
+        2340
+      ],
+      "same_latency_ideal_citation_saving_ms": 2272,
+      "retrieval_outer_ms": {
+        "retrieval_generation": 8598,
+        "retrieval_verification": 17572,
+        "retrieval_domain_review": 17115
+      }
+    },
+    {
+      "run_prefix": "1d31a0e2",
+      "wall_seconds": 78.914,
+      "model": "deepseek-flash",
+      "schema": 13,
+      "execution_path": "langgraph_v1",
+      "review_message_profile": "lossless_v1",
+      "retrieval_mode": "bm25",
+      "fact_strategy": "aggregate",
+      "calls": 6,
+      "generation": 1,
+      "extraction": 1,
+      "independent_initial": 1,
+      "independent_correction": 0,
+      "citation_initial": 2,
+      "citation_correction": 0,
+      "domain_initial": 1,
+      "domain_correction": 0,
+      "translation": 0,
+      "revision": 0,
+      "independent_ms": 10709,
+      "citation_initial_ms": [
+        1781,
+        2846
+      ],
+      "same_latency_ideal_citation_saving_ms": 1781,
+      "retrieval_outer_ms": {
+        "retrieval_generation": 10844,
+        "retrieval_verification": 24490,
+        "retrieval_domain_review": 16071
+      }
+    },
+    {
+      "run_prefix": "f7cf4ad6",
+      "wall_seconds": 28.081,
+      "model": "deepseek-flash",
+      "schema": 13,
+      "execution_path": null,
+      "review_message_profile": "lossless_v1",
+      "retrieval_mode": "bm25",
+      "fact_strategy": "aggregate",
+      "calls": 6,
+      "generation": 1,
+      "extraction": 1,
+      "independent_initial": 1,
+      "independent_correction": 0,
+      "citation_initial": 2,
+      "citation_correction": 0,
+      "domain_initial": 1,
+      "domain_correction": 0,
+      "translation": 0,
+      "revision": 0,
+      "independent_ms": 7142,
+      "citation_initial_ms": [
+        2075,
+        2696
+      ],
+      "same_latency_ideal_citation_saving_ms": 2075,
+      "retrieval_outer_ms": {
+        "retrieval_generation": 1326,
+        "retrieval_verification": 5586,
+        "retrieval_domain_review": 2673
+      }
+    },
+    {
+      "run_prefix": "380e5821",
+      "wall_seconds": 44.479,
+      "model": "deepseek-flash",
+      "schema": 13,
+      "execution_path": null,
+      "review_message_profile": "lossless_v1",
+      "retrieval_mode": "bm25",
+      "fact_strategy": "aggregate",
+      "calls": 5,
+      "generation": 1,
+      "extraction": 1,
+      "independent_initial": 1,
+      "independent_correction": 0,
+      "citation_initial": 1,
+      "citation_correction": 0,
+      "domain_initial": 1,
+      "domain_correction": 0,
+      "translation": 0,
+      "revision": 0,
+      "independent_ms": 6211,
+      "citation_initial_ms": [
+        2259
+      ],
+      "same_latency_ideal_citation_saving_ms": 0,
+      "retrieval_outer_ms": {
+        "retrieval_generation": 13036,
+        "retrieval_verification": 10414,
+        "retrieval_domain_review": 6996
+      }
+    }
+  ],
+  "offline_benchmark": {
+    "fixed_delay_seconds": {
+      "fact": 0.05,
+      "0": 0.4,
+      "1": 0.4,
+      "2": 0.4,
+      "3": 0.4,
+      "domain": 0.8
+    },
+    "serial_measured_seconds": 2.0618,
+    "candidate_measured_seconds": 1.2802,
+    "serial_fact_ideal_seconds": 1.65,
+    "candidate_fact_ideal_seconds": 0.85,
+    "domain_ideal_seconds": 0.8,
+    "serial_task_ideal_seconds": 1.65,
+    "candidate_task_ideal_seconds": 0.85,
+    "serial_maximum": {
+      "fact": 1,
+      "total": 2,
+      "domain": 1
+    },
+    "candidate_maximum": {
+      "fact": 2,
+      "total": 3,
+      "domain": 1
+    },
+    "calls_each": 6,
+    "full_output_and_wire_equal": true,
+    "scope": "Blocking synthetic exchange inside official adapters; includes local parsing, not live HTTP or service UI timing"
+  },
+  "implementation_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
+  "base_commit": "6b87207bb3aa1bfc7f6248538bf77bfa8d11303c",
+  "branch": "codex/schema13-bounded-concurrency-v1",
+  "production_default": "serial_v1",
+  "production_switched": false,
+  "master_merged": false,
+  "user_8765_touched": false,
+  "validation": {
+    "full_offline": {
+      "tests": 1389,
+      "seconds": 384.223,
+      "status": "passed"
+    },
+    "baseline_specialized": {
+      "tests": 20,
+      "seconds": 26.951,
+      "status": "passed"
+    },
+    "candidate_before_additional_owner_deadline_cases": {
+      "tests": 13,
+      "seconds": 34.603,
+      "status": "passed"
+    },
+    "regression39": {
+      "tests": 39,
+      "failed": 1,
+      "reason": "Fixture domain correction omitted correction message; field semantics corrected, isolated case passed in0.618s; final full suite covers all39"
+    },
+    "contract_comparison": "Full dataclass output except model records/timing; exact logical message/parameters; original source scopes, citations, eligible repairs; actual Factory final body, versions, decision, rounds, local temporary store/API",
+    "real_model_requests": 0,
+    "real_http": false,
+    "ui_speed_claim": false,
+    "ci": "Checked on final pushed SHA after this archive; final response and ignored closeout record contain result"
+  },
+  "proposed_flash_validation": {
+    "executed": false,
+    "frozen_cases": 1,
+    "original_citations": 4,
+    "branches": 2,
+    "max_requests_per_branch": 8,
+    "max_total_requests": 16,
+    "new_generation": false,
+    "new_retrieval": false,
+    "user_questions_replayed": false,
+    "requires_design_authorization": true
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "application_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
+  "application_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
   "evaluation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "method": "AST exact qualified symbol, actual LF excerpt, partial spans explicit; all snippets verified against Markdown",
   "excerpts": [
@@ -61,13 +61,13 @@
     {
       "file": "backend/assembly.py",
       "symbol": "ComponentFactory.create",
-      "start_line": 253,
-      "end_line": 270,
-      "function_end_line": 323,
+      "start_line": 255,
+      "end_line": 272,
+      "function_end_line": 329,
       "partial": true,
-      "file_sha256": "150ac78655223711f7f05036ef9adf1d11573b2b1aa0a672abda639442b33e93",
-      "source_text_lf_sha256": "f5675961d3546195e5fe67d5a07b6cfec24ad1388f93f8b2d7159f2ee47c73f6",
-      "excerpt_sha256": "90c30e41b968135fa24d44bf40d33f767e4ac80d3a4bd4f0848188937aac21bb"
+      "file_sha256": "17ab42dd552b40fbc11677494fec9a49f96da4216bae8e02affad7c8ee4fa391",
+      "source_text_lf_sha256": "ef65dc97659be159acbb148205f2b5370b374a18b26625f28dfb5352df1602b6",
+      "excerpt_sha256": "f467e26c695aadcd8b7e673299990953a72381770c1a9fd7937599ee40ef83ab"
     },
     {
       "file": "harness/runtime.py",
@@ -178,6 +178,28 @@
       "file_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
       "source_text_lf_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
       "excerpt_sha256": "908c10d81898c8236df5f734e16aa5eb4f3b5febe7209a9a33de2f4cd40959ee"
+    },
+    {
+      "file": "agents/schema13_concurrency_v1.py",
+      "symbol": "waves",
+      "start_line": 33,
+      "end_line": 50,
+      "function_end_line": 63,
+      "partial": true,
+      "file_sha256": "fbb303e27ae9c154ece7fe77acd1cc2e796fd3eb33ae52068200b828d75f61d9",
+      "source_text_lf_sha256": "fbb303e27ae9c154ece7fe77acd1cc2e796fd3eb33ae52068200b828d75f61d9",
+      "excerpt_sha256": "ef8f9c1571dc6d969f653da3370280329b1b74458d992ce0c668bad7993128c1"
+    },
+    {
+      "file": "model_adapter/bounded_pair_v1.py",
+      "symbol": "BoundedPairAdapter.complete",
+      "start_line": 17,
+      "end_line": 34,
+      "function_end_line": 43,
+      "partial": true,
+      "file_sha256": "f81af2a5470c6e58b0f66c595111aecf9e1bedb621a301610d722218d1676836",
+      "source_text_lf_sha256": "f81af2a5470c6e58b0f66c595111aecf9e1bedb621a301610d722218d1676836",
+      "excerpt_sha256": "1f713ceacdb60c03f1b8e064b2e723ba4b95b48a7241a4cf5083115bc569a3f9"
     }
   ],
   "maintenance_base": "653412642dc065c39ed6721a64dd55303c45be6b"

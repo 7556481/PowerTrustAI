@@ -1,9 +1,9 @@
 {
-  "application_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
+  "application_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
   "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-  "documentation_parent_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
-  "document_version": "learning-site-v6.9 exact inline review marks,2026-10-27",
+  "documentation_parent_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
+  "document_version": "learning-site-v6.10 schema13 bounded concurrency candidate,2026-10-27",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -328,6 +328,20 @@
     "final_frontend_and_fixture": {
       "tests": 18,
       "seconds": 4.828
+    }
+  },
+  "schema13_bounded_concurrency_v1": {
+    "implementation_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
+    "version": "schema13-citation-pair-v1",
+    "production_enabled": false,
+    "model_requests": 0,
+    "fact_http_limit": 2,
+    "task_http_limit": 3,
+    "report": "docs/maintenance/schema13-bounded-concurrency-v1.md",
+    "full_offline": {
+      "tests": 1389,
+      "seconds": 384.223,
+      "status": "passed"
     }
   }
 }

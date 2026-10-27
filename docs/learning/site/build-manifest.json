@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
+    "application_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
     "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "documentation_parent_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
-    "document_version": "learning-site-v6.9 exact inline review marks,2026-10-27",
+    "documentation_parent_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
+    "document_version": "learning-site-v6.10 schema13 bounded concurrency candidate,2026-10-27",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -330,6 +330,20 @@
         "tests": 18,
         "seconds": 4.828
       }
+    },
+    "schema13_bounded_concurrency_v1": {
+      "implementation_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
+      "version": "schema13-citation-pair-v1",
+      "production_enabled": false,
+      "model_requests": 0,
+      "fact_http_limit": 2,
+      "task_http_limit": 3,
+      "report": "docs/maintenance/schema13-bounded-concurrency-v1.md",
+      "full_offline": {
+        "tests": 1389,
+        "seconds": 384.223,
+        "status": "passed"
+      }
     }
   },
   "chapters": [
@@ -405,8 +419,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 25228,
-      "sha256": "0c52573f79737f30576c4e79b3e6cfeb5e7a0155d3dcb7d386d529c81f56a5c4"
+      "characters": 27124,
+      "sha256": "fd206fd07acfdb9b9e5ad1f588c1af7a8b702b63fdc138c5b0c8b767385459ce"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -415,8 +429,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 7355,
-      "sha256": "4d5bdea23d6a061fecaac4fd7345e818ace401f7a031bf6537f510da89e1cbb7"
+      "characters": 8032,
+      "sha256": "c3015369972362a7002b0664b1c39b7a8df661173a6b2f419fa52fbe8edaf3ca"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -444,6 +458,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 170130,
+  "markdown_characters": 172703,
   "network_dependencies": false
 }
