@@ -5,6 +5,19 @@ const $ = id => document.getElementById(id);
 const labels = {skipped:'跳过',production_not_assessable:'原事实对象无法评估，不执行NLI',explicit_component_delivery_missing_or_ambiguous:'缺少明确逐组件交付证明',mixed_component_literal_binding_missing:'混合组件缺少独立原文绑定',shared_parent_anchor_without_component_literal_binding:'共享原文锚点，无法唯一绑定组件',over_context_no_truncation:'超出模型上下文，未截断',unsupported_basis_target:'此依据类型不支持正文NLI',unsupported_assertion_role:'此立场类型尚不支持NLI',verification_execution_incomplete:'事实审核执行未完成',incomplete:'未完成',reject:'不通过',rejected:'不通过',needs_information:'待补充',execution_incomplete:'执行未完成',low:'低风险（限定任务）',medium:'中风险',high:'高风险',unknown:'风险未知',complete:'完整',partial:'部分',unable_to_answer:'无法回答',queued:'排队',running:'运行中',finished:'结束',failed:'执行失败',cancelled:'已取消',interrupted:'中断',supported:'有依据支持（限定范围）',contradicted:'与依据矛盾',insufficient_evidence:'证据不足',not_assessable:'无法评估',pass:'通过（当前任务，非安全认证）',revise:'需修订',review_required:'需人工复核',succeeded:'执行成功',timed_out:'执行超时',pending:'待查',confirm:'确认',disagree:'反对',note:'说明',question_answer:'问答',assess_existing:'已有回答审核',generation:'生成',claim_extraction:'主张提取',evidence_verification:'事实审核',power_domain_review:'领域审核',revision:'修订',verifying:'双重审核',extracting:'提取主张',completed:'完成',generating:'生成回答',index_core_hit:'索引核心命中',index_adjacent_context:'索引相邻上下文',generation_input:'生成输入',original_citation:'原引用绑定',user_reference:'用户参考（未核实）'};
 const tr = v => v == null ? '未提供' : typeof v === 'boolean' ? (v ? '是' : '否') : labels[v] || String(v);
 let answerFocused=false;let answerVersion=null;
+const reviewDrafts=new Map();
+function draftValue(){return {note:$('review-note').value,action:$('review-action').value,source:$('review-source').value,answer:$('review-answer').value,finding:$('review-finding').value};}
+function rememberDraft(){if(selected)reviewDrafts.set(selected,draftValue());}
+function resetDraft(){ $('review-note').value='';$('review-action').value='pending';$('review-source').value='user';$('review-draft-status').textContent='';}
+function restoreDraft(){const draft=reviewDrafts.get(selected);if(!draft)return;
+ $('review-note').value=draft.note;$('review-action').value=draft.action;$('review-source').value=draft.source;
+ const valid=[...$('review-answer').options].some(o=>o.value===draft.answer);
+ if(valid)$('review-answer').value=draft.answer;else{$('review-answer').value='';$('review-draft-status').textContent='草稿回答版本已不可用，请重新选择版本与关联发现。';}
+ reviewFindings();
+ if(valid&&[...$('review-finding').options].some(o=>o.value===draft.finding))$('review-finding').value=draft.finding;
+ else if(draft.finding){$('review-finding').value='';$('review-draft-status').textContent='草稿关联发现已不可用，请重新选择；不会静默改挂。';}
+ controls();
+}
 let connected = false, sessionConnected = false;
 const hasConnection=()=>Boolean(token||sessionConnected);
 const connectionMemory=window.PowerTrustConnectionMemory?.create()||{load:()=>null,save:()=>false,forget:()=>true};
@@ -108,10 +121,10 @@ async function load(){
 }
 async function selectRun(rid){
  if(!/^[A-Za-z0-9_-]{1,150}$/.test(rid)){tell('run_id 格式无效。',true);return;}
- stop();const stamp=++epoch;reading=false;selected=rid;answerVersion=null;answerFocused=false;result=null;$('run-id').value=rid;for(const button of $('history').children)button.className='history-item'+(button.title===rid?' selected':'');
+ rememberDraft();resetDraft();stop();const stamp=++epoch;reading=false;selected=rid;answerVersion=null;answerFocused=false;result=null;$('run-id').value=rid;for(const button of $('history').children)button.className='history-item'+(button.title===rid?' selected':'');
  for(const id of ['current','progress','trace','decision','answers','usage','findings','evidence','evidence-detail','reviews','local-nli'])clear(id);
  $('review-answer').replaceChildren();reviewFindings();await load();
- if(stamp===epoch&&result?.answer)$('answers').scrollIntoView({block:'start'});
+ if(stamp===epoch&&result?.answer){restoreDraft();$('answers').scrollIntoView({block:'start'});}
 }
 async function history(page=0){
  const stamp=epoch;const request=++historySerial;let data;
@@ -153,9 +166,10 @@ $('submit-form').addEventListener('submit',async e=>{
  if($('reference').value.trim())payload.references=[{label:$('reference-label').value||'用户参考（未核实）',text:$('reference').value}];
  const stamp=epoch;posting=true;controls();tell('正在提交一次任务，请勿重复提交。');let accepted;let sent=false;
  try{const before=profile;await health();if(stamp!==epoch)return;if(profile!==before){tell('服务模式已变化，请核对页面模式标识后再次手动提交。',true);}else{sent=true;accepted=await api('/runs',payload);}}catch(err){
+   if(stamp!==epoch)return;
    if(!(err instanceof ApiError)&&sent){uncertainPost=true;tell(errorText(err,true)+' 提交已锁定，请重新连接并核对运行列表后再决定。',true);}else tell(errorText(err),true);
  }finally{posting=false;controls();}
- if(accepted&&stamp===epoch){$('run-id').value=accepted.run_id;tell(`任务已接受：${accepted.run_id}`);await selectRun(accepted.run_id);try{await history();}catch(err){tell(`任务已接受：${accepted.run_id}，运行列表暂时无法查询。`+errorText(err),true);}}
+ if(accepted&&stamp===epoch){$('run-id').value=accepted.run_id;tell(`任务已接受：${accepted.run_id}`);await selectRun(accepted.run_id);const readStamp=epoch;try{await history();}catch(err){if(readStamp===epoch)tell(`任务已接受：${accepted.run_id}，运行列表暂时无法查询。`+errorText(err),true);}}
 });
 $('lookup-form').addEventListener('submit',e=>{e.preventDefault();selectRun($('run-id').value.trim());});
 $('refresh').addEventListener('click',load);
@@ -173,11 +187,15 @@ $('review-form').addEventListener('submit',async e=>{
  e.preventDefault();if(feedbackPosting||!hasConnection()||!selected||!$('review-answer').value)return;
  const a=JSON.parse($('review-answer').value);const rid=selected;const stamp=epoch;const note=$('review-note').value;
  const payload={answer_id:a.answer_id,answer_version:a.version,finding_id:$('review-finding').value||null,action:$('review-action').value,source:$('review-source').value,reviewer_id:$('reviewer').value,note};
+ const submitted=draftValue();reviewDrafts.set(rid,submitted);
  feedbackPosting=true;controls();let saved=false;
- try{await api(`/runs/${encodeURIComponent(rid)}/reviews`,payload);saved=true;if(stamp!==epoch)return;tell('复核意见已追加保存；模型判断保持原样。');if(selected===rid&&$('review-note').value===note)$('review-note').value='';}
+ try{await api(`/runs/${encodeURIComponent(rid)}/reviews`,payload);saved=true;
+  const latest=selected===rid?draftValue():reviewDrafts.get(rid);
+  if(JSON.stringify(latest)===JSON.stringify(submitted)){reviewDrafts.delete(rid);if(selected===rid)resetDraft();}
+  if(stamp!==epoch)return;tell('复核意见已追加保存；模型判断保持原样。');}
  catch(err){if(stamp===epoch)tell(errorText(err,true)+' 输入已保留；未确认保存成功，请先查询已有反馈再决定是否重试。',true);}
  finally{feedbackPosting=false;controls();}
- if(saved&&stamp===epoch&&selected===rid){try{const reviews=await api(`/runs/${encodeURIComponent(rid)}/reviews`);if(stamp===epoch)renderReviews(reviews);}catch(err){tell('意见已保存，但反馈列表暂时无法查询。'+errorText(err),true);}}
+ if(saved&&stamp===epoch&&selected===rid){try{const reviews=await api(`/runs/${encodeURIComponent(rid)}/reviews`);if(stamp===epoch)renderReviews(reviews);}catch(err){if(stamp===epoch)tell('意见已保存，但反馈列表暂时无法查询。'+errorText(err),true);}}
 });
 function renderFactDelivery(r){const d=node("details");d.append(node("summary","事实检索模式、知识版本、逐主张交付与省略（详情）"),jsonBox({mode:r.configuration?.retrieval_mode,strategy:r.configuration?.fact_retrieval_strategy,knowledge_version:r.configuration?.knowledge_version,embedding_profile:r.configuration?.embedding_profile,scoring_method:r.configuration?.scoring_method,records:r.retrieval}));$("usage").append(d);}
 $('example-question').addEventListener('click',()=>{$('question').value='无功功率和电压有什么关系？请作概念解释。';$('question').focus?.();tell('示例已填入，尚未提交；可以先修改问题。');});
