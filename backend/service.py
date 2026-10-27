@@ -359,6 +359,8 @@ class ApplicationService:
             'findings':{'model_fact':verification.get('findings',[]),'domain':domain.get('findings',[]),
                 'original_citations':verification.get('citation_reviews',[]),
                 'program_rules':verification.get('consistency_checks',[]),'tools':raw.get('tool_results',[])},
+            'review_bindings':{'verification':{'answer_id':verification.get('answer_id'),
+                'answer_version':verification.get('answer_version')}},
             'evidence':self.store.objects(rid,'evidence'),'evidence_bindings':raw.get('evidence_bindings',[]),
             'snapshots':{'generation':raw.get('generation_output'),'extraction':raw.get('extraction_output'),
                 'verification_input':verification.get('generation_snapshot'),'delivery':verification.get('delivery_summary')},

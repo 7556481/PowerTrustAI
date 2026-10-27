@@ -20,7 +20,7 @@ async function client({unknown=false,refusal=false}={}){
  if(p.endsWith('/result'))return response(output);if(p.includes('/evidence/'))return response({evidence_id:'e1',text:'synthetic original'});
  if(p.includes('/page/'))return response({items:[{run_id:'A',question_summary:'history question'}],next_offset:null});return response({run_id:'A',status:output.execution.status});}};
  const source=fs.readFileSync('backend/static/app.js','utf8').replace(/restoreConnection\(\)\.catch\(e=>tell\(errorText\(e\),true\)\);/,"window.testClient={connect,selectRun,load,health};");
- vm.runInNewContext(source,context);await context.window.testClient.connect('synthetic_fixture');return {elements,calls,copies,api:context.window.testClient};
+ vm.runInNewContext(fs.readFileSync('backend/static/inline_review.js','utf8'),context);vm.runInNewContext(source,context);await context.window.testClient.connect('synthetic_fixture');return {elements,calls,copies,api:context.window.testClient};
 }
 const fire=(e,event='click')=>e.listeners[event]?.({preventDefault(){}});
 (async()=>{

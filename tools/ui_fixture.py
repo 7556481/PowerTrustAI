@@ -82,13 +82,13 @@ async def seed(service, factory):
     return cases
 
 
-def fixture_app(directory, *, shutdown=None):
+def fixture_app(directory, *, shutdown=None, factory_type=SyntheticUIFactory, seed_extra=None):
     directory = Path(directory).resolve()
     # Paths are supplied by this isolated entry, never from environment or API.
     config = ServiceConfig(profile='synthetic_fixture', run_db=directory/'runs.sqlite3',
                            token_file=directory/'token', index_db=directory/'unused-index.sqlite3',
                            execution_path='langgraph_v1', nli_enabled=False)
-    factory = SyntheticUIFactory(config)
+    factory = factory_type(config)
     factory.preflight()
     app = create_app(config, factory=factory, shutdown=shutdown)
     original_lifespan = app.router.lifespan_context
@@ -97,6 +97,8 @@ def fixture_app(directory, *, shutdown=None):
     async def lifespan(app):
         async with original_lifespan(app):
             app.state.fixture_cases = await seed(app.state.service, factory)
+            if seed_extra is not None:
+                app.state.fixture_cases.update(await seed_extra(app.state.service, factory))
             print('synthetic_fixture ready: 24 isolated records; model requests=0; NLI off', flush=True)
             yield
 

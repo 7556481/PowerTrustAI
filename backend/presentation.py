@@ -2,6 +2,13 @@
 TERMINAL={'finished','failed','cancelled','interrupted'}
 
 def explain(result):
+    from backend.answer_annotations import project
+    projection = _explain(result)
+    projection['inline_review'] = project(result)
+    return projection
+
+
+def _explain(result):
     ex=result['execution'];f=result.get('findings',{});answer=result.get('answer',{})
     facts=f.get('model_fact',[]);domain=f.get('domain',[]);rules=f.get('program_rules',[])
     reasons=[];next_steps=[]
