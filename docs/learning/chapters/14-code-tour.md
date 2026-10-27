@@ -395,10 +395,12 @@ backend/service.py / ApplicationService._worker，实际行100–126。
 
 ### 摘录：真实装配的资源建立
 
-backend/assembly.py / ComponentFactory.create，2026-10-25当前实际行219–234。
+backend/assembly.py / ComponentFactory.create；默认代码基线09c6b987，实际行240–253。截取部分不代替完整函数。
 
 ```python
-    def create(self,rid,observer):
+    def create(self,rid,observer,*,fixed_evidence_only=False):
+        """Fixed Evidence evaluation may skip index resources; defaults unchanged."""
+        if type(fixed_evidence_only) is not bool:raise ConfigurationError('Boolean fixed evidence mode required')
         if self.config.profile=='synthetic_fixture':
             from agents.fakes import make_fake_harness
             harness=make_fake_harness();harness.observer=observer;harness.execution_path=self.config.execution_path
@@ -410,10 +412,6 @@ backend/assembly.py / ComponentFactory.create，2026-10-25当前实际行219–2
         from agents.evidence_verification import ModelEvidenceVerificationAgent
         if self.config.fact_internal_flow!='production':
             from agents.fact_flow_v1 import FactFlowAgent as FactAgent
-            if self.config.fact_internal_flow=='joint_v2':
-                from services.fact_flow_protocol_v2 import create_agent as FactAgent
-            elif self.config.fact_internal_flow=='two_stage_v1':
-                from services.fact_two_stage_v1 import create_agent as FactAgent
 ```
 只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。
 
@@ -526,7 +524,7 @@ backend/service.py / ApplicationService.result，实际行163–187。
 
 ### 关键连接：实际Harness组件注入
 
-backend/assembly.py当前实际行261–270，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。
+backend/assembly.py / harness=OfflineHarness；默认代码基线09c6b987，实际行298–305。截取部分不代替完整函数。
 
 ```python
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
@@ -535,10 +533,8 @@ backend/assembly.py当前实际行261–270，仅连接处摘录；显式候选�
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
-                generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' else None,
+                generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1' else None,
                 generation_corpus_english=corpus_english,execution_path=self.config.execution_path)
-            harness.subject_supplement=True
-            return Bundle(harness,resources)
 ```
 
 ### 关键连接：按输入契约包装，而非散落版本条件
@@ -750,4 +746,104 @@ services/review_simple_tool_v1.py / decode_wire，实际行16–21。载体只�
             for row in data['judgments']:
                 if type(row) is dict and any(k in row and row[k] is None for k in ('objection','repair')):row['_native_null_transport_error']=True
         return super().decode_wire(map_null(data),group)
+```
+
+
+## 2026-10-27 默认分支源码身份修复
+
+公开CI继续到学习站后暴露旧身份过期；以下按本分支实际AST重新定位与摘录，未搬入实验/维护代码。上方明确标历史的1d5528f片段继续保留。
+
+harness/execution.py / RunExecution.prepare_review；默认代码基线09c6b987，实际行356–369。截取部分不代替完整函数。
+
+```python
+    async def prepare_review(self):
+        """Prepare separate purpose-bound inputs with sequential retrieval."""
+        self.transition(RunState.VERIFYING)
+        original_ids = {eid for c in self.answer.citations for eid in c.evidence_ids}
+        self.original_evidence = tuple((e for e in self.evidence if e.evidence_id in original_ids))
+        self.v_evidence = self.d_evidence = self.evidence
+        self.v_bindings = self.d_bindings = self.bindings
+        self.v_retrieval_issue = self.d_retrieval_issue = None
+        if self.retrieval:
+            self.vd = await self.retrieve_for(RetrievalPurpose.VERIFICATION)
+            if not self.evidence_only:
+                self.dd = await self.retrieve_for(RetrievalPurpose.DOMAIN_REVIEW)
+            user_evidence = tuple((e for e in self.request.provided_evidence if e.evidence_id not in self.indexed_reference_ids))
+            self.v_evidence = merge_evidence(user_evidence, self.vd.evidence)
+```
+
+harness/execution.py / RunExecution.review_pair；默认代码基线09c6b987，实际行388–401。截取部分不代替完整函数。
+
+```python
+    async def review_pair(self):
+        """Keep concurrent review ownership, sibling results and cancellation."""
+        if self.evidence_only:
+            self.verification, issue = await self.review('evidence_verification', self.harness.verification, self.v_input, merge_evidence(self.v_evidence, self.original_evidence), True, self.v_retrieval_issue)
+            if issue:
+                self.issues.append(issue)
+                if getattr(self.harness.verification, 'schema_version', None) in (7, 8):
+                    from agents.verification_contract_v7 import execution_incomplete
+                    self.verification = execution_incomplete(self.v_input, issue)
+                else:
+                    self.verification = EvidenceVerificationOutput(self.answer.answer_id, self.answer.version, self.claims, (), (), (issue,))
+                self.reason = 'Evidence verification execution incomplete; domain review not run'
+                self.transition(RunState.REVIEW_REQUIRED)
+            else:
+```
+
+harness/execution.py / RunExecution.revise；默认代码基线09c6b987，实际行494–507。截取部分不代替完整函数。
+
+```python
+    async def revise(self):
+        """Validate a bounded revision; return whether a full re-audit can run."""
+        from dataclasses import replace
+        if self.rounds >= self.budget.max_revision_rounds:
+            raise ContractError('Policy attempted revision beyond limit')
+        self.transition(RunState.REVISING)
+        revision_input=RevisionInput(self.request,self.answer,self.verification,self.domain,self.evidence,self.decision.reasons,self.bindings,self.knowledge_version if self.retrieval else None)
+
+        def check_revision(output):
+            self.guard_agent_evidence(output, self.evidence)
+            from agents.contracts import LocalRevisionOutput
+            if isinstance(output,LocalRevisionOutput):
+                require(output.bound_defects==self.verification.literal_defects,'Local revision changed the source-bound defect catalog')
+            validate_revision(output, self.answer, self.evidence, self.verification.findings + self.domain.findings,revision_context=revision_input)
+```
+
+harness/execution.py / RunExecution.run_stages；默认代码基线09c6b987，实际行544–557。截取部分不代替完整函数。
+
+```python
+    async def run_stages(self):
+        """Original sequential route, retained as the default implementation."""
+        await self.validate_saved_inputs()
+        if self.request.mode == TaskMode.QUESTION_ANSWER:
+            await self.generate()
+        while not self.generation_only:
+            await self.extract_and_tools()
+            await self.prepare_review()
+            await self.review_pair()
+            if self.evidence_only:
+                break
+            if await self.merge_and_decide():
+                break
+            if not await self.revise():
+```
+
+harness/execution.py / RunExecution.run；默认代码基线09c6b987，实际行560–573。截取部分不代替完整函数。
+
+```python
+    async def run(self, *, driver=None):
+        """One driver inside the existing exception, registry and result boundary."""
+        try:
+            if driver is None:
+                await self.run_stages()
+            else:
+                await driver(self)
+        except HarnessObserverError:
+            raise
+        except RequiredRetrievalFailure as exc:
+            self.reason = str(exc)
+            self.transition(RunState.EXECUTION_INCOMPLETE if any((i.component == 'generation_query_conversion' for i in self.issues)) else RunState.REVIEW_REQUIRED)
+        except asyncio.CancelledError:
+            self.reason = 'Run cancelled'
 ```

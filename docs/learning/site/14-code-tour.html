@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14 核心源码阅读路线：输入、调用、异常与取舍 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 c098b5d48d12 · learning-site-v5.3 literal original review and failed local revision,2026-10-25 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">14 核心源码阅读路线：输入、调用、异常与取舍</h1>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14 核心源码阅读路线：输入、调用、异常与取舍 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 09c6b9876237 · learning-site-v5.3-default-ci-source-repair,2026-10-27 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">14 核心源码阅读路线：输入、调用、异常与取舍</h1>
 <h2 id="section-2">本轮真实验证边界</h2>
 <p>【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md#" rel="noreferrer noopener">完整响应、依据与版本边界</a>。</p>
 <h2 id="section-3">2026-10-24 简化合同与投影的源码入口</h2>
@@ -250,8 +250,10 @@
                 <span class="keyword">except</span> StorageError:<span class="keyword">pass</span></code></pre>
 <p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
 <h3 id="section-39">摘录：真实装配的资源建立</h3>
-<p>backend/assembly.py / ComponentFactory.create，2026-10-25当前实际行219–234。</p>
-<pre><code class="language-python">    <span class="keyword">def</span> create(self,rid,observer):
+<p>backend/assembly.py / ComponentFactory.create；默认代码基线09c6b987，实际行240–253。截取部分不代替完整函数。</p>
+<pre><code class="language-python">    <span class="keyword">def</span> create(self,rid,observer,*,fixed_evidence_only=<span class="keyword">False</span>):
+        <span class="string">&quot;&quot;&quot;Fixed Evidence evaluation may skip index resources; defaults unchanged.&quot;&quot;&quot;</span>
+        <span class="keyword">if</span> type(fixed_evidence_only) <span class="keyword">is</span> <span class="keyword">not</span> bool:<span class="keyword">raise</span> ConfigurationError(<span class="string">&#x27;Boolean fixed evidence mode required&#x27;</span>)
         <span class="keyword">if</span> self.config.profile==<span class="string">&#x27;synthetic_fixture&#x27;</span>:
             <span class="keyword">from</span> agents.fakes <span class="keyword">import</span> make_fake_harness
             harness=make_fake_harness();harness.observer=observer;harness.execution_path=self.config.execution_path
@@ -262,11 +264,7 @@
         <span class="keyword">from</span> agents.generation <span class="keyword">import</span> EvidenceGenerationAgent
         <span class="keyword">from</span> agents.evidence_verification <span class="keyword">import</span> ModelEvidenceVerificationAgent
         <span class="keyword">if</span> self.config.fact_internal_flow!=<span class="string">&#x27;production&#x27;</span>:
-            <span class="keyword">from</span> agents.fact_flow_v1 <span class="keyword">import</span> FactFlowAgent <span class="keyword">as</span> FactAgent
-            <span class="keyword">if</span> self.config.fact_internal_flow==<span class="string">&#x27;joint_v2&#x27;</span>:
-                <span class="keyword">from</span> services.fact_flow_protocol_v2 <span class="keyword">import</span> create_agent <span class="keyword">as</span> FactAgent
-            <span class="keyword">elif</span> self.config.fact_internal_flow==<span class="string">&#x27;two_stage_v1&#x27;</span>:
-                <span class="keyword">from</span> services.fact_two_stage_v1 <span class="keyword">import</span> create_agent <span class="keyword">as</span> FactAgent</code></pre>
+            <span class="keyword">from</span> agents.fact_flow_v1 <span class="keyword">import</span> FactFlowAgent <span class="keyword">as</span> FactAgent</code></pre>
 <p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
 <h3 id="section-40">摘录：原锚点输入与实际解析选择</h3>
 <p>services/claim_extractor.py / ModelClaimExtractor.extract，实际行145–165。</p>
@@ -356,17 +354,15 @@
         <span class="keyword">if</span> original <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">and</span> raw.get(<span class="string">&#x27;generation_output&#x27;</span>):original=raw[<span class="string">&#x27;generation_output&#x27;</span>][<span class="string">&#x27;answer&#x27;</span>]</code></pre>
 <p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
 <h3 id="section-44">关键连接：实际Harness组件注入</h3>
-<p>backend/assembly.py当前实际行261–270，仅连接处摘录；显式候选修订提示与原execution_path均由Factory传入，周围初始化/后续逻辑省略。</p>
+<p>backend/assembly.py / harness=OfflineHarness；默认代码基线09c6b987，实际行298–305。截取部分不代替完整函数。</p>
 <pre><code class="language-python">            harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=<span class="number">3</span>,product_guidance=self.config.decision_policy==<span class="string">&#x27;product-v1&#x27;</span>),
                 FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=<span class="keyword">True</span>,support_relation_version=<span class="number">6</span>,review_message_profile=self.config.review_message_profile,**({<span class="string">&#x27;review_result_transport&#x27;</span>:self.config.review_result_transport,<span class="string">&#x27;review_contract&#x27;</span>:self.config.fact_review_contract} <span class="keyword">if</span> self.config.fact_review_contract!=<span class="string">&#x27;production&#x27;</span> <span class="keyword">else</span> {})),
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=<span class="number">5</span>,safety_review=<span class="keyword">True</span>,task_applicability=<span class="keyword">True</span>),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=<span class="number">2</span>,clean_answer_body=<span class="keyword">True</span>,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=<span class="keyword">True</span>,protocol_version=<span class="number">7</span>,daily_guidance=self.config.decision_policy==<span class="string">&#x27;product-v1&#x27;</span>,message_profile=self.config.extraction_message_profile),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version=<span class="string">&#x27;scalar-si-conversion-v2&#x27;</span>),observer=observer,
-                generation_query_converter=GenerationQueryConverter(model,settings,diag) <span class="keyword">if</span> self.config.retrieval_mode==<span class="string">&#x27;bm25&#x27;</span> <span class="keyword">else</span> <span class="keyword">None</span>,
-                generation_corpus_english=corpus_english,execution_path=self.config.execution_path)
-            harness.subject_supplement=<span class="keyword">True</span>
-            <span class="keyword">return</span> Bundle(harness,resources)</code></pre>
+                generation_query_converter=GenerationQueryConverter(model,settings,diag) <span class="keyword">if</span> self.config.retrieval_mode==<span class="string">&#x27;bm25&#x27;</span> <span class="keyword">and</span> <span class="keyword">not</span> fixed_evidence_only <span class="keyword">and</span> self.config.retrieval_execution_profile!=<span class="string">&#x27;chinese_first_cross_language_v1&#x27;</span> <span class="keyword">else</span> <span class="keyword">None</span>,
+                generation_corpus_english=corpus_english,execution_path=self.config.execution_path)</code></pre>
 <h3 id="section-45">关键连接：按输入契约包装，而非散落版本条件</h3>
 <p>以下为共享阶段抽取前固定提交<code>1d5528f</code>的harness/runtime.py行432–438历史摘录。当前同一职责在harness/execution.py的prepare_review；保留旧片段帮助理解移动前后的连接，不能拿旧行号定位现行代码。</p>
 <pre><code class="language-python">                <span class="keyword">from</span> services.review_inputs <span class="keyword">import</span> build <span class="keyword">as</span> build_review_input
@@ -497,4 +493,81 @@
         <span class="keyword">if</span> type(data) <span class="keyword">is</span> dict <span class="keyword">and</span> type(data.get(<span class="string">&#x27;judgments&#x27;</span>)) <span class="keyword">is</span> list:
             <span class="keyword">for</span> row <span class="keyword">in</span> data[<span class="string">&#x27;judgments&#x27;</span>]:
                 <span class="keyword">if</span> type(row) <span class="keyword">is</span> dict <span class="keyword">and</span> any(k <span class="keyword">in</span> row <span class="keyword">and</span> row[k] <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">for</span> k <span class="keyword">in</span> (<span class="string">&#x27;objection&#x27;</span>,<span class="string">&#x27;repair&#x27;</span>)):row[<span class="string">&#x27;_native_null_transport_error&#x27;</span>]=<span class="keyword">True</span>
-        <span class="keyword">return</span> super().decode_wire(map_null(data),group)</code></pre></article><footer><a href="13-local-nli.html">← 13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">本轮真实验证边界</a><a href="#section-3">2026-10-24 简化合同与投影的源码入口</a><a href="#section-4">2026-10-24 审核链v2实证更新</a><a href="#section-5">一页请求对象流：先认对象，再读源码</a><a href="#section-6">如何读，不被版本文件淹没</a><a href="#section-7">第一条路线：从提交到冻结答案</a><a href="#section-8">第二条路线：Evidence怎样变成typed basis</a><a href="#section-9">第三条路线：政策与Revision</a><a href="#section-10">第四条路线：存储和只读恢复</a><a href="#section-11">对每个函数问五个问题</a><a href="#section-12">面试阅读练习</a><a href="#section-13">实际代码摘录</a><a href="#section-14">重复键、非有限值与严格JSON</a><a href="#section-15">名次融合不验证事实</a><a href="#section-16">原ID和内部ID分离</a><a href="#section-17">短事务的commit与rollback</a><a href="#section-18">一次修订资格不是修订成功</a><a href="#section-19">确定性标量计算的边界</a><a href="#section-20">恢复状态但不重发</a><a href="#section-21">沿一条实际请求完整阅读：谁创建对象，谁保存事实</a><a href="#section-22">一个贯穿对象的synthetic摘要</a><a href="#section-23">1 API：普通字段变成任务，不把浏览器当路径输入器</a><a href="#section-24">2 接受：先持久化，再让worker取任务</a><a href="#section-25">3 worker与Factory：装配真实组件，而非模拟回退</a><a href="#section-26">4 Harness输入与冻结：版本对象的起点</a><a href="#section-27">5 提取：原锚点→规范命题→组件</a><a href="#section-28">6 工具与交付：类型成立才可作为依据</a><a href="#section-29">7 双审输入和并发：上轮遗漏恰在这里</a><a href="#section-30">8 政策：读有效发现，不再问模型投票</a><a href="#section-31">9 Revision：新对象重建，旧版不抹去</a><a href="#section-32">10 observer、事务、结果与UI</a><a href="#section-33">如何亲自验证这条路线</a><a href="#section-34">本轮完整路线的实际代码摘录</a><a href="#section-35">摘录：Task/Answer身份与引用绑定</a><a href="#section-36">摘录：API接收与异常返回</a><a href="#section-37">摘录：保存接受和队列</a><a href="#section-38">摘录：worker装配和最终保存</a><a href="#section-39">摘录：真实装配的资源建立</a><a href="#section-40">摘录：原锚点输入与实际解析选择</a><a href="#section-41">摘录：政策上下文，不是另一个模型</a><a href="#section-42">摘录：阶段与对象短事务</a><a href="#section-43">摘录：保存结果到安全投影</a><a href="#section-44">关键连接：实际Harness组件注入</a><a href="#section-45">关键连接：按输入契约包装，而非散落版本条件</a><a href="#section-46">关键连接：并发双审和异常收尾</a><a href="#section-47">关键连接：修订后重建与旧轮次保留</a><a href="#section-48">2026-10-22现行连接：共享阶段与可选图</a><a href="#section-49">2026-10-22 服务图接线阅读点</a><a href="#section-50">三道自测：先作答，再展开</a><a href="#section-51">自测1：为什么直接组件测试不够？</a><a href="#section-52">自测2：task_id和run_id在哪里产生？</a><a href="#section-53">自测3：observer失败还能声称结果保存吗？</a><a href="#section-54">2026-10-08 首版收尾核对</a><a href="#section-55">事实审核内部候选源码：FactFlowAgent.run</a><a href="#section-56">事实审核内部候选源码：Catalog.parse_one</a><a href="#section-57">事实审核内部候选源码：execute</a><a href="#section-58">实际发送前的JSON检查</a><a href="#section-59">同运行预算的故障状态</a><a href="#section-60">唯一结果提交函数</a><a href="#section-61">传输标记还原与原解析入口</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+        <span class="keyword">return</span> super().decode_wire(map_null(data),group)</code></pre>
+<h2 id="section-62">2026-10-27 默认分支源码身份修复</h2>
+<p>公开CI继续到学习站后暴露旧身份过期；以下按本分支实际AST重新定位与摘录，未搬入实验/维护代码。上方明确标历史的1d5528f片段继续保留。</p>
+<p>harness/execution.py / RunExecution.prepare_review；默认代码基线09c6b987，实际行356–369。截取部分不代替完整函数。</p>
+<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> prepare_review(self):
+        <span class="string">&quot;&quot;&quot;Prepare separate purpose-bound inputs with sequential retrieval.&quot;&quot;&quot;</span>
+        self.transition(RunState.VERIFYING)
+        original_ids = {eid <span class="keyword">for</span> c <span class="keyword">in</span> self.answer.citations <span class="keyword">for</span> eid <span class="keyword">in</span> c.evidence_ids}
+        self.original_evidence = tuple((e <span class="keyword">for</span> e <span class="keyword">in</span> self.evidence <span class="keyword">if</span> e.evidence_id <span class="keyword">in</span> original_ids))
+        self.v_evidence = self.d_evidence = self.evidence
+        self.v_bindings = self.d_bindings = self.bindings
+        self.v_retrieval_issue = self.d_retrieval_issue = <span class="keyword">None</span>
+        <span class="keyword">if</span> self.retrieval:
+            self.vd = <span class="keyword">await</span> self.retrieve_for(RetrievalPurpose.VERIFICATION)
+            <span class="keyword">if</span> <span class="keyword">not</span> self.evidence_only:
+                self.dd = <span class="keyword">await</span> self.retrieve_for(RetrievalPurpose.DOMAIN_REVIEW)
+            user_evidence = tuple((e <span class="keyword">for</span> e <span class="keyword">in</span> self.request.provided_evidence <span class="keyword">if</span> e.evidence_id <span class="keyword">not</span> <span class="keyword">in</span> self.indexed_reference_ids))
+            self.v_evidence = merge_evidence(user_evidence, self.vd.evidence)</code></pre>
+<p>harness/execution.py / RunExecution.review_pair；默认代码基线09c6b987，实际行388–401。截取部分不代替完整函数。</p>
+<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> review_pair(self):
+        <span class="string">&quot;&quot;&quot;Keep concurrent review ownership, sibling results and cancellation.&quot;&quot;&quot;</span>
+        <span class="keyword">if</span> self.evidence_only:
+            self.verification, issue = <span class="keyword">await</span> self.review(<span class="string">&#x27;evidence_verification&#x27;</span>, self.harness.verification, self.v_input, merge_evidence(self.v_evidence, self.original_evidence), <span class="keyword">True</span>, self.v_retrieval_issue)
+            <span class="keyword">if</span> issue:
+                self.issues.append(issue)
+                <span class="keyword">if</span> getattr(self.harness.verification, <span class="string">&#x27;schema_version&#x27;</span>, <span class="keyword">None</span>) <span class="keyword">in</span> (<span class="number">7</span>, <span class="number">8</span>):
+                    <span class="keyword">from</span> agents.verification_contract_v7 <span class="keyword">import</span> execution_incomplete
+                    self.verification = execution_incomplete(self.v_input, issue)
+                <span class="keyword">else</span>:
+                    self.verification = EvidenceVerificationOutput(self.answer.answer_id, self.answer.version, self.claims, (), (), (issue,))
+                self.reason = <span class="string">&#x27;Evidence verification execution incomplete; domain review not run&#x27;</span>
+                self.transition(RunState.REVIEW_REQUIRED)
+            <span class="keyword">else</span>:</code></pre>
+<p>harness/execution.py / RunExecution.revise；默认代码基线09c6b987，实际行494–507。截取部分不代替完整函数。</p>
+<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> revise(self):
+        <span class="string">&quot;&quot;&quot;Validate a bounded revision; return whether a full re-audit can run.&quot;&quot;&quot;</span>
+        <span class="keyword">from</span> dataclasses <span class="keyword">import</span> replace
+        <span class="keyword">if</span> self.rounds &gt;= self.budget.max_revision_rounds:
+            <span class="keyword">raise</span> ContractError(<span class="string">&#x27;Policy attempted revision beyond limit&#x27;</span>)
+        self.transition(RunState.REVISING)
+        revision_input=RevisionInput(self.request,self.answer,self.verification,self.domain,self.evidence,self.decision.reasons,self.bindings,self.knowledge_version <span class="keyword">if</span> self.retrieval <span class="keyword">else</span> <span class="keyword">None</span>)
+
+        <span class="keyword">def</span> check_revision(output):
+            self.guard_agent_evidence(output, self.evidence)
+            <span class="keyword">from</span> agents.contracts <span class="keyword">import</span> LocalRevisionOutput
+            <span class="keyword">if</span> isinstance(output,LocalRevisionOutput):
+                require(output.bound_defects==self.verification.literal_defects,<span class="string">&#x27;Local revision changed the source-bound defect catalog&#x27;</span>)
+            validate_revision(output, self.answer, self.evidence, self.verification.findings + self.domain.findings,revision_context=revision_input)</code></pre>
+<p>harness/execution.py / RunExecution.run_stages；默认代码基线09c6b987，实际行544–557。截取部分不代替完整函数。</p>
+<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> run_stages(self):
+        <span class="string">&quot;&quot;&quot;Original sequential route, retained as the default implementation.&quot;&quot;&quot;</span>
+        <span class="keyword">await</span> self.validate_saved_inputs()
+        <span class="keyword">if</span> self.request.mode == TaskMode.QUESTION_ANSWER:
+            <span class="keyword">await</span> self.generate()
+        <span class="keyword">while</span> <span class="keyword">not</span> self.generation_only:
+            <span class="keyword">await</span> self.extract_and_tools()
+            <span class="keyword">await</span> self.prepare_review()
+            <span class="keyword">await</span> self.review_pair()
+            <span class="keyword">if</span> self.evidence_only:
+                <span class="keyword">break</span>
+            <span class="keyword">if</span> <span class="keyword">await</span> self.merge_and_decide():
+                <span class="keyword">break</span>
+            <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">await</span> self.revise():</code></pre>
+<p>harness/execution.py / RunExecution.run；默认代码基线09c6b987，实际行560–573。截取部分不代替完整函数。</p>
+<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> run(self, *, driver=<span class="keyword">None</span>):
+        <span class="string">&quot;&quot;&quot;One driver inside the existing exception, registry and result boundary.&quot;&quot;&quot;</span>
+        <span class="keyword">try</span>:
+            <span class="keyword">if</span> driver <span class="keyword">is</span> <span class="keyword">None</span>:
+                <span class="keyword">await</span> self.run_stages()
+            <span class="keyword">else</span>:
+                <span class="keyword">await</span> driver(self)
+        <span class="keyword">except</span> HarnessObserverError:
+            <span class="keyword">raise</span>
+        <span class="keyword">except</span> RequiredRetrievalFailure <span class="keyword">as</span> exc:
+            self.reason = str(exc)
+            self.transition(RunState.EXECUTION_INCOMPLETE <span class="keyword">if</span> any((i.component == <span class="string">&#x27;generation_query_conversion&#x27;</span> <span class="keyword">for</span> i <span class="keyword">in</span> self.issues)) <span class="keyword">else</span> RunState.REVIEW_REQUIRED)
+        <span class="keyword">except</span> asyncio.CancelledError:
+            self.reason = <span class="string">&#x27;Run cancelled&#x27;</span></code></pre></article><footer><a href="13-local-nli.html">← 13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">本轮真实验证边界</a><a href="#section-3">2026-10-24 简化合同与投影的源码入口</a><a href="#section-4">2026-10-24 审核链v2实证更新</a><a href="#section-5">一页请求对象流：先认对象，再读源码</a><a href="#section-6">如何读，不被版本文件淹没</a><a href="#section-7">第一条路线：从提交到冻结答案</a><a href="#section-8">第二条路线：Evidence怎样变成typed basis</a><a href="#section-9">第三条路线：政策与Revision</a><a href="#section-10">第四条路线：存储和只读恢复</a><a href="#section-11">对每个函数问五个问题</a><a href="#section-12">面试阅读练习</a><a href="#section-13">实际代码摘录</a><a href="#section-14">重复键、非有限值与严格JSON</a><a href="#section-15">名次融合不验证事实</a><a href="#section-16">原ID和内部ID分离</a><a href="#section-17">短事务的commit与rollback</a><a href="#section-18">一次修订资格不是修订成功</a><a href="#section-19">确定性标量计算的边界</a><a href="#section-20">恢复状态但不重发</a><a href="#section-21">沿一条实际请求完整阅读：谁创建对象，谁保存事实</a><a href="#section-22">一个贯穿对象的synthetic摘要</a><a href="#section-23">1 API：普通字段变成任务，不把浏览器当路径输入器</a><a href="#section-24">2 接受：先持久化，再让worker取任务</a><a href="#section-25">3 worker与Factory：装配真实组件，而非模拟回退</a><a href="#section-26">4 Harness输入与冻结：版本对象的起点</a><a href="#section-27">5 提取：原锚点→规范命题→组件</a><a href="#section-28">6 工具与交付：类型成立才可作为依据</a><a href="#section-29">7 双审输入和并发：上轮遗漏恰在这里</a><a href="#section-30">8 政策：读有效发现，不再问模型投票</a><a href="#section-31">9 Revision：新对象重建，旧版不抹去</a><a href="#section-32">10 observer、事务、结果与UI</a><a href="#section-33">如何亲自验证这条路线</a><a href="#section-34">本轮完整路线的实际代码摘录</a><a href="#section-35">摘录：Task/Answer身份与引用绑定</a><a href="#section-36">摘录：API接收与异常返回</a><a href="#section-37">摘录：保存接受和队列</a><a href="#section-38">摘录：worker装配和最终保存</a><a href="#section-39">摘录：真实装配的资源建立</a><a href="#section-40">摘录：原锚点输入与实际解析选择</a><a href="#section-41">摘录：政策上下文，不是另一个模型</a><a href="#section-42">摘录：阶段与对象短事务</a><a href="#section-43">摘录：保存结果到安全投影</a><a href="#section-44">关键连接：实际Harness组件注入</a><a href="#section-45">关键连接：按输入契约包装，而非散落版本条件</a><a href="#section-46">关键连接：并发双审和异常收尾</a><a href="#section-47">关键连接：修订后重建与旧轮次保留</a><a href="#section-48">2026-10-22现行连接：共享阶段与可选图</a><a href="#section-49">2026-10-22 服务图接线阅读点</a><a href="#section-50">三道自测：先作答，再展开</a><a href="#section-51">自测1：为什么直接组件测试不够？</a><a href="#section-52">自测2：task_id和run_id在哪里产生？</a><a href="#section-53">自测3：observer失败还能声称结果保存吗？</a><a href="#section-54">2026-10-08 首版收尾核对</a><a href="#section-55">事实审核内部候选源码：FactFlowAgent.run</a><a href="#section-56">事实审核内部候选源码：Catalog.parse_one</a><a href="#section-57">事实审核内部候选源码：execute</a><a href="#section-58">实际发送前的JSON检查</a><a href="#section-59">同运行预算的故障状态</a><a href="#section-60">唯一结果提交函数</a><a href="#section-61">传输标记还原与原解析入口</a><a href="#section-62">2026-10-27 默认分支源码身份修复</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

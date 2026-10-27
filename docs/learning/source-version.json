@@ -1,6 +1,6 @@
 {
-  "application_commit": "c098b5d48d12c11e4df1eefbf1ee4907f555322a",
-  "document_version": "learning-site-v5.3 literal original review and failed local revision,2026-10-25",
+  "application_commit": "09c6b9876237b027f2c28390aebf7bee75bb0034",
+  "document_version": "learning-site-v5.3-default-ci-source-repair,2026-10-27",
   "old_handbooks": "20261003 30 pages; v0.1-r1 38 pages, historical reference only",
   "update_policy": "Edit Markdown, verify code references and rebuild. Application revision is explicit, not automatically inferred from old reports.",
   "daily_schema": 13,
