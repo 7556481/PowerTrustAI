@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-27 默认首页与公开CI独立发布
+
+README重写并迁出本分支旧全文，新增合成UI截图；新版业务代码位于codex/user-ui-readme-final-delivery-v6，未合并实验/维护代码。必要CI修复：匹配图依赖、完整Git历史、忽略目录测试前提、逐方法私有归档缺失标注，公开断言不变。已读取09c6b987/99b93497失败日志，红叉不等于push失败。模型0；[完整跨分支交付报告](https://github.com/7556481/PowerTrustAI/blob/codex/user-ui-readme-final-delivery-v6/docs/maintenance/user-ui-readme-final-delivery-v6.md)，最终CI看本提交Actions。以后维护记录进交接/报告，不堆README。
+
 ## 2026-10-26 中文主线三路检索完成，N6换义触发停止
 
 唯一完整候选chinese_first_cross_language_v1默认关闭，范围解析保留机构/同名所有文献，既有Flash单query转换＋双路词法RRF k60/top20→top3，邻接预算不变。源码冻结667cbe0b8fb10cdf7ea6dfc1be53abfeb2df043a，12题×A/B/C共36槽，A八题Evidence/分数逐项复现历史，B仅N1/N4完整覆盖（6/25），C实际原文25/25。但N6将运行投切投入退出译成commissioning/decommissioning投运调试/退役，属实质不忠实；不能用原文命中补算。结构有效8、语义忠实7，有效C>A7题跨4家族、C>B5题，八题C无失败条件未满足，gate=false。16个条件性回答槽未启动，回答收益未证明，不称相当/失败16例，不补译/修后续跑/第二批。

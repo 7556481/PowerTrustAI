@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-27 默认首页与公开CI独立发布
+
+README重写并迁出本分支旧全文，新增合成UI截图；新版业务代码位于codex/user-ui-readme-final-delivery-v6，未合并实验/维护代码。必要CI修复：匹配图依赖、完整Git历史、忽略目录测试前提、逐方法私有归档缺失标注，公开断言不变。已读取09c6b987/99b93497失败日志，红叉不等于push失败。模型0；[完整跨分支交付报告](https://github.com/7556481/PowerTrustAI/blob/codex/user-ui-readme-final-delivery-v6/docs/maintenance/user-ui-readme-final-delivery-v6.md)，最终CI看本提交Actions。以后维护记录进交接/报告，不堆README。
+
 ## 2026-10-26 中文主线跨语言检索封存（已执行）
 
 [报告](evaluation/chinese-first-cross-language-retrieval-v1/report.md) · [三路36槽](evaluation/chinese-first-cross-language-retrieval-v1/retrieval-results.json) · [语言依据](evaluation/chinese-first-cross-language-retrieval-v1/language-audit.json) · [8条转换原预测](evaluation/chinese-first-cross-language-retrieval-v1/predictions.json) · [门槛](evaluation/chinese-first-cross-language-retrieval-v1/evidence-gate.json) · [独立源/翻译复核](evaluation/chinese-first-cross-language-retrieval-v1/independent-source-review.md) · [成本延迟](evaluation/chinese-first-cross-language-retrieval-v1/statistics.json) · [验证](evaluation/chinese-first-cross-language-retrieval-v1/verification.json)。A/B/C所问原文槽实际覆盖0/6/25（总25），C的N6转换实质换义失败单列；有效C>A7/8、C>B5/8，门槛未全满足，回答阶段未启动。8Flash/1359token、金额未知；每触发题+1请求、C-B均值+1.748秒。1324最终离线通过，默认关闭、无生产切换/第二批。下方“尚未执行”保留任务编写时状态，以本封存记录为准。

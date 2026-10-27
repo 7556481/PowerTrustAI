@@ -1,124 +1,85 @@
 # PowerTrustAI
 
-## 2026-10-25 审核误拦与回答交付
+**电力知识问答与有据审核的本机研究原型。** 根据电力资料回答问题，保留引用、回答版本、审核发现和修订记录，帮助使用者理解“依据是什么、哪些内容仍待核对”。适合电力资料学习和 Agent 工程研究；目前为单用户本机应用，尚未证明稳定纠错能力。
 
-统一Flash，Pro新增0调用。只移除候选conditions.answer_ids，由程序绑定当前目标范围；条件三维、来源、gap、异议与危险门禁不变，显式simple_bound_v1/投影v1.2，生产不切换。1268完整离线通过；固定A8+G3+B6全部执行56调用、688531token。A候选4/4完整、原版1/4，保护反例未错误支持；自然两路均0通过、1复核/2执行不完整，正文不变、无Revision/重审，未证明产品交付净收益，保留候选、不进生产验收。 批后发现生成检索额度未扣，实际没超限，已离线修补14项通过，不补跑。[根因、唯一改动及完整交付结果](docs/evaluation/review-delivery-unblock-v1/report.md)。学习站20章75题。
+## 使用流程
 
-## 2026-10-25 事实审核模型适配性对照
+输入问题 → 先阅读初稿 → 等待自动审核 → 查看结果与引用依据。出现修订时可切换原回答与修订后版本；历史按需打开。令牌连接、已有回答审核、工程背景、逐项发现、NLI、轨迹及追加反馈统一放在独立诊断页。
 
-同一simple_v1修补合同/投影及Beta工具路径，固定8组×Flash/Pro各一次，16任务全部执行、41请求（32初始/9纠正）196986token。Pro执行完整8/8、Flash3/8；Pro减少结构失败且部分不足判断改善，但有据目标11/18不必要降级，范围不足仍误判矛盾，费用未知。两种实验配置均不适合直接承担此负担；保留生产现状、Pro仅实验候选，不进服务验收，不加第三模型或新合同。 [完整模型依据、预测与分项结果](docs/evaluation/fact-review-model-fit-v1/report.md)。生产保持原停服与默认，学习站20章73解析题。
+新版界面与故障恢复代码交付于 [`codex/user-ui-readme-final-delivery-v6`](https://github.com/7556481/PowerTrustAI/tree/codex/user-ui-readme-final-delivery-v6)。默认分支首页单独更新，**不表示所有实验和维护代码已合并**。体验新版请按下面命令切换交付分支。
 
-## 2026-10-24 严格接口最小复现与回归
+![新版用户主页；合成演示，仅展示交互](docs/assets/user-ui-v6-desktop.png)
 
-8项合成HTTP对照全部合法、四对实际发送正文相同，接口准入通过；旧材料4项回归仅2项执行完整，复杂参数出现4次额外字段、2次来源ID违规（1次重合，共5次无效请求）。19调用61872token，账单未知；不足仍误判矛盾，不采用、不进完整服务验收。生产schema13/production/json未切、8765保持停服，四表104/2278/2999/8；无常驻候选。44相关离线通过18.821秒，20章71道解析题及构建/引用/链接/HTML检查；浏览器未新增验收。 [报告与全部必要参数](docs/evaluation/strict-interface-consistency-v1/report.md)。下方旧批保留历史身份。
+上图来自交付分支的真实浏览器截图，合成演示仅展示交互，不代表真实回答质量。
 
-## 2026-10-24 严格工具载体结果
+## 零模型本地演示
 
-[完整报告与Schema/原始参数](docs/evaluation/strict-review-tool-v1/report.md)：1247离线通过。真实A1三次指定工具信封均返回，但参数两次重复键、一次多闭合括号，0合法，按接入门禁停止27槽。3调用14879token，账单未知；自然线未运行，不采用、不进服务验收。审核语义与生产默认不改，8765仍停服；学习站20章69题。下方更早状态保留历史含义。
-
-## 2026-10-24 simple_v1修补接入结果
-
-[完整报告](docs/evaluation/review-simple-patch-v1/report.md)：公共请求检查及1234离线通过；实际A1事实合法、原引用重复键纠正后仍失败，按预定接入门禁停止26槽。3调用12682token，未请求拒绝；自然线未执行，不能评价净收益，不进生产验收。生产默认不变且8765仍停服。学习站20章67题；下方状态为历史。
-
-## 2026-10-24 审核合同简化结果
-
-[完整报告](docs/evaluation/review-contract-simple-v1/report.md)：显式simple_v1把精确转录交给程序、模型只选作用域内ID并作三维条件判断。付费前1222离线通过；唯一计划A16/G4/B8，只执行A1原/候两个本地运行，5次请求中原版3次返回、候选2次请求拒绝，剩26槽未执行。无纠正/Revision/重审，自然线完全未发送。已知15868token只来自原版，拒绝请求用量和账单未知。不补跑、不恢复attempt；不能证明稳定性、语义或自然净收益，明确不采用、不进生产验收。 最终修补仅离线1224通过；生产默认不变、8765仍停服。学习站扩为20章66题；下方状态均为历史。
-
-## 2026-10-24 生产审核链净收益v2
-
-[完整报告与复核材料](docs/evaluation/production-review-net-benefit-v2/report.md)：1209项完整离线回归通过（228.595秒）。唯一固定批次A16+G6+B12共34槽，32实际执行、2因共享初稿生成失败而未执行；116调用（96初始含1次Revision、20纠正），47次无效尝试，1,013,267 token，账单费用未知。候选A八路、自然五条实际审核路均执行不完整，无自然修订收益，明确不采用、不进入生产验收。原版B5一次澄清不计入候选。生产仍schema13/原事实领域修订与政策，8765未监听、保持原停服；无常驻候选。无重发、补跑或新批。 下方服务ready及更早试验均为历史状态。
-
-## 2026-10-24 闭环净收益改进v1
-
-[完整结果与回查材料](docs/evaluation/answer-review-net-benefit-v1/report.md)：新增显式修订正文提示候选，生产默认不变；1197离线通过，唯一A8+G4+B8真实批次106请求、1126972token，5条审核执行不完整，无补跑。候选未证明净收益，保留开发、不采用。自然线正文未改，条件/无据扩展与审核疑点照实保留。本轮前后8765实际未监听，保持原停服；下方旧ready是历史状态。学习站仍20章60自测。
-
-## 2026-10-24 当前状态
-
-生产保持LangGraph/schema13及原事实审核；事实两阶段未证明收益，暂不采用。领域business_v1为显式开发候选，12分支真实组件对照完成；两项完整服务验收在受理前被采集器冻结文件名故障阻断，0服务任务/0服务模型调用，未补跑。修复与离线验证不替代真实服务验收，不自动切换候选。见[完整报告、响应、统计及回退](docs/evaluation/domain-business-v1/report.md)。
-
-
-## 2026-10-23 当前默认与验收
-
-**本机受管默认已切为LangGraph（langgraph_v1）**，正常服务ready；公共源码无配置回退仍sequential，环境变量优先。剩余五项固定服务验收全部完成，32调用／413,018 token，两项诊断实际一次修订及完整重审；语义待复核、待补充保留。日常历史104运行、2278事件、2999版本/证据对象、8反馈及行哈希启动前后不变。旧首项不重发、旧失败记录不改。见[后续验收与回退](docs/evaluation/langgraph-service-continuation-v1/results-v1.md)、[小统计](docs/evaluation/langgraph-service-continuation-v1/results-v1.json)、[切换核对](docs/evaluation/langgraph-service-continuation-v1/switch-verification-v1.json)。
-
-唯一产品主线仍是回答＋完整审核；已有回答保留折叠诊断及兼容API，四Agent/schema13/检索/政策不变，A/B不采用。登录后的引用、版本及失败草稿浏览器验收仍待用户一次人工清单，未绕过本地文件限制；不把API结果当浏览器验收。空闲正常停服后将受管orchestration.json的execution_path改为sequential并重启可回退，无自动失败回退重发。以下2026-10-22“当前状态”是旧批收尾记录，以本节及新报告为准。
-
-## 2026-10-22 当前集成状态
-
-正常Factory/worker/存储/API已接入可选LangGraph七阶段，**实际默认仍为sequential**。固定六次真实验收仅首项原编排完成，随后验收收集器跨线程SQLite读取失败，按规则停止五项；图实测未执行，不满足默认切换条件。收集器已离线修复但不补跑。本批5调用/55,821 token，最终1136项完整离线检查通过。见[集成验收报告](docs/evaluation/langgraph-service-integration-v1/results-v1.md)、[统计](docs/evaluation/langgraph-service-integration-v1/results-v1.json)及[清理与回退](docs/evaluation/langgraph-service-integration-v1/cleanup-and-rollback-v1.json)。
-
-唯一产品主线为提问→生成→完整审核→必要时一次修订与完整重审；页面折叠已有回答诊断入口，保留兼容API/历史。A映射与B对象边界继续开发状态，生产四Agent、schema13、检索与政策未变。浏览器仅验证入口与模式切换，自动连接及登录后引用/版本/失败展示因工具file协议限制未验收。以下第二版成绩与旧检查数量是历史记录，不能替代本次状态。
-
-本地、单用户的电力资料“回答＋审核”原型；已有回答审核保留为兼容、诊断与回归入口。用户提问后检索、生成、逐主张事实/原引用与领域审核，按确定性政策处置；有定位和既有依据的局部错误最多一次修订、重提取并完整双审。模型意见、程序验证、工具及人工反馈分别保存。通过只表示满足当前任务审核条件，不能作为工程安全认证。
-
-当前：第二版已按限定范围性能改进原型冻结；最终v4＋lossless两题均120字内、完整执行、程序pass，但公式适用范围语义疑点与浏览器自动连接/答案核查仍未全部通过。实测首次API14.923/3.204秒、总44.454/28.068秒，不承诺全部10秒或费用/纠正率下降。schema13/flash/政策1.5/完整库/BM25 aggregate/NLI关闭，v5仍可选；首版与旧失败保留。见[第二版冻结与验收](docs/release-freeze-v2.md)及[独立学习站同步清单](docs/learning-site-sync-v2.md)。
-
-## 架构
-
-```mermaid
-flowchart LR
- U[本机API/UI] --> Q[持久化队列 / worker]
- Q --> H[现有OfflineHarness]
- H --> R[版本化检索与Evidence]
- H --> G[Generation]
- G --> C[ClaimExtractor]
- C --> F[事实与原引用审核]
- C --> D[领域审核]
- F --> P[确定性政策]
- D --> P
- P --> V[最多一次Revision及完整重审]
- P --> S[版本报告与SQLite]
- S --> U
- H -.仅诊断.-> N[可选本地NLI / 默认关闭]
-```
-
-## 核心能力与当前状态
-
-- 中文问答、已有回答审核、逐主张/引用原文回查、版本与失败保留、反馈、一键本机连接已实现；私有真实资料不随公开克隆发布。
-- 日常事实契约保留**schema13**，BM25/aggregate保持，日常已显式切换完整发布FTS快照；schema14接线及作用域展示已修复，8题纠正后完整，但正常支持仍有保守降级。两版都不能宣称普遍稳定。
-- 此前schema-choice-v1真实schema13正常概念完整通过；明确频率错误自然一次实质修订后完整重审。其工程题配置准备失败未受理，不能冒充完整验证；本轮完整库新任务单列于接入报告。
-- 完整大库70个有效分片已完成核验、独立发布与本机日常接入：863万去重正文、2462万片段；3个原始不可读分片有核验排除记录。FTS不是全量向量库，也不等于全部电力知识覆盖。
-
-## 实际界面
-
-![历史零付费演示界面](docs/assets/demo-ui-20261005.jpg)
-
-上图是2026-10-05实际浏览器synthetic_fixture演示截图，布局较当前版本早；不作为真实语义正确率证据。没有凭据或私有响应。普通链路v2实际浏览器已检查当前答案、版本、引用、警告与失败说明；私有截图不作通用准确率证据。
-
-![实际学习站图示](docs/assets/learning-ui-20261007.jpg)
-
-20章中文学习站采用Markdown唯一正文，独立静态阅读；上图为实际学习站截图，不是产品审核结果。
-
-## 技术
-
-Python、FastAPI、现有受控Harness/四Agent、严格结构及候选作用域校验、SQLite/WAL、中文分词与FTS5大库索引；小库BM25保留。Dense/E5、RRF/reranker为已记录未默认采用的实验。CPU MiniLM本地NLI可选，仅诊断、不投票、不赋决策权；本轮无训练。
-
-## 验证
-
-本轮796项完整离线通过，另补4项相关模块检查；此前公开离线回归714项通过；无私有资料副本714项、27项私有历史回放明确跳过。实际CI状态需查看[Public offline checks](https://github.com/7556481/PowerTrustAI/actions/workflows/public-offline.yml)，本轮推送后的运行状态另见工程记录，未使用装饰性成功徽章。
-
-固定8题同回答/主张/交付对照：schema13初次7/8、纠正后7/8；schema14初次6/8、纠正后8/8。单位案例工具准备失败，合法计算语义比较不成立；3次首题token因采集失败未保存。不能用pass数量、快速失败或小样本推导通用准确率/性能承诺。两项完整服务分别5和9次请求；修订ω条件保留并完整重审。详见[本轮对照与限制](docs/schema-choice-v1.md)。
-
-公开可复现案例见[Portfolio](portfolio/README.md)：synthetic_fixture，不含私有语料、响应或模型；没有明确参考池，不报告Recall。引用存在不等于引用支持。
-
-## 快速启动：先零付费demo
-
-Windows / Python3.13：
+新克隆需要 Python 3.13、Node.js（运行客户端测试时使用）及下列公开依赖，不需要密钥、知识大库或模型权重：
 
 ```powershell
+git clone https://github.com/7556481/PowerTrustAI.git
+cd PowerTrustAI
+git switch codex/user-ui-readme-final-delivery-v6
 python -m venv .venv
-& .\.venv\Scripts\python.exe -m pip install -r requirements-api.lock.txt
-& .\.venv\Scripts\python.exe -m backend --demo --open --port 8765
+.\.venv\Scripts\python.exe -m pip install -r requirements-api.lock.txt -r requirements-corpus.txt -r requirements-pdf.txt -r requirements-ci.txt
+.\.venv\Scripts\python.exe -m tools.ui_fixture --port 8766
 ```
 
-Linux/macOS改用`.venv/bin/python`。demo无需DeepSeek密钥/官方库/训练模型，模拟判断只验证交互。另一终端可运行`python -m harness.demo`；完整公开回归先安装requirements-corpus.txt及requirements-pdf.txt，再`python -m tools.public_checks`。
+已有项目环境只需最后一条命令。打开 [合成演示连接入口](http://127.0.0.1:8766/fixture/connect)，建立正常本机会话后进入主页。页面明确标记“演示模式 · 无模型调用”；假答案只验证交互，不作为模型质量证据。关闭该命令即可停止本次演示。8766 被占用时换空闲端口，勿占用真实服务8765。
 
-本机真实日常入口：双击`start-powertrustai.cmd`，统一8765和固定访问保护/自动连接；完整库每新进程仍校验全文件（此前44–52秒，本轮独立测量约96秒，受IO缓存影响，非保证）；需要本机获准资料与服务端`.env`配置（只由本人填写，不提交）。停止：`python -m backend --stop --port 8765`或原终端Ctrl+C；不自动重发历史任务。手动连接保留供恢复。
+只看学习资料可运行 `python -m tools.learning_site serve --port 8770`，或双击 [start-learning.cmd](start-learning.cmd)。[中文学习站](docs/learning/index.md)包含架构、算法手算、源码导读、失败分析和面试练习；N1 → A3 → N4 路线展示历史资料交付、给定发现后修订及自然审核漏错。
 
-学习站：双击`start-learning.cmd`，独立8770；或`python -m tools.learning_site serve --port 8770`。静态`docs/learning/site/index.html`可直接离线阅读。正文在[Markdown首页](docs/learning/index.md)，学习与面试待补问题在[共同补充清单](docs/learning/questions-for-chatgpt.md)。学习站不访问模型、凭据或运行库。
+真实运行使用 [start-powertrustai.cmd](start-powertrustai.cmd)，需要服务端私有配置、固定知识快照与凭据，提交会产生付费调用。新增真实请求仅使用已授权的 DeepSeek Flash；公开演示不会切换到真实适配器。私有材料与实际运行输出不随 Git 分发。
 
-## 已知限制
+## 实际架构
 
-契约与模型语义仍可能失败或不确定；程序严格拒绝非法ID/跨作用域，不把未完成算通过。知识来源层级、实际交付与全库覆盖不同，工程设定和性能保证仍需要可靠来源及工程输入。NLI曾有错误支持，仅提供第二判断。AI辅助用户监督不是专家金标准；未声称电力通用准确率或工程可靠性。本轮完整库接入的浏览器自动连接、回答/引用及重启保存已实际验证；此前其他未验收能力不因此转为通过。无goal概念的工程输入适用性已修复并真实通过；工程拒答/建议与事实边界仍有合理复核和回答偏长限制。本人熔断器题的泛化错误放行已确认；已补通用性能量值范围指导，但未重跑旧题，不能宣布该语义风险已验收解决。
+```mermaid
+flowchart TD
+    Q[问题 / 诊断页已有回答] --> R[Retriever / 固定知识快照]
+    R --> E[Evidence / 来源版本与原文定位]
+    E --> G[Generation Agent / 已有回答冻结]
+    G --> X[ClaimExtractor 提取服务]
+    X --> F[事实与原引用审核 Agent]
+    X --> D[领域审核 Agent]
+    F --> P[确定性政策]
+    D --> P
+    P -->|有据且满足资格，最多一次| V[Revision Agent]
+    V --> X
+    P --> O[最终处置 / 未解决问题]
+    H[LangGraph 外层七阶段路由] -.驱动.-> X
+    B[OfflineHarness / 预算、生命周期、停止] -.约束整个流程.-> H
+    O --> S[Store / 输入身份、版本、证据、失败与反馈]
+    S --> UI[同源用户主页 / 独立诊断页]
+```
 
-历史批次/失败/内部版本完整保留在[工程README历史](docs/engineering-readme-history.md)、[工程状态历史](docs/engineering-status-history.md)及[文档索引](docs/documentation-index.md)。长期学习手册继续采用Markdown＋本地站，PDF可选，旧手册保留。
+事实与领域审核在既有链路中并行，修订后重新提取并完整双审。四 Agent 分担生成、事实、领域和修订；ClaimExtractor 是服务，LangGraph 不是第五个 Master。受管运行使用 LangGraph，未配置源码入口可使用 sequential；二者复用 Harness 与阶段实现，不另建调度器。研究候选和历史 NLI 诊断不等于生产默认启用。
+
+## 关键工程设计
+
+- **可回查**：Evidence、文档版本、原文区间及回答引用严格绑定；可定位只证明来源可查，不证明语义支持。
+- **有限闭环**：共享预算、超时、取消及失败停止；有据修订至多一次，保存原回答并完整重审。
+- **故障与历史分离**：服务拒单或保存未确认时明确提示，保留已存业务结论，不自动重启、重放或重发未知 POST。
+- **请求归属**：旧请求和旧鉴权错误不能覆盖新任务；反馈按实际回答版本与发现追加，保留 AI 辅助、用户监督来源。
+
+## 证据与限制
+
+|已见固定材料|结果|解释边界|
+|---|---|---|
+|8题、A/C两组共16份生成|5题净改善、3题混合；正确完整语义槽1/25 → 19/25|资料变化后的生成收益；没有B回答组，不能全归查询转换|
+|给定成立发现的历史修订|4/4实际修改并完整重审|不是自主发现率，也不是自然审核收益|
+|8份自然C稿新审核|N2/N4关键问题未纠正；19/25不变；N8局部改写有争议，N5执行失败|关键纠错收益未证；pass不代表工程安全认证|
+
+[生成诊断与16回答](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md) · [给定发现后修订4/4](https://github.com/7556481/PowerTrustAI/blob/73c25ca0af9ba9fd5143527c6341aae52170fffd/docs/evaluation/local-revision-v2-flash-check-v1/report.md) · [自然审核失败](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md)。这些是小规模已见开发材料、AI辅助和用户监督复核，不是专家金标准或独立留出准确率。
+
+私有约70GB资料采用 FTS 倒排索引，不是全量向量库；资料在库仍可能无法召回。原出处、PDF提取质量和模型支持关系判断均有限制。审核包含提取、双审、可能的结构纠正及修订后重审，延迟仍可能较长；本轮未证明推理提速。回答供资料理解参考，不替代现场工程判断。
+
+## 开发与文档
+
+```powershell
+# 离线Fake测试，不发模型请求
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+# 公开克隆检查：缺失私有历史会明确跳过，公开合成检查必须执行
+.\.venv\Scripts\python.exe -m tools.public_checks
+```
+
+[学习与面试手册入口](docs/learning/index.md) · [文档索引](docs/documentation-index.md) · [设计依据](docs/design-decisions.md) · [项目状态与能力边界](https://github.com/7556481/PowerTrustAI/blob/653412642dc065c39ed6721a64dd55303c45be6b/docs/project-status-20261027.md) · [历史README快照](docs/archive/README-before-ui-v6-20261027.md)。维护进展统一写入交接和专题报告，首页保持产品与架构总览。

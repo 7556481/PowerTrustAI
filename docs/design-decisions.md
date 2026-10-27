@@ -1,5 +1,9 @@
 # 重要设计决策与依据
 
+## 2026-10-27 默认首页与公开CI独立发布
+
+README重写并迁出本分支旧全文，新增合成UI截图；新版业务代码位于codex/user-ui-readme-final-delivery-v6，未合并实验/维护代码。必要CI修复：匹配图依赖、完整Git历史、忽略目录测试前提、逐方法私有归档缺失标注，公开断言不变。已读取09c6b987/99b93497失败日志，红叉不等于push失败。模型0；[完整跨分支交付报告](https://github.com/7556481/PowerTrustAI/blob/codex/user-ui-readme-final-delivery-v6/docs/maintenance/user-ui-readme-final-delivery-v6.md)，最终CI看本提交Actions。以后维护记录进交接/报告，不堆README。
+
 ## 2026-10-26 检索交付成功不能抵消转换语义失败
 
 本轮按已授权完整组合候选实现机构/标题范围、一次Flash转换及固定词法融合，保留原默认。三路将范围收益与翻译收益分开：B已覆盖N1/N4；C实际原文全覆盖，但N6将日常投切换成commissioning/decommissioning生命周期操作，需按事前规则判C槽失败。合法JSON/调用成功/正确召回不是查询忠实证明，不能为了生成回答放宽全八C有效门槛。
