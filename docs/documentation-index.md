@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-27 正文审核标注v7交付
+
+[报告](maintenance/answer-inline-review-marking-v7.md)及[验证](maintenance/answer-inline-review-marking-v7-verification.json)：安全原文/身份定位、同句合并/重叠分段、未定位回退、当前/历史版本隔离、明确未修改与已有修订，0模型；包含离线/API/浏览器及失败修正边界。仅同步学习站10/14，不更新README或master，不重跑用户问题。
+
 ## 2026-10-27 产品首页与CI最终交付v6
 
 [用户UI、README与CI报告](maintenance/user-ui-readme-final-delivery-v6.md)：模块去留、审核时序边界、历史README迁移、实际GitHub失败日志、逐项CI修复、验证失败及修正；最终远端ref/提交CI以收尾Actions为准。新版默认问答与独立诊断，模型0，不恢复付费批次。README仅产品总览，后续维护进交接和专题报告。

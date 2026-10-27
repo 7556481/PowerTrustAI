@@ -1,5 +1,47 @@
 # 14 核心源码阅读路线：输入、调用、异常与取舍
 
+## v7只读标注源码路线
+
+先读backend/answer_annotations.py的identity/locate/project：身份与逐字核验先于展示，同句意见只合入口，不合后台记录。backend/presentation.py保留原解释字段并追加inline_review；backend/service.py仅投影已保存审核身份，不重执行、不落库。再读backend/static/inline_review.js的model/render，检查Array.from码点切片、重叠分段、纯文本节点、复制原文和历史版本隔离。app.js保持原epoch/轮询/反馈机制。tests/test_answer_annotations_v7.py与tests/ui_inline_review_probe.js覆盖坏区间、重复句、版本/原文不符、emoji/CRLF、同句两来源、重叠、原文复制及关闭焦点。
+
+下列两个片段从本轮实际AST摘录；只展示定位入口及精确核验，不代表整个函数。源码身份见source-check/source-version，不能把安全定位说成审核语义正确。
+
+### 精确标注入口：identity
+
+backend/answer_annotations.py实际行6–10，完整函数。
+
+```python
+def identity(obj, answer):
+    return (bool(answer.get('answer_id')) and type(answer.get('version')) is int
+            and obj.get('answer_id') == answer['answer_id']
+            and type(obj.get('answer_version')) is int
+            and obj['answer_version'] == answer['version'])
+```
+
+
+### 精确标注入口：locate
+
+backend/answer_annotations.py实际行13–28，部分函数。
+
+```python
+def locate(answer, binding):
+    """Explicit invalid offsets never fall back to text search."""
+    if not identity(binding, answer):
+        return None, '缺少或不符的回答版本绑定'
+    text = answer.get('text')
+    original = binding.get('text')
+    if not isinstance(text, str) or not isinstance(original, str) or not original:
+        return None, '缺少逐字原文；不能使用改述主张定位'
+    start, end = binding.get('start_offset'), binding.get('end_offset')
+    if 'start_offset' in binding or 'end_offset' in binding:
+        if (type(start) is int and type(end) is int and 0 <= start < end <= len(text)
+                and text[start:end] == original):
+            return (start, end, original, 'saved_offset'), None
+        return None, '原文区间或逐字核验不符'
+    start = text.find(original)
+    if start < 0 or text.find(original, start + 1) >= 0:
+```
+
 v6界面入口：backend/static/index.html为单列用户问答，diagnostics.html为历史与专业诊断；diagnostic_input.js独占工程背景及已有回答payload。共享app.js用实际DOM职责选择渲染/辅助读取，但认证、请求归属和主轮询只有一套。tests/ui_question_probe.js用真实主页ID创建DOM，不补造诊断节点；旧异步/反馈探针明确针对诊断页继续执行。backend/api.py只把三个确切新静态资源加入白名单，未放宽任意路径、query或运行API鉴权。
 
 ## 当前源码身份与读法（2026-10-27维护同步）

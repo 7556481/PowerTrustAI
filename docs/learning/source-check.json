@@ -1,5 +1,5 @@
 {
-  "application_commit": "09d67936c5502422cedf5ba98cd45d4a585438b9",
+  "application_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
   "evaluation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "method": "AST exact qualified symbol, actual LF excerpt, partial spans explicit; all snippets verified against Markdown",
   "excerpts": [
@@ -156,6 +156,28 @@
       "file_sha256": "9918a1177a74beda74dd221e835891e71ab172f589bf4adb83261d4e597126dd",
       "source_text_lf_sha256": "9918a1177a74beda74dd221e835891e71ab172f589bf4adb83261d4e597126dd",
       "excerpt_sha256": "25f9bd3f284cb5574787e52d9d8d53f5df3d0aa86422c901ef757e5529a4c6f0"
+    },
+    {
+      "file": "backend/answer_annotations.py",
+      "symbol": "identity",
+      "start_line": 6,
+      "end_line": 10,
+      "function_end_line": 10,
+      "partial": false,
+      "file_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
+      "source_text_lf_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
+      "excerpt_sha256": "e38e098d3055b0bf32890a341e853028e93d557a0f6523e14151686df5ef227b"
+    },
+    {
+      "file": "backend/answer_annotations.py",
+      "symbol": "locate",
+      "start_line": 13,
+      "end_line": 28,
+      "function_end_line": 30,
+      "partial": true,
+      "file_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
+      "source_text_lf_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
+      "excerpt_sha256": "908c10d81898c8236df5f734e16aa5eb4f3b5febe7209a9a33de2f4cd40959ee"
     }
   ],
   "maintenance_base": "653412642dc065c39ed6721a64dd55303c45be6b"

@@ -1,15 +1,15 @@
 {
   "version": {
-    "application_commit": "09d67936c5502422cedf5ba98cd45d4a585438b9",
+    "application_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
     "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "documentation_parent_commit": "09d67936c5502422cedf5ba98cd45d4a585438b9",
-    "document_version": "learning-site-v6.8 user question / separate diagnostics / public CI prerequisites, 2026-10-27",
+    "documentation_parent_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
+    "document_version": "learning-site-v6.9 exact inline review marks,2026-10-27",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
       "unconfigured_fallback": "sequential",
-      "service_8765": "stopped",
+      "service_8765": "observed_listening_not_managed_by_v7",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
       "literal_source_actions_candidate_default": false,
@@ -316,6 +316,20 @@
       "project_model_requests": 0,
       "production_switch": false,
       "scope": "10/14/18 and source identity; final verification in maintenance report and ignored closeout record"
+    },
+    "inline_review_v7": {
+      "implementation_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
+      "model_requests": 0,
+      "read_only_projection": true,
+      "historical_marks": false,
+      "full_offline": {
+        "tests": 1374,
+        "seconds": 406.949
+      },
+      "final_frontend_and_fixture": {
+        "tests": 18,
+        "seconds": 4.828
+      }
     }
   },
   "chapters": [
@@ -371,8 +385,8 @@
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 7551,
-      "sha256": "5bcaa79cf3cc942e686e15b09fe852b6536b66329276f02f2d7d67514dfc2dc7"
+      "characters": 8228,
+      "sha256": "3ec1e4881a5e0fd0366ccaf2df1bacbe0e627aade1e991eded28ffa366219602"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
@@ -391,8 +405,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 23469,
-      "sha256": "1fb96a6009f3717f35f2783ac57976f167f81d6e5034d7e91a84a0f6bbc050f2"
+      "characters": 25228,
+      "sha256": "0c52573f79737f30576c4e79b3e6cfeb5e7a0155d3dcb7d386d529c81f56a5c4"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -430,6 +444,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 167694,
+  "markdown_characters": 170130,
   "network_dependencies": false
 }

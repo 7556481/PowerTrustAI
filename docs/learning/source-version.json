@@ -1,14 +1,14 @@
 {
-  "application_commit": "09d67936c5502422cedf5ba98cd45d4a585438b9",
+  "application_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
   "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-  "documentation_parent_commit": "09d67936c5502422cedf5ba98cd45d4a585438b9",
-  "document_version": "learning-site-v6.8 user question / separate diagnostics / public CI prerequisites, 2026-10-27",
+  "documentation_parent_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
+  "document_version": "learning-site-v6.9 exact inline review marks,2026-10-27",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "stopped",
+    "service_8765": "observed_listening_not_managed_by_v7",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "literal_source_actions_candidate_default": false,
@@ -315,5 +315,19 @@
     "project_model_requests": 0,
     "production_switch": false,
     "scope": "10/14/18 and source identity; final verification in maintenance report and ignored closeout record"
+  },
+  "inline_review_v7": {
+    "implementation_commit": "d31b477a67e09dac48f715355fc616475eb10ac1",
+    "model_requests": 0,
+    "read_only_projection": true,
+    "historical_marks": false,
+    "full_offline": {
+      "tests": 1374,
+      "seconds": 406.949
+    },
+    "final_frontend_and_fixture": {
+      "tests": 18,
+      "seconds": 4.828
+    }
   }
 }

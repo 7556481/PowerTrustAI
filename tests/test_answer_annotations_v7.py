@@ -109,4 +109,3 @@ class InlineAPITests(unittest.TestCase):
             self.assertEqual(fixture.client.get('/runs/'+rid+'/result').status_code,401)
             self.assertEqual(fixture.client.get('/ui/inline_review.js').status_code,200)
         finally:fixture.tearDown()
-

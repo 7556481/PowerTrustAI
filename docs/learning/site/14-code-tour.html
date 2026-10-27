@@ -1,40 +1,68 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14 核心源码阅读路线：输入、调用、异常与取舍 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 09d67936c550 · learning-site-v6.8 user question / separate diagnostics / public CI prerequisites, 2026-10-27 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">14 核心源码阅读路线：输入、调用、异常与取舍</h1>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14 核心源码阅读路线：输入、调用、异常与取舍 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 d31b477a67e0 · learning-site-v6.9 exact inline review marks,2026-10-27 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">14 核心源码阅读路线：输入、调用、异常与取舍</h1>
+<h2 id="section-2">v7只读标注源码路线</h2>
+<p>先读backend/answer_annotations.py的identity/locate/project：身份与逐字核验先于展示，同句意见只合入口，不合后台记录。backend/presentation.py保留原解释字段并追加inline_review；backend/service.py仅投影已保存审核身份，不重执行、不落库。再读backend/static/inline_review.js的model/render，检查Array.from码点切片、重叠分段、纯文本节点、复制原文和历史版本隔离。app.js保持原epoch/轮询/反馈机制。tests/test_answer_annotations_v7.py与tests/ui_inline_review_probe.js覆盖坏区间、重复句、版本/原文不符、emoji/CRLF、同句两来源、重叠、原文复制及关闭焦点。</p>
+<p>下列两个片段从本轮实际AST摘录；只展示定位入口及精确核验，不代表整个函数。源码身份见source-check/source-version，不能把安全定位说成审核语义正确。</p>
+<h3 id="section-3">精确标注入口：identity</h3>
+<p>backend/answer_annotations.py实际行6–10，完整函数。</p>
+<pre><code class="language-python"><span class="keyword">def</span> identity(obj, answer):
+    <span class="keyword">return</span> (bool(answer.get(<span class="string">&#x27;answer_id&#x27;</span>)) <span class="keyword">and</span> type(answer.get(<span class="string">&#x27;version&#x27;</span>)) <span class="keyword">is</span> int
+            <span class="keyword">and</span> obj.get(<span class="string">&#x27;answer_id&#x27;</span>) == answer[<span class="string">&#x27;answer_id&#x27;</span>]
+            <span class="keyword">and</span> type(obj.get(<span class="string">&#x27;answer_version&#x27;</span>)) <span class="keyword">is</span> int
+            <span class="keyword">and</span> obj[<span class="string">&#x27;answer_version&#x27;</span>] == answer[<span class="string">&#x27;version&#x27;</span>])</code></pre>
+<h3 id="section-4">精确标注入口：locate</h3>
+<p>backend/answer_annotations.py实际行13–28，部分函数。</p>
+<pre><code class="language-python"><span class="keyword">def</span> locate(answer, binding):
+    <span class="string">&quot;&quot;&quot;Explicit invalid offsets never fall back to text search.&quot;&quot;&quot;</span>
+    <span class="keyword">if</span> <span class="keyword">not</span> identity(binding, answer):
+        <span class="keyword">return</span> <span class="keyword">None</span>, <span class="string">&#x27;缺少或不符的回答版本绑定&#x27;</span>
+    text = answer.get(<span class="string">&#x27;text&#x27;</span>)
+    original = binding.get(<span class="string">&#x27;text&#x27;</span>)
+    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(text, str) <span class="keyword">or</span> <span class="keyword">not</span> isinstance(original, str) <span class="keyword">or</span> <span class="keyword">not</span> original:
+        <span class="keyword">return</span> <span class="keyword">None</span>, <span class="string">&#x27;缺少逐字原文；不能使用改述主张定位&#x27;</span>
+    start, end = binding.get(<span class="string">&#x27;start_offset&#x27;</span>), binding.get(<span class="string">&#x27;end_offset&#x27;</span>)
+    <span class="keyword">if</span> <span class="string">&#x27;start_offset&#x27;</span> <span class="keyword">in</span> binding <span class="keyword">or</span> <span class="string">&#x27;end_offset&#x27;</span> <span class="keyword">in</span> binding:
+        <span class="keyword">if</span> (type(start) <span class="keyword">is</span> int <span class="keyword">and</span> type(end) <span class="keyword">is</span> int <span class="keyword">and</span> <span class="number">0</span> &lt;= start &lt; end &lt;= len(text)
+                <span class="keyword">and</span> text[start:end] == original):
+            <span class="keyword">return</span> (start, end, original, <span class="string">&#x27;saved_offset&#x27;</span>), <span class="keyword">None</span>
+        <span class="keyword">return</span> <span class="keyword">None</span>, <span class="string">&#x27;原文区间或逐字核验不符&#x27;</span>
+    start = text.find(original)
+    <span class="keyword">if</span> start &lt; <span class="number">0</span> <span class="keyword">or</span> text.find(original, start + <span class="number">1</span>) &gt;= <span class="number">0</span>:</code></pre>
 <p>v6界面入口：backend/static/index.html为单列用户问答，diagnostics.html为历史与专业诊断；diagnostic_input.js独占工程背景及已有回答payload。共享app.js用实际DOM职责选择渲染/辅助读取，但认证、请求归属和主轮询只有一套。tests/ui_question_probe.js用真实主页ID创建DOM，不补造诊断节点；旧异步/反馈探针明确针对诊断页继续执行。backend/api.py只把三个确切新静态资源加入白名单，未放宽任意路径、query或运行API鉴权。</p>
-<h2 id="section-2">当前源码身份与读法（2026-10-27维护同步）</h2>
+<h2 id="section-5">当前源码身份与读法（2026-10-27维护同步）</h2>
 <p>历史评测应用基线1a92d03、入口babdfe1保持冻结；2026-10-27工程维护源码身份见source-version，未改历史合同/政策。先读evaluation/natural_draft_audit_v1.py的recover与batch：前者恢复实际8稿及快照，后者接入原Factory/Harness并统一预发送扣额。参考只进离线分析，不进模型。再读rag/chinese_first.py，区分目录范围、语言触发与实际Evidence。候选默认关闭，生产schema13、受管langgraph_v1，源码fallback sequential，8765停服。</p>
 <p>后端本轮先读backend/service.py的_worker/_run_one/lifecycle_status及result，区分资源故障、排队终态和无实质回答适用阶段；backend/assembly.py的close_resources会尝试全部资源，不强行越过未确认drain。前端可从backend/static/app.js的reviewDrafts/load/requestAuxiliary看草稿归属、主周期与辅助slot独立、revision和终态收敛，从backend/store.py的require_run/state_row看测量支持的轻量读取（get完整恢复仍保留）；list_runs保留兼容的120字问题摘要；tools/ui_fixture.py仅用于隔离合成8766，不是生产入口。五个死导入的清理不改变摘录函数体。</p>
 <p>以下仅摘函数开头最多18行，明确不是完整函数；所有记录按AST限定符定位，保留完整函数终点、实际文件LF身份与片段哈希。长函数的后续分支必须继续读源码，不以开头代替证明。旧摘录已重新从实际文件取文，历史运行身份仍见原提交。</p>
-<h2 id="section-3">2026-10-24历史真实验证边界</h2>
+<h2 id="section-6">2026-10-24历史真实验证边界</h2>
 <p>【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-contract-simple-v1/report.md#" rel="noreferrer noopener">完整响应、依据与版本边界</a>。</p>
-<h2 id="section-4">2026-10-24 简化合同与投影的源码入口</h2>
+<h2 id="section-7">2026-10-24 简化合同与投影的源码入口</h2>
 <p>从services/review_simple_v1.py的SimpleCatalog看起：沿既有ReviewCatalog生成SRC来源目录及ANS答案锚点，decode_wire仅程序绑定顺序身份；parse_one校验ID并明确投影三维声明。旧typed依据/authority/objection/repair继续复用，旧condition空引用投影不再复用。Factory仍注入原事实Agent，配置simple_v1显式启用，production回退，不改领域/修订资格/product政策。</p>
 <p>【待真实验证的实现检查】离线替身能通过none/not_applicable/not_claimed用例，是否证明真实模型会识别所有无条件陈述？</p>
 <details class="self-answer"><summary>展开新增练习解析</summary><p>不能。它只证明程序收到该合法声明时不会走旧遗漏路径；真实模型能否作出正确声明、能否识别条件归属，需要固定真实输入逐项核验。不能将新字段或替身标签当语义成绩。</p></details>
-<h2 id="section-5">2026-10-24 审核链v2实证更新</h2>
+<h2 id="section-8">2026-10-24 审核链v2实证更新</h2>
 <p>本轮入口services/review_scope_v2.py，经backend/config.py与ComponentFactory显式fact_review_contract=scope_v2接入services/scoped_fact_execution.py。默认production保留旧消息/解析；fact_internal_flow须仍为production且schema13。候选使用九语义字段的顺序数组，身份由程序绑定；条件关系映射至原判断再完整重审。真实验证发现逐字字段与空条件投影缺陷，代码保留作失败证据，不建议生产验收。 <a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/production-review-net-benefit-v2/report.md#" rel="noreferrer noopener">完整预测、理由和成本</a>。</p>
 <p>2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#" rel="noreferrer noopener">报告</a>。</p>
 <p>2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#" rel="noreferrer noopener">后续验收</a>。这是2026-10-23历史服务记录；当前8765停服，以本章开头状态为准。</p>
-<h2 id="section-6">一页请求对象流：先认对象，再读源码</h2>
+<h2 id="section-9">一页请求对象流：先认对象，再读源码</h2>
 <div class="table-scroll"><table><thead><tr><th>阶段</th><th>对象及身份</th><th>数据进入和离开</th><th>失败/保存边界</th></tr></thead><tbody><tr><td>API接收</td><td>Submit→TaskRequest；服务产生task_id/run_id</td><td>用户问题、可选原回答；客户端不能提交模型路径</td><td>先类型校验；无效输入未受理，不算模型失败</td></tr><tr><td>队列/worker</td><td>RunStore保存请求/配置；ComponentFactory产生Bundle</td><td>固定知识版本/政策/schema；不把预期标签交模型</td><td>共享装配错误停止后续；接受后不能盲重发</td></tr><tr><td>Generation</td><td>AnswerDraft(answer_id,version,text,citations)</td><td>实际交付Evidence；答案引用与事实独立检索分开</td><td>无实质答案后续不适用；连接/生成失败单列</td></tr><tr><td>提取</td><td>ObligationClaim＋组件ID/原文锚点</td><td>立场、数量、必要限定、核验义务</td><td>忠实性不同于来源支持，不强制faithful</td></tr><tr><td>双审</td><td>实际EvidenceVerificationInput扩展；领域输入</td><td>身份/版本/候选由程序绑定；模型评估支持/条件/异议</td><td>Fact与Domain并发；有效同级结果保留；非法ID不补造</td></tr><tr><td>政策</td><td>执行完整性＋业务处置＋问题解决程度</td><td>不是多数投票；来源及支持要求仍阻断</td><td>可定位局部错误才修订；缺输入不靠删除问题解决</td></tr><tr><td>Revision</td><td>新回答版本，重新产生主张对象</td><td>一次实质纠错，重新交付并完整双审</td><td>原版错误不抹去；不得修订后直接通过</td></tr><tr><td>持久化/UI</td><td>observer→checkpoint/结果；版本独立</td><td>回答、处置、依据先展示，技术详情折叠</td><td>刷新/查询/重启只读既有结果，不补算或远程重发</td></tr></tbody></table></div>
 <p>教学构造：task=T、answer=A/v1、claim=C/组件C0、Evidence=E/知识K；Fact仅可在C0的候选范围选依据，原引用R0仅可用原交付。候选ID不是跨目标通行证。详细synthetic对象与实际函数摘录见下节。</p>
 <p>主要契约对照冻结同回答/主张/完整交付，只改13/14；这能减生成/检索混杂，但不能证明完整产品。完整服务与Revision另测，阶段、结构、语义和业务分母分开。采集故障也必须停止并记录，已发请求只离线恢复；否则统计会把报告工程缺陷误算模型失败。</p>
-<h2 id="section-7">如何读，不被版本文件淹没</h2>
+<h2 id="section-10">如何读，不被版本文件淹没</h2>
 <p>先看backend/__main__.py和assembly.py，再读OfflineHarness.run，最后才深入当前Agent协议。目录里旧v4/v6/v9不是多个并行审核器，而是历史契约保留。当前manifest明确schema和prompt；不要凭文件名最大数字猜采用版本。</p>
 <p>本章代码摘录按AST函数/实际行号读取当前源码，记录文件及片段SHA。省略的部分明确是摘录，不当完整函数。你可以从同名函数继续读上下文。正文解释的是责任，代码才是异常和字段的最终依据。</p>
 <p>在learning-audit-v1历史版本中，新增紧凑协议入口agents/verification_contract_v14.py的ReviewCatalog/run只通过直接组件回归，真实Harness输入包装遗漏导致12题失败；默认日常仍13。查看learning-audit-v1冻结源码中harness/runtime.py的历史schema9–13包装分支，可以定位当时14缺tool_results；当前已改用显式输入能力和services/review_inputs.build，不把历史分支当现行源码。那个批次没有在当轮自动补后重跑，见第15章。</p>
-<h2 id="section-8">第一条路线：从提交到冻结答案</h2>
+<h2 id="section-11">第一条路线：从提交到冻结答案</h2>
 <p>ApplicationService.submit验证配置、排队并保存TaskRequest。worker建立Bundle，调用OfflineHarness.run；runtime中invoke统一处理期限、使用量、执行问题和observer。问答先检索、Generation，已有回答直接冻结；提取服务输出claims，validate_extraction检查覆盖和绑定。</p>
 <p>阅读任务：找到answer_id/version在哪里生成，找到substantive_answer=False为何绕过提取。若生成未成功，是否可能还有领域模型请求？按状态和usage回答，别只看函数名。</p>
-<h2 id="section-9">第二条路线：Evidence怎样变成typed basis</h2>
+<h2 id="section-12">第二条路线：Evidence怎样变成typed basis</h2>
 <p>KnowledgeStore.evidence从固定版本片段构造原文对象；RetrievalSession保存命中与交付，quote_candidates提供字面候选，EvidenceScope为独立审核和每项原引用建立不同命名空间。解析器把合法选择映射到TextExcerpt或metadata/calculation等正式对象；core.typed_evidence负责类型义务。</p>
 <p>阅读任务：一个quote属于当前原引用scope但text相同于另一scope，借用是否合法？答案是不合法，作用域是审核对象与交付身份，不仅文字。程序可验证这个关系，不用模型判断“看起来同源”。</p>
-<h2 id="section-10">第三条路线：政策与Revision</h2>
+<h2 id="section-13">第三条路线：政策与Revision</h2>
 <p>ProductAuditPolicy.decide_context读取执行、分类、支持、领域和引用结果。bounded_repair.eligible_repairs只允许存在原文绑定建议的faithful adverse对象。Revision不自行通过；runtime创建新版本后回到提取和双审。观察review_rounds和answer.versions而非只看usage中有没有revision组件。</p>
 <p>阅读任务：为什么一个insufficient finding不必自动修订？因为可能是缺资料；没有已交付原文能支撑实质replacement时不能发明修复。反例中即使可修另一个错误，其他缺口也保留。</p>
-<h2 id="section-11">第四条路线：存储和只读恢复</h2>
+<h2 id="section-14">第四条路线：存储和只读恢复</h2>
 <p>RunStore.tx管理短写事务，index保存版本化对象，result经backend.presentation/serialization安全投影。GET result和NLI读取已存结果，不调用Harness。LocalNLI失败只产生diagnostic对象，主判断已结束，不反向进入Agent输入。</p>
 <p>阅读任务：重启恢复时为什么queued/running变interrupted而不是继续worker？没有供应商幂等保证和完整续执行证明，自动重发会重复收费、改变历史。恢复不等于重新执行。</p>
-<h2 id="section-12">对每个函数问五个问题</h2>
+<h2 id="section-15">对每个函数问五个问题</h2>
 <ul>
 <li>输入来自用户、数据库、模型还是程序派生？信任边界不同。</li>
 <li>输出是否绑定task、answer和knowledge版本？有没有跨版本缓存？</li>
@@ -43,18 +71,18 @@
 <li>测试是否走真实生产调用路线，还是只手工构造内部对象？</li>
 </ul>
 <p>例如strict_json拒绝重复键，避免模型输出两个status被普通json.loads静默保留后者。它能保证唯一键，不能保证status语义正确。source_identity生成稳定定位，不证明原来源权威。fuse_ranks融合排名，不执行事实核验。</p>
-<h2 id="section-13">面试阅读练习</h2>
+<h2 id="section-16">面试阅读练习</h2>
 <p>练习1：注释掉某个validate_review会发生什么？参考：未知/错版本依据可能进入结果，影响政策和存储；不是“更宽容”而是失去边界。练习2：只删除旧协议文件能简化当前模型消息吗？不一定，应检查真正拼装模板与运行profile；清代码目录不等于减少输出字段。</p>
 <p>面试说法：“我能从API沿submit/worker/Harness读到审核解析，解释每个边界可证明什么。代码摘录绑定实际版本和哈希，历史协议不冒充当前默认。”</p>
-<h2 id="section-14">实际代码摘录（本轮重新核对）</h2>
-<h3 id="section-15">严格JSON只验证结构</h3>
+<h2 id="section-17">实际代码摘录（本轮重新核对）</h2>
+<h3 id="section-18">严格JSON只验证结构</h3>
 <p>路径 services/structured_model.py，函数 strict_json，行18–21；完整函数至21行，完整定义。</p>
 <pre><code class="language-python"><span class="keyword">def</span> strict_json(text):
     <span class="keyword">return</span> json.loads(text, object_pairs_hook=_object,
                       parse_constant=<span class="keyword">lambda</span> _: (_ <span class="keyword">for</span> _ <span class="keyword">in</span> ()).throw(
                           StructuredValidationError(<span class="string">&quot;json_parse&quot;</span>, <span class="string">&quot;$&quot;</span>, <span class="string">&quot;nonfinite_numbers_not_allowed&quot;</span>)))</code></pre>
 <p>片段SHA256：76dd2f489da70c1558dd13cb5f101317b869c9ca56842a563dac6970ebe94200。</p>
-<h3 id="section-16">RRF融合不保证支持</h3>
+<h3 id="section-19">RRF融合不保证支持</h3>
 <p>路径 rag/semantic.py，函数 fuse_ranks，行149–154；完整函数至154行，完整定义。</p>
 <pre><code class="language-python"><span class="keyword">def</span> fuse_ranks(bm25, dense, *, constant=<span class="number">60</span>):
     scores = {}
@@ -63,7 +91,7 @@
             scores[index] = scores.get(index, <span class="number">0.0</span>) + <span class="number">1.0</span> / (constant + rank)
     <span class="keyword">return</span> scores</code></pre>
 <p>片段SHA256：9f646b4b29742ebf72bb5eb3db8128c250360dbb855b5e6c9896640dd7ad4f18。</p>
-<h3 id="section-17">来源身份不等于权威</h3>
+<h3 id="section-20">来源身份不等于权威</h3>
 <p>路径 rag/corpus_build.py，函数 source_identity，行10–14；完整函数至14行，完整定义。</p>
 <pre><code class="language-python"><span class="keyword">def</span> source_identity(row,revision,shard,row_number):
     original=row.get(<span class="string">&#x27;_id&#x27;</span>)
@@ -71,7 +99,7 @@
     <span class="keyword">if</span> <span class="keyword">not</span> missing:<span class="keyword">return</span> str(original),<span class="keyword">False</span>
     <span class="keyword">return</span> <span class="string">&#x27;industrycorpus2:row-v1:&#x27;</span>+digest(canonical([revision,shard,row_number]).encode()),<span class="keyword">True</span></code></pre>
 <p>片段SHA256：58f3c8dd93e5a6c23b7b5edbe2112c3ae1bfc686917a07a38e2f684b2c5e35d7。</p>
-<h3 id="section-18">短事务边界</h3>
+<h3 id="section-21">短事务边界</h3>
 <p>路径 backend/store.py，函数 RunStore.tx，行50–56；完整函数至56行，完整定义。</p>
 <pre><code class="language-python">    <span class="keyword">def</span> tx(self):
         <span class="keyword">try</span>:
@@ -81,13 +109,13 @@
             <span class="keyword">if</span> isinstance(exc,sqlite3.Error):<span class="keyword">raise</span> StorageError(<span class="string">&#x27;Run transaction failed&#x27;</span>) <span class="keyword">from</span> <span class="keyword">None</span>
             <span class="keyword">raise</span></code></pre>
 <p>片段SHA256：dad37aa75bf1c5e6c3552cf4ebe57685a07f4328d5ff92f9b2452f058782739f。</p>
-<h3 id="section-19">恢复不自动续跑</h3>
+<h3 id="section-22">恢复不自动续跑</h3>
 <p>路径 backend/store.py，函数 RunStore.recover，行58–60；完整函数至60行，完整定义。</p>
 <pre><code class="language-python">    <span class="keyword">def</span> recover(self):
         <span class="keyword">with</span> self.tx():
             self.db.execute(<span class="string">&quot;UPDATE runs SET status=&#x27;interrupted&#x27;,ended=?,error_code=&#x27;PROCESS_INTERRUPTED&#x27; WHERE status IN (&#x27;queued&#x27;,&#x27;running&#x27;)&quot;</span>,(now(),))</code></pre>
 <p>片段SHA256：e053039f0449359a72a0d0f7685aaaba2289e17e2832a5b51c22b11a54271334。</p>
-<h3 id="section-20">复用装配与固定Evidence入口</h3>
+<h3 id="section-23">复用装配与固定Evidence入口</h3>
 <p>路径 backend/assembly.py，函数 ComponentFactory.create，行253–270；完整函数至323行，局部摘录。</p>
 <pre><code class="language-python">    <span class="keyword">def</span> create(self,rid,observer,*,fixed_evidence_only=<span class="keyword">False</span>):
         <span class="string">&quot;&quot;&quot;Fixed Evidence evaluation may skip index resources; defaults unchanged.&quot;&quot;&quot;</span>
@@ -108,7 +136,7 @@
             <span class="keyword">elif</span> self.config.fact_internal_flow==<span class="string">&#x27;two_stage_v1&#x27;</span>:
                 <span class="keyword">from</span> services.fact_two_stage_v1 <span class="keyword">import</span> create_agent <span class="keyword">as</span> FactAgent</code></pre>
 <p>片段SHA256：90c30e41b968135fa24d44bf40d33f767e4ac80d3a4bd4f0848188937aac21bb。</p>
-<h3 id="section-21">受预算约束的完整闭环</h3>
+<h3 id="section-24">受预算约束的完整闭环</h3>
 <p>路径 harness/runtime.py，函数 OfflineHarness.run，行42–59；完整函数至61行，局部摘录。</p>
 <pre><code class="language-python">    async def run(self, request, budget, *, knowledge_version=None, generation_only=False, answer_requirements=(),
                   evidence_only=False, indexed_reference_ids=(), generation_snapshot=None, run_id=None):
@@ -129,7 +157,7 @@
             evidence_only=evidence_only, indexed_reference_ids=indexed_reference_ids,
             generation_snapshot=generation_snapshot, run_id=run_id,</code></pre>
 <p>片段SHA256：e63611d2194634a77c92814d4afdc25f3659c5fbbc0d33e07db0c083239ca525。</p>
-<h3 id="section-22">确定性政策与执行完整性</h3>
+<h3 id="section-25">确定性政策与执行完整性</h3>
 <p>路径 harness/product_policy.py，函数 ProductAuditPolicy.decide_context，行24–41；完整函数至177行，局部摘录。</p>
 <pre><code class="language-python">    def decide_context(self, verification, domain, budget, revision_round, *, request,
                        answer, claims, extraction, issues, retrieval):
@@ -150,7 +178,7 @@
                  &#x27;Classification is fallible; scope alone never overrides an adverse finding&#x27;)
         checks = [(&#x27;fact_support&#x27;, &#x27;applicable&#x27;, &#x27;Every extracted claim must have independent verification&#x27;),</code></pre>
 <p>片段SHA256：723110fc5ff83741dba7a3c4727ba3085b2db5f456fcd9d069ccbec474c6daf3。</p>
-<h3 id="section-23">D/O/S/U修订上下文</h3>
+<h3 id="section-26">D/O/S/U修订上下文</h3>
 <p>路径 services/local_revision_v2.py，函数 plan，行79–96；完整函数至144行，局部摘录。</p>
 <pre><code class="language-python"><span class="keyword">def</span> plan(inputs):
     <span class="string">&quot;&quot;&quot;Program-owned projection; no credential loading, retrieval or semantic inference.&quot;&quot;&quot;</span>
@@ -171,7 +199,7 @@
     require(len(vr)==len(v.literal_reviews) <span class="keyword">and</span> set(vr)==set(unit_by_anchor),<span class="string">&#x27;Prior literal review coverage/identity conflict&#x27;</span>)
     prior={u:[] <span class="keyword">for</span> u <span class="keyword">in</span> units};used=set()</code></pre>
 <p>片段SHA256：c28fdfa8e6ad60f7adbe6a53ceb78054de90f99e78cd7b8c39438de699148910。</p>
-<h3 id="section-24">修改授权与意见记账</h3>
+<h3 id="section-27">修改授权与意见记账</h3>
 <p>路径 services/local_revision_v2.py，函数 parse，行171–188；完整函数至241行，局部摘录。</p>
 <pre><code class="language-python"><span class="keyword">def</span> parse(value,p):
     ec=Errors()
@@ -192,12 +220,12 @@
             ss=ec.refs(e.get(<span class="string">&#x27;support_refs&#x27;</span>),legal,path+<span class="string">&#x27;.support_refs&#x27;</span>,<span class="string">&#x27;support_source_ref&#x27;</span>,nonempty=<span class="keyword">True</span>)
             <span class="keyword">for</span> d <span class="keyword">in</span> ds:</code></pre>
 <p>片段SHA256：fde156157edada85f95c68411719d42b920d829d7d0989fbc93ae99a7f6c55b6。</p>
-<h3 id="section-25">跨语言词项入口</h3>
+<h3 id="section-28">跨语言词项入口</h3>
 <p>路径 rag/chinese_first.py，函数 lexical，行26–27；完整函数至27行，完整定义。</p>
 <pre><code class="language-python"><span class="keyword">def</span> lexical(text):
     <span class="keyword">return</span> tokenize(text) + tuple(w.casefold() <span class="keyword">for</span> w <span class="keyword">in</span> re.findall(<span class="string">r&#x27;[\u0370-\u03ff]+|[=+*/^&lt;&gt;≤≥−]&#x27;</span>, text))</code></pre>
 <p>片段SHA256：34eac82ab0a0f0c47de7edafd71fc66321aa0f691bc60f11ef4d0eb50650fffd。</p>
-<h3 id="section-26">恢复实际输入与知识身份</h3>
+<h3 id="section-29">恢复实际输入与知识身份</h3>
 <p>路径 evaluation/natural_draft_audit_v1.py，函数 recover，行27–44；完整函数至45行，局部摘录。</p>
 <pre><code class="language-python"><span class="keyword">def</span> recover():
     summary=load(OLD/<span class="string">&#x27;batch/summary.json&#x27;</span>);generated={};origins=[]
@@ -218,7 +246,7 @@
                 origin=<span class="string">&#x27;archived_natural_generation_only; all initial extraction/fact/domain audits must be fresh&#x27;</span>,
                 files=[dict(path=p.relative_to(ROOT).as_posix(),sha256=digest(p)) <span class="keyword">for</span> p <span class="keyword">in</span> (path,OLD/<span class="string">&#x27;batch&#x27;</span>/rid/<span class="string">&#x27;input.json&#x27;</span>)]))</code></pre>
 <p>片段SHA256：0aafb6e57a7f5b5ed99e5510729a7a8cb2bf889033eaacd3c596d693f241ba54。</p>
-<h3 id="section-27">一次有界审核批次</h3>
+<h3 id="section-30">一次有界审核批次</h3>
 <p>路径 evaluation/natural_draft_audit_v1.py，函数 batch，行88–105；完整函数至108行，局部摘录。</p>
 <pre><code class="language-python">async def batch(c,m,generated,root,provider,*,limit=None):
     limit=limit or SendLimit(root)
@@ -239,7 +267,7 @@
     rows=[dict(id=f&#x27;N{i+1}&#x27;,input=dict(id=f&#x27;N{i+1}&#x27;,line=&#x27;B&#x27;,case=i,variant=&#x27;candidate&#x27;)) for i in range(8)]
     return await shared.batch(c,m,root,provider,factory_type=Factory,rows=rows,request_builder=request,variant_config=lambda cfg,v:cfg,</code></pre>
 <p>片段SHA256：02992c4f6c2777c98590b491f3c7ea98ed33bdaed94359d697e52cb2696429ae。</p>
-<h3 id="section-28">固定证据生成诊断入口</h3>
+<h3 id="section-31">固定证据生成诊断入口</h3>
 <p>路径 evaluation/retrieval_evidence_answer_check_v1.py，函数 run，行186–203；完整函数至216行，局部摘录。</p>
 <pre><code class="language-python"><span class="keyword">async</span> <span class="keyword">def</span> run():
     require(<span class="keyword">not</span> (LOCAL/<span class="string">&#x27;attempt.json&#x27;</span>).exists(),<span class="string">&#x27;Unique new attempt only; no resume&#x27;</span>)
@@ -261,8 +289,8 @@
     require(manifest[<span class="string">&#x27;prompts&#x27;</span>][<span class="string">&#x27;generation&#x27;</span>]==previous[<span class="string">&#x27;manifest&#x27;</span>][<span class="string">&#x27;prompts&#x27;</span>][<span class="string">&#x27;generation&#x27;</span>],<span class="string">&#x27;Generation prompt differs&#x27;</span>)</code></pre>
 <p>片段SHA256：25f9bd3f284cb5574787e52d9d8d53f5df3d0aa86422c901ef757e5529a4c6f0。</p>
 <details class="self-answer"><summary>新源码核对练习：测试14项通过能证明N2被识别吗？</summary><p>不能。专项证明恢复身份、真初审路径、预算与Store等接缝；自然语义判断必须看实际预测和原文。N2的审核supported恰好表明程序接线正确也可能语义漏检。检查文件哈希能证明教材读的是这份源码，不能证明模型结论正确。</p></details>
-<h2 id="section-29">既有源码练习（历史题保留）</h2>
+<h2 id="section-32">既有源码练习（历史题保留）</h2>
 <details class="self-answer"><summary>展开新增练习解析</summary><p>不能。它只证明程序收到该合法声明时不会走旧遗漏路径；真实模型能否作出正确声明、能否识别条件归属，需要固定真实输入逐项核验。不能将新字段或替身标签当语义成绩。</p></details>
 <details class="self-answer"><summary>展开参考答案1</summary><p>它可能手工传扩展输入，遗漏真实Factory/Harness构造分支。</p></details>
 <details class="self-answer"><summary>展开参考答案2</summary><p>Submit.task构造任务身份；ApplicationService.submit生成运行身份。</p></details>
-<details class="self-answer"><summary>展开参考答案3</summary><p>不能；抛HarnessObserverError并报告持久化失败。</p></details></article><footer><a href="13-local-nli.html">← 13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">当前源码身份与读法（2026-10-27维护同步）</a><a href="#section-3">2026-10-24历史真实验证边界</a><a href="#section-4">2026-10-24 简化合同与投影的源码入口</a><a href="#section-5">2026-10-24 审核链v2实证更新</a><a href="#section-6">一页请求对象流：先认对象，再读源码</a><a href="#section-7">如何读，不被版本文件淹没</a><a href="#section-8">第一条路线：从提交到冻结答案</a><a href="#section-9">第二条路线：Evidence怎样变成typed basis</a><a href="#section-10">第三条路线：政策与Revision</a><a href="#section-11">第四条路线：存储和只读恢复</a><a href="#section-12">对每个函数问五个问题</a><a href="#section-13">面试阅读练习</a><a href="#section-14">实际代码摘录（本轮重新核对）</a><a href="#section-15">严格JSON只验证结构</a><a href="#section-16">RRF融合不保证支持</a><a href="#section-17">来源身份不等于权威</a><a href="#section-18">短事务边界</a><a href="#section-19">恢复不自动续跑</a><a href="#section-20">复用装配与固定Evidence入口</a><a href="#section-21">受预算约束的完整闭环</a><a href="#section-22">确定性政策与执行完整性</a><a href="#section-23">D/O/S/U修订上下文</a><a href="#section-24">修改授权与意见记账</a><a href="#section-25">跨语言词项入口</a><a href="#section-26">恢复实际输入与知识身份</a><a href="#section-27">一次有界审核批次</a><a href="#section-28">固定证据生成诊断入口</a><a href="#section-29">既有源码练习（历史题保留）</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<details class="self-answer"><summary>展开参考答案3</summary><p>不能；抛HarnessObserverError并报告持久化失败。</p></details></article><footer><a href="13-local-nli.html">← 13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">v7只读标注源码路线</a><a href="#section-3">精确标注入口：identity</a><a href="#section-4">精确标注入口：locate</a><a href="#section-5">当前源码身份与读法（2026-10-27维护同步）</a><a href="#section-6">2026-10-24历史真实验证边界</a><a href="#section-7">2026-10-24 简化合同与投影的源码入口</a><a href="#section-8">2026-10-24 审核链v2实证更新</a><a href="#section-9">一页请求对象流：先认对象，再读源码</a><a href="#section-10">如何读，不被版本文件淹没</a><a href="#section-11">第一条路线：从提交到冻结答案</a><a href="#section-12">第二条路线：Evidence怎样变成typed basis</a><a href="#section-13">第三条路线：政策与Revision</a><a href="#section-14">第四条路线：存储和只读恢复</a><a href="#section-15">对每个函数问五个问题</a><a href="#section-16">面试阅读练习</a><a href="#section-17">实际代码摘录（本轮重新核对）</a><a href="#section-18">严格JSON只验证结构</a><a href="#section-19">RRF融合不保证支持</a><a href="#section-20">来源身份不等于权威</a><a href="#section-21">短事务边界</a><a href="#section-22">恢复不自动续跑</a><a href="#section-23">复用装配与固定Evidence入口</a><a href="#section-24">受预算约束的完整闭环</a><a href="#section-25">确定性政策与执行完整性</a><a href="#section-26">D/O/S/U修订上下文</a><a href="#section-27">修改授权与意见记账</a><a href="#section-28">跨语言词项入口</a><a href="#section-29">恢复实际输入与知识身份</a><a href="#section-30">一次有界审核批次</a><a href="#section-31">固定证据生成诊断入口</a><a href="#section-32">既有源码练习（历史题保留）</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
