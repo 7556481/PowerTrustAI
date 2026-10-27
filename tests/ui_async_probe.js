@@ -15,15 +15,15 @@ const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return {
 const response=(value,status=200)=>({ok:status<400,status,json:async()=>value});
 const answer=id=>({execution:{status:'finished',required_stages_complete:true},answer:{final:{answer_id:id,version:1,text:'answer '+id},versions:[{answer_id:id,version:1,text:'answer '+id}]},findings:{},evidence:[],review_rounds:[]});
 const fallback=p=>p==='/health'?response({profile:'synthetic_fixture',status:'ready',configuration_ready:true,queued:0,queue_capacity:2}):p.includes('/page/')?response({items:[],next_offset:null}):p.endsWith('/result')?response(answer(p.split('/')[2])):p.endsWith('/nli')?response({enabled:false,records:[],risk_note:'diagnostic '+p.split('/')[2]}):p.endsWith('/trace')?response({events:[]}):p.endsWith('/reviews')?response([]):response({run_id:p.split('/')[2],status:'finished',profile:'synthetic_fixture'});
-async function client(handler){
+async function client(handler,settings={}){
  const ids=[...fs.readFileSync('backend/static/index.html','utf8').matchAll(/<([a-z]+)[^>]*\bid="([^"]+)"/g)];
  const elements=Object.fromEntries(ids.map(([,tag,id])=>[id,new Element(tag)]));
- const copied=[];const polls=new Map();let tick=0;
- const schedule=(fn,ms)=>ms===1800?(polls.set(++tick,fn),tick):setTimeout(fn,ms);
- const unschedule=id=>polls.has(id)?polls.delete(id):clearTimeout(id);
+ const copied=[];const polls=new Map(),deadlines=new Map();let tick=0;
+ const schedule=(fn,ms)=>ms===1800?(polls.set(++tick,fn),tick):settings.virtualClock?(deadlines.set(++tick,{fn,ms}),tick):setTimeout(fn,ms);
+ const unschedule=id=>polls.has(id)?polls.delete(id):deadlines.has(id)?deadlines.delete(id):clearTimeout(id);
  const windowEvents={};const context={document:{getElementById:id=>elements[id],createElement:tag=>new Element(tag)},navigator:{clipboard:{writeText:async t=>copied.push(t)}},window:{addEventListener(n,f){windowEvents[n]=f;}},URL,AbortController,setTimeout:schedule,clearTimeout:unschedule,console,fetch:handler};
- const source=fs.readFileSync('backend/static/app.js','utf8').replace(/restoreConnection\(\)\.catch\(e=>tell\(errorText\(e\),true\)\);/,"window.testClient={selectRun,forgetConnection,history,connect,api,errorText,renderAnswers,load,state:()=>({reading,selected,connected})};");
- vm.runInNewContext(source,context);await context.window.testClient.connect('synthetic_fixture_not_a_secret');return {ui:elements,api:context.window.testClient,copied,polls,windowEvents};
+ const source=fs.readFileSync(settings.sourcePath||'backend/static/app.js','utf8').replace(/restoreConnection\(\)\.catch\(e=>tell\(errorText\(e\),true\)\);/,"window.testClient={selectRun,forgetConnection,history,connect,api,errorText,renderAnswers,load,state:()=>({reading,selected,connected})};");
+ vm.runInNewContext(source,context);await context.window.testClient.connect('synthetic_fixture_not_a_secret');return {ui:elements,api:context.window.testClient,copied,polls,deadlines,windowEvents};
 }
 const tests=[];const test=(name,fn)=>tests.push([name,fn]);
 test('disconnect rejects delayed NLI',async()=>{
@@ -89,9 +89,9 @@ test('pending A save clears only unchanged A draft while B edited',async()=>{
 });
 for(const item of ['trace','reviews'])test(item+' failure is bounded and does not stop running to finished; manual recovers',async()=>{
  let done=false,fail=true,calls=0;const h=await client(async p=>{if(p==='/runs/A')return response({status:done?'finished':'running',run_id:'A'});if(p==='/runs/A/'+item){calls++;if(fail)throw Error('aux offline');}return fallback(p);});
- await h.api.selectRun('A');assert.equal(h.polls.size,1,'aux failure stopped main polling');assert(h.ui[item==='trace'?'trace':'reviews'].textContent.includes('失败'));
+ await h.api.selectRun('A');await new Promise(setImmediate);assert.equal(h.polls.size,1,'aux failure stopped main polling');assert(h.ui[item==='trace'?'trace':'reviews'].textContent.includes('失败'));
  done=true;const fn=[...h.polls.values()][0];await fn();assert(h.ui.current.textContent.includes('结束'));assert.equal(calls,1,'failed aux repeated');
- fail=false;await h.api.load();assert.equal(calls,2);assert(!h.ui[item==='trace'?'trace':'reviews'].textContent.includes('失败'));
+ fail=false;await h.api.load();await new Promise(setImmediate);assert.equal(calls,2);assert(!h.ui[item==='trace'?'trace':'reviews'].textContent.includes('失败'));
 });
 test('unchanged polling preserves answer picker and feedback DOM focus target',async()=>{
  const h=await client(async p=>fallback(p));await h.api.selectRun('A');const picker=h.ui['review-answer'];const first=picker.children[0];const rendered=h.ui.answers.children[0];await h.api.load();assert.equal(picker.children[0],first);assert.equal(h.ui.answers.children[0],rendered);
@@ -126,4 +126,5 @@ test('usage updates do not rebuild an unchanged answer version picker',async()=>
  let calls=1;const h=await client(async p=>p==='/runs/A/result'?response({...answer('A'),model_usage:[{calls}]}):fallback(p));
  await h.api.selectRun('A');const rendered=h.ui.answers.children[0];calls=2;await h.api.load();assert.equal(h.ui.answers.children[0],rendered);assert(h.ui.usage.textContent.includes('2'));
 });
-(async()=>{let failed=0;for(const [name,fn] of tests){try{await fn();console.log('PASS '+name);}catch(e){failed++;console.error('FAIL '+name+': '+e.message);}}if(failed)process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=1;});
+if(require.main===module)(async()=>{let failed=0;for(const [name,fn] of tests){try{await fn();console.log('PASS '+name);}catch(e){failed++;console.error('FAIL '+name+': '+e.message);}}if(failed)process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=1;});
+module.exports={client,response,answer,fallback,deferred};

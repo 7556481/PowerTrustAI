@@ -23,6 +23,38 @@ let connected = false, sessionConnected = false;
 const hasConnection=()=>Boolean(token||sessionConnected);
 const connectionMemory=window.PowerTrustConnectionMemory?.create()||{load:()=>null,save:()=>false,forget:()=>true};
 let token = '', selected = '', profile = null, result = null, timer = null, epoch = 0, reading = false, posting = false, uncertainPost = false, feedbackPosting = false, cancelPosting = false, historySerial = 0, nextOffset = null;
+const getControllers=new Set();let auxiliary=null;
+function abandonReads(){for(const ctl of getControllers)ctl.abort();getControllers.clear();auxiliary=null;}
+function auxiliaryContext(){if(!auxiliary||auxiliary.stamp!==epoch||auxiliary.rid!==selected)auxiliary={stamp:epoch,rid:selected,slots:new Map(),known:false,running:false,stopped:false,nliPending:false,nliChecks:0};return auxiliary;}
+function ownsAuxiliary(ctx){return auxiliary===ctx&&ctx.stamp===epoch&&ctx.rid===selected&&!ctx.stopped&&hasConnection();}
+function schedulePoll(ctx){if(!ownsAuxiliary(ctx)||timer||reading||!ctx.known)return;
+ if(ctx.running||ctx.nliPending&&ctx.nliChecks<10)timer=setTimeout(()=>load(false),1800);
+ else if(ctx.nliPending&&!ctx.slots.get('nli')?.inflight&&!ctx.limitShown){ctx.limitShown=true;$('local-nli').append(node('p','诊断仍未结束，已达10次终态查询上限；自动查询暂停，可手动查询状态。','hint'));}
+}
+function requestAuxiliary(path,fresh=false){
+ const ctx=auxiliaryContext();if(!ownsAuxiliary(ctx))return;
+ let slot=ctx.slots.get(path);if(!slot){slot={revision:0,inflight:null,terminal:false,paused:false};ctx.slots.set(path,slot);}
+ if(fresh){slot.paused=false;slot.terminal=false;slot.revision++;if(slot.inflight){slot.queued=true;return slot.inflight;}}
+ if(slot.inflight||slot.paused||!ctx.running&&slot.terminal&&!(path==='nli'&&ctx.nliPending))return slot.inflight;
+ const owner={revision:slot.revision,terminal:!ctx.running};const area={nli:'local-nli',trace:'trace',reviews:'reviews'}[path];
+ const render={nli:renderLocalNLI,trace:renderTrace,reviews:renderReviews}[path];
+ if(path==='nli'&&owner.terminal)ctx.nliChecks++;
+ const task=(async()=>{
+  try{const data=await api(`/runs/${encodeURIComponent(ctx.rid)}/${path}`);
+   if(!ownsAuxiliary(ctx)||slot.revision!==owner.revision)return;
+   slot.terminal=owner.terminal;if(path==='nli')ctx.nliPending=Boolean(data.pending);render(data);
+  }catch(e){
+   if(!ownsAuxiliary(ctx)||slot.revision!==owner.revision)return;
+   slot.paused=true;auxiliaryPaused.add(path);if(path==='nli')ctx.nliPending=false;clear(area);
+   $(area).append(node('p','此项读取失败，已暂停自动读取；主状态与回答仍可更新。点击“查询状态”手动恢复。','hint'));
+   if(path==='trace')$('progress').textContent='阶段详情读取失败；主任务状态见上方。';
+  }finally{
+   if(!ownsAuxiliary(ctx)||slot.inflight!==task)return;slot.inflight=null;
+   if(!slot.paused&&(slot.queued||!ctx.running&&!owner.terminal)){const queued=slot.queued;slot.queued=false;if(queued)slot.terminal=false;requestAuxiliary(path);}
+   schedulePoll(ctx);
+  }
+ })();slot.inflight=task;return task;
+}
 function node(tag,text,cls){const n=document.createElement(tag);if(text!=null)n.textContent=String(text);if(cls)n.className=cls;return n;}
 function clear(id){$(id).replaceChildren();}
 function tell(text,error=false){$('notice').textContent=text;$('notice').className='notice'+(error?' error':'');}
@@ -30,7 +62,7 @@ function jsonBox(value){return node('pre',JSON.stringify(value,null,2),'json');}
 function fields(parent,items){const dl=node('dl');for(const [key,value] of items){dl.append(node('dt',key),node('dd',value==null?'未提供':typeof value==='object'?JSON.stringify(value):tr(value)));}parent.append(dl);}
 function badge(value){return node('span',tr(value),'badge'+(['contradicted','failed','timed_out','reject','rejected','execution_incomplete'].includes(value)?' issue':['insufficient_evidence','needs_information','not_assessable','interrupted','review_required','unknown'].includes(value)?' warning':''));}
 class ApiError extends Error {constructor(status,data){super('API error');this.status=status;this.code=data?.code||data?.detail?.code;}}
-async function api(path,body){const ctl=new AbortController();const timeout=setTimeout(()=>ctl.abort(),15000);try{const headers={};const requestToken=token;const requestEpoch=epoch;if(requestToken)headers.Authorization='Bearer '+requestToken;if(body!==undefined)headers['Content-Type']='application/json';const r=await fetch(path,{method:body===undefined?'GET':'POST',headers,body:body===undefined?undefined:JSON.stringify(body),signal:ctl.signal,cache:'no-store',credentials:'same-origin',redirect:'error'});const data=await r.json();if(!r.ok){if(r.status===401&&token===requestToken&&epoch===requestEpoch)invalidateConnection();throw new ApiError(r.status,data);}return data;}finally{clearTimeout(timeout);}}
+async function api(path,body){const ctl=new AbortController();if(body===undefined)getControllers.add(ctl);const timeout=setTimeout(()=>ctl.abort(),15000);try{const headers={};const requestToken=token;const requestEpoch=epoch;if(requestToken)headers.Authorization='Bearer '+requestToken;if(body!==undefined)headers['Content-Type']='application/json';const r=await fetch(path,{method:body===undefined?'GET':'POST',headers,body:body===undefined?undefined:JSON.stringify(body),signal:ctl.signal,cache:'no-store',credentials:'same-origin',redirect:'error'});const data=await r.json();if(!r.ok){if(r.status===401&&token===requestToken&&epoch===requestEpoch)invalidateConnection();throw new ApiError(r.status,data);}return data;}finally{getControllers.delete(ctl);clearTimeout(timeout);}}
 function errorText(e,write=false){if(!(e instanceof ApiError))return !write?'只读查询失败或超时；未提交新任务。已暂停自动查询，可手动查询状态或刷新运行列表。':'网络中断或请求超时：状态未知。任务可能已被服务接收；不会自动重新提交，请用已有 run_id 或运行列表查询。';const byCode={CONFIGURATION_UNAVAILABLE:'真实模型配置或固定知识库缺失，未接受任务；不会切换演示组件。',RUN_STORAGE_FAILED:'运行存储不可用，保存未确认。请检查服务端存储。',SERVICE_UNAVAILABLE:'服务当前不接受任务。',SAME_ORIGIN_REQUIRED:'请求来源不符合本机同源要求。'};return byCode[e.code]||({401:'令牌无效或已失效；已清除页面连接与浏览器记忆，请核对本机固定令牌后重新连接。',409:'回答版本或 finding 关联冲突，未保存意见。请刷新后选择实际版本。',429:'等待队列已满，未接受本次任务。请等待后手动提交。',422:'输入验证失败，请检查必填项、长度与实际版本。',404:'该运行或关联记录未找到；仅在收到明确 404 时作此判断。',503:'服务不可用，未确认接受或保存。',403:'仅允许本机同源访问。'}[e.status]||`HTTP ${e.status}：操作未确认成功。`);}
 function controls(){ $('connection-state').textContent=connected?'已连接 · 仅本机':'未连接';$('history-refresh').disabled=!connected||!hasConnection(); $('lookup').disabled=!connected||!hasConnection()||reading; $('submit').disabled=!connected||!hasConnection()||profile===null||posting||uncertainPost;$('refresh').disabled=!connected||!hasConnection()||!selected||reading;$('cancel').disabled=!connected||!hasConnection()||!selected||cancelPosting||!['queued','running'].includes(result?.execution?.status);$('review-submit').disabled=!connected||!hasConnection()||!selected||!$('review-answer').value||feedbackPosting||draftNeedsSelection;}
 function stop(){clearTimeout(timer);timer=null;}
@@ -90,9 +122,9 @@ function renderReviews(reviews){clear('reviews');$('reviews').append(node('h3','
 function renderLocalNLI(value){clear('local-nli');const area=$('local-nli');area.append(node('p',value.risk_note,'hint'));if(value.pending)area.append(node('p','本地NLI诊断处理中，原审核已经独立结束。','hint'));if(!value.records?.length&&!value.pending)area.append(node('p',value.enabled?'本次没有已保存诊断；缺少可安全转换的交付时跳过，历史查询不会补算。':'本次未选择本地NLI，不执行推理；服务可复用此前已加载模型。','hint'));for(const r of value.records||[]){const c=node('div',null,'card');c.append(node('h3',`v${r.answer_version??'未知'} · ${r.component_id||'无支持组件'}`),badge(r.status));fields(c,[['NLI三类诊断',r.nli_three_class_result],['原事实判断',r.comparison_source==='fact_agent'?r.production_status:'未提供（比较项为已有用户监督，不是事实Agent）'],['已见用户监督',r.comparison_source==='user_supervision_replay'?r.production_status:null],['分歧',r.disagreement===null?'无法比较':r.disagreement?'有分歧':'无分歧'],['跳过/失败原因',tr(r.reason)],['完整输入token',r.tokens],['输入身份',r.input_id]]);const d=node('details');d.append(node('summary','模型版本、原始logits及实际输入（诊断详情）'),jsonBox(r));c.append(d);area.append(c);}if(value.error_code)area.append(node('p',value.error_code,'notice'));}
 async function load(manual=true){
  if(!hasConnection()||!selected||reading)return;
- if(manual)auxiliaryPaused.clear();
+ const ctx=auxiliaryContext();if(manual){auxiliaryPaused.clear();ctx.stopped=false;ctx.nliChecks=0;ctx.limitShown=false;}
  stop();const owner={};reading=owner;controls();
- const stamp=epoch;const rid=selected;let nliPending=false;
+ const stamp=epoch;const rid=selected;
  try{
   const status=await api('/runs/'+encodeURIComponent(rid));
   if(stamp!==epoch)return;current(status);
@@ -108,22 +140,18 @@ async function load(manual=true){
    if(detailsKey!==renderedDetailsKey){renderFindings(value);renderEvidence(value);renderedDetailsKey=detailsKey;}reviewOptions(value);
    if(restoreDraftPending){restoreDraft();restoreDraftPending=false;}
   }else{clear('decision');$('decision').append(node('p','尚无阶段结果，未提供业务结论。','hint'));}
-  for(const [path,area,render] of [['nli','local-nli',renderLocalNLI],['trace','trace',renderTrace],['reviews','reviews',renderReviews]]){
-   if(auxiliaryPaused.has(path))continue;
-   try{const data=await api(`/runs/${encodeURIComponent(rid)}/${path}`);if(stamp!==epoch)return;if(path==='nli')nliPending=data.pending;render(data);}
-   catch(e){if(stamp!==epoch)return;auxiliaryPaused.add(path);clear(area);$(area).append(node('p','此项读取失败，已暂停自动读取；主状态与回答仍可更新。点击“查询状态”手动恢复。','hint'));if(path==='trace')$('progress').textContent='阶段详情读取失败；主任务状态见上方。';}
-  }
+  ctx.known=true;ctx.running=['queued','running'].includes(status.status);
+  for(const path of ['nli','trace','reviews'])requestAuxiliary(path,Boolean(manual));
   tell(`已查询 ${rid} · ${tr(status.status)}。`+(auxiliaryPaused.size?' 部分辅助详情读取已暂停，可手动恢复。':''));
-  if(['queued','running'].includes(status.status)||nliPending)timer=setTimeout(()=>load(false),1800);
  }catch(e){
-  if(stamp===epoch){tell(errorText(e),true);$('progress').textContent='只读查询失败；保留最近确认结果。自动轮询已暂停，可手动查询。';}
+  if(stamp===epoch){ctx.stopped=true;abandonReads();tell(errorText(e),true);$('progress').textContent='只读查询失败；保留最近确认结果。自动轮询已暂停，可手动查询。';}
  }finally{
-  if(reading===owner){reading=false;controls();}
+  if(reading===owner){reading=false;controls();schedulePoll(ctx);}
  }
 }
 async function selectRun(rid){
  if(!/^[A-Za-z0-9_-]{1,150}$/.test(rid)){tell('run_id 格式无效。',true);return;}
- rememberDraft();resetDraft();stop();const stamp=++epoch;auxiliaryPaused=new Set();renderedAnswerKey='';renderedDetailsKey='';restoreDraftPending=true;reading=false;selected=rid;answerVersion=null;answerFocused=false;result=null;$('run-id').value=rid;for(const button of $('history').children)button.className='history-item'+(button.title===rid?' selected':'');
+ rememberDraft();resetDraft();stop();const stamp=++epoch;abandonReads();auxiliaryPaused=new Set();renderedAnswerKey='';renderedDetailsKey='';restoreDraftPending=true;reading=false;selected=rid;answerVersion=null;answerFocused=false;result=null;$('run-id').value=rid;for(const button of $('history').children)button.className='history-item'+(button.title===rid?' selected':'');
  for(const id of ['current','progress','trace','decision','answers','usage','findings','evidence','evidence-detail','reviews','local-nli'])clear(id);
  $('review-answer').replaceChildren();reviewFindings();await load();
  if(stamp===epoch&&result?.answer)$('answers').scrollIntoView({block:'start'});
@@ -141,11 +169,11 @@ async function history(page=0){
  if(!data.items.length)$('history').append(node('p','暂无运行','hint'));
 }
 function forgetConnection(message='已忘记连接：浏览器保存项与页面内存均已清除。'){
- stop();epoch++;historySerial++;reading=false;connected=false;sessionConnected=false;token='';const deleted=connectionMemory.forget();$('remember-connection').checked=false;$('token').value='';$('token').required=true;tell(deleted?message:'页面连接已清除，但浏览器拒绝删除保存项；请在浏览器站点设置中手动清除此地址的数据。',!deleted);controls();
+ stop();epoch++;abandonReads();historySerial++;reading=false;connected=false;sessionConnected=false;token='';const deleted=connectionMemory.forget();$('remember-connection').checked=false;$('token').value='';$('token').required=true;tell(deleted?message:'页面连接已清除，但浏览器拒绝删除保存项；请在浏览器站点设置中手动清除此地址的数据。',!deleted);controls();
 }
 function invalidateConnection(){forgetConnection('连接已失效：已清除页面记忆。请双击启动入口重新自动连接，或展开高级手动连接。');$('notice').className='notice error';}
 async function connect(value){
- stop();const stamp=++epoch;connected=false;token=value;$('token').value='';$('token').required=!token;
+ stop();const stamp=++epoch;abandonReads();reading=false;connected=false;token=value;$('token').value='';$('token').required=!token;
  try{await health();if(stamp!==epoch||token!==value)return;await history();if(stamp!==epoch||token!==value)return;connected=true;uncertainPost=false;
   if($('remember-connection').checked){if(connectionMemory.save(token))tell('已连接，并记住此浏览器的本机连接。');else{$('remember-connection').checked=false;connectionMemory.forget();tell('已连接，但浏览器存储不可用；本次仅在内存保存。');}}
   else{connectionMemory.forget();tell('已连接。令牌仅保存在页面内存。');}
@@ -198,11 +226,11 @@ $('review-form').addEventListener('submit',async e=>{
   if(stamp!==epoch)return;tell('复核意见已追加保存；模型判断保持原样。');}
  catch(err){if(stamp===epoch)tell(errorText(err,true)+' 输入已保留；未确认保存成功，请先查询已有反馈再决定是否重试。',true);}
  finally{feedbackPosting=false;controls();}
- if(saved&&stamp===epoch&&selected===rid){try{const reviews=await api(`/runs/${encodeURIComponent(rid)}/reviews`);if(stamp===epoch)renderReviews(reviews);}catch(err){if(stamp===epoch)tell('意见已保存，但反馈列表暂时无法查询。'+errorText(err),true);}}
+ if(saved&&stamp===epoch&&selected===rid)requestAuxiliary('reviews',true);
 });
 function renderFactDelivery(r){const d=node("details");d.append(node("summary","事实检索模式、知识版本、逐主张交付与省略（详情）"),jsonBox({mode:r.configuration?.retrieval_mode,strategy:r.configuration?.fact_retrieval_strategy,knowledge_version:r.configuration?.knowledge_version,embedding_profile:r.configuration?.embedding_profile,scoring_method:r.configuration?.scoring_method,records:r.retrieval}));$("usage").append(d);}
 $('example-question').addEventListener('click',()=>{$('question').value='无功功率和电压有什么关系？请作概念解释。';$('question').focus?.();tell('示例已填入，尚未提交；可以先修改问题。');});
-window.addEventListener('pagehide',()=>{stop();epoch++;reading=false;token='';sessionConnected=false;connected=false;});
+window.addEventListener('pagehide',()=>{stop();epoch++;abandonReads();reading=false;token='';sessionConnected=false;connected=false;});
 async function restoreConnection(){
  try{const r=await fetch('/session',{method:'GET',credentials:'same-origin',cache:'no-store',redirect:'error'});if(r.ok){sessionConnected=true;connected=true;await health();tell('已通过本机会话自动连接，无需复制令牌。');await history();if(selected)await load();return;}}catch(_){}
  const remembered=connectionMemory.load();
