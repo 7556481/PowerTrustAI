@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio,json,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -52,6 +53,7 @@ class FitTests(unittest.IsolatedAsyncioTestCase):
                 for p in posts:self.assertEqual(p['tools'],[specification()]);self.assertEqual(p['thinking'],{'type':'disabled'});self.assertEqual(p['model'],'deepseek-v4-pro')
             finally:a.close()
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/review-contract-simple-v1/materials.json').is_file(), 'Private historical archive unavailable')
     async def test_all16_wire_identity_freeze_no_factory_no_resume(self):
         posts=[]
         class HTTPResponse:
@@ -65,7 +67,7 @@ class FitTests(unittest.IsolatedAsyncioTestCase):
                 p=json.loads(body);posts.append((path,p));d=json.loads(p['messages'][1]['content']);self.data=envelope(p['model'],json.dumps(map_null(response(d),encode=True)))
             def getresponse(self):return HTTPResponse(self.data)
             def close(self):pass
-        with tempfile.TemporaryDirectory(dir=m.ROOT/'data/retrieval_local') as tmp,patch.object(m,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch.object(m,'credential_from_environment',return_value='fixture-private'),patch('model_adapter.deepseek.credential_from_environment',return_value='fixture-private'),patch('http.client.HTTPSConnection',Connection),patch('backend.assembly.ComponentFactory.preflight',side_effect=AssertionError('No Factory')):
+        with ignored_temporary_directory(dir=m.ROOT/'data/retrieval_local') as tmp,patch.object(m,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch.object(m,'credential_from_environment',return_value='fixture-private'),patch('model_adapter.deepseek.credential_from_environment',return_value='fixture-private'),patch('http.client.HTTPSConnection',Connection),patch('backend.assembly.ComponentFactory.preflight',side_effect=AssertionError('No Factory')):
             m.save(Path(tmp)/'selection.json',dict(selected='deepseek-v4-pro'));f=m.freeze();r=await m.execute_async()
             self.assertEqual(len(r['controls']),16);self.assertFalse(r['unexecuted']);self.assertEqual(len(posts),32);self.assertTrue(all(not x['stop'] for x in r['controls']))
             for i in range(0,32,4):
@@ -74,6 +76,7 @@ class FitTests(unittest.IsolatedAsyncioTestCase):
             with self.assertRaises(FileExistsError):await m.execute_async()
             db=Path(tmp)/'runs.sqlite3';db.rename(db.with_suffix('.closed'))
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/review-contract-simple-v1/materials.json').is_file(), 'Private historical archive unavailable')
     async def test_shared_failure_stops_both_models_and_preserves_received(self):
         posts=[]
         class HTTPResponse:
@@ -88,7 +91,7 @@ class FitTests(unittest.IsolatedAsyncioTestCase):
                 else:self.response=HTTPResponse(200,envelope(p['model'],json.dumps(map_null(response(json.loads(p['messages'][1]['content'])),encode=True))))
             def getresponse(self):return self.response
             def close(self):pass
-        with tempfile.TemporaryDirectory(dir=m.ROOT/'data/retrieval_local') as tmp,patch.object(m,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch.object(m,'credential_from_environment',return_value='fixture-private'),patch('model_adapter.deepseek.credential_from_environment',return_value='fixture-private'),patch('http.client.HTTPSConnection',Connection):
+        with ignored_temporary_directory(dir=m.ROOT/'data/retrieval_local') as tmp,patch.object(m,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch.object(m,'credential_from_environment',return_value='fixture-private'),patch('model_adapter.deepseek.credential_from_environment',return_value='fixture-private'),patch('http.client.HTTPSConnection',Connection):
             m.save(Path(tmp)/'selection.json',dict(selected='deepseek-v4-pro'));m.freeze();r=await m.execute_async();self.assertEqual(len(posts),3);self.assertEqual(len(r['results']),2);self.assertTrue(r['controls'][-1]['stop']);self.assertFalse(r['results']['A1-flash']['execution_issues'])
 
     async def test_unknown_acceptance_timeout_poison_prevents_second_post(self):
@@ -100,6 +103,7 @@ class FitTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(len(calls),1);self.assertIsInstance(budget.fatal_error,ModelConnectionError);self.assertEqual(len(budget.records),1);self.assertEqual(out.execution_issues[0].code,'MODEL_CONNECTION_FAILED')
         finally:a.close()
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/review-contract-simple-v1/materials.json').is_file(), 'Private historical archive unavailable')
     async def test_budget_exhaustion_is_shared_stop_not_next_task(self):
         class HTTPResponse:
             status=200
@@ -113,7 +117,7 @@ class FitTests(unittest.IsolatedAsyncioTestCase):
                 p=json.loads(body);posts.append(p);self.data=envelope(p['model'],json.dumps(map_null(response(json.loads(p['messages'][1]['content'])),encode=True)))
             def getresponse(self):return HTTPResponse(self.data)
             def close(self):pass
-        with tempfile.TemporaryDirectory(dir=m.ROOT/'data/retrieval_local') as tmp,patch.object(m,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch.object(m,'credential_from_environment',return_value='fixture-private'),patch('model_adapter.deepseek.credential_from_environment',return_value='fixture-private'),patch('http.client.HTTPSConnection',Connection),patch.object(m,'ModelBudget',side_effect=lambda *a,**kw:ModelBudget(1)):
+        with ignored_temporary_directory(dir=m.ROOT/'data/retrieval_local') as tmp,patch.object(m,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch.object(m,'credential_from_environment',return_value='fixture-private'),patch('model_adapter.deepseek.credential_from_environment',return_value='fixture-private'),patch('http.client.HTTPSConnection',Connection),patch.object(m,'ModelBudget',side_effect=lambda *a,**kw:ModelBudget(1)):
             m.save(Path(tmp)/'selection.json',dict(selected='deepseek-v4-pro'));m.freeze();r=await m.execute_async();self.assertEqual(len(posts),1);self.assertEqual(len(r['results']),1);self.assertTrue(r['controls'][-1]['stop'])
 
 

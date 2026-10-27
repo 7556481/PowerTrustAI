@@ -96,6 +96,7 @@ class SeamTests(unittest.TestCase):
         self.assertEqual(t.variants(c,'seam').fact_review_contract,'simple_bound_v1')
         self.assertEqual(t.variants(c,'before').budget,t.variants(c,'seam').budget)
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/production-review-net-benefit-v2/materials.json').is_file(), 'Private historical archive unavailable')
     def test_existing_full_batch_rehearsal_candidate_and_stop_paths(self):
         from tests.test_review_delivery_unblock_v1 import DeliveryTests
         from evaluation import review_delivery_unblock_v1 as old

@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio,json,unittest,tempfile
 from pathlib import Path
 from dataclasses import replace
@@ -56,7 +57,7 @@ class LengthTests(unittest.TestCase):
 
     def test_failed_responses_saved_without_truncation(self):
         adapter=ScriptAdapter(*(ModelResponse(json.dumps(wire('甲'*n)),finish_reason='stop') for n in (153,141)))
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as directory:
+        with ignored_temporary_directory(dir='data/retrieval_local') as directory:
             async def run():
                 with model_scope(ModelBudget(2)):
                     with self.assertRaises(ModelOutputError):

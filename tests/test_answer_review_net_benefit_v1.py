@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 """Paid-entry rehearsal with real local Factory/SQLite and synthetic responses."""
 import asyncio
 import json
@@ -17,7 +18,7 @@ class BatchTests(unittest.TestCase):
     def exercise(self,failure=None):
         from harness.graph_runtime_v1 import validate_versions,build_graph
         validate_versions();build_graph()
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local',prefix='net-benefit-gate-') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local',prefix='net-benefit-gate-') as tmp:
             root=Path(tmp).resolve();doc=root/'fixture.md';doc.write_text(GOOD,encoding='utf-8')
             with KnowledgeStore(root/'knowledge.sqlite3') as store:
                 k=store.ingest(doc,'synthetic-fixture',SourceMetadata(source_type='synthetic_fixture')).knowledge_version
@@ -70,6 +71,7 @@ class BatchTests(unittest.TestCase):
             self.assertEqual(len(s['unexecuted']),19)
             self.assertTrue(s['control'][0]['accepted']['run_id'])
             self.assertTrue(s['outputs'])
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/deepseek/revision-normal-voltage-v2.json').is_file(), 'Private historical archive unavailable')
     def test_order_and_materials_are_pre_prediction(self):
         rows=t.order();self.assertEqual(len(rows),20)
         self.assertEqual(sum(r['input']['line']=='G' for r in rows),4)
@@ -78,8 +80,9 @@ class BatchTests(unittest.TestCase):
         request=t.initial_request(m,0,draft=True)
         self.assertNotIn('reference',t.wire(request))
         self.assertEqual(len(request.existing_answer.citations),1)
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/deepseek/revision-normal-voltage-v2.json').is_file(), 'Private historical archive unavailable')
     def test_freeze_execute_same_filename_identity_and_no_resume(self):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local',prefix='net-freeze-gate-') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local',prefix='net-freeze-gate-') as tmp:
             root=Path(tmp);c=ServiceConfig()
             seen=[]
             async def batch(config,m,directory,provider):

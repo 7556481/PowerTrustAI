@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 """Offline authorized-entry gates; no credentials or network."""
 import json,tempfile,socket,unittest
 from pathlib import Path
@@ -20,7 +21,7 @@ def freeze():return {'order':identities(build_inputs(read('inputs-r1.json'))[0])
 class Gates(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.guard=patch.object(socket.socket,'connect',side_effect=AssertionError('offline'));self.guard.start();self.addCleanup(self.guard.stop)
-        t=tempfile.TemporaryDirectory(dir=trial.ROOT/'data/retrieval_local',prefix='object-entry-');self.addCleanup(t.cleanup);self.root=Path(t.name)
+        t=ignored_temporary_directory(dir=trial.ROOT/'data/retrieval_local',prefix='object-entry-');self.addCleanup(t.cleanup);self.root=Path(t.name)
     async def test_lengths_and_prepared_hashes(self):
         # Old authorization is not reusable after source evolution.
         with self.assertRaisesRegex(ValueError,'Approved materials/source unchanged'):check()

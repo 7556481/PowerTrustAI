@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 """Hand-authored engineering checks, never repaired historical model predictions."""
 import asyncio,json,os,tempfile,unittest
 from dataclasses import replace
@@ -63,7 +64,7 @@ class V2Tests(unittest.TestCase):
                 auth=d['authorizations'][0];edits=[] if no_change else [dict(unit_ref=auth['unit_ref'],authorization_refs=[auth['authorization_ref']],text=GOOD,support_refs=[auth['source_spans'][0]['source_ref']],dependencies=[])]
                 value=dict(context_id=d['context_id'],edits=edits,opinion_actions=[dict(opinion_ref=o['opinion_ref'],action='unresolved' if no_change else 'modified' if o['origin']=='source_bound_fact_defect' else 'retained',edit_indices=[] if no_change or o['origin']!='source_bound_fact_defect' else [0],explanation='Handwritten Factory fixture action; not semantic score.') for o in d['opinions']])
                 return ModelResponse(json.dumps(value),r.model_id,finish_reason='stop')
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp).resolve();doc=root/'fixture.md';doc.write_text(GOOD,encoding='utf-8')
             with KnowledgeStore(root/'knowledge.sqlite3') as k:version=k.ingest(doc,'fixture').knowledge_version
             c=ServiceConfig(index_db=root/'knowledge.sqlite3',knowledge_version=version,run_db=root/'runs.sqlite3',fact_review_contract='literal_v1',local_revision_interface='source_actions_v2',execution_path='langgraph_v1')

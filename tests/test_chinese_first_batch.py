@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio
 from dataclasses import replace
 import json
@@ -19,7 +20,7 @@ from tests.test_schema14_factory_flow import SyntheticProvider, GOOD
 
 class BatchTests(unittest.TestCase):
     def test_global_and_slot_limits_include_corrections_and_branches(self):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             ledger=t.SendLedger(Path(tmp));ledger({'case':0,'variant':'A'},None,1)
             r=ModelRequest('deepseek-flash',(ModelMessage('user','{"answer_id":"same"}'),),8000,'evidence-bound-generation')
             ledger.claim(r);ledger.claim(replace(r,correction=True))
@@ -31,7 +32,7 @@ class BatchTests(unittest.TestCase):
             with self.assertRaises(ContractError):ledger.claim(q)
 
     def exercise(self,fail=False):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp).resolve();doc=root/'x.md';doc.write_text(GOOD,encoding='utf-8')
             with KnowledgeStore(root/'index.sqlite3') as s:
                 k=s.ingest(doc,'fixture',SourceMetadata(source_type='synthetic_fixture')).knowledge_version
