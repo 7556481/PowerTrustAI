@@ -25,6 +25,11 @@ def explain(result):
             'next_steps':['查看终端或执行详情的失败阶段；本记录保留，不自动重发。'],
             'saved':'已完成的回答与阶段记录保留；执行失败不是事实矛盾。'}
     if result.get('no_substantive_answer'):
+        if not ex.get('required_stages_complete'):
+            return {'run_ended':ex.get('status') in TERMINAL,
+                'reasons':['执行未完成：已有资料不足的生成记录保留，不能确认适用流程正常结束；未完成实质审核。'],
+                'next_steps':['查看执行或持久化故障；本任务不自动重发。'],
+                'saved':'已保存的生成记录与原处置保留，不回写为审核通过。'}
         return {'run_ended':ex.get('status') in TERMINAL,
             'reasons':['待补充：未生成实质回答，后续提取与双审核不适用。'],
             'next_steps':['补充相关依据或问题范围后，手动发起新任务。'],

@@ -126,5 +126,13 @@ test('usage updates do not rebuild an unchanged answer version picker',async()=>
  let calls=1;const h=await client(async p=>p==='/runs/A/result'?response({...answer('A'),model_usage:[{calls}]}):fallback(p));
  await h.api.selectRun('A');const rendered=h.ui.answers.children[0];calls=2;await h.api.load();assert.equal(h.ui.answers.children[0],rendered);assert(h.ui.usage.textContent.includes('2'));
 });
+test('no-answer completion is not audit approval; partial no-answer stays incomplete',async()=>{
+ const h=await client(async p=>fallback(p));
+ for(const complete of [true,false]){
+  h.api.renderAnswers({...answer('A'),no_substantive_answer:true,decision:{kind:'needs_information'},execution:{status:complete?'finished':'interrupted',required_stages_complete:complete}});
+  assert(!h.ui.answers.textContent.includes('审核认可回答'));
+  assert(h.ui.phase.textContent.includes(complete?'审核不适用':'执行未完成'));
+ }
+});
 if(require.main===module)(async()=>{let failed=0;for(const [name,fn] of tests){try{await fn();console.log('PASS '+name);}catch(e){failed++;console.error('FAIL '+name+': '+e.message);}}if(failed)process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=1;});
 module.exports={client,response,answer,fallback,deferred};

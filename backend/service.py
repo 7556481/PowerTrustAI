@@ -1,7 +1,7 @@
 """Single-worker finite queue around the existing Harness, not an audit scheduler."""
 import asyncio
 from uuid import uuid4
-from backend.assembly import ComponentFactory
+from backend.assembly import ComponentFactory,ResourceCleanupError
 from backend.serialization import wire,safe
 from backend.store import StorageError
 from core.models import TaskRequest,TaskMode,AnswerDraft,Evidence
@@ -38,7 +38,9 @@ class ApplicationService:
     def _lifecycle_failure(self,code,exc):
         if self.lifecycle_fault is None:self.lifecycle_fault=code
         if len(self.lifecycle_diagnostics)<12:
-            self.lifecycle_diagnostics.append({'code':code,'exception_type':type(exc).__name__[:80]})
+            record={'code':code,'exception_type':type(exc).__name__[:80]}
+            if isinstance(exc,ResourceCleanupError):record['resource_exception_types']=list(exc.failures[:12])
+            self.lifecycle_diagnostics.append(record)
 
     def lifecycle_status(self):
         running=self.worker is not None and not self.worker.done()
@@ -307,14 +309,21 @@ class ApplicationService:
             if output:issues+=output.get('execution_issues',[])
         current_version=(raw.get('answer') or {}).get('version')
         no_answer=(raw.get('generation_output') or {}).get('substantive_answer') is False
-        if no_answer and not issues:complete=True
-        complete=bool(rounds) and rounds[-1]['answer']['version']==current_version and all(not r[k].get('execution_issues') for r in rounds for k in ('verification','domain_review')) and not issues
+        no_answer_complete=bool(no_answer and row['status']=='finished' and row['result'] is not None
+            and row['request'].get('mode')=='question_answer' and raw.get('state')=='needs_information'
+            and not issues and not raw['generation_output'].get('execution_issues')
+            and decision and decision.get('kind')=='needs_information'
+            and decision.get('execution_integrity')=='complete'
+            and 'NO_SUBSTANTIVE_ANSWER' in decision.get('reason_codes',[]))
+        if no_answer:complete=no_answer_complete
+        else:complete=bool(rounds) and rounds[-1]['answer']['version']==current_version and all(not r[k].get('execution_issues') for r in rounds for k in ('verification','domain_review')) and not issues
         verification=raw.get('verification_output') or {};domain=raw.get('domain_output') or {}
         original=row['request'].get('existing_answer')
         if original is None and raw.get('generation_output'):original=raw['generation_output']['answer']
         checked=complete and all(f.get('status')!='not_assessable' for f in verification.get('findings',[])) and all(f.get('check_status')!='not_assessable' for f in domain.get('findings',[])) and not any(c['status']=='incomplete' for c in verification.get('consistency_checks',[]))
         if decision and decision.get('policy_version','').startswith('product-decision-v1'):
             checked=complete and decision.get('execution_integrity')=='complete' and not any(c[1] in ('not_assessable','unknown') for c in decision.get('applicable_checks',[]))
+        if no_answer:checked=False # No substantive extraction/fact/domain audit was performed.
         if not decision and row['config'].get('policy','').startswith('product-decision-v1') and row['status'] in ('failed','interrupted','cancelled','finished'):
             # A projection of execution failure, never a retroactive report/answer judgment.
             decision={'kind':'execution_incomplete','policy_version':row['config']['policy'],
@@ -325,6 +334,7 @@ class ApplicationService:
         retrieval=raw.get('retrieval_records',[])
         projection=safe({'schema_version':'local-review-service-v1','execution':dict(self.state(rid),
             required_stages_complete=complete,all_required_checks_assessed=checked,execution_issues=issues,termination_reason=raw.get('termination_reason'),
+            substantive_audit_status='not_applicable' if no_answer_complete else 'completed' if complete else 'not_completed',
             partial_only=row['result'] is None),'decision':decision,
             'no_substantive_answer':no_answer,
             'fact_diagnostics':__import__('services.fact_diagnostics',fromlist=['explain']).explain(verification),
