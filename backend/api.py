@@ -148,7 +148,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
 
     @app.get('/ui/{asset}',include_in_schema=False)
     async def ui_asset(asset:str):
-        if asset not in ('app.js','connection_memory.js','style.css'):raise HTTPException(404)
+        if asset not in ('app.js','connection_memory.js','style.css','diagnostics.html','diagnostic_input.js','mark.svg'):raise HTTPException(404)
         return FileResponse(Path(__file__).parent/'static'/asset)
 
     @app.exception_handler(RequestValidationError)

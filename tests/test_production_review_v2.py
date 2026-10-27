@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 """Whole fixed batch rehearsal; no live service or provider calls."""
 import asyncio,json,os,tempfile,unittest
 from pathlib import Path
@@ -16,7 +17,7 @@ class BatchTests(unittest.TestCase):
     def exercise(self,failure=None):
         from harness.graph_runtime_v1 import validate_versions,build_graph
         validate_versions();build_graph()
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local',prefix='production-review-v2-gate-') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local',prefix='production-review-v2-gate-') as tmp:
             root=Path(tmp).resolve();doc=root/'fixture.md';doc.write_text(GOOD,encoding='utf8')
             with KnowledgeStore(root/'knowledge.sqlite3') as k:version=k.ingest(doc,'synthetic-fixture',SourceMetadata(source_type='synthetic_fixture')).knowledge_version
             c=ServiceConfig(index_db=root/'knowledge.sqlite3',knowledge_version=version,execution_path='langgraph_v1')
@@ -38,6 +39,7 @@ class BatchTests(unittest.TestCase):
             (root/'batch/runs.sqlite3').rename(root/'closed.sqlite3')
             return s
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/deepseek/revision-normal-voltage-v2.json').is_file(), 'Private historical archive unavailable')
     def test_complete_34_tasks_same_draft_scope_and_no_semantic_reference_leak(self):
         s=self.exercise();self.assertEqual(len(s['control']),34);self.assertFalse(s['unexecuted'])
         for i in range(6):
@@ -49,14 +51,16 @@ class BatchTests(unittest.TestCase):
             self.assertEqual(len(inp.claims),len(t.materials()['A'][i]['reference']))
             self.assertNotIn('reference',t.wire(inp))
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/deepseek/revision-normal-voltage-v2.json').is_file(), 'Private historical archive unavailable')
     def test_local_failure_continue_and_unknown_shared_stop(self):
         local=self.exercise('local');self.assertEqual(len(local['control']),34)
         for reason in ('shared','response_storage','result_storage'):
             s=self.exercise(reason);self.assertEqual(len(s['control']),1);self.assertEqual(len(s['unexecuted']),33)
             self.assertTrue(s['control'][0]['accepted']['run_id'])
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/deepseek/revision-normal-voltage-v2.json').is_file(), 'Private historical archive unavailable')
     def test_actual_freeze_filename_identity_and_no_resume(self):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local',prefix='v2-freeze-') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local',prefix='v2-freeze-') as tmp:
             root=Path(tmp);c=ServiceConfig();seen=[]
             async def batch(*args,**kw):seen.append(kw);return dict(control=[],unexecuted=[],send_log=[])
             with patch.object(t,'PUBLIC',root/'public'),patch.object(t,'LOCAL',root/'private'),patch.object(ServiceConfig,'from_environment',return_value=c),patch.object(t.ComponentFactory,'preflight',return_value=c.knowledge_version),patch.object(t.ComponentFactory,'manifest',return_value={'fixture':True}),patch.dict(os.environ,{'DEEPSEEK_MODEL_ID':'deepseek-flash'}),patch.object(t,'batch',side_effect=batch):

@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio
 import json
 import ssl
@@ -108,6 +109,7 @@ class ProbeTests(unittest.IsolatedAsyncioTestCase):
             with self.assertRaises(ValueError):rec('request',dict(url='https://api.deepseek.com'+p.PATH,body_sha256='actual'))
             self.assertTrue(rec.failed)
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/deepseek/revision-normal-voltage-v2.json').is_file(), 'Private historical archive unavailable')
     async def test_full_lightweight_collection_gate_and_no_resume(self):
         from agents.contracts import ReliabilityVerificationOutput
         class Response:
@@ -122,7 +124,7 @@ class ProbeTests(unittest.IsolatedAsyncioTestCase):
             def getresponse(self):return Response(self.body)
             def close(self):pass
         async def regression(agent,inp):return ReliabilityVerificationOutput(inp.answer.answer_id,1,inp.claims,(),inp.seed_evidence)
-        with tempfile.TemporaryDirectory(dir=p.ROOT/'data/retrieval_local') as tmp,patch.object(p,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch('model_adapter.deepseek.credential_from_environment',return_value='private-test'),patch.object(p,'credential_from_environment',return_value='private-test'),patch('http.client.HTTPSConnection',Connection),patch('backend.assembly.ComponentFactory.preflight',side_effect=AssertionError('No Factory')),patch('agents.evidence_verification.ModelEvidenceVerificationAgent.run',regression):
+        with ignored_temporary_directory(dir=p.ROOT/'data/retrieval_local') as tmp,patch.object(p,'LOCAL',Path(tmp)),patch('harness.deepseek_trial.load_project_env'),patch('model_adapter.deepseek.credential_from_environment',return_value='private-test'),patch.object(p,'credential_from_environment',return_value='private-test'),patch('http.client.HTTPSConnection',Connection),patch('backend.assembly.ComponentFactory.preflight',side_effect=AssertionError('No Factory')),patch('agents.evidence_verification.ModelEvidenceVerificationAgent.run',regression):
             p.freeze();r=await p.execute_async()
             self.assertTrue(r['admission']);self.assertEqual(len(r['minimal_controls']),8);self.assertEqual(len(r['regression_controls']),4)
             self.assertTrue(all(not x['stop'] for x in r['regression_controls']))

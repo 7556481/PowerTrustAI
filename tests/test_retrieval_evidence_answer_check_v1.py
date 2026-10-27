@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio
 from dataclasses import replace
 import json
@@ -18,7 +19,7 @@ from tests.test_schema14_factory_flow import SyntheticProvider
 class ArchivedAnswerTests(unittest.TestCase):
     def exercise(self,mode='ok'):
         recovered,origins=t.recover();m=dict(N=t.old.N)
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp).resolve();p=SyntheticProvider();requests=[]
             class Provider:
                 def close(self):pass
@@ -76,7 +77,7 @@ class ArchivedAnswerTests(unittest.TestCase):
                 self.assertEqual(d['origins'],t.wire(recovered[(i,v)].bindings))
 
     def test_send_limit_is_global_and_per_branch(self):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             limit=t.SendLimit(Path(tmp));r=ModelRequest('deepseek-flash',(ModelMessage('user','{}'),),8000,'evidence-bound-generation-fixture')
             spec=dict(case=0,variant='A');limit(spec,r,1);limit(spec,replace(r,correction=True),2)
             with self.assertRaises(ContractError):limit(spec,r,3)

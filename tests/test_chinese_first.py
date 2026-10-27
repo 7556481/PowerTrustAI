@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio
 from dataclasses import replace
 import json
@@ -88,7 +89,7 @@ class CandidateTests(unittest.TestCase):
                     self.request=request
                     return ModelResponse('{"query":"voltage control"}',model_id='deepseek-flash')
             a=Adapter();budget=ModelBudget(1)
-            with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]/'data/retrieval_local') as diag:
+            with ignored_temporary_directory(dir=Path(__file__).resolve().parents[1]/'data/retrieval_local') as diag:
                 c=GenerationQueryConverter(a,ModelSettings('deepseek-flash',30,1000),Path(diag))
                 with model_scope(budget):self.assertEqual(await c.run('电压控制'),'voltage control')
             self.assertEqual(budget.used,1);self.assertEqual(len(budget.records),1)

@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 """Offline five-item collection, stop and Windows resource-release gates."""
 import importlib.util
 import sqlite3
@@ -43,7 +44,7 @@ class ContinuationGates(unittest.TestCase):
         self.assertEqual(sum(len(b.get('sent',[])) for b in s['branches']),len(p.requests))
 
     def test_readonly_connection_releases_database_for_rename_delete(self):
-        with tempfile.TemporaryDirectory(dir=trial.ROOT/'data/retrieval_local') as t:
+        with ignored_temporary_directory(dir=trial.ROOT/'data/retrieval_local') as t:
             p=Path(t)/'runs.sqlite3'
             with sqlite3.connect(p) as db:
                 db.execute('CREATE TABLE runs(id TEXT,result TEXT)')

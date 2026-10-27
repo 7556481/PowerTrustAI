@@ -14,7 +14,7 @@ class Element {
  scrollIntoView(){}
  fire(name){return this.listeners[name]?.({preventDefault(){}});}
 }
-const html=fs.readFileSync('backend/static/index.html','utf8');
+const html=fs.readFileSync('backend/static/diagnostics.html','utf8');
 const ids=[...html.matchAll(/<([a-z]+)[^>]*\bid="([^"]+)"/g)];
 const health={profile:'synthetic_fixture',status:'ready',configuration_ready:true,queued:0,queue_capacity:2};
 const response=(value,status=200)=>({ok:status<400,status,json:async()=>value});
@@ -25,7 +25,7 @@ async function harness(handler){
  elements.mode.value='question_answer';elements['review-action'].value='pending';elements['review-source'].value='user';elements.reviewer.value='test';
  const calls=[];const context={document:{getElementById:id=>elements[id],createElement:tag=>new Element(tag)},window:{addEventListener(){}},URL,AbortController,setTimeout,clearTimeout,console,
  fetch:async(path,opts)=>{calls.push({path,method:opts.method,body:opts.body});return handler(path,opts);}};
- vm.runInNewContext(fs.readFileSync('backend/static/app.js','utf8'),context);
+ vm.runInNewContext(fs.readFileSync('backend/static/diagnostic_input.js','utf8'),context);vm.runInNewContext(fs.readFileSync('backend/static/app.js','utf8'),context);
  elements.token.value='fictional-test-token-not-a-secret';await elements['access-form'].fire('submit');elements.question.value='synthetic_fixture';
  return {elements,calls};
 }

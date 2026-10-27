@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 """20-slot offline substitute: workflow evidence, no semantic model score."""
 import asyncio,json,os,sqlite3,tempfile,unittest
 from pathlib import Path
@@ -31,7 +32,7 @@ class FixtureProvider(Substitute):
 @unittest.skipUnless((t.OLD/'batch/summary.json').exists(),'Private historical archive unavailable')
 class NaturalBenefitTests(unittest.TestCase):
     def exercise(self,mode='edit',*,cap=304,quota=24,full_entry=False):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp).resolve();doc=root/'fixture.md'
             doc.write_text(GOOD+'\n'+'\n'.join(q['question'] for q in t.N),encoding='utf-8')
             with KnowledgeStore(root/'index.sqlite3') as store:k=store.ingest(doc,'synthetic',SourceMetadata(source_type='synthetic_fixture')).knowledge_version
@@ -99,7 +100,7 @@ class NaturalBenefitTests(unittest.TestCase):
         s,p=self.exercise(quota=3);self.assertEqual(len(s['control']),20);self.assertFalse(s['unexecuted'])
 
     def test_global_deadline_and_chain_counters_do_not_reset(self):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             now=[0];g=t.SendLimit(Path(tmp),clock=lambda:now[0],seconds=1);r=SimpleNamespace(model_id='deepseek-flash',max_output_tokens=8000)
             g(dict(id='N1',line='G'),r,1);g(dict(id='N1',line='B'),r,2);self.assertEqual(g.used,2)
             now[0]=1

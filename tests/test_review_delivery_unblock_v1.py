@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio,json,os,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -12,14 +13,16 @@ from rag.storage import KnowledgeStore,SourceMetadata
 
 
 class DeliveryTests(unittest.TestCase):
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/production-review-net-benefit-v2/materials.json').is_file(), 'Private historical archive unavailable')
     def test_guard_protected_semantic_error_stops_dependent_delivery(self):
         g=t.Gate(t.materials());issue=g(dict(line='A',case=2,variant='bound'),dict(execution_issues=[],verification_output=dict(findings=[dict(status='supported'),dict(status='supported')],citation_reviews=[])))
         self.assertEqual(issue['protected']['unit'],1)
         self.assertEqual(len(t.order()),17);self.assertEqual(sum(x['input']['line']=='G' for x in t.order()),3)
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/production-review-net-benefit-v2/materials.json').is_file(), 'Private historical archive unavailable')
     def test_full_rehearsal_factory_same_draft_budget_and_response_storage_stop(self):
         for failure in (None,'shared','response_storage'):
-            with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+            with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
                 root=Path(tmp).resolve();p=root/'fixture.md';p.write_text(GOOD,encoding='utf-8')
                 with KnowledgeStore(root/'knowledge.sqlite3') as k:version=k.ingest(p,'synthetic-fixture',SourceMetadata(source_type='synthetic_fixture')).knowledge_version
                 c=ServiceConfig(index_db=root/'knowledge.sqlite3',knowledge_version=version,execution_path='langgraph_v1');m=t.materials();refs={text:ref for a in m['A'] for (_,text),ref in zip(a['units'],a['reference'])}

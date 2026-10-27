@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 """Candidate engineering/contract tests; synthetic judgments are not semantic scores."""
 import asyncio,json,os,tempfile,unittest
 from copy import deepcopy
@@ -81,7 +82,7 @@ class LiteralTests(unittest.TestCase):
         from backend.store import RunStore
         from backend.serialization import wire
         from rag.storage import KnowledgeStore,SourceMetadata
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp).resolve();p=root/'fixture.md';p.write_text(GOOD,encoding='utf-8')
             with KnowledgeStore(root/'knowledge.sqlite3') as k:version=k.ingest(p,'fixture',SourceMetadata(source_type='synthetic_fixture')).knowledge_version
             c=ServiceConfig(index_db=root/'knowledge.sqlite3',knowledge_version=version,run_db=root/'runs.sqlite3',fact_review_contract='literal_v1',execution_path='langgraph_v1')
@@ -173,7 +174,7 @@ class LiteralTests(unittest.TestCase):
     def test_send_limit_global_generation_and_deadline_persist_before_send(self):
         from evaluation.literal_review_stage1_v1 import SendLimit
         from types import SimpleNamespace
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             now=[0];guard=SendLimit(Path(tmp)/'ledger.json',clock=lambda:now[0]);spec=dict(line='G',case=0,variant='production');r=SimpleNamespace(model_id='deepseek-flash',max_output_tokens=8000)
             guard(spec,r,1);guard(spec,r,2)
             with self.assertRaises(RuntimeError):guard(spec,r,3)
@@ -182,13 +183,14 @@ class LiteralTests(unittest.TestCase):
             self.assertEqual(guard.remaining_seconds(),.001)
             self.assertEqual(json.loads((Path(tmp)/'ledger/0002.json').read_text(encoding='utf-8'))['used'],2)
 
+    @unittest.skipUnless((Path(__file__).resolve().parents[1]/'data/retrieval_local/deepseek/revision-normal-voltage-v2.json').is_file(), 'Private historical archive unavailable')
     def test_exact_entry_28_slot_offline_rehearsal_freeze_store_and_shared_stop(self):
         from evaluation import literal_review_stage1_v1 as t
         from backend.config import ServiceConfig
         from rag.storage import KnowledgeStore,SourceMetadata
         self.assertEqual(len(t.order()),28)
         for failure in (False,True):
-            with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+            with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
                 root=Path(tmp).resolve();doc=root/'fixture.md';doc.write_text(GOOD,encoding='utf-8')
                 with KnowledgeStore(root/'knowledge.sqlite3') as k:version=k.ingest(doc,'fixture',SourceMetadata(source_type='synthetic_fixture')).knowledge_version
                 c=ServiceConfig(index_db=root/'knowledge.sqlite3',knowledge_version=version,execution_path='langgraph_v1')

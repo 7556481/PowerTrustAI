@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 """Offline substitute rehearsal; synthetic outputs are never semantic evidence."""
 import asyncio,json,os,tempfile,unittest,sqlite3
 from contextlib import closing
@@ -39,7 +40,7 @@ class Substitute(Provider):
 @unittest.skipUnless((t.OLD/'batch/summary.json').exists(),'Private historical inputs unavailable')
 class FlashEntryTests(unittest.TestCase):
     def exercise(self,mode='edit',*,cap=48,storage=False,quota=12):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp).resolve();p=Substitute(mode);history=t.recover()
             c=replace(t.config(ServiceConfig(execution_path='langgraph_v1')),index_db=root/'MUST-NOT-OPEN.sqlite3',run_db=root/'runs.sqlite3')
             c=replace(c,budget=replace(c.budget,max_model_calls=quota))
@@ -112,7 +113,7 @@ class FlashEntryTests(unittest.TestCase):
         self.assertTrue(all(r['execution_issues'] for r in s['outputs'].values()))
 
     def test_exact_run_entry_freezes_four_inputs_and_one_attempt(self):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp).resolve();p=Substitute('retain');c=ServiceConfig(index_db=root/'MUST-NOT-OPEN.sqlite3',execution_path='langgraph_v1')
             with patch.object(t,'LOCAL',root/'private'),patch.object(t,'PUBLIC',root/'public'),patch.object(t,'require_committed_sources'),patch('harness.deepseek_trial.load_project_env') as env,patch.object(ServiceConfig,'from_environment',return_value=c),patch.dict(os.environ,{'DEEPSEEK_API_KEY':'offline-fixture','DEEPSEEK_MODEL_ID':'deepseek-flash'}),patch('model_adapter.deepseek.create_adapter',return_value=p),patch('rag.storage.KnowledgeStore',side_effect=AssertionError('Index opened')),patch('rag.retriever.AsyncSQLiteBM25Retriever',side_effect=AssertionError('Retriever opened')),patch('backend.assembly.ROOT',root):
                 asyncio.run(t.run());env.assert_called_once()
@@ -124,7 +125,7 @@ class FlashEntryTests(unittest.TestCase):
             self.assertFalse(c.index_db.exists())
 
     def test_budget_and_clock_before_send(self):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             now=[0];g=t.SendLimit(Path(tmp),clock=lambda:now[0],max_calls=2,max_seconds=3)
             r=SimpleNamespace(model_id='deepseek-flash',max_output_tokens=8000)
             g({'case':0},r,1);now[0]=3
@@ -133,7 +134,7 @@ class FlashEntryTests(unittest.TestCase):
             self.assertEqual(json.loads((Path(tmp)/'global-stop.json').read_text())['reason'],'global_time_limit')
 
     def test_unique_attempt_refuses_before_environment_loading(self):
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp);(root/'attempt.json').write_text('{}')
             with patch.object(t,'LOCAL',root),patch('harness.deepseek_trial.load_project_env',side_effect=AssertionError('env loaded')):
                 with self.assertRaisesRegex(ValueError,'Unique'):asyncio.run(t.run())

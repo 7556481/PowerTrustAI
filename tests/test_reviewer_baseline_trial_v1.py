@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio
 from copy import deepcopy
 import json
@@ -87,7 +88,7 @@ class BaselineTests(unittest.TestCase):
 
     def test_attempt_marker_blocks_before_credentials(self):
         import tempfile
-        with tempfile.TemporaryDirectory(dir='data/evaluation_local') as name:
+        with ignored_temporary_directory(dir='data/evaluation_local') as name:
             p=Path(name);(p/'attempt.json').write_text('fixture')
             with patch.object(trial,'preflight',return_value=({},[])):
                 with self.assertRaises(FileExistsError):trial.run(p)

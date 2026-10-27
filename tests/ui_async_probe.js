@@ -16,14 +16,14 @@ const response=(value,status=200)=>({ok:status<400,status,json:async()=>value});
 const answer=id=>({execution:{status:'finished',required_stages_complete:true},answer:{final:{answer_id:id,version:1,text:'answer '+id},versions:[{answer_id:id,version:1,text:'answer '+id}]},findings:{},evidence:[],review_rounds:[]});
 const fallback=p=>p==='/health'?response({profile:'synthetic_fixture',status:'ready',configuration_ready:true,queued:0,queue_capacity:2}):p.includes('/page/')?response({items:[],next_offset:null}):p.endsWith('/result')?response(answer(p.split('/')[2])):p.endsWith('/nli')?response({enabled:false,records:[],risk_note:'diagnostic '+p.split('/')[2]}):p.endsWith('/trace')?response({events:[]}):p.endsWith('/reviews')?response([]):response({run_id:p.split('/')[2],status:'finished',profile:'synthetic_fixture'});
 async function client(handler,settings={}){
- const ids=[...fs.readFileSync('backend/static/index.html','utf8').matchAll(/<([a-z]+)[^>]*\bid="([^"]+)"/g)];
+ const ids=[...fs.readFileSync('backend/static/diagnostics.html','utf8').matchAll(/<([a-z]+)[^>]*\bid="([^"]+)"/g)];
  const elements=Object.fromEntries(ids.map(([,tag,id])=>[id,new Element(tag)]));
  const copied=[];const polls=new Map(),deadlines=new Map();let tick=0;
  const schedule=(fn,ms)=>ms===1800?(polls.set(++tick,fn),tick):settings.virtualClock?(deadlines.set(++tick,{fn,ms}),tick):setTimeout(fn,ms);
  const unschedule=id=>polls.has(id)?polls.delete(id):deadlines.has(id)?deadlines.delete(id):clearTimeout(id);
  const windowEvents={};const context={document:{getElementById:id=>elements[id],createElement:tag=>new Element(tag)},navigator:{clipboard:{writeText:async t=>copied.push(t)}},window:{addEventListener(n,f){windowEvents[n]=f;}},URL,AbortController,setTimeout:schedule,clearTimeout:unschedule,console,fetch:handler};
  const source=fs.readFileSync(settings.sourcePath||'backend/static/app.js','utf8').replace(/restoreConnection\(\)\.catch\(e=>tell\(errorText\(e\),true\)\);/,"window.testClient={selectRun,forgetConnection,history,connect,api,errorText,renderAnswers,load,health,state:()=>({reading,selected,connected,uncertainPost})};");
- vm.runInNewContext(source,context);await context.window.testClient.connect('synthetic_fixture_not_a_secret');return {ui:elements,api:context.window.testClient,copied,polls,deadlines,windowEvents};
+ vm.runInNewContext(fs.readFileSync('backend/static/diagnostic_input.js','utf8'),context);vm.runInNewContext(source,context);await context.window.testClient.connect('synthetic_fixture_not_a_secret');return {ui:elements,api:context.window.testClient,copied,polls,deadlines,windowEvents};
 }
 const tests=[];const test=(name,fn)=>tests.push([name,fn]);
 test('disconnect rejects delayed NLI',async()=>{

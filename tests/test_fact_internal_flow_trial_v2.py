@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio,json,tempfile,unittest
 from copy import deepcopy
 from pathlib import Path
@@ -22,7 +23,7 @@ class Gates(unittest.TestCase):
         def write(p,v):
             if fail_file and Path(p).name==fail_file:raise OSError('synthetic storage failure')
             original(p,v)
-        with tempfile.TemporaryDirectory(dir=t.ROOT/'data/retrieval_local') as d,patch.object(t.shared,'write',side_effect=write):
+        with ignored_temporary_directory(dir=t.ROOT/'data/retrieval_local') as d,patch.object(t.shared,'write',side_effect=write):
             result=asyncio.run(t.batch(plan,Path(d),Adapter))
             if not fail_file:self.assertTrue((Path(d)/'summary.json').exists())
         return result,seen,closed
@@ -85,10 +86,10 @@ class Gates(unittest.TestCase):
             with self.assertRaises(ValueError):t.validate_plan(plan)
 
     def test_attempt_exclusive_and_frozen_source_rejected(self):
-        with tempfile.TemporaryDirectory(dir=t.ROOT/'data/retrieval_local') as d,patch.object(t,'LOCAL',Path(d)):
+        with ignored_temporary_directory(dir=t.ROOT/'data/retrieval_local') as d,patch.object(t,'LOCAL',Path(d)):
             (Path(d)/'attempt.json').write_text('{}')
             with self.assertRaises(ValueError):t.preflight()
-        with tempfile.TemporaryDirectory(dir=t.ROOT/'data/retrieval_local') as d,patch.object(t,'LOCAL',Path(d)),patch.object(t.shared,'read',return_value={'plan':{},'files':[{'path':'evaluation/fact_internal_flow_trial_v2.py','sha256':'wrong'}]}),patch.object(t,'validate_plan'):
+        with ignored_temporary_directory(dir=t.ROOT/'data/retrieval_local') as d,patch.object(t,'LOCAL',Path(d)),patch.object(t.shared,'read',return_value={'plan':{},'files':[{'path':'evaluation/fact_internal_flow_trial_v2.py','sha256':'wrong'}]}),patch.object(t,'validate_plan'):
             with self.assertRaises(ValueError):t.preflight()
 
 if __name__=='__main__':unittest.main()

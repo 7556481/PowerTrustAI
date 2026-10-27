@@ -1,3 +1,4 @@
+from tests.temp_paths import ignored_temporary_directory
 import asyncio,os,tempfile,unittest
 from pathlib import Path
 from dataclasses import replace
@@ -13,7 +14,7 @@ class NaturalAuditTests(unittest.TestCase):
     def exercise(self,network=False,tamper=False):
         generated,origins=t.recover();m=t.load(t.LOCAL/'materials.json');m['origins']=origins
         if tamper:m['origins'][0]=dict(origins[0],snapshot_sha256='wrong')
-        with tempfile.TemporaryDirectory(dir='data/retrieval_local') as tmp:
+        with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp).resolve()
             class Fake(Provider):
                 async def complete(self,r):
