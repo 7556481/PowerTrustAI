@@ -99,8 +99,10 @@ async function load(manual=true){
   const value=await api(`/runs/${encodeURIComponent(rid)}/result`);
   if(stamp!==epoch)return;result=value;
   if(value.answer){
-   const answerKey=JSON.stringify([value.answer,value.execution?.status,value.execution?.required_stages_complete,value.no_substantive_answer,value.decision,value.presentation,value.answer_adoption,value.operational_safety,value.evidence,value.budget_usage,value.model_usage]);
-   if(answerKey!==renderedAnswerKey){renderAnswers(value);renderFactDelivery(value);renderedAnswerKey=answerKey;}
+   const answerKey=JSON.stringify([value.answer,value.execution?.status,value.execution?.required_stages_complete,value.no_substantive_answer,value.decision,value.presentation,value.answer_adoption,value.operational_safety,value.evidence]);
+   if(answerKey!==renderedAnswerKey){renderAnswers(value);renderedAnswerKey=answerKey;}
+   else{clear('usage');$('usage').append(jsonBox({budget_usage:value.budget_usage,model_usage:value.model_usage,limitations:value.limitations}));}
+   renderFactDelivery(value);
    if(!answerFocused&&value.answer.final?.text){answerFocused=true;$('answers').scrollIntoView({block:'start'});}
    const detailsKey=JSON.stringify([value.review_rounds,value.findings,value.evidence,value.snapshots?.extraction]);
    if(detailsKey!==renderedDetailsKey){renderFindings(value);renderEvidence(value);renderedDetailsKey=detailsKey;}reviewOptions(value);

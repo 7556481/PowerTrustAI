@@ -122,4 +122,8 @@ test('draft restoration finishes with main result before slow auxiliary read',as
  let slow=false;const arrived=deferred(),gate=deferred();const h=await client(async p=>{if(slow&&p==='/runs/A/nli'){arrived.resolve();await gate.promise;}return fallback(p);});
  await h.api.selectRun('A');h.ui['review-note'].value='older A';await h.api.selectRun('B');slow=true;const load=h.api.selectRun('A');await arrived.promise;h.ui['review-note'].value='edited during auxiliary wait';gate.resolve();await load;assert.equal(h.ui['review-note'].value,'edited during auxiliary wait');
 });
+test('usage updates do not rebuild an unchanged answer version picker',async()=>{
+ let calls=1;const h=await client(async p=>p==='/runs/A/result'?response({...answer('A'),model_usage:[{calls}]}):fallback(p));
+ await h.api.selectRun('A');const rendered=h.ui.answers.children[0];calls=2;await h.api.load();assert.equal(h.ui.answers.children[0],rendered);assert(h.ui.usage.textContent.includes('2'));
+});
 (async()=>{let failed=0;for(const [name,fn] of tests){try{await fn();console.log('PASS '+name);}catch(e){failed++;console.error('FAIL '+name+': '+e.message);}}if(failed)process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=1;});
