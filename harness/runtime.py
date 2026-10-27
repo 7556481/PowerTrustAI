@@ -1,5 +1,4 @@
 """Public Harness lifecycle and the original sequential stage driver."""
-import asyncio
 
 from core.validation import InputError
 from harness.contracts import RetrievalSettings

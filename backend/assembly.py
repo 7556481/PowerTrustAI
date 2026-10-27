@@ -2,7 +2,6 @@
 import asyncio
 import os
 from dataclasses import asdict
-from pathlib import Path
 import hashlib
 from backend.config import ROOT
 from harness.runtime import OfflineHarness

@@ -8,7 +8,7 @@ let answerFocused=false;let answerVersion=null;
 let connected = false, sessionConnected = false;
 const hasConnection=()=>Boolean(token||sessionConnected);
 const connectionMemory=window.PowerTrustConnectionMemory?.create()||{load:()=>null,save:()=>false,forget:()=>true};
-let token = '', selected = '', profile = null, result = null, timer = null, epoch = 0, reading = false, posting = false, uncertainPost = false, feedbackPosting = false, cancelPosting = false, historySerial = 0, offset = 0, nextOffset = null;
+let token = '', selected = '', profile = null, result = null, timer = null, epoch = 0, reading = false, posting = false, uncertainPost = false, feedbackPosting = false, cancelPosting = false, historySerial = 0, nextOffset = null;
 function node(tag,text,cls){const n=document.createElement(tag);if(text!=null)n.textContent=String(text);if(cls)n.className=cls;return n;}
 function clear(id){$(id).replaceChildren();}
 function tell(text,error=false){$('notice').textContent=text;$('notice').className='notice'+(error?' error':'');}
@@ -117,7 +117,7 @@ async function history(page=0){
  const stamp=epoch;const request=++historySerial;let data;
  try{data=await api('/runs/page/'+page);}catch(e){if(stamp!==epoch||request!==historySerial)return;throw e;}
  if(stamp!==epoch||request!==historySerial)return;
- offset=page;nextOffset=data.next_offset;clear('history');
+ nextOffset=data.next_offset;clear('history');
  for(const row of data.items){
   const btn=node('button',null,'history-item'+(selected===row.run_id?' selected':''));btn.title=row.run_id;btn.append(node('strong',row.question_summary||tr(row.mode)),node('span',`${tr(row.status)} · ${new Date(row.created_utc).toLocaleString('zh-CN')} · ${row.profile}`),node('small',row.run_id.length>16?row.run_id.slice(0,12)+'…':row.run_id));
   btn.type='button';btn.addEventListener('click',()=>selectRun(row.run_id));$('history').append(btn);

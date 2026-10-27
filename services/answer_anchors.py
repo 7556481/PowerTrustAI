@@ -2,8 +2,8 @@
 import hashlib
 import json
 import re
-from dataclasses import asdict,replace
-from services.claim_extractor import parse_extraction, COMPONENT_CATEGORIES
+from dataclasses import replace
+from services.claim_extractor import parse_extraction
 from services.validation_diagnostics import ErrorCollector
 
 ROLES={'asserted','input_report','reported_error','correction','conditional','assumption','missing_information'}
