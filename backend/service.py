@@ -137,7 +137,7 @@ class ApplicationService:
                 self.active=None;self.active_bundle=None;self.queue.task_done()
 
     def state(self,rid):
-        row=self.store.get(rid)
+        row=self.store.state_row(rid)
         return safe({'schema_version':'local-review-service-v1','run_id':rid,'status':row['status'],
             'created_utc':row['created'],'started_utc':row['started'],'ended_utc':row['ended'],
             'cancel_requested':bool(row['cancel_requested']),'harness_state':row['harness_state'],
