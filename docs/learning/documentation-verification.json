@@ -1,5 +1,5 @@
 {
-  "application_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
+  "application_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
   "chapters": [
     {
@@ -58,9 +58,9 @@
     },
     {
       "file": "10-api-storage.md",
-      "characters": 6732,
+      "characters": 7202,
       "self_checks": 4,
-      "sha256": "254cc598599d267edbfb31c180891b3b0f104ea50348e9e94e8a452610411831"
+      "sha256": "af0d3f22df38750fbe5c91c648d18e4860cd2a4dea9e0a5fe3d30587727db54a"
     },
     {
       "file": "11-supervision-metrics.md",
@@ -106,9 +106,9 @@
     },
     {
       "file": "18-operations.md",
-      "characters": 7957,
+      "characters": 8397,
       "self_checks": 6,
-      "sha256": "2722e53baa60f902dbf94ceedcc53f10095b49d29328a4561c7f341bc6a7ba16"
+      "sha256": "12737733ba96c4251d2a414b09f00632bdef2c554143bc8eab41c54c01d8c58c"
     },
     {
       "file": "19-glossary.md",
@@ -128,6 +128,6 @@
   "source_snippets": 14,
   "source_verification": "AST actual spans, exact Markdown code blocks and all hashes checked",
   "browser": "separate browser-acceptance.json; not inferred from build",
-  "documentation_parent_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
-  "current_check": "v4: 14 actual AST snippets/hashes, build/88 folds; affected10/14/18 pages only"
+  "documentation_parent_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+  "current_check": "v5: 14 exact AST snippets unchanged; source identity updated; affected10/18 only, 20 chapters/88 folds"
 }

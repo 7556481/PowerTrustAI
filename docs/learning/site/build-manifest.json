@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
+    "application_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
     "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "documentation_parent_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
-    "document_version": "learning-site-v6.6 backend lifecycle and applicable-stage completion,2026-10-27",
+    "documentation_parent_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+    "document_version": "learning-site-v6.7 service status and saved-result recovery UI,2026-10-27",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -49,6 +49,17 @@
         "tests": 1340,
         "seconds": 372.516,
         "scope": "single full offline run after shared Store changes; final frontend delayed-restore fix separately rechecked with 19 actual-client probes"
+      },
+      "service_status_ui": {
+        "implementation_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+        "tests": 11,
+        "seconds": 7.182,
+        "actual_client_status_groups": 26,
+        "prior_async_groups": 20,
+        "slow_auxiliary_groups": 12,
+        "full_rerun": false,
+        "reused_full_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
+        "scope": "frontend only; targeted isolated API/actual-client checks; affected10/18 browser separate"
       }
     },
     "experiment_batches": [
@@ -290,6 +301,15 @@
       "project_model_requests": 0,
       "production_switch": false,
       "automatic_worker_restart": false
+    },
+    "service_status_ui_maintenance": {
+      "implementation_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+      "project_model_requests": 0,
+      "project_model_tokens": 0,
+      "project_model_cost": 0,
+      "production_switch": false,
+      "automatic_restart": false,
+      "replay": false
     }
   },
   "chapters": [
@@ -345,8 +365,8 @@
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 6732,
-      "sha256": "254cc598599d267edbfb31c180891b3b0f104ea50348e9e94e8a452610411831"
+      "characters": 7202,
+      "sha256": "af0d3f22df38750fbe5c91c648d18e4860cd2a4dea9e0a5fe3d30587727db54a"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
@@ -385,8 +405,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 7957,
-      "sha256": "2722e53baa60f902dbf94ceedcc53f10095b49d29328a4561c7f341bc6a7ba16"
+      "characters": 8397,
+      "sha256": "12737733ba96c4251d2a414b09f00632bdef2c554143bc8eab41c54c01d8c58c"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -404,6 +424,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 165756,
+  "markdown_characters": 166666,
   "network_dependencies": false
 }

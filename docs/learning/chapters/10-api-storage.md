@@ -1,5 +1,11 @@
 # 10 API、UI、队列、SQLite与本机会话
 
+## 2026-10-27服务拒单与历史读取的前端边界
+
+连接成功不等于可接单。前端保存最近已确认health，明确accepting_work=false、配置/存储未就绪、队列满时禁新提交；提交前再GET核查，拒单时POST为0。核查后竞态仍以实际503/429为准，不自动重试。历史刷新、按ID查询、版本复制和证据回查独立保留，是否可读以实际GET为准；存储允许时反馈仍可追加，不改原审核。
+
+pending_terminal_status=interrupted且persistence_confirmed=false明确显示“服务已停止处理此任务，中断状态尚未确认保存”。数据库原status及pending字段在只读详情保留，不客户端改写为已落库中断；主状态和必要辅助读取后按原有有界机制收敛。仅service_fault_code不停止仍真实running任务。已存结果、版本、业务处置不因服务故障改判，元数据未确认与答案是否可读分别说明。服务检查只GET /health，不认证、不恢复未知POST锁、不启动或重放任务。
+
 ## 2026-10-27后端生命周期与无实质回答
 
 服务ready必须同时满足配置、可读存储与存活且可接单的worker。资源drain/close故障触发独立生命周期故障，health degraded、新POST 503；队列等待任务在可写时落interrupted/SERVICE_LIFECYCLE_FAILED，不自动执行或重放。存储写失败则persistence_confirmed=false及pending_terminal_status=interrupted，不能把内存处置称落库成功。当前已保存答案/report/版本/发现不因收尾故障改写；普通组件单任务失败且资源清理正常，下一任务仍可执行。计时退出、资源尝试、queue.task_done与active清理各自收尾。

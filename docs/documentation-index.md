@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-27 服务状态恢复UI v5（已执行）
+
+- [维护报告](maintenance/service-status-recovery-ui-v5.md)：修前失败、接单与读取分离、待中断未确认、只读检查、轮询停止与兼容边界。
+- [机器验证](maintenance/service-status-recovery-ui-v5-verification.json)：最终11专项、26/20/12客户端组、真实隔离API/浏览器、v4全套复用及0模型保护。
+- 学习站10/18与源码身份同步；保留已存业务结论，无自动重启/重放，完成停止。
+
 ## 2026-10-27 后端生命周期一致性v4（已执行）
 
 - [维护报告](maintenance/backend-lifecycle-consistency-v4.md)：修前/修后、故障处置、原结果保护、两执行路径无实质回答表、停止边界。

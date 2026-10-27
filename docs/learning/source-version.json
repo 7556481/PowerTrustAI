@@ -1,9 +1,9 @@
 {
-  "application_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
+  "application_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
   "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-  "documentation_parent_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
-  "document_version": "learning-site-v6.6 backend lifecycle and applicable-stage completion,2026-10-27",
+  "documentation_parent_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+  "document_version": "learning-site-v6.7 service status and saved-result recovery UI,2026-10-27",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -48,6 +48,17 @@
       "tests": 1340,
       "seconds": 372.516,
       "scope": "single full offline run after shared Store changes; final frontend delayed-restore fix separately rechecked with 19 actual-client probes"
+    },
+    "service_status_ui": {
+      "implementation_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+      "tests": 11,
+      "seconds": 7.182,
+      "actual_client_status_groups": 26,
+      "prior_async_groups": 20,
+      "slow_auxiliary_groups": 12,
+      "full_rerun": false,
+      "reused_full_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
+      "scope": "frontend only; targeted isolated API/actual-client checks; affected10/18 browser separate"
     }
   },
   "experiment_batches": [
@@ -289,5 +300,14 @@
     "project_model_requests": 0,
     "production_switch": false,
     "automatic_worker_restart": false
+  },
+  "service_status_ui_maintenance": {
+    "implementation_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+    "project_model_requests": 0,
+    "project_model_tokens": 0,
+    "project_model_cost": 0,
+    "production_switch": false,
+    "automatic_restart": false,
+    "replay": false
   }
 }

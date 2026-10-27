@@ -1,5 +1,11 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-27 服务状态与历史读取UI v5完成
+
+独立codex/service-status-recovery-ui-v5，基于06b9769。修前5项失败已保留；现服务明确拒单时禁提交，提交前拒单POST=0。待中断未确认明确说明、保留原queued/pending字段，必要读取后有界收敛；仅故障码不停止真实running。手动重新检查仅GET health，不重启/重放/认证或清未知POST锁。已存正文、原处置、版本/证据/反馈保持，实际可读性以GET为准。
+
+最终11专项/7.182秒、实际客户端26+原20/12组与POST安全/渲染通过。后端未改，复用v4的1360/363.080全套，不冒称本轮全跑。8766实际故障后禁提交但历史版本/证据/反馈可用；待中断未确认由API/探针覆盖。390窄屏及键盘验收，学习站10/18与身份同步，20章88题14摘录、构建与局部浏览器通过。模型/token/费用0，生产与历史保持，自启服务释放，完成停止。见[报告](maintenance/service-status-recovery-ui-v5.md)及[验证](maintenance/service-status-recovery-ui-v5-verification.json)。
+
 ## 2026-10-27 后端生命周期与无实质回答一致性v4完成
 
 基于e5360c3，独立codex/backend-lifecycle-consistency-v4。旧2项先复现：资源close后worker退出仍接单/active残留；合法资料不足完整性投影被覆盖。现按独立生命周期故障拒单、health degraded、等待项可写时interrupted，存储失败明确未确认；计时退出/落库/active/queue记账互不跳过。已存raw答案/原审核/版本/发现不重写；drain未确认不强关。装配清理边界另复现后修正，未自动重启或重放。
