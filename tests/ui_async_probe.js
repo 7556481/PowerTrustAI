@@ -118,4 +118,8 @@ test('missing restored finding requires explicit selection, never silently entir
  let hasFinding=true;const h=await client(async p=>{if(p==='/runs/A/result')return response({...answer('A'),feedback_targets:hasFinding?[{answer_id:'A',answer_version:1,finding_id:'f1'}]:[]});return fallback(p);});
  await h.api.selectRun('A');h.ui['review-finding'].value='f1';h.ui['review-note'].value='finding note';await h.api.selectRun('B');hasFinding=false;await h.api.selectRun('A');assert(h.ui['review-draft-status'].textContent.includes('重新选择'));assert(h.ui['review-submit'].disabled);
 });
+test('draft restoration finishes with main result before slow auxiliary read',async()=>{
+ let slow=false;const arrived=deferred(),gate=deferred();const h=await client(async p=>{if(slow&&p==='/runs/A/nli'){arrived.resolve();await gate.promise;}return fallback(p);});
+ await h.api.selectRun('A');h.ui['review-note'].value='older A';await h.api.selectRun('B');slow=true;const load=h.api.selectRun('A');await arrived.promise;h.ui['review-note'].value='edited during auxiliary wait';gate.resolve();await load;assert.equal(h.ui['review-note'].value,'edited during auxiliary wait');
+});
 (async()=>{let failed=0;for(const [name,fn] of tests){try{await fn();console.log('PASS '+name);}catch(e){failed++;console.error('FAIL '+name+': '+e.message);}}if(failed)process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=1;});

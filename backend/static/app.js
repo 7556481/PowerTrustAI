@@ -6,7 +6,7 @@ const labels = {skipped:'跳过',production_not_assessable:'原事实对象无�
 const tr = v => v == null ? '未提供' : typeof v === 'boolean' ? (v ? '是' : '否') : labels[v] || String(v);
 let answerFocused=false;let answerVersion=null;
 const reviewDrafts=new Map();let draftNeedsSelection=false;
-let auxiliaryPaused=new Set(), renderedAnswerKey='', renderedDetailsKey='';
+let auxiliaryPaused=new Set(), renderedAnswerKey='', renderedDetailsKey='', restoreDraftPending=false;
 function draftValue(){return {note:$('review-note').value,action:$('review-action').value,source:$('review-source').value,answer:$('review-answer').value,finding:$('review-finding').value,needsSelection:draftNeedsSelection};}
 function rememberDraft(){if(selected)reviewDrafts.set(selected,draftValue());}
 function resetDraft(){draftNeedsSelection=false; $('review-note').value='';$('review-action').value='pending';$('review-source').value='user';$('review-draft-status').textContent='';}
@@ -104,11 +104,12 @@ async function load(manual=true){
    if(!answerFocused&&value.answer.final?.text){answerFocused=true;$('answers').scrollIntoView({block:'start'});}
    const detailsKey=JSON.stringify([value.review_rounds,value.findings,value.evidence,value.snapshots?.extraction]);
    if(detailsKey!==renderedDetailsKey){renderFindings(value);renderEvidence(value);renderedDetailsKey=detailsKey;}reviewOptions(value);
+   if(restoreDraftPending){restoreDraft();restoreDraftPending=false;}
   }else{clear('decision');$('decision').append(node('p','尚无阶段结果，未提供业务结论。','hint'));}
   for(const [path,area,render] of [['nli','local-nli',renderLocalNLI],['trace','trace',renderTrace],['reviews','reviews',renderReviews]]){
    if(auxiliaryPaused.has(path))continue;
    try{const data=await api(`/runs/${encodeURIComponent(rid)}/${path}`);if(stamp!==epoch)return;if(path==='nli')nliPending=data.pending;render(data);}
-   catch(e){if(stamp!==epoch)return;auxiliaryPaused.add(path);clear(area);$(area).append(node('p','此项读取失败，已暂停自动读取；主状态与回答仍可更新。点击“查询当前任务”手动恢复。','hint'));if(path==='trace')$('progress').textContent='阶段详情读取失败；主任务状态见上方。';}
+   catch(e){if(stamp!==epoch)return;auxiliaryPaused.add(path);clear(area);$(area).append(node('p','此项读取失败，已暂停自动读取；主状态与回答仍可更新。点击“查询状态”手动恢复。','hint'));if(path==='trace')$('progress').textContent='阶段详情读取失败；主任务状态见上方。';}
   }
   tell(`已查询 ${rid} · ${tr(status.status)}。`+(auxiliaryPaused.size?' 部分辅助详情读取已暂停，可手动恢复。':''));
   if(['queued','running'].includes(status.status)||nliPending)timer=setTimeout(()=>load(false),1800);
@@ -120,10 +121,10 @@ async function load(manual=true){
 }
 async function selectRun(rid){
  if(!/^[A-Za-z0-9_-]{1,150}$/.test(rid)){tell('run_id 格式无效。',true);return;}
- rememberDraft();resetDraft();stop();const stamp=++epoch;auxiliaryPaused=new Set();renderedAnswerKey='';renderedDetailsKey='';reading=false;selected=rid;answerVersion=null;answerFocused=false;result=null;$('run-id').value=rid;for(const button of $('history').children)button.className='history-item'+(button.title===rid?' selected':'');
+ rememberDraft();resetDraft();stop();const stamp=++epoch;auxiliaryPaused=new Set();renderedAnswerKey='';renderedDetailsKey='';restoreDraftPending=true;reading=false;selected=rid;answerVersion=null;answerFocused=false;result=null;$('run-id').value=rid;for(const button of $('history').children)button.className='history-item'+(button.title===rid?' selected':'');
  for(const id of ['current','progress','trace','decision','answers','usage','findings','evidence','evidence-detail','reviews','local-nli'])clear(id);
  $('review-answer').replaceChildren();reviewFindings();await load();
- if(stamp===epoch&&result?.answer){restoreDraft();$('answers').scrollIntoView({block:'start'});}
+ if(stamp===epoch&&result?.answer)$('answers').scrollIntoView({block:'start'});
 }
 async function history(page=0){
  const stamp=epoch;const request=++historySerial;let data;
