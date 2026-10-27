@@ -42,10 +42,12 @@ function requestAuxiliary(path,fresh=false){
  const task=(async()=>{
   try{const data=await api(`/runs/${encodeURIComponent(ctx.rid)}/${path}`);
    if(!ownsAuxiliary(ctx)||slot.revision!==owner.revision)return;
-   slot.terminal=owner.terminal;if(path==='nli')ctx.nliPending=Boolean(data.pending);render(data);
+   slot.terminal=owner.terminal;if(path==='nli')ctx.nliPending=Boolean(data.pending);
+   const key=path==='trace'||path==='reviews'?JSON.stringify(data):null;
+   if(key===null||key!==slot.renderedKey){render(data);slot.renderedKey=key;}
   }catch(e){
    if(!ownsAuxiliary(ctx)||slot.revision!==owner.revision)return;
-   slot.paused=true;auxiliaryPaused.add(path);if(path==='nli')ctx.nliPending=false;clear(area);
+   slot.paused=true;slot.renderedKey=null;auxiliaryPaused.add(path);if(path==='nli')ctx.nliPending=false;clear(area);
    $(area).append(node('p','此项读取失败，已暂停自动读取；主状态与回答仍可更新。点击“查询状态”手动恢复。','hint'));
    if(path==='trace')$('progress').textContent='阶段详情读取失败；主任务状态见上方。';
   }finally{

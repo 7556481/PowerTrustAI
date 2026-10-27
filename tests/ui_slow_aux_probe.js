@@ -65,4 +65,10 @@ test('leaving or reconnecting aborts old GETs without a new-page error',async()=
   if(leave==='reconnect'){await h.api.connect('new_fixture');await flush();assert(h.api.state().connected);h.api.forgetConnection();await flush();}
  }
 });
+test('identical trace and reviews keep DOM; changes and same-data recovery still render',async()=>{
+ let changed=false,fail=false;const h=await client(async p=>{if(p==='/runs/A/trace'){if(fail)throw Error('offline');return response({events:[{event:{component:changed?'CHANGED':'ORIGINAL'}}]});}if(p==='/runs/A/reviews')return response([{note:'SAVED REVIEW'}]);return fallback(p);});
+ await h.api.selectRun('A');await flush();const trace=h.ui.trace.children[0],review=h.ui.reviews.children[0];await h.api.load();await flush();assert.equal(h.ui.trace.children[0],trace);assert.equal(h.ui.reviews.children[0],review);
+ changed=true;await h.api.load();await flush();assert(h.ui.trace.textContent.includes('CHANGED'));
+ fail=true;await h.api.load();await flush();assert(h.ui.trace.textContent.includes('失败'));fail=false;await h.api.load();await flush();assert(h.ui.trace.textContent.includes('CHANGED'));h.api.forgetConnection();
+});
 (async()=>{let failed=0;for(const [name,fn] of tests){try{await fn();console.log('PASS '+name);}catch(e){failed++;console.error('FAIL '+name+': '+e.message);}}if(failed)process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=1;});
