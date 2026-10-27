@@ -22,7 +22,7 @@ async function client(handler,settings={}){
  const schedule=(fn,ms)=>ms===1800?(polls.set(++tick,fn),tick):settings.virtualClock?(deadlines.set(++tick,{fn,ms}),tick):setTimeout(fn,ms);
  const unschedule=id=>polls.has(id)?polls.delete(id):deadlines.has(id)?deadlines.delete(id):clearTimeout(id);
  const windowEvents={};const context={document:{getElementById:id=>elements[id],createElement:tag=>new Element(tag)},navigator:{clipboard:{writeText:async t=>copied.push(t)}},window:{addEventListener(n,f){windowEvents[n]=f;}},URL,AbortController,setTimeout:schedule,clearTimeout:unschedule,console,fetch:handler};
- const source=fs.readFileSync(settings.sourcePath||'backend/static/app.js','utf8').replace(/restoreConnection\(\)\.catch\(e=>tell\(errorText\(e\),true\)\);/,"window.testClient={selectRun,forgetConnection,history,connect,api,errorText,renderAnswers,load,state:()=>({reading,selected,connected})};");
+ const source=fs.readFileSync(settings.sourcePath||'backend/static/app.js','utf8').replace(/restoreConnection\(\)\.catch\(e=>tell\(errorText\(e\),true\)\);/,"window.testClient={selectRun,forgetConnection,history,connect,api,errorText,renderAnswers,load,health,state:()=>({reading,selected,connected,uncertainPost})};");
  vm.runInNewContext(source,context);await context.window.testClient.connect('synthetic_fixture_not_a_secret');return {ui:elements,api:context.window.testClient,copied,polls,deadlines,windowEvents};
 }
 const tests=[];const test=(name,fn)=>tests.push([name,fn]);

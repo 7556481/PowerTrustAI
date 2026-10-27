@@ -7,6 +7,13 @@ import unittest
 
 class AsyncClientTests(unittest.TestCase):
     @unittest.skipUnless(shutil.which('node'), 'Optional Node runtime unavailable')
+    def test_service_admission_readability_and_unconfirmed_interruption(self):
+        root = Path(__file__).resolve().parents[1]
+        result = subprocess.run(['node', 'tests/ui_service_status_probe.js'], cwd=root,
+                                capture_output=True, text=True, encoding='utf8', timeout=15)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    @unittest.skipUnless(shutil.which('node'), 'Optional Node runtime unavailable')
     def test_slow_auxiliaries_have_bounded_independent_lifecycles(self):
         root = Path(__file__).resolve().parents[1]
         result = subprocess.run(['node', 'tests/ui_slow_aux_probe.js'], cwd=root,
