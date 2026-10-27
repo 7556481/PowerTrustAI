@@ -319,8 +319,7 @@ class ComponentFactory:
             harness.subject_supplement=not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
             return Bundle(harness,resources)
         except Exception:
-            try:close_resources(resources)
-            except Exception:pass # Preserve the construction failure, after trying every resource.
+            close_resources(resources) # Cleanup failure must also stop admission, not become an ordinary task error.
             raise ConfigurationError('Required component could not be constructed') from None
 
     def product_policy(self):

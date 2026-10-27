@@ -225,6 +225,11 @@ class ApplicationService:
                 if not persisted:self.store.mark(rid,'interrupted',error_code='PROCESS_INTERRUPTED')
             except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
             raise
+        except ResourceCleanupError as exc:
+            self._lifecycle_failure('RESOURCE_CLOSE_FAILED',exc)
+            try:
+                if not persisted:self.store.mark(rid,'failed',error_code='SERVICE_EXECUTION_FAILED')
+            except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
         except (StorageError,HarnessObserverError):
             self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
             try:
@@ -251,8 +256,14 @@ class ApplicationService:
                     except Exception as exc:self._lifecycle_failure('RESOURCE_CLOSE_FAILED',exc)
                 else:self.undrained_bundles.append(bundle)
             try:timing_manager.__exit__(None,None,None)
+            except asyncio.CancelledError as exc:
+                cancelled=exc
+                if not self.closing:self._lifecycle_failure('TIMING_CONTEXT_FAILED',exc)
             except Exception as exc:self._lifecycle_failure('TIMING_CONTEXT_FAILED',exc)
             try:self.store.add_retrieval_timing(rid,timing_log.records)
+            except asyncio.CancelledError as exc:
+                cancelled=exc
+                if not self.closing:self._lifecycle_failure('TIMING_PERSIST_FAILED',exc)
             except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
             except Exception as exc:self._lifecycle_failure('TIMING_PERSIST_FAILED',exc)
             if cancelled is not None:raise cancelled

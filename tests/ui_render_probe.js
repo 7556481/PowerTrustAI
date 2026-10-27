@@ -38,10 +38,13 @@ function texts(e){return e.textContent+e.children.map(texts).join(' ');}
  assert(texts(element('answers')).includes('cited_source'));
  assert(!texts(element('answers')).includes('uncited_source'));
  assert(texts(element('evidence')).includes('uncited_source')); // retained in technical detail
- result.no_substantive_answer=true;result.execution.required_stages_complete=false;
+ result.no_substantive_answer=true;result.execution.required_stages_complete=true;
  await element('refresh').listeners.click();
  assert(texts(element('phase')).includes('资料不足'));
  assert(!texts(element('phase')).includes('执行未完成'));
+ result.execution.required_stages_complete=false;
+ await element('refresh').listeners.click();
+ assert(texts(element('phase')).includes('执行未完成'));
  result.no_substantive_answer=false;result.decision.kind='execution_incomplete';
  await element('refresh').listeners.click();
  assert(texts(element('phase')).includes('执行未完成，已有草稿保留'));

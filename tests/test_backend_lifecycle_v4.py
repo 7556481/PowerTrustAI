@@ -230,3 +230,18 @@ class LifecycleTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.service.lifecycle_fault,'WORKER_UNEXPECTED_EXIT')
         self.assertEqual(self.service.state(waiting)['status'],'interrupted')
         self.assertTrue(self.store.objects(first,'answer'));self.assertEqual(self.factory.created,[first])
+
+    async def test_partial_construction_cleanup_fault_is_not_an_ordinary_component_failure(self):
+        from backend.assembly import close_resources
+        from types import SimpleNamespace
+        attempts=[]
+        def bad():attempts.append('bad');raise RuntimeError('synthetic construction resource')
+        def create(rid,observer):
+            close_resources((SimpleNamespace(close=bad),SimpleNamespace(close=lambda:attempts.append('good'))))
+        self.factory.create=create;await self.service.start()
+        first=await self.service.submit(task());waiting=await self.service.submit(task())
+        await asyncio.wait_for(self.service.queue.join(),2)
+        with self.assertRaises(ServiceUnavailable):await self.service.submit(task())
+        self.assertEqual(attempts,['bad','good'])
+        self.assertEqual(self.service.state(waiting)['status'],'interrupted')
+        self.assertEqual(self.service.lifecycle_diagnostics[0]['resource_exception_types'],['RuntimeError'])
