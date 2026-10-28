@@ -12,7 +12,7 @@ class OfflineHarness:
                  retriever=None, retrieval_settings=None, unit_tool=None, observer=None,
                  generation_query_converter=None, generation_corpus_english=False, *,
                  execution_path="sequential", audit_strategy="baseline"):
-        if audit_strategy not in ('baseline', 'source_first_audit_v1', 'source_first_audit_v2'):
+        if audit_strategy not in ('baseline', 'source_first_audit_v1', 'source_first_audit_v2', 'source_first_audit_v3'):
             raise InputError('Unknown audit strategy')
         if audit_strategy != 'baseline' and not getattr(verification,'source_first_review',False):
             raise InputError('Source-first strategy requires explicit paired reviewer')

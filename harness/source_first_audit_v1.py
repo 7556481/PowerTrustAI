@@ -14,7 +14,7 @@ from services.source_first_audit_v1 import VERSION
 
 
 def enabled(execution):
-    return execution.harness.audit_strategy in (VERSION,'source_first_audit_v2')
+    return execution.harness.audit_strategy in (VERSION,'source_first_audit_v2','source_first_audit_v3')
 
 
 def strategy(execution):

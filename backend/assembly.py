@@ -254,6 +254,8 @@ class ComponentFactory:
             from services.source_first_audit_v1 import SYSTEM,VERSION
             if self.config.audit_strategy=='source_first_audit_v2':
                 from services.source_first_audit_v2 import SYSTEM,VERSION
+            elif self.config.audit_strategy=='source_first_audit_v3':
+                from services.source_first_audit_v3 import SYSTEM,VERSION
             manifest['audit_strategy']=VERSION
             manifest['audit_scope']='source_fidelity_and_task_completeness; external cross-check separately recorded'
             manifest['prompts']['verification']=VERSION
@@ -291,6 +293,8 @@ class ComponentFactory:
                 from services.source_first_audit_v1 import SourceFirstReviewAgent as FactAgent
                 if self.config.audit_strategy=='source_first_audit_v2':
                     from services.source_first_audit_v2 import SourceFirstRelationReviewAgent as FactAgent
+                elif self.config.audit_strategy=='source_first_audit_v3':
+                    from services.source_first_audit_v3 import SourceFirstGroundedReviewAgent as FactAgent
         from services.claim_extractor import ModelClaimExtractor
         from tools.unit_conversion import UnitConversionTool
         from model_adapter.contracts import ModelSettings
