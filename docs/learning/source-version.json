@@ -385,5 +385,17 @@
     "model_requests": 0,
     "tests": 4,
     "seconds": 0.083
+  },
+  "source_first_live_validation_v2": {
+    "start_commit": "b3078cdfe24745655dc917c714554d9527f39b80",
+    "model_requests": 6,
+    "tokens": 121593,
+    "actual_cost": null,
+    "executed_slots": 2,
+    "unexecuted_slots": 6,
+    "stop": "invalid evidence origin; no repair/resume",
+    "adopted": false,
+    "targeted_tests": 7,
+    "targeted_seconds": 5.931
   }
 }

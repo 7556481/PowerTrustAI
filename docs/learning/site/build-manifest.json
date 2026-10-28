@@ -386,6 +386,18 @@
       "model_requests": 0,
       "tests": 4,
       "seconds": 0.083
+    },
+    "source_first_live_validation_v2": {
+      "start_commit": "b3078cdfe24745655dc917c714554d9527f39b80",
+      "model_requests": 6,
+      "tokens": 121593,
+      "actual_cost": null,
+      "executed_slots": 2,
+      "unexecuted_slots": 6,
+      "stop": "invalid evidence origin; no repair/resume",
+      "adopted": false,
+      "targeted_tests": 7,
+      "targeted_seconds": 5.931
     }
   },
   "chapters": [
@@ -471,8 +483,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 9188,
-      "sha256": "79e6dd8aa4b27e4496da552cc012bd7b30499bd1e406fe4df6c4cf7383274be9"
+      "characters": 9660,
+      "sha256": "024da8b6678057c9d43a29791394be43a6d1d694f6b7cd237583833a574c6c47"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -500,6 +512,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 175151,
+  "markdown_characters": 175623,
   "network_dependencies": false
 }

@@ -1,0 +1,211 @@
+{
+  "start_sha": "b3078cdfe24745655dc917c714554d9527f39b80",
+  "material_sha": "346ba9d1c3e72a3ecdbee01825368a92d344b42be203786f683d26370dedadfc",
+  "seal_seconds": 189.03706889999967,
+  "executed": [
+    {
+      "slot": "S1-baseline",
+      "state": "review_required",
+      "duration_seconds": 43.722,
+      "requests": 4,
+      "tokens": 69129,
+      "unchanged": true,
+      "revision_count": 0,
+      "report_present": true,
+      "failure": null,
+      "retrieval": [
+        {
+          "purpose": "verification",
+          "method": "deterministic-question-shared-claims-scenario-v1",
+          "duration_ms": 21611,
+          "calls_used": 1,
+          "accepted_chars": 4927
+        },
+        {
+          "purpose": "verification",
+          "method": "deterministic-question-shared-claims-scenario-v1",
+          "duration_ms": 273,
+          "calls_used": 2,
+          "accepted_chars": 4604
+        },
+        {
+          "purpose": "domain_review",
+          "method": "deterministic-question-shared-claims-scenario-v1",
+          "duration_ms": 7599,
+          "calls_used": 3,
+          "accepted_chars": 5085
+        },
+        {
+          "purpose": "verification",
+          "method": "deterministic-question-shared-claims-scenario-v1",
+          "duration_ms": 25,
+          "calls_used": 4,
+          "accepted_chars": 4604
+        }
+      ]
+    },
+    {
+      "slot": "S1-candidate",
+      "state": "failed",
+      "duration_seconds": 5.836,
+      "requests": 2,
+      "tokens": 52464,
+      "unchanged": true,
+      "revision_count": 0,
+      "report_present": false,
+      "failure": "invalid evidence origin",
+      "retrieval": [
+        {
+          "purpose": "verification",
+          "method": "source_first_audit_v1",
+          "duration_ms": 1070,
+          "calls_used": 0,
+          "accepted_chars": 6677
+        },
+        {
+          "purpose": "verification",
+          "method": "source_first_audit_v1",
+          "duration_ms": 16,
+          "calls_used": 0,
+          "accepted_chars": 0
+        }
+      ]
+    }
+  ],
+  "unexecuted": [
+    {
+      "slot": "S2-candidate",
+      "state": "unexecuted"
+    },
+    {
+      "slot": "S2-baseline",
+      "state": "unexecuted"
+    },
+    {
+      "slot": "S3-baseline",
+      "state": "unexecuted"
+    },
+    {
+      "slot": "S3-candidate",
+      "state": "unexecuted"
+    },
+    {
+      "slot": "S4-candidate",
+      "state": "unexecuted"
+    },
+    {
+      "slot": "S4-baseline",
+      "state": "unexecuted"
+    }
+  ],
+  "request_count": 6,
+  "actual_tokens": 121593,
+  "input_tokens": 117702,
+  "output_tokens": 3891,
+  "unresolved_requests": [],
+  "usage_threshold": 1200000,
+  "threshold_triggered": false,
+  "overshoot": 0,
+  "stop": "shared engineering contract failure, not token threshold",
+  "cost_amount": null,
+  "per_request": [
+    {
+      "slot": "S1-baseline",
+      "component": "power_domain_review",
+      "correction": false,
+      "duration_ms": 4012,
+      "usage": {
+        "input_tokens": 15645,
+        "output_tokens": 734,
+        "total_tokens": 16379,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1280,
+        "cache_miss_tokens": 14365
+      }
+    },
+    {
+      "slot": "S1-baseline",
+      "component": "evidence_verification",
+      "correction": false,
+      "duration_ms": 5446,
+      "usage": {
+        "input_tokens": 43515,
+        "output_tokens": 1094,
+        "total_tokens": 44609,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 3072,
+        "cache_miss_tokens": 40443
+      }
+    },
+    {
+      "slot": "S1-baseline",
+      "component": "evidence_verification",
+      "correction": false,
+      "duration_ms": 1969,
+      "usage": {
+        "input_tokens": 3699,
+        "output_tokens": 301,
+        "total_tokens": 4000,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1536,
+        "cache_miss_tokens": 2163
+      }
+    },
+    {
+      "slot": "S1-baseline",
+      "component": "evidence_verification",
+      "correction": false,
+      "duration_ms": 2829,
+      "usage": {
+        "input_tokens": 3676,
+        "output_tokens": 465,
+        "total_tokens": 4141,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1664,
+        "cache_miss_tokens": 2012
+      }
+    },
+    {
+      "slot": "S1-candidate",
+      "component": "evidence_verification",
+      "correction": false,
+      "duration_ms": 3049,
+      "usage": {
+        "input_tokens": 31489,
+        "output_tokens": 573,
+        "total_tokens": 32062,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 256,
+        "cache_miss_tokens": 31233
+      }
+    },
+    {
+      "slot": "S1-candidate",
+      "component": "power_domain_review",
+      "correction": false,
+      "duration_ms": 4043,
+      "usage": {
+        "input_tokens": 19678,
+        "output_tokens": 724,
+        "total_tokens": 20402,
+        "cost_amount": null,
+        "currency": null,
+        "cache_hit_tokens": 1280,
+        "cache_miss_tokens": 18398
+      }
+    }
+  ],
+  "store_exact": true,
+  "four_pairs_evaluable": false,
+  "adopted": false,
+  "targeted_tests": {
+    "tests": 7,
+    "seconds": 5.931
+  },
+  "business_changed": false
+}
