@@ -437,3 +437,9 @@ source_first_audit_v1在现有prepare_review/merge_and_decide内改变供给，�
 唯一source_first_audit_v3把原relation_check.source_relation从自由概括改为所选合法quote的唯一连续原文；无定位则null/unknown，不授权修订。程序只验身份、字面和一致性，不判断语义。复用原供给/缺口、四职责、一次source_actions_v2、重提取和完整双审，v1/v2与默认baseline兼容。
 
 唯一14槽中4基线完整、10候选仅6完整，S2/S3/S4/S10局部合同失败。S3有合法末稿与两轮记录，但末轮事实/领域失败，不能把“版本2”和“两轮”当完成。S7/S8是真实修订及完整双审；S2原始理由识别增强却未合法交付，仍未修。报告：项目docs/evaluation/source-first-modality-release-v6/report.md。
+
+## 2026-10-29 v7：精确引用归程序，语义仍由模型判断
+
+source_first_audit_v4以本单元版本化reference_ref链接既有quote_id，后者定位原文、来源和原区间；模型只选择已有引用并解释关系，不重抄原文/生成offset。程序还原多个独立EvidenceExcerpt，不拼成伪连续引用。跨单元/版本/来源、伪造和原引用越权仍拒绝，无自动补ID、放宽白名单或S2特判。
+
+离线真实库10路径/10读取及合成修订闭环只证明工程。唯一10链真实Flash均因relation_check形状失败，0完整、0Revision、0/5修复；领域十条虽完整不能替代事实审核。失败原稿保留和正常接口可读也不等于审核完成。报告：项目docs/evaluation/retrieval-rank-and-audit-reference-v7/report.md。

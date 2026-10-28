@@ -216,7 +216,7 @@ def source_identity(row,revision,shard,row_number):
 
 ### 复用装配与固定Evidence入口
 
-路径 backend/assembly.py，函数 ComponentFactory.create，行265–282；完整函数至345行，局部摘录。
+路径 backend/assembly.py，函数 ComponentFactory.create，行270–287；完整函数至352行，局部摘录。
 
 ```python
     def create(self,rid,observer,*,fixed_evidence_only=False):
@@ -546,3 +546,9 @@ evaluation/source_first_materials_v1.py先冻结资料；evaluation/source_first
 实现98de2084e16e3b96a49a973fb634db8b8a946e81，报告归档c7895777ed85c0bc202280752f7cf17996cc6fba。services/source_first_audit_v3.py复用v2一致性解析和literal源目录，backend配置/Factory、Harness来源开关、严格报告白名单及普通范围投影显式认v3；未改v1/v2提示或历史标签。evaluation/source_first_modality_v6.py复用共享批次和v5故障策略，无新调度器。
 
 编码前10材料冻结，旧八份对象不变；真实库10条合成/归档离线路径、1433全套及14实际归档普通读取通过。付费后源码身份未变，原文/响应/实际初末稿与截图只留忽略data，公开仅必要统计。预览夹具简记缺正常request/manifest导致404，补齐规范小Store副本后通过，不能当业务代码被修改或真实批次重跑。
+
+## 2026-10-29 v7：A/B独立身份与默认关闭
+
+A诊断fccd159、边界测试b8782ae，未改运行时SQL；B实现18d4f671e7f073b014ca18e4fdbc32b94e91cb92、报告归档ec9c7df72b3ab628ae5293efbba6039470d9f42c。services/source_first_audit_v4.py复用现有quote/locator与literal解析，reference_ref绑定协议、答案/版本、anchor、知识身份与quote；选择表只指向已有正文，不额外复制池。services/audit_reference_v7.py仅为该候选澄清领域字段，原解析器严格性不变。
+
+LiteralReviewAgent默认payload钩子不改旧wire，Factory/配置/Harness/报告及普通范围投影显式识别v4，旧版本和schema13/baseline默认保留。B真实批次强制原topic_v4_subject_v1 SQL，不混用A潜在收益；付费后源码未改。十条实际普通结果重读原对象一致、全部未完整如实保留，原文和响应只留忽略data。

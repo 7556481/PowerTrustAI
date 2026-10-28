@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-29 rank执行与审核引用v7（完成，两项未启用）
+
+- [独立验收报告](evaluation/retrieval-rank-and-audit-reference-v7/report.md)：A显式LIMIT固定三轮无稳定收益，不构造/部署第三路径；B全10链形状失败、0/5修复，不启用/不烟测/不补批。
+- [SQL全数值表及计划](evaluation/retrieval-rank-and-audit-reference-v7/sql-summary.json)：18排名/3限定COUNT，原请求/评分/K不变；最慢中位24.127→28.809秒，旧4096回退是否触发不可证。
+- [审核统计](evaluation/retrieval-rank-and-audit-reference-v7/audit-summary.json)：30 Flash/643777token、无新增未决；领域10完整不能替代事实0完整，原SQL/旧pending10保持。B18d4f67、报告ec9c7df，1448离线及35专项、十路径/实际读取和学习站源码同步通过。
+
 ## 2026-10-28 来源模态忠实性与候选发布v6（完成，未启用）
 
 - [完整报告](evaluation/source-first-modality-release-v6/report.md)：唯一v3逐字来源关系、事前10材料/14槽、候选6/10完整及严格2/5修复；S2/S10未修、S3后审失败、S4执行失败，不启用/不烟测/不补批。

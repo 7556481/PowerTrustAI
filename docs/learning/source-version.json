@@ -1,19 +1,21 @@
 {
-  "application_commit": "98de2084e16e3b96a49a973fb634db8b8a946e81",
-  "evaluation_implementation_commit": "98de2084e16e3b96a49a973fb634db8b8a946e81",
-  "evaluation_archive_commit": "c7895777ed85c0bc202280752f7cf17996cc6fba",
-  "documentation_parent_commit": "c7895777ed85c0bc202280752f7cf17996cc6fba",
-  "document_version": "learning-site-v6.16 source-first modality v6 failed completion,2026-10-28",
+  "application_commit": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
+  "evaluation_implementation_commit": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
+  "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
+  "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
+  "document_version": "learning-site-v6.17 independent rank and audit reference v7 not adopted,2026-10-29",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "observed_listening_not_managed_by_v7",
+    "service_8765": "initial health unavailable in v7; no service action or deployment by this run",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "literal_source_actions_candidate_default": false,
     "nli": "off",
-    "switched": false
+    "switched": false,
+    "audit_strategy": "baseline",
+    "sql_execution": "original bm25 score,rowid LIMIT"
   },
   "validation": {
     "reused_full": {
@@ -32,10 +34,10 @@
       "project_model_cost": 0
     },
     "current_full_offline": {
-      "commit": "98de2084e16e3b96a49a973fb634db8b8a946e81",
-      "tests": 1433,
-      "seconds": 496.107,
-      "scope": "final v6 full offline before unique batch; source identity unchanged afterwards; no second batch"
+      "commit": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
+      "tests": 1448,
+      "seconds": 487.711,
+      "scope": "final v7 offline before sole candidate batch; no paid source changes or repeat batch"
     },
     "pre_read_path_full_offline": {
       "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
@@ -507,5 +509,39 @@
     "additional_batch": false,
     "ui_actual_archive_replay": true,
     "clipboard_roundtrip_independently_verified": false
+  },
+  "retrieval_rank_audit_reference_v7": {
+    "implementation": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
+    "archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
+    "sql_driver_commit": "fccd1590619b00967ce3bb2f12fcbd11febd1e8b",
+    "report": "docs/evaluation/retrieval-rank-and-audit-reference-v7/report.md",
+    "sql_rank_executions": 18,
+    "sql_count_executions": 3,
+    "sql_adopted": false,
+    "equivalent_sql_implemented": false,
+    "candidate_chains": 10,
+    "complete_chains": 0,
+    "incomplete_chains": 10,
+    "domain_complete": 10,
+    "request_boundary_entries": 30,
+    "received_usage_records": 30,
+    "input_tokens": 622015,
+    "output_tokens": 21762,
+    "known_usage_tokens": 643777,
+    "actual_total_tokens": 643777,
+    "pending_requests": [],
+    "actual_cost": null,
+    "old_v4_pending_preserved": [
+      10
+    ],
+    "proved_repairs": 0,
+    "required_repairs": 5,
+    "actual_revisions": 0,
+    "observed_failed_eight_terminal_median_seconds": 9.2988345,
+    "all_release_gates": false,
+    "enabled": false,
+    "smoke_calls": 0,
+    "additional_batch": false,
+    "sql_in_audit_batch": "original"
   }
 }

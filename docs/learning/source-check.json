@@ -1,6 +1,6 @@
 {
-  "application_commit": "98de2084e16e3b96a49a973fb634db8b8a946e81",
-  "evaluation_commit": "98de2084e16e3b96a49a973fb634db8b8a946e81",
+  "application_commit": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
+  "evaluation_commit": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
   "method": "AST exact qualified symbol, actual LF excerpt, partial spans explicit; all snippets verified against Markdown",
   "excerpts": [
     {
@@ -61,12 +61,12 @@
     {
       "file": "backend/assembly.py",
       "symbol": "ComponentFactory.create",
-      "start_line": 265,
-      "end_line": 282,
-      "function_end_line": 345,
+      "start_line": 270,
+      "end_line": 287,
+      "function_end_line": 352,
       "partial": true,
-      "file_sha256": "0f66297263325317d85edcff09578e16f0e040df01cf56e2772bbc40b2e554d4",
-      "source_text_lf_sha256": "45b1555077e4a885663884c40eadc6a1b310b2c67185b7fb86c0aeb7898d7616",
+      "file_sha256": "35d3c3933cd902b3fd8665e272374570adcfb73532fcab4182520d81f8430736",
+      "source_text_lf_sha256": "08e8d0268ffc7b32d3d8ea59f2df8e4ad22d8b25eaa1cade341fa630e246122d",
       "excerpt_sha256": "90c30e41b968135fa24d44bf40d33f767e4ac80d3a4bd4f0848188937aac21bb"
     },
     {
@@ -76,8 +76,8 @@
       "end_line": 64,
       "function_end_line": 66,
       "partial": true,
-      "file_sha256": "d2d4a8133dfb8303c87558c52081a6feef2758b92fd0ffc202765cc1c0f59473",
-      "source_text_lf_sha256": "34f0c8665dac403960386058dd221a7e65848d67fff09283b94e73efbef66255",
+      "file_sha256": "8cfa53612b9c22c63721a53167145c5cda069e35721bdb6418d599579a14553a",
+      "source_text_lf_sha256": "937da4697ce415ac37be4b676252381252fd98e2df76391a8f0b58b624354e42",
       "excerpt_sha256": "e63611d2194634a77c92814d4afdc25f3659c5fbbc0d33e07db0c083239ca525"
     },
     {

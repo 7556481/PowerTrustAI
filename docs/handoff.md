@@ -1,5 +1,17 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-29 v7独立SQL/引用验收完成，两项均未启用
+
+A入口fccd159、测试b8782ae；SQLite3.45.3/FTS5、rank配置无覆盖。旧rank游标并非明显错误，无LIMIT但读完整K边界，>4096回原SQL；旧日志未记examined/fallback，是否触发未知。本轮冻结47cd0746/1d31a0e2/f7cf4ad6各首条原请求，原topic_v4_subject_v1/K3/知识和邻接不变，18次排名+3次60秒限定COUNT完成，测试353.330秒、封印204.997秒另列。最慢中位24.127→28.809秒、仅1轮改善；其余15.719→22.936、1.623→2.531秒且重复回退。九对top-K恰相同不证明一般同分等价；按停分支不实现第三路径、不部署SQL。命中1980897/1940449/47183，计划不分摊内部毫秒，无新索引/扫描/缓存方案/额外查询。
+
+B实现18d4f67，唯一source_first_audit_v4：本单元版本化ref链接现有quote目录，程序还原独立原文/区间、模型语义比较；不自动补ID/抄写归一化。领域说明精简为明确root/analysis_scope.task_scope与既有形状，原解析器/有限纠正保持；原引用越权本是模型选择错，不伪称绑定代码缺陷。1448全套487.711秒、35专项7.527秒及真实库10离线路径/10读取通过，v6原非法回放拒绝，新增纠正/修订明确合成。材料S1～S10完全沿v6 SHA d62008eb068bbc5000500db3399ef794783b5dbb541398ac35e66a5a346e8e46，唯一10候选、不重跑基线，始终原SQL。
+
+真实30 Flash/30可信usage：输入622015/输出21762/总643777token，新增未知0/已知越过0/金额未知，旧v4 pending10保留。十候选全因关系形状失败，最终嵌套relation_check.reason额外字段，部分初次关系对象缺失；原始41次ref选择另有2个非法，不宣称ID层完备。领域10/10完整不能补事实失败。10/10原对象未变、真实Revision0、严格修复0/5，五错仍原样；四正确/缺口亦无完整事实保护验收。失败终态原八中位9.299秒不计提速，封印191.225秒另列。十条普通结果接口重读原对象一致、执行未完整保留，付费后业务未改，无移动字段改判或补批。
+
+**本机本轮SQL优化/审核候选均未启用，切换/烟测/回退0，未重启或强停用户服务**。起初8765无health、无queued/running，不冒称正常服务已加载本分支。原schema13/baseline/原SQL保留；GUI v4与v6实际桌面/390证据保留，本轮无新UI/浏览器主张，离线UI/API/历史/取消回归通过。学习站04/08/14/16/18、源码身份同步，20章88题保持。见[报告](evaluation/retrieval-rank-and-audit-reference-v7/report.md)、[SQL统计](evaluation/retrieval-rank-and-audit-reference-v7/sql-summary.json)、[审核统计](evaluation/retrieval-rank-and-audit-reference-v7/audit-summary.json)，报告归档ec9c7df。
+
+私有根data/retrieval_local/retrieval-rank-and-audit-reference-v7/（sql、audit），最终SHA/远端/CI回执closeout.json。保护原未提交研究/论文材料，完成推送核对即停止，不再追加查询或模型批次。
+
 ## 2026-10-28 v6来源模态验收完成，候选仍关闭
 
 实现98de208，报告归档c789577。唯一source_first_audit_v3将来源关系绑定为本单元已选quote的唯一连续原文；null/unknown不授权修订，语义仍由模型判断，无关键词/S2特判。旧八份不变，编码前冻结两份真实来源人工保护/迁移材料，10材料SHA d62008eb068bbc5000500db3399ef794783b5dbb541398ac35e66a5a346e8e46。22专项10.112秒、1433全套496.107秒、实际库10离线路径及10普通读取通过；旧v5 S2真实响应回放拒绝，后续合成分账。初次GBK读取失败保留，显式UTF-8修复，无付费重跑。
