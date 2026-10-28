@@ -37,7 +37,7 @@ def configuration(m):
     frozen=json.loads((ROOT/'data/retrieval_local/source-first-audit-live-validation-v2/freeze.json').read_text(encoding='utf-8'))['configuration']
     return ServiceConfig(index_db=ROOT/frozen['index_db'],knowledge_version=m['cases'][0]['snapshot']['knowledge_version'],execution_path='langgraph_v1')
 
-async def batch(c,m,root,provider,gate,*,rows=None,variant_strategy='source_first_audit_v1'):
+async def batch(c,m,root,provider,gate,*,rows=None,variant_strategy='source_first_audit_v1',accounted_factory=old.Accounted,fault_policy=None,budget_for=None):
     generated=old.inputs(m)
     def request(m,i,**kw):return replace(restore(m['cases'][i]['request'],TaskRequest),mode=TaskMode.ASSESS_EXISTING)
     def variant(cfg,v):return replace(cfg,audit_strategy=variant_strategy,fact_review_contract='literal_v1',local_revision_interface='source_actions_v2') if v=='candidate' else cfg
@@ -64,11 +64,11 @@ async def batch(c,m,root,provider,gate,*,rows=None,variant_strategy='source_firs
         if gate.stopped:return dict(component='service',code='SERVICE_EXECUTION_FAILED',message='Global usage/call/connection stop')
         # The established structured parser can report its local final contract
         # failure as OUTPUT_CONTRACT_ERROR; do not misclassify it as shared code.
-    return await old.shared.batch(c,m,root,lambda settings,**opts:old.Accounted(provider(settings,**opts),gate),rows=rows,
+    return await old.shared.batch(c,m,root,lambda settings,**opts:accounted_factory(provider(settings,**opts),gate),rows=rows,
         request_builder=request,variant_config=variant,task_runner=runner,result_guard=guard,initial_generated=generated,
         fixed_audit_delivery=False,independent_audit_budget=True,send_guard=gate,
         local_issue_codes=('MODEL_CALL_BUDGET_EXHAUSTED',),
-        budget_for=lambda spec,b:replace(b,max_model_calls=20,max_revision_rounds=1,max_transient_retries=0))
+        fault_policy=fault_policy,budget_for=budget_for or (lambda spec,b:replace(b,max_model_calls=20,max_revision_rounds=1,max_transient_retries=0)))
 
 async def replay(label):
     m=old.material();c=configuration(m);root=LOCAL/label

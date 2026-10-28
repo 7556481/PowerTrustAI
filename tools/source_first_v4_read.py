@@ -8,8 +8,8 @@ from evaluation.source_first_quality_v4 import LOCAL,material
 from evaluation.source_first_real_v3 import configuration
 from evaluation.natural_draft_audit_v1 import save
 
-def check(label):
-    p=LOCAL/label;summary=json.loads((p/'summary.json').read_text());db=p/'projection.sqlite3'
+def check(label,*,archive_root=LOCAL):
+    p=archive_root/label;summary=json.loads((p/'summary.json').read_text());db=p/'projection.sqlite3'
     if db.exists():raise RuntimeError('Do not overwrite read acceptance')
     with sqlite3.connect((p/'runs.sqlite3').as_uri()+'?mode=ro',uri=True) as source,sqlite3.connect(db) as dest:source.backup(dest)
     c=replace(configuration(material()),run_db=db);store=RunStore(db);checks=[]
