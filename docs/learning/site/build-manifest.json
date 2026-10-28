@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "de16d5efdd2685a81877f92f1d9dd2b27fdac10a",
-    "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
+    "application_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
+    "evaluation_implementation_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
     "documentation_parent_commit": "47247745b5cdb4f185ac8de9a71efe3024b6b640",
-    "document_version": "learning-site-v6.12 source-first candidate budget-stop,2026-10-28",
+    "document_version": "learning-site-v6.13 source-first real-path v3,2026-10-28",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -33,10 +33,10 @@
         "project_model_cost": 0
       },
       "current_full_offline": {
-        "commit": "902cf65a350383f9d524a7a34ea5728173b93701",
-        "tests": 1360,
-        "seconds": 363.08,
-        "scope": "final full offline run after prior full attempt had one corrected legacy UI fixture failure and final construction-cleanup boundary fix; no paid calls"
+        "commit": "f69a4124f0193708ff5421734a0206efe60a703a",
+        "tests": 1414,
+        "seconds": 475.028,
+        "scope": "final shared v3 implementation; full offline once after fixes; no paid calls"
       },
       "pre_read_path_full_offline": {
         "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
@@ -398,6 +398,27 @@
       "adopted": false,
       "targeted_tests": 7,
       "targeted_seconds": 5.931
+    },
+    "source_first_real_path_v3": {
+      "implementation": "f69a4124f0193708ff5421734a0206efe60a703a",
+      "report": "docs/evaluation/source-first-real-path-acceptance-v3/report.md",
+      "requests": 29,
+      "tokens": 669718,
+      "executed_chains": 8,
+      "full_pairs": 4,
+      "median_baseline_seconds": 41.1337235,
+      "median_candidate_seconds": 7.1249895,
+      "speed_gate": true,
+      "quality_gate": false,
+      "target_repairs": 0,
+      "target_errors": 2,
+      "real_revisions": 0,
+      "adopted": false,
+      "production_switched": false,
+      "additional_batch": false,
+      "offline_tests": 1414,
+      "offline_seconds": 475.028,
+      "actual_cost": null
     }
   },
   "chapters": [
@@ -423,8 +444,8 @@
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 17229,
-      "sha256": "94d544f303479e486b2a6a3c8e53ce85d084773f2a7712017d3b9db16296c868"
+      "characters": 17657,
+      "sha256": "bdeffc3ff43b6a3f305d371492d0b33a0576fa4c359fd6be59dd42deaeda4d3b"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -443,8 +464,8 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 13098,
-      "sha256": "67bf1df98dbfe75a41873036d3de36e744dcf6e74c3442e07aa0e6b9a9620ae9"
+      "characters": 13408,
+      "sha256": "aab30a8501b2395bc34b7e8d7c0630967d402c297a40afcfa08c7c6e17f16218"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -473,8 +494,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 27749,
-      "sha256": "5365b80478c350c616db90bfbb34e4a408f4479f147e43ba469302f4f5343e7e"
+      "characters": 28233,
+      "sha256": "1de9d96bd393c65f7840a5691410506b89199483471a2c90f1b19531e6319d2a"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -483,8 +504,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 9660,
-      "sha256": "024da8b6678057c9d43a29791394be43a6d1d694f6b7cd237583833a574c6c47"
+      "characters": 10268,
+      "sha256": "cbf96c47c1aa740ffdaccccf051087ba35871413d3924a271231fd185730e149"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -512,6 +533,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 175623,
+  "markdown_characters": 177453,
   "network_dependencies": false
 }

@@ -1,9 +1,9 @@
 {
-  "application_commit": "de16d5efdd2685a81877f92f1d9dd2b27fdac10a",
-  "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
+  "application_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
+  "evaluation_implementation_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
   "documentation_parent_commit": "47247745b5cdb4f185ac8de9a71efe3024b6b640",
-  "document_version": "learning-site-v6.12 source-first candidate budget-stop,2026-10-28",
+  "document_version": "learning-site-v6.13 source-first real-path v3,2026-10-28",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -32,10 +32,10 @@
       "project_model_cost": 0
     },
     "current_full_offline": {
-      "commit": "902cf65a350383f9d524a7a34ea5728173b93701",
-      "tests": 1360,
-      "seconds": 363.08,
-      "scope": "final full offline run after prior full attempt had one corrected legacy UI fixture failure and final construction-cleanup boundary fix; no paid calls"
+      "commit": "f69a4124f0193708ff5421734a0206efe60a703a",
+      "tests": 1414,
+      "seconds": 475.028,
+      "scope": "final shared v3 implementation; full offline once after fixes; no paid calls"
     },
     "pre_read_path_full_offline": {
       "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
@@ -397,5 +397,26 @@
     "adopted": false,
     "targeted_tests": 7,
     "targeted_seconds": 5.931
+  },
+  "source_first_real_path_v3": {
+    "implementation": "f69a4124f0193708ff5421734a0206efe60a703a",
+    "report": "docs/evaluation/source-first-real-path-acceptance-v3/report.md",
+    "requests": 29,
+    "tokens": 669718,
+    "executed_chains": 8,
+    "full_pairs": 4,
+    "median_baseline_seconds": 41.1337235,
+    "median_candidate_seconds": 7.1249895,
+    "speed_gate": true,
+    "quality_gate": false,
+    "target_repairs": 0,
+    "target_errors": 2,
+    "real_revisions": 0,
+    "adopted": false,
+    "production_switched": false,
+    "additional_batch": false,
+    "offline_tests": 1414,
+    "offline_seconds": 475.028,
+    "actual_cost": null
   }
 }

@@ -1,5 +1,13 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-28 v3真实路径修复及唯一四对验收完成
+
+源码/真实入口f69a412：真实库非空邻接重现旧错，再以合法index_adjacent_context/core关系修复；真实补检供给、领域复审、候选严格报告及原生意见投影闭合。旧失败和修正回放分档。四例真实库确定性模型贯通、两个合法修订/重提取/双审、修订失败保留，1414离线/475.028秒通过；合成不作语义成绩。
+
+唯一新8槽Flash全部合法完成，29请求，输入647965/输出21753/总669718token、未决0/越过0、未知金额。每链20/全批160硬上限、usage300万停发；没有第二批。四对审核中位41.134→7.125秒（少34.009秒/82.678%），正常封印192.567秒单列。S4两次真实SQL后事实/领域复审仍不足；S2强度及S3排他仍supported、目标修复0/2，真实修订0。八路末稿原对象相等、无新增删失；速度通过但质量失败，不采用、不部署。8条普通结果接口归档重读通过。学习站04/08/14/16及源码身份同步；隔离8766桌面/390固定响应投影已验并停自建服务，用户8765/生产schema13/master未动。
+
+见[报告](evaluation/source-first-real-path-acceptance-v3/report.md)及[机械统计](evaluation/source-first-real-path-acceptance-v3/summary.json)。私有证据根data/retrieval_local/source-first-real-path-acceptance-v3，最终推送/CI回执closeout.json；保留旧v2的6请求失败，不补算、不自动继续付费。其他预存未提交研究/交接材料保持，未纳入本轮提交。
+
 ## 2026-10-28 真实验证v2完成一次后共享工程故障停止
 
 唯一8槽固定批次实际执行S1 A/B，6次Flash、输入117702/输出3891/总121593token，usage齐全、未决0、阈值越过0；原70GB正常字节封印189.037秒单列。A执行完整review_required/43.722秒；B两模型完成后报告校验invalid evidence origin失败/5.836秒，余6槽未执行，不把早停当提速。根因为冻结候选新增邻接绑定index_context不在严格白名单；不修业务、不恢复或第二批。两路正文完全未改，S1原文有据，其余错误/缺口未验证，四对门槛不满足、不采用不部署。7专项/5.931秒只证合成接线，未覆盖新增邻接冲突；旧1405不当本轮结果。源码b3078cd，原v1.1材料/业务不变，生产/8765/master/README未动。见[报告](evaluation/source-first-audit-live-validation-v2/report.md)与[统计](evaluation/source-first-audit-live-validation-v2/summary.json)。本轮停止交设计审阅。

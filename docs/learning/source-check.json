@@ -1,6 +1,6 @@
 {
-  "application_commit": "de16d5efdd2685a81877f92f1d9dd2b27fdac10a",
-  "evaluation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
+  "application_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
+  "evaluation_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
   "method": "AST exact qualified symbol, actual LF excerpt, partial spans explicit; all snippets verified against Markdown",
   "excerpts": [
     {
@@ -164,8 +164,8 @@
       "end_line": 10,
       "function_end_line": 10,
       "partial": false,
-      "file_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
-      "source_text_lf_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
+      "file_sha256": "2011d467bbb8787f8aa7906ab278bf628db31ee0707170ead747c906ab552b60",
+      "source_text_lf_sha256": "2011d467bbb8787f8aa7906ab278bf628db31ee0707170ead747c906ab552b60",
       "excerpt_sha256": "8155c95f5bc07868f3dac9018f9e0d5fa5fedde03758f4ea8d65bb75717e91e0"
     },
     {
@@ -175,8 +175,8 @@
       "end_line": 28,
       "function_end_line": 30,
       "partial": true,
-      "file_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
-      "source_text_lf_sha256": "874371c1eb567bb6b353f6ec8037e2ef40e0dbd87fa39eb1bd687053957b8629",
+      "file_sha256": "2011d467bbb8787f8aa7906ab278bf628db31ee0707170ead747c906ab552b60",
+      "source_text_lf_sha256": "2011d467bbb8787f8aa7906ab278bf628db31ee0707170ead747c906ab552b60",
       "excerpt_sha256": "378f644e6974ecef2bc3b134e84d7125d4838679978eb809b09f38c5805614f4"
     },
     {

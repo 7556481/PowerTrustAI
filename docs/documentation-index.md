@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-28 来源优先真实路径验收v3（完成）
+
+- [真实路径修复、唯一四对及质量复核](evaluation/source-first-real-path-acceptance-v3/report.md)：8/8合法、29Flash/669718token，中位提速82.678%；两目标漏检0/2修复，质量门槛失败，不采用不部署。
+- [逐槽/模型/FTS父子阶段统计](evaluation/source-first-real-path-acceptance-v3/summary.json)：正常封印与整链分账，私有正文/SQL/响应留忽略data，旧v2失败不覆盖。
+- 学习站04/08/14/16及source-check/source-version同步实现f69a412；1414项离线通过，8条普通接口归档重读，隔离固定响应桌面/390复核。用户服务不动，无第二批。
+
 ## 2026-10-28 真实验证v2完成一次后共享工程故障停止
 
 唯一8槽固定批次实际执行S1 A/B，6次Flash、输入117702/输出3891/总121593token，usage齐全、未决0、阈值越过0；原70GB正常字节封印189.037秒单列。A执行完整review_required/43.722秒；B两模型完成后报告校验invalid evidence origin失败/5.836秒，余6槽未执行，不把早停当提速。根因为冻结候选新增邻接绑定index_context不在严格白名单；不修业务、不恢复或第二批。两路正文完全未改，S1原文有据，其余错误/缺口未验证，四对门槛不满足、不采用不部署。7专项/5.931秒只证合成接线，未覆盖新增邻接冲突；旧1405不当本轮结果。源码b3078cd，原v1.1材料/业务不变，生产/8765/master/README未动。见[报告](evaluation/source-first-audit-live-validation-v2/report.md)与[统计](evaluation/source-first-audit-live-validation-v2/summary.json)。本轮停止交设计审阅。

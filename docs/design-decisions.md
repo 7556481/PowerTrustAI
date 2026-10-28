@@ -1,5 +1,11 @@
 # 重要设计决策与依据
 
+## 2026-10-28 v3来源优先真实验收：工程通过，业务不采用
+
+真实非空邻接应遵守现有index_adjacent_context及真实core绑定，不能扩白名单容忍index_context；原引用与补检来源不伪装。补检扩大供给后同步事实绑定和领域复审，保留原发现历史、计入原四职责预算；候选报告同样严格校验原文覆盖，读取层忠实投影原生不足。
+
+唯一29Flash/669718token的四对全部合法，审核中位41.134→7.125秒，速度门槛成立但范围不同于独立外部事实核验。S2情态和S3排他仍supported，修复0/2、无真实Revision；主要阻断是模型语义漏检，不是来源origin字段。质量门槛未过，候选默认关闭、不切schema13生产、不追加第二批。真实库确定性模型修订只证明工程，不替代真实纠错。详见[报告](evaluation/source-first-real-path-acceptance-v3/report.md)。
+
 ## 2026-10-28 真实验证v2完成一次后共享工程故障停止
 
 唯一8槽固定批次实际执行S1 A/B，6次Flash、输入117702/输出3891/总121593token，usage齐全、未决0、阈值越过0；原70GB正常字节封印189.037秒单列。A执行完整review_required/43.722秒；B两模型完成后报告校验invalid evidence origin失败/5.836秒，余6槽未执行，不把早停当提速。根因为冻结候选新增邻接绑定index_context不在严格白名单；不修业务、不恢复或第二批。两路正文完全未改，S1原文有据，其余错误/缺口未验证，四对门槛不满足、不采用不部署。7专项/5.931秒只证合成接线，未覆盖新增邻接冲突；旧1405不当本轮结果。源码b3078cd，原v1.1材料/业务不变，生产/8765/master/README未动。见[报告](evaluation/source-first-audit-live-validation-v2/report.md)与[统计](evaluation/source-first-audit-live-validation-v2/summary.json)。本轮停止交设计审阅。
