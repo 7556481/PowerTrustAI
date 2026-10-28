@@ -534,3 +534,9 @@ evaluation/source_first_materials_v1.py先冻结资料；evaluation/source_first
 业务及UI实现绑定2e99786b7940c4b023cfbe4dde5120e6cd04d86e；services/source_first_audit_v2.py只扩展单元比较并复用literal内部对象/校验及原有修订授权，策略/提示/报告标识v2。evaluation/source_first_quality_v4.py复用v3原子记账和shared.batch，非新调度器。类默认仍baseline，显式候选配置才使用v2。
 
 唯一真实批次停止后仅只读工具补充失败档案“不假报完整”的断言，未改业务或恢复；3条普通结果重读保持原对象，S2仍不完整。实际输入响应、来源、ledger及截图留忽略data；公开报告/摘要仅必要脱敏统计。历史v2/v3失败与原分支成绩不改。
+
+## 2026-10-28 v5：隔离入口与冻结源码
+
+实验实现c2ecddfdb7f7ac364c673d25f27f246e5c5d2b62，公开归档adc122754926510a28f4155f85977694d58ac1db。evaluation/source_first_completion_v5.py复用v4材料、v3批次和现有Factory，evaluation/failure_isolation_v5.py只在显式入口启用，旧调用者默认故障政策不变。业务源码与45c39c8相同，source_first_audit_v2及source_actions_v2语义合同未改。
+
+真实批次后普通结果接口重读12条，末稿对象一致，S3基线未完整如实保留；只复制小运行Store做读取，不复制大库或重放POST。原始响应/来源和私有初末稿留忽略data，公开仅必要统计与复核结论。源码身份和构建同步不表示候选启用。

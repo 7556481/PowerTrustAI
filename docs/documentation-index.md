@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-28 来源优先修订完成发布v5（完成，未启用）
+
+- [完整报告](evaluation/source-first-revision-completion-release-v5/report.md)：194秒未知项、物理释放隔离、12槽11完整/1局部失败；真实修复3/4，S2未修，三有效对不能判四对速度，不启用/不烟测/不补批。
+- [机械摘要](evaluation/source-first-revision-completion-release-v5/summary.json)：50 Flash、960147token、无新增未决，旧v4 pending10不改，实际金额未知；实际修订及普通接口重读保留完整状态。
+- 实现c2ecddf，报告归档adc1227；1425离线503.019秒、17专项及实际库8路径/8读取，12实际归档读取通过；学习站相关五章和源码身份同步，v4 UI证据与旧失败保持。
+
 ## 2026-10-28 来源优先质量/UI与有条件启用v4（完成，未启用）
 
 - [唯一候选、真实停止及UI报告](evaluation/source-first-quality-ui-release-v4/report.md)：12槽仅2完整/1未完整/9未执行；S2有限纠正后触发修订但超时且usage未决，门槛失败，不切本机、不烟测、不第二批。

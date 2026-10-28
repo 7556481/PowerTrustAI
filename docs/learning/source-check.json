@@ -1,6 +1,6 @@
 {
-  "application_commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
-  "evaluation_commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+  "application_commit": "c2ecddfdb7f7ac364c673d25f27f246e5c5d2b62",
+  "evaluation_commit": "c2ecddfdb7f7ac364c673d25f27f246e5c5d2b62",
   "method": "AST exact qualified symbol, actual LF excerpt, partial spans explicit; all snippets verified against Markdown",
   "excerpts": [
     {

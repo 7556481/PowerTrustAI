@@ -425,3 +425,9 @@ source_first_audit_v1在现有prepare_review/merge_and_decide内改变供给，�
 唯一source_first_audit_v2复用现有事实调用，在每单元显式比较来源关系、回答关系和能否推出；supported不得与not_entailed同时返回。它是输出一致性约束，不是程序凭关键词判断语义。原来源读取/有界缺口、四职责、一次Revision及完整重审仍在。
 
 真实S2首次“不能推出”却supported，被有限纠正后形成定位缺陷并进入Revision，但首次修订超时、usage未决；原稿保留，无合法修订/重提取/重审成绩。不能拿真实库确定性响应的两次闭环成功替代真实纠错。12槽仅2完整、1未完整、9未执行；不启用、不补第二批。详见项目docs/evaluation/source-first-quality-ui-release-v4/report.md。
+
+## 2026-10-28 v5：工程闭环与语义修复分开
+
+复用原Factory/OfflineHarness、四职责和一次Revision，不增加调度器或语义候选。实验隔离策略先暂停新准入，只有实际工作退出、正常drain/close及Store真实写入通过，才允许一次未知计费后的独立新Factory；第二未知或共享故障停全批。await取消不等于线程释放，未知不当0。生产默认故障规则不变。
+
+唯一12槽全部执行，11完整、S3基线局部MODEL_OUTPUT_ERROR；有限纠正失败留有效同伴并继续独立槽，失败仍计分母。S3/S7/S8真实v2、重提取和双审闭环，不借离线合成对象充成绩；S2未改。报告：项目docs/evaluation/source-first-revision-completion-release-v5/report.md。
