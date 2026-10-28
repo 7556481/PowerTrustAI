@@ -124,6 +124,7 @@ function renderTrace(trace){if(!$('trace'))return;clear('progress');clear('trace
 function renderAnswers(r){
  const focusedMark=document.activeElement?.id;const previousInline=inlineRendered;
  clear('answers');clear('decision');clear('usage');const a=r.answer||{};const final=a.final;const shown=(a.versions||[]).find(v=>v.version===answerVersion)||final;
+ if(r.presentation?.audit_scope?.text)$('answers').append(node('p',r.presentation.audit_scope.text,'hint'));
  const running=['queued','running'].includes(r.execution?.status);const complete=r.execution?.required_stages_complete===true;const versions=a.versions||[];$('phase').textContent=running?(final?'回答已生成，正在审核；尚未获得最终认可。':'任务处理中，尚无已保存回答。'):r.no_substantive_answer?(complete?'资料不足，未生成实质回答；后续审核不适用，不能当作审核通过。':'执行未完成，已有资料不足生成记录保留；不是审核通过。'):!complete?(final?'执行未完成，已有草稿保留；不是审核通过。':'执行未完成，尚无可用回答。'):'审核执行完整；最终处置：'+tr(r.decision?.kind||'unknown')+'。';if(['cancelled','interrupted','failed'].includes(r.execution?.status))$('phase').textContent=tr(r.execution.status)+'；'+$('phase').textContent;if(versions.length>1)$('phase').textContent+=' 已保留原回答及修订版本；最新版是否认可仍看最终处置。';
  if(pendingStopped(r.execution))$('phase').textContent='已停止处理；中断状态尚未确认保存。';
  const c=node('div',null,'card');const adopted=!running&&complete&&r.decision?.kind==='pass';

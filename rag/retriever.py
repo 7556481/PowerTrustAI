@@ -71,6 +71,10 @@ class AsyncSQLiteBM25Retriever:
     def _work(self, request, result, validate):
         from rag.storage import KnowledgeStore
         with KnowledgeStore(self.path, readonly=True, validated_pdf_cache=True) as store:
+            if validate == 'source_context':
+                from rag.context import read_adjacent_context
+                knowledge_version, options = request
+                return read_adjacent_context(store, result, knowledge_version, options)
             if validate == "saved_evidence":
                 for evidence in result:
                     require(evidence.provenance is not None and evidence.provenance.knowledge_version == request,
@@ -128,6 +132,10 @@ class AsyncSQLiteBM25Retriever:
     async def validate_evidence(self, evidence, knowledge_version):
         """Replay saved citations on the same thread-owned frozen index, no search."""
         await self._submit(knowledge_version, evidence, "saved_evidence")
+
+    async def source_context(self, evidence, knowledge_version, options):
+        """Fixed identities and bounded neighbors on the existing worker; no MATCH."""
+        return await self._submit((knowledge_version, options), evidence, 'source_context')
 
     def close(self):
         self._closed = True

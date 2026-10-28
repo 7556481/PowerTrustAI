@@ -250,6 +250,12 @@ class ComponentFactory:
             manifest['local_revision_interface']=self.config.local_revision_interface
             manifest['prompts']['revision']=manifest['contracts']['revision']=manifest['protocols']['revision']=VERSION
             manifest['template_sha256']['local_revision']=hashlib.sha256(system().encode()).hexdigest()
+        if self.config.audit_strategy!='baseline':
+            from services.source_first_audit_v1 import SYSTEM,VERSION
+            manifest['audit_strategy']=VERSION
+            manifest['audit_scope']='source_fidelity_and_task_completeness; external cross-check separately recorded'
+            manifest['prompts']['verification']=VERSION
+            manifest['template_sha256']['literal']=hashlib.sha256(SYSTEM.encode()).hexdigest()
         return manifest
 
     def create(self,rid,observer,*,fixed_evidence_only=False):
@@ -279,6 +285,8 @@ class ComponentFactory:
             from services.literal_review_v1 import LiteralReviewAgent as FactAgent, LocalRevisionAgent as ModelRevisionAgent
             if self.config.local_revision_interface=='source_actions_v2':
                 from services.local_revision_v2 import ScopedLocalRevisionAgent as ModelRevisionAgent
+            if self.config.audit_strategy!='baseline':
+                from services.source_first_audit_v1 import SourceFirstReviewAgent as FactAgent
         from services.claim_extractor import ModelClaimExtractor
         from tools.unit_conversion import UnitConversionTool
         from model_adapter.contracts import ModelSettings
@@ -321,8 +329,8 @@ class ComponentFactory:
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1' else None,
-                generation_corpus_english=corpus_english,execution_path=self.config.execution_path)
-            harness.subject_supplement=not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
+                generation_corpus_english=corpus_english,execution_path=self.config.execution_path,audit_strategy=self.config.audit_strategy)
+            harness.subject_supplement=self.config.audit_strategy=='baseline' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
             return Bundle(harness,resources)
         except Exception:
             close_resources(resources) # Cleanup failure must also stop admission, not become an ordinary task error.

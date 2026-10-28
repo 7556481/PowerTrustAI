@@ -11,7 +11,12 @@ class OfflineHarness:
     def __init__(self, generation, verification, domain_review, revision, extractor, policy=None,
                  retriever=None, retrieval_settings=None, unit_tool=None, observer=None,
                  generation_query_converter=None, generation_corpus_english=False, *,
-                 execution_path="sequential"):
+                 execution_path="sequential", audit_strategy="baseline"):
+        if audit_strategy not in ('baseline', 'source_first_audit_v1'):
+            raise InputError('Unknown audit strategy')
+        if audit_strategy != 'baseline' and not getattr(verification,'source_first_review',False):
+            raise InputError('Source-first strategy requires explicit paired reviewer')
+        self.audit_strategy = audit_strategy
         if execution_path not in ("sequential", "langgraph_v1"):
             raise InputError("Unknown Harness execution path")
         self.execution_path = execution_path

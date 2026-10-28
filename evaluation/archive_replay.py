@@ -48,7 +48,7 @@ def restore(value, cls):
         if type(value) is dict and cls.__name__=='RevisionOutput' and value.get('local_protocol')=='literal-local-revision-v1':
             from agents.contracts import LocalRevisionOutput
             cls=LocalRevisionOutput
-        if type(value) is dict and cls.__name__=='AuditReport' and value.get('literal_protocol')=='literal-review-v1':
+        if type(value) is dict and cls.__name__=='AuditReport' and value.get('literal_protocol') in ('literal-review-v1','source_first_audit_v1'):
             from core.literal_review import LiteralAuditReport
             cls=LiteralAuditReport
         extensions={'AuditDecision':('execution_integrity','core.models','ProductDecision'),

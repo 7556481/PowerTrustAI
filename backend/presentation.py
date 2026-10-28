@@ -5,6 +5,19 @@ def explain(result):
     from backend.answer_annotations import project
     projection = _explain(result)
     projection['inline_review'] = project(result)
+    records=[r for r in result.get('retrieval',[]) if r.get('query_method')=='source_first_audit_v1']
+    if records:
+        import json
+        rounds=[]
+        for r in records:
+            try:scope=json.loads(r.get('reason',''))
+            except (ValueError,TypeError):continue
+            rounds.append({'answer_version':r.get('answer_version'),'external_cross_check':scope.get('external_cross_check','unknown')})
+        projection['audit_scope']={'version':'source_first_audit_v1',
+            'text':'本轮审核资料忠实性与任务完整性；来源支持不代表独立事实已核实或工程安全认证。',
+            'external_cross_check':'见取证记录；仅缺口补检，不是全面交叉核验',
+            'round_records':rounds,
+            'source_truth_verified':False}
     return projection
 
 
