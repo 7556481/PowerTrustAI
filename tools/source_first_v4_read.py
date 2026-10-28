@@ -22,8 +22,10 @@ def check(label):
             start=time.perf_counter();result=ApplicationService(cfg,store,factory=factory).result(rid)
             save(p/rid/'read-projection.json',result)
             assert result['answer']['final']==summary['outputs'][rid]['answer']
-            assert result['execution']['required_stages_complete']
-            checks.append(dict(slot=row['case_id'],complete=True,final_answer_equal=True,read_seconds=time.perf_counter()-start))
+            raw=summary['outputs'][rid]
+            expected=bool(raw.get('review_rounds')) and not raw.get('execution_issues')
+            assert result['execution']['required_stages_complete']==expected
+            checks.append(dict(slot=row['case_id'],complete=result['execution']['required_stages_complete'],expected_complete=expected,final_answer_equal=True,read_seconds=time.perf_counter()-start))
     finally:store.close()
     save(p/'read-acceptance.json',dict(passed=True,checks=checks,normal_service_projection=True,small_store_copy_only=True))
     print(label,len(checks),'ordinary reads accepted',flush=True)
