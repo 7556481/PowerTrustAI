@@ -216,7 +216,7 @@ def source_identity(row,revision,shard,row_number):
 
 ### 复用装配与固定Evidence入口
 
-路径 backend/assembly.py，函数 ComponentFactory.create，行255–272；完整函数至329行，局部摘录。
+路径 backend/assembly.py，函数 ComponentFactory.create，行261–278；完整函数至337行，局部摘录。
 
 ```python
     def create(self,rid,observer,*,fixed_evidence_only=False):
@@ -243,7 +243,7 @@ def source_identity(row,revision,shard,row_number):
 
 ### 受预算约束的完整闭环
 
-路径 harness/runtime.py，函数 OfflineHarness.run，行42–59；完整函数至61行，局部摘录。
+路径 harness/runtime.py，函数 OfflineHarness.run，行47–64；完整函数至66行，局部摘录。
 
 ```python
     async def run(self, request, budget, *, knowledge_version=None, generation_only=False, answer_requirements=(),
@@ -516,3 +516,9 @@ async def waves(work, check, order):
             return await child.complete(request)
         finally:
 ```
+
+## 2026-10-28 来源优先代码入口（默认关闭）
+
+沿backend/config.py的audit_strategy显式选择source_first_audit_v1，并配对literal_v1/source_actions_v2及串行BM25。backend/assembly.py仍装配原四职责和OfflineHarness；harness/source_first_audit_v1.py只提供共享阶段的供给与缺口函数。rag/retriever.py的source_context复用唯一工作线程和KnowledgeStore严格回查；services/source_first_audit_v1.py单独版本化提示，复用原文输出/修订合同。归档还原明确识别候选LiteralAuditReport，不改旧报告。
+
+evaluation/source_first_materials_v1.py先冻结资料；evaluation/source_first_audit_redesign_v1.py只做离线wire预算准入和原子预留测试，本轮未形成获准发送的真实批次。preflight结果是budget_not_admitted，不能当真实配对入口已跑通。实现绑定de16d5efdd2685a81877f92f1d9dd2b27fdac10a，验证工具绑定64e3ca5；生产仍schema13，不切schema14或引用并发。

@@ -1,9 +1,9 @@
 {
-  "application_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
+  "application_commit": "de16d5efdd2685a81877f92f1d9dd2b27fdac10a",
   "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
   "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
   "documentation_parent_commit": "47247745b5cdb4f185ac8de9a71efe3024b6b640",
-  "document_version": "learning-site-v6.11 final audit retrieval diagnosis,2026-10-28",
+  "document_version": "learning-site-v6.12 source-first candidate budget-stop,2026-10-28",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -358,5 +358,25 @@
     "targeted_seconds": 24.311,
     "full_local_rerun": false,
     "report": "docs/maintenance/audit-retrieval-final-optimization-v1.md"
+  },
+  "source_first_audit_v1": {
+    "implementation_commit": "de16d5efdd2685a81877f92f1d9dd2b27fdac10a",
+    "validation_commit": "64e3ca5",
+    "default_enabled": false,
+    "production_switched": false,
+    "batch_status": "budget_not_admitted",
+    "project_model_calls": 0,
+    "actual_tokens": 0,
+    "actual_cost": null,
+    "adopted": false,
+    "real_speed_gain": null,
+    "real_correction_gain": null,
+    "report": "docs/evaluation/source-first-audit-redesign-v1/report.md",
+    "full_offline": {
+      "tests": 1405,
+      "seconds": 425.274,
+      "status": "passed",
+      "source_commit": "64e3ca5"
+    }
   }
 }

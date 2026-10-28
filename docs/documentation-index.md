@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-28 来源优先审核候选与预算停止交付
+
+[唯一报告](evaluation/source-first-audit-redesign-v1/report.md)、[保守预算预检](evaluation/source-first-audit-redesign-v1/preflight.json)、[公开历史正文引用](evaluation/source-first-audit-redesign-v1/cases.json)、[验证与边界](evaluation/source-first-audit-redesign-v1/verification.json)：固定来源邻接/最多三缺口查询/完整修订重审，默认关闭。四对真实链因保守预算准入失败未启动，0请求；无速度或纠错收益结论，不建议采用，不恢复第二批。学习站04/08/14/16及实际源码身份同步；原输入/提取/来源全文/wire留忽略data。
+
 ## 2026-10-28 审核检索最终诊断完成
 
 [报告](maintenance/audit-retrieval-final-optimization-v1.md)、[验证](maintenance/audit-retrieval-final-optimization-v1-verification.json)：固定3组8查询，分解/身份及预算保持，FTS主导、连接毫秒，无安全可达门槛候选，0配对/0模型；102专项通过。生产执行不改，源码身份与16章必要同步，完成推送/CI后停止。

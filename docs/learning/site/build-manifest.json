@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "5fddbf07d1a26090bd52db73cc3902fae72000f7",
+    "application_commit": "de16d5efdd2685a81877f92f1d9dd2b27fdac10a",
     "evaluation_implementation_commit": "babdfe1a429e740cc06aec178b18fb72aa05dccb",
     "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
     "documentation_parent_commit": "47247745b5cdb4f185ac8de9a71efe3024b6b640",
-    "document_version": "learning-site-v6.11 final audit retrieval diagnosis,2026-10-28",
+    "document_version": "learning-site-v6.12 source-first candidate budget-stop,2026-10-28",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -359,6 +359,26 @@
       "targeted_seconds": 24.311,
       "full_local_rerun": false,
       "report": "docs/maintenance/audit-retrieval-final-optimization-v1.md"
+    },
+    "source_first_audit_v1": {
+      "implementation_commit": "de16d5efdd2685a81877f92f1d9dd2b27fdac10a",
+      "validation_commit": "64e3ca5",
+      "default_enabled": false,
+      "production_switched": false,
+      "batch_status": "budget_not_admitted",
+      "project_model_calls": 0,
+      "actual_tokens": 0,
+      "actual_cost": null,
+      "adopted": false,
+      "real_speed_gain": null,
+      "real_correction_gain": null,
+      "report": "docs/evaluation/source-first-audit-redesign-v1/report.md",
+      "full_offline": {
+        "tests": 1405,
+        "seconds": 425.274,
+        "status": "passed",
+        "source_commit": "64e3ca5"
+      }
     }
   },
   "chapters": [
@@ -384,8 +404,8 @@
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 16834,
-      "sha256": "bd49559d9b4b57a1055e2ca9cac8753f8d157ef43aabb100c672fa4df4fd7aa1"
+      "characters": 17229,
+      "sha256": "94d544f303479e486b2a6a3c8e53ce85d084773f2a7712017d3b9db16296c868"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -404,8 +424,8 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 12826,
-      "sha256": "ab5b6a9ee3c92a046a9cb9fbdb79a99c926250cb033bc2804a9f498e6591a2e2"
+      "characters": 13098,
+      "sha256": "67bf1df98dbfe75a41873036d3de36e744dcf6e74c3442e07aa0e6b9a9620ae9"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -434,8 +454,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 27124,
-      "sha256": "fd206fd07acfdb9b9e5ad1f588c1af7a8b702b63fdc138c5b0c8b767385459ce"
+      "characters": 27749,
+      "sha256": "5365b80478c350c616db90bfbb34e4a408f4479f147e43ba469302f4f5343e7e"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -444,8 +464,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 8612,
-      "sha256": "209d66667cbd016ccaf06729ae33afe71895f611fc2841a4f95683f08a25a7aa"
+      "characters": 8965,
+      "sha256": "33c89964880281e3638a1f19df1d814fbc28fc9928cfadcc672b27bdbb6ca19c"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -473,6 +493,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 173283,
+  "markdown_characters": 174928,
   "network_dependencies": false
 }
