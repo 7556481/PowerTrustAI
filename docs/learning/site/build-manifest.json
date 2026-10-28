@@ -379,6 +379,13 @@
         "status": "passed",
         "source_commit": "64e3ca5"
       }
+    },
+    "source_first_live_validation_v1": {
+      "status": "billing_envelope_bound_unverified",
+      "complete_live_runner_validated": false,
+      "model_requests": 0,
+      "tests": 4,
+      "seconds": 0.083
     }
   },
   "chapters": [
@@ -464,8 +471,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 8965,
-      "sha256": "33c89964880281e3638a1f19df1d814fbc28fc9928cfadcc672b27bdbb6ca19c"
+      "characters": 9188,
+      "sha256": "79e6dd8aa4b27e4496da552cc012bd7b30499bd1e406fe4df6c4cf7383274be9"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -493,6 +500,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 174928,
+  "markdown_characters": 175151,
   "network_dependencies": false
 }

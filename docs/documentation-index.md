@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-28 来源优先真实验证：上界依据缺失，入口仍未验收
+
+预算新增逐请求持久化原子预留与可信usage结算，缓存不重复、未知发送/usage不释放、超额与落库异常停全局，禁止恢复；4项专项/0.083秒通过。官方资料未建立完整Hosted Chat信封计费token上界，不再以任意2048或96槽乘首审作硬保证。原v1.1材料身份保持，正常初审24调用，条件性纠正/补检/修订载荷未知。8槽全部未执行、0真实请求/0token/未加载.env/未读真实大库，完整真实入口未验收；不是120万必然不足，也无速度或纠错收益。不切生产/8765/master/README，不补跑。见[新报告](evaluation/source-first-audit-live-validation-v1/report.md)，到此停止。
+
 ## 2026-10-28 来源优先审核候选与预算停止交付
 
 [唯一报告](evaluation/source-first-audit-redesign-v1/report.md)、[保守预算预检](evaluation/source-first-audit-redesign-v1/preflight.json)、[公开历史正文引用](evaluation/source-first-audit-redesign-v1/cases.json)、[验证与边界](evaluation/source-first-audit-redesign-v1/verification.json)：固定来源邻接/最多三缺口查询/完整修订重审，默认关闭。四对真实链因保守预算准入失败未启动，0请求；无速度或纠错收益结论，不建议采用，不恢复第二批。学习站04/08/14/16及实际源码身份同步；原输入/提取/来源全文/wire留忽略data。

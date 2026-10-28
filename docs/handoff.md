@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-28 来源优先真实验证：上界依据缺失，入口仍未验收
+
+预算新增逐请求持久化原子预留与可信usage结算，缓存不重复、未知发送/usage不释放、超额与落库异常停全局，禁止恢复；4项专项/0.083秒通过。官方资料未建立完整Hosted Chat信封计费token上界，不再以任意2048或96槽乘首审作硬保证。原v1.1材料身份保持，正常初审24调用，条件性纠正/补检/修订载荷未知。8槽全部未执行、0真实请求/0token/未加载.env/未读真实大库，完整真实入口未验收；不是120万必然不足，也无速度或纠错收益。不切生产/8765/master/README，不补跑。见[新报告](evaluation/source-first-audit-live-validation-v1/report.md)，到此停止。
+
 ## 2026-10-28 来源优先候选已实现，真实阶段预算准入停止
 
 基于c4abf9c，独立codex/source-first-audit-redesign-v1，实现de16d5e、验证64e3ca5。复用四职责/共享Harness/既有literal与source_actions_v2、固定ID邻接直接读取、每审核版本至多3缺口查询一次补检、一次Revision及完整重审；范围为资料忠实性与任务完整性，外部交叉核验分账。候选默认关闭，生产schema13/8765/master/README不动，无引用并发叠加。

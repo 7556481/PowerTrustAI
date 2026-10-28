@@ -378,5 +378,12 @@
       "status": "passed",
       "source_commit": "64e3ca5"
     }
+  },
+  "source_first_live_validation_v1": {
+    "status": "billing_envelope_bound_unverified",
+    "complete_live_runner_validated": false,
+    "model_requests": 0,
+    "tests": 4,
+    "seconds": 0.083
   }
 }
