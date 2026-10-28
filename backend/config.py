@@ -44,7 +44,7 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
-        if self.audit_strategy not in ('baseline','source_first_audit_v1'):raise ValueError('Invalid audit strategy')
+        if self.audit_strategy not in ('baseline','source_first_audit_v1','source_first_audit_v2'):raise ValueError('Invalid audit strategy')
         if self.audit_strategy!='baseline' and (self.fact_review_contract!='literal_v1' or self.local_revision_interface!='source_actions_v2' or self.fact_review_execution!='serial_v1' or self.retrieval_mode!='bm25' or self.retrieval_execution_profile=='chinese_first_cross_language_v1'):raise ValueError('Source-first requires explicit literal/v2 serial BM25 candidate')
         if self.fact_review_execution not in ('serial_v1','citation_pair_v1'):raise ValueError('Invalid fact execution candidate')
         if self.fact_review_execution!='serial_v1' and (self.profile!='real' or self.verification_schema!=13 or self.fact_internal_flow!='production' or self.fact_review_contract!='production' or self.review_result_transport!='json'):raise ValueError('Candidate requires original schema13 fact contract')
@@ -110,6 +110,7 @@ class ServiceConfig:
         strategy=os.environ.get('POWERTRUST_FACT_RETRIEVAL_STRATEGY','aggregate')
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
+            audit_strategy=os.environ.get('POWERTRUST_AUDIT_STRATEGY','baseline'),
             domain_internal_flow=os.environ.get('POWERTRUST_DOMAIN_INTERNAL_FLOW','production'),
             revision_answer_delivery=os.environ.get('POWERTRUST_REVISION_ANSWER_DELIVERY','production'),
             local_revision_interface=os.environ.get('POWERTRUST_LOCAL_REVISION_INTERFACE','production'),

@@ -14,12 +14,16 @@ from services.source_first_audit_v1 import VERSION
 
 
 def enabled(execution):
-    return execution.harness.audit_strategy==VERSION
+    return execution.harness.audit_strategy in (VERSION,'source_first_audit_v2')
+
+
+def strategy(execution):
+    return getattr(getattr(execution,'harness',None),'audit_strategy',VERSION)
 
 
 def mappings(execution, evidence):
     return tuple(FactRetrievalBinding(execution.answer.answer_id,execution.answer.version,
-        c.claim_id,component,category,target,'',VERSION,None,execution.knowledge_version,
+        c.claim_id,component,category,target,'',strategy(execution),None,execution.knowledge_version,
         'source_scope',delivered_evidence_ids=tuple(e.evidence_id for e in evidence))
         for c,component,category,target,query in objects(execution.claims))
 
@@ -70,7 +74,7 @@ async def prepare(ex):
             b=replace(prior[e.evidence_id],answer_version=ex.answer.version)
         bindings.append(b)
     bindings=tuple(bindings)
-    summary=RetrievalRecord(rid,'verification','',VERSION,ex.answer.version,ex.knowledge_version,
+    summary=RetrievalRecord(rid,'verification','',strategy(ex),ex.answer.version,ex.knowledge_version,
         ExecutionStatus.SUCCEEDED,'source_scope',core_evidence_ids=tuple(e.evidence_id for e in roots),
         context_evidence_ids=tuple(i.evidence.evidence_id for i in context.items),
         offered_chars=sum(len(e.text) for e in bodies),accepted_chars=sum(len(e.text) for e in bodies),
@@ -128,8 +132,8 @@ async def supplement(ex):
         if gap['outcome']=='pending':gap['outcome']='stopped_after_failure'
     external='failed' if any(d.issue for d in deliveries) else 'executed' if deliveries else 'not_executed'
     ex.record('source_first_gaps',ExecutionStatus.SUCCEEDED if external!='failed' else ExecutionStatus.FAILED,
-        started,json.dumps(dict(version=VERSION,external_cross_check=external,gaps=gaps),ensure_ascii=False))
-    ex.retrieval.records.append(RetrievalRecord(uuid4().hex,'verification','',VERSION,
+        started,json.dumps(dict(version=strategy(ex),external_cross_check=external,gaps=gaps),ensure_ascii=False))
+    ex.retrieval.records.append(RetrievalRecord(uuid4().hex,'verification','',strategy(ex),
         ex.answer.version,ex.knowledge_version,ExecutionStatus.FAILED if external=='failed' else ExecutionStatus.SUCCEEDED,
         'gap_summary',calls_used=ex.retrieval.calls,cumulative_chars=ex.retrieval.chars,
         duration_ms=int((perf_counter()-started)*1000),answer_id=ex.answer.answer_id,

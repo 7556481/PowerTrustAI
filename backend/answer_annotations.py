@@ -61,6 +61,8 @@ def project(result):
                    reason=reason or f.get('rationale') or f.get('reason') or '具体原因未提供',
                    evidence_ids=list(f.get('evidence_ids') or []),
                    answer_id=binding.get('answer_id'), answer_version=binding.get('answer_version'))
+        from backend.user_review import scope_only
+        row['scope_only']=scope_only(f,result)
         span, failure = locate(answer, binding)
         if span and not problem:
             row.update(start=span[0], end=span[1], original_text=span[2], location_method=span[3])
@@ -113,6 +115,10 @@ def project(result):
             problem = '引用发现版本不符'
         add('citation', f, binding, key=i, problem=problem)
     for i, f in enumerate(findings.get('domain', [])):
+        from backend.user_review import scope_only
+        if scope_only(f,result):
+            add('domain',f,f,key=i,problem='检查范围说明')
+            continue
         if (f.get('check_status') not in ('warning', 'not_assessable', 'incomplete', 'failed')
                 and f.get('severity') not in ('low', 'medium', 'high', 'critical') and not f.get('missing_prerequisites')):
             continue
@@ -125,6 +131,10 @@ def project(result):
     for i, f in enumerate(findings.get('program_rules', [])):
         if f.get('status') in ('warning', 'incomplete', 'failed'):
             add('rule', f, {}, key=i, problem='程序检查没有已核验正文锚点')
+    from backend.user_review import project as user_opinions
+    opinions=user_opinions(opinions)
+    scope_notes=[o for o in opinions if o.get('scope_only')]
+    opinions=[o for o in opinions if not o.get('scope_only')]
     valid = sorted((o for o in opinions if o['located']), key=lambda o: (o['start'], o['end'], o['opinion_id']))
     regions = []
     for o in valid:
@@ -135,5 +145,5 @@ def project(result):
             regions[-1]['opinion_ids'].append(o['opinion_id'])
     return dict(version=VERSION, offset_unit='unicode_codepoint', answer_id=answer.get('answer_id'),
                 answer_version=answer.get('version'), ready=ready, opinions=opinions,
-                regions=regions if ready else [], located_region_count=len(regions) if ready else 0,
+                scope_notes=scope_notes,regions=regions if ready else [], located_region_count=len(regions) if ready else 0,
                 unlocated_count=sum(not o['located'] for o in opinions))

@@ -26,10 +26,11 @@ function render({answer,final,projection,execution,noAnswer,revisions,node,looku
  function show(opinions,trigger,key){
   owner=trigger;activeKey=key;panel.replaceChildren();panel.hidden=false;
   const closeButton=node('button','关闭原因','quiet');closeButton.type='button';closeButton.addEventListener('click',()=>close());panel.append(closeButton);
-  for(const o of opinions){const card=node('div',null,'inline-opinion');card.append(node('strong',kind(o)[0]),node('span',' · '+(origins[o.origin]||'已存审核意见'),'hint'),node('p',o.reason||'具体原因未提供'));
+  for(const o of [...new Map(opinions.map(o=>[o.display_key||o.opinion_id,o])).values()]){const card=node('div',null,'inline-opinion');card.append(node('strong',kind(o)[0]),node('span',' · '+(origins[o.origin]||'已存审核意见'),'hint'),node('p',(o.reason||'具体原因未提供').split('\n\n')[0]));
+   if((o.reason||'').includes('\n\n')){const more=node('details');more.append(node('summary','展开完整说明'),node('p',o.reason));card.append(more);}
    for(const [i,id] of (o.evidence_ids||[]).entries()){const b=node('button','查看依据 '+(i+1),'quiet');b.type='button';b.addEventListener('click',()=>lookupEvidence(id,b));card.append(b);}panel.append(card);}
   panel.append(node('p','标注是已有审核意见，正文未因标注改变；未标注部分不表示已核实正确。','hint'));
-  if(trigger?.getBoundingClientRect&&reading.getBoundingClientRect){const r=trigger.getBoundingClientRect(),base=reading.getBoundingClientRect();panel.style.top=Math.max(0,r.bottom-base.top+8)+'px';}
+  panel.style.top='';
  }
  panel.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();close();}});
  function activate(mark,opinions,key){mark.addEventListener('click',()=>show(opinions,mark,key));mark.addEventListener('focus',()=>{if(!returningFocus)show(opinions,mark,key);});mark.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();close();}else if(e.key==='Enter'||e.key===' '){e.preventDefault();show(opinions,mark,key);}});}
@@ -43,9 +44,9 @@ function render({answer,final,projection,execution,noAnswer,revisions,node,looku
  if(cursor<m.points.length||!m.points.length)body.append(node('span',m.points.slice(cursor).join('')));
  const versions=revisions?.versions||[],changed=versions.some(v=>v.answer_id===final?.answer_id&&v.version!==final?.version&&typeof v.text==='string'&&v.text!==final?.text);
  const modified=changed&&(revisions?.records||[]).some(v=>v.answer?.answer_id===final?.answer_id&&v.answer?.version===final?.version&&v.answer?.text===final?.text);
- const modification=modified?'已有实际修订，所选正文保持保存版本。':changed?'存在内容不同的保存版本，是否修订以原记录为准。':m.valid.length||m.unlocated.length?'正文未修改；本次未自动修改，需核对审核意见。':'正文未修改。';
- const prefix=!m.current?'当前展示历史版本，未叠加最新版审核标注；无高亮不表示通过。':noAnswer?'未生成实质回答，实质审核不适用。':execution?.status==='queued'||execution?.status==='running'?'审核进行中，初稿暂不叠加问题标注。':!execution?.required_stages_complete?'审核未完成，已有草稿保留；未标问题不表示通过。':m.ready?`审核结束：${m.regions.length}处内容需要核实${m.unlocated.length?'，另有'+m.unlocated.length+'条未定位意见':''}。`:'审核结束：暂无可核验的正文标注；无高亮不表示通过。';
- summary.append(node('p',prefix+(m.current?' '+modification:'')));
+ const modification=modified?'已有实际修订，所选正文保持保存版本。':changed?'存在内容不同的保存版本，是否修订以原记录为准。':m.valid.length||m.unlocated.length?'正文未修改。':'正文未修改。';
+ const prefix=!m.current?'当前展示历史版本，未叠加最新版审核标注；无高亮不表示通过。':noAnswer?'未生成实质回答，实质审核不适用。':execution?.status==='queued'||execution?.status==='running'?'审核进行中，初稿暂不叠加问题标注。':!execution?.required_stages_complete?'审核未完成，已有草稿保留；未标问题不表示通过。':m.ready?(m.regions.length||m.unlocated.length?`正文待核实位置：${m.regions.length}${m.unlocated.length?'；任务级意见：'+m.unlocated.length:''}。`:''):'审核结束：暂无可核验的正文标注；无高亮不表示通过。';
+ const summaryText=prefix+(m.current&&(changed||m.valid.length||m.unlocated.length)?' '+modification:'');if(summaryText)summary.append(node('p',summaryText));
  for(const [i,region] of m.regions.entries()){const b=node('button',`核实第${i+1}处 · `+[...new Set(region.opinions.map(o=>kind(o)[0]))].join(' / '),'quiet annotation-jump');b.type='button';b.addEventListener('click',()=>{const idx=m.segments.findIndex(s=>s.start===region.start),mark=body.children.find?.(n=>n.id==='review-mark-'+idx)||body.querySelector?.('#review-mark-'+idx);mark?.focus?.();mark?.scrollIntoView?.({block:'center'});if(mark)show(region.opinions,mark,idx);});summary.append(b);}
  for(const o of m.unlocated){const details=node('details',null,'unlocated-opinion');details.append(node('summary','此项未能定位到正文 · '+kind(o)[0]),node('p',(origins[o.origin]||'审核意见')+'：'+(o.reason||'具体原因未提供')));summary.append(details);}
  reading.append(body,panel);area.append(summary,reading);

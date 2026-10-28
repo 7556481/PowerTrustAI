@@ -23,7 +23,7 @@ class Gate(old.UsageGate):
     def __call__(self,spec,r,n):
         with self.lock:
             key=f"{spec['case']}-{spec['variant']}"
-            if self.stopped or self.calls>=160 or self.tokens>=3000000 or self.remaining_seconds()<=.001:
+            if self.stopped or self.calls>=self.cap or self.tokens>=self.threshold or self.remaining_seconds()<=.001:
                 self.stopped=True;raise RuntimeError('Global v3 budget stop')
             require(self.chains.get(key,0)<20,'Per-chain20 limit')
             require(r.model_id=='deepseek-flash' and r.max_output_tokens==8000,'Frozen Flash parameters')
@@ -37,10 +37,10 @@ def configuration(m):
     frozen=json.loads((ROOT/'data/retrieval_local/source-first-audit-live-validation-v2/freeze.json').read_text(encoding='utf-8'))['configuration']
     return ServiceConfig(index_db=ROOT/frozen['index_db'],knowledge_version=m['cases'][0]['snapshot']['knowledge_version'],execution_path='langgraph_v1')
 
-async def batch(c,m,root,provider,gate,*,rows=None):
+async def batch(c,m,root,provider,gate,*,rows=None,variant_strategy='source_first_audit_v1'):
     generated=old.inputs(m)
     def request(m,i,**kw):return replace(restore(m['cases'][i]['request'],TaskRequest),mode=TaskMode.ASSESS_EXISTING)
-    def variant(cfg,v):return replace(cfg,audit_strategy='source_first_audit_v1',fact_review_contract='literal_v1',local_revision_interface='source_actions_v2') if v=='candidate' else cfg
+    def variant(cfg,v):return replace(cfg,audit_strategy=variant_strategy,fact_review_contract='literal_v1',local_revision_interface='source_actions_v2') if v=='candidate' else cfg
     async def runner(h,req,budget,**kw):
         i=next(i for i,x in generated.items() if x.answer.answer_id==req.existing_answer.answer_id)
         fixed=restore(m['cases'][i]['extraction'],ClaimExtractionOutput);delegate=h.extractor

@@ -4,8 +4,15 @@ TERMINAL={'finished','failed','cancelled','interrupted'}
 def explain(result):
     from backend.answer_annotations import project
     projection = _explain(result)
+    # Applicability belongs to every policy's user view, including the early
+    # product-decision return. Never promote an explicit scope note to a gap.
+    from types import SimpleNamespace
+    from services.bounded_repair import missing_information_review
+    gaps=missing_information_review([SimpleNamespace(category=f.get('category',''),rationale=f.get('rationale') or '') for f in (result.get('findings') or {}).get('domain',[])]) or []
+    projection['missing_information_review']=gaps
+    projection['scope_note_indexes']=[g['index'] for g in gaps if g.get('applicability') in ('scope_note','unrequested_extension')]
     projection['inline_review'] = project(result)
-    records=[r for r in result.get('retrieval',[]) if r.get('query_method')=='source_first_audit_v1']
+    records=[r for r in result.get('retrieval',[]) if r.get('query_method') in ('source_first_audit_v1','source_first_audit_v2')]
     if records:
         import json
         rounds=[]
@@ -13,8 +20,8 @@ def explain(result):
             try:scope=json.loads(r.get('reason',''))
             except (ValueError,TypeError):continue
             rounds.append({'answer_version':r.get('answer_version'),'external_cross_check':scope.get('external_cross_check','unknown')})
-        projection['audit_scope']={'version':'source_first_audit_v1',
-            'text':'本轮审核资料忠实性与任务完整性；来源支持不代表独立事实已核实或工程安全认证。',
+        projection['audit_scope']={'version':records[-1]['query_method'],
+            'text':'核对回答与所给资料，并检查任务完整性。',
             'external_cross_check':'见取证记录；仅缺口补检，不是全面交叉核验',
             'round_records':rounds,
             'source_truth_verified':False}

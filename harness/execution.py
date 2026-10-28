@@ -167,7 +167,7 @@ class RunExecution:
             from core.literal_review import LiteralAuditReport
             from dataclasses import fields
             result=LiteralAuditReport(**{f.name:getattr(result,f.name) for f in fields(result)},literal_reviews=self.verification.literal_reviews,literal_defects=self.verification.literal_defects,
-                literal_protocol='source_first_audit_v1' if self.harness.audit_strategy=='source_first_audit_v1' else 'literal-review-v1')
+                literal_protocol=self.harness.audit_strategy if self.harness.audit_strategy!='baseline' else 'literal-review-v1')
         validate_report(result)
         return result
 

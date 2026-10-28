@@ -348,6 +348,8 @@ class ApplicationService:
             substantive_audit_status='not_applicable' if no_answer_complete else 'completed' if complete else 'not_completed',
             partial_only=row['result'] is None),'decision':decision,
             'no_substantive_answer':no_answer,
+            'task_context':{'mode':row['request'].get('mode'),'question':row['request'].get('question',''),
+                'structured_goal':(row['request'].get('engineering_context') or {}).get('goal')},
             'fact_diagnostics':__import__('services.fact_diagnostics',fromlist=['explain']).explain(verification),
             'fact_internal_flow':{'protocol':verification.get('flow_protocol'),'object_reviews':verification.get('object_reviews',[]),'trace':verification.get('flow_trace',[])},
             'answer':{'original':original,

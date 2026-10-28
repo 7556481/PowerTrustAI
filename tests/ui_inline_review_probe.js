@@ -29,7 +29,7 @@ const body=()=>find(elements.answers,e=>e.tag==='pre'&&e.className==='answer-tex
 const panel=()=>find(elements.answers,e=>e.className==='review-popover');
 const fire=(e,event='click',extra={})=>e.listeners[event]?.({preventDefault(){},...extra});
 (async()=>{
- render();assert.equal(marks().length,1);assert.equal(body().textContent,a.text);assert(marks()[0].className.includes('insufficient'));assert(elements.answers.textContent.includes('1处内容需要核实'));assert(!elements.answers.textContent.includes('已修订'));
+ render();assert.equal(marks().length,1);assert.equal(body().textContent,a.text);assert(marks()[0].className.includes('insufficient'));assert(elements.answers.textContent.includes('正文待核实位置：1'));assert(!elements.answers.textContent.includes('已修订'));
  assert(!elements.decision.textContent.includes('未解决句子'));await fire(marks()[0]);assert(!panel().hidden);assert(panel().textContent.includes('fact的独立理由'));assert(panel().textContent.includes('citation的独立理由'));assert(panel().textContent.includes('依据不足'));assert(!panel().textContent.includes('事实错误'));
  await fire(panel(),'keydown',{key:'Escape'});assert(panel().hidden,'Escape reopened focus popup');assert.equal(document.activeElement,marks()[0]);
  await fire(marks()[0],'keydown',{key:'Enter'});assert(!panel().hidden);await fire(find(panel(),e=>e.tag==='button'&&e.textContent==='关闭原因'));assert(panel().hidden);
@@ -44,6 +44,9 @@ const fire=(e,event='click',extra={})=>e.listeners[event]?.({preventDefault(){},
  for(const [status,complete,noAnswer] of [['running',false,false],['interrupted',false,false],['finished',true,true]]){r.execution={status,required_stages_complete:complete};r.no_substantive_answer=noAnswer;render();assert.equal(marks().length,0);assert.equal(body().textContent,a.text);}
  r.execution={status:'finished',required_stages_complete:true};r.no_substantive_answer=false;
  // Overlap is flattened into nonnested exact segments; untouched prefix/suffix stays literal.
- r.presentation.inline_review.opinions=[opinion('fact'),{...opinion('citation'),start:start+2,end:end+2,original_text:points.slice(start+2,end+2).join('')}];render();assert.equal(marks().length,3);assert.equal(body().textContent,a.text);assert(marks().every(m=>!m.children.some(c=>c.tag==='mark')));assert(elements.answers.textContent.includes('1处内容需要核实'));
+ r.presentation.inline_review.opinions=[opinion('fact'),{...opinion('citation'),start:start+2,end:end+2,original_text:points.slice(start+2,end+2).join('')}];render();assert.equal(marks().length,3);assert.equal(body().textContent,a.text);assert(marks().every(m=>!m.children.some(c=>c.tag==='mark')));assert(elements.answers.textContent.includes('正文待核实位置：1'));
+ r.presentation.inline_review.opinions=[];r.decision={kind:'pass',execution_integrity:'complete'};render();
+ assert.equal(all(elements.answers,e=>e.className==='badge pass').length,1);assert(!elements.answers.textContent.includes('0处'));assert(!elements.phase.textContent.includes('通过'));assert.equal(elements.decision.textContent,'');
+ for(const [status,complete,noAnswer,kind] of [['running',false,false,'pass'],['failed',true,false,'pass'],['finished',false,false,'pass'],['finished',true,true,'pass'],['finished',true,false,'review_required'],['finished',true,false,'needs_information']]){r.execution={status,required_stages_complete:complete};r.no_substantive_answer=noAnswer;r.decision.kind=kind;render();assert.equal(all(elements.answers,e=>e.className==='badge pass').length,0);}
  console.log('PASS inline real DOM: exact Unicode/CRLF/hostile text, merged opinions, conflict labels, version/offset fallback, overlap, copy, focus/Escape, pending and interruption');
 })().catch(e=>{console.error(e);process.exitCode=1;});
