@@ -69,6 +69,21 @@ def project(result):
         row['located'] = bool(span and not problem)
         opinions.append(row)
 
+    literal_rows=findings.get('literal_reviews',[])
+    literal_defects=findings.get('literal_defects',[])
+    defective={d.get('anchor_id') for d in literal_defects}
+    literal_problem=None if identity(verification,answer) else '原文审核版本不符'
+    for i,d in enumerate(literal_defects):
+        unit=next((u for u in literal_rows if u.get('anchor_id')==d.get('anchor_id')), {})
+        binding=dict(answer_id=verification.get('answer_id'),answer_version=verification.get('answer_version'),
+            text=d.get('original_text'),start_offset=d.get('start_offset'),end_offset=d.get('end_offset'))
+        add('fact',d,binding,status=unit.get('status') or 'concern',key='literal-defect:'+str(i),
+            reason=d.get('difference'),problem=literal_problem)
+    for i,u in enumerate(literal_rows):
+        if u.get('status')=='supported' or u.get('anchor_id') in defective:continue
+        binding=dict(answer_id=verification.get('answer_id'),answer_version=verification.get('answer_version'),
+            text=u.get('text'),start_offset=u.get('start_offset'),end_offset=u.get('end_offset'))
+        add('fact',u,binding,key='literal-unit:'+str(i),reason=u.get('reason'),problem=literal_problem)
     for i, f in enumerate(findings.get('model_fact', [])):
         if f.get('status') == 'supported':
             continue

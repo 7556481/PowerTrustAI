@@ -56,8 +56,20 @@ async def prepare(ex):
     ex.retrieval.chars+=sum(len(e.text) for e in bodies)
     ex.retrieval.known_evidence.update((e.evidence_id,e) for e in bodies)
     rid=uuid4().hex
-    bindings=tuple(EvidenceBinding(e.evidence_id,'index_saved_reference' if e in roots else 'index_context',
-        'source_fidelity',ex.answer.version,rid) for e in bodies)
+    adjacent={i.evidence.evidence_id:i for i in context.items}
+    prior={b.evidence_id:b for b in getattr(ex,'source_first_extra_bindings',())}
+    bindings=[]
+    for e in bodies:
+        if e in roots:
+            b=EvidenceBinding(e.evidence_id,'index_saved_reference','source_fidelity',ex.answer.version,rid)
+        elif e.evidence_id in adjacent:
+            b=EvidenceBinding(e.evidence_id,'index_adjacent_context','source_fidelity',ex.answer.version,rid,
+                tuple(dict.fromkeys(link.core_evidence_id for link in adjacent[e.evidence_id].links)))
+        else:
+            require(e.evidence_id in prior,'Prior gap evidence lacks actual retrieval binding')
+            b=replace(prior[e.evidence_id],answer_version=ex.answer.version)
+        bindings.append(b)
+    bindings=tuple(bindings)
     summary=RetrievalRecord(rid,'verification','',VERSION,ex.answer.version,ex.knowledge_version,
         ExecutionStatus.SUCCEEDED,'source_scope',core_evidence_ids=tuple(e.evidence_id for e in roots),
         context_evidence_ids=tuple(i.evidence.evidence_id for i in context.items),
@@ -129,6 +141,7 @@ async def supplement(ex):
     ex.source_first_extra=merge_evidence(getattr(ex,'source_first_extra',()),added)
     ex.evidence=merge_evidence(ex.evidence,added)
     extra_bindings=tuple(b for d in deliveries for b in d.bindings);ex.bindings+=extra_bindings
+    ex.source_first_extra_bindings=tuple({b.evidence_id:b for b in getattr(ex,'source_first_extra_bindings',())+extra_bindings}.values())
     evidence=merge_evidence(ex.v_evidence,added)
     # Per-component extension: only mapped gaps receive their delivered query.
     # Original source supply remains available to all objects; unrelated gap hits do not.
@@ -139,6 +152,10 @@ async def supplement(ex):
         bindings.append(replace(old,delivered_evidence_ids=tuple(dict.fromkeys(old.delivered_evidence_ids+ids))))
     inputs=replace(ex.v_input,seed_evidence=evidence,evidence_bindings=ex.v_bindings+extra_bindings,
         fact_retrieval_bindings=tuple(bindings))
+    ex.v_input=inputs;ex.v_evidence=evidence;ex.v_bindings=inputs.evidence_bindings
+    ex.retrieval.records[-1]=replace(ex.retrieval.records[-1],fact_bindings=tuple(bindings))
+    inputs=replace(inputs,delivery_summary=json.dumps(asdict(ex.retrieval.records[-1]),ensure_ascii=False))
+    ex.v_input=inputs
     previous=ex.verification
     second,issue=await ex.review('evidence_verification',ex.harness.verification,inputs,
         merge_evidence(evidence,ex.original_evidence),True,None)
@@ -155,3 +172,19 @@ async def supplement(ex):
     ex.record('source_first_recheck',ExecutionStatus.SUCCEEDED,started,
         json.dumps(dict(retained_defects=[d.finding_id for d in previous.literal_defects],
             new_defects=[d.finding_id for d in second.literal_defects],replacement='non-established unit judgments only')))
+    # New actually delivered gap evidence affects the domain supply as well.
+    # Reuse the same reviewer on this bounded expanded supply; the earlier stage
+    # output remains in observer/Store history, with an explicit supersession event.
+    if any(e.evidence_id not in {x.evidence_id for x in ex.d_evidence} for e in added):
+        old_domain=ex.domain
+        domain_evidence=merge_evidence(ex.d_evidence,added)
+        domain_input=replace(ex.d_input,evidence=domain_evidence,evidence_bindings=ex.d_bindings+extra_bindings,
+            delivery_summary=inputs.delivery_summary)
+        updated,domain_issue=await ex.review('power_domain_review',ex.harness.domain_review,domain_input,domain_evidence,False,None)
+        if domain_issue or updated.execution_issues:
+            ex.domain=replace(old_domain,execution_issues=old_domain.execution_issues+((domain_issue,) if domain_issue else updated.execution_issues))
+        else:
+            ex.domain=updated;ex.d_input=domain_input;ex.d_evidence=domain_evidence;ex.d_bindings=domain_input.evidence_bindings
+        ex.record('source_first_domain_recheck',ExecutionStatus.FAILED if domain_issue or updated.execution_issues else ExecutionStatus.SUCCEEDED,
+            started,json.dumps(dict(added_ids=[e.evidence_id for e in added],old_finding_ids=[f.finding_id for f in old_domain.findings],
+                final_finding_ids=[f.finding_id for f in ex.domain.findings],supersedes='prior domain stage for same answer version; original persisted')))

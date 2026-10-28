@@ -357,6 +357,7 @@ class ApplicationService:
             'domain_internal_flow':{'assessment':domain.get('business_assessment'),'trace':domain.get('business_trace',[])},
             'answer_adoption':{'approved':(raw.get('report') or {}).get('decision',{}).get('kind')=='pass','mode':row['request'].get('mode')},
             'findings':{'model_fact':verification.get('findings',[]),'domain':domain.get('findings',[]),
+                'literal_reviews':verification.get('literal_reviews',[]),'literal_defects':verification.get('literal_defects',[]),
                 'original_citations':verification.get('citation_reviews',[]),
                 'program_rules':verification.get('consistency_checks',[]),'tools':raw.get('tool_results',[])},
             'review_bindings':{'verification':{'answer_id':verification.get('answer_id'),

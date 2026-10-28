@@ -109,6 +109,11 @@ def unresolved_items(result):
     extraction=(result.get('snapshots') or {}).get('extraction') or {}
     claims={c['claim_id']:c for c in extraction.get('claims',[])}
     rows=[]
+    current=(result.get('review_bindings') or {}).get('verification') or {}
+    if current.get('answer_id')==answer.get('answer_id') and current.get('answer_version')==answer.get('version'):
+        for u in (result.get('findings') or {}).get('literal_reviews',[]):
+            if u.get('status')!='supported':
+                rows.append(dict(sentence=u.get('text'),status=u.get('status'),reason=u.get('reason'),anchor_id=u.get('anchor_id')))
     for f in (result.get('findings') or {}).get('model_fact',[]):
         if f.get('status')=='supported':continue
         c=claims.get(f.get('claim_id'),{})
