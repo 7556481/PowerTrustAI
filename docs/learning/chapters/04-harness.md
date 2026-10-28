@@ -431,3 +431,9 @@ source_first_audit_v1在现有prepare_review/merge_and_decide内改变供给，�
 复用原Factory/OfflineHarness、四职责和一次Revision，不增加调度器或语义候选。实验隔离策略先暂停新准入，只有实际工作退出、正常drain/close及Store真实写入通过，才允许一次未知计费后的独立新Factory；第二未知或共享故障停全批。await取消不等于线程释放，未知不当0。生产默认故障规则不变。
 
 唯一12槽全部执行，11完整、S3基线局部MODEL_OUTPUT_ERROR；有限纠正失败留有效同伴并继续独立槽，失败仍计分母。S3/S7/S8真实v2、重提取和双审闭环，不借离线合成对象充成绩；S2未改。报告：项目docs/evaluation/source-first-revision-completion-release-v5/report.md。
+
+## 2026-10-28 v6：来源关系逐字绑定仍需合法后审
+
+唯一source_first_audit_v3把原relation_check.source_relation从自由概括改为所选合法quote的唯一连续原文；无定位则null/unknown，不授权修订。程序只验身份、字面和一致性，不判断语义。复用原供给/缺口、四职责、一次source_actions_v2、重提取和完整双审，v1/v2与默认baseline兼容。
+
+唯一14槽中4基线完整、10候选仅6完整，S2/S3/S4/S10局部合同失败。S3有合法末稿与两轮记录，但末轮事实/领域失败，不能把“版本2”和“两轮”当完成。S7/S8是真实修订及完整双审；S2原始理由识别增强却未合法交付，仍未修。报告：项目docs/evaluation/source-first-modality-release-v6/report.md。

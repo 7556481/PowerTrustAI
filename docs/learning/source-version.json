@@ -1,9 +1,9 @@
 {
-  "application_commit": "c2ecddfdb7f7ac364c673d25f27f246e5c5d2b62",
-  "evaluation_implementation_commit": "c2ecddfdb7f7ac364c673d25f27f246e5c5d2b62",
-  "evaluation_archive_commit": "adc122754926510a28f4155f85977694d58ac1db",
-  "documentation_parent_commit": "adc122754926510a28f4155f85977694d58ac1db",
-  "document_version": "learning-site-v6.15 source-first revision completion v5 not enabled,2026-10-28",
+  "application_commit": "98de2084e16e3b96a49a973fb634db8b8a946e81",
+  "evaluation_implementation_commit": "98de2084e16e3b96a49a973fb634db8b8a946e81",
+  "evaluation_archive_commit": "c7895777ed85c0bc202280752f7cf17996cc6fba",
+  "documentation_parent_commit": "c7895777ed85c0bc202280752f7cf17996cc6fba",
+  "document_version": "learning-site-v6.16 source-first modality v6 failed completion,2026-10-28",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -32,10 +32,10 @@
       "project_model_cost": 0
     },
     "current_full_offline": {
-      "commit": "c2ecddfdb7f7ac364c673d25f27f246e5c5d2b62",
-      "tests": 1425,
-      "seconds": 503.019,
-      "scope": "final full offline before fixed v5 batch; same sources afterwards; no business edits or second batch"
+      "commit": "98de2084e16e3b96a49a973fb634db8b8a946e81",
+      "tests": 1433,
+      "seconds": 496.107,
+      "scope": "final v6 full offline before unique batch; source identity unchanged afterwards; no second batch"
     },
     "pre_read_path_full_offline": {
       "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
@@ -470,5 +470,42 @@
     "enabled": false,
     "smoke_calls": 0,
     "additional_batch": false
+  },
+  "source_first_modality_v6": {
+    "implementation": "98de2084e16e3b96a49a973fb634db8b8a946e81",
+    "archive_commit": "c7895777ed85c0bc202280752f7cf17996cc6fba",
+    "report": "docs/evaluation/source-first-modality-release-v6/report.md",
+    "planned_chains": 14,
+    "baseline_complete": 4,
+    "candidate_complete": 6,
+    "candidate_incomplete": 4,
+    "unexecuted": 0,
+    "full_pairs": 1,
+    "request_boundary_entries": 64,
+    "received_usage_records": 64,
+    "input_tokens": 1229558,
+    "output_tokens": 45988,
+    "known_usage_tokens": 1275546,
+    "actual_total_tokens": 1275546,
+    "pending_requests": [],
+    "actual_cost": null,
+    "old_v4_pending_preserved": [
+      10
+    ],
+    "proved_complete_repairs": 2,
+    "partial_revision_failed_rereview": [
+      "S3"
+    ],
+    "required_repairs": 5,
+    "protected_correct_objects": 4,
+    "observed_eight_terminal_median_seconds": 17.180294,
+    "observed_max_candidate_terminal_seconds": 43.884434,
+    "baseline_failure_independent_veto": false,
+    "all_release_gates": false,
+    "enabled": false,
+    "smoke_calls": 0,
+    "additional_batch": false,
+    "ui_actual_archive_replay": true,
+    "clipboard_roundtrip_independently_verified": false
   }
 }

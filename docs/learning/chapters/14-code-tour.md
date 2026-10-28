@@ -216,7 +216,7 @@ def source_identity(row,revision,shard,row_number):
 
 ### 复用装配与固定Evidence入口
 
-路径 backend/assembly.py，函数 ComponentFactory.create，行263–280；完整函数至341行，局部摘录。
+路径 backend/assembly.py，函数 ComponentFactory.create，行265–282；完整函数至345行，局部摘录。
 
 ```python
     def create(self,rid,observer,*,fixed_evidence_only=False):
@@ -540,3 +540,9 @@ evaluation/source_first_materials_v1.py先冻结资料；evaluation/source_first
 实验实现c2ecddfdb7f7ac364c673d25f27f246e5c5d2b62，公开归档adc122754926510a28f4155f85977694d58ac1db。evaluation/source_first_completion_v5.py复用v4材料、v3批次和现有Factory，evaluation/failure_isolation_v5.py只在显式入口启用，旧调用者默认故障政策不变。业务源码与45c39c8相同，source_first_audit_v2及source_actions_v2语义合同未改。
 
 真实批次后普通结果接口重读12条，末稿对象一致，S3基线未完整如实保留；只复制小运行Store做读取，不复制大库或重放POST。原始响应/来源和私有初末稿留忽略data，公开仅必要统计与复核结论。源码身份和构建同步不表示候选启用。
+
+## 2026-10-28 v6：独立版本与源码冻结
+
+实现98de2084e16e3b96a49a973fb634db8b8a946e81，报告归档c7895777ed85c0bc202280752f7cf17996cc6fba。services/source_first_audit_v3.py复用v2一致性解析和literal源目录，backend配置/Factory、Harness来源开关、严格报告白名单及普通范围投影显式认v3；未改v1/v2提示或历史标签。evaluation/source_first_modality_v6.py复用共享批次和v5故障策略，无新调度器。
+
+编码前10材料冻结，旧八份对象不变；真实库10条合成/归档离线路径、1433全套及14实际归档普通读取通过。付费后源码身份未变，原文/响应/实际初末稿与截图只留忽略data，公开仅必要统计。预览夹具简记缺正常request/manifest导致404，补齐规范小Store副本后通过，不能当业务代码被修改或真实批次重跑。
