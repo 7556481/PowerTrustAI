@@ -171,6 +171,7 @@ class LiteralReviewAgent:
         self.client=ModelClient(adapter,settings)
         self.diagnostics=ResponseDiagnostics(diagnostic_dir) if diagnostic_dir else None
     def parse_response(self,value,inputs):return parse(value,inputs)
+    def prepare_payload(self,data,inputs):return data
     async def run(self,inputs):
         qs,ind,orig=catalog(inputs)
         data=dict(question=inputs.request.question,user_context=inputs.request.user_context,
@@ -180,6 +181,7 @@ class LiteralReviewAgent:
             quotes=[asdict(q) for q in qs.values()],INDEPENDENT_QUOTE_IDS=list(ind),
             original_citations=[dict(citation_index=i,text=inputs.answer.text[c.start_offset:c.end_offset],allowed_quote_ids=list(orig[i])) for i,c in enumerate(inputs.answer.citations)],
             delivery_summary=inputs.delivery_summary,delivery_bindings=[asdict(b) for b in inputs.fact_retrieval_bindings])
+        data=self.prepare_payload(data,inputs)
         out,records=await structured_request(self.client,(ModelMessage('system',self.system),ModelMessage('user',json.dumps(data,ensure_ascii=False))),self.prompt_version,lambda v:parser_boundary(lambda x:self.parse_response(x,inputs),v),diagnostics=self.diagnostics,response_contract_version=VERSION)
         return replace(out,model_records=records,prompt_version=self.prompt_version)
 

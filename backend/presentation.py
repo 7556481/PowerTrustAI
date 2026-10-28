@@ -12,7 +12,7 @@ def explain(result):
     projection['missing_information_review']=gaps
     projection['scope_note_indexes']=[g['index'] for g in gaps if g.get('applicability') in ('scope_note','unrequested_extension')]
     projection['inline_review'] = project(result)
-    records=[r for r in result.get('retrieval',[]) if r.get('query_method') in ('source_first_audit_v1','source_first_audit_v2','source_first_audit_v3')]
+    records=[r for r in result.get('retrieval',[]) if r.get('query_method') in ('source_first_audit_v1','source_first_audit_v2','source_first_audit_v3','source_first_audit_v4')]
     if records:
         import json
         rounds=[]

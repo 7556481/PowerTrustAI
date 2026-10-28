@@ -419,7 +419,7 @@ def validate_report(report):
         nonempty(getattr(report, name), name)
     nonempty(report.decision.policy_version, "policy_version")
     literal_defects=getattr(report,'literal_defects',())
-    if getattr(report,'literal_protocol',None) in ('literal-review-v1','source_first_audit_v1','source_first_audit_v2','source_first_audit_v3'):
+    if getattr(report,'literal_protocol',None) in ('literal-review-v1','source_first_audit_v1','source_first_audit_v2','source_first_audit_v3','source_first_audit_v4'):
         from services.answer_anchors import anchors
         ac={a['anchor_id']:a for a in anchors(report.answer)}
         rows=report.literal_reviews

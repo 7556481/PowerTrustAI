@@ -256,6 +256,11 @@ class ComponentFactory:
                 from services.source_first_audit_v2 import SYSTEM,VERSION
             elif self.config.audit_strategy=='source_first_audit_v3':
                 from services.source_first_audit_v3 import SYSTEM,VERSION
+            elif self.config.audit_strategy=='source_first_audit_v4':
+                from services.source_first_audit_v4 import SYSTEM,VERSION
+                from services.audit_reference_v7 import DOMAIN_SYSTEM,PROMPT
+                manifest['prompts']['domain']=PROMPT
+                manifest['template_sha256']['domain_reference']=hashlib.sha256(DOMAIN_SYSTEM.encode()).hexdigest()
             manifest['audit_strategy']=VERSION
             manifest['audit_scope']='source_fidelity_and_task_completeness; external cross-check separately recorded'
             manifest['prompts']['verification']=VERSION
@@ -295,6 +300,8 @@ class ComponentFactory:
                     from services.source_first_audit_v2 import SourceFirstRelationReviewAgent as FactAgent
                 elif self.config.audit_strategy=='source_first_audit_v3':
                     from services.source_first_audit_v3 import SourceFirstGroundedReviewAgent as FactAgent
+                elif self.config.audit_strategy=='source_first_audit_v4':
+                    from services.source_first_audit_v4 import SourceFirstReferenceReviewAgent as FactAgent
         from services.claim_extractor import ModelClaimExtractor
         from tools.unit_conversion import UnitConversionTool
         from model_adapter.contracts import ModelSettings
@@ -332,7 +339,7 @@ class ComponentFactory:
                     corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
                 FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_execution_profile':self.config.fact_review_execution} if self.config.fact_review_execution!='serial_v1' else {}),**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
-                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
+                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True,**({'reference_contract_v7':True} if self.config.audit_strategy=='source_first_audit_v4' else {})),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,

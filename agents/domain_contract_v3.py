@@ -110,7 +110,13 @@ async def run(agent,inputs):
         'METADATA_ORIGINS':'index/user source manifest; not body statements','simulation_records':[]}
     if safety:payload.update(SAFETY_SOURCES=hazard.SOURCES,SAFETY_RULE=hazard.RULE)
     path=None if agent.diagnostics is None else agent.diagnostics.save_scope(payload);before=len(current_budget().records)
-    instruction=SYSTEM
+    reference=getattr(agent,'reference_contract_v7',False)
+    if reference:
+        from services.audit_reference_v7 import DOMAIN_SYSTEM,PROMPT
+        instruction=DOMAIN_SYSTEM
+        payload['RESPONSE_SHAPE']=deepcopy(wire)
+        prompt_version=PROMPT
+    else:instruction=SYSTEM
     from services.task_requirements import INSTRUCTION,prohibited_spans
     instruction+=INSTRUCTION
     payload['negative_output_constraint_spans']=prohibited_spans(inputs.request.question)
