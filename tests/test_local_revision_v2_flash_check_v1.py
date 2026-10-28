@@ -7,6 +7,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 from backend.config import ServiceConfig
+from core.validation import ContractError
 from model_adapter.contracts import ModelResponse,ModelConnectionError
 from tests.test_literal_review_v1 import Provider
 from evaluation import local_revision_v2_flash_check_v1 as t
@@ -116,7 +117,24 @@ class FlashEntryTests(unittest.TestCase):
         with ignored_temporary_directory(dir='data/retrieval_local') as tmp:
             root=Path(tmp).resolve();p=Substitute('retain');c=ServiceConfig(index_db=root/'MUST-NOT-OPEN.sqlite3',execution_path='langgraph_v1')
             with patch.object(t,'LOCAL',root/'private'),patch.object(t,'PUBLIC',root/'public'),patch.object(t,'require_committed_sources'),patch('harness.deepseek_trial.load_project_env') as env,patch.object(ServiceConfig,'from_environment',return_value=c),patch.dict(os.environ,{'DEEPSEEK_API_KEY':'offline-fixture','DEEPSEEK_MODEL_ID':'deepseek-flash'}),patch('model_adapter.deepseek.create_adapter',return_value=p),patch('rag.storage.KnowledgeStore',side_effect=AssertionError('Index opened')),patch('rag.retriever.AsyncSQLiteBM25Retriever',side_effect=AssertionError('Retriever opened')),patch('backend.assembly.ROOT',root):
-                asyncio.run(t.run());env.assert_called_once()
+                # Historical paid freeze MUST reject evolved application sources.
+                # The remainder exercises an isolated matching source fixture;
+                # neither the archived freeze nor the production guard is edited.
+                with self.assertRaisesRegex(ContractError,'Business implementation changed'):
+                    asyncio.run(t.run())
+                self.assertFalse((root/'private/attempt.json').exists());self.assertFalse(p.requests)
+                env.reset_mock()
+                git=t.subprocess.check_output
+                def fixture_git(args,**kwargs):
+                    if args[:2]==['git','show']:
+                        ref,path=args[2].split(':',1)
+                        self.assertEqual(ref,'a6a42df8186b31d7e23319d3d0fe118964ff9b63')
+                        self.assertIn(path,t.BUSINESS)
+                        return (t.ROOT/path).read_bytes()
+                    return git(args,**kwargs)
+                with patch.object(t.subprocess,'check_output',side_effect=fixture_git):
+                    asyncio.run(t.run())
+                env.assert_called_once()
                 f=json.loads((root/'public/freeze.json').read_text(encoding='utf-8'))
                 self.assertEqual(f['order'],t.order(t.recover()));self.assertEqual(f['budget']['total_new'],48)
                 self.assertEqual(json.loads((root/'private/freeze.json').read_text(encoding='utf-8')),f)
