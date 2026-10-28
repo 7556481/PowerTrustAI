@@ -1,0 +1,504 @@
+{
+  "version": "retrieval-rank-v7",
+  "adopted": false,
+  "driver_commit": "fccd1590619b00967ce3bb2f12fcbd11febd1e8b",
+  "driver_lf_sha256": "1f675e4c4d133038cd72a5f9b4bd034a20ed57ab9f6f0fe2ba92d5dc7614f79f",
+  "startup_sha": "601dc7ca8953f834e2c6b2eb13ddee53b4998314",
+  "sqlite_version": "3.45.3",
+  "rank_config": [
+    [
+      "version",
+      4
+    ]
+  ],
+  "rank_mapping": "bm25() default verified by absence of override",
+  "fts_ddl": "CREATE VIRTUAL TABLE corpus_fts USING fts5(terms,content='')",
+  "index_bytes": 70847647744,
+  "sealed_counts": {
+    "records": 8630479,
+    "chunks": 24620273,
+    "duplicates": 5705698,
+    "shard_count": 73
+  },
+  "seal_seconds": 204.99662459999672,
+  "cache": "No ranking cache; original sealed database; OS caches not cleared",
+  "limits": {
+    "rank_executions": 27,
+    "count_executions": 3,
+    "wall_seconds": 1800,
+    "each_rank_seconds": 110,
+    "each_count_seconds": 60
+  },
+  "schedule": [
+    {
+      "round": 1,
+      "query": "47cd0746",
+      "paths": [
+        "base",
+        "rank"
+      ]
+    },
+    {
+      "round": 1,
+      "query": "1d31a0e2",
+      "paths": [
+        "rank",
+        "base"
+      ]
+    },
+    {
+      "round": 1,
+      "query": "f7cf4ad6",
+      "paths": [
+        "base",
+        "rank"
+      ]
+    },
+    {
+      "round": 2,
+      "query": "47cd0746",
+      "paths": [
+        "rank",
+        "base"
+      ]
+    },
+    {
+      "round": 2,
+      "query": "1d31a0e2",
+      "paths": [
+        "base",
+        "rank"
+      ]
+    },
+    {
+      "round": 2,
+      "query": "f7cf4ad6",
+      "paths": [
+        "rank",
+        "base"
+      ]
+    },
+    {
+      "round": 3,
+      "query": "47cd0746",
+      "paths": [
+        "base",
+        "rank"
+      ]
+    },
+    {
+      "round": 3,
+      "query": "1d31a0e2",
+      "paths": [
+        "rank",
+        "base"
+      ]
+    },
+    {
+      "round": 3,
+      "query": "f7cf4ad6",
+      "paths": [
+        "base",
+        "rank"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "query": "47cd0746",
+      "round": 1,
+      "path": "base",
+      "status": "ok",
+      "seconds": 34.53337819999433,
+      "row_count": 3,
+      "result_sha256": "0b45121a15f6e4384665e44a026827f028538a4f8b2c9fcb0eee17c5833a8057"
+    },
+    {
+      "query": "47cd0746",
+      "round": 1,
+      "path": "rank",
+      "status": "ok",
+      "seconds": 31.146537899992836,
+      "row_count": 3,
+      "result_sha256": "0b45121a15f6e4384665e44a026827f028538a4f8b2c9fcb0eee17c5833a8057"
+    },
+    {
+      "query": "1d31a0e2",
+      "round": 1,
+      "path": "rank",
+      "status": "ok",
+      "seconds": 24.789868599997135,
+      "row_count": 3,
+      "result_sha256": "495e141e0da54db1c61d3156dfef105494c861751a2f4c92daed474ae7e88010"
+    },
+    {
+      "query": "1d31a0e2",
+      "round": 1,
+      "path": "base",
+      "status": "ok",
+      "seconds": 15.637062600006175,
+      "row_count": 3,
+      "result_sha256": "495e141e0da54db1c61d3156dfef105494c861751a2f4c92daed474ae7e88010"
+    },
+    {
+      "query": "f7cf4ad6",
+      "round": 1,
+      "path": "base",
+      "status": "ok",
+      "seconds": 4.639420600004087,
+      "row_count": 3,
+      "result_sha256": "4600a7d50964bf9a9684f30047ae29f9d0e9fc32b4c9954f8b4835e270798b56"
+    },
+    {
+      "query": "f7cf4ad6",
+      "round": 1,
+      "path": "rank",
+      "status": "ok",
+      "seconds": 2.499965599999996,
+      "row_count": 3,
+      "result_sha256": "4600a7d50964bf9a9684f30047ae29f9d0e9fc32b4c9954f8b4835e270798b56"
+    },
+    {
+      "query": "47cd0746",
+      "round": 2,
+      "path": "rank",
+      "status": "ok",
+      "seconds": 28.780917999996745,
+      "row_count": 3,
+      "result_sha256": "0b45121a15f6e4384665e44a026827f028538a4f8b2c9fcb0eee17c5833a8057"
+    },
+    {
+      "query": "47cd0746",
+      "round": 2,
+      "path": "base",
+      "status": "ok",
+      "seconds": 21.528906300001836,
+      "row_count": 3,
+      "result_sha256": "0b45121a15f6e4384665e44a026827f028538a4f8b2c9fcb0eee17c5833a8057"
+    },
+    {
+      "query": "1d31a0e2",
+      "round": 2,
+      "path": "base",
+      "status": "ok",
+      "seconds": 15.71911469999759,
+      "row_count": 3,
+      "result_sha256": "495e141e0da54db1c61d3156dfef105494c861751a2f4c92daed474ae7e88010"
+    },
+    {
+      "query": "1d31a0e2",
+      "round": 2,
+      "path": "rank",
+      "status": "ok",
+      "seconds": 21.38899769999989,
+      "row_count": 3,
+      "result_sha256": "495e141e0da54db1c61d3156dfef105494c861751a2f4c92daed474ae7e88010"
+    },
+    {
+      "query": "f7cf4ad6",
+      "round": 2,
+      "path": "rank",
+      "status": "ok",
+      "seconds": 2.5771420000019134,
+      "row_count": 3,
+      "result_sha256": "4600a7d50964bf9a9684f30047ae29f9d0e9fc32b4c9954f8b4835e270798b56"
+    },
+    {
+      "query": "f7cf4ad6",
+      "round": 2,
+      "path": "base",
+      "status": "ok",
+      "seconds": 1.5140409000014188,
+      "row_count": 3,
+      "result_sha256": "4600a7d50964bf9a9684f30047ae29f9d0e9fc32b4c9954f8b4835e270798b56"
+    },
+    {
+      "query": "47cd0746",
+      "round": 3,
+      "path": "base",
+      "status": "ok",
+      "seconds": 24.127327700000023,
+      "row_count": 3,
+      "result_sha256": "0b45121a15f6e4384665e44a026827f028538a4f8b2c9fcb0eee17c5833a8057"
+    },
+    {
+      "query": "47cd0746",
+      "round": 3,
+      "path": "rank",
+      "status": "ok",
+      "seconds": 28.808904299999995,
+      "row_count": 3,
+      "result_sha256": "0b45121a15f6e4384665e44a026827f028538a4f8b2c9fcb0eee17c5833a8057"
+    },
+    {
+      "query": "1d31a0e2",
+      "round": 3,
+      "path": "rank",
+      "status": "ok",
+      "seconds": 22.936209799998323,
+      "row_count": 3,
+      "result_sha256": "495e141e0da54db1c61d3156dfef105494c861751a2f4c92daed474ae7e88010"
+    },
+    {
+      "query": "1d31a0e2",
+      "round": 3,
+      "path": "base",
+      "status": "ok",
+      "seconds": 16.539126099996793,
+      "row_count": 3,
+      "result_sha256": "495e141e0da54db1c61d3156dfef105494c861751a2f4c92daed474ae7e88010"
+    },
+    {
+      "query": "f7cf4ad6",
+      "round": 3,
+      "path": "base",
+      "status": "ok",
+      "seconds": 1.6232821000012336,
+      "row_count": 3,
+      "result_sha256": "4600a7d50964bf9a9684f30047ae29f9d0e9fc32b4c9954f8b4835e270798b56"
+    },
+    {
+      "query": "f7cf4ad6",
+      "round": 3,
+      "path": "rank",
+      "status": "ok",
+      "seconds": 2.5314709000012954,
+      "row_count": 3,
+      "result_sha256": "4600a7d50964bf9a9684f30047ae29f9d0e9fc32b4c9954f8b4835e270798b56"
+    }
+  ],
+  "counts": [
+    {
+      "query": "47cd0746",
+      "status": "ok",
+      "matches": 1980897,
+      "seconds": 5.341920900005789
+    },
+    {
+      "query": "1d31a0e2",
+      "status": "ok",
+      "matches": 1940449,
+      "seconds": 3.721815200005949
+    },
+    {
+      "query": "f7cf4ad6",
+      "status": "ok",
+      "matches": 47183,
+      "seconds": 0.37989959999686107
+    }
+  ],
+  "plans": [
+    {
+      "query": "47cd0746",
+      "path": "base",
+      "plan": [
+        [
+          6,
+          0,
+          0,
+          "SCAN corpus_fts VIRTUAL TABLE INDEX 0:M1"
+        ],
+        [
+          22,
+          0,
+          0,
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      ]
+    },
+    {
+      "query": "47cd0746",
+      "path": "rank",
+      "plan": [
+        [
+          6,
+          0,
+          0,
+          "SCAN corpus_fts VIRTUAL TABLE INDEX 32:M1"
+        ]
+      ]
+    },
+    {
+      "query": "1d31a0e2",
+      "path": "base",
+      "plan": [
+        [
+          6,
+          0,
+          0,
+          "SCAN corpus_fts VIRTUAL TABLE INDEX 0:M1"
+        ],
+        [
+          22,
+          0,
+          0,
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      ]
+    },
+    {
+      "query": "1d31a0e2",
+      "path": "rank",
+      "plan": [
+        [
+          6,
+          0,
+          0,
+          "SCAN corpus_fts VIRTUAL TABLE INDEX 32:M1"
+        ]
+      ]
+    },
+    {
+      "query": "f7cf4ad6",
+      "path": "base",
+      "plan": [
+        [
+          6,
+          0,
+          0,
+          "SCAN corpus_fts VIRTUAL TABLE INDEX 0:M1"
+        ],
+        [
+          22,
+          0,
+          0,
+          "USE TEMP B-TREE FOR ORDER BY"
+        ]
+      ]
+    },
+    {
+      "query": "f7cf4ad6",
+      "path": "rank",
+      "plan": [
+        [
+          6,
+          0,
+          0,
+          "SCAN corpus_fts VIRTUAL TABLE INDEX 32:M1"
+        ]
+      ]
+    }
+  ],
+  "summary": {
+    "comparisons": [
+      {
+        "query": "47cd0746",
+        "pairs": [
+          {
+            "round": 1,
+            "base_seconds": 34.53337819999433,
+            "rank_seconds": 31.146537899992836,
+            "same_rows": true,
+            "saving": 3.386840300001495,
+            "reduction": 0.09807439864085032
+          },
+          {
+            "round": 2,
+            "base_seconds": 21.528906300001836,
+            "rank_seconds": 28.780917999996745,
+            "same_rows": true,
+            "saving": -7.25201169999491,
+            "reduction": -0.33684998201670324
+          },
+          {
+            "round": 3,
+            "base_seconds": 24.127327700000023,
+            "rank_seconds": 28.808904299999995,
+            "same_rows": true,
+            "saving": -4.681576599999971,
+            "reduction": -0.19403626701683852
+          }
+        ],
+        "base_median": 24.127327700000023,
+        "rank_median": 28.808904299999995,
+        "saving": -4.681576599999971,
+        "reduction": -0.19403626701683852,
+        "positive_rounds": 1,
+        "material_regression_rounds": 2
+      },
+      {
+        "query": "1d31a0e2",
+        "pairs": [
+          {
+            "round": 1,
+            "base_seconds": 15.637062600006175,
+            "rank_seconds": 24.789868599997135,
+            "same_rows": true,
+            "saving": -9.15280599999096,
+            "reduction": -0.5853277072630858
+          },
+          {
+            "round": 2,
+            "base_seconds": 15.71911469999759,
+            "rank_seconds": 21.38899769999989,
+            "same_rows": true,
+            "saving": -5.669883000002301,
+            "reduction": -0.36069989361443944
+          },
+          {
+            "round": 3,
+            "base_seconds": 16.539126099996793,
+            "rank_seconds": 22.936209799998323,
+            "same_rows": true,
+            "saving": -6.397083700001531,
+            "reduction": -0.38678486767222675
+          }
+        ],
+        "base_median": 15.71911469999759,
+        "rank_median": 22.936209799998323,
+        "saving": -7.2170951000007335,
+        "reduction": -0.4591285983810425,
+        "positive_rounds": 0,
+        "material_regression_rounds": 3
+      },
+      {
+        "query": "f7cf4ad6",
+        "pairs": [
+          {
+            "round": 1,
+            "base_seconds": 4.639420600004087,
+            "rank_seconds": 2.499965599999996,
+            "same_rows": true,
+            "saving": 2.139455000004091,
+            "reduction": 0.4611470234024926
+          },
+          {
+            "round": 2,
+            "base_seconds": 1.5140409000014188,
+            "rank_seconds": 2.5771420000019134,
+            "same_rows": true,
+            "saving": -1.0631011000004946,
+            "reduction": -0.7021614145294877
+          },
+          {
+            "round": 3,
+            "base_seconds": 1.6232821000012336,
+            "rank_seconds": 2.5314709000012954,
+            "same_rows": true,
+            "saving": -0.9081888000000617,
+            "reduction": -0.559476877124051
+          }
+        ],
+        "base_median": 1.6232821000012336,
+        "rank_median": 2.5314709000012954,
+        "saving": -0.9081888000000617,
+        "reduction": -0.559476877124051,
+        "positive_rounds": 1,
+        "material_regression_rounds": 2
+      }
+    ],
+    "potential_gate": false,
+    "rank_executions": 18,
+    "count_executions": 3,
+    "rank_seconds": 353.3298874999964,
+    "adopted": false,
+    "stage3": "not implemented: diagnostic failed potential gate",
+    "all_diag_rows_equal": true
+  },
+  "implemented_equivalent_path": false,
+  "equivalent_path_executions": 0,
+  "legacy_fallback_observed": null,
+  "legacy_fallback_reason": "Historical script recorded no examined/fallback counter; cannot infer whether >4096 path ran",
+  "disclosure": "Numeric allowlist only; actual queries, input, raw ranked rows and complete private records remain ignored data. Nine equal top-K observations are not a general deterministic tie-boundary proof.",
+  "official_reference": "https://www.sqlite.org/fts5.html#sorting_by_auxiliary_function_results"
+}
