@@ -419,3 +419,9 @@ source_first_audit_v1在现有prepare_review/merge_and_decide内改变供给，�
 真实大库非空邻接重现旧invalid evidence origin后，使用已有index_adjacent_context及实际core关系修复，原引用/补检身份不混用。补检扩大实际供给后，事实重审并由原领域职责复审有界扩展供给，保留原发现历史且计入模型预算；没有第二调度器。候选报告严格校验原文覆盖，普通结果接口可投影原生不足意见。
 
 真实库确定性回复贯通S2/S3一次合法修订→重提取→两轮双审，及S4真实SQL、双侧复审/不足保留、非法修订失败；这只是工程证据。唯一真实Flash8链29请求/669718token全部合法，实际修订0：S2/S3的目标错误被supported而没有授权，不能拿合成成功替真实纠错。旧v2失败保留；候选默认关闭。详见项目docs/evaluation/source-first-real-path-acceptance-v3/report.md。
+
+## 2026-10-28 v4关系比较进入修订，但未完成修复
+
+唯一source_first_audit_v2复用现有事实调用，在每单元显式比较来源关系、回答关系和能否推出；supported不得与not_entailed同时返回。它是输出一致性约束，不是程序凭关键词判断语义。原来源读取/有界缺口、四职责、一次Revision及完整重审仍在。
+
+真实S2首次“不能推出”却supported，被有限纠正后形成定位缺陷并进入Revision，但首次修订超时、usage未决；原稿保留，无合法修订/重提取/重审成绩。不能拿真实库确定性响应的两次闭环成功替代真实纠错。12槽仅2完整、1未完整、9未执行；不启用、不补第二批。详见项目docs/evaluation/source-first-quality-ui-release-v4/report.md。

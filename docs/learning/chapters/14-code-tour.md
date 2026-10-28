@@ -216,7 +216,7 @@ def source_identity(row,revision,shard,row_number):
 
 ### 复用装配与固定Evidence入口
 
-路径 backend/assembly.py，函数 ComponentFactory.create，行261–278；完整函数至337行，局部摘录。
+路径 backend/assembly.py，函数 ComponentFactory.create，行263–280；完整函数至341行，局部摘录。
 
 ```python
     def create(self,rid,observer,*,fixed_evidence_only=False):
@@ -528,3 +528,9 @@ evaluation/source_first_materials_v1.py先冻结资料；evaluation/source_first
 实现及入口绑定f69a4124f0193708ff5421734a0206efe60a703a。evaluation/source_first_real_v3.py复用原shared.batch/run_fixed、Factory、OfflineHarness、RunStore及四职责，在真实Retriever/KnowledgeStore上先做归档响应回放与确定性模型贯通，再冻结唯一四对；不是新调度器。每链20、全批160硬上限、usage累计300万停发，未知发送/usage停整批，原子发送边界与已在途越过分开记账。
 
 实际29请求/669718token、未决0/越过0，未追加批次。8条真实归档经普通ApplicationService结果读取验证原对象和完整执行；临时小Store副本只恢复正常manifest/真实TaskRequest，不改原归档或复制大库。隔离8766页面用真实库离线固定响应投影验证不足标注与范围，synthetic_fixture不冒充真实模型推理；用户8765未动。
+
+## 2026-10-28 v4版本与入口身份
+
+业务及UI实现绑定2e99786b7940c4b023cfbe4dde5120e6cd04d86e；services/source_first_audit_v2.py只扩展单元比较并复用literal内部对象/校验及原有修订授权，策略/提示/报告标识v2。evaluation/source_first_quality_v4.py复用v3原子记账和shared.batch，非新调度器。类默认仍baseline，显式候选配置才使用v2。
+
+唯一真实批次停止后仅只读工具补充失败档案“不假报完整”的断言，未改业务或恢复；3条普通结果重读保持原对象，S2仍不完整。实际输入响应、来源、ledger及截图留忽略data；公开报告/摘要仅必要脱敏统计。历史v2/v3失败与原分支成绩不改。

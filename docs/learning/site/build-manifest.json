@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
-    "evaluation_implementation_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
-    "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-    "documentation_parent_commit": "47247745b5cdb4f185ac8de9a71efe3024b6b640",
-    "document_version": "learning-site-v6.13 source-first real-path v3,2026-10-28",
+    "application_commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+    "evaluation_implementation_commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+    "evaluation_archive_commit": "3b9f0e7b53c05e6177a8b914ff70c5c3f7fe2c0d",
+    "documentation_parent_commit": "3b9f0e7b53c05e6177a8b914ff70c5c3f7fe2c0d",
+    "document_version": "learning-site-v6.14 source-first quality/UI v4 stopped,2026-10-28",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -33,10 +33,10 @@
         "project_model_cost": 0
       },
       "current_full_offline": {
-        "commit": "f69a4124f0193708ff5421734a0206efe60a703a",
-        "tests": 1414,
-        "seconds": 475.028,
-        "scope": "final shared v3 implementation; full offline once after fixes; no paid calls"
+        "commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+        "tests": 1420,
+        "seconds": 446.89,
+        "scope": "final full offline after old duplicate-status assertion update; earlier failures and interrupted attempt retained; no paid calls"
       },
       "pre_read_path_full_offline": {
         "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
@@ -419,6 +419,32 @@
       "offline_tests": 1414,
       "offline_seconds": 475.028,
       "actual_cost": null
+    },
+    "source_first_quality_ui_v4": {
+      "implementation": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+      "archive_commit": "3b9f0e7b53c05e6177a8b914ff70c5c3f7fe2c0d",
+      "report": "docs/evaluation/source-first-quality-ui-release-v4/report.md",
+      "planned_chains": 12,
+      "complete_chains": 2,
+      "incomplete_chains": 1,
+      "unexecuted": 9,
+      "full_pairs": 1,
+      "request_boundary_entries": 10,
+      "received_usage_records": 9,
+      "known_usage_tokens": 212444,
+      "actual_total_tokens": null,
+      "pending_requests": [
+        10
+      ],
+      "actual_cost": null,
+      "proved_repairs": 0,
+      "required_repairs": 4,
+      "all_quality_gates": false,
+      "overall_speed_gate": "not_evaluable_incomplete_pairs",
+      "enabled": false,
+      "smoke_calls": 0,
+      "additional_batch": false,
+      "ui_real_archive_replay": true
     }
   },
   "chapters": [
@@ -444,8 +470,8 @@
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 17657,
-      "sha256": "bdeffc3ff43b6a3f305d371492d0b33a0576fa4c359fd6be59dd42deaeda4d3b"
+      "characters": 18035,
+      "sha256": "c75f5cad741bf5eeb6f701484699c44f99c82549f73a563970621bb668720abc"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -464,8 +490,8 @@
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 13408,
-      "sha256": "aab30a8501b2395bc34b7e8d7c0630967d402c297a40afcfa08c7c6e17f16218"
+      "characters": 13723,
+      "sha256": "634f85d89a7009074030809540420ac3498473edd4ea38b8ee45f0f742158a1e"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -474,8 +500,8 @@
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 8228,
-      "sha256": "3ec1e4881a5e0fd0366ccaf2df1bacbe0e627aade1e991eded28ffa366219602"
+      "characters": 8609,
+      "sha256": "c149cfd0dde841f9532fdbe620ee40c06b87a8db2f700e27ce0eed9b6f5db4c5"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
@@ -494,8 +520,8 @@
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 28233,
-      "sha256": "1de9d96bd393c65f7840a5691410506b89199483471a2c90f1b19531e6319d2a"
+      "characters": 28600,
+      "sha256": "d836f917fa70afec218e66af71b7de22b745101b09b6f7d9045d002bcc46ca42"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -504,8 +530,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 10268,
-      "sha256": "cbf96c47c1aa740ffdaccccf051087ba35871413d3924a271231fd185730e149"
+      "characters": 10625,
+      "sha256": "9f6d14efd226b3b38c9811e600311334b210bcb486b0bf1a9e567c586a0f2315"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -514,8 +540,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 8808,
-      "sha256": "fdd7394c663578ffc71a6e0fb15d0a4272538e2cb423d0a61da1e1a8eefb8091"
+      "characters": 9099,
+      "sha256": "93e3c78145c4f03edbe0ffab196dc89c5c2831a12108fe24ab8bd0b5011e37c5"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -533,6 +559,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 177453,
+  "markdown_characters": 179542,
   "network_dependencies": false
 }

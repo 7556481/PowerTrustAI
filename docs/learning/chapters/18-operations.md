@@ -177,3 +177,9 @@ Git可把Windows工作区CRLF检出为Linux LF；直接比较工作区原字节S
 ## 2026-10-09 第二版定向补记
 
 新电脑独立读站仅需GitHub冻结版本docs/learning/site/完整目录，打开index.html；不需.env、data、模型、数据库或业务.venv。服务/重建只需Python3.10+标准库、tools/__init__.py、tools/learning_site.py、docs/learning/及start-learning.cmd；启动器有现有.venv则复用，否则py -3/python，不创建环境或装依赖。python -m tools.learning_site serve --open --port 8770；build重建。源码检查另需tools/learning_checks.py及source-check.json引用的公开只读.py文件，不导入业务服务。同步清单见GitHub docs/learning-site-sync-v2.md，最终哈希按冻结Git引用/交付核对。
+
+## 2026-10-28 v4未通过启用门槛
+
+候选尚未启用，条件服务烟测0次。真实首次Revision超时且usage未决，12链/四错修复/四对速度及正确保护尚不完整，不能以UI改善或S2初审发现替代整体门槛。没有本机配置切换、强停在途任务、历史POST重放或第二批；8765未由本轮操作，只有自建8766/8767回放已释放。
+
+UI和只读投影代码可以独立交付；当前服务未由本轮重启，完整后端投影需按原正常方式重载本分支代码。类默认schema13/baseline保留，未擅自启用候选或改master。因不准入而未执行部署及回退，不应虚构回退已验证或“已启用可使用”。

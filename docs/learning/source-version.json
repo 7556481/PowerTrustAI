@@ -1,9 +1,9 @@
 {
-  "application_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
-  "evaluation_implementation_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
-  "evaluation_archive_commit": "865eb65c617e14c04d443283bec8b27af1da0f14",
-  "documentation_parent_commit": "47247745b5cdb4f185ac8de9a71efe3024b6b640",
-  "document_version": "learning-site-v6.13 source-first real-path v3,2026-10-28",
+  "application_commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+  "evaluation_implementation_commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+  "evaluation_archive_commit": "3b9f0e7b53c05e6177a8b914ff70c5c3f7fe2c0d",
+  "documentation_parent_commit": "3b9f0e7b53c05e6177a8b914ff70c5c3f7fe2c0d",
+  "document_version": "learning-site-v6.14 source-first quality/UI v4 stopped,2026-10-28",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -32,10 +32,10 @@
       "project_model_cost": 0
     },
     "current_full_offline": {
-      "commit": "f69a4124f0193708ff5421734a0206efe60a703a",
-      "tests": 1414,
-      "seconds": 475.028,
-      "scope": "final shared v3 implementation; full offline once after fixes; no paid calls"
+      "commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+      "tests": 1420,
+      "seconds": 446.89,
+      "scope": "final full offline after old duplicate-status assertion update; earlier failures and interrupted attempt retained; no paid calls"
     },
     "pre_read_path_full_offline": {
       "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
@@ -418,5 +418,31 @@
     "offline_tests": 1414,
     "offline_seconds": 475.028,
     "actual_cost": null
+  },
+  "source_first_quality_ui_v4": {
+    "implementation": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+    "archive_commit": "3b9f0e7b53c05e6177a8b914ff70c5c3f7fe2c0d",
+    "report": "docs/evaluation/source-first-quality-ui-release-v4/report.md",
+    "planned_chains": 12,
+    "complete_chains": 2,
+    "incomplete_chains": 1,
+    "unexecuted": 9,
+    "full_pairs": 1,
+    "request_boundary_entries": 10,
+    "received_usage_records": 9,
+    "known_usage_tokens": 212444,
+    "actual_total_tokens": null,
+    "pending_requests": [
+      10
+    ],
+    "actual_cost": null,
+    "proved_repairs": 0,
+    "required_repairs": 4,
+    "all_quality_gates": false,
+    "overall_speed_gate": "not_evaluable_incomplete_pairs",
+    "enabled": false,
+    "smoke_calls": 0,
+    "additional_batch": false,
+    "ui_real_archive_replay": true
   }
 }

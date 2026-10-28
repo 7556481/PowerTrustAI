@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-28 来源优先质量/UI与有条件启用v4（完成，未启用）
+
+- [唯一候选、真实停止及UI报告](evaluation/source-first-quality-ui-release-v4/report.md)：12槽仅2完整/1未完整/9未执行；S2有限纠正后触发修订但超时且usage未决，门槛失败，不切本机、不烟测、不第二批。
+- [机械统计](evaluation/source-first-quality-ui-release-v4/summary.json)：10发送边界，9可信usage已知212444token，pending10不可当0，实际总token/金额未知；仅S1一对48.370→5.934秒，无总体中位数。
+- 实现2e99786；1420离线/446.890秒、实际库8路径和普通重读、20项UI/API专项、桌面/390真实归档回放。学习站相关章节与源码身份同步，旧v3成绩及失败保留。
+
 ## 2026-10-28 来源优先真实路径验收v3（完成）
 
 - [真实路径修复、唯一四对及质量复核](evaluation/source-first-real-path-acceptance-v3/report.md)：8/8合法、29Flash/669718token，中位提速82.678%；两目标漏检0/2修复，质量门槛失败，不采用不部署。

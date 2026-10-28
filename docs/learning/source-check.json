@@ -1,6 +1,6 @@
 {
-  "application_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
-  "evaluation_commit": "f69a4124f0193708ff5421734a0206efe60a703a",
+  "application_commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
+  "evaluation_commit": "2e99786b7940c4b023cfbe4dde5120e6cd04d86e",
   "method": "AST exact qualified symbol, actual LF excerpt, partial spans explicit; all snippets verified against Markdown",
   "excerpts": [
     {
@@ -61,12 +61,12 @@
     {
       "file": "backend/assembly.py",
       "symbol": "ComponentFactory.create",
-      "start_line": 261,
-      "end_line": 278,
-      "function_end_line": 337,
+      "start_line": 263,
+      "end_line": 280,
+      "function_end_line": 341,
       "partial": true,
-      "file_sha256": "a799f52cde16129a07ec24dbf651cee10065367a9bd4161ee654bd5a26ddf8b8",
-      "source_text_lf_sha256": "a13790ad4cd2f2317afdd69c15e8702a025753141c3b318f05840346a40b0e03",
+      "file_sha256": "7b3ef3ab6e4f150f457921f9a39ca47c74a9fb49fece7958206341e16a19f679",
+      "source_text_lf_sha256": "8f78ce7d7632932c87154f8efa7df8e5dec0804216146a1188fc068ae08676e0",
       "excerpt_sha256": "90c30e41b968135fa24d44bf40d33f767e4ac80d3a4bd4f0848188937aac21bb"
     },
     {
@@ -76,8 +76,8 @@
       "end_line": 64,
       "function_end_line": 66,
       "partial": true,
-      "file_sha256": "7555564c2ef09de48c25154219e85e2900f6702d61d74066e8bfce1727412851",
-      "source_text_lf_sha256": "76b0fd822e4619ad91254ee54a76f0d4f094c7739e8da650a6ca61ee24291674",
+      "file_sha256": "adfbc7178b4526556c11d3b742ba42407aeadc12930eace1e37b47d7b08364c9",
+      "source_text_lf_sha256": "f41371bbdeb0bc94e98ddf9cfb0dd6291dcaaf7c2f18fecd85c035b430de4f3b",
       "excerpt_sha256": "e63611d2194634a77c92814d4afdc25f3659c5fbbc0d33e07db0c083239ca525"
     },
     {
@@ -164,8 +164,8 @@
       "end_line": 10,
       "function_end_line": 10,
       "partial": false,
-      "file_sha256": "2011d467bbb8787f8aa7906ab278bf628db31ee0707170ead747c906ab552b60",
-      "source_text_lf_sha256": "2011d467bbb8787f8aa7906ab278bf628db31ee0707170ead747c906ab552b60",
+      "file_sha256": "eeb289cc5141fa56e29dab837f2029749f3c327d256fea2af3b83f437a2dabd6",
+      "source_text_lf_sha256": "eeb289cc5141fa56e29dab837f2029749f3c327d256fea2af3b83f437a2dabd6",
       "excerpt_sha256": "8155c95f5bc07868f3dac9018f9e0d5fa5fedde03758f4ea8d65bb75717e91e0"
     },
     {
@@ -175,8 +175,8 @@
       "end_line": 28,
       "function_end_line": 30,
       "partial": true,
-      "file_sha256": "2011d467bbb8787f8aa7906ab278bf628db31ee0707170ead747c906ab552b60",
-      "source_text_lf_sha256": "2011d467bbb8787f8aa7906ab278bf628db31ee0707170ead747c906ab552b60",
+      "file_sha256": "eeb289cc5141fa56e29dab837f2029749f3c327d256fea2af3b83f437a2dabd6",
+      "source_text_lf_sha256": "eeb289cc5141fa56e29dab837f2029749f3c327d256fea2af3b83f437a2dabd6",
       "excerpt_sha256": "378f644e6974ecef2bc3b134e84d7125d4838679978eb809b09f38c5805614f4"
     },
     {
