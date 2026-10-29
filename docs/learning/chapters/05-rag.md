@@ -1,5 +1,11 @@
 # 05 RAG全过程：从文件到可回查Evidence
 
+## 2026-10-29：派生索引与权威原文分离
+
+本轮Tantivy0.27.0只在忽略目录建派生postings/ID与hash映射；同一jieba预分词串分别写入单字段FTS5和Whitespace Tantivy，命中仍通过原KnowledgeStore/Evidence/邻接层回查，既有source/version/locator不变。没有接入产品Retriever、生成或审核，也未验收异步取消。
+
+48k同数据四宽TopK快3.86—5.86倍，但50k建库反复worker失败，只保住48k完整前缀；不能把小样本倍数或命中数相同当全库无损。48组来源专项含132根读取/115邻接通过，只证明映射；指定文献674质量集合单列，不混入分散样本冒称自然召回。当前生产仍SQLite FTS/schema13，PR #4取证解耦资产保持关闭。[详细边界](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-bounded-v1/report.md)。
+
 ## 资料在哪里丢失：存在、命中、交付是三件事
 
 自然v3的8份N稿全部缺目标NERC资料，审核没有制造改善；N4“单一大设备”和历史H3把when改only又属于独立漏检。后续有界定位确认目标268片段在原生FTS库中，但8个必需段落的原查询MATCH均为0。主体词NERC及泛词“文字”约束、中文问题对英文词项的间隙，是实际观察到的断点。未向量化不是已证根因。

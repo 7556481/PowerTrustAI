@@ -16,7 +16,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - run: python -m pip install --only-binary=:all: -r requirements-tantivy-prototype.txt
+      - run: >-
+          python -m pip install --only-binary=:all: -r requirements-tantivy-prototype.txt
       - run: python -m unittest tests.test_tantivy_query_ast -v
       - run: python -c "import tempfile; from pathlib import Path; import evaluation.tantivy_selfcheck as s; s.LOCAL=Path(tempfile.mkdtemp()); s.main()"
       - run: python -m evaluation.tantivy_writer_selfcheck

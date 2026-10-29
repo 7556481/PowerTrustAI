@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-29 Tantivy有界可行性：48k有速度潜力，建库稳定性阻断扩大
+
+固定Tantivy0.27.0、12历史原查询、同词项同数据，674文献质量集及精确48,000行业前缀各72次Top-K/24单独计数完成。四宽查询快3.86—5.86倍（组中位5.263倍），12命中数一致；正常Q8慢0.343ms，保留。原计划50k未完成：6次原生writer失败，末次仍48002；根因未知。没有25万/百万结果，不外推全库、不继续调参。132根证据/115邻接、48组现有来源层校验通过；只证明身份回查，不保证有用召回。
+
+原型数据约103.7MiB，已记录最大进程峰值126MiB；进程树精确峰值和纯成功建库累计未知，控制边界见报告。原库70GB只读，生产路径0改动，0模型/0token/0模型费用，不重跑本地全套1454，不切8765。PR #4/cc991a3保留其取证收益/成本及未过30%结论，未改未合并；本研究独立基于master3cb0535。新[草稿PR #5](https://github.com/7556481/PowerTrustAI/pull/5)归档原型，见[完整报告](evaluation/tantivy-bounded-v1/report.md)。后续唯一建议是先定位同版writer失败并补中等规模稳定验证，不立即全量。
+
 ## 2026-10-29 发布后分支与候选处置
 
 远端新核验后28→2，26历史分支先归档SHA再原子删除；本地安全删除27支，master安全快进。候选代码保留且不开启；rank/MATCH当前实现结束，只建议保留v6来源模态忠实与完整修订交付研究（不执行）。8765 PID19116/ready及源码/受管配置未变，0模型、无重启、不重跑1454。见[清单](maintenance/post-release-disposition-v1/report.md)、[完整SHA](maintenance/post-release-disposition-v1/branches-before.json)及[回执](maintenance/post-release-disposition-v1/cleanup-result.json)。

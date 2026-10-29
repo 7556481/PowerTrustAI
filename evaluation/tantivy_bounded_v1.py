@@ -131,6 +131,7 @@ def rows(c,native=False,start=0,stop=0,n=0):
    yield rid,r['fragment_id'],body,body
 
 def build(folder,count,f,budget,native=False):
+ if (Path(folder)/'results.json').exists():raise RuntimeError('Timed population is immutable; never resume building it')
  from rag.chinese_terms import terms
  folder.mkdir(parents=True,exist_ok=True)
  if (folder/'ready.json').exists():raise RuntimeError('Do not rebuild ready sample')

@@ -1,5 +1,13 @@
 # 16 性能与可观测性：测量到底属于谁
 
+## 2026-10-29 Tantivy：同数据快，不等于已可建全量
+
+同48,000片段、相同预分词/AND-OR表达式，K3三次交替：四慢宽题FTS中位84.562/54.818/71.367/84.071ms，T14.418/9.455/18.466/15.116ms。普通count=False，精确count另计且12题均相同；Q8空结果T反慢0.343ms。首次是建库后首次观测、OS缓存未清，不叫冷盘。
+
+原计划50k遭六次native writer失败，最后48,002仍失败；工程问题未解决，未扩25万/百万，不能将674目标文献集与分散48k拼成缩放曲线。两个后端同叫BM25也不等价：IDF、fieldnorm和同分顺序不同；48k Q4/Q7同集换序，Q10第三段更偏题，不算业务收益。来源层回查通过，全文充分性仍有共同不足。
+
+结束派生约103.7MiB，测得最大进程峰值126MiB，早期整个进程树完整峰值未知。70GB字节封印在三个独立验证进程约240/233/244秒，单列，不伪称每查询扫库。没有产品/模型实验，不建议立即全量。[完整12题、失败和资源表](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-bounded-v1/report.md)。
+
 ## 2026-10-27完整页面合成性能的边界
 
 固定normal/large均有非空轨迹、发现、证据、两版本和反馈；large最长答案3311字，不用单字段百万字造倍率。实际HTTP result627327bytes、trace507626bytes、reviews13081bytes，前后不变。服务投影、loopback HTTP、response.json等待、同步渲染函数、两次requestAnimationFrame后DOM可见分别记录，重叠时间不相加；两帧不是实际paint/FCP。
