@@ -25,6 +25,8 @@ def explain(result):
             'external_cross_check':'见取证记录；仅缺口补检，不是全面交叉核验',
             'round_records':rounds,
             'source_truth_verified':False}
+    if any(r.get('query_method')=='production-evidence-reuse-v1' for r in result.get('retrieval',[])):
+        projection['audit_scope']={'version':'production-evidence-reuse-v1','text':'快速审核试用：复用本次资料并独立检索事实；领域依据不足时补检。保留原审核标准，不代表全面核验或工程安全。','source_truth_verified':False}
     return projection
 
 

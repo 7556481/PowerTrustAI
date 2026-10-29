@@ -150,6 +150,8 @@ class ComponentFactory:
                 manifest['scoring_method']=SCORING
                 manifest['retrieval']='immutable SQLite FTS5 postings; versioned Chinese segmentation/topic query; strict hit replay'
                 manifest['performance_profile']='corpus-query-certificate-v1: identical immediate request/result; immutable seal/stamp and strict body replay; no repeated FTS ranking on certificate validation; mismatches retain full replay'
+        manifest['audit_evidence_profile']=self.config.audit_evidence_profile
+        manifest['audit_evidence_scope']='Production schema13 unchanged; conceptual/no quantities; mandatory fact search; bounded original/context domain reuse, explicit gap domain search' if self.config.audit_evidence_profile=='deferred_subject_v1' else 'original fact and domain retrieval'
         manifest['fact_subject_supplement']='literal-subject-pre-review-v2: generation/aggregate verification before model; audit-subject-supplement-v1 after assessed insufficiency; original queries/settings retained'
         from services.operational_safety import RULE,SOURCES,VERSION as SAFETY_VERSION
         manifest['operational_safety_registry']={'version':SAFETY_VERSION,'rule':RULE,'sources':SOURCES,'judgment_origin':'model semantic application of registered source-backed advice rule; not expert or engineering certification'}
@@ -350,6 +352,7 @@ class ComponentFactory:
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1' else None,
                 generation_corpus_english=corpus_english,execution_path=self.config.execution_path,audit_strategy=self.config.audit_strategy)
+            harness.audit_evidence_profile=self.config.audit_evidence_profile
             harness.subject_supplement=self.config.audit_strategy=='baseline' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
             return Bundle(harness,resources)
         except Exception:

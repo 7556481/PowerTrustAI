@@ -178,6 +178,7 @@ class RunExecution:
         return await self._retrieve_for(purpose,query_override)
 
     async def _retrieve_for(self, purpose, query_override=None):
+        from harness.production_supply_v1 import eligible
         started = perf_counter()
         try:
             if purpose == RetrievalPurpose.VERIFICATION and self.harness.retrieval_settings.fact_strategy == 'per_claim_v1':
@@ -187,7 +188,7 @@ class RunExecution:
                 delivery = await self.retrieval.retrieve(purpose, self.request, self.answer, self.claims, query_override=query_override)
             if getattr(self.harness, 'subject_supplement', False) and query_override is None and (not delivery.issue) and (purpose == RetrievalPurpose.GENERATION or (purpose == RetrievalPurpose.VERIFICATION and self.harness.retrieval_settings.fact_strategy == 'aggregate')):
                 from services.audit_subject_query import question_subject, before_review, PRE_REVIEW_VERSION
-                subject_query = question_subject(self.request.question) if purpose == RetrievalPurpose.GENERATION else before_review(self.claims)
+                subject_query = question_subject(self.request.question) if purpose == RetrievalPurpose.GENERATION else ('' if eligible(self) else before_review(self.claims))
                 if subject_query and subject_query != delivery.record.query:
                     import json
                     from dataclasses import asdict, replace
@@ -369,7 +370,8 @@ class RunExecution:
         elif self.retrieval:
             self.vd = await self.retrieve_for(RetrievalPurpose.VERIFICATION)
             if not self.evidence_only:
-                self.dd = await self.retrieve_for(RetrievalPurpose.DOMAIN_REVIEW)
+                from harness.production_supply_v1 import eligible, domain_supply
+                self.dd = await domain_supply(self) if eligible(self) else await self.retrieve_for(RetrievalPurpose.DOMAIN_REVIEW)
             user_evidence = tuple((e for e in self.request.provided_evidence if e.evidence_id not in self.indexed_reference_ids))
             self.v_evidence = merge_evidence(user_evidence, self.vd.evidence)
             if not self.evidence_only:
@@ -441,6 +443,8 @@ class RunExecution:
 
     async def merge_and_decide(self):
         """Merge evidence, apply original policy; return whether review ended."""
+        from harness.production_supply_v1 import eligible, domain_gap
+        if eligible(self):await domain_gap(self)
         from harness.source_first_audit_v1 import enabled as source_first_enabled, supplement
         if source_first_enabled(self):
             await supplement(self)

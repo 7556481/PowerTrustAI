@@ -17,6 +17,7 @@ class ServiceConfig:
     fact_internal_flow: str='production'
     fact_review_execution: str='serial_v1'
     audit_strategy: str='baseline'
+    audit_evidence_profile: str='baseline_v1'
     fact_review_contract: str='production'
     review_result_transport: str='json'
     domain_internal_flow: str='production'
@@ -44,6 +45,8 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.audit_evidence_profile not in ('baseline_v1','deferred_subject_v1'):raise ValueError('Invalid audit evidence profile')
+        if self.audit_evidence_profile!='baseline_v1' and (self.audit_strategy!='baseline' or self.verification_schema!=13 or self.fact_review_contract!='production' or self.fact_internal_flow!='production' or self.domain_internal_flow!='production' or self.revision_answer_delivery!='production' or self.review_result_transport!='json' or self.extraction_message_profile!='production' or self.retrieval_mode!='bm25' or self.decision_policy!='product-v1' or self.local_revision_interface!='production' or self.fact_review_execution!='serial_v1' or self.retrieval_execution_profile!='topic_v4_subject_v1'):raise ValueError('Deferred supply requires unmodified production contracts and retrieval')
         if self.audit_strategy not in ('baseline','source_first_audit_v1','source_first_audit_v2','source_first_audit_v3','source_first_audit_v4'):raise ValueError('Invalid audit strategy')
         if self.audit_strategy=='source_first_audit_v4' and self.domain_internal_flow!='production':raise ValueError('Source reference v4 requires its paired domain contract')
         if self.audit_strategy!='baseline' and (self.fact_review_contract!='literal_v1' or self.local_revision_interface!='source_actions_v2' or self.fact_review_execution!='serial_v1' or self.retrieval_mode!='bm25' or self.retrieval_execution_profile=='chinese_first_cross_language_v1'):raise ValueError('Source-first requires explicit literal/v2 serial BM25 candidate')
@@ -102,6 +105,12 @@ class ServiceConfig:
             if not index.is_relative_to((ROOT/'data').resolve()) or not index.is_file():
                 raise ValueError('Managed daily index unavailable')
             daily['index_db']=str(index)
+        evidence_profile={}
+        evidence_file=ROOT/'data/runtime_local/audit-evidence.json'
+        if not demo and evidence_file.exists():
+            import json
+            evidence_profile=json.loads(evidence_file.read_text(encoding='utf-8'))
+            if set(evidence_profile)!={'version','profile'} or evidence_profile['version']!='audit-evidence-config-v1':raise ValueError('Invalid managed audit evidence configuration')
         nli={}
         nli_file=ROOT/'data/runtime_local/local-nli-config.json'
         if not demo and nli_file.exists():
@@ -112,6 +121,7 @@ class ServiceConfig:
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
             audit_strategy=os.environ.get('POWERTRUST_AUDIT_STRATEGY','baseline'),
+            audit_evidence_profile=os.environ.get('POWERTRUST_AUDIT_EVIDENCE_PROFILE',evidence_profile.get('profile','baseline_v1')),
             domain_internal_flow=os.environ.get('POWERTRUST_DOMAIN_INTERNAL_FLOW','production'),
             revision_answer_delivery=os.environ.get('POWERTRUST_REVISION_ANSWER_DELIVERY','production'),
             local_revision_interface=os.environ.get('POWERTRUST_LOCAL_REVISION_INTERFACE','production'),
