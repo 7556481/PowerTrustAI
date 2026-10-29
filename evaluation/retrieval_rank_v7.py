@@ -13,7 +13,8 @@ LOCAL=ROOT/'data/retrieval_local/retrieval-rank-and-audit-reference-v7/sql'
 BASE='SELECT rowid,bm25(corpus_fts) AS score FROM corpus_fts WHERE corpus_fts MATCH ? ORDER BY score,rowid LIMIT ?'
 RANK='SELECT rowid,rank AS score FROM corpus_fts WHERE corpus_fts MATCH ? ORDER BY rank LIMIT ?'
 def idle():
-    h=health_at('http://127.0.0.1:8765')
+    try:h=health_at('http://127.0.0.1:8765')
+    except Exception:h=None  # Health timeout/refusal is not proof of active work; persisted state below still gates.
     # A live service is not treated as idle without its explicit lifecycle.
     if h:
         life=h.get('service_lifecycle',{})

@@ -3,13 +3,16 @@ import json,re,sqlite3,time,subprocess,hashlib
 from pathlib import Path
 from backend.config import ROOT
 from backend.assembly import ComponentFactory
-from evaluation.natural_draft_audit_v1 import save,sha
+from evaluation.natural_draft_audit_v1 import sha
 from evaluation.source_first_modality_v6 import material
 from evaluation.source_first_real_v3 import configuration
 from evaluation.retrieval_rank_v7 import idle,bounded
 from rag.chinese_terms import terms,ALIASES
 from rag.topic_lanes import plan
 LOCAL=ROOT/'data/retrieval_local/selective-match-retrieval-v1'
+def save(p,v):
+    p.parent.mkdir(parents=True,exist_ok=True)
+    p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 DF_TERMS=('无功','无功功率','电网','电力系统','系统','电压','发电机','变压器','电动机','电压稳定','功率因数','补偿','无功补偿','负荷','消耗','供用电','三相','cos','ui','正弦','不可','可控','长距离','容量')
 def read(p):return json.loads(p.read_text(encoding='utf-8'))
 def freeze():
@@ -61,29 +64,40 @@ def freeze():
     assert len(cases)==12 and len(set(x['query'] for x in cases))==12 and len(ablations)==6
     save(LOCAL/'selection-before-code.json',selection);save(LOCAL/'selection-identity.json',dict(sha256=sha(selection),model_calls=0));print('12 queries/goals/reference text pinned before candidate',sha(selection),flush=True)
 def diagnose():
-    assert not (LOCAL/'diagnosis').exists(),'Do not resume/repeat diagnostics';assert idle(),'User work active'
+    diagnosis=LOCAL/'diagnosis-setup-fix3'
+    assert not diagnosis.exists(),'Do not resume/repeat diagnostics';assert idle(),'User work active'
     sel=read(LOCAL/'selection-before-code.json');assert sha(sel)==read(LOCAL/'selection-identity.json')['sha256']
     c=configuration(material());f=ComponentFactory(c);start=time.monotonic();f.warm_corpus_index();seal=time.monotonic()-start
     from rag.storage import KnowledgeStore
+    from rag.corpus_index import seal as corpus_seal
     with KnowledgeStore(c.index_db,readonly=True) as store:
-        es={fid:store.evidence(fid,c.knowledge_version) for row in sel['cases'] for fid in row['reference_fragments']}
+        base=corpus_seal(store,c.knowledge_version)['base_knowledge_version'];es={};bindings={}
+        for row in sel['cases']:
+            for fid in row['reference_fragments']:
+                direct=store.connection.execute('SELECT 1 FROM corpus_native WHERE fragment_id=? UNION ALL SELECT 1 FROM corpus_chunks WHERE fragment_id=?',(fid,fid)).fetchone() is not None
+                reference_snapshot=c.knowledge_version
+                if not direct:
+                    source=store.connection.execute('SELECT document_id,version FROM fragments WHERE fragment_id=?',(fid,)).fetchone()
+                    reference_snapshot=store.connection.execute('SELECT knowledge_version FROM snapshot_documents WHERE document_id=? AND version=? LIMIT 1',tuple(source)).fetchone()[0]
+                es[fid]=store.evidence(fid,reference_snapshot)
+                bindings[fid]=dict(direct_fts_identity=direct,reference_snapshot=reference_snapshot,current_corpus_member=direct,rule='References do not authorize stale delivery: actual outputs must verify against current corpus; alternative sources only where already authorized in frozen goals')
         for fid,e in es.items():
             assert store.verify_evidence(e)==e
             if fid in sel['provided_references']:assert e.text==sel['provided_references'][fid]['text']
             else:assert e.text==sel['native_references'][fid]['raw_text']
     from backend.serialization import wire
-    save(LOCAL/'materials.json',dict(selection=sel,references={fid:wire(e) for fid,e in es.items()},selection_sha=sha(sel)));save(LOCAL/'materials-identity.json',dict(sha256=sha(read(LOCAL/'materials.json')),model_calls=0))
+    save(LOCAL/'materials.json',dict(selection=sel,references={fid:wire(e) for fid,e in es.items()},reference_bindings=bindings,selection_sha=sha(sel)));save(LOCAL/'materials-identity.json',dict(sha256=sha(read(LOCAL/'materials.json')),model_calls=0))
     db=sqlite3.connect(c.index_db.resolve().as_uri()+'?mode=ro',uri=True);stamp=(c.index_db.stat().st_size,c.index_db.stat().st_mtime_ns)
-    save(LOCAL/'diagnosis/freeze.json',dict(seal_seconds=seal,sqlite_version=sqlite3.sqlite_version,main_stamp=stamp,selection_sha=sha(sel),df_cap=24,ablation_cap=6,model_calls=0,temporary_vocab='CREATE VIRTUAL TABLE temp.selective_vocab USING fts5vocab(main,corpus_fts,row)'))
+    save(diagnosis/'freeze.json',dict(seal_seconds=seal,sqlite_version=sqlite3.sqlite_version,main_stamp=list(stamp),selection_sha=sha(sel),df_cap=24,ablation_cap=6,model_calls=0,temporary_vocab='CREATE VIRTUAL TABLE temp.selective_vocab USING fts5vocab(main,corpus_fts,row)'))
     try:
         db.execute('CREATE VIRTUAL TABLE temp.selective_vocab USING fts5vocab(main,corpus_fts,row)')
         df=[];ab=[]
         for term in sel['df_terms']:
-            assert idle(),'User work became active';v=bounded(db,'SELECT doc,cnt FROM temp.selective_vocab WHERE term=?',(term,),30);df.append(dict(term=term,**v));save(LOCAL/'diagnosis/df.json',df);print('DF',term,v['status'],round(v['seconds'],3),flush=True)
+            assert idle(),'User work became active';v=bounded(db,'SELECT doc,cnt FROM temp.selective_vocab WHERE term=?',(term,),30);df.append(dict(term=term,**v));save(diagnosis/'df.json',df);print('DF',term,v['status'],round(v['seconds'],3),flush=True)
         for row in sel['ablations']:
-            assert idle(),'User work became active';v=bounded(db,'SELECT count(*) FROM corpus_fts WHERE corpus_fts MATCH ?',(row['expression'],),60);ab.append(dict(**row,**v));save(LOCAL/'diagnosis/ablations.json',ab);print('ABLATION',row['query'],row['kind'],v['status'],round(v['seconds'],3),flush=True)
+            assert idle(),'User work became active';v=bounded(db,'SELECT count(*) FROM corpus_fts WHERE corpus_fts MATCH ?',(row['expression'],),60);ab.append(dict(**row,**v));save(diagnosis/'ablations.json',ab);print('ABLATION',row['query'],row['kind'],v['status'],round(v['seconds'],3),flush=True)
         assert stamp==(c.index_db.stat().st_size,c.index_db.stat().st_mtime_ns),'Sealed main changed'
-        save(LOCAL/'diagnosis/complete.json',dict(df_queries=len(df),ablations=len(ab),main_unchanged=True,seal_seconds=seal,new_model_calls=0));print('Bounded diagnosis complete; no runtime DF/counting',flush=True)
+        save(diagnosis/'complete.json',dict(df_queries=len(df),ablations=len(ab),main_unchanged=True,seal_seconds=seal,new_model_calls=0));print('Bounded diagnosis complete; no runtime DF/counting',flush=True)
     finally:db.close()
 if __name__=='__main__':
     import sys

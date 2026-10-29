@@ -205,6 +205,11 @@ class ComponentFactory:
             manifest['effective_corpus_query_version']='topic-subject-grammar-bm25-v2'
             manifest['ranking_work_cache']='per-run-8-entries-max64-numeric-hits; full-body/context replay retained'
             manifest['citation_execution']='complete-single-scope-v1; same shared one-correction budget'
+        if self.config.retrieval_execution_profile=='selective_match_v1':
+            manifest['candidate_recall']='selective topics; max3 MATCH; no broad OR fallback; lexical coverage is not semantic support'
+            manifest['scoring_method']='selective-match-stage-priority-v1; local BM25 only, coverage/stage-priority merge'
+            manifest['effective_corpus_query_version']='selective-match-stage-priority-v1'
+            manifest['ranking_work_cache']=None
         if self.config.fact_internal_flow!='production':
             from importlib import import_module
             protocol=import_module({'langgraph_candidate_v1':'services.fact_flow_protocol_v1','joint_v2':'services.fact_flow_protocol_v2','two_stage_v1':'services.fact_two_stage_v1'}[self.config.fact_internal_flow])

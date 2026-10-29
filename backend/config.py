@@ -67,7 +67,7 @@ class ServiceConfig:
         if self.fact_internal_flow!='production' and self.verification_schema!=13:raise ValueError('Candidate requires explicit schema13 baseline')
         if self.execution_path not in ('sequential','langgraph_v1'):raise ValueError('Invalid execution path')
         if self.review_message_profile not in ('baseline_v1','lossless_v1'):raise ValueError('Invalid review message profile')
-        if self.retrieval_execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1','chinese_first_cross_language_v1'):raise ValueError('Invalid retrieval execution profile')
+        if self.retrieval_execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1','chinese_first_cross_language_v1','selective_match_v1'):raise ValueError('Invalid retrieval execution profile')
         if type(self.verification_schema) is not int or self.verification_schema not in (13,14):raise ValueError('Explicit schema13 or schema14 required')
         if self.decision_policy not in ('product-v1','legacy-v1'):raise ValueError('Unknown decision policy')
         if type(self.nli_enabled) is not bool or not 0<float(self.nli_timeout_seconds)<=60:
