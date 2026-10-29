@@ -1,0 +1,2 @@
+# Optional isolated evaluation only; not imported by production.
+tantivy==0.27.0

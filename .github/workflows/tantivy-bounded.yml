@@ -1,0 +1,22 @@
+name: Tantivy isolated semantics
+on:
+  pull_request:
+    paths:
+      - 'evaluation/tantivy_*.py'
+      - 'tests/test_tantivy_query_ast.py'
+      - 'requirements-tantivy-prototype.txt'
+      - '.github/workflows/tantivy-bounded.yml'
+  push:
+    branches: ['codex/tantivy-bounded-feasibility-v1']
+jobs:
+  semantics:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install --only-binary=:all: -r requirements-tantivy-prototype.txt
+      - run: python -m unittest tests.test_tantivy_query_ast -v
+      - run: python -c "import tempfile; from pathlib import Path; import evaluation.tantivy_selfcheck as s; s.LOCAL=Path(tempfile.mkdtemp()); s.main()"
+      - run: python -m evaluation.tantivy_writer_selfcheck
