@@ -1,5 +1,9 @@
 # 18 环境、启动、Git、迁移与排障
 
+## 取证试用准入失败后的真实处置
+
+取证解耦已完成16条正式组件/隔离Store比较和普通读取，7完整对中位降20.016%，未过30%；因此条件产品4链、烟测及受管切换均未执行。不是浏览器或Git故障使真实验证停留在0调用。唯一批次90 Flash/1216184token，未知/未决0，比较进程exit0。8765仍原PID19116/ready，无活动任务/队列；日常start-powertrustai.cmd、演示加--demo。失败为速度不足，兼有原合同/依据通道缺陷，不转向新引擎。草稿PR保留关闭配置的实现及报告，不把它说成已启用。[运行报告](https://github.com/7556481/PowerTrustAI/blob/codex/production-evidence-decoupling-v1/docs/evaluation/production-evidence-decoupling-v1/report.md)。
+
 ## 十题真实产品案例接续
 
 十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；首稿观测2.73～12.34秒，结束19.05～95.56秒。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/evaluation/stable-product-baseline-v1/report.md)。UI四缺项本轮已用原合成夹具补验通过，旧工具失败保留。

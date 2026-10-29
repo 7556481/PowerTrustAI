@@ -1,9 +1,8 @@
 {
   "application_commit": "42448b9c05f286073034c3dd38911925f88a3916",
   "evaluation_implementation_commit": "ce5e7acd1b24c7a2186f6a68879a1a989d460b3f",
-  "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "document_version": "learning-site-v6.19 production evidence decoupling, frozen pre-paid",
+  "documentation_parent_commit": "e06ce17d0e6e5a369cba794ef6cf049fa524a730",
+  "document_version": "learning-site-v6.19 production evidence decoupling real comparison failed speed gate, 2026-10-29",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -560,5 +559,30 @@
     "additional_batch": false,
     "sql_in_audit_batch": "original"
   },
-  "published_application_commit": "674036a334e09400dfa519b85590cfbdbe8514d8"
+  "published_application_commit": "674036a334e09400dfa519b85590cfbdbe8514d8",
+  "prior_evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
+  "evaluation_archive": "docs/evaluation/production-evidence-decoupling-v1/report.md in this documentation revision",
+  "production_evidence_decoupling_v1": {
+    "application_commit": "42448b9c05f286073034c3dd38911925f88a3916",
+    "evaluation_commit": "ce5e7acd1b24c7a2186f6a68879a1a989d460b3f",
+    "chains": 16,
+    "baseline_complete": 7,
+    "candidate_complete": 8,
+    "complete_pairs": 7,
+    "median_baseline_seconds": 34.633,
+    "median_candidate_seconds": 27.701,
+    "reduction": 0.2001559206537118,
+    "speed_gate": false,
+    "model_requests": 90,
+    "input_tokens": 1157605,
+    "output_tokens": 58579,
+    "total_tokens": 1216184,
+    "pending": [],
+    "actual_cost": null,
+    "product_chains": 0,
+    "smoke_chains": 0,
+    "production_switch": false,
+    "profile_default": "baseline_v1",
+    "report": "docs/evaluation/production-evidence-decoupling-v1/report.md"
+  }
 }
