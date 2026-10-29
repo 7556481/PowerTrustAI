@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-29 稳定产品候选（待验收）
+
+- [候选验收报告](maintenance/stable-product-baseline-v1.md)：分支关系、实际配置、1454离线通过、正式启动及UI工具故障；未发布、十题未发送。
+- [从启动到退出清单](stable-operation-checklist.md)：原脚本显式--demo路径及正式服务、故障与退出边界。
+
+
 ## 2026-10-29 rank执行与审核引用v7（完成，两项未启用）
 
 - [独立验收报告](evaluation/retrieval-rank-and-audit-reference-v7/report.md)：A显式LIMIT固定三轮无稳定收益，不构造/部署第三路径；B全10链形状失败、0/5修复，不启用/不烟测/不补批。

@@ -1,5 +1,9 @@
 # 18 环境、启动、Git、迁移与排障
 
+## 稳定候选启动验收（2026-10-29）
+
+一键入口 `start-powertrustai.cmd --demo` 走原合成夹具；不带参数走真实受管服务。当前候选不是默认分支发布。1454离线通过及真实入口ready只证明工程阶段，浏览器修订/证据/390/键盘验收尚缺，十题真实基线未发送，不能用合成绿标代替语义收益。进程级库封印与每题检索分别计时；本轮精确启动秒数未知。完整边界及失败见[稳定候选报告](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/maintenance/stable-product-baseline-v1.md)，操作见[清单](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/stable-operation-checklist.md)。
+
 ## v6产品页与GitHub检查排障
 
 零模型交互用原环境`python -m tools.ui_fixture --port 8766`及`/fixture/connect`；真实8765不作为界面验收入口。主页连接失效时按提示使用原启动器重新建立本机会话，手动令牌兼容在页脚诊断入口。服务正常时模式为小字，演示清楚标“无模型调用”；不要把profile推测为具体模型型号。

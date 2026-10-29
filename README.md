@@ -6,7 +6,7 @@
 
 输入问题 → 先阅读初稿 → 等待自动审核 → 查看结果与引用依据。出现修订时可切换原回答与修订后版本；历史按需打开。令牌连接、已有回答审核、工程背景、逐项发现、NLI、轨迹及追加反馈统一放在独立诊断页。
 
-新版界面与故障恢复代码交付于 [`codex/user-ui-readme-final-delivery-v6`](https://github.com/7556481/PowerTrustAI/tree/codex/user-ui-readme-final-delivery-v6)。默认分支首页单独更新，**不表示所有实验和维护代码已合并**。体验新版请按下面命令切换交付分支。
+当前整理分支为 `codex/stable-product-baseline-v1`，**仍为待验收候选，尚未发布到默认分支**。完整离线回归及真实入口启动已通过；UI剩余验收与十题真实基线尚未完成。见[验收状态](docs/maintenance/stable-product-baseline-v1.md)与[操作清单](docs/stable-operation-checklist.md)。
 
 ![新版用户主页；合成演示，仅展示交互](docs/assets/user-ui-v6-desktop.png)
 
@@ -19,13 +19,13 @@
 ```powershell
 git clone https://github.com/7556481/PowerTrustAI.git
 cd PowerTrustAI
-git switch codex/user-ui-readme-final-delivery-v6
+git switch codex/stable-product-baseline-v1
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-api.lock.txt -r requirements-corpus.txt -r requirements-pdf.txt -r requirements-ci.txt
 .\.venv\Scripts\python.exe -m tools.ui_fixture --port 8766
 ```
 
-已有项目环境只需最后一条命令。打开 [合成演示连接入口](http://127.0.0.1:8766/fixture/connect)，建立正常本机会话后进入主页。页面明确标记“演示模式 · 无模型调用”；假答案只验证交互，不作为模型质量证据。关闭该命令即可停止本次演示。8766 被占用时换空闲端口，勿占用真实服务8765。
+已有项目环境可直接运行 `./start-powertrustai.cmd --demo`（复用上述合成演示入口）。打开 [合成演示连接入口](http://127.0.0.1:8766/fixture/connect)，建立正常本机会话后进入主页。页面明确标记“演示模式 · 无模型调用”；假答案只验证交互，不作为模型质量证据。关闭该命令即可停止本次演示。8766 被占用时换空闲端口，勿占用真实服务8765。
 
 只看学习资料可运行 `python -m tools.learning_site serve --port 8770`，或双击 [start-learning.cmd](start-learning.cmd)。[中文学习站](docs/learning/index.md)包含架构、算法手算、源码导读、失败分析和面试练习；N1 → A3 → N4 路线展示历史资料交付、给定发现后修订及自然审核漏错。
 
