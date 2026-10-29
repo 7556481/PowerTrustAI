@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
-    "evaluation_implementation_commit": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
+    "application_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
+    "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
     "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "document_version": "learning-site-v6.17 independent rank and audit reference v7 not adopted,2026-10-29",
+    "document_version": "learning-site-v6.18 selective MATCH v1 performance gate failed and not adopted,2026-10-29",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -12,6 +12,7 @@
       "service_8765": "initial health unavailable in v7; no service action or deployment by this run",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
+      "selective_match_candidate_default": false,
       "literal_source_actions_candidate_default": false,
       "nli": "off",
       "switched": false,
@@ -33,6 +34,19 @@
         "scope": "README/status links, build/learning_checks, source identity and archived-demo browser navigation only; no full1324 or ability retest",
         "project_model_calls": 0,
         "project_model_cost": 0
+      },
+      "selective_match_v1": {
+        "commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
+        "existing_full_tests": 1454,
+        "existing_targeted_tests": 6,
+        "diagnostic_regression_tests": 11,
+        "diagnostic_regression_seconds": 4.581,
+        "real_validation_groups": 72,
+        "real_validation_seconds": 753.5810547000001,
+        "seal_seconds": 206.0443804999959,
+        "performance_gate": false,
+        "model_calls": 0,
+        "scope": "bounded DF/ablation plus fixed 12-query three-round real-library retrieval validation; no adoption or production switch"
       },
       "current_full_offline": {
         "commit": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
@@ -620,7 +634,7 @@
     {
       "source": "docs/learning/chapters/14-code-tour.md",
       "characters": 29989,
-      "sha256": "cc21d3af72983f75d0758b5ce5398cad8db02e1702f9fd9928c27406dbc1880e"
+      "sha256": "51e39b1e86742a09cdb75e87d4a647450f650ba6b2f5a7335b70610e347d0187"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -629,8 +643,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 11870,
-      "sha256": "bed285cf5d9e0979a318ff4f0cbcf07919f63eb3320918a1da5b51be1e2c6551"
+      "characters": 12401,
+      "sha256": "c4c11b3a78d1e9c0f37a209ddb27c4dce94e7362086d725f6c03199dba94c573"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -658,6 +672,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 185377,
+  "markdown_characters": 185908,
   "network_dependencies": false
 }
