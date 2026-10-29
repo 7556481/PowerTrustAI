@@ -77,7 +77,7 @@ async def live():
  f=verify();assert not (LOCAL/'live-attempt.json').exists(),'No resume or replacement slots';assert (LOCAL/'timing-summary.json').exists(),'Offline timing required'
  from harness.deepseek_trial import load_project_env
  load_project_env(DATA.parent/'.env');assert os.environ.get('DEEPSEEK_MODEL_ID')=='deepseek-flash'
- c=config();factory=ComponentFactory(c);factory.preflight();m=read(LOCAL/'materials.json');gate=Gate(LOCAL/'live');save(LOCAL/'live-attempt.json',dict(freeze_sha=sha(f),resume=False))
+ c=config();factory=ComponentFactory(c);started=time.monotonic();factory.preflight();save(LOCAL/'live-startup-seal.json',dict(seconds=time.monotonic()-started,scope='process preflight before slot submission; not per-query scan'));m=read(LOCAL/'materials.json');gate=Gate(LOCAL/'live');save(LOCAL/'live-attempt.json',dict(freeze_sha=sha(f),resume=False))
  from model_adapter.deepseek import create_adapter
  async def runner(h,req,budget,**kw):
   if req.mode==TaskMode.QUESTION_ANSWER:kw['knowledge_version']=c.knowledge_version
