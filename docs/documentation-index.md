@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-29 生产合同取证解耦：付费前冻结
+
+最终应用42448b9已通过1462项/276.424秒离线回归（80私有历史材料缺失跳过），48组准备计时完成。唯一16链真实比较即将执行，默认关闭、8765保持。见[本轮报告](evaluation/production-evidence-decoupling-v1/report.md)。原1457结果仅属于初版，不重复冒充最终身份。
+
 ## 2026-10-29 发布后分支与候选处置
 
 远端新核验后28→2，26历史分支先归档SHA再原子删除；本地安全删除27支，master安全快进。候选代码保留且不开启；rank/MATCH当前实现结束，只建议保留v6来源模态忠实与完整修订交付研究（不执行）。8765 PID19116/ready及源码/受管配置未变，0模型、无重启、不重跑1454。见[清单](maintenance/post-release-disposition-v1/report.md)、[完整SHA](maintenance/post-release-disposition-v1/branches-before.json)及[回执](maintenance/post-release-disposition-v1/cleanup-result.json)。

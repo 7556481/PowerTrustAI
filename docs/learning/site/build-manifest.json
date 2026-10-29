@@ -1,15 +1,15 @@
 {
   "version": {
-    "application_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
-    "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
+    "application_commit": "42448b9c05f286073034c3dd38911925f88a3916",
+    "evaluation_implementation_commit": "ce5e7acd1b24c7a2186f6a68879a1a989d460b3f",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
     "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "document_version": "learning-site-v6.18 selective MATCH v1 performance gate failed and not adopted,2026-10-29",
+    "document_version": "learning-site-v6.19 production evidence decoupling, frozen pre-paid",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
       "unconfigured_fallback": "sequential",
-      "service_8765": "initial health unavailable in v7; no service action or deployment by this run",
+      "service_8765": "existing managed baseline PID19116; not switched by candidate",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
       "selective_match_candidate_default": false,
@@ -17,7 +17,8 @@
       "nli": "off",
       "switched": false,
       "audit_strategy": "baseline",
-      "sql_execution": "original bm25 score,rowid LIMIT"
+      "sql_execution": "original bm25 score,rowid LIMIT",
+      "audit_evidence_profile": "baseline_v1"
     },
     "validation": {
       "reused_full": {
@@ -49,10 +50,11 @@
         "scope": "bounded DF/ablation plus fixed 12-query three-round real-library retrieval validation; no adoption or production switch"
       },
       "current_full_offline": {
-        "commit": "18d4f671e7f073b014ca18e4fdbc32b94e91cb92",
-        "tests": 1448,
-        "seconds": 487.711,
-        "scope": "final v7 offline before sole candidate batch; no paid source changes or repeat batch"
+        "commit": "42448b9c05f286073034c3dd38911925f88a3916",
+        "tests": 1462,
+        "seconds": 276.424,
+        "skipped": 80,
+        "scope": "final expanded candidate, offline; private historical archives unavailable"
       },
       "pre_read_path_full_offline": {
         "commit": "4e41620614fffbb8a71582a1053e873acaa9b688",
@@ -558,7 +560,8 @@
       "smoke_calls": 0,
       "additional_batch": false,
       "sql_in_audit_batch": "original"
-    }
+    },
+    "published_application_commit": "674036a334e09400dfa519b85590cfbdbe8514d8"
   },
   "chapters": [
     {
@@ -634,7 +637,7 @@
     {
       "source": "docs/learning/chapters/14-code-tour.md",
       "characters": 29989,
-      "sha256": "51e39b1e86742a09cdb75e87d4a647450f650ba6b2f5a7335b70610e347d0187"
+      "sha256": "45bbc0486b0fdca5aaa665b372cdf9434ea64cff4fb88653a7c4037660cab11e"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -643,8 +646,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 12401,
-      "sha256": "c4c11b3a78d1e9c0f37a209ddb27c4dce94e7362086d725f6c03199dba94c573"
+      "characters": 12683,
+      "sha256": "aae5d67cc6b8253cc6ceac8838fc4b59b17fbb60abe73c974f1e549f82bb196c"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -672,6 +675,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 186765,
+  "markdown_characters": 187047,
   "network_dependencies": false
 }
