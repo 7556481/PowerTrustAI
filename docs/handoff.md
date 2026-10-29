@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-29 发布后分支与候选处置
+
+远端新核验后28→2，26历史分支先归档SHA再原子删除；本地安全删除27支，master安全快进。候选代码保留且不开启；rank/MATCH当前实现结束，只建议保留v6来源模态忠实与完整修订交付研究（不执行）。8765 PID19116/ready及源码/受管配置未变，0模型、无重启、不重跑1454。见[清单](maintenance/post-release-disposition-v1/report.md)、[完整SHA](maintenance/post-release-disposition-v1/branches-before.json)及[回执](maintenance/post-release-disposition-v1/cleanup-result.json)。
+
 ## 2026-10-29 最终工程整合准入
 
 十题与UI补验完成，默认分支文档冲突已实际解决，应用源码未变、实验关闭；PR #2等待本HEAD的CI成功后才合并和正常启动8765。已有1454复用，不重复本地回归。实际远端/本机身份及配置备份/回退见data/runtime_local/stable-product-ten-v1/release-receipt.json及最终聊天回执，不根据本段猜测已发布。详见[发布报告](maintenance/stable-product-baseline-v1.md)与[十题结果](evaluation/stable-product-baseline-v1/report.md)。
