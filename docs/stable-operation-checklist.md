@@ -1,6 +1,6 @@
 # 从启动到结束
 
-在项目根目录、既有虚拟环境中操作。当前稳定候选尚未完成发布，状态见[验收报告](maintenance/stable-product-baseline-v1.md)。
+在项目根目录、既有虚拟环境中操作。实际发布与本机版本状态见[验收报告](maintenance/stable-product-baseline-v1.md)。
 
 1. 公开离线演示运行 `./start-powertrustai.cmd --demo`。打开 http://127.0.0.1:8766/fixture/connect ，确认“演示模式 · 无模型调用”。此入口不加载私有知识库与凭据。
 2. 填入概念示例，生成并审核，检查答案、正文意见、引用依据、历史及版本。合成结果只说明交互，不证明模型能力。关闭终端前用Ctrl+C正常退出。
