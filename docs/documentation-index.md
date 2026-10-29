@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-10-29 最终工程整合准入
+
+十题与UI补验完成，默认分支文档冲突已实际解决，应用源码未变、实验关闭；PR #2等待本HEAD的CI成功后才合并和正常启动8765。已有1454复用，不重复本地回归。实际远端/本机身份及配置备份/回退见data/runtime_local/stable-product-ten-v1/release-receipt.json及最终聊天回执，不根据本段猜测已发布。详见[发布报告](maintenance/stable-product-baseline-v1.md)与[十题结果](evaluation/stable-product-baseline-v1/report.md)。
+
 ## 2026-10-29 十题产品基线与UI补验
 
 - [十题真实结果及逐题复核](evaluation/stable-product-baseline-v1/report.md)：正式API、6/10审核完整、61Flash/887560token、0修订；分列内容收益、关键条件漏检及诚实但无用的不足。
