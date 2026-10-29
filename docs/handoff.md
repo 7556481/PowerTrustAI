@@ -1241,3 +1241,7 @@ origin按授权添加指定地址。只读Git HTTPS连续连接重置，匿名cu
 唯一候选实现308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea。24 DF/6消融及12查询×两路×三轮72组完成；执行753.581秒、封印206.044秒另列，0模型。Q1/Q2中位27.244→26.961、20.405→18.965秒，仅1.0%/7.1%，未达50%且5秒；Q3/Q6/Q11/Q12重复回退。性能门槛失败，不建议进入回答验证，未部署、未烟测、不补跑。质量门槛未取得完整逐目标人工通过证据，不得称召回无损。Q11候选引入气候模型/材料学等无关正文，虚构现场容量仍未知；Q9旧参考快照成员边界和所有启动失败保留。当前生产schema13/baseline、topic_v4_subject_v1不变。
 
 报告：[选择性MATCH验收](evaluation/selective-match-retrieval-v1/report.md)。原文和完整输出留忽略data。学习站同步性能失败边界，下一后端原型须独立授权、公平同子集验证，本轮没有迁移/重建。原未提交研究材料保留。
+
+## 默认分支独立发布记录（整合时保留历史）
+
+README重写并迁出本分支旧全文，新增合成UI截图；新版业务代码位于codex/user-ui-readme-final-delivery-v6，未合并实验/维护代码。必要CI修复：匹配图依赖、完整Git历史、忽略目录测试前提、逐方法私有归档缺失标注，公开断言不变。已读取09c6b987/99b93497失败日志，红叉不等于push失败。模型0；[完整跨分支交付报告](https://github.com/7556481/PowerTrustAI/blob/codex/user-ui-readme-final-delivery-v6/docs/maintenance/user-ui-readme-final-delivery-v6.md)，最终CI看本提交Actions。以后维护记录进交接/报告，不堆README。
