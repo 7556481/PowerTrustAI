@@ -1,5 +1,10 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-29 十题真实产品基线已完成
+
+接续a23bbf9，正式隔离8775/API+独立Store唯一10题全部发送并终态，无补槽/换题/配置改动。6审核完整；61Flash、839462输入/48098输出/887560总token，usage61齐全、未决0、金额未知、0Revision。2题较可用需限定、4部分帮助、3未回答、Q3缺正弦条件关键错。启动封印200.492秒单列。UI正文原因/证据/390/Enter-Escape-Tab本轮原合成夹具补验通过。a23代理推送及CI成功；真实发布整合尚须处理文档冲突。复用1454回归不重跑。见[逐题报告](evaluation/stable-product-baseline-v1/report.md)，私有data/runtime_local/stable-product-ten-v1。
+
+
 ## 2026-10-29 稳定产品候选未发布
 
 独立codex/stable-product-baseline-v1基于053b4f7，所有本地工作分支为祖先；远端master由连接器核实9767975。1454离线/484.409秒通过、8775正式真实入口ready且已正常退出，8765未切换。公开演示示例/答案/历史通过，浏览器工具反复browser.user故障阻断修订/证据/390/键盘验收。十题未冻结未发送，新增模型/token0，不恢复旧批。原未提交研究材料保留，不能冒称稳定发布完成。见[报告](maintenance/stable-product-baseline-v1.md)和[操作清单](stable-operation-checklist.md)。

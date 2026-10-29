@@ -1,5 +1,11 @@
 # 文档索引
 
+## 2026-10-29 十题产品基线与UI补验
+
+- [十题真实结果及逐题复核](evaluation/stable-product-baseline-v1/report.md)：正式API、6/10审核完整、61Flash/887560token、0修订；分列内容收益、关键条件漏检及诚实但无用的不足。
+- [接续启动发布报告](maintenance/stable-product-baseline-v1.md)：200.492秒启动、UI四缺项补验及代理/CI。
+
+
 ## 2026-10-29 稳定产品候选（待验收）
 
 - [候选验收报告](maintenance/stable-product-baseline-v1.md)：分支关系、实际配置、1454离线通过、正式启动及UI工具故障；未发布、十题未发送。

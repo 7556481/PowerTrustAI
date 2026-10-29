@@ -1,37 +1,39 @@
 <!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>18 环境、启动、Git、迁移与排障 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 308a4b8f010d · learning-site-v6.18 selective MATCH v1 performance gate failed and not adopted,2026-10-29 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">18 环境、启动、Git、迁移与排障</h1>
-<h2 id="section-2">稳定候选启动验收（2026-10-29）</h2>
+<h2 id="section-2">十题真实产品案例接续</h2>
+<p>十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；首稿观测2.73～12.34秒，结束19.05～95.56秒。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见<a href="https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/evaluation/stable-product-baseline-v1/report.html" rel="noreferrer noopener">逐题报告</a>。UI四缺项本轮已用原合成夹具补验通过，旧工具失败保留。</p>
+<h2 id="section-3">稳定候选启动验收（2026-10-29）</h2>
 <p>一键入口 <code>start-powertrustai.cmd --demo</code> 走原合成夹具；不带参数走真实受管服务。当前候选不是默认分支发布。1454离线通过及真实入口ready只证明工程阶段，浏览器修订/证据/390/键盘验收尚缺，十题真实基线未发送，不能用合成绿标代替语义收益。进程级库封印与每题检索分别计时；本轮精确启动秒数未知。完整边界及失败见<a href="https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/maintenance/stable-product-baseline-v1.html" rel="noreferrer noopener">稳定候选报告</a>，操作见<a href="https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/stable-operation-checklist.html" rel="noreferrer noopener">清单</a>。</p>
-<h2 id="section-3">v6产品页与GitHub检查排障</h2>
+<h2 id="section-4">v6产品页与GitHub检查排障</h2>
 <p>零模型交互用原环境<code>python -m tools.ui_fixture --port 8766</code>及<code>/fixture/connect</code>；真实8765不作为界面验收入口。主页连接失效时按提示使用原启动器重新建立本机会话，手动令牌兼容在页脚诊断入口。服务正常时模式为小字，演示清楚标“无模型调用”；不要把profile推测为具体模型型号。</p>
 <p>Git工作分支推送、默认分支README展示、该提交CI检查是三件事。历史红叉日志显示公开workflow未安装LangGraph、干净克隆缺临时输出父目录、部分私有回放缺归档未显式标注；修复分别安装匹配版本、在既有忽略边界内创建临时父目录、仅对确需私有文件的测试标明缺失前提。公开合成测试仍执行，禁止吞失败或放宽断言。checkout需完整历史供SHA绑定差分测试使用。README维护日志已迁出；以后进展写handoff和维护报告。</p>
-<h2 id="section-4">2026-10-27只读服务检查与轮询收敛</h2>
+<h2 id="section-5">2026-10-27只读服务检查与轮询收敛</h2>
 <p>连接区“重新检查服务”仅发一次GET /health；同一时刻一个检查，无新增定时器，不启动服务、模型或任务。检查失败保留已读正文和草稿，历史读取可尝试但不保证损坏存储可读。旧health缺生命周期字段时依据status/configuration_ready兼容并标注限制；未知不冒称ready。配置、存储、生命周期、队列满、网络不可达和401分别提示。旧epoch/请求身份及较早health不能覆盖新故障或使新会话失效。</p>
 <p>显式待中断且保存未确认时，queued不再导致无限主轮询；保留原状态供回查，辅助失败和NLI pending仍按既有上限收敛。只有服务故障码但任务仍running时继续查询。未知POST不得借健康检查解锁重发；故障实例不自动重启。8766零付费夹具验证清理故障后禁新提交、历史版本/证据/反馈可用；待中断未确认以实际隔离API与前端探针验证，未冒称浏览器覆盖。不代表模型回答质量或审核收益改善。</p>
-<h2 id="section-5">2026-10-27工作循环故障的运维边界</h2>
+<h2 id="section-6">2026-10-27工作循环故障的运维边界</h2>
 <p>health.service_lifecycle区分worker_running、accepting_work、fault_code及受控异常类别；不含原始异常消息/堆栈。配置齐全、SQLite可读不再等于ready。资源清理失败后停止接单并明确处置等待项，不自动重启worker或重放付费任务。正常运行取消/服务关闭与worker非预期退出分开；启动失败释放已取得的资源，重复stop不重复正常关闭。</p>
 <p>drain表示底层工作仍可能活跃，抛错时保留未确认资源，不强关；关闭时可再次尝试安全drain。若一直未结束，仍可能等待，没有强制终止/远端取消保证；本轮没有引入超时硬杀。只读历史结果、版本、证据及追加意见继续可用。故障浏览器入口为显式隔离CLI tools.ui_lifecycle_fixture_v4，普通入口仍tools.ui_fixture；两者都是8766，不是生产8765，正式API无故障注入开关。</p>
-<h2 id="section-6">2026-10-27工程维护补记</h2>
+<h2 id="section-7">2026-10-27工程维护补记</h2>
 <p>零付费业务UI验收可使用 <code>.venv\Scripts\python.exe -m tools.ui_fixture --port 8766</code>，先看根页未连接状态，再访问/fixture/connect进入本机一次性会话。该入口只装配synthetic_fixture，临时库/令牌由进程管理，NLI关闭，不读.env或70GB；Ctrl+C释放。不要直接运行默认指向生产Store的旧ui_demo_scenarios。日常start-powertrustai.cmd和独立8770学习站用途不变。</p>
-<h2 id="section-7">最小复现先隔离接口，再检查业务</h2>
+<h2 id="section-8">最小复现先隔离接口，再检查业务</h2>
 <p>【真实观察】本轮四种短合成Schema分别走直接HTTP与项目适配器，实际正文逐字节相同，八项都合法。之后旧业务回归出现嵌套conditions额外字段及来源ID错误，只有两项执行完整。没有发现客户端差异，也不能因此认定服务端严格约束始终生效；未知内部原因应保留。<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-interface-consistency-v1/report.md#" rel="noreferrer noopener">证据与版本</a>。</p>
 <p>诊断应记录真正交给连接的URL、参数和正文身份，以及接收时arguments与解析后字符串是否相同。只比较构造函数不能排除后续改写。Schema约束对象形状，业务还要检查ID是否属于当前来源目录、条件归属和引用范围。结构合法的S1B0也可能不是要求的SRC:S1B0；程序不能替模型换成正确ID。</p>
 <p>【教学构造】两条客户端发送字节完全一致，都通过四种合成输入；复杂业务却多出Schema禁止字段。可以断言适配器导致错误，或把字段删掉继续吗？</p>
 <details class="self-answer"><summary>展开最小复现练习解析</summary><p>不能。相同发送字节削弱了客户端构造差异这一解释，但无法观察提供商内部处理；少量成功也不是总体保证。应定位首次违例位置、保留参数与Schema身份、本地拒绝额外字段。删除字段会掩盖原输出失效。结构故障与语义分歧分别报告，不用随机差异证明客户端因果，也不以新提示重跑凑成功。</p></details>
-<h2 id="section-8">上一严格载体批次的停止与回退</h2>
+<h2 id="section-9">上一严格载体批次的停止与回退</h2>
 <p>【真实失败】实际API未拒绝请求，但参数严格解析失败，唯一纠正后仍未完成；按A1/A3准入规则封存，不换参数、接口或模型试到成功。原始调用ID、参数、结束、用量和本地关联可回查；不能自动去重或剥离多余括号。本轮没有合法结果，不继续服务验收；生产默认JSON不变。<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-review-tool-v1/report.md#" rel="noreferrer noopener">实际证据</a>。</p>
-<h2 id="section-9">Beta与显式回退</h2>
+<h2 id="section-10">Beta与显式回退</h2>
 <p>strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实/引用审核，走官方Beta且非思考；生成、领域和修订继续原路径。回退为review_result_transport=json，生产从未自动切换。实际Schema被拒绝时必须停，不在付费中自动试另一个接口或参数。</p>
 <p>【教学构造】冻结后的严格工具请求收到HTTP400，是否可以同运行切回JSON模式把剩余题跑完？</p>
 <details class="self-answer"><summary>展开Beta回退练习解析</summary><p>不可以。那会改变冻结的实验条件，也可能绕过共享故障停止。应保存安全状态/类型/关联及诊断缺口，停止后续发送，保留已受理结果。回退是显式配置行为，不是失败后的隐式重试；不得把新诊断反推成旧请求的确切原因。</p></details>
-<h2 id="section-10">实际接入没有完成时</h2>
+<h2 id="section-11">实际接入没有完成时</h2>
 <p>【真实失败】v9.22.1三次实际消息均通过JSON模式检查并有返回，没有请求拒绝；原引用输出重复键，唯一纠正仍失败，正式A1接入门禁停止后续26槽。不要改用“最后一个同名字段”为准，也不要把部分合法事实变成整答通过。本批没有实际HTTP拒绝，相关故障状态只由离线替身验证；停止后不另发付费探测。<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-simple-patch-v1/report.md#" rel="noreferrer noopener">原文及版本边界</a>。</p>
-<h2 id="section-11">公共请求边界：额度、故障与纠正</h2>
+<h2 id="section-12">公共请求边界：额度、故障与纠正</h2>
 <p>请求预算的额度与运行是否还能发送是两个问题。JSON模式必须检查实际消息，而不是只看提示常量；初始、纠正和引用请求都应经过同一入口。请求被服务端拒绝与模型返回了不合法结构不同：前者要封住同运行的后续组和下游请求，后者按原有限纠正处理。已经进入网络的并行请求不能说成没有发出，返回仍需保存。</p>
 <p>错误诊断也需要边界：记录有界HTTP状态、白名单类型和安全说明；可能回显私有输入的原始错误消息不落盘，省略时明确记诊断缺口。服务端关联ID可存哈希，本地关联ID用于追踪；新诊断不能反推旧请求的确切状态。</p>
 <p>【离线教学构造】两次失败分别是HTTP422拒绝，以及HTTP200返回的JSON缺少必需字段。都还有预算时，是否都能继续一次纠正？</p>
 <details class="self-answer"><summary>展开公共边界练习解析</summary><p>不能。HTTP422是请求级故障，本运行后续引用、纠正和下游模型都应停止，批次也按共享故障规则停止。HTTP200的结构失败可以使用原有有限纠正额度；不能因为有余额就重试被拒绝的请求，也不能把已接受结果丢掉。这里是离线行为检查，不是故意付费制造故障。</p></details>
 <p>2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#" rel="noreferrer noopener">后续验收</a>。下文2026-10-22及更早状态保留历史含义，以本补记为当前。</p>
-<h2 id="section-12">三种入口，互不打断</h2>
+<h2 id="section-13">三种入口，互不打断</h2>
 <p>日常双击start-powertrustai.cmd，使用8765并自动连接；问答/已有回答正常提交会调用付费模型。演示用python -m backend --demo，必须独立端口/目录配置，synthetic_fixture不用DeepSeek；不能演示结果冒充真实审核。学习双击start-learning.cmd，8770纯静态，不读模型密钥、不启动任务、不占运行库。</p>
 <pre><code class="language-powershell">cd D:\PowerTrustAI
 &amp; .\.venv\Scripts\python.exe -m backend --open --port 8765
@@ -39,56 +41,56 @@
 &amp; .\.venv\Scripts\python.exe -m tools.learning_site build
 &amp; .\.venv\Scripts\python.exe -m tools.learning_site serve --open --port 8770</code></pre>
 <p>学习服务Ctrl+C停止，不影响审核。直接打开docs/learning/site/index.html同样可读，页面搜索通过本地search-data.js，无fetch/CORS要求。正文只改Markdown，HTML不要手工维护第二份。</p>
-<h2 id="section-13">环境与资源</h2>
+<h2 id="section-14">环境与资源</h2>
 <p>项目解释器D:/PowerTrustAI/.venv/Scripts/python.exe，项目Python3.13；训练依赖独立CPU环境已存在，不为读站重建。Git/Python缺失使用官方渠道，依赖按锁文件，不盲目升级。Intel GPU不按CUDA配置，不为项目修改驱动。</p>
 <p>资料、模型、DB和真实输出在data忽略目录。公开克隆不带私有权重/全文库，所以默认离线synthetic能运行，不代表真实语料可完整复现。文档构建器只依赖标准库，不引入复杂平台、远程字体或训练框架。</p>
-<h2 id="section-14">迁移需要证明什么</h2>
+<h2 id="section-15">迁移需要证明什么</h2>
 <p>先定位实际迁移目录，核对restore、manifest、exclusions、failures；大小/SHA相符再复制data，相对结构不变，冲突停止覆盖。数据库检查SQLite integrity，保留迁移目录，不复制旧虚拟环境、旧凭据或旧WAL/SHM。模型revision/配置/快照与索引需匹配。</p>
 <p>路径变化只修改新的启动配置和环境，不批量改写历史冻结请求、task哈希或归档。旧训练环境重装依赖不等于重跑实验；恢复验证仅导入/本地加载。凭据由所有者本机填写，报告仅路径和版本，不显示真实值。</p>
-<h2 id="section-15">Git与命令级网络</h2>
+<h2 id="section-16">Git与命令级网络</h2>
 <p>修改前看status、HEAD和远端，实际有更新接续不回退。代码/Markdown/静态站源码提交，data/原始响应/权重/官方全文不提交。普通push，不强推。代理只在明确需要的Git命令使用已核实127.0.0.1:7897，不能把Git代理盲套到模型API，更不关SSL。</p>
 <pre><code class="language-powershell">git status --short
 git rev-parse HEAD
 git -c http.proxy=http://127.0.0.1:7897 ls-remote origin refs/heads/master</code></pre>
 <p>本地提交成功不等远端更新，push之后读远端哈希；敏感检查应看实际Git树和blob，不只相信.gitignore。配置说明用空值或名称，不含密钥。</p>
-<h2 id="section-16">按错误层次排障</h2>
+<h2 id="section-17">按错误层次排障</h2>
 <div class="table-scroll"><table><thead><tr><th>表现</th><th>应查证据</th><th>不要做</th></tr></thead><tbody><tr><td>401/连接丢失</td><td>本机会话、固定令牌路径、origin、服务重启</td><td>发令牌到聊天或URL</td></tr><tr><td>422输入拒绝</td><td>必填字段/模式/长度及实际请求</td><td>编造厂站参数</td></tr><tr><td>429队列满</td><td>活动run及等待队列</td><td>连续POST刷提交</td></tr><tr><td>模型连接失败</td><td>实际异常类型、阶段、服务配置</td><td>认定不支持中文、关闭SSL</td></tr><tr><td>OUTPUT_CONTRACT_ERROR</td><td>原响应、纠正、具体字段、实际模板</td><td>只补题目提示、静默填ID</td></tr><tr><td>证据不足</td><td>原文、范围、交付、完整命题条件</td><td>把未找到说成全库不存在</td></tr><tr><td>KeyError _id</td><td>分片schema与原断点</td><td>重复下载或清空库</td></tr><tr><td>interrupted</td><td>原结果/阶段、重启恢复</td><td>自动重发付费任务</td></tr></tbody></table></div>
-<h2 id="section-17">最小复现记录</h2>
+<h2 id="section-18">最小复现记录</h2>
 <p>记录源码/配置/知识/模型revision，实际输入、阶段、原响应、校验位置、有效部分、调用量、时间与资源。浏览器检查保存实际截图；HTTP脚本仅是脚本证据。学习内容来源可公开必要脱敏摘要，完整原始证据仍私有。</p>
 <p>普通回归：python -m unittest discover -s tests -v，离线不加载.env、不付费。冻结验收批次另有授权和停止条件，事前预期不进入模型消息。环境受限拒绝启动用工具审批，不重建环境或改权限绕过。</p>
-<h2 id="section-18">构建与进度排障</h2>
+<h2 id="section-19">构建与进度排障</h2>
 <p>先查实际命令/父子关系、日志尾、next_row、磁盘，再判断退出原因。没有日志证据就写未知，不猜断电/网络。仍有唯一写者时不另起；退出后从有效断点恢复，不能清库。发布有独立完成核验记录后才可考虑切换日常配置，此为历史阶段；2026-10-08经过独立装配、索引回查及空闲正常停服后，日常显式切换完整发布。</p>
-<h2 id="section-19">面试与最终练习</h2>
+<h2 id="section-20">面试与最终练习</h2>
 <p>练习：日常服务正常、学习站8770打不开，是否要重启审核？参考：不需要，查学习server/静态文件/端口，不干扰8765。练习：模型API成功但Git推不上，是否统一设置全局代理？参考：分别诊断，保持命令级及SSL。</p>
 <p>面试可说：“我把可运行代码、私有资料恢复和可复现结论分开，保留哈希/版本与失败。统一入口改善本机使用，但没有把单用户localhost部署宣称多用户生产平台。”</p>
-<h2 id="section-20">文档源码跨平台身份</h2>
+<h2 id="section-21">文档源码跨平台身份</h2>
 <p>Git可把Windows工作区CRLF检出为Linux LF；直接比较工作区原字节SHA会误报代码不同。学习站source-check同时保留原始文件SHA和明确source_text_lf_sha256（仅CRLF→LF，空格/代码不变）；CI按后者核查教学源码。真实Evidence、PDF和快照仍严格原字节/原文/版本哈希，不能套这个教学规则修改生产依据。首次远端CI失败保留，Git LF副本重现后修复，再核对CI，而不是取消来源校验。</p>
-<h2 id="section-21">2026-10-22 图路径与回退</h2>
+<h2 id="section-22">2026-10-22 图路径与回退</h2>
 <p>只在服务空闲时正常停服，再修改服务端编排配置并重启。临时回退可在单个PowerShell进程中设置<code>$env:POWERTRUST_EXECUTION_PATH=&#x27;sequential&#x27;</code>后按原命令启动；该值不改变全局环境。受管文件为data/runtime_local/orchestration.json，版本service-orchestration-v1、execution_path为合法枚举；删除候选默认配置并不等于删除任何运行数据。回退前后均核对健康、历史运行/反馈/回答版本及请求数，不通过恢复旧任务验证。</p>
 <p>默认是否已切换、真实付费完成数量及未验收项见本轮集成报告。完整发布库每个新进程保留首次字节SHA检查，不能以启动慢为由跳过或改成mtime认证。学习站由Markdown构建，20章和60折叠自测保持；不手工维护第二份HTML正文。</p>
 <p>当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-integration-v1/results-v1.md#" rel="noreferrer noopener">本轮集成报告</a>。</p>
-<h2 id="section-22">三道自测：先作答，再展开</h2>
-<h3 id="section-23">自测1：学习站启动是否要停8765？</h3>
+<h2 id="section-23">三道自测：先作答，再展开</h2>
+<h3 id="section-24">自测1：学习站启动是否要停8765？</h3>
 <details class="self-answer"><summary>展开参考答案1</summary><p>不需要；8770独立静态阅读。</p></details>
-<h3 id="section-24">自测2：Git网络与模型网络应统一代理吗？</h3>
+<h3 id="section-25">自测2：Git网络与模型网络应统一代理吗？</h3>
 <details class="self-answer"><summary>展开参考答案2</summary><p>应分别诊断，不盲套代理或关闭SSL。</p></details>
-<h3 id="section-25">自测3：唯一写者仍在运行能再启动吗？</h3>
+<h3 id="section-26">自测3：唯一写者仍在运行能再启动吗？</h3>
 <details class="self-answer"><summary>展开参考答案3</summary><p>不能；先核对进程/父子关系，保留原断点。</p></details>
-<h2 id="section-26">2026-10-08 完整库接入核对</h2>
+<h2 id="section-27">2026-10-08 完整库接入核对</h2>
 <p>完整有效分片FTS已独立发布并接入日常，旧prefix历史保留。新进程仍读取约70.85GB做全文件SHA，sidecar与库内封印严格一致；字节一致时复用发布时结构/FTS/成员核验，未发布fixture仍直接检查SQL。进程内_OPENED只记路径/知识及size/mtime_ns，变化拒绝；没有跨进程跳过SHA的缓存。命中原文、字符区间、哈希仍验证。首启约52秒，后续正常重启43.5秒；未清OS缓存，不能称物理冷机或稳定SLA。四主题FTS查询0.11–4.76秒，命中不等于回答正确。唯一概念任务双审完整而业务待补充，知识接入与审核适用性问题分开。当前接入记录见项目源码目录的 <code>docs/full-corpus-adoption-v1.md</code>。</p>
-<h2 id="section-27">2026-10-08 首版冻结补记</h2>
+<h2 id="section-28">2026-10-08 首版冻结补记</h2>
 <p>迁回旧电脑仅准备：先Git源码与重建环境，再一致性备份/校验复制完整发布库+manifest与旧知识版本，再运行反馈及监督实验、固定轻量模型。凭据与虚拟环境不打包，旧机自行填写.env并生成新本机会话。新路径只调整新配置，历史请求/哈希不批量改写。不重下载、不重建索引、不重训；具体空间和只读新增盘点见源码目录 <code>docs/return-migration-preparation-v1.md</code>。</p>
-<h2 id="section-28">2026-10-09 第二版定向补记</h2>
+<h2 id="section-29">2026-10-09 第二版定向补记</h2>
 <p>新电脑独立读站仅需GitHub冻结版本docs/learning/site/完整目录，打开index.html；不需.env、data、模型、数据库或业务.venv。服务/重建只需Python3.10+标准库、tools/__init__.py、tools/learning_site.py、docs/learning/及start-learning.cmd；启动器有现有.venv则复用，否则py -3/python，不创建环境或装依赖。python -m tools.learning_site serve --open --port 8770；build重建。源码检查另需tools/learning_checks.py及source-check.json引用的公开只读.py文件，不导入业务服务。同步清单见GitHub docs/learning-site-sync-v2.md，最终哈希按冻结Git引用/交付核对。</p>
-<h2 id="section-29">2026-10-28 v4未通过启用门槛</h2>
+<h2 id="section-30">2026-10-28 v4未通过启用门槛</h2>
 <p>候选尚未启用，条件服务烟测0次。真实首次Revision超时且usage未决，12链/四错修复/四对速度及正确保护尚不完整，不能以UI改善或S2初审发现替代整体门槛。没有本机配置切换、强停在途任务、历史POST重放或第二批；8765未由本轮操作，只有自建8766/8767回放已释放。</p>
 <p>UI和只读投影代码可以独立交付；当前服务未由本轮重启，完整后端投影需按原正常方式重载本分支代码。类默认schema13/baseline保留，未擅自启用候选或改master。因不准入而未执行部署及回退，不应虚构回退已验证或“已启用可使用”。</p>
-<h2 id="section-30">2026-10-28 v5：可继续独立槽，不降低启用门槛</h2>
+<h2 id="section-31">2026-10-28 v5：可继续独立槽，不降低启用门槛</h2>
 <p>最多一次安全释放未决的授权只用于实验：请求照扣数、实际用量费用未知，第二次停全批；真实50请求全有usage，未知分支由真实线程入口离线模拟验证。17专项20.871秒、1425全套503.019秒、实际库8路径/8读取及最终12归档普通读取通过。合成后审不是模型成绩，先前夹具失败保留。</p>
 <p>11/12完整、四错仅3/4修复、四对速度不可评，候选不启用，烟测0；没有重启/强停用户服务、回退动作或第二批。沿用v4 UI与实际桌面/390回放证据，本轮无UI变更；schema13/baseline默认保留。完成归档推送后停止，不自动再实验。</p>
-<h2 id="section-31">2026-10-28 v6：候选仍未启用</h2>
+<h2 id="section-32">2026-10-28 v6：候选仍未启用</h2>
 <p>完整性6/10、严格闭环修复2/5失败，候选关闭、切换0、烟测0，无补槽/第二批；用户服务未重启或强停，schema13/baseline默认保持。1433离线496.107秒、22专项10.112秒、真实库10路径/10读取及实际14归档重读通过，不把离线合成重审充真实质量。</p>
 <p>隔离8776当前UI回放实际归档：S2未完整无绿标、S7末稿单绿标、历史v1隔离、来源定位与Enter选历史通过，390文档宽375且正文不盖页脚。复制反馈出现，但IAB剪贴板读取空，未独立确认系统剪贴板往返；离线客户端复制/Unicode回归通过。两次简记夹具404保留，规范manifest后可读；已释放自建端口/标签、重置viewport，不公开私有截图。完成定向推送/CI后停止。</p>
-<h2 id="section-32">2026-10-29 v7：两项改进均未在本机启用</h2>
+<h2 id="section-33">2026-10-29 v7：两项改进均未在本机启用</h2>
 <p>A无稳定收益、等价第三路径未实现，B候选0/10完整、0/5修复，分别未准入；无SQL/审核切换、无用户服务重启/强停、烟测0、不补槽或第二批。开始时8765无health、运行库无queued/running；没有冒称服务保持运行或已启用可用。已有GUI成果保留，本轮无新UI/浏览器验收主张。</p>
-<p>1448全套487.711秒、35专项7.527秒、真实库十路径/十离线读取及十实际归档普通重读通过；合成后审不作模型成绩。新批次每链20/总200请求、350万已知usage阈值及最多一次安全释放未知保持，实际30次643777token/未知0，旧pending10不改；独立烟测20/30万额度未用。用户未提交材料和所有历史失败保留，分项推送/CI核对后停止。</p></article><footer><a href="17-interview.html">← 17 深入面试、公式和代码练习</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">稳定候选启动验收（2026-10-29）</a><a href="#section-3">v6产品页与GitHub检查排障</a><a href="#section-4">2026-10-27只读服务检查与轮询收敛</a><a href="#section-5">2026-10-27工作循环故障的运维边界</a><a href="#section-6">2026-10-27工程维护补记</a><a href="#section-7">最小复现先隔离接口，再检查业务</a><a href="#section-8">上一严格载体批次的停止与回退</a><a href="#section-9">Beta与显式回退</a><a href="#section-10">实际接入没有完成时</a><a href="#section-11">公共请求边界：额度、故障与纠正</a><a href="#section-12">三种入口，互不打断</a><a href="#section-13">环境与资源</a><a href="#section-14">迁移需要证明什么</a><a href="#section-15">Git与命令级网络</a><a href="#section-16">按错误层次排障</a><a href="#section-17">最小复现记录</a><a href="#section-18">构建与进度排障</a><a href="#section-19">面试与最终练习</a><a href="#section-20">文档源码跨平台身份</a><a href="#section-21">2026-10-22 图路径与回退</a><a href="#section-22">三道自测：先作答，再展开</a><a href="#section-23">自测1：学习站启动是否要停8765？</a><a href="#section-24">自测2：Git网络与模型网络应统一代理吗？</a><a href="#section-25">自测3：唯一写者仍在运行能再启动吗？</a><a href="#section-26">2026-10-08 完整库接入核对</a><a href="#section-27">2026-10-08 首版冻结补记</a><a href="#section-28">2026-10-09 第二版定向补记</a><a href="#section-29">2026-10-28 v4未通过启用门槛</a><a href="#section-30">2026-10-28 v5：可继续独立槽，不降低启用门槛</a><a href="#section-31">2026-10-28 v6：候选仍未启用</a><a href="#section-32">2026-10-29 v7：两项改进均未在本机启用</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<p>1448全套487.711秒、35专项7.527秒、真实库十路径/十离线读取及十实际归档普通重读通过；合成后审不作模型成绩。新批次每链20/总200请求、350万已知usage阈值及最多一次安全释放未知保持，实际30次643777token/未知0，旧pending10不改；独立烟测20/30万额度未用。用户未提交材料和所有历史失败保留，分项推送/CI核对后停止。</p></article><footer><a href="17-interview.html">← 17 深入面试、公式和代码练习</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">十题真实产品案例接续</a><a href="#section-3">稳定候选启动验收（2026-10-29）</a><a href="#section-4">v6产品页与GitHub检查排障</a><a href="#section-5">2026-10-27只读服务检查与轮询收敛</a><a href="#section-6">2026-10-27工作循环故障的运维边界</a><a href="#section-7">2026-10-27工程维护补记</a><a href="#section-8">最小复现先隔离接口，再检查业务</a><a href="#section-9">上一严格载体批次的停止与回退</a><a href="#section-10">Beta与显式回退</a><a href="#section-11">实际接入没有完成时</a><a href="#section-12">公共请求边界：额度、故障与纠正</a><a href="#section-13">三种入口，互不打断</a><a href="#section-14">环境与资源</a><a href="#section-15">迁移需要证明什么</a><a href="#section-16">Git与命令级网络</a><a href="#section-17">按错误层次排障</a><a href="#section-18">最小复现记录</a><a href="#section-19">构建与进度排障</a><a href="#section-20">面试与最终练习</a><a href="#section-21">文档源码跨平台身份</a><a href="#section-22">2026-10-22 图路径与回退</a><a href="#section-23">三道自测：先作答，再展开</a><a href="#section-24">自测1：学习站启动是否要停8765？</a><a href="#section-25">自测2：Git网络与模型网络应统一代理吗？</a><a href="#section-26">自测3：唯一写者仍在运行能再启动吗？</a><a href="#section-27">2026-10-08 完整库接入核对</a><a href="#section-28">2026-10-08 首版冻结补记</a><a href="#section-29">2026-10-09 第二版定向补记</a><a href="#section-30">2026-10-28 v4未通过启用门槛</a><a href="#section-31">2026-10-28 v5：可继续独立槽，不降低启用门槛</a><a href="#section-32">2026-10-28 v6：候选仍未启用</a><a href="#section-33">2026-10-29 v7：两项改进均未在本机启用</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

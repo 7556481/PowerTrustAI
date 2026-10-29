@@ -6,7 +6,7 @@
 
 输入问题 → 先阅读初稿 → 等待自动审核 → 查看结果与引用依据。出现修订时可切换原回答与修订后版本；历史按需打开。令牌连接、已有回答审核、工程背景、逐项发现、NLI、轨迹及追加反馈统一放在独立诊断页。
 
-当前整理分支为 `codex/stable-product-baseline-v1`，**仍为待验收候选，尚未发布到默认分支**。完整离线回归及真实入口启动已通过；UI剩余验收与十题真实基线尚未完成。见[验收状态](docs/maintenance/stable-product-baseline-v1.md)与[操作清单](docs/stable-operation-checklist.md)。
+当前整理分支为 `codex/stable-product-baseline-v1`，**仍为待验收候选，尚未发布到默认分支**。完整离线回归、真实入口启动及UI缺项补验已通过；十题真实基线已完成：6题审核执行完整，2题较可用但仍需限定，4题部分帮助、3题未回答、1题关键条件错误。见[十题结果](docs/evaluation/stable-product-baseline-v1/report.md)。见[验收状态](docs/maintenance/stable-product-baseline-v1.md)与[操作清单](docs/stable-operation-checklist.md)。
 
 ![新版用户主页；合成演示，仅展示交互](docs/assets/user-ui-v6-desktop.png)
 

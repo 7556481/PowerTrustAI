@@ -1,5 +1,9 @@
 # 18 环境、启动、Git、迁移与排障
 
+## 十题真实产品案例接续
+
+十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；首稿观测2.73～12.34秒，结束19.05～95.56秒。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/evaluation/stable-product-baseline-v1/report.md)。UI四缺项本轮已用原合成夹具补验通过，旧工具失败保留。
+
 ## 稳定候选启动验收（2026-10-29）
 
 一键入口 `start-powertrustai.cmd --demo` 走原合成夹具；不带参数走真实受管服务。当前候选不是默认分支发布。1454离线通过及真实入口ready只证明工程阶段，浏览器修订/证据/390/键盘验收尚缺，十题真实基线未发送，不能用合成绿标代替语义收益。进程级库封印与每题检索分别计时；本轮精确启动秒数未知。完整边界及失败见[稳定候选报告](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/maintenance/stable-product-baseline-v1.md)，操作见[清单](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/stable-operation-checklist.md)。
