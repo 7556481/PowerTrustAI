@@ -1,27 +1,47 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 API、UI、队列、SQLite与本机会话 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 09c6b9876237 · learning-site-v5.3-default-ci-source-repair,2026-10-27 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">10 API、UI、队列、SQLite与本机会话</h1>
-<h2 id="section-2">工具参数的原义与审计</h2>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>10 API、UI、队列、SQLite与本机会话 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 308a4b8f010d · learning-site-v6.18 selective MATCH v1 performance gate failed and not adopted,2026-10-29 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">10 API、UI、队列、SQLite与本机会话</h1>
+<h2 id="section-2">正文审核标注：定位与判断分开（v7）</h2>
+<p>标注只读已保存结果，不改答案或发现。backend/answer_annotations.py先核对answer_id/answer_version及逐字text和Python字符区间；旧记录只有原文时必须唯一逐字出现。错误offset不回退到搜索，重复原文、改述proposition、缺版本均不猜位置。旧提取器的Claim可从同一已保存回答/审核轮次恢复；引用意见由review_bindings关联已保存审核身份。没有正文锚点的任务级工程前提留未定位摘要。</p>
+<p>浏览器inline_review.js用Array.from按Unicode码点切片，再核对身份、区间与原文。重叠区间分段为非嵌套mark，同区间事实/引用意见合为一个入口，各自理由保留。复制仍把所选保存版本的原text传给writeText，标记/原因不进入正文。依据不足浅黄、与依据冲突浅红并标明审核判断；不能从颜色推断真伪。审核中/未完成不预标问题，历史版本明确不叠加最新意见；无高亮不表示通过。</p>
+<p>Enter、焦点或点击文字/摘要打开就近原因卡，Esc/关闭返回标注；旧任务/版本切换销毁旧卡，不增加请求调度器。只有实际保存修订记录且正文改变才说已有修订；同文新版本不称改好。当前仅显示最终版本标注，历史逐轮意见仍在诊断页。合成演示入口<code>python -m tools.ui_inline_fixture_v7 --port 8766</code>，建立会话后从历史选择“正文标注 · 同句双意见”。这不是重新审核用户问题，也不证明发现正确。</p>
+<h2 id="section-3">用户主页与独立诊断页（v6）</h2>
+<p>默认主页只提交概念/资料解释问题，先展示初稿，再显示实际审核终态；引用按钮按所选版本回查原文。历史通过顶部入口按需读取，不再固定在右栏。背景、工程范围、用户参考和已有回答表单仅由独立diagnostics.html及diagnostic_input.js提供；主页不挂载这些DOM，也不读取其表单字段。</p>
+<p>两页共用app.js的鉴权、epoch归属、提交锁与轮询机制。诊断页保留原逐项发现、NLI、轨迹、完整证据和版本绑定反馈；主页不请求这些辅助端点。任务ID仅以hash传入诊断页，查询参数仍拒绝；诊断静态壳可读不代表运行API公开，运行数据仍需同源有效会话。手动服务检查位于连接小菜单，仍只GET，不解锁未知POST。服务故障与保存未确认提示始终可见。</p>
+<h2 id="section-4">2026-10-27服务拒单与历史读取的前端边界</h2>
+<p>连接成功不等于可接单。前端保存最近已确认health，明确accepting_work=false、配置/存储未就绪、队列满时禁新提交；提交前再GET核查，拒单时POST为0。核查后竞态仍以实际503/429为准，不自动重试。历史刷新、按ID查询、版本复制和证据回查独立保留，是否可读以实际GET为准；存储允许时反馈仍可追加，不改原审核。</p>
+<p>pending_terminal_status=interrupted且persistence_confirmed=false明确显示“服务已停止处理此任务，中断状态尚未确认保存”。数据库原status及pending字段在只读详情保留，不客户端改写为已落库中断；主状态和必要辅助读取后按原有有界机制收敛。仅service_fault_code不停止仍真实running任务。已存结果、版本、业务处置不因服务故障改判，元数据未确认与答案是否可读分别说明。服务检查只GET /health，不认证、不恢复未知POST锁、不启动或重放任务。</p>
+<h2 id="section-5">2026-10-27后端生命周期与无实质回答</h2>
+<p>服务ready必须同时满足配置、可读存储与存活且可接单的worker。资源drain/close故障触发独立生命周期故障，health degraded、新POST 503；队列等待任务在可写时落interrupted/SERVICE_LIFECYCLE_FAILED，不自动执行或重放。存储写失败则persistence_confirmed=false及pending_terminal_status=interrupted，不能把内存处置称落库成功。当前已保存答案/report/版本/发现不因收尾故障改写；普通组件单任务失败且资源清理正常，下一任务仍可执行。计时退出、资源尝试、queue.task_done与active清理各自收尾。</p>
+<p>合法无实质回答只有正常finished、最终结果已存、实际Harness needs_information及NO_SUBSTANTIVE_ANSWER完整处置且生成无错误时，required_stages_complete=true；all_required_checks_assessed=false，substantive_audit_status=not_applicable，仍待补充，不是pass。生成失败、生成后中断和只有快照时仍不完整；冻结快照中的旧处置不重写。普通完整双审与部分审核失败沿原义。两个执行路径sequential/langgraph_v1均有Service/Harness/Store/API反例验证。</p>
+<h2 id="section-6">2026-10-27慢辅助读取隔离</h2>
+<p>v2失败暂停不能解决“尚未失败的慢请求”。v3仍单一主state/result周期和唯一1800ms调度，但NLI/trace/reviews独立slot，各最多1在途，手动刷新最多排1次；旧epoch/revision结果丢弃，切换/离页取消GET。终态轨迹/反馈最后收敛，NLI pending最多10次终态检查后提示手动恢复。反馈保存推进reviews revision，复用slot回读，不与旧列表争写。POST不重试、草稿归属不变；同内容轨迹/反馈只跳过DOM重建，不缓存响应。</p>
+<h2 id="section-7">2026-10-27反馈归属与读取容错补记</h2>
+<p>反馈正文、动作、来源和版本/finding绑定只在页面Map里按run_id保存，切换后恢复前再次核对；失效绑定要求重选，不存浏览器长期记忆。成功只清除提交以来未改变的那份草稿，受理未知保留且不重发。主state/result与辅助NLI/trace/reviews分开处理；某辅助项失败后本任务自动暂停该项，主运行仍轮询，手动“查询状态”恢复。相同回答视图和反馈选项不重复构建，避免轮询打断操作。</p>
+<p>Store.require_run只检查存在，state_row只读元数据/config及结果存在标志，get仍用于完整对象恢复；无迁移、缓存或历史重写。固定约4.06MiB临时数据库、正常及约1MiB正文/依据结果，预热1次/测量5次：大样本state中位11.755→0.064ms，result77.004→21.067ms，trace12.415→0.026ms，reviews13.123→0.024ms；SQL次数仍1/8/2/2，JSON解析4/22/4/4→1/7/0/0。小样本state0.126→0.169ms无提速，不掩盖；这些不是模型或检索的速度结论。详见docs/maintenance/read-path-feedback-polish-v2.md。</p>
+<h2 id="section-8">2026-10-27工程维护补记</h2>
+<p>本轮工程维护只为鉴权后的历史列表增加question_summary（压空白、最多120字符），不返回完整request/config、不改Store schema或旧对象。旧服务没有此字段时客户端回退到模式名。UI读取按任务epoch与请求身份丢弃过期结果，不重发POST；这不提高事实判断能力。</p>
+<h2 id="section-9">工具参数的原义与审计</h2>
 <p>标准库HTTP先解析响应信封，保留arguments字符串，既有strict_json再检查参数中的重复键。不得让SDK提前解析成字典后只剩最后一个同名键。严格Schema文档未列null，本轮只在objection/repair使用__NULL__传输标记并精确还原业务None；unknown、布尔和对象不改。可识别原参数、调用ID、结束和用量保留；无法安全识别时明确记缺口，不保存完整失败响应作为兜底。</p>
-<h2 id="section-3">2026-10-24 新wire与旧投影的语义兼容</h2>
+<h2 id="section-10">2026-10-24 新wire与旧投影的语义兼容</h2>
 <p>【真实失败】scope_v2的A2关系模型判断保留，但source_condition与answer_condition均空、required=true，旧投影按“必要条件没有正文”降级。它把主语—结论关系误装成必要条件义务。新合同需单独表达无额外条件，且新投影绕开旧空引用路径；不能仅修改提示后继续调用旧派生规则。原始、有效和最终处置都保存，旧记录不迁移。</p>
 <p>【真实失败的教学变体】源文说双方不应过度依赖，回答忠实复述。没有条件短语，是否应为了通过旧门禁填入一个相近的条件？</p>
 <details class="self-answer"><summary>展开新增练习解析</summary><p>不应。那会补造语义或依据。模型应明确判断是否无额外条件，程序按独立的新投影处理；若三维声明冲突，应记录原因并保留复核，不能借保守降级掩盖合同不兼容。</p></details>
-<h2 id="section-4">2026-10-24 审核链v2实证更新</h2>
-<p>本批真实运行通过隔离小型SQLite及现有Store/Factory执行，未启动生产或常驻候选服务。8765前后未监听，不能报告ready。生产历史四表104/2278/2999/8不变，379冻结源码及旧212消息响应身份核对通过；新版、原版、有效同伴与无效尝试均保留。离线API贯通与真实HTTP验收必须分开。 <a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#" rel="noreferrer noopener">完整预测、理由和成本</a>。</p>
+<h2 id="section-11">2026-10-24 审核链v2实证更新</h2>
+<p>本批真实运行通过隔离小型SQLite及现有Store/Factory执行，未启动生产或常驻候选服务。8765前后未监听，不能报告ready。生产历史四表104/2278/2999/8不变，379冻结源码及旧212消息响应身份核对通过；新版、原版、有效同伴与无效尝试均保留。离线API贯通与真实HTTP验收必须分开。 <a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/production-review-net-benefit-v2/report.md#" rel="noreferrer noopener">完整预测、理由和成本</a>。</p>
 <p>本轮实际结果：A8/G4/B8固定批次106请求、1126972token，5条审核执行不完整；候选仅A4进入新修订提示，原版也纠正且没有目标历史叙述，自然8路正文不变。未证明候选净收益，不采用生产；N-1/N-2条件外推和原引用跨单元缺口疑点保留。实际8765保持原停服，无常驻候选。</p>
-<h2 id="section-5">2026-10-24 候选配置与采集边界</h2>
+<h2 id="section-12">2026-10-24 候选配置与采集边界</h2>
 <p>ServiceConfig.revision_answer_delivery和Factory清单显式记录修订正文提示候选，旧记录不迁移；页面仍按已保存版本、完整阶段及政策处置展示，不因候选提示或modified动作把未认可草稿显示为通过。候选的真实Factory/图路径/Store/API离线夹具验证包含两版本与失败；本轮未重新设计UI，也不把离线/API检查说成新浏览器验收。</p>
-<p>本批使用独立小型运行库，SQLite连接在所属事件循环创建、使用、关闭；复用saved_result另开显式关闭只读连接收集，Windows临时文件释放及响应/最终存储失败后停止已演练。旧生产库/历史attempt不修改、不复制。实际服务状态以<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#" rel="noreferrer noopener">本轮报告</a>为准，旧章节ready是当时状态。</p>
-<h2 id="section-6">2026-10-23 事实审核内部流程候选</h2>
+<p>本批使用独立小型运行库，SQLite连接在所属事件循环创建、使用、关闭；复用saved_result另开显式关闭只读连接收集，Windows临时文件释放及响应/最终存储失败后停止已演练。旧生产库/历史attempt不修改、不复制。实际服务状态以<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#" rel="noreferrer noopener">本轮报告</a>为准，旧章节ready是当时状态。</p>
+<h2 id="section-13">2026-10-23 事实审核内部流程候选</h2>
 <p>候选服务使用原Factory、worker、Store和API；新增受服务配置控制的premise_declarations，声明只能精确绑定当前question/user_context。FactFlowOutput单独保存object_reviews与flow_trace，API的fact_internal_flow展示两轴异议和节点诊断。旧记录继续可读。服务manifest记录实际候选prompt/contract，不把schema13数字等同本次实际协议。</p>
-<p>完整材料见<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md#" rel="noreferrer noopener">候选报告</a>。生产未切换，本轮0真实调用。</p>
-<p>2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#" rel="noreferrer noopener">后续验收</a>。下文2026-10-22及更早状态保留历史含义，以本补记为当前。</p>
-<h2 id="section-7">服务与浏览器的分工</h2>
+<p>完整材料见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v1/README.md#" rel="noreferrer noopener">候选报告</a>。生产未切换，本轮0真实调用。</p>
+<p>2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#" rel="noreferrer noopener">后续验收</a>。下文2026-10-22及更早状态保留历史含义，以本补记为当前。</p>
+<h2 id="section-14">服务与浏览器的分工</h2>
 <p>浏览器提交普通问题和配置选择，不能传入模型本机路径或DeepSeek密钥。API验证结构、同源和身份，ApplicationService创建run并排队，UI读取状态、答案与详情。模型profile、解释器和固定知识库只由服务端配置。页面不自行拼接另一个调度器。</p>
 <p>日常统一python -m backend和start-powertrustai.cmd，默认8765。临时验证端口与独立数据库属于不同服务，浏览器记忆按origin隔离；历史反复手输令牌曾因验证目录各生不同令牌和内存连接刷新丢失，不是固定文件每次重启都轮换。</p>
-<h2 id="section-8">队列和单活动运行</h2>
+<h2 id="section-15">队列和单活动运行</h2>
 <p>ApplicationService.submit先保存请求/config，有限等待队列由worker逐运行执行。这样单运行的预算和模型生命周期可管理；队列满明确返回错误。收到run_id说明接受任务，不说明模型已经成功。轮询GET不会自动重复POST。</p>
 <p>客户端“POST已发出但响应丢失”是未知提交状态。不能自动重发，因为服务可能已接收并产生付费请求。前端防重复提交是当前页保护，不是通用服务端幂等键。历史查询、刷新和重启不补算旧诊断或重发模型请求。</p>
-<h2 id="section-9">两类SQLite和WAL</h2>
+<h2 id="section-16">两类SQLite和WAL</h2>
 <p>运行库存请求、配置、stage_output、对象、结果和追加反馈；知识库存原文、文档版本、知识成员和片段；全文构建库独立处理大语料。不要把所有DB都叫“知识库”，更不能让审阅ZIP带完整运行库。</p>
 <p>RunStore.tx用BEGIN IMMEDIATE、commit/rollback短事务。HTTP/模型等待发生在事务外，observer完成一个事件后保存。WAL允许读者读取一致快照并协调单写者，不等于多写者并行。WAL/SHM是运行中辅助文件，迁移不直接复制旧WAL代替一致备份。</p>
 <pre><code class="language-python"><span class="comment"># 教学构造：请求期间不占长写事务</span>
@@ -31,26 +51,29 @@ result = <span class="keyword">await</span> remote_model_call()
 <span class="keyword">with</span> transaction():
     save_stage_result(result)</code></pre>
 <p>真正实现看backend/store.py和service.py。异常持久化需要记录RUN_STORAGE_FAILED，不能在内存算完就谎称已保存。对象索引绑定run_id/answer_id/version，反馈追加而不覆盖旧结果。</p>
-<h2 id="section-10">取消和重启</h2>
+<h2 id="section-17">取消和重启</h2>
 <p>排队任务取消与活动任务取消不同。活动任务合作式中断、等待底层资源drain；不能通过UI显示“已取消”保证网络对端不收费。RunStore.recover把上次queued/running变interrupted，不自动重新执行。服务重启后查询同run_id应返回原结果及调用量，历史Evidence按原知识版本回查。</p>
 <p>测试时比较原结果和快照哈希、诊断ID/输入/结果、请求数及引用文本，排除只比较页面标签的假恢复。展示投影可以另版改善中文说明，但不能回填旧语义判断。</p>
-<h2 id="section-11">访问令牌与本机会话</h2>
+<h2 id="section-18">访问令牌与本机会话</h2>
 <p>本机访问令牌控制API，DeepSeek密钥控制远程模型，二者不同。固定令牌文件存在复用，普通重启和模型配置切换不轮换。一次性引导机制让本机启动器兑换HttpOnly会话，长期令牌不进入URL；引导票据短期/单次，与长期密钥分开。普通刷新/重启复用会话；高级手动连接及主动记忆保留。</p>
 <p>原连接记忆默认不勾选，选择后按当前origin保存本机令牌，取消或忘记清除；401使失效记忆和连接失效，不自动重发真实任务。自动会话与旧主动记忆是迁移兼容，不叠加两套互相冲突的授权。浏览器永远不保存DeepSeek密钥。</p>
-<h2 id="section-12">安全显示不是隐藏业务错误</h2>
+<h2 id="section-19">安全显示不是隐藏业务错误</h2>
 <p>UI使用textContent和安全链接投影，原文中&lt;script&gt;不能执行。长ID、轨迹、NLI和JSON折叠，答案、处置和关键原因先显示。字段路径是JSON诊断位置，不能误当本机私有路径删除；真正凭据、请求头和私有文件路径应隔离。</p>
 <p>不同claim/answer版本不能合并“最终supported数量”当正确率。NLI只显示旁路诊断，logits/softmax不升级主结论。用户反馈绑定具体对象、来源保留AI辅助用户监督，不自动训练。</p>
-<h2 id="section-13">验证与面试追问</h2>
+<h2 id="section-20">验证与面试追问</h2>
 <p>练习：为一次模型等待30秒设计存储事务。参考：接收短事务→异步执行→阶段短事务，别BEGIN后等30秒。追问：WAL能解决所有锁吗？不能，仍单写者；长事务、多个进程和读后升级会锁冲突。</p>
 <p>面试可说：“API只接收任务，服务管理队列和生命周期，observer短事务持久化。重启中断不自动重发，GET历史只读。我保留同源鉴权，通过本机会话改善体验，没有删掉访问保护。”</p>
-<h2 id="section-14">核心审核修复v1的当前边界</h2>
+<h2 id="section-21">核心审核修复v1的当前边界</h2>
 <p>已有回答未认可时显示原回答/待审核原文，危险建议显示禁止采用和来源警告；原值不删，不将最后版本默认叫审核认可。GET旧记录不补算新版安全判断。</p>
-<h2 id="section-15">2026-10-22 编排身份与历史兼容</h2>
+<h2 id="section-22">2026-10-22 编排身份与历史兼容</h2>
 <p>Factory manifest、状态/API保存execution_path合法枚举；它是运行时选择，不是本地文件路径，也不公开诊断文件或凭据。新增配置不迁移旧结果、Evidence、版本和反馈，旧记录按既有原编排解释。重启恢复只把未完成任务标中断，不重新入队。小型验收运行库与日常库分开，二者复用同一不可变知识库，不复制70.8GB发布库。</p>
-<h2 id="section-16">三道自测：先作答，再展开</h2>
-<h3 id="section-17">自测1：页面按钮锁等于服务端幂等吗？</h3>
+<h2 id="section-23">三道自测：先作答，再展开</h2>
+<h3 id="section-24">自测1：页面按钮锁等于服务端幂等吗？</h3>
 <details class="self-answer"><summary>展开参考答案1</summary><p>不等；多页或响应丢失仍可能重复提交，所以不自动重POST。</p></details>
-<h3 id="section-18">自测2：WAL允许多个同时写事务吗？</h3>
+<h3 id="section-25">自测2：WAL允许多个同时写事务吗？</h3>
 <details class="self-answer"><summary>展开参考答案2</summary><p>不允许；仍需单写者/短事务协调。</p></details>
-<h3 id="section-19">自测3：重启查询是否重发模型？</h3>
-<details class="self-answer"><summary>展开参考答案3</summary><p>不；读原记录，未完任务标interrupted。</p></details></article><footer><a href="09-engineering-tools.html">← 09 工程审核、有限工具与两种缺口</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">工具参数的原义与审计</a><a href="#section-3">2026-10-24 新wire与旧投影的语义兼容</a><a href="#section-4">2026-10-24 审核链v2实证更新</a><a href="#section-5">2026-10-24 候选配置与采集边界</a><a href="#section-6">2026-10-23 事实审核内部流程候选</a><a href="#section-7">服务与浏览器的分工</a><a href="#section-8">队列和单活动运行</a><a href="#section-9">两类SQLite和WAL</a><a href="#section-10">取消和重启</a><a href="#section-11">访问令牌与本机会话</a><a href="#section-12">安全显示不是隐藏业务错误</a><a href="#section-13">验证与面试追问</a><a href="#section-14">核心审核修复v1的当前边界</a><a href="#section-15">2026-10-22 编排身份与历史兼容</a><a href="#section-16">三道自测：先作答，再展开</a><a href="#section-17">自测1：页面按钮锁等于服务端幂等吗？</a><a href="#section-18">自测2：WAL允许多个同时写事务吗？</a><a href="#section-19">自测3：重启查询是否重发模型？</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<h3 id="section-26">自测3：重启查询是否重发模型？</h3>
+<details class="self-answer"><summary>展开参考答案3</summary><p>不；读原记录，未完任务标interrupted。</p></details>
+<h2 id="section-27">2026-10-28 v4普通原因投影与状态收敛</h2>
+<p>真实最终完整pass才在回答标题旁显示一次绿色“通过”；未完成、无实质回答、待补充、待核实和历史错版不借用绿标。原业务decision不改。backend/user_review.py只读消费已知版本的附载、保留自然原因，坏/未知附载回退诊断提示，不粗暴删公式花括号；原始元数据继续保存在诊断与归档。</p>
+<p>相同角色/版本/核验区间/类型/原因/来源精确去重并保留原ID集合，同句不同意见、冲突和来源保留。一般工程能力说明移到检查范围，实质任务缺口仍显示，概念范围不再误报缺输入。两条实际归档回放从5张重复卡收敛为2种意见；390宽375无横溢，原因卡在正常文档流内不盖页脚。复制仍用原text，键盘、来源、版本和旧响应隔离有回归。用户8765未重启，新后端投影需正常重载本分支代码，推送不等于候选启用。</p></article><footer><a href="09-engineering-tools.html">← 09 工程审核、有限工具与两种缺口</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">正文审核标注：定位与判断分开（v7）</a><a href="#section-3">用户主页与独立诊断页（v6）</a><a href="#section-4">2026-10-27服务拒单与历史读取的前端边界</a><a href="#section-5">2026-10-27后端生命周期与无实质回答</a><a href="#section-6">2026-10-27慢辅助读取隔离</a><a href="#section-7">2026-10-27反馈归属与读取容错补记</a><a href="#section-8">2026-10-27工程维护补记</a><a href="#section-9">工具参数的原义与审计</a><a href="#section-10">2026-10-24 新wire与旧投影的语义兼容</a><a href="#section-11">2026-10-24 审核链v2实证更新</a><a href="#section-12">2026-10-24 候选配置与采集边界</a><a href="#section-13">2026-10-23 事实审核内部流程候选</a><a href="#section-14">服务与浏览器的分工</a><a href="#section-15">队列和单活动运行</a><a href="#section-16">两类SQLite和WAL</a><a href="#section-17">取消和重启</a><a href="#section-18">访问令牌与本机会话</a><a href="#section-19">安全显示不是隐藏业务错误</a><a href="#section-20">验证与面试追问</a><a href="#section-21">核心审核修复v1的当前边界</a><a href="#section-22">2026-10-22 编排身份与历史兼容</a><a href="#section-23">三道自测：先作答，再展开</a><a href="#section-24">自测1：页面按钮锁等于服务端幂等吗？</a><a href="#section-25">自测2：WAL允许多个同时写事务吗？</a><a href="#section-26">自测3：重启查询是否重发模型？</a><a href="#section-27">2026-10-28 v4普通原因投影与状态收敛</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

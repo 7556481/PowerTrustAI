@@ -1,35 +1,68 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14 核心源码阅读路线：输入、调用、异常与取舍 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 09c6b9876237 · learning-site-v5.3-default-ci-source-repair,2026-10-27 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">14 核心源码阅读路线：输入、调用、异常与取舍</h1>
-<h2 id="section-2">本轮真实验证边界</h2>
-<p>【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-contract-simple-v1/report.md#" rel="noreferrer noopener">完整响应、依据与版本边界</a>。</p>
-<h2 id="section-3">2026-10-24 简化合同与投影的源码入口</h2>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>14 核心源码阅读路线：输入、调用、异常与取舍 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI：从代码到判断的学习路线</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a></nav><main><div class="version">源码基线 308a4b8f010d · learning-site-v6.18 selective MATCH v1 performance gate failed and not adopted,2026-10-29 · 教学示例与真实结果分别标记</div><article><h1 id="section-1">14 核心源码阅读路线：输入、调用、异常与取舍</h1>
+<h2 id="section-2">v7只读标注源码路线</h2>
+<p>先读backend/answer_annotations.py的identity/locate/project：身份与逐字核验先于展示，同句意见只合入口，不合后台记录。backend/presentation.py保留原解释字段并追加inline_review；backend/service.py仅投影已保存审核身份，不重执行、不落库。再读backend/static/inline_review.js的model/render，检查Array.from码点切片、重叠分段、纯文本节点、复制原文和历史版本隔离。app.js保持原epoch/轮询/反馈机制。tests/test_answer_annotations_v7.py与tests/ui_inline_review_probe.js覆盖坏区间、重复句、版本/原文不符、emoji/CRLF、同句两来源、重叠、原文复制及关闭焦点。</p>
+<p>下列两个片段从本轮实际AST摘录；只展示定位入口及精确核验，不代表整个函数。源码身份见source-check/source-version，不能把安全定位说成审核语义正确。</p>
+<h3 id="section-3">精确标注入口：identity</h3>
+<p>backend/answer_annotations.py实际行6–10，完整函数。</p>
+<pre><code class="language-python"><span class="keyword">def</span> identity(obj, answer):
+    <span class="keyword">return</span> (bool(answer.get(<span class="string">&#x27;answer_id&#x27;</span>)) <span class="keyword">and</span> type(answer.get(<span class="string">&#x27;version&#x27;</span>)) <span class="keyword">is</span> int
+            <span class="keyword">and</span> obj.get(<span class="string">&#x27;answer_id&#x27;</span>) == answer[<span class="string">&#x27;answer_id&#x27;</span>]
+            <span class="keyword">and</span> type(obj.get(<span class="string">&#x27;answer_version&#x27;</span>)) <span class="keyword">is</span> int
+            <span class="keyword">and</span> obj[<span class="string">&#x27;answer_version&#x27;</span>] == answer[<span class="string">&#x27;version&#x27;</span>])</code></pre>
+<h3 id="section-4">精确标注入口：locate</h3>
+<p>backend/answer_annotations.py实际行13–28，部分函数。</p>
+<pre><code class="language-python"><span class="keyword">def</span> locate(answer, binding):
+    <span class="string">&quot;&quot;&quot;Explicit invalid offsets never fall back to text search.&quot;&quot;&quot;</span>
+    <span class="keyword">if</span> <span class="keyword">not</span> identity(binding, answer):
+        <span class="keyword">return</span> <span class="keyword">None</span>, <span class="string">&#x27;缺少或不符的回答版本绑定&#x27;</span>
+    text = answer.get(<span class="string">&#x27;text&#x27;</span>)
+    original = binding.get(<span class="string">&#x27;text&#x27;</span>)
+    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(text, str) <span class="keyword">or</span> <span class="keyword">not</span> isinstance(original, str) <span class="keyword">or</span> <span class="keyword">not</span> original:
+        <span class="keyword">return</span> <span class="keyword">None</span>, <span class="string">&#x27;缺少逐字原文；不能使用改述主张定位&#x27;</span>
+    start, end = binding.get(<span class="string">&#x27;start_offset&#x27;</span>), binding.get(<span class="string">&#x27;end_offset&#x27;</span>)
+    <span class="keyword">if</span> <span class="string">&#x27;start_offset&#x27;</span> <span class="keyword">in</span> binding <span class="keyword">or</span> <span class="string">&#x27;end_offset&#x27;</span> <span class="keyword">in</span> binding:
+        <span class="keyword">if</span> (type(start) <span class="keyword">is</span> int <span class="keyword">and</span> type(end) <span class="keyword">is</span> int <span class="keyword">and</span> <span class="number">0</span> &lt;= start &lt; end &lt;= len(text)
+                <span class="keyword">and</span> text[start:end] == original):
+            <span class="keyword">return</span> (start, end, original, <span class="string">&#x27;saved_offset&#x27;</span>), <span class="keyword">None</span>
+        <span class="keyword">return</span> <span class="keyword">None</span>, <span class="string">&#x27;原文区间或逐字核验不符&#x27;</span>
+    start = text.find(original)
+    <span class="keyword">if</span> start &lt; <span class="number">0</span> <span class="keyword">or</span> text.find(original, start + <span class="number">1</span>) &gt;= <span class="number">0</span>:</code></pre>
+<p>v6界面入口：backend/static/index.html为单列用户问答，diagnostics.html为历史与专业诊断；diagnostic_input.js独占工程背景及已有回答payload。共享app.js用实际DOM职责选择渲染/辅助读取，但认证、请求归属和主轮询只有一套。tests/ui_question_probe.js用真实主页ID创建DOM，不补造诊断节点；旧异步/反馈探针明确针对诊断页继续执行。backend/api.py只把三个确切新静态资源加入白名单，未放宽任意路径、query或运行API鉴权。</p>
+<h2 id="section-5">当前源码身份与读法（2026-10-27维护同步）</h2>
+<p>历史评测应用基线1a92d03、入口babdfe1保持冻结；2026-10-27工程维护源码身份见source-version，未改历史合同/政策。先读evaluation/natural_draft_audit_v1.py的recover与batch：前者恢复实际8稿及快照，后者接入原Factory/Harness并统一预发送扣额。参考只进离线分析，不进模型。再读rag/chinese_first.py，区分目录范围、语言触发与实际Evidence。候选默认关闭，生产schema13、受管langgraph_v1，源码fallback sequential，8765停服。</p>
+<p>后端本轮先读backend/service.py的_worker/_run_one/lifecycle_status及result，区分资源故障、排队终态和无实质回答适用阶段；backend/assembly.py的close_resources会尝试全部资源，不强行越过未确认drain。前端可从backend/static/app.js的reviewDrafts/load/requestAuxiliary看草稿归属、主周期与辅助slot独立、revision和终态收敛，从backend/store.py的require_run/state_row看测量支持的轻量读取（get完整恢复仍保留）；list_runs保留兼容的120字问题摘要；tools/ui_fixture.py仅用于隔离合成8766，不是生产入口。五个死导入的清理不改变摘录函数体。</p>
+<p>以下仅摘函数开头最多18行，明确不是完整函数；所有记录按AST限定符定位，保留完整函数终点、实际文件LF身份与片段哈希。长函数的后续分支必须继续读源码，不以开头代替证明。旧摘录已重新从实际文件取文，历史运行身份仍见原提交。</p>
+<h2 id="section-6">2026-10-24历史真实验证边界</h2>
+<p>【真实失败】计划28槽，候选请求因工程兼容缺陷被拒绝，停止后26槽未执行；没有候选模型正文，自然线完全未发送。已知token仅原版15868，拒绝用量未知。补回JSON提示、拒绝即停及条件/实例独立性后1224离线通过，不能称真实收益。schema13生产默认不变，不采用。<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-contract-simple-v1/report.md#" rel="noreferrer noopener">完整响应、依据与版本边界</a>。</p>
+<h2 id="section-7">2026-10-24 简化合同与投影的源码入口</h2>
 <p>从services/review_simple_v1.py的SimpleCatalog看起：沿既有ReviewCatalog生成SRC来源目录及ANS答案锚点，decode_wire仅程序绑定顺序身份；parse_one校验ID并明确投影三维声明。旧typed依据/authority/objection/repair继续复用，旧condition空引用投影不再复用。Factory仍注入原事实Agent，配置simple_v1显式启用，production回退，不改领域/修订资格/product政策。</p>
 <p>【待真实验证的实现检查】离线替身能通过none/not_applicable/not_claimed用例，是否证明真实模型会识别所有无条件陈述？</p>
 <details class="self-answer"><summary>展开新增练习解析</summary><p>不能。它只证明程序收到该合法声明时不会走旧遗漏路径；真实模型能否作出正确声明、能否识别条件归属，需要固定真实输入逐项核验。不能将新字段或替身标签当语义成绩。</p></details>
-<h2 id="section-4">2026-10-24 审核链v2实证更新</h2>
-<p>本轮入口services/review_scope_v2.py，经backend/config.py与ComponentFactory显式fact_review_contract=scope_v2接入services/scoped_fact_execution.py。默认production保留旧消息/解析；fact_internal_flow须仍为production且schema13。候选使用九语义字段的顺序数组，身份由程序绑定；条件关系映射至原判断再完整重审。真实验证发现逐字字段与空条件投影缺陷，代码保留作失败证据，不建议生产验收。 <a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#" rel="noreferrer noopener">完整预测、理由和成本</a>。</p>
-<p>2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#" rel="noreferrer noopener">报告</a>。</p>
-<p>2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#" rel="noreferrer noopener">后续验收</a>。下文2026-10-22及更早状态保留历史含义，以本补记为当前。</p>
-<h2 id="section-5">一页请求对象流：先认对象，再读源码</h2>
+<h2 id="section-8">2026-10-24 审核链v2实证更新</h2>
+<p>本轮入口services/review_scope_v2.py，经backend/config.py与ComponentFactory显式fact_review_contract=scope_v2接入services/scoped_fact_execution.py。默认production保留旧消息/解析；fact_internal_flow须仍为production且schema13。候选使用九语义字段的顺序数组，身份由程序绑定；条件关系映射至原判断再完整重审。真实验证发现逐字字段与空条件投影缺陷，代码保留作失败证据，不建议生产验收。 <a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/production-review-net-benefit-v2/report.md#" rel="noreferrer noopener">完整预测、理由和成本</a>。</p>
+<p>2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#" rel="noreferrer noopener">报告</a>。</p>
+<p>2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#" rel="noreferrer noopener">后续验收</a>。这是2026-10-23历史服务记录；当前8765停服，以本章开头状态为准。</p>
+<h2 id="section-9">一页请求对象流：先认对象，再读源码</h2>
 <div class="table-scroll"><table><thead><tr><th>阶段</th><th>对象及身份</th><th>数据进入和离开</th><th>失败/保存边界</th></tr></thead><tbody><tr><td>API接收</td><td>Submit→TaskRequest；服务产生task_id/run_id</td><td>用户问题、可选原回答；客户端不能提交模型路径</td><td>先类型校验；无效输入未受理，不算模型失败</td></tr><tr><td>队列/worker</td><td>RunStore保存请求/配置；ComponentFactory产生Bundle</td><td>固定知识版本/政策/schema；不把预期标签交模型</td><td>共享装配错误停止后续；接受后不能盲重发</td></tr><tr><td>Generation</td><td>AnswerDraft(answer_id,version,text,citations)</td><td>实际交付Evidence；答案引用与事实独立检索分开</td><td>无实质答案后续不适用；连接/生成失败单列</td></tr><tr><td>提取</td><td>ObligationClaim＋组件ID/原文锚点</td><td>立场、数量、必要限定、核验义务</td><td>忠实性不同于来源支持，不强制faithful</td></tr><tr><td>双审</td><td>实际EvidenceVerificationInput扩展；领域输入</td><td>身份/版本/候选由程序绑定；模型评估支持/条件/异议</td><td>Fact与Domain并发；有效同级结果保留；非法ID不补造</td></tr><tr><td>政策</td><td>执行完整性＋业务处置＋问题解决程度</td><td>不是多数投票；来源及支持要求仍阻断</td><td>可定位局部错误才修订；缺输入不靠删除问题解决</td></tr><tr><td>Revision</td><td>新回答版本，重新产生主张对象</td><td>一次实质纠错，重新交付并完整双审</td><td>原版错误不抹去；不得修订后直接通过</td></tr><tr><td>持久化/UI</td><td>observer→checkpoint/结果；版本独立</td><td>回答、处置、依据先展示，技术详情折叠</td><td>刷新/查询/重启只读既有结果，不补算或远程重发</td></tr></tbody></table></div>
 <p>教学构造：task=T、answer=A/v1、claim=C/组件C0、Evidence=E/知识K；Fact仅可在C0的候选范围选依据，原引用R0仅可用原交付。候选ID不是跨目标通行证。详细synthetic对象与实际函数摘录见下节。</p>
 <p>主要契约对照冻结同回答/主张/完整交付，只改13/14；这能减生成/检索混杂，但不能证明完整产品。完整服务与Revision另测，阶段、结构、语义和业务分母分开。采集故障也必须停止并记录，已发请求只离线恢复；否则统计会把报告工程缺陷误算模型失败。</p>
-<h2 id="section-6">如何读，不被版本文件淹没</h2>
+<h2 id="section-10">如何读，不被版本文件淹没</h2>
 <p>先看backend/__main__.py和assembly.py，再读OfflineHarness.run，最后才深入当前Agent协议。目录里旧v4/v6/v9不是多个并行审核器，而是历史契约保留。当前manifest明确schema和prompt；不要凭文件名最大数字猜采用版本。</p>
-<p>本章代码摘录由write-excerpts脚本按AST函数/实际行号读取当前源码，记录文件及片段SHA。省略的部分明确是摘录，不当完整函数。你可以从同名函数继续读上下文。正文解释的是责任，代码才是异常和字段的最终依据。</p>
+<p>本章代码摘录按AST函数/实际行号读取当前源码，记录文件及片段SHA。省略的部分明确是摘录，不当完整函数。你可以从同名函数继续读上下文。正文解释的是责任，代码才是异常和字段的最终依据。</p>
 <p>在learning-audit-v1历史版本中，新增紧凑协议入口agents/verification_contract_v14.py的ReviewCatalog/run只通过直接组件回归，真实Harness输入包装遗漏导致12题失败；默认日常仍13。查看learning-audit-v1冻结源码中harness/runtime.py的历史schema9–13包装分支，可以定位当时14缺tool_results；当前已改用显式输入能力和services/review_inputs.build，不把历史分支当现行源码。那个批次没有在当轮自动补后重跑，见第15章。</p>
-<h2 id="section-7">第一条路线：从提交到冻结答案</h2>
+<h2 id="section-11">第一条路线：从提交到冻结答案</h2>
 <p>ApplicationService.submit验证配置、排队并保存TaskRequest。worker建立Bundle，调用OfflineHarness.run；runtime中invoke统一处理期限、使用量、执行问题和observer。问答先检索、Generation，已有回答直接冻结；提取服务输出claims，validate_extraction检查覆盖和绑定。</p>
 <p>阅读任务：找到answer_id/version在哪里生成，找到substantive_answer=False为何绕过提取。若生成未成功，是否可能还有领域模型请求？按状态和usage回答，别只看函数名。</p>
-<h2 id="section-8">第二条路线：Evidence怎样变成typed basis</h2>
+<h2 id="section-12">第二条路线：Evidence怎样变成typed basis</h2>
 <p>KnowledgeStore.evidence从固定版本片段构造原文对象；RetrievalSession保存命中与交付，quote_candidates提供字面候选，EvidenceScope为独立审核和每项原引用建立不同命名空间。解析器把合法选择映射到TextExcerpt或metadata/calculation等正式对象；core.typed_evidence负责类型义务。</p>
 <p>阅读任务：一个quote属于当前原引用scope但text相同于另一scope，借用是否合法？答案是不合法，作用域是审核对象与交付身份，不仅文字。程序可验证这个关系，不用模型判断“看起来同源”。</p>
-<h2 id="section-9">第三条路线：政策与Revision</h2>
+<h2 id="section-13">第三条路线：政策与Revision</h2>
 <p>ProductAuditPolicy.decide_context读取执行、分类、支持、领域和引用结果。bounded_repair.eligible_repairs只允许存在原文绑定建议的faithful adverse对象。Revision不自行通过；runtime创建新版本后回到提取和双审。观察review_rounds和answer.versions而非只看usage中有没有revision组件。</p>
 <p>阅读任务：为什么一个insufficient finding不必自动修订？因为可能是缺资料；没有已交付原文能支撑实质replacement时不能发明修复。反例中即使可修另一个错误，其他缺口也保留。</p>
-<h2 id="section-10">第四条路线：存储和只读恢复</h2>
+<h2 id="section-14">第四条路线：存储和只读恢复</h2>
 <p>RunStore.tx管理短写事务，index保存版本化对象，result经backend.presentation/serialization安全投影。GET result和NLI读取已存结果，不调用Harness。LocalNLI失败只产生diagnostic对象，主判断已结束，不反向进入Agent输入。</p>
 <p>阅读任务：重启恢复时为什么queued/running变interrupted而不是继续worker？没有供应商幂等保证和完整续执行证明，自动重发会重复收费、改变历史。恢复不等于重新执行。</p>
-<h2 id="section-11">对每个函数问五个问题</h2>
+<h2 id="section-15">对每个函数问五个问题</h2>
 <ul>
 <li>输入来自用户、数据库、模型还是程序派生？信任边界不同。</li>
 <li>输出是否绑定task、answer和knowledge版本？有没有跨版本缓存？</li>
@@ -38,37 +71,36 @@
 <li>测试是否走真实生产调用路线，还是只手工构造内部对象？</li>
 </ul>
 <p>例如strict_json拒绝重复键，避免模型输出两个status被普通json.loads静默保留后者。它能保证唯一键，不能保证status语义正确。source_identity生成稳定定位，不证明原来源权威。fuse_ranks融合排名，不执行事实核验。</p>
-<h2 id="section-12">面试阅读练习</h2>
+<h2 id="section-16">面试阅读练习</h2>
 <p>练习1：注释掉某个validate_review会发生什么？参考：未知/错版本依据可能进入结果，影响政策和存储；不是“更宽容”而是失去边界。练习2：只删除旧协议文件能简化当前模型消息吗？不一定，应检查真正拼装模板与运行profile；清代码目录不等于减少输出字段。</p>
 <p>面试说法：“我能从API沿submit/worker/Harness读到审核解析，解释每个边界可证明什么。代码摘录绑定实际版本和哈希，历史协议不冒充当前默认。”</p>
-<h2 id="section-13">实际代码摘录</h2>
-<p>以下段落由程序读取源码生成，并由source-check.json核对；不是手写伪代码。</p>
-<h3 id="section-14">重复键、非有限值与严格JSON</h3>
-<p>路径 services/structured_model.py，函数 strict_json，行18–21。</p>
+<h2 id="section-17">实际代码摘录（本轮重新核对）</h2>
+<h3 id="section-18">严格JSON只验证结构</h3>
+<p>路径 services/structured_model.py，函数 strict_json，行18–21；完整函数至21行，完整定义。</p>
 <pre><code class="language-python"><span class="keyword">def</span> strict_json(text):
     <span class="keyword">return</span> json.loads(text, object_pairs_hook=_object,
                       parse_constant=<span class="keyword">lambda</span> _: (_ <span class="keyword">for</span> _ <span class="keyword">in</span> ()).throw(
                           StructuredValidationError(<span class="string">&quot;json_parse&quot;</span>, <span class="string">&quot;$&quot;</span>, <span class="string">&quot;nonfinite_numbers_not_allowed&quot;</span>)))</code></pre>
-<p>输入是模型响应字符串，输出JSON对象；异常仍进入有限纠正，绝不把解析失败变业务通过。</p>
-<h3 id="section-15">名次融合不验证事实</h3>
-<p>路径 rag/semantic.py，函数 fuse_ranks，行149–154。</p>
+<p>片段SHA256：76dd2f489da70c1558dd13cb5f101317b869c9ca56842a563dac6970ebe94200。</p>
+<h3 id="section-19">RRF融合不保证支持</h3>
+<p>路径 rag/semantic.py，函数 fuse_ranks，行149–154；完整函数至154行，完整定义。</p>
 <pre><code class="language-python"><span class="keyword">def</span> fuse_ranks(bm25, dense, *, constant=<span class="number">60</span>):
     scores = {}
     <span class="keyword">for</span> ranking <span class="keyword">in</span> (bm25, dense):
         <span class="keyword">for</span> rank, (index, _) <span class="keyword">in</span> enumerate(ranking, <span class="number">1</span>):
             scores[index] = scores.get(index, <span class="number">0.0</span>) + <span class="number">1.0</span> / (constant + rank)
     <span class="keyword">return</span> scores</code></pre>
-<p>输入是两路固定排名，输出各片段RRF分；未出现的路不贡献，名次从1。</p>
-<h3 id="section-16">原ID和内部ID分离</h3>
-<p>路径 rag/corpus_build.py，函数 source_identity，行10–14。</p>
+<p>片段SHA256：9f646b4b29742ebf72bb5eb3db8128c250360dbb855b5e6c9896640dd7ad4f18。</p>
+<h3 id="section-20">来源身份不等于权威</h3>
+<p>路径 rag/corpus_build.py，函数 source_identity，行10–14；完整函数至14行，完整定义。</p>
 <pre><code class="language-python"><span class="keyword">def</span> source_identity(row,revision,shard,row_number):
     original=row.get(<span class="string">&#x27;_id&#x27;</span>)
     missing=original <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> original==<span class="string">&#x27;&#x27;</span>
     <span class="keyword">if</span> <span class="keyword">not</span> missing:<span class="keyword">return</span> str(original),<span class="keyword">False</span>
     <span class="keyword">return</span> <span class="string">&#x27;industrycorpus2:row-v1:&#x27;</span>+digest(canonical([revision,shard,row_number]).encode()),<span class="keyword">True</span></code></pre>
-<p>输入含可缺失_id的记录、revision、分片和绝对行号；输出身份和missing标志，不猜出版机构。</p>
-<h3 id="section-17">短事务的commit与rollback</h3>
-<p>路径 backend/store.py，函数 RunStore.tx，行50–56。</p>
+<p>片段SHA256：58f3c8dd93e5a6c23b7b5edbe2112c3ae1bfc686917a07a38e2f684b2c5e35d7。</p>
+<h3 id="section-21">短事务边界</h3>
+<p>路径 backend/store.py，函数 RunStore.tx，行50–56；完整函数至56行，完整定义。</p>
 <pre><code class="language-python">    <span class="keyword">def</span> tx(self):
         <span class="keyword">try</span>:
             self.db.execute(<span class="string">&#x27;BEGIN IMMEDIATE&#x27;</span>);<span class="keyword">yield</span>;self.db.commit()
@@ -76,181 +108,15 @@
             self.db.rollback()
             <span class="keyword">if</span> isinstance(exc,sqlite3.Error):<span class="keyword">raise</span> StorageError(<span class="string">&#x27;Run transaction failed&#x27;</span>) <span class="keyword">from</span> <span class="keyword">None</span>
             <span class="keyword">raise</span></code></pre>
-<p>写入中异常回滚，SQLite错误转StorageError；网络调用在事务外。</p>
-<h3 id="section-18">一次修订资格不是修订成功</h3>
-<p>路径 services/bounded_repair.py，函数 eligible_repairs，行21–31。</p>
-<pre><code class="language-python"><span class="keyword">def</span> eligible_repairs(finding):
-    <span class="string">&quot;&quot;&quot;At least one faithful adverse component; other gaps remain untouched.&quot;&quot;&quot;</span>
-    <span class="keyword">from</span> dataclasses <span class="keyword">import</span> replace
-    rows=getattr(finding,<span class="string">&#x27;component_reviews&#x27;</span>,())
-    <span class="keyword">if</span> <span class="keyword">not</span> rows:<span class="keyword">return</span> repair_proposals(finding)
-    proposals=[]
-    <span class="keyword">for</span> row <span class="keyword">in</span> rows:
-        <span class="keyword">if</span> row.status.value <span class="keyword">not</span> <span class="keyword">in</span> (<span class="string">&#x27;insufficient_evidence&#x27;</span>,<span class="string">&#x27;contradicted&#x27;</span>):<span class="keyword">continue</span>
-        <span class="keyword">if</span> row.classification_issue <span class="keyword">or</span> row.fidelity_status!=<span class="string">&#x27;faithful&#x27;</span>:<span class="keyword">continue</span>
-        proposals.extend(repair_proposals(replace(finding,status=row.status,component_reviews=(row,))))
-    <span class="keyword">return</span> tuple(proposals)</code></pre>
-<p>输入是当前finding，输出可用原文绑定建议；faithful并且adverse才考虑，repair=null不会自动造建议。</p>
-<h3 id="section-19">确定性标量计算的边界</h3>
-<p>路径 tools/unit_conversion.py，函数 compute，行14–24。</p>
-<pre><code class="language-python"><span class="keyword">def</span> compute(payload):
-    <span class="keyword">if</span> set(payload)!={<span class="string">&#x27;value&#x27;</span>,<span class="string">&#x27;from_unit&#x27;</span>,<span class="string">&#x27;to_unit&#x27;</span>,<span class="string">&#x27;claim_id&#x27;</span>}:<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.input: exact declared fields required&#x27;</span>)
-    value=payload[<span class="string">&#x27;value&#x27;</span>];a,b=payload[<span class="string">&#x27;from_unit&#x27;</span>],payload[<span class="string">&#x27;to_unit&#x27;</span>]
-    <span class="keyword">if</span> type(value) <span class="keyword">not</span> <span class="keyword">in</span> (int,float) <span class="keyword">or</span> <span class="keyword">not</span> math.isfinite(value):<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.value: finite scalar required&#x27;</span>)
-    <span class="keyword">if</span> a <span class="keyword">not</span> <span class="keyword">in</span> PAIRS <span class="keyword">or</span> b <span class="keyword">not</span> <span class="keyword">in</span> PAIRS <span class="keyword">or</span> PAIRS[a][<span class="number">0</span>]!=PAIRS[b][<span class="number">0</span>]:<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.units: known same-dimension units required&#x27;</span>)
-    <span class="keyword">if</span> type(payload[<span class="string">&#x27;claim_id&#x27;</span>]) <span class="keyword">is</span> <span class="keyword">not</span> str:<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.claim_id: program claim binding required&#x27;</span>)
-    converted=value*PAIRS[a][<span class="number">1</span>]/PAIRS[b][<span class="number">1</span>]
-    <span class="keyword">if</span> <span class="keyword">not</span> math.isfinite(converted):<span class="keyword">raise</span> ValueError(<span class="string">&#x27;unit_conversion.output: finite result required&#x27;</span>)
-    <span class="keyword">return</span> {<span class="string">&#x27;input&#x27;</span>:dict(payload),<span class="string">&#x27;output_value&#x27;</span>:converted,<span class="string">&#x27;output_unit&#x27;</span>:b,<span class="string">&#x27;quantity_kind&#x27;</span>:PAIRS[a][<span class="number">0</span>],
-        <span class="string">&#x27;scope&#x27;</span>:<span class="string">&#x27;scalar SI conversion only; user data unverified; no stability, equipment suitability or simulation result&#x27;</span>,
-        <span class="string">&#x27;rule_source&#x27;</span>:<span class="string">&#x27;SI prefix scale whitelist in tools/unit_conversion.py; program rule, not an electrical operating standard&#x27;</span>}</code></pre>
-<p>完整函数可看有限单位表和类别校验；不做潮流或厂站性能分析。</p>
-<h3 id="section-20">恢复状态但不重发</h3>
-<p>路径 backend/store.py，函数 RunStore.recover，行58–60。</p>
+<p>片段SHA256：dad37aa75bf1c5e6c3552cf4ebe57685a07f4328d5ff92f9b2452f058782739f。</p>
+<h3 id="section-22">恢复不自动续跑</h3>
+<p>路径 backend/store.py，函数 RunStore.recover，行58–60；完整函数至60行，完整定义。</p>
 <pre><code class="language-python">    <span class="keyword">def</span> recover(self):
         <span class="keyword">with</span> self.tx():
             self.db.execute(<span class="string">&quot;UPDATE runs SET status=&#x27;interrupted&#x27;,ended=?,error_code=&#x27;PROCESS_INTERRUPTED&#x27; WHERE status IN (&#x27;queued&#x27;,&#x27;running&#x27;)&quot;</span>,(now(),))</code></pre>
-<p>SQL只将未完成标interrupted，没有模型调用；已有结果保持原版本。</p>
-<h2 id="section-21">沿一条实际请求完整阅读：谁创建对象，谁保存事实</h2>
-<p>以下基于当前函数，不是另建示意调度器。先看教学对象，再沿十步追字段；schema14上轮包装遗漏在真实Harness中，直接组件测试绕过该输入构造。日常仍默认13。integration-learning-v2历史阶段统一输入能力并完成Factory回归；该轮唯一烟测634a22…已发Fact请求，但条件/basis ID非法而未完整，当轮未开启新批次。后续schema-choice-v1已完成固定8题13/14对照，并另列正常服务及2ω→ω实质修订全重审；详见<a href="08-verification.html" rel="noreferrer noopener">第08章后续对照</a>。这里的“唯一烟测”只指历史阶段，不代表至今只有一次验证。</p>
-<h3 id="section-22">一个贯穿对象的synthetic摘要</h3>
-<pre><code class="language-json">{
-  &quot;example_kind&quot;: &quot;synthetic_fixture, 教学对象摘要，不是完整API wire&quot;,
-  &quot;task&quot;: {&quot;task_id&quot;: &quot;synthetic-task-01&quot;, &quot;mode&quot;: &quot;question_answer&quot;, &quot;question&quot;: &quot;只解释这个教学装置在条件C下的许可电压&quot;},
-  &quot;evidence&quot;: {&quot;evidence_id&quot;: &quot;synthetic-evidence-01&quot;, &quot;source_type&quot;: &quot;synthetic_fixture&quot;, &quot;text&quot;: &quot;在条件C下，这个教学装置的许可电压为3kV。&quot;, &quot;locator&quot;: &quot;教学正文字符[0,n)&quot;},
-  &quot;answer&quot;: {&quot;answer_id&quot;: &quot;synthetic-answer-01&quot;, &quot;version&quot;: 1, &quot;text&quot;: &quot;在条件C下，教学装置的许可电压为3kV。&quot;, &quot;citation&quot;: &quot;绑定同一正文单元与synthetic-evidence-01&quot;},
-  &quot;claim&quot;: {&quot;claim_id&quot;: &quot;synthetic-claim-01&quot;, &quot;component_id&quot;: &quot;synthetic-part-01&quot;, &quot;proposition&quot;: &quot;在条件C下，教学装置的许可电压为3kV。&quot;, &quot;basis_target&quot;: &quot;technical_content&quot;, &quot;verification_obligation&quot;: &quot;technical_truth&quot;},
-  &quot;finding&quot;: {&quot;finding_id&quot;: &quot;synthetic-finding-01&quot;, &quot;answer_version&quot;: 1, &quot;status&quot;: &quot;supported&quot;, &quot;basis&quot;: &quot;当前实际交付正文中程序绑定的quote&quot;, &quot;reason&quot;: &quot;教学固定响应保留相同装置、数值和条件&quot;},
-  &quot;disposition&quot;: {&quot;kind&quot;: &quot;pass仅在所需检查/原引用完成且无阻断时&quot;, &quot;resolution&quot;: &quot;完整&quot;, &quot;execution_integrity&quot;: &quot;complete&quot;}
-}</code></pre>
-<p>这些是教学身份和固定判断，不冒充原始官方资料或真实模型正确率。现实ID/哈希/区间由程序产生。许可值的正文依据与3kV→3000V单位工具是两个对象：工具只验证前缀换算，不能证明装置许可值。若独立/原引用或领域义务没完成，即使这个finding为supported，处置也不能pass。</p>
-<h3 id="section-23">1 API：普通字段变成任务，不把浏览器当路径输入器</h3>
-<p>backend/api.py的Submit是严格Pydantic模型，未知字段拒绝。Submit.task检查两种mode与existing_answer一致，建立task_id；已有回答也建立answer_id、version1，indexed引用按fragment ID回查转正式Evidence。create_app内submit路由先校验现有引用区间/固定库，调用service.submit后返回202/run_id。浏览器不设置本机模型路径，也不拿DeepSeek密钥。</p>
-<h3 id="section-24">2 接受：先持久化，再让worker取任务</h3>
-<p>ApplicationService.submit验证TaskRequest/预算、配置preflight及队列；rid=uuid4产生run_id，factory.manifest记录代码/知识/协议，RunStore.create保存request/config。async lock保护队列接收与状态；保存失败不能返回假接受。先生成run_id不是完成审核，UI随后GET状态。任务和运行身份分开，原问题相同也不是同一run。</p>
-<h3 id="section-25">3 worker与Factory：装配真实组件，而非模拟回退</h3>
-<p>ApplicationService._worker取得队列项，mark running，factory.create(rid, observer)产生Bundle；observer是lambda snapshot: store.checkpoint(rid,snapshot)。ComponentFactory.create建立两个适配器、固定Retriever、四Agent、Extractor、单位工具和Product政策，注入已有OfflineHarness。它不调用evaluation脚本，也不另建业务调度器；构造失败清资源并ConfigurationError。</p>
-<h3 id="section-26">4 Harness输入与冻结：版本对象的起点</h3>
-<p>OfflineHarness.run收到TaskRequest、RunBudget、knowledge_version和run_id。问答检索/生成，已有回答直接用原AnswerDraft。invoke统一预算、deadline、ModelContext和异常；record产生事件并通知observer。Generation快照须保留实际Evidence与知识版本。无实质回答有明确不适用终态，不能把程序拒答当真实答题继续审核。</p>
-<h3 id="section-27">5 提取：原锚点→规范命题→组件</h3>
-<p>ModelClaimExtractor.extract(protocol7)由answer_anchors提供原文锚点，模型选anchor_id，程序绑定区间。parse_extraction/claim_obligations检查覆盖、立场和义务，不能悄悄改错答案。这里生成的claim_id/component_id属于当前answer版本；对象与输入原文不同步会成为忠实性异议。</p>
-<h3 id="section-28">6 工具与交付：类型成立才可作为依据</h3>
-<p>requests_for按受支持数值/单位组织真实工具调用，保存ToolResult/current_tools；这不是通用P/Q求解。retrieve_for分别组织Verification/Domain用途交付，保留每版本的EvidenceBinding与RetrievalRecord。独立审核只收到这一轮允许资料，不把全部库或旧运行池借过来。</p>
-<h3 id="section-29">7 双审输入和并发：上轮遗漏恰在这里</h3>
-<p>基础EvidenceVerificationInput只有request/answer/claims/evidence/快照；ReliabilityVerificationInput另含tool_results、delivery_summary和fact_retrieval_bindings。上轮runtime只按schema9–13做包装，14在ModelAgent开始前就缺字段。组件测试手工给扩展输入绕过了这一行。</p>
-<p>事实与领域输入绑定同一answer/claims，各自允许不同Evidence用途。reviewers通过create_task/gather并发等待；异常不能使有效peer变无效。schema13/14决定解析入口，不应让散落版本条件决定是否携带本该提供的数据。本轮由ModelAgent.review_input_type声明扩展类型，services/review_inputs.build构造输入；历史未声明的注入组件在同处保留兼容映射。已用Factory→Harness→真实parser的synthetic贯通核对，而不是声称一个内部函数成功就接好线。</p>
-<h3 id="section-30">8 政策：读有效发现，不再问模型投票</h3>
-<p>ProductAuditPolicy.decide_context读取执行问题、typed支持、异议、原引用与领域范围。parent状态由组件聚合；支持、严重度、处置、解决程度分开。缺执行先禁止放行，未解决异议复核；明确已选原文的可修复缺陷可一次Revision，真正缺输入仍保留。raw supported不覆盖保守effective状态。</p>
-<h3 id="section-31">9 Revision：新对象重建，旧版不抹去</h3>
-<p>RevisionInput包含当前发现和合法依据，check_revision检查实际修改/绑定。成功后answer=revised.answer，version递增，保存revision_outputs和旧ReviewRound；循环回提取，current_tools和审核对象按新版本重建。verification/domain/report临时清空，防v1结论沿用v2。对象索引按run/answer/version保存，旧错误与反馈继续可读。</p>
-<h3 id="section-32">10 observer、事务、结果与UI</h3>
-<p>record给observer一个阶段快照，包括事件、已完成对象、review_rounds、usage和执行问题。RunStore.checkpoint在短tx中写event、snapshot并index对象，tx的BEGIN IMMEDIATE/commit/rollback不跨网络等待。observer异常转HarnessObserverError，不能称保存完成。</p>
-<p>worker最终store.mark保存result，ApplicationService.result经store读取/结果投影，API GET result和trace返回安全视图。backend/static/app.js的renderAnswers/renderTrace及结果装载中的decision区域构建用保存结果展示；GET/刷新不启动Harness、Revision或NLI补算。UI展示改善和旧结论不修改是两种责任。</p>
-<h3 id="section-33">如何亲自验证这条路线</h3>
-<p>对同一synthetic任务记录Factory实际组件类、Harness收到/转成的输入类、真正parser收的payload、Trace状态、Store对象和API结果。问答与已有回答都走，不模拟替换Harness本身；测试有成功工具basis、多个原引用scope、Revision后两轮提取/双审和不同版本保存。捕获共享装配故障时，提交执行器应先落已发请求/部分结果再停止后续，而非把AttributeError当单题语义差。</p>
-<h2 id="section-34">本轮完整路线的实际代码摘录</h2>
-<p>每段给出实际行号，短段结束明确标“后续行省略”；省略不改变语义判断，不是可独立运行的全部函数。</p>
-<h3 id="section-35">摘录：Task/Answer身份与引用绑定</h3>
-<p>backend/api.py / Submit.task，实际行54–67。</p>
-<pre><code class="language-python">    <span class="keyword">def</span> task(self,indexed_evidence=()):
-        <span class="keyword">if</span> <span class="keyword">not</span> self.question.strip() <span class="keyword">or</span> self.existing_answer <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> <span class="keyword">not</span> self.existing_answer.strip():<span class="keyword">raise</span> InputError(<span class="string">&#x27;Nonempty question/answer required&#x27;</span>)
-        <span class="keyword">if</span> (self.mode==<span class="string">&#x27;assess_existing&#x27;</span>)!=(self.existing_answer <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>):<span class="keyword">raise</span> InputError(<span class="string">&#x27;Existing answer required only for assess_existing&#x27;</span>)
-        <span class="keyword">if</span> self.existing_citations <span class="keyword">and</span> self.mode!=<span class="string">&#x27;assess_existing&#x27;</span>:<span class="keyword">raise</span> InputError(<span class="string">&#x27;Citation bindings require existing answer&#x27;</span>)
-        <span class="keyword">if</span> any(len(s)&gt;<span class="number">4000</span> <span class="keyword">for</span> s <span class="keyword">in</span> self.answer_requirements):<span class="keyword">raise</span> InputError(<span class="string">&#x27;Answer requirement too long&#x27;</span>)
-        aid=uuid4().hex
-        by_fragment={e.provenance.fragment_id:e.evidence_id <span class="keyword">for</span> e <span class="keyword">in</span> indexed_evidence}
-        citations=tuple(CitationBinding(c.start_offset,c.end_offset,tuple(by_fragment[f] <span class="keyword">for</span> f <span class="keyword">in</span> c.fragment_ids)) <span class="keyword">for</span> c <span class="keyword">in</span> self.existing_citations)
-        answer=<span class="keyword">None</span> <span class="keyword">if</span> self.existing_answer <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> AnswerDraft(aid,<span class="number">1</span>,self.existing_answer,citations=citations)
-        refs=tuple(Evidence(<span class="string">&#x27;user-&#x27;</span>+uuid4().hex,<span class="string">&#x27;user_supplied&#x27;</span>,<span class="string">&#x27;unverified&#x27;</span>,r.label,r.text,<span class="string">&#x27;user_reference&#x27;</span>) <span class="keyword">for</span> r <span class="keyword">in</span> self.references)
-        e=self.engineering_context
-        engineering=<span class="keyword">None</span> <span class="keyword">if</span> e <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> EngineeringContext(e.goal,e.network_model,e.operating_point,e.limits,
-            tuple(e.contingencies),tuple(EngineeringQuantity(uuid4().hex,q.kind,q.value,q.unit,q.reference) <span class="keyword">for</span> q <span class="keyword">in</span> e.quantities))
-        args=(uuid4().hex,TaskMode(self.mode),<span class="string">&#x27;voltage_stability_reactive_support&#x27;</span>,self.question,self.user_context,answer,refs+tuple(indexed_evidence),engineering)</code></pre>
-<p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
-<h3 id="section-36">摘录：API接收与异常返回</h3>
-<p>backend/api.py / create_app.submit，实际行228–247。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> submit(body:Submit,request:Request):
-        <span class="keyword">try</span>:
-            <span class="keyword">if</span> body.premise_declarations <span class="keyword">and</span> config.fact_internal_flow!=<span class="string">&#x27;langgraph_candidate_v1&#x27;</span>:<span class="keyword">raise</span> InputError(<span class="string">&#x27;Explicit premises require candidate flow&#x27;</span>)
-            indexed=()
-            <span class="keyword">if</span> body.existing_citations:
-                <span class="keyword">if</span> config.profile!=<span class="string">&#x27;real&#x27;</span>:<span class="keyword">raise</span> InputError(<span class="string">&#x27;Indexed references require real knowledge snapshot&#x27;</span>)
-                <span class="keyword">if</span> body.mode!=<span class="string">&#x27;assess_existing&#x27;</span> <span class="keyword">or</span> body.existing_answer <span class="keyword">is</span> <span class="keyword">None</span>:<span class="keyword">raise</span> InputError(<span class="string">&#x27;Existing answer required&#x27;</span>)
-                <span class="keyword">for</span> c <span class="keyword">in</span> body.existing_citations:
-                    <span class="keyword">if</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=c.start_offset&lt;c.end_offset&lt;=len(body.existing_answer):<span class="keyword">raise</span> InputError(<span class="string">&#x27;Citation span outside answer&#x27;</span>)
-                <span class="keyword">import</span> asyncio
-                <span class="keyword">def</span> resolve():
-                    <span class="keyword">from</span> rag.storage <span class="keyword">import</span> KnowledgeStore
-                    ids=tuple(dict.fromkeys(f <span class="keyword">for</span> c <span class="keyword">in</span> body.existing_citations <span class="keyword">for</span> f <span class="keyword">in</span> c.fragment_ids))
-                    <span class="keyword">with</span> KnowledgeStore(config.index_db,readonly=<span class="keyword">True</span>) <span class="keyword">as</span> index:
-                        <span class="keyword">return</span> tuple(index.evidence(f,config.knowledge_version) <span class="keyword">for</span> f <span class="keyword">in</span> ids)
-                indexed=<span class="keyword">await</span> asyncio.to_thread(resolve)
-            rid=<span class="keyword">await</span> svc(request).submit(body.task(indexed),answer_requirements=tuple(body.answer_requirements),
-                indexed_reference_ids=tuple(e.evidence_id <span class="keyword">for</span> e <span class="keyword">in</span> indexed),nli_enabled=body.local_nli_enabled)
-        <span class="keyword">except</span> InputError <span class="keyword">as</span> exc:
-            <span class="keyword">if</span> str(exc).startswith(<span class="string">&#x27;Complete citation scopes exceed configured capacity; citation_indexes=&#x27;</span>):</code></pre>
-<p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
-<h3 id="section-37">摘录：保存接受和队列</h3>
-<p>backend/service.py / ApplicationService.submit，实际行56–81。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> submit(self,request,*,answer_requirements=(),indexed_reference_ids=(),nli_enabled=<span class="keyword">None</span>):
-        validate_request(request,self.config.budget)
-        selected=self.config.nli_enabled <span class="keyword">if</span> nli_enabled <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> nli_enabled
-        <span class="keyword">if</span> type(selected) <span class="keyword">is</span> <span class="keyword">not</span> bool:<span class="keyword">raise</span> ValueError(<span class="string">&#x27;NLI selection must be boolean&#x27;</span>)
-        <span class="keyword">if</span> selected <span class="keyword">and</span> nli_enabled <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:
-            <span class="keyword">from</span> core.validation <span class="keyword">import</span> InputError
-            <span class="keyword">if</span> <span class="keyword">not</span> self.nli_capability()[<span class="string">&#x27;available&#x27;</span>]:<span class="keyword">raise</span> InputError(<span class="string">&#x27;Local NLI not configured/available; disable the optional selection&#x27;</span>)
-            <span class="keyword">await</span> self.ensure_nli() <span class="comment"># A load failure is diagnostic only; the audit still runs.</span>
-        knowledge=self.factory.preflight()
-        <span class="keyword">if</span> self.config.profile==<span class="string">&#x27;real&#x27;</span> <span class="keyword">and</span> request.existing_answer <span class="keyword">and</span> request.existing_answer.citations:
-            <span class="keyword">from</span> services.citation_workload <span class="keyword">import</span> submission_rejections
-            <span class="keyword">from</span> core.validation <span class="keyword">import</span> InputError
-            rejected=submission_rejections(request,knowledge,self.config.verification_schema,self.config.citation_workload,review_contract=self.config.fact_review_contract,review_result_transport=self.config.review_result_transport)
-            <span class="keyword">if</span> rejected:<span class="keyword">raise</span> InputError(<span class="string">&#x27;Complete citation scopes exceed configured capacity; citation_indexes=&#x27;</span>+str(list(rejected)))
-
-        <span class="keyword">async</span> <span class="keyword">with</span> self.lock:
-            <span class="keyword">if</span> self.closing <span class="keyword">or</span> self.storage_fault:<span class="keyword">raise</span> ServiceUnavailable(<span class="string">&#x27;Service not accepting work&#x27;</span>)
-            <span class="keyword">if</span> self.queue.full():<span class="keyword">raise</span> QueueFullError(<span class="string">&#x27;Waiting queue is full&#x27;</span>)
-            rid=uuid4().hex;manifest=self.factory.manifest(knowledge)
-            manifest[<span class="string">&#x27;answer_requirements&#x27;</span>]=answer_requirements
-            manifest[<span class="string">&#x27;indexed_reference_ids&#x27;</span>]=indexed_reference_ids
-            manifest[<span class="string">&#x27;local_nli_diagnostic&#x27;</span>]={<span class="string">&#x27;version&#x27;</span>:<span class="string">&#x27;local-nli-task-selection-v1&#x27;</span>,<span class="string">&#x27;enabled&#x27;</span>:selected,<span class="string">&#x27;authority&#x27;</span>:<span class="string">&#x27;diagnostic_only&#x27;</span>,<span class="string">&#x27;affects_decision&#x27;</span>:<span class="keyword">False</span>}
-            manifest[<span class="string">&#x27;local_nli_diagnostic&#x27;</span>].update(load_status=<span class="string">&#x27;ready&#x27;</span> <span class="keyword">if</span> selected <span class="keyword">and</span> self.nli <span class="keyword">and</span> self.nli.identity <span class="keyword">and</span> <span class="keyword">not</span> self.nli.failure <span class="keyword">else</span> <span class="string">&#x27;failed&#x27;</span> <span class="keyword">if</span> selected <span class="keyword">else</span> <span class="string">&#x27;not_requested&#x27;</span>,load_error=self.nli.failure <span class="keyword">if</span> selected <span class="keyword">and</span> self.nli <span class="keyword">else</span> <span class="keyword">None</span>)
-            self.store.create(rid,request,manifest)
-            self.queue.put_nowait((rid,request,knowledge,answer_requirements,indexed_reference_ids))
-        <span class="keyword">return</span> rid</code></pre>
-<p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
-<h3 id="section-38">摘录：worker装配和最终保存</h3>
-<p>backend/service.py / ApplicationService._worker，实际行100–126。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> _worker(self):
-        <span class="keyword">while</span> <span class="keyword">not</span> self.closing:
-            <span class="keyword">if</span> self.storage_fault:<span class="keyword">return</span>
-            rid,request,knowledge,requirements,indexed_ids=<span class="keyword">await</span> self.queue.get()
-            bundle=<span class="keyword">None</span>
-            <span class="keyword">from</span> rag.timing <span class="keyword">import</span> capture_timing
-            timing_manager=capture_timing(run_id=rid);timing_log=timing_manager.__enter__()
-            <span class="keyword">try</span>:
-                <span class="keyword">if</span> self.store.get(rid)[<span class="string">&#x27;status&#x27;</span>]!=<span class="string">&#x27;queued&#x27;</span>:<span class="keyword">continue</span>
-                self.active=rid;self.store.mark(rid,<span class="string">&#x27;running&#x27;</span>)
-                bundle=self.factory.create(rid,<span class="keyword">lambda</span> snapshot:self.store.checkpoint(rid,snapshot))
-                self.active_bundle=bundle
-                result=<span class="keyword">await</span> bundle.harness.run(request,self.config.budget,knowledge_version=knowledge,
-                    answer_requirements=tuple(requirements),indexed_reference_ids=tuple(indexed_ids),run_id=rid)
-                status=<span class="string">&#x27;interrupted&#x27;</span> <span class="keyword">if</span> self.closing <span class="keyword">else</span> <span class="string">&#x27;cancelled&#x27;</span> <span class="keyword">if</span> result.state.value==<span class="string">&#x27;cancelled&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;failed&#x27;</span> <span class="keyword">if</span> result.state.value==<span class="string">&#x27;failed&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;finished&#x27;</span>
-                self.store.mark(rid,status,error_code=<span class="string">&#x27;PROCESS_INTERRUPTED&#x27;</span> <span class="keyword">if</span> self.closing <span class="keyword">else</span> <span class="keyword">None</span>,result=result)
-                <span class="keyword">if</span> self.nli <span class="keyword">and</span> <span class="keyword">not</span> self.closing <span class="keyword">and</span> self.store.get(rid)[<span class="string">&#x27;config&#x27;</span>].get(<span class="string">&#x27;local_nli_diagnostic&#x27;</span>,{}).get(<span class="string">&#x27;enabled&#x27;</span>,self.config.nli_enabled):
-                    task=asyncio.create_task(self.diagnose_completed(rid,wire(result)),name=<span class="string">&#x27;local-nli:&#x27;</span>+rid)
-                    self.nli_tasks.add(task);task.add_done_callback(self.nli_tasks.discard)
-            <span class="keyword">except</span> asyncio.CancelledError:
-                <span class="keyword">try</span>:self.store.mark(rid,<span class="string">&#x27;interrupted&#x27;</span>,error_code=<span class="string">&#x27;PROCESS_INTERRUPTED&#x27;</span>)
-                <span class="keyword">except</span> StorageError:self.storage_fault=<span class="keyword">True</span>;self.volatile_errors[rid]=<span class="string">&#x27;RUN_STORAGE_FAILED&#x27;</span>
-                <span class="keyword">raise</span>
-            <span class="keyword">except</span> (StorageError,HarnessObserverError):
-                self.storage_fault=<span class="keyword">True</span>;self.volatile_errors[rid]=<span class="string">&#x27;RUN_STORAGE_FAILED&#x27;</span>
-                <span class="keyword">try</span>:self.store.mark(rid,<span class="string">&#x27;interrupted&#x27;</span>,error_code=<span class="string">&#x27;RUN_STORAGE_FAILED&#x27;</span>)
-                <span class="keyword">except</span> StorageError:<span class="keyword">pass</span></code></pre>
-<p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
-<h3 id="section-39">摘录：真实装配的资源建立</h3>
-<p>backend/assembly.py / ComponentFactory.create；默认代码基线09c6b987，实际行240–253。截取部分不代替完整函数。</p>
+<p>片段SHA256：e053039f0449359a72a0d0f7685aaaba2289e17e2832a5b51c22b11a54271334。</p>
+<h3 id="section-23">复用装配与固定Evidence入口</h3>
+<p>路径 backend/assembly.py，函数 ComponentFactory.create，行275–292；完整函数至357行，局部摘录。</p>
 <pre><code class="language-python">    <span class="keyword">def</span> create(self,rid,observer,*,fixed_evidence_only=<span class="keyword">False</span>):
         <span class="string">&quot;&quot;&quot;Fixed Evidence evaluation may skip index resources; defaults unchanged.&quot;&quot;&quot;</span>
         <span class="keyword">if</span> type(fixed_evidence_only) <span class="keyword">is</span> <span class="keyword">not</span> bool:<span class="keyword">raise</span> ConfigurationError(<span class="string">&#x27;Boolean fixed evidence mode required&#x27;</span>)
@@ -264,310 +130,227 @@
         <span class="keyword">from</span> agents.generation <span class="keyword">import</span> EvidenceGenerationAgent
         <span class="keyword">from</span> agents.evidence_verification <span class="keyword">import</span> ModelEvidenceVerificationAgent
         <span class="keyword">if</span> self.config.fact_internal_flow!=<span class="string">&#x27;production&#x27;</span>:
-            <span class="keyword">from</span> agents.fact_flow_v1 <span class="keyword">import</span> FactFlowAgent <span class="keyword">as</span> FactAgent</code></pre>
-<p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
-<h3 id="section-40">摘录：原锚点输入与实际解析选择</h3>
-<p>services/claim_extractor.py / ModelClaimExtractor.extract，实际行145–165。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> extract(self, answer):
-        <span class="keyword">if</span> self.protocol_version <span class="keyword">in</span> (<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>):
-            <span class="keyword">from</span> services.answer_anchors <span class="keyword">import</span> anchors,parse,SYSTEM <span class="keyword">as</span> anchor_system
-            <span class="keyword">if</span> self.protocol_version==<span class="number">6</span>:
-                <span class="keyword">from</span> services.answer_basis_targets <span class="keyword">import</span> parse,SYSTEM <span class="keyword">as</span> anchor_system
-            <span class="keyword">if</span> self.protocol_version==<span class="number">7</span>:
-                <span class="keyword">from</span> services.claim_obligations <span class="keyword">import</span> parse,SYSTEM <span class="keyword">as</span> anchor_system
-                <span class="keyword">if</span> self.daily_guidance:
-                    <span class="keyword">from</span> services.claim_obligations <span class="keyword">import</span> DAILY_SYSTEM <span class="keyword">as</span> anchor_system
-            unified=self.message_profile==<span class="string">&#x27;unified_v1&#x27;</span>
-            <span class="keyword">if</span> unified:
-                <span class="keyword">from</span> services.claim_message_v1 <span class="keyword">import</span> system, VERSION, correction_instruction
-                anchor_system=system(self.daily_guidance)
-            payload={<span class="string">&#x27;answer_id&#x27;</span>:answer.answer_id,<span class="string">&#x27;answer_version&#x27;</span>:answer.version,<span class="string">&#x27;ANSWER_ANCHORS&#x27;</span>:anchors(answer),
-                <span class="string">&#x27;assumptions&#x27;</span>:answer.assumptions,<span class="string">&#x27;missing_information&#x27;</span>:answer.missing_information}
-            path=<span class="keyword">None</span> <span class="keyword">if</span> self.diagnostics <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> self.diagnostics.save_scope(payload)
-            output,_=<span class="keyword">await</span> structured_request(self.client,(ModelMessage(<span class="string">&#x27;system&#x27;</span>,anchor_system),ModelMessage(<span class="string">&#x27;user&#x27;</span>,json.dumps(payload,ensure_ascii=<span class="keyword">False</span>))),
-                VERSION <span class="keyword">if</span> unified <span class="keyword">else</span> (<span class="string">&#x27;atomic-claims-v7-obligations-faithful-assertions-v2&#x27;</span> <span class="keyword">if</span> self.daily_guidance <span class="keyword">else</span> <span class="string">&#x27;atomic-claims-v7-obligations&#x27;</span>) <span class="keyword">if</span> self.protocol_version==<span class="number">7</span> <span class="keyword">else</span> <span class="string">&#x27;atomic-claims-v6-basis-target-anchors&#x27;</span> <span class="keyword">if</span> self.protocol_version==<span class="number">6</span> <span class="keyword">else</span> <span class="string">&#x27;atomic-claims-v5-program-anchors&#x27;</span>,<span class="keyword">lambda</span> v:parse(v,answer),diagnostics=self.diagnostics,
-                response_contract_version=<span class="string">&#x27;atomic-claims-v&#x27;</span>+str(self.protocol_version),candidate_catalog_path=path,
-                correction_instruction=correction_instruction() <span class="keyword">if</span> unified <span class="keyword">else</span> <span class="keyword">None</span>)
-            <span class="keyword">return</span> output</code></pre>
-<p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
-<h3 id="section-41">摘录：政策上下文，不是另一个模型</h3>
-<p>harness/product_policy.py / ProductAuditPolicy.decide_context，实际行24–40。</p>
-<pre><code class="language-python">    <span class="keyword">def</span> decide_context(self, verification, domain, budget, revision_round, *, request,
+            <span class="keyword">from</span> agents.fact_flow_v1 <span class="keyword">import</span> FactFlowAgent <span class="keyword">as</span> FactAgent
+            <span class="keyword">if</span> self.config.fact_internal_flow==<span class="string">&#x27;joint_v2&#x27;</span>:
+                <span class="keyword">from</span> services.fact_flow_protocol_v2 <span class="keyword">import</span> create_agent <span class="keyword">as</span> FactAgent
+            <span class="keyword">elif</span> self.config.fact_internal_flow==<span class="string">&#x27;two_stage_v1&#x27;</span>:
+                <span class="keyword">from</span> services.fact_two_stage_v1 <span class="keyword">import</span> create_agent <span class="keyword">as</span> FactAgent</code></pre>
+<p>片段SHA256：90c30e41b968135fa24d44bf40d33f767e4ac80d3a4bd4f0848188937aac21bb。</p>
+<h3 id="section-24">受预算约束的完整闭环</h3>
+<p>路径 harness/runtime.py，函数 OfflineHarness.run，行47–64；完整函数至66行，局部摘录。</p>
+<pre><code class="language-python">    async def run(self, request, budget, *, knowledge_version=None, generation_only=False, answer_requirements=(),
+                  evidence_only=False, indexed_reference_ids=(), generation_snapshot=None, run_id=None):
+        if self.execution_path not in (&quot;sequential&quot;, &quot;langgraph_v1&quot;):
+            raise InputError(&quot;Unknown Harness execution path&quot;)
+        driver = None
+        if self.execution_path == &quot;langgraph_v1&quot;:
+            # Optional dependencies are never imported by the default path.
+            try:
+                from harness.graph_runtime_v1 import run_graph, validate_versions
+            except ImportError as exc:
+                raise InputError(&quot;Optional LangGraph dependencies unavailable; install requirements-langgraph.lock.txt&quot;) from exc
+            validate_versions()
+            driver = run_graph
+        execution = RunExecution(
+            self, request, budget, knowledge_version=knowledge_version,
+            generation_only=generation_only, answer_requirements=answer_requirements,
+            evidence_only=evidence_only, indexed_reference_ids=indexed_reference_ids,
+            generation_snapshot=generation_snapshot, run_id=run_id,</code></pre>
+<p>片段SHA256：e63611d2194634a77c92814d4afdc25f3659c5fbbc0d33e07db0c083239ca525。</p>
+<h3 id="section-25">确定性政策与执行完整性</h3>
+<p>路径 harness/product_policy.py，函数 ProductAuditPolicy.decide_context，行24–41；完整函数至177行，局部摘录。</p>
+<pre><code class="language-python">    def decide_context(self, verification, domain, budget, revision_round, *, request,
                        answer, claims, extraction, issues, retrieval):
+        from agents.contracts import LiteralVerificationOutput
+        if isinstance(verification,LiteralVerificationOutput):
+            from services.literal_policy_v1 import decide
+            return decide(self,verification,domain,budget,revision_round,request=request,answer=answer,claims=claims,extraction=extraction,issues=issues,retrieval=retrieval)
         facts, findings = verification.findings, domain.findings
-        ids = tuple(f.finding_id <span class="keyword">for</span> f <span class="keyword">in</span> facts <span class="keyword">if</span> f.status != V.SUPPORTED) + tuple(
-            f.finding_id <span class="keyword">for</span> f <span class="keyword">in</span> findings <span class="keyword">if</span> f.check_status <span class="keyword">in</span> (<span class="string">&#x27;warning&#x27;</span>, <span class="string">&#x27;not_assessable&#x27;</span>)
-            <span class="keyword">or</span> f.severity == Severity.HIGH)
+        ids = tuple(f.finding_id for f in facts if f.status != V.SUPPORTED) + tuple(
+            f.finding_id for f in findings if f.check_status in (&#x27;warning&#x27;, &#x27;not_assessable&#x27;)
+            or f.severity == Severity.HIGH)
         context = request.engineering_context
-        <span class="keyword">from</span> services.task_applicability <span class="keyword">import</span> read,effective
+        from services.task_applicability import read,effective
         assessment=read(findings)
-        scope=effective(context,assessment) <span class="keyword">if</span> assessment <span class="keyword">else</span> context.goal <span class="keyword">if</span> context <span class="keyword">else</span> <span class="string">&#x27;unknown&#x27;</span>
-        basis = ((<span class="string">&#x27;Model-reviewed requested/asserted scope: &#x27;</span> + scope + <span class="string">&#x27;; &#x27;</span> + assessment[<span class="string">&#x27;reason&#x27;</span>]) <span class="keyword">if</span> assessment <span class="keyword">else</span> <span class="string">&#x27;User requested scope: &#x27;</span> + scope,
-                 <span class="string">&#x27;Claim components and independent analysis_scope check retain technical truth obligations&#x27;</span>,
-                 <span class="string">&#x27;Classification is fallible; scope alone never overrides an adverse finding&#x27;</span>)
-        checks = [(<span class="string">&#x27;fact_support&#x27;</span>, <span class="string">&#x27;applicable&#x27;</span>, <span class="string">&#x27;Every extracted claim must have independent verification&#x27;</span>),
-                  (<span class="string">&#x27;original_citations&#x27;</span>, <span class="string">&#x27;applicable&#x27;</span> <span class="keyword">if</span> answer.citations <span class="keyword">else</span> <span class="string">&#x27;not_applicable&#x27;</span>,
-                   <span class="string">&#x27;Separate original citation judgments&#x27;</span> <span class="keyword">if</span> answer.citations <span class="keyword">else</span> <span class="string">&#x27;No original citations&#x27;</span>)]
-        <span class="keyword">for</span> claim <span class="keyword">in</span> claims:</code></pre>
-<p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
-<h3 id="section-42">摘录：阶段与对象短事务</h3>
-<p>backend/store.py / RunStore.checkpoint，实际行89–100。</p>
-<pre><code class="language-python">    <span class="keyword">def</span> checkpoint(self,rid,snapshot):
-        v=wire(snapshot);event=v[<span class="string">&#x27;event&#x27;</span>]
-        <span class="keyword">with</span> self.tx():
-            ordinal=self.db.execute(<span class="string">&#x27;SELECT COUNT(*) FROM events WHERE run_id=?&#x27;</span>,(rid,)).fetchone()[<span class="number">0</span>]+<span class="number">1</span>
-            self.db.execute(<span class="string">&#x27;INSERT INTO events VALUES (?,?,?,?,?)&#x27;</span>,(rid,event[<span class="string">&#x27;event_id&#x27;</span>],ordinal,dumps(event),dumps(v.get(<span class="string">&#x27;stage_output&#x27;</span>))))
-            self.db.execute(<span class="string">&#x27;UPDATE runs SET snapshot=?,harness_state=? WHERE id=?&#x27;</span>,(dumps(v),v[<span class="string">&#x27;state&#x27;</span>],rid))
-            <span class="comment"># Bind domain finding IDs to this frozen answer; domain findings already have explicit bindings.</span>
-            self.index(rid,v)
-            <span class="keyword">if</span> v.get(<span class="string">&#x27;stage_output&#x27;</span>) <span class="keyword">and</span> event[<span class="string">&#x27;component&#x27;</span>]==<span class="string">&#x27;evidence_verification&#x27;</span>:
-                answer=v[<span class="string">&#x27;stage_output&#x27;</span>];aid=answer[<span class="string">&#x27;answer_id&#x27;</span>];version=answer[<span class="string">&#x27;answer_version&#x27;</span>]
-                <span class="keyword">for</span> f <span class="keyword">in</span> answer[<span class="string">&#x27;findings&#x27;</span>]:
-                    self.index(rid,dict(f,answer_id=aid,answer_version=version))</code></pre>
-<p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
-<h3 id="section-43">摘录：保存结果到安全投影</h3>
-<p>backend/service.py / ApplicationService.result，实际行163–187。</p>
-<pre><code class="language-python">    <span class="keyword">def</span> result(self,rid):
-        row=self.store.get(rid);raw=row[<span class="string">&#x27;result&#x27;</span>] <span class="keyword">or</span> row[<span class="string">&#x27;snapshot&#x27;</span>]
-        <span class="keyword">if</span> raw <span class="keyword">is</span> <span class="keyword">None</span>:<span class="keyword">return</span> {<span class="string">&#x27;execution&#x27;</span>:self.state(rid),<span class="string">&#x27;result_available&#x27;</span>:<span class="keyword">False</span>,<span class="string">&#x27;reason&#x27;</span>:<span class="string">&#x27;No stage result persisted yet&#x27;</span>}
-        raw=dict(raw)
-        <span class="keyword">if</span> row[<span class="string">&#x27;result&#x27;</span>] <span class="keyword">is</span> <span class="keyword">None</span>:
-            <span class="comment"># Use already persisted valid sibling outputs, not a second execution.</span>
-            names={<span class="string">&#x27;generation&#x27;</span>:<span class="string">&#x27;generation_output&#x27;</span>,<span class="string">&#x27;claim_extraction&#x27;</span>:<span class="string">&#x27;extraction_output&#x27;</span>,
-                   <span class="string">&#x27;evidence_verification&#x27;</span>:<span class="string">&#x27;verification_output&#x27;</span>,<span class="string">&#x27;power_domain_review&#x27;</span>:<span class="string">&#x27;domain_output&#x27;</span>}
-            <span class="keyword">for</span> stage <span class="keyword">in</span> self.store.events(rid):
-                name=names.get(stage[<span class="string">&#x27;event&#x27;</span>][<span class="string">&#x27;component&#x27;</span>]);output=stage[<span class="string">&#x27;stage_output&#x27;</span>]
-                <span class="keyword">if</span> <span class="keyword">not</span> name <span class="keyword">or</span> <span class="keyword">not</span> isinstance(output,dict):<span class="keyword">continue</span>
-                <span class="keyword">if</span> output.get(<span class="string">&#x27;answer_version&#x27;</span>) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> raw.get(<span class="string">&#x27;answer&#x27;</span>) <span class="keyword">and</span> output[<span class="string">&#x27;answer_version&#x27;</span>]!=raw[<span class="string">&#x27;answer&#x27;</span>][<span class="string">&#x27;version&#x27;</span>]:<span class="keyword">continue</span>
-                <span class="keyword">if</span> raw.get(name) <span class="keyword">is</span> <span class="keyword">None</span>:raw[name]=output
-        report=raw.get(<span class="string">&#x27;report&#x27;</span>);decision=<span class="keyword">None</span> <span class="keyword">if</span> <span class="keyword">not</span> report <span class="keyword">else</span> report[<span class="string">&#x27;decision&#x27;</span>]
-        rounds=raw.get(<span class="string">&#x27;review_rounds&#x27;</span>,[])
-        issues=list(raw.get(<span class="string">&#x27;execution_issues&#x27;</span>,[]))
-        <span class="keyword">for</span> output <span class="keyword">in</span> (raw.get(<span class="string">&#x27;verification_output&#x27;</span>),raw.get(<span class="string">&#x27;domain_output&#x27;</span>)):
-            <span class="keyword">if</span> output:issues+=output.get(<span class="string">&#x27;execution_issues&#x27;</span>,[])
-        current_version=(raw.get(<span class="string">&#x27;answer&#x27;</span>) <span class="keyword">or</span> {}).get(<span class="string">&#x27;version&#x27;</span>)
-        no_answer=(raw.get(<span class="string">&#x27;generation_output&#x27;</span>) <span class="keyword">or</span> {}).get(<span class="string">&#x27;substantive_answer&#x27;</span>) <span class="keyword">is</span> <span class="keyword">False</span>
-        <span class="keyword">if</span> no_answer <span class="keyword">and</span> <span class="keyword">not</span> issues:complete=<span class="keyword">True</span>
-        complete=bool(rounds) <span class="keyword">and</span> rounds[-<span class="number">1</span>][<span class="string">&#x27;answer&#x27;</span>][<span class="string">&#x27;version&#x27;</span>]==current_version <span class="keyword">and</span> all(<span class="keyword">not</span> r[k].get(<span class="string">&#x27;execution_issues&#x27;</span>) <span class="keyword">for</span> r <span class="keyword">in</span> rounds <span class="keyword">for</span> k <span class="keyword">in</span> (<span class="string">&#x27;verification&#x27;</span>,<span class="string">&#x27;domain_review&#x27;</span>)) <span class="keyword">and</span> <span class="keyword">not</span> issues
-        verification=raw.get(<span class="string">&#x27;verification_output&#x27;</span>) <span class="keyword">or</span> {};domain=raw.get(<span class="string">&#x27;domain_output&#x27;</span>) <span class="keyword">or</span> {}
-        original=row[<span class="string">&#x27;request&#x27;</span>].get(<span class="string">&#x27;existing_answer&#x27;</span>)
-        <span class="keyword">if</span> original <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">and</span> raw.get(<span class="string">&#x27;generation_output&#x27;</span>):original=raw[<span class="string">&#x27;generation_output&#x27;</span>][<span class="string">&#x27;answer&#x27;</span>]</code></pre>
-<p>只摘录该函数入口/关键部分，省略后续实现；沿当前源码继续阅读。</p>
-<h3 id="section-44">关键连接：实际Harness组件注入</h3>
-<p>backend/assembly.py / harness=OfflineHarness；默认代码基线09c6b987，实际行298–305。截取部分不代替完整函数。</p>
-<pre><code class="language-python">            harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=<span class="number">3</span>,product_guidance=self.config.decision_policy==<span class="string">&#x27;product-v1&#x27;</span>),
-                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=<span class="keyword">True</span>,support_relation_version=<span class="number">6</span>,review_message_profile=self.config.review_message_profile,**({<span class="string">&#x27;review_result_transport&#x27;</span>:self.config.review_result_transport,<span class="string">&#x27;review_contract&#x27;</span>:self.config.fact_review_contract} <span class="keyword">if</span> self.config.fact_review_contract!=<span class="string">&#x27;production&#x27;</span> <span class="keyword">else</span> {})),
-                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=<span class="number">5</span>,safety_review=<span class="keyword">True</span>,task_applicability=<span class="keyword">True</span>),
-                ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=<span class="number">2</span>,clean_answer_body=<span class="keyword">True</span>,answer_delivery=self.config.revision_answer_delivery),
-                ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=<span class="keyword">True</span>,protocol_version=<span class="number">7</span>,daily_guidance=self.config.decision_policy==<span class="string">&#x27;product-v1&#x27;</span>,message_profile=self.config.extraction_message_profile),
-                policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version=<span class="string">&#x27;scalar-si-conversion-v2&#x27;</span>),observer=observer,
-                generation_query_converter=GenerationQueryConverter(model,settings,diag) <span class="keyword">if</span> self.config.retrieval_mode==<span class="string">&#x27;bm25&#x27;</span> <span class="keyword">and</span> <span class="keyword">not</span> fixed_evidence_only <span class="keyword">and</span> self.config.retrieval_execution_profile!=<span class="string">&#x27;chinese_first_cross_language_v1&#x27;</span> <span class="keyword">else</span> <span class="keyword">None</span>,
-                generation_corpus_english=corpus_english,execution_path=self.config.execution_path)</code></pre>
-<h3 id="section-45">关键连接：按输入契约包装，而非散落版本条件</h3>
-<p>以下为共享阶段抽取前固定提交<code>1d5528f</code>的harness/runtime.py行432–438历史摘录。当前同一职责在harness/execution.py的prepare_review；保留旧片段帮助理解移动前后的连接，不能拿旧行号定位现行代码。</p>
-<pre><code class="language-python">                <span class="keyword">from</span> services.review_inputs <span class="keyword">import</span> build <span class="keyword">as</span> build_review_input
-                summary=<span class="keyword">lambda</span> delivery:__import__(<span class="string">&#x27;json&#x27;</span>).dumps(__import__(<span class="string">&#x27;dataclasses&#x27;</span>).asdict(delivery.record)) <span class="keyword">if</span> retrieval <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span>
-                v_input=build_review_input(self.verification,v_input,tool_results=current_tools,
-                    delivery_summary=summary(vd) <span class="keyword">if</span> retrieval <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span>,
-                    fact_retrieval_bindings=vd.record.fact_bindings <span class="keyword">if</span> retrieval <span class="keyword">else</span> ())
-                d_input=build_review_input(self.domain_review,d_input,tool_results=current_tools,
-                    delivery_summary=summary(dd) <span class="keyword">if</span> retrieval <span class="keyword">and</span> <span class="keyword">not</span> evidence_only <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span>)</code></pre>
-<h3 id="section-46">关键连接：并发双审和异常收尾</h3>
-<p>以下为固定提交<code>1d5528f</code>的harness/runtime.py行477–488历史摘录；当前在harness/execution.py的review_pair，仍是一个阶段内部并发双审，不因图适配改为两个图节点。</p>
-<pre><code class="language-python">                reviewers = [asyncio.create_task(job) <span class="keyword">for</span> job <span class="keyword">in</span> (
-                    review(<span class="string">&quot;evidence_verification&quot;</span>, self.verification, v_input, merge_evidence(v_evidence, original_evidence), <span class="keyword">True</span>, v_retrieval_issue),
-                    review(<span class="string">&quot;power_domain_review&quot;</span>, self.domain_review, d_input, d_evidence, <span class="keyword">False</span>, d_retrieval_issue),
-                )]
-                <span class="keyword">try</span>:
-                    (verification, v_issue), (domain, d_issue) = <span class="keyword">await</span> asyncio.gather(*reviewers)
-                <span class="keyword">except</span> BaseException:
-                    <span class="keyword">for</span> reviewer <span class="keyword">in</span> reviewers:
-                        reviewer.cancel()
-                    <span class="keyword">await</span> asyncio.gather(*reviewers,return_exceptions=<span class="keyword">True</span>)
-                    <span class="keyword">raise</span>
-                <span class="keyword">if</span> v_issue:</code></pre>
-<h3 id="section-47">关键连接：修订后重建与旧轮次保留</h3>
-<p>以下为固定提交<code>1d5528f</code>的harness/runtime.py行600–613历史摘录；当前在harness/execution.py的revise和外层run异常边界，不因修订而覆盖旧轮次。</p>
-<pre><code class="language-python">                answer = revised.answer
-                revision_outputs.append(revised)
-                active_snapshot = revised.evidence_snapshot
-                evidence = merge_evidence(evidence, revised.evidence)
-                collect_agent_evidence(revised.evidence)
-                record(&quot;revision_changes&quot;, ExecutionStatus.SUCCEEDED, perf_counter(),
-                       &quot;; &quot;.join(change.description for change in revised.changes),
-                       outputs=(f&quot;{answer.answer_id}@{answer.version}&quot;,))
-                rounds += 1
-                verification = domain = None
-                report = None
-        except HarnessObserverError:
-            raise
-        except RequiredRetrievalFailure as exc:</code></pre>
-<h2 id="section-48">2026-10-22现行连接：共享阶段与可选图</h2>
-<p>图适配应用源码绑定提交<code>9f0e491</code>，<code>docs/learning/source-check.json</code>保留上述旧连接记录并新增当前阶段/图函数的行号与文本哈希。先看harness/runtime.py的OfflineHarness.run：只有显式选<code>langgraph_v1</code>才加载可选依赖并传入图driver；默认路径不需要图依赖，也没有API载荷开关。</p>
-<p>接着看harness/execution.py：run_stages保留原顺序驱动，run(driver=...)只选择一个driver，并共用同一套异常、取消、observer、注册清理和结果组装。harness/graph_runtime_v1.py的build_graph定义7节点和条件边；run_graph调用ainvoke，不调用run_stages。节点每次只执行一个共享阶段，通过状态更新提供下一阶段标签，条件边实际完成路由。</p>
-<p>调试时可对照tests/test_langgraph_runtime_v1.py：让run_stages直接抛错，图仍完成7阶段和修订回环；图失败则检查旧驱动没有执行。预算、调用归属和部分结果通过同一输入的差分核对。evaluation/reviewer_graph_v1.py包装独立评审组件，evaluation/langgraph_replay_v1.py只返回绑定消息哈希的历史响应，不创建真实供应商适配器。</p>
-<p>与第04章的节点图一起阅读，并区分代码已存在、离线通过和真实运行验证。当前只完成前两项；v7历史响应回放不是新的模型生成成绩，生产组装仍为schema13及默认顺序路径。</p>
-<h2 id="section-49">2026-10-22 服务图接线阅读点</h2>
-<p>先看backend/config.py的服务端execution_path，再看backend/assembly.py的preflight、manifest和create。worker依然只调用同一个Harness，图和原驱动均调用harness/execution.py七共享阶段。API/SQLite保存编排身份，历史默认原路；正常Factory不注入A/B候选。服务收集器曾跨线程读SQLite，已改只读独立连接，修复不代表恢复已停止批次。</p>
-<h2 id="section-50">三道自测：先作答，再展开</h2>
-<h3 id="section-51">自测1：为什么直接组件测试不够？</h3>
+        scope=effective(context,assessment) if assessment else context.goal if context else &#x27;unknown&#x27;
+        basis = ((&#x27;Model-reviewed requested/asserted scope: &#x27; + scope + &#x27;; &#x27; + assessment[&#x27;reason&#x27;]) if assessment else &#x27;User requested scope: &#x27; + scope,
+                 &#x27;Claim components and independent analysis_scope check retain technical truth obligations&#x27;,
+                 &#x27;Classification is fallible; scope alone never overrides an adverse finding&#x27;)
+        checks = [(&#x27;fact_support&#x27;, &#x27;applicable&#x27;, &#x27;Every extracted claim must have independent verification&#x27;),</code></pre>
+<p>片段SHA256：723110fc5ff83741dba7a3c4727ba3085b2db5f456fcd9d069ccbec474c6daf3。</p>
+<h3 id="section-26">D/O/S/U修订上下文</h3>
+<p>路径 services/local_revision_v2.py，函数 plan，行79–96；完整函数至144行，局部摘录。</p>
+<pre><code class="language-python"><span class="keyword">def</span> plan(inputs):
+    <span class="string">&quot;&quot;&quot;Program-owned projection; no credential loading, retrieval or semantic inference.&quot;&quot;&quot;</span>
+    validate_types(inputs,RevisionInput)
+    v=inputs.verification;answer=inputs.answer
+    require(isinstance(v,LiteralVerificationOutput),<span class="string">&#x27;V2 revision requires literal review output&#x27;</span>)
+    require((v.answer_id,v.answer_version)==(answer.answer_id,answer.version),<span class="string">&#x27;Revision input version conflict&#x27;</span>)
+    require(<span class="keyword">not</span> v.execution_issues <span class="keyword">and</span> <span class="keyword">not</span> inputs.domain_review.execution_issues,<span class="string">&#x27;Incomplete review cannot authorize revision&#x27;</span>)
+    require((inputs.domain_review.answer_id,inputs.domain_review.answer_version)==(answer.answer_id,answer.version),<span class="string">&#x27;Domain version conflict&#x27;</span>)
+    require(len({e.evidence_id <span class="keyword">for</span> e <span class="keyword">in</span> inputs.allowed_evidence})==len(inputs.allowed_evidence),<span class="string">&#x27;Duplicate allowed evidence identity&#x27;</span>)
+    validate_answer(answer,inputs.allowed_evidence)
+    av={e.evidence_id:e <span class="keyword">for</span> e <span class="keyword">in</span> inputs.allowed_evidence};aa=anchors(answer)
+    units={f&#x27;U{i}&#x27;:a <span class="keyword">for</span> i,a <span class="keyword">in</span> enumerate(aa)};unit_by_anchor={a[<span class="string">&#x27;anchor_id&#x27;</span>]:k <span class="keyword">for</span> k,a <span class="keyword">in</span> units.items()}
+    require(len(unit_by_anchor)==len(aa),<span class="string">&#x27;Duplicate answer anchor&#x27;</span>)
+    authorities={f&#x27;D{i}&#x27;:d <span class="keyword">for</span> i,d <span class="keyword">in</span> enumerate(sorted(v.literal_defects,key=<span class="keyword">lambda</span> d:d.finding_id))}
+    require(len({d.finding_id <span class="keyword">for</span> d <span class="keyword">in</span> authorities.values()})==len(authorities),<span class="string">&#x27;Duplicate authority&#x27;</span>)
+    vr={r.anchor_id:r <span class="keyword">for</span> r <span class="keyword">in</span> v.literal_reviews}
+    require(len(vr)==len(v.literal_reviews) <span class="keyword">and</span> set(vr)==set(unit_by_anchor),<span class="string">&#x27;Prior literal review coverage/identity conflict&#x27;</span>)
+    prior={u:[] <span class="keyword">for</span> u <span class="keyword">in</span> units};used=set()</code></pre>
+<p>片段SHA256：c28fdfa8e6ad60f7adbe6a53ceb78054de90f99e78cd7b8c39438de699148910。</p>
+<h3 id="section-27">修改授权与意见记账</h3>
+<p>路径 services/local_revision_v2.py，函数 parse，行171–188；完整函数至241行，局部摘录。</p>
+<pre><code class="language-python"><span class="keyword">def</span> parse(value,p):
+    ec=Errors()
+    <span class="keyword">if</span> <span class="keyword">not</span> ec.fields(value,<span class="string">&#x27;root&#x27;</span>,<span class="string">&#x27;$&#x27;</span>):ec.finish()
+    ec.check(value.get(<span class="string">&#x27;context_id&#x27;</span>)==p.payload[<span class="string">&#x27;context_id&#x27;</span>],<span class="string">&#x27;$.context_id&#x27;</span>,<span class="string">&#x27;answer_version_context_mismatch&#x27;</span>)
+    edits=value.get(<span class="string">&#x27;edits&#x27;</span>);actions=value.get(<span class="string">&#x27;opinion_actions&#x27;</span>);good_edits=[];targets={};used_d=set();action_rows=[];seen_o=set()
+    <span class="keyword">if</span> ec.check(type(edits) <span class="keyword">is</span> list,<span class="string">&#x27;$.edits&#x27;</span>,<span class="string">&#x27;array_required&#x27;</span>):
+        <span class="keyword">for</span> i,e <span class="keyword">in</span> enumerate(edits):
+            path=f&#x27;$.edits[{i}]&#x27;
+            <span class="keyword">if</span> <span class="keyword">not</span> ec.fields(e,<span class="string">&#x27;edit&#x27;</span>,path):<span class="keyword">continue</span>
+            u=e.get(<span class="string">&#x27;unit_ref&#x27;</span>);valid_u=type(u) <span class="keyword">is</span> str <span class="keyword">and</span> u <span class="keyword">in</span> p.units
+            ec.check(valid_u,path+<span class="string">&#x27;.unit_ref&#x27;</span>,<span class="string">&#x27;current_unit_ref_required&#x27;</span>)
+            <span class="keyword">if</span> valid_u:
+                ec.check(u <span class="keyword">not</span> <span class="keyword">in</span> targets,path+<span class="string">&#x27;.unit_ref&#x27;</span>,<span class="string">&#x27;conflicting_unit_replacement&#x27;</span>);targets[u]=i
+            ds=ec.refs(e.get(<span class="string">&#x27;authorization_refs&#x27;</span>),p.authorities,path+<span class="string">&#x27;.authorization_refs&#x27;</span>,<span class="string">&#x27;authorization_ref&#x27;</span>,nonempty=<span class="keyword">True</span>)
+            used_d.update(ds)
+            legal={k <span class="keyword">for</span> k,s <span class="keyword">in</span> p.sources.items() <span class="keyword">if</span> valid_u <span class="keyword">and</span> any(s.evidence_id==x[<span class="string">&#x27;evidence_id&#x27;</span>] <span class="keyword">for</span> x <span class="keyword">in</span> p.prior[u]) <span class="keyword">or</span> any(s.evidence_id==q.evidence_id <span class="keyword">for</span> d <span class="keyword">in</span> ds <span class="keyword">for</span> q <span class="keyword">in</span> p.authorities[d].sources)}
+            ss=ec.refs(e.get(<span class="string">&#x27;support_refs&#x27;</span>),legal,path+<span class="string">&#x27;.support_refs&#x27;</span>,<span class="string">&#x27;support_source_ref&#x27;</span>,nonempty=<span class="keyword">True</span>)
+            <span class="keyword">for</span> d <span class="keyword">in</span> ds:</code></pre>
+<p>片段SHA256：fde156157edada85f95c68411719d42b920d829d7d0989fbc93ae99a7f6c55b6。</p>
+<h3 id="section-28">跨语言词项入口</h3>
+<p>路径 rag/chinese_first.py，函数 lexical，行26–27；完整函数至27行，完整定义。</p>
+<pre><code class="language-python"><span class="keyword">def</span> lexical(text):
+    <span class="keyword">return</span> tokenize(text) + tuple(w.casefold() <span class="keyword">for</span> w <span class="keyword">in</span> re.findall(<span class="string">r&#x27;[\u0370-\u03ff]+|[=+*/^&lt;&gt;≤≥−]&#x27;</span>, text))</code></pre>
+<p>片段SHA256：34eac82ab0a0f0c47de7edafd71fc66321aa0f691bc60f11ef4d0eb50650fffd。</p>
+<h3 id="section-29">恢复实际输入与知识身份</h3>
+<p>路径 evaluation/natural_draft_audit_v1.py，函数 recover，行27–44；完整函数至45行，局部摘录。</p>
+<pre><code class="language-python"><span class="keyword">def</span> recover():
+    summary=load(OLD/<span class="string">&#x27;batch/summary.json&#x27;</span>);generated={};origins=[]
+    <span class="keyword">with</span> closing(sqlite3.connect((OLD/<span class="string">&#x27;batch/runs.sqlite3&#x27;</span>).as_uri()+<span class="string">&#x27;?mode=ro&#x27;</span>,uri=<span class="keyword">True</span>)) <span class="keyword">as</span> db:
+        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):
+            ident=f&#x27;N{i+<span class="number">1</span>}-C&#x27;;control=next(r <span class="keyword">for</span> r <span class="keyword">in</span> summary[<span class="string">&#x27;control&#x27;</span>] <span class="keyword">if</span> r[<span class="string">&#x27;case_id&#x27;</span>]==ident);rid=control[<span class="string">&#x27;accepted&#x27;</span>][<span class="string">&#x27;run_id&#x27;</span>]
+            raw=summary[<span class="string">&#x27;outputs&#x27;</span>][rid];path=OLD/<span class="string">&#x27;batch&#x27;</span>/rid/<span class="string">&#x27;result.json&#x27;</span>;inp=load(OLD/<span class="string">&#x27;batch&#x27;</span>/rid/<span class="string">&#x27;input.json&#x27;</span>)
+            require(load(path)==raw <span class="keyword">and</span> json.loads(db.execute(<span class="string">&#x27;SELECT result FROM runs WHERE id=?&#x27;</span>,(rid,)).fetchone()[<span class="number">0</span>])==raw,<span class="string">&#x27;Historical result/Store mismatch&#x27;</span>)
+            req=restore(inp[<span class="string">&#x27;request&#x27;</span>],TaskRequest);gen=restore(raw[<span class="string">&#x27;generation_output&#x27;</span>],GenerationOutput)
+            validate_snapshot(gen.evidence_snapshot,gen.answer)
+            require(wire(gen.answer)==raw[<span class="string">&#x27;answer&#x27;</span>] <span class="keyword">and</span> wire(gen.evidence_snapshot.evidence)==raw[<span class="string">&#x27;evidence&#x27;</span>],<span class="string">&#x27;Historical natural draft/snapshot mismatch&#x27;</span>)
+            require(wire(gen.evidence_snapshot.evidence_bindings)==raw[<span class="string">&#x27;evidence_bindings&#x27;</span>],<span class="string">&#x27;Historical role/binding mismatch&#x27;</span>)
+            require(gen.evidence_snapshot.question==req.question <span class="keyword">and</span> gen.evidence_snapshot.user_context==req.user_context <span class="keyword">and</span> gen.evidence_snapshot.engineering_context==req.engineering_context,<span class="string">&#x27;Historical question/context mismatch&#x27;</span>)
+            generated[i]=SimpleNamespace(answer=gen.answer,evidence=gen.evidence_snapshot.evidence,generation_output=replace(gen,model_records=()),model_records=(),duration_ms=<span class="number">0</span>,retrieval_records=())
+            origins.append(dict(id=f&#x27;N{i+<span class="number">1</span>}&#x27;,old_run_id=rid,request=wire(req),answer_sha256=sha(raw[<span class="string">&#x27;answer&#x27;</span>]),evidence_sha256=sha(raw[<span class="string">&#x27;evidence&#x27;</span>]),
+                bindings_sha256=sha(raw[<span class="string">&#x27;evidence_bindings&#x27;</span>]),snapshot_sha256=sha(raw[<span class="string">&#x27;generation_output&#x27;</span>][<span class="string">&#x27;evidence_snapshot&#x27;</span>]),
+                knowledge_version=gen.evidence_snapshot.knowledge_version,old_generation_records=raw[<span class="string">&#x27;model_records&#x27;</span>],historical_cost_recounted=<span class="keyword">False</span>,
+                origin=<span class="string">&#x27;archived_natural_generation_only; all initial extraction/fact/domain audits must be fresh&#x27;</span>,
+                files=[dict(path=p.relative_to(ROOT).as_posix(),sha256=digest(p)) <span class="keyword">for</span> p <span class="keyword">in</span> (path,OLD/<span class="string">&#x27;batch&#x27;</span>/rid/<span class="string">&#x27;input.json&#x27;</span>)]))</code></pre>
+<p>片段SHA256：0aafb6e57a7f5b5ed99e5510729a7a8cb2bf889033eaacd3c596d693f241ba54。</p>
+<h3 id="section-30">一次有界审核批次</h3>
+<p>路径 evaluation/natural_draft_audit_v1.py，函数 batch，行88–105；完整函数至108行，局部摘录。</p>
+<pre><code class="language-python">async def batch(c,m,generated,root,provider,*,limit=None):
+    limit=limit or SendLimit(root)
+    async def runner(h,req,budget,**kw):
+        i=next(i for i,row in enumerate(m[&#x27;origins&#x27;]) if row[&#x27;request&#x27;][&#x27;question&#x27;]==req.question);origin=m[&#x27;origins&#x27;][i]
+        require(req.existing_answer==generated[i].answer and req.provided_evidence==generated[i].evidence,&#x27;Fixed natural input differs&#x27;)
+        require(sha(kw[&#x27;generation_snapshot&#x27;])==origin[&#x27;snapshot_sha256&#x27;],&#x27;Real generation snapshot differs&#x27;)
+        require(h.retriever is None and not h.subject_supplement and kw[&#x27;knowledge_version&#x27;]==origin[&#x27;knowledge_version&#x27;],&#x27;Unexpected retrieval/snapshot scope&#x27;)
+        save(root/kw[&#x27;run_id&#x27;]/&#x27;audit-origin.json&#x27;,dict(origin=origin,new_run_id=kw[&#x27;run_id&#x27;],initial_audits=&#x27;all_fresh&#x27;,
+            archived_generation_bindings_preserved_in_snapshot=True,current_provided_evidence_roles=&#x27;normal fixed-evidence Harness user_reference; distinct from archived generation core/adjacent roles&#x27;,
+            no_historical_audit_replay=True,historical_cost_recounted=False))
+        return await h.run(req,budget,**kw)
+    def guard(spec,raw):
+        if any(x[&#x27;code&#x27;] in (&#x27;MODEL_TIMEOUT&#x27;,&#x27;TIMEOUT&#x27;,&#x27;MODEL_CANCELLED&#x27;,&#x27;CANCELLED&#x27;) for x in raw.get(&#x27;execution_issues&#x27;,[])):
+            return dict(component=&#x27;service&#x27;,code=&#x27;SERVICE_EXECUTION_FAILED&#x27;,message=&#x27;Shared timeout/unknown acceptance; stop new sends&#x27;)
+        if raw.get(&#x27;generation_output&#x27;) or raw.get(&#x27;retrieval_records&#x27;):
+            return dict(component=&#x27;service&#x27;,code=&#x27;SERVICE_EXECUTION_FAILED&#x27;,message=&#x27;Unexpected generation/retrieval&#x27;)
+    rows=[dict(id=f&#x27;N{i+1}&#x27;,input=dict(id=f&#x27;N{i+1}&#x27;,line=&#x27;B&#x27;,case=i,variant=&#x27;candidate&#x27;)) for i in range(8)]
+    return await shared.batch(c,m,root,provider,factory_type=Factory,rows=rows,request_builder=request,variant_config=lambda cfg,v:cfg,</code></pre>
+<p>片段SHA256：02992c4f6c2777c98590b491f3c7ea98ed33bdaed94359d697e52cb2696429ae。</p>
+<h3 id="section-31">固定证据生成诊断入口</h3>
+<p>路径 evaluation/retrieval_evidence_answer_check_v1.py，函数 run，行186–203；完整函数至216行，局部摘录。</p>
+<pre><code class="language-python"><span class="keyword">async</span> <span class="keyword">def</span> run():
+    require(<span class="keyword">not</span> (LOCAL/<span class="string">&#x27;attempt.json&#x27;</span>).exists(),<span class="string">&#x27;Unique new attempt only; no resume&#x27;</span>)
+    require(<span class="keyword">not</span> subprocess.check_output([<span class="string">&#x27;git&#x27;</span>,<span class="string">&#x27;status&#x27;</span>,<span class="string">&#x27;--porcelain&#x27;</span>,<span class="string">&#x27;--&#x27;</span>,<span class="string">&#x27;agents&#x27;</span>,<span class="string">&#x27;backend&#x27;</span>,<span class="string">&#x27;core&#x27;</span>,<span class="string">&#x27;harness&#x27;</span>,<span class="string">&#x27;model_adapter&#x27;</span>,<span class="string">&#x27;rag&#x27;</span>,<span class="string">&#x27;services&#x27;</span>,<span class="string">&#x27;evaluation&#x27;</span>,<span class="string">&#x27;tests&#x27;</span>,<span class="string">&#x27;tools&#x27;</span>],cwd=ROOT,text=<span class="keyword">True</span>).strip(),<span class="string">&#x27;Commit sources first&#x27;</span>)
+    require(<span class="keyword">not</span> subprocess.check_output([<span class="string">&#x27;git&#x27;</span>,<span class="string">&#x27;diff&#x27;</span>,BASE,<span class="string">&#x27;--&#x27;</span>,<span class="string">&#x27;agents&#x27;</span>,<span class="string">&#x27;backend&#x27;</span>,<span class="string">&#x27;core&#x27;</span>,<span class="string">&#x27;harness&#x27;</span>,<span class="string">&#x27;model_adapter&#x27;</span>,<span class="string">&#x27;rag&#x27;</span>,<span class="string">&#x27;services&#x27;</span>,<span class="string">&#x27;tools&#x27;</span>],cwd=ROOT),<span class="string">&#x27;Business semantics changed&#x27;</span>)
+    m=load(LOCAL/<span class="string">&#x27;materials.json&#x27;</span>);recovered,origins=recover();require(origins==load(LOCAL/<span class="string">&#x27;origins.json&#x27;</span>),<span class="string">&#x27;Prepared origins changed&#x27;</span>)
+    original_materials=load(OLD/<span class="string">&#x27;materials.json&#x27;</span>)
+    <span class="keyword">for</span> key <span class="keyword">in</span> (<span class="string">&#x27;N&#x27;</span>,<span class="string">&#x27;rules&#x27;</span>,<span class="string">&#x27;reference_sources&#x27;</span>):
+        require(m[key]==original_materials[key],<span class="string">&#x27;Frozen original reference changed: &#x27;</span>+key)
+    c=ServiceConfig.from_environment()  <span class="comment"># sole real-run root .env loader</span>
+    require(os.environ.get(<span class="string">&#x27;DEEPSEEK_MODEL_ID&#x27;</span>)==<span class="string">&#x27;deepseek-flash&#x27;</span>,<span class="string">&#x27;Flash only&#x27;</span>)
+    previous=load(OLD/<span class="string">&#x27;freeze.json&#x27;</span>)
+    <span class="keyword">for</span> key <span class="keyword">in</span> (<span class="string">&#x27;profile&#x27;</span>,<span class="string">&#x27;decision_policy&#x27;</span>,<span class="string">&#x27;execution_path&#x27;</span>,<span class="string">&#x27;verification_schema&#x27;</span>,<span class="string">&#x27;retrieval_mode&#x27;</span>,<span class="string">&#x27;retrieval_execution_profile&#x27;</span>,
+        <span class="string">&#x27;fact_strategy&#x27;</span>,<span class="string">&#x27;fact_review_contract&#x27;</span>,<span class="string">&#x27;local_revision_interface&#x27;</span>,<span class="string">&#x27;revision_answer_delivery&#x27;</span>,<span class="string">&#x27;review_result_transport&#x27;</span>,
+        <span class="string">&#x27;fact_internal_flow&#x27;</span>,<span class="string">&#x27;domain_internal_flow&#x27;</span>,<span class="string">&#x27;extraction_message_profile&#x27;</span>,<span class="string">&#x27;review_message_profile&#x27;</span>,<span class="string">&#x27;knowledge_version&#x27;</span>):
+        require(getattr(c,key)==previous[<span class="string">&#x27;configuration&#x27;</span>][key],<span class="string">&#x27;Original configuration differs: &#x27;</span>+key)
+    c=replace(c,run_db=LOCAL/<span class="string">&#x27;batch/runs.sqlite3&#x27;</span>,budget=replace(c.budget,max_model_calls=<span class="number">2</span>,max_duration_seconds=<span class="number">800</span>,max_transient_retries=<span class="number">0</span>))
+    manifest=ComponentFactory(c).manifest(c.knowledge_version,fixed_evidence_only=<span class="keyword">True</span>)
+    require(manifest[<span class="string">&#x27;prompts&#x27;</span>][<span class="string">&#x27;generation&#x27;</span>]==previous[<span class="string">&#x27;manifest&#x27;</span>][<span class="string">&#x27;prompts&#x27;</span>][<span class="string">&#x27;generation&#x27;</span>],<span class="string">&#x27;Generation prompt differs&#x27;</span>)</code></pre>
+<p>片段SHA256：25f9bd3f284cb5574787e52d9d8d53f5df3d0aa86422c901ef757e5529a4c6f0。</p>
+<details class="self-answer"><summary>新源码核对练习：测试14项通过能证明N2被识别吗？</summary><p>不能。专项证明恢复身份、真初审路径、预算与Store等接缝；自然语义判断必须看实际预测和原文。N2的审核supported恰好表明程序接线正确也可能语义漏检。检查文件哈希能证明教材读的是这份源码，不能证明模型结论正确。</p></details>
+<h2 id="section-32">既有源码练习（历史题保留）</h2>
+<details class="self-answer"><summary>展开新增练习解析</summary><p>不能。它只证明程序收到该合法声明时不会走旧遗漏路径；真实模型能否作出正确声明、能否识别条件归属，需要固定真实输入逐项核验。不能将新字段或替身标签当语义成绩。</p></details>
 <details class="self-answer"><summary>展开参考答案1</summary><p>它可能手工传扩展输入，遗漏真实Factory/Harness构造分支。</p></details>
-<h3 id="section-52">自测2：task_id和run_id在哪里产生？</h3>
 <details class="self-answer"><summary>展开参考答案2</summary><p>Submit.task构造任务身份；ApplicationService.submit生成运行身份。</p></details>
-<h3 id="section-53">自测3：observer失败还能声称结果保存吗？</h3>
 <details class="self-answer"><summary>展开参考答案3</summary><p>不能；抛HarnessObserverError并报告持久化失败。</p></details>
-<h2 id="section-54">2026-10-08 首版收尾核对</h2>
-<p>schema13未换。任务范围由既有Domain的analysis_scope新增task_scope字段同次判断，结合实际问题/回答，程序记录原goal、身份/哈希/理由；缺goal不默认工程或概念，conceptual不能豁免工程承诺，真实异议/范围不确定保留复核。见 <code>services/task_applicability.py</code>、<code>agents/domain_contract_v3.py</code> 和 <code>agents/power_domain_review.program_findings</code>。同组件关系v6取消模型重复quote_ids，由合法局部bases/indexes程序绑定；条件/repair不得借未选正文或别的作用域，旧v5按旧接口保存，新增输出v9.12显式标记。见 <code>services/support_relation_v6.py</code>，危险规则未扩。</p>
-<p>4题各一次全部阶段完成：新概念通过、特定100kVA不足被识别、危险事实矛盾与来源绑定高风险完整且禁止采用；工程题不编造，但长回答/拒答及建议边界仍复核。16调用/0纠正/0修订不能称通用稳定；本批没有真实Revision，既有成功与Factory完整重审另列。实际浏览器和重启保存已核对，旧失败和完整库不变。进入限定个人最终试用，工程自动定值/认证未提供；详见项目 <code>docs/audit-closeout-v1.md</code>。</p>
-<h2 id="section-55">事实审核内部候选源码：FactFlowAgent.run</h2>
-<p>路径 agents/fact_flow_v1.py，函数 FactFlowAgent.run，行21–33。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> run(self,inputs):
-        <span class="keyword">from</span> harness.graph_runtime_v1 <span class="keyword">import</span> validate_versions
-        validate_versions()
-        <span class="keyword">from</span> core.validation <span class="keyword">import</span> merge_evidence, require
-        <span class="keyword">from</span> services.evidence_scope <span class="keyword">import</span> validate_snapshot
-        merge_evidence(inputs.seed_evidence,inputs.original_evidence)
-        <span class="keyword">if</span> inputs.generation_snapshot <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:
-            validate_snapshot(inputs.generation_snapshot,inputs.answer)
-            merge_evidence(inputs.seed_evidence,inputs.original_evidence,inputs.generation_snapshot.evidence)
-            require(inputs.knowledge_version <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> inputs.generation_snapshot.knowledge_version==inputs.knowledge_version,<span class="string">&#x27;knowledge version mismatch&#x27;</span>)
-        <span class="keyword">async</span> <span class="keyword">def</span> prepare(state):
-            <span class="comment"># Existing binder rejects stale source identities and scopes.</span>
-            cat=Catalog(state[<span class="string">&#x27;inputs&#x27;</span>])</code></pre>
-<h2 id="section-56">事实审核内部候选源码：Catalog.parse_one</h2>
-<p>路径 services/fact_flow_protocol_v1.py，函数 Catalog.parse_one，行113–125。</p>
-<pre><code class="language-python">    <span class="keyword">def</span> parse_one(self,row,target,path):
-        ec=ErrorCollector(VERSION)
-        required={<span class="string">&#x27;target_id&#x27;</span>,<span class="string">&#x27;status&#x27;</span>,<span class="string">&#x27;basis_ids&#x27;</span>,<span class="string">&#x27;reason&#x27;</span>,<span class="string">&#x27;conditions&#x27;</span>,<span class="string">&#x27;repair&#x27;</span>,<span class="string">&#x27;requires_authoritative_source&#x27;</span>,
-                  <span class="string">&#x27;object_kind&#x27;</span>,<span class="string">&#x27;classification_objection&#x27;</span>,<span class="string">&#x27;fidelity&#x27;</span>,<span class="string">&#x27;fidelity_reason&#x27;</span>,<span class="string">&#x27;dependencies&#x27;</span>,<span class="string">&#x27;comparison&#x27;</span>}
-        <span class="keyword">if</span> <span class="keyword">not</span> ec.fields(row,required,set(),path):ec.finish()
-        kind=row[<span class="string">&#x27;object_kind&#x27;</span>];obj=row[<span class="string">&#x27;classification_objection&#x27;</span>];ids=row[<span class="string">&#x27;basis_ids&#x27;</span>];deps=row[<span class="string">&#x27;dependencies&#x27;</span>]
-        ec.check(type(kind) <span class="keyword">is</span> str <span class="keyword">and</span> kind <span class="keyword">in</span> KINDS,path+<span class="string">&#x27;.object_kind&#x27;</span>,<span class="string">&#x27;known_object_kind&#x27;</span>)
-        ec.check(obj <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> type(obj) <span class="keyword">is</span> str <span class="keyword">and</span> bool(obj.strip()),path+<span class="string">&#x27;.classification_objection&#x27;</span>,<span class="string">&#x27;null_or_explicit_objection&#x27;</span>)
-        ec.check(row[<span class="string">&#x27;fidelity&#x27;</span>] <span class="keyword">in</span> (<span class="string">&#x27;faithful&#x27;</span>,<span class="string">&#x27;disputed&#x27;</span>,<span class="string">&#x27;uncertain&#x27;</span>),path+<span class="string">&#x27;.fidelity&#x27;</span>,<span class="string">&#x27;independent_fidelity_required&#x27;</span>)
-        ec.check(type(row[<span class="string">&#x27;fidelity_reason&#x27;</span>]) <span class="keyword">is</span> str <span class="keyword">and</span> bool(row[<span class="string">&#x27;fidelity_reason&#x27;</span>].strip()),path+<span class="string">&#x27;.fidelity_reason&#x27;</span>,<span class="string">&#x27;fidelity_reason_required&#x27;</span>)
-        ec.check(type(ids) <span class="keyword">is</span> list <span class="keyword">and</span> all(type(b) <span class="keyword">is</span> str <span class="keyword">and</span> b <span class="keyword">in</span> target[<span class="string">&#x27;allowed_basis_ids&#x27;</span>] <span class="keyword">for</span> b <span class="keyword">in</span> ids),path+<span class="string">&#x27;.basis_ids&#x27;</span>,<span class="string">&#x27;legal_scoped_ids&#x27;</span>)
-        ec.check(type(deps) <span class="keyword">is</span> list <span class="keyword">and</span> all(type(b) <span class="keyword">is</span> str <span class="keyword">and</span> type(ids) <span class="keyword">is</span> list <span class="keyword">and</span> b <span class="keyword">in</span> ids <span class="keyword">for</span> b <span class="keyword">in</span> deps) <span class="keyword">and</span> len(set(deps))==len(deps),path+<span class="string">&#x27;.dependencies&#x27;</span>,<span class="string">&#x27;selected_dependency_subset&#x27;</span>)
-        ec.finish()</code></pre>
-<h2 id="section-57">事实审核内部候选源码：execute</h2>
-<p>路径 services/scoped_fact_execution.py，函数 execute，行19–31。</p>
-<pre><code class="language-python"><span class="keyword">async</span> <span class="keyword">def</span> execute(agent,inputs,*,catalog,prompt_version,contract_version,instruction):
-    <span class="keyword">if</span> current_budget() <span class="keyword">is</span> <span class="keyword">None</span>:
-        <span class="keyword">with</span> model_scope(ModelBudget((<span class="number">3</span> <span class="keyword">if</span> hasattr(catalog,<span class="string">&quot;prepare_stage&quot;</span>) <span class="keyword">else</span> <span class="number">2</span>)+len(inputs.answer.citations))):<span class="keyword">return</span> <span class="keyword">await</span> execute(agent,inputs,catalog=catalog,prompt_version=prompt_version,contract_version=contract_version,instruction=instruction)
-    <span class="keyword">if</span> catalog <span class="keyword">is</span> <span class="keyword">None</span>:
-        <span class="keyword">from</span> agents.verification_contract_v14 <span class="keyword">import</span> ReviewCatalog
-        cat=ReviewCatalog(inputs)
-    <span class="keyword">else</span>:cat=catalog
-    start=len(current_budget().records);current=deepcopy(cat.rows);accepted=set();issues=[];corrected=<span class="keyword">False</span>
-    facts=[t <span class="keyword">for</span> t,x <span class="keyword">in</span> cat.targets.items() <span class="keyword">if</span> x[<span class="string">&#x27;kind&#x27;</span>]==<span class="string">&#x27;fact&#x27;</span>];citations=[t <span class="keyword">for</span> t,x <span class="keyword">in</span> cat.targets.items() <span class="keyword">if</span> x[<span class="string">&#x27;kind&#x27;</span>]==<span class="string">&#x27;citation&#x27;</span>]
-    capacity_instruction=instruction+(json.dumps(cat.result_tool,ensure_ascii=<span class="keyword">False</span>) <span class="keyword">if</span> getattr(cat,<span class="string">&#x27;result_tool&#x27;</span>,<span class="keyword">None</span>) <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span>)
-    groups,rejected=pack(citations,cat.payload,capacity_instruction,agent.citation_workload <span class="keyword">or</span> CitationWorkload())
-    <span class="keyword">if</span> rejected:issues.append(ExecutionIssue(<span class="string">&#x27;evidence_verification&#x27;</span>,ExecutionStatus.FAILED,<span class="string">&#x27;REVIEW_MESSAGE_CAPACITY_EXCEEDED&#x27;</span>,<span class="string">&#x27;Complete citation scopes exceed capacity; no truncation&#x27;</span>))
-    <span class="keyword">for</span> group <span class="keyword">in</span> ([tuple(facts)] <span class="keyword">if</span> facts <span class="keyword">else</span> [])+list(groups):</code></pre>
-<h2 id="section-58">实际发送前的JSON检查</h2>
-<p>model_adapter/deepseek.py / json_mode_preflight，实际行27–38。程序检查实际消息与运行状态，不改模型语义标签；只摘录入口，沿源码继续读。</p>
-<pre><code class="language-python"><span class="keyword">def</span> json_mode_preflight(request):
-    <span class="string">&quot;&quot;&quot;Check actual initial/correction/citation messages, never edit them.&quot;&quot;&quot;</span>
-    validate_types(request, ModelRequest)
-    texts=[m.content <span class="keyword">for</span> m <span class="keyword">in</span> request.messages <span class="keyword">if</span> m.role <span class="keyword">in</span> (<span class="string">&#x27;system&#x27;</span>,<span class="string">&#x27;user&#x27;</span>)]
-    valid=any(re.search(<span class="string">r&#x27;\bjson\b&#x27;</span>,t,re.I) <span class="keyword">for</span> t <span class="keyword">in</span> texts)
-    example=<span class="keyword">True</span>
-    <span class="keyword">if</span> request.prompt_version.startswith(<span class="string">&#x27;evidence-verification-v9.22&#x27;</span>):
-        example=<span class="keyword">False</span>
-        <span class="keyword">for</span> t <span class="keyword">in</span> texts:
-            <span class="keyword">for</span> match <span class="keyword">in</span> re.finditer(<span class="string">r&#x27;\{&quot;judgments&quot;\s*:&#x27;</span>,t):
-                <span class="keyword">try</span>:value,_=json.JSONDecoder().raw_decode(t[match.start():])
-                <span class="keyword">except</span> ValueError:<span class="keyword">continue</span></code></pre>
-<h2 id="section-59">同运行预算的故障状态</h2>
-<p>model_adapter/runtime.py / raise_if_failed，实际行35–36。程序检查实际消息与运行状态，不改模型语义标签；只摘录入口，沿源码继续读。</p>
-<pre><code class="language-python">    <span class="keyword">def</span> raise_if_failed(self):
-        <span class="keyword">if</span> self.fatal_error <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:<span class="keyword">raise</span> self.fatal_error</code></pre>
-<h2 id="section-60">唯一结果提交函数</h2>
-<p>model_adapter/strict_review_tool.py / specification，实际行25–26。载体只提交数据，不执行外部动作；摘录入口，完整定义沿源文件阅读。</p>
-<pre><code class="language-python"><span class="keyword">def</span> specification():
-    <span class="keyword">return</span> dict(type=<span class="string">&#x27;function&#x27;</span>,function=dict(name=NAME,strict=<span class="keyword">True</span>,description=<span class="string">&#x27;Submit this review result only; this function performs no external action.&#x27;</span>,parameters=schema()))</code></pre>
-<h2 id="section-61">传输标记还原与原解析入口</h2>
-<p>services/review_simple_tool_v1.py / decode_wire，实际行16–21。载体只提交数据，不执行外部动作；摘录入口，完整定义沿源文件阅读。</p>
-<pre><code class="language-python">    <span class="keyword">def</span> decode_wire(self,value,group):
-        data=deepcopy(value)
-        <span class="keyword">if</span> type(data) <span class="keyword">is</span> dict <span class="keyword">and</span> type(data.get(<span class="string">&#x27;judgments&#x27;</span>)) <span class="keyword">is</span> list:
-            <span class="keyword">for</span> row <span class="keyword">in</span> data[<span class="string">&#x27;judgments&#x27;</span>]:
-                <span class="keyword">if</span> type(row) <span class="keyword">is</span> dict <span class="keyword">and</span> any(k <span class="keyword">in</span> row <span class="keyword">and</span> row[k] <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">for</span> k <span class="keyword">in</span> (<span class="string">&#x27;objection&#x27;</span>,<span class="string">&#x27;repair&#x27;</span>)):row[<span class="string">&#x27;_native_null_transport_error&#x27;</span>]=<span class="keyword">True</span>
-        <span class="keyword">return</span> super().decode_wire(map_null(data),group)</code></pre>
-<h2 id="section-62">2026-10-27 默认分支源码身份修复</h2>
-<p>公开CI继续到学习站后暴露旧身份过期；以下按本分支实际AST重新定位与摘录，未搬入实验/维护代码。上方明确标历史的1d5528f片段继续保留。</p>
-<p>harness/execution.py / RunExecution.prepare_review；默认代码基线09c6b987，实际行356–369。截取部分不代替完整函数。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> prepare_review(self):
-        <span class="string">&quot;&quot;&quot;Prepare separate purpose-bound inputs with sequential retrieval.&quot;&quot;&quot;</span>
-        self.transition(RunState.VERIFYING)
-        original_ids = {eid <span class="keyword">for</span> c <span class="keyword">in</span> self.answer.citations <span class="keyword">for</span> eid <span class="keyword">in</span> c.evidence_ids}
-        self.original_evidence = tuple((e <span class="keyword">for</span> e <span class="keyword">in</span> self.evidence <span class="keyword">if</span> e.evidence_id <span class="keyword">in</span> original_ids))
-        self.v_evidence = self.d_evidence = self.evidence
-        self.v_bindings = self.d_bindings = self.bindings
-        self.v_retrieval_issue = self.d_retrieval_issue = <span class="keyword">None</span>
-        <span class="keyword">if</span> self.retrieval:
-            self.vd = <span class="keyword">await</span> self.retrieve_for(RetrievalPurpose.VERIFICATION)
-            <span class="keyword">if</span> <span class="keyword">not</span> self.evidence_only:
-                self.dd = <span class="keyword">await</span> self.retrieve_for(RetrievalPurpose.DOMAIN_REVIEW)
-            user_evidence = tuple((e <span class="keyword">for</span> e <span class="keyword">in</span> self.request.provided_evidence <span class="keyword">if</span> e.evidence_id <span class="keyword">not</span> <span class="keyword">in</span> self.indexed_reference_ids))
-            self.v_evidence = merge_evidence(user_evidence, self.vd.evidence)</code></pre>
-<p>harness/execution.py / RunExecution.review_pair；默认代码基线09c6b987，实际行388–401。截取部分不代替完整函数。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> review_pair(self):
-        <span class="string">&quot;&quot;&quot;Keep concurrent review ownership, sibling results and cancellation.&quot;&quot;&quot;</span>
-        <span class="keyword">if</span> self.evidence_only:
-            self.verification, issue = <span class="keyword">await</span> self.review(<span class="string">&#x27;evidence_verification&#x27;</span>, self.harness.verification, self.v_input, merge_evidence(self.v_evidence, self.original_evidence), <span class="keyword">True</span>, self.v_retrieval_issue)
-            <span class="keyword">if</span> issue:
-                self.issues.append(issue)
-                <span class="keyword">if</span> getattr(self.harness.verification, <span class="string">&#x27;schema_version&#x27;</span>, <span class="keyword">None</span>) <span class="keyword">in</span> (<span class="number">7</span>, <span class="number">8</span>):
-                    <span class="keyword">from</span> agents.verification_contract_v7 <span class="keyword">import</span> execution_incomplete
-                    self.verification = execution_incomplete(self.v_input, issue)
-                <span class="keyword">else</span>:
-                    self.verification = EvidenceVerificationOutput(self.answer.answer_id, self.answer.version, self.claims, (), (), (issue,))
-                self.reason = <span class="string">&#x27;Evidence verification execution incomplete; domain review not run&#x27;</span>
-                self.transition(RunState.REVIEW_REQUIRED)
-            <span class="keyword">else</span>:</code></pre>
-<p>harness/execution.py / RunExecution.revise；默认代码基线09c6b987，实际行494–507。截取部分不代替完整函数。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> revise(self):
-        <span class="string">&quot;&quot;&quot;Validate a bounded revision; return whether a full re-audit can run.&quot;&quot;&quot;</span>
-        <span class="keyword">from</span> dataclasses <span class="keyword">import</span> replace
-        <span class="keyword">if</span> self.rounds &gt;= self.budget.max_revision_rounds:
-            <span class="keyword">raise</span> ContractError(<span class="string">&#x27;Policy attempted revision beyond limit&#x27;</span>)
-        self.transition(RunState.REVISING)
-        revision_input=RevisionInput(self.request,self.answer,self.verification,self.domain,self.evidence,self.decision.reasons,self.bindings,self.knowledge_version <span class="keyword">if</span> self.retrieval <span class="keyword">else</span> <span class="keyword">None</span>)
-
-        <span class="keyword">def</span> check_revision(output):
-            self.guard_agent_evidence(output, self.evidence)
-            <span class="keyword">from</span> agents.contracts <span class="keyword">import</span> LocalRevisionOutput
-            <span class="keyword">if</span> isinstance(output,LocalRevisionOutput):
-                require(output.bound_defects==self.verification.literal_defects,<span class="string">&#x27;Local revision changed the source-bound defect catalog&#x27;</span>)
-            validate_revision(output, self.answer, self.evidence, self.verification.findings + self.domain.findings,revision_context=revision_input)</code></pre>
-<p>harness/execution.py / RunExecution.run_stages；默认代码基线09c6b987，实际行544–557。截取部分不代替完整函数。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> run_stages(self):
-        <span class="string">&quot;&quot;&quot;Original sequential route, retained as the default implementation.&quot;&quot;&quot;</span>
-        <span class="keyword">await</span> self.validate_saved_inputs()
-        <span class="keyword">if</span> self.request.mode == TaskMode.QUESTION_ANSWER:
-            <span class="keyword">await</span> self.generate()
-        <span class="keyword">while</span> <span class="keyword">not</span> self.generation_only:
-            <span class="keyword">await</span> self.extract_and_tools()
-            <span class="keyword">await</span> self.prepare_review()
-            <span class="keyword">await</span> self.review_pair()
-            <span class="keyword">if</span> self.evidence_only:
-                <span class="keyword">break</span>
-            <span class="keyword">if</span> <span class="keyword">await</span> self.merge_and_decide():
-                <span class="keyword">break</span>
-            <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">await</span> self.revise():</code></pre>
-<p>harness/execution.py / RunExecution.run；默认代码基线09c6b987，实际行560–573。截取部分不代替完整函数。</p>
-<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> run(self, *, driver=<span class="keyword">None</span>):
-        <span class="string">&quot;&quot;&quot;One driver inside the existing exception, registry and result boundary.&quot;&quot;&quot;</span>
+<h2 id="section-33">schema13双通道候选的源码边界</h2>
+<p>候选仍走原Factory和Harness，不另设运行编排。事实先行、引用两项一波；晚索引非法先返回也不能抢先纠正，结果按原次序合并后做覆盖检查。实际HTTP容量由两个原单线程适配器保证，取消await不等于线程已停止。默认serial_v1及v7只读标注不改，真实收益未验证。</p>
+<h3 id="section-34">waves</h3>
+<p>路径 agents/schema13_concurrency_v1.py，实际行33–50，局部摘录，完整函数至63行；取消后的租约归还需继续阅读函数finally。</p>
+<pre><code class="language-python"><span class="keyword">async</span> <span class="keyword">def</span> waves(work, check, order):
+    <span class="string">&quot;&quot;&quot;First independent review is serial; later citation waves contain &lt;=2 tasks.&quot;&quot;&quot;</span>
+    <span class="keyword">async</span> <span class="keyword">def</span> perform(index):
         <span class="keyword">try</span>:
-            <span class="keyword">if</span> driver <span class="keyword">is</span> <span class="keyword">None</span>:
-                <span class="keyword">await</span> self.run_stages()
-            <span class="keyword">else</span>:
-                <span class="keyword">await</span> driver(self)
-        <span class="keyword">except</span> HarnessObserverError:
-            <span class="keyword">raise</span>
-        <span class="keyword">except</span> RequiredRetrievalFailure <span class="keyword">as</span> exc:
-            self.reason = str(exc)
-            self.transition(RunState.EXECUTION_INCOMPLETE <span class="keyword">if</span> any((i.component == <span class="string">&#x27;generation_query_conversion&#x27;</span> <span class="keyword">for</span> i <span class="keyword">in</span> self.issues)) <span class="keyword">else</span> RunState.REVIEW_REQUIRED)
-        <span class="keyword">except</span> asyncio.CancelledError:
-            self.reason = <span class="string">&#x27;Run cancelled&#x27;</span></code></pre></article><footer><a href="13-local-nli.html">← 13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">本轮真实验证边界</a><a href="#section-3">2026-10-24 简化合同与投影的源码入口</a><a href="#section-4">2026-10-24 审核链v2实证更新</a><a href="#section-5">一页请求对象流：先认对象，再读源码</a><a href="#section-6">如何读，不被版本文件淹没</a><a href="#section-7">第一条路线：从提交到冻结答案</a><a href="#section-8">第二条路线：Evidence怎样变成typed basis</a><a href="#section-9">第三条路线：政策与Revision</a><a href="#section-10">第四条路线：存储和只读恢复</a><a href="#section-11">对每个函数问五个问题</a><a href="#section-12">面试阅读练习</a><a href="#section-13">实际代码摘录</a><a href="#section-14">重复键、非有限值与严格JSON</a><a href="#section-15">名次融合不验证事实</a><a href="#section-16">原ID和内部ID分离</a><a href="#section-17">短事务的commit与rollback</a><a href="#section-18">一次修订资格不是修订成功</a><a href="#section-19">确定性标量计算的边界</a><a href="#section-20">恢复状态但不重发</a><a href="#section-21">沿一条实际请求完整阅读：谁创建对象，谁保存事实</a><a href="#section-22">一个贯穿对象的synthetic摘要</a><a href="#section-23">1 API：普通字段变成任务，不把浏览器当路径输入器</a><a href="#section-24">2 接受：先持久化，再让worker取任务</a><a href="#section-25">3 worker与Factory：装配真实组件，而非模拟回退</a><a href="#section-26">4 Harness输入与冻结：版本对象的起点</a><a href="#section-27">5 提取：原锚点→规范命题→组件</a><a href="#section-28">6 工具与交付：类型成立才可作为依据</a><a href="#section-29">7 双审输入和并发：上轮遗漏恰在这里</a><a href="#section-30">8 政策：读有效发现，不再问模型投票</a><a href="#section-31">9 Revision：新对象重建，旧版不抹去</a><a href="#section-32">10 observer、事务、结果与UI</a><a href="#section-33">如何亲自验证这条路线</a><a href="#section-34">本轮完整路线的实际代码摘录</a><a href="#section-35">摘录：Task/Answer身份与引用绑定</a><a href="#section-36">摘录：API接收与异常返回</a><a href="#section-37">摘录：保存接受和队列</a><a href="#section-38">摘录：worker装配和最终保存</a><a href="#section-39">摘录：真实装配的资源建立</a><a href="#section-40">摘录：原锚点输入与实际解析选择</a><a href="#section-41">摘录：政策上下文，不是另一个模型</a><a href="#section-42">摘录：阶段与对象短事务</a><a href="#section-43">摘录：保存结果到安全投影</a><a href="#section-44">关键连接：实际Harness组件注入</a><a href="#section-45">关键连接：按输入契约包装，而非散落版本条件</a><a href="#section-46">关键连接：并发双审和异常收尾</a><a href="#section-47">关键连接：修订后重建与旧轮次保留</a><a href="#section-48">2026-10-22现行连接：共享阶段与可选图</a><a href="#section-49">2026-10-22 服务图接线阅读点</a><a href="#section-50">三道自测：先作答，再展开</a><a href="#section-51">自测1：为什么直接组件测试不够？</a><a href="#section-52">自测2：task_id和run_id在哪里产生？</a><a href="#section-53">自测3：observer失败还能声称结果保存吗？</a><a href="#section-54">2026-10-08 首版收尾核对</a><a href="#section-55">事实审核内部候选源码：FactFlowAgent.run</a><a href="#section-56">事实审核内部候选源码：Catalog.parse_one</a><a href="#section-57">事实审核内部候选源码：execute</a><a href="#section-58">实际发送前的JSON检查</a><a href="#section-59">同运行预算的故障状态</a><a href="#section-60">唯一结果提交函数</a><a href="#section-61">传输标记还原与原解析入口</a><a href="#section-62">2026-10-27 默认分支源码身份修复</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+            <span class="keyword">return</span> <span class="keyword">await</span> check(work[index], index)
+        <span class="keyword">finally</span>:
+            order.done[index].set()
+    first = <span class="keyword">await</span> perform(<span class="number">0</span>)
+    <span class="keyword">yield</span> [(work[<span class="number">0</span>], first)]
+    <span class="keyword">if</span> first[<span class="number">2</span>] <span class="keyword">or</span> current_budget().fatal_error <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:
+        <span class="keyword">return</span>
+    start = <span class="number">1</span>
+    <span class="keyword">while</span> start &lt; len(work):
+        remaining = current_budget().limit - current_budget().used
+        <span class="comment"># With insufficient slack preserve canonical serial correction priority.</span>
+        width = <span class="number">2</span> <span class="keyword">if</span> remaining &gt;= len(work) - start + (<span class="keyword">not</span> order.used) <span class="keyword">else</span> <span class="number">1</span>
+        indexes = list(range(start, min(start + width, len(work))))
+        tasks = [asyncio.create_task(perform(i)) <span class="keyword">for</span> i <span class="keyword">in</span> indexes]</code></pre>
+<h3 id="section-35">BoundedPairAdapter.complete</h3>
+<p>路径 model_adapter/bounded_pair_v1.py，实际行17–34，局部摘录，完整函数至43行；取消后的租约归还需继续阅读函数finally。</p>
+<pre><code class="language-python">    <span class="keyword">async</span> <span class="keyword">def</span> complete(self, request):
+        <span class="keyword">from</span> model_adapter.contracts <span class="keyword">import</span> ModelConnectionError
+        <span class="keyword">if</span> self._closed:
+            <span class="keyword">raise</span> ModelConnectionError()
+        <span class="keyword">if</span> self.available <span class="keyword">is</span> <span class="keyword">None</span>:
+            self.available = asyncio.Queue()
+            <span class="keyword">for</span> child <span class="keyword">in</span> self.children:
+                self.available.put_nowait(child)
+        child = <span class="keyword">await</span> self.available.get()
+        loop = asyncio.get_running_loop()
+        <span class="keyword">def</span> release():
+            <span class="keyword">if</span> <span class="keyword">not</span> self._closed:
+                self.available.put_nowait(child)
+        <span class="keyword">try</span>:
+            <span class="keyword">if</span> self._closed:
+                <span class="keyword">raise</span> ModelConnectionError()
+            <span class="keyword">return</span> <span class="keyword">await</span> child.complete(request)
+        <span class="keyword">finally</span>:</code></pre>
+<h2 id="section-36">2026-10-28 来源优先代码入口（默认关闭）</h2>
+<p>沿backend/config.py的audit_strategy显式选择source_first_audit_v1，并配对literal_v1/source_actions_v2及串行BM25。backend/assembly.py仍装配原四职责和OfflineHarness；harness/source_first_audit_v1.py只提供共享阶段的供给与缺口函数。rag/retriever.py的source_context复用唯一工作线程和KnowledgeStore严格回查；services/source_first_audit_v1.py单独版本化提示，复用原文输出/修订合同。归档还原明确识别候选LiteralAuditReport，不改旧报告。</p>
+<p>evaluation/source_first_materials_v1.py先冻结资料；evaluation/source_first_audit_redesign_v1.py只做离线wire预算准入和原子预留测试，本轮未形成获准发送的真实批次。preflight结果是budget_not_admitted，不能当真实配对入口已跑通。实现绑定de16d5efdd2685a81877f92f1d9dd2b27fdac10a，验证工具绑定64e3ca5；生产仍schema13，不切schema14或引用并发。</p>
+<h2 id="section-37">2026-10-28 v3真实入口与归档重读</h2>
+<p>实现及入口绑定f69a4124f0193708ff5421734a0206efe60a703a。evaluation/source_first_real_v3.py复用原shared.batch/run_fixed、Factory、OfflineHarness、RunStore及四职责，在真实Retriever/KnowledgeStore上先做归档响应回放与确定性模型贯通，再冻结唯一四对；不是新调度器。每链20、全批160硬上限、usage累计300万停发，未知发送/usage停整批，原子发送边界与已在途越过分开记账。</p>
+<p>实际29请求/669718token、未决0/越过0，未追加批次。8条真实归档经普通ApplicationService结果读取验证原对象和完整执行；临时小Store副本只恢复正常manifest/真实TaskRequest，不改原归档或复制大库。隔离8766页面用真实库离线固定响应投影验证不足标注与范围，synthetic_fixture不冒充真实模型推理；用户8765未动。</p>
+<h2 id="section-38">2026-10-28 v4版本与入口身份</h2>
+<p>业务及UI实现绑定2e99786b7940c4b023cfbe4dde5120e6cd04d86e；services/source_first_audit_v2.py只扩展单元比较并复用literal内部对象/校验及原有修订授权，策略/提示/报告标识v2。evaluation/source_first_quality_v4.py复用v3原子记账和shared.batch，非新调度器。类默认仍baseline，显式候选配置才使用v2。</p>
+<p>唯一真实批次停止后仅只读工具补充失败档案“不假报完整”的断言，未改业务或恢复；3条普通结果重读保持原对象，S2仍不完整。实际输入响应、来源、ledger及截图留忽略data；公开报告/摘要仅必要脱敏统计。历史v2/v3失败与原分支成绩不改。</p>
+<h2 id="section-39">2026-10-28 v5：隔离入口与冻结源码</h2>
+<p>实验实现c2ecddfdb7f7ac364c673d25f27f246e5c5d2b62，公开归档adc122754926510a28f4155f85977694d58ac1db。evaluation/source_first_completion_v5.py复用v4材料、v3批次和现有Factory，evaluation/failure_isolation_v5.py只在显式入口启用，旧调用者默认故障政策不变。业务源码与45c39c8相同，source_first_audit_v2及source_actions_v2语义合同未改。</p>
+<p>真实批次后普通结果接口重读12条，末稿对象一致，S3基线未完整如实保留；只复制小运行Store做读取，不复制大库或重放POST。原始响应/来源和私有初末稿留忽略data，公开仅必要统计与复核结论。源码身份和构建同步不表示候选启用。</p>
+<h2 id="section-40">2026-10-28 v6：独立版本与源码冻结</h2>
+<p>实现98de2084e16e3b96a49a973fb634db8b8a946e81，报告归档c7895777ed85c0bc202280752f7cf17996cc6fba。services/source_first_audit_v3.py复用v2一致性解析和literal源目录，backend配置/Factory、Harness来源开关、严格报告白名单及普通范围投影显式认v3；未改v1/v2提示或历史标签。evaluation/source_first_modality_v6.py复用共享批次和v5故障策略，无新调度器。</p>
+<p>编码前10材料冻结，旧八份对象不变；真实库10条合成/归档离线路径、1433全套及14实际归档普通读取通过。付费后源码身份未变，原文/响应/实际初末稿与截图只留忽略data，公开仅必要统计。预览夹具简记缺正常request/manifest导致404，补齐规范小Store副本后通过，不能当业务代码被修改或真实批次重跑。</p>
+<h2 id="section-41">2026-10-29 v7：A/B独立身份与默认关闭</h2>
+<p>A诊断fccd159、边界测试b8782ae，未改运行时SQL；B实现18d4f671e7f073b014ca18e4fdbc32b94e91cb92、报告归档ec9c7df72b3ab628ae5293efbba6039470d9f42c。services/source_first_audit_v4.py复用现有quote/locator与literal解析，reference_ref绑定协议、答案/版本、anchor、知识身份与quote；选择表只指向已有正文，不额外复制池。services/audit_reference_v7.py仅为该候选澄清领域字段，原解析器严格性不变。</p>
+<p>LiteralReviewAgent默认payload钩子不改旧wire，Factory/配置/Harness/报告及普通范围投影显式识别v4，旧版本和schema13/baseline默认保留。B真实批次强制原topic_v4_subject_v1 SQL，不混用A潜在收益；付费后源码未改。十条实际普通结果重读原对象一致、全部未完整如实保留，原文和响应只留忽略data。</p></article><footer><a href="13-local-nli.html">← 13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">v7只读标注源码路线</a><a href="#section-3">精确标注入口：identity</a><a href="#section-4">精确标注入口：locate</a><a href="#section-5">当前源码身份与读法（2026-10-27维护同步）</a><a href="#section-6">2026-10-24历史真实验证边界</a><a href="#section-7">2026-10-24 简化合同与投影的源码入口</a><a href="#section-8">2026-10-24 审核链v2实证更新</a><a href="#section-9">一页请求对象流：先认对象，再读源码</a><a href="#section-10">如何读，不被版本文件淹没</a><a href="#section-11">第一条路线：从提交到冻结答案</a><a href="#section-12">第二条路线：Evidence怎样变成typed basis</a><a href="#section-13">第三条路线：政策与Revision</a><a href="#section-14">第四条路线：存储和只读恢复</a><a href="#section-15">对每个函数问五个问题</a><a href="#section-16">面试阅读练习</a><a href="#section-17">实际代码摘录（本轮重新核对）</a><a href="#section-18">严格JSON只验证结构</a><a href="#section-19">RRF融合不保证支持</a><a href="#section-20">来源身份不等于权威</a><a href="#section-21">短事务边界</a><a href="#section-22">恢复不自动续跑</a><a href="#section-23">复用装配与固定Evidence入口</a><a href="#section-24">受预算约束的完整闭环</a><a href="#section-25">确定性政策与执行完整性</a><a href="#section-26">D/O/S/U修订上下文</a><a href="#section-27">修改授权与意见记账</a><a href="#section-28">跨语言词项入口</a><a href="#section-29">恢复实际输入与知识身份</a><a href="#section-30">一次有界审核批次</a><a href="#section-31">固定证据生成诊断入口</a><a href="#section-32">既有源码练习（历史题保留）</a><a href="#section-33">schema13双通道候选的源码边界</a><a href="#section-34">waves</a><a href="#section-35">BoundedPairAdapter.complete</a><a href="#section-36">2026-10-28 来源优先代码入口（默认关闭）</a><a href="#section-37">2026-10-28 v3真实入口与归档重读</a><a href="#section-38">2026-10-28 v4版本与入口身份</a><a href="#section-39">2026-10-28 v5：隔离入口与冻结源码</a><a href="#section-40">2026-10-28 v6：独立版本与源码冻结</a><a href="#section-41">2026-10-29 v7：A/B独立身份与默认关闭</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

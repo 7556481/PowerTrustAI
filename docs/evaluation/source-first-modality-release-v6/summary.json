@@ -1,0 +1,4509 @@
+{
+  "version": "source-first-modality-release-v6",
+  "implementation": "98de2084e16e3b96a49a973fb634db8b8a946e81",
+  "semantics": "source_first_audit_v3/local-revision-source-actions-v2",
+  "material_sha": "d62008eb068bbc5000500db3399ef794783b5dbb541398ac35e66a5a346e8e46",
+  "seal_seconds": 194.00378880000062,
+  "limits": {
+    "per_chain_calls": 20,
+    "total_calls": 280,
+    "known_usage_stop": 4500000,
+    "allowed_released_unknowns": 1
+  },
+  "totals": {
+    "request_boundary_entries": 64,
+    "known_usage_tokens": 1275546,
+    "actual_total_tokens": 1275546,
+    "pending": [],
+    "unknown": {},
+    "stopped": false,
+    "known_overshoot": 0,
+    "release_receipts": []
+  },
+  "slots": [
+    {
+      "slot": "S1-baseline",
+      "state": "review_required",
+      "control_phase": null,
+      "requests": 4,
+      "received_usage_records": 4,
+      "known_input_tokens": 66546,
+      "known_output_tokens": 2251,
+      "known_tokens": 68797,
+      "run_id": "fed08793b09541ffb2e2bd5e25590ad2",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 42.391957999999995,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4392,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 29.676837300001353,
+          "end_seconds": 34.068837300001356
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 5100,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 29.599690000002738,
+          "end_seconds": 34.69969000000274
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 1793,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 36.36223620000237,
+          "end_seconds": 38.15523620000237
+        },
+        {
+          "call_number": 4,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2662,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 38.62862000000314,
+          "end_seconds": 41.29062000000314
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.003778999999999977,
+          "end_seconds": 0.378779,
+          "duration_ms": 375
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.391024,
+          "end_seconds": 0.391024,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.396636,
+          "end_seconds": 0.408636,
+          "duration_ms": 12
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.420191,
+          "end_seconds": 0.420191,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.425517,
+          "end_seconds": 0.425517,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.433966,
+          "end_seconds": 0.433966,
+          "duration_ms": 0
+        },
+        {
+          "component": "retrieval_original_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.4437919999999984,
+          "end_seconds": 21.007792,
+          "duration_ms": 20564
+        },
+        {
+          "component": "retrieval_subject_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.4432609999999997,
+          "end_seconds": 21.378261,
+          "duration_ms": 20935
+        },
+        {
+          "component": "retrieval_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.4440079999999966,
+          "end_seconds": 21.393008,
+          "duration_ms": 20949
+        },
+        {
+          "component": "retrieval_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 21.401823,
+          "end_seconds": 29.178823,
+          "duration_ms": 7777
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 29.526396,
+          "end_seconds": 34.175396,
+          "duration_ms": 4649
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 29.803264000000002,
+          "end_seconds": 34.195264,
+          "duration_ms": 4392
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 29.204885,
+          "end_seconds": 41.928885,
+          "duration_ms": 12724
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 36.85779,
+          "end_seconds": 41.95779,
+          "duration_ms": 5100
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 40.175899,
+          "end_seconds": 41.968899,
+          "duration_ms": 1793
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 39.317767,
+          "end_seconds": 41.979767,
+          "duration_ms": 2662
+        },
+        {
+          "component": "fact_subject_supplement",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 42.018452,
+          "end_seconds": 42.018452,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 42.056807,
+          "end_seconds": 42.056807,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 42.106998,
+          "end_seconds": 42.106998,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 42.167023,
+          "end_seconds": 42.167023,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 42.219602,
+          "end_seconds": 42.219602,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.03427090001787292,
+        "retriever_worker": 29.022464699984994,
+        "retriever_wait": 29.045874199997343,
+        "query_prepare": 1.5317944000125863,
+        "fts_execute_fetch_sort": 26.97264520000317,
+        "body_evidence_construct": 0.03633809999882942,
+        "adjacent_context": 0.027176299998245668,
+        "corpus_retrieve": 28.568850999996357,
+        "result_validation": 0.051371000008657575
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "hits",
+          "duration_ms": 20562,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 4927,
+          "calls_used": 1,
+          "core_count": 3,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "hits",
+          "duration_ms": 360,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 4604,
+          "calls_used": 2,
+          "core_count": 3,
+          "context_count": 3
+        },
+        {
+          "purpose": "domain_review",
+          "outcome": "hits",
+          "duration_ms": 7770,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 5085,
+          "calls_used": 3,
+          "core_count": 3,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "hits",
+          "duration_ms": 27,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 4604,
+          "calls_used": 4,
+          "core_count": 3,
+          "context_count": 3
+        }
+      ],
+      "fts_spans": [
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "fed08793b09541ffb2e2bd5e25590ad2",
+          "retrieval_id": "d6d0a039b09b4cb7b1f2d0f0b8d6bfd9",
+          "span_id": "217ac4f1983a4bd2bf9c1924b198b748",
+          "parent_id": "1c04e41f71b54e94b2b0a429466bee9f",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 2.018339800000831,
+          "end_seconds": 20.967672999999195,
+          "seconds": 18.949333199998364,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "verification"
+        },
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "fed08793b09541ffb2e2bd5e25590ad2",
+          "retrieval_id": "51758f4019514d719371b199bf41767d",
+          "span_id": "b92f82897f9940b38794e85df0dadef0",
+          "parent_id": "ae63718d049241d5a432d32c0b1b47c0",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 21.086702100001276,
+          "end_seconds": 21.381659700004093,
+          "seconds": 0.29495760000281734,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "verification"
+        },
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "fed08793b09541ffb2e2bd5e25590ad2",
+          "retrieval_id": "6db49c8be65b4d81886bac428084562d",
+          "span_id": "02da96bc1d96432b826289665ca86e02",
+          "parent_id": "a62e7941a6514e6bbcebcedb59ea250c",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 21.452228100002685,
+          "end_seconds": 29.18054420000408,
+          "seconds": 7.728316100001393,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "domain_review"
+        },
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "fed08793b09541ffb2e2bd5e25590ad2",
+          "retrieval_id": "9535d7de49114849a1f9ae2f664a1021",
+          "span_id": "40a55585e3054d42938b0a6677f58074",
+          "parent_id": "35a8ed5c46bb48689998ea7d7be5a0ba",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 42.03923780000332,
+          "end_seconds": 42.03927610000392,
+          "seconds": 3.8300000596791506e-05,
+          "status": "succeeded",
+          "rank_cache_hit": true,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "verification"
+        }
+      ]
+    },
+    {
+      "slot": "S1-candidate",
+      "state": "completed",
+      "control_phase": null,
+      "requests": 3,
+      "received_usage_records": 3,
+      "known_input_tokens": 84409,
+      "known_output_tokens": 2186,
+      "known_tokens": 86595,
+      "run_id": "21ebe49a2e794b15b311f7b02a290a99",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 9.526299000000002,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3805,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 1.4831795999998576,
+          "end_seconds": 5.288179599999857
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4154,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 1.4401993999999831,
+          "end_seconds": 5.594199399999983
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3551,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 5.607802600003197,
+          "end_seconds": 9.158802600003197
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.004614000000000007,
+          "end_seconds": 0.249614,
+          "duration_ms": 245
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.25991,
+          "end_seconds": 0.25991,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.263935,
+          "end_seconds": 0.266935,
+          "duration_ms": 3
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.271823,
+          "end_seconds": 0.271823,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.278319,
+          "end_seconds": 0.278319,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.284018,
+          "end_seconds": 0.284018,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.2895319999999999,
+          "end_seconds": 1.363532,
+          "duration_ms": 1074
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 1.4043830000000002,
+          "end_seconds": 5.528383,
+          "duration_ms": 4124
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 1.736425,
+          "end_seconds": 5.541425,
+          "duration_ms": 3805
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 1.3830959999999992,
+          "end_seconds": 9.230096,
+          "duration_ms": 7847
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.102546,
+          "end_seconds": 9.256546,
+          "duration_ms": 4154
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.713419,
+          "end_seconds": 9.264419,
+          "duration_ms": 3551
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.273766,
+          "end_seconds": 9.273766,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.303156,
+          "end_seconds": 9.303156,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.331217,
+          "end_seconds": 9.331217,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.366548,
+          "end_seconds": 9.366548,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.404384,
+          "end_seconds": 9.404384,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.01912830000219401,
+        "retriever_worker": 1.311388000009174,
+        "retriever_wait": 1.3130588000058196
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 1070,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 6677,
+          "calls_used": 0,
+          "core_count": 6,
+          "context_count": 3
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 20,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 0,
+          "core_count": 0,
+          "context_count": 0
+        }
+      ],
+      "fts_spans": []
+    },
+    {
+      "slot": "S2-candidate",
+      "state": "execution_incomplete",
+      "control_phase": null,
+      "requests": 3,
+      "received_usage_records": 3,
+      "known_input_tokens": 87694,
+      "known_output_tokens": 2828,
+      "known_tokens": 90522,
+      "run_id": "2fb522eb47404802bf28f4ca38e30afc",
+      "execution_complete": false,
+      "issue_codes": [
+        "MODEL_OUTPUT_ERROR"
+      ],
+      "wall_seconds": 12.937931,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4532,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 1.5893741999971098,
+          "end_seconds": 6.12137419999711
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 6512,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 1.5478731999974116,
+          "end_seconds": 8.059873199997412
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4585,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 8.131840200003353,
+          "end_seconds": 12.716840200003354
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.005106999999999973,
+          "end_seconds": 0.261107,
+          "duration_ms": 256
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.266354,
+          "end_seconds": 0.266354,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.270723,
+          "end_seconds": 0.273723,
+          "duration_ms": 3
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.27902,
+          "end_seconds": 0.27902,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.285613,
+          "end_seconds": 0.285613,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.291389,
+          "end_seconds": 0.291389,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.29749400000000015,
+          "end_seconds": 1.473494,
+          "duration_ms": 1176
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 1.515459,
+          "end_seconds": 6.351459,
+          "duration_ms": 4836
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 1.8349969999999995,
+          "end_seconds": 6.366997,
+          "duration_ms": 4532
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "failed",
+          "start_seconds": 1.492858,
+          "end_seconds": 12.702858,
+          "duration_ms": 11210
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 6.204329,
+          "end_seconds": 12.716329,
+          "duration_ms": 6512
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.140895,
+          "end_seconds": 12.725895,
+          "duration_ms": 4585
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 12.749743,
+          "end_seconds": 12.749743,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 12.774757,
+          "end_seconds": 12.774757,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 12.801637,
+          "end_seconds": 12.801637,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 12.843907,
+          "end_seconds": 12.843907,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.015160599992668722,
+        "retriever_worker": 1.4259759999986272,
+        "retriever_wait": 1.427284299999883
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 1172,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 7599,
+          "calls_used": 0,
+          "core_count": 6,
+          "context_count": 3
+        }
+      ],
+      "fts_spans": []
+    },
+    {
+      "slot": "S2-baseline",
+      "state": "review_required",
+      "control_phase": null,
+      "requests": 5,
+      "received_usage_records": 5,
+      "known_input_tokens": 89937,
+      "known_output_tokens": 4503,
+      "known_tokens": 94440,
+      "run_id": "7aff789b78fc42b486b44519f8417129",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 39.416672,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4003,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 16.27294300000358,
+          "end_seconds": 20.27594300000358
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 8438,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 16.233703500001866,
+          "end_seconds": 24.67170350000187
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 6084,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": true,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 24.897644800003036,
+          "end_seconds": 30.981644800003036
+        },
+        {
+          "call_number": 4,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2958,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 32.15554079999856,
+          "end_seconds": 35.11354079999856
+        },
+        {
+          "call_number": 5,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3073,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 35.48362910000287,
+          "end_seconds": 38.55662910000287
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.004261000000000015,
+          "end_seconds": 0.249261,
+          "duration_ms": 245
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.258708,
+          "end_seconds": 0.258708,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.262825,
+          "end_seconds": 0.265825,
+          "duration_ms": 3
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.270467,
+          "end_seconds": 0.270467,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.276495,
+          "end_seconds": 0.276495,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.28254,
+          "end_seconds": 0.28254,
+          "duration_ms": 0
+        },
+        {
+          "component": "retrieval_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.28745499999999957,
+          "end_seconds": 10.108455,
+          "duration_ms": 9821
+        },
+        {
+          "component": "retrieval_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 10.115852,
+          "end_seconds": 15.976852,
+          "duration_ms": 5861
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 16.192091,
+          "end_seconds": 20.381091,
+          "duration_ms": 4189
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 16.396237,
+          "end_seconds": 20.399237,
+          "duration_ms": 4003
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 15.994854,
+          "end_seconds": 39.059854,
+          "duration_ms": 23065
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 30.644093999999996,
+          "end_seconds": 39.082094,
+          "duration_ms": 8438
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 33.008104,
+          "end_seconds": 39.092104,
+          "duration_ms": 6084
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 36.157942,
+          "end_seconds": 39.115942,
+          "duration_ms": 2958
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 36.055917,
+          "end_seconds": 39.128917,
+          "duration_ms": 3073
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 39.150124,
+          "end_seconds": 39.150124,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 39.18233,
+          "end_seconds": 39.18233,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 39.233168,
+          "end_seconds": 39.233168,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 39.284666,
+          "end_seconds": 39.284666,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.015084199978446122,
+        "retriever_worker": 15.901541899991571,
+        "retriever_wait": 15.903331600005913,
+        "query_prepare": 0.005272200003673788,
+        "fts_execute_fetch_sort": 15.587384500009648,
+        "body_evidence_construct": 0.021984399994835258,
+        "adjacent_context": 0.016692700002749916,
+        "corpus_retrieve": 15.631690199996228,
+        "result_validation": 0.011963700002525002
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "hits",
+          "duration_ms": 9817,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 5790,
+          "calls_used": 1,
+          "core_count": 3,
+          "context_count": 2
+        },
+        {
+          "purpose": "domain_review",
+          "outcome": "hits",
+          "duration_ms": 5856,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 5643,
+          "calls_used": 2,
+          "core_count": 3,
+          "context_count": 2
+        }
+      ],
+      "fts_spans": [
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "7aff789b78fc42b486b44519f8417129",
+          "retrieval_id": "edc2036618924ec7b12da4132d4bbbff",
+          "span_id": "f3ba93cfd4d04e3d87cc9fc78616c8dc",
+          "parent_id": "5567584a92ff45398ca9437e408c247d",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 0.3118365999980597,
+          "end_seconds": 10.090342900002724,
+          "seconds": 9.778506300004665,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "verification"
+        },
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "7aff789b78fc42b486b44519f8417129",
+          "retrieval_id": "1666bf7857d644cd9c31c989bccdb5b2",
+          "span_id": "002ebb020f534c8caaaf4eec5335eb62",
+          "parent_id": "b66df576c2aa462e969fba80bf3083f9",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 10.140551099997538,
+          "end_seconds": 15.949429300002521,
+          "seconds": 5.808878200004983,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "domain_review"
+        }
+      ]
+    },
+    {
+      "slot": "S3-baseline",
+      "state": "review_required",
+      "control_phase": null,
+      "requests": 5,
+      "received_usage_records": 5,
+      "known_input_tokens": 65630,
+      "known_output_tokens": 4377,
+      "known_tokens": 70007,
+      "run_id": "1e9ce13b0b524ddea865cc48306fda6c",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 80.94393,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 6520,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 57.392721100004565,
+          "end_seconds": 63.91272110000456
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 10345,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 57.353446700006316,
+          "end_seconds": 67.69844670000631
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2744,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 70.6284111000059,
+          "end_seconds": 73.3724111000059
+        },
+        {
+          "call_number": 4,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 1967,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 73.9486837000004,
+          "end_seconds": 75.9156837000004
+        },
+        {
+          "call_number": 5,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3177,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 76.50464300000021,
+          "end_seconds": 79.68164300000022
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.004715000000000025,
+          "end_seconds": 0.294715,
+          "duration_ms": 290
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.30055,
+          "end_seconds": 0.30055,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.304705,
+          "end_seconds": 0.310705,
+          "duration_ms": 6
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.31697,
+          "end_seconds": 0.31697,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.324123,
+          "end_seconds": 0.324123,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.331226,
+          "end_seconds": 0.331226,
+          "duration_ms": 0
+        },
+        {
+          "component": "retrieval_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.3371449999999996,
+          "end_seconds": 29.101145,
+          "duration_ms": 28764
+        },
+        {
+          "component": "retrieval_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 29.111389,
+          "end_seconds": 56.990389,
+          "duration_ms": 27879
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 57.319908,
+          "end_seconds": 64.114908,
+          "duration_ms": 6795
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 57.609761000000006,
+          "end_seconds": 64.129761,
+          "duration_ms": 6520
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 57.013358000000004,
+          "end_seconds": 80.497358,
+          "duration_ms": 23484
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 70.182222,
+          "end_seconds": 80.527222,
+          "duration_ms": 10345
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 77.794375,
+          "end_seconds": 80.538375,
+          "duration_ms": 2744
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 78.580751,
+          "end_seconds": 80.547751,
+          "duration_ms": 1967
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 77.381991,
+          "end_seconds": 80.558991,
+          "duration_ms": 3177
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 80.586412,
+          "end_seconds": 80.586412,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 80.640925,
+          "end_seconds": 80.640925,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 80.708117,
+          "end_seconds": 80.708117,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 80.777658,
+          "end_seconds": 80.777658,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.01633340000989847,
+        "retriever_worker": 56.90579840000282,
+        "retriever_wait": 56.907800599998154,
+        "query_prepare": 0.007135500003641937,
+        "fts_execute_fetch_sort": 56.54387019999558,
+        "body_evidence_construct": 0.02421899999899324,
+        "adjacent_context": 0.01722890000382904,
+        "corpus_retrieve": 56.59299420000025,
+        "result_validation": 0.011960499992710538
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "hits",
+          "duration_ms": 28759,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 5144,
+          "calls_used": 1,
+          "core_count": 3,
+          "context_count": 3
+        },
+        {
+          "purpose": "domain_review",
+          "outcome": "hits",
+          "duration_ms": 27874,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 4367,
+          "calls_used": 2,
+          "core_count": 3,
+          "context_count": 2
+        }
+      ],
+      "fts_spans": [
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "1e9ce13b0b524ddea865cc48306fda6c",
+          "retrieval_id": "413a1a55cb194d05819430876fbbe9f9",
+          "span_id": "966fff33ebd34fb4a34c5356afd748b9",
+          "parent_id": "671654d1a4994995877f6c6360d9376c",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 0.36219749999872874,
+          "end_seconds": 29.08105660000001,
+          "seconds": 28.718859100001282,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "verification"
+        },
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "1e9ce13b0b524ddea865cc48306fda6c",
+          "retrieval_id": "e3ed3793cb3e4caa9ab529c2431b0ddd",
+          "span_id": "4805f52f1c334fd2a8e43da0bc14a4b2",
+          "parent_id": "120bc5adb2e146c5b6fde3d67484f0f3",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 29.135352800003602,
+          "end_seconds": 56.9603638999979,
+          "seconds": 27.8250110999943,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "domain_review"
+        }
+      ]
+    },
+    {
+      "slot": "S3-candidate",
+      "state": "execution_incomplete",
+      "control_phase": null,
+      "requests": 9,
+      "received_usage_records": 9,
+      "known_input_tokens": 326979,
+      "known_output_tokens": 11199,
+      "known_tokens": 338178,
+      "run_id": "ed4d2e970b67412d994436a9d0a94e9d",
+      "execution_complete": false,
+      "issue_codes": [
+        "MODEL_OUTPUT_ERROR",
+        "MODEL_OUTPUT_ERROR"
+      ],
+      "wall_seconds": 43.884434,
+      "answer_version": 2,
+      "body_unchanged": false,
+      "answer_object_unchanged": false,
+      "review_rounds": 2,
+      "revision_outputs": 1,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 5562,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 1.8733090000023367,
+          "end_seconds": 7.435309000002337
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 8172,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 1.8199195000051986,
+          "end_seconds": 9.9919195000052
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 8653,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 10.032778900000267,
+          "end_seconds": 18.685778900000265
+        },
+        {
+          "call_number": 4,
+          "component": "revision",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2273,
+          "prompt_version": "local-revision-source-actions-v2",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 19.225362700002734,
+          "end_seconds": 21.498362700002733
+        },
+        {
+          "call_number": 5,
+          "component": "claim_extraction",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 4946,
+          "prompt_version": "atomic-claims-v7-obligations-faithful-assertions-v2",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 21.798630000004778,
+          "end_seconds": 26.744630000004776
+        },
+        {
+          "call_number": 7,
+          "component": "power_domain_review",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 6444,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 28.46097330000339,
+          "end_seconds": 34.90497330000339
+        },
+        {
+          "call_number": 6,
+          "component": "evidence_verification",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 8749,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 28.416441100001975,
+          "end_seconds": 37.16544110000198
+        },
+        {
+          "call_number": 8,
+          "component": "power_domain_review",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 5472,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": true,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 35.3967299000069,
+          "end_seconds": 40.868729900006905
+        },
+        {
+          "call_number": 9,
+          "component": "evidence_verification",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 6135,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 37.212664100006805,
+          "end_seconds": 43.3476641000068
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.004128999999999994,
+          "end_seconds": 0.294129,
+          "duration_ms": 290
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.305099,
+          "end_seconds": 0.305099,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.309126,
+          "end_seconds": 0.316126,
+          "duration_ms": 7
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.321535,
+          "end_seconds": 0.321535,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.329147,
+          "end_seconds": 0.329147,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.337086,
+          "end_seconds": 0.337086,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.3443149999999999,
+          "end_seconds": 1.731315,
+          "duration_ms": 1387
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 1.7853029999999999,
+          "end_seconds": 7.882303,
+          "duration_ms": 6097
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 2.3396169999999996,
+          "end_seconds": 7.901617,
+          "duration_ms": 5562
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 1.7563470000000017,
+          "end_seconds": 18.756347,
+          "duration_ms": 17000
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 10.668329,
+          "end_seconds": 18.840329,
+          "duration_ms": 8172
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 10.211353999999998,
+          "end_seconds": 18.864354,
+          "duration_ms": 8653
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 18.880159,
+          "end_seconds": 18.880159,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 18.934145,
+          "end_seconds": 18.934145,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 18.979807,
+          "end_seconds": 18.979807,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 19.061902,
+          "end_seconds": 19.061902,
+          "duration_ms": 0
+        },
+        {
+          "component": "revision",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 19.143354000000002,
+          "end_seconds": 21.520354,
+          "duration_ms": 2377
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 19.311361,
+          "end_seconds": 21.584361,
+          "duration_ms": 2273
+        },
+        {
+          "component": "revision_changes",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 21.641604,
+          "end_seconds": 21.641604,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 21.701869,
+          "end_seconds": 21.701869,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 21.754831000000003,
+          "end_seconds": 26.721831,
+          "duration_ms": 4967
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 21.828106,
+          "end_seconds": 26.774106,
+          "duration_ms": 4946
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 26.811618,
+          "end_seconds": 26.811618,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 26.851069,
+          "end_seconds": 26.851069,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 26.890554,
+          "end_seconds": 26.890554,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 26.928264,
+          "end_seconds": 28.298264,
+          "duration_ms": 1370
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 2,
+          "status": "failed",
+          "start_seconds": 28.382227,
+          "end_seconds": 41.281227,
+          "duration_ms": 12899
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 34.907447999999995,
+          "end_seconds": 41.351448,
+          "duration_ms": 6444
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 35.931546,
+          "end_seconds": 41.403546,
+          "duration_ms": 5472
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 2,
+          "status": "failed",
+          "start_seconds": 28.354817999999998,
+          "end_seconds": 43.331818,
+          "duration_ms": 14977
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 34.636368,
+          "end_seconds": 43.385368,
+          "duration_ms": 8749
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 37.291121000000004,
+          "end_seconds": 43.426121,
+          "duration_ms": 6135
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 43.477168,
+          "end_seconds": 43.477168,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 43.558718,
+          "end_seconds": 43.558718,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 43.648603,
+          "end_seconds": 43.648603,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 43.720415,
+          "end_seconds": 43.720415,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.03573009998945054,
+        "retriever_worker": 3.025274499996158,
+        "retriever_wait": 3.027712499992049
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 1381,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 7073,
+          "calls_used": 0,
+          "core_count": 7,
+          "context_count": 6
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 35,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 0,
+          "core_count": 0,
+          "context_count": 0
+        },
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 1362,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 7073,
+          "calls_used": 0,
+          "core_count": 7,
+          "context_count": 6
+        }
+      ],
+      "fts_spans": []
+    },
+    {
+      "slot": "S4-candidate",
+      "state": "execution_incomplete",
+      "control_phase": null,
+      "requests": 5,
+      "received_usage_records": 5,
+      "known_input_tokens": 183950,
+      "known_output_tokens": 2993,
+      "known_tokens": 186943,
+      "run_id": "7a35884ceeb04e3290ab01995bb122df",
+      "execution_complete": false,
+      "issue_codes": [
+        "MODEL_OUTPUT_ERROR",
+        "MODEL_OUTPUT_ERROR"
+      ],
+      "wall_seconds": 26.780728,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3648,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 1.5832016999993357,
+          "end_seconds": 5.231201699999335
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3959,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 1.539209499998833,
+          "end_seconds": 5.498209499998833
+        },
+        {
+          "call_number": 3,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3598,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": true,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 5.4143686999959755,
+          "end_seconds": 9.012368699995974
+        },
+        {
+          "call_number": 4,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4610,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 18.131222199997865,
+          "end_seconds": 22.741222199997864
+        },
+        {
+          "call_number": 5,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3612,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 22.79482999999891,
+          "end_seconds": 26.406829999998912
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0036599999999999966,
+          "end_seconds": 0.24366,
+          "duration_ms": 240
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.254008,
+          "end_seconds": 0.254008,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.258087,
+          "end_seconds": 0.260087,
+          "duration_ms": 2
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.265375,
+          "end_seconds": 0.265375,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.270952,
+          "end_seconds": 0.270952,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.2767,
+          "end_seconds": 0.2767,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.283293,
+          "end_seconds": 1.470293,
+          "duration_ms": 1187
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 1.489147,
+          "end_seconds": 5.490147,
+          "duration_ms": 4001
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 1.5446969999999998,
+          "end_seconds": 5.503697,
+          "duration_ms": 3959
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "failed",
+          "start_seconds": 1.5105329999999997,
+          "end_seconds": 9.230533,
+          "duration_ms": 7720
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.600238000000001,
+          "end_seconds": 9.248238,
+          "duration_ms": 3648
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.657615000000001,
+          "end_seconds": 9.255615,
+          "duration_ms": 3598
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.265786,
+          "end_seconds": 18.028786,
+          "duration_ms": 8763
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "failed",
+          "start_seconds": 18.073794,
+          "end_seconds": 26.458794,
+          "duration_ms": 8385
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 21.876483,
+          "end_seconds": 26.486483,
+          "duration_ms": 4610
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 22.894968,
+          "end_seconds": 26.506968,
+          "duration_ms": 3612
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 26.541601,
+          "end_seconds": 26.541601,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 26.575625,
+          "end_seconds": 26.575625,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 26.627953,
+          "end_seconds": 26.627953,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 26.671902,
+          "end_seconds": 26.671902,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.03154680000443477,
+        "retriever_worker": 10.155383000004804,
+        "retriever_wait": 10.157897399978538,
+        "query_prepare": 0.0038560999964829534,
+        "fts_execute_fetch_sort": 8.677688999996462,
+        "body_evidence_construct": 0.022895599991898052,
+        "adjacent_context": 0.018599200004246086,
+        "corpus_retrieve": 8.723322699988785,
+        "result_validation": 0.009866100001090672
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 1178,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 6677,
+          "calls_used": 0,
+          "core_count": 6,
+          "context_count": 3
+        },
+        {
+          "purpose": "verification",
+          "outcome": "hits",
+          "duration_ms": 3619,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 5845,
+          "calls_used": 1,
+          "core_count": 3,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "hits",
+          "duration_ms": 5144,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 5741,
+          "calls_used": 2,
+          "core_count": 3,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 8780,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 2,
+          "core_count": 0,
+          "context_count": 0
+        }
+      ],
+      "fts_spans": [
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "7a35884ceeb04e3290ab01995bb122df",
+          "retrieval_id": "ec1d3d858fce4e4b90374ad22919ac44",
+          "span_id": "26c21cc7509f4a988d62966eafe77544",
+          "parent_id": "b2343a9b3de8406787a9ceaf3432296c",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 9.286579799998435,
+          "end_seconds": 12.858963999999105,
+          "seconds": 3.57238420000067,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "verification"
+        },
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "7a35884ceeb04e3290ab01995bb122df",
+          "retrieval_id": "e318d2c8e94241249769124f68b5f5db",
+          "span_id": "399e9c3393ea4fb3aadd6a71d4cd07e5",
+          "parent_id": "76bc234e1e234d2bbc3900e12a0225ce",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 12.904928399999335,
+          "end_seconds": 18.010233199995128,
+          "seconds": 5.105304799995793,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "verification"
+        }
+      ]
+    },
+    {
+      "slot": "S4-baseline",
+      "state": "review_required",
+      "control_phase": null,
+      "requests": 3,
+      "received_usage_records": 3,
+      "known_input_tokens": 46634,
+      "known_output_tokens": 1481,
+      "known_tokens": 48115,
+      "run_id": "c789dec66a694bc8879f536502e68ebb",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 28.656391,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3871,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 21.16037679999863,
+          "end_seconds": 25.03137679999863
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4426,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 21.120685399997456,
+          "end_seconds": 25.546685399997457
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 1810,
+          "prompt_version": "evidence-verification-v9.20-lossless-transport-json-nesting",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 26.204953000000387,
+          "end_seconds": 28.014953000000386
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.027685000000000015,
+          "end_seconds": 0.266685,
+          "duration_ms": 239
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.277016,
+          "end_seconds": 0.277016,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.415966,
+          "end_seconds": 0.418966,
+          "duration_ms": 3
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.43751,
+          "end_seconds": 0.43751,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.457877,
+          "end_seconds": 0.457877,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.481059,
+          "end_seconds": 0.481059,
+          "duration_ms": 0
+        },
+        {
+          "component": "retrieval_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.5127439999999996,
+          "end_seconds": 8.665744,
+          "duration_ms": 8153
+        },
+        {
+          "component": "retrieval_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.674783999999999,
+          "end_seconds": 20.843784,
+          "duration_ms": 12169
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 21.033877,
+          "end_seconds": 25.114877,
+          "duration_ms": 4081
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 21.28106,
+          "end_seconds": 25.15206,
+          "duration_ms": 3871
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 20.863325999999997,
+          "end_seconds": 28.303326,
+          "duration_ms": 7440
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 23.901246999999998,
+          "end_seconds": 28.327247,
+          "duration_ms": 4426
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 26.528675,
+          "end_seconds": 28.338675,
+          "duration_ms": 1810
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 28.367965,
+          "end_seconds": 28.367965,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 28.402003,
+          "end_seconds": 28.402003,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 28.440672,
+          "end_seconds": 28.440672,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 28.48299,
+          "end_seconds": 28.48299,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.013434700013021939,
+        "retriever_worker": 20.532874000004085,
+        "retriever_wait": 20.534746500001347,
+        "query_prepare": 0.007074199995258823,
+        "fts_execute_fetch_sort": 20.23935779999738,
+        "body_evidence_construct": 0.01582090000010794,
+        "adjacent_context": 0.011379999996279366,
+        "corpus_retrieve": 20.273954299998877,
+        "result_validation": 0.010276299995894078
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "hits",
+          "duration_ms": 8150,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 5350,
+          "calls_used": 1,
+          "core_count": 3,
+          "context_count": 3
+        },
+        {
+          "purpose": "domain_review",
+          "outcome": "hits",
+          "duration_ms": 12164,
+          "query_method": "deterministic-question-shared-claims-scenario-v1",
+          "accepted_chars": 5255,
+          "calls_used": 2,
+          "core_count": 3,
+          "context_count": 2
+        }
+      ],
+      "fts_spans": [
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "c789dec66a694bc8879f536502e68ebb",
+          "retrieval_id": "d920321d928c4cd89b2bef6f376c111b",
+          "span_id": "560a9f12173b49c7a650731b99d75696",
+          "parent_id": "da262439848541d8a4f2ec14b83afb2f",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 0.5373076999967452,
+          "end_seconds": 8.639800899996771,
+          "seconds": 8.102493200000026,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "verification"
+        },
+        {
+          "version": "retrieval-timing-v1",
+          "run_id": "c789dec66a694bc8879f536502e68ebb",
+          "retrieval_id": "74f0a5b8733245c18e493aa59cb38859",
+          "span_id": "6ce24b9c35374f64af45b6c9de4fe4b2",
+          "parent_id": "d6263d921b684f9b83808f2e6f818fde",
+          "phase": "fts_execute_fetch_sort",
+          "start_seconds": 8.695776599997771,
+          "end_seconds": 20.832641199995123,
+          "seconds": 12.136864599997352,
+          "status": "succeeded",
+          "rank_cache_hit": false,
+          "result_count": 3,
+          "answer_version": 1,
+          "purpose": "domain_review"
+        }
+      ]
+    },
+    {
+      "slot": "S5-candidate",
+      "state": "completed",
+      "control_phase": null,
+      "requests": 3,
+      "received_usage_records": 3,
+      "known_input_tokens": 23279,
+      "known_output_tokens": 1186,
+      "known_tokens": 24465,
+      "run_id": "a489e66a6f344afca0ae70022af484b4",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 6.038481,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2652,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 0.4341872999939369,
+          "end_seconds": 3.086187299993937
+        },
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2971,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 0.47277349999785656,
+          "end_seconds": 3.4437734999978566
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2740,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 3.1143143999943277,
+          "end_seconds": 5.854314399994328
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.008492999999999994,
+          "end_seconds": 0.065493,
+          "duration_ms": 57
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.069399,
+          "end_seconds": 0.069399,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.079763,
+          "end_seconds": 0.079763,
+          "duration_ms": 0
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.090001,
+          "end_seconds": 0.090001,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.100891,
+          "end_seconds": 0.100891,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.111986,
+          "end_seconds": 0.111986,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.12262899999999999,
+          "end_seconds": 0.384629,
+          "duration_ms": 262
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.4118879999999998,
+          "end_seconds": 3.474888,
+          "duration_ms": 3063
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.516451,
+          "end_seconds": 3.487451,
+          "duration_ms": 2971
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.39608699999999963,
+          "end_seconds": 5.860087,
+          "duration_ms": 5464
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 3.216254,
+          "end_seconds": 5.868254,
+          "duration_ms": 2652
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 3.138203,
+          "end_seconds": 5.878203,
+          "duration_ms": 2740
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.890659,
+          "end_seconds": 5.890659,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.910879,
+          "end_seconds": 5.910879,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.93001,
+          "end_seconds": 5.93001,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.949556,
+          "end_seconds": 5.949556,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.969451,
+          "end_seconds": 5.969451,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.0038885000176378526,
+        "retriever_worker": 0.31618180000805296,
+        "retriever_wait": 0.317629000004672
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 261,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 973,
+          "calls_used": 0,
+          "core_count": 1,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 16,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 0,
+          "core_count": 0,
+          "context_count": 0
+        }
+      ],
+      "fts_spans": []
+    },
+    {
+      "slot": "S6-candidate",
+      "state": "completed",
+      "control_phase": null,
+      "requests": 3,
+      "received_usage_records": 3,
+      "known_input_tokens": 31657,
+      "known_output_tokens": 1027,
+      "known_tokens": 32684,
+      "run_id": "03dab3d21c8e405d9b67ddbb2cd0a0fa",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 5.285418,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2287,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 0.4158342000009725,
+          "end_seconds": 2.7028342000009724
+        },
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2458,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 0.4534159999966505,
+          "end_seconds": 2.9114159999966507
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2294,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 2.7356576999954996,
+          "end_seconds": 5.0296576999955
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0033460000000000018,
+          "end_seconds": 0.055346,
+          "duration_ms": 52
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.059502,
+          "end_seconds": 0.059502,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.069285,
+          "end_seconds": 0.069285,
+          "duration_ms": 0
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.078188,
+          "end_seconds": 0.078188,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.088409,
+          "end_seconds": 0.088409,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.098241,
+          "end_seconds": 0.098241,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.10856300000000002,
+          "end_seconds": 0.359563,
+          "duration_ms": 251
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.38908600000000026,
+          "end_seconds": 2.943086,
+          "duration_ms": 2554
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.498046,
+          "end_seconds": 2.956046,
+          "duration_ms": 2458
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.37280299999999933,
+          "end_seconds": 5.046803,
+          "duration_ms": 4674
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 2.776123,
+          "end_seconds": 5.063123,
+          "duration_ms": 2287
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 2.7808930000000003,
+          "end_seconds": 5.074893,
+          "duration_ms": 2294
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.086232,
+          "end_seconds": 5.086232,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.110245,
+          "end_seconds": 5.110245,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.136225,
+          "end_seconds": 5.136225,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.165236,
+          "end_seconds": 5.165236,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.199065,
+          "end_seconds": 5.199065,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.002922900006524287,
+        "retriever_worker": 0.3007231999945361,
+        "retriever_wait": 0.3021299000029103
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 250,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 3587,
+          "calls_used": 0,
+          "core_count": 1,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 16,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 0,
+          "core_count": 0,
+          "context_count": 0
+        }
+      ],
+      "fts_spans": []
+    },
+    {
+      "slot": "S7-candidate",
+      "state": "completed",
+      "control_phase": null,
+      "requests": 8,
+      "received_usage_records": 8,
+      "known_input_tokens": 78064,
+      "known_output_tokens": 4877,
+      "known_tokens": 82941,
+      "run_id": "c0724a61edd94430912094ae1000597d",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 22.555017,
+      "answer_version": 2,
+      "body_unchanged": false,
+      "answer_object_unchanged": false,
+      "review_rounds": 2,
+      "revision_outputs": 1,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3063,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 0.4548066999996081,
+          "end_seconds": 3.5178066999996083
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4931,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 0.4171663000015542,
+          "end_seconds": 5.348166300001554
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3843,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 5.382043599995086,
+          "end_seconds": 9.225043599995086
+        },
+        {
+          "call_number": 4,
+          "component": "revision",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2859,
+          "prompt_version": "local-revision-source-actions-v2",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 9.314983099997335,
+          "end_seconds": 12.173983099997335
+        },
+        {
+          "call_number": 5,
+          "component": "claim_extraction",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 3066,
+          "prompt_version": "atomic-claims-v7-obligations-faithful-assertions-v2",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 12.273141300000134,
+          "end_seconds": 15.339141300000133
+        },
+        {
+          "call_number": 6,
+          "component": "evidence_verification",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 3457,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 15.762430899994797,
+          "end_seconds": 19.219430899994798
+        },
+        {
+          "call_number": 7,
+          "component": "power_domain_review",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 4321,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 15.797833199998422,
+          "end_seconds": 20.11883319999842
+        },
+        {
+          "call_number": 8,
+          "component": "evidence_verification",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 2990,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 19.259078600000066,
+          "end_seconds": 22.249078600000068
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.003161999999999998,
+          "end_seconds": 0.057162,
+          "duration_ms": 54
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.060749,
+          "end_seconds": 0.060749,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.070629,
+          "end_seconds": 0.070629,
+          "duration_ms": 0
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.079331,
+          "end_seconds": 0.079331,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.089462,
+          "end_seconds": 0.089462,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.098665,
+          "end_seconds": 0.098665,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.10824600000000001,
+          "end_seconds": 0.361246,
+          "duration_ms": 253
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.39214199999999977,
+          "end_seconds": 3.536142,
+          "duration_ms": 3144
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.4813989999999997,
+          "end_seconds": 3.544399,
+          "duration_ms": 3063
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.37575000000000003,
+          "end_seconds": 9.19475,
+          "duration_ms": 8819
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 4.270601999999999,
+          "end_seconds": 9.201602,
+          "duration_ms": 4931
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.3642970000000005,
+          "end_seconds": 9.207297,
+          "duration_ms": 3843
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.212732,
+          "end_seconds": 9.212732,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.223801,
+          "end_seconds": 9.223801,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.236299,
+          "end_seconds": 9.236299,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.254405,
+          "end_seconds": 9.254405,
+          "duration_ms": 0
+        },
+        {
+          "component": "revision",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.271395,
+          "end_seconds": 12.159395,
+          "duration_ms": 2888
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 9.320896,
+          "end_seconds": 12.179896,
+          "duration_ms": 2859
+        },
+        {
+          "component": "revision_changes",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 12.1994,
+          "end_seconds": 12.1994,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 12.220909,
+          "end_seconds": 12.220909,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 12.233069,
+          "end_seconds": 15.329069,
+          "duration_ms": 3096
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 12.313922000000002,
+          "end_seconds": 15.379922,
+          "duration_ms": 3066
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 15.395337,
+          "end_seconds": 15.395337,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 15.411557,
+          "end_seconds": 15.411557,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 15.426439,
+          "end_seconds": 15.426439,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 15.441106999999999,
+          "end_seconds": 15.696107,
+          "duration_ms": 255
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 15.733718000000001,
+          "end_seconds": 20.217718,
+          "duration_ms": 4484
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 15.920314,
+          "end_seconds": 20.241314,
+          "duration_ms": 4321
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 15.720566999999999,
+          "end_seconds": 22.270567,
+          "duration_ms": 6550
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 18.843927,
+          "end_seconds": 22.300927,
+          "duration_ms": 3457
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 19.325924999999998,
+          "end_seconds": 22.315925,
+          "duration_ms": 2990
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 22.330866,
+          "end_seconds": 22.330866,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 22.365004,
+          "end_seconds": 22.365004,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 22.389939,
+          "end_seconds": 22.389939,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 22.420531,
+          "end_seconds": 22.420531,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 22.460857,
+          "end_seconds": 22.460857,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.006040799984475598,
+        "retriever_worker": 0.555853699988802,
+        "retriever_wait": 0.5578643000044394
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 252,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 2273,
+          "calls_used": 0,
+          "core_count": 1,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 7,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 0,
+          "core_count": 0,
+          "context_count": 0
+        },
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 253,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 2273,
+          "calls_used": 0,
+          "core_count": 1,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 28,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 0,
+          "core_count": 0,
+          "context_count": 0
+        }
+      ],
+      "fts_spans": []
+    },
+    {
+      "slot": "S8-candidate",
+      "state": "completed",
+      "control_phase": null,
+      "requests": 8,
+      "received_usage_records": 8,
+      "known_input_tokens": 80206,
+      "known_output_tokens": 4576,
+      "known_tokens": 84782,
+      "run_id": "a99022fbd677473caf818e679d2fd9e8",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 21.422657,
+      "answer_version": 2,
+      "body_unchanged": false,
+      "answer_object_unchanged": false,
+      "review_rounds": 2,
+      "revision_outputs": 1,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2353,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 0.4039740000007441,
+          "end_seconds": 2.7569740000007443
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4592,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 0.37018130000069505,
+          "end_seconds": 4.962181300000695
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3457,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 4.977017600002,
+          "end_seconds": 8.434017600002
+        },
+        {
+          "call_number": 4,
+          "component": "revision",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2730,
+          "prompt_version": "local-revision-source-actions-v2",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 8.56679350000195,
+          "end_seconds": 11.29679350000195
+        },
+        {
+          "call_number": 5,
+          "component": "claim_extraction",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 3120,
+          "prompt_version": "atomic-claims-v7-obligations-faithful-assertions-v2",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 11.432923500004108,
+          "end_seconds": 14.552923500004109
+        },
+        {
+          "call_number": 6,
+          "component": "evidence_verification",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 3498,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 14.971371100000397,
+          "end_seconds": 18.469371100000398
+        },
+        {
+          "call_number": 7,
+          "component": "power_domain_review",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 3970,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 15.010179500000959,
+          "end_seconds": 18.980179500000958
+        },
+        {
+          "call_number": 8,
+          "component": "evidence_verification",
+          "answer_version": 2,
+          "status": "succeeded",
+          "duration_ms": 2614,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 18.48761110000487,
+          "end_seconds": 21.10161110000487
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.003265000000000004,
+          "end_seconds": 0.055265,
+          "duration_ms": 52
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.059338,
+          "end_seconds": 0.059338,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.062472,
+          "end_seconds": 0.062472,
+          "duration_ms": 0
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.065377,
+          "end_seconds": 0.065377,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.068853,
+          "end_seconds": 0.068853,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.072881,
+          "end_seconds": 0.072881,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.07569500000000001,
+          "end_seconds": 0.332695,
+          "duration_ms": 257
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.3524350000000003,
+          "end_seconds": 2.793435,
+          "duration_ms": 2441
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.44804699999999986,
+          "end_seconds": 2.801047,
+          "duration_ms": 2353
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.3410339999999987,
+          "end_seconds": 8.452034,
+          "duration_ms": 8111
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 3.868983000000001,
+          "end_seconds": 8.460983,
+          "duration_ms": 4592
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 5.009859,
+          "end_seconds": 8.466859,
+          "duration_ms": 3457
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.473051,
+          "end_seconds": 8.473051,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.488995,
+          "end_seconds": 8.488995,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.501525,
+          "end_seconds": 8.501525,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.517921,
+          "end_seconds": 8.517921,
+          "duration_ms": 0
+        },
+        {
+          "component": "revision",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.534224,
+          "end_seconds": 11.315224,
+          "duration_ms": 2781
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.609287,
+          "end_seconds": 11.339287,
+          "duration_ms": 2730
+        },
+        {
+          "component": "revision_changes",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 11.358502,
+          "end_seconds": 11.358502,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 11.391025,
+          "end_seconds": 11.391025,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 11.407802,
+          "end_seconds": 14.538802,
+          "duration_ms": 3131
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 11.439367999999998,
+          "end_seconds": 14.559368,
+          "duration_ms": 3120
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 14.57345,
+          "end_seconds": 14.57345,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 14.588369,
+          "end_seconds": 14.588369,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 14.607678,
+          "end_seconds": 14.607678,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 14.622925,
+          "end_seconds": 14.913925,
+          "duration_ms": 291
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 14.952444,
+          "end_seconds": 19.076444,
+          "duration_ms": 4124
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 15.202466,
+          "end_seconds": 19.172466,
+          "duration_ms": 3970
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 14.938398999999999,
+          "end_seconds": 21.137399,
+          "duration_ms": 6199
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 17.68477,
+          "end_seconds": 21.18277,
+          "duration_ms": 3498
+        },
+        {
+          "component": "model_request",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 18.585541,
+          "end_seconds": 21.199541,
+          "duration_ms": 2614
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 21.216757,
+          "end_seconds": 21.216757,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 21.241563,
+          "end_seconds": 21.241563,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 21.266073,
+          "end_seconds": 21.266073,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 21.309147,
+          "end_seconds": 21.309147,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 2,
+          "status": "succeeded",
+          "start_seconds": 21.342141,
+          "end_seconds": 21.342141,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.006568500000867061,
+        "retriever_worker": 0.5928715999980341,
+        "retriever_wait": 0.5951356000005035
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 255,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 3004,
+          "calls_used": 0,
+          "core_count": 1,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 11,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 0,
+          "core_count": 0,
+          "context_count": 0
+        },
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 289,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 3004,
+          "calls_used": 0,
+          "core_count": 1,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 20,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 0,
+          "core_count": 0,
+          "context_count": 0
+        }
+      ],
+      "fts_spans": []
+    },
+    {
+      "slot": "S9-candidate",
+      "state": "review_required",
+      "control_phase": null,
+      "requests": 2,
+      "received_usage_records": 2,
+      "known_input_tokens": 21343,
+      "known_output_tokens": 695,
+      "known_tokens": 22038,
+      "run_id": "6d95c7b714c34f3abc175be9fac9d4e1",
+      "execution_complete": true,
+      "issue_codes": [],
+      "wall_seconds": 2.493964,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2155,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 0.11704550000285963,
+          "end_seconds": 2.2720455000028594
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2301,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 0.0790913000018918,
+          "end_seconds": 2.380091300001892
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0028959999999999993,
+          "end_seconds": 0.010896,
+          "duration_ms": 8
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.013932,
+          "end_seconds": 0.013932,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.017494,
+          "end_seconds": 0.017494,
+          "duration_ms": 0
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.019693,
+          "end_seconds": 0.019693,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.022606,
+          "end_seconds": 0.022606,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.026046,
+          "end_seconds": 0.026046,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.029372000000000002,
+          "end_seconds": 0.042372,
+          "duration_ms": 13
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.060429000000000066,
+          "end_seconds": 2.341429,
+          "duration_ms": 2281
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.1931130000000003,
+          "end_seconds": 2.348113,
+          "duration_ms": 2155
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.049357000000000095,
+          "end_seconds": 2.367357,
+          "duration_ms": 2318
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0728089999999999,
+          "end_seconds": 2.373809,
+          "duration_ms": 2301
+        },
+        {
+          "component": "source_first_gaps",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 2.378459,
+          "end_seconds": 2.378459,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 2.388554,
+          "end_seconds": 2.388554,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 2.398805,
+          "end_seconds": 2.398805,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 2.413725,
+          "end_seconds": 2.413725,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 2.429288,
+          "end_seconds": 2.429288,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.0025817999994615093,
+        "retriever_worker": 0.017445199999201577,
+        "retriever_wait": 0.01890099999582162
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 12,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 3526,
+          "calls_used": 0,
+          "core_count": 1,
+          "context_count": 2
+        },
+        {
+          "purpose": "verification",
+          "outcome": "gap_summary",
+          "duration_ms": 6,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 0,
+          "calls_used": 0,
+          "core_count": 0,
+          "context_count": 0
+        }
+      ],
+      "fts_spans": []
+    },
+    {
+      "slot": "S10-candidate",
+      "state": "execution_incomplete",
+      "control_phase": null,
+      "requests": 3,
+      "received_usage_records": 3,
+      "known_input_tokens": 43230,
+      "known_output_tokens": 1809,
+      "known_tokens": 45039,
+      "run_id": "b0009e6e361e429c8738d3222f71e0d2",
+      "execution_complete": false,
+      "issue_codes": [
+        "MODEL_OUTPUT_ERROR"
+      ],
+      "wall_seconds": 8.826888,
+      "answer_version": 1,
+      "body_unchanged": true,
+      "answer_object_unchanged": true,
+      "review_rounds": 1,
+      "revision_outputs": 0,
+      "models": [
+        {
+          "call_number": 2,
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 2811,
+          "prompt_version": "power-domain-review-v3.5-task-obligations",
+          "correction": false,
+          "output_status": "valid_structure",
+          "error_code": null,
+          "start_seconds": 0.6274376000001212,
+          "end_seconds": 3.438437600000121
+        },
+        {
+          "call_number": 1,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 4149,
+          "prompt_version": "source_first_audit_v3",
+          "correction": false,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 0.5894439999974566,
+          "end_seconds": 4.738443999997457
+        },
+        {
+          "call_number": 3,
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "succeeded",
+          "duration_ms": 3908,
+          "prompt_version": "source_first_audit_v3",
+          "correction": true,
+          "output_status": "invalid_structure",
+          "error_code": null,
+          "start_seconds": 4.781803199999558,
+          "end_seconds": 8.689803199999558
+        }
+      ],
+      "stage_intervals": [
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.0,
+          "end_seconds": 0.0,
+          "duration_ms": 0
+        },
+        {
+          "component": "original_index_validation",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.003264000000000003,
+          "end_seconds": 0.090264,
+          "duration_ms": 87
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.094341,
+          "end_seconds": 0.094341,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_extraction",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.09852,
+          "end_seconds": 0.09852,
+          "duration_ms": 0
+        },
+        {
+          "component": "claims_created",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.101839,
+          "end_seconds": 0.101839,
+          "duration_ms": 0
+        },
+        {
+          "component": "claim_coverage",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.105418,
+          "end_seconds": 0.105418,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.109518,
+          "end_seconds": 0.109518,
+          "duration_ms": 0
+        },
+        {
+          "component": "source_first_supply",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.11341799999999996,
+          "end_seconds": 0.539418,
+          "duration_ms": 426
+        },
+        {
+          "component": "power_domain_review",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.5688300000000002,
+          "end_seconds": 3.49283,
+          "duration_ms": 2924
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 0.6895120000000001,
+          "end_seconds": 3.500512,
+          "duration_ms": 2811
+        },
+        {
+          "component": "evidence_verification",
+          "answer_version": 1,
+          "status": "failed",
+          "start_seconds": 0.553706,
+          "end_seconds": 8.679706,
+          "duration_ms": 8126
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 4.545452,
+          "end_seconds": 8.694452,
+          "duration_ms": 4149
+        },
+        {
+          "component": "model_request",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 4.800091,
+          "end_seconds": 8.708091,
+          "duration_ms": 3908
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.724426,
+          "end_seconds": 8.724426,
+          "duration_ms": 0
+        },
+        {
+          "component": "audit_policy",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.740713,
+          "end_seconds": 8.740713,
+          "duration_ms": 0
+        },
+        {
+          "component": "state",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.757202,
+          "end_seconds": 8.757202,
+          "duration_ms": 0
+        },
+        {
+          "component": "termination",
+          "answer_version": 1,
+          "status": "succeeded",
+          "start_seconds": 8.772388,
+          "end_seconds": 8.772388,
+          "duration_ms": 0
+        }
+      ],
+      "retrieval_phase_seconds": {
+        "immutable_seal": 0.005637600006593857,
+        "retriever_worker": 0.5085025999942445,
+        "retriever_wait": 0.5098051000095438
+      },
+      "retrieval_records": [
+        {
+          "purpose": "verification",
+          "outcome": "source_scope",
+          "duration_ms": 423,
+          "query_method": "source_first_audit_v3",
+          "accepted_chars": 4299,
+          "calls_used": 0,
+          "core_count": 2,
+          "context_count": 2
+        }
+      ],
+      "fts_spans": []
+    }
+  ],
+  "speed": {
+    "valid_pairs": 1,
+    "pairs": [
+      {
+        "case": "S1",
+        "baseline_seconds": 42.391957999999995,
+        "candidate_seconds": 9.526299000000002
+      }
+    ],
+    "overall_evaluable": false,
+    "legacy_gate_passed": false,
+    "note": "Only S1 is a complete pair; v6 release uses candidate quality/completeness and absolute latency, not old four-pair gate."
+  },
+  "actual_cost": null,
+  "currency": null,
+  "enabled": false,
+  "smoke_requests": 0,
+  "disclosure": "Only mechanical allowlisted metadata; source bodies, actual wire, model prose, answer bodies and all original records stay ignored data. Pending means billing unknown, not a live thread; release receipts separately attest physical state.",
+  "quality": {
+    "provenance": "AI-assisted source-based review under user supervision; seen/authored development fixtures, not expert gold or holdout",
+    "required_target_repairs": 5,
+    "completed_source_bound_repair_reextract_dual_review": [
+      "S7",
+      "S8"
+    ],
+    "partial_revision_no_complete_rereview": [
+      "S3"
+    ],
+    "unchanged_unrepaired": [
+      "S2",
+      "S10"
+    ],
+    "protected_original_objects": [
+      "S1",
+      "S5",
+      "S6",
+      "S9"
+    ],
+    "s4": "Initial factual gap retained, no false pass; later evidence/domain local output failures, not full acceptance",
+    "new_critical_error_observed_in_legal_revisions": false,
+    "required_content_loss_observed_in_legal_revisions": false,
+    "all_quality_gates": false,
+    "all_release_gates": false,
+    "baseline_failure_independent_veto": false
+  },
+  "absolute_latency": {
+    "original_eight_terminal_median_seconds": 17.180294,
+    "max_candidate_terminal_seconds": 43.884434,
+    "max_revision_candidate_terminal_seconds": 43.884434,
+    "median_threshold": 20,
+    "revision_chain_threshold": 60,
+    "each_candidate_threshold": 90,
+    "observed_terminal_thresholds_met": true,
+    "contains_incomplete_chains": true,
+    "complete_chain_latency_acceptance": false,
+    "denominator": "All original S1-S8 candidates, including failed terminal states; no failed chain excluded or credited as completed speed benefit"
+  },
+  "candidate_complete": 6,
+  "candidate_incomplete": 4,
+  "baseline_complete": 4,
+  "total_complete": 10,
+  "unexecuted": 0,
+  "known_input_tokens": 1229558,
+  "known_output_tokens": 45988,
+  "source_span_diagnosis": {
+    "whitespace_changed": 17,
+    "exact": 16,
+    "elided_or_spliced": 5,
+    "null_or_other": 7
+  },
+  "ordinary_reads": {
+    "passed": true,
+    "slots": 14,
+    "incomplete_preserved": [
+      "S2-candidate",
+      "S3-candidate",
+      "S4-candidate",
+      "S10-candidate"
+    ]
+  },
+  "validation": {
+    "full_offline_tests": 1433,
+    "full_offline_seconds": 496.107,
+    "targeted_tests": 22,
+    "targeted_seconds": 10.112,
+    "real_index_offline_paths": 10,
+    "real_index_offline_reads": 10,
+    "ui_actual_archive_replay": true,
+    "clipboard_roundtrip_independently_verified": false
+  },
+  "second_batch": false,
+  "old_v4_pending_preserved": [
+    10
+  ],
+  "service_restarted": false
+}

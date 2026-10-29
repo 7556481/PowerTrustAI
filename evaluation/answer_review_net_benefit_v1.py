@@ -107,7 +107,7 @@ def freeze():
     print('Frozen 8 capability + 4 generation + 8 natural audit tasks; zero sends.',flush=True)
 
 
-async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None,fixed_audit_delivery=True,initial_generated=None,before_submit=None,send_guard=None,budget_for=None,local_issue_codes=(),independent_audit_budget=False):
+async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=None,request_builder=None,variant_config=None,task_runner=None,result_guard=None,fixed_audit_delivery=True,initial_generated=None,before_submit=None,send_guard=None,budget_for=None,local_issue_codes=(),independent_audit_budget=False,fault_policy=None):
     """Submission/persistence/stop is exclusively run_fixed; collection runs Harness."""
     rows=rows or order();generated=dict(initial_generated or {});outputs={};send_log=[];fatal=False
     store=RunStore(root/'runs.sqlite3')
@@ -124,6 +124,7 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
             result=dict(run_id=rid,execution_issues=[],state='unexecuted',reason='no_substantive_natural_draft')
             store.mark(rid,'finished',result=result);outputs[rid]=result;return result
         req=(request_builder or initial_request)(m,i,draft=line=='A');snapshot=None;budget=budget_for(spec,c.budget) if budget_for else c.budget
+        if fault_policy is not None:fault_policy.begin(rid,spec)
         if line=='B':
             g=generated[i];snapshot=g.generation_output.evidence_snapshot
             req=replace(req,mode=TaskMode.ASSESS_EXISTING,existing_answer=g.answer,provided_evidence=g.evidence)
@@ -163,21 +164,27 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
                     if r.result_tool is not None:row['parameters'].update(result_tool=r.result_tool,endpoint='https://api.deepseek.com/beta/chat/completions',tool_choice={'type':'function','function':{'name':'submit_review_result'}},thinking={'type':'disabled'})
                     write(root/'messages'/f'{n:04d}.json',row)
                     send_log.append({k:v for k,v in row.items() if k!='messages'})
-                except Exception:
+                except Exception as exc:
+                    if fault_policy is not None:fault_policy.pre_send_failure(exc)
                     fatal=True;raise PreSendStorageFailure({'constraint':'frozen_identity_or_message_storage'}) from None
                 try:
                     if send_guard is not None and hasattr(send_guard,'remaining_seconds'):
                         response=await asyncio.wait_for(self.delegate.complete(r),send_guard.remaining_seconds())
                     else:response=await self.delegate.complete(r)
-                except asyncio.CancelledError:
-                    if send_guard is not None:fatal=True
+                except asyncio.CancelledError as exc:
+                    if fault_policy is not None:fatal=fault_policy.on_exception(spec,exc) or fatal
+                    elif send_guard is not None:fatal=True
                     raise
                 except Exception as exc:
-                    if send_guard is not None and isinstance(exc,TimeoutError):fatal=True
-                    if getattr(exc,'code',None) in ('MODEL_REQUEST_REJECTED','MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED','MODEL_RATE_LIMITED'):fatal=True
+                    if fault_policy is not None:fatal=fault_policy.on_exception(spec,exc) or fatal
+                    else:
+                        if send_guard is not None and isinstance(exc,TimeoutError):fatal=True
+                        if getattr(exc,'code',None) in ('MODEL_REQUEST_REJECTED','MODEL_AUTHENTICATION_FAILED','MODEL_INSUFFICIENT_BALANCE','MODEL_SERVICE_UNAVAILABLE','MODEL_CONNECTION_FAILED','MODEL_RATE_LIMITED'):fatal=True
                     raise
                 try:write(root/'responses'/f'{n:04d}.json',dict(text=response.text,model_id=response.model_id,usage=wire(response.usage),finish_reason=response.finish_reason,**({'result_transport':wire(response.result_transport)} if response.result_transport is not None else {})))
-                except Exception:fatal=True;raise PreSendStorageFailure({'constraint':'response_storage'}) from None
+                except Exception:
+                    if fault_policy is not None:fault_policy.storage_failure()
+                    fatal=True;raise PreSendStorageFailure({'constraint':'response_storage'}) from None
                 return response
         try:
             store.mark(rid,'running')
@@ -191,7 +198,9 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
             result=await run(bundle.harness,req,budget,knowledge_version=(snapshot.knowledge_version if line=='B' and independent_audit_budget else c.knowledge_version) if line in ('G','B') else None,
                 generation_only=line=='G',generation_snapshot=snapshot,run_id=rid)
             raw=wire(result)
-            if fatal:raw['execution_issues'].append(dict(component='harness',code='DIAGNOSTIC_STORAGE_FAILED',message='pre-send or response persistence failed'))
+            if fault_policy is not None:
+                await fault_policy.finalize(rid,spec,raw,bundle,store)
+            if fatal:raw['execution_issues'].append(dict(component='harness',code='DIAGNOSTIC_STORAGE_FAILED' if fault_policy is None or fault_policy.storage_failed else 'SERVICE_EXECUTION_FAILED',message='pre-send or response persistence failed' if fault_policy is None or fault_policy.storage_failed else 'Structured shared transport failure'))
             known={'MODEL_OUTPUT_ERROR','MODEL_TIMEOUT','TIMEOUT','BUDGET_EXHAUSTED','CANCELLED'}
             known.update(local_issue_codes)
             # Unknown errors stop; never discover sharedness by spending again.
@@ -211,6 +220,7 @@ async def batch(c,m,root,provider_factory,*,factory_type=ComponentFactory,rows=N
             print(f'{line}{i+1}-{spec["variant"]}: {raw["state"]}, calls={len(result.model_records)}',flush=True)
             return raw
         finally:
+            if fault_policy is not None:await fault_policy.finish(rid)
             if bundle:
                 await bundle.drain();bundle.close()
             await factory.close()

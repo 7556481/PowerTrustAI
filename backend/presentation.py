@@ -2,6 +2,33 @@
 TERMINAL={'finished','failed','cancelled','interrupted'}
 
 def explain(result):
+    from backend.answer_annotations import project
+    projection = _explain(result)
+    # Applicability belongs to every policy's user view, including the early
+    # product-decision return. Never promote an explicit scope note to a gap.
+    from types import SimpleNamespace
+    from services.bounded_repair import missing_information_review
+    gaps=missing_information_review([SimpleNamespace(category=f.get('category',''),rationale=f.get('rationale') or '') for f in (result.get('findings') or {}).get('domain',[])]) or []
+    projection['missing_information_review']=gaps
+    projection['scope_note_indexes']=[g['index'] for g in gaps if g.get('applicability') in ('scope_note','unrequested_extension')]
+    projection['inline_review'] = project(result)
+    records=[r for r in result.get('retrieval',[]) if r.get('query_method') in ('source_first_audit_v1','source_first_audit_v2','source_first_audit_v3','source_first_audit_v4')]
+    if records:
+        import json
+        rounds=[]
+        for r in records:
+            try:scope=json.loads(r.get('reason',''))
+            except (ValueError,TypeError):continue
+            rounds.append({'answer_version':r.get('answer_version'),'external_cross_check':scope.get('external_cross_check','unknown')})
+        projection['audit_scope']={'version':records[-1]['query_method'],
+            'text':'核对回答与所给资料，并检查任务完整性。',
+            'external_cross_check':'见取证记录；仅缺口补检，不是全面交叉核验',
+            'round_records':rounds,
+            'source_truth_verified':False}
+    return projection
+
+
+def _explain(result):
     ex=result['execution'];f=result.get('findings',{});answer=result.get('answer',{})
     facts=f.get('model_fact',[]);domain=f.get('domain',[]);rules=f.get('program_rules',[])
     reasons=[];next_steps=[]
@@ -25,6 +52,11 @@ def explain(result):
             'next_steps':['查看终端或执行详情的失败阶段；本记录保留，不自动重发。'],
             'saved':'已完成的回答与阶段记录保留；执行失败不是事实矛盾。'}
     if result.get('no_substantive_answer'):
+        if not ex.get('required_stages_complete'):
+            return {'run_ended':ex.get('status') in TERMINAL,
+                'reasons':['执行未完成：已有资料不足的生成记录保留，不能确认适用流程正常结束；未完成实质审核。'],
+                'next_steps':['查看执行或持久化故障；本任务不自动重发。'],
+                'saved':'已保存的生成记录与原处置保留，不回写为审核通过。'}
         return {'run_ended':ex.get('status') in TERMINAL,
             'reasons':['待补充：未生成实质回答，后续提取与双审核不适用。'],
             'next_steps':['补充相关依据或问题范围后，手动发起新任务。'],
@@ -84,6 +116,11 @@ def unresolved_items(result):
     extraction=(result.get('snapshots') or {}).get('extraction') or {}
     claims={c['claim_id']:c for c in extraction.get('claims',[])}
     rows=[]
+    current=(result.get('review_bindings') or {}).get('verification') or {}
+    if current.get('answer_id')==answer.get('answer_id') and current.get('answer_version')==answer.get('version'):
+        for u in (result.get('findings') or {}).get('literal_reviews',[]):
+            if u.get('status')!='supported':
+                rows.append(dict(sentence=u.get('text'),status=u.get('status'),reason=u.get('reason'),anchor_id=u.get('anchor_id')))
     for f in (result.get('findings') or {}).get('model_fact',[]):
         if f.get('status')=='supported':continue
         c=claims.get(f.get('claim_id'),{})

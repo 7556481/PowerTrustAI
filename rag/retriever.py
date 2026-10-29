@@ -53,12 +53,12 @@ class AsyncSQLiteBM25Retriever:
         from concurrent.futures import ThreadPoolExecutor
         from pathlib import Path
         self.path = str(Path(path).resolve())
-        if execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1'):raise ValueError('Unknown retrieval execution profile')
+        if execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1','selective_match_v1'):raise ValueError('Unknown retrieval execution profile')
         self.execution_profile=execution_profile
         from rag.chinese_terms import TOPIC_VERSION
         from rag.rank_cache import RankCache
         self.query_version=None if execution_profile=='baseline_v1' else ('topic-subject-grammar-bm25-v2' if execution_profile=='topic_v5_grammar_v1' else 'topic-subject-and-bm25-v1' if execution_profile=='topic_v4_subject_v1' else TOPIC_VERSION)
-        self.rank_cache=None if execution_profile=='baseline_v1' else RankCache()
+        self.rank_cache=None if execution_profile in ('baseline_v1','selective_match_v1') else RankCache()
         self.cache_identity=('bm25',execution_profile)
         self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="powertrust-retrieval")
         self._active = None
@@ -66,11 +66,34 @@ class AsyncSQLiteBM25Retriever:
         # One worker-local certificate for the immediately preceding corpus
         # query. This is not a model judgment or a cross-answer query cache.
         self._corpus_certificate = None
+        self._connection = None
+        from threading import Event
+        self._cancel_work = Event()
+        self.last_selective_work = None
+        self._work_limits = None
+
+    def configure_work_budget(self, *, sql_limit, char_limit, deadline):
+        if self.execution_profile == 'selective_match_v1':
+            self._work_limits = (sql_limit, char_limit, deadline)
+
+    def interrupt(self):
+        """Only interrupts this adapter's connection, never a user/service job."""
+        self._cancel_work.set()
+        if self._connection is not None:self._connection.interrupt()
 
     @timed('retriever_worker')
     def _work(self, request, result, validate):
         from rag.storage import KnowledgeStore
         with KnowledgeStore(self.path, readonly=True, validated_pdf_cache=True) as store:
+            self._connection = store.connection
+            if self.execution_profile == 'selective_match_v1':
+                import time
+                store.connection.set_progress_handler(lambda:int(self._cancel_work.is_set() or
+                    (self.last_selective_work is not None and time.perf_counter()>=self.last_selective_work.deadline)),10000)
+            if validate == 'source_context':
+                from rag.context import read_adjacent_context
+                knowledge_version, options = request
+                return read_adjacent_context(store, result, knowledge_version, options)
             if validate == "saved_evidence":
                 for evidence in result:
                     require(evidence.provenance is not None and evidence.provenance.knowledge_version == request,
@@ -96,11 +119,16 @@ class AsyncSQLiteBM25Retriever:
                             for evidence in bodies:
                                 require(store.verify_evidence(evidence) == evidence, "Certified evidence differs from fixed index")
                             return None
+                    require(self.execution_profile!='selective_match_v1','Selective result requires immediate query certificate; no unbudgeted replay')
                     measured['ranking_replay_attempted']=True
                     retriever._validate_result(request, result)
                     return None
             self._corpus_certificate = None
-            retrieved = retriever._retrieve(request)
+            if self.execution_profile == 'selective_match_v1':
+                from rag.selective_match import retrieve,Work
+                self.last_selective_work=Work(*self._work_limits) if self._work_limits else Work()
+                retrieved=retrieve(store,request,self.last_selective_work)
+            else:retrieved = retriever._retrieve(request)
             if isinstance(retriever, CorpusRetriever):
                 self._corpus_certificate = (request, retrieved,self.execution_profile)
             return retrieved
@@ -113,11 +141,22 @@ class AsyncSQLiteBM25Retriever:
         if self._active is not None and not self._active.done():
             raise RuntimeError("Retriever worker busy; cancelled/timed-out work may still be running")
         context=copy_context()
+        self._cancel_work.clear()
         self._active = self._executor.submit(context.run,self._work, request, result, validate)
         future = asyncio.wrap_future(self._active)
         # Consume exceptions even if the waiter is cancelled while the worker runs.
         future.add_done_callback(lambda done: None if done.cancelled() else done.exception())
-        return await asyncio.shield(future)
+        try:
+            return await asyncio.shield(future)
+        except asyncio.CancelledError:
+            if self.execution_profile == 'selective_match_v1':
+                self.interrupt()
+                # Drain physical SQLite work before releasing the call slot.
+                try:await asyncio.shield(future)
+                except Exception:pass
+            raise
+        finally:
+            if self._active.done():self._connection=None
 
     async def retrieve(self, request):
         return await self._submit(request)
@@ -128,6 +167,10 @@ class AsyncSQLiteBM25Retriever:
     async def validate_evidence(self, evidence, knowledge_version):
         """Replay saved citations on the same thread-owned frozen index, no search."""
         await self._submit(knowledge_version, evidence, "saved_evidence")
+
+    async def source_context(self, evidence, knowledge_version, options):
+        """Fixed identities and bounded neighbors on the existing worker; no MATCH."""
+        return await self._submit((knowledge_version, options), evidence, 'source_context')
 
     def close(self):
         self._closed = True

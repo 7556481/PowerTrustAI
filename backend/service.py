@@ -1,7 +1,7 @@
 """Single-worker finite queue around the existing Harness, not an audit scheduler."""
 import asyncio
 from uuid import uuid4
-from backend.assembly import ComponentFactory
+from backend.assembly import ComponentFactory,ResourceCleanupError
 from backend.serialization import wire,safe
 from backend.store import StorageError
 from core.models import TaskRequest,TaskMode,AnswerDraft,Evidence
@@ -16,25 +16,104 @@ class ApplicationService:
         self.config=config;self.store=store;self.factory=factory or ComponentFactory(config)
         self.queue=asyncio.Queue(config.queue_capacity);self.lock=asyncio.Lock()
         self.worker=None;self.active=None;self.active_bundle=None;self.closing=False;self.storage_fault=False
+        self.started=False;self.lifecycle_fault=None;self.lifecycle_diagnostics=[];self.pending_interruptions={}
+        self.undrained_bundles=[];self._stop_complete=False
         self.volatile_errors={}
         self.nli=None;self.nli_tasks=set();self.nli_errors={};self.nli_start_lock=asyncio.Lock()
     async def start(self):
-        if hasattr(self.factory,'initialize_retrieval'):self.factory.initialize_retrieval()
-        self.store.recover();self.worker=asyncio.create_task(self._worker())
-        if self.config.nli_enabled:
-            from services.local_nli import LocalNLI
-            self.nli=LocalNLI(self.config);await self.nli.start()
+        if self.worker is not None or self.closing:raise ServiceUnavailable('Service cannot restart automatically')
+        try:
+            if hasattr(self.factory,'initialize_retrieval'):self.factory.initialize_retrieval()
+            self.store.recover()
+            if self.config.nli_enabled:
+                from services.local_nli import LocalNLI
+                self.nli=LocalNLI(self.config);await self.nli.start()
+            self.worker=asyncio.create_task(self._worker());self.worker.add_done_callback(self._worker_done)
+            self.started=True
+        except BaseException as exc:
+            if isinstance(exc,StorageError):self.storage_fault=True
+            self._lifecycle_failure('SERVICE_START_FAILED',exc)
+            await self.stop();raise
+
+    def _lifecycle_failure(self,code,exc):
+        if self.lifecycle_fault is None:self.lifecycle_fault=code
+        if len(self.lifecycle_diagnostics)<12:
+            record={'code':code,'exception_type':type(exc).__name__[:80]}
+            if isinstance(exc,ResourceCleanupError):record['resource_exception_types']=list(exc.failures[:12])
+            self.lifecycle_diagnostics.append(record)
+
+    def lifecycle_status(self):
+        running=self.worker is not None and not self.worker.done()
+        return {'worker_running':running,'accepting_work':bool(self.started and running and not self.closing and not self.storage_fault and not self.lifecycle_fault),
+            'closing':self.closing,'fault_code':self.lifecycle_fault,
+            'diagnostics':list(self.lifecycle_diagnostics),'undrained_bundles':len(self.undrained_bundles)}
+
+    def require_accepting(self):
+        if not self.lifecycle_status()['accepting_work']:raise ServiceUnavailable('Service not accepting work')
+
+    def _interrupt_unfinished(self,rid,code):
+        try:
+            if self.store.state_row(rid)['status'] in ('queued','running'):
+                self.store.mark(rid,'interrupted',error_code=code)
+        except StorageError:
+            self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+            self.pending_interruptions[rid]=code
+        except Exception as exc:
+            self._lifecycle_failure('QUEUE_RETIRE_FAILED',exc)
+            self.volatile_errors[rid]='SERVICE_LIFECYCLE_FAILED';self.pending_interruptions[rid]=code
+
+    def _retire_waiting(self,code):
+        while not self.queue.empty():
+            item=self.queue.get_nowait()
+            try:self._interrupt_unfinished(item[0],code)
+            finally:self.queue.task_done()
+
+    def _worker_done(self,worker):
+        if worker.cancelled():exc=asyncio.CancelledError()
+        else:exc=worker.exception()
+        if not self.closing and not self.storage_fault and not self.lifecycle_fault:
+            self._lifecycle_failure('WORKER_UNEXPECTED_EXIT',exc or RuntimeError())
+        self._retire_waiting('PROCESS_INTERRUPTED' if self.closing else 'SERVICE_LIFECYCLE_FAILED' if self.lifecycle_fault else 'RUN_STORAGE_FAILED')
+
     async def stop(self):
+        if self._stop_complete:return
         self.closing=True
+        cancelled=None
         for task in self.nli_tasks:task.cancel()
-        if self.nli_tasks:await asyncio.gather(*self.nli_tasks,return_exceptions=True)
-        if self.nli:await self.nli.close()
-        if self.active_bundle:await self.active_bundle.harness.cancel(self.active)
+        if self.nli_tasks:
+            try:await asyncio.gather(*self.nli_tasks,return_exceptions=True)
+            except asyncio.CancelledError as exc:cancelled=exc
+        if self.active_bundle:
+            try:await self.active_bundle.harness.cancel(self.active)
+            except asyncio.CancelledError as exc:cancelled=exc
+            except Exception as exc:self._lifecycle_failure('ACTIVE_CANCEL_FAILED',exc)
         if self.worker:
             self.worker.cancel()
-            await asyncio.gather(self.worker,return_exceptions=True)
-        self.store.recover() # queued/running become interrupted; no auto-enqueue
-        if hasattr(self.factory,'close'):await self.factory.close()
+            try:await asyncio.gather(self.worker,return_exceptions=True)
+            except asyncio.CancelledError as exc:cancelled=exc
+        self._retire_waiting('PROCESS_INTERRUPTED')
+        # An unproven drain never licenses closing resources still in use.
+        remaining=[]
+        for bundle in self.undrained_bundles:
+            try:await bundle.drain()
+            except asyncio.CancelledError as exc:cancelled=exc;remaining.append(bundle)
+            except Exception as exc:self._lifecycle_failure('RESOURCE_DRAIN_FAILED',exc);remaining.append(bundle)
+            else:
+                try:bundle.close()
+                except asyncio.CancelledError as exc:cancelled=exc
+                except Exception as exc:self._lifecycle_failure('RESOURCE_CLOSE_FAILED',exc)
+        self.undrained_bundles=remaining
+        if self.nli:
+            nli,self.nli=self.nli,None
+            try:await nli.close()
+            except asyncio.CancelledError as exc:cancelled=exc
+            except Exception as exc:self._lifecycle_failure('NLI_CLOSE_FAILED',exc)
+        if not remaining and hasattr(self.factory,'close'):
+            try:await self.factory.close()
+            except asyncio.CancelledError as exc:cancelled=exc
+            except Exception as exc:self._lifecycle_failure('FACTORY_CLOSE_FAILED',exc)
+        self._stop_complete=not remaining
+        if cancelled is not None:raise cancelled
 
     def nli_capability(self):
         paths=(self.config.nli_python,self.config.nli_checkpoint,self.config.nli_profile)
@@ -54,6 +133,7 @@ class ApplicationService:
             return bool(self.nli.identity and not self.nli.failure)
 
     async def submit(self,request,*,answer_requirements=(),indexed_reference_ids=(),nli_enabled=None):
+        self.require_accepting()
         validate_request(request,self.config.budget)
         selected=self.config.nli_enabled if nli_enabled is None else nli_enabled
         if type(selected) is not bool:raise ValueError('NLI selection must be boolean')
@@ -61,6 +141,7 @@ class ApplicationService:
             from core.validation import InputError
             if not self.nli_capability()['available']:raise InputError('Local NLI not configured/available; disable the optional selection')
             await self.ensure_nli() # A load failure is diagnostic only; the audit still runs.
+        self.require_accepting()
         knowledge=self.factory.preflight()
         if self.config.profile=='real' and request.existing_answer and request.existing_answer.citations:
             from services.citation_workload import submission_rejections
@@ -69,7 +150,7 @@ class ApplicationService:
             if rejected:raise InputError('Complete citation scopes exceed configured capacity; citation_indexes='+str(list(rejected)))
 
         async with self.lock:
-            if self.closing or self.storage_fault:raise ServiceUnavailable('Service not accepting work')
+            self.require_accepting()
             if self.queue.full():raise QueueFullError('Waiting queue is full')
             rid=uuid4().hex;manifest=self.factory.manifest(knowledge)
             manifest['answer_requirements']=answer_requirements
@@ -98,53 +179,106 @@ class ApplicationService:
             'termination_guaranteed':False,'note':'Cooperative cancellation; sent remote requests or worker threads may remain active.'}
 
     async def _worker(self):
-        while not self.closing:
-            if self.storage_fault:return
-            rid,request,knowledge,requirements,indexed_ids=await self.queue.get()
-            bundle=None
-            from rag.timing import capture_timing
-            timing_manager=capture_timing(run_id=rid);timing_log=timing_manager.__enter__()
+        rid=None
+        try:
+            while not self.closing and not self.storage_fault and not self.lifecycle_fault:
+                item=await self.queue.get();rid=item[0]
+                try:await self._run_one(item)
+                finally:
+                    self.active=None;self.active_bundle=None;self.queue.task_done()
+                rid=None
+        except asyncio.CancelledError as exc:
+            if not self.closing:self._lifecycle_failure('WORKER_UNEXPECTED_EXIT',exc)
+            if rid:self._interrupt_unfinished(rid,'PROCESS_INTERRUPTED' if self.closing else 'SERVICE_LIFECYCLE_FAILED')
+            raise
+        except Exception as exc:
+            self._lifecycle_failure('WORKER_UNEXPECTED_EXIT',exc)
+            if rid:self._interrupt_unfinished(rid,'SERVICE_LIFECYCLE_FAILED')
+        finally:
+            self._retire_waiting('PROCESS_INTERRUPTED' if self.closing else 'SERVICE_LIFECYCLE_FAILED' if self.lifecycle_fault else 'RUN_STORAGE_FAILED')
+
+    async def _run_one(self,item):
+        rid,request,knowledge,requirements,indexed_ids=item
+        bundle=None;persisted=False
+        from rag.timing import capture_timing
+        timing_manager=capture_timing(run_id=rid);timing_log=timing_manager.__enter__()
+        try:
+            if self.store.get(rid)['status']!='queued':return
+            self.active=rid;self.store.mark(rid,'running')
+            bundle=self.factory.create(rid,lambda snapshot:self.store.checkpoint(rid,snapshot))
+            self.active_bundle=bundle
+            result=await bundle.harness.run(request,self.config.budget,knowledge_version=knowledge,
+                answer_requirements=tuple(requirements),indexed_reference_ids=tuple(indexed_ids),run_id=rid)
+            current=asyncio.current_task()
+            if current.cancelling() and not self.closing:
+                if self.store.state_row(rid)['cancel_requested']:
+                    while current.cancelling():current.uncancel() # Explicit per-run cancellation, not worker failure.
+                else:self._lifecycle_failure('WORKER_UNEXPECTED_EXIT',asyncio.CancelledError())
+            status='interrupted' if self.closing else 'cancelled' if result.state.value=='cancelled' else 'failed' if result.state.value=='failed' else 'finished'
+            self.store.mark(rid,status,error_code='PROCESS_INTERRUPTED' if self.closing else None,result=result)
+            persisted=True
+            if self.nli and not self.closing and self.store.get(rid)['config'].get('local_nli_diagnostic',{}).get('enabled',self.config.nli_enabled):
+                task=asyncio.create_task(self.diagnose_completed(rid,wire(result)),name='local-nli:'+rid)
+                self.nli_tasks.add(task);task.add_done_callback(self.nli_tasks.discard)
+        except asyncio.CancelledError:
             try:
-                if self.store.get(rid)['status']!='queued':continue
-                self.active=rid;self.store.mark(rid,'running')
-                bundle=self.factory.create(rid,lambda snapshot:self.store.checkpoint(rid,snapshot))
-                self.active_bundle=bundle
-                result=await bundle.harness.run(request,self.config.budget,knowledge_version=knowledge,
-                    answer_requirements=tuple(requirements),indexed_reference_ids=tuple(indexed_ids),run_id=rid)
-                status='interrupted' if self.closing else 'cancelled' if result.state.value=='cancelled' else 'failed' if result.state.value=='failed' else 'finished'
-                self.store.mark(rid,status,error_code='PROCESS_INTERRUPTED' if self.closing else None,result=result)
-                if self.nli and not self.closing and self.store.get(rid)['config'].get('local_nli_diagnostic',{}).get('enabled',self.config.nli_enabled):
-                    task=asyncio.create_task(self.diagnose_completed(rid,wire(result)),name='local-nli:'+rid)
-                    self.nli_tasks.add(task);task.add_done_callback(self.nli_tasks.discard)
-            except asyncio.CancelledError:
-                try:self.store.mark(rid,'interrupted',error_code='PROCESS_INTERRUPTED')
-                except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-                raise
-            except (StorageError,HarnessObserverError):
-                self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-                try:self.store.mark(rid,'interrupted',error_code='RUN_STORAGE_FAILED')
-                except StorageError:pass
-            except Exception:
-                try:self.store.mark(rid,'failed',error_code='SERVICE_EXECUTION_FAILED')
-                except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-            finally:
-                if bundle:
-                    try:await bundle.drain()
-                    finally:bundle.close()
-                timing_manager.__exit__(None,None,None)
-                try:self.store.add_retrieval_timing(rid,timing_log.records)
-                except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
-                self.active=None;self.active_bundle=None;self.queue.task_done()
+                if not persisted:self.store.mark(rid,'interrupted',error_code='PROCESS_INTERRUPTED')
+            except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+            raise
+        except ResourceCleanupError as exc:
+            self._lifecycle_failure('RESOURCE_CLOSE_FAILED',exc)
+            try:
+                if not persisted:self.store.mark(rid,'failed',error_code='SERVICE_EXECUTION_FAILED')
+            except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+        except (StorageError,HarnessObserverError):
+            self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+            try:
+                if not persisted:self.store.mark(rid,'interrupted',error_code='RUN_STORAGE_FAILED')
+            except StorageError:pass
+        except Exception:
+            try:
+                if not persisted:self.store.mark(rid,'failed',error_code='SERVICE_EXECUTION_FAILED')
+            except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+        finally:
+            cancelled=None
+            if bundle:
+                drained=False
+                try:await bundle.drain();drained=True
+                except asyncio.CancelledError as exc:
+                    cancelled=exc
+                    if not self.closing:self._lifecycle_failure('RESOURCE_DRAIN_FAILED',exc)
+                except Exception as exc:self._lifecycle_failure('RESOURCE_DRAIN_FAILED',exc)
+                if drained:
+                    try:bundle.close()
+                    except asyncio.CancelledError as exc:
+                        cancelled=exc
+                        if not self.closing:self._lifecycle_failure('RESOURCE_CLOSE_FAILED',exc)
+                    except Exception as exc:self._lifecycle_failure('RESOURCE_CLOSE_FAILED',exc)
+                else:self.undrained_bundles.append(bundle)
+            try:timing_manager.__exit__(None,None,None)
+            except asyncio.CancelledError as exc:
+                cancelled=exc
+                if not self.closing:self._lifecycle_failure('TIMING_CONTEXT_FAILED',exc)
+            except Exception as exc:self._lifecycle_failure('TIMING_CONTEXT_FAILED',exc)
+            try:self.store.add_retrieval_timing(rid,timing_log.records)
+            except asyncio.CancelledError as exc:
+                cancelled=exc
+                if not self.closing:self._lifecycle_failure('TIMING_PERSIST_FAILED',exc)
+            except StorageError:self.storage_fault=True;self.volatile_errors[rid]='RUN_STORAGE_FAILED'
+            except Exception as exc:self._lifecycle_failure('TIMING_PERSIST_FAILED',exc)
+            if cancelled is not None:raise cancelled
 
     def state(self,rid):
-        row=self.store.get(rid)
+        row=self.store.state_row(rid)
         return safe({'schema_version':'local-review-service-v1','run_id':rid,'status':row['status'],
             'created_utc':row['created'],'started_utc':row['started'],'ended_utc':row['ended'],
             'cancel_requested':bool(row['cancel_requested']),'harness_state':row['harness_state'],
             'error_code':self.volatile_errors.get(rid) or row['error_code'],'profile':row['config']['profile'],
             'knowledge_version':row['config']['knowledge_version'],'persisted_result_available':row['result'] is not None,
             'execution_path':row['config'].get('execution_path','sequential'),
-            'partial_result_available':row['snapshot'] is not None,'persistence_confirmed':rid not in self.volatile_errors})
+            'partial_result_available':row['snapshot'] is not None,'persistence_confirmed':rid not in self.volatile_errors,
+            'pending_terminal_status':'interrupted' if rid in self.pending_interruptions else None,
+            'service_fault_code':self.lifecycle_fault})
 
     async def diagnose_completed(self,rid,raw):
         # Audit has already terminated. Never pass diagnostics to a Harness input.
@@ -186,14 +320,21 @@ class ApplicationService:
             if output:issues+=output.get('execution_issues',[])
         current_version=(raw.get('answer') or {}).get('version')
         no_answer=(raw.get('generation_output') or {}).get('substantive_answer') is False
-        if no_answer and not issues:complete=True
-        complete=bool(rounds) and rounds[-1]['answer']['version']==current_version and all(not r[k].get('execution_issues') for r in rounds for k in ('verification','domain_review')) and not issues
+        no_answer_complete=bool(no_answer and row['status']=='finished' and row['result'] is not None
+            and row['request'].get('mode')=='question_answer' and raw.get('state')=='needs_information'
+            and not issues and not raw['generation_output'].get('execution_issues')
+            and decision and decision.get('kind')=='needs_information'
+            and decision.get('execution_integrity')=='complete'
+            and 'NO_SUBSTANTIVE_ANSWER' in decision.get('reason_codes',[]))
+        if no_answer:complete=no_answer_complete
+        else:complete=bool(rounds) and rounds[-1]['answer']['version']==current_version and all(not r[k].get('execution_issues') for r in rounds for k in ('verification','domain_review')) and not issues
         verification=raw.get('verification_output') or {};domain=raw.get('domain_output') or {}
         original=row['request'].get('existing_answer')
         if original is None and raw.get('generation_output'):original=raw['generation_output']['answer']
         checked=complete and all(f.get('status')!='not_assessable' for f in verification.get('findings',[])) and all(f.get('check_status')!='not_assessable' for f in domain.get('findings',[])) and not any(c['status']=='incomplete' for c in verification.get('consistency_checks',[]))
         if decision and decision.get('policy_version','').startswith('product-decision-v1'):
             checked=complete and decision.get('execution_integrity')=='complete' and not any(c[1] in ('not_assessable','unknown') for c in decision.get('applicable_checks',[]))
+        if no_answer:checked=False # No substantive extraction/fact/domain audit was performed.
         if not decision and row['config'].get('policy','').startswith('product-decision-v1') and row['status'] in ('failed','interrupted','cancelled','finished'):
             # A projection of execution failure, never a retroactive report/answer judgment.
             decision={'kind':'execution_incomplete','policy_version':row['config']['policy'],
@@ -204,8 +345,11 @@ class ApplicationService:
         retrieval=raw.get('retrieval_records',[])
         projection=safe({'schema_version':'local-review-service-v1','execution':dict(self.state(rid),
             required_stages_complete=complete,all_required_checks_assessed=checked,execution_issues=issues,termination_reason=raw.get('termination_reason'),
+            substantive_audit_status='not_applicable' if no_answer_complete else 'completed' if complete else 'not_completed',
             partial_only=row['result'] is None),'decision':decision,
             'no_substantive_answer':no_answer,
+            'task_context':{'mode':row['request'].get('mode'),'question':row['request'].get('question',''),
+                'structured_goal':(row['request'].get('engineering_context') or {}).get('goal')},
             'fact_diagnostics':__import__('services.fact_diagnostics',fromlist=['explain']).explain(verification),
             'fact_internal_flow':{'protocol':verification.get('flow_protocol'),'object_reviews':verification.get('object_reviews',[]),'trace':verification.get('flow_trace',[])},
             'answer':{'original':original,
@@ -215,8 +359,11 @@ class ApplicationService:
             'domain_internal_flow':{'assessment':domain.get('business_assessment'),'trace':domain.get('business_trace',[])},
             'answer_adoption':{'approved':(raw.get('report') or {}).get('decision',{}).get('kind')=='pass','mode':row['request'].get('mode')},
             'findings':{'model_fact':verification.get('findings',[]),'domain':domain.get('findings',[]),
+                'literal_reviews':verification.get('literal_reviews',[]),'literal_defects':verification.get('literal_defects',[]),
                 'original_citations':verification.get('citation_reviews',[]),
                 'program_rules':verification.get('consistency_checks',[]),'tools':raw.get('tool_results',[])},
+            'review_bindings':{'verification':{'answer_id':verification.get('answer_id'),
+                'answer_version':verification.get('answer_version')}},
             'evidence':self.store.objects(rid,'evidence'),'evidence_bindings':raw.get('evidence_bindings',[]),
             'snapshots':{'generation':raw.get('generation_output'),'extraction':raw.get('extraction_output'),
                 'verification_input':verification.get('generation_snapshot'),'delivery':verification.get('delivery_summary')},

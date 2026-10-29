@@ -17,6 +17,14 @@ class UITests(unittest.TestCase):
         self.assertNotIn('unsafe-inline',page.headers['content-security-policy'])
         self.assertEqual(page.headers['cache-control'],'no-store')
         self.assertEqual(self.client.get('/ui/app.js').status_code,200)
+        diagnostic = self.client.get('/ui/diagnostics.html')
+        self.assertEqual(diagnostic.status_code, 200)
+        self.assertIn('id="review-form"', diagnostic.text)
+        self.assertNotIn('id="review-form"', page.text)
+        self.assertNotIn('id="task-scope"', page.text)
+        self.assertEqual(self.client.get('/ui/diagnostic_input.js').status_code, 200)
+        self.assertEqual(self.client.get('/ui/mark.svg').status_code, 200)
+        self.assertEqual(self.client.get('/ui/diagnostics.html?run_id=x').status_code, 400)
         self.assertEqual(self.client.get('/ui/anything').status_code,404)
         self.assertEqual(self.client.get('/runs/page/0').status_code,401)
         response=self.client.post('/runs',headers=dict(self.headers,Origin='https://evil.example'),
@@ -31,7 +39,8 @@ class UITests(unittest.TestCase):
         self.assertEqual(len(first['items']),20);self.assertEqual(len(second['items']),1)
         self.assertEqual(first['next_offset'],20);self.assertIsNone(second['next_offset'])
         self.assertFalse({r['run_id'] for r in first['items']}&{r['run_id'] for r in second['items']})
-        self.assertEqual(set(first['items'][0]),{'run_id','status','created_utc','mode','profile'})
+        self.assertEqual(set(first['items'][0]),{'run_id','status','created_utc','mode','profile','question_summary'})
+        self.assertLessEqual(len(first['items'][0]['question_summary']),120)
         self.assertEqual(self.client.get('/runs/page/-1',headers=self.headers).status_code,422)
 
     def test_feedback_targets_preserve_historical_version_bindings(self):

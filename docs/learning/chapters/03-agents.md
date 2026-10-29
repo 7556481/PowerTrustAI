@@ -1,5 +1,13 @@
 # 03 四Agent与ClaimExtractor：对象比角色名称重要
 
+## 四Agent各自承担哪一种失败
+
+Generation只读原中文问题与实际Evidence；英文查询用于召回，不是事实来源。ClaimExtractor管理原文锚点，不能把自己的忠实标签当真值。Fact需判断整句的范围和强度，Domain需区分概念解释与需要厂站参数的工程结论；Revision只能凭已有原文授权修改，不能自行补事实。
+
+本轮固定8份C稿，没有重新生成或检索。N2、N4都已进入真实原文审核，仍被判supported：这是识别断点，不是修订器未获得足够重试。N5领域纠正后仍非法，执行不完整；这又不同于合法语义漏检。[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
+
+## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+
 ## 结果工具不是额外Agent
 
 严格工具调用也可以只提交审核结果。submit_review_result不搜索、不写文件、不执行业务动作；参数直接进入原审核对象，程序不再请求模型总结。四职责与审核阶段不增。模型调用仍是实际一次请求，不能因返回一个函数名就多算Agent，也不能把它当作额外工具业务能力。
@@ -16,7 +24,7 @@
 
 ## 2026-10-24 审核链v2实证更新
 
-任务完整性评估整份回答是否覆盖问题；独立事实审核检查提取的完整命题；原引用审核只检查绑定子串与它的原引用。相邻答案可消歧，不能代替当前绑定提供依据。scope_v2候选把程序已知身份/位置移出模型输出，但真实契约执行失败严重，不改变生产四职责和schema13默认。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#)。
+任务完整性评估整份回答是否覆盖问题；独立事实审核检查提取的完整命题；原引用审核只检查绑定子串与它的原引用。相邻答案可消歧，不能代替当前绑定提供依据。scope_v2候选把程序已知身份/位置移出模型输出，但真实契约执行失败严重，不改变生产四职责和schema13默认。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/production-review-net-benefit-v2/report.md#)。
 
 本轮实际结果：A8/G4/B8固定批次106请求、1126972token，5条审核执行不完整；候选仅A4进入新修订提示，原版也纠正且没有目标历史叙述，自然8路正文不变。未证明候选净收益，不采用生产；N-1/N-2条件外推和原引用跨单元缺口疑点保留。实际8765保持原停服，无常驻候选。
 
@@ -24,22 +32,22 @@
 
 近期闭环目标是修复影响结论成立的矛盾、条件遗漏和无据扩展，同时保留正确内容与必答点。最近生产相关归档LSI-03-G正确修正数值，却在正文加入“原回答误作……已修正”；完整重审没有收到旧正文快照，为过程叙述新增了无法满足的输入依据义务，最终待补充。LSI-03-S同样修正数值而无该历史叙述，最终通过；单次模型差异不能归因于编排。
 
-最小候选只给原ModelRevisionAgent增加answer_delivery=answer_only_v1提示：正文交付完整新答案，修改历史与接受/保留意见的理由留在既有finding_actions.explanation；原问题明确询问历史时仍可回答，技术所需的数值对比也保留。不扩大审核来源，不把审核理由当事实。production仍使用原提示，事实联合v2/两阶段和领域business_v1保持各自候选身份。见[本轮断点与验证](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
+最小候选只给原ModelRevisionAgent增加answer_delivery=answer_only_v1提示：正文交付完整新答案，修改历史与接受/保留意见的理由留在既有finding_actions.explanation；原问题明确询问历史时仍可回答，技术所需的数值对比也保留。不扩大审核来源，不把审核理由当事实。production仍使用原提示，事实联合v2/两阶段和领域business_v1保持各自候选身份。见[本轮断点与验证](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
 
 ## 2026-10-23 契约审计与v2离线候选
 
 首真实内部候选对照已按F05最终失败停止：12调用、3纠正，后6分支未发送，生产未切。审计实际消息发现旧objection字段要求与新字段禁止并存，以及必填repair缺失、纠正提示禁止复制文本与字面quote字段的歧义。v2使用唯一字段规范供初始/纠正消息共用；程序检查preserved=true必须有回答原片段，并拒绝技术对象以ordinary静默绕过义务；明确异议后ordinary仍可合法转复核。程序不猜分类、不补理由或条件片段。
 
-v2仍一次联合判断，没有额外规划调用。独立对象/义务确认可能减少耦合，但每事实组增加一次初始调用，并可能将分类错误传给支持阶段，当前无证据证明值得。结构接线和完整离线回归通过不代表语义改善；下一次6项开发复验材料仅准备、0真实发送。v2仅显式开发create_agent入口，原Factory/生产默认不变。见[审计与设计比较](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v2/README.md#)。旧段落中的“本轮0调用”为其历史轮次。
+v2仍一次联合判断，没有额外规划调用。独立对象/义务确认可能减少耦合，但每事实组增加一次初始调用，并可能将分类错误传给支持阶段，当前无证据证明值得。结构接线和完整离线回归通过不代表语义改善；下一次6项开发复验材料仅准备、0真实发送。v2仅显式开发create_agent入口，原Factory/生产默认不变。见[审计与设计比较](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v2/README.md#)。旧段落中的“本轮0调用”为其历史轮次。
 
 
 ## 2026-10-23 事实审核内部流程候选
 
 事实审核内部候选仍属于原事实Agent，没有新增Master。生成、领域和修订职责不变；Factory显式fact_internal_flow=langgraph_candidate_v1才装配FactFlowAgent，默认production仍schema13。内部对象分类与支持同次请求，不增加规划调用。
 
-完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
+完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
 ## 2026-10-22：已有定制与工具选择
 

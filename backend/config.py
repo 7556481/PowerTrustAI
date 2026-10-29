@@ -15,6 +15,8 @@ class ServiceConfig:
     verification_schema: int=13
     execution_path: str='sequential'
     fact_internal_flow: str='production'
+    fact_review_execution: str='serial_v1'
+    audit_strategy: str='baseline'
     fact_review_contract: str='production'
     review_result_transport: str='json'
     domain_internal_flow: str='production'
@@ -42,6 +44,11 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.audit_strategy not in ('baseline','source_first_audit_v1','source_first_audit_v2','source_first_audit_v3','source_first_audit_v4'):raise ValueError('Invalid audit strategy')
+        if self.audit_strategy=='source_first_audit_v4' and self.domain_internal_flow!='production':raise ValueError('Source reference v4 requires its paired domain contract')
+        if self.audit_strategy!='baseline' and (self.fact_review_contract!='literal_v1' or self.local_revision_interface!='source_actions_v2' or self.fact_review_execution!='serial_v1' or self.retrieval_mode!='bm25' or self.retrieval_execution_profile=='chinese_first_cross_language_v1'):raise ValueError('Source-first requires explicit literal/v2 serial BM25 candidate')
+        if self.fact_review_execution not in ('serial_v1','citation_pair_v1'):raise ValueError('Invalid fact execution candidate')
+        if self.fact_review_execution!='serial_v1' and (self.profile!='real' or self.verification_schema!=13 or self.fact_internal_flow!='production' or self.fact_review_contract!='production' or self.review_result_transport!='json'):raise ValueError('Candidate requires original schema13 fact contract')
         if self.local_revision_interface not in ('production','source_actions_v2'):raise ValueError('Invalid local revision interface')
         if self.local_revision_interface!='production' and (self.fact_review_contract!='literal_v1' or self.profile!='real'):raise ValueError('V2 revision requires explicit literal fact candidate')
         if self.extraction_message_profile not in ('production','unified_v1'):raise ValueError('Invalid extraction message profile')
@@ -60,7 +67,7 @@ class ServiceConfig:
         if self.fact_internal_flow!='production' and self.verification_schema!=13:raise ValueError('Candidate requires explicit schema13 baseline')
         if self.execution_path not in ('sequential','langgraph_v1'):raise ValueError('Invalid execution path')
         if self.review_message_profile not in ('baseline_v1','lossless_v1'):raise ValueError('Invalid review message profile')
-        if self.retrieval_execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1','chinese_first_cross_language_v1'):raise ValueError('Invalid retrieval execution profile')
+        if self.retrieval_execution_profile not in ('baseline_v1','topic_v3_rank_v1','topic_v4_subject_v1','topic_v5_grammar_v1','chinese_first_cross_language_v1','selective_match_v1'):raise ValueError('Invalid retrieval execution profile')
         if type(self.verification_schema) is not int or self.verification_schema not in (13,14):raise ValueError('Explicit schema13 or schema14 required')
         if self.decision_policy not in ('product-v1','legacy-v1'):raise ValueError('Unknown decision policy')
         if type(self.nli_enabled) is not bool or not 0<float(self.nli_timeout_seconds)<=60:
@@ -104,10 +111,12 @@ class ServiceConfig:
         strategy=os.environ.get('POWERTRUST_FACT_RETRIEVAL_STRATEGY','aggregate')
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
         return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
+            audit_strategy=os.environ.get('POWERTRUST_AUDIT_STRATEGY','baseline'),
             domain_internal_flow=os.environ.get('POWERTRUST_DOMAIN_INTERNAL_FLOW','production'),
             revision_answer_delivery=os.environ.get('POWERTRUST_REVISION_ANSWER_DELIVERY','production'),
             local_revision_interface=os.environ.get('POWERTRUST_LOCAL_REVISION_INTERFACE','production'),
             fact_internal_flow=os.environ.get('POWERTRUST_FACT_INTERNAL_FLOW','production'),
+            fact_review_execution=os.environ.get('POWERTRUST_FACT_REVIEW_EXECUTION','serial_v1'),
             fact_review_contract=os.environ.get('POWERTRUST_FACT_REVIEW_CONTRACT','production'),
             review_result_transport=os.environ.get('POWERTRUST_REVIEW_RESULT_TRANSPORT','json'),
             execution_path=os.environ.get('POWERTRUST_EXECUTION_PATH',orchestration.get('execution_path','sequential')),

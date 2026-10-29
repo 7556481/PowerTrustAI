@@ -1,0 +1,122 @@
+{
+  "base_commit": "06b97697697a27c9f5d5bb345ba49342ed101a72",
+  "implementation_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+  "branch": "codex/service-status-recovery-ui-v5",
+  "baseline": {
+    "failed_assertions": 5,
+    "pre_submit_post": 1,
+    "pending_queued_poll_timers": 1,
+    "logs": "data/maintenance_local/service-status-v5/before.log",
+    "additional_failure": "metadata-only pending transition and answer version switch restored running label; metadata-before.log"
+  },
+  "after": {
+    "actual_client_groups": {
+      "status-final.log": 26,
+      "previous-async-final.log": 20,
+      "previous-slow-final.log": 12
+    },
+    "targeted_tests": 11,
+    "targeted_seconds": 7.182,
+    "pre_submit_blocked_posts": 0,
+    "pending_queued_poll_timers": 0,
+    "manual_health_only": true,
+    "automatic_restart": false,
+    "replay": false
+  },
+  "actual_isolated_api": {
+    "case": "actual_isolated_api",
+    "health": {
+      "status": "degraded",
+      "reason": "RESOURCE_CLOSE_FAILED",
+      "storage_healthy": false,
+      "service_lifecycle": {
+        "worker_running": false,
+        "accepting_work": false,
+        "closing": false,
+        "fault_code": "RESOURCE_CLOSE_FAILED",
+        "diagnostics": [
+          {
+            "code": "RESOURCE_CLOSE_FAILED",
+            "exception_type": "RuntimeError"
+          }
+        ],
+        "undrained_bundles": 0
+      }
+    },
+    "waiting_state": {
+      "status": "queued",
+      "pending_terminal_status": "interrupted",
+      "persistence_confirmed": false,
+      "service_fault_code": "RESOURCE_CLOSE_FAILED",
+      "persisted_result_available": false
+    },
+    "waiting_result_available": false,
+    "finished_status": "finished",
+    "new_post_status": 503,
+    "history_read_status": 200,
+    "feedback_append_status": 201,
+    "saved_raw_equal": true,
+    "component_runs": 1
+  },
+  "full_suite": {
+    "rerun": false,
+    "reused_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
+    "tests": 1360,
+    "seconds": 363.08,
+    "reason": "No shared backend change; relevant API and client tests run on final frontend"
+  },
+  "browser": {
+    "port": 8766,
+    "fixture": "tools.ui_lifecycle_fixture_v4 --cleanup-fault-on-next",
+    "normal_synthetic_submit": true,
+    "post_cleanup_fault_submit_disabled": true,
+    "history_versions_evidence_feedback": true,
+    "no_answer_needs_information_not_pass": true,
+    "keyboard_manual_check": true,
+    "narrow_viewport": 390,
+    "document_client_width": 375,
+    "document_scroll_width": 375,
+    "pending_unconfirmed_browser": false,
+    "pending_unconfirmed_evidence": "actual isolated API plus actual-client JS probe",
+    "screenshot": "data/maintenance_local/service-status-v5/fault-browser.png"
+  },
+  "learning": {
+    "chapters": 20,
+    "folds": 88,
+    "exact_ast_snippets": 14,
+    "affected_chapters": [
+      10,
+      18
+    ],
+    "browser_pages": [
+      "10-api-storage.html",
+      "18-operations.html"
+    ],
+    "application_commit": "0c22ca5c785f0e095cf4f7d468bb166c202aef22",
+    "whole_site_browser": false
+  },
+  "protected_files": {
+    "start-learning.cmd": {
+      "sha256": "82011cca2ba20f0c821dbd73e634979f578da66399934749a8c81de127fe50d4",
+      "matches_prior": true
+    },
+    "start-powertrustai.cmd": {
+      "sha256": "aa63112c9ef41ee865e4033e680a560391caad9abde2e94d63da70bc422102b7",
+      "matches_prior": true
+    },
+    "data/runtime_local/orchestration.json": {
+      "sha256": "5546973984813b01e08972ad94a37486a1430d508fcab3833f06bd7c2a069c06",
+      "matches_prior": true
+    },
+    "data/runtime_local/daily-knowledge.json": {
+      "sha256": "f77330bfe08862c89a33e769cff57fb9347b8de41b8f398dae8818519249d03c",
+      "matches_prior": true
+    }
+  },
+  "project_model_calls": 0,
+  "project_model_tokens": 0,
+  "project_model_cost": 0,
+  "production_database_opened": false,
+  "production_switched": false,
+  "raw_archive": "data/maintenance_local/service-status-v5"
+}

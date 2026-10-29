@@ -166,7 +166,8 @@ class RunExecution:
         if isinstance(self.verification,LiteralVerificationOutput):
             from core.literal_review import LiteralAuditReport
             from dataclasses import fields
-            result=LiteralAuditReport(**{f.name:getattr(result,f.name) for f in fields(result)},literal_reviews=self.verification.literal_reviews,literal_defects=self.verification.literal_defects)
+            result=LiteralAuditReport(**{f.name:getattr(result,f.name) for f in fields(result)},literal_reviews=self.verification.literal_reviews,literal_defects=self.verification.literal_defects,
+                literal_protocol=self.harness.audit_strategy if self.harness.audit_strategy!='baseline' else 'literal-review-v1')
         validate_report(result)
         return result
 
@@ -361,7 +362,11 @@ class RunExecution:
         self.v_evidence = self.d_evidence = self.evidence
         self.v_bindings = self.d_bindings = self.bindings
         self.v_retrieval_issue = self.d_retrieval_issue = None
-        if self.retrieval:
+        from harness.source_first_audit_v1 import enabled as source_first_enabled
+        if source_first_enabled(self):
+            from harness.source_first_audit_v1 import prepare as prepare_source_first
+            await prepare_source_first(self)
+        elif self.retrieval:
             self.vd = await self.retrieve_for(RetrievalPurpose.VERIFICATION)
             if not self.evidence_only:
                 self.dd = await self.retrieve_for(RetrievalPurpose.DOMAIN_REVIEW)
@@ -436,6 +441,9 @@ class RunExecution:
 
     async def merge_and_decide(self):
         """Merge evidence, apply original policy; return whether review ended."""
+        from harness.source_first_audit_v1 import enabled as source_first_enabled, supplement
+        if source_first_enabled(self):
+            await supplement(self)
         if self.retrieval and getattr(self.harness, 'subject_supplement', False) and (not self.v_issue) and (not self.verification.execution_issues):
             from services.audit_subject_query import query as subject_query, VERSION as SUBJECT_QUERY_VERSION
             q = subject_query(self.claims, self.verification.findings)
@@ -471,6 +479,9 @@ class RunExecution:
         self.transition(RunState.DECIDING)
         self.product_policy = getattr(self.harness.policy, 'product_policy', False)
         self.decision = self.harness.policy.decide_context(self.verification, self.domain, self.budget, self.rounds, request=self.request, answer=self.answer, claims=self.claims, extraction=self.extracted, issues=self.issues, retrieval=self.retrieval) if self.product_policy else self.harness.policy.decide(self.verification, self.domain, self.budget, self.rounds)
+        if source_first_enabled(self):
+            self.decision=replace(self.decision,reasons=self.decision.reasons+('Scope: source fidelity and task completeness; independent external truth and engineering safety not established',),
+                classification_basis=('Source-first supplied-evidence judgments; external gap retrieval separately recorded',))
         real_repair = getattr(self.harness.policy, 'allows_bounded_real_revision', False) and getattr(self.harness.revision, 'bounded_real_revision', False) and (self.rounds < 1)
         if not self.product_policy and self.decision.kind in (DecisionKind.PASS, DecisionKind.REVISE) and (getattr(self.harness.verification, 'uses_model_adapter', False) or getattr(self.harness.extractor, 'uses_model_adapter', False)) and (not (self.decision.kind == DecisionKind.REVISE and real_repair)):
             self.decision = AuditDecision(DecisionKind.REVIEW_REQUIRED, ('Model and rule reviews are limited; no engineering feasibility/safety certification',) + self.decision.reasons, 'evidence-local-gate-v1', self.decision.unresolved_finding_ids)

@@ -1,8 +1,39 @@
 # 18 环境、启动、Git、迁移与排障
 
+## 十题真实产品案例接续
+
+十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；首稿观测2.73～12.34秒，结束19.05～95.56秒。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/evaluation/stable-product-baseline-v1/report.md)。UI四缺项本轮已用原合成夹具补验通过，旧工具失败保留。
+
+## 稳定候选启动验收（首轮历史，接续状态见上文）
+
+一键入口 `start-powertrustai.cmd --demo` 走原合成夹具；不带参数走真实受管服务。当前候选不是默认分支发布。1454离线通过及真实入口ready只证明工程阶段，浏览器修订/证据/390/键盘验收尚缺，十题真实基线未发送，不能用合成绿标代替语义收益。进程级库封印与每题检索分别计时；本轮精确启动秒数未知。完整边界及失败见[稳定候选报告](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/maintenance/stable-product-baseline-v1.md)，操作见[清单](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/stable-operation-checklist.md)。
+
+## v6产品页与GitHub检查排障
+
+零模型交互用原环境`python -m tools.ui_fixture --port 8766`及`/fixture/connect`；真实8765不作为界面验收入口。主页连接失效时按提示使用原启动器重新建立本机会话，手动令牌兼容在页脚诊断入口。服务正常时模式为小字，演示清楚标“无模型调用”；不要把profile推测为具体模型型号。
+
+Git工作分支推送、默认分支README展示、该提交CI检查是三件事。历史红叉日志显示公开workflow未安装LangGraph、干净克隆缺临时输出父目录、部分私有回放缺归档未显式标注；修复分别安装匹配版本、在既有忽略边界内创建临时父目录、仅对确需私有文件的测试标明缺失前提。公开合成测试仍执行，禁止吞失败或放宽断言。checkout需完整历史供SHA绑定差分测试使用。README维护日志已迁出；以后进展写handoff和维护报告。
+
+## 2026-10-27只读服务检查与轮询收敛
+
+连接区“重新检查服务”仅发一次GET /health；同一时刻一个检查，无新增定时器，不启动服务、模型或任务。检查失败保留已读正文和草稿，历史读取可尝试但不保证损坏存储可读。旧health缺生命周期字段时依据status/configuration_ready兼容并标注限制；未知不冒称ready。配置、存储、生命周期、队列满、网络不可达和401分别提示。旧epoch/请求身份及较早health不能覆盖新故障或使新会话失效。
+
+显式待中断且保存未确认时，queued不再导致无限主轮询；保留原状态供回查，辅助失败和NLI pending仍按既有上限收敛。只有服务故障码但任务仍running时继续查询。未知POST不得借健康检查解锁重发；故障实例不自动重启。8766零付费夹具验证清理故障后禁新提交、历史版本/证据/反馈可用；待中断未确认以实际隔离API与前端探针验证，未冒称浏览器覆盖。不代表模型回答质量或审核收益改善。
+
+## 2026-10-27工作循环故障的运维边界
+
+health.service_lifecycle区分worker_running、accepting_work、fault_code及受控异常类别；不含原始异常消息/堆栈。配置齐全、SQLite可读不再等于ready。资源清理失败后停止接单并明确处置等待项，不自动重启worker或重放付费任务。正常运行取消/服务关闭与worker非预期退出分开；启动失败释放已取得的资源，重复stop不重复正常关闭。
+
+drain表示底层工作仍可能活跃，抛错时保留未确认资源，不强关；关闭时可再次尝试安全drain。若一直未结束，仍可能等待，没有强制终止/远端取消保证；本轮没有引入超时硬杀。只读历史结果、版本、证据及追加意见继续可用。故障浏览器入口为显式隔离CLI tools.ui_lifecycle_fixture_v4，普通入口仍tools.ui_fixture；两者都是8766，不是生产8765，正式API无故障注入开关。
+
+
+## 2026-10-27工程维护补记
+
+零付费业务UI验收可使用 `.venv\Scripts\python.exe -m tools.ui_fixture --port 8766`，先看根页未连接状态，再访问/fixture/connect进入本机一次性会话。该入口只装配synthetic_fixture，临时库/令牌由进程管理，NLI关闭，不读.env或70GB；Ctrl+C释放。不要直接运行默认指向生产Store的旧ui_demo_scenarios。日常start-powertrustai.cmd和独立8770学习站用途不变。
+
 ## 最小复现先隔离接口，再检查业务
 
-【真实观察】本轮四种短合成Schema分别走直接HTTP与项目适配器，实际正文逐字节相同，八项都合法。之后旧业务回归出现嵌套conditions额外字段及来源ID错误，只有两项执行完整。没有发现客户端差异，也不能因此认定服务端严格约束始终生效；未知内部原因应保留。[证据与版本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-interface-consistency-v1/report.md#)。
+【真实观察】本轮四种短合成Schema分别走直接HTTP与项目适配器，实际正文逐字节相同，八项都合法。之后旧业务回归出现嵌套conditions额外字段及来源ID错误，只有两项执行完整。没有发现客户端差异，也不能因此认定服务端严格约束始终生效；未知内部原因应保留。[证据与版本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-interface-consistency-v1/report.md#)。
 
 诊断应记录真正交给连接的URL、参数和正文身份，以及接收时arguments与解析后字符串是否相同。只比较构造函数不能排除后续改写。Schema约束对象形状，业务还要检查ID是否属于当前来源目录、条件归属和引用范围。结构合法的S1B0也可能不是要求的SRC:S1B0；程序不能替模型换成正确ID。
 
@@ -14,7 +45,7 @@
 
 ## 上一严格载体批次的停止与回退
 
-【真实失败】实际API未拒绝请求，但参数严格解析失败，唯一纠正后仍未完成；按A1/A3准入规则封存，不换参数、接口或模型试到成功。原始调用ID、参数、结束、用量和本地关联可回查；不能自动去重或剥离多余括号。本轮没有合法结果，不继续服务验收；生产默认JSON不变。[实际证据](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/strict-review-tool-v1/report.md#)。
+【真实失败】实际API未拒绝请求，但参数严格解析失败，唯一纠正后仍未完成；按A1/A3准入规则封存，不换参数、接口或模型试到成功。原始调用ID、参数、结束、用量和本地关联可回查；不能自动去重或剥离多余括号。本轮没有合法结果，不继续服务验收；生产默认JSON不变。[实际证据](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-review-tool-v1/report.md#)。
 
 ## Beta与显式回退
 
@@ -28,7 +59,7 @@ strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实
 
 ## 实际接入没有完成时
 
-【真实失败】v9.22.1三次实际消息均通过JSON模式检查并有返回，没有请求拒绝；原引用输出重复键，唯一纠正仍失败，正式A1接入门禁停止后续26槽。不要改用“最后一个同名字段”为准，也不要把部分合法事实变成整答通过。本批没有实际HTTP拒绝，相关故障状态只由离线替身验证；停止后不另发付费探测。[原文及版本边界](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/review-simple-patch-v1/report.md#)。
+【真实失败】v9.22.1三次实际消息均通过JSON模式检查并有返回，没有请求拒绝；原引用输出重复键，唯一纠正仍失败，正式A1接入门禁停止后续26槽。不要改用“最后一个同名字段”为准，也不要把部分合法事实变成整答通过。本批没有实际HTTP拒绝，相关故障状态只由离线替身验证；停止后不另发付费探测。[原文及版本边界](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-simple-patch-v1/report.md#)。
 
 ## 公共请求边界：额度、故障与纠正
 
@@ -42,7 +73,7 @@ strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实
 不能。HTTP422是请求级故障，本运行后续引用、纠正和下游模型都应停止，批次也按共享故障规则停止。HTTP200的结构失败可以使用原有有限纠正额度；不能因为有余额就重试被拒绝的请求，也不能把已接受结果丢掉。这里是离线行为检查，不是故意付费制造故障。
 :::
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
 ## 三种入口，互不打断
 
@@ -121,7 +152,7 @@ Git可把Windows工作区CRLF检出为Linux LF；直接比较工作区原字节S
 
 默认是否已切换、真实付费完成数量及未验收项见本轮集成报告。完整发布库每个新进程保留首次字节SHA检查，不能以启动慢为由跳过或改成mtime认证。学习站由Markdown构建，20章和60折叠自测保持；不手工维护第二份HTML正文。
 
-当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
+当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
 
 ## 三道自测：先作答，再展开
 
@@ -154,3 +185,27 @@ Git可把Windows工作区CRLF检出为Linux LF；直接比较工作区原字节S
 ## 2026-10-09 第二版定向补记
 
 新电脑独立读站仅需GitHub冻结版本docs/learning/site/完整目录，打开index.html；不需.env、data、模型、数据库或业务.venv。服务/重建只需Python3.10+标准库、tools/__init__.py、tools/learning_site.py、docs/learning/及start-learning.cmd；启动器有现有.venv则复用，否则py -3/python，不创建环境或装依赖。python -m tools.learning_site serve --open --port 8770；build重建。源码检查另需tools/learning_checks.py及source-check.json引用的公开只读.py文件，不导入业务服务。同步清单见GitHub docs/learning-site-sync-v2.md，最终哈希按冻结Git引用/交付核对。
+
+## 2026-10-28 v4未通过启用门槛
+
+候选尚未启用，条件服务烟测0次。真实首次Revision超时且usage未决，12链/四错修复/四对速度及正确保护尚不完整，不能以UI改善或S2初审发现替代整体门槛。没有本机配置切换、强停在途任务、历史POST重放或第二批；8765未由本轮操作，只有自建8766/8767回放已释放。
+
+UI和只读投影代码可以独立交付；当前服务未由本轮重启，完整后端投影需按原正常方式重载本分支代码。类默认schema13/baseline保留，未擅自启用候选或改master。因不准入而未执行部署及回退，不应虚构回退已验证或“已启用可使用”。
+
+## 2026-10-28 v5：可继续独立槽，不降低启用门槛
+
+最多一次安全释放未决的授权只用于实验：请求照扣数、实际用量费用未知，第二次停全批；真实50请求全有usage，未知分支由真实线程入口离线模拟验证。17专项20.871秒、1425全套503.019秒、实际库8路径/8读取及最终12归档普通读取通过。合成后审不是模型成绩，先前夹具失败保留。
+
+11/12完整、四错仅3/4修复、四对速度不可评，候选不启用，烟测0；没有重启/强停用户服务、回退动作或第二批。沿用v4 UI与实际桌面/390回放证据，本轮无UI变更；schema13/baseline默认保留。完成归档推送后停止，不自动再实验。
+
+## 2026-10-28 v6：候选仍未启用
+
+完整性6/10、严格闭环修复2/5失败，候选关闭、切换0、烟测0，无补槽/第二批；用户服务未重启或强停，schema13/baseline默认保持。1433离线496.107秒、22专项10.112秒、真实库10路径/10读取及实际14归档重读通过，不把离线合成重审充真实质量。
+
+隔离8776当前UI回放实际归档：S2未完整无绿标、S7末稿单绿标、历史v1隔离、来源定位与Enter选历史通过，390文档宽375且正文不盖页脚。复制反馈出现，但IAB剪贴板读取空，未独立确认系统剪贴板往返；离线客户端复制/Unicode回归通过。两次简记夹具404保留，规范manifest后可读；已释放自建端口/标签、重置viewport，不公开私有截图。完成定向推送/CI后停止。
+
+## 2026-10-29 v7：两项改进均未在本机启用
+
+A无稳定收益、等价第三路径未实现，B候选0/10完整、0/5修复，分别未准入；无SQL/审核切换、无用户服务重启/强停、烟测0、不补槽或第二批。开始时8765无health、运行库无queued/running；没有冒称服务保持运行或已启用可用。已有GUI成果保留，本轮无新UI/浏览器验收主张。
+
+1448全套487.711秒、35专项7.527秒、真实库十路径/十离线读取及十实际归档普通重读通过；合成后审不作模型成绩。新批次每链20/总200请求、350万已知usage阈值及最多一次安全释放未知保持，实际30次643777token/未知0，旧pending10不改；独立烟测20/30万额度未用。用户未提交材料和所有历史失败保留，分项推送/CI核对后停止。

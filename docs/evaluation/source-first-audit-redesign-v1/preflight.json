@@ -1,0 +1,50 @@
+{
+  "version": "source_first_audit_v1",
+  "status": "budget_not_admitted",
+  "materials_sha256": "346ba9d1c3e72a3ecdbee01825368a92d344b42be203786f683d26370dedadfc",
+  "cases": [
+    {
+      "id": "S1",
+      "message_chars": 65029,
+      "content_utf8_bytes": 66801,
+      "initial_request_reservation": 76849,
+      "candidate_12_call_reservation": 922188,
+      "wire_sha256": "f93c4b95b0ffdaf28ac2f9f53c72e7aa395d8703144fc0a8b9ff5367e5a9d5d8"
+    },
+    {
+      "id": "S2",
+      "message_chars": 66067,
+      "content_utf8_bytes": 68741,
+      "initial_request_reservation": 78789,
+      "candidate_12_call_reservation": 945468,
+      "wire_sha256": "1e8102c9f9fbbcbb7634b5a468b47d9dbf9f464a32081ca416d5b764709a169e"
+    },
+    {
+      "id": "S3",
+      "message_chars": 86058,
+      "content_utf8_bytes": 90266,
+      "initial_request_reservation": 100314,
+      "candidate_12_call_reservation": 1203768,
+      "wire_sha256": "c0418336062e51d40b36da40b5d6a282c091015c61c0ad9b67e60e21709d827e"
+    },
+    {
+      "id": "S4",
+      "message_chars": 59969,
+      "content_utf8_bytes": 61953,
+      "initial_request_reservation": 72001,
+      "candidate_12_call_reservation": 864012,
+      "wire_sha256": "a1540fe7337901699ce7ff37d8206c73c08237077c394fad0ee0c310db35e944"
+    }
+  ],
+  "total_token_cap": 1200000,
+  "candidate_chains_only_48_call_reservation": 3935436,
+  "full_pair_calls": 96,
+  "output_allowance_alone": 768000,
+  "method": "Conservative UTF-8 reservation, NOT actual provider tokens. Uses frozen initial candidate wires before adjacency/correction/revision growth. Baseline not priced and not treated as same scope.",
+  "limitation": "This conservative admission can reject a batch whose actual usage would fit; no claim that actual provider consumption must exceed cap.",
+  "project_model_calls": 0,
+  "actual_tokens": 0,
+  "env_loaded": false,
+  "attempt_started": false,
+  "stop": "Do not lower output limits, shrink cases, omit required re-review, use another tokenizer estimate as hard proof, or start a partial paid batch. No second batch."
+}

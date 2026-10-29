@@ -88,7 +88,10 @@ class QueryTests(unittest.IsolatedAsyncioTestCase):
 
     def test_ui_collapsed_and_citations_only(self):
         html=Path('backend/static/index.html').read_text(encoding='utf-8')
-        self.assertIn('<details class="panel"><summary>审核详情：逐项发现',html)
+        diagnostic=Path('backend/static/diagnostics.html').read_text(encoding='utf-8')
+        self.assertNotIn('id="findings"',html)
+        self.assertIn('<details class="panel"><summary>审核详情：逐项发现',diagnostic)
+        self.assertNotIn('<details class="panel" open',diagnostic)
         self.assertNotIn('<details class="panel" open',html)
         self.assertLess(html.index('id="answers"'),html.index('id="decision"'))
         script=Path('backend/static/app.js').read_text(encoding='utf-8')

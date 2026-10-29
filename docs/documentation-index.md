@@ -1,8 +1,132 @@
 # 文档索引
 
-## 2026-10-27 默认首页与公开CI独立发布
+## 2026-10-29 最终工程整合准入
 
-README重写并迁出本分支旧全文，新增合成UI截图；新版业务代码位于codex/user-ui-readme-final-delivery-v6，未合并实验/维护代码。必要CI修复：匹配图依赖、完整Git历史、忽略目录测试前提、逐方法私有归档缺失标注，公开断言不变。已读取09c6b987/99b93497失败日志，红叉不等于push失败。模型0；[完整跨分支交付报告](https://github.com/7556481/PowerTrustAI/blob/codex/user-ui-readme-final-delivery-v6/docs/maintenance/user-ui-readme-final-delivery-v6.md)，最终CI看本提交Actions。以后维护记录进交接/报告，不堆README。
+十题与UI补验完成，默认分支文档冲突已实际解决，应用源码未变、实验关闭；PR #2等待本HEAD的CI成功后才合并和正常启动8765。已有1454复用，不重复本地回归。实际远端/本机身份及配置备份/回退见data/runtime_local/stable-product-ten-v1/release-receipt.json及最终聊天回执，不根据本段猜测已发布。详见[发布报告](maintenance/stable-product-baseline-v1.md)与[十题结果](evaluation/stable-product-baseline-v1/report.md)。
+
+## 2026-10-29 十题产品基线与UI补验
+
+- [十题真实结果及逐题复核](evaluation/stable-product-baseline-v1/report.md)：正式API、6/10审核完整、61Flash/887560token、0修订；分列内容收益、关键条件漏检及诚实但无用的不足。
+- [接续启动发布报告](maintenance/stable-product-baseline-v1.md)：200.492秒启动、UI四缺项补验及代理/CI。
+
+
+## 2026-10-29 稳定产品候选（待验收）
+
+- [候选验收报告](maintenance/stable-product-baseline-v1.md)：分支关系、实际配置、1454离线通过、正式启动及UI工具故障；未发布、十题未发送。
+- [从启动到退出清单](stable-operation-checklist.md)：原脚本显式--demo路径及正式服务、故障与退出边界。
+
+
+## 2026-10-29 rank执行与审核引用v7（完成，两项未启用）
+
+- [独立验收报告](evaluation/retrieval-rank-and-audit-reference-v7/report.md)：A显式LIMIT固定三轮无稳定收益，不构造/部署第三路径；B全10链形状失败、0/5修复，不启用/不烟测/不补批。
+- [SQL全数值表及计划](evaluation/retrieval-rank-and-audit-reference-v7/sql-summary.json)：18排名/3限定COUNT，原请求/评分/K不变；最慢中位24.127→28.809秒，旧4096回退是否触发不可证。
+- [审核统计](evaluation/retrieval-rank-and-audit-reference-v7/audit-summary.json)：30 Flash/643777token、无新增未决；领域10完整不能替代事实0完整，原SQL/旧pending10保持。B18d4f67、报告ec9c7df，1448离线及35专项、十路径/实际读取和学习站源码同步通过。
+
+## 2026-10-28 来源模态忠实性与候选发布v6（完成，未启用）
+
+- [完整报告](evaluation/source-first-modality-release-v6/report.md)：唯一v3逐字来源关系、事前10材料/14槽、候选6/10完整及严格2/5修复；S2/S10未修、S3后审失败、S4执行失败，不启用/不烟测/不补批。
+- [脱敏统计](evaluation/source-first-modality-release-v6/summary.json)：64 Flash/1275546token，无新增未决、旧pending10保留；新候选绝对门槛与旧四对门槛分开，失败不剔除，费用未知。
+- 实现98de208、报告c789577；1433离线496.107秒、22专项10.112秒、实际库10路径/10读取和实际14归档读取通过。实际UI回放保留复制往返未独立确认及两次夹具404边界，学习站五章与源身份同步。
+
+## 2026-10-28 来源优先修订完成发布v5（完成，未启用）
+
+- [完整报告](evaluation/source-first-revision-completion-release-v5/report.md)：194秒未知项、物理释放隔离、12槽11完整/1局部失败；真实修复3/4，S2未修，三有效对不能判四对速度，不启用/不烟测/不补批。
+- [机械摘要](evaluation/source-first-revision-completion-release-v5/summary.json)：50 Flash、960147token、无新增未决，旧v4 pending10不改，实际金额未知；实际修订及普通接口重读保留完整状态。
+- 实现c2ecddf，报告归档adc1227；1425离线503.019秒、17专项及实际库8路径/8读取，12实际归档读取通过；学习站相关五章和源码身份同步，v4 UI证据与旧失败保持。
+
+## 2026-10-28 来源优先质量/UI与有条件启用v4（完成，未启用）
+
+- [唯一候选、真实停止及UI报告](evaluation/source-first-quality-ui-release-v4/report.md)：12槽仅2完整/1未完整/9未执行；S2有限纠正后触发修订但超时且usage未决，门槛失败，不切本机、不烟测、不第二批。
+- [机械统计](evaluation/source-first-quality-ui-release-v4/summary.json)：10发送边界，9可信usage已知212444token，pending10不可当0，实际总token/金额未知；仅S1一对48.370→5.934秒，无总体中位数。
+- 实现2e99786；1420离线/446.890秒、实际库8路径和普通重读、20项UI/API专项、桌面/390真实归档回放。学习站相关章节与源码身份同步，旧v3成绩及失败保留。
+
+## 2026-10-28 来源优先真实路径验收v3（完成）
+
+- [真实路径修复、唯一四对及质量复核](evaluation/source-first-real-path-acceptance-v3/report.md)：8/8合法、29Flash/669718token，中位提速82.678%；两目标漏检0/2修复，质量门槛失败，不采用不部署。
+- [逐槽/模型/FTS父子阶段统计](evaluation/source-first-real-path-acceptance-v3/summary.json)：正常封印与整链分账，私有正文/SQL/响应留忽略data，旧v2失败不覆盖。
+- 学习站04/08/14/16及source-check/source-version同步实现f69a412；1414项离线通过，8条普通接口归档重读，隔离固定响应桌面/390复核。用户服务不动，无第二批。
+
+## 2026-10-28 真实验证v2完成一次后共享工程故障停止
+
+唯一8槽固定批次实际执行S1 A/B，6次Flash、输入117702/输出3891/总121593token，usage齐全、未决0、阈值越过0；原70GB正常字节封印189.037秒单列。A执行完整review_required/43.722秒；B两模型完成后报告校验invalid evidence origin失败/5.836秒，余6槽未执行，不把早停当提速。根因为冻结候选新增邻接绑定index_context不在严格白名单；不修业务、不恢复或第二批。两路正文完全未改，S1原文有据，其余错误/缺口未验证，四对门槛不满足、不采用不部署。7专项/5.931秒只证合成接线，未覆盖新增邻接冲突；旧1405不当本轮结果。源码b3078cd，原v1.1材料/业务不变，生产/8765/master/README未动。见[报告](evaluation/source-first-audit-live-validation-v2/report.md)与[统计](evaluation/source-first-audit-live-validation-v2/summary.json)。本轮停止交设计审阅。
+
+## 2026-10-28 来源优先真实验证：上界依据缺失，入口仍未验收
+
+预算新增逐请求持久化原子预留与可信usage结算，缓存不重复、未知发送/usage不释放、超额与落库异常停全局，禁止恢复；4项专项/0.083秒通过。官方资料未建立完整Hosted Chat信封计费token上界，不再以任意2048或96槽乘首审作硬保证。原v1.1材料身份保持，正常初审24调用，条件性纠正/补检/修订载荷未知。8槽全部未执行、0真实请求/0token/未加载.env/未读真实大库，完整真实入口未验收；不是120万必然不足，也无速度或纠错收益。不切生产/8765/master/README，不补跑。见[新报告](evaluation/source-first-audit-live-validation-v1/report.md)，到此停止。
+
+## 2026-10-28 来源优先审核候选与预算停止交付
+
+[唯一报告](evaluation/source-first-audit-redesign-v1/report.md)、[保守预算预检](evaluation/source-first-audit-redesign-v1/preflight.json)、[公开历史正文引用](evaluation/source-first-audit-redesign-v1/cases.json)、[验证与边界](evaluation/source-first-audit-redesign-v1/verification.json)：固定来源邻接/最多三缺口查询/完整修订重审，默认关闭。四对真实链因保守预算准入失败未启动，0请求；无速度或纠错收益结论，不建议采用，不恢复第二批。学习站04/08/14/16及实际源码身份同步；原输入/提取/来源全文/wire留忽略data。
+
+## 2026-10-28 审核检索最终诊断完成
+
+[报告](maintenance/audit-retrieval-final-optimization-v1.md)、[验证](maintenance/audit-retrieval-final-optimization-v1-verification.json)：固定3组8查询，分解/身份及预算保持，FTS主导、连接毫秒，无安全可达门槛候选，0配对/0模型；102专项通过。生产执行不改，源码身份与16章必要同步，完成推送/CI后停止。
+
+## 2026-10-27 schema13有界并发候选
+
+[短报告与真实验证方案](maintenance/schema13-bounded-concurrency-v1.md)、[离线验证](maintenance/schema13-bounded-concurrency-v1-verification.json)：五条白名单元数据、独立依赖、双HTTP通道、索引确定性纠正、取消drain、完整发现/引用/正文/修订对照及模拟收益边界。默认关闭、0新增模型、未动8765/master；学习站14/16必要同步。
+
+## 2026-10-27 正文审核标注v7交付
+
+[报告](maintenance/answer-inline-review-marking-v7.md)及[验证](maintenance/answer-inline-review-marking-v7-verification.json)：安全原文/身份定位、同句合并/重叠分段、未定位回退、当前/历史版本隔离、明确未修改与已有修订，0模型；包含离线/API/浏览器及失败修正边界。仅同步学习站10/14，不更新README或master，不重跑用户问题。
+
+## 2026-10-27 产品首页与CI最终交付v6
+
+[用户UI、README与CI报告](maintenance/user-ui-readme-final-delivery-v6.md)：模块去留、审核时序边界、历史README迁移、实际GitHub失败日志、逐项CI修复、验证失败及修正；最终远端ref/提交CI以收尾Actions为准。新版默认问答与独立诊断，模型0，不恢复付费批次。README仅产品总览，后续维护进交接和专题报告。
+
+## 2026-10-27 服务状态恢复UI v5（已执行）
+
+- [维护报告](maintenance/service-status-recovery-ui-v5.md)：修前失败、接单与读取分离、待中断未确认、只读检查、轮询停止与兼容边界。
+- [机器验证](maintenance/service-status-recovery-ui-v5-verification.json)：最终11专项、26/20/12客户端组、真实隔离API/浏览器、v4全套复用及0模型保护。
+- 学习站10/18与源码身份同步；保留已存业务结论，无自动重启/重放，完成停止。
+
+## 2026-10-27 后端生命周期一致性v4（已执行）
+
+- [维护报告](maintenance/backend-lifecycle-consistency-v4.md)：修前/修后、故障处置、原结果保护、两执行路径无实质回答表、停止边界。
+- [机器验证](maintenance/backend-lifecycle-consistency-v4-verification.json)：最终全套1360、首次失败与修正、32影响范围专项、真实API/浏览器及0模型隔离证据。
+- 学习站10/14/18与源码身份同步；无生产库读取/改写、无自动worker重启或重放，完成后停止。
+
+## 2026-10-27 慢辅助隔离与页面性能v3（已执行）
+
+- [维护短报告](maintenance/slow-auxiliary-page-performance-v3.md)：修前挂起/回读重叠、有限slot生命周期、固定非空样本各层性能、渲染去重及未改善项。
+- [验证机器记录](maintenance/slow-auxiliary-page-performance-v3-verification.json)：前后14输出SHA、5次HTTP/实际浏览器原值、12新/19旧探针、专项错误及修正、复用1340边界。
+- 学习站仅10/14/16与源码身份；项目模型0，生产/历史保持，自启服务已释放，完成后停止。
+
+## 2026-10-27 反馈归属与读取容错v2（已执行）
+
+- [短报告](maintenance/read-path-feedback-polish-v2.md)：修前失败断言、局部修复、同样本性能前后表、跳过项与浏览器范围。
+- [机器可读验证](maintenance/read-path-feedback-polish-v2-verification.json)：19组真实JS探针、1340全套、2条合成Store测量与8份输出SHA等价、生产保护及源码身份。
+- 学习站10/14章已同步，20章88题保持；项目模型0，辅助故障以探针验证，8766/8770验收后停服，完成即停止。
+
+## 2026-10-27 业务UI与有限清理（已执行）
+
+- [维护说明与合成UI前后图](maintenance/product-polish-ui-code-hygiene-v1.md)：五项异步/错误提示复现修复、版本选择/对应正文复制、证据直达、历史摘要、有限依赖清理及必须保留的旧代码。
+- [验证与提交身份](maintenance/product-polish-ui-code-hygiene-v1-verification.json)：1337全套399.514秒，合成8766桌面/窄屏/反馈/取消/分页/安全渲染，0项目模型；学习站源码同步、20章88题保持。
+- [隔离业务UI入口](../tools/ui_fixture.py)：原环境`python -m tools.ui_fixture --port 8766`，不读.env/生产库/大索引；不同于8770学习站和真实8765入口。封版6534126及历史收益/失败不改，不新启旧能力任务。
+
+## 2026-10-27 阶段封版交付（已执行）
+
+[当前README](../README.md) · [阶段清单/能力边界/分批用量/入口](project-status-20261027.md) · [学习站演示路线](learning/index.md) · [17章求职表述](learning/chapters/17-interview.md) · [本次验证范围](learning/closeout-20261027-verification.json)。20章88题保持，新增项目请求0；本轮非全套/全站重验，旧v6记录明确复用。阶段可展示不等于审核研究目标完成。
+
+### 当前任务入口状态（下方历史交办不再作当前待办）
+
+|入口|当前状态|
+|---|---|
+|literal-stage1、offline-redesign、revision-v2、natural-v3|已执行封存，各自失败及回放边界保持|
+|retrieval-delivery-repair、chinese-first、retrieval-evidence-answer-check、natural-draft-audit|已执行封存；旧条件槽未启动不恢复，N6旧gate=false保持|
+|source-comparison-review-v2-task-v1|已被检索定位任务替代，未执行，不恢复为待办|
+|answer-review-improvement-checklist-v1、论文清单/综合等未跟踪材料|暂存设计/研究，非新执行授权，未删除或擅自提交|
+|project-closeout-20261027|本次已执行阶段收尾；无待运行批次，完成远端核对即停止|
+
+## 2026-10-26 自然同稿审核与学习站完整同步
+
+- [固定自然稿审核报告](evaluation/natural-draft-audit-v1/report.md)：8链32请求，N2/N4识别失败，N8边界改写争议，N5执行失败；初末全文/原预测含无效/冻结/用量/独立复核/Store齐全。
+- [学习站v6同步与真实浏览器验收](learning/sync-v6.md)：20章88题，N1/N4/A3完整案例、14处实际源码摘录及分批元数据，桌面/窄屏/搜索/导航/解析验证。
+- [学习站首页正文](learning/index.md)、[源码与批次身份](learning/source-version.json)、[浏览器记录](learning/browser-acceptance.json)。start-learning.cmd可重开8770；当前生产8765停服，schema13不变。
+
+## 2026-10-26 固定证据回答诊断封存（已执行）
+
+[报告](evaluation/retrieval-evidence-answer-check-v1/report.md) · [16完整正文](evaluation/retrieval-evidence-answer-check-v1/cases.md) / [三分层结果与完整对象](evaluation/retrieval-evidence-answer-check-v1/cases.json) · [输入恢复](evaluation/retrieval-evidence-answer-check-v1/input-recovery.json) · [独立文本复核](evaluation/retrieval-evidence-answer-check-v1/text-review.md) · [16预测](evaluation/retrieval-evidence-answer-check-v1/predictions.json) · [统计](evaluation/retrieval-evidence-answer-check-v1/statistics.json) · [验证](evaluation/retrieval-evidence-answer-check-v1/verification.json)。全部8题5改善/3混合，忠实7题5改善/2混合，N6混合且未出现调试退役；旧转换失败不回写。16Flash/147049token、金额未知，0新检索/转换/审核/Revision，旧8转换不重计。N2模态/N4排他/N6规划范围新错使整组门槛未达，不采用。10专项及复用旧1324全套、Store/消息/快照核查齐全，下方“尚未执行”保留任务编写时状态，以本封存为准。
 
 ## 2026-10-26 中文主线跨语言检索封存（已执行）
 
@@ -663,3 +787,13 @@ README重写并迁出本分支旧全文，新增合成UI截图；新版业务代
 唯一新主题75字、API12.942秒可见/48.501秒完成、5请求87900token/完整pass，不能称同题端到端A/B或普遍性能。通用性能量值适用提示另版v9/v9.18，原熔断器不重跑/旧pass不改，语义对应复验仍缺，内容错误放行风险不能宣布解除。796完整回归＋之后4项相关检查；实际浏览器/自动连接/回查和全表重启不变。完整库、schema13/flash/product1.5/BM25aggregate/NLIoff保持，8765运行。见[报告](performance-closeout-v1.md)，私有审阅包performance-closeout-v1。停止追加，速度与剩余内容风险等待共同确认。
 
 - [事实审核内部流程候选启动草案（未实施）](fact-internal-flow-candidate-v1.md)：初步职责、源码问题与未完成项；无验证成绩。
+
+## 2026-10-29 selective MATCH v1：固定验证失败，候选关闭
+
+唯一候选实现308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea。24 DF/6消融及12查询×两路×三轮72组完成；执行753.581秒、封印206.044秒另列，0模型。Q1/Q2中位27.244→26.961、20.405→18.965秒，仅1.0%/7.1%，未达50%且5秒；Q3/Q6/Q11/Q12重复回退。性能门槛失败，不建议进入回答验证，未部署、未烟测、不补跑。质量门槛未取得完整逐目标人工通过证据，不得称召回无损。Q11候选引入气候模型/材料学等无关正文，虚构现场容量仍未知；Q9旧参考快照成员边界和所有启动失败保留。当前生产schema13/baseline、topic_v4_subject_v1不变。
+
+报告：[选择性MATCH验收](evaluation/selective-match-retrieval-v1/report.md)。原文和完整输出留忽略data。学习站同步性能失败边界，下一后端原型须独立授权、公平同子集验证，本轮没有迁移/重建。原未提交研究材料保留。
+
+## 默认分支独立发布记录（整合时保留历史）
+
+README重写并迁出本分支旧全文，新增合成UI截图；新版业务代码位于codex/user-ui-readme-final-delivery-v6，未合并实验/维护代码。必要CI修复：匹配图依赖、完整Git历史、忽略目录测试前提、逐方法私有归档缺失标注，公开断言不变。已读取09c6b987/99b93497失败日志，红叉不等于push失败。模型0；[完整跨分支交付报告](https://github.com/7556481/PowerTrustAI/blob/codex/user-ui-readme-final-delivery-v6/docs/maintenance/user-ui-readme-final-delivery-v6.md)，最终CI看本提交Actions。以后维护记录进交接/报告，不堆README。

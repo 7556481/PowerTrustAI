@@ -121,26 +121,42 @@ class RunStore:
         return result
 
     @read_boundary
+    def require_run(self,rid):
+        if self.db.execute('SELECT 1 FROM runs WHERE id=?',(rid,)).fetchone() is None:
+            raise KeyError(rid)
+
+    @read_boundary
+    def state_row(self,rid):
+        # Presence flags retain the state projection's None/non-None contract.
+        row=self.db.execute('''SELECT id,status,created,started,ended,cancel_requested,
+            harness_state,error_code,config,CASE WHEN result IS NOT NULL THEN 1 END AS result,
+            CASE WHEN snapshot IS NOT NULL THEN 1 END AS snapshot FROM runs WHERE id=?''',(rid,)).fetchone()
+        if row is None:raise KeyError(rid)
+        value=dict(row);value['config']=json.loads(value['config'])
+        return value
+
+    @read_boundary
     def list_runs(self,offset=0,limit=20):
         rows=self.db.execute('SELECT id,status,created,request,config FROM runs ORDER BY created DESC,id DESC LIMIT ? OFFSET ?',
                              (limit+1,offset)).fetchall()
         items=[{'run_id':r['id'],'status':r['status'],'created_utc':r['created'],
-                'mode':json.loads(r['request'])['mode'],'profile':json.loads(r['config'])['profile']} for r in rows[:limit]]
+                'mode':json.loads(r['request'])['mode'],'profile':json.loads(r['config'])['profile'],
+                'question_summary':' '.join(json.loads(r['request']).get('question','').split())[:120]} for r in rows[:limit]]
         return {'items':items,'offset':offset,'next_offset':offset+limit if len(rows)>limit else None}
 
     @read_boundary
     def events(self,rid):
-        self.get(rid)
+        self.require_run(rid)
         return [{'event':json.loads(r['payload']),'stage_output':json.loads(r['stage_output']) if r['stage_output'] else None} for r in self.db.execute('SELECT * FROM events WHERE run_id=? ORDER BY ordinal',(rid,))]
 
     @read_boundary
     def objects(self,rid,kind):
-        self.get(rid)
+        self.require_run(rid)
         return [json.loads(r[0]) for r in self.db.execute('SELECT payload FROM objects WHERE run_id=? AND kind=? ORDER BY version,id',(rid,kind))]
 
     @read_boundary
     def evidence(self,rid,eid):
-        self.get(rid)
+        self.require_run(rid)
         row=self.db.execute("SELECT payload FROM objects WHERE run_id=? AND kind='evidence' AND id=?",(rid,eid)).fetchone()
         if row is None:raise KeyError(eid)
         return json.loads(row[0])
@@ -158,7 +174,7 @@ class RunStore:
 
     @read_boundary
     def reviews(self,rid):
-        self.get(rid)
+        self.require_run(rid)
         return [json.loads(r[0]) for r in self.db.execute('SELECT payload FROM reviews WHERE run_id=? ORDER BY created,id',(rid,))]
 
     def healthy(self):

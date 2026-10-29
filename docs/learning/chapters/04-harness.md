@@ -1,5 +1,37 @@
 # 04 Harness：状态机、并发、有限纠正与完整重审
 
+## 从修订0/4到4/4，究竟修复了哪一层
+
+literal第一阶段四次候选修订没有合法应用。后续source_actions_v2把D（可改原文差异的授权）、O（每条意见的处理记账）、S（支持来源）和U（编辑单元）分开：有缺资料意见不等于禁止修另一个已成立错误，也不等于允许凭空补足资料。编辑必须列D，所有O仍须交代，正确混合句部分要保留。
+
+历史v2固定四份已成立发现，修订4/4并真实完整重审，新增16请求82465token。这证明给定成立发现后的修复接缝，不证明自然初审发现率。本轮自然8稿的N2/N4没有成立D，不能借历史4/4替它们宣布成功。[完整证据](https://github.com/7556481/PowerTrustAI/blob/73c25ca0af9ba9fd5143527c6341aae52170fffd/docs/evaluation/local-revision-v2-flash-check-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
+
+### 完整案例三：历史A3，一次修改与完整重审
+
+这是已见开发例，不是本轮新发现。来源为NERC 2016《Reactive Power Planning》Background动态/静态资源条目，实际Evidence e-5144faa1d672ad26585556a4d64b78cebf248f80c4a6f18ec52a7fd5470d36c5，定位为PDF抽取文件第8页，page_chars[0:1200)、page_lines[1:16]；抽取页不冒充印刷页，原始版本见归档。
+
+原稿：
+
+动态无功资源在任何电网电压下都能响应电压变化，自动、实时、连续调节无功输出，不受指定电压带宽限制；可维持电压设定点或按电压下垂模式运行。
+
+静态无功资源在额定电压下贡献固定，其能力随电压平方变化，可按系统条件手动或自动投切。
+
+修订后：
+
+动态无功资源在指定电压带宽范围内，自动、实时、连续调节无功输出以响应电网电压变化；可维持电压设定点或按电压下垂模式运行。
+
+静态无功资源在额定电压下贡献固定，其能力随电压平方变化，可按系统条件手动或自动投切。
+
+D只授权把“任何电压、不受带宽限制”改回指定带宽；O仍记录领域输入等意见，不能把O当补写工程结论的授权。电压设定点/下垂方式和静态资源段逐字保留。随后提取新版本、事实/原引用及领域完整重审，Store保留v1与v2。初次发现来自历史回放，新的Revision与版本2审核才是这批16请求的成本。
+
+::: answer 新增：D与O为什么不能互换？
+若O说缺少网络模型，但D已定位“任意电压”与指定带宽矛盾，可以仅凭D及S改电压范围，并将缺参数O保留或解释其概念任务适用性。不能凭O发明网络参数；也不能为消除O删掉正确静态资源段。最多一次业务Revision，改后重新提取、双审及原引用核验，不能只看modified。[完整证据](https://github.com/7556481/PowerTrustAI/blob/73c25ca0af9ba9fd5143527c6341aae52170fffd/docs/evaluation/local-revision-v2-flash-check-v1/report.md#)
+:::
+
+[演示上一站：N1资料交付](05-rag.html#section-3) · [演示下一站：N4漏错](08-verification.html#section-3) · [返回7分钟路线](index.html#section-2)
+
+## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+
 ## 2026-10-24 可审计的停止规则
 
 单例输出失败与共享程序故障分开。固定批次仍使用原采集器；连续候选不同案例若在最终失败时重复同一结构约束，保存两例约束和位置后停止后续发送。合法语义不足或不确定不触发这一停止。失败项不重发，未知状态的已受理任务不能再提交。
@@ -12,7 +44,7 @@
 
 ## 2026-10-24 审核链v2实证更新
 
-沿同一Factory、LangGraph、共享预算与最多一次Revision执行候选，不另建调度器。34槽中G2有限纠正后仍无有效初稿，两个依赖审核保留未执行；单例结构失败继续，未知/共享故障停止。候选A八路与实际自然五路全执行不完整；收集成功不等于审核成功，更不等于答案有净收益。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#)。
+沿同一Factory、LangGraph、共享预算与最多一次Revision执行候选，不另建调度器。34槽中G2有限纠正后仍无有效初稿，两个依赖审核保留未执行；单例结构失败继续，未知/共享故障停止。候选A八路与实际自然五路全执行不完整；收集成功不等于审核成功，更不等于答案有净收益。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/production-review-net-benefit-v2/report.md#)。
 
 本轮实际结果：A8/G4/B8固定批次106请求、1126972token，5条审核执行不完整；候选仅A4进入新修订提示，原版也纠正且没有目标历史叙述，自然8路正文不变。未证明候选净收益，不采用生产；N-1/N-2条件外推和原引用跨单元缺口疑点保留。实际8765保持原停服，无常驻候选。
 
@@ -20,22 +52,22 @@
 
 候选复用原Factory、OfflineHarness、四职责、双审核和共享阶段。revision-output-v2的逐ID动作与“至少一项modified且正文改变”门禁没有放宽：归档两条实际Revision都有成立的阈值错误，不能只看条件存在便声称迫使错误改写。modified只是提议改动，retained解释保留，unresolved说明无法解决；任何动作都不代替新版本重新提取与完整双审。
 
-开发入口revision_answer_delivery=answer_only_v1仅改变修订提示，默认production；回退选择production即可，原输出与旧记录兼容。完整离线1197项通过197.256秒，仅证明程序行为。新批使用已有run_fixed、RunStore与独立关闭的只读采集器；单例最终结构失败继续，共享/未知故障停止，已受理不重复提交。真实语义、成本和未执行槽见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
+开发入口revision_answer_delivery=answer_only_v1仅改变修订提示，默认production；回退选择production即可，原输出与旧记录兼容。完整离线1197项通过197.256秒，仅证明程序行为。新批使用已有run_fixed、RunStore与独立关闭的只读采集器；单例最终结构失败继续，共享/未知故障停止，已受理不重复提交。真实语义、成本和未执行槽见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
 
 ## 2026-10-23 契约审计与v2离线候选
 
 首真实内部候选对照已按F05最终失败停止：12调用、3纠正，后6分支未发送，生产未切。审计实际消息发现旧objection字段要求与新字段禁止并存，以及必填repair缺失、纠正提示禁止复制文本与字面quote字段的歧义。v2使用唯一字段规范供初始/纠正消息共用；程序检查preserved=true必须有回答原片段，并拒绝技术对象以ordinary静默绕过义务；明确异议后ordinary仍可合法转复核。程序不猜分类、不补理由或条件片段。
 
-v2仍一次联合判断，没有额外规划调用。独立对象/义务确认可能减少耦合，但每事实组增加一次初始调用，并可能将分类错误传给支持阶段，当前无证据证明值得。结构接线和完整离线回归通过不代表语义改善；下一次6项开发复验材料仅准备、0真实发送。v2仅显式开发create_agent入口，原Factory/生产默认不变。见[审计与设计比较](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v2/README.md#)。旧段落中的“本轮0调用”为其历史轮次。
+v2仍一次联合判断，没有额外规划调用。独立对象/义务确认可能减少耦合，但每事实组增加一次初始调用，并可能将分类错误传给支持阶段，当前无证据证明值得。结构接线和完整离线回归通过不代表语义改善；下一次6项开发复验材料仅准备、0真实发送。v2仅显式开发create_agent入口，原Factory/生产默认不变。见[审计与设计比较](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v2/README.md#)。旧段落中的“本轮0调用”为其历史轮次。
 
 
 ## 2026-10-23 事实审核内部流程候选
 
 外层七共享阶段继续管理检索、并发领域审核、预算和修订；内层prepare→review→gap→summarize管理合法目标、一次语义判断及保守汇总。内部没有检索循环和图层重发。gap返回既有共享阶段，不虚构工具。修订仍重新提取、完整双审并保存新版本。
 
-完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
+完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
 ## 状态机是什么
 
@@ -310,7 +342,7 @@ harness.execution_path = "langgraph_v1"  # 安装可选依赖后，仅开发验�
 
 离线固定响应差分是编排等价的主要证据；真实两版回答不同不能直接归因为图。真实运行分别报告必需执行、语义处置、修订是否触发、用量和持久化。首最终执行或存储故障停止后续付费，仍保留已完成同伴和草稿。明确的证据不足或合法复核结论不是编排失败。
 
-当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
+当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
 
 ## 三道自测：先作答，再展开
 
@@ -366,7 +398,7 @@ A1初稿将来源的important写成“必须履行的强制义务”。审核在
 
 A4也说明关系标签并不免费：模型把结论单元自身的缺陷绑定到该单元，却称dependent，合同要求dependent指向别的单元，因而拒绝。应在设计审阅中说明这种表达冲突；本批冻结后没有放宽或补跑。生产路径同题虽纠正影响顺序和耦合，却新增“互为因果”，超出了来源的双向耦合含义，独立复核记mixed，不能用修改和重审代替正文质量。
 
-源码阅读顺序：先看 [原文结果类型](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/core/literal_review.py#)，再看 [审核与局部拼装](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_review_v1.py#)，最后看 [政策适配](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_policy_v1.py#) 和 [同一Harness的修订终止/重审](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/harness/execution.py#)。完整来源、前后文本、失效响应和成本见 [阶段报告](https://github.com/7556481/PowerTrustAI/blob/codex/literal-review-stage1-v1/docs/evaluation/literal-review-stage1-v1/report.md#)。这些链接绑定实际实现，不把离线替身当模型成绩；账单金额未知，生产8765仍停服，无新增浏览器验收。
+源码阅读顺序：先看 [原文结果类型](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/core/literal_review.py#)，再看 [审核与局部拼装](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_review_v1.py#)，最后看 [政策适配](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_policy_v1.py#) 和 [同一Harness的修订终止/重审](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/harness/execution.py#)。完整来源、前后文本、失效响应和成本见 [阶段报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/literal-review-stage1-v1/report.md#)。这些链接绑定实际实现，不把离线替身当模型成绩；账单金额未知，生产8765仍停服，无新增浏览器验收。
 
 ::: answer 自测：原文审核有据指出错误，修订两次响应都有合理替换正文，但都违反合同。可以计为改对吗？
 不能。分别记录“初审差异成立”“提议文本有纠正方向”“修订执行失败”和“最终原文未变”。本批候选A1–A4都是这一类，实质修复0/4。删除非法字段或挑选替换再评分，会把未经正常应用和完整重审的文本当成系统交付，改变冻结实验。
@@ -375,3 +407,39 @@ A4也说明关系标签并不免费：模型把结论单元自身的缺陷绑定
 ::: answer 自测：一次合法修订保留所有必答点，并把错误排序改正，但新增“互为因果”；应如何评价？
 记mixed：目标修复与内容保留成立，新增无据因果强化也成立，不能用加权总分抵消。来源说双向耦合，不自动证明互为因果；未证明其反命题也不等于该强化有据。重审通过或复核状态与独立文本质量分开报告。若所有动作retained/unresolved，则是保留原版本的一次尝试，不能当修复或重置轮次再试。
 :::
+
+## 2026-10-28 来源优先候选：同一闭环中的供给改变
+
+source_first_audit_v1在现有prepare_review/merge_and_decide内改变供给，不另建调度器。首次冻结生成快照保留，固定身份读取原片段及有界邻接；literal初审的不足/无法评估项形成组件缺口，至多3个不同查询、一次补检后事实复审。已成立缺陷不因补检复审消失；合法发现仍进入source_actions_v2一次Revision，新版本重提取和完整双审。来源支持、任务完整性、外部交叉核验及工程安全分别报告。
+
+这是默认关闭的研发候选。固定四对Flash在发送前保守预算不适配而停止，0真实请求；没有真实速度或纠错收益，旧“审核收益待研究”结论保持。来源错误且回答忠实时，即使库中另有反证，首轮supported也可能不补检而范围内pass。该反例揭示能力边界，不是通过证明。
+
+## 2026-10-28 v3真实数据链闭合与修订触发边界
+
+真实大库非空邻接重现旧invalid evidence origin后，使用已有index_adjacent_context及实际core关系修复，原引用/补检身份不混用。补检扩大实际供给后，事实重审并由原领域职责复审有界扩展供给，保留原发现历史且计入模型预算；没有第二调度器。候选报告严格校验原文覆盖，普通结果接口可投影原生不足意见。
+
+真实库确定性回复贯通S2/S3一次合法修订→重提取→两轮双审，及S4真实SQL、双侧复审/不足保留、非法修订失败；这只是工程证据。唯一真实Flash8链29请求/669718token全部合法，实际修订0：S2/S3的目标错误被supported而没有授权，不能拿合成成功替真实纠错。旧v2失败保留；候选默认关闭。详见项目docs/evaluation/source-first-real-path-acceptance-v3/report.md。
+
+## 2026-10-28 v4关系比较进入修订，但未完成修复
+
+唯一source_first_audit_v2复用现有事实调用，在每单元显式比较来源关系、回答关系和能否推出；supported不得与not_entailed同时返回。它是输出一致性约束，不是程序凭关键词判断语义。原来源读取/有界缺口、四职责、一次Revision及完整重审仍在。
+
+真实S2首次“不能推出”却supported，被有限纠正后形成定位缺陷并进入Revision，但首次修订超时、usage未决；原稿保留，无合法修订/重提取/重审成绩。不能拿真实库确定性响应的两次闭环成功替代真实纠错。12槽仅2完整、1未完整、9未执行；不启用、不补第二批。详见项目docs/evaluation/source-first-quality-ui-release-v4/report.md。
+
+## 2026-10-28 v5：工程闭环与语义修复分开
+
+复用原Factory/OfflineHarness、四职责和一次Revision，不增加调度器或语义候选。实验隔离策略先暂停新准入，只有实际工作退出、正常drain/close及Store真实写入通过，才允许一次未知计费后的独立新Factory；第二未知或共享故障停全批。await取消不等于线程释放，未知不当0。生产默认故障规则不变。
+
+唯一12槽全部执行，11完整、S3基线局部MODEL_OUTPUT_ERROR；有限纠正失败留有效同伴并继续独立槽，失败仍计分母。S3/S7/S8真实v2、重提取和双审闭环，不借离线合成对象充成绩；S2未改。报告：项目docs/evaluation/source-first-revision-completion-release-v5/report.md。
+
+## 2026-10-28 v6：来源关系逐字绑定仍需合法后审
+
+唯一source_first_audit_v3把原relation_check.source_relation从自由概括改为所选合法quote的唯一连续原文；无定位则null/unknown，不授权修订。程序只验身份、字面和一致性，不判断语义。复用原供给/缺口、四职责、一次source_actions_v2、重提取和完整双审，v1/v2与默认baseline兼容。
+
+唯一14槽中4基线完整、10候选仅6完整，S2/S3/S4/S10局部合同失败。S3有合法末稿与两轮记录，但末轮事实/领域失败，不能把“版本2”和“两轮”当完成。S7/S8是真实修订及完整双审；S2原始理由识别增强却未合法交付，仍未修。报告：项目docs/evaluation/source-first-modality-release-v6/report.md。
+
+## 2026-10-29 v7：精确引用归程序，语义仍由模型判断
+
+source_first_audit_v4以本单元版本化reference_ref链接既有quote_id，后者定位原文、来源和原区间；模型只选择已有引用并解释关系，不重抄原文/生成offset。程序还原多个独立EvidenceExcerpt，不拼成伪连续引用。跨单元/版本/来源、伪造和原引用越权仍拒绝，无自动补ID、放宽白名单或S2特判。
+
+离线真实库10路径/10读取及合成修订闭环只证明工程。唯一10链真实Flash均因relation_check形状失败，0完整、0Revision、0/5修复；领域十条虽完整不能替代事实审核。失败原稿保留和正常接口可读也不等于审核完成。报告：项目docs/evaluation/retrieval-rank-and-audit-reference-v7/report.md。

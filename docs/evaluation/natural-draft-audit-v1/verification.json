@@ -1,0 +1,47 @@
+{
+  "source_freeze_unchanged": true,
+  "preservation": {
+    "data/runtime_local/runs.sqlite3": true,
+    "data/runtime_local/orchestration.json": true,
+    "data/runtime_local/daily-knowledge.json": true,
+    "data/retrieval_local/chinese-first-cross-language-retrieval-v1/evidence-gate.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/summary.json": true,
+    "docs/evaluation/retrieval-evidence-answer-check-v1/report.md": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/ab2d55acdd994b4782b0fb4abeaf72a8/result.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/ab2d55acdd994b4782b0fb4abeaf72a8/input.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/2c237dd641824bd4bccb1817e672073c/result.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/2c237dd641824bd4bccb1817e672073c/input.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/05a6f4d3c22e4f2f87624ffab1b32310/result.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/05a6f4d3c22e4f2f87624ffab1b32310/input.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/6b731e4dcfc143a69db1da85e0d1fa32/result.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/6b731e4dcfc143a69db1da85e0d1fa32/input.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/0da8f9e5d9ca4ba5891728a2851a10e9/result.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/0da8f9e5d9ca4ba5891728a2851a10e9/input.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/3bbbba935d2a451192d4a40d2cea607c/result.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/3bbbba935d2a451192d4a40d2cea607c/input.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/49e05da2137244c2ba3aa09fbed706e1/result.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/49e05da2137244c2ba3aa09fbed706e1/input.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/ff83abdbd59c4fa2a7b7ec4e2cf09802/result.json": true,
+    "data/retrieval_local/retrieval-evidence-answer-check-v1/batch/ff83abdbd59c4fa2a7b7ec4e2cf09802/input.json": true
+  },
+  "store": {
+    "runs": 8,
+    "objects": 183,
+    "events": 140,
+    "reviews": 0,
+    "all_results_exact": true
+  },
+  "offline_specialized": {
+    "tests": 14,
+    "seconds": 11.462
+  },
+  "reused_full": {
+    "tests": 1324,
+    "seconds": 338.071,
+    "commit": "667cbe0"
+  },
+  "production_switch": false,
+  "no_new_retrieval": true,
+  "no_new_generation": true,
+  "no_new_conversion": true
+}

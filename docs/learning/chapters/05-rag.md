@@ -1,5 +1,37 @@
 # 05 RAG全过程：从文件到可回查Evidence
 
+## 资料在哪里丢失：存在、命中、交付是三件事
+
+自然v3的8份N稿全部缺目标NERC资料，审核没有制造改善；N4“单一大设备”和历史H3把when改only又属于独立漏检。后续有界定位确认目标268片段在原生FTS库中，但8个必需段落的原查询MATCH均为0。主体词NERC及泛词“文字”约束、中文问题对英文词项的间隙，是实际观察到的断点。未向量化不是已证根因。
+
+chinese_first_cross_language_v1候选先核对机构/标题目录，再决定是否进行一次中英查询转换。目录保留同机构多文档、同标题多版本，冲突/未知不能静默挑一个。它默认关闭；本轮固定稿审核完全没有重新打开70GB库。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)。
+
+::: answer 新增：库内有268片段，为什么仍答资料不足？
+库内存在只证明可供检索。MATCH可能因subject或语言词项为0；命中后还可能被排序、截断、相邻交付丢失。必须分别看目录、原MATCH、top-k、实际Evidence及生成快照。给未交到模型的原文打正确标签，是回填历史。A稿按自身资料说明不足是合理行为。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)
+:::
+
+## 完整案例一：N1从资料不足到有据回答
+
+上轮固定证据回答诊断，以原中文问题问TO/DP边界建模及位置。A使用原检索的实际材料，C使用跨语言候选归档Evidence；没有重译问题，也没有把错误查询当事实来源。
+
+A原稿全文：
+
+所给NERC相关资料只涉及电网运行安全角色与要求（如电力传输运营商等责任实体），未描述TO与DP边界负荷的建模方法，也未列出建模位置选项，因此无法据此回答。
+
+C原稿全文（也是本轮审核前后相同的交付）：
+
+NERC指南指出，TO与DP在潮流、稳定分析和实时运行中的边界通常用显式负荷（以MW和Mvar表示）定义。建模位置可选：直接放在母线/变电站高压侧，或放在降压变压器之后和/或等效配电阻抗之后。
+
+跨边界建模的负荷功率因数（LPF）会影响BES的电压与无功表现；负荷不应过度依赖BES的无功支撑，BES也不应仅依赖负荷的无功支撑。
+
+A没有读到目标段，说明不足合理，不能称错误拒答。C的完整来源为NERC 2016 Reactive Power Planning，Transmission to Distribution Coordination / Modeling，Evidence e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247；实际抽取文件第37页，page_chars[0:1193)、page_lines[1:21]；目录、版本及引用绑定见[冻结案例](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/cases.md#)。两类位置及and/or保留，必答2/2。改善属于资料交付后的生成，本轮审核未增加正文收益。
+
+归档身份核对：A运行f7dc7f6eb45b40e8a73e8d26c15ead75，实际来源示例为dataset-record-eb646d26de0626d5f5609d11a1adc4ac5b93f5b0838fa0faed1eda141ef0ec03，版本e15146cdf43916c5833e6ff91c1956ecec6f596717bbf74915e7332662db4662，Evidence e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140，定位shard=chinese/middle/rank_00415.parquet;row=67967;record=397600026370;chars[2101:3158)，类型industry_corpus_unverified；不是NERC官方建模段。C运行ab2d55acdd994b4782b0fb4abeaf72a8，实际来源nerc-reactive-planning-2016，版本dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193；上述页37原文Evidence来自它。示例不能冒充全部来源，逐Evidence映射及实际快照哈希见冻结案例；今天只读公开归档，不重检索或生成。
+
+[演示下一站：A3修订](04-harness.html#section-3) · [返回7分钟路线](index.html#section-2)
+
+## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+
 ## RAG是什么，为什么不能只存embedding
 
 RAG是先检索再生成。它可以让模型基于实际交付资料回答，但不会自动使资料正确或引用支持成立。若只存向量和一段摘要，后续无法证明某个限定是不是原文存在。本项目把SQLite中的原文、版本和字符区间作为权威，搜索表示只是派生物。

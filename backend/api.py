@@ -148,7 +148,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
 
     @app.get('/ui/{asset}',include_in_schema=False)
     async def ui_asset(asset:str):
-        if asset not in ('app.js','connection_memory.js','style.css'):raise HTTPException(404)
+        if asset not in ('app.js','connection_memory.js','style.css','diagnostics.html','diagnostic_input.js','mark.svg','inline_review.js'):raise HTTPException(404)
         return FileResponse(Path(__file__).parent/'static'/asset)
 
     @app.exception_handler(RequestValidationError)
@@ -169,7 +169,10 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
         if not service.store.healthy():service.storage_fault=True
         try:service.factory.preflight();ready=True;reason=None
         except ConfigurationError:ready=False;reason='CONFIGURATION_UNAVAILABLE'
-        return {'status':'degraded' if service.storage_fault or not ready else 'ready','health_model_requests':0,
+        lifecycle=service.lifecycle_status()
+        reason=lifecycle['fault_code'] or ('RUN_STORAGE_FAILED' if service.storage_fault else reason) or ('WORKER_UNAVAILABLE' if not lifecycle['accepting_work'] else None)
+        return {'status':'degraded' if not lifecycle['accepting_work'] or not ready else 'ready','health_model_requests':0,
+            'service_lifecycle':lifecycle,
             'local_session_version':'localhost-launch-session-v1',
             'local_nli':service.nli_capability(),
             'profile':config.profile,'configuration_ready':ready,'reason':reason,
@@ -238,6 +241,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
     @app.post('/runs',status_code=202,dependencies=[Depends(authorized)])
     async def submit(body:Submit,request:Request):
         try:
+            svc(request).require_accepting()
             if body.premise_declarations and config.fact_internal_flow=='production':raise InputError('Explicit premises require candidate flow')
             indexed=()
             if body.existing_citations:

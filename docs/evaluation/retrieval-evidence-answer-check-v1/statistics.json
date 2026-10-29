@@ -1,0 +1,208 @@
+{
+  "version": "retrieval-evidence-answer-check-v1",
+  "new_generation_requests": 16,
+  "initial_requests": 16,
+  "corrections": 0,
+  "total_slots": 16,
+  "executed_slots": 16,
+  "unexecuted": [],
+  "query_conversion_requests": 0,
+  "new_retrieval_calls": 0,
+  "audit_revision_judge_requests": 0,
+  "new_seal_or_ranking": false,
+  "usage": {
+    "input_tokens": 142390,
+    "output_tokens": 4659,
+    "total_tokens": 147049,
+    "cache_hit_tokens": 77952,
+    "cache_miss_tokens": 64438
+  },
+  "usage_by_branch": {
+    "A": {
+      "input_tokens": 71411,
+      "output_tokens": 2192,
+      "total_tokens": 73603,
+      "cache_hit_tokens": 65664,
+      "cache_miss_tokens": 5747
+    },
+    "C": {
+      "input_tokens": 70979,
+      "output_tokens": 2467,
+      "total_tokens": 73446,
+      "cache_hit_tokens": 12288,
+      "cache_miss_tokens": 58691
+    }
+  },
+  "actual_cost_amount": null,
+  "actual_cost_currency": null,
+  "cost_status": "No invoice amount supplied; actual amount/currency unknown, historical pricing estimates not counted as actual cost",
+  "historical_conversion_background": {
+    "requests": 8,
+    "input_tokens": 1072,
+    "output_tokens": 287,
+    "total_tokens": 1359,
+    "charged_again_this_trial": false,
+    "model_mean_seconds": 0.9960080875001722,
+    "C_over_B_mean_extra_seconds": 1.748325674999819,
+    "scope": "Previous single fixed-order query trial including cache effects; cold seal189.786s separately; not newly measured online latency"
+  },
+  "timing_by_branch": {
+    "A": {
+      "mean_generation_only_ms": 2673.875,
+      "total_model_ms": 20554
+    },
+    "C": {
+      "mean_generation_only_ms": 2849.875,
+      "total_model_ms": 21982
+    }
+  },
+  "per_slot": [
+    {
+      "slot": "N1-A",
+      "state": "generated",
+      "generation_only_ms": 2013,
+      "model_ms": 1873,
+      "collector_end_to_end_ms": 3467.053,
+      "first_answer_saved_ms": 3442.718,
+      "calls": 1
+    },
+    {
+      "slot": "N1-C",
+      "state": "generated",
+      "generation_only_ms": 2410,
+      "model_ms": 2319,
+      "collector_end_to_end_ms": 2444.99,
+      "first_answer_saved_ms": 2419.535,
+      "calls": 1
+    },
+    {
+      "slot": "N2-C",
+      "state": "generated",
+      "generation_only_ms": 2545,
+      "model_ms": 2430,
+      "collector_end_to_end_ms": 2577.343,
+      "first_answer_saved_ms": 2552.064,
+      "calls": 1
+    },
+    {
+      "slot": "N2-A",
+      "state": "generated",
+      "generation_only_ms": 2417,
+      "model_ms": 2320,
+      "collector_end_to_end_ms": 2451.051,
+      "first_answer_saved_ms": 2424.135,
+      "calls": 1
+    },
+    {
+      "slot": "N3-A",
+      "state": "generated",
+      "generation_only_ms": 3291,
+      "model_ms": 3176,
+      "collector_end_to_end_ms": 3335.446,
+      "first_answer_saved_ms": 3307.984,
+      "calls": 1
+    },
+    {
+      "slot": "N3-C",
+      "state": "generated",
+      "generation_only_ms": 2296,
+      "model_ms": 2192,
+      "collector_end_to_end_ms": 2328.617,
+      "first_answer_saved_ms": 2301.128,
+      "calls": 1
+    },
+    {
+      "slot": "N4-C",
+      "state": "generated",
+      "generation_only_ms": 3512,
+      "model_ms": 3402,
+      "collector_end_to_end_ms": 3545.284,
+      "first_answer_saved_ms": 3516.535,
+      "calls": 1
+    },
+    {
+      "slot": "N4-A",
+      "state": "generated",
+      "generation_only_ms": 3034,
+      "model_ms": 2950,
+      "collector_end_to_end_ms": 3064.455,
+      "first_answer_saved_ms": 3042.394,
+      "calls": 1
+    },
+    {
+      "slot": "N5-A",
+      "state": "generated",
+      "generation_only_ms": 2771,
+      "model_ms": 2662,
+      "collector_end_to_end_ms": 2803.673,
+      "first_answer_saved_ms": 2779.958,
+      "calls": 1
+    },
+    {
+      "slot": "N5-C",
+      "state": "generated",
+      "generation_only_ms": 2062,
+      "model_ms": 1975,
+      "collector_end_to_end_ms": 2094.816,
+      "first_answer_saved_ms": 2069.85,
+      "calls": 1
+    },
+    {
+      "slot": "N6-C",
+      "state": "generated",
+      "generation_only_ms": 3497,
+      "model_ms": 3401,
+      "collector_end_to_end_ms": 3530.425,
+      "first_answer_saved_ms": 3503.142,
+      "calls": 1
+    },
+    {
+      "slot": "N6-A",
+      "state": "generated",
+      "generation_only_ms": 2636,
+      "model_ms": 2548,
+      "collector_end_to_end_ms": 2672.491,
+      "first_answer_saved_ms": 2648.108,
+      "calls": 1
+    },
+    {
+      "slot": "N7-A",
+      "state": "generated",
+      "generation_only_ms": 1913,
+      "model_ms": 1806,
+      "collector_end_to_end_ms": 1945.472,
+      "first_answer_saved_ms": 1921.532,
+      "calls": 1
+    },
+    {
+      "slot": "N7-C",
+      "state": "generated",
+      "generation_only_ms": 4138,
+      "model_ms": 4021,
+      "collector_end_to_end_ms": 4172.705,
+      "first_answer_saved_ms": 4141.203,
+      "calls": 1
+    },
+    {
+      "slot": "N8-C",
+      "state": "generated",
+      "generation_only_ms": 2339,
+      "model_ms": 2242,
+      "collector_end_to_end_ms": 2372.31,
+      "first_answer_saved_ms": 2343.753,
+      "calls": 1
+    },
+    {
+      "slot": "N8-A",
+      "state": "generated",
+      "generation_only_ms": 3316,
+      "model_ms": 3219,
+      "collector_end_to_end_ms": 3348.992,
+      "first_answer_saved_ms": 3322.808,
+      "calls": 1
+    }
+  ],
+  "approx_seconds_first_send_to_last_model_completion": 44.94310759999912,
+  "timing_scope": "New fixed-Evidence Generation/collector times only. No retrieval, conversion, audits or user UI. Never add old retrieval numbers to imply a measured online end-to-end run.",
+  "cost_value": "A/C token totals similar but cache split differs substantially. Full archived route improves 5 questions with3mixed; no B generation arm, so marginal translation-answer value is not isolated. No general deployment conclusion."
+}

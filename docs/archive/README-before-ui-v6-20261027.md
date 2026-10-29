@@ -1,8 +1,57 @@
-# 默认首页迁出快照 · 2026-10-27
+# README历史快照 · 2026-10-27迁出
 
-来自09c6b987的README完整历史，不作为当前配置。
+以下完整保留迁出时首页，仅作历史；当前配置以代码和当前README为准。相对链接已改为从本归档回到仓库根目录。
 
 # PowerTrustAI
+
+中文电力资料问答与已有回答审核原型。以实际Evidence、原文定位和版本记录追踪“根据什么回答、哪句话有问题、修改后是否重审”。采用AI协作开发与用户监督，当前是本机单用户研究作品。
+
+**阶段封存、可演示、审核收益待研究（2026-10-27）。** 生产schema13及原默认保留，8765停服；跨语言检索与literal/source_actions候选默认关闭，NLI关闭。未宣称稳定消除幻觉、普遍准确率或工程安全认证。
+
+2026-10-27后续[工程维护](../../docs/maintenance/product-polish-ui-code-hygiene-v1.md)已改进业务UI；可用 `python -m tools.ui_fixture --port 8766` 在隔离零付费合成环境体验。它与下方8770归档学习站不同，未改变上述研究结论或生产默认。
+
+## 先看7分钟归档演示：无需密钥、大库或模型请求
+
+1. 双击[start-learning.cmd](../../start-learning.cmd)，打开静态学习站[127.0.0.1:8770](http://127.0.0.1:8770/)。或直接用浏览器打开[离线首页](../../docs/learning/site/index.html)。
+2. 首页按 **N1资料交付 → A3给定发现后的修订 → N4生成及审核漏错 → 返回路线** 讲解，已有完整原稿/末稿、来源位置和冻结报告链接。全部是历史归档阅读，不是现场实时生成。
+3. [学习站Markdown首页](../../docs/learning/index.md) · [面试讲稿与三条简历描述](../../docs/learning/chapters/17-interview.md) · [阶段交付清单](../../docs/project-status-20261027.md)。README是入口，不替代20章中文手册。
+
+```powershell
+# 在项目根目录；仅Python标准库，不导入业务后端或读取.env
+python -m tools.learning_site serve --port 8770
+```
+
+没有Python也可直接打开已提交的site/index.html；缺少静态文件时，有Python再运行 `python -m tools.learning_site build`。不自动下载数据库、模型或依赖。
+
+## 工程闭环与职责
+
+四职责为Generation、事实/原引用审核、领域审核、Revision；ClaimExtractor是提取服务。外层LangGraph管理七共享阶段，现有OfflineHarness管理预算、状态、Evidence与确定性政策，SQLite保留版本和失败。受管配置langgraph_v1，无配置源码fallback sequential；二者不能混称。
+
+请求/固定原稿 → 实际Evidence与生成快照 → 提取 → 事实/原引用和领域双审 → 确定性政策 → 有原文授权时至多一次Revision → 重提取及完整双审 → Store。ID、区间和结构校验不证明语义支持。
+
+## 真实结果：三笔收益分别看
+
+|固定已见材料|实际结果|不能外推|
+|---|---|---|
+|A/C归档Evidence的16次生成|8题5净改善/3混合，正确完整语义槽1/25→19/25|不是普遍准确率；无B回答组，不能全归翻译|
+|给定历史成立初审发现的修订v2|4/4实际修改、正确内容保留并完整重审|不是自主发现率或自然审核净收益|
+|8份自然C稿真实新初审|N2/N4未纠正，19/25不变；N8有争议局部改写，N5执行失败|未证明关键纠错收益；不以pass或引用可查替代正确|
+
+[16回答全文与分层结果](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md) · [修订4/4及回放边界](https://github.com/7556481/PowerTrustAI/blob/73c25ca0af9ba9fd5143527c6341aae52170fffd/docs/evaluation/local-revision-v2-flash-check-v1/report.md) · [自然审核失败与复核](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md)。
+
+70GB是FTS倒排库，不是全库向量库；目标资料在库也可能MATCH失败。A/B/C检索区分来源范围与一次英文转换，C原始证据槽25/25但N6换义导致旧gate=false。中文/英文导入输入行不是去重正文语言比例。[检索与语言依据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md)。
+
+## 公开克隆与私有运行的边界
+
+- 公开可读：源码、20章88题、上述归档答案与必要预测、来源身份/定位；[Portfolio](../../portfolio/README.md)的synthetic_fixture只证明交互/工程行为。
+- 私有不随Git发布：70GB知识库、官方全文、实际完整输入/响应、原始Store、模型权重及凭据。公共案例阅读不依赖这些资源；无法据公开克隆复跑真实语义批次。
+- [start-learning.cmd](../../start-learning.cmd)仅启动静态8770；[start-powertrustai.cmd](../../start-powertrustai.cmd)启动业务8765，可能加载服务端配置并在提交任务时产生付费请求。今天不运行后者，也不运行历史付费命令。新增项目请求限定Flash，旧Pro结果只作历史。
+
+[模块、回退、最近分批用量与验证范围](../../docs/project-status-20261027.md) · [架构章节](../../docs/learning/chapters/02-architecture.md) · [文档索引](../../docs/documentation-index.md)。唯一后续研发议题是重新设计事实支持关系判断，优先处理要求强度增强和“未说明→排除”；这里只留待决问题，没有待运行批次。
+
+<details>
+<summary>截至2026-10-25的历史README原文（以下ready、配置、测试数均属当时记录，非当前状态）</summary>
+
 
 ## 2026-10-25 审核误拦与回答交付
 
@@ -126,3 +175,5 @@ Linux/macOS改用`.venv/bin/python`。demo无需DeepSeek密钥/官方库/训练�
 契约与模型语义仍可能失败或不确定；程序严格拒绝非法ID/跨作用域，不把未完成算通过。知识来源层级、实际交付与全库覆盖不同，工程设定和性能保证仍需要可靠来源及工程输入。NLI曾有错误支持，仅提供第二判断。AI辅助用户监督不是专家金标准；未声称电力通用准确率或工程可靠性。本轮完整库接入的浏览器自动连接、回答/引用及重启保存已实际验证；此前其他未验收能力不因此转为通过。无goal概念的工程输入适用性已修复并真实通过；工程拒答/建议与事实边界仍有合理复核和回答偏长限制。本人熔断器题的泛化错误放行已确认；已补通用性能量值范围指导，但未重跑旧题，不能宣布该语义风险已验收解决。
 
 历史批次/失败/内部版本完整保留在[工程README历史](../../docs/engineering-readme-history.md)、[工程状态历史](../../docs/engineering-status-history.md)及[文档索引](../../docs/documentation-index.md)。长期学习手册继续采用Markdown＋本地站，PDF可选，旧手册保留。
+
+</details>

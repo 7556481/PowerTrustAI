@@ -1,0 +1,61 @@
+{
+  "version": "selective-match-retrieval-v1",
+  "implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
+  "model_calls": 0,
+  "diagnosis": {
+    "seal_seconds": 206.85130980001122,
+    "df_queries": 24,
+    "ablations": 6,
+    "main_unchanged": true,
+    "high_df_terms": [
+      {"term": "系统", "doc": 2556771, "cnt": 7042282},
+      {"term": "电网", "doc": 932552, "cnt": 2574617},
+      {"term": "电压", "doc": 684170, "cnt": 2049333},
+      {"term": "容量", "doc": 520226, "cnt": 921360},
+      {"term": "负荷", "doc": 478257, "cnt": 993094},
+      {"term": "电力系统", "doc": 328716, "cnt": 619314},
+      {"term": "cos", "doc": 25494, "cnt": 49393},
+      {"term": "正弦", "doc": 14886, "cnt": 24889}
+    ],
+    "ablation_results": [
+      {"query": "Q1", "kind": "theme_alias_only_removed_score_OR_unchanged", "matched_rows": 1980897, "seconds": 21.999758500009193},
+      {"query": "Q1", "kind": "only_one_original_theme_group_score_OR_unchanged", "matched_rows": 172802, "seconds": 2.0623640999983763},
+      {"query": "Q2", "kind": "theme_alias_only_removed_score_OR_unchanged", "matched_rows": 1822705, "seconds": 17.433062600000994},
+      {"query": "Q2", "kind": "only_one_original_theme_group_score_OR_unchanged", "matched_rows": 250676, "seconds": 1.621782100002747},
+      {"query": "Q3", "kind": "theme_alias_only_removed_score_OR_unchanged", "matched_rows": 47183, "seconds": 4.754728999992949},
+      {"query": "Q3", "kind": "only_one_original_theme_group_score_OR_unchanged", "matched_rows": 25494, "seconds": 0.35227439999289345}
+    ]
+  },
+  "validation": {
+    "groups": 72,
+    "seconds": 753.5810547000001,
+    "seal_seconds": 206.0443804999959,
+    "stopped": null,
+    "source_unchanged": true,
+    "performance_gate": false,
+    "quality_gate": "not passed; performance gate failed, no adoption-oriented full manual review",
+    "comparisons": [
+      {"query": "Q1", "baseline_median": 27.24376690000645, "candidate_median": 26.961457299999893, "saving": 0.28230960000655614, "reduction": 0.01036235558183729, "improving_rounds": 2, "material_regression_rounds": 0},
+      {"query": "Q2", "baseline_median": 20.404767200001515, "candidate_median": 18.96543749999546, "saving": 1.4393297000060556, "reduction": 0.0705388934800466, "improving_rounds": 2, "material_regression_rounds": 1},
+      {"query": "Q3", "baseline_median": 2.75597879999259, "candidate_median": 11.241062700006296, "saving": -8.485083900013706, "reduction": -3.078791426130172, "improving_rounds": 0, "material_regression_rounds": 3},
+      {"query": "Q4", "baseline_median": 28.35348829999566, "candidate_median": 2.5523249999969266, "saving": 25.801163299998734, "reduction": 0.909981975657037, "improving_rounds": 3, "material_regression_rounds": 0},
+      {"query": "Q5", "baseline_median": 2.2895425999886356, "candidate_median": 1.9436217000038596, "saving": 0.34592089998477604, "reduction": 0.15108733944784125, "improving_rounds": 2, "material_regression_rounds": 1},
+      {"query": "Q6", "baseline_median": 3.772648300000583, "candidate_median": 5.0725547000038205, "saving": -1.2999064000032376, "reduction": -0.3445607161428317, "improving_rounds": 0, "material_regression_rounds": 3},
+      {"query": "Q7", "baseline_median": 2.599401300001773, "candidate_median": 1.745698300001095, "saving": 0.853703000000678, "reduction": 0.32842293338858286, "improving_rounds": 2, "material_regression_rounds": 1},
+      {"query": "Q8", "baseline_median": 2.965339199989103, "candidate_median": 1.0969810999959009, "saving": 1.868358099993202, "reduction": 0.630065558773198, "improving_rounds": 3, "material_regression_rounds": 0},
+      {"query": "Q9", "baseline_median": 1.0765806999988854, "candidate_median": 0.7544667000038316, "saving": 0.32211399999505375, "reduction": 0.29920097954141966, "improving_rounds": 2, "material_regression_rounds": 0},
+      {"query": "Q10", "baseline_median": 14.975648899999214, "candidate_median": 3.8713309000013396, "saving": 11.104317999997875, "reduction": 0.7414916090880348, "improving_rounds": 3, "material_regression_rounds": 0},
+      {"query": "Q11", "baseline_median": 1.0980468000052497, "candidate_median": 3.882577800002764, "saving": -2.7845309999975143, "reduction": -2.535894644913315, "improving_rounds": 0, "material_regression_rounds": 3},
+      {"query": "Q12", "baseline_median": 4.274466799994116, "candidate_median": 5.856697600000189, "saving": -1.582230800006073, "reduction": -0.37015863592817033, "improving_rounds": 0, "material_regression_rounds": 2}
+    ]
+  },
+  "offline": {
+    "existing_full_tests": 1454,
+    "existing_targeted_tests": 6,
+    "diagnostic_regression_tests": 11,
+    "diagnostic_regression_seconds": 4.581
+  },
+  "adopted": false,
+  "production_switched": false,
+  "smoke_tests": 0
+}

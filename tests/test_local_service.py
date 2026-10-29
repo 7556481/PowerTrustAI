@@ -55,6 +55,7 @@ class ServiceTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(self.factory.created),2)
 
     async def test_queue_full_persisted_and_cancel_frees_slot(self):
+        await self.service.start()
         rid=await self.service.submit(task())
         with self.assertRaises(QueueFullError):await self.service.submit(task())
         self.assertEqual(self.store.db.execute('SELECT COUNT(*) FROM runs').fetchone()[0],1)
@@ -73,7 +74,8 @@ class ServiceTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.service.result(rid)['execution']['required_stages_complete'],False)
 
     async def test_restart_marks_queued_and_running_interrupted_no_replay(self):
-        a=await self.service.submit(task());b='saved-running';self.store.create(b,task(),self.factory.manifest(None));self.store.mark(b,'running')
+        a='saved-queued';self.store.create(a,task(),self.factory.manifest(None))
+        b='saved-running';self.store.create(b,task(),self.factory.manifest(None));self.store.mark(b,'running')
         await self.service.start()
         self.assertEqual(self.service.state(a)['status'],'interrupted');self.assertEqual(self.service.state(b)['status'],'interrupted')
         self.assertFalse(self.factory.created)
@@ -106,6 +108,7 @@ class ServiceTests(unittest.IsolatedAsyncioTestCase):
         with self.assertRaises(ServiceUnavailable):await self.service.submit(task())
 
     async def test_create_transaction_failure_no_acceptance(self):
+        await self.service.start()
         self.store.db.execute("CREATE TRIGGER fail_input BEFORE INSERT ON runs BEGIN SELECT RAISE(ABORT,'synthetic_fixture'); END")
         with self.assertRaises(StorageError):await self.service.submit(task())
         self.assertTrue(self.service.queue.empty());self.assertEqual(self.store.db.execute('SELECT COUNT(*) FROM runs').fetchone()[0],0)

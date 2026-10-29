@@ -213,11 +213,13 @@ def validate_domain_output(output,answer,claims):
 class ModelPowerDomainReviewAgent:
     uses_model_adapter=True
     rule_set_version=RULE_SET_VERSION
-    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1,safety_review=False,task_applicability=False):
+    def __init__(self,adapter,settings,*,diagnostic_dir=None,protocol_version=1,safety_review=False,task_applicability=False,reference_contract_v7=False):
         require(protocol_version in (1,2,3,4,5),"Unknown domain contract")
         self.protocol_version=protocol_version
         self.safety_review=safety_review
         self.task_applicability=task_applicability
+        self.reference_contract_v7=reference_contract_v7
+        if reference_contract_v7:require(protocol_version==5 and safety_review and task_applicability,'Reference v7 requires the complete paired domain contract')
         from agents.contracts import PowerDomainReviewInput,ReliabilityDomainInput
         self.review_input_type=ReliabilityDomainInput if protocol_version>=3 else PowerDomainReviewInput
         self.client=ModelClient(adapter,settings)

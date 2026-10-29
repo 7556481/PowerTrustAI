@@ -2,7 +2,6 @@
 import asyncio
 import os
 from dataclasses import asdict
-from pathlib import Path
 import hashlib
 from backend.config import ROOT
 from harness.runtime import OfflineHarness
@@ -12,14 +11,29 @@ from harness.contracts import RetrievalSettings
 class ConfigurationError(RuntimeError):
     code='CONFIGURATION_UNAVAILABLE'
 
+class ResourceCleanupError(RuntimeError):
+    def __init__(self,failures):
+        super().__init__('Resource cleanup failed')
+        self.failures=tuple(failures) # Controlled categories only, no exception messages.
+
+def close_resources(resources):
+    failures=[];cancelled=None
+    for resource in resources:
+        try:resource.close()
+        except asyncio.CancelledError as exc:cancelled=exc
+        except Exception as exc:failures.append(type(exc).__name__)
+    if cancelled is not None:raise cancelled
+    if failures:raise ResourceCleanupError(failures)
+
 class Bundle:
-    def __init__(self,harness,resources=()):self.harness=harness;self.resources=resources
+    def __init__(self,harness,resources=()):self.harness=harness;self.resources=resources;self._close_attempted=False
     async def drain(self):
         # Await completion, not termination. Cancelled shielded workers may still be active.
         while any(getattr(r,'_active',None) is not None and not r._active.done() for r in self.resources):
             await asyncio.sleep(.05)
     def close(self):
-        for resource in self.resources:resource.close()
+        if self._close_attempted:return
+        self._close_attempted=True;close_resources(self.resources)
 
 class ComponentFactory:
     def __init__(self,config):self.config=config;self.semantic_resource=None;self.retrieval_metrics=None
@@ -50,9 +64,8 @@ class ComponentFactory:
             await Bundle(None,(resource,)).drain()
             self.retrieval_metrics={'query_encodings':resource.query_encodings,
                 'validation_replays':resource.validation_replays,'encoding_seconds':resource.encoder.encoding_seconds}
-            resource.close()
-            if hasattr(resource.encoder,'close'):resource.encoder.close()
-            self.semantic_resource=None
+            try:close_resources((resource,resource.encoder) if hasattr(resource.encoder,'close') else (resource,))
+            finally:self.semantic_resource=None
     def preflight(self):
         if self.config.execution_path=='langgraph_v1' or self.config.fact_internal_flow!='production' or self.config.domain_internal_flow!='production':
             try:
@@ -168,6 +181,8 @@ class ComponentFactory:
             manifest['prompts']['extraction']=extraction_version
             manifest['extraction_message_sha256']=hashlib.sha256(system(self.config.decision_policy=='product-v1').encode()).hexdigest()
         manifest['review_message_profile']=self.config.review_message_profile if self.config.verification_schema==13 else 'baseline_v1'
+        if self.config.fact_review_execution!='serial_v1':
+            manifest['fact_review_execution']={'version':'schema13-citation-pair-v1','profile':self.config.fact_review_execution,'fact_http_limit':2,'task_http_limit':3,'correction_accounting':'invocation_scoped_v1','enabled_by_default':False}
         if self.config.review_message_profile=='lossless_v1' and self.config.verification_schema==13:
             manifest['review_transport']='review-lossless-shared-values-v1'
             from services.review_transport import INSTRUCTION as transport_instruction,NESTING
@@ -190,6 +205,11 @@ class ComponentFactory:
             manifest['effective_corpus_query_version']='topic-subject-grammar-bm25-v2'
             manifest['ranking_work_cache']='per-run-8-entries-max64-numeric-hits; full-body/context replay retained'
             manifest['citation_execution']='complete-single-scope-v1; same shared one-correction budget'
+        if self.config.retrieval_execution_profile=='selective_match_v1':
+            manifest['candidate_recall']='selective topics; max3 MATCH; no broad OR fallback; lexical coverage is not semantic support'
+            manifest['scoring_method']='selective-match-stage-priority-v1; local BM25 only, coverage/stage-priority merge'
+            manifest['effective_corpus_query_version']='selective-match-stage-priority-v1'
+            manifest['ranking_work_cache']=None
         if self.config.fact_internal_flow!='production':
             from importlib import import_module
             protocol=import_module({'langgraph_candidate_v1':'services.fact_flow_protocol_v1','joint_v2':'services.fact_flow_protocol_v2','two_stage_v1':'services.fact_two_stage_v1'}[self.config.fact_internal_flow])
@@ -235,6 +255,21 @@ class ComponentFactory:
             manifest['local_revision_interface']=self.config.local_revision_interface
             manifest['prompts']['revision']=manifest['contracts']['revision']=manifest['protocols']['revision']=VERSION
             manifest['template_sha256']['local_revision']=hashlib.sha256(system().encode()).hexdigest()
+        if self.config.audit_strategy!='baseline':
+            from services.source_first_audit_v1 import SYSTEM,VERSION
+            if self.config.audit_strategy=='source_first_audit_v2':
+                from services.source_first_audit_v2 import SYSTEM,VERSION
+            elif self.config.audit_strategy=='source_first_audit_v3':
+                from services.source_first_audit_v3 import SYSTEM,VERSION
+            elif self.config.audit_strategy=='source_first_audit_v4':
+                from services.source_first_audit_v4 import SYSTEM,VERSION
+                from services.audit_reference_v7 import DOMAIN_SYSTEM,PROMPT
+                manifest['prompts']['domain']=PROMPT
+                manifest['template_sha256']['domain_reference']=hashlib.sha256(DOMAIN_SYSTEM.encode()).hexdigest()
+            manifest['audit_strategy']=VERSION
+            manifest['audit_scope']='source_fidelity_and_task_completeness; external cross-check separately recorded'
+            manifest['prompts']['verification']=VERSION
+            manifest['template_sha256']['literal']=hashlib.sha256(SYSTEM.encode()).hexdigest()
         return manifest
 
     def create(self,rid,observer,*,fixed_evidence_only=False):
@@ -264,6 +299,14 @@ class ComponentFactory:
             from services.literal_review_v1 import LiteralReviewAgent as FactAgent, LocalRevisionAgent as ModelRevisionAgent
             if self.config.local_revision_interface=='source_actions_v2':
                 from services.local_revision_v2 import ScopedLocalRevisionAgent as ModelRevisionAgent
+            if self.config.audit_strategy!='baseline':
+                from services.source_first_audit_v1 import SourceFirstReviewAgent as FactAgent
+                if self.config.audit_strategy=='source_first_audit_v2':
+                    from services.source_first_audit_v2 import SourceFirstRelationReviewAgent as FactAgent
+                elif self.config.audit_strategy=='source_first_audit_v3':
+                    from services.source_first_audit_v3 import SourceFirstGroundedReviewAgent as FactAgent
+                elif self.config.audit_strategy=='source_first_audit_v4':
+                    from services.source_first_audit_v4 import SourceFirstReferenceReviewAgent as FactAgent
         from services.claim_extractor import ModelClaimExtractor
         from tools.unit_conversion import UnitConversionTool
         from model_adapter.contracts import ModelSettings
@@ -275,7 +318,11 @@ class ComponentFactory:
         diag=ROOT/'data/retrieval_local/service_private'/rid
         resources=[]
         try:
-            model=create_adapter(settings,**({'review_contract':'simple_bound_v1'} if self.config.fact_review_contract=='simple_bound_v1' else {}));resources.append(model)
+            if self.config.fact_review_execution=='citation_pair_v1':
+                from model_adapter.bounded_pair_v1 import create_pair
+                model=create_pair(settings,create_adapter)
+            else:model=create_adapter(settings,**({'review_contract':'simple_bound_v1'} if self.config.fact_review_contract=='simple_bound_v1' else {}))
+            resources.append(model)
             domain_model=create_adapter(settings);resources.append(domain_model)
             if fixed_evidence_only:
                 retriever=None
@@ -296,17 +343,17 @@ class ComponentFactory:
                     corpus=seal(store,self.config.knowledge_version)
                     corpus_english = (corpus['has_english'] or english_fallback_available(store.rows(corpus['base_knowledge_version']))) if corpus is not None else english_fallback_available(store.rows(self.config.knowledge_version))
             harness=OfflineHarness(EvidenceGenerationAgent(model,settings,diagnostic_dir=diag,schema_version=3,product_guidance=self.config.decision_policy=='product-v1'),
-                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
-                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True),
+                FactAgent(model,settings,diagnostic_dir=diag,schema_version=self.config.verification_schema,citation_workload=self.config.citation_workload,support_relation_checks=True,support_relation_version=6,review_message_profile=self.config.review_message_profile,**({'review_execution_profile':self.config.fact_review_execution} if self.config.fact_review_execution!='serial_v1' else {}),**({'review_result_transport':self.config.review_result_transport,'review_contract':self.config.fact_review_contract} if self.config.fact_review_contract!='production' else {})),
+                ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True,**({'reference_contract_v7':True} if self.config.audit_strategy=='source_first_audit_v4' else {})),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
                 policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1' else None,
-                generation_corpus_english=corpus_english,execution_path=self.config.execution_path)
-            harness.subject_supplement=not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
+                generation_corpus_english=corpus_english,execution_path=self.config.execution_path,audit_strategy=self.config.audit_strategy)
+            harness.subject_supplement=self.config.audit_strategy=='baseline' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
             return Bundle(harness,resources)
         except Exception:
-            for resource in resources:resource.close()
+            close_resources(resources) # Cleanup failure must also stop admission, not become an ordinary task error.
             raise ConfigurationError('Required component could not be constructed') from None
 
     def product_policy(self):

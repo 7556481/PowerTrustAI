@@ -1,5 +1,47 @@
 # 10 API、UI、队列、SQLite与本机会话
 
+## 正文审核标注：定位与判断分开（v7）
+
+标注只读已保存结果，不改答案或发现。backend/answer_annotations.py先核对answer_id/answer_version及逐字text和Python字符区间；旧记录只有原文时必须唯一逐字出现。错误offset不回退到搜索，重复原文、改述proposition、缺版本均不猜位置。旧提取器的Claim可从同一已保存回答/审核轮次恢复；引用意见由review_bindings关联已保存审核身份。没有正文锚点的任务级工程前提留未定位摘要。
+
+浏览器inline_review.js用Array.from按Unicode码点切片，再核对身份、区间与原文。重叠区间分段为非嵌套mark，同区间事实/引用意见合为一个入口，各自理由保留。复制仍把所选保存版本的原text传给writeText，标记/原因不进入正文。依据不足浅黄、与依据冲突浅红并标明审核判断；不能从颜色推断真伪。审核中/未完成不预标问题，历史版本明确不叠加最新意见；无高亮不表示通过。
+
+Enter、焦点或点击文字/摘要打开就近原因卡，Esc/关闭返回标注；旧任务/版本切换销毁旧卡，不增加请求调度器。只有实际保存修订记录且正文改变才说已有修订；同文新版本不称改好。当前仅显示最终版本标注，历史逐轮意见仍在诊断页。合成演示入口`python -m tools.ui_inline_fixture_v7 --port 8766`，建立会话后从历史选择“正文标注 · 同句双意见”。这不是重新审核用户问题，也不证明发现正确。
+
+## 用户主页与独立诊断页（v6）
+
+默认主页只提交概念/资料解释问题，先展示初稿，再显示实际审核终态；引用按钮按所选版本回查原文。历史通过顶部入口按需读取，不再固定在右栏。背景、工程范围、用户参考和已有回答表单仅由独立diagnostics.html及diagnostic_input.js提供；主页不挂载这些DOM，也不读取其表单字段。
+
+两页共用app.js的鉴权、epoch归属、提交锁与轮询机制。诊断页保留原逐项发现、NLI、轨迹、完整证据和版本绑定反馈；主页不请求这些辅助端点。任务ID仅以hash传入诊断页，查询参数仍拒绝；诊断静态壳可读不代表运行API公开，运行数据仍需同源有效会话。手动服务检查位于连接小菜单，仍只GET，不解锁未知POST。服务故障与保存未确认提示始终可见。
+
+## 2026-10-27服务拒单与历史读取的前端边界
+
+连接成功不等于可接单。前端保存最近已确认health，明确accepting_work=false、配置/存储未就绪、队列满时禁新提交；提交前再GET核查，拒单时POST为0。核查后竞态仍以实际503/429为准，不自动重试。历史刷新、按ID查询、版本复制和证据回查独立保留，是否可读以实际GET为准；存储允许时反馈仍可追加，不改原审核。
+
+pending_terminal_status=interrupted且persistence_confirmed=false明确显示“服务已停止处理此任务，中断状态尚未确认保存”。数据库原status及pending字段在只读详情保留，不客户端改写为已落库中断；主状态和必要辅助读取后按原有有界机制收敛。仅service_fault_code不停止仍真实running任务。已存结果、版本、业务处置不因服务故障改判，元数据未确认与答案是否可读分别说明。服务检查只GET /health，不认证、不恢复未知POST锁、不启动或重放任务。
+
+## 2026-10-27后端生命周期与无实质回答
+
+服务ready必须同时满足配置、可读存储与存活且可接单的worker。资源drain/close故障触发独立生命周期故障，health degraded、新POST 503；队列等待任务在可写时落interrupted/SERVICE_LIFECYCLE_FAILED，不自动执行或重放。存储写失败则persistence_confirmed=false及pending_terminal_status=interrupted，不能把内存处置称落库成功。当前已保存答案/report/版本/发现不因收尾故障改写；普通组件单任务失败且资源清理正常，下一任务仍可执行。计时退出、资源尝试、queue.task_done与active清理各自收尾。
+
+合法无实质回答只有正常finished、最终结果已存、实际Harness needs_information及NO_SUBSTANTIVE_ANSWER完整处置且生成无错误时，required_stages_complete=true；all_required_checks_assessed=false，substantive_audit_status=not_applicable，仍待补充，不是pass。生成失败、生成后中断和只有快照时仍不完整；冻结快照中的旧处置不重写。普通完整双审与部分审核失败沿原义。两个执行路径sequential/langgraph_v1均有Service/Harness/Store/API反例验证。
+
+
+## 2026-10-27慢辅助读取隔离
+
+v2失败暂停不能解决“尚未失败的慢请求”。v3仍单一主state/result周期和唯一1800ms调度，但NLI/trace/reviews独立slot，各最多1在途，手动刷新最多排1次；旧epoch/revision结果丢弃，切换/离页取消GET。终态轨迹/反馈最后收敛，NLI pending最多10次终态检查后提示手动恢复。反馈保存推进reviews revision，复用slot回读，不与旧列表争写。POST不重试、草稿归属不变；同内容轨迹/反馈只跳过DOM重建，不缓存响应。
+
+
+## 2026-10-27反馈归属与读取容错补记
+
+反馈正文、动作、来源和版本/finding绑定只在页面Map里按run_id保存，切换后恢复前再次核对；失效绑定要求重选，不存浏览器长期记忆。成功只清除提交以来未改变的那份草稿，受理未知保留且不重发。主state/result与辅助NLI/trace/reviews分开处理；某辅助项失败后本任务自动暂停该项，主运行仍轮询，手动“查询状态”恢复。相同回答视图和反馈选项不重复构建，避免轮询打断操作。
+
+Store.require_run只检查存在，state_row只读元数据/config及结果存在标志，get仍用于完整对象恢复；无迁移、缓存或历史重写。固定约4.06MiB临时数据库、正常及约1MiB正文/依据结果，预热1次/测量5次：大样本state中位11.755→0.064ms，result77.004→21.067ms，trace12.415→0.026ms，reviews13.123→0.024ms；SQL次数仍1/8/2/2，JSON解析4/22/4/4→1/7/0/0。小样本state0.126→0.169ms无提速，不掩盖；这些不是模型或检索的速度结论。详见docs/maintenance/read-path-feedback-polish-v2.md。
+
+## 2026-10-27工程维护补记
+
+本轮工程维护只为鉴权后的历史列表增加question_summary（压空白、最多120字符），不返回完整request/config、不改Store schema或旧对象。旧服务没有此字段时客户端回退到模式名。UI读取按任务epoch与请求身份丢弃过期结果，不重发POST；这不提高事实判断能力。
+
 ## 工具参数的原义与审计
 
 标准库HTTP先解析响应信封，保留arguments字符串，既有strict_json再检查参数中的重复键。不得让SDK提前解析成字典后只剩最后一个同名键。严格Schema文档未列null，本轮只在objection/repair使用__NULL__传输标记并精确还原业务None；unknown、布尔和对象不改。可识别原参数、调用ID、结束和用量保留；无法安全识别时明确记缺口，不保存完整失败响应作为兜底。
@@ -16,7 +58,7 @@
 
 ## 2026-10-24 审核链v2实证更新
 
-本批真实运行通过隔离小型SQLite及现有Store/Factory执行，未启动生产或常驻候选服务。8765前后未监听，不能报告ready。生产历史四表104/2278/2999/8不变，379冻结源码及旧212消息响应身份核对通过；新版、原版、有效同伴与无效尝试均保留。离线API贯通与真实HTTP验收必须分开。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/production-review-net-benefit-v2/report.md#)。
+本批真实运行通过隔离小型SQLite及现有Store/Factory执行，未启动生产或常驻候选服务。8765前后未监听，不能报告ready。生产历史四表104/2278/2999/8不变，379冻结源码及旧212消息响应身份核对通过；新版、原版、有效同伴与无效尝试均保留。离线API贯通与真实HTTP验收必须分开。 [完整预测、理由和成本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/production-review-net-benefit-v2/report.md#)。
 
 本轮实际结果：A8/G4/B8固定批次106请求、1126972token，5条审核执行不完整；候选仅A4进入新修订提示，原版也纠正且没有目标历史叙述，自然8路正文不变。未证明候选净收益，不采用生产；N-1/N-2条件外推和原引用跨单元缺口疑点保留。实际8765保持原停服，无常驻候选。
 
@@ -24,15 +66,15 @@
 
 ServiceConfig.revision_answer_delivery和Factory清单显式记录修订正文提示候选，旧记录不迁移；页面仍按已保存版本、完整阶段及政策处置展示，不因候选提示或modified动作把未认可草稿显示为通过。候选的真实Factory/图路径/Store/API离线夹具验证包含两版本与失败；本轮未重新设计UI，也不把离线/API检查说成新浏览器验收。
 
-本批使用独立小型运行库，SQLite连接在所属事件循环创建、使用、关闭；复用saved_result另开显式关闭只读连接收集，Windows临时文件释放及响应/最终存储失败后停止已演练。旧生产库/历史attempt不修改、不复制。实际服务状态以[本轮报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/answer-review-net-benefit-v1/report.md#)为准，旧章节ready是当时状态。
+本批使用独立小型运行库，SQLite连接在所属事件循环创建、使用、关闭；复用saved_result另开显式关闭只读连接收集，Windows临时文件释放及响应/最终存储失败后停止已演练。旧生产库/历史attempt不修改、不复制。实际服务状态以[本轮报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#)为准，旧章节ready是当时状态。
 
 ## 2026-10-23 事实审核内部流程候选
 
 候选服务使用原Factory、worker、Store和API；新增受服务配置控制的premise_declarations，声明只能精确绑定当前question/user_context。FactFlowOutput单独保存object_reviews与flow_trace，API的fact_internal_flow展示两轴异议和节点诊断。旧记录继续可读。服务manifest记录实际候选prompt/contract，不把schema13数字等同本次实际协议。
 
-完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
+完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
 
 ## 服务与浏览器的分工
 
@@ -114,3 +156,9 @@ Factory manifest、状态/API保存execution_path合法枚举；它是运行时�
 ::: answer 展开参考答案3
 不；读原记录，未完任务标interrupted。
 :::
+
+## 2026-10-28 v4普通原因投影与状态收敛
+
+真实最终完整pass才在回答标题旁显示一次绿色“通过”；未完成、无实质回答、待补充、待核实和历史错版不借用绿标。原业务decision不改。backend/user_review.py只读消费已知版本的附载、保留自然原因，坏/未知附载回退诊断提示，不粗暴删公式花括号；原始元数据继续保存在诊断与归档。
+
+相同角色/版本/核验区间/类型/原因/来源精确去重并保留原ID集合，同句不同意见、冲突和来源保留。一般工程能力说明移到检查范围，实质任务缺口仍显示，概念范围不再误报缺输入。两条实际归档回放从5张重复卡收敛为2种意见；390宽375无横溢，原因卡在正常文档流内不盖页脚。复制仍用原text，键盘、来源、版本和旧响应隔离有回归。用户8765未重启，新后端投影需正常重载本分支代码，推送不等于候选启用。

@@ -75,6 +75,9 @@ class RetrievalSession:
         issue, outcome, status, offered, reason = None, "failed", ExecutionStatus.FAILED, 0, ""
         accepted = 0
         omission_reasons = []
+        selective = getattr(self.retriever,'execution_profile',None)=='selective_match_v1'
+        selective_started = False
+        work_charged = False
         timing_token=bind_request(rid,version,purpose.value)
         try:
             remaining = self.deadline - started
@@ -100,6 +103,12 @@ class RetrievalSession:
                     outcome = 'budget_exhausted'
                     raise RuntimeError('Retrieval call budget exhausted')
                 self.calls += 1
+                if selective:
+                    self.retriever.configure_work_budget(sql_limit=min(3,self.budget.max_retrieval_calls-self.calls+1),
+                        char_limit=min(self.budget.max_retrieval_chars_per_call,self.budget.max_retrieval_chars_total-self.chars),
+                        deadline=started+min(self.budget.step_timeout_seconds,remaining))
+                    self.retriever.last_selective_work=None
+                    selective_started=True
 
             async def work():
                 output = cached[0] if cached else await self.retriever.retrieve(retrieval_request)
@@ -129,6 +138,11 @@ class RetrievalSession:
                 return output
 
             result = await asyncio.wait_for(work(), min(self.budget.step_timeout_seconds, remaining))
+            precharged=set()
+            if selective_started and self.retriever.last_selective_work is not None:
+                w=self.retriever.last_selective_work
+                self.calls+=max(0,w.calls-1);self.chars+=w.chars
+                precharged={e.evidence_id for e in w.bodies.values()};work_charged=True
             if fact_query:
                 reused = cached[1] if cached else None
                 self.query_cache.setdefault(cache_key, (result, rid))
@@ -136,10 +150,12 @@ class RetrievalSession:
             offered = sum(len(e.text) for e in result.evidence) + sum(len(i.evidence.text) for i in extras)
             capacity = min(self.budget.max_retrieval_chars_per_call,
                            self.budget.max_retrieval_chars_total - self.chars)
+            if selective_started and work_charged:
+                capacity=min(capacity,self.budget.max_retrieval_chars_per_call-self.retriever.last_selective_work.chars)
             chosen, core_ids = [], set()
             charged = 0
             for e in result.evidence:
-                cost = 0 if fact_query and (version, e.evidence_id) in self.fact_delivered else len(e.text)
+                cost = 0 if e.evidence_id in precharged or fact_query and (version, e.evidence_id) in self.fact_delivered else len(e.text)
                 if cost <= capacity:
                     chosen.append(e)
                     core_ids.add(e.evidence_id)
@@ -191,6 +207,12 @@ class RetrievalSession:
             reason = f"{type(exc).__name__}: {exc}"
             issue = ExecutionIssue("retrieval_" + purpose.value, status, code, reason)
         finally:
+            if selective_started and not work_charged and self.retriever.last_selective_work is not None:
+                w=self.retriever.last_selective_work
+                self.calls+=max(0,w.calls-1);self.chars+=w.chars
+            if selective_started and self.retriever.last_selective_work is not None:
+                w=self.retriever.last_selective_work
+                reason+=f'; selective SQL={w.calls}; examined unique chars={w.chars}; lexical gaps={w.missing}; stop={w.stop}; semantic support unjudged'
             record = RetrievalRecord(rid, purpose.value, query, QUERY_METHOD, version, self.knowledge_version,
                 status, outcome, () if result is None else result.hits,
                 tuple(b.evidence_id for b in bindings if b.origin == "index_core_hit"),
