@@ -1,5 +1,7 @@
 # 从启动到结束
 
+2026-10-29取证解耦比较已结束，速度未达门槛：快速配置关闭，8765保持原基线。继续使用下列原命令；不要重跑已封存16链、十题或烟测。进程封印约192秒与单链12.987—81.778秒分开，结果见[报告](evaluation/production-evidence-decoupling-v1/report.md)。
+
 在项目根目录、既有虚拟环境中操作。实际发布与本机版本状态见[验收报告](maintenance/stable-product-baseline-v1.md)。
 
 1. 公开离线演示运行 `./start-powertrustai.cmd --demo`。打开 http://127.0.0.1:8766/fixture/connect ，确认“演示模式 · 无模型调用”。此入口不加载私有知识库与凭据。

@@ -1,5 +1,15 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-29 生产合同取证解耦已比较：不有限发布
+
+16链一次执行完、0补跑。基线完整7/8、候选8/8；7完整对34.633→27.701秒，20.016%/6.932秒，未达30%门槛。90 Flash/1216184可信token，未知/在途0，费用未知；未启动产品4链或烟测。S6候选一次改对“所有电厂必须额装”并完整双审；S4/S5共同漏检、S1基线无关载体supported和事实载体不足均保留。失败主因速度不足，非取证不能解耦；不改合同、不另批。
+
+应用42448b9完整1462/276.424秒OK（80私有历史材料缺失跳过），后续只有评测封印计时与文档，应用身份未变；旧1457结果仅对应初版。比较进程实际exit0，无遗留批次/测试，8765仍原PID19116/ready、active=false、queue0，未重启/切换。远端候选codex/production-evidence-decoupling-v1与[草稿PR #4](https://github.com/7556481/PowerTrustAI/pull/4)归档审阅，不合入master；[完整报告](evaluation/production-evidence-decoupling-v1/report.md)含逐对质量、分段时间、取证实际减少与保留。
+
+## 2026-10-29 生产合同取证解耦：付费前冻结
+
+最终应用42448b9已通过1462项/276.424秒离线回归（80私有历史材料缺失跳过），48组准备计时完成。唯一16链真实比较即将执行，默认关闭、8765保持。见[本轮报告](evaluation/production-evidence-decoupling-v1/report.md)。原1457结果仅属于初版，不重复冒充最终身份。
+
 ## 2026-10-29 发布后分支与候选处置
 
 远端新核验后28→2，26历史分支先归档SHA再原子删除；本地安全删除27支，master安全快进。候选代码保留且不开启；rank/MATCH当前实现结束，只建议保留v6来源模态忠实与完整修订交付研究（不执行）。8765 PID19116/ready及源码/受管配置未变，0模型、无重启、不重跑1454。见[清单](maintenance/post-release-disposition-v1/report.md)、[完整SHA](maintenance/post-release-disposition-v1/branches-before.json)及[回执](maintenance/post-release-disposition-v1/cleanup-result.json)。
