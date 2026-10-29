@@ -1,5 +1,5 @@
 """Isolated, resource-bounded, same-token FTS/Tantivy feasibility; no models."""
-import argparse,gc,ctypes,hashlib,json,math,os,re,shutil,sqlite3,time,urllib.request
+import argparse,subprocess,sys,gc,ctypes,hashlib,json,math,os,re,shutil,sqlite3,time,urllib.request
 from pathlib import Path
 from ctypes import wintypes
 ROOT=Path(__file__).resolve().parents[1]
@@ -140,20 +140,35 @@ def build(folder,count,f,budget,native=False):
  idx=index(folder/'tantivy');writer=idx.writer(heap_size=f['resources']['writer_heap'],num_threads=1);beg=time.monotonic();chain=hashlib.sha256();tfts=ttant=ttokens=0
  try:
   with source() as c:
-   for rid,fid,body,text in rows(c,native=native,start=done,stop=count,n=f['source']['max_chunk']):
+   for rid,fid,body,text in rows(c,native=native,start=done,stop=f.get('batch_end',count),n=f['source']['max_chunk']):
     tick=time.monotonic();pre=' '.join(terms(text));ttokens+=time.monotonic()-tick
     tick=time.monotonic();con.execute('insert into corpus_fts(rowid,terms) values(?,?)',(rid,pre));con.execute('insert into mapping values(?,?,?,?)',(rid,fid,digest(body),digest(pre)));tfts+=time.monotonic()-tick
     tick=time.monotonic();import tantivy;writer.add_document(tantivy.Document(terms=pre,rowid=rid));ttant+=time.monotonic()-tick
     chain.update((str(rid)+fid+digest(body)+digest(pre)).encode());done+=1
     if done%1000==0:
-     writer.commit();writer.wait_merging_threads();del writer;del idx;gc.collect();idx=index(folder/'tantivy');writer=idx.writer(heap_size=f['resources']['writer_heap'],num_threads=1);con.execute('delete from progress');con.execute('insert into progress values(?)',(done,));con.commit();r=budget.check();save(folder/'progress.json',dict(completed=done,resources=r));print(folder.name,done,r['rss']//1048576,flush=True)
+     r=budget.check();print(folder.name,done,r['rss']//1048576,flush=True)
   writer.commit();writer.wait_merging_threads();con.execute('delete from progress');con.execute('insert into progress values(?)',(done,));con.commit();idx.reload();chain=hashlib.sha256()
   for r in con.execute('select rowid,fragment_id,body_sha,terms_sha from mapping order by rowid'):chain.update(json.dumps(tuple(r),ensure_ascii=False).encode())
-  result=dict(complete=True,n=done,stream_sha=chain.hexdigest(),seconds=time.monotonic()-beg,preprocess_s=ttokens,fts_insert_s=tfts,tantivy_add_s=ttant,source=f['source'],resources=budget.check());save(folder/'ready.json',result);return result
+  result=dict(complete=done==count,n=done,stream_sha=chain.hexdigest(),seconds=time.monotonic()-beg,preprocess_s=ttokens,fts_insert_s=tfts,tantivy_add_s=ttant,source=f['source'],resources=budget.check());save(folder/('ready.json' if done==count else 'progress.json'),result);return result
+ except Exception as failure:
+  detail=None
+  try:writer.wait_merging_threads()
+  except Exception as inner:detail=str(inner)
+  save(folder/'native-error.json',dict(primary=str(failure),join_detail=detail,committed_start=prior[0] if prior else 0,attempted=done,resources=native_process()))
+  raise
  finally:
   try:writer.rollback();writer.wait_merging_threads()
   except Exception:pass
   con.close()
+
+def build_isolated(folder,count,f,budget):
+ # Fresh process per checkpoint: Python/Rust handle teardown must finish before
+ # the next writer opens. No overlapping writer/merge pools, no new query logic.
+ folder.mkdir(parents=True,exist_ok=True)
+ while not (folder/'ready.json').exists():
+  budget.check();reserved=max(native_process()['rss'],native_process()['private_commit'])+16*1048576
+  result=subprocess.run([sys.executable,'-X','utf8','-m','evaluation.tantivy_bounded_v1','append',str(folder),str(count),str(reserved)],cwd=ROOT)
+  if result.returncode:raise RuntimeError('Isolated checkpoint child failed; preserve committed progress')
 
 def bench(folder,f,budget):
  if (folder/'results.json').exists():raise RuntimeError('No timing repeat')
@@ -191,7 +206,7 @@ def run():
   if not (folder/'results.json').exists():bench(folder,f,budget)
   for n in f['resources']['scales']:
    folder=LOCAL/str(n)
-   if not (folder/'ready.json').exists():build(folder,n,f,budget)
+   if not (folder/'ready.json').exists():build_isolated(folder,n,f,budget)
    if not (folder/'results.json').exists():bench(folder,f,budget)
    print('Awaiting quality/performance gate',n,flush=True)
    decision=folder/'review.json'
@@ -201,4 +216,11 @@ def run():
  except Exception as e:
   save(LOCAL/'stopped.json',dict(type=type(e).__name__,reason=str(e),resources=native_process(),model_calls=0));raise
 if __name__=='__main__':
- args=argparse.ArgumentParser();args.add_argument('action',choices=['freeze','run']);a=args.parse_args();freeze() if a.action=='freeze' else run()
+ args=argparse.ArgumentParser();args.add_argument('action',choices=['freeze','run','append']);args.add_argument('folder',nargs='?');args.add_argument('count',nargs='?',type=int);args.add_argument('reserved',nargs='?',type=int);a=args.parse_args()
+ if a.action=='freeze':freeze()
+ elif a.action=='run':run()
+ else:
+  f=read(LOCAL/'freeze.json');folder=Path(a.folder);done=0
+  if (folder/'fts.sqlite3').exists():
+   con=sqlite3.connect(folder/'fts.sqlite3');prior=con.execute('select n from progress').fetchone();done=prior[0] if prior else 0;con.close()
+  f['batch_end']=min(a.count,done+1000);f['resources']['process_memory_limit']-=a.reserved;build(folder,a.count,f,Budget(f))

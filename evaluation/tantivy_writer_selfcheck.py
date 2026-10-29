@@ -12,7 +12,7 @@ def main():
   def rows(c,**kw):
    for i in range(kw['start'],kw['stop']):yield i+1,'synthetic-'+str(i),'无功 功率','无功 功率'
   with patch('evaluation.tantivy_bounded_v1.source',lambda:nullcontext(None)),patch('evaluation.tantivy_bounded_v1.rows',rows),patch('rag.chinese_terms.terms',lambda s:tuple(s.split())):
-   r=build(folder,2100,f,SimpleNamespace(check=lambda **kw:{}))
+   r=build(folder,2100,f,SimpleNamespace(check=lambda **kw:{"rss":0}))
   assert r['n']==2100 and r['complete'];idx=index(folder/'tantivy');idx.reload();assert idx.searcher().num_docs==2100;del idx;gc.collect()
- print('Actual builder crossed two1000-doc barriers with2100 exact synthetic mappings;0 model')
+ print('Actual builder crossed two1000-doc checkpoints with2100 exact synthetic mappings;0 model')
 if __name__=='__main__':main()
