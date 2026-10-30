@@ -8,7 +8,7 @@
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "existing baseline PID19116; no switch or restart",
+    "service_8765": "2026-10-30 final check: not listening; reason unknown; no stop/restart/switch by this task",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "selective_match_candidate_default": false,
@@ -591,6 +591,7 @@
     "report": "docs/evaluation/tantivy-stability-v2/report.md",
     "maximum_accepted": 250000,
     "million": "stopped at684000; no benchmark",
-    "decision": "resolve interruption/deadline/cleanup first"
+    "decision": "resolve interruption/deadline/cleanup first",
+    "service_final": "not listening; no service actions"
   }
 }

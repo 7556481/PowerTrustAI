@@ -4,7 +4,7 @@
 
 取证来源仍由原KnowledgeStore/corpus_evidence/邻接读取层管理，Tantivy只存相同预分词terms及原rowid。v2先完成预处理spool，再以128MB、单索引worker、单长生命周期writer建库，commit与merge正常等待后退出；两份从零50k及25万完整ID与hash新进程验收通过。原48k、六次失败和v1成绩不覆盖。百万输入准备完，但684000处因时间/资源停止，未验收、未计时；长监测空窗导致四小时监督保证未成立，下一步只解决恢复后的限时及清理交接。原生writer失败原因仍未确定，当前配置未复现不是根因解决。
 
-文献标题仍是普通正文词项，Q9/Q10没有新增metadata来源过滤；自然语言否定也不改为Boolean NOT。674文献集合单列，不冒称分散样本的自然召回。即使命中数相同、来源可查，也可能检索到营销页、目录或无关正文；质量复核必须保留共同不足。当前仍是隔离原型，没有产品Retriever适配器，不宣称已支持线上超时或异步取消。
+文献标题仍是普通正文词项，Q9/Q10没有新增metadata来源过滤；自然语言否定也不改为Boolean NOT。674文献集合单列，不冒称分散样本的自然召回。即使命中数相同、来源可查，也可能检索到营销页、目录或无关正文；质量复核必须保留共同不足。收尾8765未监听，原因未知，本轮无服务操作。当前仍是隔离原型，没有产品Retriever适配器，不宣称已支持线上超时或异步取消。
 
 [本轮完整协议、故障与规模结果](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-stability-v2/report.md)。
 

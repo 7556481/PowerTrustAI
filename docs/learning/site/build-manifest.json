@@ -9,7 +9,7 @@
       "schema": 13,
       "managed_execution": "langgraph_v1",
       "unconfigured_fallback": "sequential",
-      "service_8765": "existing baseline PID19116; no switch or restart",
+      "service_8765": "2026-10-30 final check: not listening; reason unknown; no stop/restart/switch by this task",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
       "selective_match_candidate_default": false,
@@ -592,7 +592,8 @@
       "report": "docs/evaluation/tantivy-stability-v2/report.md",
       "maximum_accepted": 250000,
       "million": "stopped at684000; no benchmark",
-      "decision": "resolve interruption/deadline/cleanup first"
+      "decision": "resolve interruption/deadline/cleanup first",
+      "service_final": "not listening; no service actions"
     }
   },
   "chapters": [
@@ -623,8 +624,8 @@
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 8320,
-      "sha256": "43ceac2bf00cda4472ba79af4703fd674eb2411ba69ffdfe2b9921969fec5ca0"
+      "characters": 8343,
+      "sha256": "4f2d4c564eba921953b7a15a37dc8687445bc27733b751980cce94b4dd5046f6"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -707,6 +708,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 189242,
+  "markdown_characters": 189265,
   "network_dependencies": false
 }

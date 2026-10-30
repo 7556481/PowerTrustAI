@@ -1264,3 +1264,6 @@ origin按授权添加指定地址。只读Git HTTPS连续连接重置，匿名cu
 ## 默认分支独立发布记录（整合时保留历史）
 
 README重写并迁出本分支旧全文，新增合成UI截图；新版业务代码位于codex/user-ui-readme-final-delivery-v6，未合并实验/维护代码。必要CI修复：匹配图依赖、完整Git历史、忽略目录测试前提、逐方法私有归档缺失标注，公开断言不变。已读取09c6b987/99b93497失败日志，红叉不等于push失败。模型0；[完整跨分支交付报告](https://github.com/7556481/PowerTrustAI/blob/codex/user-ui-readme-final-delivery-v6/docs/maintenance/user-ui-readme-final-delivery-v6.md)，最终CI看本提交Actions。以后维护记录进交接/报告，不堆README。
+
+
+收尾实际状态（2026-10-30）：8765无监听，health连接被拒绝（WinError10061）；原因未知，未执行停止、重启或切换。中断前监测的ready/idle不代表当前在线。
