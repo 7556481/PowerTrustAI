@@ -1,5 +1,25 @@
 # 05 RAG全过程：从文件到可回查Evidence
 
+## 2026-10-30 监督v3与百万一次验证
+
+百万同spool从零419.621秒、4段；按无删除段的DocAddress逐个读取并用SQLite唯一集合核对全部ID、原文/terms映射hash，新进程验收267.324秒，不物化百万hits。四宽查询含原文及邻接比值中位5.220倍，25万为4.655倍；70GB封印198.468秒另计。正常运行没有空窗，休眠无需采样，恢复先检查绝对deadline。主错误先归档、一次关闭、30秒宽限后仅可终止核验PID及创建时间的隔离子树。
+
+Q4/Q12有更偏题替换，Q2近重复占位，Q10额外限值/TO额定例外风险未解决，不能称质量无损或上线许可。实测29844be；结束后06051f9只补健康异常/阶段pause边界并过12项短测，没有补跑百万。原服务最终5252恢复ready（15312后来退出，原因未知）、0模型，T仍未接生产。下一步仅全量资源规划与关闭适配，不开始全量。[完整结果](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-supervision-v3/report.md)。
+
+## 2026-10-30 Tantivy v2：先统一建库，再谈替换后端
+
+取证来源仍由原KnowledgeStore/corpus_evidence/邻接读取层管理，Tantivy只存相同预分词terms及原rowid。v2先完成预处理spool，再以128MB、单索引worker、单长生命周期writer建库，commit与merge正常等待后退出；两份从零50k及25万完整ID与hash新进程验收通过。原48k、六次失败和v1成绩不覆盖。百万输入准备完，但684000处因时间/资源停止，未验收、未计时；长监测空窗导致四小时监督保证未成立，下一步只解决恢复后的限时及清理交接。原生writer失败原因仍未确定，当前配置未复现不是根因解决。
+
+文献标题仍是普通正文词项，Q9/Q10没有新增metadata来源过滤；自然语言否定也不改为Boolean NOT。674文献集合单列，不冒称分散样本的自然召回。即使命中数相同、来源可查，也可能检索到营销页、目录或无关正文；质量复核必须保留共同不足。收尾8765未监听，原因未知，本轮无服务操作。当前仍是隔离原型，没有产品Retriever适配器，不宣称已支持线上超时或异步取消。
+
+[本轮完整协议、故障与规模结果](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-stability-v2/report.md)。
+
+## 2026-10-29 v1历史：派生索引与权威原文分离
+
+本轮Tantivy0.27.0只在忽略目录建派生postings/ID与hash映射；同一jieba预分词串分别写入单字段FTS5和Whitespace Tantivy，命中仍通过原KnowledgeStore/Evidence/邻接层回查，既有source/version/locator不变。没有接入产品Retriever、生成或审核，也未验收异步取消。
+
+48k同数据四宽TopK快3.86—5.86倍，但50k建库反复worker失败，只保住48k完整前缀；不能把小样本倍数或命中数相同当全库无损。48组来源专项含132根读取/115邻接通过，只证明映射；指定文献674质量集合单列，不混入分散样本冒称自然召回。当前生产仍SQLite FTS/schema13，PR #4取证解耦资产保持关闭。[详细边界](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-bounded-v1/report.md)。
+
 ## 资料在哪里丢失：存在、命中、交付是三件事
 
 自然v3的8份N稿全部缺目标NERC资料，审核没有制造改善；N4“单一大设备”和历史H3把when改only又属于独立漏检。后续有界定位确认目标268片段在原生FTS库中，但8个必需段落的原查询MATCH均为0。主体词NERC及泛词“文字”约束、中文问题对英文词项的间隙，是实际观察到的断点。未向量化不是已证根因。

@@ -1,5 +1,27 @@
 # 16 性能与可观测性：测量到底属于谁
 
+## 2026-10-30 监督v3与百万一次验证
+
+百万同spool从零419.621秒、4段；按无删除段的DocAddress逐个读取并用SQLite唯一集合核对全部ID、原文/terms映射hash，新进程验收267.324秒，不物化百万hits。四宽查询含原文及邻接比值中位5.220倍，25万为4.655倍；70GB封印198.468秒另计。正常运行没有空窗，休眠无需采样，恢复先检查绝对deadline。主错误先归档、一次关闭、30秒宽限后仅可终止核验PID及创建时间的隔离子树。
+
+Q4/Q12有更偏题替换，Q2近重复占位，Q10额外限值/TO额定例外风险未解决，不能称质量无损或上线许可。实测29844be；结束后06051f9只补健康异常/阶段pause边界并过12项短测，没有补跑百万。原服务最终5252恢复ready（15312后来退出，原因未知）、0模型，T仍未接生产。下一步仅全量资源规划与关闭适配，不开始全量。[完整结果](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-supervision-v3/report.md)。
+
+## 2026-10-30 Tantivy v2：建库、Top-K和回查分开计时
+
+v1的224MiB仅是Python采样软限制，不能解释成OS硬杀；wait_merging_threads会把原生worker的具体Err换成泛化错误，新异常路径先commit争取保留原错误。固定窗口在旧48k副本与新目录均一次成功，32/128MB和短窗口正常重开也成功，因此没有证据把故障单独归罪于输入、内存或Tantivy稳定性。
+
+v2两个从零50k约14.88/14.14秒，25万约75.11秒；这是同次构建FTS与Tantivy的共同写入阶段，不是Tantivy独占建库时间。预分词另计，25万新增20万准备684.16秒；70GB来源首封印287.72秒另列，一进程一次，不算每题扫描。25万四宽查询含原文及邻接回查的逐题中位比值中位约4.655倍，674文献集只有约1.039倍：回查可能吞掉内核优势，不能将小内核倍数冒充用户等待倍数。三次交替数据全部保留，不称首次访问为冷盘。百万建库684000处工程停止，出现两段长采样空窗；不能把12.8小时墙钟当吞吐，不能宣称四小时控制可靠。最大完整验收25万，唯一下一步为中断恢复后的限时/清理交接，不启动全量。
+
+[本轮完整协议、故障与规模结果](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-stability-v2/report.md)。
+
+## 2026-10-29 v1历史 Tantivy：同数据快，不等于已可建全量
+
+同48,000片段、相同预分词/AND-OR表达式，K3三次交替：四慢宽题FTS中位84.562/54.818/71.367/84.071ms，T14.418/9.455/18.466/15.116ms。普通count=False，精确count另计且12题均相同；Q8空结果T反慢0.343ms。首次是建库后首次观测、OS缓存未清，不叫冷盘。
+
+原计划50k遭六次native writer失败，最后48,002仍失败；工程问题未解决，未扩25万/百万，不能将674目标文献集与分散48k拼成缩放曲线。两个后端同叫BM25也不等价：IDF、fieldnorm和同分顺序不同；48k Q4/Q7同集换序，Q10第三段更偏题，不算业务收益。来源层回查通过，全文充分性仍有共同不足。
+
+结束派生约103.7MiB，测得最大进程峰值126MiB，早期整个进程树完整峰值未知。70GB字节封印在三个独立验证进程约240/233/244秒，单列，不伪称每查询扫库。没有产品/模型实验，不建议立即全量。[完整12题、失败和资源表](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-bounded-v1/report.md)。
+
 ## 2026-10-27完整页面合成性能的边界
 
 固定normal/large均有非空轨迹、发现、证据、两版本和反馈；large最长答案3311字，不用单字段百万字造倍率。实际HTTP result627327bytes、trace507626bytes、reviews13081bytes，前后不变。服务投影、loopback HTTP、response.json等待、同步渲染函数、两次requestAnimationFrame后DOM可见分别记录，重叠时间不相加；两帧不是实际paint/FCP。

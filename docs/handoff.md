@@ -1,5 +1,21 @@
 # PowerTrustAI 会话交接
 
+## 2026-10-30 Tantivy监督v3与百万完成
+
+唯一实测29844be：百万从零419.621秒/4段、新进程全部ID/hash有界验收267.324秒；72 TopK/24独立计数完成。四宽含原文及邻接比值中位5.220倍（25万4.655），源封印198.468秒单列。采样峰值606.61MiB/3.669GiB，无空窗/超期/重试。Q3/Q4/Q12替换及Q10额外限值/TO例外风险保留，不称无损。监督10项先测；结束后06051f9补健康异常与阶段旧pause，12项短测试通过，无百万补跑。原服务最终恢复PID5252/ready（此前15312退出原因未知），退出原因未知，0模型，不切检索、不启全量、PR4不动。见[报告](evaluation/tantivy-supervision-v3/report.md)和[逐次表](evaluation/tantivy-supervision-v3/timings.md)。下一步只准备全量资源规划及默认关闭适配，本轮结束。
+
+
+## 2026-10-30 Tantivy v2：25万稳定，百万工程停止
+
+实现d144be9，D1—D4固定失败窗口均一次成功，旧原生根因未定；两份从零50k、新进程全量ID/hash验收通过，25万从零75.113秒/3段亦通过。25万四宽内核/原文/邻接比值中位5.108/4.868/4.655倍，674回查主导只1.039倍，不宣称全库或质量无损。百万准备完，建库684000安全停止、未验收未计时，不续写。监测46036秒含两段长空窗，四小时持续监督保证不成立，唯一后续是恢复后deadline与已消费writer清理交接；不开始下一批。0模型，原库只读，8765不动，PR #4不变；v1全部保留。见[独立完整报告](evaluation/tantivy-stability-v2/report.md)及[逐次分段表](evaluation/tantivy-stability-v2/timings.md)。
+
+
+## 2026-10-29 Tantivy有界可行性：48k有速度潜力，建库稳定性阻断扩大
+
+固定Tantivy0.27.0、12历史原查询、同词项同数据，674文献质量集及精确48,000行业前缀各72次Top-K/24单独计数完成。四宽查询快3.86—5.86倍（组中位5.263倍），12命中数一致；正常Q8慢0.343ms，保留。原计划50k未完成：6次原生writer失败，末次仍48002；根因未知。没有25万/百万结果，不外推全库、不继续调参。132根证据/115邻接、48组现有来源层校验通过；只证明身份回查，不保证有用召回。
+
+原型数据约103.7MiB，已记录最大进程峰值126MiB；进程树精确峰值和纯成功建库累计未知，控制边界见报告。原库70GB只读，生产路径0改动，0模型/0token/0模型费用，不重跑本地全套1454，不切8765。PR #4/cc991a3保留其取证收益/成本及未过30%结论，未改未合并；本研究独立基于master3cb0535。新[草稿PR #5](https://github.com/7556481/PowerTrustAI/pull/5)归档原型，见[完整报告](evaluation/tantivy-bounded-v1/report.md)。后续唯一建议是先定位同版writer失败并补中等规模稳定验证，不立即全量。
+
 ## 2026-10-29 发布后分支与候选处置
 
 远端新核验后28→2，26历史分支先归档SHA再原子删除；本地安全删除27支，master安全快进。候选代码保留且不开启；rank/MATCH当前实现结束，只建议保留v6来源模态忠实与完整修订交付研究（不执行）。8765 PID19116/ready及源码/受管配置未变，0模型、无重启、不重跑1454。见[清单](maintenance/post-release-disposition-v1/report.md)、[完整SHA](maintenance/post-release-disposition-v1/branches-before.json)及[回执](maintenance/post-release-disposition-v1/cleanup-result.json)。
@@ -1253,3 +1269,6 @@ origin按授权添加指定地址。只读Git HTTPS连续连接重置，匿名cu
 ## 默认分支独立发布记录（整合时保留历史）
 
 README重写并迁出本分支旧全文，新增合成UI截图；新版业务代码位于codex/user-ui-readme-final-delivery-v6，未合并实验/维护代码。必要CI修复：匹配图依赖、完整Git历史、忽略目录测试前提、逐方法私有归档缺失标注，公开断言不变。已读取09c6b987/99b93497失败日志，红叉不等于push失败。模型0；[完整跨分支交付报告](https://github.com/7556481/PowerTrustAI/blob/codex/user-ui-readme-final-delivery-v6/docs/maintenance/user-ui-readme-final-delivery-v6.md)，最终CI看本提交Actions。以后维护记录进交接/报告，不堆README。
+
+
+收尾实际状态（2026-10-30）：8765无监听，health连接被拒绝（WinError10061）；原因未知，未执行停止、重启或切换。中断前监测的ready/idle不代表当前在线。
