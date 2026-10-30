@@ -3,7 +3,7 @@
   "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "document_version": "learning-site-v6.20 Tantivy bounded48k, build stability blocked,2026-10-29",
+  "document_version": "learning-site-v6.21 Tantivy stability and medium-scale v2,2026-10-29",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -576,5 +576,21 @@
     "model_calls": 0,
     "production_switched": false,
     "report": "docs/evaluation/tantivy-bounded-v1/report.md"
+  },
+  "tantivy_stability_medium_v2": {
+    "implementation_commit": "d144be9cf4b80a369f3dc9b1daf5804ee85bcb15",
+    "binding": "0.27.0",
+    "monitor": "psutil7.0.0",
+    "writer_heap_bytes": 128000000,
+    "index_workers": 1,
+    "process_tree_budget_bytes": 536870912,
+    "native_merge_pool_default": 4,
+    "production_connected": false,
+    "model_calls": 0,
+    "root_cause": "not established; current configuration not reproduced",
+    "report": "docs/evaluation/tantivy-stability-v2/report.md",
+    "maximum_accepted": 250000,
+    "million": "stopped at684000; no benchmark",
+    "decision": "resolve interruption/deadline/cleanup first"
   }
 }

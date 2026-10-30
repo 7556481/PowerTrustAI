@@ -4,7 +4,7 @@
     "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
     "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "document_version": "learning-site-v6.20 Tantivy bounded48k, build stability blocked,2026-10-29",
+    "document_version": "learning-site-v6.21 Tantivy stability and medium-scale v2,2026-10-29",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -577,6 +577,22 @@
       "model_calls": 0,
       "production_switched": false,
       "report": "docs/evaluation/tantivy-bounded-v1/report.md"
+    },
+    "tantivy_stability_medium_v2": {
+      "implementation_commit": "d144be9cf4b80a369f3dc9b1daf5804ee85bcb15",
+      "binding": "0.27.0",
+      "monitor": "psutil7.0.0",
+      "writer_heap_bytes": 128000000,
+      "index_workers": 1,
+      "process_tree_budget_bytes": 536870912,
+      "native_merge_pool_default": 4,
+      "production_connected": false,
+      "model_calls": 0,
+      "root_cause": "not established; current configuration not reproduced",
+      "report": "docs/evaluation/tantivy-stability-v2/report.md",
+      "maximum_accepted": 250000,
+      "million": "stopped at684000; no benchmark",
+      "decision": "resolve interruption/deadline/cleanup first"
     }
   },
   "chapters": [
@@ -607,8 +623,8 @@
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 7670,
-      "sha256": "3510060c5a36fd8f99f78ea7361f531428bf79892385e05f5228eff68be673fc"
+      "characters": 8320,
+      "sha256": "43ceac2bf00cda4472ba79af4703fd674eb2411ba69ffdfe2b9921969fec5ca0"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -662,8 +678,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 13028,
-      "sha256": "df8cf2f0990fd4670deb8e382ca695fd8fecca545a21d96fe679057869bd0030"
+      "characters": 13713,
+      "sha256": "d62f4b49d82cf52570d309ef409f75f11d2c5fe11c9195debc49e21e297e721f"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -691,6 +707,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 187907,
+  "markdown_characters": 189242,
   "network_dependencies": false
 }
