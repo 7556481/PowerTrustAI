@@ -22,3 +22,4 @@ jobs:
       - run: python -c "import tempfile; from pathlib import Path; import evaluation.tantivy_selfcheck as s; s.LOCAL=Path(tempfile.mkdtemp()); s.main()"
       - run: python -m evaluation.tantivy_writer_selfcheck
       - run: python -m evaluation.tantivy_stability_checks_v2
+      - run: python -m evaluation.tantivy_supervision_checks_v3

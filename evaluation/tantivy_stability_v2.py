@@ -121,6 +121,8 @@ def build_sample(name,n):
   meta=read(folder/'tantivy/meta.json');save(folder/'built.json',dict(n=n,input_sha=h.hexdigest(),seconds=time.monotonic()-start,fts_insert_s=tsql,tantivy_enqueue_s=tsend,commit_s=commit_s,wait_merge_s=merge_s,opstamp=opstamp,segments=len(meta['segments']),heap=plan['writer_heap'],index_threads=1,from_zero=True,normal_close=True));print('built',name,n,flush=True)
  except Exception as e:
   root=errors(e);detail=None
+  save(folder/'primary-failure.json',dict(attempted=done,error=root))
+  if writer is not None and hasattr(writer,'guard'):writer.guard.cleanup=True
   try:writer.commit()
   except Exception as inner:detail=errors(inner);traceback.print_exc()
   save(folder/'build-failure.json',dict(attempted=done,error=root,commit_detail=detail));traceback.print_exc();raise
