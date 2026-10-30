@@ -66,7 +66,11 @@ class Checks(unittest.TestCase):
   from evaluation import tantivy_supervision_v3 as v
   self.clock[0]=time.time();self.p.write_text(json.dumps(dict(deadline=self.clock[0]+5,grace_seconds=.1,cwd=str(Path.cwd()),data_root=str(self.p.parent),memory_limit=512*1024**2,disk_limit=1024**3,min_free=1024,pressure_available=0)))
   g=v.Guard(self.p,wall=lambda:self.clock[0]);
-  def idle():self.clock[0]+=10;return True
+  calls=[0]
+  def idle():
+   calls[0]+=1
+   if calls[0]>1:self.clock[0]+=10
+   return True
   with patch.object(v,'Guard',return_value=g):rc=v.supervise(self.p,[sys.executable,'-c','import time;time.sleep(20)'],self.p.parent/'gap',idle)
   self.assertNotEqual(rc,0);events=[json.loads(x) for x in self.p.with_name('events.jsonl').read_text().splitlines()];self.assertTrue(any(x['kind']=='observation_gap' and x['unobserved_resources'] for x in events))
  def test_restarted_supervisor_expires_and_stops_recorded_child(self):
@@ -78,5 +82,15 @@ class Checks(unittest.TestCase):
    rc=supervise(self.p,['never-launch-expired'],self.p.parent/'restarted',lambda:True);self.assertEqual(rc,1);child.wait(timeout=5)
   finally:
    if child.poll() is None:child.kill();child.wait()
+
+
+ def test_stage_boundary_pause_refresh(self):
+  self.p.with_name('pause.json').write_text('old user task');self.g.check('next phase',refresh=lambda:True);self.assertFalse(self.p.with_name('pause.json').exists())
+ def test_unavailable_health_prevents_child_start(self):
+  import time
+  from evaluation.tantivy_supervision_v3 import supervise
+  self.p.write_text(json.dumps(dict(deadline=time.time()+.2)))
+  def unavailable():raise OSError('synthetic health unavailable')
+  with self.assertRaises(Expired):supervise(self.p,['must-not-launch'],self.p.parent/'unavailable',unavailable)
 
 if __name__=='__main__':unittest.main()

@@ -9,11 +9,12 @@ class Guard:
   self.path=Path(path);self.plan=json.loads(self.path.read_text());self.wall=wall;self.mono=mono;self.sleep=sleep;self.start=mono();self.cleanup=False
  def event(self,kind,**fields):
   with self.path.with_name('events.jsonl').open('a',encoding='utf8') as f:f.write(json.dumps(dict(kind=kind,wall=self.wall(),monotonic_elapsed=self.mono()-self.start,**fields))+'\n')
- def check(self,stage,pause_action=None):
+ def check(self,stage,pause_action=None,refresh=None):
   if self.wall()>=self.plan['deadline'] or self.path.with_name('stop.json').exists():
    self.cleanup=True;self.event('expired',stage=stage);raise Expired(stage)
   paused_once=False
   while self.path.with_name('pause.json').exists():
+   if refresh and refresh():self.path.with_name('pause.json').unlink(missing_ok=True);break
    if pause_action and not paused_once:pause_action();paused_once=True
    self.event('paused',stage=stage);self.sleep(.2)
    if self.wall()>=self.plan['deadline'] or self.path.with_name('stop.json').exists():
@@ -69,7 +70,12 @@ def supervise(plan_path,command,directory,service_idle):
    until=time.monotonic()+g.plan['grace_seconds']
    while time.monotonic()<until and any(psutil.pid_exists(int(pid)) for pid in alive):time.sleep(.1)
    terminate_verified(alive);directory.mkdir(exist_ok=True);directory.joinpath('INVALID.json').write_text('supervisor restart with orphaned stage');return 1
- g.check('process admission');directory.mkdir(exist_ok=False)
+ def idle():
+  try:return service_idle()
+  except Exception as e:g.event('service_health_unavailable',error=type(e).__name__);return False
+ if idle():g.path.with_name('pause.json').unlink(missing_ok=True)
+ else:g.path.with_name('pause.json').write_text('service not idle or health unavailable')
+ g.check('process admission',refresh=idle);directory.mkdir(exist_ok=False)
  with (directory/'stdout.log').open('w',encoding='utf8') as out,(directory/'stderr.log').open('w',encoding='utf8') as err,(directory/'heartbeats.jsonl').open('w') as log:
   p=subprocess.Popen(command,stdout=out,stderr=err,cwd=g.plan['cwd'],creationflags=subprocess.CREATE_NO_WINDOW|subprocess.BELOW_NORMAL_PRIORITY_CLASS)
   root=psutil.Process(p.pid);ids={p.pid:root.create_time()};last=g.wall();stopping=None;peak=0;disk=0;disk_tick=0
@@ -93,7 +99,7 @@ def supervise(plan_path,command,directory,service_idle):
      stopping=now;g.path.with_name('stop.json').write_text(json.dumps(dict(reason='deadline' if expired else 'memory',wall=now)));g.event('stop_requested',identities=ids)
     if now-stopping>=g.plan['grace_seconds']:
      directory.joinpath('INVALID.json').write_text(json.dumps(dict(reason='grace exhausted',identities=ids)));terminate_verified(ids);g.event('terminated_verified_tree');break
-   busy=not service_idle() or psutil.virtual_memory().available<g.plan['pressure_available'];pause=g.path.with_name('pause.json')
+   busy=not idle() or psutil.virtual_memory().available<g.plan['pressure_available'];pause=g.path.with_name('pause.json')
    if busy:pause.write_text('resource/service pressure')
    elif pause.exists():pause.unlink()
    log.write(json.dumps(dict(wall=now,mono_elapsed=g.mono()-g.start,processes=rows,memory=memory,disk=disk,system_available=psutil.virtual_memory().available,service_busy=busy))+'\n');log.flush();g.sleep(.2)
