@@ -1,5 +1,11 @@
 # 16 性能与可观测性：测量到底属于谁
 
+## 2026-10-30 监督v3与百万一次验证
+
+百万同spool从零419.621秒、4段；按无删除段的DocAddress逐个读取并用SQLite唯一集合核对全部ID、原文/terms映射hash，新进程验收267.324秒，不物化百万hits。四宽查询含原文及邻接比值中位5.220倍，25万为4.655倍；70GB封印198.468秒另计。正常运行没有空窗，休眠无需采样，恢复先检查绝对deadline。主错误先归档、一次关闭、30秒宽限后仅可终止核验PID及创建时间的隔离子树。
+
+Q4/Q12有更偏题替换，Q2近重复占位，Q10额外限值/TO额定例外风险未解决，不能称质量无损或上线许可。实测29844be；结束后06051f9只补健康异常/阶段pause边界并过12项短测，没有补跑百万。原服务最终5252恢复ready（15312后来退出，原因未知）、0模型，T仍未接生产。下一步仅全量资源规划与关闭适配，不开始全量。[完整结果](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-supervision-v3/report.md)。
+
 ## 2026-10-30 Tantivy v2：建库、Top-K和回查分开计时
 
 v1的224MiB仅是Python采样软限制，不能解释成OS硬杀；wait_merging_threads会把原生worker的具体Err换成泛化错误，新异常路径先commit争取保留原错误。固定窗口在旧48k副本与新目录均一次成功，32/128MB和短窗口正常重开也成功，因此没有证据把故障单独归罪于输入、内存或Tantivy稳定性。

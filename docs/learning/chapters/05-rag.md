@@ -1,5 +1,11 @@
 # 05 RAG全过程：从文件到可回查Evidence
 
+## 2026-10-30 监督v3与百万一次验证
+
+百万同spool从零419.621秒、4段；按无删除段的DocAddress逐个读取并用SQLite唯一集合核对全部ID、原文/terms映射hash，新进程验收267.324秒，不物化百万hits。四宽查询含原文及邻接比值中位5.220倍，25万为4.655倍；70GB封印198.468秒另计。正常运行没有空窗，休眠无需采样，恢复先检查绝对deadline。主错误先归档、一次关闭、30秒宽限后仅可终止核验PID及创建时间的隔离子树。
+
+Q4/Q12有更偏题替换，Q2近重复占位，Q10额外限值/TO额定例外风险未解决，不能称质量无损或上线许可。实测29844be；结束后06051f9只补健康异常/阶段pause边界并过12项短测，没有补跑百万。原服务最终5252恢复ready（15312后来退出，原因未知）、0模型，T仍未接生产。下一步仅全量资源规划与关闭适配，不开始全量。[完整结果](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-supervision-v3/report.md)。
+
 ## 2026-10-30 Tantivy v2：先统一建库，再谈替换后端
 
 取证来源仍由原KnowledgeStore/corpus_evidence/邻接读取层管理，Tantivy只存相同预分词terms及原rowid。v2先完成预处理spool，再以128MB、单索引worker、单长生命周期writer建库，commit与merge正常等待后退出；两份从零50k及25万完整ID与hash新进程验收通过。原48k、六次失败和v1成绩不覆盖。百万输入准备完，但684000处因时间/资源停止，未验收、未计时；长监测空窗导致四小时监督保证未成立，下一步只解决恢复后的限时及清理交接。原生writer失败原因仍未确定，当前配置未复现不是根因解决。

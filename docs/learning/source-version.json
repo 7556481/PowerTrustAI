@@ -3,12 +3,12 @@
   "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "document_version": "learning-site-v6.21 Tantivy stability and medium-scale v2,2026-10-29",
+  "document_version": "learning-site-v6.22 Tantivy supervision and million v3,2026-10-30",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "2026-10-30 final check: not listening; reason unknown; no stop/restart/switch by this task",
+    "service_8765": "final original service PID5252 real/ready; prior PID15312 exited unknown; Win32 process creation, no scheduled task/global change",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "selective_match_candidate_default": false,
@@ -593,5 +593,15 @@
     "million": "stopped at684000; no benchmark",
     "decision": "resolve interruption/deadline/cleanup first",
     "service_final": "not listening; no service actions"
+  },
+  "tantivy_supervision_v3": {
+    "real_implementation": "29844be",
+    "postrun_control_fix": [
+      "06051f9",
+      "3a74214"
+    ],
+    "million_accepted": true,
+    "model_calls": 0,
+    "production_retrieval_changed": false
   }
 }
