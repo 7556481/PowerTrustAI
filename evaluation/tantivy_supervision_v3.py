@@ -83,14 +83,16 @@ def supervise(plan_path,command,directory,service_idle):
    now=g.wall();gap=now-last
    if gap>g.plan.get('gap_seconds',5):g.event('observation_gap',seconds=gap,unobserved_resources=True)
    last=now;rows=[]
-   for proc in [psutil.Process(),root,*root.children(recursive=True)]:
+   try:descendants=root.children(recursive=True)
+   except psutil.NoSuchProcess:break
+   for proc in [psutil.Process(),root,*descendants]:
     try:
      created=proc.create_time();m=proc.memory_info()
      if proc.pid!=os.getpid():ids[proc.pid]=created
      rows.append(dict(pid=proc.pid,created=created,rss=m.rss,private=getattr(m,'private',m.vms)))
     except psutil.Error:pass
    memory=max(sum(x['rss'] for x in rows),sum(x['private'] for x in rows));peak=max(peak,memory)
-   g.path.with_name('process-identities.json').write_text(json.dumps(ids))
+   roster=g.path.with_name('process-identities.json');tmp=roster.with_suffix('.tmp');tmp.write_text(json.dumps(ids));os.replace(tmp,roster)
    if now-disk_tick>2:
     disk=sum(x.stat().st_size for x in Path(g.plan['data_root']).rglob('*') if x.is_file());disk_tick=now
    expired=now>=g.plan['deadline'];hard=memory>g.plan['memory_limit'] or disk>g.plan['disk_limit'] or shutil.disk_usage(directory).free<g.plan['min_free']
