@@ -10,6 +10,7 @@ from model_adapter.call_budget_v1 import shared_gate,BudgetStop
 from rag.tantivy_build import atomic
 from rag.tantivy_manifest import sha
 from evaluation.tantivy_full_build_v1 import ROOT,SOURCE,K
+from evaluation.tantivy_full_controller_v1 import idle
 
 LOCAL=Path('D:/PowerTrustAI/data/runtime_local/tantivy-full-fast-v1/comparison')
 CODE=Path(__file__).resolve().parents[1]
@@ -53,6 +54,7 @@ async def execute(configs,f):
    clients[name]=httpx.AsyncClient(base_url='http://127.0.0.1:'+str(f['ports'][name]),headers={'Authorization':'Bearer '+token},timeout=30,trust_env=False)
   for i,case in enumerate(f['cases']):
    for name in (('baseline','fast') if i%2==0 else ('fast','baseline')):
+    while not idle():await asyncio.sleep(.5) # no paid task inflight; yield to ordinary user service
     if f['sources']!=code_identity() or f['source_stat']!=[SOURCE.stat().st_size,SOURCE.stat().st_mtime_ns] or f['index_manifest_sha256']!=sha(ROOT/'accepted/manifest.json'):raise RuntimeError('Frozen code/source/index changed')
     if gate.state['calls']>=240 or gate.state['trusted_tokens']>=4000000:raise BudgetStop('Global allowance reached')
     if any(e['inflight'] for e in gate.state['entries'].values()):raise RuntimeError('Prior model resources not proven drained')

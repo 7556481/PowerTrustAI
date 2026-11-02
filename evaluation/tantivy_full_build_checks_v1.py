@@ -53,4 +53,15 @@ class FullBuildChecks(unittest.TestCase):
    with self.assertRaisesRegex(ValueError,'synthetic native root'):w.commit()
    with self.assertRaisesRegex(RuntimeError,'synthetic cleanup'):w.wait_merging_threads()
    w.wait_merging_threads();self.assertEqual((inner.commits,inner.waits),(1,1));records=[json.loads(x) for x in (Path(t)/'native-errors.jsonl').read_text().splitlines()];self.assertEqual([x['operation'] for x in records],['commit','wait_merging_threads'])
+ def test_failed_diagnostic_sink_does_not_replace_native_failure(self):
+  from evaluation.tantivy_full_identity_v1 import DiagnosticWriter
+  from unittest.mock import patch
+  import io
+  class Inner:
+   def commit(self):raise ValueError('synthetic original')
+  with tempfile.TemporaryDirectory() as t:
+   writer=DiagnosticWriter(Inner(),Path(t))
+   with patch.object(Path,'open',side_effect=PermissionError()),patch('sys.stderr',new=io.StringIO()) as fallback:
+    with self.assertRaisesRegex(ValueError,'synthetic original'):writer.commit()
+    self.assertIn('PermissionError',fallback.getvalue())
 if __name__=='__main__':unittest.main()

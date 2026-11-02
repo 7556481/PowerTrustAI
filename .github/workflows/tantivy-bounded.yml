@@ -34,4 +34,4 @@ jobs:
       - run: python -m evaluation.tantivy_ranking_checks_v1
       - run: python -m evaluation.tantivy_light_score_checks_v1
 
-      - run: python -m unittest evaluation.tantivy_full_finish_checks_v1 evaluation.tantivy_full_build_checks_v1 evaluation.tantivy_full_accept_checks_v1 evaluation.tantivy_owned_job_checks_v1 evaluation.tantivy_fast_checks_v1 evaluation.tantivy_fast_config_checks_v1 evaluation.tantivy_fast_factory_checks_v1 evaluation.tantivy_full_budget_checks_v1 -v
+      - run: python -m unittest evaluation.tantivy_full_stage_checks_v1 evaluation.tantivy_full_finish_checks_v1 evaluation.tantivy_full_build_checks_v1 evaluation.tantivy_full_accept_checks_v1 evaluation.tantivy_owned_job_checks_v1 evaluation.tantivy_fast_checks_v1 evaluation.tantivy_fast_config_checks_v1 evaluation.tantivy_fast_factory_checks_v1 evaluation.tantivy_full_budget_checks_v1 -v

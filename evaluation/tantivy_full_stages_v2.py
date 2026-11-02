@@ -9,7 +9,7 @@ from evaluation.tantivy_supervision_v3 import Guard,Expired
 from rag.tantivy_manifest import IndexIdentityError
 
 def run(mode,plan_path):
- os.environ['RUST_BACKTRACE']='full';g=Guard(plan_path);identity=json.loads((ROOT/'build-identity.json').read_text());started=time.monotonic();sp=None;owner=None;primary=None;feeding=False
+ os.environ['RUST_BACKTRACE']='full';g=Guard(plan_path);identity=json.loads((ROOT/'build-identity.json').read_text());started=time.monotonic();sp=None;owner=None;primary=None;feeding=False;native_owner=False
  import psutil
  supervisor=json.loads(g.path.with_name('supervisor-owner.json').read_text())
  supervisor_pid=supervisor['pid'];supervisor_created=supervisor['created'];last_parent_check=[0.]
@@ -36,17 +36,29 @@ def run(mode,plan_path):
    if inv['total']!=identity['expected']:raise IndexIdentityError('Source member total changed')
    source.connection.execute('pragma cache_size=-8192');source.connection.execute('attach database ? as reuse',('file:'+str(ROOT.parent/'tantivy-stability-v2/input/spool.sqlite3').replace('\\','/')+'?mode=ro',))
    remaining=max(0,g.plan['deadline']-time.time()-60)
-   owner=PreparationStage(ROOT/'build',identity,total_seconds=96*3600,segment_seconds=remaining,checkpoint=check) if mode=='prepare' else FullCheckpoint(ROOT/'build',identity,authorized_full=True,segment_seconds=remaining,checkpoint=check)
+   owner=PreparationStage(ROOT/'build',identity,total_seconds=96*3600,segment_seconds=remaining,checkpoint=check)
+   mapped_db=sqlite3.connect((ROOT/'build/mapping.sqlite3').resolve().as_uri()+'?mode=ro',uri=True)
+   try:
+    mapped_count=mapped_db.execute('select count(*) from rows').fetchone()[0];mapped_hash=hashlib.sha256();pos=0
+    for m in mapped_db.execute('select * from rows order by position'):
+     if pos%1000==0:check()
+     if m[0]!=pos:raise IndexIdentityError('Mapping position gap before writer admission')
+     mapped_hash.update(json.dumps(m).encode());pos+=1
+   finally:mapped_db.close()
    sp=StreamingSpool(ROOT/'spool.sqlite3',identity,checkpoint=check);sp.con.execute('pragma cache_size=-4096');h=hashlib.sha256();n=0
    audit=json.loads((ROOT/'recovery-audit-1.json').read_text());prefix_file=ROOT/'spool-prefix.json';prefix=json.loads(prefix_file.read_text()) if prefix_file.exists() else None
    pending_file=ROOT/'build/prepared.json';pending=json.loads(pending_file.read_text()) if pending_file.exists() else None
+   boundaries={mapped_count};bindings={0:hashlib.sha256().hexdigest()}
+   if pending:boundaries.add(pending['end'])
    for row in sp.con.execute('select * from input order by position'):
     check()
     if row[0]!=n or row[1]!=(-(n+1) if n<inv['native'] else n-inv['native']+1) or hashlib.sha256(row[-1].encode()).hexdigest()!=row[-2]:raise IndexIdentityError('Existing input prefix/hash/order changed')
     if pending and pending['start']<=n<pending['end'] and list(row[:5])!=pending['rows'][n-pending['start']]:raise IndexIdentityError('Prepared input metadata changed')
     h.update(json.dumps(row[:-1]).encode());n+=1
+    if n in boundaries:bindings[n]=h.hexdigest()
     if n==audit['committed'] and h.hexdigest()!=audit['mapping_hash']:raise IndexIdentityError('Audited committed input prefix changed')
     if prefix and n==prefix['n'] and h.hexdigest()!=prefix['mapping_hash']:raise IndexIdentityError('Prepared checkpoint digest changed')
+   if bindings.get(mapped_count)!=mapped_hash.hexdigest():raise IndexIdentityError('Committed mapping metadata differs from verified input prefix')
    if mode=='prepare':
     while n<identity['expected']:
      check();batch=prepare(source,inv,n,10000,check)
@@ -58,6 +70,11 @@ def run(mode,plan_path):
    else:
     complete=json.loads((ROOT/'input-complete.json').read_text())
     if n!=identity['expected'] or h.hexdigest()!=complete['mapping_hash']:raise IndexIdentityError('Full input digest mismatch before writer feeding')
+    # All source/input/committed metadata checks precede native writer creation.
+    owner.close();owner=None;check();remaining=max(0,g.plan['deadline']-time.time()-60)
+    owner=FullCheckpoint(ROOT/'build',identity,authorized_full=True,segment_seconds=remaining,checkpoint=check);native_owner=True
+    recovered=owner.con.execute('select count(*) from rows').fetchone()[0]
+    if bindings.get(recovered)!=owner.mapping_hash():raise IndexIdentityError('Recovered native commit not bound to verified spool')
     while True:
      check();mapped=owner.con.execute('select count(*) from rows').fetchone()[0]
      if mapped==n:break
@@ -78,7 +95,7 @@ def run(mode,plan_path):
   if sp:sp.close()
   cleanup=[]
   if owner:
-   if mode=='prepare':owner.close()
+   if not native_owner:owner.close()
    else:cleanup=owner.close(primary=primary)
   g.event('stage_closed',mode=mode,primary=repr(primary),cleanup_errors=cleanup,elapsed=time.monotonic()-started)
   if cleanup:raise RuntimeError('Native cleanup failed; primary retained separately; audit required') from primary

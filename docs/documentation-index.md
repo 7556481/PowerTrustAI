@@ -4,7 +4,7 @@
 
 最新应用3df7f2f已推送PR #5，四CI成功；完整CI1458/133.249秒、Windows29专项通过。本机a912完整1458/259.023秒日志保留，80私有归档缺失跳过。检索方案原生16→最多6不同正文/8000+2400字符，不改生产审核。674实际接口预检恢复检索Q10的1.05pu/TO例外；E3页脚/E4偏题为两路共同问题，非保护成功，正式全量质量仍未批准。
 
-全量未完成：输入5,850,674，原生150,674；当前prepare新段重新校验，96小时绝对账本不重置。根data/retrieval_local/tantivy-full-fast-v1。原监督3136消失曾留下准备worker，已正常停点/完整输入元数据审计并记411秒空窗；v3监督7064使用Windows所有权Job，下一writer用v4有界磁盘ID证明、原生主错误原样保存、清理失败停审计。旧原生writer根因仍未知，不误报OOM。进程是否存在每次以PID+创建时间核验。
+全量未完成：输入5,850,674，原生150,674；当前prepare新段重新校验，96小时绝对账本不重置。根data/retrieval_local/tantivy-full-fast-v1。原监督3136消失曾留下准备worker，已正常停点/完整输入元数据审计并记411秒空窗；v3监督7064使用Windows所有权Job，下一writer用v5：先验完整输入/已提交映射全前缀再打开writer、磁盘有界ID证明、原生主错误原样保存、清理失败停审计。旧原生writer根因仍未知，不误报OOM。进程是否存在每次以PID+创建时间核验。
 
 postbuild/identity.json观察器4428已启动，等待当前控制器干净结束，复用既有supervise自动完成全量新进程身份验收和144离线读取；预算/身份/异常不通过即停，不重试、不付费、不发布。原预算240Flash/400万可信token未消费，实际新增0。完整索引与24题后，用tantivy_full_summarize_v1 offline逐题复核；满足既定门槛才由本任务冻结并执行tantivy_full_product_batch_v1 --execute-single-authorized-batch（独立8775/8776 Store，唯一16链及共享烟测预算）。不重新申请已有授权；不得绕过offline-approved身份门禁。
 

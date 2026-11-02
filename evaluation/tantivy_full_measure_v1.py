@@ -11,6 +11,12 @@ from evaluation.tantivy_full_build_v1 import ROOT,SOURCE,K
 from evaluation.tantivy_full_controller_v1 import idle
 
 async def run():
+ from evaluation.tantivy_supervision_v3 import Guard
+ control=ROOT/'postbuild/measure/plan.json'
+ if not control.exists():raise RuntimeError('Independent supervision plan required for full comparison')
+ guard=Guard(control)
+ def admit():guard.check('offline comparison safe boundary')
+ admit()
  if not (ROOT/'acceptance-complete.json').exists():raise RuntimeError('Full index not accepted; no comparison')
  output=ROOT/'full-measurements.jsonl'
  if output.exists():raise RuntimeError('Comparison already started; no overwrite or second batch')
@@ -25,12 +31,23 @@ async def run():
  files=[str(p).replace(chr(92),'/') for folder in ('rag','core') for p in Path(folder).glob('*.py')]+['backend/assembly.py','backend/config.py','evaluation/tantivy_full_measure_v1.py']
  construction=json.loads((ROOT/'construction-ledger.json').read_text())
  frozen={'queries':queries,'implementation_sha256':{f:sha(f) for f in files},'index_manifest_sha256':sha(manifest),'original_source_stat':[SOURCE.stat().st_size,SOURCE.stat().st_mtime_ns],'started_wall':time.time(),'deadline':min(construction['deadline'],time.time()+4*3600),'rounds':3,'order':'baseline/fast alternated each round; reverse query order on odd round','cache':'OS not cleared; ranking cache off','budgets':{'baseline_roots':3,'fast_candidates':16,'fast_roots':6,'fast_root_chars':8000,'context_chars':2400},'model_calls':0}
- atomic(ROOT/'offline-freeze.json',frozen);started=time.monotonic();fast=FastTantivyRetriever(SOURCE,manifest,K,isolated=True);warm=fast.warm();baseline=AsyncSQLiteBM25Retriever(SOURCE,execution_profile='topic_v4_subject_v1');baseline.rank_cache=None;atomic(ROOT/'offline-startup.json',{'seconds':time.monotonic()-started,'worker':warm,'source_seal_once':True});records=[]
+ atomic(ROOT/'offline-freeze.json',frozen);started=time.monotonic();fast=None;baseline=None;records=[]
  try:
+  # Same cryptographic identity checks; add deadline/pause boundaries per block.
+  from unittest.mock import patch
+  original_sha=hashlib.sha256
+  class CheckedSHA:
+   def __init__(self,*a,**kw):admit();self.inner=original_sha(*a,**kw)
+   def update(self,data):admit();return self.inner.update(data)
+   def __getattr__(self,name):return getattr(self.inner,name)
+  with patch.object(hashlib,'sha256',CheckedSHA):fast=FastTantivyRetriever(SOURCE,manifest,K,isolated=True)
+  admit();warm=fast.warm();baseline=AsyncSQLiteBM25Retriever(SOURCE,execution_profile='topic_v4_subject_v1');baseline.rank_cache=None;atomic(ROOT/'offline-startup.json',{'seconds':time.monotonic()-started,'worker':warm,'source_seal_once':True})
   for rd in range(3):
    for q in (queries if rd%2==0 else list(reversed(queries))):
     for name,a in ([('baseline',baseline),('fast',fast)] if rd%2==0 else [('fast',fast),('baseline',baseline)]):
+     admit()
      while not idle():
+      admit()
       if time.time()>=frozen['deadline']:raise TimeoutError('Paused comparison expired')
       await asyncio.sleep(.5)
      if time.time()>=frozen['deadline']:raise TimeoutError('Full comparison expired')
@@ -40,6 +57,7 @@ async def run():
      try:
       with capture_timing() as timing:
        result=await asyncio.wait_for(a.retrieve(request),110);retrieved=time.monotonic();await asyncio.wait_for(a.validate_result(request,result),110)
+      if time.time()>=frozen['deadline']:raise TimeoutError('Result finished after absolute comparison deadline')
       r.update(status='ok',total_seconds=time.monotonic()-tick,retrieve_seconds=retrieved-tick,validation_seconds=time.monotonic()-retrieved,roots=[dataclasses.asdict(e) for e in result.evidence],neighbors=[dataclasses.asdict(e.evidence) for e in result.context.items],hits=[dataclasses.asdict(h) for h in result.hits],context_chars=result.context.char_count,trace=dict(getattr(a,'last_trace',{})),spans=timing.records)
       assert len(result.evidence)<=(6 if name=='fast' else 3) and result.context.char_count<=2400
      except Exception as e:
@@ -54,5 +72,7 @@ async def run():
      if name=='fast' and not fast.available:raise RuntimeError('Fast retrieval unavailable; stop offline comparison')
      if r['status']=='error' and r.get('error') in ('IndexIdentityError','ContractError','InputError','DatabaseError','OperationalError','ResourceCleanupError'):raise RuntimeError('Shared identity/storage failure; stop comparison')
  finally:
-  fast.close();baseline.close();atomic(ROOT/'offline-receipt.json',{'completed_reads':len(records),'expected_reads':144,'ended':time.time(),'models':0,'worker_released':fast._native is None})
+  if fast is not None:fast.close()
+  if baseline is not None:baseline.close()
+  atomic(ROOT/'offline-receipt.json',{'completed_reads':len(records),'expected_reads':144,'ended':time.time(),'models':0,'worker_released':fast is None or fast._native is None})
 if __name__=='__main__':asyncio.run(run())

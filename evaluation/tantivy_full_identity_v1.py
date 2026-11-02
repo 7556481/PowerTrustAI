@@ -7,7 +7,13 @@ class DiagnosticWriter:
  def __init__(self,inner,root):self.inner=inner;self.root=root;self.closed=False
  def __getattr__(self,name):return getattr(self.inner,name)
  def record(self,operation,error):
-  with (self.root/'native-errors.jsonl').open('a',encoding='utf8') as f:f.write(json.dumps({'operation':operation,'wall':time.time(),'error':repr(error),'cause':repr(error.__cause__),'context':repr(error.__context__)})+'\n')
+  row={'operation':operation,'wall':time.time(),'error':repr(error),'cause':repr(error.__cause__),'context':repr(error.__context__)}
+  try:
+   with (self.root/'native-errors.jsonl').open('a',encoding='utf8') as f:f.write(json.dumps(row)+'\n')
+  except Exception as logging_error:
+   import sys
+   try:sys.stderr.write(json.dumps(dict(row,logging_error=type(logging_error).__name__))+'\n')
+   except Exception:pass # Never replace the original native failure with logging failure.
  def commit(self):
   try:return self.inner.commit()
   except BaseException as e:self.record('commit',e);raise
