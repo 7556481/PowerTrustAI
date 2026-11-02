@@ -156,3 +156,7 @@ ordinary-chain-v2将明确概念问题/正文断言的语法主体补检前置�
 ## 2026-11-02 默认关闭的Tantivy产品适配
 
 候选代码已从实际Factory接回Retriever、Evidence、Harness与Store，普通启动仍SQLite。原topic_v4表达式经同版AST，unsupported显式失败；每查询原生搜索隔离进程可超时/取消，无静默SQLite回退。Top-K后的原文、版本与邻接仍走旧来源层。六条真实索引/离线模型夹具链只证明接线，不能当真实模型回答质量。旧5.220倍仅百万内核方案含回查的历史证据，新的逐查询spawn含额外成本。详见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-product-v1/report.md)。
+
+## 2026-11-02 排序保护与成本实测
+
+同词项输入不等于BM25排序等价。实际诊断Q10必要片段在T第4，Q4原段第5，Q12原段第4；相关词DF相同，但IDF定义及量化长度足以重现边界翻转。唯一隔离方案T32后用同语料原SQLite BM25选3，在固定16题恢复FTS全部正文与邻接，最终预算不增加；但不能保证有限候选等价全库排序。该方案只在evaluation验证，不接入默认配置，且实测变慢，停止当前实现，不进入全量建设。

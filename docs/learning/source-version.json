@@ -1,14 +1,14 @@
 {
-  "application_commit": "6c60d2297541dfdbb90b56855ae5d55b085830a9",
+  "application_commit": "c30f7e24877dfd4f96e8903040f5da1a1421ce7d",
   "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "document_version": "learning-site-v6.23 Tantivy product adapter and full-build preparation,2026-11-02",
+  "document_version": "learning-site-v6.24 Tantivy ranking diagnosis and actual adapter comparison,2026-11-02",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "2026-11-02 read-only no listener; no restart or configuration switch this round",
+    "service_8765": "no listener, no restart; last saved ready predates latest system boot; exact exit unknown",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "selective_match_candidate_default": false,
@@ -90,6 +90,18 @@
       "isolated_chains": 6,
       "real_model_requests": 0,
       "coverage_release_gate": "blocked_known_coverage_risks"
+    },
+    "tantivy_ranking_v1": {
+      "implementation": "c30f7e24877dfd4f96e8903040f5da1a1421ce7d",
+      "queries": 16,
+      "reads": 288,
+      "complete": 288,
+      "adapter_tests": 9,
+      "specific_tests": 3,
+      "reused_local_regression": 1458,
+      "real_model_requests": 0,
+      "full_build": false,
+      "decision": "Known losses restored on frozen materials but candidate slower; no full build"
     }
   },
   "experiment_batches": [

@@ -1,15 +1,15 @@
 {
   "version": {
-    "application_commit": "6c60d2297541dfdbb90b56855ae5d55b085830a9",
+    "application_commit": "c30f7e24877dfd4f96e8903040f5da1a1421ce7d",
     "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
     "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "document_version": "learning-site-v6.23 Tantivy product adapter and full-build preparation,2026-11-02",
+    "document_version": "learning-site-v6.24 Tantivy ranking diagnosis and actual adapter comparison,2026-11-02",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
       "unconfigured_fallback": "sequential",
-      "service_8765": "2026-11-02 read-only no listener; no restart or configuration switch this round",
+      "service_8765": "no listener, no restart; last saved ready predates latest system boot; exact exit unknown",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
       "selective_match_candidate_default": false,
@@ -91,6 +91,18 @@
         "isolated_chains": 6,
         "real_model_requests": 0,
         "coverage_release_gate": "blocked_known_coverage_risks"
+      },
+      "tantivy_ranking_v1": {
+        "implementation": "c30f7e24877dfd4f96e8903040f5da1a1421ce7d",
+        "queries": 16,
+        "reads": 288,
+        "complete": 288,
+        "adapter_tests": 9,
+        "specific_tests": 3,
+        "reused_local_regression": 1458,
+        "real_model_requests": 0,
+        "full_build": false,
+        "decision": "Known losses restored on frozen materials but candidate slower; no full build"
       }
     },
     "experiment_batches": [
@@ -649,8 +661,8 @@
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 9294,
-      "sha256": "cfa47886026b035bdbb3d84baf4c11dda0a200dcf01eba2ce35ee1ec26edef45"
+      "characters": 9516,
+      "sha256": "05a296b8b600419f7b7d2b98c3aa3886374a307c5e4ac5fe47ce49c003101a77"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -704,8 +716,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 14492,
-      "sha256": "005db726fb4b2c7708b9b94711776538a3f6c6d7d167c891f1123c204c0e8af2"
+      "characters": 14908,
+      "sha256": "185000121a3c90da37596d8ef97cf05c217bbf69f19df349caebfabe988ba174"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -714,8 +726,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 11448,
-      "sha256": "165c59bc3518bf84cff534a3b3c4b3eb61958a4e4684c5d3d1cef02d1a3ff1d1"
+      "characters": 11711,
+      "sha256": "09b810ea7ad073de047dc7e8a88b12bee42ac51e36abb87c1361851b95b4ba36"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -733,6 +745,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 191904,
+  "markdown_characters": 192805,
   "network_dependencies": false
 }

@@ -1,0 +1,1220 @@
+{
+  "elapsed": 5.225375599984545,
+  "results": [
+    {
+      "scope": "quality674",
+      "query": "Q10",
+      "documents": 674,
+      "total_terms": 114908,
+      "avgdl": 170.486646884273,
+      "df_terms": 23,
+      "df_seconds": 0.03298459999496117,
+      "exact_count": 47,
+      "count_seconds": 0.0017931000038515776,
+      "docs": [
+        {
+          "rowid": -163,
+          "fts_rank": 1,
+          "tantivy_rank": 1,
+          "fts_score": 62.80466388697296,
+          "tantivy_score": 67.908935546875,
+          "length_exact": 130,
+          "length_tantivy": 128.0,
+          "matched_terms": [
+            {
+              "term": "and",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 297,
+              "total_occurrences": 1082,
+              "fts_idf": 0.2381563437033949,
+              "tantivy_idf": 0.8192984658868453
+            },
+            {
+              "term": "capacitors",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 12,
+              "total_occurrences": 14,
+              "fts_idf": 3.970291913552122,
+              "tantivy_idf": 3.9889840465642745
+            },
+            {
+              "term": "contingency",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 64,
+              "total_occurrences": 129,
+              "fts_idf": 2.2476130697490326,
+              "tantivy_idf": 2.348047467070803
+            },
+            {
+              "term": "high",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 65,
+              "total_occurrences": 100,
+              "fts_idf": 2.23058880628012,
+              "tantivy_idf": 2.3326625482313235
+            },
+            {
+              "term": "if",
+              "query_multiplicity": 2,
+              "frequency": 1,
+              "df": 47,
+              "total_occurrences": 65,
+              "fts_idf": 2.5810139599653437,
+              "tantivy_idf": 2.6539829798319343
+            },
+            {
+              "term": "in",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 262,
+              "total_occurrences": 715,
+              "fts_idf": 0.4519851237430572,
+              "tantivy_idf": 0.9444616088408514
+            },
+            {
+              "term": "limits",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 52,
+              "total_occurrences": 125,
+              "fts_idf": 2.472930458741285,
+              "tantivy_idf": 2.553899521274952
+            },
+            {
+              "term": "may",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 81,
+              "total_occurrences": 119,
+              "fts_idf": 1.9854341938029056,
+              "tantivy_idf": 2.1141096706257128
+            },
+            {
+              "term": "of",
+              "query_multiplicity": 1,
+              "frequency": 5,
+              "df": 290,
+              "total_occurrences": 990,
+              "fts_idf": 0.2803402126537327,
+              "tantivy_idf": 0.8431091145805639
+            },
+            {
+              "term": "or",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 143,
+              "total_occurrences": 323,
+              "fts_idf": 1.3093681625823268,
+              "tantivy_idf": 1.5483776556728541
+            },
+            {
+              "term": "out",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 18,
+              "total_occurrences": 21,
+              "fts_idf": 3.5691519616585716,
+              "tantivy_idf": 3.5969419587882507
+            },
+            {
+              "term": "post",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 46,
+              "total_occurrences": 63,
+              "fts_idf": 2.6038837154369916,
+              "tantivy_idf": 2.6752603782792193
+            },
+            {
+              "term": "pre",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 33,
+              "total_occurrences": 49,
+              "fts_idf": 2.9522637452246703,
+              "tantivy_idf": 3.003167252041509
+            },
+            {
+              "term": "reactors",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 7,
+              "total_occurrences": 10,
+              "fts_idf": 4.48863636973214,
+              "tantivy_idf": 4.499809670330265
+            },
+            {
+              "term": "reduce",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 6,
+              "total_occurrences": 6,
+              "fts_idf": 4.633234219640406,
+              "tantivy_idf": 4.642910513970938
+            },
+            {
+              "term": "service",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 23,
+              "total_occurrences": 28,
+              "fts_idf": 3.3222769754147867,
+              "tantivy_idf": 3.3577122697224167
+            },
+            {
+              "term": "shunt",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 13,
+              "total_occurrences": 22,
+              "fts_idf": 3.8918202981106265,
+              "tantivy_idf": 3.912023005428146
+            },
+            {
+              "term": "voltage",
+              "query_multiplicity": 1,
+              "frequency": 4,
+              "df": 203,
+              "total_occurrences": 751,
+              "fts_idf": 0.8402530971908624,
+              "tantivy_idf": 1.19904668598988
+            },
+            {
+              "term": "voltages",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 47,
+              "total_occurrences": 78,
+              "fts_idf": 2.5810139599653437,
+              "tantivy_idf": 2.6539829798319343
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 62.80466388697295,
+            "only_idf_swapped": 67.6220577505146,
+            "only_length_swapped": 63.07732511191868,
+            "both_swapped": 67.90893533402534
+          }
+        },
+        {
+          "rowid": -192,
+          "fts_rank": 2,
+          "tantivy_rank": 2,
+          "fts_score": 33.46120346232949,
+          "tantivy_score": 37.199100494384766,
+          "length_exact": 185,
+          "length_tantivy": 184.0,
+          "matched_terms": [
+            {
+              "term": "and",
+              "query_multiplicity": 1,
+              "frequency": 5,
+              "df": 297,
+              "total_occurrences": 1082,
+              "fts_idf": 0.2381563437033949,
+              "tantivy_idf": 0.8192984658868453
+            },
+            {
+              "term": "contingency",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 64,
+              "total_occurrences": 129,
+              "fts_idf": 2.2476130697490326,
+              "tantivy_idf": 2.348047467070803
+            },
+            {
+              "term": "if",
+              "query_multiplicity": 2,
+              "frequency": 2,
+              "df": 47,
+              "total_occurrences": 65,
+              "fts_idf": 2.5810139599653437,
+              "tantivy_idf": 2.6539829798319343
+            },
+            {
+              "term": "in",
+              "query_multiplicity": 1,
+              "frequency": 4,
+              "df": 262,
+              "total_occurrences": 715,
+              "fts_idf": 0.4519851237430572,
+              "tantivy_idf": 0.9444616088408514
+            },
+            {
+              "term": "limits",
+              "query_multiplicity": 1,
+              "frequency": 5,
+              "df": 52,
+              "total_occurrences": 125,
+              "fts_idf": 2.472930458741285,
+              "tantivy_idf": 2.553899521274952
+            },
+            {
+              "term": "may",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 81,
+              "total_occurrences": 119,
+              "fts_idf": 1.9854341938029056,
+              "tantivy_idf": 2.1141096706257128
+            },
+            {
+              "term": "or",
+              "query_multiplicity": 1,
+              "frequency": 5,
+              "df": 143,
+              "total_occurrences": 323,
+              "fts_idf": 1.3093681625823268,
+              "tantivy_idf": 1.5483776556728541
+            },
+            {
+              "term": "post",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 46,
+              "total_occurrences": 63,
+              "fts_idf": 2.6038837154369916,
+              "tantivy_idf": 2.6752603782792193
+            },
+            {
+              "term": "pre",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 33,
+              "total_occurrences": 49,
+              "fts_idf": 2.9522637452246703,
+              "tantivy_idf": 3.003167252041509
+            },
+            {
+              "term": "service",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 23,
+              "total_occurrences": 28,
+              "fts_idf": 3.3222769754147867,
+              "tantivy_idf": 3.3577122697224167
+            },
+            {
+              "term": "voltage",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 203,
+              "total_occurrences": 751,
+              "fts_idf": 0.8402530971908624,
+              "tantivy_idf": 1.19904668598988
+            },
+            {
+              "term": "voltages",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 47,
+              "total_occurrences": 78,
+              "fts_idf": 2.5810139599653437,
+              "tantivy_idf": 2.6539829798319343
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 33.46120346232949,
+            "only_idf_swapped": 37.14119865281542,
+            "only_length_swapped": 33.51495795292646,
+            "both_swapped": 37.199098519718056
+          }
+        },
+        {
+          "rowid": -97,
+          "fts_rank": 4,
+          "tantivy_rank": 3,
+          "fts_score": 26.411839759808313,
+          "tantivy_score": 31.157882690429688,
+          "length_exact": 193,
+          "length_tantivy": 184.0,
+          "matched_terms": [
+            {
+              "term": "and",
+              "query_multiplicity": 1,
+              "frequency": 4,
+              "df": 297,
+              "total_occurrences": 1082,
+              "fts_idf": 0.2381563437033949,
+              "tantivy_idf": 0.8192984658868453
+            },
+            {
+              "term": "contingency",
+              "query_multiplicity": 1,
+              "frequency": 5,
+              "df": 64,
+              "total_occurrences": 129,
+              "fts_idf": 2.2476130697490326,
+              "tantivy_idf": 2.348047467070803
+            },
+            {
+              "term": "if",
+              "query_multiplicity": 2,
+              "frequency": 1,
+              "df": 47,
+              "total_occurrences": 65,
+              "fts_idf": 2.5810139599653437,
+              "tantivy_idf": 2.6539829798319343
+            },
+            {
+              "term": "in",
+              "query_multiplicity": 1,
+              "frequency": 4,
+              "df": 262,
+              "total_occurrences": 715,
+              "fts_idf": 0.4519851237430572,
+              "tantivy_idf": 0.9444616088408514
+            },
+            {
+              "term": "limits",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 52,
+              "total_occurrences": 125,
+              "fts_idf": 2.472930458741285,
+              "tantivy_idf": 2.553899521274952
+            },
+            {
+              "term": "may",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 81,
+              "total_occurrences": 119,
+              "fts_idf": 1.9854341938029056,
+              "tantivy_idf": 2.1141096706257128
+            },
+            {
+              "term": "of",
+              "query_multiplicity": 1,
+              "frequency": 5,
+              "df": 290,
+              "total_occurrences": 990,
+              "fts_idf": 0.2803402126537327,
+              "tantivy_idf": 0.8431091145805639
+            },
+            {
+              "term": "or",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 143,
+              "total_occurrences": 323,
+              "fts_idf": 1.3093681625823268,
+              "tantivy_idf": 1.5483776556728541
+            },
+            {
+              "term": "post",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 46,
+              "total_occurrences": 63,
+              "fts_idf": 2.6038837154369916,
+              "tantivy_idf": 2.6752603782792193
+            },
+            {
+              "term": "pre",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 33,
+              "total_occurrences": 49,
+              "fts_idf": 2.9522637452246703,
+              "tantivy_idf": 3.003167252041509
+            },
+            {
+              "term": "voltage",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 203,
+              "total_occurrences": 751,
+              "fts_idf": 0.8402530971908624,
+              "tantivy_idf": 1.19904668598988
+            },
+            {
+              "term": "voltages",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 47,
+              "total_occurrences": 78,
+              "fts_idf": 2.5810139599653437,
+              "tantivy_idf": 2.6539829798319343
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 26.411839759808316,
+            "only_idf_swapped": 30.68259837794241,
+            "only_length_swapped": 26.840798703006957,
+            "both_swapped": 31.15787975381905
+          }
+        },
+        {
+          "rowid": -206,
+          "fts_rank": 3,
+          "tantivy_rank": 4,
+          "fts_score": 27.935944661511847,
+          "tantivy_score": 31.045053482055664,
+          "length_exact": 152,
+          "length_tantivy": 152.0,
+          "matched_terms": [
+            {
+              "term": "and",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 297,
+              "total_occurrences": 1082,
+              "fts_idf": 0.2381563437033949,
+              "tantivy_idf": 0.8192984658868453
+            },
+            {
+              "term": "contingency",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 64,
+              "total_occurrences": 129,
+              "fts_idf": 2.2476130697490326,
+              "tantivy_idf": 2.348047467070803
+            },
+            {
+              "term": "high",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 65,
+              "total_occurrences": 100,
+              "fts_idf": 2.23058880628012,
+              "tantivy_idf": 2.3326625482313235
+            },
+            {
+              "term": "if",
+              "query_multiplicity": 2,
+              "frequency": 2,
+              "df": 47,
+              "total_occurrences": 65,
+              "fts_idf": 2.5810139599653437,
+              "tantivy_idf": 2.6539829798319343
+            },
+            {
+              "term": "limits",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 52,
+              "total_occurrences": 125,
+              "fts_idf": 2.472930458741285,
+              "tantivy_idf": 2.553899521274952
+            },
+            {
+              "term": "of",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 290,
+              "total_occurrences": 990,
+              "fts_idf": 0.2803402126537327,
+              "tantivy_idf": 0.8431091145805639
+            },
+            {
+              "term": "or",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 143,
+              "total_occurrences": 323,
+              "fts_idf": 1.3093681625823268,
+              "tantivy_idf": 1.5483776556728541
+            },
+            {
+              "term": "post",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 46,
+              "total_occurrences": 63,
+              "fts_idf": 2.6038837154369916,
+              "tantivy_idf": 2.6752603782792193
+            },
+            {
+              "term": "voltage",
+              "query_multiplicity": 1,
+              "frequency": 5,
+              "df": 203,
+              "total_occurrences": 751,
+              "fts_idf": 0.8402530971908624,
+              "tantivy_idf": 1.19904668598988
+            },
+            {
+              "term": "voltages",
+              "query_multiplicity": 1,
+              "frequency": 4,
+              "df": 47,
+              "total_occurrences": 78,
+              "fts_idf": 2.5810139599653437,
+              "tantivy_idf": 2.6539829798319343
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 27.935944661511844,
+            "only_idf_swapped": 31.045054985088402,
+            "only_length_swapped": 27.935944661511844,
+            "both_swapped": 31.045054985088402
+          }
+        }
+      ]
+    },
+    {
+      "scope": "million",
+      "query": "Q4",
+      "documents": 1000000,
+      "total_terms": 247396048,
+      "avgdl": 247.396048,
+      "df_terms": 45,
+      "df_seconds": 2.710069399996428,
+      "exact_count": 562091,
+      "count_seconds": 0.3098288999754004,
+      "docs": [
+        {
+          "rowid": 9253898,
+          "fts_rank": 1,
+          "tantivy_rank": 1,
+          "fts_score": 56.33059715135424,
+          "tantivy_score": 58.31016540527344,
+          "length_exact": 366,
+          "length_tantivy": 344.0,
+          "matched_terms": [
+            {
+              "term": "cip",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 195,
+              "total_occurrences": 306,
+              "fts_idf": 8.539755659621276,
+              "tantivy_idf": 8.539951178538354
+            },
+            {
+              "term": "nerc",
+              "query_multiplicity": 2,
+              "frequency": 2,
+              "df": 403,
+              "total_occurrences": 622,
+              "fts_idf": 7.814931489229403,
+              "tantivy_idf": 7.815335070253771
+            },
+            {
+              "term": "也",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 176461,
+              "total_occurrences": 375726,
+              "fts_idf": 1.540508792198289,
+              "tantivy_idf": 1.7346535567137769
+            },
+            {
+              "term": "可",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 150121,
+              "total_occurrences": 338102,
+              "fts_idf": 1.733649608505619,
+              "tantivy_idf": 1.896311312758342
+            },
+            {
+              "term": "描述",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 6251,
+              "total_occurrences": 7057,
+              "fts_idf": 5.0686637278708435,
+              "tantivy_idf": 5.07493484402872
+            },
+            {
+              "term": "未",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 26412,
+              "total_occurrences": 41013,
+              "fts_idf": 3.6071513468290073,
+              "tantivy_idf": 3.633918896039462
+            },
+            {
+              "term": "标准",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 56937,
+              "total_occurrences": 107603,
+              "fts_idf": 2.8071794436282387,
+              "tantivy_idf": 2.86580210396146
+            },
+            {
+              "term": "涉及",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 22712,
+              "total_occurrences": 28619,
+              "fts_idf": 3.7618664664397916,
+              "tantivy_idf": 3.7848408452593474
+            },
+            {
+              "term": "组织",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 47763,
+              "total_occurrences": 77785,
+              "fts_idf": 2.992552728986271,
+              "tantivy_idf": 3.0414945295002873
+            },
+            {
+              "term": "网络安全",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 1281,
+              "total_occurrences": 3037,
+              "fts_idf": 6.65844269161948,
+              "tantivy_idf": 6.659725012159648
+            },
+            {
+              "term": "运营",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 32143,
+              "total_occurrences": 52670,
+              "fts_idf": 3.404874612747101,
+              "tantivy_idf": 3.4375460260325275
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 56.33059715135424,
+            "only_idf_swapped": 56.80571981902575,
+            "only_length_swapped": 57.82045342976708,
+            "both_swapped": 58.310170964000626
+          }
+        },
+        {
+          "rowid": 22112778,
+          "fts_rank": 2,
+          "tantivy_rank": 2,
+          "fts_score": 43.4146558869676,
+          "tantivy_score": 45.6775016784668,
+          "length_exact": 184,
+          "length_tantivy": 184.0,
+          "matched_terms": [
+            {
+              "term": "cip",
+              "query_multiplicity": 1,
+              "frequency": 5,
+              "df": 195,
+              "total_occurrences": 306,
+              "fts_idf": 8.539755659621276,
+              "tantivy_idf": 8.539951178538354
+            },
+            {
+              "term": "nerc",
+              "query_multiplicity": 2,
+              "frequency": 4,
+              "df": 403,
+              "total_occurrences": 622,
+              "fts_idf": 7.814931489229403,
+              "tantivy_idf": 7.815335070253771
+            },
+            {
+              "term": "to",
+              "query_multiplicity": 2,
+              "frequency": 8,
+              "df": 562061,
+              "total_occurrences": 2594202,
+              "fts_idf": 1e-06,
+              "tantivy_idf": 0.5761450044700556
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 43.4146558869676,
+            "only_idf_swapped": 45.67750337413376,
+            "only_length_swapped": 43.4146558869676,
+            "both_swapped": 45.67750337413376
+          }
+        },
+        {
+          "rowid": 20719575,
+          "fts_rank": 6,
+          "tantivy_rank": 3,
+          "fts_score": 42.622680147471726,
+          "tantivy_score": 44.946014404296875,
+          "length_exact": 162,
+          "length_tantivy": 152.0,
+          "matched_terms": [
+            {
+              "term": "cip",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 195,
+              "total_occurrences": 306,
+              "fts_idf": 8.539755659621276,
+              "tantivy_idf": 8.539951178538354
+            },
+            {
+              "term": "nerc",
+              "query_multiplicity": 2,
+              "frequency": 4,
+              "df": 403,
+              "total_occurrences": 622,
+              "fts_idf": 7.814931489229403,
+              "tantivy_idf": 7.815335070253771
+            },
+            {
+              "term": "to",
+              "query_multiplicity": 2,
+              "frequency": 3,
+              "df": 562061,
+              "total_occurrences": 2594202,
+              "fts_idf": 1e-06,
+              "tantivy_idf": 0.5761450044700556
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 42.62268014747172,
+            "only_idf_swapped": 44.5798360178206,
+            "only_length_swapped": 42.97038406257404,
+            "both_swapped": 44.94601620240689
+          }
+        },
+        {
+          "rowid": 933848,
+          "fts_rank": 3,
+          "tantivy_rank": 5,
+          "fts_score": 43.324029794519795,
+          "tantivy_score": 44.08407974243164,
+          "length_exact": 479,
+          "length_tantivy": 472.0,
+          "matched_terms": [
+            {
+              "term": "nerc",
+              "query_multiplicity": 2,
+              "frequency": 3,
+              "df": 403,
+              "total_occurrences": 622,
+              "fts_idf": 7.814931489229403,
+              "tantivy_idf": 7.815335070253771
+            },
+            {
+              "term": "也",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 176461,
+              "total_occurrences": 375726,
+              "fts_idf": 1.540508792198289,
+              "tantivy_idf": 1.7346535567137769
+            },
+            {
+              "term": "介绍",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 38412,
+              "total_occurrences": 50758,
+              "fts_idf": 3.220203677018219,
+              "tantivy_idf": 3.259373351525034
+            },
+            {
+              "term": "则",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 40506,
+              "total_occurrences": 56600,
+              "fts_idf": 3.164944128217266,
+              "tantivy_idf": 3.2062938239197396
+            },
+            {
+              "term": "可",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 150121,
+              "total_occurrences": 338102,
+              "fts_idf": 1.733649608505619,
+              "tantivy_idf": 1.896311312758342
+            },
+            {
+              "term": "标准",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 56937,
+              "total_occurrences": 107603,
+              "fts_idf": 2.8071794436282387,
+              "tantivy_idf": 2.86580210396146
+            },
+            {
+              "term": "涉及",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 22712,
+              "total_occurrences": 28619,
+              "fts_idf": 3.7618664664397916,
+              "tantivy_idf": 3.7848408452593474
+            },
+            {
+              "term": "相应",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 19548,
+              "total_occurrences": 23900,
+              "fts_idf": 3.9151156426467866,
+              "tantivy_idf": 3.9348577218365897
+            },
+            {
+              "term": "组织",
+              "query_multiplicity": 1,
+              "frequency": 10,
+              "df": 47763,
+              "total_occurrences": 77785,
+              "fts_idf": 2.992552728986271,
+              "tantivy_idf": 3.0414945295002873
+            },
+            {
+              "term": "负荷",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 19455,
+              "total_occurrences": 40451,
+              "fts_idf": 3.9199792430148155,
+              "tantivy_idf": 3.939626472541264
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 43.324029794519795,
+            "only_idf_swapped": 43.81819893290147,
+            "only_length_swapped": 43.586309951793645,
+            "both_swapped": 44.08408131292255
+          }
+        }
+      ]
+    },
+    {
+      "scope": "million",
+      "query": "Q12",
+      "documents": 1000000,
+      "total_terms": 247396048,
+      "avgdl": 247.396048,
+      "df_terms": 22,
+      "df_seconds": 1.0605317000008654,
+      "exact_count": 30099,
+      "count_seconds": 0.04944740000064485,
+      "docs": [
+        {
+          "rowid": 8618382,
+          "fts_rank": 1,
+          "tantivy_rank": 1,
+          "fts_score": 36.6957273275808,
+          "tantivy_score": 37.998695373535156,
+          "length_exact": 547,
+          "length_tantivy": 536.0,
+          "matched_terms": [
+            {
+              "term": "2016",
+              "query_multiplicity": 2,
+              "frequency": 3,
+              "df": 30099,
+              "total_occurrences": 46782,
+              "fts_idf": 3.472685959628312,
+              "tantivy_idf": 3.5032477186604574
+            },
+            {
+              "term": "中",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 238853,
+              "total_occurrences": 614519,
+              "fts_idf": 1.158976769719297,
+              "tantivy_idf": 1.4319058857047764
+            },
+            {
+              "term": "于",
+              "query_multiplicity": 1,
+              "frequency": 4,
+              "df": 131556,
+              "total_occurrences": 218511,
+              "fts_idf": 1.8872672632217218,
+              "tantivy_idf": 2.028319861845621
+            },
+            {
+              "term": "年",
+              "query_multiplicity": 1,
+              "frequency": 8,
+              "df": 195707,
+              "total_occurrences": 669147,
+              "fts_idf": 1.4133430546828218,
+              "tantivy_idf": 1.631135081348698
+            },
+            {
+              "term": "强制",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 4339,
+              "total_occurrences": 5617,
+              "fts_idf": 5.435648206279378,
+              "tantivy_idf": 5.439997144879475
+            },
+            {
+              "term": "指定",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 5389,
+              "total_occurrences": 6803,
+              "fts_idf": 5.217899592411408,
+              "tantivy_idf": 5.223303662742091
+            },
+            {
+              "term": "数值",
+              "query_multiplicity": 1,
+              "frequency": 5,
+              "df": 4334,
+              "total_occurrences": 6298,
+              "fts_idf": 5.436806098829396,
+              "tantivy_idf": 5.441150015655079
+            },
+            {
+              "term": "条款",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 2367,
+              "total_occurrences": 3563,
+              "fts_idf": 6.043551428317339,
+              "tantivy_idf": 6.04592173290354
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 36.6957273275808,
+            "only_idf_swapped": 37.697872442740156,
+            "only_length_swapped": 36.99051228587259,
+            "both_swapped": 37.998691519491665
+          }
+        },
+        {
+          "rowid": 3536388,
+          "fts_rank": 2,
+          "tantivy_rank": 2,
+          "fts_score": 32.03202200184522,
+          "tantivy_score": 33.46538543701172,
+          "length_exact": 496,
+          "length_tantivy": 472.0,
+          "matched_terms": [
+            {
+              "term": "13",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 48416,
+              "total_occurrences": 63021,
+              "fts_idf": 2.978287825222499,
+              "tantivy_idf": 3.0279156142644426
+            },
+            {
+              "term": "2016",
+              "query_multiplicity": 2,
+              "frequency": 14,
+              "df": 30099,
+              "total_occurrences": 46782,
+              "fts_idf": 3.472685959628312,
+              "tantivy_idf": 3.5032477186604574
+            },
+            {
+              "term": "中",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 238853,
+              "total_occurrences": 614519,
+              "fts_idf": 1.158976769719297,
+              "tantivy_idf": 1.4319058857047764
+            },
+            {
+              "term": "于",
+              "query_multiplicity": 1,
+              "frequency": 7,
+              "df": 131556,
+              "total_occurrences": 218511,
+              "fts_idf": 1.8872672632217218,
+              "tantivy_idf": 2.028319861845621
+            },
+            {
+              "term": "年",
+              "query_multiplicity": 1,
+              "frequency": 10,
+              "df": 195707,
+              "total_occurrences": 669147,
+              "fts_idf": 1.4133430546828218,
+              "tantivy_idf": 1.631135081348698
+            },
+            {
+              "term": "条款",
+              "query_multiplicity": 1,
+              "frequency": 3,
+              "df": 2367,
+              "total_occurrences": 3563,
+              "fts_idf": 6.043551428317339,
+              "tantivy_idf": 6.04592173290354
+            },
+            {
+              "term": "现场",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 40585,
+              "total_occurrences": 66978,
+              "fts_idf": 3.162913384908403,
+              "tantivy_idf": 3.204345419021792
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 32.03202200184522,
+            "only_idf_swapped": 33.0443668830599,
+            "only_length_swapped": 32.439700999573304,
+            "both_swapped": 33.46538719898431
+          }
+        },
+        {
+          "rowid": 3124981,
+          "fts_rank": 4,
+          "tantivy_rank": 3,
+          "fts_score": 30.94307469832212,
+          "tantivy_score": 32.76728820800781,
+          "length_exact": 303,
+          "length_tantivy": 280.0,
+          "matched_terms": [
+            {
+              "term": "2016",
+              "query_multiplicity": 2,
+              "frequency": 3,
+              "df": 30099,
+              "total_occurrences": 46782,
+              "fts_idf": 3.472685959628312,
+              "tantivy_idf": 3.5032477186604574
+            },
+            {
+              "term": "中",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 238853,
+              "total_occurrences": 614519,
+              "fts_idf": 1.158976769719297,
+              "tantivy_idf": 1.4319058857047764
+            },
+            {
+              "term": "于",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 131556,
+              "total_occurrences": 218511,
+              "fts_idf": 1.8872672632217218,
+              "tantivy_idf": 2.028319861845621
+            },
+            {
+              "term": "年",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 195707,
+              "total_occurrences": 669147,
+              "fts_idf": 1.4133430546828218,
+              "tantivy_idf": 1.631135081348698
+            },
+            {
+              "term": "强制",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 4339,
+              "total_occurrences": 5617,
+              "fts_idf": 5.435648206279378,
+              "tantivy_idf": 5.439997144879475
+            },
+            {
+              "term": "指定",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 5389,
+              "total_occurrences": 6803,
+              "fts_idf": 5.217899592411408,
+              "tantivy_idf": 5.223303662742091
+            },
+            {
+              "term": "整",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 4206,
+              "total_occurrences": 6583,
+              "fts_idf": 5.466909962986669,
+              "tantivy_idf": 5.471125330972906
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 30.943074698322118,
+            "only_idf_swapped": 31.864546026408174,
+            "only_length_swapped": 31.822980978777174,
+            "both_swapped": 32.76728930315135
+          }
+        },
+        {
+          "rowid": 1789283,
+          "fts_rank": 3,
+          "tantivy_rank": 4,
+          "fts_score": 31.217043461757605,
+          "tantivy_score": 32.38853454589844,
+          "length_exact": 471,
+          "length_tantivy": 440.0,
+          "matched_terms": [
+            {
+              "term": "2016",
+              "query_multiplicity": 2,
+              "frequency": 1,
+              "df": 30099,
+              "total_occurrences": 46782,
+              "fts_idf": 3.472685959628312,
+              "tantivy_idf": 3.5032477186604574
+            },
+            {
+              "term": "中",
+              "query_multiplicity": 1,
+              "frequency": 2,
+              "df": 238853,
+              "total_occurrences": 614519,
+              "fts_idf": 1.158976769719297,
+              "tantivy_idf": 1.4319058857047764
+            },
+            {
+              "term": "定",
+              "query_multiplicity": 1,
+              "frequency": 11,
+              "df": 11503,
+              "total_occurrences": 17111,
+              "fts_idf": 4.453534776632115,
+              "tantivy_idf": 4.4651049420907505
+            },
+            {
+              "term": "定位",
+              "query_multiplicity": 1,
+              "frequency": 6,
+              "df": 10043,
+              "total_occurrences": 13309,
+              "fts_idf": 4.590736353821752,
+              "tantivy_idf": 4.600830619889171
+            },
+            {
+              "term": "年",
+              "query_multiplicity": 1,
+              "frequency": 1,
+              "df": 195707,
+              "total_occurrences": 669147,
+              "fts_idf": 1.4133430546828218,
+              "tantivy_idf": 1.631135081348698
+            },
+            {
+              "term": "整",
+              "query_multiplicity": 1,
+              "frequency": 4,
+              "df": 4206,
+              "total_occurrences": 6583,
+              "fts_idf": 5.466909962986669,
+              "tantivy_idf": 5.471125330972906
+            }
+          ],
+          "counterfactual_scores": {
+            "fts_formula": 31.217043461757605,
+            "only_idf_swapped": 31.764197315427477,
+            "only_length_swapped": 31.82427125784495,
+            "both_swapped": 32.388535963015464
+          }
+        }
+      ]
+    }
+  ]
+}
