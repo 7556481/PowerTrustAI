@@ -1,15 +1,15 @@
 {
   "version": {
-    "application_commit": "c30f7e24877dfd4f96e8903040f5da1a1421ce7d",
+    "application_commit": "a912a2b",
     "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
     "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "document_version": "learning-site-v6.24 Tantivy ranking diagnosis and actual adapter comparison,2026-11-02",
+    "document_version": "learning-site-v6.25 full fast retrieval construction in progress,2026-11-02",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
       "unconfigured_fallback": "sequential",
-      "service_8765": "no listener, no restart; last saved ready predates latest system boot; exact exit unknown",
+      "service_8765": "restored original application once, subsequently no listener; exit reason unknown; not switched to Tantivy",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
       "selective_match_candidate_default": false,
@@ -631,6 +631,13 @@
       "million_accepted": true,
       "model_calls": 0,
       "production_retrieval_changed": false
+    },
+    "full_fast_candidate": {
+      "code": "a912a2b",
+      "state": "full input preparation, no quality or release approval",
+      "requests": 0,
+      "manifest": "not yet accepted",
+      "default_enabled": false
     }
   },
   "chapters": [
@@ -661,8 +668,8 @@
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 9516,
-      "sha256": "05a296b8b600419f7b7d2b98c3aa3886374a307c5e4ac5fe47ce49c003101a77"
+      "characters": 9918,
+      "sha256": "02ad17782290667636534d8e8d87ce767efa075843a3f868fbb83fad5c4b7077"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -707,7 +714,7 @@
     {
       "source": "docs/learning/chapters/14-code-tour.md",
       "characters": 29989,
-      "sha256": "922ec543094bed2fbf897abe05ec6f7f18284f7db47b5c0526f53627153283b0"
+      "sha256": "85e806659313057a282754890d05b40dbfc3cf13d34fce1ab71d185b0b1b6cb6"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -716,8 +723,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 14908,
-      "sha256": "185000121a3c90da37596d8ef97cf05c217bbf69f19df349caebfabe988ba174"
+      "characters": 15310,
+      "sha256": "9c4c36146164143c5d00a1b71da1ebe4be920c2a3696ccf6e4b00203cc16f871"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -726,8 +733,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 11711,
-      "sha256": "09b810ea7ad073de047dc7e8a88b12bee42ac51e36abb87c1361851b95b4ba36"
+      "characters": 12113,
+      "sha256": "d83e86a23042cc8907dfa75f4aece1d066ba702946cd62426441df0246e8d5f9"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -745,6 +752,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 192805,
+  "markdown_characters": 194011,
   "network_dependencies": false
 }

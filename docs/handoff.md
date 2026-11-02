@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-11-02 全量快速检索建设进行中
+
+用户新授权全量24,620,947、可复用worker和新有界交付；a912a2b实现已提交，默认仍关闭。3,810,674输入/150,674原生提交，未完成全量；先输入后writer恢复，原生失败和411秒监督空窗均保留审计，不能称根因解决。监督突退出Job保护及实际Factory/Harness/Store离线修订重审通过。原96小时/160GiB账本未重置，当前监督PID7064（创建时间与实时状态须再核对），data/retrieval_local/tantivy-full-fast-v1；controller-v3-identity.json不是旧controller-identity。最新a912a2b完整离线1458/259.023秒OK，80私有归档缺失跳过；不重跑。真实0，正式24题/16链/UI/发布尚待，不能合并或切换。8765曾恢复随后无监听，具体退出未知，非当前重启导致。见[进行中报告](evaluation/tantivy-full-fast-v1/report.md)与[冻结清单](evaluation/tantivy-full-fast-v1/implementation-checklist.md)。
+
 ## 2026-11-02 轻量评分统计准入停止
 
 接续47135bb；独立N/avgdl/精确长度统计：674为.255秒/24KiB，百万8.936秒/11898880bytes，全成员count/总长度一致。实现前冻4首次短语，百万of the/in the精确DF为384496/316943，T计数.320/.256秒且需全语料相关位置，不可用单词DF替代；按用户第6条停止。未实现完整评分器，未跑新16题三路批次，不称成本解决。3项FTS统计语义检查通过，旧288及1458结果保留。结论该路径不值得继续（本轮通用精确且候选有界约束下），无模型/全量/生产/进程生命周期改变。见[报告](evaluation/tantivy-light-score-v1/report.md)。

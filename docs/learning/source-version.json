@@ -1,14 +1,14 @@
 {
-  "application_commit": "c30f7e24877dfd4f96e8903040f5da1a1421ce7d",
+  "application_commit": "a912a2b",
   "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "document_version": "learning-site-v6.24 Tantivy ranking diagnosis and actual adapter comparison,2026-11-02",
+  "document_version": "learning-site-v6.25 full fast retrieval construction in progress,2026-11-02",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "no listener, no restart; last saved ready predates latest system boot; exact exit unknown",
+    "service_8765": "restored original application once, subsequently no listener; exit reason unknown; not switched to Tantivy",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "selective_match_candidate_default": false,
@@ -630,5 +630,12 @@
     "million_accepted": true,
     "model_calls": 0,
     "production_retrieval_changed": false
+  },
+  "full_fast_candidate": {
+    "code": "a912a2b",
+    "state": "full input preparation, no quality or release approval",
+    "requests": 0,
+    "manifest": "not yet accepted",
+    "default_enabled": false
   }
 }
