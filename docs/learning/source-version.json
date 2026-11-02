@@ -1,14 +1,14 @@
 {
-  "application_commit": "674036a334e09400dfa519b85590cfbdbe8514d8",
+  "application_commit": "6c60d2297541dfdbb90b56855ae5d55b085830a9",
   "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "document_version": "learning-site-v6.22 Tantivy supervision and million v3,2026-10-30",
+  "document_version": "learning-site-v6.23 Tantivy product adapter and full-build preparation,2026-11-02",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "final original service PID5252 real/ready; prior PID15312 exited unknown; Win32 process creation, no scheduled task/global change",
+    "service_8765": "2026-11-02 read-only no listener; no restart or configuration switch this round",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "selective_match_candidate_default": false,
@@ -16,7 +16,9 @@
     "nli": "off",
     "switched": false,
     "audit_strategy": "baseline",
-    "sql_execution": "original bm25 score,rowid LIMIT"
+    "sql_execution": "original bm25 score,rowid LIMIT",
+    "release_application_commit": "674036a334e09400dfa519b85590cfbdbe8514d8",
+    "tantivy_default": false
   },
   "validation": {
     "reused_full": {
@@ -75,6 +77,19 @@
       "full_rerun": false,
       "reused_full_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
       "scope": "frontend only; targeted isolated API/actual-client checks; affected10/18 browser separate"
+    },
+    "tantivy_product_v1": {
+      "implementation": "6c60d2297541dfdbb90b56855ae5d55b085830a9",
+      "full_offline": {
+        "tests": 1458,
+        "seconds": 280.722,
+        "skipped_private_archives": 80
+      },
+      "protocol_tests": 11,
+      "adapter_tests": 9,
+      "isolated_chains": 6,
+      "real_model_requests": 0,
+      "coverage_release_gate": "blocked_known_coverage_risks"
     }
   },
   "experiment_batches": [

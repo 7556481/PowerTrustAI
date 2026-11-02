@@ -152,3 +152,7 @@ ordinary-chain-v2将明确概念问题/正文断言的语法主体补检前置�
 ## 2026-10-09 第二版定向补记
 
 第二版默认topic_v4_subject_v1：完整正向词项OR与每句主体OR相交，原BM25稳定score/rowid Top-K。每run有界8项数字排名复用只存rowid/score，绑定发布身份/版本/表达式/K；每请求仍重读正文/邻接/版本/定位，审核结论不缓存。命中不证明首次查询解决；v5保留可选，覆盖及排序退步未充分验证，不能切默认。完整库不重建、不原地修改。
+
+## 2026-11-02 默认关闭的Tantivy产品适配
+
+候选代码已从实际Factory接回Retriever、Evidence、Harness与Store，普通启动仍SQLite。原topic_v4表达式经同版AST，unsupported显式失败；每查询原生搜索隔离进程可超时/取消，无静默SQLite回退。Top-K后的原文、版本与邻接仍走旧来源层。六条真实索引/离线模型夹具链只证明接线，不能当真实模型回答质量。旧5.220倍仅百万内核方案含回查的历史证据，新的逐查询spawn含额外成本。详见[本轮报告](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-product-v1/report.md)。

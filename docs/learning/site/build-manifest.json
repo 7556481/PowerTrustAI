@@ -1,15 +1,15 @@
 {
   "version": {
-    "application_commit": "674036a334e09400dfa519b85590cfbdbe8514d8",
+    "application_commit": "6c60d2297541dfdbb90b56855ae5d55b085830a9",
     "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
     "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "document_version": "learning-site-v6.22 Tantivy supervision and million v3,2026-10-30",
+    "document_version": "learning-site-v6.23 Tantivy product adapter and full-build preparation,2026-11-02",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
       "unconfigured_fallback": "sequential",
-      "service_8765": "final original service PID5252 real/ready; prior PID15312 exited unknown; Win32 process creation, no scheduled task/global change",
+      "service_8765": "2026-11-02 read-only no listener; no restart or configuration switch this round",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
       "selective_match_candidate_default": false,
@@ -17,7 +17,9 @@
       "nli": "off",
       "switched": false,
       "audit_strategy": "baseline",
-      "sql_execution": "original bm25 score,rowid LIMIT"
+      "sql_execution": "original bm25 score,rowid LIMIT",
+      "release_application_commit": "674036a334e09400dfa519b85590cfbdbe8514d8",
+      "tantivy_default": false
     },
     "validation": {
       "reused_full": {
@@ -76,6 +78,19 @@
         "full_rerun": false,
         "reused_full_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
         "scope": "frontend only; targeted isolated API/actual-client checks; affected10/18 browser separate"
+      },
+      "tantivy_product_v1": {
+        "implementation": "6c60d2297541dfdbb90b56855ae5d55b085830a9",
+        "full_offline": {
+          "tests": 1458,
+          "seconds": 280.722,
+          "skipped_private_archives": 80
+        },
+        "protocol_tests": 11,
+        "adapter_tests": 9,
+        "isolated_chains": 6,
+        "real_model_requests": 0,
+        "coverage_release_gate": "blocked_known_coverage_risks"
       }
     },
     "experiment_batches": [
@@ -634,8 +649,8 @@
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 8903,
-      "sha256": "f88b2f289a20f60a9cfdf55d2bab859b63810ed539f132e8bc88309ab78a8ddc"
+      "characters": 9294,
+      "sha256": "cfa47886026b035bdbb3d84baf4c11dda0a200dcf01eba2ce35ee1ec26edef45"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -644,8 +659,8 @@
     },
     {
       "source": "docs/learning/chapters/07-corpus.md",
-      "characters": 4517,
-      "sha256": "e6fe3adc8cfe131ff624dfc249a64e0fdcab983cc0b2eda600ab7dfc5a7029fb"
+      "characters": 4734,
+      "sha256": "4cc56cfe365c1cbdca77a1f18cb2e95e0e73ff53a74454a9d8fcd8fb020afee4"
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
@@ -659,8 +674,8 @@
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 8609,
-      "sha256": "c149cfd0dde841f9532fdbe620ee40c06b87a8db2f700e27ce0eed9b6f5db4c5"
+      "characters": 8841,
+      "sha256": "fb6592d455807a202529026882bb0f9e9a445b596410ad83c546ab7fba594676"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
@@ -680,7 +695,7 @@
     {
       "source": "docs/learning/chapters/14-code-tour.md",
       "characters": 29989,
-      "sha256": "51e39b1e86742a09cdb75e87d4a647450f650ba6b2f5a7335b70610e347d0187"
+      "sha256": "922ec543094bed2fbf897abe05ec6f7f18284f7db47b5c0526f53627153283b0"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -689,8 +704,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 14273,
-      "sha256": "9068d3fae4b222c193b17cc92082425ff2702316eaf81251f3121e1b00f91b8e"
+      "characters": 14492,
+      "sha256": "005db726fb4b2c7708b9b94711776538a3f6c6d7d167c891f1123c204c0e8af2"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -699,8 +714,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 10988,
-      "sha256": "0e806fffd480677ce385fb331fe53c708bb3cbfe003e00220591a0f374f91cbd"
+      "characters": 11448,
+      "sha256": "165c59bc3518bf84cff534a3b3c4b3eb61958a4e4684c5d3d1cef02d1a3ff1d1"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -718,6 +733,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 190385,
+  "markdown_characters": 191904,
   "network_dependencies": false
 }
