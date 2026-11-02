@@ -30,3 +30,4 @@ jobs:
       - run: python -m evaluation.tantivy_product_checks_v1
       - run: python -m evaluation.tantivy_adapter_checks_v1
       - run: python -m evaluation.tantivy_ranking_checks_v1
+      - run: python -m evaluation.tantivy_light_score_checks_v1

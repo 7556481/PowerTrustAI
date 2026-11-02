@@ -1,0 +1,15 @@
+{
+  "seconds": 8.319351299999994,
+  "checks": {
+    "quality674": {
+      "reference_sha256": "ad338b0f47749b88665e71a4e1f452c47017eb90587aed2cd3e73f14643d9c16",
+      "statistics_sha256": "8965535b9d2d3f7f9c7fe43155a4c687de543607105d6c558d05d1dbf925160e",
+      "native_manifest_sha256": "e45c2dcca4defdb8cc2acbdb15d0a0eac36b4a6ac5c52e2ba95cbbbf3d1d10d6"
+    },
+    "million": {
+      "reference_sha256": "e6512a4dac29e85f0e6aa0825c38a9d3c45fa3db2da81d964ae2198326459d29",
+      "statistics_sha256": "18710339e3e8904f6f9d9532b677dc59672d1c61c6dcb7c6422bcbdfed65bf47",
+      "native_manifest_sha256": "a56257e51f76ec9dc0c1bd3d5d70b8adde91f48b113803b652c6c86312e9ecd6"
+    }
+  }
+}

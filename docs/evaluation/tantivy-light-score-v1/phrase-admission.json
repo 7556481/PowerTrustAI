@@ -1,0 +1,114 @@
+[
+  {
+    "scope": "quality674",
+    "query": "\"of the\"",
+    "term_df": [
+      290,
+      315
+    ],
+    "phrase_df": 164,
+    "fts_phrase_df": 164,
+    "term_df_seconds": 0.0009059000000206652,
+    "t_phrase_seconds": 0.003993600000057995,
+    "fts_phrase_seconds": 0.012548200000082943,
+    "fts_progress_ticks": 0
+  },
+  {
+    "scope": "quality674",
+    "query": "\"in the\"",
+    "term_df": [
+      262,
+      315
+    ],
+    "phrase_df": 111,
+    "fts_phrase_df": 111,
+    "term_df_seconds": 2.470000003995665e-05,
+    "t_phrase_seconds": 0.0002243000000134998,
+    "fts_phrase_seconds": 0.0013817999999901076,
+    "fts_progress_ticks": 0
+  },
+  {
+    "scope": "quality674",
+    "query": "\"power system\"",
+    "term_df": [
+      252,
+      185
+    ],
+    "phrase_df": 28,
+    "fts_phrase_df": 28,
+    "term_df_seconds": 6.849999999758438e-05,
+    "t_phrase_seconds": 0.0002782000000252083,
+    "fts_phrase_seconds": 0.002022399999987101,
+    "fts_progress_ticks": 1
+  },
+  {
+    "scope": "quality674",
+    "query": "\"voltage stability\"",
+    "term_df": [
+      203,
+      83
+    ],
+    "phrase_df": 39,
+    "fts_phrase_df": 39,
+    "term_df_seconds": 3.5200000070290116e-05,
+    "t_phrase_seconds": 0.0002646000000368076,
+    "fts_phrase_seconds": 0.0017172000000300613,
+    "fts_progress_ticks": 0
+  },
+  {
+    "scope": "million",
+    "query": "\"of the\"",
+    "term_df": [
+      573990,
+      584822
+    ],
+    "phrase_df": 384496,
+    "fts_phrase_df": 384496,
+    "term_df_seconds": 0.018546700000001692,
+    "t_phrase_seconds": 0.32046439999999166,
+    "fts_phrase_seconds": 1.3562312999999904,
+    "fts_progress_ticks": 778
+  },
+  {
+    "scope": "million",
+    "query": "\"in the\"",
+    "term_df": [
+      548300,
+      584822
+    ],
+    "phrase_df": 316943,
+    "fts_phrase_df": 316943,
+    "term_df_seconds": 0.0075780999999324195,
+    "t_phrase_seconds": 0.25598519999994096,
+    "fts_phrase_seconds": 0.6249393999999029,
+    "fts_progress_ticks": 641
+  },
+  {
+    "scope": "million",
+    "query": "\"power system\"",
+    "term_df": [
+      152814,
+      70610
+    ],
+    "phrase_df": 2782,
+    "fts_phrase_df": 2782,
+    "term_df_seconds": 0.007833000000005086,
+    "t_phrase_seconds": 0.020065400000021327,
+    "fts_phrase_seconds": 0.10335780000002615,
+    "fts_progress_ticks": 8
+  },
+  {
+    "scope": "million",
+    "query": "\"voltage stability\"",
+    "term_df": [
+      15873,
+      6225
+    ],
+    "phrase_df": 54,
+    "fts_phrase_df": 54,
+    "term_df_seconds": 0.0048127000000022235,
+    "t_phrase_seconds": 0.009166800000002695,
+    "fts_phrase_seconds": 0.020623999999997977,
+    "fts_progress_ticks": 0
+  }
+]

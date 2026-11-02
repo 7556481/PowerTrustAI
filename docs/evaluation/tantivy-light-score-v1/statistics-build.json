@@ -1,0 +1,22 @@
+[
+  {
+    "scope": "quality674",
+    "n": 674,
+    "total_terms": 114908,
+    "avgdl": 170.486646884273,
+    "seconds": 0.25493870000002516,
+    "bytes": 24576,
+    "all_lengths_sum_verified": true,
+    "tf_or_phrase_index_built": false
+  },
+  {
+    "scope": "million",
+    "n": 1000000,
+    "total_terms": 247396048,
+    "avgdl": 247.396048,
+    "seconds": 8.936032000000068,
+    "bytes": 11898880,
+    "all_lengths_sum_verified": true,
+    "tf_or_phrase_index_built": false
+  }
+]
