@@ -28,6 +28,8 @@ class ServiceConfig:
     knowledge_version: str=BASELINE_KNOWLEDGE
     queue_capacity: int=2
     fact_strategy: str='aggregate'
+    tantivy_manifest: Path|None=None
+    tantivy_isolated: bool=False
     retrieval_mode: str='bm25'
     retrieval_execution_profile: str='topic_v4_subject_v1'
     review_message_profile: str='lossless_v1'
@@ -44,6 +46,9 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if type(self.tantivy_isolated) is not bool:raise ValueError('Boolean isolated index flag required')
+        if self.tantivy_isolated and self.tantivy_manifest is None:raise ValueError('Isolated index requires explicit manifest')
+        if self.tantivy_manifest is not None and (self.profile!='real' or self.retrieval_mode!='bm25' or self.retrieval_execution_profile!='topic_v4_subject_v1'):raise ValueError('Tantivy requires real composition and unchanged topic_v4_subject_v1 BM25 query contract')
         if self.audit_strategy not in ('baseline','source_first_audit_v1','source_first_audit_v2','source_first_audit_v3','source_first_audit_v4'):raise ValueError('Invalid audit strategy')
         if self.audit_strategy=='source_first_audit_v4' and self.domain_internal_flow!='production':raise ValueError('Source reference v4 requires its paired domain contract')
         if self.audit_strategy!='baseline' and (self.fact_review_contract!='literal_v1' or self.local_revision_interface!='source_actions_v2' or self.fact_review_execution!='serial_v1' or self.retrieval_mode!='bm25' or self.retrieval_execution_profile=='chinese_first_cross_language_v1'):raise ValueError('Source-first requires explicit literal/v2 serial BM25 candidate')

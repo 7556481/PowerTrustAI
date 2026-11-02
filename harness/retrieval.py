@@ -203,7 +203,7 @@ class RetrievalSession:
             code = ("RETRIEVAL_BUDGET_EXHAUSTED" if outcome == "budget_exhausted" else
                     "RETRIEVAL_TIMEOUT" if status == ExecutionStatus.TIMED_OUT else
                     "RETRIEVAL_CANCELLED" if status == ExecutionStatus.CANCELLED else
-                    "RETRIEVAL_CONTRACT_ERROR" if isinstance(exc, ContractError) else "RETRIEVAL_FAILURE")
+                    "RETRIEVAL_CONTRACT_ERROR" if isinstance(exc, ContractError) else getattr(exc,"code","RETRIEVAL_FAILURE"))
             reason = f"{type(exc).__name__}: {exc}"
             issue = ExecutionIssue("retrieval_" + purpose.value, status, code, reason)
         finally:

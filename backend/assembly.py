@@ -44,6 +44,11 @@ class ComponentFactory:
         from rag.corpus_index import seal
         with KnowledgeStore(self.config.index_db,readonly=True) as store:seal(store,self.config.knowledge_version)
     def initialize_retrieval(self,encoder=None):
+        if self.config.tantivy_manifest is not None:
+            if self.semantic_resource is None:
+                from rag.tantivy_retriever import AsyncTantivyRetriever
+                self.semantic_resource=AsyncTantivyRetriever(self.config.index_db,self.config.tantivy_manifest,self.config.knowledge_version,isolated=self.config.tantivy_isolated)
+            return
         if self.config.profile=='synthetic_fixture' or self.config.retrieval_mode=='bm25':return
         if self.semantic_resource is not None:return
         from rag.semantic import AsyncSQLiteSemanticRetriever,VectorIndex
@@ -62,9 +67,9 @@ class ComponentFactory:
         resource=self.semantic_resource
         if resource:
             await Bundle(None,(resource,)).drain()
-            self.retrieval_metrics={'query_encodings':resource.query_encodings,
-                'validation_replays':resource.validation_replays,'encoding_seconds':resource.encoder.encoding_seconds}
-            try:close_resources((resource,resource.encoder) if hasattr(resource.encoder,'close') else (resource,))
+            self.retrieval_metrics={'query_encodings':getattr(resource,'query_encodings',0),
+                'validation_replays':getattr(resource,'validation_replays',0),'encoding_seconds':getattr(getattr(resource,'encoder',None),'encoding_seconds',0)}
+            try:close_resources((resource,resource.encoder) if hasattr(getattr(resource,'encoder',None),'close') else (resource,))
             finally:self.semantic_resource=None
     def preflight(self):
         if self.config.execution_path=='langgraph_v1' or self.config.fact_internal_flow!='production' or self.config.domain_internal_flow!='production':
@@ -136,7 +141,7 @@ class ComponentFactory:
         from rag.bm25 import SCORING_METHOD
         from rag.semantic import RRF_VERSION
         manifest.update(retrieval_mode=self.config.retrieval_mode,
-            embedding_profile=None if self.semantic_resource is None else dict(self.semantic_resource.encoder.profile),
+            embedding_profile=None if not hasattr(self.semantic_resource,'encoder') else dict(self.semantic_resource.encoder.profile),
             scoring_method=SCORING_METHOD if self.config.retrieval_mode=='bm25' else RRF_VERSION if self.config.retrieval_mode=='hybrid' else 'Dense-cosine-v1(positive-only)')
         manifest['retrieval']='fixed-index '+self.config.retrieval_mode+'; full result replay validation'
         manifest['performance_profile']='validated-pdf-report-cache-v1: connection-local immutable body verification only; full ranking replay retained' if self.config.retrieval_mode=='bm25' else 'legacy-semantic-full-replay'
@@ -270,6 +275,12 @@ class ComponentFactory:
             manifest['audit_scope']='source_fidelity_and_task_completeness; external cross-check separately recorded'
             manifest['prompts']['verification']=VERSION
             manifest['template_sha256']['literal']=hashlib.sha256(SYSTEM.encode()).hexdigest()
+        if self.config.tantivy_manifest is not None:
+            self.initialize_retrieval()
+            manifest['retrieval']='Tantivy isolated native Top-K; original source readers; immediate certificate and strict body replay'
+            manifest['scoring_method']='tantivy-0.27.0-native-bm25'
+            manifest['performance_profile']='tantivy-owned-process-v1: per-search process startup included; no SQLite fallback'
+            manifest['retrieval_backend']={'backend':'tantivy','identity':self.semantic_resource.manifest['_identity'],'scope':self.semantic_resource.manifest['scope'],'fallback':False,'quality_gate':self.semantic_resource.manifest.get('quality_gate','blocked')}
         return manifest
 
     def create(self,rid,observer,*,fixed_evidence_only=False):
@@ -327,13 +338,15 @@ class ComponentFactory:
             if fixed_evidence_only:
                 retriever=None
             elif self.config.retrieval_mode=='bm25':
-                if self.config.retrieval_execution_profile=='chinese_first_cross_language_v1':
+                if self.config.tantivy_manifest is not None:
+                    self.initialize_retrieval();retriever=self.semantic_resource
+                elif self.config.retrieval_execution_profile=='chinese_first_cross_language_v1':
                     from dataclasses import replace
                     from rag.chinese_first import ChineseFirstRetriever
                     retriever=ChineseFirstRetriever(self.config.index_db,self.config.knowledge_version,
                         GenerationQueryConverter(model,replace(settings,max_output_tokens=1000),diag))
                 else:retriever=AsyncSQLiteBM25Retriever(self.config.index_db,execution_profile=self.config.retrieval_execution_profile)
-                resources.append(retriever)
+                resources.append(RetrieverLease(retriever) if self.config.tantivy_manifest is not None else retriever)
             else:
                 self.initialize_retrieval();retriever=self.semantic_resource;resources.append(RetrieverLease(retriever))
             corpus_english=False
