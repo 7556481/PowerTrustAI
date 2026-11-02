@@ -35,4 +35,22 @@ class FullBuildChecks(unittest.TestCase):
   with tempfile.TemporaryDirectory() as t:
    p=Path(t)/'spool.sqlite3';id={'source':'synthetic_fixture'};text='voltage';row=[0,-1,'f','b',hashlib.sha256(text.encode()).hexdigest(),text]
    s=StreamingSpool(p,id);s.append([row]);before=s.checkpoint();s.close();s=StreamingSpool(p,id);self.assertEqual(before,s.checkpoint());s.close()
+ def test_full_disk_backed_recovery_native_before_mapping(self):
+  from evaluation.tantivy_full_identity_v1 import FullCheckpoint
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t)/'build';identity={'expected':2,'source':'synthetic_fixture'};text='voltage';rows=[[i,i+1,'f'+str(i),'b',hashlib.sha256(text.encode()).hexdigest(),text] for i in range(2)]
+   b=FullCheckpoint(root,identity)
+   with self.assertRaises(RuntimeError):b.append(rows,fail_after_native=True)
+   b.close();b=FullCheckpoint(root,identity);self.assertEqual(b.con.execute('select count(*) from rows').fetchone()[0],2);b.close();self.assertFalse(list(root.glob('recovery-seen-*')))
+ def test_native_diagnostics_keep_original_error_and_cleanup_once(self):
+  from evaluation.tantivy_full_identity_v1 import DiagnosticWriter
+  class Inner:
+   commits=0;waits=0
+   def commit(self):self.commits+=1;raise ValueError('synthetic native root')
+   def wait_merging_threads(self):self.waits+=1;raise RuntimeError('synthetic cleanup')
+  with tempfile.TemporaryDirectory() as t:
+   inner=Inner();w=DiagnosticWriter(inner,Path(t))
+   with self.assertRaisesRegex(ValueError,'synthetic native root'):w.commit()
+   with self.assertRaisesRegex(RuntimeError,'synthetic cleanup'):w.wait_merging_threads()
+   w.wait_merging_threads();self.assertEqual((inner.commits,inner.waits),(1,1));records=[json.loads(x) for x in (Path(t)/'native-errors.jsonl').read_text().splitlines()];self.assertEqual([x['operation'] for x in records],['commit','wait_merging_threads'])
 if __name__=='__main__':unittest.main()

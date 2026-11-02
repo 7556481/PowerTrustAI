@@ -58,7 +58,7 @@ def run(plan_path):
      import tantivy
      index=tantivy.Index.open(str(ROOT/'build/tantivy'));seen_path=ROOT/'native-seen.sqlite3'
      if seen_path.exists():raise IndexIdentityError('Prior acceptance artifact requires explicit investigation')
-     seen=sqlite3.connect(seen_path);seen.execute('pragma cache_size=-8192');seen.execute('create table seen(rowid integer primary key)');count=0;batch=[];native_start=time.time()
+     seen=sqlite3.connect(seen_path.resolve().as_uri(),uri=True);seen.execute('pragma cache_size=-8192');seen.execute('create table seen(rowid integer primary key)');count=0;batch=[];native_start=time.time()
      try:
       for rid in stored_ids(index,ROOT/'build/tantivy'):
        batch.append((rid,));count+=1

@@ -36,7 +36,7 @@ class FastChecks(unittest.TestCase):
   async def run():
    with patch('rag.tantivy_fast_v1.serve',crossed_worker):
     with self.assertRaises(Exception):await a.retrieve(self.request())
-   self.assertIsNone(a._native)
+   self.assertIsNone(a._native);self.assertFalse(a.available)
   try:asyncio.run(run())
   finally:a.close()
  def test_wrong_index_ready_rejected(self):
@@ -55,5 +55,16 @@ class FastChecks(unittest.TestCase):
     with self.assertRaises(asyncio.CancelledError):await t
    self.assertIsNone(a._native);self.assertTrue((await a.retrieve(self.request())).evidence)
   try:asyncio.run(run())
+  finally:a.close()
+ def test_fatal_identity_and_exhausted_restarts_are_not_ready(self):
+  from backend.config import ServiceConfig
+  from backend.assembly import ComponentFactory,ConfigurationError
+  a=self.fast();cfg=ServiceConfig(index_db=self.source.p,knowledge_version=self.source.k,tantivy_manifest=self.path,tantivy_isolated=True,tantivy_worker_mode='fast_v1');factory=ComponentFactory(cfg);factory.semantic_resource=a
+  try:
+   with patch.dict('os.environ',{'DEEPSEEK_API_KEY':'fixture','DEEPSEEK_MODEL_ID':'deepseek-flash'}):
+    factory.preflight();a._starts=a.max_restarts+1
+    with self.assertRaises(ConfigurationError):factory.preflight()
+    a._starts=0;a._closed=True
+    with self.assertRaises(ConfigurationError):factory.preflight()
   finally:a.close()
 if __name__=='__main__':unittest.main()

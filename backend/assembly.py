@@ -94,6 +94,7 @@ class ComponentFactory:
                 if corpus is None:store.rows(self.config.knowledge_version)
         except Exception:raise ConfigurationError('Fixed knowledge snapshot unavailable') from None
         self.initialize_retrieval()
+        if self.config.tantivy_worker_mode=='fast_v1' and not self.semantic_resource.available:raise ConfigurationError('Fast retrieval identity/resource unavailable; no new submissions')
         return self.config.knowledge_version
 
     def manifest(self,knowledge_version,*,fixed_evidence_only=False):

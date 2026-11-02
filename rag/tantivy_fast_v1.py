@@ -26,6 +26,16 @@ class FastTantivyRetriever(AsyncTantivyRetriever):
   if type(memory_limit) is not int or not 64*1024**2<=memory_limit<=2*1024**3:raise ValueError('Bounded worker memory limit required')
   if type(max_restarts) is not int or not 0<=max_restarts<=2:raise ValueError('Worker restart quota must be0..2')
   super().__init__(*args,**kwargs);self.memory_limit=memory_limit;self.max_restarts=max_restarts;self._starts=0;self._pipe=None;self._generation=None
+ @property
+ def available(self):
+  try:live=self._native is not None and self._native.is_alive()
+  except ValueError:live=False # process handle just released by its owner
+  return not self._closed and (live or self._starts<=self.max_restarts)
+ async def _submit(self,*a,**kw):
+  from core.validation import ContractError
+  try:return await super()._submit(*a,**kw)
+  except (IndexIdentityError,ContractError):
+   self._closed=True;self._stop();raise
  def _stamps(self):
   for name,stamp in self.manifest['_stamps'].items():
    f=Path(self.manifest['_index_path'])/name
@@ -44,6 +54,7 @@ class FastTantivyRetriever(AsyncTantivyRetriever):
    if process.is_alive():self._closed=True;raise NativeSearchError('Owned worker did not release')
   finally:
    if self._pipe:self._pipe.close()
+   if not process.is_alive():process.close()
    self._pipe=None;self._native=None;self._generation=None
  def _wait(self,started):
   import psutil

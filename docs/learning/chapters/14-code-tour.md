@@ -216,7 +216,7 @@ def source_identity(row,revision,shard,row_number):
 
 ### 复用装配与固定Evidence入口
 
-路径 backend/assembly.py，函数 ComponentFactory.create，行304–321；完整函数至392行，局部摘录。
+路径 backend/assembly.py，函数 ComponentFactory.create，行305–322；完整函数至393行，局部摘录。
 
 ```python
     def create(self,rid,observer,*,fixed_evidence_only=False):

@@ -40,6 +40,8 @@ class FactoryFast(unittest.TestCase):
        r=client.get('/runs/'+rid+'/result',headers=h).json();self.assertTrue(r['execution']['required_stages_complete'],r['execution']);self.assertEqual(r['configuration']['protocols']['evidence_verification'],13);pids.append(factory.semantic_resource._native.pid)
        if bad:self.assertEqual(len(r['answer']['versions']),2);self.assertEqual(len(r['review_rounds']),2)
       self.assertEqual(pids[0],pids[1]);self.assertEqual(client.get('/runs/page/0',headers=h).status_code,200)
+      factory.semantic_resource._closed=True
+      self.assertEqual(client.get('/health').json()['status'],'degraded');self.assertEqual(client.post('/runs',headers=h,json=body).status_code,503);self.assertEqual(client.get('/runs/page/0',headers=h).status_code,200)
     self.assertIsNone(factory.semantic_resource)
     from model_adapter.call_budget_v1 import shared_gate
     gate=shared_gate(root/'budget');self.assertGreater(gate.state['calls'],0);self.assertTrue(all(not e['inflight'] for e in gate.state['entries'].values()));self.assertEqual(gate.held(),sum(e['reserved'] for e in gate.state['entries'].values()))

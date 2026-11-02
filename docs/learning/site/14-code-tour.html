@@ -116,7 +116,7 @@
             self.db.execute(<span class="string">&quot;UPDATE runs SET status=&#x27;interrupted&#x27;,ended=?,error_code=&#x27;PROCESS_INTERRUPTED&#x27; WHERE status IN (&#x27;queued&#x27;,&#x27;running&#x27;)&quot;</span>,(now(),))</code></pre>
 <p>片段SHA256：e053039f0449359a72a0d0f7685aaaba2289e17e2832a5b51c22b11a54271334。</p>
 <h3 id="section-23">复用装配与固定Evidence入口</h3>
-<p>路径 backend/assembly.py，函数 ComponentFactory.create，行304–321；完整函数至392行，局部摘录。</p>
+<p>路径 backend/assembly.py，函数 ComponentFactory.create，行305–322；完整函数至393行，局部摘录。</p>
 <pre><code class="language-python">    <span class="keyword">def</span> create(self,rid,observer,*,fixed_evidence_only=<span class="keyword">False</span>):
         <span class="string">&quot;&quot;&quot;Fixed Evidence evaluation may skip index resources; defaults unchanged.&quot;&quot;&quot;</span>
         <span class="keyword">if</span> type(fixed_evidence_only) <span class="keyword">is</span> <span class="keyword">not</span> bool:<span class="keyword">raise</span> ConfigurationError(<span class="string">&#x27;Boolean fixed evidence mode required&#x27;</span>)

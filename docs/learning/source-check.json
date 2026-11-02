@@ -61,12 +61,12 @@
     {
       "file": "backend/assembly.py",
       "symbol": "ComponentFactory.create",
-      "start_line": 304,
-      "end_line": 321,
-      "function_end_line": 392,
+      "start_line": 305,
+      "end_line": 322,
+      "function_end_line": 393,
       "partial": true,
-      "file_sha256": "3b8886302a9667fcce3453e7704d044be69712eef3f464a39578ebd4be23aaaf",
-      "source_text_lf_sha256": "240f57bd38c0fa8c80b1ba1947dd72eacba46689c339a3f7b098ca632a7fbcd0",
+      "file_sha256": "4140ba4e0fe1b541107d28e9c500b8318aa978079ebcd722c1d757dffaccdcc7",
+      "source_text_lf_sha256": "429c896ac8632e8bc065b076372258a5e54404994717109eafd26c98b6f8797f",
       "excerpt_sha256": "90c30e41b968135fa24d44bf40d33f767e4ac80d3a4bd4f0848188937aac21bb"
     },
     {

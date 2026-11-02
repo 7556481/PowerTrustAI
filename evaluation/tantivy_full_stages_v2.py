@@ -2,6 +2,7 @@
 import json,time,sqlite3,hashlib,sys,os
 from evaluation.tantivy_full_build_v1 import ROOT,SOURCE,K,StreamingSpool,StreamingCheckpoint,prepare,PauseCheckpoint
 from rag.tantivy_build import PreparationStage,atomic
+from evaluation.tantivy_full_identity_v1 import FullCheckpoint
 from rag.storage import KnowledgeStore
 from rag.tantivy_members import inventory
 from evaluation.tantivy_supervision_v3 import Guard,Expired
@@ -35,7 +36,7 @@ def run(mode,plan_path):
    if inv['total']!=identity['expected']:raise IndexIdentityError('Source member total changed')
    source.connection.execute('pragma cache_size=-8192');source.connection.execute('attach database ? as reuse',('file:'+str(ROOT.parent/'tantivy-stability-v2/input/spool.sqlite3').replace('\\','/')+'?mode=ro',))
    remaining=max(0,g.plan['deadline']-time.time()-60)
-   owner=PreparationStage(ROOT/'build',identity,total_seconds=96*3600,segment_seconds=remaining,checkpoint=check) if mode=='prepare' else StreamingCheckpoint(ROOT/'build',identity,authorized_full=True,segment_seconds=remaining,checkpoint=check)
+   owner=PreparationStage(ROOT/'build',identity,total_seconds=96*3600,segment_seconds=remaining,checkpoint=check) if mode=='prepare' else FullCheckpoint(ROOT/'build',identity,authorized_full=True,segment_seconds=remaining,checkpoint=check)
    sp=StreamingSpool(ROOT/'spool.sqlite3',identity,checkpoint=check);sp.con.execute('pragma cache_size=-4096');h=hashlib.sha256();n=0
    audit=json.loads((ROOT/'recovery-audit-1.json').read_text());prefix_file=ROOT/'spool-prefix.json';prefix=json.loads(prefix_file.read_text()) if prefix_file.exists() else None
    pending_file=ROOT/'build/prepared.json';pending=json.loads(pending_file.read_text()) if pending_file.exists() else None
@@ -66,10 +67,7 @@ def run(mode,plan_path):
      feeding=True
      try:owner.append(batch)
      except BaseException as e:
-      try:
-       if isinstance(e,(Expired,TimeoutError,PauseCheckpoint)):raise e
-       owner.writer.commit()
-      except BaseException as original:atomic(g.path.with_name('native-root-error.json'),{'primary':repr(e),'commit_error':repr(original),'cause':repr(original.__cause__),'context':repr(original.__context__)})
+      atomic(g.path.with_name('native-root-error.json'),{'primary':repr(e),'cause':repr(e.__cause__),'context':repr(e.__context__),'extra_commit_attempted':False})
       raise
      finally:feeding=False
      atomic(ROOT/'progress-v2.json',{'phase':'writer-only committed checkpoint','spooled':n,'mapped':mapped+len(batch),'expected':n,'wall':time.time(),'segment':str(plan_path)})
@@ -78,8 +76,10 @@ def run(mode,plan_path):
  except BaseException as e:primary=e;g.event('stage_failure',error=repr(e));raise
  finally:
   if sp:sp.close()
+  cleanup=[]
   if owner:
    if mode=='prepare':owner.close()
-   else:owner.close(primary=primary)
-  g.event('stage_closed',mode=mode,primary=repr(primary),elapsed=time.monotonic()-started)
+   else:cleanup=owner.close(primary=primary)
+  g.event('stage_closed',mode=mode,primary=repr(primary),cleanup_errors=cleanup,elapsed=time.monotonic()-started)
+  if cleanup:raise RuntimeError('Native cleanup failed; primary retained separately; audit required') from primary
 if __name__=='__main__':run(sys.argv[1],sys.argv[2])
