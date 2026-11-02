@@ -1,5 +1,5 @@
 {
-  "application_commit": "a912a2b",
+  "application_commit": "3df7f2f6e2622095e6d2912a121b4db1b2990363",
   "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
@@ -8,7 +8,7 @@
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "restored original application once, subsequently no listener; exit reason unknown; not switched to Tantivy",
+    "service_8765": "original SQLite service restored, PID11640 health ready, no active/queued; previous exit unknown; not switched to Tantivy",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "selective_match_candidate_default": false,
@@ -632,10 +632,11 @@
     "production_retrieval_changed": false
   },
   "full_fast_candidate": {
-    "code": "a912a2b",
+    "code": "3df7f2f6e2622095e6d2912a121b4db1b2990363",
     "state": "full input preparation, no quality or release approval",
     "requests": 0,
     "manifest": "not yet accepted",
-    "default_enabled": false
+    "default_enabled": false,
+    "ci": "four push/PR checks successful; full offline1458 in133.249s; Windows semantics successful"
   }
 }

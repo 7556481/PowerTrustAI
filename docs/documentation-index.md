@@ -1,8 +1,14 @@
 # 文档索引
 
-## 2026-11-02 全量快速检索建设进行中
+## 2026-11-02 全量快速检索继续建设（未发布）
 
-用户新授权全量24,620,947、可复用worker和新有界交付；a912a2b实现已提交，默认仍关闭。3,810,674输入/150,674原生提交，未完成全量；先输入后writer恢复，原生失败和411秒监督空窗均保留审计，不能称根因解决。监督突退出Job保护及实际Factory/Harness/Store离线修订重审通过。原96小时/160GiB账本未重置，当前监督PID7064（创建时间与实时状态须再核对），data/retrieval_local/tantivy-full-fast-v1；controller-v3-identity.json不是旧controller-identity。最新a912a2b完整离线1458/259.023秒OK，80私有归档缺失跳过；不重跑。真实0，正式24题/16链/UI/发布尚待，不能合并或切换。8765曾恢复随后无监听，具体退出未知，非当前重启导致。见[进行中报告](evaluation/tantivy-full-fast-v1/report.md)与[冻结清单](evaluation/tantivy-full-fast-v1/implementation-checklist.md)。
+最新应用3df7f2f已推送PR #5，四CI成功；完整CI1458/133.249秒、Windows29专项通过。本机a912完整1458/259.023秒日志保留，80私有归档缺失跳过。检索方案原生16→最多6不同正文/8000+2400字符，不改生产审核。674实际接口预检恢复检索Q10的1.05pu/TO例外；E3页脚/E4偏题为两路共同问题，非保护成功，正式全量质量仍未批准。
+
+全量未完成：输入5,850,674，原生150,674；当前prepare新段重新校验，96小时绝对账本不重置。根data/retrieval_local/tantivy-full-fast-v1。原监督3136消失曾留下准备worker，已正常停点/完整输入元数据审计并记411秒空窗；v3监督7064使用Windows所有权Job，下一writer用v4有界磁盘ID证明、原生主错误原样保存、清理失败停审计。旧原生writer根因仍未知，不误报OOM。进程是否存在每次以PID+创建时间核验。
+
+postbuild/identity.json观察器4428已启动，等待当前控制器干净结束，复用既有supervise自动完成全量新进程身份验收和144离线读取；预算/身份/异常不通过即停，不重试、不付费、不发布。原预算240Flash/400万可信token未消费，实际新增0。完整索引与24题后，用tantivy_full_summarize_v1 offline逐题复核；满足既定门槛才由本任务冻结并执行tantivy_full_product_batch_v1 --execute-single-authorized-batch（独立8775/8776 Store，唯一16链及共享烟测预算）。不重新申请已有授权；不得绕过offline-approved身份门禁。
+
+8765已再次由原正式D盘入口恢复，PID11640 health ready、0活动/0排队，HEAD02f85c9的应用与674036a无差异，T默认仍关闭；此前退出原因未知。原未提交材料不动。当前不能合并PR或切快速配置，余项全量身份/24题质量计时/16链真实复核/UI/发布。见[进行中报告](evaluation/tantivy-full-fast-v1/report.md)和[冻结清单](evaluation/tantivy-full-fast-v1/implementation-checklist.md)。
 
 ## 2026-11-02 轻量评分统计准入停止
 
