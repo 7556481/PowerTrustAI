@@ -12,8 +12,9 @@ def search_worker(path,tree,k,pipe):
  try:
   import tantivy
   from rag.tantivy_query import query
-  idx=tantivy.Index.open(path);idx.register_tokenizer('existing_terms',tantivy.TextAnalyzerBuilder(tantivy.Tokenizer.whitespace()).build());search=idx.searcher()
-  pipe.send(('ok',[(search.doc(a)['rowid'][0],float(score)) for score,a in search.search(query(idx,tree),limit=k,count=False).hits]))
+  started=time.monotonic();idx=tantivy.Index.open(path);idx.register_tokenizer('existing_terms',tantivy.TextAnalyzerBuilder(tantivy.Tokenizer.whitespace()).build());search=idx.searcher();opened=time.monotonic()
+  hits=search.search(query(idx,tree),limit=k,count=False).hits;queried=time.monotonic();rows=[(search.doc(a)['rowid'][0],float(score)) for score,a in hits];finished=time.monotonic()
+  pipe.send(('ok',rows,{'index_open_seconds':opened-started,'query_seconds':queried-opened,'stored_hit_seconds':finished-queried}))
  except Exception as e:pipe.send(('error',type(e).__name__))
  finally:pipe.close()
 
@@ -33,24 +34,27 @@ class AsyncTantivyRetriever(AsyncSQLiteBM25Retriever):
   for name,stamp in self.manifest['_stamps'].items():
    f=Path(self.manifest['_index_path'])/name
    if (f.stat().st_size,f.stat().st_mtime_ns)!=stamp:raise IndexIdentityError('Accepted index changed')
-  ctx=mp.get_context('spawn');parent,child=ctx.Pipe(duplex=False);process=ctx.Process(target=search_worker,args=(self.manifest['_index_path'],tree,k,child),daemon=True);started=time.monotonic();process.start();child.close();self._native=process
+  ctx=mp.get_context('spawn');parent,child=ctx.Pipe(duplex=False);process=ctx.Process(target=search_worker,args=(self.manifest['_index_path'],tree,k,child),daemon=True);started=time.monotonic();process.start();launched=time.monotonic();child.close();self._native=process
   try:
    while not parent.poll(.02):
     if self._cancel_work.is_set():raise InterruptedError('Tantivy request cancelled')
     if time.monotonic()-started>=self.timeout_seconds:raise TimeoutError('Tantivy native search timeout')
     if not process.is_alive():raise NativeSearchError('Native process exited without result')
-   try:status,rows=parent.recv()
+   try:
+    payload=parent.recv();status,rows=payload[:2];metrics=payload[2] if len(payload)>2 else {}
    except EOFError:raise NativeSearchError('Native process closed result channel') from None
    for name,stamp in self.manifest['_stamps'].items():
     f=Path(self.manifest['_index_path'])/name
     if (f.stat().st_size,f.stat().st_mtime_ns)!=stamp:raise IndexIdentityError('Accepted index changed during search')
    if status!='ok':raise NativeSearchError('Native index/search failure: '+rows)
-   self.last_trace={'backend':'tantivy','manifest':self.manifest['_identity'],'scope':self.manifest['scope'],'native_seconds':time.monotonic()-started,'fallback':False};return rows
+   self.last_trace={'backend':'tantivy','manifest':self.manifest['_identity'],'scope':self.manifest['scope'],'native_seconds':time.monotonic()-started,'process_start_seconds':launched-started,'worker_metrics':metrics,'fallback':False};return rows
   finally:
+   release_started=time.monotonic()
    if process.is_alive():process.terminate()
    process.join(2)
    if process.is_alive():process.kill();process.join(2)
    parent.close();self._native=None
+   self.last_trace.update(release_seconds=time.monotonic()-release_started,native_total_seconds=time.monotonic()-started)
    if process.is_alive():self._closed=True;raise NativeSearchError('Native process resource release failed')
  def _work(self,request,result,validate):
   # Reuse the existing source-only/citation replay paths; they never rank.
@@ -76,12 +80,14 @@ class AsyncTantivyRetriever(AsyncSQLiteBM25Retriever):
     return None
    try:tree=ast(plan(request.query)[0][1])
    except ValueError as e:raise UnsupportedQueryError(str(e)) from None
-   self._certificate=None;rows=self._rank(tree,request.max_results);evidence=[];hits=[]
+   self._certificate=None;rows=self._rank(tree,request.max_results);evidence=[];hits=[];body_started=time.monotonic()
    for rank,(rid,score) in enumerate(rows,1):
     table='corpus_chunks' if rid>0 else 'corpus_native';row=store.connection.execute('select fragment_id from '+table+' where id=?',(abs(rid),)).fetchone()
     if not row:raise IndexIdentityError('Native row has no original source member')
     e=corpus_evidence(store,row[0],request.knowledge_version,sealed);evidence.append(e);hits.append(RetrievalHit(e.evidence_id,row[0],rank,score,'tantivy-0.27.0-bm25;topic_v4_subject_v1;'+self.manifest['_identity']))
+   self.last_trace['body_seconds']=time.monotonic()-body_started;context_started=time.monotonic()
    context=None if request.context_options is None else read_adjacent_context(store,tuple(evidence),request.knowledge_version,request.context_options)
+   self.last_trace['context_seconds']=time.monotonic()-context_started
    output=RetrievalResult(tuple(evidence),request.knowledge_version,hits=tuple(hits),context=context);self._certificate=(request,output);return output
  async def _submit(self,*a,**kw):
   import asyncio
