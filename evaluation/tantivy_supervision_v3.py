@@ -77,7 +77,16 @@ def supervise(plan_path,command,directory,service_idle):
  else:g.path.with_name('pause.json').write_text('service not idle or health unavailable')
  g.check('process admission',refresh=idle);directory.mkdir(exist_ok=False)
  with (directory/'stdout.log').open('w',encoding='utf8') as out,(directory/'stderr.log').open('w',encoding='utf8') as err,(directory/'heartbeats.jsonl').open('w') as log:
+  job=None
+  if g.plan.get('kill_on_supervisor_exit'):
+   from evaluation.tantivy_owned_job_v1 import OwnedJob
+   job=OwnedJob()
+   g.path.with_name('supervisor-owner.json').write_text(json.dumps({'pid':os.getpid(),'created':psutil.Process().create_time()}))
   p=subprocess.Popen(command,stdout=out,stderr=err,cwd=g.plan['cwd'],creationflags=subprocess.CREATE_NO_WINDOW|subprocess.BELOW_NORMAL_PRIORITY_CLASS)
+  if job is not None:
+   try:job.assign(p)
+   except BaseException:
+    p.terminate();p.wait();job.close();raise
   root=psutil.Process(p.pid);ids={p.pid:root.create_time()};last=g.wall();stopping=None;peak=0;disk=0;disk_tick=0
   while p.poll() is None:
    now=g.wall();gap=now-last
@@ -89,7 +98,7 @@ def supervise(plan_path,command,directory,service_idle):
     try:
      created=proc.create_time();m=proc.memory_info()
      if proc.pid!=os.getpid():ids[proc.pid]=created
-     rows.append(dict(pid=proc.pid,created=created,rss=m.rss,private=getattr(m,'private',m.vms)))
+     rows.append(dict(pid=proc.pid,created=created,rss=m.rss,private=getattr(m,'private',m.vms),cpu_seconds=sum(proc.cpu_times()[:2])))
     except psutil.Error:pass
    memory=max(sum(x['rss'] for x in rows),sum(x['private'] for x in rows));peak=max(peak,memory)
    roster=g.path.with_name('process-identities.json');tmp=roster.with_suffix('.tmp');tmp.write_text(json.dumps(ids));os.replace(tmp,roster)
@@ -106,6 +115,7 @@ def supervise(plan_path,command,directory,service_idle):
    elif pause.exists():pause.unlink()
    log.write(json.dumps(dict(wall=now,mono_elapsed=g.mono()-g.start,processes=rows,memory=memory,disk=disk,system_available=psutil.virtual_memory().available,service_busy=busy))+'\n');log.flush();g.sleep(.2)
   rc=p.wait()
+  if job is not None:job.close()
   if g.wall()>=g.plan['deadline'] and stopping is None:stopping=g.wall()
   g.event('exit',code=rc,peak=peak)
   if rc or stopping is not None:directory.joinpath('INVALID.json').write_text(json.dumps(dict(exit_code=rc,stop_requested=stopping)))

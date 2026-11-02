@@ -36,7 +36,7 @@ class Bundle:
         self._close_attempted=True;close_resources(self.resources)
 
 class ComponentFactory:
-    def __init__(self,config):self.config=config;self.semantic_resource=None;self.retrieval_metrics=None
+    def __init__(self,config):self.config=config;self.semantic_resource=None;self.retrieval_metrics=None;self._budget_runs=set();self._smoke_run=None
     def warm_corpus_index(self):
         """Open-time validation before accepting HTTP; never a model request."""
         if self.config.profile!='real' or not self.config.index_db.is_file():return
@@ -47,7 +47,12 @@ class ComponentFactory:
         if self.config.tantivy_manifest is not None:
             if self.semantic_resource is None:
                 from rag.tantivy_retriever import AsyncTantivyRetriever
+                if self.config.tantivy_worker_mode=='fast_v1':
+                    from rag.tantivy_fast_v1 import FastTantivyRetriever as AsyncTantivyRetriever
                 self.semantic_resource=AsyncTantivyRetriever(self.config.index_db,self.config.tantivy_manifest,self.config.knowledge_version,isolated=self.config.tantivy_isolated)
+                if self.config.tantivy_worker_mode=='fast_v1':
+                    try:self.semantic_resource.warm()
+                    except BaseException:self.semantic_resource.close();self.semantic_resource=None;raise
             return
         if self.config.profile=='synthetic_fixture' or self.config.retrieval_mode=='bm25':return
         if self.semantic_resource is not None:return
@@ -280,8 +285,21 @@ class ComponentFactory:
             manifest['retrieval']='Tantivy isolated native Top-K; original source readers; immediate certificate and strict body replay'
             manifest['scoring_method']='tantivy-0.27.0-native-bm25'
             manifest['performance_profile']='tantivy-owned-process-v1: per-search process startup included; no SQLite fallback'
-            manifest['retrieval_backend']={'backend':'tantivy','identity':self.semantic_resource.manifest['_identity'],'scope':self.semantic_resource.manifest['scope'],'fallback':False,'quality_gate':self.semantic_resource.manifest.get('quality_gate','blocked')}
+            if self.config.tantivy_worker_mode=='fast_v1':
+                manifest['retrieval']='Tantivy fast trial: original source fragments and bounded neighboring text'
+                manifest['performance_profile']='tantivy-reusable-worker-v1: startup identity; request stamp/source validation; bounded restarts, no fallback'
+            manifest['fast_delivery']=None if self.config.tantivy_worker_mode!='fast_v1' else {'version':'fast-evidence-v1','candidate_limit':16,'max_results':6,'root_max_chars':8000,'context_max_chars':2400,'dedup':'exact_body_only','worker':'single_reusable_bounded2_restarts'}
+            manifest['retrieval_backend']={'backend':'tantivy-fast-v1' if self.config.tantivy_worker_mode=='fast_v1' else 'tantivy','identity':self.semantic_resource.manifest['_identity'],'scope':self.semantic_resource.manifest['scope'],'fallback':False,'quality_gate':self.semantic_resource.manifest.get('quality_gate','blocked')}
         return manifest
+
+    def bind_budget_task(self,rid,request):
+        if self.config.model_budget_dir is None:return
+        if self.config.model_budget_owner_file is not None and not self.config.model_budget_owner_file.exists():return
+        expected=self.config.model_budget_question_sha256
+        if expected is not None:
+            if hashlib.sha256(request.question.encode()).hexdigest()!=expected or request.mode.value!='question_answer' or self._smoke_run not in (None,rid):raise ConfigurationError('Frozen smoke question required')
+            self._smoke_run=rid
+        self._budget_runs.add(rid)
 
     def create(self,rid,observer,*,fixed_evidence_only=False):
         """Fixed Evidence evaluation may skip index resources; defaults unchanged."""
@@ -333,8 +351,12 @@ class ComponentFactory:
                 from model_adapter.bounded_pair_v1 import create_pair
                 model=create_pair(settings,create_adapter)
             else:model=create_adapter(settings,**({'review_contract':'simple_bound_v1'} if self.config.fact_review_contract=='simple_bound_v1' else {}))
-            resources.append(model)
-            domain_model=create_adapter(settings);resources.append(domain_model)
+            domain_model=create_adapter(settings)
+            if rid in self._budget_runs:
+                from model_adapter.call_budget_v1 import AccountedFlash,shared_gate
+                gate=shared_gate(self.config.model_budget_dir)
+                model=AccountedFlash(model,gate,rid);domain_model=AccountedFlash(domain_model,gate,rid)
+            resources.extend((model,domain_model))
             if fixed_evidence_only:
                 retriever=None
             elif self.config.retrieval_mode=='bm25':
@@ -360,7 +382,7 @@ class ComponentFactory:
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True,**({'reference_contract_v7':True} if self.config.audit_strategy=='source_first_audit_v4' else {})),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
-                policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
+                policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy,max_results=6 if self.config.tantivy_worker_mode=='fast_v1' else 3),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1' else None,
                 generation_corpus_english=corpus_english,execution_path=self.config.execution_path,audit_strategy=self.config.audit_strategy)
             harness.subject_supplement=self.config.audit_strategy=='baseline' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'

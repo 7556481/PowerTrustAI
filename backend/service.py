@@ -205,6 +205,7 @@ class ApplicationService:
         try:
             if self.store.get(rid)['status']!='queued':return
             self.active=rid;self.store.mark(rid,'running')
+            if hasattr(self.factory,'bind_budget_task'):self.factory.bind_budget_task(rid,request)
             bundle=self.factory.create(rid,lambda snapshot:self.store.checkpoint(rid,snapshot))
             self.active_bundle=bundle
             result=await bundle.harness.run(request,self.config.budget,knowledge_version=knowledge,
