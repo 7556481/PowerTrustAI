@@ -88,3 +88,13 @@ v6将批次50000降到5000、提交后释放batch及旧pending引用；这能减
 控制器10548已启动第12段准入，自动续接观察器也按原流程重新启动。当前并非全量建成，也未证明新目录长时无故障。源输入24620947不重建，原SQLite库不动；8765继续原服务，无模型调用或生产切换。私有证据native-failure11-observation、recovery-audit-11、diagnostic-window-11/result、access-probe-11、disk-location-probe-{C11,Dshort11}、checkpoint-location-probe11、native-location-v7.json。历史失败均保留。
 
 源码参考：[0.27工作线程错误传播](https://raw.githubusercontent.com/quickwit-oss/tantivy/0.27.0/src/indexer/index_writer.rs)、[Python绑定writer生命周期](https://raw.githubusercontent.com/quickwit-oss/tantivy-py/0.27.0/src/index.rs)、[磁盘文件创建实现](https://raw.githubusercontent.com/quickwit-oss/tantivy/0.27.0/src/directory/mmap_directory/mod.rs)。笼统线程失败不能作为OOM结论；隔离复现才取得具体IO错误。本次仅隔离新目录中追加一次诊断commit，不在原失败索引上尝试commit或重投模型。
+
+## 2026-11-03 11:28 再次原生writer失败，目录迁移未证明稳定
+
+第16段在新物理目录再次失败：映射/原生文档数均685674，prepared为[685674,690674)，首批尚未提交。树采样峰值115822592bytes（约110.5MiB），无stop.json；非内存护栏或4小时到期。控制器10548及续接5380均已退出，不存在后台继续建库。第12—15段是正常资源/服务暂停，不是四次writer故障。旧progress-v2的680674是陈旧提交回执，不能代表当前检查点或进程存活。
+
+本次主异常仍为An index writer was killed，清理wait_merging_threads另报Worker thread failed；cause/context均None。上次隔离诊断的Windows5拒绝访问不能直接冒充本次根因；失败时间窗未取得对应应用崩溃/Defender事件，不能据此排除安全软件。迁移短目录只证明一次小窗口成功，没有解决长流程的未定位依赖。
+
+三项有界验证：相同失败5000条在新索引经junction路径成功0.618秒、物理路径成功0.859秒；复制当前派生原生文件及映射/checkpoint/prepared，逐文件SHA核对，通过实际FullCheckpoint完整前缀恢复证明及同批append/commit/close，成功23.601秒（含复制与证明），cleanup空。补充在普通沙箱分别运行同窗口的新junction/物理索引，各成功0.615/0.800秒；简单沙箱文件限制亦未复现，不能据此排除长时后台环境差异。原检查点只读不续写，副本结果不是全量进度；不能由此宣布输入、路径或生命周期在所有状态下均正常。该证据缩小为实际长流程/原目录运行环境中的未解释故障，尚无确定根因，未启动相同配置的又一次正式重试。
+
+完整输入24620947不重建，原96小时deadline不重置；尚未全量建成/验收/付费/切换。当前阻断是取得原生首个I/O或panic的完整诊断，再决定可证明安全的恢复，不能仅增加重试或继续搬目录。私有证据native-failure16-observation.json、controls/16、diagnostic16-paths/result.json及diagnostic16-checkpoint/result.json；历史现场保留。8765只读health仍ready、无活动/排队；原SQLite配置不变，模型调用0。
