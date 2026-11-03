@@ -1,5 +1,11 @@
 # PowerTrustAI 会话交接
 
+## 2026-11-03 用户额外授权再运行一次，原3/3终止记录不重置
+
+原三次分别新增55000、200000、45000，正式到985674；均捕获.managed原子替换Windows5，末次全ID/映射/journal/必要文件审计通过后按3次上限停止，旧控制器退出。用户随后明确“失败了 先不修复 再重新运行一次吧”，授权额外一次，单独记整体第4次、extra_limit=1，原formal-policy.json的3/3及终止原因原样保留，原96h截止不变。未修复或修改运行代码、未创建新索引副本；复用after-segment-19审计，相关meta/managed/mapping/journal及必要文件SHA确认未变后准入。
+
+新增入口为忽略存储extra_resume_once_v11.py，仅调用原plan/execute/audit_segment，不自动循环重试。记录checkpoint-recovery-v10/user-extra-once-v11/authorization-and-result.json，段20；实际worker4060/创建1793719253.6944587已核验，当前源/输入校验，正式仍985674。本次结束只做必要后验并停止，不再运行第5次。旧controller-v3-identity仍指已退出的第3次控制器，不能仅凭它判断新运行状态；以段20的worker-admission与PID/创建时间核对。模型0、8765不动。
+
 只读跟踪补充：当前运行保持0366fa0，不修改恢复代码、不新建副本、不重置计数。37分钟阶段含不可变源整文件SHA、成员范围、当前映射、完整24620947条spool逐行terms/hash及journal边界，子项时间未知；不得以读取量当正式增量。恢复1新增55000，成功批次处理约9.781秒，联合核验2227.473秒，独立前/后审计61.367/59.333秒，归档及启动准备369.811秒；恢复2归档及启动准备461.291秒，后续尚待运行终态。复用方案仅写入evaluation/tantivy-checkpoint-recovery-v10/validation-reuse-plan.md，未实施。
 
 ## 2026-11-03 正式已提交至740674，第2次恢复进行中
