@@ -724,8 +724,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 18813,
-      "sha256": "31c8d08c9496cde83f3e01ffd88cc392e5dc52496deca42c069f4e5a220cb294"
+      "characters": 19240,
+      "sha256": "8b5d30dc3f82264cbde0c75664c312bf71e08bcfc4d2f1f7c78cb53ac7f7d013"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -753,6 +753,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 197514,
+  "markdown_characters": 197941,
   "network_dependencies": false
 }
