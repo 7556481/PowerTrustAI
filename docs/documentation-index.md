@@ -1,5 +1,7 @@
 # 文档索引
 
+- 2026-11-04：[有界恢复及逐次额外授权](evaluation/tantivy-checkpoint-recovery-v10/report.md)：正式1065674；第4次新增80000后结束，第5次按用户本轮单独授权启动，旧计数/原96h不重置。
+
 - [恢复校验只读拆解及复用方案（未实施）](evaluation/tantivy-checkpoint-recovery-v10/validation-reuse-plan.md)：不可变源/完整spool与动态checkpoint/journal分开，当前运行代码不修改，计时不以I/O代替提交增长。
 
 - [原版Tantivy有界检查点恢复v10](evaluation/tantivy-checkpoint-recovery-v10/report.md)：全前缀/组件CRC审计、一次隔离验证、正式最多3次且零进度停止；签名路线已停止，原生故障不宣称修复。
