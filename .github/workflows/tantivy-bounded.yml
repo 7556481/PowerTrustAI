@@ -20,7 +20,7 @@ jobs:
   atomic-compatibility:
     runs-on: windows-latest
     env:
-      PTAI_ATOMIC_TEST_ROOT: '${{ runner.temp }}/ptai-atomic-v9'
+      PTAI_ATOMIC_TEST_ROOT: '${{ github.workspace }}/.atomic-compat-ci'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -33,7 +33,7 @@ jobs:
         if: always()
         with:
           name: atomic-compatibility-evidence
-          path: '${{ runner.temp }}/ptai-atomic-v9'
+          path: '${{ env.PTAI_ATOMIC_TEST_ROOT }}'
   semantics:
     runs-on: windows-latest
     steps:
