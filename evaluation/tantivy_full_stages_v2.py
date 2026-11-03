@@ -11,10 +11,10 @@ from rag.tantivy_manifest import IndexIdentityError
 def run(mode,plan_path):
  os.environ['RUST_BACKTRACE']='full';g=Guard(plan_path);identity=json.loads((ROOT/'build-identity.json').read_text());started=time.monotonic();sp=None;owner=None;primary=None;feeding=False;native_owner=False
  diagnostic=g.plan.get('diagnostic_run');phase=lambda name:None
- if diagnostic:
+ if g.plan.get('native_trace'):
   from evaluation.tantivy_native_trace_v8 import wait_ready,phase
-  if ROOT.resolve()==__import__('evaluation.tantivy_full_build_v1',fromlist=['ROOT']).ROOT.resolve():raise RuntimeError('Diagnostic stage cannot write formal checkpoint')
   wait_ready(g.plan);phase('source/input verification')
+ if diagnostic and ROOT.resolve()==__import__('evaluation.tantivy_full_build_v1',fromlist=['ROOT']).ROOT.resolve():raise RuntimeError('Diagnostic stage cannot write formal checkpoint')
  import psutil
  supervisor=json.loads(g.path.with_name('supervisor-owner.json').read_text())
  supervisor_pid=supervisor['pid'];supervisor_created=supervisor['created'];last_parent_check=[0.]

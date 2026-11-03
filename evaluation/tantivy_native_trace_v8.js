@@ -12,6 +12,7 @@ const k = Process.getModuleByName('kernel32.dll');
 const mkdir = new NativeFunction(k.getExportByName('CreateDirectoryW'), 'bool', ['pointer', 'pointer']);
 const ntToWin = new NativeFunction(Process.getModuleByName('ntdll.dll').getExportByName('RtlNtStatusToDosError'), 'uint32', ['uint32']);
 function event(operation, path, fields = {}) {
+  if (cfg.errors_only && operation !== 'phase' && operation !== 'trace_ready' && (!fields.failed || fields.winerror === 38)) return;
   send({operation, path, pid: Process.id, thread: Process.getCurrentThreadId(), wall_ms: Date.now(), sequence: sequence++, phase, ...fields});
 }
 function inject(path) {

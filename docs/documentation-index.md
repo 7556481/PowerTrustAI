@@ -1,5 +1,7 @@
 # 文档索引
 
+- [原版Tantivy有界检查点恢复v10](evaluation/tantivy-checkpoint-recovery-v10/report.md)：全前缀/组件CRC审计、一次隔离验证、正式最多3次且零进度停止；签名路线已停止，原生故障不宣称修复。
+
 
 - [Windows原子元数据替换兼容v9](evaluation/tantivy-atomic-compat-v9/report.md)：固定边界有界重试原型；本机DLL被CodeIntegrity/4551拒绝，未启动长流程、未恢复建设，原96h截止不变。
 ## 2026-11-03 原生首错已真实捕获：.managed原子替换被拒绝，正式仍停

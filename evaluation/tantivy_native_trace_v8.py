@@ -121,7 +121,7 @@ class TraceSession:
         self.session = frida.get_local_device().attach(self.pid)
         self.session.on('detached', lambda reason, *args: self.stop('trace detached before stage ended') if not self.finished and reason != 'process-terminated' else None)
         source = Path(__file__).with_suffix('.js').read_text(encoding='utf8')
-        agent = {'roots': self.config['roots'], 'inject_pos_failure': self.config.get('inject_pos_failure', False)}
+        agent = {'roots': self.config['roots'], 'inject_pos_failure': self.config.get('inject_pos_failure', False), 'errors_only': self.config.get('errors_only', False)}
         self.script = self.session.create_script(source.replace('CONFIG', json.dumps(agent), 1))
         self.script.on('message', self.message)
         self.script.load()
