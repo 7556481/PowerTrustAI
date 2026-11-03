@@ -19,7 +19,42 @@ from rag.tantivy_build import atomic, owner
 from rag.tantivy_manifest import sha
 
 
-def freeze_and_run():
+def admit_preflight_correction(out, now):
+    """Only the explicitly authorized zero-write path correction; never recovery."""
+    previous = json.loads((out / 'control/plan.json').read_text())
+    if now >= previous['deadline']:
+        raise TimeoutError('Original two-hour diagnostic deadline expired; no renewal')
+    if (out / 'corrected-control').exists():
+        raise RuntimeError('The one authorized correction has already been admitted')
+    result = json.loads((out / 'result.json').read_text())
+    if result.get('diagnostic_added') != 0 or result.get('diagnostic_committed') != 685674 or not result.get('formal_checkpoint_unchanged'):
+        raise RuntimeError('Correction is restricted to the zero-write preflight failure')
+    events = [json.loads(line) for line in (out / 'control/events.jsonl').read_text().splitlines()]
+    error = next((e.get('primary', '') for e in reversed(events) if e.get('kind') == 'stage_closed'), '')
+    if 'unable to open database' not in error or 'native-diagnostic-v8/tantivy-stability-v2/input/spool.sqlite3' not in error.replace('\\', '/'):
+        raise RuntimeError('This is not the known diagnostic path admission failure')
+    for line in (out / 'trace/files.jsonl').read_text().splitlines():
+        event = json.loads(line)
+        if event.get('phase') not in (None, 'attached-before-admission', 'source/input verification'):
+            raise RuntimeError('Native lifecycle already entered; correction is forbidden')
+    for pid, created in json.loads((out / 'control/process-identities.json').read_text()).items():
+        try:
+            if abs(psutil.Process(int(pid)).create_time() - created) < .001:
+                raise RuntimeError('Prior diagnostic process still alive')
+        except psutil.NoSuchProcess:
+            pass
+    copied = json.loads((out / 'copied-checkpoint.json').read_text())
+    for name, expected in copied.items():
+        if sha(out / name) != expected:
+            raise RuntimeError('Zero-write diagnostic checkpoint changed')
+    actual = {str(p.relative_to(out)) for p in (out / 'build/tantivy').iterdir() if p.is_file() and not p.name.endswith('.lock')}
+    expected = {n for n in copied if Path(n).parent.name == 'tantivy'}
+    if actual != expected:
+        raise RuntimeError('Unexpected native files before correction')
+    return previous
+
+
+def freeze_and_run(correction=False):
     from evaluation.tantivy_supervision_v3 import supervise
     from evaluation.tantivy_full_controller_v1 import idle
     import tantivy
@@ -46,8 +81,9 @@ def freeze_and_run():
         if holders_at_start.get('error') or holders_at_start.get('holders'):
             raise RuntimeError('Original index file ownership requires inspection: ' + json.dumps(holders_at_start))
         out = ROOT / 'native-diagnostic-v8/long'
-        out.mkdir(exist_ok=False)  # No rerun or overwrite of this one run.
-        control = out / 'control'
+        previous = admit_preflight_correction(out, now) if correction else None
+        if not correction:out.mkdir(exist_ok=False)
+        control = out / ('corrected-control' if correction else 'control')
         control.mkdir()
         before_cp = sha(ROOT / 'build/checkpoint.json')
         code_files = [
@@ -58,7 +94,7 @@ def freeze_and_run():
             'rag/tantivy_build.py',
         ]
         plan = {
-            'deadline': min(ledger['deadline'], now + 7200), 'kill_on_supervisor_exit': True,
+            'deadline': min(ledger['deadline'], previous['deadline'] if correction else now + 7200), 'kill_on_supervisor_exit': True,
             'grace_seconds': 45, 'cwd': str(Path.cwd()), 'data_root': str(ROOT),
             'extra_data_roots': [str((ROOT / 'build').resolve())],
             'memory_limit': ledger['memory_limit'], 'disk_limit': 157 * 1024**3,
@@ -66,7 +102,7 @@ def freeze_and_run():
             'diagnostic_run': {'original_committed': 685674, 'target': 1685674,
                                'max_added': 1000000, 'root': str(out), 'input_spool': str(ROOT / 'spool.sqlite3'),
                                'reuse_spool': str(REUSE)},
-            'native_trace': {'directory': str(out / 'trace'),
+            'native_trace': {'directory': str(out / ('corrected-trace' if correction else 'trace')),
                 'dependencies': str(ROOT / 'native-diagnostic-v8/deps'),
                 'dependency_files': {str(p): sha(p) for p in (ROOT / 'native-diagnostic-v8/deps/frida').rglob('*') if p.is_file() and p.suffix in ('.pyd', '.dll', '.py')},
                 'roots': [str(out / 'build/tantivy')],
@@ -79,6 +115,7 @@ def freeze_and_run():
             'code_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
             'original_ledger_deadline': ledger['deadline'], 'models': 0,
             'original_holders_point_observation': holders_at_start,
+            'authorized_preflight_correction': correction,
         }
         atomic(control / 'plan.json', plan)
         entry = {'version': 8, 'start': now, 'deadline': plan['deadline'], 'status': 'running',
@@ -92,39 +129,40 @@ def freeze_and_run():
             from evaluation.tantivy_supervision_v3 import derived_bytes
             if derived_bytes(plan) > plan['disk_limit'] or shutil.disk_usage(out).free < plan['min_free'] + 2*1024**3:
                 raise RuntimeError('No diagnostic copy resource admission')
-            with owner(ROOT / 'build'):
-                dest = out / 'build'
-                dest.mkdir()
-                (dest / 'tantivy').mkdir()
-                copied = {}
-                for source in [*(ROOT / 'build/tantivy').iterdir(),
-                               *[ROOT / 'build' / n for n in ('mapping.sqlite3', 'checkpoint.json', 'prepared.json', 'budget.json')]]:
-                    if not source.is_file() or source.name.endswith('.lock'):
-                        continue
-                    if time.time() >= plan['deadline']:
-                        raise TimeoutError('Diagnostic deadline during copy')
-                    digest = sha(source)
-                    target = dest / 'tantivy' / source.name if source.parent.name == 'tantivy' else dest / source.name
-                    shutil.copyfile(source, target)
-                    if sha(source) != digest or sha(target) != digest:
-                        raise RuntimeError('Diagnostic checkpoint copy changed')
-                    copied[str(target.relative_to(out))] = digest
-                atomic(out / 'copied-checkpoint.json', copied)
-                for name in ('build-identity.json', 'recovery-audit-1.json', 'spool-prefix.json', 'input-complete.json'):
-                    shutil.copyfile(ROOT / name, out / name)
-                    if sha(ROOT / name) != sha(out / name):
-                        raise RuntimeError('Diagnostic input metadata copy changed')
+            if not correction:
+                with owner(ROOT / 'build'):
+                    dest = out / 'build'
+                    dest.mkdir()
+                    (dest / 'tantivy').mkdir()
+                    copied = {}
+                    for source in [*(ROOT / 'build/tantivy').iterdir(),
+                                   *[ROOT / 'build' / n for n in ('mapping.sqlite3', 'checkpoint.json', 'prepared.json', 'budget.json')]]:
+                        if not source.is_file() or source.name.endswith('.lock'):
+                            continue
+                        if time.time() >= plan['deadline']:
+                            raise TimeoutError('Diagnostic deadline during copy')
+                        digest = sha(source)
+                        target = dest / 'tantivy' / source.name if source.parent.name == 'tantivy' else dest / source.name
+                        shutil.copyfile(source, target)
+                        if sha(source) != digest or sha(target) != digest:
+                            raise RuntimeError('Diagnostic checkpoint copy changed')
+                        copied[str(target.relative_to(out))] = digest
+                    atomic(out / 'copied-checkpoint.json', copied)
+                    for name in ('build-identity.json', 'recovery-audit-1.json', 'spool-prefix.json', 'input-complete.json'):
+                        shutil.copyfile(ROOT / name, out / name)
+                        if sha(ROOT / name) != sha(out / name):
+                            raise RuntimeError('Diagnostic input metadata copy changed')
             command = [sys.executable, '-X', 'utf8', '-m', 'evaluation.tantivy_native_long_v8', 'worker', str(control / 'plan.json')]
-            rc = supervise(control / 'plan.json', command, out / 'logs', idle)
+            rc = supervise(control / 'plan.json', command, out / ('corrected-logs' if correction else 'logs'), idle)
             if rc == 0 and time.time() < plan['deadline'] - 45:
-                audit_control = out / 'audit-control'
+                audit_control = out / ('corrected-audit-control' if correction else 'audit-control')
                 audit_control.mkdir()
                 audit_plan = dict(plan)
                 audit_plan.pop('native_trace')
                 atomic(audit_control / 'plan.json', audit_plan)
                 audit_rc = supervise(audit_control / 'plan.json',
                     [sys.executable, '-X', 'utf8', '-m', 'evaluation.tantivy_native_long_v8', 'audit', str(audit_control / 'plan.json')],
-                    out / 'audit-logs', idle)
+                    out / ('corrected-audit-logs' if correction else 'audit-logs'), idle)
                 if audit_rc:
                     rc = audit_rc
         except BaseException as error:
@@ -140,7 +178,7 @@ def freeze_and_run():
             event_file = control / 'events.jsonl'
             events = [json.loads(line) for line in event_file.read_text().splitlines()] if event_file.exists() else []
             worker_primary = next((e.get('primary') for e in reversed(events) if e.get('kind') == 'stage_closed'), None)
-            atomic(out / 'result.json', {'exit_code': rc, 'primary': primary, 'ended': time.time(),
+            atomic(out / ('corrected-result.json' if correction else 'result.json'), {'exit_code': rc, 'primary': primary, 'ended': time.time(),
                    'worker_primary': worker_primary,
                    'formal_checkpoint_unchanged': sha(ROOT / 'build/checkpoint.json') == before_cp,
                    'formal_committed': final['count'], 'diagnostic_committed': copy_count,
@@ -220,5 +258,7 @@ if __name__ == '__main__':
         audit(sys.argv[2])
     elif len(sys.argv) == 2 and sys.argv[1] == '--once':
         raise SystemExit(freeze_and_run())
+    elif len(sys.argv) == 2 and sys.argv[1] == '--correct-preflight-once':
+        raise SystemExit(freeze_and_run(correction=True))
     else:
         raise SystemExit('Use --once; never resumes formal construction')

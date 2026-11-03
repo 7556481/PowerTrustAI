@@ -112,6 +112,33 @@ class NativeDiagnosticChecks(unittest.TestCase):
                     audit(root / 'plan.json')
                     self.assertEqual(json.loads((root / 'reopen-audit.json').read_text())['count'], len(ids))
 
+    def test_correction_preserves_deadline_and_refuses_native_or_changed_state(self):
+        from evaluation.tantivy_native_long_v8 import admit_preflight_correction
+        from rag.tantivy_build import atomic
+        from rag.tantivy_manifest import sha
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ('control', 'trace', 'build/tantivy'):
+                (root / name).mkdir(parents=True, exist_ok=True)
+            data = root / 'build/tantivy/synthetic'
+            data.write_bytes(b'fixed copied checkpoint')
+            atomic(root / 'control/plan.json', {'deadline': 2000})
+            atomic(root / 'control/process-identities.json', {})
+            atomic(root / 'result.json', {'diagnostic_added': 0, 'diagnostic_committed': 685674, 'formal_checkpoint_unchanged': True})
+            atomic(root / 'control/events.jsonl', {'kind': 'stage_closed', 'primary': 'unable to open database native-diagnostic-v8/tantivy-stability-v2/input/spool.sqlite3'})
+            atomic(root / 'trace/files.jsonl', {'phase': 'source/input verification'})
+            atomic(root / 'copied-checkpoint.json', {str(data.relative_to(root)): sha(data)})
+            self.assertEqual(admit_preflight_correction(root, 1000)['deadline'], 2000)
+            with self.assertRaises(TimeoutError):
+                admit_preflight_correction(root, 2000)
+            atomic(root / 'trace/files.jsonl', {'phase': 'feed'})
+            with self.assertRaisesRegex(RuntimeError, 'Native lifecycle'):
+                admit_preflight_correction(root, 1000)
+            atomic(root / 'trace/files.jsonl', {'phase': 'source/input verification'})
+            data.write_bytes(b'changed')
+            with self.assertRaisesRegex(RuntimeError, 'checkpoint changed'):
+                admit_preflight_correction(root, 1000)
+
 
 if __name__ == '__main__':
     unittest.main()
