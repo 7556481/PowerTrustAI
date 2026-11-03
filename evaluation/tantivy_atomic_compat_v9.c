@@ -61,9 +61,9 @@ static BOOL WINAPI compatible_move(LPCWSTR src,LPCWSTR dst,DWORD flags){
     if(!stable||(last!=ERROR_ACCESS_DENIED&&last!=ERROR_SHARING_VIOLATION&&last!=ERROR_LOCK_VIOLATION))goto fail;
     for(DWORD i=0;i<sizeof(waits)/sizeof(waits[0]);i++){
         if(!snapshot(src,&after_src,&se)||!snapshot(dst,&after_dst,&de)||!same(&before_src,&after_src)||!same(&before_dst,&after_dst)||!deletable(src)||!deletable(dst)){record("state_or_access_rejected",last,i+1,start,src,dst);goto fail;}
-        DWORD remaining=waits[i];while(remaining){why=admission();if(why){last=why;record("retry_stopped",last,i+1,start,src,dst);goto fail;}DWORD slice=remaining>10?10:remaining;Sleep(slice);remaining-=slice;}
+        DWORD remaining=waits[i];while(remaining){why=admission();if(why){last=why;record("retry_stopped",last,i+1,start,src,dst);goto fail;}if(GetTickCount64()-start>=2000){InterlockedIncrement(&exhausted);record("wait_budget_exhausted",last,i+1,start,src,dst);goto fail;}DWORD slice=remaining>10?10:remaining;Sleep(slice);remaining-=slice;}
         why=admission();if(why){last=why;goto fail;}
-        if(GetTickCount64()-start>=2000){last=original;goto fail;}
+        if(GetTickCount64()-start>=2000){InterlockedIncrement(&exhausted);record("wait_budget_exhausted",last,i+1,start,src,dst);goto fail;}
         /* Revalidate after waiting: never overwrite an unexpected new target. */
         if(!snapshot(src,&after_src,&se)||!snapshot(dst,&after_dst,&de)||!same(&before_src,&after_src)||!same(&before_dst,&after_dst)){record("state_changed",last,i+1,start,src,dst);goto fail;}
         if(real_move(src,dst,flags)){InterlockedIncrement(&recovered);record("replace_recovered",0,i+2,start,src,dst);return TRUE;}
