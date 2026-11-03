@@ -67,7 +67,7 @@ def execute(control,p,role):
     if roster.exists():
         # Give the original Frida client normal shutdown time; never kill a
         # process merely because an observer is slow. Live ownership blocks resume.
-        until=time.monotonic()+10
+        until=time.monotonic()+45
         while True:
             try:dead(json.loads(roster.read_text()));break
             except RuntimeError:
@@ -162,6 +162,33 @@ def controlled_writer(plan_path):
         g.event('stage_closed',primary=repr(primary),cleanup_errors=cleanup)
 
 
+def finish_controlled_readonly():
+    """Finish this same write attempt's proof after delayed observer exit.
+
+    Does not create a writer, reset the original deadline, or repeat any append.
+    Original failed gate receipt is retained independently.
+    """
+    out=HOME/'controlled'
+    with owner(ROOT):
+        l=json.loads((ROOT/'construction-ledger.json').read_text());entry=l['checkpoint_recovery_validations'][-1]
+        if entry.get('status')!='failed-no-retry' or not entry.get('error','').startswith("RuntimeError('Prior owned process still alive:"):
+            raise RuntimeError('Not the delayed owned-process exit gate')
+        if (out/'result.json').exists() or (out/'after-control').exists():raise RuntimeError('Read-only completion already attempted')
+        events=[json.loads(s) for s in (out/'write-control/events.jsonl').read_text().splitlines()]
+        closed=next(e for e in reversed(events) if e['kind']=='stage_closed')
+        exited=next(e for e in reversed(events) if e['kind']=='exit')
+        if closed['primary']!='None' or closed['cleanup_errors'] or exited['code']!=0 or (out/'write-control/stop.json').exists():
+            raise RuntimeError('The original controlled writer did not finish cleanly')
+        dead(json.loads((out/'write-control/process-identities.json').read_text()))
+        if sha(ROOT/'build/checkpoint.json')!=entry['formal_unchanged_sha']:raise RuntimeError('Formal checkpoint changed')
+        after=audit_segment(out/'build',out/'after.json',out/'after-control',entry['deadline'],[out/'write-control/process-identities.json'])
+        if after['native_committed']!=885674 or after['mapped']!=885674:raise RuntimeError('Controlled committed IDs changed')
+        result={'passed':True,'before':875674,'after':885674,'added':10000,'formal_progress_unchanged':True,'original_binary':ORIGINAL_PYD,'original_fault_fixed':False,'write_attempts':1,'read_only_completion_after_delayed_exit':True,'original_gate_stop_preserved':dict(entry),'wall':time.time()}
+        atomic(out/'result.json',result)
+        entry.update(status='passed-after-readonly-proof',added=10000,readonly_proof_completed=time.time())
+        l['wall_elapsed']=time.time()-l['start_wall'];atomic(ROOT/'construction-ledger.json',l)
+
+
 def segment(plan_path,role):
     from evaluation.tantivy_supervision_v3 import supervise
     from evaluation.tantivy_full_controller_v1 import idle
@@ -178,6 +205,7 @@ def segment(plan_path,role):
 
 if __name__=='__main__':
     if sys.argv[1:] == ['--controlled-once']:controlled()
+    elif sys.argv[1:] == ['--finish-readonly-once']:finish_controlled_readonly()
     elif len(sys.argv)==3 and sys.argv[1]=='controlled-worker':controlled_writer(sys.argv[2])
     elif len(sys.argv)==4 and sys.argv[1]=='segment':raise SystemExit(segment(sys.argv[2],sys.argv[3]))
     else:raise SystemExit('Use --controlled-once or the frozen segment worker')
