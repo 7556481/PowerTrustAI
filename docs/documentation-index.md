@@ -4,7 +4,7 @@
 
 完整输入24,620,947已准备，原生提交510,674。第10段因树RSS峰值926,904,320bytes超过891,244,544上限主动停止；worker正常退出、cleanup空，无新原生writer异常。只读审计59.992秒通过：全部510674原生ID唯一且集合等于映射，映射/待提交50000与spool一致，正ID来源元数据匹配。完整输入不重建；原pending和所有停止回执归档，旧INVALID保留。
 
-v6将批次50000降到5000、提交后释放batch及旧pending引用；这能减少Python瞬态占用，尚未证明消除原生merge/RSS增长。内存上限与96小时deadline不提高不重置；若再超限仍停审计。5个小型阶段/验收专项通过（沙箱temp权限拒绝后按规则审批原解释器复验），不重跑完整业务回归。控制器15388已恢复第11段write准入校验；后续实际写入及全量稳定性仍待观察。新续接观察器按原流程等建库干净结束后验收/24题，不自动付费。原8765、审核合同/分词/评分不变，模型0。见[进行中报告](evaluation/tantivy-full-fast-v1/report.md)；私有recovery-audit-10.json、resume-plan-v6.json与recovery10-archive。
+v6将批次50000降到5000、提交后释放batch及旧pending引用；固定窗口双批只读实测RSS增量约305→35MiB，确认Python部分明显减少，尚未证明消除原生merge/RSS增长。内存上限与96小时deadline不提高不重置；若再超限仍停审计。5个小型阶段/验收专项通过（沙箱temp权限拒绝后按规则审批原解释器复验），不重跑完整业务回归。控制器15388已恢复第11段write准入校验；后续实际写入及全量稳定性仍待观察。新续接观察器按原流程等建库干净结束后验收/24题，不自动付费。原8765、审核合同/分词/评分不变，模型0。见[进行中报告](evaluation/tantivy-full-fast-v1/report.md)；私有recovery-audit-10.json、resume-plan-v6.json与recovery10-archive。
 
 ## 2026-11-02 全量快速检索继续建设（未发布）
 
