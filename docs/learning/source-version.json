@@ -1,6 +1,6 @@
 {
   "application_commit": "3df7f2f6e2622095e6d2912a121b4db1b2990363",
-  "evaluation_implementation_commit": "5fb491f5b5525168bccc935ae8fb807bf33e208b",
+  "evaluation_implementation_commit": "b3d7f9407224b854640747f58972b60ec5d70719",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "document_version": "learning-site-v6.25 full fast retrieval construction in progress,2026-11-02",
@@ -633,7 +633,7 @@
   },
   "full_fast_candidate": {
     "code": "3df7f2f6e2622095e6d2912a121b4db1b2990363",
-    "state": "full input preparation, no quality or release approval",
+    "state": "all input prepared; memory-stop prefix510674 audited; bounded5000-batch recovery validation running; quality/release not approved",
     "requests": 0,
     "manifest": "not yet accepted",
     "default_enabled": false,
