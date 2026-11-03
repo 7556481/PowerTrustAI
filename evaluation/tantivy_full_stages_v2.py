@@ -78,7 +78,7 @@ def run(mode,plan_path):
     while True:
      check();mapped=owner.con.execute('select count(*) from rows').fetchone()[0]
      if mapped==n:break
-     pending=ROOT/'build/prepared.json';limit=50000
+     pending=ROOT/'build/prepared.json';limit=5000
      if pending.exists():p=json.loads(pending.read_text());limit=p['end']-p['start']
      batch=sp.con.execute('select * from input where position>=? order by position limit ?',(mapped,limit)).fetchall()
      feeding=True
@@ -87,7 +87,9 @@ def run(mode,plan_path):
       atomic(g.path.with_name('native-root-error.json'),{'primary':repr(e),'cause':repr(e.__cause__),'context':repr(e.__context__),'extra_commit_attempted':False})
       raise
      finally:feeding=False
-     atomic(ROOT/'progress-v2.json',{'phase':'writer-only committed checkpoint','spooled':n,'mapped':mapped+len(batch),'expected':n,'wall':time.time(),'segment':str(plan_path)})
+     batch_count=len(batch);del batch
+     if 'p' in locals():del p
+     atomic(ROOT/'progress-v2.json',{'phase':'writer-only committed checkpoint','spooled':n,'mapped':mapped+batch_count,'expected':n,'wall':time.time(),'segment':str(plan_path)})
     atomic(ROOT/'built-complete.json',{'n':n,'not_yet_accepted':True})
  except (Expired,TimeoutError,PauseCheckpoint) as e:primary=e;g.event('normal_stage_stop',error=type(e).__name__)
  except BaseException as e:primary=e;g.event('stage_failure',error=repr(e));raise
