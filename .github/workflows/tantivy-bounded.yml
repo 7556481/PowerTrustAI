@@ -20,13 +20,13 @@ jobs:
   atomic-compatibility:
     runs-on: windows-latest
     env:
-      PTAI_ATOMIC_TEST_ROOT: '${{ github.workspace }}/.atomic-compat-ci'
+      PTAI_ATOMIC_TEST_ROOT: '${{ github.workspace }}/atomic-compat-ci'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - run: python -m pip install tantivy==0.27.0 psutil ziglang==0.15.2
+      - run: python -m pip install tantivy==0.27.0 psutil==7.0.0 ziglang==0.15.2
       - run: python -m evaluation.tantivy_atomic_build_v9
       - run: python -m unittest evaluation.tantivy_atomic_checks_v9 -v
       - uses: actions/upload-artifact@v4
@@ -34,6 +34,8 @@ jobs:
         with:
           name: atomic-compatibility-evidence
           path: '${{ env.PTAI_ATOMIC_TEST_ROOT }}'
+          include-hidden-files: true
+          if-no-files-found: error
   semantics:
     runs-on: windows-latest
     steps:
