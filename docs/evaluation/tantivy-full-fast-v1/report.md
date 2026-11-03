@@ -78,3 +78,13 @@ v6将批次50000降到5000、提交后释放batch及旧pending引用；这能减
 
 
 固定停止窗口只读Python内存诊断（无writer）：50000条一批对象约144.4MiB，两批同时引用RSS较基线增304.8MiB；5000条一批对象约14.6MiB，两批RSS增34.9MiB。此为进程快照，不含Rust合并/映射页峰值，不能归因为全部内存来源。v6提交后即释放旧batch，不再产生正常的双批重叠。数据在python-batch-memory-v6-{50000,5000}.json，未改输入。
+
+## 2026-11-03 原生文件创建拒绝访问，审计后迁移派生目录
+
+第11段新增到680,674后原生worker失败，树采样峰值约200MiB、无资源stop；不是再次触发850MiB护栏。固定失败5000条在原根下新目录一次复现，通过隔离诊断commit取得明确Windows错误5 PermissionDenied，创建.pos文件失败。原生主错误及清理错误保留。Python同目录/后台写文件成功；相同5000内存索引、C临时目录、D短目录各一次成功。不能据此归因于D盘整体或某安全软件，具体原目录访问环境根因尚未知。未关闭防护、改全局ACL/模型/分词/评分。
+
+只读审计72.959秒确认680674原生ID集合/映射/输入及待提交5000一致。仅复制派生检查点到D盘tv-checkpoint-probe11短目录，逐文件SHA相等，再写同待提交5000成功，副本685674；原失败build完整保存为build-before-location-v7。v7将逻辑build以junction接到该已验证物理目录，复制旧映射/预算/原pending并核对SHA；下段必须完整复验及原生685674/映射680674的既有journal滚进，不能盲重放。新物理目录与旧现场联合计量、canonical去重，保留160GiB/30GiB余量及原96h/850MiB限制。19监督/阶段/验收、1多根计量专项通过，不重跑无关完整回归。
+
+控制器10548已启动第12段准入，自动续接观察器也按原流程重新启动。当前并非全量建成，也未证明新目录长时无故障。源输入24620947不重建，原SQLite库不动；8765继续原服务，无模型调用或生产切换。私有证据native-failure11-observation、recovery-audit-11、diagnostic-window-11/result、access-probe-11、disk-location-probe-{C11,Dshort11}、checkpoint-location-probe11、native-location-v7.json。历史失败均保留。
+
+源码参考：[0.27工作线程错误传播](https://raw.githubusercontent.com/quickwit-oss/tantivy/0.27.0/src/indexer/index_writer.rs)、[Python绑定writer生命周期](https://raw.githubusercontent.com/quickwit-oss/tantivy-py/0.27.0/src/index.rs)、[磁盘文件创建实现](https://raw.githubusercontent.com/quickwit-oss/tantivy/0.27.0/src/directory/mmap_directory/mod.rs)。笼统线程失败不能作为OOM结论；隔离复现才取得具体IO错误。本次仅隔离新目录中追加一次诊断commit，不在原失败索引上尝试commit或重投模型。

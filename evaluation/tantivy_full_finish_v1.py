@@ -40,7 +40,10 @@ def main():
    if (ROOT/'acceptance-complete.json').exists() or (ROOT/'full-measurements.jsonl').exists():raise RuntimeError('Existing acceptance/comparison requires inspection')
    for phase,module in [('accept','evaluation.tantivy_full_accept_v1'),('measure','evaluation.tantivy_full_measure_v1')]:
     if time.time()>=deadline:raise TimeoutError('No original96h budget remains')
-    control=folder/phase;control.mkdir(exist_ok=False);logs=folder/(phase+'-logs');plan={'deadline':min(deadline,time.time()+4*3600),'grace_seconds':45,'kill_on_supervisor_exit':True,'cwd':str(Path.cwd()),'data_root':str(ROOT),'memory_limit':ledger['memory_limit'],'disk_limit':157*1024**3,'min_free':30*1024**3,'pressure_available':512*1024**2};atomic(control/'plan.json',plan)
+    control=folder/phase;control.mkdir(exist_ok=False);logs=folder/(phase+'-logs');plan={'deadline':min(deadline,time.time()+4*3600),'grace_seconds':45,'kill_on_supervisor_exit':True,'cwd':str(Path.cwd()),'data_root':str(ROOT),'memory_limit':ledger['memory_limit'],'disk_limit':157*1024**3,'min_free':30*1024**3,'pressure_available':512*1024**2}
+    location=ROOT/'native-location-v7.json'
+    if location.exists():plan['extra_data_roots']=[json.loads(location.read_text())['build_root']]
+    atomic(control/'plan.json',plan)
     args=[sys.executable,'-X','utf8','-m',module]+([str(control/'plan.json')] if phase=='accept' else [])
     atomic(folder/'phase.json',{'phase':phase,'started':time.time(),'deadline':plan['deadline'],'models':0})
     rc=supervise(control/'plan.json',args,logs,idle)

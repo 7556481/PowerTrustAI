@@ -17,7 +17,13 @@ def main():
   if not history.exists():atomic(history,{'reason':'Restore validated prepare-before-writer lifecycle; initial failed stream retained','audit':str(ROOT/'recovery-audit-1.json'),'input_schema_unchanged':True,'effective_code':{p:sha(p) for p in ['evaluation/tantivy_full_stages_v2.py','evaluation/tantivy_full_controller_v2.py']}})
   while time.time()<ledger['deadline'] and not (ROOT/'built-complete.json').exists():
    mode='write' if (ROOT/'input-complete.json').exists() else 'prepare';i=len(ledger['segments']);control=ROOT/'controls'/str(i);control.mkdir(exist_ok=False);logs=ROOT/'segments'/str(i)
-   p={'deadline':min(ledger['deadline'],time.time()+4*3600),'kill_on_supervisor_exit':True,'grace_seconds':45,'cwd':str(Path.cwd()),'data_root':str(ROOT),'memory_limit':ledger['memory_limit'],'disk_limit':157*1024**3,'min_free':30*1024**3,'pressure_available':512*1024**2};atomic(control/'plan.json',p)
+   p={'deadline':min(ledger['deadline'],time.time()+4*3600),'kill_on_supervisor_exit':True,'grace_seconds':45,'cwd':str(Path.cwd()),'data_root':str(ROOT),'memory_limit':ledger['memory_limit'],'disk_limit':157*1024**3,'min_free':30*1024**3,'pressure_available':512*1024**2}
+   location=ROOT/'native-location-v7.json'
+   if location.exists():
+    extra=Path(json.loads(location.read_text())['build_root']).resolve()
+    if not extra.is_relative_to(ROOT.parent.resolve()):raise RuntimeError('Derived build root outside authorized storage')
+    p['extra_data_roots']=[str(extra)]
+   atomic(control/'plan.json',p)
    segment={'index':i,'phase':mode,'driver':'v2','start':time.time(),'status':'running','control':str(control)};ledger['segments'].append(segment);atomic(ledger_file,ledger)
    try:rc=supervise(control/'plan.json',[sys.executable,'-X','utf8','-m','evaluation.tantivy_full_stages_v2',mode,str(control/'plan.json')],logs,idle)
    except Expired:rc=0

@@ -3,6 +3,19 @@ import json,time,os,sys,subprocess,shutil
 from pathlib import Path
 import psutil
 
+def resource_roots(plan):
+ return [Path(plan['data_root']),*[Path(p) for p in plan.get('extra_data_roots',[])]]
+def derived_bytes(plan):
+ seen=set();total=0
+ for root in resource_roots(plan):
+  for p in root.rglob('*'):
+   try:
+    if not p.is_file():continue
+    real=p.resolve()
+    if real in seen:continue
+    seen.add(real);total+=p.stat().st_size
+   except FileNotFoundError:continue # concurrent native merge/atomic rename
+ return total
 class Expired(RuntimeError):pass
 class Guard:
  def __init__(self,path,wall=time.time,mono=time.monotonic,sleep=time.sleep):
@@ -103,8 +116,8 @@ def supervise(plan_path,command,directory,service_idle):
    memory=max(sum(x['rss'] for x in rows),sum(x['private'] for x in rows));peak=max(peak,memory)
    roster=g.path.with_name('process-identities.json');tmp=roster.with_suffix('.tmp');tmp.write_text(json.dumps(ids));os.replace(tmp,roster)
    if now-disk_tick>2:
-    disk=sum(x.stat().st_size for x in Path(g.plan['data_root']).rglob('*') if x.is_file());disk_tick=now
-   expired=now>=g.plan['deadline'];hard=memory>g.plan['memory_limit'] or disk>g.plan['disk_limit'] or shutil.disk_usage(directory).free<g.plan['min_free']
+    disk=derived_bytes(g.plan);disk_tick=now
+   expired=now>=g.plan['deadline'];hard=memory>g.plan['memory_limit'] or disk>g.plan['disk_limit'] or min(shutil.disk_usage(p).free for p in resource_roots(g.plan))<g.plan['min_free']
    if expired or hard:
     if stopping is None:
      stopping=now;g.path.with_name('stop.json').write_text(json.dumps(dict(reason='deadline' if expired else 'memory',wall=now)));g.event('stop_requested',identities=ids)

@@ -12,12 +12,17 @@ def audited_history(root,ledger):
  for s in ledger['segments']:
   if s.get('exit_code')==0 and s['status']=='complete':continue
   key=s['index'];file=root/('recovery-audit-%d.json'%key)
-  if key not in (1,3,10) or not file.exists():raise IndexIdentityError('Unresolved construction segment')
+  if key not in (1,3,10,11) or not file.exists():raise IndexIdentityError('Unresolved construction segment')
   a=json.loads(file.read_text())
   if not a.get('passed'):raise IndexIdentityError('Failed recovery proof')
   if key==1 and (not a.get('native_unique_id_set_matches') or not a.get('source_and_spool_prefix_matches') or a.get('committed')!=150674):raise IndexIdentityError('Native recovery boundary not proven')
   if key==3 and (not a.get('source_positive_members_match') or not a.get('native_unchanged')):raise IndexIdentityError('Preparation recovery not proven')
   if key==10 and (a.get('version')!='full-prefix-recovery-v1' or a.get('committed')!=510674 or not all(a.get(x) for x in ('native_matches_mapping','mapping_matches_spool','positive_source_metadata_matches','memory_stop_not_native_failure'))):raise IndexIdentityError('Memory-stop boundary not proven')
+  if key==11:
+   relocation=root/'native-location-v7.json'
+   if not relocation.exists() or a.get('committed')!=680674 or not all(a.get(x) for x in ('native_matches_mapping','mapping_matches_spool','positive_source_metadata_matches')):raise IndexIdentityError('Native failure prefix/relocation not proven')
+   moved=json.loads(relocation.read_text())
+   if moved.get('copied_prefix')!=680674 or moved.get('verified_clone_commit')!=685674 or moved.get('audit_sha256')!=sha(file):raise IndexIdentityError('Relocated checkpoint identity mismatch')
   proofs[str(key)]={'audit_sha256':sha(file),'status':s['status'],'exit_code':s.get('exit_code')}
  return proofs
 
