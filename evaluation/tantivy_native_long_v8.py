@@ -14,7 +14,7 @@ from pathlib import Path
 
 import psutil
 
-from evaluation.tantivy_full_build_v1 import ROOT
+from evaluation.tantivy_full_build_v1 import ROOT, REUSE
 from rag.tantivy_build import atomic, owner
 from rag.tantivy_manifest import sha
 
@@ -39,6 +39,8 @@ def freeze_and_run():
         original_cp = json.loads((ROOT / 'build/checkpoint.json').read_text())
         if original_cp['count'] != 685674:
             raise RuntimeError('Frozen original prefix changed')
+        if not REUSE.is_file():
+            raise RuntimeError('Existing read-only reuse spool is missing before diagnostic admission')
         from evaluation.tantivy_native_holders_v8 import holders
         holders_at_start = holders([p for p in (ROOT / 'build/tantivy').iterdir() if p.is_file()])
         if holders_at_start.get('error') or holders_at_start.get('holders'):
@@ -62,7 +64,8 @@ def freeze_and_run():
             'memory_limit': ledger['memory_limit'], 'disk_limit': 157 * 1024**3,
             'min_free': 30 * 1024**3, 'pressure_available': 512 * 1024**2,
             'diagnostic_run': {'original_committed': 685674, 'target': 1685674,
-                               'max_added': 1000000, 'root': str(out), 'input_spool': str(ROOT / 'spool.sqlite3')},
+                               'max_added': 1000000, 'root': str(out), 'input_spool': str(ROOT / 'spool.sqlite3'),
+                               'reuse_spool': str(REUSE)},
             'native_trace': {'directory': str(out / 'trace'),
                 'dependencies': str(ROOT / 'native-diagnostic-v8/deps'),
                 'dependency_files': {str(p): sha(p) for p in (ROOT / 'native-diagnostic-v8/deps/frida').rglob('*') if p.is_file() and p.suffix in ('.pyd', '.dll', '.py')},
@@ -134,12 +137,17 @@ def freeze_and_run():
             final = json.loads((ROOT / 'build/checkpoint.json').read_text())
             copy_cp = out / 'build/checkpoint.json'
             copy_count = json.loads(copy_cp.read_text())['count'] if copy_cp.exists() else None
+            event_file = control / 'events.jsonl'
+            events = [json.loads(line) for line in event_file.read_text().splitlines()] if event_file.exists() else []
+            worker_primary = next((e.get('primary') for e in reversed(events) if e.get('kind') == 'stage_closed'), None)
             atomic(out / 'result.json', {'exit_code': rc, 'primary': primary, 'ended': time.time(),
+                   'worker_primary': worker_primary,
                    'formal_checkpoint_unchanged': sha(ROOT / 'build/checkpoint.json') == before_cp,
                    'formal_committed': final['count'], 'diagnostic_committed': copy_count,
                    'diagnostic_added': copy_count - 685674 if copy_count is not None else None,
                    'original_deadline': ledger['deadline'],
                    'remaining_seconds': max(0, ledger['deadline'] - time.time()), 'models': 0})
+        return rc if rc is not None else 1
 
 
 def worker(plan_path):
@@ -211,6 +219,6 @@ if __name__ == '__main__':
     elif len(sys.argv) == 3 and sys.argv[1] == 'audit':
         audit(sys.argv[2])
     elif len(sys.argv) == 2 and sys.argv[1] == '--once':
-        freeze_and_run()
+        raise SystemExit(freeze_and_run())
     else:
         raise SystemExit('Use --once; never resumes formal construction')

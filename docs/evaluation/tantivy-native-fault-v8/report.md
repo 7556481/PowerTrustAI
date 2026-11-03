@@ -23,7 +23,7 @@
 
 ## 原生文件诊断，不替换生产依赖
 
-官方Frida17.25.2只装在忽略的native-diagnostic-v8/deps，不修改venv。没有Rust/链接工具链，本轮优先使用用户授权的限定文件访问跟踪，未制作或替换Tantivy二进制。绑定源码留在同一忽略目录作审计。
+官方Frida17.25.2只装在忽略的native-diagnostic-v8/deps，不修改venv。当前PATH及标准目录未找到Rust/链接工具链，本轮优先使用用户授权的限定文件访问跟踪，未制作或替换Tantivy二进制。绑定源码留在同一忽略目录作审计。
 
 仅附加本次经PID/创建时间及父子关系核验的实际worker；路径过滤为副本native索引目录。捕获NT/Win32创建、读写、flush、文件信息/rename、关闭，保存阶段、线程、操作、路径、NTSTATUS和Windows码。普通模式不改参数、返回值、系统错误或异常处理。现有panic hook及完整stderr保留。原生文件内容、完整环境、密钥和请求头不采集。
 
@@ -35,6 +35,18 @@
 
 使用经SHA复制的685,674派生检查点，完整源/输入/映射校验后沿正式路径运行。现成spool用mode=ro打开，不复制50GiB输入、不重新准备。副本最多新增1,000,000至1,685,674；最长7200秒，包括复制、全输入核验、暂停、merge/关闭与观测空窗；还受原96小时绝对期限限制，先到即停。一个writer，128000000 heap、1索引worker，原merge策略/线程默认不变；树内存891244544bytes、现有157GiB计量+既有3GiB外部预留、磁盘≥30GiB，原忙碌/压力安全点沿用。不自动重试。
 
-计划、代码/扩展/跟踪依赖身份、进程、检查点副本哈希及结果在忽略目录native-diagnostic-v8/long。原construction-ledger追加diagnostic_runs，原deadline不变；原checkpoint/输入/失败记录保留。副本新增数不写正式进度。正式建库仍暂停。长流程结果待运行后填写；不能把启动或短测成功写成根因已修复。
+计划、代码/扩展/跟踪依赖身份、进程、检查点副本哈希及结果在忽略目录native-diagnostic-v8/long。原construction-ledger追加diagnostic_runs，原deadline不变；原checkpoint/输入/失败记录保留。副本新增数不写正式进度。正式建库仍暂停。长流程未到writer，结果见下节；不能把启动或短测成功写成根因已修复。
 
 只有取得真实原因及针对性修复证据、同长流程验证通过、原检查点再审计且预算足够，才可恢复。若未复现，记录覆盖量/生命周期后结束本轮，不能宣布修复或无限正式重试。
+
+## 本次受控运行结果：工程前置失败，真实原生故障仍未知
+
+冻结d5fb5a4的worker阶段实际226.085秒，12:38:48停止。源封印校验后，SQLite attach复用spool使用了诊断副本ROOT.parent下不存在的路径；这是本轮诊断适配遗漏，不是旧原生writer原因。writer尚未创建，跟踪仅source/input verification，native文件操作0，新增提交0。原正式及副本提交均685674，原checkpoint SHA未变；本次没有得到有效的原生长流程复现或未复现结论，也未覆盖馈送、commit、merge。
+
+观察树峰值273629184bytes（约261MiB）；跟踪附加有6.475秒空窗，不能声称连续资源无异常。result.json的exit_code为1，但原协调CLI未传播该值而返回0，已补修；原回执不覆盖。原最早错误在control/events.jsonl及logs/stderr.log，控制层primary为空仅代表协调器自身没抛错，不能当worker无异常；新代码单列worker_primary。
+
+接线修正为显式绝对reuse_spool、mode=ro，并在源扫描/原生writer前校验；原正式入口默认路径不变。新增实际小型诊断副本贯通及缺失路径拒绝专项通过，相关10项通过，失败测试/实际运行均保留。未再启动同配置或自动改deadline；因用户明确只允许一次长流程，已询问是否允许在本次原绝对截止14:34:46内纠正运行，未获答复前不执行。原96小时截止为2026-11-06 11:49:19，北京时间；终止审计时约71.09小时余量，之后继续按绝对时间扣减。
+
+当前真正修复的是诊断链、主错可见性和诊断入口接线；没有修复经证实的原生根因。正式建设不恢复。尚需验证的假设：历史Windows5说明曾有文件创建拒绝，但第16段未知；简单短窗口/目录成功不能排除长流程状态或瞬时文件访问差异；无panic/低RSS也不能排除未观测的原生分配/句柄/提交额度问题；点时69文件无其他持有者不证明历史无并发访问。只能用可靠原生首错与对应上下文缩小，不换目录追成功、不归罪于引擎或安全软件。
+
+证据路径：native-diagnostic-v8/long/{control/plan.json,copied-checkpoint.json,result.json,termination-audit.json,trace/files.jsonl,logs/stderr.log}、path-preflight-checks.txt、offline-checks-qualified.txt。所有实际材料留忽略存储，源库只读、模型0、8765未操作，PR #5保持草稿，不合并PR #4。

@@ -31,6 +31,9 @@ def run(mode,plan_path):
    raise PauseCheckpoint('resource/user pause at safe boundary')
  try:
   check()
+  from pathlib import Path
+  reuse_path=Path(diagnostic['reuse_spool']) if diagnostic else ROOT.parent/'tantivy-stability-v2/input/spool.sqlite3'
+  if not reuse_path.is_file():raise IndexIdentityError('Read-only reuse spool missing before source verification: '+str(reuse_path))
   if [SOURCE.stat().st_size,SOURCE.stat().st_mtime_ns]!=identity['source_stat']:raise IndexIdentityError('Source file identity changed')
   with KnowledgeStore(SOURCE,readonly=True,validated_pdf_cache=True) as source:
    from evaluation.tantivy_medium_measure_v2 import seal_checked
@@ -39,7 +42,7 @@ def run(mode,plan_path):
    with patch.object(old,'checkpoint',check):seal_checked(source,K)
    inv=inventory(source,K)
    if inv['total']!=identity['expected']:raise IndexIdentityError('Source member total changed')
-   source.connection.execute('pragma cache_size=-8192');source.connection.execute('attach database ? as reuse',('file:'+str(ROOT.parent/'tantivy-stability-v2/input/spool.sqlite3').replace('\\','/')+'?mode=ro',))
+   source.connection.execute('pragma cache_size=-8192');source.connection.execute('attach database ? as reuse',(reuse_path.resolve().as_uri()+'?mode=ro',))
    remaining=max(0,g.plan['deadline']-time.time()-60)
    owner=PreparationStage(ROOT/'build',identity,total_seconds=96*3600,segment_seconds=remaining,checkpoint=check)
    mapped_db=sqlite3.connect((ROOT/'build/mapping.sqlite3').resolve().as_uri()+'?mode=ro',uri=True)

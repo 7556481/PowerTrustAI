@@ -58,4 +58,25 @@ class StageChecks(unittest.TestCase):
     closed=next(x for x in events if x['kind']=='stage_closed')
     self.assertIn('first native add error',closed['primary']);self.assertEqual(closed['cleanup_errors'],['later native join error'])
   finally:fixture.tearDown()
+ def test_diagnostic_copy_uses_absolute_readonly_spools(self):
+  fixture=source_fixture.CorpusTests();fixture.setUp()
+  try:
+   with tempfile.TemporaryDirectory() as t:
+    root,plan=self.setup_input(Path(t),fixture)
+    config=json.loads(plan.read_text());config['diagnostic_run']={'target':3,'input_spool':str(root/'spool.sqlite3'),'reuse_spool':str(root.parent/'tantivy-stability-v2/input/spool.sqlite3')};atomic(plan,config)
+    with patch.object(module,'ROOT',root),patch.object(module,'SOURCE',Path(fixture.p)),patch.object(module,'K',fixture.k),patch('evaluation.tantivy_native_trace_v8.wait_ready'):
+     module.run('write',plan)
+    self.assertEqual(json.loads((root/'diagnostic-complete.json').read_text())['committed'],3)
+    self.assertFalse((root/'built-complete.json').exists())
+  finally:fixture.tearDown()
+ def test_diagnostic_missing_reuse_fails_before_source_scan_or_writer(self):
+  fixture=source_fixture.CorpusTests();fixture.setUp()
+  try:
+   with tempfile.TemporaryDirectory() as t:
+    root,plan=self.setup_input(Path(t),fixture)
+    config=json.loads(plan.read_text());config['diagnostic_run']={'target':3,'input_spool':str(root/'spool.sqlite3'),'reuse_spool':str(root/'missing-reuse.sqlite3')};atomic(plan,config)
+    with patch.object(module,'ROOT',root),patch.object(module,'SOURCE',Path(fixture.p)),patch('evaluation.tantivy_native_trace_v8.wait_ready'),patch('evaluation.tantivy_medium_measure_v2.seal_checked') as seal,patch.object(module,'FullCheckpoint') as writer:
+     with self.assertRaisesRegex(IndexIdentityError,'reuse spool missing'):module.run('write',plan)
+     seal.assert_not_called();writer.assert_not_called()
+  finally:fixture.tearDown()
 if __name__=='__main__':unittest.main()
