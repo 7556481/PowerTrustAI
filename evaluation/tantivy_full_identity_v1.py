@@ -4,7 +4,7 @@ from evaluation.tantivy_full_build_v1 import StreamingCheckpoint
 from rag.tantivy_build import stored_ids
 from rag.tantivy_manifest import IndexIdentityError
 class DiagnosticWriter:
- def __init__(self,inner,root):self.inner=inner;self.root=root;self.closed=False
+ def __init__(self,inner,root,phase=None):self.inner=inner;self.root=root;self.closed=False;self.phase=phase or (lambda name:None)
  def __getattr__(self,name):return getattr(self.inner,name)
  def record(self,operation,error):
   row={'operation':operation,'wall':time.time(),'error':repr(error),'cause':repr(error.__cause__),'context':repr(error.__context__)}
@@ -15,11 +15,16 @@ class DiagnosticWriter:
    try:sys.stderr.write(json.dumps(dict(row,logging_error=type(logging_error).__name__))+'\n')
    except Exception:pass # Never replace the original native failure with logging failure.
  def commit(self):
+  self.phase('commit')
   try:return self.inner.commit()
   except BaseException as e:self.record('commit',e);raise
+ def add_document(self,*a,**kw):
+  try:return self.inner.add_document(*a,**kw)
+  except BaseException as e:self.record('add_document',e);raise
  def wait_merging_threads(self):
   if self.closed:return
   self.closed=True
+  self.phase('merge_wait/close')
   try:return self.inner.wait_merging_threads()
   except BaseException as e:self.record('wait_merging_threads',e);raise
 class FullCheckpoint(StreamingCheckpoint):

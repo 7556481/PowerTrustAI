@@ -101,11 +101,24 @@ def supervise(plan_path,command,directory,service_idle):
    except BaseException:
     p.terminate();p.wait();job.close();raise
   root=psutil.Process(p.pid);ids={p.pid:root.create_time()};last=g.wall();stopping=None;peak=0;disk=0;disk_tick=0
+  trace=None
+  if g.plan.get('native_trace'):
+   from evaluation.tantivy_native_trace_v8 import TraceSession
+   trace=TraceSession(g.plan['native_trace'],p.pid,ids[p.pid],g.path.with_name('stop.json'))
+   try:trace.start()
+   except BaseException:
+    terminate_verified(ids);trace.close()
+    if job is not None:job.close()
+    raise
   while p.poll() is None:
    now=g.wall();gap=now-last
    if gap>g.plan.get('gap_seconds',5):g.event('observation_gap',seconds=gap,unobserved_resources=True)
    last=now;rows=[]
-   try:descendants=root.children(recursive=True)
+   try:
+    descendants=root.children(recursive=True)
+    if trace is not None:
+     # Diagnostic client helpers, if any, belong to this supervisor too.
+     descendants=list({x.pid:x for x in [*descendants,*psutil.Process().children(recursive=True)] if x.pid!=root.pid}.values())
    except psutil.NoSuchProcess:break
    for proc in [psutil.Process(),root,*descendants]:
     try:
@@ -118,9 +131,12 @@ def supervise(plan_path,command,directory,service_idle):
    if now-disk_tick>2:
     disk=derived_bytes(g.plan);disk_tick=now
    expired=now>=g.plan['deadline'];hard=memory>g.plan['memory_limit'] or disk>g.plan['disk_limit'] or min(shutil.disk_usage(p).free for p in resource_roots(g.plan))<g.plan['min_free']
-   if expired or hard:
+   observer_stop=trace is not None and g.path.with_name('stop.json').exists()
+   if expired or hard or observer_stop:
     if stopping is None:
-     stopping=now;g.path.with_name('stop.json').write_text(json.dumps(dict(reason='deadline' if expired else 'memory',wall=now)));g.event('stop_requested',identities=ids)
+     stopping=now
+     if not observer_stop:g.path.with_name('stop.json').write_text(json.dumps(dict(reason='deadline' if expired else 'memory',wall=now)))
+     g.event('stop_requested',identities=ids)
     if now-stopping>=g.plan['grace_seconds']:
      directory.joinpath('INVALID.json').write_text(json.dumps(dict(reason='grace exhausted',identities=ids)));terminate_verified(ids);g.event('terminated_verified_tree');break
    busy=not idle() or psutil.virtual_memory().available<g.plan['pressure_available'];pause=g.path.with_name('pause.json')
@@ -128,6 +144,7 @@ def supervise(plan_path,command,directory,service_idle):
    elif pause.exists():pause.unlink()
    log.write(json.dumps(dict(wall=now,mono_elapsed=g.mono()-g.start,processes=rows,memory=memory,disk=disk,system_available=psutil.virtual_memory().available,service_busy=busy))+'\n');log.flush();g.sleep(.2)
   rc=p.wait()
+  if trace is not None:trace.close()
   if job is not None:job.close()
   if g.wall()>=g.plan['deadline'] and stopping is None:stopping=g.wall()
   g.event('exit',code=rc,peak=peak)

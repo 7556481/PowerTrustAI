@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'evaluation/tantivy_*.py'
+      - 'evaluation/tantivy_*.js'
       - 'rag/tantivy_*.py'
       - 'backend/assembly.py'
       - 'backend/config.py'
@@ -27,6 +28,7 @@ jobs:
       - run: python -m unittest tests.test_tantivy_query_ast -v
       - run: python -c "import tempfile; from pathlib import Path; import evaluation.tantivy_selfcheck as s; s.LOCAL=Path(tempfile.mkdtemp()); s.main()"
       - run: python -m evaluation.tantivy_writer_selfcheck
+      - run: python -m unittest evaluation.tantivy_native_checks_v8 -v
       - run: python -m evaluation.tantivy_stability_checks_v2
       - run: python -m evaluation.tantivy_supervision_checks_v3
       - run: python -m evaluation.tantivy_product_checks_v1

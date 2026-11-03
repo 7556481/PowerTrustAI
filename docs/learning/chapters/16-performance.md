@@ -268,3 +268,7 @@ FTS5 rank可配置，须核验映射；本机SQLite3.45.3、配置无rank覆盖�
 三项有界验证：相同失败5000条在新索引经junction路径成功0.618秒、物理路径成功0.859秒；复制当前派生原生文件及映射/checkpoint/prepared，逐文件SHA核对，通过实际FullCheckpoint完整前缀恢复证明及同批append/commit/close，成功23.601秒（含复制与证明），cleanup空。补充在普通沙箱分别运行同窗口的新junction/物理索引，各成功0.615/0.800秒；简单沙箱文件限制亦未复现，不能据此排除长时后台环境差异。原检查点只读不续写，副本结果不是全量进度；不能由此宣布输入、路径或生命周期在所有状态下均正常。该证据缩小为实际长流程/原目录运行环境中的未解释故障，尚无确定根因，未启动相同配置的又一次正式重试。
 
 完整输入24620947不重建，原96小时deadline不重置；尚未全量建成/验收/付费/切换。当前阻断是取得原生首个I/O或panic的完整诊断，再决定可证明安全的恢复，不能仅增加重试或继续搬目录。私有证据native-failure16-observation.json、controls/16、diagnostic16-paths/result.json及diagnostic16-checkpoint/result.json；历史现场保留。8765只读health仍ready、无活动/排队；原SQLite配置不变，模型调用0。
+
+## 2026-11-03：把原生错误保留到产品工程记录
+
+Tantivy0.27的add遇到worker失效只报通用killed，wait会把原Result映射成通用join失败；额外commit可能走另一条保留原错的路径，但不能在原失败索引上为诊断改提交行为。本轮先记录add主错、独立清理错，并用限定PID及索引目录的NT文件跟踪取得路径、线程及系统码。正常短测证明Rust实际写入可绕过Win32 WriteFile，需观察NtWriteFile/NtClose；原生I/O短测成功不等于真实根因复现，原生纯逻辑Result仍可能需要进一步原生层日志。正式685674进度保留，唯一副本长流程最多新增100万/两小时，原累计期限不重置。模型0、生产不切换，未取得原因与修复证据不能恢复。详见原生诊断报告（docs/evaluation/tantivy-native-fault-v8/report.md）。

@@ -41,4 +41,21 @@ class StageChecks(unittest.TestCase):
      writer.assert_not_called()
     self.assertFalse((root/'built-complete.json').exists());self.assertIsNone(json.loads((root/'build/budget.json').read_text())['active_since'])
   finally:fixture.tearDown()
+ def test_native_primary_survives_cleanup_failure(self):
+  from types import SimpleNamespace
+  fixture=source_fixture.CorpusTests();fixture.setUp()
+  try:
+   with tempfile.TemporaryDirectory() as t:
+    root,plan=self.setup_input(Path(t),fixture);primary=ValueError('first native add error')
+    c=sqlite3.connect((root/'build/mapping.sqlite3').resolve().as_uri()+'?mode=ro',uri=True)
+    def fail(rows):raise primary
+    def close(primary=None):c.close();return ['later native join error']
+    fake=SimpleNamespace(con=c,writer=SimpleNamespace(),mapping_hash=lambda:json.loads((root/'build/checkpoint.json').read_text())['mapping_hash'],append=fail,close=close)
+    with patch.object(module,'ROOT',root),patch.object(module,'SOURCE',Path(fixture.p)),patch.object(module,'K',fixture.k),patch.object(module,'FullCheckpoint',return_value=fake):
+     with self.assertRaises(ValueError) as caught:module.run('write',plan)
+     self.assertIs(caught.exception,primary)
+    events=[json.loads(x) for x in (root/'control/events.jsonl').read_text().splitlines()]
+    closed=next(x for x in events if x['kind']=='stage_closed')
+    self.assertIn('first native add error',closed['primary']);self.assertEqual(closed['cleanup_errors'],['later native join error'])
+  finally:fixture.tearDown()
 if __name__=='__main__':unittest.main()

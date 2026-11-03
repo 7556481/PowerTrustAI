@@ -10,6 +10,11 @@ from rag.tantivy_manifest import IndexIdentityError
 
 def run(mode,plan_path):
  os.environ['RUST_BACKTRACE']='full';g=Guard(plan_path);identity=json.loads((ROOT/'build-identity.json').read_text());started=time.monotonic();sp=None;owner=None;primary=None;feeding=False;native_owner=False
+ diagnostic=g.plan.get('diagnostic_run');phase=lambda name:None
+ if diagnostic:
+  from evaluation.tantivy_native_trace_v8 import wait_ready,phase
+  if ROOT.resolve()==__import__('evaluation.tantivy_full_build_v1',fromlist=['ROOT']).ROOT.resolve():raise RuntimeError('Diagnostic stage cannot write formal checkpoint')
+  wait_ready(g.plan);phase('source/input verification')
  import psutil
  supervisor=json.loads(g.path.with_name('supervisor-owner.json').read_text())
  supervisor_pid=supervisor['pid'];supervisor_created=supervisor['created'];last_parent_check=[0.]
@@ -45,7 +50,13 @@ def run(mode,plan_path):
      if m[0]!=pos:raise IndexIdentityError('Mapping position gap before writer admission')
      mapped_hash.update(json.dumps(m).encode());pos+=1
    finally:mapped_db.close()
-   sp=StreamingSpool(ROOT/'spool.sqlite3',identity,checkpoint=check);sp.con.execute('pragma cache_size=-4096');h=hashlib.sha256();n=0
+   if diagnostic:
+    from types import SimpleNamespace
+    input_path=__import__('pathlib').Path(diagnostic['input_spool']).resolve()
+    input_con=sqlite3.connect(input_path.as_uri()+'?mode=ro',uri=True)
+    sp=SimpleNamespace(con=input_con,close=input_con.close)
+   else:sp=StreamingSpool(ROOT/'spool.sqlite3',identity,checkpoint=check)
+   sp.con.execute('pragma cache_size=-4096');h=hashlib.sha256();n=0
    audit=json.loads((ROOT/'recovery-audit-1.json').read_text());prefix_file=ROOT/'spool-prefix.json';prefix=json.loads(prefix_file.read_text()) if prefix_file.exists() else None
    pending_file=ROOT/'build/prepared.json';pending=json.loads(pending_file.read_text()) if pending_file.exists() else None
    boundaries={mapped_count};bindings={0:hashlib.sha256().hexdigest()}
@@ -72,16 +83,21 @@ def run(mode,plan_path):
     if n!=identity['expected'] or h.hexdigest()!=complete['mapping_hash']:raise IndexIdentityError('Full input digest mismatch before writer feeding')
     # All source/input/committed metadata checks precede native writer creation.
     owner.close();owner=None;check();remaining=max(0,g.plan['deadline']-time.time()-60)
+    phase('native recovery/writer creation')
     owner=FullCheckpoint(ROOT/'build',identity,authorized_full=True,segment_seconds=remaining,checkpoint=check);native_owner=True
+    owner.writer.phase=phase
     recovered=owner.con.execute('select count(*) from rows').fetchone()[0]
     if bindings.get(recovered)!=owner.mapping_hash():raise IndexIdentityError('Recovered native commit not bound to verified spool')
+    target=diagnostic['target'] if diagnostic else n
+    if not recovered<=target<=min(n,recovered+1000000) and diagnostic:raise RuntimeError('Diagnostic member ceiling changed')
     while True:
      check();mapped=owner.con.execute('select count(*) from rows').fetchone()[0]
-     if mapped==n:break
-     pending=ROOT/'build/prepared.json';limit=5000
+     if mapped==target:break
+     pending=ROOT/'build/prepared.json';limit=min(5000,target-mapped)
      if pending.exists():p=json.loads(pending.read_text());limit=p['end']-p['start']
      batch=sp.con.execute('select * from input where position>=? order by position limit ?',(mapped,limit)).fetchall()
      feeding=True
+     phase('feed')
      try:owner.append(batch)
      except BaseException as e:
       atomic(g.path.with_name('native-root-error.json'),{'primary':repr(e),'cause':repr(e.__cause__),'context':repr(e.__context__),'extra_commit_attempted':False})
@@ -90,7 +106,8 @@ def run(mode,plan_path):
      batch_count=len(batch);del batch
      if 'p' in locals():del p
      atomic(ROOT/'progress-v2.json',{'phase':'writer-only committed checkpoint','spooled':n,'mapped':mapped+batch_count,'expected':n,'wall':time.time(),'segment':str(plan_path)})
-    atomic(ROOT/'built-complete.json',{'n':n,'not_yet_accepted':True})
+    if diagnostic:atomic(ROOT/'diagnostic-complete.json',{'committed':target,'original_progress_unchanged':True,'wall':time.time()})
+    else:atomic(ROOT/'built-complete.json',{'n':n,'not_yet_accepted':True})
  except (Expired,TimeoutError,PauseCheckpoint) as e:primary=e;g.event('normal_stage_stop',error=type(e).__name__)
  except BaseException as e:primary=e;g.event('stage_failure',error=repr(e));raise
  finally:
@@ -100,5 +117,8 @@ def run(mode,plan_path):
    if not native_owner:owner.close()
    else:cleanup=owner.close(primary=primary)
   g.event('stage_closed',mode=mode,primary=repr(primary),cleanup_errors=cleanup,elapsed=time.monotonic()-started)
-  if cleanup:raise RuntimeError('Native cleanup failed; primary retained separately; audit required') from primary
+  if cleanup and (primary is None or isinstance(primary,(Expired,TimeoutError,PauseCheckpoint))):
+   raise RuntimeError('Native cleanup failed; primary retained separately; audit required') from primary
+  # An already-propagating primary remains the outward exception. Cleanup is
+  # separately recorded above; never replace the first failure with join failure.
 if __name__=='__main__':run(sys.argv[1],sys.argv[2])
