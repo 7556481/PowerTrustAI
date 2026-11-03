@@ -1,0 +1,31 @@
+# Windows原子元数据替换兼容修复 v9
+
+接续f0810e8。真实故障的首错仍是临时文件→`.managed.json`的MoveFileExW/Windows5，真实持有者未知不再单独阻止兼容修复。本轮不改变分词、schema、评分、成员、merge或审核合同。
+
+## 实现与安全边界
+
+核对固定核心0.27.0的MmapDirectory::atomic_write、绑定0.27.0，以及[tempfile 3.21.0 Windows persist](https://github.com/Stebalien/tempfile/blob/v3.21.0/src/file/imp/windows.rs)。tempfile当前master仍是相同的SetFileAttributesW→MoveFileExW；[更新记录](https://github.com/Stebalien/tempfile/blob/master/CHANGELOG.md)未提供可直接归因本故障的persist重试修复。没有盲目升级依赖，也没有声称遍查所有上游问题。原写入、flush、sync_data、临时文件清理和失败传播保留。
+
+本轮实现一个**尚未准入的兼容原型**：固定原Tantivy扩展SHA，仅重定向该扩展自身的MoveFileExW导入。隔离C DLL不替换venv的扩展，不修改系统DLL/全局配置；仅匹配配置目录内`.tmp*`→`.managed.json`、REPLACE_EXISTING标志。其他路径/标志直接走原操作，索引格式不变。选择这种小范围接线是本机没有Rust/MSVC工具链，避免为一个替换边界盲升整套依赖；不是已验证的上游修复。
+
+原操作先执行一次。仅错误5/32/33、源和既有目标仍为同一普通可写文件、卷/文件ID/长度/mtime/属性未变，且DELETE权限探测未发现真正拒绝，才允许最多7次额外替换，等待10/20/40/80/160/320/640ms，总计划等待1270ms，另有操作经过2秒检查。每次等待切成≤10ms检查取消、stop文件和绝对deadline；每次失败记录路径、线程、系统码和尝试数。权限探测的SharingViolation允许进入有界等待，AccessDenied不允许。只读、无效路径、缺失/变更文件、非白名单错误、日志失败、取消、到期和持续冲突均停止。首次创建没有既有目标时不重试。
+
+这里重复的是相同原子rename，不是writer/批次；无删除旧文件、复制覆盖、关闭merge或未知提交重放。底层I/O自身不能承诺2秒内返回，已有监督宽限/已核验子树终止仍是最终上界；不得把等待上限写成任意系统调用的硬实时保证。取消与replace成功的竞争以真实系统调用结果为准，已经成功的原子替换不会伪报成未写入。文件状态检查不能消除外部TOCTOU，依赖单writer所有权；未声称可处理任意外部写入。
+
+## 本机实测：DLL加载被应用程序控制拒绝
+
+固定便携ziglang0.15.2仅下载解压至忽略的`atomic-compat-v9/toolchain`，没有安装全局工具或修改项目环境。C DLL编译成功；本机9项首次短测全部在LoadLibrary阶段失败，**替换实现一次也未执行**。不是9次替换失败，也不是Tantivy故障复现，不能称语义测试通过。失败目录/回执与系统事件保留，不重试加载或更名搬目录规避。
+
+2026-11-03 15:40:39–43，Python加载DLL返回Windows4551“应用程序控制策略已阻止此文件”。限定该文件的CodeIntegrity/Operational事件3033、3077明确记录未满足Enterprise signing level或代码完整性策略；签名检查为NotSigned。拒绝产物SHA256：`dabff1480492be34f996495ecbb1db0bf2ae97313830c85998efeeba71445eaa`。这是新增兼容产物的执行准入问题，**不是原MoveFileExW/5的归因证据**，不能反推原故障是代码签名/防护导致。
+
+没有关闭防护、修改ACL/信任策略、自签并安装信任，或改用运行时注入绕过此次明确拒绝。兼容原型未接入正式控制器，未更改原依赖。
+
+## 独立验证与恢复门禁
+
+新增Windows CI隔离构建及真实文件测试：正常替换、短暂读冲突释放、持续冲突、只读、无效路径、取消、stop、deadline、日志失败；替换前/等待中/完成后中断检查完整旧/新JSON；真实小索引失败后新进程重开最后100条已提交ID。每个用例独立进程，调用C实现和实际Windows文件API，不以模拟异常代替。本机准入失败记录与CI结果必须分开；CI通过也不能证明本机允许加载或真实长流程已通过。
+
+一次≤100万/2小时长流程**未启动、未消耗这一次机会**。正式685674、诊断875674、完整输入24620947均保留，不合并副本进度，不重复准备输入。恢复需要：当前系统策略允许的可信兼容构建产物（如受信签名构建，或经审阅可采用的上游发行物）、本机真实短测、一次原生命周期长流程及全部已提交ID/hash新进程验收通过。不得为得到通过另建writer重试循环。未知真实持有者不再是唯一前置条件。
+
+原96小时绝对截止仍为2026-11-06 11:49:19（北京时间），没有重置、申请延期或把阻断时间抹除。模型0，原库只读，8765未操作、PR #4不动、PR #5仍草稿。当前不能宣称修复成功或恢复建设。
+
+私有证据：`data/retrieval_local/tantivy-full-fast-v1/atomic-compat-v9/{build-receipt.json,code-integrity-events.json,short-*}`。原v8真实首错及所有历史现场保留。

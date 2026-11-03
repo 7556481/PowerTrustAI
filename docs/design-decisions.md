@@ -844,3 +844,7 @@ analysis_scope同次领域判断联合问题/当前回答，不以缺goal默认�
 ## 默认分支独立发布记录（整合时保留历史）
 
 README重写并迁出本分支旧全文，新增合成UI截图；新版业务代码位于codex/user-ui-readme-final-delivery-v6，未合并实验/维护代码。必要CI修复：匹配图依赖、完整Git历史、忽略目录测试前提、逐方法私有归档缺失标注，公开断言不变。已读取09c6b987/99b93497失败日志，红叉不等于push失败。模型0；[完整跨分支交付报告](https://github.com/7556481/PowerTrustAI/blob/codex/user-ui-readme-final-delivery-v6/docs/maintenance/user-ui-readme-final-delivery-v6.md)，最终CI看本提交Actions。以后维护记录进交接/报告，不堆README。
+
+## 2026-11-03 原子替换兼容与二进制准入分开
+
+实际持有者未知不否定已经验证的文件冲突机制，可以对相同原子rename作严格有界兼容，不能重放writer或删除旧元数据。兼容原型仅限固定扩展/目录/目标/标志，检查文件状态和DELETE权限，按错误类别、尝试数、等待、取消和原deadline停止。实现可解释不等于验证通过：本机隔离产物被CodeIntegrity拒绝加载，不能改用注入绕过或把CI通过当成本机准入。原输入/正式前缀和预算保留，当前只缺可信可执行修复及本机短/长验收，未启动长流程。[报告](evaluation/tantivy-atomic-compat-v9/report.md)。
