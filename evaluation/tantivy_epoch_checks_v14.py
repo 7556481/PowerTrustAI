@@ -3,6 +3,7 @@ import hashlib,json,os,sqlite3,subprocess,sys,tempfile,time,unittest
 from pathlib import Path
 from unittest.mock import patch
 import psutil
+from types import SimpleNamespace
 from evaluation.tantivy_input_epoch_v14 import Lease,WorkerLease,InputEpoch
 from rag.tantivy_build import atomic,CheckpointBuild,InputSpool
 from rag.tantivy_manifest import sha,IndexIdentityError
@@ -57,7 +58,11 @@ class EpochChecks(unittest.TestCase):
    spool=InputSpool(root/'spool.sqlite3',identity);spool.append(rows);proof=spool.checkpoint();spool.close()
    atomic(root/'input-complete.json',{'n':6,'mapping_hash':proof['prefix_hash']})
    b=CheckpointBuild(root/'build',identity,total_seconds=300,segment_seconds=120);b.append(rows[:2]);b.close()
-   with patch('evaluation.tantivy_medium_measure_v2.seal_checked') as sealing,patch('rag.tantivy_members.inventory',return_value={'native':674,'total':6}):
+   # The tiny synthetic fixture should exercise the reserve policy, not require
+   # 30GiB physical free space on a hosted test runner. Production is unmocked.
+   with patch('evaluation.tantivy_medium_measure_v2.seal_checked') as sealing,patch('rag.tantivy_members.inventory',return_value={'native':674,'total':6}),patch('shutil.disk_usage',return_value=SimpleNamespace(free=0)) as disk:
+    with self.assertRaisesRegex(RuntimeError,'disk reserve'):InputEpoch(root,source,'synthetic',time.time()+300)
+    disk.return_value.free=100*1024**3;sealing.reset_mock()
     epoch=InputEpoch(root,source,'synthetic',time.time()+300)
     try:
      for turn in (1,2):

@@ -31,3 +31,5 @@ writer仍采用原FullCheckpoint、有限journal、原append/commit/merge等待�
 如需在首次验证阶段停止，在`data/retrieval_local/tantivy-full-fast-v1/input-epochs/stop.json`写停止请求；该标记不会自动清除。已有worker时仍可使用该段stop.json安全停止。停止后先检查记录，不通过删除标记跳过身份检查。
 
 实际源seal、全spool一次验证、后续恢复准入与新增提交耗时待运行记录，不能提前承诺省下37分钟。最终全量验收仍是独立门槛。
+
+CI保留一项合成环境失败：Windows托管runner实际空闲不足30GiB，微型合成epoch被正式磁盘余量规则拒绝。正式保护未改；测试改为明确先模拟低空间并断言拒绝，再给微型夹具模拟充足空间检验句柄/writer协议，避免要求CI为几行数据预留30GiB。修正后本机专项通过。快速worker另外保持RUST_BACKTRACE=full，并将早期epoch身份失败也保存为stage主错。

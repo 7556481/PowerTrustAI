@@ -1,5 +1,6 @@
 """Original checkpoint/writer with a live immutable-input epoch admission."""
 import json
+import os
 import sqlite3
 import time
 from pathlib import Path
@@ -13,9 +14,10 @@ from rag.tantivy_build import atomic
 from rag.tantivy_manifest import IndexIdentityError
 
 def run(plan_path):
+    os.environ['RUST_BACKTRACE']='full'
     g=Guard(plan_path);wait_ready(g.plan);p=g.plan;start=time.monotonic();b=None;con=None;primary=None;feeding=False
     parent=json.loads(g.path.with_name('supervisor-owner.json').read_text())
-    lease=WorkerLease(p['input_epoch'])
+    lease=None
     def check():
         lease.check()
         try:alive=abs(psutil.Process(parent['pid']).create_time()-parent['created'])<.001
@@ -24,6 +26,7 @@ def run(plan_path):
         if time.time()>=p['deadline']-60 or g.path.with_name('stop.json').exists():raise Expired('deadline/stop')
         if not feeding and g.path.with_name('pause.json').exists():raise PauseCheckpoint('resource/user pause at safe boundary')
     try:
+        lease=WorkerLease(p['input_epoch'])
         phase('live input epoch and dynamic recovery admission');check()
         identity=lease.receipt['identity'];proof=proof_unchanged(ROOT/'build',p['recovery_proof'],check)
         if lease.receipt['count']!=identity['expected']:raise IndexIdentityError('Input epoch member count changed')
@@ -48,5 +51,6 @@ def run(plan_path):
     finally:
         if con:con.close()
         cleanup=b.close(primary=primary) if b else []
-        lease.close();g.event('stage_closed',primary=repr(primary),cleanup_errors=cleanup,elapsed=time.monotonic()-start)
+        if lease:lease.close()
+        g.event('stage_closed',primary=repr(primary),cleanup_errors=cleanup,elapsed=time.monotonic()-start)
         if cleanup and (primary is None or isinstance(primary,(Expired,TimeoutError,PauseCheckpoint))):raise RuntimeError('Cleanup failure requires audit')
