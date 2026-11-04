@@ -1,5 +1,7 @@
 # 文档索引
 
+- [手动及连续续跑](evaluation/tantivy-checkpoint-recovery-v10/manual-operation.md)：修正正常PauseCheckpoint被误拦，新增--continue；当前正式1985674，原预算及身份保护保留。
+
 - [本机手动单次续建与查看](evaluation/tantivy-checkpoint-recovery-v10/manual-operation.md)：tools.tantivy_manual_once的status/run-once、安全停止和身份门禁；只准备入口，未启动第6次。
 
 - 2026-11-04：[有界恢复及逐次额外授权](evaluation/tantivy-checkpoint-recovery-v10/report.md)：正式1065674；第4次新增80000后结束，第5次按用户本轮单独授权启动，旧计数/原96h不重置。
