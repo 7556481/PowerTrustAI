@@ -11,7 +11,7 @@ from rag.tantivy_manifest import sha,IndexIdentityError
 class EpochChecks(unittest.TestCase):
  def test_real_share_locks_and_worker_duplication(self):
   with tempfile.TemporaryDirectory() as d:
-   p=Path(d)/'source';p.write_bytes(b'unchanged input');lease=Lease()
+   p=Path(d)/'source.sqlite3';p.write_bytes(b'unchanged input');lease=Lease()
    try:
     row=lease.pin(p);receipt={'pid':os.getpid(),'created':psutil.Process().create_time(),'deadline':time.time()+60,'files':[row]}
     rp=Path(d)/'receipt.json';atomic(rp,receipt);receipt.update(receipt_path=str(rp),receipt_sha256=sha(rp))
@@ -21,6 +21,9 @@ class EpochChecks(unittest.TestCase):
     r=subprocess.run([sys.executable,'-X','utf8','-c',code,json.dumps(receipt)],capture_output=True,text=True,timeout=20)
     self.assertEqual(r.returncode,0,r.stderr);self.assertIn('duplicated',r.stdout)
     self.assertEqual(p.read_bytes(),b'unchanged input')
+    wal=Path(str(p)+'-wal');wal.write_bytes(b'unbound pages')
+    with self.assertRaises(IndexIdentityError):WorkerLease(receipt)
+    wal.write_bytes(b'');w=WorkerLease(receipt);w.close();wal.unlink()
     with self.assertRaises(IndexIdentityError):WorkerLease(dict(receipt,created=receipt['created']+1))
     atomic(rp,{'modified':True})
     with self.assertRaises(IndexIdentityError):WorkerLease(receipt)

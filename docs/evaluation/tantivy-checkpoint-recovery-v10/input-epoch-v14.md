@@ -33,3 +33,5 @@ writer仍采用原FullCheckpoint、有限journal、原append/commit/merge等待�
 实际源seal、全spool一次验证、后续恢复准入与新增提交耗时待运行记录，不能提前承诺省下37分钟。最终全量验收仍是独立门槛。
 
 CI保留一项合成环境失败：Windows托管runner实际空闲不足30GiB，微型合成epoch被正式磁盘余量规则拒绝。正式保护未改；测试改为明确先模拟低空间并断言拒绝，再给微型夹具模拟充足空间检验句柄/writer协议，避免要求CI为几行数据预留30GiB。修正后本机专项通过。快速worker另外保持RUST_BACKTRACE=full，并将早期epoch身份失败也保存为stage主错。
+
+SQLite旁路文件也显式纳入准入：实际源库journal_mode=wal，当前-wal为0bytes、-shm为32768bytes，spool为delete模式且无旁路文件。主文件句柄固定不等于可以忽略非空WAL；worker每次活跃检查拒绝非空-wal或-journal，空WAL允许，SHM作为读者协调索引不当作新数据正文。依据[SQLite WAL说明](https://www.sqlite.org/wal.html)及[临时文件说明](https://www.sqlite.org/tempfiles.html)。未删除真实sidefile、未修改源库journal模式。合成测试覆盖非空WAL拒绝、空WAL通过。首次真实完整验证发生在既有空WAL状态，后续worker仍强制该约束。

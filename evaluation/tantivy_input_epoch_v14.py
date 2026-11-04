@@ -73,6 +73,13 @@ class WorkerLease(Lease):
         if max(m.rss,getattr(m,'private',m.rss))>64*1024**2:raise MemoryError('Immutable input owner exceeds its reserved64MiB')
         for h,row in zip(self.handles,self.receipt['files']):
             if information(self.k,h)!=row['info']:raise IndexIdentityError('Pinned file changed')
+            if row['path'].endswith('.sqlite3'):
+                # An empty WAL and reader SHM contain no extra database pages.
+                # Never reuse a main-file seal with unbound WAL/journal data.
+                for suffix in ('-wal','-journal'):
+                    side=Path(row['path']+suffix)
+                    if side.exists() and side.stat().st_size:
+                        raise IndexIdentityError('Nonempty immutable input sidefile: '+str(side))
     def close(self):
         super().close()
         if self.parent:self.k.CloseHandle(self.parent);self.parent=None
