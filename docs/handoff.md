@@ -1,5 +1,11 @@
 # PowerTrustAI 会话交接
 
+## 2026-11-04 输入epoch复用已实现，首次真实完整验证中
+
+用户授权减少恢复时重复37分钟校验。已安全停止旧段29，正式1985674、旧worker全退出，原停止及后验保留。新增evaluation/tantivy_input_epoch_v14和epoch_writer_v14：长期控制器只读且禁止写/删替换地固定源库/spool/manifest等输入，完整验证一次；worker从活跃PID/创建时间复制实际句柄核验身份，不信任独立落盘pass。后续每次仍核对动态审计、checkpoint/journal、全部ID恢复及必要组件SHA，spool仅mode=ro，无原始源库/全spool反复扫描。旧无epoch入口保留；原审核schema13/引擎/排序不变。
+
+真实Windows共享/跨进程句柄/控制器退出及同epoch两次原版writer合成后验通过，相关24专项通过。实际输入控制器8600/创建1793805805.2889643已启动首次完整验证，正式仍1985674、尚无该优化带来的新增提交；原预算不重置。当前状态看input-epochs/*/state.json，验证完才自动进入下一次原版writer；不能沿用旧段29状态判断新控制器是否运行。详见[evaluation/tantivy-checkpoint-recovery-v10/input-epoch-v14.md](evaluation/tantivy-checkpoint-recovery-v10/input-epoch-v14.md)。模型0、8765不切，签名DLL路线关闭。
+
 ## 2026-11-04 正常暂停续跑接线修正及连续运行授权
 
 用户连续手动运行到整体第12次，当前正式checkpoint/native meta一致1985674/24620947（8.1%，并非过半）。第12次exit0、PauseCheckpoint、cleanup空、后验通过且无stop，因入口仅接受Windows5而误要求人工检查。已添加严格正常暂停分支，保留未知故障/用户stop/到期/并行writer等拒绝；在跑、到期、未知错误及真实暂停内存中准备验证通过。

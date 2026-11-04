@@ -19,6 +19,7 @@ from rag.tantivy_manifest import sha
 HOME=ROOT/'checkpoint-recovery-v10'
 MODULE='evaluation.tantivy_checkpoint_control_v10'
 ORIGINAL_PYD='69c2221c2ce1a896bf7b493147a750b5501f5aaebdfdd0dbbc176fc483ef8702'
+EPOCH_FILES=['evaluation/tantivy_input_epoch_v14.py','evaluation/tantivy_epoch_writer_v14.py']
 FILES=['evaluation/tantivy_checkpoint_recovery_v10.py','evaluation/tantivy_checkpoint_control_v10.py','evaluation/tantivy_full_controller_v2.py','evaluation/tantivy_full_stages_v2.py','evaluation/tantivy_full_identity_v1.py','evaluation/tantivy_native_trace_v8.py','evaluation/tantivy_native_trace_v8.js','evaluation/tantivy_supervision_v3.py','rag/tantivy_build.py']
 
 
@@ -39,6 +40,7 @@ def plan(until,*,traced_build=None):
     p={'deadline':min(until,l['deadline']),'grace_seconds':45,'kill_on_supervisor_exit':True,'cwd':str(Path.cwd()),'data_root':str(ROOT),
        'extra_data_roots':[str((ROOT/'build').resolve())],'memory_limit':l['memory_limit']-64*1024**2,'controller_reserved_bytes':64*1024**2,
        'disk_limit':157*1024**3,'min_free':30*1024**3,'pressure_available':512*1024**2,'frozen_code':{n:sha(n) for n in FILES}}
+    p['frozen_code'].update({n:sha(n) for n in EPOCH_FILES})
     if traced_build:
         deps=ROOT/'native-diagnostic-v8/deps'
         p['native_trace']={'dependencies':str(deps),'dependency_files':{str(f):sha(f) for f in (deps/'frida').rglob('*') if f.is_file() and f.suffix in ('.pyd','.dll','.py')},

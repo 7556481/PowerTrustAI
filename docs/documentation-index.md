@@ -1,5 +1,7 @@
 # 文档索引
 
+- [控制器固定不可变输入身份v14](evaluation/tantivy-checkpoint-recovery-v10/input-epoch-v14.md)：已实现并通过Windows句柄/原版writer专项，首次真实完整验证中；后续恢复性能待实测，生产审核未变。
+
 - [手动及连续续跑](evaluation/tantivy-checkpoint-recovery-v10/manual-operation.md)：修正正常PauseCheckpoint被误拦，新增--continue；当前正式1985674，原预算及身份保护保留。
 
 - [本机手动单次续建与查看](evaluation/tantivy-checkpoint-recovery-v10/manual-operation.md)：tools.tantivy_manual_once的status/run-once、安全停止和身份门禁；只准备入口，未启动第6次。

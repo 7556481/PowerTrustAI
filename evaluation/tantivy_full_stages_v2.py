@@ -9,6 +9,10 @@ from evaluation.tantivy_supervision_v3 import Guard,Expired
 from rag.tantivy_manifest import IndexIdentityError
 
 def run(mode,plan_path):
+ if json.loads(__import__('pathlib').Path(plan_path).read_text()).get('input_epoch'):
+  if mode!='write':raise RuntimeError('Input epoch only permits existing complete input writer')
+  from evaluation.tantivy_epoch_writer_v14 import run as epoch_run
+  return epoch_run(plan_path)
  os.environ['RUST_BACKTRACE']='full';g=Guard(plan_path);identity=json.loads((ROOT/'build-identity.json').read_text());started=time.monotonic();sp=None;owner=None;primary=None;feeding=False;native_owner=False
  diagnostic=g.plan.get('diagnostic_run');phase=lambda name:None
  if g.plan.get('native_trace'):

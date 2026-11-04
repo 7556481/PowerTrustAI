@@ -51,6 +51,7 @@ jobs:
       - run: python -m unittest evaluation.tantivy_native_checks_v8 -v
       - run: python -m unittest evaluation.tantivy_atomic_admission_checks_v9 -v
       - run: python -m unittest evaluation.tantivy_checkpoint_checks_v10 -v
+      - run: python -m unittest evaluation.tantivy_epoch_checks_v14 -v
       - run: python -m evaluation.tantivy_stability_checks_v2
       - run: python -m evaluation.tantivy_supervision_checks_v3
       - run: python -m evaluation.tantivy_product_checks_v1
