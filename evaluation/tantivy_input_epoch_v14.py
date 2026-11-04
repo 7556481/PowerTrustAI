@@ -69,6 +69,8 @@ class WorkerLease(Lease):
         try:p=psutil.Process(self.receipt['pid'])
         except psutil.NoSuchProcess:raise IndexIdentityError('Input validation controller exited')
         if abs(p.create_time()-self.receipt['created'])>=.001:raise IndexIdentityError('Input validation controller PID reused')
+        m=p.memory_info()
+        if max(m.rss,getattr(m,'private',m.rss))>64*1024**2:raise MemoryError('Immutable input owner exceeds its reserved64MiB')
         for h,row in zip(self.handles,self.receipt['files']):
             if information(self.k,h)!=row['info']:raise IndexIdentityError('Pinned file changed')
     def close(self):

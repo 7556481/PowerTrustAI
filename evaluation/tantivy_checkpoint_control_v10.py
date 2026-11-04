@@ -34,11 +34,12 @@ def plan(until,*,traced_build=None):
     l=json.loads((ROOT/'construction-ledger.json').read_text())
     if time.time()>=min(until,l['deadline']):raise TimeoutError('Original deadline expired')
     # This lightweight controller stays outside the supervised segment tree.
-    # Reserve64MiB inside, not in addition to, the original850MiB tree cap.
+    # Reserve64MiB for each of the immutable-input owner and one-shot driver,
+    # inside, not in addition to, the original850MiB tree cap.
     m=psutil.Process().memory_info()
     if max(m.rss,getattr(m,'private',m.rss))>64*1024**2:raise MemoryError('Recovery controller exceeds its reserved memory')
     p={'deadline':min(until,l['deadline']),'grace_seconds':45,'kill_on_supervisor_exit':True,'cwd':str(Path.cwd()),'data_root':str(ROOT),
-       'extra_data_roots':[str((ROOT/'build').resolve())],'memory_limit':l['memory_limit']-64*1024**2,'controller_reserved_bytes':64*1024**2,
+       'extra_data_roots':[str((ROOT/'build').resolve())],'memory_limit':l['memory_limit']-128*1024**2,'controller_reserved_bytes':128*1024**2,
        'disk_limit':157*1024**3,'min_free':30*1024**3,'pressure_available':512*1024**2,'frozen_code':{n:sha(n) for n in FILES}}
     p['frozen_code'].update({n:sha(n) for n in EPOCH_FILES})
     if traced_build:

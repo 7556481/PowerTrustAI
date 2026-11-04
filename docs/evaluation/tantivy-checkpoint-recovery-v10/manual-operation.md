@@ -41,3 +41,7 @@ if ($segment.status -eq 'running') {
 用户已授权在现有预算内持续运行，不再逐次确认。执行`python -m tools.tantivy_manual_once --continue`，使用同一项目解释器和工作目录。每次仍调用原单次监督/后验，无固定重启次数上限；原96小时截止、磁盘/内存、单writer、来源/检查点审计、未知故障及故障零提交增长停止保持。正常PauseCheckpoint退出0、清理为空、无stop请求且完整后验通过时允许继续；不再错误地要求它必须有Windows5失败字段。
 
 此命令与--run-once/--status互斥；不要并行启动第二个连续入口。需要停止时按上面的stop.json流程，连续入口遇到该停止结果也会退出，不会自动清除用户stop请求。当前正式目录核验1985674/24620947，约8.1%；完整spool准备不等于索引建库完成。第12次是正常资源/服务暂停，零新增并非原生writer再次失败。已启动第13次，未调整系统审批/防护或原生引擎。
+
+## 活跃输入控制器复用（已实现）
+
+--continue现会先固定源库/完整spool并完整验证一次，后续原版writer恢复复用同一活跃验证身份；每次仍校验动态checkpoint/journal/ID/必要文件。控制器退出或身份失效不能复用落盘receipt，重开连续入口必须重新完整验证。--status区分“校验行数”和正式已提交数。首轮验证期间可在input-epochs/stop.json写停止请求；标记不会自动清除。控制器与worker资源预算合并计入原上限，原绝对deadline不变。详情见[input-epoch-v14](input-epoch-v14.md)。
