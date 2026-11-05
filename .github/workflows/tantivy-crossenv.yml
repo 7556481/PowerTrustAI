@@ -1,0 +1,71 @@
+name: Tantivy public cross-environment checkpoint
+on:
+  push:
+    branches: ['codex/tantivy-bounded-feasibility-v1']
+    paths:
+      - 'evaluation/tantivy_crossenv_v15.py'
+      - '.github/workflows/tantivy-crossenv.yml'
+permissions:
+  contents: read
+jobs:
+  windows-seed:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements-tantivy-prototype.txt
+      - run: python -m evaluation.tantivy_crossenv_v15 seed-windows crossenv
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crossenv-windows-seed
+          path: crossenv
+          include-hidden-files: true
+          if-no-files-found: error
+  linux-resume:
+    needs: windows-seed
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements-tantivy-prototype.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: crossenv-windows-seed
+          path: crossenv
+      - run: python -m evaluation.tantivy_crossenv_v15 resume-linux crossenv
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crossenv-linux-return
+          path: crossenv
+          include-hidden-files: true
+          if-no-files-found: error
+  windows-product-read:
+    needs: linux-resume
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements-tantivy-prototype.txt -r requirements-api.lock.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: crossenv-linux-return
+          path: crossenv
+      - run: python -m evaluation.tantivy_crossenv_v15 read-windows crossenv
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crossenv-windows-product-evidence
+          path: crossenv
+          include-hidden-files: true
+          if-no-files-found: error

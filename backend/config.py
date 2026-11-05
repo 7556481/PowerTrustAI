@@ -28,6 +28,12 @@ class ServiceConfig:
     knowledge_version: str=BASELINE_KNOWLEDGE
     queue_capacity: int=2
     fact_strategy: str='aggregate'
+    tantivy_manifest: Path|None=None
+    tantivy_isolated: bool=False
+    tantivy_worker_mode: str='oneshot'
+    model_budget_dir: Path|None=None
+    model_budget_question_sha256: str|None=None
+    model_budget_owner_file: Path|None=None
     retrieval_mode: str='bm25'
     retrieval_execution_profile: str='topic_v4_subject_v1'
     review_message_profile: str='lossless_v1'
@@ -44,6 +50,11 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
+        if self.tantivy_worker_mode not in ('oneshot','fast_v1'):raise ValueError('Unsupported Tantivy worker mode')
+        if self.tantivy_worker_mode=='fast_v1' and (self.tantivy_manifest is None or self.audit_strategy!='baseline' or self.fact_review_execution!='serial_v1' or self.fact_review_contract!='production' or self.domain_internal_flow!='production' or self.verification_schema!=13 or self.fact_internal_flow!='production' or self.local_revision_interface!='production' or self.revision_answer_delivery!='production' or self.review_result_transport!='json' or self.fact_strategy!='aggregate' or self.extraction_message_profile!='production' or self.review_message_profile!='lossless_v1' or self.decision_policy!='product-v1'):raise ValueError('Fast retrieval requires unchanged production audit and explicit index')
+        if type(self.tantivy_isolated) is not bool:raise ValueError('Boolean isolated index flag required')
+        if self.tantivy_isolated and self.tantivy_manifest is None:raise ValueError('Isolated index requires explicit manifest')
+        if self.tantivy_manifest is not None and (self.profile!='real' or self.retrieval_mode!='bm25' or self.retrieval_execution_profile!='topic_v4_subject_v1'):raise ValueError('Tantivy requires real composition and unchanged topic_v4_subject_v1 BM25 query contract')
         if self.audit_strategy not in ('baseline','source_first_audit_v1','source_first_audit_v2','source_first_audit_v3','source_first_audit_v4'):raise ValueError('Invalid audit strategy')
         if self.audit_strategy=='source_first_audit_v4' and self.domain_internal_flow!='production':raise ValueError('Source reference v4 requires its paired domain contract')
         if self.audit_strategy!='baseline' and (self.fact_review_contract!='literal_v1' or self.local_revision_interface!='source_actions_v2' or self.fact_review_execution!='serial_v1' or self.retrieval_mode!='bm25' or self.retrieval_execution_profile=='chinese_first_cross_language_v1'):raise ValueError('Source-first requires explicit literal/v2 serial BM25 candidate')
@@ -108,9 +119,28 @@ class ServiceConfig:
             import json
             nli=json.loads(nli_file.read_text(encoding='utf-8'))
             if set(nli)!={'version','python','checkpoint','profile'} or nli.pop('version')!='local-nli-server-config-v1':raise ValueError('Invalid server-owned NLI configuration')
+        fast={}
+        fast_file=ROOT/'data/runtime_local/fast-retrieval.json'
+        if not demo and fast_file.exists():
+            import json
+            declared=json.loads(fast_file.read_text(encoding='utf8'))
+            if set(declared)!={'version','manifest','knowledge_version'} or declared['version']!='fast-retrieval-service-v1':raise ValueError('Invalid fast retrieval configuration; restore its saved backup')
+            manifest=(ROOT/declared['manifest']).resolve()
+            if not manifest.is_relative_to((ROOT/'data').resolve()) or not manifest.is_file():raise ValueError('Configured fast index manifest unavailable; restore backup or finish index publication')
+            fast={'tantivy_manifest':manifest,'tantivy_worker_mode':'fast_v1'}
+            if declared['knowledge_version']!=os.environ.get('POWERTRUST_KNOWLEDGE_VERSION',daily.get('knowledge_version',BASELINE_KNOWLEDGE)):raise ValueError('Fast index and source knowledge versions differ')
+        smoke={}
+        smoke_file=ROOT/'data/runtime_local/publication-smoke.json'
+        if not demo and smoke_file.exists():
+            import json,re
+            declared=json.loads(smoke_file.read_text(encoding='utf8'))
+            if set(declared)!={'version','budget_dir','question_sha256'} or declared['version']!='publication-smoke-budget-v1' or not re.fullmatch('[a-f0-9]{64}',declared['question_sha256']):raise ValueError('Invalid publication smoke budget configuration')
+            budget_dir=(ROOT/declared['budget_dir']).resolve()
+            if not budget_dir.is_relative_to((ROOT/'data').resolve()) or not (budget_dir/'state.json').is_file():raise ValueError('Existing publication smoke accounting unavailable')
+            smoke={'model_budget_dir':budget_dir,'model_budget_question_sha256':declared['question_sha256'],'model_budget_owner_file':smoke_file}
         strategy=os.environ.get('POWERTRUST_FACT_RETRIEVAL_STRATEGY','aggregate')
         budget=replace(cls().budget,max_retrieval_calls=int(os.environ.get('POWERTRUST_MAX_RETRIEVAL_CALLS','128' if strategy=='per_claim_v1' else '12')))
-        return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,
+        return cls(profile='synthetic_fixture' if demo else 'real',budget=budget,**fast,**smoke,
             audit_strategy=os.environ.get('POWERTRUST_AUDIT_STRATEGY','baseline'),
             domain_internal_flow=os.environ.get('POWERTRUST_DOMAIN_INTERNAL_FLOW','production'),
             revision_answer_delivery=os.environ.get('POWERTRUST_REVISION_ANSWER_DELIVERY','production'),

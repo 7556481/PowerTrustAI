@@ -1,5 +1,118 @@
 # 文档索引
 
+- [跨环境续写小样本首次验证](evaluation/tantivy-crossenv-v15/report.md)：独立CI渠道可用；Windows夹具清理失败，Linux未执行，兼容性未验证，不迁移正式数据。
+
+- [15—17次目标文件/进程交接只读排查](evaluation/tantivy-checkpoint-recovery-v10/handle-handoff-20261105.md)：未发现确认的本项目泄漏，持有者未知；成功open/close日志缺失，不启动18、不加时。
+
+- [2026-11-05完整周期吞吐、预算及授权链](evaluation/tantivy-checkpoint-recovery-v10/throughput-budget-20261105.md)：最近15—17次含零产出，规模增长情景及验收预留；第17次已按零增长停止，未加时或擅自重启。
+
+- [控制器固定不可变输入身份v14](evaluation/tantivy-checkpoint-recovery-v10/input-epoch-v14.md)：已实现并通过Windows句柄/原版writer专项，首次真实完整验证中；后续恢复性能待实测，生产审核未变。
+
+- [手动及连续续跑](evaluation/tantivy-checkpoint-recovery-v10/manual-operation.md)：修正正常PauseCheckpoint被误拦，新增--continue；当前正式1985674，原预算及身份保护保留。
+
+- [本机手动单次续建与查看](evaluation/tantivy-checkpoint-recovery-v10/manual-operation.md)：tools.tantivy_manual_once的status/run-once、安全停止和身份门禁；只准备入口，未启动第6次。
+
+- 2026-11-04：[有界恢复及逐次额外授权](evaluation/tantivy-checkpoint-recovery-v10/report.md)：正式1065674；第4次新增80000后结束，第5次按用户本轮单独授权启动，旧计数/原96h不重置。
+
+- [恢复校验只读拆解及复用方案（未实施）](evaluation/tantivy-checkpoint-recovery-v10/validation-reuse-plan.md)：不可变源/完整spool与动态checkpoint/journal分开，当前运行代码不修改，计时不以I/O代替提交增长。
+
+- [原版Tantivy有界检查点恢复v10](evaluation/tantivy-checkpoint-recovery-v10/report.md)：全前缀/组件CRC审计、一次隔离验证、正式最多3次且零进度停止；签名路线已停止，原生故障不宣称修复。
+
+
+- [Windows原子元数据替换兼容v9](evaluation/tantivy-atomic-compat-v9/report.md)：固定边界有界重试原型；本机DLL被CodeIntegrity/4551拒绝，未启动长流程、未恢复建设，原96h截止不变。
+## 2026-11-03 原生首错已真实捕获：.managed原子替换被拒绝，正式仍停
+
+用户授权的一次纠正长流程冻结1c8c9b7，保留相同物理副本、原14:34:46截止及96h账本，未重建输入。运行37分09秒：源/全输入/映射核验2179.589秒，native恢复与writer创建8.193秒，真实馈送/38次提交37.695秒后失败。副本新增190000、已提交875674；正式仍685674，未把副本计入进度。
+
+13:55:13.058，实际worker6740/创建1793683083.882902、原生线程14012，MoveFileExW(.tmpfXccu2→.managed.json)返回Windows5；3.014ms后add_document报通用killed，随后wait报通用失败，原ValueError保留未被清理覆盖。本次限定范围唯一非例行文件错误为该替换失败；179次EOF是正常读到末尾，raw记录保留。底层NT rename状态、共享模式和故障瞬间持有者未捕获，仍未知；不能套用合成.pos测试或旧日志的系统调用结论。
+
+本机合成文件试验确认：无读句柄替换成功；持有读句柄（包括share-delete）可产生相同Windows5，关闭本测试自有句柄后成功。这支持句柄/旧替换语义的调查方向，不证明真实阻塞者。源码确认ManagedDirectory登记片段先保存.managed，注册IO错误也会包装为片段open_write路径；旧报告“创建.pos失败”仅有上层filepath依据，底层操作当时未知，原日志不改。未盲加重试、切换版本或修改原子写行为。
+
+新进程有界遍历875674全部ID、唯一性、映射/位置/命名空间/hash通过，15.64秒；待提交[875674,880674)5000条与原spool一致。proof明确failure_unresolved、approved_for_resume_or_service=false。观测树峰值约601MiB（850MiB护栏），派生总峰值约53.8GiB（含既有spool/现场），无资源stop；不能由此排除所有原生资源因素。隔离子树及协调CLI均结束，无后台待续写。原96h期限2026-11-06 11:49:19，14:21核验余约69.46h。模型0，8765未重启/切换，PR #4不变。
+
+本轮按原因仍未完全确定的停止规则归档，不再长流程重试。剩余最小工程问题：取得替换拒绝瞬间的文件句柄/共享模式、低层rename状态及相关文件过滤上下文，然后决定一次具体修复；不能以合成复现替代真实归因。详见[原生诊断报告](evaluation/tantivy-native-fault-v8/report.md)，实际证据native-diagnostic-v8/long/{native-failure-summary.json,corrected-trace,corrected-logs,reopen-audit.json,final-state.json}。
+
+## 2026-11-03 已获准一次纠正运行，原期限不变
+
+用户已明确回复“允许一次纠正后的长流程”。只允许原物理副本、原685674前缀，复验全部已复制文件SHA、确认此前未进入native/写入0后准入；已进入馈送、文件变更、已纠正过或原两小时到期均拒绝。保留旧control/logs/trace/result，另记corrected-*；绝对截止仍为2026-11-03 14:34:46，不重新复制输入或重置96h，不自动重试。纠正准入及路径专项11项通过。真实结果待本次运行结束，尚未恢复正式建设。
+
+## 2026-11-03 v8受控入口在writer前失败，未自动重试
+
+唯一长流程冻结d5fb5a4后实际运行226.085秒，在源核验之后、writer之前因诊断副本ROOT改变而漏接旧复用spool绝对路径，SQLite报unable to open database。属于本轮新增诊断入口接线缺陷，不是Tantivy原生故障复现；native操作0、新增提交0、原checkpoint SHA未变。树采样峰值约261MiB，附加跟踪约6.475秒空窗单列；原96h绝对期限2026-11-06 11:49:19不重置，停止审计时剩余约71.09h。
+
+现已修正显式只读reuse_spool路径，并在源扫描前校验存在；新增实际副本阶段与缺失路径拒绝专项，相关10项通过。诊断协调入口也改为传播worker非零退出码、单列worker_primary，避免外层CLI0掩盖记录中的失败。d5fb5a4及修正实现39d8b80的四CI均成功；此后仅文档回执同步。首个真实原生故障仍未知，不能恢复正式建设。用户限定仅一次长流程，已询问是否允许在原诊断截止2026-11-03 14:34:46内做一次纠正运行；未获得回复，不启动第二次。13:11再次核验隔离进程均退出，正式685674/完整输入24620947不变，原96h期限余70.63h。原spool、失败现场和副本均保留，模型0，8765未操作。见[完整诊断与限制](evaluation/tantivy-native-fault-v8/report.md)。
+
+## 2026-11-03 原生错误可观测性v8，正式建库暂停
+
+接续c21851a。确认核心wait_merging_threads会忽略原始Result，而旧隔离脚本额外commit可取到原始错误；正式失败索引不追加commit。修复add记录及主错被finally清理覆盖，限定实际worker PID+创建时间、索引路径的NT/Win32跟踪；原生依赖/分词/评分不换。短测验证系统错误先于通用异常、清理分离和日志失败不遮主错；正常写入确认实际走NtWriteFile/NtClose。首次launcher附加错误及正常写入未被Win32观察的测试失败均保留。22个相关专项通过，不重复业务全套。
+
+唯一长流程将复用正式监督/阶段/检查点，复制685674已提交派生前缀，现有24620947完整spool只读复用；新增≤100万、含准备/核验/暂停总≤2小时及原96h期限，原850MiB/空间护栏不放开，不自动重试。正式进度不计副本新增，尚未恢复建设，模型0，8765不操作。结果与门禁见[原生诊断v8报告](evaluation/tantivy-native-fault-v8/report.md)。
+
+## 2026-11-03 11:28 再次原生writer失败，目录迁移未证明稳定
+
+第16段在新物理目录再次失败：映射/原生文档数均685674，prepared为[685674,690674)，首批尚未提交。树采样峰值115822592bytes（约110.5MiB），无stop.json；非内存护栏或4小时到期。控制器10548及续接5380均已退出，不存在后台继续建库。第12—15段是正常资源/服务暂停，不是四次writer故障。旧progress-v2的680674是陈旧提交回执，不能代表当前检查点或进程存活。
+
+本次主异常仍为An index writer was killed，清理wait_merging_threads另报Worker thread failed；cause/context均None。上次隔离诊断的Windows5拒绝访问不能直接冒充本次根因；失败时间窗未取得对应应用崩溃/Defender事件，不能据此排除安全软件。迁移短目录只证明一次小窗口成功，没有解决长流程的未定位依赖。
+
+三项有界验证：相同失败5000条在新索引经junction路径成功0.618秒、物理路径成功0.859秒；复制当前派生原生文件及映射/checkpoint/prepared，逐文件SHA核对，通过实际FullCheckpoint完整前缀恢复证明及同批append/commit/close，成功23.601秒（含复制与证明），cleanup空。补充在普通沙箱分别运行同窗口的新junction/物理索引，各成功0.615/0.800秒；简单沙箱文件限制亦未复现，不能据此排除长时后台环境差异。原检查点只读不续写，副本结果不是全量进度；不能由此宣布输入、路径或生命周期在所有状态下均正常。该证据缩小为实际长流程/原目录运行环境中的未解释故障，尚无确定根因，未启动相同配置的又一次正式重试。
+
+完整输入24620947不重建，原96小时deadline不重置；尚未全量建成/验收/付费/切换。当前阻断是取得原生首个I/O或panic的完整诊断，再决定可证明安全的恢复，不能仅增加重试或继续搬目录。私有证据native-failure16-observation.json、controls/16、diagnostic16-paths/result.json及diagnostic16-checkpoint/result.json；历史现场保留。8765只读health仍ready、无活动/排队；原SQLite配置不变，模型调用0。
+
+## 2026-11-03 原生文件创建拒绝访问，审计后迁移派生目录
+
+第11段新增到680,674后原生worker失败，树采样峰值约200MiB、无资源stop；不是再次触发850MiB护栏。固定失败5000条在原根下新目录一次复现，通过隔离诊断commit取得明确Windows错误5 PermissionDenied，创建.pos文件失败。原生主错误及清理错误保留。Python同目录/后台写文件成功；相同5000内存索引、C临时目录、D短目录各一次成功。不能据此归因于D盘整体或某安全软件，具体原目录访问环境根因尚未知。未关闭防护、改全局ACL/模型/分词/评分。
+
+只读审计72.959秒确认680674原生ID集合/映射/输入及待提交5000一致。仅复制派生检查点到D盘tv-checkpoint-probe11短目录，逐文件SHA相等，再写同待提交5000成功，副本685674；原失败build完整保存为build-before-location-v7。v7将逻辑build以junction接到该已验证物理目录，复制旧映射/预算/原pending并核对SHA；下段必须完整复验及原生685674/映射680674的既有journal滚进，不能盲重放。新物理目录与旧现场联合计量、canonical去重，保留160GiB/30GiB余量及原96h/850MiB限制。19监督/阶段/验收、1多根计量专项通过，不重跑无关完整回归。
+
+控制器10548已启动第12段准入，自动续接观察器也按原流程重新启动。当前并非全量建成，也未证明新目录长时无故障。源输入24620947不重建，原SQLite库不动；8765继续原服务，无模型调用或生产切换。私有证据native-failure11-observation、recovery-audit-11、diagnostic-window-11/result、access-probe-11、disk-location-probe-{C11,Dshort11}、checkpoint-location-probe11、native-location-v7.json。历史失败均保留。
+
+## 2026-11-03 内存保护停止已审计，缩批恢复
+
+完整输入24,620,947已准备，原生提交510,674。第10段因树RSS峰值926,904,320bytes超过891,244,544上限主动停止；worker正常退出、cleanup空，无新原生writer异常。只读审计59.992秒通过：全部510674原生ID唯一且集合等于映射，映射/待提交50000与spool一致，正ID来源元数据匹配。完整输入不重建；原pending和所有停止回执归档，旧INVALID保留。
+
+v6将批次50000降到5000、提交后释放batch及旧pending引用；固定窗口双批只读实测RSS增量约305→35MiB，确认Python部分明显减少，尚未证明消除原生merge/RSS增长。内存上限与96小时deadline不提高不重置；若再超限仍停审计。5个小型阶段/验收专项通过（沙箱temp权限拒绝后按规则审批原解释器复验），不重跑完整业务回归。控制器15388已恢复第11段write准入校验；后续实际写入及全量稳定性仍待观察。新续接观察器按原流程等建库干净结束后验收/24题，不自动付费。原8765、审核合同/分词/评分不变，模型0。见[进行中报告](evaluation/tantivy-full-fast-v1/report.md)；私有recovery-audit-10.json、resume-plan-v6.json与recovery10-archive。
+
+## 2026-11-02 全量快速检索继续建设（未发布）
+
+最新应用3df7f2f已推送PR #5，四CI成功；完整CI1458/133.249秒、Windows29专项通过。本机a912完整1458/259.023秒日志保留，80私有归档缺失跳过。检索方案原生16→最多6不同正文/8000+2400字符，不改生产审核。674实际接口预检恢复检索Q10的1.05pu/TO例外；E3页脚/E4偏题为两路共同问题，非保护成功，正式全量质量仍未批准。
+
+全量未完成：输入5,850,674，原生150,674；当前prepare新段重新校验，96小时绝对账本不重置。根data/retrieval_local/tantivy-full-fast-v1。原监督3136消失曾留下准备worker，已正常停点/完整输入元数据审计并记411秒空窗；v3监督7064使用Windows所有权Job，下一writer用v5：先验完整输入/已提交映射全前缀再打开writer、磁盘有界ID证明、原生主错误原样保存、清理失败停审计。旧原生writer根因仍未知，不误报OOM。进程是否存在每次以PID+创建时间核验。
+
+postbuild/identity.json观察器4428已启动，等待当前控制器干净结束，复用既有supervise自动完成全量新进程身份验收和144离线读取；预算/身份/异常不通过即停，不重试、不付费、不发布。原预算240Flash/400万可信token未消费，实际新增0。完整索引与24题后，用tantivy_full_summarize_v1 offline逐题复核；满足既定门槛才由本任务冻结并执行tantivy_full_product_batch_v1 --execute-single-authorized-batch（独立8775/8776 Store，唯一16链及共享烟测预算）。不重新申请已有授权；不得绕过offline-approved身份门禁。
+
+8765已再次由原正式D盘入口恢复，PID11640 health ready、0活动/0排队，HEAD02f85c9的应用与674036a无差异，T默认仍关闭；此前退出原因未知。原未提交材料不动。当前不能合并PR或切快速配置，余项全量身份/24题质量计时/16链真实复核/UI/发布。见[进行中报告](evaluation/tantivy-full-fast-v1/report.md)和[冻结清单](evaluation/tantivy-full-fast-v1/implementation-checklist.md)。
+
+## 2026-11-02 轻量评分统计准入停止
+
+接续47135bb；独立N/avgdl/精确长度统计：674为.255秒/24KiB，百万8.936秒/11898880bytes，全成员count/总长度一致。实现前冻4首次短语，百万of the/in the精确DF为384496/316943，T计数.320/.256秒且需全语料相关位置，不可用单词DF替代；按用户第6条停止。未实现完整评分器，未跑新16题三路批次，不称成本解决。3项FTS统计语义检查通过，旧288及1458结果保留。结论该路径不值得继续（本轮通用精确且候选有界约束下），无模型/全量/生产/进程生命周期改变。见[报告](evaluation/tantivy-light-score-v1/report.md)。
+
+
+## 2026-11-02 Tantivy排序定位与实际接口比较
+
+实现c30f7e2，原12+预冻4迁移查询，两规模三路各三次，共288实际Retriever读取全部完整/释放。Q10 -206在T第4、Q4原段第5、Q12原段第4；48项词DF一致，实测IDF公式+长度量化可复算12相关文档评分，非同分或漏建。唯一T32→原SQLite BM25→3在96组恢复FTS全部正文/邻接及Q10限值/TO例外，无本批新增覆盖退化，但百万四宽实际当前T仅快1.917倍、保护反慢，两个规模保护16题均慢于FTS。故不进入全量，不开第二方案。9适配+3专项通过，复用1458回归，不调合同/默认、不调用模型/不建索引。8765未监听；10:39 ready文件早于同日11:41系统开机，旧进程不能跨开机存活，具体更早退出原因仍未知，本轮不恢复。见[报告](evaluation/tantivy-ranking-v1/report.md)、[逐次表](evaluation/tantivy-ranking-v1/timings.md)、[统计](evaluation/tantivy-ranking-v1/summary.json)。
+
+
+## 2026-11-02 Tantivy产品适配与全量准备
+
+默认关闭Retriever接入原Factory/Harness/Store；百万及674两组共6条实际取证/离线模型产品链完整，2条一次修订+完整重审，2无效引用422；70份Store证据和历史/标注版本补读一致。9适配专项、11恢复协议通过，完整离线1458/280.722秒OK（80私有归档缺失跳过），不重跑百万。Q10的1.05pu/TO例外在T根+邻接均缺失，Q4/Q12退步及近重复仍阻止默认发布，没有新重排或扩大K。全范围24,620,947（含674负ID）；恢复/原子发布只在小索引验，完整计划建议160GiB/总96h/每段≤4h，尚未授权或执行。0真实模型，8765当前未监听，本轮不恢复/切换；PR4不动、PR5仍草稿。见[报告](evaluation/tantivy-product-v1/report.md)、[建设与质量门槛](evaluation/tantivy-product-v1/full-build-plan.md)。下一步只在明确资源授权后建设离线全量，不能据此默认发布。
+
+
+## 2026-10-30 Tantivy监督v3与百万完成
+
+唯一实测29844be：百万从零419.621秒/4段、新进程全部ID/hash有界验收267.324秒；72 TopK/24独立计数完成。四宽含原文及邻接比值中位5.220倍（25万4.655），源封印198.468秒单列。采样峰值606.61MiB/3.669GiB，无空窗/超期/重试。Q3/Q4/Q12替换及Q10额外限值/TO例外风险保留，不称无损。监督10项先测；结束后06051f9补健康异常与阶段旧pause，12项短测试通过，无百万补跑。原服务最终恢复PID5252/ready（此前15312退出原因未知），退出原因未知，0模型，不切检索、不启全量、PR4不动。见[报告](evaluation/tantivy-supervision-v3/report.md)和[逐次表](evaluation/tantivy-supervision-v3/timings.md)。下一步只准备全量资源规划及默认关闭适配，本轮结束。
+
+
+## 2026-10-30 Tantivy v2：25万稳定，百万工程停止
+
+实现d144be9，D1—D4固定失败窗口均一次成功，旧原生根因未定；两份从零50k、新进程全量ID/hash验收通过，25万从零75.113秒/3段亦通过。25万四宽内核/原文/邻接比值中位5.108/4.868/4.655倍，674回查主导只1.039倍，不宣称全库或质量无损。百万准备完，建库684000安全停止、未验收未计时，不续写。监测46036秒含两段长空窗，四小时持续监督保证不成立，唯一后续是恢复后deadline与已消费writer清理交接；不开始下一批。0模型，原库只读，8765不动，PR #4不变；v1全部保留。见[独立完整报告](evaluation/tantivy-stability-v2/report.md)及[逐次分段表](evaluation/tantivy-stability-v2/timings.md)。
+
+
+## 2026-10-29 Tantivy有界可行性：48k有速度潜力，建库稳定性阻断扩大
+
+固定Tantivy0.27.0、12历史原查询、同词项同数据，674文献质量集及精确48,000行业前缀各72次Top-K/24单独计数完成。四宽查询快3.86—5.86倍（组中位5.263倍），12命中数一致；正常Q8慢0.343ms，保留。原计划50k未完成：6次原生writer失败，末次仍48002；根因未知。没有25万/百万结果，不外推全库、不继续调参。132根证据/115邻接、48组现有来源层校验通过；只证明身份回查，不保证有用召回。
+
+原型数据约103.7MiB，已记录最大进程峰值126MiB；进程树精确峰值和纯成功建库累计未知，控制边界见报告。原库70GB只读，生产路径0改动，0模型/0token/0模型费用，不重跑本地全套1454，不切8765。PR #4/cc991a3保留其取证收益/成本及未过30%结论，未改未合并；本研究独立基于master3cb0535。新[草稿PR #5](https://github.com/7556481/PowerTrustAI/pull/5)归档原型，见[完整报告](evaluation/tantivy-bounded-v1/report.md)。后续唯一建议是先定位同版writer失败并补中等规模稳定验证，不立即全量。
+
 ## 2026-10-29 发布后分支与候选处置
 
 远端新核验后28→2，26历史分支先归档SHA再原子删除；本地安全删除27支，master安全快进。候选代码保留且不开启；rank/MATCH当前实现结束，只建议保留v6来源模态忠实与完整修订交付研究（不执行）。8765 PID19116/ready及源码/受管配置未变，0模型、无重启、不重跑1454。见[清单](maintenance/post-release-disposition-v1/report.md)、[完整SHA](maintenance/post-release-disposition-v1/branches-before.json)及[回执](maintenance/post-release-disposition-v1/cleanup-result.json)。

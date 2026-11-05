@@ -9,3 +9,5 @@
 5. 正常使用先阅读初稿，等待审核结束，再看证据、不足和可能的修订。绿标不等于回答正确或工程安全。
 6. 停止前确认任务已结束、队列为空；运行 `.\.venv\Scripts\python.exe -m backend --stop --port 8765`。无法确认在途请求时不强杀、不重放。
 7. 真实固定批次必须独立冻结并使用现有预算/usage入口；本轮固定十题已执行一次并封存，禁止重跑；见[结果](evaluation/stable-product-baseline-v1/report.md)。不能以日常提交替代冻结验收。
+
+当前全量快速检索仍在隔离建设，正式D盘入口继续运行原SQLite。不要另启writer或重复冻结/真实批次；建设与可核验进程状态见[交接](handoff.md)。只有完整门槛通过后才启用受管快速配置；现在用户启动命令仍是 `D:\PowerTrustAI\start-powertrustai.cmd`。

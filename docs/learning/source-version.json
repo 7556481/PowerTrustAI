@@ -1,14 +1,14 @@
 {
-  "application_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
-  "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
+  "application_commit": "3df7f2f6e2622095e6d2912a121b4db1b2990363",
+  "evaluation_implementation_commit": "b3d7f9407224b854640747f58972b60ec5d70719",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "document_version": "learning-site-v6.18 selective MATCH v1 performance gate failed and not adopted,2026-10-29",
+  "document_version": "learning-site-v6.25 full fast retrieval construction in progress,2026-11-02",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "initial health unavailable in v7; no service action or deployment by this run",
+    "service_8765": "original SQLite service restored, PID11640 health ready, no active/queued; previous exit unknown; not switched to Tantivy",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "selective_match_candidate_default": false,
@@ -16,7 +16,9 @@
     "nli": "off",
     "switched": false,
     "audit_strategy": "baseline",
-    "sql_execution": "original bm25 score,rowid LIMIT"
+    "sql_execution": "original bm25 score,rowid LIMIT",
+    "release_application_commit": "674036a334e09400dfa519b85590cfbdbe8514d8",
+    "tantivy_default": false
   },
   "validation": {
     "reused_full": {
@@ -75,6 +77,31 @@
       "full_rerun": false,
       "reused_full_commit": "902cf65a350383f9d524a7a34ea5728173b93701",
       "scope": "frontend only; targeted isolated API/actual-client checks; affected10/18 browser separate"
+    },
+    "tantivy_product_v1": {
+      "implementation": "6c60d2297541dfdbb90b56855ae5d55b085830a9",
+      "full_offline": {
+        "tests": 1458,
+        "seconds": 280.722,
+        "skipped_private_archives": 80
+      },
+      "protocol_tests": 11,
+      "adapter_tests": 9,
+      "isolated_chains": 6,
+      "real_model_requests": 0,
+      "coverage_release_gate": "blocked_known_coverage_risks"
+    },
+    "tantivy_ranking_v1": {
+      "implementation": "c30f7e24877dfd4f96e8903040f5da1a1421ce7d",
+      "queries": 16,
+      "reads": 288,
+      "complete": 288,
+      "adapter_tests": 9,
+      "specific_tests": 3,
+      "reused_local_regression": 1458,
+      "real_model_requests": 0,
+      "full_build": false,
+      "decision": "Known losses restored on frozen materials but candidate slower; no full build"
     }
   },
   "experiment_batches": [
@@ -557,5 +584,59 @@
     "smoke_calls": 0,
     "additional_batch": false,
     "sql_in_audit_batch": "original"
+  },
+  "tantivy_bounded_v1": {
+    "version": "0.27.0",
+    "sample": 48000,
+    "planned_minimum": 50000,
+    "quality_native": 674,
+    "queries": 12,
+    "topk_runs": 144,
+    "separate_count_runs": 48,
+    "wide_speedup_range": [
+      3.86,
+      5.86
+    ],
+    "group_speedup": 5.263,
+    "larger_scales": false,
+    "build_failures": 6,
+    "model_calls": 0,
+    "production_switched": false,
+    "report": "docs/evaluation/tantivy-bounded-v1/report.md"
+  },
+  "tantivy_stability_medium_v2": {
+    "implementation_commit": "d144be9cf4b80a369f3dc9b1daf5804ee85bcb15",
+    "binding": "0.27.0",
+    "monitor": "psutil7.0.0",
+    "writer_heap_bytes": 128000000,
+    "index_workers": 1,
+    "process_tree_budget_bytes": 536870912,
+    "native_merge_pool_default": 4,
+    "production_connected": false,
+    "model_calls": 0,
+    "root_cause": "not established; current configuration not reproduced",
+    "report": "docs/evaluation/tantivy-stability-v2/report.md",
+    "maximum_accepted": 250000,
+    "million": "stopped at684000; no benchmark",
+    "decision": "resolve interruption/deadline/cleanup first",
+    "service_final": "not listening; no service actions"
+  },
+  "tantivy_supervision_v3": {
+    "real_implementation": "29844be",
+    "postrun_control_fix": [
+      "06051f9",
+      "3a74214"
+    ],
+    "million_accepted": true,
+    "model_calls": 0,
+    "production_retrieval_changed": false
+  },
+  "full_fast_candidate": {
+    "code": "3df7f2f6e2622095e6d2912a121b4db1b2990363",
+    "state": "all input prepared; memory-stop prefix510674 audited; bounded5000-batch recovery validation running; quality/release not approved",
+    "requests": 0,
+    "manifest": "not yet accepted",
+    "default_enabled": false,
+    "ci": "four push/PR checks successful; full offline1458 in133.249s; Windows semantics successful"
   }
 }
