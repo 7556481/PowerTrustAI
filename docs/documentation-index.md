@@ -1,5 +1,7 @@
 # 文档索引
 
+- [15—17次目标文件/进程交接只读排查](evaluation/tantivy-checkpoint-recovery-v10/handle-handoff-20261105.md)：未发现确认的本项目泄漏，持有者未知；成功open/close日志缺失，不启动18、不加时。
+
 - [2026-11-05完整周期吞吐、预算及授权链](evaluation/tantivy-checkpoint-recovery-v10/throughput-budget-20261105.md)：最近15—17次含零产出，规模增长情景及验收预留；第17次已按零增长停止，未加时或擅自重启。
 
 - [控制器固定不可变输入身份v14](evaluation/tantivy-checkpoint-recovery-v10/input-epoch-v14.md)：已实现并通过Windows句柄/原版writer专项，首次真实完整验证中；后续恢复性能待实测，生产审核未变。
