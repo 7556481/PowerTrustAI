@@ -314,3 +314,7 @@ v10首轮源/全spool及映射联合阶段2227.473秒，代码还在每个writer
 ### 只记录失败不能重建句柄持有时间线
 
 第17次前审计退出约62秒后才发生目标替换失败；活跃输入锁实际5项均不含.managed，动态SHA使用with并先于writer返回。没有证据支持“上一轮审计进程仍在”，也不能证明所有项目元数据探测均无瞬时句柄。errors_only日志滤掉成功打开/关闭，而且未存共享模式，失败PID只标识替换发起者，不标识阻挡者。故持有者保留未知，不因只读检查点通过就恢复零增长运行。详见docs/evaluation/tantivy-checkpoint-recovery-v10/handle-handoff-20261105.md。
+
+### 兼容性实验的夹具失败应单列
+
+跨环境小样本首次Actions在Windows夹具清理时返回WinError32：sqlite3 Connection的with上下文提交/回滚事务，并不关闭连接；src仍活着时删除临时库会失败。它与原.managed替换错误5不同，Linux续写和Windows产品读回未执行，故兼容性保持未验证；有artifact不等于阶段通过。本轮不修后续跑、不迁移正式检查点。详见docs/evaluation/tantivy-crossenv-v15/report.md。

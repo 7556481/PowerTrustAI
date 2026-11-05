@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-11-05 跨环境小样本首次验证在Windows夹具清理处停止
+
+代码3e9e1ea，唯一Actions41942205637；本机WSL未安装，复用仓库已有Linux CI渠道。公开5成员Windows先3、Linux续2、WindowsFactory读取的冻结方案，实际seed因sqlite3连接事务上下文未close、fixture清理WinError32退出1，Linux及返回读取未执行。不是原.managed错误5，也不能认定格式不兼容；按任一步失败门槛停止，不修后重跑。正式2575674、原输入/账本/deadline不动、无18次、模型0/8765不动。见[evaluation/tantivy-crossenv-v15/report.md](evaluation/tantivy-crossenv-v15/report.md)。
+
 ## 2026-11-05 文件句柄交接只读排查结束，未恢复
 
 第15—17次前审计监督器均先exit，再writer准入；第17次前审计23:57:27退出，动态校验23:57:58结束，23:58:29首次feed约170ms后替换失败，未进入commit。持久输入锁仅覆盖5项源/spool/manifest，不含.managed；sha用with关闭，监测仅目录元数据。现有errors_only trace没有成功open/close或共享模式，不能还原实际持有者，也不能排除瞬时元数据访问。未发现可确认本项目缺陷，持有者未知，按用户要求结束，不修假设、不启动18、不追加预算。正式2575674及所有输入/副本保留，模型0、8765不动。[排查、恢复依据与预算分别结论](evaluation/tantivy-checkpoint-recovery-v10/handle-handoff-20261105.md)。
