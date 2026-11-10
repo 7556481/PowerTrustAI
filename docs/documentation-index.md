@@ -1,5 +1,7 @@
 # 文档索引
 
+- [本机分片25万实建及双片读取](evaluation/tantivy-shards-v16/report.md)：实建/完整验收通过，保留验收连接错误；尚未批准新全程预算，不扩大或切生产。
+
 - [跨环境续写小样本首次验证](evaluation/tantivy-crossenv-v15/report.md)：独立CI渠道可用；Windows夹具清理失败，Linux未执行，兼容性未验证，不迁移正式数据。
 
 - [15—17次目标文件/进程交接只读排查](evaluation/tantivy-checkpoint-recovery-v10/handle-handoff-20261105.md)：未发现确认的本项目泄漏，持有者未知；成功open/close日志缺失，不启动18、不加时。

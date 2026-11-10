@@ -318,3 +318,7 @@ v10首轮源/全spool及映射联合阶段2227.473秒，代码还在每个writer
 ### 兼容性实验的夹具失败应单列
 
 跨环境小样本首次Actions在Windows夹具清理时返回WinError32：sqlite3 Connection的with上下文提交/回滚事务，并不关闭连接；src仍活着时删除临时库会失败。它与原.managed替换错误5不同，Linux续写和Windows产品读回未执行，故兼容性保持未验证；有artifact不等于阶段通过。本轮不修后续跑、不迁移正式检查点。详见docs/evaluation/tantivy-crossenv-v15/report.md。
+
+### 封存分片不等于重启失败writer
+
+2026-11-10保留原2575674首片只读，紧接冻结输入新增25万独立片，长writer末尾单commit正常关闭30.16秒。验收URI连接错误保留并修复后，全25万ID/映射/正文/terms新进程通过508.21秒，旧片不续写。双片统一产品证据接口与邻接回查通过，但各片BM25统计不同，确定性合并不等于全局排名或质量通过；当前两进程接线不能机械扩至90进程。整体观察约24.3分钟包含首次失败、重验和初始化；不能只用30秒推算建设时间。原96h已到期，新全程预算待用户一次批准，生产继续SQLite、模型0。详见docs/evaluation/tantivy-shards-v16/report.md。

@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-11-10 本机25万新分片与双片读取通过，等待新全程预算
+
+旧2575674只读hash核验不变，新[2575674,2825674)独立单writer/单commit正常关闭30.16秒，峰值368MiB；验收URI连接错误保留并修复，第二次新进程全25万ID/映射/正文/terms通过508.21秒。双片同一隔离产品Retriever读取原文/邻接通过，初版局部分数确定性合并仍需全量质量门槛；两片总2825674。原96h已到期、无18次，未建第二新增片。申请获批起60h新全程绝对预算、160GiB/30GiB余量、每段4h，剩88片/最终90片；未批不继续。完整实测和预算见[evaluation/tantivy-shards-v16/report.md](evaluation/tantivy-shards-v16/report.md)。模型0、8765/生产SQLite不动。
+
 ## 2026-11-05 跨环境小样本首次验证在Windows夹具清理处停止
 
 代码3e9e1ea，唯一Actions41942205637；本机WSL未安装，复用仓库已有Linux CI渠道。公开5成员Windows先3、Linux续2、WindowsFactory读取的冻结方案，实际seed因sqlite3连接事务上下文未close、fixture清理WinError32退出1，Linux及返回读取未执行。不是原.managed错误5，也不能认定格式不兼容；按任一步失败门槛停止，不修后重跑。正式2575674、原输入/账本/deadline不动、无18次、模型0/8765不动。见[evaluation/tantivy-crossenv-v15/report.md](evaluation/tantivy-crossenv-v15/report.md)。
