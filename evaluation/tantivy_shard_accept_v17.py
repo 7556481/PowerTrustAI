@@ -24,6 +24,8 @@ def accept(plan):
    g.check('full shard identity');start,end=entry['input_range']
    if start!=position or end-start!=entry['count']:raise RuntimeError('Gap/overlap in shard intervals')
    root=Path(entry['index']).parent
+   if entry.get('acceptance_sha256') and sha(root/'acceptance.json')!=entry['acceptance_sha256']:raise RuntimeError('Sealed acceptance receipt changed')
+   if entry.get('reader_manifest_sha256') and sha(entry['reader_manifest'])!=entry['reader_manifest_sha256']:raise RuntimeError('Initial reader manifest changed')
    files=entry.get('files')
    if files:
     for name,v in files.items():
