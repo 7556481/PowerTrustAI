@@ -48,6 +48,18 @@ def audit():
  sp=sqlite3.connect((OLD/'spool.sqlite3').resolve().as_uri()+'?mode=ro',uri=True);mapping=sqlite3.connect((folder/'mapping.sqlite3').resolve().as_uri()+'?mode=ro',uri=True);seen=sqlite3.connect((folder/('audit-seen-'+uuid.uuid4().hex+'.sqlite3')).resolve().as_uri(),uri=True)
  try:
   with KnowledgeStore(SOURCE,readonly=True,validated_pdf_cache=True) as store:
+   # Process-open source sealing is not a query scan. Make its8MiB blocks
+   # cooperative too, so a busy service/deadline does not wait for70GB.
+   from rag.corpus_index import seal
+   from unittest.mock import patch
+   raw_sha=hashlib.sha256
+   class CheckedSHA:
+    def __init__(self,*args,**kwargs):AUDIT_CHECK();self.inner=raw_sha(*args,**kwargs)
+    def update(self,data):AUDIT_CHECK();return self.inner.update(data)
+    def __getattr__(self,name):return getattr(self.inner,name)
+   seal_started=time.time()
+   with patch.object(hashlib,'sha256',CheckedSHA):assert seal(store,K) is not None
+   seal_seconds=time.time()-seal_started
    for row in mapping.execute('select * from rows order by position'):
     if n%1000==0:AUDIT_CHECK()
     expected=sp.execute('select * from input where position=?',(START+n,)).fetchone();assert row==expected[:5]
@@ -63,7 +75,7 @@ def audit():
   if batch:seen.executemany('insert into seen values(?)',batch)
   seen.execute('attach database ? as mapped',((folder/'mapping.sqlite3').resolve().as_uri()+'?mode=ro',))
   assert count==END-START and not seen.execute('select rowid from seen except select rowid from mapped.rows limit 1').fetchone() and not seen.execute('select rowid from mapped.rows except select rowid from seen limit 1').fetchone()
-  atomic(folder/'acceptance.json',{'passed':True,'complete_id_set':True,'n':n,'range':[START,END],'mapping_hash':h.hexdigest(),'all_bodies_terms_ids_verified':True,'new_process':True,'seconds':time.time()-started})
+  atomic(folder/'acceptance.json',{'passed':True,'complete_id_set':True,'n':n,'range':[START,END],'mapping_hash':h.hexdigest(),'all_bodies_terms_ids_verified':True,'new_process':True,'source_seal_seconds':seal_seconds,'seconds':time.time()-started})
  finally:sp.close();mapping.close();seen.close()
 
 def launch():

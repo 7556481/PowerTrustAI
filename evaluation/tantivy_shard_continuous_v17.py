@@ -14,6 +14,13 @@ def guard():
  a=read(AUTH)
  if time.time()>=a['deadline']:raise TimeoutError('Authorized60h absolute deadline expired')
  if (HOME/'operator-stop.json').exists():raise RuntimeError('Operator stop retained')
+ for f in a.get('protected_inputs',[]):
+  path=Path(f['path']);stamp=path.stat()
+  if [stamp.st_size,stamp.st_mtime_ns]!=[f['bytes'],f['mtime_ns']]:raise RuntimeError('Frozen input stamp changed: '+str(path))
+  if path.suffix=='.sqlite3':
+   for suffix in ['-wal','-journal']:
+    side=Path(str(path)+suffix)
+    if side.exists() and side.stat().st_size:raise RuntimeError('Nonempty immutable input sidefile: '+str(side))
  if shutil.disk_usage(HOME).free<a['min_free']:raise RuntimeError('Disk reserve below30GiB')
  return a
 
@@ -80,7 +87,9 @@ def stage(path):
  guard();worker.START=p['start'];worker.END=p['end'];worker.SHARD=Path(p['shard_dir'])
  if p['role']=='build':worker.build(path)
  else:
-  g=Guard(path);worker.AUDIT_CHECK=lambda:g.check('complete shard audit');worker.audit()
+  g=Guard(path)
+  def audit_check():guard();g.check('complete shard audit')
+  worker.AUDIT_CHECK=audit_check;worker.audit()
 
 def seal(folder,start,end):
  acceptance=read(folder/'acceptance.json');built=read(folder/'built.json')

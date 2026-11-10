@@ -18,7 +18,7 @@ def accept(plan):
  if inventory['covered']!=a['expected'] or inventory['unbuilt']!=0:raise RuntimeError('Incomplete coverage')
  db=HOME/('full-seen-'+uuid.uuid4().hex+'.sqlite3');seen=sqlite3.connect(db.resolve().as_uri(),uri=True)
  sp=sqlite3.connect((OLD/'spool.sqlite3').resolve().as_uri()+'?mode=ro',uri=True)
- seen.execute('create table ids(rowid integer primary key)');seen.execute('pragma cache_size=-8192');position=0;negative=0;manifests=[];started=time.time()
+ seen.execute('create table ids(rowid integer primary key)');seen.execute('pragma cache_size=-8192');position=0;negative=0;manifests=[];started=time.time();global_hash=hashlib.sha256()
  try:
   for ordinal,entry in enumerate(inventory['shards']):
    g.check('full shard identity');start,end=entry['input_range']
@@ -41,7 +41,7 @@ def accept(plan):
      if expected is None or row!=expected[:5] or row[0]!=position:raise RuntimeError('Input/mapping/position mismatch')
      rid=(-(position+1) if position<674 else position-673)
      if row[1]!=rid or hashlib.sha256(expected[5].encode()).hexdigest()!=row[4]:raise RuntimeError('Namespace/terms mismatch')
-     h.update(json.dumps(row).encode());position+=1
+     h.update(json.dumps(row).encode());global_hash.update(json.dumps(row).encode());position+=1
     if position!=end or next(inputs,None) is not None:raise RuntimeError('Missing mapping member')
     index=tantivy.Index.open(entry['index']);n=0;batch=[]
     for rid in stored_ids(index,Path(entry['index'])):
@@ -57,9 +57,10 @@ def accept(plan):
    package_manifest(entry['index'],proof,target,knowledge_version=K,source_total=a['expected'],scope='isolated',build={'range':[start,end]},source_identity={'prior_audit':entry.get('proof',entry.get('acceptance_sha256'))},check=lambda:g.check('full reader packaging'))
    manifests.append(str(target))
   if position!=24620947 or negative!=674 or seen.execute('select count(*) from ids').fetchone()[0]!=position:raise RuntimeError('Full ID scope mismatch')
+  if global_hash.hexdigest()!=read(OLD/'input-complete.json')['mapping_hash']:raise RuntimeError('Original complete frozen input digest differs')
   # Dense namespace plus unique count proves the exact expected set.
   if seen.execute('select count(*) from ids where rowid between -674 and -1').fetchone()[0]!=674 or seen.execute('select count(*) from ids where rowid between 1 and 24620273').fetchone()[0]!=24620273:raise RuntimeError('Missing namespace members')
-  atomic(HOME/'accepted-shard-group.json',{'complete':True,'count':position,'negative':negative,'manifests':manifests,'seconds':time.time()-started,'models':0})
+  atomic(HOME/'accepted-shard-group.json',{'complete':True,'count':position,'negative':negative,'input_mapping_hash':global_hash.hexdigest(),'manifests':manifests,'seconds':time.time()-started,'models':0})
   atomic(HOME/'acceptance-complete.json',{'complete':True,'n':position,'models':0})
  finally:seen.close();sp.close()
 
@@ -98,6 +99,10 @@ def offline():
 
 if __name__=='__main__':
  import sys
+ if sys.argv[1] in ['accept','measure']:
+  guard()
+  for f,h in read(sys.argv[2]).get('frozen_code',{}).items():
+   if sha(f)!=h:raise RuntimeError('Full offline frozen code changed')
  if sys.argv[1]=='offline':offline()
  elif sys.argv[1]=='accept':accept(sys.argv[2])
  elif sys.argv[1]=='measure':measure(sys.argv[2])
