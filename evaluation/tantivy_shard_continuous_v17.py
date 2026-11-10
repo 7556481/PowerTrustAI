@@ -89,7 +89,7 @@ def stage(path):
  else:
   g=Guard(path)
   def audit_check():guard();g.check('complete shard audit')
-  worker.AUDIT_CHECK=audit_check;worker.audit()
+  worker.AUDIT_CHECK=audit_check;worker.AUDIT_DEADLINE=p['deadline'];worker.audit()
 
 def seal(folder,start,end):
  acceptance=read(folder/'acceptance.json');built=read(folder/'built.json')

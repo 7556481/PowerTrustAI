@@ -11,6 +11,16 @@ from rag.tantivy_query import ast
 from rag.contracts import RetrievalRequest,RetrievalPurpose,ContextOptions
 
 class ShardedTests(unittest.TestCase):
+ def test_expired_stage_never_opens_native_writer(self):
+  import json
+  from unittest.mock import patch
+  from evaluation.tantivy_supervision_v3 import Expired
+  import evaluation.tantivy_shard_v16 as worker
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);plan=root/'plan.json';plan.write_text(json.dumps({'deadline':0}));target=root/'must-not-exist'
+   with patch('evaluation.tantivy_native_trace_v8.wait_ready'),patch.object(worker,'SHARD',target),patch.object(worker,'create_index') as create:
+    with self.assertRaises(Expired):worker.build(plan)
+    create.assert_not_called();self.assertFalse(target.exists())
  def test_expiry_and_immutable_input_sidefile_stop(self):
   import json,time
   from unittest.mock import patch

@@ -10,6 +10,7 @@ OLD=Path('D:/PowerTrustAI/data/retrieval_local/tantivy-full-fast-v1')
 HOME=Path('D:/PowerTrustAI/data/retrieval_local/tantivy-shards-v16')
 SHARD=HOME/'shard-01'
 AUDIT_CHECK=lambda:None
+AUDIT_DEADLINE=None
 
 def read(p):return json.loads(Path(p).read_text())
 
@@ -17,13 +18,14 @@ def build(plan):
  import tantivy
  from evaluation.tantivy_supervision_v3 import Guard
  from evaluation.tantivy_native_trace_v8 import wait_ready,phase
- g=Guard(plan);wait_ready(g.plan);folder=SHARD;folder.mkdir(exist_ok=False)
+ g=Guard(plan);wait_ready(g.plan);g.check('writer admission');folder=SHARD;folder.mkdir(exist_ok=False)
  con=sqlite3.connect(folder/'mapping.sqlite3');source=sqlite3.connect((OLD/'spool.sqlite3').resolve().as_uri()+'?mode=ro',uri=True)
  con.execute('create table rows(position integer primary key,rowid integer unique,fragment_id text,body_sha text,terms_sha text)')
- idx=create_index(folder/'tantivy');writer=None;primary=None;cleanup=[];n=0;h=hashlib.sha256();started=time.time()
+ g.check('native index creation');idx=create_index(folder/'tantivy');writer=None;primary=None;cleanup=[];n=0;h=hashlib.sha256();started=time.time()
  try:
-  writer=idx.writer(heap_size=128000000,num_threads=1)
+  g.check('writer creation');writer=idx.writer(heap_size=128000000,num_threads=1)
   for row in source.execute('select * from input where position>=? and position<? order by position',(START,END)):
+   if g.wall()>=g.plan['deadline']:g.check('feed deadline')
    if n%1000==0:g.check('feed')
    assert row[0]==START+n and hashlib.sha256(row[5].encode()).hexdigest()==row[4]
    con.execute('insert into rows values(?,?,?,?,?)',row[:5]);h.update(json.dumps(row[:5]).encode());writer.add_document(tantivy.Document(terms=row[5],rowid=row[1]));n+=1
@@ -31,7 +33,7 @@ def build(plan):
   assert n==END-START
   g.check('commit');phase('commit');t=time.time();opstamp=writer.commit();commit=time.time()-t
   phase('merge_wait/close');t=time.time();w=writer;writer=None;w.wait_merging_threads();merge=time.time()-t
-  con.commit();atomic(folder/'built.json',{'n':n,'range':[START,END],'mapping_hash':h.hexdigest(),'opstamp':opstamp,'seconds':time.time()-started,'commit_seconds':commit,'merge_seconds':merge,'commits':1,'normal_close':True})
+  g.check('completed write acceptance');con.commit();atomic(folder/'built.json',{'n':n,'range':[START,END],'mapping_hash':h.hexdigest(),'opstamp':opstamp,'seconds':time.time()-started,'commit_seconds':commit,'merge_seconds':merge,'commits':1,'normal_close':True})
  except BaseException as e:
   primary=repr(e);atomic(folder/'primary-error.json',{'error':primary,'fed':n,'wall':time.time()});raise
  finally:
@@ -68,6 +70,7 @@ def audit():
    with patch.object(hashlib,'sha256',CheckedSHA):assert seal(store,K) is not None
    seal_seconds=time.time()-seal_started
    for row in mapping.execute('select * from rows order by position'):
+    if AUDIT_DEADLINE is not None and time.time()>=AUDIT_DEADLINE:AUDIT_CHECK()
     if n%1000==0:AUDIT_CHECK()
     expected=sp.execute('select * from input where position=?',(START+n,)).fetchone();assert row==expected[:5]
     assert hashlib.sha256(expected[5].encode()).hexdigest()==row[4]
@@ -76,6 +79,7 @@ def audit():
   assert n==END-START and h.hexdigest()==built['mapping_hash']
   seen.execute('create table seen(rowid integer primary key)');idx=tantivy.Index.open(str(folder/'tantivy'));batch=[];count=0
   for rid in stored_ids(idx,folder/'tantivy'):
+   if AUDIT_DEADLINE is not None and time.time()>=AUDIT_DEADLINE:AUDIT_CHECK()
    batch.append((rid,));count+=1
    if count%1000==0:AUDIT_CHECK()
    if len(batch)==1000:seen.executemany('insert into seen values(?)',batch);batch=[]
