@@ -44,7 +44,14 @@ def audit():
  import tantivy
  from evaluation.tantivy_full_build_v1 import SOURCE,K
  from rag.storage import KnowledgeStore
- folder=SHARD;built=read(folder/'built.json');n=0;h=hashlib.sha256();started=time.time()
+ folder=SHARD
+ inventory=HOME/'shards.json'
+ if inventory.exists() and any(Path(e['index']).resolve()==(folder/'tantivy').resolve() and e.get('state','').startswith('sealed') for e in read(inventory)['shards']):raise RuntimeError('Sealed shard audit receipt is immutable; use the full read-only verifier')
+ previous=folder/'acceptance.json'
+ if previous.exists():
+  history=folder/'audit-history';history.mkdir(exist_ok=True)
+  with (history/('acceptance-'+uuid.uuid4().hex+'.json')).open('xb') as saved:saved.write(previous.read_bytes())
+ built=read(folder/'built.json');n=0;h=hashlib.sha256();started=time.time()
  sp=sqlite3.connect((OLD/'spool.sqlite3').resolve().as_uri()+'?mode=ro',uri=True);mapping=sqlite3.connect((folder/'mapping.sqlite3').resolve().as_uri()+'?mode=ro',uri=True);seen=sqlite3.connect((folder/('audit-seen-'+uuid.uuid4().hex+'.sqlite3')).resolve().as_uri(),uri=True)
  try:
   with KnowledgeStore(SOURCE,readonly=True,validated_pdf_cache=True) as store:

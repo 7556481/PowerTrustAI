@@ -45,7 +45,11 @@ class ShardedTests(unittest.TestCase):
     try:b.append(rows);h=b.mapping_hash()
     finally:b.close()
     atomic(shard/'built.json',{'mapping_hash':h});calls=[]
-    with patch.multiple(worker,SHARD=shard,OLD=spool,START=0,END=len(rows),AUDIT_CHECK=lambda:calls.append(True)),patch.multiple(original,SOURCE=fixture.p,K=fixture.k):worker.audit()
+    with patch.multiple(worker,HOME=root,SHARD=shard,OLD=spool,START=0,END=len(rows),AUDIT_CHECK=lambda:calls.append(True)),patch.multiple(original,SOURCE=fixture.p,K=fixture.k):
+     worker.audit();before=(shard/'acceptance.json').read_bytes();worker.audit()
+     self.assertIn(before,[p.read_bytes() for p in (shard/'audit-history').glob('*.json')])
+     atomic(root/'shards.json',{'shards':[{'index':str(shard/'tantivy'),'state':'sealed-isolated-readonly'}]})
+     with self.assertRaisesRegex(RuntimeError,'immutable'):worker.audit()
     proof=json.loads((shard/'acceptance.json').read_text());self.assertTrue(proof['passed']);self.assertEqual(proof['n'],3);self.assertTrue(calls);self.assertIn('source_seal_seconds',proof)
   finally:fixture.tearDown()
  def test_two_shards_one_worker_source_and_release(self):
