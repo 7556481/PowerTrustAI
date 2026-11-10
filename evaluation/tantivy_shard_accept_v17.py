@@ -73,7 +73,10 @@ def measure(plan):
  atomic(HOME/'plan.json',{'queries':expected['queries']})
  atomic(HOME/'construction-ledger.json',{'kind':'new60h-offline-budget-view-not-old-ledger','deadline':read(AUTH)['deadline']})
  (HOME/'accepted').mkdir(exist_ok=True);atomic(HOME/'accepted/manifest.json',group)
- def factory(source,manifest,k,isolated=True):return ShardedTantivyRetriever(source,group['manifests'],k)
+ tree_limit=read(plan)['memory_limit']
+ native_limit=min(2*1024**3,max(64*1024**2,tree_limit-192*1024**2))
+ atomic(HOME/'offline-runtime-resource-freeze.json',{'tree_limit':tree_limit,'native_limit':native_limit,'parent_reserve':192*1024**2,'formula':'min2GiB/max64MiB/tree minus192MiB; before comparisons, independent of query results','deadline':read(plan)['deadline'],'models':0})
+ def factory(source,manifest,k,isolated=True):return ShardedTantivyRetriever(source,group['manifests'],k,memory_limit=native_limit)
  existing.ROOT=HOME;existing.FastTantivyRetriever=factory
  asyncio.run(existing.run())
 
@@ -97,13 +100,59 @@ def offline():
   dead(read(control/'process-identities.json'))
  atomic(HOME/'offline-stages-complete.json',{'wall':time.time(),'models':0,'needs_content_review':True})
 
+def wait_for_construction():
+ """Same bounded postbuild-companion pattern as tantivy_full_finish_v1.
+
+ It neither retries construction nor schedules any paid/production work.
+ """
+ import psutil
+ from rag.tantivy_build import owner
+ folder=HOME/'postbuild';folder.mkdir(exist_ok=True)
+ identity=read(folder/'controller-identity.json');deadline=read(AUTH)['deadline'];last=time.time()
+ def alive():
+  try:return abs(psutil.Process(identity['pid']).create_time()-identity['created'])<.001
+  except psutil.NoSuchProcess:return False
+ with owner(folder):
+  if (folder/'companion-result.json').exists():raise RuntimeError('Existing postbuild receipt; no repeat')
+  atomic(folder/'companion-identity.json',{'pid':psutil.Process().pid,'created':psutil.Process().create_time(),'controller':identity,'deadline':deadline})
+  try:
+   with (folder/'waiting-heartbeats.jsonl').open('a') as log:
+    while alive():
+     guard();now=time.time();row={'wall':now,'deadline':deadline}
+     if now-last>5:row.update(observation_gap=now-last,unobserved_resources=True)
+     last=now;root=psutil.Process(identity['pid']);processes={p.pid:p for p in [psutil.Process(),root,*root.children(recursive=True)]};memory=0
+     for process in processes.values():
+      try:
+       m=process.memory_info();memory+=max(m.rss,getattr(m,'private',m.rss))
+      except psutil.NoSuchProcess:pass
+     # This lightweight companion counts inside the actual active segment
+     # tree budget, including the original outer-controller64MiB reserve.
+     state=read(HOME/'continuous-state.json');active=[]
+     for control in HOME.glob('control-*'):
+      path=control/'plan.json'
+      if path.exists():
+       plan=read(path)
+       if plan.get('shard_dir')==state.get('folder'):active.append((path.stat().st_mtime,plan))
+     if active:
+      plan=max(active,key=lambda x:x[0])[1];budget=plan['memory_limit']+64*1024**2
+      if memory>budget:raise MemoryError('Controller plus postbuild companion exceeds active tree budget')
+      row['combined_limit']=budget
+     row['combined_memory']=memory;log.write(json.dumps(row)+'\n');log.flush();time.sleep(2)
+   guard();state=read(HOME/'continuous-state.json');inventory=read(HOME/'shards.json')
+   if state['state']!='construction-complete-awaiting-full-offline-acceptance' or inventory['covered']!=read(AUTH)['expected']:raise RuntimeError('Construction stopped/incomplete; no automatic retries')
+   offline()
+   atomic(folder/'companion-result.json',{'status':'offline_outputs_ready_for_in_task_semantic_review','wall':time.time(),'models':0})
+  except BaseException as e:
+   atomic(folder/'companion-result.json',{'status':'stopped_requires_inspection','error':repr(e),'wall':time.time(),'models':0});raise
+
 if __name__=='__main__':
  import sys
  if sys.argv[1] in ['accept','measure']:
   guard()
   for f,h in read(sys.argv[2]).get('frozen_code',{}).items():
    if sha(f)!=h:raise RuntimeError('Full offline frozen code changed')
- if sys.argv[1]=='offline':offline()
+ if sys.argv[1]=='wait':wait_for_construction()
+ elif sys.argv[1]=='offline':offline()
  elif sys.argv[1]=='accept':accept(sys.argv[2])
  elif sys.argv[1]=='measure':measure(sys.argv[2])
  else:raise SystemExit('accept PLAN | measure PLAN')
