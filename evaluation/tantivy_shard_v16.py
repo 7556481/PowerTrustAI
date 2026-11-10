@@ -8,6 +8,8 @@ START=2575674
 END=2825674
 OLD=Path('D:/PowerTrustAI/data/retrieval_local/tantivy-full-fast-v1')
 HOME=Path('D:/PowerTrustAI/data/retrieval_local/tantivy-shards-v16')
+SHARD=HOME/'shard-01'
+AUDIT_CHECK=lambda:None
 
 def read(p):return json.loads(Path(p).read_text())
 
@@ -15,7 +17,7 @@ def build(plan):
  import tantivy
  from evaluation.tantivy_supervision_v3 import Guard
  from evaluation.tantivy_native_trace_v8 import wait_ready,phase
- g=Guard(plan);wait_ready(g.plan);folder=HOME/'shard-01';folder.mkdir(exist_ok=False)
+ g=Guard(plan);wait_ready(g.plan);folder=SHARD;folder.mkdir(exist_ok=False)
  con=sqlite3.connect(folder/'mapping.sqlite3');source=sqlite3.connect((OLD/'spool.sqlite3').resolve().as_uri()+'?mode=ro',uri=True)
  con.execute('create table rows(position integer primary key,rowid integer unique,fragment_id text,body_sha text,terms_sha text)')
  idx=create_index(folder/'tantivy');writer=None;primary=None;cleanup=[];n=0;h=hashlib.sha256();started=time.time()
@@ -42,23 +44,25 @@ def audit():
  import tantivy
  from evaluation.tantivy_full_build_v1 import SOURCE,K
  from rag.storage import KnowledgeStore
- folder=HOME/'shard-01';built=read(folder/'built.json');n=0;h=hashlib.sha256();started=time.time()
+ folder=SHARD;built=read(folder/'built.json');n=0;h=hashlib.sha256();started=time.time()
  sp=sqlite3.connect((OLD/'spool.sqlite3').resolve().as_uri()+'?mode=ro',uri=True);mapping=sqlite3.connect((folder/'mapping.sqlite3').resolve().as_uri()+'?mode=ro',uri=True);seen=sqlite3.connect((folder/('audit-seen-'+uuid.uuid4().hex+'.sqlite3')).resolve().as_uri(),uri=True)
  try:
   with KnowledgeStore(SOURCE,readonly=True,validated_pdf_cache=True) as store:
    for row in mapping.execute('select * from rows order by position'):
+    if n%1000==0:AUDIT_CHECK()
     expected=sp.execute('select * from input where position=?',(START+n,)).fetchone();assert row==expected[:5]
     assert hashlib.sha256(expected[5].encode()).hexdigest()==row[4]
     e=store.evidence(row[2],K);assert hashlib.sha256(e.text.encode()).hexdigest()==row[3]
     h.update(json.dumps(row).encode());n+=1
-  assert n==250000 and h.hexdigest()==built['mapping_hash']
+  assert n==END-START and h.hexdigest()==built['mapping_hash']
   seen.execute('create table seen(rowid integer primary key)');idx=tantivy.Index.open(str(folder/'tantivy'));batch=[];count=0
   for rid in stored_ids(idx,folder/'tantivy'):
    batch.append((rid,));count+=1
+   if count%1000==0:AUDIT_CHECK()
    if len(batch)==1000:seen.executemany('insert into seen values(?)',batch);batch=[]
   if batch:seen.executemany('insert into seen values(?)',batch)
   seen.execute('attach database ? as mapped',((folder/'mapping.sqlite3').resolve().as_uri()+'?mode=ro',))
-  assert count==250000 and not seen.execute('select rowid from seen except select rowid from mapped.rows limit 1').fetchone() and not seen.execute('select rowid from mapped.rows except select rowid from seen limit 1').fetchone()
+  assert count==END-START and not seen.execute('select rowid from seen except select rowid from mapped.rows limit 1').fetchone() and not seen.execute('select rowid from mapped.rows except select rowid from seen limit 1').fetchone()
   atomic(folder/'acceptance.json',{'passed':True,'complete_id_set':True,'n':n,'range':[START,END],'mapping_hash':h.hexdigest(),'all_bodies_terms_ids_verified':True,'new_process':True,'seconds':time.time()-started})
  finally:sp.close();mapping.close();seen.close()
 

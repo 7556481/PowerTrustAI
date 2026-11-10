@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-11-10 新60h预算已批准，连续分片运行中
+
+起点17:01:22/截止11-13 05:01:22北京时间，暂停计入；新账本full-authorization-20261110.json，旧96h不动，模型0。2825674后首片已正常提交25万、但退出门禁辅助PID延迟导致暂停；确认全PID退出后只补原片新进程审计，无重建/18次恢复。首个新增片已验收封存，覆盖3075674，自动进入下一片；实时封存值查shards.json，阶段查continuous-state.json。单进程多片产品读与全局验收/24题入口已准备，不能冒称全量通过。见[evaluation/tantivy-shards-v16/continuous-authorization-v17.md](evaluation/tantivy-shards-v16/continuous-authorization-v17.md)。
+
 ## 2026-11-10 本机25万新分片与双片读取通过，等待新全程预算
 
 旧2575674只读hash核验不变，新[2575674,2825674)独立单writer/单commit正常关闭30.16秒，峰值368MiB；验收URI连接错误保留并修复，第二次新进程全25万ID/映射/正文/terms通过508.21秒。双片同一隔离产品Retriever读取原文/邻接通过，初版局部分数确定性合并仍需全量质量门槛；两片总2825674。原96h已到期、无18次，未建第二新增片。申请获批起60h新全程绝对预算、160GiB/30GiB余量、每段4h，剩88片/最终90片；未批不继续。完整实测和预算见[evaluation/tantivy-shards-v16/report.md](evaluation/tantivy-shards-v16/report.md)。模型0、8765/生产SQLite不动。

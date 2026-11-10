@@ -1,5 +1,7 @@
 # 文档索引
 
+- [已批准60h连续分片与全量离线验收](evaluation/tantivy-shards-v16/continuous-authorization-v17.md)：新截止11月13日05:01:22，建设中，尚无全量提速/质量结论。
+
 - [本机分片25万实建及双片读取](evaluation/tantivy-shards-v16/report.md)：实建/完整验收通过，保留验收连接错误；尚未批准新全程预算，不扩大或切生产。
 
 - [跨环境续写小样本首次验证](evaluation/tantivy-crossenv-v15/report.md)：独立CI渠道可用；Windows夹具清理失败，Linux未执行，兼容性未验证，不迁移正式数据。
