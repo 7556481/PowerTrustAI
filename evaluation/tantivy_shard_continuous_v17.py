@@ -1,5 +1,5 @@
 """Durable authorized shard construction; no paid calls or production mutation."""
-import json,sys,time,sqlite3,shutil,os
+import json,sys,time,sqlite3,shutil,os,subprocess
 from contextlib import closing
 from pathlib import Path
 import psutil
@@ -40,7 +40,16 @@ def run_stage(folder,start,end,role,control):
   deps=OLD/'native-diagnostic-v8/deps'
   p['native_trace']={'dependencies':str(deps),'dependency_files':{str(f):sha(f) for f in (deps/'frida').rglob('*') if f.is_file() and f.suffix in ('.pyd','.dll','.py')},'roots':[str(folder/'tantivy')],'directory':str(control/'trace'),'ready_file':str(control/'trace-ready.json'),'errors_only':True,'inject_pos_failure':False}
  atomic(control/'plan.json',p)
- rc=supervise(control/'plan.json',[sys.executable,'-X','utf8','-m','evaluation.tantivy_shard_continuous_v17','stage',str(control/'plan.json')],control/'logs',idle)
+ with (control/'coordinator-stdout.log').open('w') as out,(control/'coordinator-stderr.log').open('w') as err:
+  child=subprocess.Popen([sys.executable,'-X','utf8','-m','evaluation.tantivy_shard_continuous_v17','supervisor',str(control/'plan.json')],stdout=out,stderr=err,creationflags=subprocess.CREATE_NO_WINDOW|subprocess.BELOW_NORMAL_PRIORITY_CLASS)
+  created=psutil.Process(child.pid).create_time();atomic(control/'segment-supervisor.json',{'pid':child.pid,'created':created})
+  while child.poll() is None:
+   if time.time()>=min(p['deadline']+90,a['deadline']):
+    atomic(control/'stop.json',{'reason':'supervisor absolute expiry','wall':time.time()})
+    if abs(psutil.Process(child.pid).create_time()-created)<.001:child.terminate()
+    child.wait(10);raise TimeoutError('Owned isolated supervisor expired; job closed')
+   time.sleep(.2)
+  rc=child.returncode
  roster=control/'process-identities.json'
  if roster.exists():
   until=min(p['deadline']+p['grace_seconds'],a['deadline'])
@@ -106,7 +115,10 @@ def main():
      closed=next(x for x in reversed(events) if x['kind']=='stage_closed');exited=next(x for x in reversed(events) if x['kind']=='exit')
      built=read(folder/'built.json')
      if exited['code']!=0 or closed['primary'] is not None or closed['cleanup_errors'] or not built['normal_close'] or built['range']!=[cursor,end]:raise RuntimeError('Unsealed stage is not a proven normally closed build')
-     if base.with_name(base.name+'-audit').exists():raise RuntimeError('Existing audit attempt requires explicit inspection; preserve evidence')
+     if base.with_name(base.name+'-audit').exists():
+      prior_audit=base.with_name(base.name+'-audit');dead(read(prior_audit/'process-identities.json'))
+      ae=[json.loads(x) for x in (prior_audit/'events.jsonl').read_text().splitlines()]
+      if next(x for x in reversed(ae) if x['kind']=='exit')['code']!=0 or not read(folder/'acceptance.json')['passed']:raise RuntimeError('Existing audit failed; preserve evidence')
     atomic(STATE,{'state':'building','start':cursor,'end':end,'attempt':attempt,'folder':str(folder),'wall':time.time(),'deadline':a['deadline']})
     control=base.with_name(base.name+'-build');rc=0 if resuming else run_stage(folder,cursor,end,'build',control)
     if rc:
@@ -118,7 +130,9 @@ def main():
      if failure.get('kind')!='identified-managed-atomic-replace-win5' or attempt==1:raise RuntimeError('Build stopped; no further rebuild authorized')
      continue
     atomic(STATE,{'state':'auditing','start':cursor,'end':end,'folder':str(folder),'wall':time.time(),'deadline':a['deadline']})
-    if run_stage(folder,cursor,end,'audit',base.with_name(base.name+'-audit')):raise RuntimeError('Audit failed; retain field evidence')
+    audit_control=base.with_name(base.name+'-audit')
+    if audit_control.exists():audit_control=base.with_name(base.name+'-audit-revalidate-'+str(time.time_ns()))
+    if run_stage(folder,cursor,end,'audit',audit_control):raise RuntimeError('Audit failed; retain field evidence')
     entry=seal(folder,cursor,end);manifest['shards'].append(entry);cursor=end
     manifest.update(covered=cursor,covered_range=[0,cursor],unbuilt=a['expected']-cursor)
     atomic(HOME/'shards.json',manifest);atomic(STATE,{'state':'sealed','covered':cursor,'wall':time.time(),'deadline':a['deadline']});print('SEALED',cursor,'/',a['expected'],flush=True);break
@@ -126,7 +140,15 @@ def main():
 
 if __name__=='__main__':
  try:
-  if len(sys.argv)==3 and sys.argv[1]=='stage':stage(sys.argv[2])
+  if len(sys.argv)==3 and sys.argv[1]=='supervisor':
+   from evaluation.tantivy_supervision_v3 import supervise
+   from evaluation.tantivy_full_controller_v1 import idle
+   path=Path(sys.argv[2])
+   def service_idle():
+    if (HOME/'operator-stop.json').exists():atomic(path.with_name('stop.json'),read(HOME/'operator-stop.json'))
+    return idle()
+   raise SystemExit(supervise(path,[sys.executable,'-X','utf8','-m','evaluation.tantivy_shard_continuous_v17','stage',str(path)],path.parent/'logs',service_idle))
+  elif len(sys.argv)==3 and sys.argv[1]=='stage':stage(sys.argv[2])
   elif sys.argv[1:]==['run']:main()
   else:raise SystemExit('run | stage PLAN')
  except BaseException as e:
