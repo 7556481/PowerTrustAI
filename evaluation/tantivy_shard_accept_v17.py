@@ -64,6 +64,8 @@ def accept(plan):
   if seen.execute('select count(*) from ids where rowid between -674 and -1').fetchone()[0]!=674 or seen.execute('select count(*) from ids where rowid between 1 and 24620273').fetchone()[0]!=24620273:raise RuntimeError('Missing namespace members')
   atomic(HOME/'accepted-shard-group.json',{'complete':True,'count':position,'negative':negative,'input_mapping_hash':global_hash.hexdigest(),'manifests':manifests,'seconds':time.time()-started,'models':0})
   atomic(HOME/'acceptance-complete.json',{'complete':True,'n':position,'models':0})
+  inventory.update(scope='isolated-complete-identity-verified-not-production',identity_accepted_wall=time.time(),input_mapping_hash=global_hash.hexdigest())
+  atomic(HOME/'shards.json',inventory)
  finally:seen.close();sp.close()
 
 def measure(plan):

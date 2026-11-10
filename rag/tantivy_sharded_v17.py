@@ -16,14 +16,15 @@ def serve_shards(paths,identity,pipe):
    if msg[0]=='stop':break
    kind,rid,version,tree,k=msg
    if kind!='search' or version!=identity or not 0<k<=16:raise ValueError('Shard request identity/budget mismatch')
-   started=time.monotonic();candidates=[];segments=[]
+   started=time.monotonic();candidates=[];segments=[];per_shard=[]
    for index,search in opened:
     t=time.monotonic();hits=search.search(query(index,tree),limit=k,count=False).hits
-    candidates.extend((search.doc(a)['rowid'][0],float(score)) for score,a in hits);segments.append(time.monotonic()-t)
+    local=[(search.doc(a)['rowid'][0],float(score)) for score,a in hits]
+    candidates.extend(local);per_shard.append(local);segments.append(time.monotonic()-t)
    t=time.monotonic();ids=[r for r,s in candidates]
    if len(ids)!=len(set(ids)):raise ValueError('Overlapping shard member IDs')
    rows=sorted(candidates,key=lambda x:(-x[1],x[0]))[:k]
-   pipe.send(('result',rid,identity,rows,{'query_seconds':time.monotonic()-started,'shard_seconds':segments,'merge_seconds':time.monotonic()-t,'candidate_count':len(candidates),'shard_count':len(paths)}))
+   pipe.send(('result',rid,identity,rows,{'query_seconds':time.monotonic()-started,'shard_seconds':segments,'merge_seconds':time.monotonic()-t,'candidate_count':len(candidates),'shard_count':len(paths),'per_shard_candidates':per_shard}))
  except (EOFError,BrokenPipeError):pass
  except BaseException as e:
   try:pipe.send(('fatal',type(e).__name__))
@@ -55,7 +56,7 @@ class ShardedTantivyRetriever(FastTantivyRetriever):
   return True
  def _rank(self,tree,k):
   rows=super()._rank(tree,k)
-  self.last_trace.update(backend='tantivy-sharded-v17',score_scope='per-shard BM25; score desc, signed rowid asc',shard_count=len(self._shards))
+  self.last_trace.update(backend='tantivy-sharded-v17',score_scope='per-shard BM25; score desc, signed rowid asc',shard_count=len(self._shards),merged_candidates=rows)
   return rows
  def _work(self,request,result,validate):
   output=super()._work(request,result,validate)
