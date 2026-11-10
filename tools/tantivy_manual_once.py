@@ -129,6 +129,23 @@ def main():
             finally:epoch.close()
     if args.run_once and args.status:parser.error('选择--status或--run-once')
     os.chdir(REPO)
+    shards=ROOT.parent/'tantivy-shards-v16'
+    if not args.run_once and (shards/'shards.json').exists() and (shards/'full-authorization-20261110.json').exists():
+        from datetime import datetime,timezone,timedelta
+        inventory=read(shards/'shards.json');authorization=read(shards/'full-authorization-20261110.json')
+        state=read(shards/'continuous-state.json') if (shards/'continuous-state.json').exists() else {}
+        total=authorization['expected'];covered=inventory['covered']
+        print('当前分片任务已封存:',covered,'/',total,'('+str(round(covered/total*100,2))+'%)')
+        print('封存片数:',len(inventory['shards']),'；尚未封存成员:',total-covered)
+        print('阶段记录:',state.get('state','未知'),'；当前区间:',state.get('start'),state.get('end'))
+        print('新60小时截止（北京时间）:',authorization['deadline_beijing'],'；剩余小时:',round(max(0,authorization['deadline']-time.time())/3600,2))
+        sealed=[e['sealed_wall'] for e in inventory['shards'] if 'sealed_wall' in e]
+        if sealed:print('最近封存时间:',datetime.fromtimestamp(max(sealed),timezone(timedelta(hours=8))).isoformat())
+        result=shards/'postbuild/companion-result.json'
+        if result.exists():print('全量后验记录:',read(result)['status'])
+        if state.get('error'):print('停止原因:',state['error'])
+        print('只读状态；旧单索引2575674保留，不用旧--continue续本轮。模型0，生产配置未切换。')
+        return
     ledger,cp,last,result=snapshot()
     print('正式已提交:',cp['count'],'/ 24620947')
     print('最近一段:',last['index'],last['status'],'/ 运行结果:',result['status'])
