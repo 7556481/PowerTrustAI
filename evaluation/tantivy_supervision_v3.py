@@ -135,8 +135,10 @@ def supervise(plan_path,command,directory,service_idle):
    if expired or hard or observer_stop:
     if stopping is None:
      stopping=now
-     if not observer_stop:g.path.with_name('stop.json').write_text(json.dumps(dict(reason='deadline' if expired else 'memory',wall=now)))
-     g.event('stop_requested',identities=ids)
+     reason='native_observer' if observer_stop else 'deadline' if expired else 'memory' if memory>g.plan['memory_limit'] else 'disk_limit' if disk>g.plan['disk_limit'] else 'disk_free'
+     detail=dict(reason=reason,initiator='supervisor',wall=now,memory=memory,memory_limit=g.plan['memory_limit'],disk=disk,disk_limit=g.plan['disk_limit'],deadline=g.plan['deadline'],minimum_free=g.plan['min_free'])
+     if not observer_stop:g.path.with_name('stop.json').write_text(json.dumps(detail))
+     g.event('stop_requested',identities=ids,**{k:v for k,v in detail.items() if k!='wall'})
     if now-stopping>=g.plan['grace_seconds']:
      directory.joinpath('INVALID.json').write_text(json.dumps(dict(reason='grace exhausted',identities=ids)));terminate_verified(ids);g.event('terminated_verified_tree');break
    busy=not idle() or psutil.virtual_memory().available<g.plan['pressure_available'];pause=g.path.with_name('pause.json')

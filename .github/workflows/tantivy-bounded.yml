@@ -53,6 +53,7 @@ jobs:
       - run: python -m unittest evaluation.tantivy_checkpoint_checks_v10 -v
       - run: python -m unittest evaluation.tantivy_epoch_checks_v14 -v
       - run: python -m unittest evaluation.tantivy_sharded_checks_v17 -v
+      - run: python -m unittest evaluation.tantivy_repair_checks_v18 -v
       - run: python -m evaluation.tantivy_stability_checks_v2
       - run: python -m evaluation.tantivy_supervision_checks_v3
       - run: python -m evaluation.tantivy_product_checks_v1

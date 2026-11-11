@@ -9,6 +9,7 @@ from rag.tantivy_build import atomic
 from rag.tantivy_manifest import sha,IndexIdentityError
 from evaluation.tantivy_full_build_v1 import ROOT,SOURCE,K
 from evaluation.tantivy_full_controller_v1 import idle
+ALLOW_UNAVAILABLE_SLOT_RECORDS=False
 
 async def run():
  from evaluation.tantivy_supervision_v3 import Guard
@@ -54,6 +55,10 @@ async def run():
      if frozen['original_source_stat']!=[SOURCE.stat().st_size,SOURCE.stat().st_mtime_ns] or sha(manifest)!=frozen['index_manifest_sha256']:raise RuntimeError('Frozen source/index identity changed')
      if any(sha(f)!=h for f,h in frozen['implementation_sha256'].items()):raise RuntimeError('Frozen implementation changed')
      r={'query':q['id'],'backend':name,'round':rd,'started_wall':time.time()};request=RetrievalRequest(q['query'],'voltage_stability_reactive_support',RetrievalPurpose.GENERATION,K,6 if name=='fast' else 3,ContextOptions());tick=time.monotonic()
+     if name=='fast' and not fast.available and ALLOW_UNAVAILABLE_SLOT_RECORDS:
+      r.update(status='not_executed_unavailable',error='Bounded worker quota exhausted',total_seconds=None)
+      with output.open('a',encoding='utf8') as f:f.write(json.dumps(r)+'\n')
+      records.append(r);continue
      try:
       with capture_timing() as timing:
        result=await asyncio.wait_for(a.retrieve(request),110);retrieved=time.monotonic();await asyncio.wait_for(a.validate_result(request,result),110)
@@ -69,7 +74,7 @@ async def run():
       if a._active is not None and not a._active.done():raise RuntimeError('Unreleased query; stop comparison') from e
      with output.open('a',encoding='utf8') as f:f.write(json.dumps(r,ensure_ascii=False)+'\n')
      records.append(r);print(q['id'],rd,name,r['status'],round(r['total_seconds'],3),flush=True)
-     if name=='fast' and not fast.available:raise RuntimeError('Fast retrieval unavailable; stop offline comparison')
+     if name=='fast' and not fast.available and not ALLOW_UNAVAILABLE_SLOT_RECORDS:raise RuntimeError('Fast retrieval unavailable; stop offline comparison')
      if r['status']=='error' and r.get('error') in ('IndexIdentityError','ContractError','InputError','DatabaseError','OperationalError','ResourceCleanupError'):raise RuntimeError('Shared identity/storage failure; stop comparison')
  finally:
   if fast is not None:fast.close()
