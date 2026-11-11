@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-11-11 仅审核Tantivy v21离线未准入
+
+唯一隔离Factory和身份/范围严格正文共享组件已实现，2专项通过；复用v20的36审核请求，读取累计省285.597秒是旧记录，载体382768→406608字不是完整模型请求统计。最终请求字符、正常修订重审Store贯通仍缺证明，未付费、无用户等待收益结论、不建议烟测、生产未切换。见[报告](evaluation/audit-tantivy-v21/report.md)，私有data/runtime_local/audit-tantivy-v21。
+
 - [v20：限3条真实请求离线回放与决策](evaluation/tantivy-delivery-replay-v20/report.md)：168槽全成功，48快8慢，审核占主要读取节省；Q6保留而ISO-NE关键限值/TO例外被截，当前限3不直接付费，模型0。
 
 - [v18与正式SQLite固定八题真实产品对照](evaluation/tantivy-product-v19/report.md)：16链/6完整对，终态中位晚13.523秒，token多38.03%；Q6改善与Q3限定遗漏分列，不建议有限发布，生产不变。
