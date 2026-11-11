@@ -724,8 +724,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 21130,
-      "sha256": "e3d83f191f87db0ebe478796dac46ca682bec5215531eb7978c3aab2eeafb105"
+      "characters": 22084,
+      "sha256": "672c1669ce82fe46f937ebfc27b400fefb4847e0fb5e04bc476938da060ac85f"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -734,8 +734,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 12113,
-      "sha256": "d83e86a23042cc8907dfa75f4aece1d066ba702946cd62426441df0246e8d5f9"
+      "characters": 12634,
+      "sha256": "bbf0a333c989ec8ee146af7cda493c32a60c1dd4b4d9ac4d4b83630b32697c7b"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -753,6 +753,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 199831,
+  "markdown_characters": 201306,
   "network_dependencies": false
 }

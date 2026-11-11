@@ -1,8 +1,10 @@
 # 文档索引
 
-- [已批准60h连续分片与全量离线验收](evaluation/tantivy-shards-v16/continuous-authorization-v17.md)：新截止11月13日05:01:22，建设中，尚无全量提速/质量结论。
+- [全量90片、完整身份与产品比较停止结果](evaluation/tantivy-shards-v16/full-offline-results-v17.md)：24,620,947全成员建齐，77/144读取后有界worker额度耗尽；逐题速度/覆盖、Q10改善及Q3/M4退步、资源和未知原因分开，模型0、不切生产。
 
-- [本机分片25万实建及双片读取](evaluation/tantivy-shards-v16/report.md)：实建/完整验收通过，保留验收连接错误；尚未批准新全程预算，不扩大或切生产。
+- [已批准60h连续分片过程](evaluation/tantivy-shards-v16/continuous-authorization-v17.md)：截止11月13日05:01:22未重置，保留控制交接修正与早期回执限制；当前终态见上条。
+
+- [本机分片25万实建及双片读取](evaluation/tantivy-shards-v16/report.md)：历史首片实建/验收、连接错误和预算申请；后续授权及全量结果已另行归档，不作为当前待批状态。
 
 - [跨环境续写小样本首次验证](evaluation/tantivy-crossenv-v15/report.md)：独立CI渠道可用；Windows夹具清理失败，Linux未执行，兼容性未验证，不迁移正式数据。
 

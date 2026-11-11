@@ -1,5 +1,11 @@
 # 18 环境、启动、Git、迁移与排障
 
+## 2026-11-11 当前分片任务已停止在离线验收边界
+
+90片全24,620,947成员已经封存，完整身份通过；查询比较因worker启动额度耗尽停止，当前没有建设/比较进程。使用既有只读状态入口`python -m tools.tantivy_manual_once --status`核对shards.json和postbuild回执，不用旧单库`--continue`或`--run-once`，不删除停标/账本来复跑。身份通过与产品比较失败同时成立：保留全部索引，不再写成“还需建最后一片”或“可能后台继续”。
+
+程序只记NativeSearchError类而丢失消息时，不能将RSS接近上限断言为确定越限，也不能套用历史Windows错误5。此次仅离线，8765未监听、未恢复、未切配置，模型0。[24题、资源与具体停止证据](https://github.com/7556481/PowerTrustAI/blob/codex/tantivy-bounded-feasibility-v1/docs/evaluation/tantivy-shards-v16/full-offline-results-v17.md)。
+
 ## 十题真实产品案例接续
 
 十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；首稿观测2.73～12.34秒，结束19.05～95.56秒。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/evaluation/stable-product-baseline-v1/report.md)。UI四缺项本轮已用原合成夹具补验通过，旧工具失败保留。
