@@ -1,5 +1,7 @@
 # 文档索引
 
+- [v20：限3条真实请求离线回放与决策](evaluation/tantivy-delivery-replay-v20/report.md)：168槽全成功，48快8慢，审核占主要读取节省；Q6保留而ISO-NE关键限值/TO例外被截，当前限3不直接付费，模型0。
+
 - [v18与正式SQLite固定八题真实产品对照](evaluation/tantivy-product-v19/report.md)：16链/6完整对，终态中位晚13.523秒，token多38.03%；Q6改善与Q3限定遗漏分列，不建议有限发布，生产不变。
 
 - [v18查询诊断、全局词权重与完整144槽](evaluation/tantivy-shards-v16/query-repair-v18.md)：直接RSS门禁证据、专属worker有界回收、Q3/M4依据恢复及Q10保护；全144成功，宽题1.869倍，普通题回退和共同不足保留。模型0、默认SQLite。
