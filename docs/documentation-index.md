@@ -1,5 +1,7 @@
 # 文档索引
 
+- [v18查询诊断、全局词权重与完整144槽](evaluation/tantivy-shards-v16/query-repair-v18.md)：直接RSS门禁证据、专属worker有界回收、Q3/M4依据恢复及Q10保护；全144成功，宽题1.869倍，普通题回退和共同不足保留。模型0、默认SQLite。
+
 - [全量90片、完整身份与产品比较停止结果](evaluation/tantivy-shards-v16/full-offline-results-v17.md)：24,620,947全成员建齐，77/144读取后有界worker额度耗尽；逐题速度/覆盖、Q10改善及Q3/M4退步、资源和未知原因分开，模型0、不切生产。
 
 - [已批准60h连续分片过程](evaluation/tantivy-shards-v16/continuous-authorization-v17.md)：截止11月13日05:01:22未重置，保留控制交接修正与早期回执限制；当前终态见上条。
