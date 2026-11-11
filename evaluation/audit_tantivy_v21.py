@@ -64,7 +64,7 @@ def install_client(client):
                 if not isinstance(p,dict):out.append(m);continue
                 q=pack(p);assert expand(q)==p
                 changed=changed or q!=p
-                out.append(ModelMessage(m.role,json.dumps(q,ensure_ascii=False)))
+                out.append(ModelMessage(m.role,json.dumps(q,ensure_ascii=False)) if q!=p else m)
             else:out.append(m)
         if changed:out=[ModelMessage(m.role,m.content+INSTRUCTION) if m.role=='system' else m for m in out]
         return await original(tuple(out),*args,**kwargs)
@@ -77,10 +77,12 @@ class AuditRouter:
         return (self.tantivy,replace(r,max_results=6)) if audit else (self.sqlite,replace(r,max_results=3))
     async def retrieve(self,r):
         target,request=self.route(r);result=await target.retrieve(request)
-        self.trace.append(dict(purpose=r.purpose.value,backend=type(target).__name__,max_results=request.max_results))
+        self.trace.append(dict(purpose=r.purpose.value,backend=type(target).__name__,max_results=request.max_results,query_sha256=__import__('hashlib').sha256(r.query.encode()).hexdigest(),trace=dict(getattr(target,'last_trace',{}))))
         return result
     async def validate_result(self,r,result):
         target,request=self.route(r);await target.validate_result(request,result)
+    async def validate_evidence(self,evidence,knowledge_version):
+        return await self.sqlite.validate_evidence(evidence,knowledge_version)
     def close(self):self.sqlite.close()
 
 from backend.assembly import ComponentFactory

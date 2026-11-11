@@ -1,0 +1,2123 @@
+{
+  "totals": {
+    "sqlite": {
+      "independent": {
+        "requests": 20,
+        "evidence_chars": 286007,
+        "message_chars": 1986882
+      },
+      "original_citation": {
+        "requests": 34,
+        "evidence_chars": 63581,
+        "message_chars": 585043
+      },
+      "domain": {
+        "requests": 16,
+        "evidence_chars": 77671,
+        "message_chars": 683376
+      }
+    },
+    "candidate": {
+      "independent": {
+        "requests": 20,
+        "evidence_chars": 345007,
+        "message_chars": 2579798
+      },
+      "original_citation": {
+        "requests": 34,
+        "evidence_chars": 63581,
+        "message_chars": 585043
+      },
+      "domain": {
+        "requests": 16,
+        "evidence_chars": 139955,
+        "message_chars": 904507
+      }
+    }
+  },
+  "primary_sqlite_drafts": {
+    "sqlite": 174473,
+    "candidate": 242586
+  },
+  "paired_initial_extra": 121284,
+  "historical_correction_requests": 5,
+  "historical_correction_evidence_chars": 64543,
+  "primary_historical_correction_evidence_chars": 45413,
+  "primary_conservative_excess": 22700,
+  "pairs": [
+    {
+      "slot": 2,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 13607,
+        "evidence_chars_unique": 11619,
+        "message_chars": 91597,
+        "scope_ids": [
+          "scope-dc84a19c54362ceb8165ccdd"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 17503,
+        "evidence_chars_unique": 17503,
+        "message_chars": 121500,
+        "scope_ids": [
+          "scope-9b12f80200f55a8ec1157f95"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 3896
+    },
+    {
+      "slot": 2,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1455,
+        "evidence_chars_unique": 1455,
+        "message_chars": 16974,
+        "scope_ids": [
+          "scope-867489231f5624de058f4f9c"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1455,
+        "evidence_chars_unique": 1455,
+        "message_chars": 16974,
+        "scope_ids": [
+          "scope-867489231f5624de058f4f9c"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 2,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q1",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1009,
+        "evidence_chars_unique": 1009,
+        "message_chars": 13586,
+        "scope_ids": [
+          "scope-2dcd2dc1e12faabc253905d5"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1009,
+        "evidence_chars_unique": 1009,
+        "message_chars": 13586,
+        "scope_ids": [
+          "scope-2dcd2dc1e12faabc253905d5"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 3,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "baseline",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 17986,
+        "evidence_chars_unique": 11619,
+        "message_chars": 118215,
+        "scope_ids": [
+          "scope-f3c784ad2d30f54ef30bd820"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 20,
+        "evidence_chars_delivered": 21483,
+        "evidence_chars_unique": 21483,
+        "message_chars": 178925,
+        "scope_ids": [
+          "scope-7fbe5e5ff72fa17d7aa560b6"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 3497
+    },
+    {
+      "slot": 3,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "baseline",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1455,
+        "evidence_chars_unique": 1455,
+        "message_chars": 16974,
+        "scope_ids": [
+          "scope-867489231f5624de058f4f9c"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1455,
+        "evidence_chars_unique": 1455,
+        "message_chars": 16974,
+        "scope_ids": [
+          "scope-867489231f5624de058f4f9c"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 3,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q1",
+      "origin": "baseline",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1009,
+        "evidence_chars_unique": 1009,
+        "message_chars": 13586,
+        "scope_ids": [
+          "scope-2dcd2dc1e12faabc253905d5"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1009,
+        "evidence_chars_unique": 1009,
+        "message_chars": 13586,
+        "scope_ids": [
+          "scope-2dcd2dc1e12faabc253905d5"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 4,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 4805,
+        "evidence_chars_unique": 4805,
+        "message_chars": 40552,
+        "scope_ids": [
+          "scope-58470bb126884f5f1d47ad20"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 8732,
+        "evidence_chars_unique": 8732,
+        "message_chars": 56941,
+        "scope_ids": [
+          "scope-d52556e1bd0f5d6f6df2a2b6"
+        ]
+      },
+      "extra": 3927
+    },
+    {
+      "slot": 7,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 22505,
+        "evidence_chars_unique": 22505,
+        "message_chars": 129739,
+        "scope_ids": [
+          "scope-ff203a3bcbc11107073badc3"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 9,
+        "evidence_chars_delivered": 26184,
+        "evidence_chars_unique": 26184,
+        "message_chars": 154474,
+        "scope_ids": [
+          "scope-c4a5673ea038aefb0b5beb5d"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 3679
+    },
+    {
+      "slot": 7,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2294,
+        "evidence_chars_unique": 2294,
+        "message_chars": 17871,
+        "scope_ids": [
+          "scope-3de2794c59807142e86ee96f"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2294,
+        "evidence_chars_unique": 2294,
+        "message_chars": 17871,
+        "scope_ids": [
+          "scope-3de2794c59807142e86ee96f"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 7,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q1",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 3,
+        "evidence_chars_delivered": 3396,
+        "evidence_chars_unique": 3396,
+        "message_chars": 21909,
+        "scope_ids": [
+          "scope-60376775cb9539bb36371690"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 3,
+        "evidence_chars_delivered": 3396,
+        "evidence_chars_unique": 3396,
+        "message_chars": 21909,
+        "scope_ids": [
+          "scope-60376775cb9539bb36371690"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 8,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "fast",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 26339,
+        "evidence_chars_unique": 24961,
+        "message_chars": 150806,
+        "scope_ids": [
+          "scope-d6ecf5a4b64d26b2004845a8"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 18,
+        "evidence_chars_delivered": 33837,
+        "evidence_chars_unique": 33837,
+        "message_chars": 206388,
+        "scope_ids": [
+          "scope-55d7b712ec5f7b41a4a0d72f"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 7498
+    },
+    {
+      "slot": 8,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "fast",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2294,
+        "evidence_chars_unique": 2294,
+        "message_chars": 17871,
+        "scope_ids": [
+          "scope-3de2794c59807142e86ee96f"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2294,
+        "evidence_chars_unique": 2294,
+        "message_chars": 17871,
+        "scope_ids": [
+          "scope-3de2794c59807142e86ee96f"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 8,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q1",
+      "origin": "fast",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 3,
+        "evidence_chars_delivered": 3396,
+        "evidence_chars_unique": 3396,
+        "message_chars": 21909,
+        "scope_ids": [
+          "scope-60376775cb9539bb36371690"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 3,
+        "evidence_chars_delivered": 3396,
+        "evidence_chars_unique": 3396,
+        "message_chars": 21909,
+        "scope_ids": [
+          "scope-60376775cb9539bb36371690"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 9,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q1",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 5805,
+        "evidence_chars_unique": 5805,
+        "message_chars": 55758,
+        "scope_ids": [
+          "scope-cb867e9e83d811b01e4ec292"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 9,
+        "evidence_chars_delivered": 9206,
+        "evidence_chars_unique": 9206,
+        "message_chars": 67157,
+        "scope_ids": [
+          "scope-3080d662da97452e0f873d63"
+        ]
+      },
+      "extra": 3401
+    },
+    {
+      "slot": 12,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 12353,
+        "evidence_chars_unique": 11064,
+        "message_chars": 99775,
+        "scope_ids": [
+          "scope-0832b0c508e6f48f34c6484c"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 9,
+        "evidence_chars_delivered": 14446,
+        "evidence_chars_unique": 14446,
+        "message_chars": 122000,
+        "scope_ids": [
+          "scope-643635cfde3930eec4535784"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 2093
+    },
+    {
+      "slot": 12,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1241,
+        "evidence_chars_unique": 1241,
+        "message_chars": 16856,
+        "scope_ids": [
+          "scope-743a706f6f01349117d797b2"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1241,
+        "evidence_chars_unique": 1241,
+        "message_chars": 16856,
+        "scope_ids": [
+          "scope-743a706f6f01349117d797b2"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 12,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q3",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1191,
+        "evidence_chars_unique": 1191,
+        "message_chars": 13796,
+        "scope_ids": [
+          "scope-349813f35112c2f377a75eb9"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1191,
+        "evidence_chars_unique": 1191,
+        "message_chars": 13796,
+        "scope_ids": [
+          "scope-349813f35112c2f377a75eb9"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 12,
+      "category": "original_citation",
+      "ordinal": 2,
+      "case": "Q3",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1499,
+        "evidence_chars_unique": 1499,
+        "message_chars": 16988,
+        "scope_ids": [
+          "scope-a4cf04fcc786eb2e86b018fb"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1499,
+        "evidence_chars_unique": 1499,
+        "message_chars": 16988,
+        "scope_ids": [
+          "scope-a4cf04fcc786eb2e86b018fb"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 13,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "baseline",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 11,
+        "evidence_chars_delivered": 16648,
+        "evidence_chars_unique": 11064,
+        "message_chars": 123902,
+        "scope_ids": [
+          "scope-81f1b3b59f1471d5220d2d47"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 17,
+        "evidence_chars_delivered": 21095,
+        "evidence_chars_unique": 21095,
+        "message_chars": 164770,
+        "scope_ids": [
+          "scope-ba4d0fca7f396a9aeee7f891"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 4447
+    },
+    {
+      "slot": 13,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "baseline",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1241,
+        "evidence_chars_unique": 1241,
+        "message_chars": 16856,
+        "scope_ids": [
+          "scope-743a706f6f01349117d797b2"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1241,
+        "evidence_chars_unique": 1241,
+        "message_chars": 16856,
+        "scope_ids": [
+          "scope-743a706f6f01349117d797b2"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 13,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q3",
+      "origin": "baseline",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1191,
+        "evidence_chars_unique": 1191,
+        "message_chars": 13796,
+        "scope_ids": [
+          "scope-349813f35112c2f377a75eb9"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1191,
+        "evidence_chars_unique": 1191,
+        "message_chars": 13796,
+        "scope_ids": [
+          "scope-349813f35112c2f377a75eb9"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 13,
+      "category": "original_citation",
+      "ordinal": 2,
+      "case": "Q3",
+      "origin": "baseline",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1499,
+        "evidence_chars_unique": 1499,
+        "message_chars": 16988,
+        "scope_ids": [
+          "scope-a4cf04fcc786eb2e86b018fb"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1499,
+        "evidence_chars_unique": 1499,
+        "message_chars": 16988,
+        "scope_ids": [
+          "scope-a4cf04fcc786eb2e86b018fb"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 14,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 5855,
+        "evidence_chars_unique": 5855,
+        "message_chars": 49997,
+        "scope_ids": [
+          "scope-267a67dc404f93bc3d783cd1"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 9,
+        "evidence_chars_delivered": 9237,
+        "evidence_chars_unique": 9237,
+        "message_chars": 61390,
+        "scope_ids": [
+          "scope-c7604f47c437bca61ef3e62e"
+        ]
+      },
+      "extra": 3382
+    },
+    {
+      "slot": 17,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 22360,
+        "evidence_chars_unique": 22360,
+        "message_chars": 125598,
+        "scope_ids": [
+          "scope-944cd4f84e6770c302f4f91b"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 8,
+        "evidence_chars_delivered": 27201,
+        "evidence_chars_unique": 27201,
+        "message_chars": 147547,
+        "scope_ids": [
+          "scope-ac389228b3242e5dc5375287"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 4841
+    },
+    {
+      "slot": 17,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2352,
+        "evidence_chars_unique": 2352,
+        "message_chars": 17944,
+        "scope_ids": [
+          "scope-308e1c6f6df23a8e2e211a20"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2352,
+        "evidence_chars_unique": 2352,
+        "message_chars": 17944,
+        "scope_ids": [
+          "scope-308e1c6f6df23a8e2e211a20"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 17,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q3",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2322,
+        "evidence_chars_unique": 2322,
+        "message_chars": 17944,
+        "scope_ids": [
+          "scope-8fa6ca8063e92feb67d5aa8f"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2322,
+        "evidence_chars_unique": 2322,
+        "message_chars": 17944,
+        "scope_ids": [
+          "scope-8fa6ca8063e92feb67d5aa8f"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 18,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "fast",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 26655,
+        "evidence_chars_unique": 26655,
+        "message_chars": 149921,
+        "scope_ids": [
+          "scope-44253cd97612e906ec32eb17"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 18,
+        "evidence_chars_delivered": 27201,
+        "evidence_chars_unique": 27201,
+        "message_chars": 199504,
+        "scope_ids": [
+          "scope-2f2c8c4b332d3b0550967536"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 546
+    },
+    {
+      "slot": 18,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "fast",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2352,
+        "evidence_chars_unique": 2352,
+        "message_chars": 17944,
+        "scope_ids": [
+          "scope-308e1c6f6df23a8e2e211a20"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2352,
+        "evidence_chars_unique": 2352,
+        "message_chars": 17944,
+        "scope_ids": [
+          "scope-308e1c6f6df23a8e2e211a20"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 18,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q3",
+      "origin": "fast",
+      "conditional_supplement": true,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2322,
+        "evidence_chars_unique": 2322,
+        "message_chars": 17944,
+        "scope_ids": [
+          "scope-8fa6ca8063e92feb67d5aa8f"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2322,
+        "evidence_chars_unique": 2322,
+        "message_chars": 17944,
+        "scope_ids": [
+          "scope-8fa6ca8063e92feb67d5aa8f"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 19,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q3",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 5021,
+        "evidence_chars_unique": 5021,
+        "message_chars": 48774,
+        "scope_ids": [
+          "scope-e65014bf834f533341987aae"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 8,
+        "evidence_chars_delivered": 9283,
+        "evidence_chars_unique": 9283,
+        "message_chars": 58906,
+        "scope_ids": [
+          "scope-afa4689ef7ccf7aa016ec51a"
+        ]
+      },
+      "extra": 4262
+    },
+    {
+      "slot": 21,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q4",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 5224,
+        "evidence_chars_unique": 4859,
+        "message_chars": 66240,
+        "scope_ids": [
+          "scope-81f32b1662f305bdd1e67451"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 8,
+        "evidence_chars_delivered": 10130,
+        "evidence_chars_unique": 10130,
+        "message_chars": 88285,
+        "scope_ids": [
+          "scope-308088ab8c45b6a9c165a6fa"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 4906
+    },
+    {
+      "slot": 21,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q4",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 578,
+        "evidence_chars_unique": 578,
+        "message_chars": 16049,
+        "scope_ids": [
+          "scope-b371b08333f0b5dababa7098"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 578,
+        "evidence_chars_unique": 578,
+        "message_chars": 16049,
+        "scope_ids": [
+          "scope-b371b08333f0b5dababa7098"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 22,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q4",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 4321,
+        "evidence_chars_unique": 4321,
+        "message_chars": 38685,
+        "scope_ids": [
+          "scope-937d5b48a762daa963acabf5"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 8,
+        "evidence_chars_delivered": 9054,
+        "evidence_chars_unique": 9054,
+        "message_chars": 51509,
+        "scope_ids": [
+          "scope-c30ff58548b46bd8880f8719"
+        ]
+      },
+      "extra": 4733
+    },
+    {
+      "slot": 24,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q4",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 14024,
+        "evidence_chars_unique": 13096,
+        "message_chars": 90057,
+        "scope_ids": [
+          "scope-b4ab20e6571cc02fa55cc2af"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 8,
+        "evidence_chars_delivered": 16545,
+        "evidence_chars_unique": 16545,
+        "message_chars": 112152,
+        "scope_ids": [
+          "scope-68b0cfbbf9eb2cc6d22e7a01"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 2521
+    },
+    {
+      "slot": 24,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q4",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2054,
+        "evidence_chars_unique": 2054,
+        "message_chars": 17648,
+        "scope_ids": [
+          "scope-d8e637807d638f496f99756d"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2054,
+        "evidence_chars_unique": 2054,
+        "message_chars": 17648,
+        "scope_ids": [
+          "scope-d8e637807d638f496f99756d"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 24,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q4",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1126,
+        "evidence_chars_unique": 1126,
+        "message_chars": 13721,
+        "scope_ids": [
+          "scope-8de0a479489ec045af4def46"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1126,
+        "evidence_chars_unique": 1126,
+        "message_chars": 13721,
+        "scope_ids": [
+          "scope-8de0a479489ec045af4def46"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 25,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q4",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 5147,
+        "evidence_chars_unique": 5147,
+        "message_chars": 38752,
+        "scope_ids": [
+          "scope-fbb901f6bdf7bba0fd62510a"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 9,
+        "evidence_chars_delivered": 9096,
+        "evidence_chars_unique": 9096,
+        "message_chars": 53099,
+        "scope_ids": [
+          "scope-f03bb1651880896da5e1c6de"
+        ]
+      },
+      "extra": 3949
+    },
+    {
+      "slot": 27,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q5",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 8655,
+        "evidence_chars_unique": 6981,
+        "message_chars": 85004,
+        "scope_ids": [
+          "scope-bac219299934e4487e7d1f62"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 11511,
+        "evidence_chars_unique": 11511,
+        "message_chars": 109264,
+        "scope_ids": [
+          "scope-aebd38ed9cd2b619762858ef"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 2856
+    },
+    {
+      "slot": 27,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q5",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 4,
+        "evidence_chars_delivered": 3939,
+        "evidence_chars_unique": 3939,
+        "message_chars": 25605,
+        "scope_ids": [
+          "scope-a64a24b09f9d11f8d6c017ee"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 4,
+        "evidence_chars_delivered": 3939,
+        "evidence_chars_unique": 3939,
+        "message_chars": 25605,
+        "scope_ids": [
+          "scope-a64a24b09f9d11f8d6c017ee"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 28,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q5",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 4915,
+        "evidence_chars_unique": 4417,
+        "message_chars": 45308,
+        "scope_ids": [
+          "scope-372a369962aa88ff234c5330"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 8767,
+        "evidence_chars_unique": 7273,
+        "message_chars": 59474,
+        "scope_ids": [
+          "scope-696ad1e662d22541a92d58aa"
+        ]
+      },
+      "extra": 3852
+    },
+    {
+      "slot": 30,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q5",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 12383,
+        "evidence_chars_unique": 10574,
+        "message_chars": 103837,
+        "scope_ids": [
+          "scope-3a37d421f262f58823aa0754"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 11189,
+        "evidence_chars_unique": 11189,
+        "message_chars": 106703,
+        "scope_ids": [
+          "scope-634835dda1437b44b1a2f1de"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": -1194
+    },
+    {
+      "slot": 30,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q5",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 3,
+        "evidence_chars_delivered": 3466,
+        "evidence_chars_unique": 3466,
+        "message_chars": 22214,
+        "scope_ids": [
+          "scope-3436cea9b5e2f482a8f76433"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 3,
+        "evidence_chars_delivered": 3466,
+        "evidence_chars_unique": 3466,
+        "message_chars": 22214,
+        "scope_ids": [
+          "scope-3436cea9b5e2f482a8f76433"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 31,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q5",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 5876,
+        "evidence_chars_unique": 3500,
+        "message_chars": 52978,
+        "scope_ids": [
+          "scope-43859fb6d7e1a93947d43e09"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 6420,
+        "evidence_chars_unique": 6420,
+        "message_chars": 53851,
+        "scope_ids": [
+          "scope-c7457b7c2550799a4b502af3"
+        ]
+      },
+      "extra": 544
+    },
+    {
+      "slot": 33,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q6",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 4,
+        "evidence_chars_delivered": 7883,
+        "evidence_chars_unique": 7883,
+        "message_chars": 64915,
+        "scope_ids": [
+          "scope-ed4f07264233cd9bed554a4b"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 9,
+        "evidence_chars_delivered": 12849,
+        "evidence_chars_unique": 12849,
+        "message_chars": 96844,
+        "scope_ids": [
+          "scope-f1d76c602c49aaf5c6140756"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 4966
+    },
+    {
+      "slot": 33,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q6",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1611,
+        "evidence_chars_unique": 1611,
+        "message_chars": 17193,
+        "scope_ids": [
+          "scope-6794bf27ecc6afbc4b2eb858"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1611,
+        "evidence_chars_unique": 1611,
+        "message_chars": 17193,
+        "scope_ids": [
+          "scope-6794bf27ecc6afbc4b2eb858"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 34,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q6",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 4531,
+        "evidence_chars_unique": 4531,
+        "message_chars": 38191,
+        "scope_ids": [
+          "scope-f2c5709b16b9a9370c10e60b"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 11,
+        "evidence_chars_delivered": 9056,
+        "evidence_chars_unique": 9056,
+        "message_chars": 55278,
+        "scope_ids": [
+          "scope-7baf21331c6f73db93316904"
+        ]
+      },
+      "extra": 4525
+    },
+    {
+      "slot": 36,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q6",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 4,
+        "evidence_chars_delivered": 11257,
+        "evidence_chars_unique": 9901,
+        "message_chars": 84751,
+        "scope_ids": [
+          "scope-d64cca5d0013fea331aa9a29"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 11,
+        "evidence_chars_delivered": 14492,
+        "evidence_chars_unique": 14492,
+        "message_chars": 128974,
+        "scope_ids": [
+          "scope-a9d2155a17aecfe08bec3d26"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 3235
+    },
+    {
+      "slot": 36,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q6",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2279,
+        "evidence_chars_unique": 2279,
+        "message_chars": 17867,
+        "scope_ids": [
+          "scope-8532a78d444c8f508ffb0d38"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2279,
+        "evidence_chars_unique": 2279,
+        "message_chars": 17867,
+        "scope_ids": [
+          "scope-8532a78d444c8f508ffb0d38"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 36,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q6",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2279,
+        "evidence_chars_unique": 2279,
+        "message_chars": 17857,
+        "scope_ids": [
+          "scope-3163be803e2889dfdc2da67d"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 2279,
+        "evidence_chars_unique": 2279,
+        "message_chars": 17857,
+        "scope_ids": [
+          "scope-3163be803e2889dfdc2da67d"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 37,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q6",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 4,
+        "evidence_chars_delivered": 2101,
+        "evidence_chars_unique": 2101,
+        "message_chars": 35967,
+        "scope_ids": [
+          "scope-7eeed32cf1fb089d4e7a30c4"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 11,
+        "evidence_chars_delivered": 7885,
+        "evidence_chars_unique": 7885,
+        "message_chars": 59288,
+        "scope_ids": [
+          "scope-52473a9a52a6a8c0f79c0fca"
+        ]
+      },
+      "extra": 5784
+    },
+    {
+      "slot": 39,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q7",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 10779,
+        "evidence_chars_unique": 10779,
+        "message_chars": 81582,
+        "scope_ids": [
+          "scope-a9c5aa57ba18df40f70cc4e8"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 9,
+        "evidence_chars_delivered": 14317,
+        "evidence_chars_unique": 14317,
+        "message_chars": 101793,
+        "scope_ids": [
+          "scope-d444598e94a152ddfff8ec62"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 3538
+    },
+    {
+      "slot": 39,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q7",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1062,
+        "evidence_chars_unique": 1062,
+        "message_chars": 13764,
+        "scope_ids": [
+          "scope-1107971d8acb82a55dfeba99"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1062,
+        "evidence_chars_unique": 1062,
+        "message_chars": 13764,
+        "scope_ids": [
+          "scope-1107971d8acb82a55dfeba99"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 40,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q7",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 5550,
+        "evidence_chars_unique": 5550,
+        "message_chars": 39781,
+        "scope_ids": [
+          "scope-42950fe888190b76a84aab7c"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 8,
+        "evidence_chars_delivered": 8985,
+        "evidence_chars_unique": 8985,
+        "message_chars": 51358,
+        "scope_ids": [
+          "scope-2456ad244024f9f30529654d"
+        ]
+      },
+      "extra": 3435
+    },
+    {
+      "slot": 42,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q7",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 14478,
+        "evidence_chars_unique": 10130,
+        "message_chars": 88129,
+        "scope_ids": [
+          "scope-0a6e7de7197605de1551fa3e"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 8,
+        "evidence_chars_delivered": 13654,
+        "evidence_chars_unique": 13654,
+        "message_chars": 107521,
+        "scope_ids": [
+          "scope-e1550e7ee6de82cb624855dc"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": -824
+    },
+    {
+      "slot": 42,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q7",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1062,
+        "evidence_chars_unique": 1062,
+        "message_chars": 13721,
+        "scope_ids": [
+          "scope-b25ce2c86e8f44d16fc30c15"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1062,
+        "evidence_chars_unique": 1062,
+        "message_chars": 13721,
+        "scope_ids": [
+          "scope-b25ce2c86e8f44d16fc30c15"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 43,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q7",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 5447,
+        "evidence_chars_unique": 5447,
+        "message_chars": 38524,
+        "scope_ids": [
+          "scope-0a87c4d5f964343b143a1915"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 9,
+        "evidence_chars_delivered": 9060,
+        "evidence_chars_unique": 9060,
+        "message_chars": 52644,
+        "scope_ids": [
+          "scope-6de9a825ea05dd6eda58b4e0"
+        ]
+      },
+      "extra": 3613
+    },
+    {
+      "slot": 45,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q9",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 8971,
+        "evidence_chars_unique": 6931,
+        "message_chars": 79759,
+        "scope_ids": [
+          "scope-e498c57a8c1fe162a00cc85d"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 9,
+        "evidence_chars_delivered": 10504,
+        "evidence_chars_unique": 10504,
+        "message_chars": 101000,
+        "scope_ids": [
+          "scope-c073962775ad88ea7c6320c7"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 1533
+    },
+    {
+      "slot": 45,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q9",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1569,
+        "evidence_chars_unique": 1569,
+        "message_chars": 17103,
+        "scope_ids": [
+          "scope-86b97092a8943f8fa5da763a"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1569,
+        "evidence_chars_unique": 1569,
+        "message_chars": 17103,
+        "scope_ids": [
+          "scope-86b97092a8943f8fa5da763a"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 45,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q9",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 3,
+        "evidence_chars_delivered": 2710,
+        "evidence_chars_unique": 2710,
+        "message_chars": 21405,
+        "scope_ids": [
+          "scope-a8e7fcff2677636efe80d741"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 3,
+        "evidence_chars_delivered": 2710,
+        "evidence_chars_unique": 2710,
+        "message_chars": 21405,
+        "scope_ids": [
+          "scope-a8e7fcff2677636efe80d741"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 46,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q9",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 4557,
+        "evidence_chars_unique": 4557,
+        "message_chars": 38915,
+        "scope_ids": [
+          "scope-f2db5d12a181f290aa9bbf8c"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 9119,
+        "evidence_chars_unique": 9119,
+        "message_chars": 56140,
+        "scope_ids": [
+          "scope-3a455079e3a6a659df2d51b0"
+        ]
+      },
+      "extra": 4562
+    },
+    {
+      "slot": 48,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q9",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 6,
+        "evidence_chars_delivered": 13164,
+        "evidence_chars_unique": 10642,
+        "message_chars": 94003,
+        "scope_ids": [
+          "scope-0a5913a4fa883aa802e9d132"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 13398,
+        "evidence_chars_unique": 13398,
+        "message_chars": 120037,
+        "scope_ids": [
+          "scope-9a9738f61772cc10fbfdb9b2"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 234
+    },
+    {
+      "slot": 48,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q9",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1196,
+        "evidence_chars_unique": 1196,
+        "message_chars": 13866,
+        "scope_ids": [
+          "scope-82e4079d0dbfde2349a6625d"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1196,
+        "evidence_chars_unique": 1196,
+        "message_chars": 13866,
+        "scope_ids": [
+          "scope-82e4079d0dbfde2349a6625d"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 48,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q9",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1196,
+        "evidence_chars_unique": 1196,
+        "message_chars": 13851,
+        "scope_ids": [
+          "scope-dd9eea31b929e5be4a5c3820"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 1,
+        "evidence_chars_delivered": 1196,
+        "evidence_chars_unique": 1196,
+        "message_chars": 13851,
+        "scope_ids": [
+          "scope-dd9eea31b929e5be4a5c3820"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 49,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q9",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 3399,
+        "evidence_chars_unique": 3399,
+        "message_chars": 39052,
+        "scope_ids": [
+          "scope-906622efef13a0ca4b106cbd"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 8917,
+        "evidence_chars_unique": 8917,
+        "message_chars": 57913,
+        "scope_ids": [
+          "scope-3439cf63ec66887caf457221"
+        ]
+      },
+      "extra": 5518
+    },
+    {
+      "slot": 51,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q10",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 8174,
+        "evidence_chars_unique": 8174,
+        "message_chars": 71135,
+        "scope_ids": [
+          "scope-54a8cefadf0c7d7b5fe245d9"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 12611,
+        "evidence_chars_unique": 12611,
+        "message_chars": 101944,
+        "scope_ids": [
+          "scope-4803ab33337b2f31558f46cc"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 4437
+    },
+    {
+      "slot": 52,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q10",
+      "origin": "baseline",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 5400,
+        "evidence_chars_unique": 5400,
+        "message_chars": 39991,
+        "scope_ids": [
+          "scope-745419fd50cf788c2d758d3e"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 10,
+        "evidence_chars_delivered": 8928,
+        "evidence_chars_unique": 8928,
+        "message_chars": 56021,
+        "scope_ids": [
+          "scope-2c0dcd40cd07e41637375953"
+        ]
+      },
+      "extra": 3528
+    },
+    {
+      "slot": 54,
+      "category": "independent",
+      "ordinal": 0,
+      "case": "Q10",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 12562,
+        "evidence_chars_unique": 11563,
+        "message_chars": 87917,
+        "scope_ids": [
+          "scope-c1d68d666b71834004b2174d"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 8,
+        "evidence_chars_delivered": 14857,
+        "evidence_chars_unique": 14857,
+        "message_chars": 110173,
+        "scope_ids": [
+          "scope-bd3b3a2060fbca10c7081325"
+        ],
+        "lossless_transport_messages": 1
+      },
+      "extra": 2295
+    },
+    {
+      "slot": 54,
+      "category": "original_citation",
+      "ordinal": 0,
+      "case": "Q10",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1968,
+        "evidence_chars_unique": 1968,
+        "message_chars": 17706,
+        "scope_ids": [
+          "scope-35b5750a80eb3f05ad237e55"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1968,
+        "evidence_chars_unique": 1968,
+        "message_chars": 17706,
+        "scope_ids": [
+          "scope-35b5750a80eb3f05ad237e55"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 54,
+      "category": "original_citation",
+      "ordinal": 1,
+      "case": "Q10",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1968,
+        "evidence_chars_unique": 1968,
+        "message_chars": 17737,
+        "scope_ids": [
+          "scope-a743b5e3d535dc35f660f7b5"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 2,
+        "evidence_chars_delivered": 1968,
+        "evidence_chars_unique": 1968,
+        "message_chars": 17737,
+        "scope_ids": [
+          "scope-a743b5e3d535dc35f660f7b5"
+        ]
+      },
+      "extra": 0
+    },
+    {
+      "slot": 55,
+      "category": "domain",
+      "ordinal": 0,
+      "case": "Q10",
+      "origin": "fast",
+      "conditional_supplement": false,
+      "sqlite": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 5,
+        "evidence_chars_delivered": 4941,
+        "evidence_chars_unique": 3984,
+        "message_chars": 42151,
+        "scope_ids": [
+          "scope-d6c213c695b400e8f3362e6a"
+        ]
+      },
+      "candidate": {
+        "method": "literal-delivered-json-fields-v1",
+        "candidate_count": 8,
+        "evidence_chars_delivered": 8210,
+        "evidence_chars_unique": 8210,
+        "message_chars": 53538,
+        "scope_ids": [
+          "scope-66355b466851d6e01a63ae78"
+        ]
+      },
+      "extra": 3269
+    }
+  ],
+  "models_real": 0,
+  "paid_gate": false,
+  "correction_pairing": "Old corrections can be boundary-replayed exactly only with old scope and old response; no prediction of new candidate corrections.",
+  "measurement": "Actual adapter ModelRequest after normal auditors, review_transport, optional v21 sharing and ModelClient. Recorder raises ModelOutputError to stop response/correction inference."
+}
