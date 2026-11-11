@@ -3,12 +3,12 @@
   "evaluation_implementation_commit": "b3d7f9407224b854640747f58972b60ec5d70719",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "document_version": "learning-site-v6.25 full fast retrieval construction in progress,2026-11-02",
+  "document_version": "learning-site-v6.26 v18 real product comparison,2026-11-11",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
     "unconfigured_fallback": "sequential",
-    "service_8765": "original SQLite service restored, PID11640 health ready, no active/queued; previous exit unknown; not switched to Tantivy",
+    "service_8765": "2026-11-11 closeout read-only: port not listening; not operated this round; historical PID11640 receipt is not current",
     "default_retrieval": "topic_v4_subject_v1",
     "cross_language_candidate_default": false,
     "selective_match_candidate_default": false,
@@ -102,6 +102,25 @@
       "real_model_requests": 0,
       "full_build": false,
       "decision": "Known losses restored on frozen materials but candidate slower; no full build"
+    },
+    "v19_product": {
+      "application_commit": "1e4543592930550caff27205978d9d01f9bb64f1",
+      "retrieval_commit": "eb7ab40",
+      "submitted_chains": 16,
+      "complete_baseline": 6,
+      "complete_candidate": 8,
+      "complete_pair_terminal_median_seconds": [
+        35.34948189998977,
+        48.87221025000326
+      ],
+      "limited_release_recommended": false,
+      "real_requests": 96,
+      "trusted_tokens": 1700322,
+      "unknown_usage": 0,
+      "bill": "unknown",
+      "full_offline_tests": 1458,
+      "full_offline_seconds": 280.338,
+      "skipped_private_archive_replays": 80
     }
   },
   "experiment_batches": [

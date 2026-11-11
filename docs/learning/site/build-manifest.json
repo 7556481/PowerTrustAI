@@ -4,12 +4,12 @@
     "evaluation_implementation_commit": "b3d7f9407224b854640747f58972b60ec5d70719",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
     "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "document_version": "learning-site-v6.25 full fast retrieval construction in progress,2026-11-02",
+    "document_version": "learning-site-v6.26 v18 real product comparison,2026-11-11",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
       "unconfigured_fallback": "sequential",
-      "service_8765": "original SQLite service restored, PID11640 health ready, no active/queued; previous exit unknown; not switched to Tantivy",
+      "service_8765": "2026-11-11 closeout read-only: port not listening; not operated this round; historical PID11640 receipt is not current",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
       "selective_match_candidate_default": false,
@@ -103,6 +103,25 @@
         "real_model_requests": 0,
         "full_build": false,
         "decision": "Known losses restored on frozen materials but candidate slower; no full build"
+      },
+      "v19_product": {
+        "application_commit": "1e4543592930550caff27205978d9d01f9bb64f1",
+        "retrieval_commit": "eb7ab40",
+        "submitted_chains": 16,
+        "complete_baseline": 6,
+        "complete_candidate": 8,
+        "complete_pair_terminal_median_seconds": [
+          35.34948189998977,
+          48.87221025000326
+        ],
+        "limited_release_recommended": false,
+        "real_requests": 96,
+        "trusted_tokens": 1700322,
+        "unknown_usage": 0,
+        "bill": "unknown",
+        "full_offline_tests": 1458,
+        "full_offline_seconds": 280.338,
+        "skipped_private_archive_replays": 80
       }
     },
     "experiment_batches": [
@@ -715,7 +734,7 @@
     {
       "source": "docs/learning/chapters/14-code-tour.md",
       "characters": 29989,
-      "sha256": "b92d3cb273adec0d3c6e15b3192d38a6557a28295f1b41af0738e5c8ea8488fc"
+      "sha256": "0bf45fba8761daef77a3f94688dbe36b40b2fa1879ddc738d8343a1574d69abb"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
@@ -724,8 +743,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 22902,
-      "sha256": "677bfaccc75b2648e8a0d1b51e2759f0cf37e8b58c079dcf8ab89080ce742409"
+      "characters": 23510,
+      "sha256": "efdb02720e53a93d981b4ee4d0f62eb2df9ba01ea3693915591cbf5fd9a44d21"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -734,8 +753,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 12634,
-      "sha256": "bbf0a333c989ec8ee146af7cda493c32a60c1dd4b4d9ac4d4b83630b32697c7b"
+      "characters": 13242,
+      "sha256": "4920b95599f7518b59de94aee2edf170c5d9c4d6d0de53ef8bd141eba23352a4"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -753,6 +772,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 202124,
+  "markdown_characters": 203340,
   "network_dependencies": false
 }

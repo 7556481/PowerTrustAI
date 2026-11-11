@@ -61,12 +61,12 @@
     {
       "file": "backend/assembly.py",
       "symbol": "ComponentFactory.create",
-      "start_line": 305,
-      "end_line": 322,
-      "function_end_line": 393,
+      "start_line": 318,
+      "end_line": 335,
+      "function_end_line": 406,
       "partial": true,
-      "file_sha256": "4140ba4e0fe1b541107d28e9c500b8318aa978079ebcd722c1d757dffaccdcc7",
-      "source_text_lf_sha256": "429c896ac8632e8bc065b076372258a5e54404994717109eafd26c98b6f8797f",
+      "file_sha256": "48308bf02e1dcadbaa4375278d9cb359b6b83262d87f3b34e80ed4f93227a19e",
+      "source_text_lf_sha256": "b44baef20dd58ce61192f107aa19b93cc2278baad37e58460c41399ec7cb130b",
       "excerpt_sha256": "90c30e41b968135fa24d44bf40d33f767e4ac80d3a4bd4f0848188937aac21bb"
     },
     {
@@ -202,5 +202,11 @@
       "excerpt_sha256": "e78dffcf6a0e76d92b5313332b6a1a26f71652feca3be082e10180f8ef032712"
     }
   ],
-  "maintenance_base": "653412642dc065c39ed6721a64dd55303c45be6b"
+  "maintenance_base": "653412642dc065c39ed6721a64dd55303c45be6b",
+  "v19_source_recheck": {
+    "commit": "1e4543592930550caff27205978d9d01f9bb64f1",
+    "file": "backend/assembly.py",
+    "excerpt_body_unchanged": true,
+    "method": "AST actual symbol and same exact excerpt hash; line and file hashes refreshed"
+  }
 }
