@@ -658,6 +658,15 @@
       "manifest": "not yet accepted",
       "default_enabled": false,
       "ci": "four push/PR checks successful; full offline1458 in133.249s; Windows semantics successful"
+    },
+    "fact_domain_overlap_v23": {
+      "implementation_commit": "d9c4f2e1031aef231a310e418a2fa63dda356cc6",
+      "default_enabled": false,
+      "production_switched": false,
+      "complete_pairs": 7,
+      "real_calls": 75,
+      "trusted_tokens": 1177010,
+      "decision": "recommend limited isolated smoke only"
     }
   },
   "chapters": [
@@ -743,8 +752,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 25121,
-      "sha256": "2ebd7add3c5332c8bec22a6aa11b8992a7a28c64e8588b76a2fc93883d536bbd"
+      "characters": 25630,
+      "sha256": "2e8bbbc8c51bc37772a0c0d9cfae362ce74689a25c294847320c86e5a0c86397"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -753,8 +762,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 13242,
-      "sha256": "4920b95599f7518b59de94aee2edf170c5d9c4d6d0de53ef8bd141eba23352a4"
+      "characters": 13751,
+      "sha256": "f81e97e281d867e0db42aa026010e0f08702a731311aefabadf1f2507775f32b"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -772,6 +781,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 204951,
+  "markdown_characters": 205969,
   "network_dependencies": false
 }

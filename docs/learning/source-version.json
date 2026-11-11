@@ -657,5 +657,14 @@
     "manifest": "not yet accepted",
     "default_enabled": false,
     "ci": "four push/PR checks successful; full offline1458 in133.249s; Windows semantics successful"
+  },
+  "fact_domain_overlap_v23": {
+    "implementation_commit": "d9c4f2e1031aef231a310e418a2fa63dda356cc6",
+    "default_enabled": false,
+    "production_switched": false,
+    "complete_pairs": 7,
+    "real_calls": 75,
+    "trusted_tokens": 1177010,
+    "decision": "recommend limited isolated smoke only"
   }
 }
