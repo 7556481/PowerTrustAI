@@ -31,6 +31,8 @@ class ServiceConfig:
     tantivy_manifest: Path|None=None
     tantivy_isolated: bool=False
     tantivy_worker_mode: str='oneshot'
+    tantivy_spool: Path|None=None
+    tantivy_memory_limit: int=756807680
     model_budget_dir: Path|None=None
     model_budget_question_sha256: str|None=None
     model_budget_owner_file: Path|None=None
@@ -50,8 +52,10 @@ class ServiceConfig:
         max_duration_seconds=800,step_timeout_seconds=110,max_transient_retries=0,max_retrieval_chars_total=160000))
 
     def __post_init__(self):
-        if self.tantivy_worker_mode not in ('oneshot','fast_v1'):raise ValueError('Unsupported Tantivy worker mode')
-        if self.tantivy_worker_mode=='fast_v1' and (self.tantivy_manifest is None or self.audit_strategy!='baseline' or self.fact_review_execution!='serial_v1' or self.fact_review_contract!='production' or self.domain_internal_flow!='production' or self.verification_schema!=13 or self.fact_internal_flow!='production' or self.local_revision_interface!='production' or self.revision_answer_delivery!='production' or self.review_result_transport!='json' or self.fact_strategy!='aggregate' or self.extraction_message_profile!='production' or self.review_message_profile!='lossless_v1' or self.decision_policy!='product-v1'):raise ValueError('Fast retrieval requires unchanged production audit and explicit index')
+        if self.tantivy_worker_mode not in ('oneshot','fast_v1','sharded_v18'):raise ValueError('Unsupported Tantivy worker mode')
+        if self.tantivy_worker_mode=='sharded_v18' and (not self.tantivy_isolated or self.tantivy_spool is None):raise ValueError('V18 requires explicit isolated group and frozen spool')
+        if type(self.tantivy_memory_limit) is not int or not 64*1024**2<=self.tantivy_memory_limit<=2*1024**3:raise ValueError('Bounded native memory required')
+        if self.tantivy_worker_mode in ('fast_v1','sharded_v18') and (self.tantivy_manifest is None or self.audit_strategy!='baseline' or self.fact_review_execution!='serial_v1' or self.fact_review_contract!='production' or self.domain_internal_flow!='production' or self.verification_schema!=13 or self.fact_internal_flow!='production' or self.local_revision_interface!='production' or self.revision_answer_delivery!='production' or self.review_result_transport!='json' or self.fact_strategy!='aggregate' or self.extraction_message_profile!='production' or self.review_message_profile!='lossless_v1' or self.decision_policy!='product-v1'):raise ValueError('Fast retrieval requires unchanged production audit and explicit index')
         if type(self.tantivy_isolated) is not bool:raise ValueError('Boolean isolated index flag required')
         if self.tantivy_isolated and self.tantivy_manifest is None:raise ValueError('Isolated index requires explicit manifest')
         if self.tantivy_manifest is not None and (self.profile!='real' or self.retrieval_mode!='bm25' or self.retrieval_execution_profile!='topic_v4_subject_v1'):raise ValueError('Tantivy requires real composition and unchanged topic_v4_subject_v1 BM25 query contract')

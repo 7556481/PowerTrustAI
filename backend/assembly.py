@@ -47,10 +47,18 @@ class ComponentFactory:
         if self.config.tantivy_manifest is not None:
             if self.semantic_resource is None:
                 from rag.tantivy_retriever import AsyncTantivyRetriever
-                if self.config.tantivy_worker_mode=='fast_v1':
+                if self.config.tantivy_worker_mode in ('fast_v1','sharded_v18'):
                     from rag.tantivy_fast_v1 import FastTantivyRetriever as AsyncTantivyRetriever
-                self.semantic_resource=AsyncTantivyRetriever(self.config.index_db,self.config.tantivy_manifest,self.config.knowledge_version,isolated=self.config.tantivy_isolated)
-                if self.config.tantivy_worker_mode=='fast_v1':
+                if self.config.tantivy_worker_mode=='sharded_v18':
+                    import json
+                    from rag.tantivy_global_rank_v18 import GlobalIDFRetriever
+                    group=json.loads(self.config.tantivy_manifest.read_text(encoding='utf8'))
+                    if not group.get('complete'):raise ConfigurationError('Unaccepted shard group')
+                    self.semantic_resource=GlobalIDFRetriever(self.config.index_db,group['manifests'],self.config.knowledge_version,spool_path=self.config.tantivy_spool,memory_limit=self.config.tantivy_memory_limit,diagnostic_path=self.config.run_db.parent/'retrieval-native-events.jsonl',trim_owned_working_set=True)
+                    if self.semantic_resource.manifest['members']['total']!=group['count']:raise ConfigurationError('Shard group member count differs')
+                else:
+                    self.semantic_resource=AsyncTantivyRetriever(self.config.index_db,self.config.tantivy_manifest,self.config.knowledge_version,isolated=self.config.tantivy_isolated)
+                if self.config.tantivy_worker_mode in ('fast_v1','sharded_v18'):
                     try:self.semantic_resource.warm()
                     except BaseException:self.semantic_resource.close();self.semantic_resource=None;raise
             return
@@ -94,7 +102,7 @@ class ComponentFactory:
                 if corpus is None:store.rows(self.config.knowledge_version)
         except Exception:raise ConfigurationError('Fixed knowledge snapshot unavailable') from None
         self.initialize_retrieval()
-        if self.config.tantivy_worker_mode=='fast_v1' and not self.semantic_resource.available:raise ConfigurationError('Fast retrieval identity/resource unavailable; no new submissions')
+        if self.config.tantivy_worker_mode in ('fast_v1','sharded_v18') and not self.semantic_resource.available:raise ConfigurationError('Fast retrieval identity/resource unavailable; no new submissions')
         return self.config.knowledge_version
 
     def manifest(self,knowledge_version,*,fixed_evidence_only=False):
@@ -286,11 +294,16 @@ class ComponentFactory:
             manifest['retrieval']='Tantivy isolated native Top-K; original source readers; immediate certificate and strict body replay'
             manifest['scoring_method']='tantivy-0.27.0-native-bm25'
             manifest['performance_profile']='tantivy-owned-process-v1: per-search process startup included; no SQLite fallback'
-            if self.config.tantivy_worker_mode=='fast_v1':
+            if self.config.tantivy_worker_mode in ('fast_v1','sharded_v18'):
                 manifest['retrieval']='Tantivy fast trial: original source fragments and bounded neighboring text'
                 manifest['performance_profile']='tantivy-reusable-worker-v1: startup identity; request stamp/source validation; bounded restarts, no fallback'
-            manifest['fast_delivery']=None if self.config.tantivy_worker_mode!='fast_v1' else {'version':'fast-evidence-v1','candidate_limit':16,'max_results':6,'root_max_chars':8000,'context_max_chars':2400,'dedup':'exact_body_only','worker':'single_reusable_bounded2_restarts'}
-            manifest['retrieval_backend']={'backend':'tantivy-fast-v1' if self.config.tantivy_worker_mode=='fast_v1' else 'tantivy','identity':self.semantic_resource.manifest['_identity'],'scope':self.semantic_resource.manifest['scope'],'fallback':False,'quality_gate':self.semantic_resource.manifest.get('quality_gate','blocked')}
+            manifest['fast_delivery']=None if self.config.tantivy_worker_mode not in ('fast_v1','sharded_v18') else {'version':'fast-evidence-v1','candidate_limit':16,'max_results':6,'root_max_chars':8000,'context_max_chars':2400,'dedup':'exact_body_only','worker':'single_reusable_bounded2_restarts'}
+            manifest['retrieval_backend']={'backend':'tantivy-fast-v1' if self.config.tantivy_worker_mode in ('fast_v1','sharded_v18') else 'tantivy','identity':self.semantic_resource.manifest['_identity'],'scope':self.semantic_resource.manifest['scope'],'fallback':False,'quality_gate':self.semantic_resource.manifest.get('quality_gate','blocked')}
+        if self.config.tantivy_worker_mode=='sharded_v18':
+            manifest['retrieval']='v18 global exact token-IDF saturated TF; original Boolean eligibility; bounded90-shard union'
+            manifest['scoring_method']='global-token-idf-saturated-tf-v18'
+            manifest['retrieval_backend'].update(backend='tantivy-global-idf-v18',fallback=False,scope='isolated-complete-identity-verified-not-production')
+            manifest['fast_delivery'].update(version='v18',shards=len(self.semantic_resource._shards))
         return manifest
 
     def bind_budget_task(self,rid,request):
@@ -383,7 +396,7 @@ class ComponentFactory:
                 ModelPowerDomainReviewAgent(domain_model,settings,diagnostic_dir=diag,protocol_version=5,safety_review=True,task_applicability=True,**({'reference_contract_v7':True} if self.config.audit_strategy=='source_first_audit_v4' else {})),
                 ModelRevisionAgent(model,settings,diagnostic_dir=diag,protocol_version=2,clean_answer_body=True,answer_delivery=self.config.revision_answer_delivery),
                 ModelClaimExtractor(model,settings,diagnostic_dir=diag,typed_components=True,protocol_version=7,daily_guidance=self.config.decision_policy=='product-v1',message_profile=self.config.extraction_message_profile),
-                policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy,max_results=6 if self.config.tantivy_worker_mode=='fast_v1' else 3),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
+                policy=self.product_policy(),retriever=retriever,retrieval_settings=RetrievalSettings(fact_strategy=self.config.fact_strategy,max_results=6 if self.config.tantivy_worker_mode in ('fast_v1','sharded_v18') else 3),unit_tool=UnitConversionTool(version='scalar-si-conversion-v2'),observer=observer,
                 generation_query_converter=GenerationQueryConverter(model,settings,diag) if self.config.retrieval_mode=='bm25' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1' else None,
                 generation_corpus_english=corpus_english,execution_path=self.config.execution_path,audit_strategy=self.config.audit_strategy)
             harness.subject_supplement=self.config.audit_strategy=='baseline' and not fixed_evidence_only and self.config.retrieval_execution_profile!='chinese_first_cross_language_v1'
