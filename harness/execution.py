@@ -368,8 +368,29 @@ class RunExecution:
             await prepare_source_first(self)
         elif self.retrieval:
             self.vd = await self.retrieve_for(RetrievalPurpose.VERIFICATION)
+            if getattr(self.harness,'fact_domain_retrieval_overlap',False) and not self.evidence_only and self.model_budget.limit-self.model_budget.used>=4+len(self.answer.citations):
+                # Freeze only fact-purpose inputs; subsequent domain delivery cannot
+                # enlarge the independent or original citation namespaces.
+                from services.review_inputs import build as build_early_input
+                import json
+                from dataclasses import asdict
+                user = tuple(e for e in self.request.provided_evidence if e.evidence_id not in self.indexed_reference_ids)
+                frozen_evidence = merge_evidence(user,self.vd.evidence)
+                frozen_bindings = tuple(b for b in self.bindings if b.origin=='user_reference') + self.vd.bindings
+                snapshot=self.active_snapshot if self.active_snapshot is None or self.active_snapshot.answer_version==self.answer.version else None
+                base = EvidenceVerificationInput(self.request,self.answer,self.claims,frozen_evidence,frozen_bindings,self.knowledge_version,self.original_evidence,snapshot)
+                early = build_early_input(self.harness.verification,base,tool_results=self.current_tools,delivery_summary=json.dumps(asdict(self.vd.record)),fact_retrieval_bindings=self.vd.record.fact_bindings)
+                self._early_fact_task = asyncio.create_task(self.review('evidence_verification',self.harness.verification,early,merge_evidence(frozen_evidence,self.original_evidence),True,self.vd.issue))
             if not self.evidence_only:
-                self.dd = await self.retrieve_for(RetrievalPurpose.DOMAIN_REVIEW)
+                try:
+                    self.dd = await self.retrieve_for(RetrievalPurpose.DOMAIN_REVIEW)
+                except BaseException:
+                    task=getattr(self,'_early_fact_task',None)
+                    if task is not None:
+                        task.cancel()
+                        await asyncio.gather(task,return_exceptions=True)
+                        self._early_fact_task=None
+                    raise
             user_evidence = tuple((e for e in self.request.provided_evidence if e.evidence_id not in self.indexed_reference_ids))
             self.v_evidence = merge_evidence(user_evidence, self.vd.evidence)
             if not self.evidence_only:
@@ -412,10 +433,12 @@ class RunExecution:
             return
         # Retrieve sequentially in prepare_review; run the two reviewers against
         # the same immutable answer/claims and retain each completed stage event.
+        early=getattr(self,'_early_fact_task',None)
+        async def fact_review():
+            if early is not None:return await early
+            return await self.review('evidence_verification',self.harness.verification,self.v_input,merge_evidence(self.v_evidence,self.original_evidence),True,self.v_retrieval_issue)
         reviewers = [asyncio.create_task(job) for job in (
-            self.review('evidence_verification', self.harness.verification, self.v_input,
-                        merge_evidence(self.v_evidence, self.original_evidence),
-                        True, self.v_retrieval_issue),
+            fact_review(),
             self.review('power_domain_review', self.harness.domain_review, self.d_input,
                         self.d_evidence, False, self.d_retrieval_issue),
         )]
@@ -426,6 +449,7 @@ class RunExecution:
                 reviewer.cancel()
             await asyncio.gather(*reviewers, return_exceptions=True)
             raise
+        self._early_fact_task=None
         if self.v_issue:
             if getattr(self.harness.verification, 'schema_version', None) in (7, 8):
                 from agents.verification_contract_v7 import execution_incomplete
@@ -590,6 +614,11 @@ class RunExecution:
                 self.issues.append(ExecutionIssue('harness', ExecutionStatus.FAILED, 'EXECUTION_FAILURE', self.reason))
             self.transition(RunState.FAILED)
         finally:
+            early=getattr(self,"_early_fact_task",None)
+            if early is not None:
+                if not early.done():early.cancel()
+                await asyncio.gather(early,return_exceptions=True)
+                self._early_fact_task=None
             self.harness._runs.pop(self.run_id, None)
         self.record('termination', ExecutionStatus.CANCELLED if self.state == RunState.CANCELLED else ExecutionStatus.FAILED if self.state == RunState.FAILED else ExecutionStatus.SUCCEEDED, perf_counter(), self.reason)
         result = HarnessResult(

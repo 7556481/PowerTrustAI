@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
 if /I "%~1"=="--demo" goto demo
-".venv\Scripts\python.exe" -m backend --open --port 8765
+".venv\Scripts\python.exe" -m tools.managed_overlap --open %*
 if errorlevel 1 pause
 exit /b
 :demo
