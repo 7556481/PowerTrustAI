@@ -1,9 +1,9 @@
 {
   "application_commit": "eac94b7b0b8eea7613b595f2d5583c9d6fdd2f01",
-  "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
-  "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-  "documentation_parent_commit": "ee31fc26ea6e9edca4952b34655714f93323fd55",
-  "document_version": "learning-site-v6.26 final publication and dependency-aware cleanup, 2026-11-12",
+  "evaluation_implementation_commit": "534b3ca3848ca07fcca88af4c5b5a6e36e756886",
+  "evaluation_archive_commit": "ce1cbbe2297c37a787cc7e91e7250c2f75701426",
+  "documentation_parent_commit": "ce1cbbe2297c37a787cc7e91e7250c2f75701426",
+  "document_version": "learning-site-v6.27 fast retrieval overlap offline stop and standalone sample,2026-11-12",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -576,5 +576,28 @@
     "renderer_lf_sha256": "9ffcba6a4c091e075d79b685d36ecb253ec30eafa079b185ec4119e76e35b113",
     "real_model_requests": 0,
     "service_restarts": 0
+  },
+  "evaluation_v27": {
+    "production_unchanged": true,
+    "candidate_count": 1,
+    "admission_passed": false,
+    "live_model_requests": 0,
+    "primary_evidence_chars": [
+      205408,
+      215587
+    ],
+    "generation_evidence_increase_fraction": 0.2531760142233716,
+    "iso_common_deficiency_not_new_relative_error": true,
+    "self_contained_sample_members": 293,
+    "source_lf_sha256": {
+      "evaluation/fast_overlap_assets_v27.py": "06103a0081753891ff374836b5b67a8c24f74f533351e1ba013ca62b3064b26c",
+      "evaluation/fast_overlap_boundary_v27.py": "52d6084e9434358d0d1fca298a1a5f967a3fe7c12f437f89106c2e7dc60b6184",
+      "evaluation/fast_overlap_directed_v27.py": "37b0c774371bd95fcd01b96c75a0dc443862bc60aac1888f50ffc4276cea9d2b",
+      "evaluation/fast_overlap_history_v27.py": "5224d5c9b011d604a8d380574d92804c002e3354aa7ea147ef585c997c2acb8a",
+      "evaluation/fast_overlap_pack_v27.py": "1c0887c340d097ba00a232a3d68ec4bb229064ce37d492baf8d487a68415fd2e",
+      "evaluation/fast_overlap_replay_v27.py": "d293008bb187e116109455d7f17ddd1af65ce3081e109a37b990042632771b2c",
+      "evaluation/fast_overlap_v27.py": "24858c832ca7de8c0d76602e6d3547f06826382c7abfdd7a817d76d4308886a4"
+    },
+    "report": "https://github.com/7556481/PowerTrustAI/blob/ce1cbbe2297c37a787cc7e91e7250c2f75701426/docs/evaluation/fast-retrieval-overlap-v27/report.md"
   }
 }
