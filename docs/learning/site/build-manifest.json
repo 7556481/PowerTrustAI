@@ -762,8 +762,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 14019,
-      "sha256": "9dc88af20dbba0e57b951907c8412c7c020e803186000a50eb44aee3c3e972a8"
+      "characters": 14304,
+      "sha256": "4ece9b5d59a5077cc3925f07d113f2e8577810487c12dceaf6bf9a9ae49ed091"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -781,6 +781,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 206237,
+  "markdown_characters": 206522,
   "network_dependencies": false
 }
