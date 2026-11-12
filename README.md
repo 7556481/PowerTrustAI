@@ -6,7 +6,7 @@
 
 输入问题 → 先阅读初稿 → 等待自动审核 → 查看结果与引用依据。出现修订时可切换原回答与修订后版本；历史按需打开。令牌连接、已有回答审核、工程背景、逐项发现、NLI、轨迹及追加反馈统一放在独立诊断页。
 
-当前稳定整理范围包括正式启动、简化UI及原Harness链路；来源优先、选择性MATCH与引用并发实验保持关闭。发布与本机身份以[收尾报告](docs/maintenance/stable-product-baseline-v1.md)为准。完整离线回归、真实入口启动及UI缺项补验已通过；十题真实基线已完成：6题审核执行完整，2题较可用但仍需限定，4题部分帮助、3题未回答、1题关键条件错误。见[十题结果](docs/evaluation/stable-product-baseline-v1/report.md)。见[验收状态](docs/maintenance/stable-product-baseline-v1.md)与[操作清单](docs/stable-operation-checklist.md)。
+当前发布包含正式启动、简化UI及原Harness链路；本机8765已通过受管配置有限启用SQLite上的“事实审核与领域检索重叠”。通用默认仍为普通Factory，来源优先、选择性MATCH与事实内部引用并发实验保持关闭。日常双击[start-powertrustai.cmd](start-powertrustai.cmd)，原Store历史保留；需要回退时使用[rollback-overlap.cmd](rollback-overlap.cmd)。实际版本和回退依据见[本机发布回执](docs/maintenance/local-overlap-release-v25.md)。完整离线回归、真实入口启动及UI缺项补验已通过；十题真实基线已完成：6题审核执行完整，2题较可用但仍需限定，4题部分帮助、3题未回答、1题关键条件错误。见[十题结果](docs/evaluation/stable-product-baseline-v1/report.md)。见[验收状态](docs/maintenance/stable-product-baseline-v1.md)与[操作清单](docs/stable-operation-checklist.md)。
 
 ![新版用户主页；合成演示，仅展示交互](docs/assets/user-ui-v6-desktop.png)
 
@@ -64,13 +64,17 @@ flowchart TD
 
 |已见固定材料|结果|解释边界|
 |---|---|---|
+|7个完整的同初稿真实Flash对照|审核终态中位等待33.48→23.71秒，约早9.8秒（29.2%）|收益在首稿之后；本机有限启用的是SQLite调度，未证明首稿变快|
+|Tantivy全库90片、约2462万成员|v18四个冻结宽查询读取速度比中位约1.87倍|普通题中位比0.58，未全面提速；检索候选未启用为日常后端|
 |8题、A/C两组共16份生成|5题净改善、3题混合；正确完整语义槽1/25 → 19/25|资料变化后的生成收益；没有B回答组，不能全归查询转换|
 |给定成立发现的历史修订|4/4实际修改并完整重审|不是自主发现率，也不是自然审核收益|
 |8份自然C稿新审核|N2/N4关键问题未纠正；19/25不变；N8局部改写有争议，N5执行失败|关键纠错收益未证；pass不代表工程安全认证|
 
 [生成诊断与16回答](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md) · [给定发现后修订4/4](https://github.com/7556481/PowerTrustAI/blob/73c25ca0af9ba9fd5143527c6341aae52170fffd/docs/evaluation/local-revision-v2-flash-check-v1/report.md) · [自然审核失败](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md)。这些是小规模已见开发材料、AI辅助和用户监督复核，不是专家金标准或独立留出准确率。
 
-私有约70GB资料采用 FTS 倒排索引，不是全量向量库；资料在库仍可能无法召回。原出处、PDF提取质量和模型支持关系判断均有限制。审核包含提取、双审、可能的结构纠正及修订后重审，延迟仍可能较长；本轮未证明推理提速。回答供资料理解参考，不替代现场工程判断。
+私有约70GB资料采用 FTS 倒排索引，不是全量向量库；资料在库仍可能无法召回。原出处、PDF提取质量和模型支持关系判断均有限制。审核包含提取、双审、可能的结构纠正及修订后重审，延迟仍可能较长；调度已测得首稿后的等待缩短，不能归因为模型推理或首稿生成提速。回答供资料理解参考，不替代现场工程判断。
+
+[审核等待配对评估](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/fact-domain-overlap-v23/report.md) · [Tantivy全库与宽查询评估](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/tantivy-shards-v16/query-repair-v18.md)。实验实现和失败记录以固定提交保留，未整包进入默认配置。
 
 ## 开发与文档
 

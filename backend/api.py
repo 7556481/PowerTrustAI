@@ -179,6 +179,7 @@ def create_app(config=None,*,store=None,factory=None,access_token=None,shutdown=
             'execution_path':config.execution_path,
             'retrieval_mode':config.retrieval_mode if config.profile=='real' else 'none',
             'fact_retrieval_strategy':config.fact_strategy,'knowledge_version':config.knowledge_version if config.profile=='real' else None,
+            'managed_factory':service.factory.runtime_status() if hasattr(service.factory,'runtime_status') else None,
             'storage_healthy':not service.storage_fault,'active_run':service.active is not None,
             'queue_capacity':config.queue_capacity,'queued':service.queue.qsize(),'workers_supported':1}
 

@@ -27,3 +27,10 @@ class DocumentationTextIdentityTests(unittest.TestCase):
  def test_content_change_is_not_normalized_away(self):
   from tools.learning_checks import source_text_digest
   self.assertNotEqual(source_text_digest(b'return 1\n'),source_text_digest(b'return 2\n'))
+
+class ExternalReportLinksTests(unittest.TestCase):
+ def test_github_markdown_report_is_not_rewritten_as_html(self):
+  h,_=render('[report](https://github.com/owner/repo/blob/abc/report.md)\n\n[chapter](18-operations.md)')
+  self.assertIn('href="https://github.com/owner/repo/blob/abc/report.md"',h)
+  self.assertIn('href="18-operations.html"',h)
+  self.assertNotIn('blob/abc/report.html',h)

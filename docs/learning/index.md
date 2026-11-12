@@ -1,12 +1,20 @@
 # PowerTrustAI：从代码到判断的学习路线
 
+## 当前发布与两项性能结果（2026-11-12）
+
+日常启动[start-powertrustai.cmd](https://github.com/7556481/PowerTrustAI/blob/master/start-powertrustai.cmd)，零模型UI演示用其--demo入口；本机8765已有限启用SQLite上的事实审核/领域检索重叠，普通源码默认component。回退使用[rollback-overlap.cmd](https://github.com/7556481/PowerTrustAI/blob/master/rollback-overlap.cmd)，原Store历史与预算保留。详见[运维章节](18-operations.md)和[本机回执](https://github.com/7556481/PowerTrustAI/blob/master/docs/maintenance/local-overlap-release-v25.md)。
+
+7个完整的同初稿真实Flash对照中，审核终态中位等待33.48→23.71秒，约早9.8秒（29.2%）；这是首稿后的收益，不代表首稿或模型推理提速。Tantivy已完成90片全库建设，v18四个冻结宽查询读取速度比中位约1.87，普通题约0.58，当前日常仍使用SQLite。详见[性能章节](16-performance.md)。来源绑定可回查不等于语义正确，历史共同缺陷仍保留。
+
+演示先用本段约一分钟说明“检索候选”和“已启用调度”的区别，再按下方N1→A3→N4归档路线讲质量得失；不现场调用付费模型。[固定配对报告](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/fact-domain-overlap-v23/report.md) · [固定Tantivy报告](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/tantivy-shards-v16/query-repair-v18.md)。
+
 ## 5—8分钟归档演示路线（2026-10-27）
 
 只读历史公开案例，不做现场生成；不需要70GB数据库、.env或模型网络。每站先读完整两稿，再解释来源身份、动作及失败，不把教学构造当真实运行。
 
 |时间|点击阅读|讲解与追问|
 |---|---|---|
-|0:00—0:45|本页当前边界|中文电力原型；四职责、LangGraph/Harness；schema13保留，8765停服|
+|0:00—0:45|本页当前边界|中文电力原型；四职责、LangGraph/Harness；schema13保留；当前8765有限启用SQLite重叠调度|
 |0:45—2:30|[第一站N1：资料不足到有据回答](05-rag.html#section-3)|两稿都是归档生成；A缺目标建模段而合理不足，C读到Modeling页37，2/2槽完整；改善属于资料交付后的生成|
 |2:30—4:30|[第二站A3：给定发现后的修订](04-harness.html#section-3)|任何电压→指定带宽内；正确方式/静态段保留，D授权/O记账、版本与引用、一次完整重审；初审发现来自历史回放|
 |4:30—6:30|[第三站N4：更多资料仍生成并漏过排他错误](08-verification.html#section-3)|完整两稿及页21定位；when不支持排除热考核，literal却认可；引用可查/结构合法/pass都不保证语义正确|
@@ -19,7 +27,7 @@
 
 资料交付改善了固定8题中的5份回答，3份混合；必答正确完整槽1/25→19/25。同一8份C自然稿再审核，N2要求增强和N4排他断言仍未改，0份已证实净改善；N8局部边界改写有复核分歧。不能把生成收益归给审核，也不能声称稳定消除幻觉。
 
-当前生产schema13、受管配置langgraph_v1，源码无配置fallback为sequential；8765停服。默认检索topic_v4_subject_v1，跨语言profile及literal/source_actions_v2候选未切生产；NLI关闭。N6转换换义和旧gate=false均保留。
+2026-10-26当时生产schema13、受管配置langgraph_v1，源码无配置fallback为sequential；当时8765停服。当前运行状态见本页顶部2026-11-12发布说明。默认检索topic_v4_subject_v1，跨语言profile及literal/source_actions_v2候选未切生产；NLI关闭。N6转换换义和旧gate=false均保留。
 
 [三路检索与成本](06-retrieval-math.md) · [本轮审核与完整N4案例](08-verification.md) · [N1资料交付案例](05-rag.md) · [历史A3修订与一次重审](04-harness.md) · [当前面试口述](17-interview.md)
 

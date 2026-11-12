@@ -209,3 +209,19 @@ UI和只读投影代码可以独立交付；当前服务未由本轮重启，完
 A无稳定收益、等价第三路径未实现，B候选0/10完整、0/5修复，分别未准入；无SQL/审核切换、无用户服务重启/强停、烟测0、不补槽或第二批。开始时8765无health、运行库无queued/running；没有冒称服务保持运行或已启用可用。已有GUI成果保留，本轮无新UI/浏览器验收主张。
 
 1448全套487.711秒、35专项7.527秒、真实库十路径/十离线读取及十实际归档普通重读通过；合成后审不作模型成绩。新批次每链20/总200请求、350万已知usage阈值及最多一次安全释放未知保持，实际30次643777token/未知0，旧pending10不改；独立烟测20/30万额度未用。用户未提交材料和所有历史失败保留，分项推送/CI核对后停止。
+
+
+## 2026-11-12 本机日常入口有限启用 overlap
+
+v23把事实审核与领域检索重叠，事实内部仍serial_v1。七完整对审核终态中位早9.775秒/29.20%，初末正文对象相同；这不证明共同缺陷已修复。v24浏览器唯一自然题完整审核、终态待补充，6 Flash/70323 token；不是新的配对提速样本。
+
+v25从正式master只整合该调度和受管入口，SQLite/schema13/Flash/原审核政策保持。双击D:/PowerTrustAI/start-powertrustai.cmd读取忽略data内managed-service.json；缺省仍component，本机显式overlap。rollback-overlap.cmd在任务排空后优雅停止，以同端口/Store/预算账本改回component。正式库仍data/runtime_local/runs.sqlite3，原每任务预算与usage保留，没有全局实验批次账本，不使用8779隔离示例库替代日常历史。
+
+生效要核对/health.managed_factory.startup_factory_probe_enabled和原Store，不能只看配置文字。零模型调用启动探针只证明实际组合开关；下一次自然任务的fact_http_worker_begin早于领域retrieval_return才证明生产执行确实重叠。两项状态分开写在回执。1460离线回归通过、跳过80；发布详情见维护报告local-overlap-release-v25.md，实际启用状态以该报告和私有运行回执为准。
+
+
+## 2026-11-12 正式收尾与清理的依赖边界
+
+README和本站区分两项成果：Tantivy90片全库与宽查询读取收益；本机实际启用的SQLite事实审核/领域检索重叠，7完整同初稿对的首稿后等待33.48→23.71秒。日常/演示/回退入口见本章上段，源码默认component，本机显式overlap。
+
+清理不能只看文件名：53.68GB spool.sqlite3仍被v18读取候选TF和核验terms_sha；首片由build联接指向tv-checkpoint-probe11，90片mapping和manifest须共同保留。本次只删已保留正本且SHA完全相同的118个大索引副本及201个有源.py的字节码，文件逻辑4.346857GB、D盘删除窗口净释放4.347310GB分别记录。旧prefix、历史环境/冻结spool等价未证，不以“当前不用”推断可删。正式服务不重启，历史、预算与引用及一次v18检索/邻接均只读验收，原始回执留忽略data，公开清理报告在docs/maintenance/final-publication-cleanup-v26.md。

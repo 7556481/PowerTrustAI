@@ -1,23 +1,25 @@
 {
   "version": {
-    "application_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
+    "application_commit": "eac94b7b0b8eea7613b595f2d5583c9d6fdd2f01",
     "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "document_version": "learning-site-v6.18 selective MATCH v1 performance gate failed and not adopted,2026-10-29",
+    "documentation_parent_commit": "ee31fc26ea6e9edca4952b34655714f93323fd55",
+    "document_version": "learning-site-v6.26 final publication and dependency-aware cleanup, 2026-11-12",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
       "unconfigured_fallback": "sequential",
-      "service_8765": "initial health unavailable in v7; no service action or deployment by this run",
+      "service_8765": "v25 local explicit overlap; ready verified in release receipt; first natural task pending",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
       "selective_match_candidate_default": false,
       "literal_source_actions_candidate_default": false,
       "nli": "off",
-      "switched": false,
+      "switched": true,
       "audit_strategy": "baseline",
-      "sql_execution": "original bm25 score,rowid LIMIT"
+      "sql_execution": "original bm25 score,rowid LIMIT",
+      "managed_factory": "overlap",
+      "generic_factory": "component"
     },
     "validation": {
       "reused_full": {
@@ -558,13 +560,30 @@
       "smoke_calls": 0,
       "additional_batch": false,
       "sql_in_audit_batch": "original"
+    },
+    "local_overlap_release_v25": {
+      "base": "3cb0535c04cbac96520e4d55aaf9a5e32de75ce3",
+      "generic_factory": "component",
+      "local_managed_factory": "overlap",
+      "first_natural_task_observed": false,
+      "tests": 1460,
+      "skipped": 80,
+      "requests": 0,
+      "launcher_fix_tests": 7
+    },
+    "publication_cleanup_v26": {
+      "application_bytes_commit": "eac94b7b0b8eea7613b595f2d5583c9d6fdd2f01",
+      "documentation_parent": "ee31fc26ea6e9edca4952b34655714f93323fd55",
+      "renderer_lf_sha256": "9ffcba6a4c091e075d79b685d36ecb253ec30eafa079b185ec4119e76e35b113",
+      "real_model_requests": 0,
+      "service_restarts": 0
     }
   },
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 7990,
-      "sha256": "9f1a32ec3b2b1efd6070f43df4eb2e83e5873e3e43f3c77dd0eb41f4a8c953d0"
+      "characters": 8987,
+      "sha256": "ed56a139b56fd6291276cb6df6d9d78129017d353e883dcfa2bd1009b0ca3030"
     },
     {
       "source": "docs/learning/chapters/01-product.md",
@@ -643,18 +662,18 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 12401,
-      "sha256": "c4c11b3a78d1e9c0f37a209ddb27c4dce94e7362086d725f6c03199dba94c573"
+      "characters": 13159,
+      "sha256": "c16df679635c82bcaaef4740d8a086be37919bdb30549a16762f4ac220620e2d"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
-      "characters": 5420,
-      "sha256": "78880c1fea9edda7a444d4a03f62fd6d44c7db5e63f248d6e113a9098bac3992"
+      "characters": 5626,
+      "sha256": "ad0261147ec71fbb7d627b49e63ce48a3fedc73c98d1e6c311dbedf5344e6da6"
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 10988,
-      "sha256": "0e806fffd480677ce385fb331fe53c708bb3cbfe003e00220591a0f374f91cbd"
+      "characters": 12186,
+      "sha256": "9ac2968659b08d81597dcafe173cb8cb712d610320abd4a4c14f8a501aebd3f4"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -672,6 +691,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 186765,
+  "markdown_characters": 189924,
   "network_dependencies": false
 }

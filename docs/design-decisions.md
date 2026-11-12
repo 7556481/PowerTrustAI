@@ -1,5 +1,13 @@
 # 重要设计决策与依据
 
+## 2026-11-12 默认分支发布与依赖感知清理v26
+
+PR #7沿正式master只整合已验收SQLite重叠调度/日常/回退，Tantivy90片及宽查询成果通过75cbbdd固定报告保留、不整包进默认配置。README/学习站补齐33.48→23.71秒（7完整对、首稿后）及检索候选边界，修复外部.md报告链接误改.html。实际删除118个SHA相同索引副本+201可再生字节码，逻辑4346857320字节；删除窗口D盘free净增4347310080，C同期-86016无删除，分别记账。正式SQLite、Store/账本、90片/首片目标/53.68GB spool保留；旧环境/旧prefix/spool等价未证的大项单列。原进程9904、110历史/usage及两条引用回查通过；v18实际零模型检索6根+3邻接/2004字通过，0模型/0重启。详见[正式发布清理报告](maintenance/final-publication-cleanup-v26.md)，最终合并SHA/CI及磁盘净量在私有final-closeout.json独立核验。
+
+## 2026-11-12 本机8765有限启用overlap，首次自然任务待观察
+
+经用户批准，从正式master 3cb0535选择v23调度和受管入口，不合入PR #6实验沿革。日常start-powertrustai.cmd读取本机managed-service.json显式overlap，通用默认component；rollback-overlap.cmd同端口/原Store优雅回退。正式SQLite/schema13/Flash/serial_v1/baseline及langgraph_v1、原RunStore预算usage保持。隔离启用/回退均实际Factory探针及110条历史、全部历史/usage逐表hash通过，0模型。1460离线/319.436秒OK跳过80；停机RemoteDisconnected修复后7专项和eac94b7 CI通过。首次实际进程载入旧版本的纠正与重启证据不隐去。正式ready/实际开关和原历史已核对后归档，首次自然任务仍待用户提问，不自动付费。详见[本机发布与回退](maintenance/local-overlap-release-v25.md)，私有回执data/runtime_local/overlap-release-v25。
+
 ## 2026-10-29 v7独立发布与严格引用选择失败保留
 
 A只读核验rank映射后固定18排名/3 COUNT，最慢三轮仅一轮快，中位24.127→28.809秒，其他也重复明显回退；不以官方可能收益或九个相同top-K充一般同分等价，不构造第三路径/接生产。旧4096游标回退无记录不可推定，查询计划不分摊内部时间。
