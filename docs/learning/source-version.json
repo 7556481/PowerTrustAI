@@ -1,8 +1,8 @@
 {
   "application_commit": "eac94b7b0b8eea7613b595f2d5583c9d6fdd2f01",
   "evaluation_implementation_commit": "534b3ca3848ca07fcca88af4c5b5a6e36e756886",
-  "evaluation_archive_commit": "ce1cbbe2297c37a787cc7e91e7250c2f75701426",
-  "documentation_parent_commit": "ce1cbbe2297c37a787cc7e91e7250c2f75701426",
+  "evaluation_archive_commit": "73b832ca24bb360842a1b308215256aabe491aa9",
+  "documentation_parent_commit": "73b832ca24bb360842a1b308215256aabe491aa9",
   "document_version": "learning-site-v6.27 fast retrieval overlap offline stop and standalone sample,2026-11-12",
   "production": {
     "schema": 13,
@@ -598,6 +598,6 @@
       "evaluation/fast_overlap_replay_v27.py": "d293008bb187e116109455d7f17ddd1af65ce3081e109a37b990042632771b2c",
       "evaluation/fast_overlap_v27.py": "24858c832ca7de8c0d76602e6d3547f06826382c7abfdd7a817d76d4308886a4"
     },
-    "report": "https://github.com/7556481/PowerTrustAI/blob/ce1cbbe2297c37a787cc7e91e7250c2f75701426/docs/evaluation/fast-retrieval-overlap-v27/report.md"
+    "report": "https://github.com/7556481/PowerTrustAI/blob/73b832ca24bb360842a1b308215256aabe491aa9/docs/evaluation/fast-retrieval-overlap-v27/report.md"
   }
 }

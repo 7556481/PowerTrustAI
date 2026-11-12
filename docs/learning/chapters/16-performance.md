@@ -230,4 +230,4 @@ v24浏览器烟测后本机8765有限启用，默认类仍component；下一次�
 
 唯一候选从6根按查询词覆盖与整段长度选3，根≤3600字，再读原邻接≤2400。两路预算上限相同，最终ModelClient边界的原8稿主组证据却205408→215587字，生成多25.32%。预算上限、根数量、实际送字和token必须分别核对。已知ISO-NE历史限值与TO例外在宽池第6根，但选后/邻接/最终生成请求均无；SQLite该离线题也缺，只能说共同缺口和必要依据保留失败，不能夸大成相对SQLite新增错误。
 
-因此v27没有进入付费16链，不能给出新提交→首稿/终态更快的结论。小样本另把全文片段、TF、身份、范围和邻接键存入一套原生索引；旧SQLite/spool及网络不可用仍检索和回查成功，证明了路径，但50—150GB全库容量只是规划，未准入全库重建或迁移。[固定v27报告](https://github.com/7556481/PowerTrustAI/blob/ce1cbbe2297c37a787cc7e91e7250c2f75701426/docs/evaluation/fast-retrieval-overlap-v27/report.md)。
+因此v27没有进入付费16链，不能给出新提交→首稿/终态更快的结论。小样本另把全文片段、TF、身份、范围和邻接键存入一套原生索引；旧SQLite/spool及网络不可用仍检索和回查成功，证明了路径，但50—150GB全库容量只是规划，未准入全库重建或迁移。[固定v27报告](https://github.com/7556481/PowerTrustAI/blob/73b832ca24bb360842a1b308215256aabe491aa9/docs/evaluation/fast-retrieval-overlap-v27/report.md)。
