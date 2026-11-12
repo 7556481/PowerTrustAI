@@ -218,3 +218,10 @@ v23把事实审核与领域检索重叠，事实内部仍serial_v1。七完整�
 v25从正式master只整合该调度和受管入口，SQLite/schema13/Flash/原审核政策保持。双击D:/PowerTrustAI/start-powertrustai.cmd读取忽略data内managed-service.json；缺省仍component，本机显式overlap。rollback-overlap.cmd在任务排空后优雅停止，以同端口/Store/预算账本改回component。正式库仍data/runtime_local/runs.sqlite3，原每任务预算与usage保留，没有全局实验批次账本，不使用8779隔离示例库替代日常历史。
 
 生效要核对/health.managed_factory.startup_factory_probe_enabled和原Store，不能只看配置文字。零模型调用启动探针只证明实际组合开关；下一次自然任务的fact_http_worker_begin早于领域retrieval_return才证明生产执行确实重叠。两项状态分开写在回执。1460离线回归通过、跳过80；发布详情见维护报告local-overlap-release-v25.md，实际启用状态以该报告和私有运行回执为准。
+
+
+## 2026-11-12 正式收尾与清理的依赖边界
+
+README和本站区分两项成果：Tantivy90片全库与宽查询读取收益；本机实际启用的SQLite事实审核/领域检索重叠，7完整同初稿对的首稿后等待33.48→23.71秒。日常/演示/回退入口见本章上段，源码默认component，本机显式overlap。
+
+清理不能只看文件名：53.68GB spool.sqlite3仍被v18读取候选TF和核验terms_sha；首片由build联接指向tv-checkpoint-probe11，90片mapping和manifest须共同保留。本次只删已保留正本且SHA完全相同的118个大索引副本及201个有源.py的字节码，文件逻辑4.346857GB、D盘删除窗口净释放4.347310GB分别记录。旧prefix、历史环境/冻结spool等价未证，不以“当前不用”推断可删。正式服务不重启，历史、预算与引用及一次v18检索/邻接均只读验收，原始回执留忽略data，公开清理报告在docs/maintenance/final-publication-cleanup-v26.md。

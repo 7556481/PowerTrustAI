@@ -15,7 +15,7 @@ def inline(text):
     def link(m):
         target=m[2]
         if re.match(r'^(?:javascript|data|file):',target,re.I):return m[1]
-        if target.endswith('.md'):target=target[:-3]+'.html'
+        if not re.match(r'^(?:[A-Za-z][A-Za-z0-9+.-]*:|//)',target) and target.endswith('.md'):target=target[:-3]+'.html'
         return '<a href="'+target+'" rel="noreferrer noopener">'+m[1]+'</a>'
     return re.sub(r'\[([^\]]+)\]\(([^)]+)\)',link,text)
 
