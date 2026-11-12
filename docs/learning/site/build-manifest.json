@@ -1,23 +1,25 @@
 {
   "version": {
-    "application_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
+    "application_commit": "eac94b7b0b8eea7613b595f2d5583c9d6fdd2f01",
     "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "documentation_parent_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
-    "document_version": "learning-site-v6.18 selective MATCH v1 performance gate failed and not adopted,2026-10-29",
+    "documentation_parent_commit": "eac94b7b0b8eea7613b595f2d5583c9d6fdd2f01",
+    "document_version": "learning-site-v6.25 local explicit overlap release, 2026-11-12",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
       "unconfigured_fallback": "sequential",
-      "service_8765": "initial health unavailable in v7; no service action or deployment by this run",
+      "service_8765": "v25 local explicit overlap; ready verified in release receipt; first natural task pending",
       "default_retrieval": "topic_v4_subject_v1",
       "cross_language_candidate_default": false,
       "selective_match_candidate_default": false,
       "literal_source_actions_candidate_default": false,
       "nli": "off",
-      "switched": false,
+      "switched": true,
       "audit_strategy": "baseline",
-      "sql_execution": "original bm25 score,rowid LIMIT"
+      "sql_execution": "original bm25 score,rowid LIMIT",
+      "managed_factory": "overlap",
+      "generic_factory": "component"
     },
     "validation": {
       "reused_full": {
@@ -558,6 +560,16 @@
       "smoke_calls": 0,
       "additional_batch": false,
       "sql_in_audit_batch": "original"
+    },
+    "local_overlap_release_v25": {
+      "base": "3cb0535c04cbac96520e4d55aaf9a5e32de75ce3",
+      "generic_factory": "component",
+      "local_managed_factory": "overlap",
+      "first_natural_task_observed": false,
+      "tests": 1460,
+      "skipped": 80,
+      "requests": 0,
+      "launcher_fix_tests": 7
     }
   },
   "chapters": [
@@ -653,8 +665,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 10988,
-      "sha256": "0e806fffd480677ce385fb331fe53c708bb3cbfe003e00220591a0f374f91cbd"
+      "characters": 11688,
+      "sha256": "c1b72a36160d3921b9f359b91ae9edf8fce598154fc22d6bbfc7051a3011aee7"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -672,6 +684,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 186765,
+  "markdown_characters": 187465,
   "network_dependencies": false
 }

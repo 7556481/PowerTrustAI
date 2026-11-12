@@ -1,5 +1,9 @@
 # 文档索引
 
+## 2026-11-12 本机8765有限启用overlap，首次自然任务待观察
+
+经用户批准，从正式master 3cb0535选择v23调度和受管入口，不合入PR #6实验沿革。日常start-powertrustai.cmd读取本机managed-service.json显式overlap，通用默认component；rollback-overlap.cmd同端口/原Store优雅回退。正式SQLite/schema13/Flash/serial_v1/baseline及langgraph_v1、原RunStore预算usage保持。隔离启用/回退均实际Factory探针及110条历史、全部历史/usage逐表hash通过，0模型。1460离线/319.436秒OK跳过80；停机RemoteDisconnected修复后7专项和eac94b7 CI通过。首次实际进程载入旧版本的纠正与重启证据不隐去。正式ready/实际开关和原历史已核对后归档，首次自然任务仍待用户提问，不自动付费。详见[本机发布与回退](maintenance/local-overlap-release-v25.md)，私有回执data/runtime_local/overlap-release-v25。
+
 ## 2026-10-29 发布后分支与候选处置
 
 远端新核验后28→2，26历史分支先归档SHA再原子删除；本地安全删除27支，master安全快进。候选代码保留且不开启；rank/MATCH当前实现结束，只建议保留v6来源模态忠实与完整修订交付研究（不执行）。8765 PID19116/ready及源码/受管配置未变，0模型、无重启、不重跑1454。见[清单](maintenance/post-release-disposition-v1/report.md)、[完整SHA](maintenance/post-release-disposition-v1/branches-before.json)及[回执](maintenance/post-release-disposition-v1/cleanup-result.json)。
