@@ -1,0 +1,419 @@
+{
+  "version": "fast-overlap-v27",
+  "base_commit": "cd15bb423bdc06684b418cc40946991b5b4d9cba",
+  "decision": "stop single frozen candidate offline; no real batch",
+  "admission": {
+    "passed": false,
+    "decision": "stop single frozen candidate offline; no real batch",
+    "speed_upper_gate": {
+      "passed": true,
+      "baseline_overlap_historical_median": 23.705633399999897,
+      "optimistic_zero_retrieval_median": 10.837625200000275,
+      "max_median_saved_seconds": 12.868008199999622,
+      "max_fraction": 0.5428249050708629,
+      "not_a_product_measurement": true
+    },
+    "evidence_selection_gate": {
+      "passed": false,
+      "reason": "Known necessary ISO-NE limit/TO exception available in6-root pool but absent in selected whole spans, original adjacency, and final generation boundary",
+      "sqlite_same_offline_question_also_missing": true,
+      "not_classified_as_new_sqlite_relative_error": true
+    },
+    "actual_wire_cost": {
+      "same_production_budget_ceiling": true,
+      "primary_sqlite_evidence_chars": 205408,
+      "primary_candidate_evidence_chars": 215587,
+      "delta": 10179,
+      "fraction": 0.0495550319364387,
+      "primary_generation_delta": 7832,
+      "primary_generation_fraction": 0.2531760142233716,
+      "not_claimed_as_budget_overrun": true
+    },
+    "single_asset_sample": {
+      "passed": true,
+      "proof": "single-asset-proof.json",
+      "full_corpus_migration_not_verified": true
+    },
+    "live_requests": 0,
+    "trusted_tokens": 0,
+    "unknown_usage": 0,
+    "budget_batch_created": false,
+    "configured_caps_if_admitted": {
+      "requests": 240,
+      "trusted_tokens": 4000000
+    },
+    "production_switch": false,
+    "full_rebuild": false,
+    "large_file_delete": false
+  },
+  "rows": [
+    {
+      "case": "Q1",
+      "batch": "v19-real8/v23-overlap-real8",
+      "question_sha256": "dd5b47ed7255f235c595f9cb36420de3529fcb1213ca25674740c7ea2b8d32ff",
+      "post_draft_sqlite_overlap_seconds": 35.732071299999916,
+      "complete": true,
+      "issues": [],
+      "fact_finished": 35.2034991999999,
+      "domain_finished": 29.15827259999969,
+      "last_role": "fact",
+      "verification_read_seconds": 9.00889559999996,
+      "domain_read_seconds": 9.759905899999922,
+      "optimistic_zero_read_seconds_saved": 9.00889559999996,
+      "unmatched_query_count": 2,
+      "matched_query_only_terminal_saved": null,
+      "historical_generation_path_read_saved": 3.662186900023837,
+      "new_submit_to_draft_readable": null,
+      "new_submit_to_terminal_readable": null,
+      "new_body_change": null,
+      "actual_new_pair_not_run": true
+    },
+    {
+      "case": "Q3",
+      "batch": "v19-real8/v23-overlap-real8",
+      "question_sha256": "7815488dac46494e7cfed2cf86a23f6e5d438073cfca6a9a2d46d1889efd6ff9",
+      "post_draft_sqlite_overlap_seconds": 66.31085770000027,
+      "complete": false,
+      "issues": [
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Scoped semantic check incomplete; valid peers retained"
+        },
+        {
+          "component": "evidence_verification",
+          "status": "failed",
+          "code": "MODEL_OUTPUT_ERROR",
+          "message": "Scoped semantic check incomplete; valid peers retained"
+        }
+      ],
+      "fact_finished": 65.37805759999992,
+      "domain_finished": 46.787397000000055,
+      "last_role": "fact",
+      "verification_read_seconds": 19.911244100000204,
+      "domain_read_seconds": 16.808315700000094,
+      "optimistic_zero_read_seconds_saved": 19.911244100000204,
+      "unmatched_query_count": 2,
+      "matched_query_only_terminal_saved": null,
+      "historical_generation_path_read_saved": -0.827807900045882,
+      "new_submit_to_draft_readable": null,
+      "new_submit_to_terminal_readable": null,
+      "new_body_change": null,
+      "actual_new_pair_not_run": true
+    },
+    {
+      "case": "Q4",
+      "batch": "v19-real8/v23-overlap-real8",
+      "question_sha256": "2f6209c0054a6d8f8984242a982985892a1700d345c783647edad14fcb308ace",
+      "post_draft_sqlite_overlap_seconds": 15.304860199999894,
+      "complete": true,
+      "issues": [],
+      "fact_finished": 14.114286099999845,
+      "domain_finished": 15.066812300000038,
+      "last_role": "domain",
+      "verification_read_seconds": 3.7063929000000826,
+      "domain_read_seconds": 6.316575300000295,
+      "optimistic_zero_read_seconds_saved": 4.658919100000276,
+      "unmatched_query_count": 2,
+      "matched_query_only_terminal_saved": null,
+      "historical_generation_path_read_saved": 1.6042686999973377,
+      "new_submit_to_draft_readable": null,
+      "new_submit_to_terminal_readable": null,
+      "new_body_change": null,
+      "actual_new_pair_not_run": true
+    },
+    {
+      "case": "Q5",
+      "batch": "v19-real8/v23-overlap-real8",
+      "question_sha256": "171589c3f0dfc685bbb104953a961a37e3c17c6789159754cabd15dc7655d5b6",
+      "post_draft_sqlite_overlap_seconds": 30.420752800000173,
+      "complete": true,
+      "issues": [],
+      "fact_finished": 29.93510030000016,
+      "domain_finished": 25.9418655999998,
+      "last_role": "fact",
+      "verification_read_seconds": 7.3608595000000605,
+      "domain_read_seconds": 9.854855399999906,
+      "optimistic_zero_read_seconds_saved": 7.3608595000000605,
+      "unmatched_query_count": 2,
+      "matched_query_only_terminal_saved": null,
+      "historical_generation_path_read_saved": 2.4034510000016307,
+      "new_submit_to_draft_readable": null,
+      "new_submit_to_terminal_readable": null,
+      "new_body_change": null,
+      "actual_new_pair_not_run": true
+    },
+    {
+      "case": "Q6",
+      "batch": "v19-real8/v23-overlap-real8",
+      "question_sha256": "c80e700ce3a82070a84c1e9575b7da4dbf1edeb2fa947fdcaf01d193d62b10fa",
+      "post_draft_sqlite_overlap_seconds": 14.271452500000123,
+      "complete": true,
+      "issues": [],
+      "fact_finished": 13.76780030000009,
+      "domain_finished": 13.996554199999991,
+      "last_role": "domain",
+      "verification_read_seconds": 3.821090799999638,
+      "domain_read_seconds": 4.628422499999942,
+      "optimistic_zero_read_seconds_saved": 4.049844699999539,
+      "unmatched_query_count": 0,
+      "matched_query_only_terminal_saved": -0.6142049999903065,
+      "historical_generation_path_read_saved": 0.12797160000365693,
+      "new_submit_to_draft_readable": null,
+      "new_submit_to_terminal_readable": null,
+      "new_body_change": null,
+      "actual_new_pair_not_run": true
+    },
+    {
+      "case": "Q7",
+      "batch": "v19-real8/v23-overlap-real8",
+      "question_sha256": "7eed752f61fafb4b3be0ac0d208a8da4f306d0ace7dd5930dc36a345580b855d",
+      "post_draft_sqlite_overlap_seconds": 23.705633399999897,
+      "complete": true,
+      "issues": [],
+      "fact_finished": 20.036147600000277,
+      "domain_finished": 23.426601699999992,
+      "last_role": "domain",
+      "verification_read_seconds": 9.477554099999907,
+      "domain_read_seconds": 7.140699200000199,
+      "optimistic_zero_read_seconds_saved": 12.868008199999622,
+      "unmatched_query_count": 0,
+      "matched_query_only_terminal_saved": 4.920962399996824,
+      "historical_generation_path_read_saved": 5.034838499989012,
+      "new_submit_to_draft_readable": null,
+      "new_submit_to_terminal_readable": null,
+      "new_body_change": null,
+      "actual_new_pair_not_run": true
+    },
+    {
+      "case": "Q9",
+      "batch": "v19-real8/v23-overlap-real8",
+      "question_sha256": "f298f6fe0d154f22a320e67533e316dac16b6ece8fe2750bd114160361f2baa2",
+      "post_draft_sqlite_overlap_seconds": 22.196543399999882,
+      "complete": true,
+      "issues": [],
+      "fact_finished": 21.841807699999663,
+      "domain_finished": 19.045617599999787,
+      "last_role": "fact",
+      "verification_read_seconds": 3.010787000000164,
+      "domain_read_seconds": 7.907070799999929,
+      "optimistic_zero_read_seconds_saved": 3.010787000000164,
+      "unmatched_query_count": 2,
+      "matched_query_only_terminal_saved": null,
+      "historical_generation_path_read_saved": 4.236548400027329,
+      "new_submit_to_draft_readable": null,
+      "new_submit_to_terminal_readable": null,
+      "new_body_change": null,
+      "actual_new_pair_not_run": true
+    },
+    {
+      "case": "Q10",
+      "batch": "v19-real8/v23-overlap-real8",
+      "question_sha256": "f27b0a31a850671e69f262fce29e06df4b656f692206a32ab308f9e74181184e",
+      "post_draft_sqlite_overlap_seconds": 26.553695300000072,
+      "complete": true,
+      "issues": [],
+      "fact_finished": 16.36340990000008,
+      "domain_finished": 26.27540530000033,
+      "last_role": "domain",
+      "verification_read_seconds": 8.593063399999664,
+      "domain_read_seconds": 10.328977000000123,
+      "optimistic_zero_read_seconds_saved": 18.505058799999915,
+      "unmatched_query_count": 0,
+      "matched_query_only_terminal_saved": 4.767719499991472,
+      "historical_generation_path_read_saved": 1.3794876999906265,
+      "new_submit_to_draft_readable": null,
+      "new_submit_to_terminal_readable": null,
+      "new_body_change": null,
+      "actual_new_pair_not_run": true
+    }
+  ],
+  "boundary_totals": {
+    "primary_sqlite_drafts": {
+      "sqlite/generation": {
+        "requests": 8,
+        "evidence_chars": 30935,
+        "message_chars": 185952
+      },
+      "sqlite/independent": {
+        "requests": 10,
+        "evidence_chars": 110280,
+        "message_chars": 882128
+      },
+      "sqlite/original_citation": {
+        "requests": 16,
+        "evidence_chars": 24259,
+        "message_chars": 267519
+      },
+      "sqlite/domain": {
+        "requests": 8,
+        "evidence_chars": 39934,
+        "message_chars": 331423
+      },
+      "candidate/generation": {
+        "requests": 8,
+        "evidence_chars": 38767,
+        "message_chars": 203605
+      },
+      "candidate/independent": {
+        "requests": 10,
+        "evidence_chars": 111346,
+        "message_chars": 869241
+      },
+      "candidate/original_citation": {
+        "requests": 16,
+        "evidence_chars": 24259,
+        "message_chars": 267519
+      },
+      "candidate/domain": {
+        "requests": 8,
+        "evidence_chars": 41215,
+        "message_chars": 335584
+      }
+    },
+    "supplement_fast_drafts": {
+      "sqlite/generation": {
+        "requests": 8,
+        "evidence_chars": 30935,
+        "message_chars": 185952
+      },
+      "sqlite/independent": {
+        "requests": 10,
+        "evidence_chars": 175727,
+        "message_chars": 1104764
+      },
+      "sqlite/original_citation": {
+        "requests": 18,
+        "evidence_chars": 39322,
+        "message_chars": 317524
+      },
+      "sqlite/domain": {
+        "requests": 8,
+        "evidence_chars": 37737,
+        "message_chars": 351958
+      },
+      "candidate/generation": {
+        "requests": 8,
+        "evidence_chars": 38767,
+        "message_chars": 203605
+      },
+      "candidate/independent": {
+        "requests": 10,
+        "evidence_chars": 183652,
+        "message_chars": 1134796
+      },
+      "candidate/original_citation": {
+        "requests": 18,
+        "evidence_chars": 39322,
+        "message_chars": 317524
+      },
+      "candidate/domain": {
+        "requests": 8,
+        "evidence_chars": 40283,
+        "message_chars": 360164
+      }
+    },
+    "all16_states": {
+      "sqlite/generation": {
+        "requests": 16,
+        "evidence_chars": 61870,
+        "message_chars": 371904
+      },
+      "sqlite/independent": {
+        "requests": 20,
+        "evidence_chars": 286007,
+        "message_chars": 1986892
+      },
+      "sqlite/original_citation": {
+        "requests": 34,
+        "evidence_chars": 63581,
+        "message_chars": 585043
+      },
+      "sqlite/domain": {
+        "requests": 16,
+        "evidence_chars": 77671,
+        "message_chars": 683381
+      },
+      "candidate/generation": {
+        "requests": 16,
+        "evidence_chars": 77534,
+        "message_chars": 407210
+      },
+      "candidate/independent": {
+        "requests": 20,
+        "evidence_chars": 294998,
+        "message_chars": 2004037
+      },
+      "candidate/original_citation": {
+        "requests": 34,
+        "evidence_chars": 63581,
+        "message_chars": 585043
+      },
+      "candidate/domain": {
+        "requests": 16,
+        "evidence_chars": 81498,
+        "message_chars": 695748
+      }
+    },
+    "case_Q1": {
+      "sqlite": 45705,
+      "candidate": 43413
+    },
+    "case_Q3": {
+      "sqlite": 47013,
+      "candidate": 45082
+    },
+    "case_Q4": {
+      "sqlite": 11026,
+      "candidate": 18167
+    },
+    "case_Q5": {
+      "sqlite": 21747,
+      "candidate": 22115
+    },
+    "case_Q6": {
+      "sqlite": 18329,
+      "candidate": 22054
+    },
+    "case_Q7": {
+      "sqlite": 23006,
+      "candidate": 22151
+    },
+    "case_Q9": {
+      "sqlite": 21505,
+      "candidate": 22841
+    },
+    "case_Q10": {
+      "sqlite": 17077,
+      "candidate": 19764
+    },
+    "paired_requests": 86,
+    "all_system_prompts_identical": true
+  },
+  "single_asset": {
+    "members": 293,
+    "documents": 10,
+    "index_bytes": 606402,
+    "legacy_examples": 3,
+    "blocked_sqlite_spool": true,
+    "phrase_query_passed": true,
+    "estimated_linear_full_bytes": 50956284992.12969,
+    "planning_capacity_bytes": [
+      50000000000,
+      150000000000
+    ],
+    "capacity_estimate_not_verified": true
+  },
+  "whole_chain_optimistic_proxy": {
+    "complete": 7,
+    "baseline_combined_proxy_median": 31.500678298986713,
+    "optimistic_combined_proxy_median": 12.490670098987092,
+    "optimistic_saved": 19.01000819999962,
+    "optimistic_fraction": 0.6034793289073753,
+    "gate_optimistic_room": true,
+    "not_actual_product_wait": true
+  },
+  "source_stat_confirmed_against_v20": true,
+  "historical_answer_snapshot_pairs_verified": 8
+}
