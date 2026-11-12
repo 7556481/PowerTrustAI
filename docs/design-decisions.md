@@ -1,5 +1,9 @@
 # 重要设计决策与依据
 
+## 2026-11-12 v24浏览器烟测待手动认证（0真实请求）
+
+75cbbdd上独立8778/Store与16次/30万token账本已冻结。浏览器URL策略拒绝官方file://单次会话入口并禁止绕过；HTTP页仍未连接、提交禁用。尚未自然题提交/三时刻/页面历史与引用验收，不建议有限启用。后台同服务cancel/failure/recovery/普通Factory回退4零付费夹具通过，账本0/0。8778留运行等待手动认证，当前phase=rollback仅夹具；下一轮须先刷新60秒官方票据由用户打开，再恢复同一real槽，禁止换题/重置批次。见[状态](evaluation/overlap-smoke-v24/report.md)、[待审发布方案](evaluation/overlap-smoke-v24/release-plan.md)。8765未动。
+
 ## 2026-11-11 v23事实审核/领域检索重叠真实门槛通过
 
 正式SQLite、事实serial_v1、默认关闭，零付费8对消息/证据/预算/Store与实际重叠准入后，仅一次原8份初稿Flash比较完成。两路7/8完整，7完整对初稿后终态中位33.480→23.706秒，早9.775秒/29.20%；Q3两路失败保留，Q7反晚1.432秒。全部16初末答案对象/引用未改，共同缺陷仍在，真实Revision0。75 Flash/1177010可信token，未知/在途0。1465离线OK跳过80、3产品失败/取消/修订专项通过。建议进入有限隔离产品烟测，不自动切生产、不补批。见[报告](evaluation/fact-domain-overlap-v23/report.md)、[逐题阶段统计](evaluation/fact-domain-overlap-v23/summary.json)，实现d9c4f2e。
