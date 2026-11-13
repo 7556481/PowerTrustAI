@@ -1,45 +1,31 @@
 # PowerTrustAI · 电力资料问答与自动审核
 
-PowerTrustAI 根据电力资料回答问题，在正文中标出需要核实的句子，并让用户查看对应原文。它面向电力概念和文献解释：用户既能读到回答，也能看到哪些说法缺少依据、哪些结论需要补充适用条件。
+## 项目简介
 
-系统先通过 SQLite 全文检索取得资料，由生成 Agent 写出初稿。事实审核核对回答与引用，领域审核检查适用条件和工程前提。有明确依据时，系统最多修订一次，再对新版完整复核。每一版回答都保留自己的引用和审核记录。
+PowerTrustAI 根据电力资料回答问题，在正文中标出需要核实的句子，并让用户查看对应原文。
 
-```mermaid
-%%{init: {"flowchart": {"diagramPadding": 24, "rankSpacing": 20, "nodeSpacing": 20}}}%%
-flowchart LR
-    V[修订 Agent<br/>最多一次] -->|新版重新提取与双审| C[提取主张]
-    Q[问题] --> E[SQLite<br/>检索证据] --> D[初稿<br/>生成 Agent] --> C
-    C --> F[事实／引用审核]
-    C --> R[领域审核]
-    F --> J{处置}
-    R --> J
-    J -->|交付| O[正文与审核状态]
-    J -->|有据且未修订| V
-    O ~~~ PAD["预留控件位置"]
-    style PAD opacity:0
-```
+面向电力概念和文献解释，用户可以一起查看回答、句旁的审核意见，以及每个回答版本对应的引用和原文。自动审核会漏错，回答不能替代工程判断。
 
-- **阶段与控制分开**：LangGraph 编排阶段，Harness 管预算、取消和停止。图中是职责与路由，不是固定次数的串行模型调用；事实与领域审核可并行，本机受管配置还让事实审核与领域检索重叠。
-- **依据跟随回答版本**：Store 保存回答、引用和审核记录；引用绑定具体回答版本、来源版本及原文范围，因此打开旧答案仍能查到当时的依据。
+## 审核示例
 
-## 顺着一次请求读代码
+**回答原句**：把并联电力电容器和同步调相机称为“最典型的两种”。  
+**审核意见**：资料支持它们是“两种常见装置”，但未提供足以支持“最典型”的比较依据；疑点在比较用语，不在设备名称。  
+**本次结果**：系统标出原句并解释原因，正文未修改。
 
-从日常启动入口往下读，可依次找到装配、检索、审核和保存的位置：
+## 系统架构
 
-1. [tools/managed_overlap.py](tools/managed_overlap.py)：`start-powertrustai.cmd` 从这里选择受管 Factory，创建 API 服务；显式配置可启用 overlap，通用默认仍为普通 Factory。
-2. [backend/assembly.py](backend/assembly.py)：`ComponentFactory` 将检索器、四项 Agent 职责、主张提取和 Harness 装配为一次任务的组件。
-3. [rag/retriever.py](rag/retriever.py)：查看 SQLite 检索如何返回 Evidence，以及如何校验固定知识版本、回查原文和读取邻接段。
-4. [harness/graph_runtime_v1.py](harness/graph_runtime_v1.py)：看 LangGraph 如何连接生成、提取、双审、处置和修订，并将新版送回提取阶段。
-5. [harness/execution.py](harness/execution.py)：看各阶段实际执行、双审与检索重叠、预算检查和最多一次修订的边界；审核失败不能算审核完整。
-6. [backend/store.py](backend/store.py)：看回答版本、证据和意见如何保存，以及历史意见如何按回答 ID 与版本校验绑定。
+![问答与审核流程：检索、生成、提取主张后进入事实与领域双审；符合条件时最多有据修订一次，再对新版重新提取并完整双审](docs/assets/architecture.svg)
 
-## 试用、评测与开发
+- **连接工作阶段并控制执行**：LangGraph 负责阶段路由；Harness 负责预算、取消和停止，不把四项 Agent 职责当作四次必经的串行调用。[阶段编排](harness/graph_runtime_v1.py) · [执行控制](harness/execution.py)
+- **为回答提供可定位的资料**：SQLite 全文检索返回带来源、版本和字符范围的证据，支持原文及邻接段回查。[检索与回查](rag/retriever.py)
+- **区分依据问题与工程前提**：事实审核核对回答与引用是否有据；领域审核检查适用条件和工程前提。完整审核发现有明确依据、符合修订资格的问题时，最多修订一次，再对新版完整双审；只有依据不足时保留缺口，不拼凑结论。[审核与修订政策](harness/product_policy.py)
+- **让旧答案保留当时的依据**：Store 按回答 ID 和版本保存正文、引用及意见；查看历史版本时不会套用新版审核。[版本保存](backend/store.py)
 
-这是单用户本机研究原型。自动审核会漏错，**自然问答中的自动纠错收益仍待验证**；引用可回查也不代表原文一定支持结论，回答不能替代工程判断。
+## 体验与文档
 
-- [查看界面与试用步骤](docs/demo.md)：零模型演示的完整安装、端口、操作与截图；真实模式所需私有资料和 DeepSeek 配置另列。
-- [正式产品十题基线](docs/evaluation/stable-product-baseline-v1/report.md)：真实问答与审核效果、失败和局限；6/10 审核完整，未观察到有据修订，不把执行完整率当作答案可用率。
-- [中文学习站](docs/learning/index.md)：双击 `start-learning.cmd`，从源码解释读到面试练习。
-- [开发与文档索引](docs/documentation-index.md)及[依赖说明](requirements/README.md)：离线验证、运维与固定历史报告；检索研究、资产退役和分支维护从索引查阅。
+- [界面与试用步骤](docs/demo.md)：零模型演示的安装、端口、操作和截图，以及真实模式所需资料与 DeepSeek 配置。
+- [正式产品十题基线](docs/evaluation/stable-product-baseline-v1/report.md)：在十道真实问题中，六道完成了完整审核，本批没有触发有据修订。
+- [中文学习站](docs/learning/index.md)：架构、源码解释和面试练习；本机可双击 `start-learning.cmd`。
+- [开发与文档索引](docs/documentation-index.md)：依赖、启动装配、配置和运维说明，以及固定研究报告。
 
-已配置环境的零模型演示：`.\start-powertrustai.cmd --demo`；日常真实模式：`.\start-powertrustai.cmd`。
+已配置环境的零模型演示：`.\start-powertrustai.cmd --demo`；日常启动：`.\start-powertrustai.cmd`。
