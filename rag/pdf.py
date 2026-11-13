@@ -63,7 +63,7 @@ def _reader(data):
     try:
         import pypdf
     except ImportError as exc:
-        raise PDFDependencyError("PDF ingestion requires requirements-pdf.txt; offline modes remain available") from exc
+        raise PDFDependencyError("PDF ingestion requires requirements/pdf.txt; offline modes remain available") from exc
     if pypdf.__version__ != PYPDF_VERSION:
         raise PDFDependencyError(f"Expected pypdf {PYPDF_VERSION}; found {pypdf.__version__}")
     return pypdf.PdfReader(BytesIO(data), strict=True)
