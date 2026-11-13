@@ -9,3 +9,5 @@
 - `training-v1.txt`仅隔离CPU训练环境，不装入日常服务环境。
 
 原清单版本/哈希/平台注释保留。冻结报告中的旧根路径不改写，需要重现时检出对应固定提交。
+
+Windows演示额外用windows-runtime-constraints.txt固定原langgraph.lock.txt已有的间接版本，避免解析到未经本机验证的新原生轮子；原带哈希锁保持不变。

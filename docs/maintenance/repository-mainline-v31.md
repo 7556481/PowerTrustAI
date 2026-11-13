@@ -10,7 +10,7 @@
 
 ## 代码审查和实际重构
 
-正式start-powertrustai.cmd→tools.managed_overlap→backend.api/ManagedFactory→Harness，演示--demo→tools.ui_fixture→SyntheticUIFactory，历史GET→RunService.result/RunStore与evidence端点；公开评测入口tools.public_checks/harness.demo/acceptance_preparation已逐路径核对。
+正式start-powertrustai.cmd→tools.managed_overlap→backend.api/ManagedFactory→Harness，演示--demo→tools.ui_fixture→SyntheticUIFactory，历史GET→RunService.result/RunStore与evidence端点；公开评测入口tools.public_checks/harness.demo/acceptance_preparation已逐路径核对。acceptance_preparation仍有公共消费者，当前源指纹改为包含requirements/全部清单和约束，避免移动后漏计依赖身份；不回写旧清单或历史结果。
 
 健康探测曾两处实现策略：backend.launcher只接URLError，tools.managed_overlap再套一层接RemoteDisconnected。现在统一到backend.launcher.health_at，普通open_local/受管启动/回退均直接调用同一实现，删除受管层重复包装；连接关闭竞态测试改为替换中央urlopen，覆盖同一行为。这消除了普通入口与受管入口错误处理容易漂移的维护负担。
 
@@ -22,7 +22,7 @@
 
 3个远端已核验peeled提交的归档标签：archive/retrieval-overlap-20261113（覆盖v18—v24及旧本地ed87/131头）、archive/tantivy-retirement-20261113（覆盖v27—v29）、archive/evidence-decoupling-20261113。原release-v2-20261009标签保留。8个旧远端分支分别核对SHA、master/标签可达性和PR/worktree关系后按旧SHA原子删除；已结束草稿PR #4/#5/#6/#8/#9关闭，未将研究候选合入默认配置。
 
-主干保护由所有者在本轮手动完成；连接器administration读取403，不能仅凭用户报告断言全部服务端细项。本轮公共CI真实检查名offline，来源GitHub Actions/App15368，要求master-only、禁强推/删除、必须PR、人工批准0；通过本轮PR实际检验合并流程。
+主干保护由所有者在本轮手动完成；连接器administration读取403后，改由公开只读API核实ruleset 27186104为active，仅refs/heads/master，实际四规则包含禁删除/强推、PR批准0及offline/App15368。本轮公共CI真实检查名offline，来源GitHub Actions/App15368，要求master-only、禁强推/删除、必须PR、人工批准0；通过本轮PR实际检验合并流程。
 
 干净检出创建新.venv，公开安装命令实际执行。首次未约束Windows间接原生包使xxhash4.1 DLL被本机策略阻止，保留失败日志；增加windows-runtime-constraints.txt，所有版本取自原langgraph.lock.txt，修复后图预检通过，公共回归重跑。无版本轮换或改应用合同。
 

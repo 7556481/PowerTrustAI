@@ -35,10 +35,14 @@ def baseline(*, include_private_history=False):
         for path in sorted((PROJECT_ROOT / directory).rglob("*")):
             if path.is_file() and path.suffix in (".py", ".md", ".json"):
                 files[path.relative_to(PROJECT_ROOT).as_posix()] = sha(path)
-    for name in ("README.md", "requirements.txt", "requirements-pdf.txt", ".gitignore"):
+    for name in ("README.md", "requirements.txt", ".gitignore"):
         path = PROJECT_ROOT / name
         if path.exists():
             files[name] = sha(path)
+    # Current dependency profiles/constraints participate in the source identity.
+    # Frozen historical manifests are never rewritten.
+    for path in sorted((PROJECT_ROOT / "requirements").glob("*.txt")):
+        files[path.relative_to(PROJECT_ROOT).as_posix()] = sha(path)
     fingerprint = hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest()
     history = []
     for name in (("stability-minimal-v2.json", "stability-minimal-v3-rereview.json") if include_private_history else ()):
