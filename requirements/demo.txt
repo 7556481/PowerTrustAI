@@ -1,0 +1,4 @@
+# Zero-model UI: API and local graph runtime; no corpus, model weights or credentials.
+-r api.lock.txt
+-r ci.txt
+-c windows-runtime-constraints.txt

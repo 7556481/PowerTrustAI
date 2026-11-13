@@ -1,88 +1,55 @@
 # PowerTrustAI
 
-**电力知识问答与有据审核的本机研究原型。** 根据电力资料回答问题，保留引用、回答版本、审核发现和修订记录，帮助使用者理解“依据是什么、哪些内容仍待核对”。适合电力资料学习和 Agent 工程研究；目前为单用户本机应用，尚未证明稳定纠错能力。
+PowerTrustAI 根据电力资料回答问题，标出需要核实的句子，并让你查看对应原文。
 
-## 使用流程
+这是单用户本机研究原型：你可以先读回答，再检查审核标注、引用与原文。审核也可能失败或漏错，回答不能替代现场工程判断。
 
-输入问题 → 先阅读初稿 → 等待自动审核 → 查看结果与引用依据。出现修订时可切换原回答与修订后版本；历史按需打开。令牌连接、已有回答审核、工程背景、逐项发现、NLI、轨迹及追加反馈统一放在独立诊断页。
+## 先试零模型演示
 
-当前发布包含正式启动、简化UI及原Harness链路；本机8765受管配置已有限启用SQLite上的“事实审核与领域检索重叠”。通用默认仍为普通Factory，来源优先、选择性MATCH与事实内部引用并发实验保持关闭。日常双击[start-powertrustai.cmd](start-powertrustai.cmd)，零模型演示运行 `start-powertrustai.cmd --demo`；实际后端为SQLite全文库＋事实审核与领域检索重叠，原Store历史保留；需要回退时使用[rollback-overlap.cmd](rollback-overlap.cmd)。实际版本和回退依据见[本机发布回执](docs/maintenance/local-overlap-release-v25.md)。完整离线回归、真实入口启动及UI缺项补验已通过；十题真实基线已完成：6题审核执行完整，2题较可用但仍需限定，4题部分帮助、3题未回答、1题关键条件错误。见[十题结果](docs/evaluation/stable-product-baseline-v1/report.md)。见[验收状态](docs/maintenance/stable-product-baseline-v1.md)与[操作清单](docs/stable-operation-checklist.md)。
-
-![新版用户主页；合成演示，仅展示交互](docs/assets/user-ui-v6-desktop.png)
-
-上图来自交付分支的真实浏览器截图，合成演示仅展示交互，不代表真实回答质量。
-
-## 零模型本地演示
-
-新克隆需要 Python 3.13、Node.js（运行客户端测试时使用）及下列公开依赖，不需要密钥、知识大库或模型权重：
+需要 **Windows、Python 3.13 和 Git**。以下命令在 PowerShell 中运行；不需要 DeepSeek 密钥、私有知识库或模型权重。安装依赖需要联网，演示本身不调用模型。
 
 ```powershell
 git clone https://github.com/7556481/PowerTrustAI.git
 cd PowerTrustAI
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-api.lock.txt -r requirements-corpus.txt -r requirements-pdf.txt -r requirements-ci.txt
-.\.venv\Scripts\python.exe -m tools.ui_fixture --port 8766
+py -3.13 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\start-powertrustai.cmd --demo
 ```
 
-已有项目环境可直接运行 `./start-powertrustai.cmd --demo`（复用上述合成演示入口）。打开 [合成演示连接入口](http://127.0.0.1:8766/fixture/connect)，建立正常本机会话后进入主页。页面明确标记“演示模式 · 无模型调用”；假答案只验证交互，不作为模型质量证据。关闭该命令即可停止本次演示。8766 被占用时换空闲端口，勿占用真实服务8765。
+保持终端运行，打开 <http://127.0.0.1:8766/fixture/connect>。页面会标记“演示模式 · 无模型调用”。8766需空闲；也可运行 `.\.venv\Scripts\python.exe -m tools.ui_fixture --port 8788`，使用对应端口的 `/fixture/connect`。按 Ctrl+C 停止演示。
 
-只看学习资料可运行 `python -m tools.learning_site serve --port 8770`，或双击 [start-learning.cmd](start-learning.cmd)。[中文学习站](docs/learning/index.md)包含架构、算法手算、源码导读、失败分析和面试练习；N1 → A3 → N4 路线展示历史资料交付、给定发现后修订及自然审核漏错。
+试一遍：输入“无功支撑与电压有什么关系？”并提交，阅读合成回答并等待审核结束。再从历史打开“资料待补充” → 点“核实第1处”看审核标注 → 点“查看依据”读来源原文。打开“一次修订与版本1/2”可比较两个版本，选择v1查看其原引用；历史版本不会叠加最新版标注。演示数据是固定合成案例，不是模型推理或电力知识正确性的证明。
 
-真实运行使用 [start-powertrustai.cmd](start-powertrustai.cmd)，需要服务端私有配置、固定知识快照与凭据，提交会产生付费调用。新增真实请求仅使用已授权的 DeepSeek Flash；公开演示不会切换到真实适配器。私有材料与实际运行输出不随 Git 分发。
+![合成演示：提交问题后，打开历史中的待核实标注和来源原文](docs/assets/demo-v31.png)
 
-## 实际架构
+## 使用真实资料
 
-```mermaid
-flowchart TD
-    Q[问题 / 诊断页已有回答] --> R[Retriever / 固定知识快照]
-    R --> E[Evidence / 来源版本与原文定位]
-    E --> G[Generation Agent / 已有回答冻结]
-    G --> X[ClaimExtractor 提取服务]
-    X --> F[事实与原引用审核 Agent]
-    X --> D[领域审核 Agent]
-    F --> P[确定性政策]
-    D --> P
-    P -->|有据且满足资格，最多一次| V[Revision Agent]
-    V --> X
-    P --> O[最终处置 / 未解决问题]
-    H[LangGraph 外层七阶段路由] -.驱动.-> X
-    B[OfflineHarness / 预算、生命周期、停止] -.约束整个流程.-> H
-    O --> S[Store / 输入身份、版本、证据、失败与反馈]
-    S --> UI[同源用户主页 / 独立诊断页]
-```
+已有本机部署日常双击 `start-powertrustai.cmd`，或在项目目录运行 `.\start-powertrustai.cmd`。真实提交会产生付费调用。新克隆不会附带以下私有材料：
 
-事实与领域审核在既有链路中并行，修订后重新提取并完整双审。四 Agent 分担生成、事实、领域和修订；ClaimExtractor 是服务，LangGraph 不是第五个 Master。受管运行使用 LangGraph，未配置源码入口可使用 sequential；二者复用 Harness 与阶段实现，不另建调度器。研究候选和历史 NLI 诊断不等于生产默认启用。
+- 固定版本的 SQLite 全文知识库及对应发布清单、知识版本配置。
+- 本机受管启动配置、服务访问令牌及需要保留的历史 Store。
+- 服务端 DeepSeek 配置：按 [.env.example](.env.example) 在本机设置 `DEEPSEEK_API_KEY` 和 `DEEPSEEK_MODEL_ID=deepseek-flash`；已有环境变量优先，不要提交真实密钥。
 
-## 关键工程设计
+安装与可选依赖见 [requirements/](requirements/README.md)，本机配置与回退步骤见[运维章节](docs/learning/chapters/18-operations.md)。本机已验收配置使用 **SQLite 全文检索＋事实审核与领域检索重叠**；通用未配置入口仍用普通 Factory。调度回退入口为 `rollback-overlap.cmd`，保留原历史和预算。
 
-- **可回查**：Evidence、文档版本、原文区间及回答引用严格绑定；可定位只证明来源可查，不证明语义支持。
-- **有限闭环**：共享预算、超时、取消及失败停止；有据修订至多一次，保存原回答并完整重审。
-- **故障与历史分离**：服务拒单或保存未确认时明确提示，保留已存业务结论，不自动重启、重放或重发未知 POST。
-- **请求归属**：旧请求和旧鉴权错误不能覆盖新任务；反馈按实际回答版本与发现追加，保留 AI 辅助、用户监督来源。
+## 它怎样工作
 
-## 证据与限制
+SQLite 检索提供带来源版本和原文范围的 Evidence。四项 Agent 职责依次是生成回答、事实及原引用审核、领域审核、有据修订；主张提取是辅助服务。事实与领域审核可并行，满足资格时最多修订一次，再重新提取并完整双审。
 
-|已见固定材料|结果|解释边界|
-|---|---|---|
-|7个完整的同初稿真实Flash对照|审核终态中位等待33.48→23.71秒，约早9.8秒（29.2%）|收益在首稿之后；本机有限启用的是SQLite调度，未证明首稿变快|
-|Tantivy全库建设与产品验收|四条宽查询读取曾快约1.87倍；最终六个完整对客户端终态中位SQLite29.99秒、Tantivy37.60秒|未达产品门槛，实验资产已退役；删除窗口释放约73.23GB，见[公开退役记录](docs/maintenance/tantivy-retirement-public-v30.md)|
-|8题、A/C两组共16份生成|5题净改善、3题混合；正确完整语义槽1/25 → 19/25|资料变化后的生成收益；没有B回答组，不能全归查询转换|
-|给定成立发现的历史修订|4/4实际修改并完整重审|不是自主发现率，也不是自然审核收益|
-|8份自然C稿新审核|N2/N4关键问题未纠正；19/25不变；N8局部改写有争议，N5执行失败|关键纠错收益未证；pass不代表工程安全认证|
+LangGraph 驱动既有阶段路由；Harness 管理预算、取消、生命周期及确定性处置。Store 保存回答版本、证据、审核结果和历史。引用能回查，只证明原文身份可查，不保证原文支持回答。
 
-[生成诊断与16回答](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md) · [给定发现后修订4/4](https://github.com/7556481/PowerTrustAI/blob/73c25ca0af9ba9fd5143527c6341aae52170fffd/docs/evaluation/local-revision-v2-flash-check-v1/report.md) · [自然审核失败](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md)。这些是小规模已见开发材料、AI辅助和用户监督复核，不是专家金标准或独立留出准确率。
-
-私有约70GB资料采用 FTS 倒排索引，不是全量向量库；资料在库仍可能无法召回。原出处、PDF提取质量和模型支持关系判断均有限制。审核包含提取、双审、可能的结构纠正及修订后重审，延迟仍可能较长；调度已测得首稿后的等待缩短，不能归因为模型推理或首稿生成提速。回答供资料理解参考，不替代现场工程判断。
-
-[审核等待配对评估](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/fact-domain-overlap-v23/report.md) · [Tantivy全库与宽查询评估](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/tantivy-shards-v16/query-repair-v18.md)。实验实现和失败记录以固定提交保留，未整包进入默认配置。
-
-## 开发与文档
+## 开发、学习与评测
 
 ```powershell
-# 离线Fake测试，不发模型请求
-.\.venv\Scripts\python.exe -m unittest discover -s tests -v
-# 公开克隆检查：缺失私有历史会明确跳过，公开合成检查必须执行
+.\.venv\Scripts\python.exe -m pip install -r requirements/public.txt
+# 完整公共离线检查还需要 Node.js 22；不发模型请求
 .\.venv\Scripts\python.exe -m tools.public_checks
+.\.venv\Scripts\python.exe -m harness.demo
 ```
 
-[学习与面试手册入口](docs/learning/index.md) · [文档索引](docs/documentation-index.md) · [设计依据](docs/design-decisions.md) · [项目状态与能力边界](https://github.com/7556481/PowerTrustAI/blob/653412642dc065c39ed6721a64dd55303c45be6b/docs/project-status-20261027.md) · [历史README快照](docs/archive/README-before-ui-v6-20261027.md)。维护进展统一写入交接和专题报告，首页保持产品与架构总览。
+- [中文学习站](docs/learning/index.md)：双击 `start-learning.cmd`，阅读架构、源码、失败分析与面试练习。
+- [公开合成案例](docs/portfolio/README.md)与[文档索引](docs/documentation-index.md)：查看可复现的工程检查。
+- [评测与退役记录](docs/maintenance/tantivy-retirement-public-v30.md)：区分读取速度与用户等待，保留固定历史报告入口。
+- [维护与发布路线](docs/maintenance/repository-mainline-v31.md)：分支、依赖消费者及兼容代码的维护约定。
+
+私有数据、模型输入输出和历史实验结果不随 Git 分发；公开案例不是专家金标准。

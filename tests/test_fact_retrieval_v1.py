@@ -150,7 +150,7 @@ class FactRetrievalTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result['sides']['aggregate']['retrieval_calls'],1)
         self.assertEqual(result['sides']['per_claim_v1']['retrieval_calls'],2)
 
-    @unittest.skipUnless(importlib.util.find_spec('fastapi') and importlib.util.find_spec('httpx'), 'Optional API dependencies: requirements-api.lock.txt')
+    @unittest.skipUnless(importlib.util.find_spec('fastapi') and importlib.util.find_spec('httpx'), 'Optional API dependencies: requirements/api.lock.txt')
     def test_http_mapping_projection_and_restart_preserve_version_and_query(self):
         import time
         from fastapi.testclient import TestClient

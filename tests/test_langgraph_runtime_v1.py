@@ -20,7 +20,7 @@ from tests.test_model_trace_attribution import Adapter, setup as managed_setup
 AVAILABLE = importlib.util.find_spec('langgraph') is not None
 
 
-@unittest.skipUnless(AVAILABLE, 'Optional requirements-langgraph.lock.txt not installed')
+@unittest.skipUnless(AVAILABLE, 'Optional requirements/langgraph.lock.txt not installed')
 class GraphDifferentialTests(baseline.StageDifferentialTests):
     candidate_execution_path = 'langgraph_v1'
 
@@ -88,7 +88,7 @@ class GraphDifferentialTests(baseline.StageDifferentialTests):
         self.assertEqual(sum(x['correction'] for x in value['transport_requests']), 1)
 
 
-@unittest.skipUnless(AVAILABLE, 'Optional requirements-langgraph.lock.txt not installed')
+@unittest.skipUnless(AVAILABLE, 'Optional requirements/langgraph.lock.txt not installed')
 class GraphControlTests(unittest.IsolatedAsyncioTestCase):
     async def test_existing_sqlite_wire_and_restore_compatibility(self):
         import tempfile

@@ -50,5 +50,5 @@ class ManagedReleaseTests(unittest.TestCase):
     def test_graceful_stop_health_socket_closed_is_stopped(self):
         from http.client import RemoteDisconnected
         from tools.managed_overlap import health_at
-        with patch('tools.managed_overlap._health_at',side_effect=RemoteDisconnected()):
+        with patch('backend.launcher.urlopen',side_effect=RemoteDisconnected()):
             self.assertIsNone(health_at('http://127.0.0.1:8779'))

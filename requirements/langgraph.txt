@@ -1,2 +1,2 @@
 # Optional development execution path only.
--r requirements-langgraph.lock.txt
+-r langgraph.lock.txt

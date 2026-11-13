@@ -1,9 +1,9 @@
 {
-  "application_commit": "eac94b7b0b8eea7613b595f2d5583c9d6fdd2f01",
+  "application_commit": "6af6b2114e8d9d9b5b46639ab8f1efe4ced224d9",
   "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ee31fc26ea6e9edca4952b34655714f93323fd55",
-  "document_version": "learning-site-v6.30 final SQLite delivery and Tantivy retirement,2026-11-13",
+  "document_version": "learning-site-v6.31 public onboarding and maintained dependency paths,2026-11-13",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -591,5 +591,13 @@
     "retirement_net_free_bytes": 73228570624,
     "private_receipts_published": false,
     "pr8_pr9_observed": "open draft unmerged"
+  },
+  "repository_v31": {
+    "code_change": "central launcher health, installed dependency error paths only; protocols unchanged",
+    "windows_runtime_versions": "existing accepted langgraph lock",
+    "root_install": "requirements.txt -> requirements/demo.txt",
+    "public_ci_install": "requirements/public.txt",
+    "portfolio": "docs/portfolio",
+    "frozen_pdfs": "output/pdf retained for historical consumers"
   }
 }
