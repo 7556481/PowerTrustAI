@@ -14,7 +14,9 @@ PowerTrustAI 根据电力资料回答问题，在正文中标出需要核实的�
 
 ## 系统架构
 
-![问答与审核流程：检索、生成、提取主张后进入事实与领域双审；符合条件时最多有据修订一次，再对新版重新提取并完整双审](docs/assets/architecture.svg)
+<p align="center">
+  <img src="docs/assets/architecture.svg" alt="问答与审核流程：检索、生成、提取主张后进入事实与领域双审；符合条件时最多有据修订一次，再对新版重新提取并完整双审" width="360">
+</p>
 
 - **连接工作阶段并控制执行**：LangGraph 负责阶段路由；Harness 负责预算、取消和停止，不把四项 Agent 职责当作四次必经的串行调用。[阶段编排](harness/graph_runtime_v1.py) · [执行控制](harness/execution.py)
 - **为回答提供可定位的资料**：SQLite 全文检索返回带来源、版本和字符范围的证据，支持原文及邻接段回查。[检索与回查](rag/retriever.py)
