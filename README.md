@@ -6,7 +6,7 @@
 
 输入问题 → 先阅读初稿 → 等待自动审核 → 查看结果与引用依据。出现修订时可切换原回答与修订后版本；历史按需打开。令牌连接、已有回答审核、工程背景、逐项发现、NLI、轨迹及追加反馈统一放在独立诊断页。
 
-当前发布包含正式启动、简化UI及原Harness链路；本机8765已通过受管配置有限启用SQLite上的“事实审核与领域检索重叠”。通用默认仍为普通Factory，来源优先、选择性MATCH与事实内部引用并发实验保持关闭。日常双击[start-powertrustai.cmd](start-powertrustai.cmd)，原Store历史保留；需要回退时使用[rollback-overlap.cmd](rollback-overlap.cmd)。实际版本和回退依据见[本机发布回执](docs/maintenance/local-overlap-release-v25.md)。完整离线回归、真实入口启动及UI缺项补验已通过；十题真实基线已完成：6题审核执行完整，2题较可用但仍需限定，4题部分帮助、3题未回答、1题关键条件错误。见[十题结果](docs/evaluation/stable-product-baseline-v1/report.md)。见[验收状态](docs/maintenance/stable-product-baseline-v1.md)与[操作清单](docs/stable-operation-checklist.md)。
+当前发布包含正式启动、简化UI及原Harness链路；本机8765受管配置已有限启用SQLite上的“事实审核与领域检索重叠”。通用默认仍为普通Factory，来源优先、选择性MATCH与事实内部引用并发实验保持关闭。日常双击[start-powertrustai.cmd](start-powertrustai.cmd)，零模型演示运行 `start-powertrustai.cmd --demo`；实际后端为SQLite全文库＋事实审核与领域检索重叠，原Store历史保留；需要回退时使用[rollback-overlap.cmd](rollback-overlap.cmd)。实际版本和回退依据见[本机发布回执](docs/maintenance/local-overlap-release-v25.md)。完整离线回归、真实入口启动及UI缺项补验已通过；十题真实基线已完成：6题审核执行完整，2题较可用但仍需限定，4题部分帮助、3题未回答、1题关键条件错误。见[十题结果](docs/evaluation/stable-product-baseline-v1/report.md)。见[验收状态](docs/maintenance/stable-product-baseline-v1.md)与[操作清单](docs/stable-operation-checklist.md)。
 
 ![新版用户主页；合成演示，仅展示交互](docs/assets/user-ui-v6-desktop.png)
 
@@ -65,7 +65,7 @@ flowchart TD
 |已见固定材料|结果|解释边界|
 |---|---|---|
 |7个完整的同初稿真实Flash对照|审核终态中位等待33.48→23.71秒，约早9.8秒（29.2%）|收益在首稿之后；本机有限启用的是SQLite调度，未证明首稿变快|
-|Tantivy全库90片、约2462万成员|v18四个冻结宽查询读取速度比中位约1.87倍|普通题中位比0.58，未全面提速；检索候选未启用为日常后端|
+|Tantivy全库建设与产品验收|四条宽查询读取曾快约1.87倍；最终六个完整对客户端终态中位SQLite29.99秒、Tantivy37.60秒|未达产品门槛，实验资产已退役；删除窗口释放约73.23GB，见[公开退役记录](docs/maintenance/tantivy-retirement-public-v30.md)|
 |8题、A/C两组共16份生成|5题净改善、3题混合；正确完整语义槽1/25 → 19/25|资料变化后的生成收益；没有B回答组，不能全归查询转换|
 |给定成立发现的历史修订|4/4实际修改并完整重审|不是自主发现率，也不是自然审核收益|
 |8份自然C稿新审核|N2/N4关键问题未纠正；19/25不变；N8局部改写有争议，N5执行失败|关键纠错收益未证；pass不代表工程安全认证|

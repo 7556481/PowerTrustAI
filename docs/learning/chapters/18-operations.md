@@ -224,4 +224,10 @@ v25从正式master只整合该调度和受管入口，SQLite/schema13/Flash/原�
 
 README和本站区分两项成果：Tantivy90片全库与宽查询读取收益；本机实际启用的SQLite事实审核/领域检索重叠，7完整同初稿对的首稿后等待33.48→23.71秒。日常/演示/回退入口见本章上段，源码默认component，本机显式overlap。
 
-清理不能只看文件名：53.68GB spool.sqlite3仍被v18读取候选TF和核验terms_sha；首片由build联接指向tv-checkpoint-probe11，90片mapping和manifest须共同保留。本次只删已保留正本且SHA完全相同的118个大索引副本及201个有源.py的字节码，文件逻辑4.346857GB、D盘删除窗口净释放4.347310GB分别记录。旧prefix、历史环境/冻结spool等价未证，不以“当前不用”推断可删。正式服务不重启，历史、预算与引用及一次v18检索/邻接均只读验收，原始回执留忽略data，公开清理报告在docs/maintenance/final-publication-cleanup-v26.md。
+以下为v26历史清理状态（早于v29整条路线退役）：清理不能只看文件名，53.68GB spool.sqlite3当时仍被v18读取候选TF和核验terms_sha；首片由build联接指向tv-checkpoint-probe11，90片mapping和manifest须共同保留。本次只删已保留正本且SHA完全相同的118个大索引副本及201个有源.py的字节码，文件逻辑4.346857GB、D盘删除窗口净释放4.347310GB分别记录。旧prefix、历史环境/冻结spool等价未证，不以“当前不用”推断可删。正式服务不重启，历史、预算与引用及一次v18检索/邻接均只读验收，原始回执留忽略data，公开清理报告在docs/maintenance/final-publication-cleanup-v26.md。
+
+## 2026-11-13 当前封版：Tantivy已退役
+
+上文v18/v26的90片封存、mapping和spool保留要求属于当时实验状态。v28固定16链中六个完整对客户端终态中位SQLite29.99秒、Tantivy37.60秒，未过门槛；全8题首稿5.32→7.09秒。四条宽查询约1.87倍读取收益没有转化为产品收益。v29获批删除90片/映射/spool，删除窗口D盘释放约73.23GB，正式SQLite、历史和预算保留；旧实验资产不可运行，历史报告原文保留。
+
+日常 `start-powertrustai.cmd`，零模型演示 `start-powertrustai.cmd --demo`，调度回退 `rollback-overlap.cmd`。当前SQLite全文库＋事实审核/领域检索重叠；另批v23的33.48→23.71秒仅指首稿后审核等待。退役回查的原探针未被正文引用、补查缺清理前API观测的限制不省略。见[简短公开退役记录](https://github.com/7556481/PowerTrustAI/blob/master/docs/maintenance/tantivy-retirement-public-v30.md)及其固定实验提交入口。
