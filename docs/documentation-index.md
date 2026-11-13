@@ -1,5 +1,11 @@
 # 文档索引
 
+当前配置、启动和能力边界的唯一入口：[当前状态](current-status.md)。[历史索引](history-index.md)保留阶段发布与研究结论；本文件继续承担完整文档目录。
+
+## 2026-11-13 当前状态与学习入口同步v35
+
+旧10月25日状态全文原样归档；学习首页三条路线及N1→A3→N4案例回溯；全部20章时效词定向复核，第20章复用公开文字与合成夹具串起产品到代码。Markdown和独立site两种链接/锚点一致，静态构建保留源码校验。本轮仅离线，不操作8765或真实模型。见[核对与构建说明](learning/current-status-sync-v35.md)。
+
 ## 2026-11-13 README 阅读体验精修v33
 
 首页按产品简介、已有审核案例、系统架构、体验入口排列。案例区分设备名称与“最典型”比较依据，明确本次未改正文；纵向 SVG 去掉横向占位布局，源码链接融入四项架构说明，正式十题边界只陈述一次。演示与历史报告保持；仅文档和离线验证，不改服务/模型/审核政策。
@@ -592,7 +598,7 @@ PR #7沿正式master只整合已验收SQLite重叠调度/日常/回退，Tantivy
 - 代码提交97e3523最终独立克隆455项通过；final-stdlib-tests.txt、final-locked-tests.txt、final-harness-demo.txt、final-http-demo.txt保存实际提交验证。普通push因github.com:443连接失败未成功，最新提交与待推送范围见verification.json，不能以旧origin/master冒充远端同步。
 
 - [README](../README.md)：当前架构、标准库/锁定API测试、本机synthetic_fixture演示最短入口。
-- [当前状态](current-status.md)：schema13真实基线与本轮无付费范围，BM25默认/Dense-RRF非默认/微调未实现；网络状态按日期记录。
+- [当前状态](current-status.md)：唯一现行配置、启动与能力边界；旧10月25日全文及固定报告由历史索引回溯。
 - [公开复现](public-reproducibility-v1.md)：干净克隆、依赖、基线8错误、修复测试/跳过项、原Harness及HTTP演示证据。
 - [并发轨迹](model-trace-attribution-v1.md)：稳定请求归属、共享预算、纠正/超时/取消与旧记录兼容。
 - [实施接入点](implementation-roadmap.md)：逐主张证据、可选语义装配、支持判断微调数据与独立评测，均未在本轮实现。

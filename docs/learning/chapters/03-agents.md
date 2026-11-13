@@ -1,12 +1,15 @@
 # 03 四Agent与ClaimExtractor：对象比角色名称重要
 
+配置与实时服务状态统一见[当前状态](../../current-status.md)。本章带日期的实验、ready／停服与“当前／默认”均按各段日期和绑定版本解释；代码摘录不自动升级为现行配置。
+
+
 ## 四Agent各自承担哪一种失败
 
 Generation只读原中文问题与实际Evidence；英文查询用于召回，不是事实来源。ClaimExtractor管理原文锚点，不能把自己的忠实标签当真值。Fact需判断整句的范围和强度，Domain需区分概念解释与需要厂站参数的工程结论；Revision只能凭已有原文授权修改，不能自行补事实。
 
 本轮固定8份C稿，没有重新生成或检索。N2、N4都已进入真实原文审核，仍被判supported：这是识别断点，不是修订器未获得足够重试。N5领域纠正后仍非法，执行不完整；这又不同于合法语义漏检。[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
 
-## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+## 历史说明与基础知识（按记录日期和绑定版本阅读）
 
 ## 结果工具不是额外Agent
 
@@ -47,7 +50,7 @@ v2仍一次联合判断，没有额外规划调用。独立对象/义务确认�
 
 完整材料见[候选报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-internal-flow-v1/README.md#)。生产未切换，本轮0真实调用。
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+历史观测（2026-10-23）：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，该补记仅表示2026-10-23的观察，现行配置请读状态页。
 
 ## 2026-10-22：已有定制与工具选择
 

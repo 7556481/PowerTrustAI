@@ -202,5 +202,28 @@
       "excerpt_sha256": "e78dffcf6a0e76d92b5313332b6a1a26f71652feca3be082e10180f8ef032712"
     }
   ],
-  "maintenance_base": "653412642dc065c39ed6721a64dd55303c45be6b"
+  "maintenance_base": "653412642dc065c39ed6721a64dd55303c45be6b",
+  "current_application_reference": "284acadab8b47c390efd4108f3c7e6839f3d63f4",
+  "learning_runtime": [
+    {
+      "file": "tools/learning_site.py",
+      "source_text_lf_sha256": "7e9cfac6bf6ccf7f0d55d60b195fd79067445ca3f7f7525640c76b0ced21c695",
+      "scope": "complete maintained learning source file"
+    },
+    {
+      "file": "tools/learning_checks.py",
+      "source_text_lf_sha256": "950340c99b8a2a083378199ca5a444289fb1ebf3aa6643787d533b5363f30497",
+      "scope": "complete maintained learning source file"
+    },
+    {
+      "file": "docs/learning/assets/site.js",
+      "source_text_lf_sha256": "fc98658c5657a495f934f6a9c59be87e0f84aa18e7160af48d3cd4fb08a0862f",
+      "scope": "complete maintained learning source file"
+    },
+    {
+      "file": "docs/learning/assets/style.css",
+      "source_text_lf_sha256": "daf462e885065cc04e6c4e0fe642673f7f4da954ac38f5582650e1f3b0711576",
+      "scope": "complete maintained learning source file"
+    }
+  ]
 }

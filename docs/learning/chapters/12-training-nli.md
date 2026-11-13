@@ -1,5 +1,8 @@
 # 12 BERT-Tiny、MiniLM与一次训练的真实结果
 
+配置与实时服务状态统一见[当前状态](../../current-status.md)。本章带日期的实验、ready／停服与“当前／默认”均按各段日期和绑定版本解释；代码摘录不自动升级为现行配置。
+
+
 ## 预训练编码器与NLI分类头
 
 编码器把token变表示，分类头把表示映射为类别logits。BERT-Tiny的语言预训练并不意味着已学会entailment/contradiction。首次项目模型google/bert_uncased_L-2_H-128_A-2加载编码器后随机初始化三分类头，是从固定随机头开发对照，不可称官方NLI基线。

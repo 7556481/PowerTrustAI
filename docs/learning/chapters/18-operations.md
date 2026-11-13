@@ -1,12 +1,23 @@
 # 18 环境、启动、Git、迁移与排障
 
+配置与实时服务状态统一见[当前状态](../../current-status.md)。本章带日期的实验、ready／停服与“当前／默认”均按各段日期和绑定版本解释；代码摘录不自动升级为现行配置。
+
+
+## 从正确入口开始
+
+公开克隆先按[演示教程](../../demo.md)安装依赖，再运行 `start-powertrustai.cmd --demo`；这是临时Store和合成模型。已有私有SQLite、DeepSeek和受管配置的本机部署，日常运行 `start-powertrustai.cmd`，需要调度回退时用 `rollback-overlap.cmd`。配置事实统一见[当前状态](../../current-status.md)，不要按下文历史“候选尚未发布”判断今天。
+
+只读 `http://127.0.0.1:8765/health` 可以核对当时的 status、service_lifecycle.accepting_work、managed_factory探针和Store；不可达不等于历史数据丢失，旧ready也不能保证现在可用。不要为了阅读学习站而启动、重启或提交正式任务。学习站8770与问答8765分离。
+
+下文2026-10-29候选首次验收中的“十题未发送”、旧ready和停服均为当日阶段观察；后续十题、11月发布与退役分别看[历史索引](../../history-index.md)。
+
 ## 十题真实产品案例接续
 
-十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；首稿观测2.73～12.34秒，结束19.05～95.56秒。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/evaluation/stable-product-baseline-v1/report.md)。UI四缺项本轮已用原合成夹具补验通过，旧工具失败保留。
+十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；客户端轮询发现已保存首稿2.73～12.34秒、终态19.05～95.56秒，不是浏览器首次绘制。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](https://github.com/7556481/PowerTrustAI/blob/a23bbf9cdfa529a330952006a983981b6fe55252/docs/evaluation/stable-product-baseline-v1/report.md)。UI四缺项本轮已用原合成夹具补验通过，旧工具失败保留。
 
 ## 稳定候选启动验收（首轮历史，接续状态见上文）
 
-一键入口 `start-powertrustai.cmd --demo` 走原合成夹具；不带参数走真实受管服务。当前候选不是默认分支发布。1454离线通过及真实入口ready只证明工程阶段，浏览器修订/证据/390/键盘验收尚缺，十题真实基线未发送，不能用合成绿标代替语义收益。进程级库封印与每题检索分别计时；本轮精确启动秒数未知。完整边界及失败见[稳定候选报告](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/maintenance/stable-product-baseline-v1.md)，操作见[清单](https://github.com/7556481/PowerTrustAI/blob/codex/stable-product-baseline-v1/docs/stable-operation-checklist.md)。
+一键入口 `start-powertrustai.cmd --demo` 走原合成夹具；不带参数走真实受管服务。2026-10-29首轮时，该候选尚未合入默认分支。1454离线通过及真实入口ready只证明工程阶段，浏览器修订/证据/390/键盘验收尚缺，十题真实基线未发送，不能用合成绿标代替语义收益。进程级库封印与每题检索分别计时；本轮精确启动秒数未知。完整边界及失败见[稳定候选报告](https://github.com/7556481/PowerTrustAI/blob/a23bbf9cdfa529a330952006a983981b6fe55252/docs/maintenance/stable-product-baseline-v1.md)，操作见[清单](https://github.com/7556481/PowerTrustAI/blob/a23bbf9cdfa529a330952006a983981b6fe55252/docs/stable-operation-checklist.md)。
 
 ## v6产品页与GitHub检查排障
 
@@ -73,7 +84,7 @@ strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实
 不能。HTTP422是请求级故障，本运行后续引用、纠正和下游模型都应停止，批次也按共享故障规则停止。HTTP200的结构失败可以使用原有有限纠正额度；不能因为有余额就重试被拒绝的请求，也不能把已接受结果丢掉。这里是离线行为检查，不是故意付费制造故障。
 :::
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+历史观测（2026-10-23）：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，该补记仅表示2026-10-23的观察，现行配置请读状态页。
 
 ## 三种入口，互不打断
 
@@ -152,7 +163,7 @@ Git可把Windows工作区CRLF检出为Linux LF；直接比较工作区原字节S
 
 默认是否已切换、真实付费完成数量及未验收项见本轮集成报告。完整发布库每个新进程保留首次字节SHA检查，不能以启动慢为由跳过或改成mtime认证。学习站由Markdown构建，20章和60折叠自测保持；不手工维护第二份HTML正文。
 
-当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
+2026-10-22首轮集成验收状态：当时正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
 
 ## 三道自测：先作答，再展开
 
@@ -176,7 +187,7 @@ Git可把Windows工作区CRLF检出为Linux LF；直接比较工作区原字节S
 
 ## 2026-10-08 完整库接入核对
 
-完整有效分片FTS已独立发布并接入日常，旧prefix历史保留。新进程仍读取约70.85GB做全文件SHA，sidecar与库内封印严格一致；字节一致时复用发布时结构/FTS/成员核验，未发布fixture仍直接检查SQL。进程内_OPENED只记路径/知识及size/mtime_ns，变化拒绝；没有跨进程跳过SHA的缓存。命中原文、字符区间、哈希仍验证。首启约52秒，后续正常重启43.5秒；未清OS缓存，不能称物理冷机或稳定SLA。四主题FTS查询0.11–4.76秒，命中不等于回答正确。唯一概念任务双审完整而业务待补充，知识接入与审核适用性问题分开。当前接入记录见项目源码目录的 `docs/full-corpus-adoption-v1.md`。
+【历史完整库接入观测，见本段发布报告；不是当前启动时长或保留清单】完整有效分片FTS当时已独立发布并接入日常，旧prefix当时保留。新进程仍读取约70.85GB做全文件SHA，sidecar与库内封印严格一致；字节一致时复用发布时结构/FTS/成员核验，未发布fixture仍直接检查SQL。进程内_OPENED只记路径/知识及size/mtime_ns，变化拒绝；没有跨进程跳过SHA的缓存。命中原文、字符区间、哈希仍验证。首启约52秒，后续正常重启43.5秒；未清OS缓存，不能称物理冷机或稳定SLA。四主题FTS查询0.11–4.76秒，命中不等于回答正确。唯一概念任务双审完整而业务待补充，知识接入与审核适用性问题分开。该次接入记录见项目源码目录的 `docs/full-corpus-adoption-v1.md`。
 
 ## 2026-10-08 首版冻结补记
 
@@ -226,7 +237,7 @@ README和本站区分两项成果：Tantivy90片全库与宽查询读取收益�
 
 以下为v26历史清理状态（早于v29整条路线退役）：清理不能只看文件名，53.68GB spool.sqlite3当时仍被v18读取候选TF和核验terms_sha；首片由build联接指向tv-checkpoint-probe11，90片mapping和manifest须共同保留。本次只删已保留正本且SHA完全相同的118个大索引副本及201个有源.py的字节码，文件逻辑4.346857GB、D盘删除窗口净释放4.347310GB分别记录。旧prefix、历史环境/冻结spool等价未证，不以“当前不用”推断可删。正式服务不重启，历史、预算与引用及一次v18检索/邻接均只读验收，原始回执留忽略data，公开清理报告在docs/maintenance/final-publication-cleanup-v26.md。
 
-## 2026-11-13 当前封版：Tantivy已退役
+## 2026-11-13退役记录：Tantivy实验资产处置
 
 上文v18/v26的90片封存、mapping和spool保留要求属于当时实验状态。v28固定16链中六个完整对客户端终态中位SQLite29.99秒、Tantivy37.60秒，未过门槛；全8题首稿5.32→7.09秒。四条宽查询约1.87倍读取收益没有转化为产品收益。v29获批删除90片/映射/spool，删除窗口D盘释放约73.23GB，正式SQLite、历史和预算保留；旧实验资产不可运行，历史报告原文保留。
 

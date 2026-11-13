@@ -1,8 +1,17 @@
 # 01 产品目标、入口和处置含义
 
+配置与实时服务状态统一见[当前状态](../../current-status.md)。本章带日期的实验、ready／停服与“当前／默认”均按各段日期和绑定版本解释；代码摘录不自动升级为现行配置。
+
+
+## 先从用户能看到什么开始
+
+先读回答，再点句旁意见，最后回查所选回答版本的原文。“有标注”表示系统提出疑点，不表示正文已改；只有保存的正文确实变化并完成新版审核，才能讨论修订结果。运行配置与启动方式统一从上方状态页进入。
+
+用[“常见／最典型”练习](20-workshops.md#从产品到代码常见与最典型)检查这三个结果；再读[第02章](02-architecture.md)追踪它们怎样连接。下面的资料交付与修订数字属于2026-10-26等固定历史批次。
+
 ## 截至2026-10-26：产品收益分三笔账
 
-产品面向中文电力问题，英文权威原文按需参与。中文优先是使用场景选择，并不声称全库中文占多数。当前生产基线schema13，受管配置langgraph_v1；未配置的源码fallback为sequential。8765停服，本轮不切生产，检索topic_v4_subject_v1及审核默认不变，NLI仍是关闭的旁路。
+产品面向中文电力问题，英文权威原文按需参与。中文优先是使用场景选择，并不声称全库中文占多数。当前生产基线schema13，受管配置langgraph_v1；未配置的源码fallback为sequential。2026-10-26记录为8765停服，该批未切生产，检索topic_v4_subject_v1及审核默认不变，NLI仍是关闭的旁路。
 
 |问题|已见证据|仍不能声称|
 |---|---|---|
@@ -12,9 +21,9 @@
 
 先把资料缺失、生成误读、审核漏检拆开，才能知道下一步应改哪里。上轮检索收益不能记到本轮审核名下。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
 
-## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+## 历史说明与基础知识（按记录日期和绑定版本阅读）
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，以本补记为当前。
+历史观测（2026-10-23）：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。下文2026-10-22及更早状态保留历史含义，该补记仅表示2026-10-23的观察，现行配置请读状态页。
 
 ## 是什么：一个回答包含多种义务
 
@@ -38,7 +47,7 @@
 
 ## 项目怎样实现：入口和输出分层
 
-backend/api.py负责同源HTTP、鉴权和请求结构，backend/service.py负责排队和生命周期，backend/assembly.py装配真实组件。harness/runtime.py保留运行入口及取消，harness/execution.py提供生成、提取、审核、决策和有限Revision共享阶段；默认顺序驱动，可选图路径只供开发验证。core/models.py定义TaskRequest、AnswerDraft、Claim、Finding与业务处置对象。
+backend/api.py负责同源HTTP、鉴权和请求结构，backend/service.py负责排队和生命周期，backend/assembly.py装配真实组件。harness/runtime.py保留运行入口及取消，harness/execution.py提供生成、提取、审核、决策和有限Revision共享阶段；驱动随服务端配置选择；本机受管使用langgraph_v1，通用无配置回退为sequential。core/models.py定义TaskRequest、AnswerDraft、Claim、Finding与业务处置对象。
 
 输出至少分开四个维度：执行完整性、审核发现及严重度、最终处置、问题解决程度。正常概念可在条件完整、引用满足、无阻断发现时自动通过；缺证据进入待补充；判断不确定需人工复核；符合已审阅规则注册及当前依据要求的高严重度错误可不通过；接口超时或漏检查属于执行未完成，不伪装成事实矛盾。
 
@@ -74,15 +83,15 @@ backend/api.py负责同源HTTP、鉴权和请求结构，backend/service.py负�
 
 面试可说：“我把执行完整性与业务处置分开，保证接口失败不能被包装成通过；通过只针对冻结任务。已有一个真实局部修订闭环，但语义支持和通用修复能力仍有未验收限制，我保留逐版本证据。”避免说“用了四Agent，所以准确率高”。
 
-## 最新Revision能力边界
+## 历史schema-choice-v1的Revision能力边界
 
-当前schema13服务已完成一个真实局部错误的自动修订及完整重审：2ω改为ω，保留线性时不变、正弦激励及暂态消失条件，产生两版回答。原功率因数因果错误案例仍未获得可用修复建议、未触发Revision。一次成功只证明这条链路能运行，不证明所有错误可修复。 记录出处为schema-choice-v1的f61a804c41054092a3b31d496c541c78，原PF失败见第15章。
+历史schema-choice-v1记录了一次真实局部错误的自动修订及完整重审：2ω改为ω，保留线性时不变、正弦激励及暂态消失条件，产生两版回答。原功率因数因果错误案例仍未获得可用修复建议、未触发Revision。一次成功只证明这条链路能运行，不证明所有错误可修复。 记录出处为schema-choice-v1的f61a804c41054092a3b31d496c541c78，原PF失败见第15章。
 
 ## 2026-10-22 产品入口收敛
 
 唯一面向用户主线是提问→检索→生成→完整审核→有据局部修订（最多一次）→完整重审。已有回答保留为折叠的诊断/回归入口和兼容API，不再是同等优先的产品线。页面区分已生成/正在审核、执行完整/最终处置、执行失败但有草稿，以及原回答/修订版本/是否获认可。生成成功不能显示为审核通过；pass仍非安全认证。
 
-当前验收状态：正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
+2026-10-22首轮集成验收状态：当时正常服务默认sequential，图已接线但未完成真实服务验收；本批首项原路径服务完成、收集失败后停止，五项未执行。不能称默认切换成功。详见[本轮集成报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-integration-v1/results-v1.md#)。
 
 ## 三道自测：先作答，再展开
 

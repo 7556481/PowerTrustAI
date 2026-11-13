@@ -1,5 +1,6 @@
 """Offline Markdown learning site: stdlib only, no application/database imports."""
 import argparse,html,json,re,hashlib,webbrowser
+from urllib.parse import unquote
 from pathlib import Path
 from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from functools import partial
@@ -8,14 +9,23 @@ ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'docs/learning'
 DEST=SOURCE/'site'
 
-def inline(text):
+def heading_slug(title):
+    """GitHub-compatible aliases for the maintained plain-text chapter headings."""
+    return re.sub(r"[^\w\s-]", "", title.lower()).replace(" ", "-")
+
+
+def inline(text, link_resolver=None):
     text=html.escape(text)
     text=re.sub(r'`([^`]+)`',r'<code>\1</code>',text)
     text=re.sub(r'\*\*([^*]+)\*\*',r'<strong>\1</strong>',text)
     def link(m):
         target=m[2]
         if re.match(r'^(?:javascript|data|file):',target,re.I):return m[1]
-        if not re.match(r'^(?:[A-Za-z][A-Za-z0-9+.-]*:|//)',target) and target.endswith('.md'):target=target[:-3]+'.html'
+        if link_resolver is not None:
+            target=html.escape(link_resolver(html.unescape(target)),quote=True)
+        elif not re.match(r'^(?:[A-Za-z][A-Za-z0-9+.-]*:|//)',target):
+            path,separator,fragment=target.partition('#')
+            if path.endswith('.md'):target=path[:-3]+'.html'+(separator+fragment if separator else '')
         return '<a href="'+target+'" rel="noreferrer noopener">'+m[1]+'</a>'
     return re.sub(r'\[([^\]]+)\]\(([^)]+)\)',link,text)
 
@@ -64,10 +74,12 @@ def diagram(source):
     out.append('</svg></div><p class="diagram-legend">实线绿：控制调用；虚线蓝：数据交付；点线橙：持久化。箭头不表示投票或事实证明。</p>')
     return ''.join(out)
 
-def render(markdown):
+def render(markdown, link_resolver=None):
+    inline_local=lambda text:inline(text,link_resolver)
+    heading_counts={}
     out=[];toc=[];lines=markdown.splitlines();i=0;paragraph=[];listing=False
     def flush():
-        if paragraph:out.append('<p>'+inline(' '.join(paragraph))+'</p>');paragraph.clear()
+        if paragraph:out.append('<p>'+inline_local(' '.join(paragraph))+'</p>');paragraph.clear()
     def close_list():
         nonlocal listing
         if listing:out.append('</ul>');listing=False
@@ -81,34 +93,60 @@ def render(markdown):
             flush();close_list();title=line[len('::: answer'):].strip() or '展开参考答案';inner=[];i+=1
             while i<len(lines) and lines[i].strip()!=':::':inner.append(lines[i]);i+=1
             if i==len(lines):raise ValueError('Unclosed answer block')
-            content,_=render('\n'.join(inner));out.append('<details class="self-answer"><summary>'+html.escape(title)+'</summary>'+content+'</details>')
+            content,_=render('\n'.join(inner),link_resolver);out.append('<details class="self-answer"><summary>'+html.escape(title)+'</summary>'+content+'</details>')
         elif re.match(r'^#{1,6} ',line):
-            flush();close_list();level=len(line)-len(line.lstrip('#'));title=line[level:].strip();anchor='section-'+str(len(toc)+1);toc.append((level,title,anchor));out.append(f'<h{level} id="{anchor}">'+inline(title)+f'</h{level}>')
+            flush();close_list();level=len(line)-len(line.lstrip('#'));title=line[level:].strip();anchor='section-'+str(len(toc)+1)
+            alias=heading_slug(title);ordinal=heading_counts.get(alias,0);heading_counts[alias]=ordinal+1
+            alias=alias+('-'+str(ordinal) if ordinal else '')
+            toc.append((level,title,anchor));out.append(f'<h{level} id="{anchor}"><span id="{html.escape(alias,quote=True)}"></span>'+inline_local(title)+f'</h{level}>')
         elif line.startswith('|') and i+1<len(lines) and re.match(r'^\|[ :|\-]+\|?$',lines[i+1]):
             flush();close_list();cells=lambda s:s.strip().strip('|').split('|');head=cells(line);i+=2;rows=[]
             while i<len(lines) and lines[i].startswith('|'):rows.append(cells(lines[i]));i+=1
-            i-=1;out.append('<div class="table-scroll"><table><thead><tr>'+''.join('<th>'+inline(x.strip())+'</th>' for x in head)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+inline(x.strip())+'</td>' for x in row)+'</tr>' for row in rows)+'</tbody></table></div>')
+            i-=1;out.append('<div class="table-scroll"><table><thead><tr>'+''.join('<th>'+inline_local(x.strip())+'</th>' for x in head)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+inline_local(x.strip())+'</td>' for x in row)+'</tr>' for row in rows)+'</tbody></table></div>')
         elif line.startswith('- ') or re.match(r'^\d+\. ',line):
             flush()
             if not listing:out.append('<ul>');listing=True
-            out.append('<li>'+inline(re.sub(r'^(?:- |\d+\. )','',line))+'</li>')
-        elif line.startswith('> '):flush();close_list();out.append('<blockquote>'+inline(line[2:])+'</blockquote>')
+            out.append('<li>'+inline_local(re.sub(r'^(?:- |\d+\. )','',line))+'</li>')
+        elif line.startswith('> '):flush();close_list();out.append('<blockquote>'+inline_local(line[2:])+'</blockquote>')
         elif not line.strip():flush();close_list()
         elif line.startswith('<!--'):flush();close_list()
         else:paragraph.append(line)
         i+=1
     flush();close_list();return '\n'.join(out),toc
 
+
+def source_link_resolver(source, page_targets):
+    """Map real Markdown sources to flat site pages; keep external fixed reports."""
+    def resolve(target):
+        if re.match(r'^(?:[A-Za-z][A-Za-z0-9+.-]*:|//)',target) or target.startswith('#'):
+            return target
+        path,separator,fragment=target.partition('#')
+        candidate=(source.parent/unquote(path)).resolve()
+        if candidate in page_targets:
+            return page_targets[candidate]+(separator+fragment if separator else '')
+        # Preserve old flat chapter links while maintained Markdown uses real paths.
+        if Path(path).suffix in ('.html','.md'):
+            matches=[value for key,value in page_targets.items() if key.stem==Path(path).stem]
+            if len(matches)==1:return matches[0]+(separator+fragment if separator else '')
+        try:relative=candidate.relative_to(ROOT.resolve()).as_posix()
+        except ValueError:raise ValueError('Learning link leaves repository: '+target)
+        return 'https://github.com/7556481/PowerTrustAI/blob/master/'+relative+(separator+fragment if separator else '')
+    return resolve
+
+
 def build():
     DEST.mkdir(parents=True,exist_ok=True)
     chapters=sorted((SOURCE/'chapters').glob('*.md'))
-    pages=[SOURCE/'index.md',*chapters,SOURCE/'questions-for-chatgpt.md']
+    pages=[SOURCE/'index.md',ROOT/'docs/current-status.md',*chapters,SOURCE/'questions-for-chatgpt.md',
+           ROOT/'docs/history-index.md',
+           ROOT/'docs/current-status-2026-10-25.md',SOURCE/'reading-history.md']
+    page_targets={p.resolve():p.stem+'.html' for p in pages}
     version=json.loads((SOURCE/'source-version.json').read_text(encoding='utf-8'))
     names={p.stem:next(x[2:] for x in p.read_text(encoding='utf-8').splitlines() if x.startswith('# ')) for p in pages}
     nav=''.join('<a href="'+p.stem+'.html">'+html.escape(names[p.stem])+'</a>' for p in pages)
     search=[];stats=[]
     for n,p in enumerate(pages):
-        text=p.read_text(encoding='utf-8');body,toc=render(text)
+        text=p.read_text(encoding='utf-8');body,toc=render(text,source_link_resolver(p,page_targets))
         page_toc=''.join('<a href="#'+a+'">'+html.escape(t)+'</a>' for level,t,a in toc if level in (2,3))
         adjacent=('<a href="'+pages[n-1].stem+'.html">← '+html.escape(names[pages[n-1].stem])+'</a>' if n else '')+('<a href="'+pages[n+1].stem+'.html">'+html.escape(names[pages[n+1].stem])+' →</a>' if n+1<len(pages) else '')
         content='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(names[p.stem])+' · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录">'+nav+'</nav><main><div class="version">源码基线 '+html.escape(version['application_commit'][:12])+' · '+html.escape(version['document_version'])+' · 教学示例与真实结果分别标记</div><article>'+body+'</article><footer>'+adjacent+'</footer></main><aside aria-label="本章目录">'+page_toc+'</aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>'

@@ -1,5 +1,17 @@
 # 14 核心源码阅读路线：输入、调用、异常与取舍
 
+配置与实时服务状态统一见[当前状态](../../current-status.md)。本章带日期的实验、ready／停服与“当前／默认”均按各段日期和绑定版本解释；代码摘录不自动升级为现行配置。
+
+
+## 先追一次请求
+
+1. [API入口](../../../backend/api.py)接收问题；[ApplicationService](../../../backend/service.py)保存身份与配置、排队，再由Factory创建一次任务组件。提交被接收不等于模型已调用。
+2. [组件装配](../../../backend/assembly.py)把SQLite Retriever、四项职责和提取服务交给Harness；[受管选择](../../../backend/managed.py)只在显式配置下启用事实审核与领域检索重叠。
+3. [LangGraph阶段路由](../../../harness/graph_runtime_v1.py)连接七个共享阶段；[RunExecution](../../../harness/execution.py)执行检索、生成、提取、双审、政策与至多一次修订。预算、取消、停止仍由Harness执行，生成与审核的调用次数不固定为四次。
+4. [RunStore](../../../backend/store.py)按run、answer_id/version保存正文、证据和意见；历史GET读取已有结果，不发模型请求补算。用[第20章练习](20-workshops.md#从产品到代码常见与最典型)把一个标注追到审核与修订资格。
+
+下面的代码摘录与实验分支按各自绑定版本理解，不因本次阅读路线更新而改写。
+
 ## v7只读标注源码路线
 
 先读backend/answer_annotations.py的identity/locate/project：身份与逐字核验先于展示，同句意见只合入口，不合后台记录。backend/presentation.py保留原解释字段并追加inline_review；backend/service.py仅投影已保存审核身份，不重执行、不落库。再读backend/static/inline_review.js的model/render，检查Array.from码点切片、重叠分段、纯文本节点、复制原文和历史版本隔离。app.js保持原epoch/轮询/反馈机制。tests/test_answer_annotations_v7.py与tests/ui_inline_review_probe.js覆盖坏区间、重复句、版本/原文不符、emoji/CRLF、同句两来源、重叠、原文复制及关闭焦点。
@@ -73,7 +85,7 @@ v6界面入口：backend/static/index.html为单列用户问答，diagnostics.ht
 
 2026-10-24：当前Factory显式revision_answer_delivery接入原ModelRevisionAgent，默认production；新prompt身份写入manifest和快照，contract与政策不改。下方两处assembly摘录已按当前AST/连接行重新绑定，旧历史说明以日期阅读。本轮结果与服务实际停服见[报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/answer-review-net-benefit-v1/report.md#)。
 
-2026-10-23当前补记：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。这是2026-10-23历史服务记录；当前8765停服，以本章开头状态为准。
+历史观测（2026-10-23）：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见[后续验收](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#)。这是2026-10-23历史服务记录；当前8765停服，以本章开头状态为准。
 
 ## 一页请求对象流：先认对象，再读源码
 
