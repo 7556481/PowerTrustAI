@@ -318,7 +318,7 @@ harness.execution_path = "langgraph_v1"  # 安装可选依赖后，仅开发验�
 
 ## 图适配的验证与开销边界
 
-依赖锁为`requirements-langgraph.lock.txt`：LangGraph 1.2.16，Windows/Python3.13精确轮子哈希。原19个包版本未变，新增依赖包含SDK/checkpoint/追踪库，但没有启用相关服务。图不启用checkpointer、store、cache或RetryPolicy；显式关闭云追踪，即使外层打开追踪也通过无网络替身检查。
+依赖锁为`requirements/langgraph.lock.txt`：LangGraph 1.2.16，Windows/Python3.13精确轮子哈希。原19个包版本未变，新增依赖包含SDK/checkpoint/追踪库，但没有启用相关服务。图不启用checkpointer、store、cache或RetryPolicy；显式关闭云追踪，即使外层打开追踪也通过无网络替身检查。
 
 业务差分使用同一输入、假模型和合成SQLite快照，比较结果、阶段输入、observer快照、调用归属、消息内容、修订重审和终态；只规范化时钟观测并固定新生成ID序列。独立评审组件另用历史25份响应回放，两路径最终24份预测均与原记录相同；不是重新生成、重评标签或新的语义成绩。原5覆盖分歧、2支持分歧及2未对齐继续保留。
 

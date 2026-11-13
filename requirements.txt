@@ -1,0 +1,2 @@
+# Default install: zero-model local demonstration. Optional profiles: requirements/README.md
+-r requirements/demo.txt

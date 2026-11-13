@@ -54,7 +54,7 @@ class OfflineHarness:
             try:
                 from harness.graph_runtime_v1 import run_graph, validate_versions
             except ImportError as exc:
-                raise InputError("Optional LangGraph dependencies unavailable; install requirements-langgraph.lock.txt") from exc
+                raise InputError("Optional LangGraph dependencies unavailable; install requirements/langgraph.lock.txt") from exc
             validate_versions()
             driver = run_graph
         execution = RunExecution(

@@ -1,0 +1,4 @@
+# Public offline regression, including optional corpus/PDF fixture paths.
+-r demo.txt
+-r corpus.txt
+-r pdf.txt

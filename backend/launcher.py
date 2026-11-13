@@ -1,5 +1,6 @@
 """Normal localhost launcher. No credential output and no duplicate server."""
 import json
+from http.client import RemoteDisconnected
 from pathlib import Path
 import time
 from urllib.error import URLError
@@ -11,7 +12,7 @@ from backend.local_access import token_for
 def health_at(origin):
     try:
         with urlopen(origin+'/health',timeout=2) as response:return json.load(response)
-    except URLError:return None
+    except (URLError, RemoteDisconnected):return None
 
 
 def open_local(config, origin, *, opener=webbrowser.open):

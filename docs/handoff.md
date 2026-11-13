@@ -1,5 +1,10 @@
 # PowerTrustAI 会话交接
 
+## 2026-11-13 公开仓库主线整理v31
+
+README改为新用户演示/真实模式入口，依赖集中requirements并明确根默认安装；公开案例迁docs/portfolio，冻结PDF旧路径保留。中央健康探测消除受管重复包装，生产合同/Store保持。维护路线与消费者依据见[审查记录](maintenance/repository-mainline-v31.md)。本轮仅离线；原三份本地补记及未跟踪文件保护，最终master快进后逐项恢复，研究分支以可达归档标签保留后再删除。
+
+
 ## 2026-11-13 封版状态同步v30
 
 日常start-powertrustai.cmd，零模型演示加--demo；实际SQLite全文库＋事实审核/领域检索重叠。v23另一批首稿后33.48→23.71秒；v28六完整对提交到客户端终态29.99→37.60秒，Tantivy路线结束。v29获批删除实验资产，删除窗口D盘净增约73.23GB，正式SQLite/110历史/预算保留。PR #8/#9核对均开放草稿未合并，固定提交报告保持；本轮仅文档，不夹带本机既有历史补记。详见[简短公开退役记录](maintenance/tantivy-retirement-public-v30.md)。

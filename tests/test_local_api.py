@@ -12,7 +12,7 @@ except ImportError:TestClient=None
 from backend.config import ServiceConfig
 from tests.test_local_service import FixtureFactory
 
-@unittest.skipUnless(TestClient is not None,'Install optional requirements-api.txt for HTTP tests')
+@unittest.skipUnless(TestClient is not None,'Install optional requirements/api.txt for HTTP tests')
 class APITests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();p=Path(self.tmp.name)

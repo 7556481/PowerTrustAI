@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '22'
       - name: Install public test dependencies
-        run: python -m pip install -r requirements-api.lock.txt -r requirements-corpus.txt -r requirements-pdf.txt -r requirements-ci.txt
+        run: python -m pip install -r requirements/public.txt
       - name: Public regression (private history explicitly optional)
         run: python -m tools.public_checks
       - name: Offline Harness demonstration

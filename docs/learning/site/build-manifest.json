@@ -618,7 +618,7 @@
     {
       "source": "docs/learning/chapters/04-harness.md",
       "characters": 19215,
-      "sha256": "2c40d5135096c4452f96b301121f3b81b0806625259cf9bb51058fb30602da14"
+      "sha256": "cdf45766c65988ee7310906232b0e81f09a6ff96231a8da4fedff9fa54c74931"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
@@ -668,7 +668,7 @@
     {
       "source": "docs/learning/chapters/14-code-tour.md",
       "characters": 29989,
-      "sha256": "51e39b1e86742a09cdb75e87d4a647450f650ba6b2f5a7335b70610e347d0187"
+      "sha256": "9ea54baffa7bbd1baec7f7349c0d12c743fc1769be5813720bb97230a79d5bb4"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",

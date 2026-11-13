@@ -148,7 +148,7 @@
             try:
                 from harness.graph_runtime_v1 import run_graph, validate_versions
             except ImportError as exc:
-                raise InputError(&quot;Optional LangGraph dependencies unavailable; install requirements-langgraph.lock.txt&quot;) from exc
+                raise InputError(&quot;Optional LangGraph dependencies unavailable; install requirements/langgraph.lock.txt&quot;) from exc
             validate_versions()
             driver = run_graph
         execution = RunExecution(

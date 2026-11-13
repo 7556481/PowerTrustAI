@@ -63,7 +63,7 @@ harness = make_fake_harness()
 harness.execution_path = <span class="string">&quot;langgraph_v1&quot;</span>  <span class="comment"># 安装可选依赖后，仅开发验证</span></code></pre>
 <p>直接构造OfflineHarness也可传<code>execution_path=&quot;langgraph_v1&quot;</code>。该开关不在API任务载荷里，生产组装仍选默认路径。回退是下次开发运行明确选择<code>sequential</code>；发生失败的图运行不会自动执行旧驱动再发请求。</p>
 <h2 id="section-17">图适配的验证与开销边界</h2>
-<p>依赖锁为<code>requirements-langgraph.lock.txt</code>：LangGraph 1.2.16，Windows/Python3.13精确轮子哈希。原19个包版本未变，新增依赖包含SDK/checkpoint/追踪库，但没有启用相关服务。图不启用checkpointer、store、cache或RetryPolicy；显式关闭云追踪，即使外层打开追踪也通过无网络替身检查。</p>
+<p>依赖锁为<code>requirements/langgraph.lock.txt</code>：LangGraph 1.2.16，Windows/Python3.13精确轮子哈希。原19个包版本未变，新增依赖包含SDK/checkpoint/追踪库，但没有启用相关服务。图不启用checkpointer、store、cache或RetryPolicy；显式关闭云追踪，即使外层打开追踪也通过无网络替身检查。</p>
 <p>业务差分使用同一输入、假模型和合成SQLite快照，比较结果、阶段输入、observer快照、调用归属、消息内容、修订重审和终态；只规范化时钟观测并固定新生成ID序列。独立评审组件另用历史25份响应回放，两路径最终24份预测均与原记录相同；不是重新生成、重评标签或新的语义成绩。原5覆盖分歧、2支持分歧及2未对齐继续保留。</p>
 <p>本机无observer、假Agent的30对交错暖运行：无修订中位数原路径2.68ms、图15.99ms；一次修订原路径6.08ms、图22.47ms。单次冷启动原路径4.95ms、图923.16ms，图包含首次依赖导入及编译。这说明编排引入开销，不说明真实服务延迟、费用或准确率变化。</p>
 <p>回放工具首次把网络禁用检查放在事件循环创建外，拦住Windows内部socketpair，0次适配器回放、未重建预测。失败目录保留，改为循环已创建、回放开始前禁止连接；最终回放无网络。这个故障不属于原付费批次，更未删除其attempt或补跑模型。</p>

@@ -46,7 +46,7 @@ class Factory(ComponentFactory):
             schema_version=13,citation_workload=self.config.citation_workload)
         return Bundle(h,(retriever,))
 
-@unittest.skipUnless(TestClient is not None,'Optional API test dependencies unavailable; install requirements-api.lock.txt')
+@unittest.skipUnless(TestClient is not None,'Optional API test dependencies unavailable; install requirements/api.lock.txt')
 class WorkloadAPITests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();p=Path(self.tmp.name)

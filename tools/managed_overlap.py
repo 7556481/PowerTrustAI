@@ -6,17 +6,8 @@ from pathlib import Path
 import time
 import threading
 from backend.config import ROOT, ServiceConfig
-from backend.launcher import health_at as _health_at, open_local, stop_local
-from http.client import RemoteDisconnected
+from backend.launcher import health_at, open_local, stop_local
 from backend.managed import ManagedFactory
-
-
-def health_at(origin):
-    try:
-        return _health_at(origin)
-    except RemoteDisconnected:
-        # The original idle stop may close an already accepted health socket.
-        return None
 
 
 def read_managed(path):
