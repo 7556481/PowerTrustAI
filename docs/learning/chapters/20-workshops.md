@@ -1,5 +1,30 @@
 # 20 八个综合工作坊：把概念落到对象和失败
 
+配置与实时服务状态统一见[当前状态](../../current-status.md)。本章带日期的实验、ready／停服与“当前／默认”均按各段日期和绑定版本解释；代码摘录不自动升级为现行配置。
+
+
+## 从产品到代码：常见与最典型
+
+先读[README的公开案例文字](../../../README.md#审核示例)。回答把并联电力电容器和同步调相机称为“最典型的两种”；资料支持“两种常见装置”，未提供支持“最典型”的比较依据。本次系统标出原句并解释原因，正文未修改。
+
+1. 圈出被质疑的词，写出资料实际支持的表述；设备名称本身是否被判错？
+2. 分别给出“有审核意见”“已有修订正文”的证据，判断本例属于哪一种。
+3. 复用本章只读实操D：指出事实审核、修订资格、真正改稿与版本保存分别在哪个文件／函数；为什么需要新版重提取和双审？
+4. 练界面时按[演示教程](../../demo.md)进入合成演示，从历史打开“资料待补充”查看标注、原因及依据；再打开“一次修订与版本1/2”比较两版和原引用。不要向8765提交问题。
+
+**来源边界**：公开演示的seed没有“常见／最典型”这条真实历史案例，不能假称在演示里复现。前半用已公开README文字作分析；后半用tools.ui_fixture现有synthetic_fixture操作界面，合成案例不能证明真实语义判断正确。
+
+::: answer 展开产品到代码练习解析
+
+被质疑的是“最典型”的比较强度，不是并联电力电容器或同步调相机的名称。给定资料支持“常见”，不足以推出最高典型程度；不能因没有比较依据反推设备本身错误。
+
+本例只有原句标注与原因，正文未修改。看见意见、“依据不足”等状态、Revision请求，甚至同文新版本，都不等于内容已修好；要对照保存正文、版本、实际改动与新版重审。资料不足时也不能擅自拼成新结论。
+
+沿[harness/execution.py](../../../harness/execution.py)的review_pair追事实／原引用与领域审核；[harness/product_policy.py](../../../harness/product_policy.py)的ProductAuditPolicy.decide_context决定是否具备修订资格。RunExecution.revise调用修订并校验，新版回到extract_and_tools及完整双审；预算和执行不完整仍可阻断。[backend/store.py](../../../backend/store.py)的RunStore.event/index/checkpoint按answer_id/version保存答案、意见和依据。流程图不是四次固定串行模型调用。
+
+实操D只读代码与已有对象；界面任务另用合成临时Store。能指出源码职责，不等于自己实现过该功能；面试只认领本人确认的贡献。
+:::
+
 ## 新实验练习：错误查询与最终答案分账
 
 N6原中文问运行投切，转换成生命周期commissioning/decommissioning。后续固定生成仍读原中文问题和实际Evidence，没有把查询当事实来源；最终没有重现生命周期换义，但规划研究条件仍被泛化。
@@ -8,7 +33,7 @@ N6原中文问运行投切，转换成生命周期commissioning/decommissioning�
 不能。转换忠实性以转换时的原问/查询判断，旧gate=false保持；最终答案以原中文及实际来源另评。N6最终mixed还包含规划研究范围问题及必答残余，即使两步某些信息正确也不能净改善。分别列请求数：历史转换8、本轮审核32，绝不重算旧成本。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)
 :::
 
-## 历史说明与基础知识（保留原日期，当前状态以上文为准）
+## 历史说明与基础知识（按记录日期和绑定版本阅读）
 
 ## 从模型完成率走到回答交付
 

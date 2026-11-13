@@ -34,3 +34,29 @@ class ExternalReportLinksTests(unittest.TestCase):
   self.assertIn('href="https://github.com/owner/repo/blob/abc/report.md"',h)
   self.assertIn('href="18-operations.html"',h)
   self.assertNotIn('blob/abc/report.html',h)
+
+
+class PortableLearningLinksTests(unittest.TestCase):
+ def test_markdown_fragment_is_converted_and_legacy_heading_alias_remains(self):
+  h,_=render('## 从产品到代码：常见与最典型\n\n[exercise](20-workshops.md#从产品到代码常见与最典型)')
+  self.assertIn('id="section-1"',h)
+  self.assertIn('id="从产品到代码常见与最典型"',h)
+  self.assertIn('href="20-workshops.html#从产品到代码常见与最典型"',h)
+ def test_source_paths_are_portable_and_external_fixed_reports_are_preserved(self):
+  from pathlib import Path
+  from tools.learning_site import ROOT,source_link_resolver
+  source=ROOT/'docs/learning/index.md';chapter=ROOT/'docs/learning/chapters/18-operations.md';status=ROOT/'docs/current-status.md'
+  resolve=source_link_resolver(source,{chapter.resolve():'18-operations.html',status.resolve():'current-status.html'})
+  self.assertEqual(resolve('chapters/18-operations.md#从正确入口开始'),'18-operations.html#从正确入口开始')
+  self.assertEqual(resolve('../current-status.md'),'current-status.html')
+  fixed='https://github.com/owner/repo/blob/fixed/report.md#result'
+  self.assertEqual(resolve(fixed),fixed)
+ def test_missing_local_fragment_is_rejected_even_when_page_exists(self):
+  from tempfile import TemporaryDirectory
+  from pathlib import Path
+  from tools.learning_checks import validate_local_links
+  with TemporaryDirectory() as temp:
+   root=Path(temp);(root/'index.html').write_text('<a href="chapter.html#missing">chapter</a>');(root/'chapter.html').write_text('<h1 id="present">Title</h1>')
+   with self.assertRaisesRegex(ValueError,'Broken local anchor'):validate_local_links(root)
+   (root/'index.html').write_text('<a href="chapter.html#present">chapter</a>')
+   validate_local_links(root)

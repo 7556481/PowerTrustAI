@@ -25,6 +25,8 @@ PowerTrustAI 根据电力资料回答问题，在正文中标出需要核实的�
 
 ## 体验与文档
 
+[当前状态](docs/current-status.md)：已发布配置、启动入口和能力边界；实时运行看本机健康检查。
+
 - [界面与试用步骤](docs/demo.md)：零模型演示的安装、端口、操作和截图，以及真实模式所需资料与 DeepSeek 配置。
 - [正式产品十题基线](docs/evaluation/stable-product-baseline-v1/report.md)：在十道真实问题中，六道完成了完整审核，本批没有触发有据修订。
 - [中文学习站](docs/learning/index.md)：架构、源码解释和面试练习；本机可双击 `start-learning.cmd`。
