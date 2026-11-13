@@ -1,10 +1,10 @@
 # PowerTrustAI：从代码到判断的学习路线
 
-## 当前发布与两项性能结果（2026-11-12）
+## 当前发布与实验退役（2026-11-13）
 
-日常启动[start-powertrustai.cmd](https://github.com/7556481/PowerTrustAI/blob/master/start-powertrustai.cmd)，零模型UI演示用其--demo入口；本机8765已有限启用SQLite上的事实审核/领域检索重叠，普通源码默认component。回退使用[rollback-overlap.cmd](https://github.com/7556481/PowerTrustAI/blob/master/rollback-overlap.cmd)，原Store历史与预算保留。详见[运维章节](18-operations.md)和[本机回执](https://github.com/7556481/PowerTrustAI/blob/master/docs/maintenance/local-overlap-release-v25.md)。
+日常启动[start-powertrustai.cmd](https://github.com/7556481/PowerTrustAI/blob/master/start-powertrustai.cmd)，零模型UI演示用其--demo入口；本机受管配置使用SQLite全文库＋事实审核/领域检索重叠（非服务实时状态探针），普通源码默认component。回退使用[rollback-overlap.cmd](https://github.com/7556481/PowerTrustAI/blob/master/rollback-overlap.cmd)，原Store历史与预算保留。详见[运维章节](18-operations.md)和[本机回执](https://github.com/7556481/PowerTrustAI/blob/master/docs/maintenance/local-overlap-release-v25.md)。
 
-7个完整的同初稿真实Flash对照中，审核终态中位等待33.48→23.71秒，约早9.8秒（29.2%）；这是首稿后的收益，不代表首稿或模型推理提速。Tantivy已完成90片全库建设，v18四个冻结宽查询读取速度比中位约1.87，普通题约0.58，当前日常仍使用SQLite。详见[性能章节](16-performance.md)。来源绑定可回查不等于语义正确，历史共同缺陷仍保留。
+7个完整的同初稿真实Flash对照中，审核终态中位等待33.48→23.71秒，约早9.8秒（29.2%）；这是首稿后的收益，不代表首稿或模型推理提速。Tantivy曾完成90片建设，四条宽查询读取曾快约1.87倍，但v28六完整对客户端终态中位SQLite29.99秒、Tantivy37.60秒，故路线结束；v29已退役实验资产，删除窗口释放约73.23GB。当前日常使用SQLite，旧90片/映射/spool不再可运行。详见[性能章节](16-performance.md)及[公开退役记录](https://github.com/7556481/PowerTrustAI/blob/master/docs/maintenance/tantivy-retirement-public-v30.md)。来源绑定可回查不等于语义正确，历史共同缺陷仍保留。
 
 演示先用本段约一分钟说明“检索候选”和“已启用调度”的区别，再按下方N1→A3→N4归档路线讲质量得失；不现场调用付费模型。[固定配对报告](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/fact-domain-overlap-v23/report.md) · [固定Tantivy报告](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/tantivy-shards-v16/query-repair-v18.md)。
 

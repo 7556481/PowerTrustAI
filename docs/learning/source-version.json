@@ -3,7 +3,7 @@
   "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
   "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
   "documentation_parent_commit": "ee31fc26ea6e9edca4952b34655714f93323fd55",
-  "document_version": "learning-site-v6.26 final publication and dependency-aware cleanup, 2026-11-12",
+  "document_version": "learning-site-v6.30 final SQLite delivery and Tantivy retirement,2026-11-13",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -576,5 +576,20 @@
     "renderer_lf_sha256": "9ffcba6a4c091e075d79b685d36ecb253ec30eafa079b185ec4119e76e35b113",
     "real_model_requests": 0,
     "service_restarts": 0
+  },
+  "closure_v30": {
+    "application_changed": false,
+    "production": "SQLite + explicit managed overlap",
+    "Tantivy_assets": "retired v29",
+    "terminal_complete_pair_medians": [
+      29.99,
+      37.6
+    ],
+    "comparison_origin": "client submission, unlike v23 post-draft",
+    "fixed_report": "https://github.com/7556481/PowerTrustAI/blob/2456646a2398e7ca634dab8f79b0585146e725b7/docs/evaluation/tantivy-product-acceptance-v28/report.md",
+    "fixed_retirement": "https://github.com/7556481/PowerTrustAI/blob/99d92cd51f9d6e755f10344cc1a10f5591757a99/docs/maintenance/tantivy-retirement-v29.md",
+    "retirement_net_free_bytes": 73228570624,
+    "private_receipts_published": false,
+    "pr8_pr9_observed": "open draft unmerged"
   }
 }

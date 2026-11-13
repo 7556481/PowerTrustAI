@@ -217,8 +217,14 @@ FTS5 rank可配置，须核验映射；本机SQLite3.45.3、配置无rank覆盖�
 
 ## 2026-11-12 两项性能结果分别归因
 
-Tantivy全库90片、24620947成员已封存。v18沿原24题、两路各3次、144槽全部成功，四个冻结宽查询SQLite/Tantivy读取墙钟比中位1.868946，普通Q5—Q8为0.583055；宽题达标不意味着每题更快，更不代表产品终态等待更短。候选全局IDF评分每次仍读spool.sqlite3的候选词频和terms_sha，53.68GB spool是当前读取依赖，不能当可删除构建缓存。完整证据见[固定v18报告](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/tantivy-shards-v16/query-repair-v18.md)。
+历史v18（实体已于v29退役）：Tantivy全库90片、24620947成员当时已封存。v18沿原24题、两路各3次、144槽全部成功，四个冻结宽查询SQLite/Tantivy读取墙钟比中位1.868946，普通Q5—Q8为0.583055；宽题达标不意味着每题更快，更不代表产品终态等待更短。候选全局IDF评分每次仍读spool.sqlite3的候选词频和terms_sha，53.68GB spool是当时v18读取依赖，不能当构建缓存删；v29获批结束整条路线后已连同索引退役。完整证据见[固定v18报告](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/tantivy-shards-v16/query-repair-v18.md)。
 
 实际上线的是SQLite上的v23调度：只把输入已齐备的事实审核提前到领域检索期间，事实内部serial_v1不改。原8个真实问题两路各7条完整，7完整对审核终态中位33.480→23.706秒（展示为33.48→23.71），约早9.8秒/29.20%。Q3共同失败留在分母，Q7反慢，共同内容缺陷仍在，全部初末答案与引用对象未变。起点是同一初稿交给审核；没有测出首稿生成提速，也没有把请求节省秒数相加。[固定v23报告](https://github.com/7556481/PowerTrustAI/blob/75cbbdd/docs/evaluation/fact-domain-overlap-v23/report.md)。
 
 v24浏览器烟测后本机8765有限启用，默认类仍component；下一次真实自然任务的生产侧重叠证据单列，不用离线任务创建或旧配对代替。上线与回退见18章。
+
+## 2026-11-13 当前封版：Tantivy已退役
+
+上文v18/v26的90片封存、mapping和spool保留要求属于当时实验状态。v28固定16链中六个完整对客户端终态中位SQLite29.99秒、Tantivy37.60秒，未过门槛；全8题首稿5.32→7.09秒。四条宽查询约1.87倍读取收益没有转化为产品收益。v29获批删除90片/映射/spool，删除窗口D盘释放约73.23GB，正式SQLite、历史和预算保留；旧实验资产不可运行，历史报告原文保留。
+
+日常 `start-powertrustai.cmd`，零模型演示 `start-powertrustai.cmd --demo`，调度回退 `rollback-overlap.cmd`。当前SQLite全文库＋事实审核/领域检索重叠；另批v23的33.48→23.71秒仅指首稿后审核等待。退役回查的原探针未被正文引用、补查缺清理前API观测的限制不省略。见[简短公开退役记录](https://github.com/7556481/PowerTrustAI/blob/master/docs/maintenance/tantivy-retirement-public-v30.md)及其固定实验提交入口。
