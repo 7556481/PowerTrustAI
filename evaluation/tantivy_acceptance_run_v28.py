@@ -51,7 +51,7 @@ def main():
     v20=json.loads((HOME.parent/'tantivy-delivery-replay-v20/freeze.json').read_text(encoding='utf-8'));assert [SPOOL.stat().st_size,SPOOL.stat().st_mtime_ns]==v20['spool_stat']
     assert hashlib.sha256(Path('evaluation/tantivy_acceptance_v28.py').read_bytes()).hexdigest()==freeze['source_sha256']
     frozen_files={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in Path('evaluation').glob('*v28.py')}
-    prep=HOME/'normal-api-offline';prep.mkdir(exist_ok=False);c=replace(base,run_db=prep/'runs.sqlite3',token_file=prep/'token');factory=AcceptanceFactory(c,True)
+    prep=HOME/'normal-api-offline-2';prep.mkdir(exist_ok=False);c=replace(base,run_db=prep/'runs.sqlite3',token_file=prep/'token');factory=AcceptanceFactory(c,True)
     print('Native 90-shard identity/startup preparation; no model',flush=True);tick=time.monotonic();factory.prepare();print('Native prepared',round(time.monotonic()-tick,3),flush=True)
     # Reuse exactly this accepted native reader after zero-paid normal API fixture.
     # TestClient lifespan would close it; temporarily retain the service-owned reader.

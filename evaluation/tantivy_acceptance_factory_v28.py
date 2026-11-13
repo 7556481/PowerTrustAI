@@ -9,6 +9,7 @@ from evaluation.tantivy_accounting_v28 import AccountedFlash
 from model_adapter.runtime import current_model_invocation
 from backend.serialization import wire
 from services.request_metrics import measure
+enable_v18() # Windows spawn must resolve the archived worker module before unpickling.
 HOME=Path('D:/PowerTrustAI/data/runtime_local/tantivy-acceptance-v28')
 GROUP=Path('D:/PowerTrustAI/data/retrieval_local/tantivy-shards-v16/accepted-shard-group.json')
 SPOOL=Path('D:/PowerTrustAI/data/retrieval_local/tantivy-full-fast-v1/spool.sqlite3')
