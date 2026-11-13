@@ -5,16 +5,16 @@ PowerTrustAI 根据电力资料回答问题，在正文中标出需要核实的�
 系统先通过 SQLite 全文检索取得资料，由生成 Agent 写出初稿。事实审核核对回答与引用，领域审核检查适用条件和工程前提。有明确依据时，系统最多修订一次，再对新版完整复核。每一版回答都保留自己的引用和审核记录。
 
 ```mermaid
-%%{init: {"flowchart": {"diagramPadding": 90, "rankSpacing": 20, "nodeSpacing": 20}}}%%
+%%{init: {"flowchart": {"diagramPadding": 24, "rankSpacing": 20, "nodeSpacing": 20}}}%%
 flowchart LR
-    Q[问题] --> E[SQLite<br/>检索证据] --> D[初稿<br/>生成 Agent] --> C[提取主张]
+    V[修订 Agent<br/>最多一次] -->|新版重新提取与双审| C[提取主张]
+    Q[问题] --> E[SQLite<br/>检索证据] --> D[初稿<br/>生成 Agent] --> C
     C --> F[事实／引用审核]
     C --> R[领域审核]
     F --> J{处置}
     R --> J
     J -->|交付| O[正文与审核状态]
-    J -->|有据且未修订| V[修订 Agent<br/>最多一次]
-    V -->|新版重新提取与双审| C
+    J -->|有据且未修订| V
 ```
 
 - **阶段与控制分开**：LangGraph 编排阶段，Harness 管预算、取消和停止。图中是职责与路由，不是固定次数的串行模型调用；事实与领域审核可并行，本机受管配置还让事实审核与领域检索重叠。
