@@ -1,0 +1,852 @@
+{
+  "version": "v28",
+  "implementation": "b674124e3bb8289731044f744cec75571fb6db8d",
+  "adopt": false,
+  "decision": "end Tantivy product route; proposed retirement only, user confirmation required before delete",
+  "complete_pairs": 6,
+  "complete_chains": {
+    "sqlite": 7,
+    "tantivy": 7
+  },
+  "terminal_complete_pair_medians": [
+    29.987104199999862,
+    37.60223604999999
+  ],
+  "terminal_saving_seconds": -7.615131850000125,
+  "terminal_saving_fraction": -0.25394688994344977,
+  "draft_all8_medians": [
+    5.320768799999996,
+    7.0862516499999515
+  ],
+  "requests": 100,
+  "trusted_tokens": 1835305,
+  "unknown_usage": 0,
+  "held": 0,
+  "rows": [
+    {
+      "case": "Q1",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 9.083340900000053
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 68.7122296
+        }
+      ],
+      "route": "sqlite",
+      "run_id": "389f847ef83e4d72b59e74e21b755a54",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 9.083340900000053,
+      "submit_to_terminal_api_readable_seconds": 68.7122296,
+      "calls": 7,
+      "corrections": 1,
+      "tokens": 166888,
+      "revisions": 0,
+      "body_chars": 166,
+      "evidence_chars": 54075,
+      "message_chars": 410391
+    },
+    {
+      "case": "Q1",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 7.190741199999934
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 81.07411869999999
+        }
+      ],
+      "route": "tantivy",
+      "run_id": "0a45cb8131a44a4b927e743f0e3db448",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 7.190741199999934,
+      "submit_to_terminal_api_readable_seconds": 81.07411869999999,
+      "calls": 8,
+      "corrections": 1,
+      "tokens": 254826,
+      "revisions": 0,
+      "body_chars": 203,
+      "evidence_chars": 98987,
+      "message_chars": 617371
+    },
+    {
+      "case": "Q3",
+      "complete": false,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 5.578423499999985
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 58.74600680000003
+        }
+      ],
+      "route": "tantivy",
+      "run_id": "ab6f5eaf0de14ff1894ba36212ba7cf7",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 5.578423499999985,
+      "submit_to_terminal_api_readable_seconds": 58.74600680000003,
+      "calls": 7,
+      "corrections": 1,
+      "tokens": 250444,
+      "revisions": 0,
+      "body_chars": 130,
+      "evidence_chars": 106028,
+      "message_chars": 603581
+    },
+    {
+      "case": "Q3",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 3.408943000000022
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 33.49148940000009
+        }
+      ],
+      "route": "sqlite",
+      "run_id": "727834cae53a4985873b0e378bcb8044",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 3.408943000000022,
+      "submit_to_terminal_api_readable_seconds": 33.49148940000009,
+      "calls": 6,
+      "corrections": 0,
+      "tokens": 92885,
+      "revisions": 0,
+      "body_chars": 118,
+      "evidence_chars": 29575,
+      "message_chars": 235966
+    },
+    {
+      "case": "Q4",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 4.441470700000082
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 24.69499780000001
+        }
+      ],
+      "route": "sqlite",
+      "run_id": "b52930ac42c64133a7d3d67d7002ef0c",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 4.441470700000082,
+      "submit_to_terminal_api_readable_seconds": 24.69499780000001,
+      "calls": 6,
+      "corrections": 1,
+      "tokens": 62438,
+      "revisions": 0,
+      "body_chars": 79,
+      "evidence_chars": 14454,
+      "message_chars": 174945
+    },
+    {
+      "case": "Q4",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 6.868062099999975
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 27.587430299999937
+        }
+      ],
+      "route": "tantivy",
+      "run_id": "d0e5ccee12774ddc92e6dd4ee39ae777",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 6.868062099999975,
+      "submit_to_terminal_api_readable_seconds": 27.587430299999937,
+      "calls": 7,
+      "corrections": 1,
+      "tokens": 113846,
+      "revisions": 0,
+      "body_chars": 60,
+      "evidence_chars": 48763,
+      "message_chars": 292745
+    },
+    {
+      "case": "Q5",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 7.198663500000066
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 30.681369700000005
+        }
+      ],
+      "route": "tantivy",
+      "run_id": "8e5d3f7c11c74edca989935d43b4919d",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 7.198663500000066,
+      "submit_to_terminal_api_readable_seconds": 30.681369700000005,
+      "calls": 6,
+      "corrections": 1,
+      "tokens": 99326,
+      "revisions": 0,
+      "body_chars": 131,
+      "evidence_chars": 40492,
+      "message_chars": 253799
+    },
+    {
+      "case": "Q5",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 5.588961100000006
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 39.52520439999989
+        }
+      ],
+      "route": "sqlite",
+      "run_id": "afeabb57b19944188c6aa50ae046d907",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 5.588961100000006,
+      "submit_to_terminal_api_readable_seconds": 39.52520439999989,
+      "calls": 6,
+      "corrections": 0,
+      "tokens": 75995,
+      "revisions": 0,
+      "body_chars": 157,
+      "evidence_chars": 19579,
+      "message_chars": 199078
+    },
+    {
+      "case": "Q6",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 4.940203500000052
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 26.22838899999988
+        }
+      ],
+      "route": "sqlite",
+      "run_id": "1560ae5bcc344943bb34b5f0c9c4120d",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 4.940203500000052,
+      "submit_to_terminal_api_readable_seconds": 26.22838899999988,
+      "calls": 7,
+      "corrections": 1,
+      "tokens": 73149,
+      "revisions": 0,
+      "body_chars": 111,
+      "evidence_chars": 25032,
+      "message_chars": 199836
+    },
+    {
+      "case": "Q6",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 4.57157159999997
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 46.38499860000002
+        }
+      ],
+      "route": "tantivy",
+      "run_id": "9d6dd154e6ee452fb1753ef50cac979b",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 4.57157159999997,
+      "submit_to_terminal_api_readable_seconds": 46.38499860000002,
+      "calls": 7,
+      "corrections": 1,
+      "tokens": 138590,
+      "revisions": 0,
+      "body_chars": 115,
+      "evidence_chars": 44768,
+      "message_chars": 345689
+    },
+    {
+      "case": "Q7",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 8.857696900000064
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 27.02322960000015
+        }
+      ],
+      "route": "tantivy",
+      "run_id": "d2b08a0440e84990b40ae36e3c6c43ad",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 8.857696900000064,
+      "submit_to_terminal_api_readable_seconds": 27.02322960000015,
+      "calls": 5,
+      "corrections": 0,
+      "tokens": 87535,
+      "revisions": 0,
+      "body_chars": 103,
+      "evidence_chars": 38228,
+      "message_chars": 228324
+    },
+    {
+      "case": "Q7",
+      "complete": false,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 7.909474100000125
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 31.26521730000013
+        }
+      ],
+      "route": "sqlite",
+      "run_id": "e04cf84b4e59456089cf77abcd834e81",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 7.909474100000125,
+      "submit_to_terminal_api_readable_seconds": 31.26521730000013,
+      "calls": 6,
+      "corrections": 1,
+      "tokens": 98461,
+      "revisions": 0,
+      "body_chars": 90,
+      "evidence_chars": 34880,
+      "message_chars": 262293
+    },
+    {
+      "case": "Q9",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 8.285152899999957
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 33.745819399999846
+        }
+      ],
+      "route": "sqlite",
+      "run_id": "4b86b4f9a10e4f7ba91c023e909b8bcb",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 8.285152899999957,
+      "submit_to_terminal_api_readable_seconds": 33.745819399999846,
+      "calls": 6,
+      "corrections": 0,
+      "tokens": 72189,
+      "revisions": 0,
+      "body_chars": 84,
+      "evidence_chars": 19679,
+      "message_chars": 191530
+    },
+    {
+      "case": "Q9",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 8.055200699999887
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 33.718865999999935
+        }
+      ],
+      "route": "tantivy",
+      "run_id": "fa460585bfba4ca891bddc5009e32836",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 8.055200699999887,
+      "submit_to_terminal_api_readable_seconds": 33.718865999999935,
+      "calls": 6,
+      "corrections": 0,
+      "tokens": 96010,
+      "revisions": 0,
+      "body_chars": 90,
+      "evidence_chars": 37077,
+      "message_chars": 246831
+    },
+    {
+      "case": "Q10",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 6.981762099999969
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 41.48560610000004
+        }
+      ],
+      "route": "tantivy",
+      "run_id": "3e6cab7120184c1cab2d1b5c51ae7064",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 6.981762099999969,
+      "submit_to_terminal_api_readable_seconds": 41.48560610000004,
+      "calls": 6,
+      "corrections": 1,
+      "tokens": 96839,
+      "revisions": 0,
+      "body_chars": 163,
+      "evidence_chars": 35648,
+      "message_chars": 242552
+    },
+    {
+      "case": "Q10",
+      "complete": true,
+      "observations": [
+        {
+          "kind": "first_draft_api_readable",
+          "seconds": 5.0525764999999865
+        },
+        {
+          "kind": "terminal_api_readable",
+          "seconds": 22.81619520000004
+        }
+      ],
+      "route": "sqlite",
+      "run_id": "9f8b70ecb36445409a4037b81fc1dbdd",
+      "status": "finished",
+      "submit_to_draft_api_readable_seconds": 5.0525764999999865,
+      "submit_to_terminal_api_readable_seconds": 22.81619520000004,
+      "calls": 4,
+      "corrections": 0,
+      "tokens": 55884,
+      "revisions": 0,
+      "body_chars": 120,
+      "evidence_chars": 17250,
+      "message_chars": 147794
+    }
+  ],
+  "phases": {
+    "Q1/sqlite": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 6.591741400000046
+        },
+        {
+          "purpose": "generation",
+          "seconds": 0.17988769999999477
+        },
+        {
+          "purpose": "verification",
+          "seconds": 11.036538000000064
+        },
+        {
+          "purpose": "verification",
+          "seconds": 0.0070560999999997875
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 9.802347700000041
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 4,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q1/tantivy": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 3.4323141999999507
+        },
+        {
+          "purpose": "generation",
+          "seconds": 0.7937837000000627
+        },
+        {
+          "purpose": "verification",
+          "seconds": 19.35099349999996
+        },
+        {
+          "purpose": "verification",
+          "seconds": 0.27256420000003345
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 5.58586420000006
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 5,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q3/tantivy": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 2.207672699999989
+        },
+        {
+          "purpose": "generation",
+          "seconds": 0.636668200000031
+        },
+        {
+          "purpose": "verification",
+          "seconds": 11.584550100000001
+        },
+        {
+          "purpose": "verification",
+          "seconds": 0.26931679999995595
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 3.7822172999999566
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 4,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q3/sqlite": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 0.8705370999999786
+        },
+        {
+          "purpose": "generation",
+          "seconds": 0.24953870000001643
+        },
+        {
+          "purpose": "verification",
+          "seconds": 4.817893300000037
+        },
+        {
+          "purpose": "verification",
+          "seconds": 0.008972900000003392
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 3.053408099999956
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 3,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q4/sqlite": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 2.4976979000000483
+        },
+        {
+          "purpose": "verification",
+          "seconds": 4.905904699999951
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 6.5528553999999986
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 3,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q4/tantivy": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 2.8690785000000005
+        },
+        {
+          "purpose": "verification",
+          "seconds": 2.919693000000052
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 2.1272511000000804
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 2,
+        "claim_extraction": 1,
+        "evidence_verification": 3,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q5/tantivy": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 4.7507565999999315
+        },
+        {
+          "purpose": "verification",
+          "seconds": 9.886204700000008
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 3.3738358000000517
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 2,
+        "power_domain_review": 2
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q5/sqlite": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 3.1746442999999545
+        },
+        {
+          "purpose": "verification",
+          "seconds": 10.4339844000001
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 13.299712099999851
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 3,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q6/sqlite": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 0.6166474999999991
+        },
+        {
+          "purpose": "verification",
+          "seconds": 7.276561500000071
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 5.943462700000055
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 2,
+        "claim_extraction": 1,
+        "evidence_verification": 3,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q6/tantivy": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 2.3049700999999914
+        },
+        {
+          "purpose": "verification",
+          "seconds": 9.76161030000003
+        },
+        {
+          "purpose": "verification",
+          "seconds": 0.9424705000001268
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 3.177380899999889
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 4,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q7/tantivy": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 6.813716900000145
+        },
+        {
+          "purpose": "verification",
+          "seconds": 7.26752260000012
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 3.6590289000000666
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 2,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q7/sqlite": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 5.901790500000061
+        },
+        {
+          "purpose": "verification",
+          "seconds": 4.990644700000075
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 3.9899290000000747
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 3,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q9/sqlite": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 5.956336100000044
+        },
+        {
+          "purpose": "verification",
+          "seconds": 5.267651699999988
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 9.386117199999944
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 3,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q9/tantivy": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 5.9848996000000625
+        },
+        {
+          "purpose": "verification",
+          "seconds": 5.939842499999941
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 3.093442300000106
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 3,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q10/tantivy": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 4.203634299999976
+        },
+        {
+          "purpose": "verification",
+          "seconds": 11.784403899999916
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 4.969487500000014
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 3,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    },
+    "Q10/sqlite": {
+      "retrieval_seconds_by_purpose": [
+        {
+          "purpose": "generation",
+          "seconds": 3.071900999999798
+        },
+        {
+          "purpose": "verification",
+          "seconds": 3.2333326000000397
+        },
+        {
+          "purpose": "domain_review",
+          "seconds": 5.245778900000005
+        }
+      ],
+      "request_count_by_component": {
+        "generation": 1,
+        "claim_extraction": 1,
+        "evidence_verification": 1,
+        "power_domain_review": 1
+      },
+      "note": "retrieval and concurrent model time must not be summed as terminal waiting"
+    }
+  },
+  "quality_review": "No semantic pass claimed. Original frozen root bodies/ISO pair/IDs verified; automated review blocked displaying private final model text. Structural model judgements not expert quality certification. Speed fails independently.",
+  "retirement_logical_bytes": 73225683200,
+  "actual_deleted_bytes": 0
+}
