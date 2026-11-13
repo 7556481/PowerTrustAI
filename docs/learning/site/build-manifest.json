@@ -4,7 +4,7 @@
     "evaluation_implementation_commit": "534b3ca3848ca07fcca88af4c5b5a6e36e756886",
     "evaluation_archive_commit": "73b832ca24bb360842a1b308215256aabe491aa9",
     "documentation_parent_commit": "73b832ca24bb360842a1b308215256aabe491aa9",
-    "document_version": "learning-site-v6.27 fast retrieval overlap offline stop and standalone sample,2026-11-12",
+    "document_version": "learning-site-v6.28 Tantivy product rejection,2026-11-13",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -600,6 +600,21 @@
         "evaluation/fast_overlap_v27.py": "24858c832ca7de8c0d76602e6d3547f06826382c7abfdd7a817d76d4308886a4"
       },
       "report": "https://github.com/7556481/PowerTrustAI/blob/73b832ca24bb360842a1b308215256aabe491aa9/docs/evaluation/fast-retrieval-overlap-v27/report.md"
+    },
+    "evaluation_v28": {
+      "implementation_commit": "b674124e3bb8289731044f744cec75571fb6db8d",
+      "archive_commit": "2456646a2398e7ca634dab8f79b0585146e725b7",
+      "report": "https://github.com/7556481/PowerTrustAI/blob/2456646a2398e7ca634dab8f79b0585146e725b7/docs/evaluation/tantivy-product-acceptance-v28/report.md",
+      "adopted": false,
+      "live_requests": 100,
+      "trusted_tokens": 1835305,
+      "complete_pairs": 6,
+      "terminal_medians": [
+        29.9871042,
+        37.60223605
+      ],
+      "quality_semantic_pass_claimed": false,
+      "deleted_bytes": 0
     }
   },
   "chapters": [
@@ -685,8 +700,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 14186,
-      "sha256": "5c0b3fb80fc3919ee0e22bd189ba3eff00a91b0b55d5ddaa18c162c26f63fd22"
+      "characters": 14332,
+      "sha256": "322b82ef43a29b7d571189f91dabdab8f65a8802e9f57e97cbe1a4cffd0c1c05"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -714,6 +729,6 @@
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
     }
   ],
-  "markdown_characters": 191308,
+  "markdown_characters": 191454,
   "network_dependencies": false
 }

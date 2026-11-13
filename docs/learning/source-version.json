@@ -3,7 +3,7 @@
   "evaluation_implementation_commit": "534b3ca3848ca07fcca88af4c5b5a6e36e756886",
   "evaluation_archive_commit": "73b832ca24bb360842a1b308215256aabe491aa9",
   "documentation_parent_commit": "73b832ca24bb360842a1b308215256aabe491aa9",
-  "document_version": "learning-site-v6.27 fast retrieval overlap offline stop and standalone sample,2026-11-12",
+  "document_version": "learning-site-v6.28 Tantivy product rejection,2026-11-13",
   "production": {
     "schema": 13,
     "managed_execution": "langgraph_v1",
@@ -599,5 +599,20 @@
       "evaluation/fast_overlap_v27.py": "24858c832ca7de8c0d76602e6d3547f06826382c7abfdd7a817d76d4308886a4"
     },
     "report": "https://github.com/7556481/PowerTrustAI/blob/73b832ca24bb360842a1b308215256aabe491aa9/docs/evaluation/fast-retrieval-overlap-v27/report.md"
+  },
+  "evaluation_v28": {
+    "implementation_commit": "b674124e3bb8289731044f744cec75571fb6db8d",
+    "archive_commit": "2456646a2398e7ca634dab8f79b0585146e725b7",
+    "report": "https://github.com/7556481/PowerTrustAI/blob/2456646a2398e7ca634dab8f79b0585146e725b7/docs/evaluation/tantivy-product-acceptance-v28/report.md",
+    "adopted": false,
+    "live_requests": 100,
+    "trusted_tokens": 1835305,
+    "complete_pairs": 6,
+    "terminal_medians": [
+      29.9871042,
+      37.60223605
+    ],
+    "quality_semantic_pass_claimed": false,
+    "deleted_bytes": 0
   }
 }
