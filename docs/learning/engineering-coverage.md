@@ -42,3 +42,32 @@
 ## 内容验收方法
 
 逐页检查实现、输入、异常、验证和限制；每道重点解析给判断过程、项目入口、误答与继续追问。构建验收另外检查源码身份、Markdown链接、HTML锚点、搜索和折叠答案。人工内容复核与程序结构检查是两层，结构通过不证明所有解释语义正确。
+
+## 主路径的调用方、被调用方与持久化对象
+
+下面是职责边界图表，读代码时从左到右，再按run/版本回到保存对象。它不是所有历史实验开关的完整静态调用图。
+
+|入口或调用方|模块内动作→下一层|保存对象与失败边界|
+|---|---|---|
+|start-powertrustai.cmd / backend.managed|读取受管选择→launcher/config→ComponentFactory或overlap|配置manifest记录实际协议与源码；端口监听不能替代身份|
+|backend.api|校验会话与请求→ReviewService.submit|RunStore.create保存queued/request/config；响应丢失提交可能未知|
+|ReviewService.worker|取队列→Factory.create→OfflineHarness|run_id绑定observer；异常仍需queue.task_done与资源收尾|
+|OfflineHarness / graph_runtime_v1|运行RunExecution七阶段→条件路由|事件/checkpoint由Store保存；图没有自带可恢复业务checkpoint|
+|generate / prepare_review / revise|retrieve_for按purpose→harness.retrieval→rag.retriever|目的、输入查询、交付记录绑定知识版本；检索失败不伪装空支持|
+|rag.retriever|KnowledgeStore→corpus_index MATCH/排名→原文与邻接|EvidenceProvenance保存版本/fragment/range/hash；预算选择后还要看发送边界|
+|corpus_download / corpus_build|固定manifest→Parquet批次→add_record→publish|partial、正文/duplicates/identity、progress、发布封印；事务断点与排除分母分开|
+|生成Agent|结构客户端→模型→generation parser|Answer及citations按answer_id/version保存；结构失败不能制造正文|
+|claim_extractor|原句锚点→规范主张→覆盖校验|Claims绑定输入正文；未覆盖不等于非事实|
+|事实Agent|review_inputs→独立审核/原引用分组→review_transport|findings、组件及引用绑定保存；外部ID或其他scope引用拒绝|
+|领域Agent|任务义务、规则、工具与领域Evidence→模型合同|missing_prerequisites/领域发现保存；无法获取现场输入不等于事实反证|
+|merge_and_decide|policy / product_policy→资格→修订或终态|Report保存程序处置；意见存在不等于可改稿|
+|revision Agent|发现catalog→动作/新正文parser→版本应用|finding_actions和新版Answer；随后新提取和双审，不沿用旧版通过|
+|structured_request|strict_json→parser→至多一次纠正|调用记录/诊断保存；部分响应不能绕过完整合同|
+|模型客户端 / DeepSeekAdapter|预算claim→线程HTTP→response/usage校验|run/component/version调用归属；超时或取消不保证远端未执行|
+|ReviewService observer|RunStore.index/checkpoint/mark|objects/events/runs短事务；写失败保留未确认持久化状态|
+|历史API / presentation|Store.get/objects/evidence→serialization兼容|只读旧版本；不调用模型、不覆盖旧意见|
+|app.js / inline_review.js|主读取与辅助slot→归属检查→码点标注|浏览器不创造权威版本；反馈追加到对应run/answer/finding|
+|用户取消 / service.stop|拒新单→取消任务→gather/drain→close|在途结算、资源释放、Store终态分别核对；重启旧run标中断|
+|public_checks / evaluation入口|公开夹具/合同/API测试，固定批次另冻结|测试日志与报告；跳过私有归档不能包装为真实语义重测|
+
+每一行的异常需与对应章节的反例一起读；正常路径图不会证明所有失败都可靠恢复。
