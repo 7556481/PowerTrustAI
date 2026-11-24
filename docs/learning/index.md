@@ -8,6 +8,29 @@
 - [沿一次请求读源码](chapters/14-code-tour.md)：读完能追踪检索、生成、双审、修订与版本保存，指出每一步能验证什么。
 - [准备面试](chapters/17-interview.md)：读完能用证据讲清技术取舍与失败边界，再完成[从产品到代码的实操](chapters/20-workshops.md#从产品到代码常见与最典型)。
 
+## 按主题系统学习
+
+先读[知识覆盖与证据清单](engineering-coverage.md)，再沿以下概念依赖学习。21—30是工程专题，31—36把同一机制放回真实失败和取舍。旧1—20章保留详细公式、代码摘录和绑定版本的实验原文。
+
+- [21 从用户问题到可交付对象](chapters/21-product-contracts.md)
+- [22 数据发布、事务与稳定原文身份](chapters/22-corpus-engineering.md)
+- [23 从SQL走到模型实际读到的证据](chapters/23-search-boundaries.md)
+- [24 云端请求、结构纠正与未知费用](chapters/24-model-wire.md)
+- [25 主张、支持关系与修订权限](chapters/25-agents-semantics.md)
+- [26 图编排、关键路径与资源所有权](chapters/26-execution-control.md)
+- [27 接单、存储、停服与旧版本读取](chapters/27-service-storage.md)
+- [28 初稿、异步读取与字符标注](chapters/28-browser-consistency.md)
+- [29 从指标分母到用户等待的可计算评测](chapters/29-evaluation-math.md)
+- [30 依赖、CI与安全删除的工程依据](chapters/30-maintenance-practice.md)
+- [31 案例：修订合同：给定发现后的四例闭环](chapters/31-case-revision.md)
+- [32 案例：跨语言：目标交付与投入退出换义](chapters/32-case-cross-language.md)
+- [33 案例：Tantivy：快读取为何没有快交付](chapters/33-case-tantivy.md)
+- [34 案例：Windows writer：直接证据与未知持有者](chapters/34-case-windows-writer.md)
+- [35 案例：Overlap：让模型工作盖住领域读取](chapters/35-case-overlap.md)
+- [36 案例：前端与生命周期：从具体故障到归属守卫](chapters/36-case-ui-lifecycle.md)
+
+- [37 协议字段与预算状态实操](chapters/37-protocol-ledger-lab.md)：先读24/25章，再练JSON边界、引用隔离和持久预留演算。
+
 ## 归档案例路线
 
 保留 N1 → A3 → N4，先读两稿和原文，再解释改善发生在哪一层；这些是2026-10-26/27归档材料，不现场生成、不调用模型。

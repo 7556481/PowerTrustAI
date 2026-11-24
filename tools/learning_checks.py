@@ -47,7 +47,7 @@ def main():
         page=root/'site'/(p.stem+'.html');rendered=page.read_text(encoding='utf-8')
         if rendered.count('<details class="self-answer">')!=expected:raise ValueError('Folded answer rendering failed')
     v=json.loads((root/'source-check.json').read_text(encoding='utf-8'))
-    for key in ('excerpts','request_route_excerpts','connection_excerpts','graph_excerpts','learning_runtime'):
+    for key in ('excerpts','request_route_excerpts','connection_excerpts','graph_excerpts','learning_runtime','handbook_sources'):
         for record in v.get(key,[]):
             if source_text_digest(Path(record['file']).read_bytes())!=record['source_text_lf_sha256']:raise ValueError('Stale source reference: '+record['file'])
     validate_local_links(root/'site')
