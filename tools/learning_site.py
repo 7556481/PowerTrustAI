@@ -137,7 +137,7 @@ def source_link_resolver(source, page_targets):
 def build():
     DEST.mkdir(parents=True,exist_ok=True)
     chapters=sorted((SOURCE/'chapters').glob('*.md'))
-    pages=[SOURCE/'index.md',ROOT/'docs/current-status.md',*chapters,SOURCE/'questions-for-chatgpt.md',
+    pages=[SOURCE/'index.md',SOURCE/'engineering-coverage.md',SOURCE/'engineering-verification-v36.md',ROOT/'docs/current-status.md',*chapters,SOURCE/'questions-for-chatgpt.md',
            ROOT/'docs/history-index.md',
            ROOT/'docs/current-status-2026-10-25.md',SOURCE/'reading-history.md']
     page_targets={p.resolve():p.stem+'.html' for p in pages}

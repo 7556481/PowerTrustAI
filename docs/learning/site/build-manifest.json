@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "284acadab8b47c390efd4108f3c7e6839f3d63f4",
+    "application_commit": "e4fb27e7c8893a5ad141ebef0ae5f32216648065",
     "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
     "documentation_parent_commit": "ee31fc26ea6e9edca4952b34655714f93323fd55",
-    "document_version": "learning-site-v6.35 current status and first reading, 2026-11-13",
+    "document_version": "learning-site-v7.36 engineering handbook, 2026-11-24",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -607,8 +607,18 @@
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 1287,
-      "sha256": "8778e0f376d608c9eb4a2f1d619986e5c95dc53d9940781f1cc0f1fba0278b29"
+      "characters": 2332,
+      "sha256": "d68de36aba76994e6cadaf93e77092f7af7e1f3cdc313788dc2b298fc61dda26"
+    },
+    {
+      "source": "docs/learning/engineering-coverage.md",
+      "characters": 4519,
+      "sha256": "031f915424019bb059b4737b94c4d11cb924cbc58b74a2acee81da60d4a2ed94"
+    },
+    {
+      "source": "docs/learning/engineering-verification-v36.md",
+      "characters": 866,
+      "sha256": "227c715a4db94284cfd6874d6cf15b82add8edb74ca0b3f9c1ac4ca61fbdc44c"
     },
     {
       "source": "docs/current-status.md",
@@ -617,8 +627,8 @@
     },
     {
       "source": "docs/learning/chapters/01-product.md",
-      "characters": 5616,
-      "sha256": "9ec87bd120856a2f03d1bc382607ae645782250d763dd1e44cd7132589f7f0e8"
+      "characters": 5672,
+      "sha256": "eb07d33dcbf97f316c3476dedd974824b2bce5ad68129e7c61569686d13699bb"
     },
     {
       "source": "docs/learning/chapters/02-architecture.md",
@@ -632,13 +642,13 @@
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 19363,
-      "sha256": "eeba144f542a97392a399f479acb24f335e26b09f75032bd2ff7d3b39053368c"
+      "characters": 19419,
+      "sha256": "9ac321d0d6fab1a129cad64e88b901334503be395726a3c01fd29f25a3b494af"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 7293,
-      "sha256": "4cfa4b2e108be6bfbc517874a5e6f6d374c5a158d6933856f2c30b7010e3f61f"
+      "characters": 7349,
+      "sha256": "12e273e899e6b6fdddb99fd0aaeb40b188c760b77f450d42005364e8407054da"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -647,13 +657,13 @@
     },
     {
       "source": "docs/learning/chapters/07-corpus.md",
-      "characters": 4650,
-      "sha256": "b2e2cbcb5d0f22a67770e46de280c337a6659ebf59cbb80bbc04ce34168a4e11"
+      "characters": 4707,
+      "sha256": "26dd13ac3a602298cb53645903158b660e09f305cd0a64e0aafd4666a313dba7"
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 14818,
-      "sha256": "5493da1c1be334ea8dba809d8e160f7a9a0a09e15cd7c1776e0ffa780820f2f2"
+      "characters": 14873,
+      "sha256": "321d7eb8c729b813ff391d37ad1f9980dc533ea1fcdd828f08019bf61a309dac"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -662,13 +672,13 @@
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 8734,
-      "sha256": "8b6deb3d5a4e6d527c9ce57025f38887b6616072be53ac3ff87c61d02b95d104"
+      "characters": 8788,
+      "sha256": "84caeb92145737c7bc6902ae7737060ec629cf113382bec6893534f787deea88"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
-      "characters": 7946,
-      "sha256": "2b71f41d0ca004143d65cd7eb3454658a3b042801daebdc0595aaea7fedf3126"
+      "characters": 8000,
+      "sha256": "0a4a1164cbbcce4c52482b489c91dc90f5d304c0899b5f98de9a52e97bac9fb5"
     },
     {
       "source": "docs/learning/chapters/12-training-nli.md",
@@ -697,13 +707,13 @@
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
-      "characters": 5862,
-      "sha256": "60fab9437f04782873fb55064b4acbbd07354efd9114f352192fbabc146f78de"
+      "characters": 6014,
+      "sha256": "17c543ecc4ecf583651c5f6d67b2a7f2e46b6af46052bb729cb19f46c0896ae1"
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 13513,
-      "sha256": "b3d08f186e66c8b288cd8c68b110cb06b1000fa61393ad163d046a43ab40d9bf"
+      "characters": 13572,
+      "sha256": "e6173af87fe24842a6d46917e9664e3244ac79edcb13bacc14949a1b1421671a"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -712,8 +722,88 @@
     },
     {
       "source": "docs/learning/chapters/20-workshops.md",
-      "characters": 6199,
-      "sha256": "b51b0cc58e5eab814418a661a71ff1e7e6e1d5aa29d723f13e0d3bbd4a5250a9"
+      "characters": 6351,
+      "sha256": "a9f074460d5accd5ef9095f651f98bd351fb2c6cd93200c29f6367ed6b5adb24"
+    },
+    {
+      "source": "docs/learning/chapters/21-product-contracts.md",
+      "characters": 1696,
+      "sha256": "956e5c629ef33329fad68b29bcc4f1d05af3a30ace76102c69ecabdf300b6335"
+    },
+    {
+      "source": "docs/learning/chapters/22-corpus-engineering.md",
+      "characters": 1881,
+      "sha256": "34008c74209d4b8a62edf19cc7377640d99c005aad889158c20a0600475429d1"
+    },
+    {
+      "source": "docs/learning/chapters/23-search-boundaries.md",
+      "characters": 1680,
+      "sha256": "2be859e618b626f54568458ddf994ec20314e11cc9f4dd1fa805e85711c4149f"
+    },
+    {
+      "source": "docs/learning/chapters/24-model-wire.md",
+      "characters": 2045,
+      "sha256": "3961954a05ce3b257f9349f5588eaef50bb0e95a7d0f260aed48d374888337b5"
+    },
+    {
+      "source": "docs/learning/chapters/25-agents-semantics.md",
+      "characters": 1530,
+      "sha256": "e2d513a9191f0622adfa567d3d31f79f00372bc62bcd62dd6f5d2df56cc2291e"
+    },
+    {
+      "source": "docs/learning/chapters/26-execution-control.md",
+      "characters": 1756,
+      "sha256": "87ef3aa71859db0699b180dfd124dcf2f55b2f8c283c3007246760175e81ed24"
+    },
+    {
+      "source": "docs/learning/chapters/27-service-storage.md",
+      "characters": 1777,
+      "sha256": "fcc2437579de57878f989f8e321d8ae6adbae36a1e26b40bba8c53a3a8901e6b"
+    },
+    {
+      "source": "docs/learning/chapters/28-browser-consistency.md",
+      "characters": 1381,
+      "sha256": "160052b4236263994d54a366ab951f4a17153da8c9bc9ace73bb9ae57d53d92f"
+    },
+    {
+      "source": "docs/learning/chapters/29-evaluation-math.md",
+      "characters": 1524,
+      "sha256": "d9a53ada6e6e66098fa82f762f4c3f09409bd4b7ad66b5f106ecd18aab30340b"
+    },
+    {
+      "source": "docs/learning/chapters/30-maintenance-practice.md",
+      "characters": 1499,
+      "sha256": "55ab9e1956b7f8e1394deab9a0d7fe734681315d53b8f9dfe5bc0adacea6b0e2"
+    },
+    {
+      "source": "docs/learning/chapters/31-case-revision.md",
+      "characters": 1026,
+      "sha256": "f93587e15fc3cca8244f0c89be4ce5b1ad5ee031aa8c1ca632cce2019c0e0af5"
+    },
+    {
+      "source": "docs/learning/chapters/32-case-cross-language.md",
+      "characters": 981,
+      "sha256": "e5467a09502d7222acfc3caf26432bde15d4369914ee85429a61cab302da5a02"
+    },
+    {
+      "source": "docs/learning/chapters/33-case-tantivy.md",
+      "characters": 1006,
+      "sha256": "475348f40d0e6c756626be6ecf2235ed9e0302cf9c87e55cb57b9e703beeae5b"
+    },
+    {
+      "source": "docs/learning/chapters/34-case-windows-writer.md",
+      "characters": 1097,
+      "sha256": "051f4c0d7454055481952a1f329a15808539c8a3e83d4c40069f88b655f6f7d8"
+    },
+    {
+      "source": "docs/learning/chapters/35-case-overlap.md",
+      "characters": 1023,
+      "sha256": "426a2dd3595af653920a66322c5cfbe28bdfe60a71502c6f36690682f6836165"
+    },
+    {
+      "source": "docs/learning/chapters/36-case-ui-lifecycle.md",
+      "characters": 1052,
+      "sha256": "4f2fc1b0856b25ec7f494876566cd2f066fd8e198b27f4e63222fdcb4b34aa24"
     },
     {
       "source": "docs/learning/questions-for-chatgpt.md",
@@ -736,6 +826,6 @@
       "sha256": "8cc74d4d76ff04fab6073061ff479f944d5efcab667205be816fdd1a85b23698"
     }
   ],
-  "markdown_characters": 205546,
+  "markdown_characters": 235681,
   "network_dependencies": false
 }
