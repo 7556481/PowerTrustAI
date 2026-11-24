@@ -1,10 +1,10 @@
 {
   "version": {
-    "application_commit": "e4fb27e7c8893a5ad141ebef0ae5f32216648065",
+    "application_commit": "f953b1b3a54c6d93186cb65fdde8119e00941e94",
     "evaluation_implementation_commit": "308a4b8f010d6b9fbeb6c031d2258f9b89ee5eea",
     "evaluation_archive_commit": "ec9c7df72b3ab628ae5293efbba6039470d9f42c",
     "documentation_parent_commit": "ee31fc26ea6e9edca4952b34655714f93323fd55",
-    "document_version": "learning-site-v7.36 engineering handbook, 2026-11-24",
+    "document_version": "learning-site-v7.37 resume-aligned depth, 2026-11-24",
     "production": {
       "schema": 13,
       "managed_execution": "langgraph_v1",
@@ -607,13 +607,23 @@
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 2419,
-      "sha256": "881290274314f8bb80bd13a287ee20aab7eed9d1617d41ab1e2e941842f28c69"
+      "characters": 2595,
+      "sha256": "bbf5a296578926d149da09602b54245b9b12519edbea53b47c8397976df06f31"
     },
     {
       "source": "docs/learning/engineering-coverage.md",
-      "characters": 6582,
-      "sha256": "8cce2ce0c4bba874a0795cf1f26f1f7f36ec54909267c3fea4120c0da437e29f"
+      "characters": 6740,
+      "sha256": "3f6469ea1907bc94e6ff239091e83f8d894911a526ed73e3033e3ccd77b17c2e"
+    },
+    {
+      "source": "docs/learning/resume-learning-map.md",
+      "characters": 1876,
+      "sha256": "f8cdf7abd87caa0f36bef825e2900d5da013a29ae30ae24001363e119f4d833a"
+    },
+    {
+      "source": "docs/learning/engineering-verification-v37.md",
+      "characters": 621,
+      "sha256": "53aa7e71b04c87e85d9031eed6bc9ccf4f86a3041320c591a5cbf0745da220b6"
     },
     {
       "source": "docs/learning/engineering-verification-v36.md",
@@ -742,23 +752,23 @@
     },
     {
       "source": "docs/learning/chapters/24-model-wire.md",
-      "characters": 2045,
-      "sha256": "3961954a05ce3b257f9349f5588eaef50bb0e95a7d0f260aed48d374888337b5"
+      "characters": 4903,
+      "sha256": "0c4431574700ae0bb909273e320960a8dba5f2b1b7258fde3a4e2d8a70da96db"
     },
     {
       "source": "docs/learning/chapters/25-agents-semantics.md",
-      "characters": 1530,
-      "sha256": "e2d513a9191f0622adfa567d3d31f79f00372bc62bcd62dd6f5d2df56cc2291e"
+      "characters": 3031,
+      "sha256": "88bce9b4defedfa3888ffa33191c588054e43e4059e9a73fb5e57dbbb059d017"
     },
     {
       "source": "docs/learning/chapters/26-execution-control.md",
-      "characters": 1756,
-      "sha256": "87ef3aa71859db0699b180dfd124dcf2f55b2f8c283c3007246760175e81ed24"
+      "characters": 3268,
+      "sha256": "76fdb068cf19657618bd17fa305c9aab00ad54e4e2dd9007acea7f059916e138"
     },
     {
       "source": "docs/learning/chapters/27-service-storage.md",
-      "characters": 1777,
-      "sha256": "fcc2437579de57878f989f8e321d8ae6adbae36a1e26b40bba8c53a3a8901e6b"
+      "characters": 3871,
+      "sha256": "bede13a988508ef53f7e34d15f79e0200240ce740408ff63835846ae08079ad8"
     },
     {
       "source": "docs/learning/chapters/28-browser-consistency.md",
@@ -767,48 +777,53 @@
     },
     {
       "source": "docs/learning/chapters/29-evaluation-math.md",
-      "characters": 1524,
-      "sha256": "d9a53ada6e6e66098fa82f762f4c3f09409bd4b7ad66b5f106ecd18aab30340b"
+      "characters": 2410,
+      "sha256": "4646eed2aa1fb6617786ec15743c071fda5e6d42fd49ddbc1445dfe9226fb88a"
     },
     {
       "source": "docs/learning/chapters/30-maintenance-practice.md",
-      "characters": 1499,
-      "sha256": "55ab9e1956b7f8e1394deab9a0d7fe734681315d53b8f9dfe5bc0adacea6b0e2"
+      "characters": 2289,
+      "sha256": "7e779d7fcf9b82d50a8bc12bf776a8c57e5e7a167e3227158e38654592438567"
     },
     {
       "source": "docs/learning/chapters/31-case-revision.md",
-      "characters": 1026,
-      "sha256": "f93587e15fc3cca8244f0c89be4ce5b1ad5ee031aa8c1ca632cce2019c0e0af5"
+      "characters": 2709,
+      "sha256": "6860f3e53a6dd7c11235d92006e9a646b964833caea5bb9dd3caccdbd79a9fa0"
     },
     {
       "source": "docs/learning/chapters/32-case-cross-language.md",
-      "characters": 981,
-      "sha256": "e5467a09502d7222acfc3caf26432bde15d4369914ee85429a61cab302da5a02"
+      "characters": 1060,
+      "sha256": "6df7e219b133fd796eda94c523378fc4fa667a6a55b6e721598b126faaae3784"
     },
     {
       "source": "docs/learning/chapters/33-case-tantivy.md",
-      "characters": 1006,
-      "sha256": "475348f40d0e6c756626be6ecf2235ed9e0302cf9c87e55cb57b9e703beeae5b"
+      "characters": 1086,
+      "sha256": "45292bfbb94a7e2911a14d501dfb15135ec596244ae95dc90a2d758ece8da225"
     },
     {
       "source": "docs/learning/chapters/34-case-windows-writer.md",
-      "characters": 1097,
-      "sha256": "051f4c0d7454055481952a1f329a15808539c8a3e83d4c40069f88b655f6f7d8"
+      "characters": 1207,
+      "sha256": "e5daa77fbbc0cf00de7398ecc4273677ca42edacebb4312d3ba9d4dd01c3efdc"
     },
     {
       "source": "docs/learning/chapters/35-case-overlap.md",
-      "characters": 1023,
-      "sha256": "426a2dd3595af653920a66322c5cfbe28bdfe60a71502c6f36690682f6836165"
+      "characters": 2180,
+      "sha256": "e46d27899d424e611510926dc50da078248eecb798e581301a2bf6d92ad7b86b"
     },
     {
       "source": "docs/learning/chapters/36-case-ui-lifecycle.md",
-      "characters": 1052,
-      "sha256": "4f2fc1b0856b25ec7f494876566cd2f066fd8e198b27f4e63222fdcb4b34aa24"
+      "characters": 2048,
+      "sha256": "9d3f85405b2603cd3bef36047c7c0919ab33545ff98cc939111d0422b4ccf340"
     },
     {
       "source": "docs/learning/chapters/37-protocol-ledger-lab.md",
-      "characters": 3281,
-      "sha256": "fde0aeb3790570744c83f1ee15546de301c3f50d3cc95b7eb63f53aa3a64e2ac"
+      "characters": 5341,
+      "sha256": "f41a4f3d3865526082e0f39e2abf106db01be4ded31290140fbc6562baa8db21"
+    },
+    {
+      "source": "docs/learning/chapters/38-adjacent-foundations.md",
+      "characters": 1297,
+      "sha256": "c3c6b1daab49645e265c01cba1a2d2a9e73d86adb38c1d268c11f54226b16288"
     },
     {
       "source": "docs/learning/questions-for-chatgpt.md",
@@ -831,6 +846,6 @@
       "sha256": "8cc74d4d76ff04fab6073061ff479f944d5efcab667205be816fdd1a85b23698"
     }
   ],
-  "markdown_characters": 241168,
+  "markdown_characters": 261102,
   "network_dependencies": false
 }

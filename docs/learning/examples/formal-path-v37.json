@@ -1,0 +1,44 @@
+{
+  "provenance": "synthetic teaching fixture; no real model output",
+  "answer": {
+    "id": "teaching-answer",
+    "version": 1,
+    "text": "Under C, device A supplies reactive power."
+  },
+  "generation": {
+    "answer_units": [
+      {
+        "kind": "technical",
+        "text": "Under C, device A supplies reactive power.",
+        "evidence_ids": [
+          "teaching-e1"
+        ]
+      }
+    ],
+    "assumptions": [],
+    "missing_information": [],
+    "evidence_sufficient": true
+  },
+  "extraction_v7": {
+    "claims": [
+      {
+        "anchor_id": "answer-anchor-c1abb2ec0c600d4a36bac7ff",
+        "proposition": "Under C, device A supplies reactive power.",
+        "claim_type": "technical",
+        "assertion_role": "conditional",
+        "semantic_qualifiers": [
+          "Under C"
+        ],
+        "components": [
+          {
+            "category": "technical_fact",
+            "proposition": "Under C, device A supplies reactive power.",
+            "basis_target": "document_body",
+            "verification_obligation": "technical_truth"
+          }
+        ]
+      }
+    ],
+    "non_claims": []
+  }
+}

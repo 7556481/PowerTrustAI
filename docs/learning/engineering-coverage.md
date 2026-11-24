@@ -31,6 +31,10 @@
 |依赖CI|[tools/public_checks.py](../../tools/public_checks.py)|[30 / 30.1](chapters/30-maintenance-practice.md)|公开夹具/版本/可选环境；结论按章节链接的测试/报告限定|已有教学|
 |研究归档与退役|[docs/maintenance/tantivy-retirement-public-v30.md](../../docs/maintenance/tantivy-retirement-public-v30.md)|[33 / 33.1](chapters/33-case-tantivy.md)|固定报告/运行依赖/资产处置；结论按章节链接的测试/报告限定|已有教学|
 
+## 最终交付能力的正文深度
+
+[学习索引](resume-learning-map.md)按技术逐项连接输入/输出、关键语句、异常、验证和限制；24/25/26/27/29/30/37章补连续演算，31/35/36重写案例，其余三例补独有排查题。正式生成/v7样例由现有parser验证，旧v4形状明确标历史。
+
 ## 仍缺依据与实际未实现
 
 - 卡特彼勒复盘仅作本轮教学缺口输入，不公开个人求职、情绪、未确认贡献或其他团队经历。DeepSeek个人选型理由未获受控选型证明。

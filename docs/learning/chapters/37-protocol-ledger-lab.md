@@ -2,6 +2,58 @@
 
 应用基线e4fb27e，当前配置见[当前状态](../../current-status.md)。本页补24/25章的字段阅读及状态演算；例子均为教学构造，不是真实模型输出。
 
+## 正式主路径的可执行样例
+先看[formal-path-v37.json](../examples/formal-path-v37.json)，它全是合成数据。generation根对象交给`agents.generation.parse_units`；extraction_v7交给`services.claim_obligations.parse`，输入AnswerDraft必须与文件中的ID、version和text一致。锚点由anchors计算后冻结，模型不抄版本、quote或offset。
+
+```python
+answer = AnswerDraft(data['answer']['id'], data['answer']['version'],
+                     data['answer']['text'])
+out = parse(data['extraction_v7'], answer)  # claim_obligations.parse
+```
+输出Claim的quote和范围由程序恢复，本例只有一个段落，start=0、end=len(text)；component_basis_targets是document_body，component_obligations是technical_truth。这两个字段使“原文是否证明事实”与“输入里有没有出现过句子”不能互换。用bool冒充version的旧形状问题与v7现有anchor问题不同，不能把所有测试都叫schema13测试。
+
+|一次改动|预期|原因|
+|---|---|---|
+|原始合成generation及v7对象|接受|给定证据ID、锚点、类别和义务相容|
+|generation引用换成unknown|拒绝|不在输入Evidence集合|
+|v7义务改成answer_scope|拒绝|document_body需要technical_truth|
+|同一对象换AnswerDraft.version=2再解析|拒绝|旧anchor不在新版目录|
+|命题改成only under C，保留合法字段|可能仍结构接受|语义新增P→C，不由parser证明|
+
+离线测试见[test_handbook_examples_v37](../../../tests/test_handbook_examples_v37.py)。测试还通过注入DeepSeek exchange走正式ModelClient与structured_request，首答非法、纠正合法，断言确有两份payload和两条调用记录。注入的是网络边界，不另造业务解析器；它证明接线与拒绝规则，不证明真实Flash会判断正确。
+
+::: answer 题37.4：为何旧v4示例能parse，不代表正式提取消息能用它？
+Factory的提取协议为v7，ClaimExtractor会选claim_obligations.parse，不走最下层parse_extraction入口。版本选择改变根形状和字段职责；绕过上层直接测旧parser，会造成“样例合法”但正式入口不能用。应同时固定实际路由、完整payload和版本绑定对象。继续追问：嵌套字段合法仍不证明提取忠实，only反例必须留给语义评测。
+:::
+
+## 完整正式v7教学输出
+
+与teaching-answer/v1原文一起解析，锚点由程序产生，不由模型计算hash。
+```json
+{
+  "claims": [
+    {
+      "anchor_id": "answer-anchor-c1abb2ec0c600d4a36bac7ff",
+      "proposition": "Under C, device A supplies reactive power.",
+      "claim_type": "technical",
+      "assertion_role": "conditional",
+      "semantic_qualifiers": [
+        "Under C"
+      ],
+      "components": [
+        {
+          "category": "technical_fact",
+          "proposition": "Under C, device A supplies reactive power.",
+          "basis_target": "document_body",
+          "verification_obligation": "technical_truth"
+        }
+      ]
+    }
+  ],
+  "non_claims": []
+}
+```
+
 ## 先读哪一份合同
 
 schema13并非一个孤立JSON Schema：Factory组合review_templates、support_relation版本和原引用分组，parser再校验ID与业务绑定。模板基础版本的注释不能覆盖Factory实际添加的instructions。先读[装配](../../../backend/assembly.py)，再读[Schema13分组](../../../agents/verification_contract_v10_batched.py)和[支持关系](../../../services/support_relation.py)。
@@ -19,7 +71,7 @@ schema13并非一个孤立JSON Schema：Factory组合review_templates、support_
 
 表为主路径字段导读，具体可选项和版本差异以parser为准，不能直接把它转成全套生产示例。领域对象的rule_ids、missing_prerequisites、basis_kind等见[领域合同](../../../agents/domain_contract_v3.py)；事实status枚举不能替代领域check_status。
 
-## 正常和失败的提取例
+## 历史v4形状的提取例（不作为正式v7请求）
 
 ```json
 {

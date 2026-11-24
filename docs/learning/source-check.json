@@ -203,11 +203,11 @@
     }
   ],
   "maintenance_base": "653412642dc065c39ed6721a64dd55303c45be6b",
-  "current_application_reference": "e4fb27e7c8893a5ad141ebef0ae5f32216648065",
+  "current_application_reference": "f953b1b3a54c6d93186cb65fdde8119e00941e94",
   "learning_runtime": [
     {
       "file": "tools/learning_site.py",
-      "source_text_lf_sha256": "589c2c17689b310327736c6e1e223f67a6e804c1181662c4a06582b81e793434",
+      "source_text_lf_sha256": "d935963335ccad24c98a0cfcbae15cf976a6b3ee8857c49a01a33041ebb1ca0f",
       "scope": "complete maintained learning source file"
     },
     {
@@ -222,7 +222,7 @@
     },
     {
       "file": "docs/learning/assets/style.css",
-      "source_text_lf_sha256": "daf462e885065cc04e6c4e0fe642673f7f4da954ac38f5582650e1f3b0711576",
+      "source_text_lf_sha256": "f467b5e53789519a5d70b8c244b7f050186d5139df934420d2267dffb25ae882",
       "scope": "complete maintained learning source file"
     }
   ],
@@ -230,272 +230,317 @@
     {
       "file": "agents/domain_contract_v3.py",
       "source_text_lf_sha256": "3fd1a40e28b564df575714a08ea754aa777b9fde084b290830a37b98c699061a",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "agents/evidence_verification.py",
       "source_text_lf_sha256": "734323d87fb84206a37a342e3cbef95e8326f53b64142e6b1487d3249622eff8",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "agents/generation.py",
       "source_text_lf_sha256": "44b8027c350dce6cfeee5b1d3abdd4d28140df02b54611d2443e2ab1d668ab3c",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "agents/power_domain_review.py",
       "source_text_lf_sha256": "b741f7fa1601995575937da801d540c9adb1a7197aae070efbe4ec45a599e77d",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "agents/review_templates_v3.py",
       "source_text_lf_sha256": "f836fa050f52b785a0fd5efae8c6ef2f0732f3a088fe74286108ebdd5dbccfae",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "agents/revision.py",
       "source_text_lf_sha256": "447fd13a17c14784b6de180769d8907e8db46ba2e9ba90b68432f56d0c2b55d0",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "agents/revision_contract_v2.py",
       "source_text_lf_sha256": "50b5b7392d6398438256da2cf6664742ee82d4b13f279a3435f416531be647a7",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
+    },
+    {
+      "file": "agents/verification_contract_v10_batched.py",
+      "source_text_lf_sha256": "574b1853b29dadbaa775a9c9a22fa0de0eb3db098379251983e9b3bced071b84",
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/answer_annotations.py",
       "source_text_lf_sha256": "eeb289cc5141fa56e29dab837f2029749f3c327d256fea2af3b83f437a2dabd6",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/api.py",
       "source_text_lf_sha256": "234c0c88ed02f5ba7a956d1c780cf2940906d539231187e34749c8daafc22875",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/assembly.py",
       "source_text_lf_sha256": "28084ba2b9107b85e2fa5d444febaa74907c0f82ba282a4a321f648cb451bbd4",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/local_access.py",
       "source_text_lf_sha256": "1092c9b1ee80a4c01ddc74618c6424c3bb4aac4c6311096d9bc3b8da83a9aa68",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/local_session.py",
       "source_text_lf_sha256": "6f9c09412b34bc23cfad5416f9c7eaadd77e3f17be5ba70a97cebd6540680801",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/managed.py",
       "source_text_lf_sha256": "cf64434642ee6bfb5d1aa0621d60461080c37ce1e1de15e6ab4ca2e09ee4fd29",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/presentation.py",
       "source_text_lf_sha256": "284b5c70babe7259a4a821a58f7d6270a4dd222dd9db5c0a0c0ac88b96fdcc4c",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/serialization.py",
       "source_text_lf_sha256": "9218d00b64cc45874605fc607b0159c305ddfcc74fe7abc16bafedeac4f7640d",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/service.py",
       "source_text_lf_sha256": "f4586cd151c9bec4d14d8133672f0b330cb25f8a1b941a4b474d1da47e8347d0",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/static/app.js",
       "source_text_lf_sha256": "09b2152349a0e2a984dc41c5b950bf952ff48e9a09ccadd0d466c14831bfe049",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/static/inline_review.js",
       "source_text_lf_sha256": "4a034d259da7a88d58cdf32671efb04199742b41edbc540e997ede5c6e95f5d7",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "backend/store.py",
       "source_text_lf_sha256": "1040b6658adbf42b165d321fed772b9b9d635d928e9a739a9e8524d8ba967b86",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "core/models.py",
       "source_text_lf_sha256": "cdd05a67a8881a508b6ded2d3a197361820904e97c4c852fbf9b95781d4c8c33",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "core/validation.py",
       "source_text_lf_sha256": "20699b2a83f51e77db4a831877a543be5b4d0e5dc1e8b65a574554872f6624d8",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "evaluation/batch_control.py",
       "source_text_lf_sha256": "55d10135886c9acd8de6053047b30681df5d95a894feea8985cc874ade6945f5",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "evaluation/source_first_live_budget_v1.py",
       "source_text_lf_sha256": "bac2882334e186ef77cb133363f5274a0eea768060d7563732d24e86b2c16aec",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "harness/execution.py",
       "source_text_lf_sha256": "8de669a79981f94df72076012ee4c0b28432879ad735c6116becccf40442c326",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "harness/graph_runtime_v1.py",
       "source_text_lf_sha256": "76286693cbbfb4f7cfc59f0121684080e6b18c5aabd584579bf3ccc6c2529044",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "harness/policy.py",
       "source_text_lf_sha256": "467fdd9b3b7b7e3639796ba2a0311261bacf68748ce40f47b52f608121007680",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "harness/product_policy.py",
       "source_text_lf_sha256": "abc1c7606f44531918ca52e293f1c5bb9afc81e79709587ae043c335c3f9cb46",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "harness/retrieval.py",
       "source_text_lf_sha256": "391857a5c546d7e0a2903a9de39cf8cfd459d4850168c45244cc25a4036d58fd",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "model_adapter/contracts.py",
       "source_text_lf_sha256": "4ab4b69bc9feffb370bde39175eaddcb3bcaa0d33642f5e818b698316216bd16",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "model_adapter/deepseek.py",
       "source_text_lf_sha256": "f562ff8a3c4ea83b13958cf0cb4bcc19b86a02a23e78b976e303930cf9319e1a",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
+    },
+    {
+      "file": "model_adapter/runtime.py",
+      "source_text_lf_sha256": "f5b2f3366966a3a7a957f9c15c005f5a6619d589f10e814187836027b90ed21b",
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "rag/chinese_terms.py",
       "source_text_lf_sha256": "9238748a7ba1f720ad7b9f675ccf16d6e3a99d5d41795c809539bf9a4f67e717",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "rag/corpus_build.py",
       "source_text_lf_sha256": "9f66579ed7900680c26a09f2c458400bc252a2bc7c27c120360a2f6ca39e9a0e",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "rag/corpus_download.py",
       "source_text_lf_sha256": "24159a07841b301d60b4021ce5f0a3aaa8f564c053d382cf34e365f12128da7f",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "rag/corpus_index.py",
       "source_text_lf_sha256": "c4a492bb5f1f3e1fc099fac011cb5159df394b8a82a81ff6687e4838ae45802a",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "rag/reranker.py",
       "source_text_lf_sha256": "cb325ffd1714f17108c8e53c49844df7bc17149cb62fff7e9e0b8ed30f012e28",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "rag/retriever.py",
       "source_text_lf_sha256": "b7cc35207f1127e0d879895630d5e34a7ec261d7035f652ecb9966e7fcb0766c",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "rag/semantic.py",
       "source_text_lf_sha256": "d403d3eaeeddea47f49ebd46ae533f43c273e1c2053a2461731d46548e6367db",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
+    },
+    {
+      "file": "services/answer_anchors.py",
+      "source_text_lf_sha256": "d084c1c66f766483b0a0716e90b0469e9d7f215e4575d925c6544142f5979d54",
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "services/bounded_repair.py",
       "source_text_lf_sha256": "6cb8298596f6e62c1754da6e04aedc4f7f204460527617e2344d51bca3b86f6a",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
+    },
+    {
+      "file": "services/citation_workload.py",
+      "source_text_lf_sha256": "bd570cd17958d9025da0ae298a15d4f40e92004f10e3ee884d54aa67b0224d53",
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "services/claim_extractor.py",
       "source_text_lf_sha256": "55eb59b9f8995c4ce0abf4a29a29f888ddf79cc47a010d1113a7ece792dc55b2",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "services/claim_obligations.py",
       "source_text_lf_sha256": "d757bae747b52af2619e03be7026292e494d653276c7338eebda9debd8a5974d",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "services/local_revision_v2.py",
       "source_text_lf_sha256": "b7a5d691ed8ca9927a2e2513b32a7e5ce6a0d485b3c4086c21a7662ecbe1cd20",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "services/review_fidelity.py",
       "source_text_lf_sha256": "dc4d0b43e803cb393afc5f726f38ca13aa18b53cc13a50f81a371b6acefbf288",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "services/review_inputs.py",
       "source_text_lf_sha256": "4b39f2175deb5488e503b49ee6db9c1681630d0dcd59be2d9d3a531d4bea4aea",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "services/review_transport.py",
       "source_text_lf_sha256": "d4b3150466ea7ca043357744521babb3f99f6e1306b6007732d8d2ad84f8ac2b",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "services/structured_model.py",
       "source_text_lf_sha256": "0b1cec8e8751f3a64d203b7626f5253a9b0f867802172355719a498f77982b9a",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
+    },
+    {
+      "file": "services/support_relation.py",
+      "source_text_lf_sha256": "03ca4373e3311eb02558e461998e0b0bfba364ceec111631575df4a438603e98",
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "tests/test_backend_lifecycle_api_v4.py",
       "source_text_lf_sha256": "76eb1d6fb0fb24982cc7f1b2015b8c78da8769ae89e391004e0f8831da15eebd",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "tests/test_backend_lifecycle_v4.py",
       "source_text_lf_sha256": "977e687a5c7ae05b1becb49e9615eae8fd64560ff3bc78c14205eb1ed72d2ee5",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "tests/test_corpus_index.py",
       "source_text_lf_sha256": "b6a29ed31156e29d9ff4cb037d4ef17df0a719d9e845e78608a66d79106fd9b9",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "tests/test_fact_domain_overlap_v23.py",
       "source_text_lf_sha256": "8823fc8f4262dade85fa2983e2f59bdbe17765abe72207288ffbd2e561d4cd8a",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "tests/test_fact_retrieval_v1.py",
       "source_text_lf_sha256": "58790b7ecaace9f81189489ddd9c38cbfb58fc9101a39ec122b7df477761f48e",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
+    },
+    {
+      "file": "tests/test_handbook_examples_v37.py",
+      "source_text_lf_sha256": "5e8ee89f86147fd460dad38bdd6cbc4c39d7b1db9dfcb940e4098fa716666b58",
+      "scope": "complete teaching reference, not exact excerpt"
+    },
+    {
+      "file": "tests/test_local_revision_v2.py",
+      "source_text_lf_sha256": "1445e62474457d55aa3b33a42b7ab2c2cd946c19b7eed5df0210f84121589245",
+      "scope": "complete teaching reference, not exact excerpt"
+    },
+    {
+      "file": "tests/test_local_service.py",
+      "source_text_lf_sha256": "6731197fcac05662eb72aeb9c7bdf153d3aa626b278cbb58dd132552ece27e59",
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "tests/test_published_corpus_seal.py",
       "source_text_lf_sha256": "39eac9ad6d990f1d5b86e5f971ca9ca2e3f40f9bbb531bf83d451292a6da2545",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
+    },
+    {
+      "file": "tests/ui_async_probe.js",
+      "source_text_lf_sha256": "5580d9e3d1abc21a1bbc3f673b9ceb4bc1e8f7b5fee0db5ff26d665465a31676",
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "tests/ui_client_checks.js",
       "source_text_lf_sha256": "af2cb0e354e356cba7b899201f7f5c59c42c806c8ef214e98a8883db27fffbec",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "tools/public_checks.py",
       "source_text_lf_sha256": "16465e1907e727a5a6409a5ba09bc28df489239a6feb4d97ce1489d7a96510d4",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     },
     {
       "file": "tools/ui_inline_fixture_v7.py",
       "source_text_lf_sha256": "b144341b0052c6f10c0d25b2db05b63b997025682248c69b015abbf7f266fffc",
-      "scope": "complete source referenced for teaching, not exact excerpt"
+      "scope": "complete teaching reference, not exact excerpt"
     }
   ]
 }

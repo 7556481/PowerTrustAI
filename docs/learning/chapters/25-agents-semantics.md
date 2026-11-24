@@ -2,6 +2,35 @@
 
 本专题绑定应用提交 `e4fb27e7c8893a5ad141ebef0ae5f32216648065`，2026-11-24离线核对。配置只看[当前状态](../../current-status.md)。数字分别标记真实实验与教学构造；以下问题不授权现场工程操作。
 
+## 用一段输入走完主张提取
+输入AnswerDraft为`teaching-answer/v1`，正文 `Under C, device A supplies reactive power.`。生产提取v7不要求模型重新抄quote和字符位置；[anchors](../../../services/answer_anchors.py)先按完整段落生成目录，anchor_id由answer_id、version、start/end计算。模型只选择现有anchor_id，再表达命题、立场和义务。少抄一个字段能减少绑定错误，但不能消除语义错。
+
+v7一个主张的核心输入输出如下，完整可解析样例见[合成数据](../examples/formal-path-v37.json)：
+```json
+{
+  "proposition": "Under C, device A supplies reactive power.",
+  "claim_type": "technical",
+  "assertion_role": "conditional",
+  "semantic_qualifiers": ["Under C"],
+  "components": [{
+    "category": "technical_fact",
+    "proposition": "Under C, device A supplies reactive power.",
+    "basis_target": "document_body",
+    "verification_obligation": "technical_truth"
+  }]
+}
+```
+此摘录省了anchor_id和根数组，不可单独送parser。claim_obligations.parse先检查document_body必须配technical_truth，再逐层调用v6目标/类别检查与v5锚点检查，恢复原quote和offset，最后构造带义务的Claim。中间对象同时保存原句与规范命题，后续可以比较它们，而不是用规范句替掉原文。
+
+## 改变一个条件，观察哪道守卫负责
+把verification_obligation换成answer_scope：v7拒绝，因为“答案中出现某句”不能承担技术真值核验。把anchor_id换成另一版本的ID：锚点表找不到，拒绝。只把proposition改成“Only under C…”：结构及ID有可能仍合法，却多了反向蕴含。这个反例证明程序检查与模型语义审核各自必要；解析器不是自然语言证明器。
+
+事实审核接到Claim后，独立证据回答“取得的依据是否支持此主张”；原引用审核回答“初稿这条引用是否支持它绑定的原句”。领域审核另问是否缺现场前提、适用条件或输入。新独立依据不能消除原引用用错，领域警告也不能自动变成有来源的替换正文。
+
+::: answer 题25.4：同一句有事实不足和领域输入缺失，能合并为一个“错误”吗？
+不能直接合并。先分别保存两条意见的ID、原因与所评版本，再判断是否存在有依据的修改授权。若事实不足没有可支持的新句，领域又只是缺现场输入，程序可能交付待补充/待复核，而不是编一个现场结论。若有具体来源证明句中9应为3，则可授权相应范围修改，其他意见仍须单独记账。D/O演算见[修订合同案例](31-case-revision.md#授权-d-与意见-o-如何分离)。验证必须同时看正文、意见集合与新版完整重审，不能只看最终版本号增加。
+:::
+
 ## 数据先于角色名
 生成消费问题与交付证据，输出有版本的正文及引用；提取服务消费该正文，输出主张与覆盖信息；事实审核消费原句、主张、独立证据和原引用，检查支持关系；领域审核看任务、工程前提、工具结果和领域证据；修订消费授权发现及允许依据。入口分别在[生成](../../../agents/generation.py)、[提取](../../../services/claim_extractor.py)、[事实](../../../agents/evidence_verification.py)、[领域](../../../agents/power_domain_review.py)、[修订](../../../agents/revision.py)。
 
