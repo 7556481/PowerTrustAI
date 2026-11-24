@@ -607,18 +607,18 @@
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 2332,
-      "sha256": "d68de36aba76994e6cadaf93e77092f7af7e1f3cdc313788dc2b298fc61dda26"
+      "characters": 2419,
+      "sha256": "881290274314f8bb80bd13a287ee20aab7eed9d1617d41ab1e2e941842f28c69"
     },
     {
       "source": "docs/learning/engineering-coverage.md",
-      "characters": 4519,
-      "sha256": "031f915424019bb059b4737b94c4d11cb924cbc58b74a2acee81da60d4a2ed94"
+      "characters": 4571,
+      "sha256": "3e4e8c24c10ac729fabb2f5fb603c43c1369f21be3816bfa58fed5574b019b39"
     },
     {
       "source": "docs/learning/engineering-verification-v36.md",
-      "characters": 866,
-      "sha256": "227c715a4db94284cfd6874d6cf15b82add8edb74ca0b3f9c1ac4ca61fbdc44c"
+      "characters": 884,
+      "sha256": "19ea0eeffc04b8e452246ba57bb82cc423d459cc5eae02ed8c35c0b40f23a5fb"
     },
     {
       "source": "docs/current-status.md",
@@ -806,6 +806,11 @@
       "sha256": "4f2fc1b0856b25ec7f494876566cd2f066fd8e198b27f4e63222fdcb4b34aa24"
     },
     {
+      "source": "docs/learning/chapters/37-protocol-ledger-lab.md",
+      "characters": 3281,
+      "sha256": "fde0aeb3790570744c83f1ee15546de301c3f50d3cc95b7eb63f53aa3a64e2ac"
+    },
+    {
       "source": "docs/learning/questions-for-chatgpt.md",
       "characters": 1489,
       "sha256": "ef5c1658332cb20aedd45bc4d35ecbbad7a168f58180ca2f10d748305c99479f"
@@ -826,6 +831,6 @@
       "sha256": "8cc74d4d76ff04fab6073061ff479f944d5efcab667205be816fdd1a85b23698"
     }
   ],
-  "markdown_characters": 235681,
+  "markdown_characters": 239119,
   "network_dependencies": false
 }

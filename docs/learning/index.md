@@ -29,6 +29,8 @@
 - [35 案例：Overlap：让模型工作盖住领域读取](chapters/35-case-overlap.md)
 - [36 案例：前端与生命周期：从具体故障到归属守卫](chapters/36-case-ui-lifecycle.md)
 
+- [37 协议字段与预算状态实操](chapters/37-protocol-ledger-lab.md)：先读24/25章，再练JSON边界、引用隔离和持久预留演算。
+
 ## 归档案例路线
 
 保留 N1 → A3 → N4，先读两稿和原文，再解释改善发生在哪一层；这些是2026-10-26/27归档材料，不现场生成、不调用模型。
