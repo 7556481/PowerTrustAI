@@ -2,6 +2,18 @@
 
 本专题绑定应用提交 `e4fb27e7c8893a5ad141ebef0ae5f32216648065`，2026-11-24离线核对。配置只看[当前状态](../../current-status.md)。数字分别标记真实实验与教学构造；以下问题不授权现场工程操作。
 
+## 用一次文档改动理解Git和CI
+提交是内容快照，SHA标识它；分支名是会移动的引用；tag可保住研究节点。工作分支写正文→本地离线核验→push→PR→offline成功→合并。PR是审阅与合并入口，CI是对某个head执行检查，两者都不等于人已确认所有语义。主干保护要求的检查名须对应实际job，不凭工作流标题猜。
+
+本轮文档使用独立发布工作树，主目录三份未提交补记与33个未跟踪材料保持；同步主干时定向stash补记，ff后apply并比较新增行，untracked逐文件SHA检查。stash不是全库备份，也不是擅自发布私有材料。squash合并后旧分支SHA不一定是主干祖先，删除前还要看PR与最终tree/diff。
+
+## 工具执行了什么规范
+[public_checks](../../../tools/public_checks.py)运行公开unittest并限定可跳过的私有/历史条件；[公共工作流](../../../.github/workflows/public-offline.yml)还跑Harness演示和学习站构建/身份/链接。由这些命令只能声明这些检查实际执行，不能声明项目所有文件都强制Black、Ruff或覆盖率门槛。发现旧模块时同时搜索动态import、配置注册、CLI、旧Store读取与冻结脚本，而非rg一次零命中就删。
+
+::: answer 题30.4：若CI成功但文档把“首稿后”写成“提交后”，由谁发现？
+现有构建与程序测试不理解这个实验口径，需内容复核把数字回到固定报告，检查起点、分母和批次。本轮用明确的时间线题与参考答案减少这种误读。若要加自动检查，可校验结构化指标元数据和引用，但不能声称自动证明自然语言都正确。继续追问：个人团队分支策略或冲突经历没有记录时，只讲上述项目可核查流程，不编造个人操作。
+:::
+
 ## 库必须对应消费者
 FastAPI提供API路由与校验边界，Uvicorn运行ASGI服务；LangGraph装配阶段图；jieba负责中文预分词；PyArrow在构建工具流式读Parquet；sqlite3、http.client、asyncio、hashlib属于Python标准库，无需额外pip安装。PDF、embedding、CPU训练是按需环境，不能把实验包都装进演示入口。消费者见[依赖场景说明](../../../requirements/README.md)、[正式装配](../../../backend/assembly.py)、[语料构建](../../../rag/corpus_build.py)。
 
