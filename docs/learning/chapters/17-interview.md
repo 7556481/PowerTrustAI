@@ -33,7 +33,7 @@ PowerTrustAI根据电力资料回答问题，保存带引用的初稿，再提�
 ### 5 为什么LangGraph仍需要Harness，overlap为何有时有效
 简答：LangGraph连阶段和路由，修订后回提取；Harness及RunExecution持有业务对象、预算、期限和取消。本项目checkpointer=None，节点retry_policy=[]，没有透明恢复远端模型调用。结构纠正在业务请求层，不由图任意重放付费节点。
 
-例子：F=2、领域读取4、事实10、领域模型5，旧终态16、新12；若领域模型9且其他不变，则15→15。资源竞争或纠正变化时重算，不套理想上界。源码：[图节点](../../../harness/graph_runtime_v1.py)、[prepare_review/review_pair](../../../harness/execution.py)。继续追问：create_task不等于HTTP线程已启动；换Tantivy的读取优势没有兑现产品终态收益，不能乘以overlap倍率。
+例子：第一组F=2、领域读取4、事实审核10、领域审核5，旧终态16秒，新终态12秒；第二组F=2、领域读取4、事实审核6、领域审核9，旧终态15秒，新终态15秒。第二组同时改变了事实与领域耗时，此时领域路径决定结束时间，事实提前完成没有缩短最终等待。资源竞争或纠正变化时重算，不套理想上界。源码：[图节点](../../../harness/graph_runtime_v1.py)、[prepare_review/review_pair](../../../harness/execution.py)。继续追问：create_task不等于HTTP线程已启动；换Tantivy的读取优势没有兑现产品终态收益，不能乘以overlap倍率。
 
 ### 6 哪些已有验证，哪些尚未证明
 简答：离线合同、绑定、重审和存储有工程验证；固定历史错误稿给定发现后的四例修订闭合有真实结果；自然问答自主纠错的普遍收益未证，十题基线六题完整且无有据修订。

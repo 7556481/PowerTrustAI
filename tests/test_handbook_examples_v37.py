@@ -80,3 +80,19 @@ class MarkdownJSONTests(unittest.TestCase):
         response=parse_response(200,block.encode('utf-8'),'deepseek-flash')
         self.assertEqual(strict_json(response.text),{'unexpected':True})
         with self.assertRaises(ContractError):parse_units(strict_json(response.text),inputs())
+
+
+class PrintedTimelineArithmeticTests(unittest.TestCase):
+    def test_interview_inputs_and_outputs_match_case_table(self):
+        import re
+        chapters=Path(__file__).resolve().parents[1]/'docs/learning/chapters'
+        interview=(chapters/'17-interview.md').read_text(encoding='utf-8')
+        cases=re.findall(r'F=(\d+)、领域读取(\d+)、事实审核(\d+)、领域审核(\d+)，旧终态(\d+)秒，新终态(\d+)秒',interview)
+        self.assertEqual(len(cases),2)
+        table=(chapters/'35-case-overlap.md').read_text(encoding='utf-8')
+        table_inputs=[tuple(map(int,x)) for x in re.findall(r'F=(\d+)，R=(\d+)，V=(\d+)，D=(\d+)',table)]
+        self.assertEqual([tuple(map(int,x[:4])) for x in cases],table_inputs)
+        for row in cases:
+            f,r,v,d,old,new=map(int,row)
+            self.assertEqual(old,f+r+max(v,d))
+            self.assertEqual(new,f+max(v,r+d))
