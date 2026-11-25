@@ -20,7 +20,7 @@
 <p>主要契约对照冻结同回答/主张/完整交付，只改13/14；这能减生成/检索混杂，但不能证明完整产品。完整服务与Revision另测，阶段、结构、语义和业务分母分开。采集故障也必须停止并记录，已发请求只离线恢复；否则统计会把报告工程缺陷误算模型失败。</p>
 <h2 id="section-4"><span id="如何读不被版本文件淹没"></span>如何读，不被版本文件淹没</h2>
 <p>先看backend/__main__.py和assembly.py，再读OfflineHarness.run，最后才深入当前Agent协议。目录里旧v4/v6/v9不是多个并行审核器，而是历史契约保留。当前manifest明确schema和prompt；不要凭文件名最大数字猜采用版本。</p>
-<p>本章代码摘录按AST函数/实际行号读取当前源码，记录文件及片段SHA。省略的部分明确是摘录，不当完整函数。你可以从同名函数继续读上下文。正文解释的是责任，代码才是异常和字段的最终依据。</p>
+<p>本章提供调用路线；早期代码摘录已移入章末链接的历史快照，按摘录绑定版本阅读，不代表最新实现。查现行实现时，从本章源码链接进入完整函数，再核对装配与调用方。源码身份检查证明文件与记录一致，不自动证明教材解释正确。</p>
 <p>在learning-audit-v1历史版本中，新增紧凑协议入口agents/verification_contract_v14.py的ReviewCatalog/run只通过直接组件回归，真实Harness输入包装遗漏导致12题失败；默认日常仍13。查看learning-audit-v1冻结源码中harness/runtime.py的历史schema9–13包装分支，可以定位当时14缺tool_results；当前已改用显式输入能力和services/review_inputs.build，不把历史分支当现行源码。那个批次没有在当轮自动补后重跑，见第15章。</p>
 <h2 id="section-5"><span id="第一条路线从提交到冻结答案"></span>第一条路线：从提交到冻结答案</h2>
 <p>ApplicationService.submit验证配置、排队并保存TaskRequest。worker建立Bundle，调用OfflineHarness.run；runtime中invoke统一处理期限、使用量、执行问题和observer。问答先检索、Generation，已有回答直接冻结；提取服务输出claims，validate_extraction检查覆盖和绑定。</p>
