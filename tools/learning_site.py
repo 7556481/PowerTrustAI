@@ -150,8 +150,9 @@ def build():
            ROOT/'docs/current-status-2026-10-25.md',SOURCE/'reading-history.md',*sorted((SOURCE/'archives').glob('*.md'))]
     page_targets={p.resolve():page_key(p)+'.html' for p in pages}
     version=json.loads((SOURCE/'source-version.json').read_text(encoding='utf-8'))
-    names={page_key(p):next(x[2:] for x in p.read_text(encoding='utf-8').splitlines() if x.startswith('# ')) for p in pages}
-    nav=''.join('<a href="'+page_key(p)+'.html">'+html.escape(names[page_key(p)])+'</a>' for p in pages)
+    names={page_key(p):('历史快照：' if p.parent.name=='archives' else '')+next(x[2:] for x in p.read_text(encoding='utf-8').splitlines() if x.startswith('# ')) for p in pages}
+    nav=''.join('<a href="'+page_key(p)+'.html">'+html.escape(names[page_key(p)])+'</a>' for p in pages if p.parent.name!='archives')
+    nav+='<details><summary>历史快照（非当前正文）</summary>'+''.join('<a href="'+page_key(p)+'.html">'+html.escape(names[page_key(p)])+'</a>' for p in pages if p.parent.name=='archives')+'</details>'
     search=[];stats=[]
     for n,p in enumerate(pages):
         text=p.read_text(encoding='utf-8');body,toc=render(text,source_link_resolver(p,page_targets))
