@@ -2,7 +2,7 @@
 <p>配置、启动与能力边界见<a href="current-status.html" rel="noreferrer noopener">当前状态</a>。先按<a href="25-agents-semantics.html" rel="noreferrer noopener">最终机制正文</a>学习输入、状态、异常与验证；本章保留基础推导。历史实验不参与正式流程选择。</p>
 <h2 id="section-2"><span id="四agent各自承担哪一种失败"></span>四Agent各自承担哪一种失败</h2>
 <p>Generation只读原中文问题与实际Evidence；英文查询用于召回，不是事实来源。ClaimExtractor管理原文锚点，不能把自己的忠实标签当真值。Fact需判断整句的范围和强度，Domain需区分概念解释与需要厂站参数的工程结论；Revision只能凭已有原文授权修改，不能自行补事实。</p>
-<p>本轮固定8份C稿，没有重新生成或检索。N2、N4都已进入真实原文审核，仍被判supported：这是识别断点，不是修订器未获得足够重试。N5领域纠正后仍非法，执行不完整；这又不同于合法语义漏检。<a href="https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#" rel="noreferrer noopener">完整证据</a>。</p>
+<p>历史 natural-draft-audit-v1 固定8份C稿，没有重新生成或检索。N2、N4都已进入真实原文审核，仍被判supported：这是识别断点，不是修订器未获得足够重试。N5领域纠正后仍非法，执行不完整；这又不同于合法语义漏检。<a href="https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#" rel="noreferrer noopener">完整证据</a>。</p>
 <h2 id="section-3"><span id="结果工具不是额外agent"></span>结果工具不是额外Agent</h2>
 <p>严格工具调用也可以只提交审核结果。submit_review_result不搜索、不写文件、不执行业务动作；参数直接进入原审核对象，程序不再请求模型总结。四职责与审核阶段不增。模型调用仍是实际一次请求，不能因返回一个函数名就多算Agent，也不能把它当作额外工具业务能力。</p>
 <h2 id="section-4"><span id="generation生成不是审核"></span>Generation：生成不是审核</h2>
@@ -13,7 +13,7 @@
 <p>教学构造：“电压合格，所以系统一定稳定”若全被标成non_claim，字符覆盖仍可完整，但技术对象已可能丢失。实际ProductAuditPolicy会将non_claim分类疑点交复核，不能以字符检查宣称无需审核。proposition是规范表达，不能把“四类”顺手改“三类”，也不能把“可能”改成必然。</p>
 <p>混合句应按组件理解：一句既说技术值又说“材料未提供X”，分别需要technical_content与input_snapshot等依据。冻结组件分类后，审核可以提出真实异议，但不能为了supported把technical_truth偷换成“答案写了这句话”。提取忠实性与事实真值分开：准确提取的错误回答应能得到contradicted或insufficient。</p>
 <h2 id="section-6"><span id="evidence-verification两项独立义务"></span>Evidence Verification：两项独立义务</h2>
-<p>独立核验判断本轮实际交付的允许Evidence能否支持命题；检索使用固定知识快照，但审核不穷尽扫描或证明整个快照。原引用审核检查答案当初引用的那段资料能否支持对应正文。独立找到正确证据不能治好原错误引用。正文、元数据、输入快照、答案原文和计算结果用不同typed basis，来源适用性登记不能冒充官方技术正文。</p>
+<p>独立核验判断该次审核实际交付的允许Evidence能否支持命题；检索使用固定知识快照，但审核不穷尽扫描或证明整个快照。原引用审核检查答案当初引用的那段资料能否支持对应正文。独立找到正确证据不能治好原错误引用。正文、元数据、输入快照、答案原文和计算结果用不同typed basis，来源适用性登记不能冒充官方技术正文。</p>
 <p>模型承担支持关系、必要条件、因果方向及真实异议。程序只证明ID、版本、范围、字面存在和派生处置一致。旧接口曾让模型重复生成quote_ids、basis_indexes、conditions_preserved等字段，结构复杂性导致纠正负担；合法结构仍会有原引用语义误判。</p>
 <h2 id="section-7"><span id="domain-review问工程前提不装作仿真"></span>Domain Review：问工程前提，不装作仿真</h2>
 <p>领域审核收到同一答案/主张及工程背景，检查范围、输入、前提、量纲及仿真边界。概念转述不无条件要求厂站模型；设定值和性能保证必须保留相应输入义务。演示规则有版本和适用范围，不是国家标准库，也不执行潮流。模型high标签或话题高风险不能机械等同于高风险回答。</p>

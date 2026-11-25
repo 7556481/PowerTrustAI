@@ -97,3 +97,30 @@ class UniquePageIDTests(unittest.TestCase):
   for path in (SOURCE/'chapters').glob('*.md'):
    ids=re.findall(r'<a id="([\w-]+)"></a>',path.read_text(encoding='utf-8'))
    self.assertEqual(len(ids),len(set(ids)),path.name)
+
+
+class RepairedChapterTableTests(unittest.TestCase):
+ def test_restored_tables_render_with_their_header_and_all_data_cells(self):
+  import re
+  from tools.learning_site import SOURCE
+  # Explicit expected dimensions keep split rows from silently disappearing.
+  expected = {
+   '01': [('页面处置',5,3)], '02': [('目录',10,3)],
+   '05': [('实际对象/函数',4,3)], '06': [('片段',4,4)],
+   '08': [('层次',4,3)], '09': [('对象',4,3)],
+   '12': [('行真值、列预测',6,4),('实验/候选',3,3)],
+   '14': [('阶段',8,4)], '16': [('记录',3,3),('批次',6,4)],
+   '18': [('表现',8,3)],
+  }
+  for chapter, tables in expected.items():
+   path=next((SOURCE/'chapters').glob(chapter+'-*.md'))
+   html,_=render(path.read_text(encoding='utf-8'))
+   for name, rows, columns in tables:
+    with self.subTest(chapter=chapter,table=name):
+     matches=re.findall(r'<table><thead><tr><th>'+re.escape(name)+r'</th>(.*?)</tr></thead><tbody>(.*?)</tbody></table>',html,re.S)
+     self.assertEqual(len(matches),1)
+     header, body=matches[0]
+     self.assertEqual(header.count('<th>')+1,columns)
+     data=re.findall(r'<tr>(.*?)</tr>',body,re.S)
+     self.assertEqual(len(data),rows)
+     self.assertEqual([row.count('<td>') for row in data],[columns]*rows)

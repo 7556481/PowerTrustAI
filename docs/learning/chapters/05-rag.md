@@ -10,7 +10,7 @@
 
 
 
-chinese_first_cross_language_v1候选先核对机构/标题目录，再决定是否进行一次中英查询转换。目录保留同机构多文档、同标题多版本，冲突/未知不能静默挑一个。它默认关闭；本轮固定稿审核完全没有重新打开70GB库。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)。
+chinese_first_cross_language_v1候选先核对机构/标题目录，再决定是否进行一次中英查询转换。目录保留同机构多文档、同标题多版本，冲突/未知不能静默挑一个。这是未采用的跨语言检索候选。后续固定稿审核沿用冻结材料。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)。
 
 
 
@@ -26,7 +26,7 @@ chinese_first_cross_language_v1候选先核对机构/标题目录，再决定是
 
 
 
-上轮固定证据回答诊断，以原中文问题问TO/DP边界建模及位置。A使用原检索的实际材料，C使用跨语言候选归档Evidence；没有重译问题，也没有把错误查询当事实来源。
+历史 retrieval-evidence-answer-check-v1 固定证据回答诊断，以原中文问题问TO/DP边界建模及位置。A使用原检索的实际材料，C使用跨语言候选归档Evidence；没有重译问题，也没有把错误查询当事实来源。
 
 
 
@@ -38,7 +38,7 @@ A原稿全文：
 
 
 
-C原稿全文（也是本轮审核前后相同的交付）：
+C原稿全文（也是后续自然初稿审核实验前后相同的交付）：
 
 
 
@@ -50,7 +50,7 @@ NERC指南指出，TO与DP在潮流、稳定分析和实时运行中的边界通
 
 
 
-A没有读到目标段，说明不足合理，不能称错误拒答。C的完整来源为NERC 2016 Reactive Power Planning，Transmission to Distribution Coordination / Modeling，Evidence e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247；实际抽取文件第37页，page_chars[0:1193)、page_lines[1:21]；目录、版本及引用绑定见[冻结案例](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/cases.md#)。两类位置及and/or保留，必答2/2。改善属于资料交付后的生成，本轮审核未增加正文收益。
+A没有读到目标段，说明不足合理，不能称错误拒答。C的完整来源为NERC 2016 Reactive Power Planning，Transmission to Distribution Coordination / Modeling，Evidence e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247；实际抽取文件第37页，page_chars[0:1193)、page_lines[1:21]；目录、版本及引用绑定见[冻结案例](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/cases.md#)。两类位置及and/or保留，必答2/2。改善属于资料交付后的生成，后续自然初稿审核实验未增加正文收益。
 
 
 
@@ -179,20 +179,15 @@ Generation用途检索围绕原问题，Verification可围绕冻结主张，Doma
 
 
 | 实际对象/函数 | 缓存键或范围 | 失效与仍执行的检查 |
-
 |---|---|---|
-
 | RetrievalSession.query_cache / retrieve | 同一run；knowledge_version、retriever.cache_identity、query、max_results、实际ContextOptions | 只在fact_query=True查询和写入；新run新字典，知识/模式/profile/查询/上下文变更另键；命中仍validate_result完整确定性重放 |
-
 | retrieve_facts内deliveries | 单次逐组件审核；完整规范查询字符串 | 本次同查询复用Delivery；下一轮重新创建字典，组件映射/回答版本重新绑定 |
-
 | KnowledgeStore._load_pdf_report | 只读连接局部；SQLite data_version/total_changes、知识、文档、版本、file_hash及缓存版本 | 外部提交改变stamp；可写Store禁用；返回deepcopy；容量达到8清空。不是排名/审核结论缓存 |
-
 | corpus_index._OPENED / seal | 进程内路径＋knowledge_version；已验证文件size/mtime_ns | stamp变化拒绝；新进程严格sidecar/库内manifest与全文件SHA；字节一致复用发布时SQLite/FTS/成员检查，不在每题全库SHA；逐命中原文和区间继续校验 |
 
 
 
-AsyncSQLiteBM25Retriever._work每次工作打开只读KnowledgeStore，所以PDF报告缓存不能跨这些新连接任意复用。aggregate普通检索不启用上述fact_query结果复用；不能把per_claim的优化写成默认aggregate行为。当前没有通用跨服务答案缓存或用缓存跳过必需审核。减少重放等其他优化只是建议，需要另行证据，未在本轮实现。
+AsyncSQLiteBM25Retriever._work每次工作打开只读KnowledgeStore，所以PDF报告缓存不能跨这些新连接任意复用。aggregate普通检索不启用上述fact_query结果复用；不能把per_claim的优化写成默认aggregate行为。当前没有通用跨服务答案缓存或用缓存跳过必需审核。减少重放等其他优化只是建议，需要另行证据，未在该缓存优化中实现。
 
 
 

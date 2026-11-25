@@ -6,17 +6,17 @@
 
 
 
-第一层检索必答槽，第二层同问题生成A→C，第三层同C稿审核前→后，第四层完整执行及存储。上轮16次生成是5净改善/3混合；忠实转换7题子集5改善/2混合，N6单列混合。正确完整必答槽A1/25→C19/25，C只有N1/N5/N7/N8完整覆盖。N3时点和始终要求仍残余；N2/N4/N6不能靠其他正确内容抵消关键错误。
+阅读目的：按阶段保留分母。以下是已冻结的证据回答和自然初稿审核实验，不是当前系统的综合评测成绩。第一层检索必答槽，第二层同问题生成A→C，第三层同C稿审核前→后，第四层完整执行及存储。固定证据回答实验的16次生成是5净改善/3混合；忠实转换7题子集5改善/2混合，N6单列混合。正确完整必答槽A1/25→C19/25，C只有N1/N5/N7/N8完整覆盖。N3时点和始终要求仍残余；N2/N4/N6不能靠其他正确内容抵消关键错误。
 
 
 
-本轮事前标准要求N2/N4均完整修对且至少2题完整改善、其他题无新增关键错误/删失，实际未达到。全部8份已见开发稿，AI辅助/用户监督复核，不能叫专家金标准或泛化准确率。[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
+自然初稿审核实验的事前标准要求N2/N4均完整修对且至少2题完整改善、其他题无新增关键错误/删失，实际未达到。全部8份已见开发稿，AI辅助/用户监督复核，不能叫专家金标准或泛化准确率。[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
 
 
 
 ::: answer 新增：为何N4不能记净改善？
 
-它得到更多正确材料，正确槽比A多，但新增无据排他限定；这是mixed。净改善要求整体收益不被关键新增错误破坏。应同时报覆盖增益与错误，不用平均分掩盖风险。本轮若正文没变，审核也不能继承上轮覆盖增益。[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)
+它得到更多正确材料，正确槽比A多，但新增无据排他限定；这是mixed。净改善要求整体收益不被关键新增错误破坏。应同时报覆盖增益与错误，不用平均分掩盖风险。自然初稿审核实验中正文未变时，覆盖增益仍计入固定证据回答实验。[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)
 
 :::
 
@@ -26,7 +26,7 @@
 
 
 
-【真实回归】A1/A3/A7/A2已经参与开发，本轮保留旧问题、答案、证据与参考，接口准入后各执行一次。它们仍能揭示局部引用、条件归属、证据不足等问题，但不能作为新的独立成绩。CT/TR/SW/RC、EIA/NRC与四来源24回答组件的旧协议各异，评测v7不能直接充当生产schema13；输入映射需另版、禁止夹带参考。[复用盘点](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-interface-consistency-v1/report.md#)。
+【历史严格接口验证，未采用】A1/A3/A7/A2已经参与开发。该验证保留旧问题、答案、证据与参考，接口准入后各执行一次。它们仍能揭示局部引用、条件归属、证据不足等问题，但不能作为新的独立成绩。CT/TR/SW/RC、EIA/NRC与四来源24回答组件的旧协议各异，评测v7不能直接充当生产schema13；输入映射需另版、禁止夹带参考。[复用盘点](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-interface-consistency-v1/report.md#)。
 
 
 
@@ -46,7 +46,7 @@
 
 
 
-【真实失败】本批工具信封3/3符合要求，合法参数0/3，最终接入0/1；28槽只执行A1，余27未发送。应保留全部分母，不能把3次函数返回当审核成功。没有合法事实/引用判断，也没有自然初稿，就不能评价错误认可或净收益；14,879token的低总量由停止造成，不是效率升级。[原参数和统计](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-review-tool-v1/report.md#)。
+【历史严格工具接口实验，未采用】该实验的工具信封3/3符合要求，合法参数0/3，最终接入0/1；28槽只执行A1，余27未发送。应保留全部分母，不能把3次函数返回当审核成功。没有合法事实/引用判断，也没有自然初稿，就不能评价错误认可或净收益；14,879token的低总量由停止造成，不是效率升级。[原参数和统计](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-review-tool-v1/report.md#)。
 
 
 
@@ -246,7 +246,7 @@ partition文件应保存原旧划分和新版本理由，不覆盖历史test归�
 
 
 
-本轮旧三份自然初稿在提取前分支；问题、原稿和生成快照相同，后续提取及检索仍可能不同。不能把全部终态差异归因一个消息改动。新题也由当前生成器各生成一次，不人为制造错误，没有修订机会不追加题目。旧题用于防退步，新设计但经本轮审阅的题目仍是开发验证。
+历史 natural-review-seam-v1 在提取前分支三份旧自然初稿。此例用于判断同稿对照控制了哪些变量；问题、原稿和生成快照相同，后续提取及检索仍可能不同。不能把全部终态差异归因一个消息改动。新题由该实验冻结的生成器各生成一次，不人为制造错误，没有修订机会不追加题目。旧题用于防退步，新设计但经该实验审阅的题目仍是开发验证。
 
 
 
