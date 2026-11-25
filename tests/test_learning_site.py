@@ -60,3 +60,19 @@ class PortableLearningLinksTests(unittest.TestCase):
    with self.assertRaisesRegex(ValueError,'Broken local anchor'):validate_local_links(root)
    (root/'index.html').write_text('<a href="chapter.html#present">chapter</a>')
    validate_local_links(root)
+
+
+class HistoricalChapterArchiveTests(unittest.TestCase):
+ def test_pre_reorganization_snapshots_are_byte_identical(self):
+  import hashlib,json
+  from tools.learning_site import SOURCE
+  for row in json.loads((SOURCE/'archive-v39-manifest.json').read_text(encoding='utf-8')):
+   self.assertEqual(hashlib.sha256((SOURCE/'archives'/row['file']).read_bytes()).hexdigest(),row['sha256'],row['file'])
+ def test_archive_page_identity_does_not_collide_with_current_chapter(self):
+  from tools.learning_site import SOURCE,page_key
+  self.assertNotEqual(page_key(SOURCE/'chapters/17-interview.md'),page_key(SOURCE/'archives/17-interview.md'))
+
+ def test_safe_compatibility_anchor_does_not_enable_arbitrary_html(self):
+  h,_=render('<a id="old-heading"></a>\n\n<a id="bad" onclick="alert(1)"></a>')
+  self.assertIn('<a id="old-heading"></a>',h)
+  self.assertNotIn('<a id="bad" onclick=',h)

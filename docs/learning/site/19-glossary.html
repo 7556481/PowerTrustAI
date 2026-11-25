@@ -1,96 +1,246 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19 术语词典：每个词对应哪个工程对象 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI 学习入口</a><a href="engineering-coverage.html">工程知识覆盖与证据清单</a><a href="resume-learning-map.html">最终交付能力学习索引</a><a href="engineering-verification-v37.html">正文深化v37内容验收</a><a href="engineering-verification-v36.html">工程手册v36内容与验证记录</a><a href="current-status.html">当前状态</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="21-product-contracts.html">21 从用户问题到可交付对象</a><a href="22-corpus-engineering.html">22 数据发布、事务与稳定原文身份</a><a href="23-search-boundaries.html">23 从SQL走到模型实际读到的证据</a><a href="24-model-wire.html">24 云端请求、结构纠正与未知费用</a><a href="25-agents-semantics.html">25 主张、支持关系与修订权限</a><a href="26-execution-control.html">26 图编排、关键路径与资源所有权</a><a href="27-service-storage.html">27 接单、存储、停服与旧版本读取</a><a href="28-browser-consistency.html">28 初稿、异步读取与字符标注</a><a href="29-evaluation-math.html">29 从指标分母到用户等待的可计算评测</a><a href="30-maintenance-practice.html">30 依赖、CI与安全删除的工程依据</a><a href="31-case-revision.html">31 修订合同：一处改动、两条意见和新版重审</a><a href="32-case-cross-language.html">32 案例：跨语言：目标交付与投入退出换义</a><a href="33-case-tantivy.html">33 案例：Tantivy：快读取为何没有快交付</a><a href="34-case-windows-writer.html">34 案例：Windows writer：直接证据与未知持有者</a><a href="35-case-overlap.html">35 Overlap：从任务创建推导终态时间</a><a href="36-case-ui-lifecycle.html">36 前端与生命周期：迟到响应怎样不再改错任务</a><a href="37-protocol-ledger-lab.html">37 协议字段与预算状态实操</a><a href="38-adjacent-foundations.html">38 邻接技术基础与个人经历边界</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a><a href="history-index.html">发布与研究历史索引</a><a href="current-status-2026-10-25.html">当前状态（2026-10-25，自然问答审核接缝封存）</a><a href="reading-history.html">学习首页的历史记录</a></nav><main><div class="version">源码基线 f953b1b3a54c · learning-site-v7.37 resume-aligned depth, 2026-11-24 · 教学示例与真实结果分别标记</div><article><h1 id="section-1"><span id="19-术语词典每个词对应哪个工程对象"></span>19 术语词典：每个词对应哪个工程对象</h1>
-<p>配置与实时服务状态统一见<a href="current-status.html" rel="noreferrer noopener">当前状态</a>。本章带日期的实验、ready／停服与“当前／默认”均按各段日期和绑定版本解释；代码摘录不自动升级为现行配置。</p>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>19 术语词典：每个词对应哪个工程对象 · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录"><a href="index.html">PowerTrustAI 学习入口</a><a href="engineering-coverage.html">工程知识覆盖与证据清单</a><a href="resume-learning-map.html">最终交付能力学习索引</a><a href="engineering-verification-v37.html">正文深化v37内容验收</a><a href="engineering-verification-v36.html">工程手册v36内容与验证记录</a><a href="current-status.html">当前状态</a><a href="01-product.html">01 产品目标、入口和处置含义</a><a href="02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="17-interview.html">17 深入面试、公式和代码练习</a><a href="18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a><a href="21-product-contracts.html">21 从用户问题到可交付对象</a><a href="22-corpus-engineering.html">22 数据发布、事务与稳定原文身份</a><a href="23-search-boundaries.html">23 从SQL走到模型实际读到的证据</a><a href="24-model-wire.html">24 云端请求、结构纠正与未知费用</a><a href="25-agents-semantics.html">25 主张、支持关系与修订权限</a><a href="26-execution-control.html">26 图编排、关键路径与资源所有权</a><a href="27-service-storage.html">27 接单、存储、停服与旧版本读取</a><a href="28-browser-consistency.html">28 初稿、异步读取与字符标注</a><a href="29-evaluation-math.html">29 从指标分母到用户等待的可计算评测</a><a href="30-maintenance-practice.html">30 依赖、CI与安全删除的工程依据</a><a href="31-case-revision.html">31 修订合同：一处改动、两条意见和新版重审</a><a href="32-case-cross-language.html">32 案例：跨语言：目标交付与投入退出换义</a><a href="33-case-tantivy.html">33 案例：Tantivy：快读取为何没有快交付</a><a href="34-case-windows-writer.html">34 案例：Windows writer：直接证据与未知持有者</a><a href="35-case-overlap.html">35 Overlap：从任务创建推导终态时间</a><a href="36-case-ui-lifecycle.html">36 前端与生命周期：迟到响应怎样不再改错任务</a><a href="37-protocol-ledger-lab.html">37 协议字段与预算状态实操</a><a href="38-adjacent-foundations.html">38 邻接技术基础与个人经历边界</a><a href="questions-for-chatgpt.html">与项目所有者和ChatGPT共同补充的问题</a><a href="history-index.html">发布与研究历史索引</a><a href="current-status-2026-10-25.html">当前状态（2026-10-25，自然问答审核接缝封存）</a><a href="reading-history.html">学习首页的历史记录</a><a href="history-01-product.html">01 产品目标、入口和处置含义</a><a href="history-02-architecture.html">02 全系统架构和一次请求的数据流</a><a href="history-03-agents.html">03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="history-04-harness.html">04 Harness：状态机、并发、有限纠正与完整重审</a><a href="history-05-rag.html">05 RAG全过程：从文件到可回查Evidence</a><a href="history-06-retrieval-math.html">06 BM25、Dense/E5、余弦、RRF与reranker</a><a href="history-07-corpus.html">07 大语料：流式构建、去重、事务和稳定身份</a><a href="history-08-verification.html">08 事实支持、提取忠实性和审核协议复杂度</a><a href="history-09-engineering-tools.html">09 工程审核、有限工具与两种缺口</a><a href="history-10-api-storage.html">10 API、UI、队列、SQLite与本机会话</a><a href="history-11-supervision-metrics.html">11 监督数据、家族划分、泄漏和评测分母</a><a href="history-12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果</a><a href="history-13-local-nli.html">13 本地NLI旁路：版本绑定、跳过与子进程</a><a href="history-14-code-tour.html">14 核心源码阅读路线：输入、调用、异常与取舍</a><a href="history-15-failures.html">15 真实失败复盘：从现象到证据，而非猜模型内因</a><a href="history-16-performance.html">16 性能与可观测性：测量到底属于谁</a><a href="history-17-interview.html">17 深入面试、公式和代码练习</a><a href="history-18-operations.html">18 环境、启动、Git、迁移与排障</a><a href="history-19-glossary.html">19 术语词典：每个词对应哪个工程对象</a><a href="history-20-workshops.html">20 八个综合工作坊：把概念落到对象和失败</a></nav><main><div class="version">源码基线 8b4fa25f507e · learning-site-v7.39 thematic reading and cases, 2026-11-25 · 教学示例与真实结果分别标记</div><article><h1 id="section-1"><span id="19-术语词典每个词对应哪个工程对象"></span>19 术语词典：每个词对应哪个工程对象</h1>
+<p>配置、启动与能力边界见<a href="current-status.html" rel="noreferrer noopener">当前状态</a>。先按<a href="resume-learning-map.html" rel="noreferrer noopener">最终机制正文</a>学习输入、状态、异常与验证；本章保留基础推导。历史实验不参与正式流程选择。</p>
 <h2 id="section-2"><span id="阅读约定"></span>阅读约定</h2>
 <p>词典用于回查，不替代前18章推导。每个词说明在本项目的具体含义和一个易混对象。遇到不同代码版本，优先manifest与源码；不要因为中文翻译相同而交换字段。</p>
 <h2 id="section-3"><span id="数据与依据"></span>数据与依据</h2>
 <ul>
 <li>TaskRequest：用户问题、模式和上下文组成的冻结任务。task_id是身份，不是问题文本摘要。</li>
+</ul>
+<ul>
 <li>AnswerDraft：某answer_id的一版实际回答，含正文和引用绑定。version变化必须独立审核，不是只改页面标题。</li>
+</ul>
+<ul>
 <li>Claim：从答案锚点提取的核验命题。它应忠实保留原意，不能为了得到supported改正确答案。</li>
+</ul>
+<ul>
 <li>Component：混合主张中的一个类型化义务。单个claim可包含正文、元数据和输入覆盖，依据不能混用。</li>
+</ul>
+<ul>
 <li>Proposition：规范化命题正文。规范化可以消除无关重复，但不能删除否定、数量、条件或立场。</li>
+</ul>
+<ul>
 <li>Assertion role：asserted/conditional/转述等立场，描述答案怎样表达命题。input_provided是义务，不自动等于input_report立场。</li>
+</ul>
+<ul>
 <li>Verification obligation：technical_truth、metadata_value、input_provided、answer_scope等核验责任。文字存在和事实为真不是同一义务。</li>
+</ul>
+<ul>
 <li>Evidence：实际可交付和回查的依据对象，包含正文、来源定位、适用性及provenance。相似度不属于事实证据。</li>
+</ul>
+<ul>
 <li>Provenance：文档/版本/片段/哈希/区间等来源轨迹。完整provenance证明可追溯，不证明出版物正确。</li>
+</ul>
+<ul>
 <li>Raw text：保留的原始文本；原始不等于权威。不能为优化搜索把它改成模型摘要。</li>
+</ul>
+<ul>
 <li>Search text：用于排序的派生搜索表示，可含标题/词项增强。它与Evidence原文分开，不能作为原文摘录回查。</li>
+</ul>
+<ul>
 <li>Locator：来源中的页、行、字符或分片/原行等位置。位置只有结合版本才有意义。</li>
+</ul>
+<ul>
 <li>半开区间：文本[start:end]包含start不包含end，便于无重叠拼接。错误off-by-one会漏/多一个字符。</li>
+</ul>
+<ul>
 <li>Document version：原件和解析/派生相关的版本身份。不是按文件名修改日期猜“最新”。</li>
+</ul>
+<ul>
 <li>Knowledge version：某个固定文档版本集合。缓存和向量必须匹配它，不随库更新静默变化。</li>
+</ul>
+<ul>
 <li>Quote candidate：从允许Evidence产生的字面摘录候选。模型选择ID而非猜offset，不证明该摘录支持命题。</li>
+</ul>
+<ul>
 <li>Quote ID：当前候选scope中的身份。不是可以在所有运行全局借用的原文索引。</li>
+</ul>
+<ul>
 <li>Scope：一次审核对象允许的输入边界。原引用scope与独立审核scope不同，同文字也不自动跨借。</li>
+</ul>
+<ul>
 <li>Condition carrier：完整既有quote承载的来源条件候选。它不是程序已证明必要的最小条件片段。</li>
+</ul>
+<ul>
 <li>Typed basis：text_excerpt、metadata_reference、answer_text_reference、input_snapshot_reference、calculation_result_reference等明确类型依据。</li>
+</ul>
+<ul>
 <li>Original citation：答案原本引用的资料区间。独立找到其他资料不能使原引用自动正确。</li>
+</ul>
+<ul>
 <li>Delivery：这一步真正交付给该对象的Evidence。全运行池有材料不表示每个组件读过。</li>
+</ul>
+<ul>
 <li>Snapshot：冻结输入或结果视图，记录当时的内容与身份。现在补检索不能修改历史交付快照。</li>
 </ul>
 <h2 id="section-4"><span id="检索与索引"></span>检索与索引</h2>
 <ul>
 <li>Token：分词器产生的单元，英文词、中文字/双字或WordPiece均可能。字符数和token数不能直接互换。</li>
+</ul>
+<ul>
 <li>Tokenizer version：分词行为身份。文档和查询用不同处理会让索引可建但不可正确命中。</li>
+</ul>
+<ul>
 <li>Jieba/HMM：中文分词组件及未知词统计路径。本项目固定词典和HMM关闭，不训练分词模型。</li>
+</ul>
+<ul>
 <li>TF：词在某片段的频次。BM25通过饱和分式使用它，不是次数线性相加。</li>
+</ul>
+<ul>
 <li>DF：实际参与BM25统计的索引语料集合中含该词的片段数，用于IDF；不是重排序候选池中的计数。统计语料/知识版本变化可能改变DF，裁剪reranker池不自动改变索引DF。</li>
+</ul>
+<ul>
 <li>IDF：稀有词贡献，项目小库采用正值对数形式。稀有不等于权威。</li>
+</ul>
+<ul>
 <li>BM25：基于TF/DF/长度的相关性排序。score不是支持概率。</li>
+</ul>
+<ul>
 <li>FTS5：SQLite全文倒排扩展。中文能力来自显式预分词，不是扩展名称本身。</li>
+</ul>
+<ul>
 <li>Posting：词到出现文档/位置的列表。倒排避免每题扫描全部原文，仍有候选和回查成本。</li>
+</ul>
+<ul>
 <li>Embedding：模型派生的向量表示。不能代替原文或修正出版错误。</li>
+</ul>
+<ul>
 <li>E5：当前可选多语言双塔编码器，query/passage前缀属于profile。</li>
+</ul>
+<ul>
 <li>Pooling：把token或窗口表示聚合为向量。平均与归一化次序影响结果。</li>
+</ul>
+<ul>
 <li>L2 normalization：向量除范数，使点积可等于余弦。零范数/非有限值需拒绝。</li>
+</ul>
+<ul>
 <li>Cosine：方向相似性；归一化后点积。0.96不表示96%真实。</li>
+</ul>
+<ul>
 <li>RRF：按排名倒数融合，缺失路无贡献。多路出现不等于多个独立证据证明。</li>
+</ul>
+<ul>
 <li>Cross-encoder：把查询与候选一起编码的排序/分类模型。不同于预计算每文档向量的双塔。</li>
+</ul>
+<ul>
 <li>Reranker：重排给定候选池；不能召回池外资料。</li>
+</ul>
+<ul>
 <li>Top-k：输出核心候选数量，与检索深度和上下文数量不同。</li>
+</ul>
+<ul>
 <li>Context：有界相邻片段；保持独立身份，不伪造核心排名。</li>
+</ul>
+<ul>
 <li>Candidate pool：固定可比较候选集合。扩大池会改变可召回上限，不能只将效果归给排序。</li>
+</ul>
+<ul>
 <li>Profile：模型revision、文件哈希、维数、精度、池化、窗口及编码处理的联合配置。</li>
 </ul>
 <h2 id="section-5"><span id="判断与执行"></span>判断与执行</h2>
 <ul>
 <li>Supported：给定对象由实际合法依据支持，不等于总体回答通过。</li>
+</ul>
+<ul>
 <li>Contradicted：有依据冲突；没有依据不是矛盾。</li>
+</ul>
+<ul>
 <li>Insufficient evidence：支持/反驳所需依据不够，可能可补资料，不机械触发Revision。</li>
+</ul>
+<ul>
 <li>Not assessable：对象不能有效评估或存在未解决分类/忠实性异议；不等于模型接口失败。</li>
+</ul>
+<ul>
 <li>Fidelity：提取对象对答案原文的忠实程度，和事实支持分开。</li>
+</ul>
+<ul>
 <li>Severity：发现影响严重度，与真假及最终处置分别记录。</li>
+</ul>
+<ul>
 <li>Disposition：通过/不通过/待补充/复核/执行未完成等业务处置。</li>
+</ul>
+<ul>
 <li>Resolution：当前问题完整、部分或无法回答，不用“合法JSON”代替。</li>
+</ul>
+<ul>
 <li>Harness：受控流程执行器，不是另一个无限自主模型。</li>
+</ul>
+<ul>
 <li>Observer：阶段事件的记录者，不发起新业务调用。</li>
+</ul>
+<ul>
 <li>Structured correction：一次有限输出格式纠正，修接口不等于修答案。</li>
+</ul>
+<ul>
 <li>Revision：针对审核发现生成新答案版本，需全重提取和双重审。</li>
+</ul>
+<ul>
 <li>Raw judgment：模型真实原始判断。有效派生可以更保守，但不得覆盖原判断。</li>
+</ul>
+<ul>
 <li>Effective judgment：程序根据合法异议、条件和责任计算的可用于处置状态。</li>
+</ul>
+<ul>
 <li>Deadline：剩余墙钟期限。达到期限不应再发新调用。</li>
+</ul>
+<ul>
 <li>ModelBudget：每运行实际请求资源账本，不由提示文本自报控制。</li>
+</ul>
+<ul>
 <li>ContextVar：协程上下文变量，用于阶段调用归属；并发任务共享run预算但有独立invocation。</li>
+</ul>
+<ul>
 <li>Drain：等待底层线程/模型工作安全结束再关闭或复用，不是强杀。</li>
 </ul>
 <h2 id="section-6"><span id="数据训练与运维"></span>数据、训练与运维</h2>
 <ul>
 <li>Pending/confirmed/hold：待审、用户授权确认和暂缓分流；confirmed非专家金标准。</li>
+</ul>
+<ul>
 <li>Parent lineage：任务变体父谱系。跨集合共享会产生开发泄漏。</li>
+</ul>
+<ul>
 <li>Family：通过概念、父关系、共享证据和近重复合并的关联组，不能按模型成绩拆分。</li>
+</ul>
+<ul>
 <li>Document holdout：另一文档留出，不参与训练、验证、选模型或checkpoint。</li>
+</ul>
+<ul>
 <li>Macro-F1：各类F1等权平均，需明确有效集合和类定义。</li>
+</ul>
+<ul>
 <li>False supported：误预测supported；4/23与4/14两个分母不同。</li>
+</ul>
+<ul>
 <li>Logits：分类头未归一原始分数，不是可信概率。</li>
+</ul>
+<ul>
 <li>Checkpoint：模型参数及配置的保存版本。best必须有事前选择规则与哈希。</li>
+</ul>
+<ul>
 <li>Seed：随机状态条件之一，不保证跨所有平台逐位复现。</li>
+</ul>
+<ul>
 <li>Parquet batch：流式读取小批列式数据，不把全库转Python列表。</li>
+</ul>
+<ul>
 <li>Internal row ID：缺原ID时固定revision/分片/绝对行号生成的明确内部身份，不冒充原出版ID。</li>
+</ul>
+<ul>
 <li>Exact dedup：正文SHA一致的精确去重，来源谱系仍保留。</li>
+</ul>
+<ul>
 <li>Transaction：数据与断点同成功/同回滚的原子写入单位。</li>
+</ul>
+<ul>
 <li>WAL：SQLite预写日志模式，帮助快照读取与单写者协调，不是多写者并行保证。</li>
+</ul>
+<ul>
 <li>Immutable publication：构建后封印并独立发布新文件，不能边改边作为固定快照服务。</li>
+</ul>
+<ul>
 <li>Local session：本机引导换取的HttpOnly会话；DeepSeek密钥仍服务端。</li>
+</ul>
+<ul>
 <li>Idempotency：相同提交不产生重复任务的服务端协议；当前页按钮锁不等于此能力。</li>
 </ul>
 <h2 id="section-7"><span id="三道自测先作答再展开"></span>三道自测：先作答，再展开</h2>
@@ -99,4 +249,7 @@
 <h3 id="section-9"><span id="自测2checkpoint文件名best证明什么"></span>自测2：checkpoint文件名best证明什么？</h3>
 <details class="self-answer"><summary>展开参考答案2</summary><p>没有选择规则/封印哈希时不能证明是合法最优选择。</p></details>
 <h3 id="section-10"><span id="自测3logit是不是概率"></span>自测3：logit是不是概率？</h3>
-<details class="self-answer"><summary>展开参考答案3</summary><p>不是；softmax也只是未校准分数，不是事实可信度。</p></details></article><footer><a href="18-operations.html">← 18 环境、启动、Git、迁移与排障</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">阅读约定</a><a href="#section-3">数据与依据</a><a href="#section-4">检索与索引</a><a href="#section-5">判断与执行</a><a href="#section-6">数据、训练与运维</a><a href="#section-7">三道自测：先作答，再展开</a><a href="#section-8">自测1：typed basis与Evidence有何差别？</a><a href="#section-9">自测2：checkpoint文件名best证明什么？</a><a href="#section-10">自测3：logit是不是概率？</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<details class="self-answer"><summary>展开参考答案3</summary><p>不是；softmax也只是未校准分数，不是事实可信度。</p></details>
+<h2 id="section-11"><span id="历史索引按需展开"></span>历史索引（按需展开）</h2>
+<p><a href="history-19-glossary.html" rel="noreferrer noopener">本章整理前完整快照</a>逐字保留旧公式、源码、口述和失败记录；原锚点在下面提供归档定位。</p>
+<details class="self-answer"><summary>展开历史标题定位（不是当前面试稿）</summary></details></article><footer><a href="18-operations.html">← 18 环境、启动、Git、迁移与排障</a><a href="20-workshops.html">20 八个综合工作坊：把概念落到对象和失败 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">阅读约定</a><a href="#section-3">数据与依据</a><a href="#section-4">检索与索引</a><a href="#section-5">判断与执行</a><a href="#section-6">数据、训练与运维</a><a href="#section-7">三道自测：先作答，再展开</a><a href="#section-8">自测1：typed basis与Evidence有何差别？</a><a href="#section-9">自测2：checkpoint文件名best证明什么？</a><a href="#section-10">自测3：logit是不是概率？</a><a href="#section-11">历史索引（按需展开）</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

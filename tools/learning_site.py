@@ -109,6 +109,8 @@ def render(markdown, link_resolver=None):
             out.append('<li>'+inline_local(re.sub(r'^(?:- |\d+\. )','',line))+'</li>')
         elif line.startswith('> '):flush();close_list();out.append('<blockquote>'+inline_local(line[2:])+'</blockquote>')
         elif not line.strip():flush();close_list()
+        elif re.fullmatch(r'<a id="[\w-]+"></a>',line):
+            flush();close_list();out.append(line)
         elif line.startswith('<!--'):flush();close_list()
         else:paragraph.append(line)
         i+=1
@@ -124,6 +126,8 @@ def source_link_resolver(source, page_targets):
         candidate=(source.parent/unquote(path)).resolve()
         if candidate in page_targets:
             return page_targets[candidate]+(separator+fragment if separator else '')
+        if candidate.suffix=='.html' and candidate.with_suffix('.md') in page_targets:
+            return page_targets[candidate.with_suffix('.md')]+(separator+fragment if separator else '')
         # Preserve old flat chapter links while maintained Markdown uses real paths.
         if Path(path).suffix in ('.html','.md'):
             matches=[value for key,value in page_targets.items() if key.stem==Path(path).stem]
@@ -134,23 +138,27 @@ def source_link_resolver(source, page_targets):
     return resolve
 
 
+def page_key(path):
+    return ('history-' if path.parent.name=='archives' else '')+path.stem
+
+
 def build():
     DEST.mkdir(parents=True,exist_ok=True)
     chapters=sorted((SOURCE/'chapters').glob('*.md'))
     pages=[SOURCE/'index.md',SOURCE/'engineering-coverage.md',SOURCE/'resume-learning-map.md',SOURCE/'engineering-verification-v37.md',SOURCE/'engineering-verification-v36.md',ROOT/'docs/current-status.md',*chapters,SOURCE/'questions-for-chatgpt.md',
            ROOT/'docs/history-index.md',
-           ROOT/'docs/current-status-2026-10-25.md',SOURCE/'reading-history.md']
-    page_targets={p.resolve():p.stem+'.html' for p in pages}
+           ROOT/'docs/current-status-2026-10-25.md',SOURCE/'reading-history.md',*sorted((SOURCE/'archives').glob('*.md'))]
+    page_targets={p.resolve():page_key(p)+'.html' for p in pages}
     version=json.loads((SOURCE/'source-version.json').read_text(encoding='utf-8'))
-    names={p.stem:next(x[2:] for x in p.read_text(encoding='utf-8').splitlines() if x.startswith('# ')) for p in pages}
-    nav=''.join('<a href="'+p.stem+'.html">'+html.escape(names[p.stem])+'</a>' for p in pages)
+    names={page_key(p):next(x[2:] for x in p.read_text(encoding='utf-8').splitlines() if x.startswith('# ')) for p in pages}
+    nav=''.join('<a href="'+page_key(p)+'.html">'+html.escape(names[page_key(p)])+'</a>' for p in pages)
     search=[];stats=[]
     for n,p in enumerate(pages):
         text=p.read_text(encoding='utf-8');body,toc=render(text,source_link_resolver(p,page_targets))
         page_toc=''.join('<a href="#'+a+'">'+html.escape(t)+'</a>' for level,t,a in toc if level in (2,3))
-        adjacent=('<a href="'+pages[n-1].stem+'.html">← '+html.escape(names[pages[n-1].stem])+'</a>' if n else '')+('<a href="'+pages[n+1].stem+'.html">'+html.escape(names[pages[n+1].stem])+' →</a>' if n+1<len(pages) else '')
-        content='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(names[p.stem])+' · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录">'+nav+'</nav><main><div class="version">源码基线 '+html.escape(version['application_commit'][:12])+' · '+html.escape(version['document_version'])+' · 教学示例与真实结果分别标记</div><article>'+body+'</article><footer>'+adjacent+'</footer></main><aside aria-label="本章目录">'+page_toc+'</aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>'
-        (DEST/(p.stem+'.html')).write_text(content,encoding='utf-8');search.append({'title':names[p.stem],'url':p.stem+'.html','text':text});stats.append({'source':p.relative_to(ROOT).as_posix(),'characters':len(text),'sha256':hashlib.sha256(text.encode()).hexdigest()})
+        adjacent=('<a href="'+page_key(pages[n-1])+'.html">← '+html.escape(names[page_key(pages[n-1])])+'</a>' if n else '')+('<a href="'+page_key(pages[n+1])+'.html">'+html.escape(names[page_key(pages[n+1])])+' →</a>' if n+1<len(pages) else '')
+        content='<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(names[page_key(p)])+' · PowerTrustAI学习站</title><link rel="stylesheet" href="style.css"><body><header><a href="index.html">PowerTrustAI / 项目学习与面试</a><button id="menu" aria-expanded="false">目录</button><label>全文搜索<input id="search" type="search" placeholder="条件、RRF、Revision…"></label></header><div id="search-results" aria-live="polite" hidden></div><div class="layout"><nav id="chapters" aria-label="章节目录">'+nav+'</nav><main><div class="version">源码基线 '+html.escape(version['application_commit'][:12])+' · '+html.escape(version['document_version'])+' · 教学示例与真实结果分别标记</div><article>'+body+'</article><footer>'+adjacent+'</footer></main><aside aria-label="本章目录">'+page_toc+'</aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>'
+        (DEST/(page_key(p)+'.html')).write_text(content,encoding='utf-8');search.append({'title':names[page_key(p)],'url':page_key(p)+'.html','text':text});stats.append({'source':p.relative_to(ROOT).as_posix(),'characters':len(text),'sha256':hashlib.sha256(text.encode()).hexdigest()})
     for name in ('style.css','site.js'): (DEST/name).write_bytes((SOURCE/'assets'/name).read_bytes())
     (DEST/'search-data.js').write_text('window.learningSearch='+json.dumps(search,ensure_ascii=False).replace('<','\\u003c')+';',encoding='utf-8')
     (DEST/'build-manifest.json').write_text(json.dumps({'version':version,'chapters':stats,'markdown_characters':sum(s['characters'] for s in stats),'network_dependencies':False},ensure_ascii=False,indent=2),encoding='utf-8')
