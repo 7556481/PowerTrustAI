@@ -637,103 +637,103 @@
     },
     {
       "source": "docs/learning/chapters/01-product.md",
-      "characters": 4133,
-      "sha256": "62ae4155f1e9f666a2f1fc818e4eeb4cb1532131d0f6c799766dda53152abbe0"
+      "characters": 4120,
+      "sha256": "818da4943814e65abb1f760fcc34b081ba665be2420b243db0297fba46205e1d"
     },
     {
       "source": "docs/learning/chapters/02-architecture.md",
-      "characters": 8902,
-      "sha256": "ec8b8742d0d83c36488337816f3eb92858cb0a7b01c0039fa38899d47eda750e"
+      "characters": 9103,
+      "sha256": "d9bdf5c2ab56cf049f11ccef97ba95d0e13f1ab8ab6e1c65241d0ac1207d1f4e"
     },
     {
       "source": "docs/learning/chapters/03-agents.md",
-      "characters": 5093,
-      "sha256": "50b9d76e0c1c49f65c79870c170045411e1ba6710c2cbf3647738dff053a5afd"
+      "characters": 5198,
+      "sha256": "aaa2642102fc4f7906a0604256e3641f79e25151f9fc9df3c05c1316f0d13f52"
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 11157,
-      "sha256": "c929f548d453e8a6a6bbdaecf9dc86cb5d8d53a0f5ea9c3839220acca705a883"
+      "characters": 11176,
+      "sha256": "18ab0e1eb17570a6d17b3e9ac5d6987c39e4dc1aa4af21569ccfa0ae098c6a64"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 7137,
-      "sha256": "7b6f4fb6f7f6bd262568044469f9300b465a9c48decb4c7794942388db49f49b"
+      "characters": 7381,
+      "sha256": "704988f862ef480f0d4515a1b701ae8a946a95d6085943163b1860c1c1b60ee0"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
-      "characters": 5478,
-      "sha256": "7740ddbb8bd8ec629d55d6116cc4fd38bae35041a5482c10dc426b6bc2d5e0c8"
+      "characters": 5593,
+      "sha256": "2b79a09b7bafc9c29b173b4f6551a33a8dcde4b87fc413e9724017928fd05f6f"
     },
     {
       "source": "docs/learning/chapters/07-corpus.md",
-      "characters": 4659,
-      "sha256": "589bdf726d9ad3f41b31abfdb19d842629538b0c8d0e9cc0c391a05ee3361499"
+      "characters": 4788,
+      "sha256": "5c1079eaa4b5f4c1e363eb68238c476fd89688ce9dae1e1e873eee516de63c21"
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 8856,
-      "sha256": "976c4549c6ba648fc2dae40f6d8701f5038689eeb2cdfb9aa8b9f12be8cfbfd4"
+      "characters": 8870,
+      "sha256": "c275b17d33c79f48b2be85245b665b73abb2b90ec517dc1e6ebc72468d6f795a"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
-      "characters": 3365,
-      "sha256": "541636e528e0ff97ee0263381a4438920d3513880fa8385d7a598651d39e3f0a"
+      "characters": 3356,
+      "sha256": "c8679b3d6a7366fdabb16de6605b2194a6d749022f1540888edd7b60f3d8517e"
     },
     {
       "source": "docs/learning/chapters/10-api-storage.md",
-      "characters": 4401,
-      "sha256": "35a496edf27fb6d078299ba39de8edae67bde53e37cc5928a03f189e223072b7"
+      "characters": 4398,
+      "sha256": "aa73c3c815f72c57c9f77dc8f8089c8f3aef1a3ac1ed81be647e44cfec76aa20"
     },
     {
       "source": "docs/learning/chapters/11-supervision-metrics.md",
-      "characters": 6691,
-      "sha256": "7aa2e37647aaac4e7163eaad7cfef50cd6956b0002e5263a9d76a5509776f23b"
+      "characters": 6678,
+      "sha256": "c5f61e3ad22c9ca72093198d54e80b4eeb1164b124b5c8c7050d60ef3a53ab6a"
     },
     {
       "source": "docs/learning/chapters/12-training-nli.md",
-      "characters": 6924,
-      "sha256": "43049392400b5ced735cb90328c201854517d63cbdb01cf6ac8d23c3d4018652"
+      "characters": 7056,
+      "sha256": "09e9a75226d25ff138254d1c6e9114ddf90d4a3fc14d3f5d967abaab9281afeb"
     },
     {
       "source": "docs/learning/chapters/13-local-nli.md",
-      "characters": 2378,
-      "sha256": "86376bbba7dcaddcc29baa2a12344f496a37c781ee81836c826bc5540f9daef6"
+      "characters": 2413,
+      "sha256": "0d8c74a3cc2a6e3ff09d1c510b862a4d560694c865026d92b32e1423c62bf60f"
     },
     {
       "source": "docs/learning/chapters/14-code-tour.md",
-      "characters": 7269,
-      "sha256": "6fa5b6d19b0dcfc2caa07eb7d2a24a86f89fb548a0f9678d3b89f505f340ed46"
+      "characters": 7300,
+      "sha256": "fe52515ab7786f8a881a8afb7e96a073d581a1c3d2bd771f2e216b0b09840273"
     },
     {
       "source": "docs/learning/chapters/15-failures.md",
-      "characters": 5749,
-      "sha256": "9662f3b93292a231da5f82ce59e881714983b4a312630a8d9302d7f9398d0a09"
+      "characters": 5734,
+      "sha256": "f0c0d272fbf58cbae5c408b32b72bba9563c6e533e84e89571156d4a2c3ea514"
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 7171,
-      "sha256": "25cdb597b2d5342c46dd6871aeb2bead879b100539260ff3e38f75ea835b60f7"
+      "characters": 7159,
+      "sha256": "9efedc5b91f9ceddea877154617a49c3038f147c84e82678ae89980c5664e41e"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
-      "characters": 4864,
-      "sha256": "4130f352f06d91d7eef43c80f401079d988ab5982717fa63a4673c11a7f9c3d6"
+      "characters": 4851,
+      "sha256": "10a2cedb7f5ae6e84d215ae390bbe070d118dc1fe1218d927f3cc85bbe9f77bd"
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 7582,
-      "sha256": "a2d6dffa2aab1bd72b841687a50c678f16f02d38324a73da460774fdfa2d212b"
+      "characters": 7577,
+      "sha256": "af80c45367df57bc0ca42d0dd8e3b6a3e8b3a7a3e9fb1d52b5655d77729be81b"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
-      "characters": 4492,
-      "sha256": "d03cc88732c2a20c99ca4deb125c4e5c72bb4c0c35c7f895232d1515261a8758"
+      "characters": 4480,
+      "sha256": "f15ba4ab728e74fdf602ef1d23260b2181015ca6fa67ef437810e9e3799eb151"
     },
     {
       "source": "docs/learning/chapters/20-workshops.md",
-      "characters": 6570,
-      "sha256": "1eac73ad9e0a13b6a14050ea3259f089917b862177be3bef7e37814cbacf6ad9"
+      "characters": 6559,
+      "sha256": "eeca4949c2ce919ba2b84483d6a5104dffda12fdc853e9b8fd91e871e09dbfcb"
     },
     {
       "source": "docs/learning/chapters/21-product-contracts.md",
@@ -772,8 +772,8 @@
     },
     {
       "source": "docs/learning/chapters/28-browser-consistency.md",
-      "characters": 1728,
-      "sha256": "03467b032fb1ca6b97e479df05084da0f895932086b51dfdb8b5d96b602e51d0"
+      "characters": 1781,
+      "sha256": "33d9e80e7fb8e992f860a1371582a23b105f34c73d8213d31f53f8f8b0553c97"
     },
     {
       "source": "docs/learning/chapters/29-evaluation-math.md",
@@ -812,8 +812,8 @@
     },
     {
       "source": "docs/learning/chapters/36-case-ui-lifecycle.md",
-      "characters": 2395,
-      "sha256": "1882e7d5df12555415c7b35eed796e2faf7446458f61747cf30d506715987993"
+      "characters": 2838,
+      "sha256": "59673c953f4a479d407aeb6a449ca74f4d1c85783905f72da9afabcd0bbf4cd8"
     },
     {
       "source": "docs/learning/chapters/37-protocol-ledger-lab.md",
@@ -946,6 +946,6 @@
       "sha256": "a9f074460d5accd5ef9095f651f98bd351fb2c6cd93200c29f6367ed6b5adb24"
     }
   ],
-  "markdown_characters": 387731,
+  "markdown_characters": 389146,
   "network_dependencies": false
 }

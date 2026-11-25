@@ -1,6 +1,6 @@
 # 05 RAG全过程：从文件到可回查Evidence
 
-配置、启动与能力边界见[当前状态](../../current-status.md)。先按[最终机制正文](23-search-boundaries.md)学习输入、状态、异常与验证；本章保留基础推导。历史实验不参与正式流程选择。
+配置、启动与能力边界见[当前状态](../../current-status.md)。本章跟踪一段原文怎样成为证据。读完可到[第23章](23-search-boundaries.md)，用实际 SQL 和交付记录定位资料在哪一步丢失。
 
 ## 资料在哪里丢失：存在、命中、交付是三件事
 
@@ -50,11 +50,33 @@ NERC指南指出，TO与DP在潮流、稳定分析和实时运行中的边界通
 
 
 
-A没有读到目标段，说明不足合理，不能称错误拒答。C的完整来源为NERC 2016 Reactive Power Planning，Transmission to Distribution Coordination / Modeling，Evidence e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247；实际抽取文件第37页，page_chars[0:1193)、page_lines[1:21]；目录、版本及引用绑定见[冻结案例](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/cases.md#)。两类位置及and/or保留，必答2/2。改善属于资料交付后的生成，后续自然初稿审核实验未增加正文收益。
+A 收到的资料没有目标建模段，说明资料不足符合当时实际输入。C 引用 NERC 2016《Reactive Power Planning》的 Transmission to Distribution Coordination / Modeling 小节，位于抽取文件第 37 页，`page_chars[0:1193)`、`page_lines[1:21]`。核对原文可见 C 保留了两类位置及 and/or 的关系，覆盖两项必答点。改善来自交付目标资料后重新生成，后续自然初稿审核实验未增加正文收益。
 
 
 
-归档身份核对：A运行f7dc7f6eb45b40e8a73e8d26c15ead75，实际来源示例为dataset-record-eb646d26de0626d5f5609d11a1adc4ac5b93f5b0838fa0faed1eda141ef0ec03，版本e15146cdf43916c5833e6ff91c1956ecec6f596717bbf74915e7332662db4662，Evidence e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140，定位shard=chinese/middle/rank_00415.parquet;row=67967;record=397600026370;chars[2101:3158)，类型industry_corpus_unverified；不是NERC官方建模段。C运行ab2d55acdd994b4782b0fb4abeaf72a8，实际来源nerc-reactive-planning-2016，版本dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193；上述页37原文Evidence来自它。示例不能冒充全部来源，逐Evidence映射及实际快照哈希见冻结案例；今天只读公开归档，不重检索或生成。
+::: answer 展开案例身份与回查信息
+A 路示例是未核实的语料记录，来源类型为 `industry_corpus_unverified`。
+
+```text
+运行 ID     f7dc7f6eb45b40e8a73e8d26c15ead75
+来源        dataset-record-eb646d26de0626d5f5609d11a1adc4ac5b93f5b0838fa0faed1eda141ef0ec03
+版本        e15146cdf43916c5833e6ff91c1956ecec6f596717bbf74915e7332662db4662
+Evidence    e-a3b05eaf89e8e55745237c6123ca44cf3d409683836459b71c6fd9720cfe5140
+范围        shard=chinese/middle/rank_00415.parquet;row=67967;record=397600026370;chars[2101:3158)
+```
+
+C 路示例是上述 NERC 指南第 37 页的建模段。
+
+```text
+运行 ID     ab2d55acdd994b4782b0fb4abeaf72a8
+来源        nerc-reactive-planning-2016
+版本        dbf1bc7c3e57ae2b3b70b01a677eb0ac1479873fdcc7075eb101c93e1f54e193
+Evidence    e-62aa9c4011e99f7ace774dff4a002625d1e319d8aee364b0154c5eaddccbc247
+范围        第 37 页，page_chars[0:1193)、page_lines[1:21]
+```
+
+逐条 Evidence 映射、引用绑定及实际快照哈希见[冻结案例](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/cases.md#)。
+:::
 
 
 
@@ -217,7 +239,7 @@ AsyncSQLiteBM25Retriever._work每次工作打开只读KnowledgeStore，所以PDF
 
 ::: answer 展开参考答案2
 
-不能；查询/排名/预算都可能限制交付。
+交付记录能确认生成阶段收到了哪些资料。若缺少目标原文，先查源片段是否存在，再核对原查询的 MATCH 与候选排名；若已命中，最后看邻接或预算裁剪是否把必要段落留在模型输入之外。
 
 :::
 

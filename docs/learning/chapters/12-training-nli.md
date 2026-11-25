@@ -1,6 +1,6 @@
 # 12 BERT-Tiny、MiniLM与一次训练的真实结果
 
-配置、启动与能力边界见[当前状态](../../current-status.md)。先按[最终机制正文](38-adjacent-foundations.md)学习输入、状态、异常与验证；本章保留基础推导。历史实验不参与正式流程选择。
+配置、启动与能力边界见[当前状态](../../current-status.md)。本章为历史选修。先读[第11章](11-supervision-metrics.md)的监督数据与评测分母，再学习本章的分类模型训练。当前产品主线不依赖这些训练结果。
 
 本章为**历史／选修**，训练与NLI不是正式产品必经链。
 
@@ -150,11 +150,13 @@ tokenizer输出input_ids和attention_mask。input_ids是词表索引，不是词
 
 
 
-## 为什么早停选择同分最早
+<a id="为什么早停选择同分最早"></a>
+
+## 为什么验证同分时选择最早的检查点
 
 
 
-本次4epoch验证macro-F1完全相同，训练loss继续逼近0。选择最早最高epoch1避免以“多训肯定更好”替代证据，也不从SSIAG错误挑epoch。selection-seal保存best_epoch、配置/冻结清单和checkpoint文件哈希，并声明封存前留出预测0。
+本实验完成了冻结的四个 epoch。四轮验证 macro-F1 完全相同，训练 loss 继续下降。[训练循环](../../../evaluation/support_training.py)只在验证分数严格提高时更新最佳检查点，因此保留 epoch 1；分数持平时仍继续训练。这里选择的是训练结束后使用哪轮权重。真正的早停会在达到预设条件时提前结束训练。selection-seal 保存 best_epoch、配置和冻结清单及检查点哈希，封存前的留出预测数为 0。
 
 
 

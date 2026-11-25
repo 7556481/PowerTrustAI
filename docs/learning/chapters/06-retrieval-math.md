@@ -1,6 +1,6 @@
 # 06 BM25、Dense/E5、余弦、RRF与reranker
 
-配置、启动与能力边界见[当前状态](../../current-status.md)。先按[最终机制正文](23-search-boundaries.md)学习输入、状态、异常与验证；本章保留基础推导。历史实验不参与正式流程选择。
+配置、启动与能力边界见[当前状态](../../current-status.md)。先读[第05章](05-rag.md)区分候选池和实际交付，再用本章手算排序。BM25 用于产品主线；Dense、RRF 和重排是历史选修。
 
 ## 为什么要学公式，而不是只记名称
 
@@ -38,11 +38,13 @@ IDF=ln(1+0.5/4.5)=0.105361。D1长度3、词出现2次，TF因子=5/[2+1.5*(0.25
 
 
 
-## Dense与E5：从token到384维向量
+<a id="dense与e5从token到384维向量"></a>
+
+## 历史可选实现：Dense 与 E5 从 token 到 384 维向量
 
 
 
-rag/embedding.py固定multilingual-e5-small revision 614241…，CPU ONNX、384维FP32。输入前缀query: / passage:标识任务，不改Evidence原文。模型产生batch×token×384的hidden，attention mask排除padding，做有效token均值。长passage用480 token窗口、448步长；窗口均值等权平均，最后L2归一化。query超512拒绝，不静默截断。
+下述 E5 配置来自历史可选实现，正式受管服务使用 SQLite 全文检索。rag/embedding.py固定multilingual-e5-small revision 614241…，CPU ONNX、384维FP32。输入前缀query: / passage:标识任务，不改Evidence原文。模型产生batch×token×384的hidden，attention mask排除padding，做有效token均值。长passage用480 token窗口、448步长；窗口均值等权平均，最后L2归一化。query超512拒绝，不静默截断。
 
 
 
@@ -64,7 +66,9 @@ L2归一化后：cos(q,d) = q·d
 
 
 
-## RRF：为何按名次而不是分数相加
+<a id="rrf为何按名次而不是分数相加"></a>
+
+## 历史选修：RRF 为何按名次融合
 
 
 

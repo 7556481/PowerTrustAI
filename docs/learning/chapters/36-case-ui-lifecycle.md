@@ -2,19 +2,10 @@
 
 本页复用[2026-10-27维护证据](../../maintenance/product-polish-ui-code-hygiene-v1.md)及其验证清单。页面均为synthetic_fixture，未证明审核语义收益。配置统一见[当前状态](../../current-status.md)。
 
-## 故障一：旧A响应覆盖新B
-教学时序：t0选择A并发GET；t1切到B，epoch递增；t2 B先返回并展示；t3 A迟到。如果回调只写全局result，用户看到标题B却是A的答案/引用。仅禁用选择按钮会把用户困在慢A，不能解决归属。
+## 故障一：旧任务收尾时，新任务仍在读取
+先做[第28章的返回顺序基础题](28-browser-consistency.md)，本章接着查异步操作的收尾。即使旧响应已经被 epoch 守卫丢弃，退出 `try` 后仍会执行 `finally`。如果它无条件把 `reading` 置为 false，就可能允许另一轮读取抢在当前读取之前启动。
 
-[app.js](../../../backend/static/app.js)在请求发出时捕获任务/连接epoch与读取身份，返回及finally均检查是否仍属于当前选择。A迟到既不能写正文，也不能让旧finally释放B的新请求锁。Abort旧GET减少浪费，但取消可能发生在响应已送达之后，所以仍需要归属守卫。
-
-|事件|当前选择|回调归属|允许动作|
-|---|---|---|---|
-|A发送|A|epoch1/A|等待|
-|切B|B|epoch2/B|建立B读取|
-|B返回|B|epoch2/B|绘制B及其版本|
-|A迟到|B|epoch1/A|丢弃，不写正文、不清B锁|
-
-同一连接令牌也有epoch问题：旧401不能注销后来成功建立的新连接。归属不只是run_id，还包括连接生命周期。
+[app.js](../../../backend/static/app.js) 的 `load` 给每次主读取建立独立 `owner`。返回值用 epoch 检查是否仍属于当前任务；清锁和安排下一次轮询则要求 `reading === owner`。旧连接返回的 401 也要匹配发出时的连接与 epoch，才可清除连接状态。
 
 ## 故障二：辅助请求一直没返回
 假设trace GET一直挂起，state/result已经能读到首稿。若用一个Promise.all把它们绑在一起，正文就被trace卡住；“失败后暂停重试”也救不了尚未失败的请求。后续改为单一主state/result周期，trace/reviews/NLI各有独立slot、最多一个在途和有界补刷，切换任务取消旧读取。
@@ -36,10 +27,24 @@
 不能。初稿保存证明生成对象存在；pending且persistence_confirmed=false说明最终处理未确认落库；事实/领域是否完整还须看保存的阶段与报告。不能用可读正文替完整链计数。验证应同时注入Store失败与关闭失败，核对拒新单、旧历史仍可读、在途释放与下一任务策略；入口[test_backend_lifecycle_api_v4](../../../tests/test_backend_lifecycle_api_v4.py)。
 :::
 
-## 返回顺序演算（先写四项结果）
+<a id="返回顺序演算先写四项结果"></a>
 
-教学日志：t0打开A，epoch=7，发GET A；t1切B，epoch=8，发GET B；t2 B返回并保存正文B；t3 A返回。请写出t3对象归属、最终页面、Abort失败的影响、复制来源。
+## 故障推演：旧锁、挂起辅助读取与未保存终态
 
-::: answer 展开返回顺序解析
-A响应属于发送时A/epoch7，当前选择是B/epoch8，不能写回视图或释放B的新读取锁。页面继续显示B；Abort只是减少无用工作，归属检查负责正确性。复制从当前所选版本保存的text取，不从带标注卡的DOM取。这里epoch数字是教学构造，实际守卫见backend/static/app.js的请求身份与选择归属，以及inline_review.js的版本核对；GET失败不能显示POST受理未知。
+|事件|诊断页观测|
+|---|---|
+|t0|任务 A 的主读取仍在途，持有 ownerA|
+|t1|切到 B，B 的主读取取得 ownerB；旧 GET 的取消未及时生效|
+|t2|A 的请求结束，进入 `finally`。B 的主读取仍未返回|
+|t3|B 的 state/result 返回 `running` 和已保存初稿，B 的 trace GET 一直未返回|
+|t4|下一轮主读取返回数据库状态 `running`，并带有 `pending_terminal_status=interrupted`、`persistence_confirmed=false` 与生命周期故障码|
+
+分别写出 t2 的锁归属、t3 下一轮能否启动、t4 页面文案与轮询决定。已知本例没有启用 NLI 诊断。
+
+::: answer 展开故障推演解析
+1. t2 时 `reading` 仍是 ownerB。A 的 `finally` 因 `reading !== ownerA` 跳过清锁和调度。若无此检查，主读取的互斥条件会被提前解除。
+2. t3 的 `load` 不等待 `requestAuxiliary('trace')`。B 自己的 `finally` 释放主锁后，`schedulePoll` 看到当前上下文仍在运行，安排下一次主读取。trace 持有自己的 `slot.inflight`，新一轮会跳过尚未完成的 trace。
+3. t4 的 `pendingStopped` 成立，页面说明“已停止处理；中断状态尚未确认保存”，同时交代数据库原状态并保留可读初稿。主上下文不再按 `running` 持续轮询，可以手动查状态；生命周期故障关闭新任务提交。
+
+可用[异步探针](../../../tests/ui_async_probe.js)核对旧请求清锁和慢辅助读取，用[生命周期 API 测试](../../../tests/test_backend_lifecycle_api_v4.py)核对终态未确认与拒单。
 :::

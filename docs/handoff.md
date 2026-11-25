@@ -1,5 +1,9 @@
 # PowerTrustAI 会话交接
 
+## 2026-11-25 教材时效与教学衔接
+
+[架构](learning/chapters/02-architecture.md)补齐受管图路径启用与回退，[语料](learning/chapters/07-corpus.md)区分历史 prefix-v2 与完整 SQLite 迁移，统一 73 个发布分片中 70 个处理、3 个排除。[训练选修](learning/chapters/12-training-nli.md)区分四轮训练与检查点选择。逐章核对导读用途；基础乱序题留在[第28章](learning/chapters/28-browser-consistency.md)，[第36章](learning/chapters/36-case-ui-lifecycle.md)改练旧锁、辅助读取和终态未确认。N1 完整身份折叠保留。只调整教材与静态产物，历史档案保持原样。
+
 ## 2026-11-25 教材集中勘误v42
 
 恢复01、02、05、06、08、09、12、14、16、18章的12张表。校正ApplicationService等实际名称及教学伪代码标记，核对主页与诊断入口。正式JSON路径与历史严格工具、提取统一和旧评测分别标明身份。第12章分别解释eval和禁用自动求导。静态表格形状回归覆盖表头与完整数据行。
