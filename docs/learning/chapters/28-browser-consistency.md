@@ -7,7 +7,7 @@
 主state/result决定主要内容；trace/reviews/NLI等辅助读取各有在途slot和有界收敛。慢辅助请求不应阻塞主轮询；取消旧GET不等于取消服务任务，取消任务需要显式API动作。
 
 ::: answer 题28.1：旧任务的慢响应为什么不能写回新页面？
-教学：A请求发出后切到B，B先返回，A最后返回。若只用一个全局result，页面回到A。应用应在发送时捕获epoch/任务/版本，返回时再比较；旧归属丢弃。反馈回读还要考虑reviews revision，避免旧列表覆盖新反馈。看[主读取](../../../backend/static/app.js)、[前端检查](../../../tests/ui_client_checks.js)。继续追问：仅AbortController不够，取消可能晚于响应，所以归属检查仍必要。
+教学：A请求发出后切到B，B先返回，A最后返回。若只用一个全局result，页面回到A。应用应在发送时捕获epoch/任务/版本，返回时再比较；旧归属丢弃。反馈回读还要考虑reviews revision，避免旧列表覆盖新反馈。主读取进行中若遇到旧任务收尾，可接做[第36章故障题](36-case-ui-lifecycle.md)。看[主读取](../../../backend/static/app.js)、[前端检查](../../../tests/ui_client_checks.js)。继续追问：仅AbortController不够，取消可能晚于响应，所以归属检查仍必要。
 :::
 
 ## 字符范围为什么会错
