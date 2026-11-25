@@ -717,8 +717,8 @@
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
-      "characters": 4771,
-      "sha256": "347dce570103fa1b027c6adf3b071b978ba73e7f71a073beccc3faff8eb489a7"
+      "characters": 4844,
+      "sha256": "8332150a942619d3ac03878e1d04e11fd2e83fa420cce52ae45a11aca0cc147f"
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
@@ -777,8 +777,8 @@
     },
     {
       "source": "docs/learning/chapters/29-evaluation-math.md",
-      "characters": 2773,
-      "sha256": "6d56121f22f88b0e56b6d384ea4a547343a9236d55055bea18be82ddd7f3a97e"
+      "characters": 2799,
+      "sha256": "9aa2806c675afb4da80a28e0dc8077951d88592fcbcd89aaf41362c3112e9536"
     },
     {
       "source": "docs/learning/chapters/30-maintenance-practice.md",
@@ -946,6 +946,6 @@
       "sha256": "a9f074460d5accd5ef9095f651f98bd351fb2c6cd93200c29f6367ed6b5adb24"
     }
   ],
-  "markdown_characters": 387876,
+  "markdown_characters": 387975,
   "network_dependencies": false
 }
