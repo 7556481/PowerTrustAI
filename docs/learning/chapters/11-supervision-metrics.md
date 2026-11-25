@@ -265,11 +265,11 @@ partition文件应保存原旧划分和新版本理由，不覆盖历史test归�
 :::
 
 
-## 历史索引（按需展开）
+## 历史内容定位
 
-[本章整理前完整快照](../archives/11-supervision-metrics.md)逐字保留旧公式、源码、口述和失败记录；原锚点在下面提供归档定位。
+整理前原文完整保留于[历史快照](../archives/11-supervision-metrics.md)；这里只放一套旧定位。
 
-::: answer 展开历史标题定位（不是当前面试稿）
+::: answer 展开历史内容定位
 <a id="历史说明与基础知识按记录日期和绑定版本阅读"></a>
 
 - [历史说明与基础知识（按记录日期和绑定版本阅读）](../archives/11-supervision-metrics.md#历史说明与基础知识按记录日期和绑定版本阅读)
@@ -297,36 +297,5 @@ partition文件应保存原旧划分和新版本理由，不覆盖历史test归�
 <a id="历史实验分母与风险措辞"></a>
 
 - [历史实验分母与风险措辞](../archives/11-supervision-metrics.md#历史实验分母与风险措辞)
-
-:::
-
-::: answer 旧细节位置兼容入口
-<a id="2026-10-24-两条净收益线"></a>
-
-[旧位置转到归档](../archives/11-supervision-metrics.md#2026-10-24-两条净收益线)
-
-<a id="2026-10-24-失败实验的成本与净收益"></a>
-
-[旧位置转到归档](../archives/11-supervision-metrics.md#2026-10-24-失败实验的成本与净收益)
-
-<a id="2026-10-24-审核链v2实证更新"></a>
-
-[旧位置转到归档](../archives/11-supervision-metrics.md#2026-10-24-审核链v2实证更新)
-
-<a id="历史参考与真实接入结果"></a>
-
-[旧位置转到归档](../archives/11-supervision-metrics.md#历史参考与真实接入结果)
-
-<a id="历史实验分母与风险措辞"></a>
-
-[旧位置转到归档](../archives/11-supervision-metrics.md#历史实验分母与风险措辞)
-
-<a id="历史说明与基础知识按记录日期和绑定版本阅读"></a>
-
-[旧位置转到归档](../archives/11-supervision-metrics.md#历史说明与基础知识按记录日期和绑定版本阅读)
-
-<a id="本轮真实验证边界"></a>
-
-[旧位置转到归档](../archives/11-supervision-metrics.md#本轮真实验证边界)
 
 :::

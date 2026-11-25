@@ -207,17 +207,17 @@
   "learning_runtime": [
     {
       "file": "tools/learning_site.py",
-      "source_text_lf_sha256": "8b45110c26c4d7f02fd7e4ecafa4be88f0b2cee34537b96b1aa67d1b1093e4a1",
+      "source_text_lf_sha256": "b3a6719cbae0f38255d352a2739a8906270d21a233fed6aaf6fdc062fbfcba7e",
       "scope": "complete maintained learning source file"
     },
     {
       "file": "tools/learning_checks.py",
-      "source_text_lf_sha256": "0c3249b57f5f6c9651747c411b07f8e974af07588cb31b64abcfc3bd4dc3234f",
+      "source_text_lf_sha256": "83a4d9875d39ba580c1e36c649901a9e8eaf828bd698292fd650a9afe17c124d",
       "scope": "complete maintained learning source file"
     },
     {
       "file": "docs/learning/assets/site.js",
-      "source_text_lf_sha256": "fc98658c5657a495f934f6a9c59be87e0f84aa18e7160af48d3cd4fb08a0862f",
+      "source_text_lf_sha256": "2e79a1869b9fca8a624b278565ff73c8bb55b6e4e25ea333c7ff70ba29a6a7df",
       "scope": "complete maintained learning source file"
     },
     {

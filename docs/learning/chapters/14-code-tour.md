@@ -159,11 +159,11 @@ RunStore.tx管理短写事务，index保存版本化对象，result经backend.pr
 沿上方最终机制正文写输入、输出、版本、异常和验证入口，再核对历史配置没有混入。具体解析见所链专题。
 :::
 
-## 历史索引（按需展开）
+## 历史内容定位
 
-[本章整理前完整快照](../archives/14-code-tour.md)逐字保留旧公式、源码、口述和失败记录；原锚点在下面提供归档定位。
+整理前原文完整保留于[历史快照](../archives/14-code-tour.md)；这里只放一套旧定位。
 
-::: answer 展开历史标题定位（不是当前面试稿）
+::: answer 展开历史内容定位
 <a id="v7只读标注源码路线"></a>
 
 - [v7只读标注源码路线](../archives/14-code-tour.md#v7只读标注源码路线)
@@ -220,135 +220,76 @@ RunStore.tx管理短写事务，index保存版本化对象，result经backend.pr
 
 - [2026-10-29 v7：A/B独立身份与默认关闭](../archives/14-code-tour.md#2026-10-29-v7ab独立身份与默认关闭)
 
-:::
-
-::: answer 旧细节位置兼容入口
-<a id="2026-10-24-审核链v2实证更新"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#2026-10-24-审核链v2实证更新)
-
-<a id="2026-10-24-简化合同与投影的源码入口"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#2026-10-24-简化合同与投影的源码入口)
-
-<a id="2026-10-24历史真实验证边界"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#2026-10-24历史真实验证边界)
-
-<a id="2026-10-28-v3真实入口与归档重读"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#2026-10-28-v3真实入口与归档重读)
-
-<a id="2026-10-28-v4版本与入口身份"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#2026-10-28-v4版本与入口身份)
-
-<a id="2026-10-28-v5隔离入口与冻结源码"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#2026-10-28-v5隔离入口与冻结源码)
-
-<a id="2026-10-28-v6独立版本与源码冻结"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#2026-10-28-v6独立版本与源码冻结)
-
-<a id="2026-10-28-来源优先代码入口默认关闭"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#2026-10-28-来源优先代码入口默认关闭)
-
-<a id="2026-10-29-v7ab独立身份与默认关闭"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#2026-10-29-v7ab独立身份与默认关闭)
-
 <a id="boundedpairadaptercomplete"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#boundedpairadaptercomplete)
+- [旧位置转到归档](../archives/14-code-tour.md#boundedpairadaptercomplete)
 
 <a id="dosu修订上下文"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#dosu修订上下文)
+- [旧位置转到归档](../archives/14-code-tour.md#dosu修订上下文)
 
 <a id="rrf融合不保证支持"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#rrf融合不保证支持)
-
-<a id="schema13双通道候选的源码边界"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#schema13双通道候选的源码边界)
-
-<a id="v7只读标注源码路线"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#v7只读标注源码路线)
+- [旧位置转到归档](../archives/14-code-tour.md#rrf融合不保证支持)
 
 <a id="waves"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#waves)
+- [旧位置转到归档](../archives/14-code-tour.md#waves)
 
 <a id="一次有界审核批次"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#一次有界审核批次)
+- [旧位置转到归档](../archives/14-code-tour.md#一次有界审核批次)
 
 <a id="严格json只验证结构"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#严格json只验证结构)
+- [旧位置转到归档](../archives/14-code-tour.md#严格json只验证结构)
 
 <a id="修改授权与意见记账"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#修改授权与意见记账)
+- [旧位置转到归档](../archives/14-code-tour.md#修改授权与意见记账)
 
 <a id="受预算约束的完整闭环"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#受预算约束的完整闭环)
+- [旧位置转到归档](../archives/14-code-tour.md#受预算约束的完整闭环)
 
 <a id="固定证据生成诊断入口"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#固定证据生成诊断入口)
+- [旧位置转到归档](../archives/14-code-tour.md#固定证据生成诊断入口)
 
 <a id="复用装配与固定evidence入口"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#复用装配与固定evidence入口)
-
-<a id="实际代码摘录本轮重新核对"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#实际代码摘录本轮重新核对)
-
-<a id="当前源码身份与读法2026-10-27维护同步"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#当前源码身份与读法2026-10-27维护同步)
+- [旧位置转到归档](../archives/14-code-tour.md#复用装配与固定evidence入口)
 
 <a id="恢复不自动续跑"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#恢复不自动续跑)
+- [旧位置转到归档](../archives/14-code-tour.md#恢复不自动续跑)
 
 <a id="恢复实际输入与知识身份"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#恢复实际输入与知识身份)
-
-<a id="既有源码练习历史题保留"></a>
-
-[旧位置转到归档](../archives/14-code-tour.md#既有源码练习历史题保留)
+- [旧位置转到归档](../archives/14-code-tour.md#恢复实际输入与知识身份)
 
 <a id="来源身份不等于权威"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#来源身份不等于权威)
+- [旧位置转到归档](../archives/14-code-tour.md#来源身份不等于权威)
 
 <a id="短事务边界"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#短事务边界)
+- [旧位置转到归档](../archives/14-code-tour.md#短事务边界)
 
 <a id="确定性政策与执行完整性"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#确定性政策与执行完整性)
+- [旧位置转到归档](../archives/14-code-tour.md#确定性政策与执行完整性)
 
 <a id="精确标注入口identity"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#精确标注入口identity)
+- [旧位置转到归档](../archives/14-code-tour.md#精确标注入口identity)
 
 <a id="精确标注入口locate"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#精确标注入口locate)
+- [旧位置转到归档](../archives/14-code-tour.md#精确标注入口locate)
 
 <a id="跨语言词项入口"></a>
 
-[旧位置转到归档](../archives/14-code-tour.md#跨语言词项入口)
+- [旧位置转到归档](../archives/14-code-tour.md#跨语言词项入口)
 
 :::

@@ -74,7 +74,8 @@ def diagram(source):
     out.append('</svg></div><p class="diagram-legend">实线绿：控制调用；虚线蓝：数据交付；点线橙：持久化。箭头不表示投票或事实证明。</p>')
     return ''.join(out)
 
-def render(markdown, link_resolver=None):
+def render(markdown, link_resolver=None, _context=None):
+    context = _context if _context is not None else {"ids":set(),"section":0}
     inline_local=lambda text:inline(text,link_resolver)
     heading_counts={}
     out=[];toc=[];lines=markdown.splitlines();i=0;paragraph=[];listing=False
@@ -93,11 +94,14 @@ def render(markdown, link_resolver=None):
             flush();close_list();title=line[len('::: answer'):].strip() or '展开参考答案';inner=[];i+=1
             while i<len(lines) and lines[i].strip()!=':::':inner.append(lines[i]);i+=1
             if i==len(lines):raise ValueError('Unclosed answer block')
-            content,_=render('\n'.join(inner),link_resolver);out.append('<details class="self-answer"><summary>'+html.escape(title)+'</summary>'+content+'</details>')
+            content,_=render('\n'.join(inner),link_resolver,context);out.append('<details class="self-answer"><summary>'+html.escape(title)+'</summary>'+content+'</details>')
         elif re.match(r'^#{1,6} ',line):
-            flush();close_list();level=len(line)-len(line.lstrip('#'));title=line[level:].strip();anchor='section-'+str(len(toc)+1)
+            flush();close_list();level=len(line)-len(line.lstrip('#'));title=line[level:].strip();context['section']+=1;anchor='section-'+str(context['section']);context['ids'].add(anchor)
             alias=heading_slug(title);ordinal=heading_counts.get(alias,0);heading_counts[alias]=ordinal+1
-            alias=alias+('-'+str(ordinal) if ordinal else '')
+            base_alias=alias;alias=alias+('-'+str(ordinal) if ordinal else '')
+            while alias in context['ids']:
+                ordinal+=1;alias=base_alias+'-'+str(ordinal)
+            context['ids'].add(alias)
             toc.append((level,title,anchor));out.append(f'<h{level} id="{anchor}"><span id="{html.escape(alias,quote=True)}"></span>'+inline_local(title)+f'</h{level}>')
         elif line.startswith('|') and i+1<len(lines) and re.match(r'^\|[ :|\-]+\|?$',lines[i+1]):
             flush();close_list();cells=lambda s:s.strip().strip('|').split('|');head=cells(line);i+=2;rows=[]
@@ -110,7 +114,9 @@ def render(markdown, link_resolver=None):
         elif line.startswith('> '):flush();close_list();out.append('<blockquote>'+inline_local(line[2:])+'</blockquote>')
         elif not line.strip():flush();close_list()
         elif re.fullmatch(r'<a id="[\w-]+"></a>',line):
-            flush();close_list();out.append(line)
+            flush();close_list()
+            explicit=re.search(r'id="([^"]+)"',line)[1]
+            if explicit not in context['ids']:out.append(line);context['ids'].add(explicit)
         elif line.startswith('<!--'):flush();close_list()
         else:paragraph.append(line)
         i+=1

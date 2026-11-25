@@ -241,11 +241,11 @@ mean pooling不是把字符向量平均。tokenizer可以把同一个电力术�
 :::
 
 
-## 历史索引（按需展开）
+## 历史内容定位
 
-[本章整理前完整快照](../archives/06-retrieval-math.md)逐字保留旧公式、源码、口述和失败记录；原锚点在下面提供归档定位。
+整理前原文完整保留于[历史快照](../archives/06-retrieval-math.md)；这里只放一套旧定位。
 
-::: answer 展开历史标题定位（不是当前面试稿）
+::: answer 展开历史内容定位
 <a id="abc比较如何分离原因"></a>
 
 - [A/B/C比较如何分离原因](../archives/06-retrieval-math.md#abc比较如何分离原因)
@@ -253,16 +253,5 @@ mean pooling不是把字符向量平均。tokenizer可以把同一个电力术�
 <a id="历史说明与基础知识按记录日期和绑定版本阅读"></a>
 
 - [历史说明与基础知识（按记录日期和绑定版本阅读）](../archives/06-retrieval-math.md#历史说明与基础知识按记录日期和绑定版本阅读)
-
-:::
-
-::: answer 旧细节位置兼容入口
-<a id="abc比较如何分离原因"></a>
-
-[旧位置转到归档](../archives/06-retrieval-math.md#abc比较如何分离原因)
-
-<a id="历史说明与基础知识按记录日期和绑定版本阅读"></a>
-
-[旧位置转到归档](../archives/06-retrieval-math.md#历史说明与基础知识按记录日期和绑定版本阅读)
 
 :::

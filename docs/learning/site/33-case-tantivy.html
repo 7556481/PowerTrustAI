@@ -8,25 +8,5 @@
 <p>先在同run/版本对齐dispatch、HTTP线程、检索返回与角色保存，再取最后完成路径；若模型响应等待包含在检索跨度内，不再相加。只有完整消息、单次响应和资源轨迹都齐，才比较输入体量或服务抖动等假设。公开报告未给出Q1每一阶段可分解秒数，教材不替它补造。</p>
 <p>最终六完整对的两路终态中位29.99→37.60秒未过门槛，两路各7/8完整、失败保留。候选Q3和基线Q7事实失败不同，不能只挑成功快题；已有速度失败足以结束路线，质量逐句完整复核未证，不补跑。</p>
 <details class="self-answer"><summary>代码推演：读取少2秒，事实HTTP多5秒，领域最后完成，能断言终态多3秒吗？</summary><p>不能。先确定这些区间是否在同一关键路径、是否被领域覆盖，再计算终态max。若领域结束一直最晚且其他不变，局部差可能完全被覆盖；若事实超过领域，才从新的最后结束算差。需要Q1本次各角色时刻，缺项保留未知。这里不能用四条宽查询1.87倍去填终态归因。</p></details>
-<h2 id="section-4"><span id="1-最初观察"></span>1 最初观察</h2>
-<p>四条宽查询读取曾比SQLite快约1.87倍，普通题比值约0.58，适用范围已不同。</p>
-<h2 id="section-5"><span id="2-当时数据流"></span>2 当时数据流</h2>
-<p>90片原生索引＋映射＋spool→宽候选→摘取与原文回查→同overlap模型链→客户端轮询终态。</p>
-<h2 id="section-6"><span id="3-原始证据与固定版本"></span>3 原始证据与固定版本</h2>
-<p><a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/maintenance/tantivy-retirement-public-v30.md" rel="noreferrer noopener">公开退役记录与固定v28报告</a>。实际输入、响应和私有日志按原报告本机索引保存，不搬运到公开教材；固定报告不可被本页摘要替代。</p>
-<h2 id="section-7"><span id="4-假设与排查"></span>4 假设与排查</h2>
-<p>将读取提速作为假设；在相同产品入口、同调度、固定8题16链验证，避免相乘历史倍率与overlap收益。</p>
-<h2 id="section-8"><span id="5-实际改动"></span>5 实际改动</h2>
-<p>历史v28候选证据摘取/范围回查及隔离Factory；未切换正式SQLite。实现和全报告通过公开退役记录中的固定提交取回。</p>
-<h2 id="section-9"><span id="6-机制解释"></span>6 机制解释</h2>
-<p>更快候选召回不保证更少消息字符或更快Flash，原文定位和选择本身也有成本。</p>
-<h2 id="section-10"><span id="7-离线与真实结果"></span>7 离线与真实结果</h2>
-<p>两路各7/8完整、6完整对；客户端提交到终态中位29.99秒SQLite、37.60秒Tantivy；首稿5.32→7.09秒。</p>
-<h2 id="section-11"><span id="8-解决范围与剩余问题"></span>8 解决范围与剩余问题</h2>
-<p>未达15%且3秒门槛，路线结束；未宣称逐句语义复核通过。资产后来经批准清理，代码报告保留。</p>
-<h2 id="section-12"><span id="9-重新设计的考虑"></span>9 重新设计的考虑</h2>
-<p>先按关键路径和最终模型消息做准入，单库脱离旧SQLite/spool的小样本原型不能称全库迁移完成。 此段是设计讨论，不标为已实现。</p>
-<h2 id="section-13"><span id="10-追问与解析"></span>10 追问与解析</h2>
-<details class="self-answer"><summary>题33.1：怎样从现象讲到证据而不夸大？</summary><p>为什么快1.87倍仍退役？读取与用户终态不是同一指标，且样本不同。继续追问：29.99和37.60是两组中位数，差值按报告原精度解释。</p></details>
-<h2 id="section-14"><span id="排查过程练习"></span>排查过程练习</h2>
-<details class="self-answer"><summary>题33.2：四条宽查询快1.87倍，为什么还要从生成开始做16链？</summary><p>宽查询只覆盖读取机制，且普通题表现不同；产品还包含摘取、原文定位、模型输入、纠正和轮询。原8题两路各投一次能观察组合路径，不能用读取速度乘以旧审核倍率。最终六完整对29.99与37.60秒是客户端终态口径，Q3/Q7独立失败留分母；没有最终语义逐句通过记录就不能补写质量已验收。</p></details></article><footer><a href="32-case-cross-language.html">← 32 案例：跨语言：目标交付与投入退出换义</a><a href="34-case-windows-writer.html">34 案例：Windows writer：直接证据与未知持有者 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">从命中到模型：六个步骤分别量什么</a><a href="#section-3">怎样定位而不杜撰增时原因</a><a href="#section-4">1 最初观察</a><a href="#section-5">2 当时数据流</a><a href="#section-6">3 原始证据与固定版本</a><a href="#section-7">4 假设与排查</a><a href="#section-8">5 实际改动</a><a href="#section-9">6 机制解释</a><a href="#section-10">7 离线与真实结果</a><a href="#section-11">8 解决范围与剩余问题</a><a href="#section-12">9 重新设计的考虑</a><a href="#section-13">10 追问与解析</a><a href="#section-14">排查过程练习</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<h2 id="section-4"><span id="证据措施与验证边界"></span>证据、措施与验证边界</h2>
+<p>固定记录：<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/maintenance/tantivy-retirement-public-v30.md" rel="noreferrer noopener">公开退役记录与固定v28报告</a>. 候选保留相同overlap、提示与政策，仅改变检索/证据选择，未切正式SQLite。实际100次Flash、1835305可信token；两路各7/8完整、六完整对未达15%且3秒，结束路线。后经另行批准退役资产，代码和报告保留。</p></article><footer><a href="32-case-cross-language.html">← 32 案例：跨语言：目标交付与投入退出换义</a><a href="34-case-windows-writer.html">34 案例：Windows writer：直接证据与未知持有者 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">从命中到模型：六个步骤分别量什么</a><a href="#section-3">怎样定位而不杜撰增时原因</a><a href="#section-4">证据、措施与验证边界</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

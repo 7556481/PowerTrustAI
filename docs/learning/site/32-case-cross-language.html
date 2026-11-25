@@ -2,31 +2,11 @@
 <p>配置见<a href="current-status.html" rel="noreferrer noopener">当前状态</a>。本页解释项目记录，不声称项目所有者个人负责了所有步骤。个人发现、操作和决策经历需由本人确认。</p>
 <h2 id="section-2"><span id="从原词到实际交付的断点"></span>从原词到实际交付的断点</h2>
 <p>先区分真实观察与教学演算。真实N6的日常“投入退出”被转换成commissioning/decommissioning，动作含义从运行投切偏成投运调试/退役。原始全文与转换记录在<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md" rel="noreferrer noopener">固定报告及predictions</a>，本页不冒充复制了完整实际请求。以下SQL词项集合为教学构造，用于手算MATCH，非该题实测输出。</p>
-<div class="table-scroll"><table><thead><tr><th>层</th><th>中文运行问题</th><th>错误生命周期转换</th><th>正确运行意图</th></tr></thead><tbody><tr><td>动作</td><td>投入/退出</td><td>commissioning/decommissioning</td><td>switching in/out</td></tr><tr><td>教学词项</td><td>投入 OR 退出</td><td>commissioning OR decommissioning</td><td>switching OR operation</td></tr><tr><td>教学倒排列表</td><td>D1运行投切</td><td>D2投运退役</td><td>D1运行投切、D3运行约束</td></tr><tr><td>风险</td><td>中文不匹配英文body</td><td>命中但换了任务</td><td>仍需保留恒定工况等条件</td></tr></tbody></table></div>
+<div class="table-scroll"><table><thead><tr><th>查询</th><th>实际参与匹配的词</th><th>命中</th></tr></thead><tbody><tr><td>原中文查询</td><td>投入、退出</td><td>空集</td></tr><tr><td>错误转换</td><td>commissioning、decommissioning</td><td>D2</td></tr><tr><td>保留运行意图的教学查询</td><td>switching、operation</td><td>D1、D3</td></tr></tbody></table></div>
 <p>给三个段落词表D1={switching,reactive}、D2={commissioning,equipment}、D3={operation,limits}，OR匹配错误转换只得到D2；正确意图得到D1/D3。这是集合演算，不是宣称实际N6只命中D2。真实链还包含原查询、来源目录、RRF和邻段，所以错误转换时也可能交付正确原段，甚至生成不沿用错词；必须分别评价转换与回答，不能强推“翻译错则答案必错”。</p>
 <h2 id="section-3"><span id="abc的控制变量"></span>A/B/C的控制变量</h2>
 <p>A是原全库topic_v4中文路径；B限定目录来源、取消subject硬约束，用中文；C与B相同目录，另加英文转换并融合排名。A→B有范围/约束变化，B→C才接近隔离跨语言增量。B已覆盖N1/N4的6/25槽，C实际25/25包含N6换义槽，不能把这些覆盖全算翻译功劳。C比B均值增加1.748秒是本批观察，非一般翻译开销常数。</p>
 <p>对象记录应依次写原query、转换query、目录身份、MATCH候选、融合排名、根与邻段、最终消息证据；每一步都保留原版本和范围。后续回答是否使用错词需逐句比对，不能靠检索日志推定。本批转换门槛失败时没有启动条件性回答槽，不能把别批回答填进本批结果。</p>
 <details class="self-answer"><summary>对象推演：错误转换交付了正确段，转换与回答应各填什么？</summary><p>转换仍记失败，因为输入意图被改变；交付按实际原文逐槽核对，可以记到达。没有生成记录时回答填未测，而非错或对。下一步是找转换预测与最终消息的同一输入身份，不能根据D2词项猜实际生成。若以后做生成验证，必须独立冻结并保留错误转换条件，不能事后把查询改对再称原候选成功。</p></details>
-<h2 id="section-4"><span id="1-最初观察"></span>1 最初观察</h2>
-<p>中文原查询未交付若干英文必答段；库里有原文不等于模型得到原文。</p>
-<h2 id="section-5"><span id="2-当时数据流"></span>2 当时数据流</h2>
-<p>目录来源选择→中文/英文查询→词项排名融合→根与邻接→生成；A/B/C的来源范围并不全相同。</p>
-<h2 id="section-6"><span id="3-原始证据与固定版本"></span>3 原始证据与固定版本</h2>
-<p><a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md" rel="noreferrer noopener">中文主线跨语言检索固定报告</a>。实际输入、响应和私有日志按原报告本机索引保存，不搬运到公开教材；固定报告不可被本页摘要替代。</p>
-<h2 id="section-7"><span id="4-假设与排查"></span>4 假设与排查</h2>
-<p>先追成员、MATCH、排名和交付，排除“目标资料根本没进库”；B控制来源范围，C与B比较转换效果。</p>
-<h2 id="section-8"><span id="5-实际改动"></span>5 实际改动</h2>
-<p>rag/chinese_first.py和services/generation_query.py等默认关闭候选；目录限定、转换与RRF属于同一个已冻结候选。</p>
-<h2 id="section-9"><span id="6-机制解释"></span>6 机制解释</h2>
-<p>英文词项可补词面不相交；但自然语言转换会改变运行术语，不是无损编码。</p>
-<h2 id="section-10"><span id="7-离线与真实结果"></span>7 离线与真实结果</h2>
-<p>原文交付25槽都在，N6却把投入退出变成投运退役；8Flash/1359token、0回答请求，本门槛失败。</p>
-<h2 id="section-11"><span id="8-解决范围与剩余问题"></span>8 解决范围与剩余问题</h2>
-<p>目标交付有改善，但转换忠实性有确认失败，不能用覆盖抵消；后续回答实验另批统计，不能填进本批。</p>
-<h2 id="section-12"><span id="9-重新设计的考虑"></span>9 重新设计的考虑</h2>
-<p>可考虑可核查词项映射，但需保留原查询并测限定和动作语义，不为单题补词。 此段是设计讨论，不标为已实现。</p>
-<h2 id="section-13"><span id="10-追问与解析"></span>10 追问与解析</h2>
-<details class="self-answer"><summary>题32.1：怎样从现象讲到证据而不夸大？</summary><p>为什么合法JSON仍失败？结构正确不保证运行语义忠实。继续追问：去subject和缩库的速度不能归为翻译收益。</p></details>
-<h2 id="section-14"><span id="排查过程练习"></span>排查过程练习</h2>
-<details class="self-answer"><summary>题32.2：若C拿到25槽但N6把日常投切改成退役，应算几题成功？</summary><p>先按原冻结门槛逐题判断；N6语义失败不能被槽覆盖抵消。其余七题只表示转换/交付可评价，生成尚未运行时不能填七题回答正确。A与B范围不同，B与C同范围，C相对B增加的转换耗时才是该对照中的增量。排查需并列中文原句、转换词、来源目录、MATCH、排名与最终交付；每层证据不能跳过。</p></details></article><footer><a href="31-case-revision.html">← 31 修订合同：一处改动、两条意见和新版重审</a><a href="33-case-tantivy.html">33 案例：Tantivy：快读取为何没有快交付 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">从原词到实际交付的断点</a><a href="#section-3">A/B/C的控制变量</a><a href="#section-4">1 最初观察</a><a href="#section-5">2 当时数据流</a><a href="#section-6">3 原始证据与固定版本</a><a href="#section-7">4 假设与排查</a><a href="#section-8">5 实际改动</a><a href="#section-9">6 机制解释</a><a href="#section-10">7 离线与真实结果</a><a href="#section-11">8 解决范围与剩余问题</a><a href="#section-12">9 重新设计的考虑</a><a href="#section-13">10 追问与解析</a><a href="#section-14">排查过程练习</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<h2 id="section-4"><span id="证据措施与验证边界"></span>证据、措施与验证边界</h2>
+<p>固定记录：<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md" rel="noreferrer noopener">中文主线跨语言检索固定报告</a>. 默认关闭候选调整目录来源、中文/英文词项与RRF融合；未改正式库。8次转换/1359token，N6换义导致门槛失败，未开启条件性回答。后续回答收益必须另批记录，不能覆盖本批失败。</p></article><footer><a href="31-case-revision.html">← 31 修订合同：一处改动、两条意见和新版重审</a><a href="33-case-tantivy.html">33 案例：Tantivy：快读取为何没有快交付 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">从原词到实际交付的断点</a><a href="#section-3">A/B/C的控制变量</a><a href="#section-4">证据、措施与验证边界</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

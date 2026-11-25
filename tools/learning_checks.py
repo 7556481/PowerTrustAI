@@ -12,10 +12,12 @@ def source_text_digest(data):
 
 class PageLinks(HTMLParser):
     def __init__(self):
-        super().__init__();self.ids=set();self.links=[]
+        super().__init__();self.ids=set();self.links=[];self.duplicates=[]
     def handle_starttag(self,tag,attrs):
         attrs=dict(attrs)
-        if 'id' in attrs:self.ids.add(attrs['id'])
+        if 'id' in attrs:
+            if attrs['id'] in self.ids:self.duplicates.append(attrs['id'])
+            self.ids.add(attrs['id'])
         if tag=='a' and 'href' in attrs:self.links.append(attrs['href'])
         if tag=='link' and 'href' in attrs:self.links.append(attrs['href'])
         if tag=='script' and 'src' in attrs:self.links.append(attrs['src'])
@@ -25,6 +27,7 @@ def validate_local_links(directory):
     pages={}
     for page in directory.glob('*.html'):
         parser=PageLinks();parser.feed(page.read_text(encoding='utf-8'));pages[page.resolve()]=parser
+        if parser.duplicates:raise ValueError('Duplicate HTML IDs in '+page.name+': '+str(parser.duplicates))
     for page,parser in pages.items():
         for link in parser.links:
             url=urlsplit(link)

@@ -83,9 +83,9 @@ coverage  = 有效预测样本数/全部冻结样本数
 <p>旧批“12次纠正”仅指事实阶段；按保存调用全批为43初始、13纠正，其中提取纠正1次。按组件的多个缺字段不能膨胀成多个失败请求。原始判断、有效判断、最终处置和正文变化分别报告，执行占位不算合法语义无法评估。</p>
 <h3 id="section-20"><span id="自测两路复用一份生成生成用量如何计"></span>自测：两路复用一份生成，生成用量如何计？</h3>
 <details class="self-answer"><summary>展开共享额度解析</summary><p>实际成本只发生一次生成，汇总调用不重复计；但每条后续分支都从原运行额度扣除这一份生成已用的调用、时间、检索次数及字符，防止比较中给某一路额外资源。复用旧生成时其历史耗时不进入本次墙钟。旧批漏扣检索额度的修补保留批后版本，不能倒写为原批预算等价。</p></details>
-<h2 id="section-21"><span id="历史索引按需展开"></span>历史索引（按需展开）</h2>
-<p><a href="history-11-supervision-metrics.html" rel="noreferrer noopener">本章整理前完整快照</a>逐字保留旧公式、源码、口述和失败记录；原锚点在下面提供归档定位。</p>
-<details class="self-answer"><summary>展开历史标题定位（不是当前面试稿）</summary><a id="历史说明与基础知识按记录日期和绑定版本阅读"></a>
+<h2 id="section-21"><span id="历史内容定位"></span>历史内容定位</h2>
+<p>整理前原文完整保留于<a href="history-11-supervision-metrics.html" rel="noreferrer noopener">历史快照</a>；这里只放一套旧定位。</p>
+<details class="self-answer"><summary>展开历史内容定位</summary><a id="历史说明与基础知识按记录日期和绑定版本阅读"></a>
 <ul>
 <li><a href="history-11-supervision-metrics.html#历史说明与基础知识按记录日期和绑定版本阅读" rel="noreferrer noopener">历史说明与基础知识（按记录日期和绑定版本阅读）</a></li>
 </ul>
@@ -112,18 +112,4 @@ coverage  = 有效预测样本数/全部冻结样本数
 <a id="历史实验分母与风险措辞"></a>
 <ul>
 <li><a href="history-11-supervision-metrics.html#历史实验分母与风险措辞" rel="noreferrer noopener">历史实验分母与风险措辞</a></li>
-</ul></details>
-<details class="self-answer"><summary>旧细节位置兼容入口</summary><a id="2026-10-24-两条净收益线"></a>
-<p><a href="history-11-supervision-metrics.html#2026-10-24-两条净收益线" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-24-失败实验的成本与净收益"></a>
-<p><a href="history-11-supervision-metrics.html#2026-10-24-失败实验的成本与净收益" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-24-审核链v2实证更新"></a>
-<p><a href="history-11-supervision-metrics.html#2026-10-24-审核链v2实证更新" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="历史参考与真实接入结果"></a>
-<p><a href="history-11-supervision-metrics.html#历史参考与真实接入结果" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="历史实验分母与风险措辞"></a>
-<p><a href="history-11-supervision-metrics.html#历史实验分母与风险措辞" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="历史说明与基础知识按记录日期和绑定版本阅读"></a>
-<p><a href="history-11-supervision-metrics.html#历史说明与基础知识按记录日期和绑定版本阅读" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="本轮真实验证边界"></a>
-<p><a href="history-11-supervision-metrics.html#本轮真实验证边界" rel="noreferrer noopener">旧位置转到归档</a></p></details></article><footer><a href="10-api-storage.html">← 10 API、UI、队列、SQLite与本机会话</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">增量评价保留四个独立分母</a><a href="#section-3">旧验证集用于防退步，不重新成为未见样本</a><a href="#section-4">输出机制与业务效果分开</a><a href="#section-5">标签来源与质量版本</a><a href="#section-6">为什么按家族而非随机行划分</a><a href="#section-7">数据泄漏的几种形式</a><a href="#section-8">分类指标：先写混淆矩阵方向</a><a href="#section-9">两个错误支持分母</a><a href="#section-10">检索指标与unknown</a><a href="#section-11">验证与面试</a><a href="#section-12">nDCG手算：背景相关也可能贡献，但不是直接支持</a><a href="#section-13">家族并集为什么会改变划分</a><a href="#section-14">审核产品的指标表怎么设计</a><a href="#section-15">三道自测：先作答，再展开</a><a href="#section-16">自测1：unknown能否当0或删除？</a><a href="#section-17">自测2：4/23与4/14相同吗？</a><a href="#section-18">自测3：已看五题可叫独立验收吗？</a><a href="#section-19">同稿比较也有接缝与计数边界</a><a href="#section-20">自测：两路复用一份生成，生成用量如何计？</a><a href="#section-21">历史索引（按需展开）</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+</ul></details></article><footer><a href="10-api-storage.html">← 10 API、UI、队列、SQLite与本机会话</a><a href="12-training-nli.html">12 BERT-Tiny、MiniLM与一次训练的真实结果 →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">增量评价保留四个独立分母</a><a href="#section-3">旧验证集用于防退步，不重新成为未见样本</a><a href="#section-4">输出机制与业务效果分开</a><a href="#section-5">标签来源与质量版本</a><a href="#section-6">为什么按家族而非随机行划分</a><a href="#section-7">数据泄漏的几种形式</a><a href="#section-8">分类指标：先写混淆矩阵方向</a><a href="#section-9">两个错误支持分母</a><a href="#section-10">检索指标与unknown</a><a href="#section-11">验证与面试</a><a href="#section-12">nDCG手算：背景相关也可能贡献，但不是直接支持</a><a href="#section-13">家族并集为什么会改变划分</a><a href="#section-14">审核产品的指标表怎么设计</a><a href="#section-15">三道自测：先作答，再展开</a><a href="#section-16">自测1：unknown能否当0或删除？</a><a href="#section-17">自测2：4/23与4/14相同吗？</a><a href="#section-18">自测3：已看五题可叫独立验收吗？</a><a href="#section-19">同稿比较也有接缝与计数边界</a><a href="#section-20">自测：两路复用一份生成，生成用量如何计？</a><a href="#section-21">历史内容定位</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>

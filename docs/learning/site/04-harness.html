@@ -48,9 +48,9 @@
 <p>源码阅读顺序：先看 <a href="https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/core/literal_review.py#" rel="noreferrer noopener">原文结果类型</a>，再看 <a href="https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_review_v1.py#" rel="noreferrer noopener">审核与局部拼装</a>，最后看 <a href="https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_policy_v1.py#" rel="noreferrer noopener">政策适配</a> 和 <a href="https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/harness/execution.py#" rel="noreferrer noopener">同一Harness的修订终止/重审</a>。完整来源、前后文本、失效响应和成本见 <a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/literal-review-stage1-v1/report.md#" rel="noreferrer noopener">阶段报告</a>。这些链接绑定实际实现，不把离线替身当模型成绩；账单金额未知，生产8765仍停服，无新增浏览器验收。</p>
 <details class="self-answer"><summary>自测：原文审核有据指出错误，修订两次响应都有合理替换正文，但都违反合同。可以计为改对吗？</summary><p>不能。分别记录“初审差异成立”“提议文本有纠正方向”“修订执行失败”和“最终原文未变”。本批候选A1–A4都是这一类，实质修复0/4。删除非法字段或挑选替换再评分，会把未经正常应用和完整重审的文本当成系统交付，改变冻结实验。</p></details>
 <details class="self-answer"><summary>自测：一次合法修订保留所有必答点，并把错误排序改正，但新增“互为因果”；应如何评价？</summary><p>记mixed：目标修复与内容保留成立，新增无据因果强化也成立，不能用加权总分抵消。来源说双向耦合，不自动证明互为因果；未证明其反命题也不等于该强化有据。重审通过或复核状态与独立文本质量分开报告。若所有动作retained/unresolved，则是保留原版本的一次尝试，不能当修复或重置轮次再试。</p></details>
-<h2 id="section-16"><span id="历史索引按需展开"></span>历史索引（按需展开）</h2>
-<p><a href="history-04-harness.html" rel="noreferrer noopener">本章整理前完整快照</a>逐字保留旧公式、源码、口述和失败记录；原锚点在下面提供归档定位。</p>
-<details class="self-answer"><summary>展开历史标题定位（不是当前面试稿）</summary><a id="从修订04到44究竟修复了哪一层"></a>
+<h2 id="section-16"><span id="历史内容定位"></span>历史内容定位</h2>
+<p>整理前原文完整保留于<a href="history-04-harness.html" rel="noreferrer noopener">历史快照</a>；这里只放一套旧定位。</p>
+<details class="self-answer"><summary>展开历史内容定位</summary><a id="从修订04到44究竟修复了哪一层"></a>
 <ul>
 <li><a href="history-04-harness.html#从修订04到44究竟修复了哪一层" rel="noreferrer noopener">从修订0/4到4/4，究竟修复了哪一层</a></li>
 </ul>
@@ -117,52 +117,32 @@
 <a id="2026-10-29-v7精确引用归程序语义仍由模型判断"></a>
 <ul>
 <li><a href="history-04-harness.html#2026-10-29-v7精确引用归程序语义仍由模型判断" rel="noreferrer noopener">2026-10-29 v7：精确引用归程序，语义仍由模型判断</a></li>
-</ul></details>
-<details class="self-answer"><summary>旧细节位置兼容入口</summary><a id="17b276277e-control"></a>
-<p><a href="history-04-harness.html#17b276277e-control" rel="noreferrer noopener">旧位置转到归档</a></p>
+</ul>
+<a id="17b276277e-control"></a>
+<ul>
+<li><a href="history-04-harness.html#17b276277e-control" rel="noreferrer noopener">旧位置转到归档</a></li>
+</ul>
 <a id="17b276277e-data"></a>
-<p><a href="history-04-harness.html#17b276277e-data" rel="noreferrer noopener">旧位置转到归档</a></p>
+<ul>
+<li><a href="history-04-harness.html#17b276277e-data" rel="noreferrer noopener">旧位置转到归档</a></li>
+</ul>
 <a id="17b276277e-persist"></a>
-<p><a href="history-04-harness.html#17b276277e-persist" rel="noreferrer noopener">旧位置转到归档</a></p>
+<ul>
+<li><a href="history-04-harness.html#17b276277e-persist" rel="noreferrer noopener">旧位置转到归档</a></li>
+</ul>
 <a id="1aa56fd42b-control"></a>
-<p><a href="history-04-harness.html#1aa56fd42b-control" rel="noreferrer noopener">旧位置转到归档</a></p>
+<ul>
+<li><a href="history-04-harness.html#1aa56fd42b-control" rel="noreferrer noopener">旧位置转到归档</a></li>
+</ul>
 <a id="1aa56fd42b-data"></a>
-<p><a href="history-04-harness.html#1aa56fd42b-data" rel="noreferrer noopener">旧位置转到归档</a></p>
+<ul>
+<li><a href="history-04-harness.html#1aa56fd42b-data" rel="noreferrer noopener">旧位置转到归档</a></li>
+</ul>
 <a id="1aa56fd42b-persist"></a>
-<p><a href="history-04-harness.html#1aa56fd42b-persist" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-22-服务编排配置与失败"></a>
-<p><a href="history-04-harness.html#2026-10-22-服务编排配置与失败" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-227共享阶段接成可选图"></a>
-<p><a href="history-04-harness.html#2026-10-227共享阶段接成可选图" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-23-事实审核内部流程候选"></a>
-<p><a href="history-04-harness.html#2026-10-23-事实审核内部流程候选" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-23-契约审计与v2离线候选"></a>
-<p><a href="history-04-harness.html#2026-10-23-契约审计与v2离线候选" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-24-agent业务收敛"></a>
-<p><a href="history-04-harness.html#2026-10-24-agent业务收敛" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-24-一次修订与交付净收益"></a>
-<p><a href="history-04-harness.html#2026-10-24-一次修订与交付净收益" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-24-两阶段事实审核开发候选"></a>
-<p><a href="history-04-harness.html#2026-10-24-两阶段事实审核开发候选" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-24-可审计的停止规则"></a>
-<p><a href="history-04-harness.html#2026-10-24-可审计的停止规则" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-24-审核链v2实证更新"></a>
-<p><a href="history-04-harness.html#2026-10-24-审核链v2实证更新" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-28-v3真实数据链闭合与修订触发边界"></a>
-<p><a href="history-04-harness.html#2026-10-28-v3真实数据链闭合与修订触发边界" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-28-v4关系比较进入修订但未完成修复"></a>
-<p><a href="history-04-harness.html#2026-10-28-v4关系比较进入修订但未完成修复" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-28-v5工程闭环与语义修复分开"></a>
-<p><a href="history-04-harness.html#2026-10-28-v5工程闭环与语义修复分开" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-28-v6来源关系逐字绑定仍需合法后审"></a>
-<p><a href="history-04-harness.html#2026-10-28-v6来源关系逐字绑定仍需合法后审" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-28-来源优先候选同一闭环中的供给改变"></a>
-<p><a href="history-04-harness.html#2026-10-28-来源优先候选同一闭环中的供给改变" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="2026-10-29-v7精确引用归程序语义仍由模型判断"></a>
-<p><a href="history-04-harness.html#2026-10-29-v7精确引用归程序语义仍由模型判断" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="从修订04到44究竟修复了哪一层"></a>
-<p><a href="history-04-harness.html#从修订04到44究竟修复了哪一层" rel="noreferrer noopener">旧位置转到归档</a></p>
-<a id="历史说明与基础知识按记录日期和绑定版本阅读"></a>
-<p><a href="history-04-harness.html#历史说明与基础知识按记录日期和绑定版本阅读" rel="noreferrer noopener">旧位置转到归档</a></p>
+<ul>
+<li><a href="history-04-harness.html#1aa56fd42b-persist" rel="noreferrer noopener">旧位置转到归档</a></li>
+</ul>
 <a id="完整案例三历史a3一次修改与完整重审"></a>
-<p><a href="history-04-harness.html#完整案例三历史a3一次修改与完整重审" rel="noreferrer noopener">旧位置转到归档</a></p></details></article><footer><a href="03-agents.html">← 03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">状态机是什么</a><a href="#section-3">冻结与并发：共享什么，不共享什么</a><a href="#section-4">有限格式纠正与Revision不是一回事</a><a href="#section-5">预算、超时和停止</a><a href="#section-6">一次Revision的门控与记录</a><a href="#section-7">如何验证完整闭环</a><a href="#section-8">图适配的验证与开销边界</a><a href="#section-9">练习与面试</a><a href="#section-10">三道自测：先作答，再展开</a><a href="#section-11">自测1：纠正与Revision是否同一事？</a><a href="#section-12">自测2：并发双审是否减少请求数？</a><a href="#section-13">自测3：修订后能否沿用旧claims？</a><a href="#section-14">发现到修订的控制接缝</a><a href="#section-15">原文审核与局部修订：发现成立，交付仍会失败</a><a href="#section-16">历史索引（按需展开）</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
+<ul>
+<li><a href="history-04-harness.html#完整案例三历史a3一次修改与完整重审" rel="noreferrer noopener">旧位置转到归档</a></li>
+</ul></details></article><footer><a href="03-agents.html">← 03 四Agent与ClaimExtractor：对象比角色名称重要</a><a href="05-rag.html">05 RAG全过程：从文件到可回查Evidence →</a></footer></main><aside aria-label="本章目录"><a href="#section-2">状态机是什么</a><a href="#section-3">冻结与并发：共享什么，不共享什么</a><a href="#section-4">有限格式纠正与Revision不是一回事</a><a href="#section-5">预算、超时和停止</a><a href="#section-6">一次Revision的门控与记录</a><a href="#section-7">如何验证完整闭环</a><a href="#section-8">图适配的验证与开销边界</a><a href="#section-9">练习与面试</a><a href="#section-10">三道自测：先作答，再展开</a><a href="#section-11">自测1：纠正与Revision是否同一事？</a><a href="#section-12">自测2：并发双审是否减少请求数？</a><a href="#section-13">自测3：修订后能否沿用旧claims？</a><a href="#section-14">发现到修订的控制接缝</a><a href="#section-15">原文审核与局部修订：发现成立，交付仍会失败</a><a href="#section-16">历史内容定位</a></aside></div><script src="search-data.js"></script><script src="site.js"></script></body></html>
