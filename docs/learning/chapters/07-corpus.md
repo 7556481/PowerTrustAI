@@ -16,7 +16,7 @@
 
 ::: answer 新增：24,620,273可以叫知识条数吗？
 
-只能明确叫片段数。切分会一文多段、输入会重复，去重正文又保留来源谱系。报告语言规模要标明输入行/去重记录/片段/文档口径；本轮只能给输入行语言分类，不能算出去重正文中文占比。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)
+只能明确叫片段数。切分会一文多段、输入会重复，去重正文又保留来源谱系。报告语言规模要标明输入行/去重记录/片段/文档口径；该语料报告只能给输入行语言分类，不能算出去重正文中文占比。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)
 
 :::
 

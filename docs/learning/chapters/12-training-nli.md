@@ -32,7 +32,12 @@ training和production的任务范围不同。三分类文本支持不覆盖not_a
 
 
 
-每batch前向计算logits，交叉熵比较标签，backward形成梯度，clip限制全局梯度范数，AdamW按学习率更新参数并独立权重衰减。训练模式允许dropout，评估模式关闭dropout且不算梯度。仅load/predict不是训练；仅loss下降不代表泛化提高。这里微调的是既有NLI分类器的领域文本支持能力，不是给生成模型灌知识或建立新的RAG语料。官方NLI头起点不同于Tiny的随机头，验证打平后按冻结速度规则选MiniLM，不证明它在整个电力领域最佳。
+每batch前向计算logits，交叉熵比较标签，backward形成梯度，clip限制全局梯度范数，AdamW按学习率更新参数并独立权重衰减。训练模式启用 Dropout 的随机丢弃。 `model.eval()` 切换相关层的行为，例如让 Dropout 停止随机丢弃。自动求导由独立的 `torch.no_grad()` 或 `torch.inference_mode()` 上下文控制。项目历史 NLI worker 先调用 `model.eval()`，再用 `torch.inference_mode()` 包住模型前向。见[推理实现](../../../backend/nli_worker.py)。仅load/predict不是训练；仅loss下降不代表泛化提高。这里微调的是既有NLI分类器的领域文本支持能力，不是给生成模型灌知识或建立新的RAG语料。官方NLI头起点不同于Tiny的随机头，验证打平后按冻结速度规则选MiniLM，不证明它在整个电力领域最佳。
+
+::: answer 只调用 model.eval()，前向是否会停止记录梯度？
+不会。eval 改变模块的训练／评估行为。若自动求导仍开启且相关输入或参数需要梯度，前向仍可记录计算图。NLI worker 单独用 inference_mode 包住前向来禁用记录。
+:::
+
 
 
 
@@ -83,19 +88,12 @@ backward → clip_grad_norm(1.0) → AdamW.step → zero_grad
 
 
 | 行真值、列预测 | supported | contradicted | insufficient |
-
 |---|---:|---:|---:|
-
 | 基座supported（10） | 5 | 1 | 4 |
-
 | 基座contradicted（13） | 0 | 11 | 2 |
-
 | 基座insufficient（10） | 0 | 4 | 6 |
-
 | 微调supported（10） | 10 | 0 | 0 |
-
 | 微调contradicted（13） | 3 | 9 | 1 |
-
 | 微调insufficient（10） | 1 | 1 | 8 |
 
 
@@ -188,7 +186,7 @@ NLI neutral表示premise没有蕴含或矛盾hypothesis，映射为本实验证�
 
 
 
-公开代码可解释配置冻结和训练入口，私有原文/监督模板/模型权重不默认公开。复现报告应说明材料权限、文件哈希、版本及缺失依赖。一个外部读者只有Git代码不能重现33条私有评测，不应把这点隐藏成“运行脚本即可得到相同分数”。本轮不执行训练或重新下载基座。
+公开代码可解释配置冻结和训练入口，私有原文/监督模板/模型权重不默认公开。复现报告应说明材料权限、文件哈希、版本及缺失依赖。一个外部读者只有Git代码不能重现33条私有评测，不应把这点隐藏成“运行脚本即可得到相同分数”。历史权重与训练环境仅按需复现。
 
 
 
@@ -201,13 +199,9 @@ MiniLM实验是对已有NLI分类器做领域适配：更新参数以学习给�
 
 
 | 实验/候选 | 实际起点及许可 | 规模与选择依据 |
-
 |---|---|---|
-
 | support-finetune-v1 Tiny | google/bert_uncased_L-2_H-128_A-2；Apache-2.0；revision30b0a37…；随机新分类头 | 4,386,307分类模型参数；19材料11/3/5；验证选epoch3；5已见开发题结果不作独立验收 |
-
 | support-nli-v1 MiniLM | cross-encoder/nli-MiniLM2-L6-H768；Apache-2.0；b95119…；已有SNLI/MultiNLI分类头 | 82,120,707参数、约328.50MB safetensors；512上下文；19材料；比较仅训练11/验证3 |
-
 | 同轮RoBERTa候选 | FacebookAI/roberta-large-mnli；MIT；2a8f12d27941090092df78e4ba6f0928eb5eac98；已有MNLI头 | 355,362,819参数、约1.426GB；512；没有执行正式领域训练 |
 
 

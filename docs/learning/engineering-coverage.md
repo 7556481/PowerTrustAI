@@ -54,8 +54,8 @@
 |入口或调用方|模块内动作→下一层|保存对象与失败边界|
 |---|---|---|
 |start-powertrustai.cmd / backend.managed|读取受管选择→launcher/config→ComponentFactory或overlap|配置manifest记录实际协议与源码；端口监听不能替代身份|
-|backend.api|校验会话与请求→ReviewService.submit|RunStore.create保存queued/request/config；响应丢失提交可能未知|
-|ReviewService.worker|取队列→Factory.create→OfflineHarness|run_id绑定observer；异常仍需queue.task_done与资源收尾|
+|backend.api|校验会话与请求→ApplicationService.submit|RunStore.create保存queued/request/config；响应丢失提交可能未知|
+|ApplicationService._worker|取队列→ComponentFactory.create→OfflineHarness|run_id绑定observer；异常仍需queue.task_done与资源收尾|
 |OfflineHarness / graph_runtime_v1|运行RunExecution七阶段→条件路由|事件/checkpoint由Store保存；图没有自带可恢复业务checkpoint|
 |generate / prepare_review / revise|retrieve_for按purpose→harness.retrieval→rag.retriever|目的、输入查询、交付记录绑定知识版本；检索失败不伪装空支持|
 |rag.retriever|KnowledgeStore→corpus_index MATCH/排名→原文与邻接|EvidenceProvenance保存版本/fragment/range/hash；预算选择后还要看发送边界|
@@ -68,7 +68,7 @@
 |revision Agent|发现catalog→动作/新正文parser→版本应用|finding_actions和新版Answer；随后新提取和双审，不沿用旧版通过|
 |structured_request|strict_json→parser→至多一次纠正|调用记录/诊断保存；部分响应不能绕过完整合同|
 |模型客户端 / DeepSeekAdapter|预算claim→线程HTTP→response/usage校验|run/component/version调用归属；超时或取消不保证远端未执行|
-|ReviewService observer|RunStore.index/checkpoint/mark|objects/events/runs短事务；写失败保留未确认持久化状态|
+|ApplicationService observer|RunStore.index/checkpoint/mark|objects/events/runs短事务；写失败保留未确认持久化状态|
 |历史API / presentation|Store.get/objects/evidence→serialization兼容|只读旧版本；不调用模型、不覆盖旧意见|
 |app.js / inline_review.js|主读取与辅助slot→归属检查→码点标注|浏览器不创造权威版本；反馈追加到对应run/answer/finding|
 |用户取消 / service.stop|拒新单→取消任务→gather/drain→close|在途结算、资源释放、Store终态分别核对；重启旧run标中断|

@@ -22,69 +22,25 @@
 
 
 
-十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；客户端轮询发现已保存首稿2.73～12.34秒、终态19.05～95.56秒，不是浏览器首次绘制。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](https://github.com/7556481/PowerTrustAI/blob/a23bbf9cdfa529a330952006a983981b6fe55252/docs/evaluation/stable-product-baseline-v1/report.md)。UI四缺项本轮已用原合成夹具补验通过，旧工具失败保留。
+十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；客户端轮询发现已保存首稿2.73～12.34秒、终态19.05～95.56秒，不是浏览器首次绘制。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](https://github.com/7556481/PowerTrustAI/blob/a23bbf9cdfa529a330952006a983981b6fe55252/docs/evaluation/stable-product-baseline-v1/report.md)。十题验收后的UI补验使用原合成夹具并通过，旧工具失败保留。
 
 
 
 ## 最小复现先隔离接口，再检查业务
 
-
-
-【真实观察】本轮四种短合成Schema分别走直接HTTP与项目适配器，实际正文逐字节相同，八项都合法。之后旧业务回归出现嵌套conditions额外字段及来源ID错误，只有两项执行完整。没有发现客户端差异，也不能因此认定服务端严格约束始终生效；未知内部原因应保留。[证据与版本](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-interface-consistency-v1/report.md#)。
-
-
-
-诊断应记录真正交给连接的URL、参数和正文身份，以及接收时arguments与解析后字符串是否相同。只比较构造函数不能排除后续改写。Schema约束对象形状，业务还要检查ID是否属于当前来源目录、条件归属和引用范围。结构合法的S1B0也可能不是要求的SRC:S1B0；程序不能替模型换成正确ID。
-
-
-
-【教学构造】两条客户端发送字节完全一致，都通过四种合成输入；复杂业务却多出Schema禁止字段。可以断言适配器导致错误，或把字段删掉继续吗？
-
-
-
-::: answer 展开最小复现练习解析
-
-不能。相同发送字节削弱了客户端构造差异这一解释，但无法观察提供商内部处理；少量成功也不是总体保证。应定位首次违例位置、保留参数与Schema身份、本地拒绝额外字段。删除字段会掩盖原输出失效。结构故障与语义分歧分别报告，不用随机差异证明客户端因果，也不以新提示重跑凑成功。
-
-:::
-
-
+历史 strict-interface-consistency-v1 用相同请求字节排查客户端差异。该严格工具候选未采用。阅读时关注合成请求成功与复杂业务回归失败为何可以并存。 [完整历史记录](../archives/18-operations.md#最小复现先隔离接口再检查业务)。
 
 ## 上一严格载体批次的停止与回退
 
-
-
-【真实失败】实际API未拒绝请求，但参数严格解析失败，唯一纠正后仍未完成；按A1/A3准入规则封存，不换参数、接口或模型试到成功。原始调用ID、参数、结束、用量和本地关联可回查；不能自动去重或剥离多余括号。本轮没有合法结果，不继续服务验收；生产默认JSON不变。[实际证据](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-review-tool-v1/report.md#)。
-
-
+历史 strict-review-tool-v1 在唯一纠正后仍未取得合法参数，按原准入规则停止。该载体未进入默认路径。 [完整历史记录](../archives/18-operations.md#上一严格载体批次的停止与回退)。
 
 ## Beta与显式回退
 
-
-
-strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实/引用审核，走官方Beta且非思考；生成、领域和修订继续原路径。回退为review_result_transport=json，生产从未自动切换。实际Schema被拒绝时必须停，不在付费中自动试另一个接口或参数。
-
-
-
-【教学构造】冻结后的严格工具请求收到HTTP400，是否可以同运行切回JSON模式把剩余题跑完？
-
-
-
-::: answer 展开Beta回退练习解析
-
-不可以。那会改变冻结的实验条件，也可能绕过共享故障停止。应保存安全状态/类型/关联及诊断缺口，停止后续发送，保留已受理结果。回退是显式配置行为，不是失败后的隐式重试；不得把新诊断反推成旧请求的确切原因。
-
-:::
-
-
+官方 Beta 工具传输属于历史 strict_tool_v1 候选。日常启动使用正式 JSON 请求。冻结试验的显式配置回退与单次失败后的重试应分别理解。 [完整历史记录](../archives/18-operations.md#beta与显式回退)。
 
 ## 实际接入没有完成时
 
-
-
-【真实失败】v9.22.1三次实际消息均通过JSON模式检查并有返回，没有请求拒绝；原引用输出重复键，唯一纠正仍失败，正式A1接入门禁停止后续26槽。不要改用“最后一个同名字段”为准，也不要把部分合法事实变成整答通过。本批没有实际HTTP拒绝，相关故障状态只由离线替身验证；停止后不另发付费探测。[原文及版本边界](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-simple-patch-v1/report.md#)。
-
-
+历史 review-simple-patch-v1 在原引用输出重复键、唯一纠正仍失败后停止。这个案例说明 HTTP 返回和业务接入完成是两道门。 [完整历史记录](../archives/18-operations.md#实际接入没有完成时)。
 
 ## 公共请求边界：额度、故障与纠正
 
@@ -118,7 +74,7 @@ strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实
 
 
 
-日常双击start-powertrustai.cmd，使用8765并自动连接；问答/已有回答正常提交会调用付费模型。演示用python -m backend --demo，必须独立端口/目录配置，synthetic_fixture不用DeepSeek；不能演示结果冒充真实审核。学习双击start-learning.cmd，8770纯静态，不读模型密钥、不启动任务、不占运行库。
+日常双击start-powertrustai.cmd，使用8765并自动连接。正常提交问答或已有回答审核会调用付费模型。公开演示用 start-powertrustai.cmd --demo，使用隔离端口和临时目录，synthetic_fixture不用DeepSeek；不能演示结果冒充真实审核。学习双击start-learning.cmd，8770纯静态，不读模型密钥、不启动任务、不占运行库。
 
 
 
@@ -126,9 +82,7 @@ strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实
 
 cd D:\PowerTrustAI
 
-& .\.venv\Scripts\python.exe -m backend --open --port 8765
-
-& .\.venv\Scripts\python.exe -m backend --stop --port 8765
+& .\start-powertrustai.cmd --demo
 
 & .\.venv\Scripts\python.exe -m tools.learning_site build
 
@@ -195,23 +149,14 @@ git -c http.proxy=http://127.0.0.1:7897 ls-remote origin refs/heads/master
 
 
 | 表现 | 应查证据 | 不要做 |
-
 |---|---|---|
-
 | 401/连接丢失 | 本机会话、固定令牌路径、origin、服务重启 | 发令牌到聊天或URL |
-
 | 422输入拒绝 | 必填字段/模式/长度及实际请求 | 编造厂站参数 |
-
 | 429队列满 | 活动run及等待队列 | 连续POST刷提交 |
-
 | 模型连接失败 | 实际异常类型、阶段、服务配置 | 认定不支持中文、关闭SSL |
-
 | OUTPUT_CONTRACT_ERROR | 原响应、纠正、具体字段、实际模板 | 只补题目提示、静默填ID |
-
 | 证据不足 | 原文、范围、交付、完整命题条件 | 把未找到说成全库不存在 |
-
 | KeyError _id | 分片schema与原断点 | 重复下载或清空库 |
-
 | interrupted | 原结果/阶段、重启恢复 | 自动重发付费任务 |
 
 

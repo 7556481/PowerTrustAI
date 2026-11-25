@@ -10,7 +10,7 @@ Generation只读原中文问题与实际Evidence；英文查询用于召回，�
 
 
 
-本轮固定8份C稿，没有重新生成或检索。N2、N4都已进入真实原文审核，仍被判supported：这是识别断点，不是修订器未获得足够重试。N5领域纠正后仍非法，执行不完整；这又不同于合法语义漏检。[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
+历史 natural-draft-audit-v1 固定8份C稿，没有重新生成或检索。N2、N4都已进入真实原文审核，仍被判supported：这是识别断点，不是修订器未获得足够重试。N5领域纠正后仍非法，执行不完整；这又不同于合法语义漏检。[完整证据](https://github.com/7556481/PowerTrustAI/blob/865eb65c617e14c04d443283bec8b27af1da0f14/docs/evaluation/natural-draft-audit-v1/report.md#)。
 
 
 
@@ -54,7 +54,7 @@ GenerationInput包含问题、工程上下文、实际交付Evidence、绑定、
 
 
 
-独立核验判断本轮实际交付的允许Evidence能否支持命题；检索使用固定知识快照，但审核不穷尽扫描或证明整个快照。原引用审核检查答案当初引用的那段资料能否支持对应正文。独立找到正确证据不能治好原错误引用。正文、元数据、输入快照、答案原文和计算结果用不同typed basis，来源适用性登记不能冒充官方技术正文。
+独立核验判断该次审核实际交付的允许Evidence能否支持命题；检索使用固定知识快照，但审核不穷尽扫描或证明整个快照。原引用审核检查答案当初引用的那段资料能否支持对应正文。独立找到正确证据不能治好原错误引用。正文、元数据、输入快照、答案原文和计算结果用不同typed basis，来源适用性登记不能冒充官方技术正文。
 
 
 

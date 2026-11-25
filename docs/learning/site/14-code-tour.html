@@ -15,16 +15,7 @@
 </ul>
 <p>下面的代码摘录与实验分支按各自绑定版本理解，不因本次阅读路线更新而改写。</p>
 <h2 id="section-3"><span id="一页请求对象流先认对象再读源码"></span>一页请求对象流：先认对象，再读源码</h2>
-<p>|阶段|对象及身份|数据进入和离开|失败/保存边界|</p>
-<p>|---|---|---|---|</p>
-<p>|API接收|Submit→TaskRequest；服务产生task_id/run_id|用户问题、可选原回答；客户端不能提交模型路径|先类型校验；无效输入未受理，不算模型失败|</p>
-<p>|队列/worker|RunStore保存请求/配置；ComponentFactory产生Bundle|固定知识版本/政策/schema；不把预期标签交模型|共享装配错误停止后续；接受后不能盲重发|</p>
-<p>|Generation|AnswerDraft(answer_id,version,text,citations)|实际交付Evidence；答案引用与事实独立检索分开|无实质答案后续不适用；连接/生成失败单列|</p>
-<p>|提取|ObligationClaim＋组件ID/原文锚点|立场、数量、必要限定、核验义务|忠实性不同于来源支持，不强制faithful|</p>
-<p>|双审|实际EvidenceVerificationInput扩展；领域输入|身份/版本/候选由程序绑定；模型评估支持/条件/异议|Fact与Domain并发；有效同级结果保留；非法ID不补造|</p>
-<p>|政策|执行完整性＋业务处置＋问题解决程度|不是多数投票；来源及支持要求仍阻断|可定位局部错误才修订；缺输入不靠删除问题解决|</p>
-<p>|Revision|新回答版本，重新产生主张对象|一次实质纠错，重新交付并完整双审|原版错误不抹去；不得修订后直接通过|</p>
-<p>|持久化/UI|observer→checkpoint/结果；版本独立|回答、处置、依据先展示，技术详情折叠|刷新/查询/重启只读既有结果，不补算或远程重发|</p>
+<div class="table-scroll"><table><thead><tr><th>阶段</th><th>对象及身份</th><th>数据进入和离开</th><th>失败/保存边界</th></tr></thead><tbody><tr><td>API接收</td><td>Submit→TaskRequest；服务产生task_id/run_id</td><td>用户问题、可选原回答；客户端不能提交模型路径</td><td>先类型校验；无效输入未受理，不算模型失败</td></tr><tr><td>队列/worker</td><td>RunStore保存请求/配置；ComponentFactory产生Bundle</td><td>固定知识版本/政策/schema；不把预期标签交模型</td><td>共享装配错误停止后续；接受后不能盲重发</td></tr><tr><td>Generation</td><td>AnswerDraft(answer_id,version,text,citations)</td><td>实际交付Evidence；答案引用与事实独立检索分开</td><td>无实质答案后续不适用；连接/生成失败单列</td></tr><tr><td>提取</td><td>ObligationClaim＋组件ID/原文锚点</td><td>立场、数量、必要限定、核验义务</td><td>忠实性不同于来源支持，不强制faithful</td></tr><tr><td>双审</td><td>实际EvidenceVerificationInput扩展；领域输入</td><td>身份/版本/候选由程序绑定；模型评估支持/条件/异议</td><td>Fact与Domain并发；有效同级结果保留；非法ID不补造</td></tr><tr><td>政策</td><td>执行完整性＋业务处置＋问题解决程度</td><td>不是多数投票；来源及支持要求仍阻断</td><td>可定位局部错误才修订；缺输入不靠删除问题解决</td></tr><tr><td>Revision</td><td>新回答版本，重新产生主张对象</td><td>一次实质纠错，重新交付并完整双审</td><td>原版错误不抹去；不得修订后直接通过</td></tr><tr><td>持久化/UI</td><td>observer→checkpoint/结果；版本独立</td><td>回答、处置、依据先展示，技术详情折叠</td><td>刷新/查询/重启只读既有结果，不补算或远程重发</td></tr></tbody></table></div>
 <p>教学构造：task=T、answer=A/v1、claim=C/组件C0、Evidence=E/知识K；Fact仅可在C0的候选范围选依据，原引用R0仅可用原交付。候选ID不是跨目标通行证。详细synthetic对象与实际函数摘录见下节。</p>
 <p>主要契约对照冻结同回答/主张/完整交付，只改13/14；这能减生成/检索混杂，但不能证明完整产品。完整服务与Revision另测，阶段、结构、语义和业务分母分开。采集故障也必须停止并记录，已发请求只离线恢复；否则统计会把报告工程缺陷误算模型失败。</p>
 <h2 id="section-4"><span id="如何读不被版本文件淹没"></span>如何读，不被版本文件淹没</h2>

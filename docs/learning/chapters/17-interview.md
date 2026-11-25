@@ -21,7 +21,7 @@ PowerTrustAI根据电力资料回答问题，保存带引用的初稿，再提�
 例子：“常见装置”被写成“最典型”，事实要查比较依据；“可以确定现场投切方案”还需运行参数，属于领域前提问题。缺参数不是反证，不能一律标contradicted。源码：[事实Agent](../../../agents/evidence_verification.py)、[领域Agent](../../../agents/power_domain_review.py)。继续追问：两者都认可仍可能共同漏错；政策不靠投票决定真伪。
 
 ### 3 一次请求怎样经过函数、对象和持久化
-简答：API Submit→ReviewService.submit→Store.create与queue→worker→Factory.create→Harness/RunExecution→阶段observer→Store.checkpoint/mark。请求、Answer版本、Claims、Findings和Evidence分别保存关联。
+简答：API Submit→ApplicationService.submit→RunStore.create与queue→worker→ComponentFactory.create→Harness/RunExecution→阶段observer→RunStore.checkpoint/mark。请求、Answer版本、Claims、Findings和Evidence分别保存关联。
 
 例子：生成后v1已保存而审核仍running，页面可读初稿；修订为v2后须重新提取和双审，不能把v1意见贴过去。源码：[api](../../../backend/api.py)、[service](../../../backend/service.py)、[store](../../../backend/store.py)。继续追问：DB创建与内存入队不是跨进程原子事务，响应丢失时提交可能已成功，不能自动再POST。
 

@@ -24,12 +24,7 @@ L2归一化后：cos(q,d) = q·d
 <p>0.96只是教学相似度，不是事实支持概率。向量索引必须绑定模型profile、维数、精度、知识版本和正文指纹；不同profile不能用同一索引。归一化次序也属于profile，因为“每窗先归一再平均”和“平均后归一”一般不等价。</p>
 <h2 id="section-5"><span id="rrf为何按名次而不是分数相加"></span>RRF：为何按名次而不是分数相加</h2>
 <p>BM25的分数尺度与余弦不同，直接相加会让某路权重随语料变化。rag/semantic.py的fuse_ranks使用两路等权、常数60、名次从1开始；某路未出现的片段没有贡献，不能当rank0。</p>
-<p>| 片段 | BM25名次 | Dense名次 | RRF |</p>
-<p>|---|---:|---:|---:|</p>
-<p>| A | 1 | 4 | 1/61+1/64=0.032018 |</p>
-<p>| B | 2 | 1 | 1/62+1/61=0.032522 |</p>
-<p>| C | 3 | 2 | 1/63+1/62=0.032002 |</p>
-<p>| D | 4 | 3 | 1/64+1/63=0.031498 |</p>
+<div class="table-scroll"><table><thead><tr><th>片段</th><th>BM25名次</th><th>Dense名次</th><th>RRF</th></tr></thead><tbody><tr><td>A</td><td>1</td><td>4</td><td>1/61+1/64=0.032018</td></tr><tr><td>B</td><td>2</td><td>1</td><td>1/62+1/61=0.032522</td></tr><tr><td>C</td><td>3</td><td>2</td><td>1/63+1/62=0.032002</td></tr><tr><td>D</td><td>4</td><td>3</td><td>1/64+1/63=0.031498</td></tr></tbody></table></div>
 <p>排序B,A,C,D。若答案需要B的条件和C的结论，Dense前二满足{B,C}，RRF前二却成{B,A}。A很相关但不替代C，完整组合反而退步。这是可能机制的算例，不拿它替历史模型解释内因。</p>
 <h2 id="section-6"><span id="cross-encoder-reranker与双塔区别"></span>Cross-encoder reranker与双塔区别</h2>
 <p>E5先独立编码q和d，文档向量可预计算；cross-encoder把(q,d)一起送模型，token间交互更充分，但每个候选都要推理。它只能重排给定池，不能召回池外材料。历史固定模型mmarco-mMiniLMv2-L12-H384-v1、int8 CPU、512 token、batch2，输出单logit，未校准为概率。</p>

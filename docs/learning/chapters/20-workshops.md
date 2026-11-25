@@ -56,7 +56,7 @@ N6原中文问运行投切，转换成生命周期commissioning/decommissioning�
 
 ::: answer 新增：最终答案没有生命周期错误，是否可把N6转换改判成功？
 
-不能。转换忠实性以转换时的原问/查询判断，旧gate=false保持；最终答案以原中文及实际来源另评。N6最终mixed还包含规划研究范围问题及必答残余，即使两步某些信息正确也不能净改善。分别列请求数：历史转换8、本轮审核32，绝不重算旧成本。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)
+不能。转换忠实性以转换时的原问/查询判断，旧gate=false保持；最终答案以原中文及实际来源另评。N6最终mixed还包含规划研究范围问题及必答残余，即使两步某些信息正确也不能净改善。分别列请求数：历史转换8、自然初稿审核32，绝不重算旧成本。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)；[完整证据](https://github.com/7556481/PowerTrustAI/blob/a6ba66d4787e2806d828edd84ec6435cc6e2d64f/docs/evaluation/retrieval-evidence-answer-check-v1/report.md#)
 
 :::
 
@@ -66,7 +66,7 @@ N6原中文问运行投切，转换成生命周期commissioning/decommissioning�
 
 
 
-【真实结果】本轮只用Flash。固定机制任务候选4/4完整、原版1/4，但三份自然初稿的两路交付都没有通过：各1复核、2执行不完整，正文未修订。B1有提取组件遗漏原文限定，B2有推荐语气变成“须协调”的异议，不能为了减少误拦一律放行。模型对照和字段完成率只是诊断手段，产品目标仍是有据、完整且处置合理的答案。[完整正文与处置](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-delivery-unblock-v1/report.md#)。
+【历史 natural-review-seam-v1，候选未采用】该实验只用Flash。固定机制任务候选4/4完整、原版1/4，但三份自然初稿的两路交付都没有通过：各1复核、2执行不完整，正文未修订。B1有提取组件遗漏原文限定，B2有推荐语气变成“须协调”的异议，不能为了减少误拦一律放行。模型对照和字段完成率只是诊断手段，产品目标仍是有据、完整且处置合理的答案。[完整正文与处置](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-delivery-unblock-v1/report.md#)。
 
 
 

@@ -5,14 +5,14 @@
 ## 一个POST怎样变成可查询的任务
 教学请求体是`{"question":"说明无功对电压的作用"}`，其余字段由[Submit](../../../backend/api.py)的默认与校验处理；不是客户端指定数据库、模型端点或Factory。RESTful在这里指用资源路径与HTTP方法区分操作，不是所有接口都必须CRUD齐全。
 
-POST /runs通过鉴权、请求体大小与类型检查，body.task生成TaskRequest，再交ReviewService.submit。源码主干如下（省略NLI和既有引用解析）：
+POST /runs通过鉴权、请求体大小与类型检查，body.task生成TaskRequest，再交ApplicationService.submit。下面是教学伪代码，按 `ApplicationService.submit` 的接单顺序简写。真实方法在锁内生成配置清单，随后保存任务和排队。
 ```python
 async with self.lock:
     self.require_accepting()
     if self.queue.full(): raise QueueFullError('Waiting queue is full')
     rid = uuid4().hex
     self.store.create(rid, request, manifest)
-    self.queue.put_nowait((rid, request, knowledge, requirements, indexed_ids))
+    self.queue.put_nowait((rid, request, knowledge, answer_requirements, indexed_reference_ids))
 ```
 lock防同一事件循环中并发提交穿过容量检查，不是数据库事务锁；store.create自己的BEGIN IMMEDIATE负责run行与对象索引原子保存。保存成功后放入内存queue，二者不是跨进程分布式事务。POST返回202与run_id仅表示已受理，不能读作模型已完成。响应里的queued也可能在浏览器收到时已经变running。
 
@@ -38,7 +38,7 @@ SQLite连接默认归创建线程；event-loop Store由该线程访问。检索t
 :::
 
 ## 从提交到持久化
-[API](../../../backend/api.py)校验请求、会话和边界，[ReviewService.submit](../../../backend/service.py)核对接单与队列容量、建立run并入队，worker逐个执行；Factory每次构造运行资源，observer把阶段对象和checkpoint存入[RunStore](../../../backend/store.py)。queued/running/finished等运行状态与答案/审核对象分开保存。
+[API](../../../backend/api.py)校验请求、会话和边界，[ApplicationService.submit](../../../backend/service.py)核对接单与队列容量、建立run并入队，worker逐个执行；Factory每次构造运行资源，observer把阶段对象和checkpoint存入[RunStore](../../../backend/store.py)。queued/running/finished等运行状态与答案/审核对象分开保存。
 事务是短SQLite BEGIN IMMEDIATE/commit/rollback；不要持有写事务跨云端等待。WAL允许读写更好共存，不使单连接可跨任意线程。RunStore设计为事件循环线程使用，检索线程要管理自己的连接。
 
 ::: answer 题27.1：POST断网能否重发？这是幂等问题吗？
@@ -53,7 +53,7 @@ runs保存请求、配置、状态和snapshot/result；events按run与ordinal记
 :::
 
 ::: answer 题27.3：drain、worker与拒单怎样衔接？
-ReviewService停止接单后处理取消/队列收尾，等待在途资源，关闭失败形成生命周期故障。health不只看端口监听，还涉及配置、Store和worker可接单状态；服务故障不应阻止仍可读历史。见[服务生命周期实现](../../../backend/service.py)、[API故障测试](../../../tests/test_backend_lifecycle_api_v4.py)。继续追问：队列满、配置失败和未知提交不是同一种错误，不能统一提示“再试一次”。
+ApplicationService停止接单后处理取消/队列收尾，等待在途资源，关闭失败形成生命周期故障。health不只看端口监听，还涉及配置、Store和worker可接单状态；服务故障不应阻止仍可读历史。见[服务生命周期实现](../../../backend/service.py)、[API故障测试](../../../tests/test_backend_lifecycle_api_v4.py)。继续追问：队列满、配置失败和未知提交不是同一种错误，不能统一提示“再试一次”。
 :::
 
 ## 本地访问的边界

@@ -5,20 +5,15 @@
 <p>只读 <code>http://127.0.0.1:8765/health</code> 可以核对当时的 status、service_lifecycle.accepting_work、managed_factory探针和Store；不可达不等于历史数据丢失，旧ready也不能保证现在可用。不要为了阅读学习站而启动、重启或提交正式任务。学习站8770与问答8765分离。</p>
 <p>下文2026-10-29候选首次验收中的“十题未发送”、旧ready和停服均为当日阶段观察；后续十题、11月发布与退役分别看<a href="history-index.html" rel="noreferrer noopener">历史索引</a>。</p>
 <h2 id="section-3"><span id="十题真实产品案例接续"></span>十题真实产品案例接续</h2>
-<p>十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；客户端轮询发现已保存首稿2.73～12.34秒、终态19.05～95.56秒，不是浏览器首次绘制。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见<a href="https://github.com/7556481/PowerTrustAI/blob/a23bbf9cdfa529a330952006a983981b6fe55252/docs/evaluation/stable-product-baseline-v1/report.md" rel="noreferrer noopener">逐题报告</a>。UI四缺项本轮已用原合成夹具补验通过，旧工具失败保留。</p>
+<p>十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；客户端轮询发现已保存首稿2.73～12.34秒、终态19.05～95.56秒，不是浏览器首次绘制。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见<a href="https://github.com/7556481/PowerTrustAI/blob/a23bbf9cdfa529a330952006a983981b6fe55252/docs/evaluation/stable-product-baseline-v1/report.md" rel="noreferrer noopener">逐题报告</a>。十题验收后的UI补验使用原合成夹具并通过，旧工具失败保留。</p>
 <h2 id="section-4"><span id="最小复现先隔离接口再检查业务"></span>最小复现先隔离接口，再检查业务</h2>
-<p>【真实观察】本轮四种短合成Schema分别走直接HTTP与项目适配器，实际正文逐字节相同，八项都合法。之后旧业务回归出现嵌套conditions额外字段及来源ID错误，只有两项执行完整。没有发现客户端差异，也不能因此认定服务端严格约束始终生效；未知内部原因应保留。<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-interface-consistency-v1/report.md#" rel="noreferrer noopener">证据与版本</a>。</p>
-<p>诊断应记录真正交给连接的URL、参数和正文身份，以及接收时arguments与解析后字符串是否相同。只比较构造函数不能排除后续改写。Schema约束对象形状，业务还要检查ID是否属于当前来源目录、条件归属和引用范围。结构合法的S1B0也可能不是要求的SRC:S1B0；程序不能替模型换成正确ID。</p>
-<p>【教学构造】两条客户端发送字节完全一致，都通过四种合成输入；复杂业务却多出Schema禁止字段。可以断言适配器导致错误，或把字段删掉继续吗？</p>
-<details class="self-answer"><summary>展开最小复现练习解析</summary><p>不能。相同发送字节削弱了客户端构造差异这一解释，但无法观察提供商内部处理；少量成功也不是总体保证。应定位首次违例位置、保留参数与Schema身份、本地拒绝额外字段。删除字段会掩盖原输出失效。结构故障与语义分歧分别报告，不用随机差异证明客户端因果，也不以新提示重跑凑成功。</p></details>
+<p>历史 strict-interface-consistency-v1 用相同请求字节排查客户端差异。该严格工具候选未采用。阅读时关注合成请求成功与复杂业务回归失败为何可以并存。 <a href="history-18-operations.html#最小复现先隔离接口再检查业务" rel="noreferrer noopener">完整历史记录</a>。</p>
 <h2 id="section-5"><span id="上一严格载体批次的停止与回退"></span>上一严格载体批次的停止与回退</h2>
-<p>【真实失败】实际API未拒绝请求，但参数严格解析失败，唯一纠正后仍未完成；按A1/A3准入规则封存，不换参数、接口或模型试到成功。原始调用ID、参数、结束、用量和本地关联可回查；不能自动去重或剥离多余括号。本轮没有合法结果，不继续服务验收；生产默认JSON不变。<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/strict-review-tool-v1/report.md#" rel="noreferrer noopener">实际证据</a>。</p>
+<p>历史 strict-review-tool-v1 在唯一纠正后仍未取得合法参数，按原准入规则停止。该载体未进入默认路径。 <a href="history-18-operations.html#上一严格载体批次的停止与回退" rel="noreferrer noopener">完整历史记录</a>。</p>
 <h2 id="section-6"><span id="beta与显式回退"></span>Beta与显式回退</h2>
-<p>strict_tool_v1由服务端开发配置显式启用，只作用于simple_v1事实/引用审核，走官方Beta且非思考；生成、领域和修订继续原路径。回退为review_result_transport=json，生产从未自动切换。实际Schema被拒绝时必须停，不在付费中自动试另一个接口或参数。</p>
-<p>【教学构造】冻结后的严格工具请求收到HTTP400，是否可以同运行切回JSON模式把剩余题跑完？</p>
-<details class="self-answer"><summary>展开Beta回退练习解析</summary><p>不可以。那会改变冻结的实验条件，也可能绕过共享故障停止。应保存安全状态/类型/关联及诊断缺口，停止后续发送，保留已受理结果。回退是显式配置行为，不是失败后的隐式重试；不得把新诊断反推成旧请求的确切原因。</p></details>
+<p>官方 Beta 工具传输属于历史 strict_tool_v1 候选。日常启动使用正式 JSON 请求。冻结试验的显式配置回退与单次失败后的重试应分别理解。 <a href="history-18-operations.html#beta与显式回退" rel="noreferrer noopener">完整历史记录</a>。</p>
 <h2 id="section-7"><span id="实际接入没有完成时"></span>实际接入没有完成时</h2>
-<p>【真实失败】v9.22.1三次实际消息均通过JSON模式检查并有返回，没有请求拒绝；原引用输出重复键，唯一纠正仍失败，正式A1接入门禁停止后续26槽。不要改用“最后一个同名字段”为准，也不要把部分合法事实变成整答通过。本批没有实际HTTP拒绝，相关故障状态只由离线替身验证；停止后不另发付费探测。<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-simple-patch-v1/report.md#" rel="noreferrer noopener">原文及版本边界</a>。</p>
+<p>历史 review-simple-patch-v1 在原引用输出重复键、唯一纠正仍失败后停止。这个案例说明 HTTP 返回和业务接入完成是两道门。 <a href="history-18-operations.html#实际接入没有完成时" rel="noreferrer noopener">完整历史记录</a>。</p>
 <h2 id="section-8"><span id="公共请求边界额度故障与纠正"></span>公共请求边界：额度、故障与纠正</h2>
 <p>请求预算的额度与运行是否还能发送是两个问题。JSON模式必须检查实际消息，而不是只看提示常量；初始、纠正和引用请求都应经过同一入口。请求被服务端拒绝与模型返回了不合法结构不同：前者要封住同运行的后续组和下游请求，后者按原有限纠正处理。已经进入网络的并行请求不能说成没有发出，返回仍需保存。</p>
 <p>错误诊断也需要边界：记录有界HTTP状态、白名单类型和安全说明；可能回显私有输入的原始错误消息不落盘，省略时明确记诊断缺口。服务端关联ID可存哈希，本地关联ID用于追踪；新诊断不能反推旧请求的确切状态。</p>
@@ -26,13 +21,11 @@
 <details class="self-answer"><summary>展开公共边界练习解析</summary><p>不能。HTTP422是请求级故障，本运行后续引用、纠正和下游模型都应停止，批次也按共享故障规则停止。HTTP200的结构失败可以使用原有有限纠正额度；不能因为有余额就重试被拒绝的请求，也不能把已接受结果丢掉。这里是离线行为检查，不是故意付费制造故障。</p></details>
 <p>历史观测（2026-10-23）：剩余五项固定服务验收完成，本机受管默认已为langgraph_v1，正常服务ready；无配置源码fallback仍sequential。新批32调用、413018token、0失败/未执行；两项诊断实际一次修订和完整重审，但图最终待补充保留，不冒称全部答案认可。四Agent、schema13、七共享阶段及预算/政策不变，A/B未采用。历史104运行/2278事件/2999版本证据对象/8反馈及SHA启动前后相同；原编排可正常停服改受管配置回退。工具浏览器入口已验、登录后视图待一次用户清单，不绕本地文件限制。详见<a href="https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/langgraph-service-continuation-v1/results-v1.md#" rel="noreferrer noopener">后续验收</a>。下文2026-10-22及更早状态保留历史含义，该补记仅表示2026-10-23的观察，现行配置请读状态页。</p>
 <h2 id="section-9"><span id="三种入口互不打断"></span>三种入口，互不打断</h2>
-<p>日常双击start-powertrustai.cmd，使用8765并自动连接；问答/已有回答正常提交会调用付费模型。演示用python -m backend --demo，必须独立端口/目录配置，synthetic_fixture不用DeepSeek；不能演示结果冒充真实审核。学习双击start-learning.cmd，8770纯静态，不读模型密钥、不启动任务、不占运行库。</p>
+<p>日常双击start-powertrustai.cmd，使用8765并自动连接。正常提交问答或已有回答审核会调用付费模型。公开演示用 start-powertrustai.cmd --demo，使用隔离端口和临时目录，synthetic_fixture不用DeepSeek；不能演示结果冒充真实审核。学习双击start-learning.cmd，8770纯静态，不读模型密钥、不启动任务、不占运行库。</p>
 <pre><code class="language-powershell">
 cd D:\PowerTrustAI
 
-&amp; .\.venv\Scripts\python.exe -m backend --open --port 8765
-
-&amp; .\.venv\Scripts\python.exe -m backend --stop --port 8765
+&amp; .\start-powertrustai.cmd --demo
 
 &amp; .\.venv\Scripts\python.exe -m tools.learning_site build
 
@@ -56,16 +49,7 @@ git -c http.proxy=http://127.0.0.1:7897 ls-remote origin refs/heads/master
 </code></pre>
 <p>本地提交成功不等远端更新，push之后读远端哈希；敏感检查应看实际Git树和blob，不只相信.gitignore。配置说明用空值或名称，不含密钥。</p>
 <h2 id="section-13"><span id="按错误层次排障"></span>按错误层次排障</h2>
-<p>| 表现 | 应查证据 | 不要做 |</p>
-<p>|---|---|---|</p>
-<p>| 401/连接丢失 | 本机会话、固定令牌路径、origin、服务重启 | 发令牌到聊天或URL |</p>
-<p>| 422输入拒绝 | 必填字段/模式/长度及实际请求 | 编造厂站参数 |</p>
-<p>| 429队列满 | 活动run及等待队列 | 连续POST刷提交 |</p>
-<p>| 模型连接失败 | 实际异常类型、阶段、服务配置 | 认定不支持中文、关闭SSL |</p>
-<p>| OUTPUT_CONTRACT_ERROR | 原响应、纠正、具体字段、实际模板 | 只补题目提示、静默填ID |</p>
-<p>| 证据不足 | 原文、范围、交付、完整命题条件 | 把未找到说成全库不存在 |</p>
-<p>| KeyError _id | 分片schema与原断点 | 重复下载或清空库 |</p>
-<p>| interrupted | 原结果/阶段、重启恢复 | 自动重发付费任务 |</p>
+<div class="table-scroll"><table><thead><tr><th>表现</th><th>应查证据</th><th>不要做</th></tr></thead><tbody><tr><td>401/连接丢失</td><td>本机会话、固定令牌路径、origin、服务重启</td><td>发令牌到聊天或URL</td></tr><tr><td>422输入拒绝</td><td>必填字段/模式/长度及实际请求</td><td>编造厂站参数</td></tr><tr><td>429队列满</td><td>活动run及等待队列</td><td>连续POST刷提交</td></tr><tr><td>模型连接失败</td><td>实际异常类型、阶段、服务配置</td><td>认定不支持中文、关闭SSL</td></tr><tr><td>OUTPUT_CONTRACT_ERROR</td><td>原响应、纠正、具体字段、实际模板</td><td>只补题目提示、静默填ID</td></tr><tr><td>证据不足</td><td>原文、范围、交付、完整命题条件</td><td>把未找到说成全库不存在</td></tr><tr><td>KeyError _id</td><td>分片schema与原断点</td><td>重复下载或清空库</td></tr><tr><td>interrupted</td><td>原结果/阶段、重启恢复</td><td>自动重发付费任务</td></tr></tbody></table></div>
 <h2 id="section-14"><span id="最小复现记录"></span>最小复现记录</h2>
 <p>记录源码/配置/知识/模型revision，实际输入、阶段、原响应、校验位置、有效部分、调用量、时间与资源。浏览器检查保存实际截图；HTTP脚本仅是脚本证据。学习内容来源可公开必要脱敏摘要，完整原始证据仍私有。</p>
 <p>普通回归：python -m unittest discover -s tests -v，离线不加载.env、不付费。冻结验收批次另有授权和停止条件，事前预期不进入模型消息。环境受限拒绝启动用工具审批，不重建环境或改权限绕过。</p>
