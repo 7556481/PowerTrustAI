@@ -76,3 +76,24 @@ class HistoricalChapterArchiveTests(unittest.TestCase):
   h,_=render('<a id="old-heading"></a>\n\n<a id="bad" onclick="alert(1)"></a>')
   self.assertIn('<a id="old-heading"></a>',h)
   self.assertNotIn('<a id="bad" onclick=',h)
+
+
+class UniquePageIDTests(unittest.TestCase):
+ def test_repeated_heading_and_nested_fold_share_one_id_namespace(self):
+  from tools.learning_checks import PageLinks
+  h,_=render('# Root\n\n::: answer Details\n## Repeated\n:::\n'+'\n## Repeated\n\n<a id="repeated"></a>')
+  p=PageLinks();p.feed(h);self.assertFalse(p.duplicates)
+ def test_duplicate_existing_html_is_rejected(self):
+  import tempfile
+  from pathlib import Path
+  from tools.learning_checks import validate_local_links
+  with tempfile.TemporaryDirectory() as t:
+   p=Path(t);(p/'x.html').write_text('<h1 id="x">a</h1><p id="x">b</p>')
+   with self.assertRaisesRegex(ValueError,'Duplicate HTML IDs'):validate_local_links(p)
+
+ def test_explicit_anchor_ids_in_maintained_markdown_are_unique(self):
+  import re
+  from tools.learning_site import SOURCE
+  for path in (SOURCE/'chapters').glob('*.md'):
+   ids=re.findall(r'<a id="([\w-]+)"></a>',path.read_text(encoding='utf-8'))
+   self.assertEqual(len(ids),len(set(ids)),path.name)

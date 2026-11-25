@@ -35,3 +35,11 @@
 ::: answer 题36.2：页面有初稿且pending interrupted，是否能计完整审核？
 不能。初稿保存证明生成对象存在；pending且persistence_confirmed=false说明最终处理未确认落库；事实/领域是否完整还须看保存的阶段与报告。不能用可读正文替完整链计数。验证应同时注入Store失败与关闭失败，核对拒新单、旧历史仍可读、在途释放与下一任务策略；入口[test_backend_lifecycle_api_v4](../../../tests/test_backend_lifecycle_api_v4.py)。
 :::
+
+## 返回顺序演算（先写四项结果）
+
+教学日志：t0打开A，epoch=7，发GET A；t1切B，epoch=8，发GET B；t2 B返回并保存正文B；t3 A返回。请写出t3对象归属、最终页面、Abort失败的影响、复制来源。
+
+::: answer 展开返回顺序解析
+A响应属于发送时A/epoch7，当前选择是B/epoch8，不能写回视图或释放B的新读取锁。页面继续显示B；Abort只是减少无用工作，归属检查负责正确性。复制从当前所选版本保存的text取，不从带标注卡的DOM取。这里epoch数字是教学构造，实际守卫见backend/static/app.js的请求身份与选择归属，以及inline_review.js的版本核对；GET失败不能显示POST受理未知。
+:::

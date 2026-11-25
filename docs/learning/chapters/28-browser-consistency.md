@@ -20,3 +20,11 @@ Python按Unicode码点索引，JavaScript字符串索引是UTF-16 code unit。�
 ::: answer 题28.3：为什么复制应取保存的原文？
 DOM含mark、意见卡、状态和辅助文本；复制DOM会把解释混入正文，或受布局空白影响。应取所选保存版本text，并检查当前版本归属。历史版本不能叠最新意见，反馈也绑定对应对象。离线夹具能验证交互与竞态，不能证明审核语义正确。见[原文标注夹具](../../../tools/ui_inline_fixture_v7.py)。继续追问：重试辅助GET与重试提交POST后果不同，前者只读，后者可能建立新付费任务。
 :::
+
+## 返回顺序演算（先写四项结果）
+
+教学日志：t0打开A，epoch=7，发GET A；t1切B，epoch=8，发GET B；t2 B返回并保存正文B；t3 A返回。请写出t3对象归属、最终页面、Abort失败的影响、复制来源。
+
+::: answer 展开返回顺序解析
+A响应属于发送时A/epoch7，当前选择是B/epoch8，不能写回视图或释放B的新读取锁。页面继续显示B；Abort只是减少无用工作，归属检查负责正确性。复制从当前所选版本保存的text取，不从带标注卡的DOM取。这里epoch数字是教学构造，实际守卫见backend/static/app.js的请求身份与选择归属，以及inline_review.js的版本核对；GET失败不能显示POST受理未知。
+:::

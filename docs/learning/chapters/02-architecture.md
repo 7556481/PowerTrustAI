@@ -829,11 +829,11 @@ ComponentFactory构造真实模型/检索/工具，传给OfflineHarness。离线
 
 
 
-## 历史索引（按需展开）
+## 历史内容定位
 
-[本章整理前完整快照](../archives/02-architecture.md)逐字保留旧公式、源码、口述和失败记录；原锚点在下面提供归档定位。
+整理前原文完整保留于[历史快照](../archives/02-architecture.md)；这里只放一套旧定位。
 
-::: answer 展开历史标题定位（不是当前面试稿）
+::: answer 展开历史内容定位
 <a id="2026-10-22agent编排运行时和harness的分层"></a>
 
 - [2026-10-22：Agent、编排运行时和Harness的分层](../archives/02-architecture.md#2026-10-22agent编排运行时和harness的分层)
@@ -846,31 +846,16 @@ ComponentFactory构造真实模型/检索/工具，传给OfflineHarness。离线
 
 - [2026-10-23运行观察（历史）](../archives/02-architecture.md#2026-10-23运行观察历史)
 
-:::
-
-::: answer 旧细节位置兼容入口
-<a id="2026-10-22-正常服务中的可选图接线"></a>
-
-[旧位置转到归档](../archives/02-architecture.md#2026-10-22-正常服务中的可选图接线)
-
-<a id="2026-10-22agent编排运行时和harness的分层"></a>
-
-[旧位置转到归档](../archives/02-architecture.md#2026-10-22agent编排运行时和harness的分层)
-
-<a id="2026-10-23运行观察历史"></a>
-
-[旧位置转到归档](../archives/02-architecture.md#2026-10-23运行观察历史)
-
 <a id="316396681d-control"></a>
 
-[旧位置转到归档](../archives/02-architecture.md#316396681d-control)
+- [旧位置转到归档](../archives/02-architecture.md#316396681d-control)
 
 <a id="316396681d-data"></a>
 
-[旧位置转到归档](../archives/02-architecture.md#316396681d-data)
+- [旧位置转到归档](../archives/02-architecture.md#316396681d-data)
 
 <a id="316396681d-persist"></a>
 
-[旧位置转到归档](../archives/02-architecture.md#316396681d-persist)
+- [旧位置转到归档](../archives/02-architecture.md#316396681d-persist)
 
 :::

@@ -163,11 +163,11 @@ tools/unit_conversion.py处理受支持的标量单位、前缀和数值关系�
 
 
 
-## 历史索引（按需展开）
+## 历史内容定位
 
-[本章整理前完整快照](../archives/09-engineering-tools.md)逐字保留旧公式、源码、口述和失败记录；原锚点在下面提供归档定位。
+整理前原文完整保留于[历史快照](../archives/09-engineering-tools.md)；这里只放一套旧定位。
 
-::: answer 展开历史标题定位（不是当前面试稿）
+::: answer 展开历史内容定位
 <a id="2026-10-23-事实审核内部流程候选"></a>
 
 - [2026-10-23 事实审核内部流程候选](../archives/09-engineering-tools.md#2026-10-23-事实审核内部流程候选)
@@ -179,20 +179,5 @@ tools/unit_conversion.py处理受支持的标量单位、前缀和数值关系�
 <a id="2026-10-08-首版收尾核对"></a>
 
 - [2026-10-08 首版收尾核对](../archives/09-engineering-tools.md#2026-10-08-首版收尾核对)
-
-:::
-
-::: answer 旧细节位置兼容入口
-<a id="2026-10-08-首版收尾核对"></a>
-
-[旧位置转到归档](../archives/09-engineering-tools.md#2026-10-08-首版收尾核对)
-
-<a id="2026-10-23-事实审核内部流程候选"></a>
-
-[旧位置转到归档](../archives/09-engineering-tools.md#2026-10-23-事实审核内部流程候选)
-
-<a id="核心审核修复v1的当前边界"></a>
-
-[旧位置转到归档](../archives/09-engineering-tools.md#核心审核修复v1的当前边界)
 
 :::
