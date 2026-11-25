@@ -612,8 +612,8 @@
     },
     {
       "source": "docs/learning/engineering-coverage.md",
-      "characters": 6956,
-      "sha256": "8e01b5aabddaeee58b460f0b3118ba1fa104900c2f17df7f81b18641bdb6ebce"
+      "characters": 6959,
+      "sha256": "adacbf593caabdd28543a666b8d86d58d51248bd5d07a2bbc857e6ac9c80f198"
     },
     {
       "source": "docs/learning/resume-learning-map.md",
@@ -946,6 +946,6 @@
       "sha256": "a9f074460d5accd5ef9095f651f98bd351fb2c6cd93200c29f6367ed6b5adb24"
     }
   ],
-  "markdown_characters": 387728,
+  "markdown_characters": 387731,
   "network_dependencies": false
 }

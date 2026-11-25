@@ -69,7 +69,7 @@
 |structured_request|strict_json→parser→至多一次纠正|调用记录/诊断保存；部分响应不能绕过完整合同|
 |模型客户端 / DeepSeekAdapter|预算claim→线程HTTP→response/usage校验|run/component/version调用归属；超时或取消不保证远端未执行|
 |ApplicationService observer|RunStore.index/checkpoint/mark|objects/events/runs短事务；写失败保留未确认持久化状态|
-|历史API / presentation|Store.get/objects/evidence→serialization兼容|只读旧版本；不调用模型、不覆盖旧意见|
+|历史API / presentation|RunStore.get/objects/evidence→serialization兼容|只读旧版本；不调用模型、不覆盖旧意见|
 |app.js / inline_review.js|主读取与辅助slot→归属检查→码点标注|浏览器不创造权威版本；反馈追加到对应run/answer/finding|
 |用户取消 / service.stop|拒新单→取消任务→gather/drain→close|在途结算、资源释放、Store终态分别核对；重启旧run标中断|
 |public_checks / evaluation入口|公开夹具/合同/API测试，固定批次另冻结|测试日志与报告；跳过私有归档不能包装为真实语义重测|
