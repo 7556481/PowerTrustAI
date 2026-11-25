@@ -60,3 +60,23 @@ class TeachingExamples(unittest.TestCase):
                 self.assertEqual(value[0].text,answer().text)
             finally:adapter.close()
         asyncio.run(go())
+
+
+class MarkdownJSONTests(unittest.TestCase):
+    def test_all_json_fences_in_chapters_parse_as_displayed(self):
+        import re
+        chapters=Path(__file__).resolve().parents[1]/'docs/learning/chapters'
+        for path in chapters.glob('*.md'):
+            for index,match in enumerate(re.finditer(r'```json\s*\n(.*?)\n```',path.read_text(encoding='utf-8'),re.S)):
+                with self.subTest(chapter=path.name,block=index):
+                    from services.structured_model import strict_json
+                    strict_json(match[1])
+    def test_displayed_http_envelope_parses_but_business_content_is_rejected(self):
+        import re
+        from model_adapter.deepseek import parse_response
+        from services.structured_model import strict_json
+        path=Path(__file__).resolve().parents[1]/'docs/learning/chapters/24-model-wire.md'
+        block=re.findall(r'```json\s*\n(.*?)\n```',path.read_text(encoding='utf-8'),re.S)[0]
+        response=parse_response(200,block.encode('utf-8'),'deepseek-flash')
+        self.assertEqual(strict_json(response.text),{'unexpected':True})
+        with self.assertRaises(ContractError):parse_units(strict_json(response.text),inputs())

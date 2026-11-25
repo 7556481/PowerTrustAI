@@ -60,8 +60,9 @@ schema13并非一个孤立JSON Schema：Factory组合review_templates、support_
 
 |对象|需要读懂的字段|约束与典型失败|
 |---|---|---|
-|提取结果|answer_id、answer_version、claims、non_claims|身份必须是输入版，不能给新版本造主张|
-|主张|quote、proposition、claim_type、qualifiers，必要时prefix/suffix|quote逐字锚定，qualifiers保留原句限定；原话与规范命题分别比较|
+|正式v7模型提取根|claims、non_claims|不由模型返回answer_id、answer_version、quote或offset|
+|正式v7模型主张|anchor_id、proposition、claim_type、components、assertion_role、semantic_qualifiers|选程序提供的锚点；组件须含category、proposition、basis_target、verification_obligation|
+|正式v7模型non_claims项|anchor_id、reason|只选完整非事实段，不能与claims共用同一锚点|
 |事实finding|claim_id、rationale、applicability_conditions、bases、component_reviews|每个应审主张都有结果，不能多造ID；非空理由不等于理由成立|
 |组件判断|component_index、status、basis_indexes、rationale、semantic_review|只覆盖程序允许的组件，不能输出程序拥有的缺失组件；索引不能越界|
 |语义判断|fidelity、assertion_role、verification_obligation、rationale|忠实性、立场和义务是独立轴；分类争议不自动变成事实矛盾|
@@ -69,7 +70,24 @@ schema13并非一个孤立JSON Schema：Factory组合review_templates、support_
 |修订结果|answer_units、assumptions、missing_information、finding_actions|只能有合同字段；改稿与动作解释分开|
 |finding_action|finding_id、action、explanation|已冻结发现恰好一次，action仅modified/retained/unresolved，理由非空|
 
-表为主路径字段导读，具体可选项和版本差异以parser为准，不能直接把它转成全套生产示例。领域对象的rule_ids、missing_prerequisites、basis_kind等见[领域合同](../../../agents/domain_contract_v3.py)；事实status枚举不能替代领域check_status。
+表中提取行只描述正式v7模型输出；其他审核/修订行按各自合同阅读。表为主路径字段导读，具体可选项和版本差异以parser为准，不能直接把它转成全套生产示例。领域对象的rule_ids、missing_prerequisites、basis_kind等见[领域合同](../../../agents/domain_contract_v3.py)；事实status枚举不能替代领域check_status。
+
+## 程序恢复后的内部字段（不是v7模型输出）
+
+模型返回anchor_id后，程序按当前AnswerDraft的锚点目录查找原段，恢复quote及start/end，绑定answer_id和answer_version，再构造Claim。主张ID由程序计算；v7的basis_target和verification_obligation进一步保存为component_basis_targets/component_obligations。
+
+|归属|字段|来源与边界|
+|---|---|---|
+|输入AnswerDraft|answer_id、version、text|已保存的回答版本，不允许模型另造|
+|内部Claim|answer_id、answer_version、text、start_offset、end_offset、claim_id|程序从冻结回答及锚点恢复；text保存原quote|
+|内部语义信息|proposition、assertion_role、semantic_qualifiers等|来自模型的语义判断，程序可核对结构但不证明等价|
+|内部qualifiers|qualifiers|v7锚点转换中设为空tuple；不要将其与模型semantic_qualifiers混同|
+
+调用链是claim_obligations.parse→answer_basis_targets.parse→answer_anchors.parse→parse_extraction。最后一层能接受旧形状，并不意味着正式模型要输出那种形状。内部定位和语义忠实是两道问题。
+
+## 历史v4模型字段（不是正式v7）
+
+历史v4由模型返回answer_id、answer_version，以及claims中的quote、proposition、claim_type、qualifiers，可选prefix/suffix；组件模式另有components。下面仅展示旧基础形状，用于解释历史parser，不应照抄到正式v7请求。
 
 ## 历史v4形状的提取例（不作为正式v7请求）
 

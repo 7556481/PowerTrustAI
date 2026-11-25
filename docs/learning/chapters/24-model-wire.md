@@ -35,7 +35,7 @@ _http建立HTTPSConnection，TLS连接后POST，接收状态码和最多规定�
 ```json
 {
   "model": "deepseek-flash",
-  "choices": [{"message": {"content": "{"unexpected":true}"},
+  "choices": [{"message": {"content": "{\"unexpected\":true}"},
                "finish_reason": "stop"}],
   "usage": {"prompt_tokens": 2, "completion_tokens": 1, "total_tokens": 3}
 }
