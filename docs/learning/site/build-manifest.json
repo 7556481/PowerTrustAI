@@ -607,8 +607,8 @@
   "chapters": [
     {
       "source": "docs/learning/index.md",
-      "characters": 2749,
-      "sha256": "6e04819e2584cedf3fc149edba39854e3d0b1f65ba79d1bdc0e3cad096c6bc7d"
+      "characters": 2892,
+      "sha256": "21e4f05cd7afadd70e2bf1cecee863d38b7cb2584b5f8f40a903edbe55a3bd65"
     },
     {
       "source": "docs/learning/engineering-coverage.md",
@@ -647,18 +647,18 @@
     },
     {
       "source": "docs/learning/chapters/03-agents.md",
-      "characters": 5198,
-      "sha256": "aaa2642102fc4f7906a0604256e3641f79e25151f9fc9df3c05c1316f0d13f52"
+      "characters": 5243,
+      "sha256": "bad6ac64181101c59ee230f21a54bd6b1382dba62d7e601d256eba355e27f2d6"
     },
     {
       "source": "docs/learning/chapters/04-harness.md",
-      "characters": 11176,
-      "sha256": "18ab0e1eb17570a6d17b3e9ac5d6987c39e4dc1aa4af21569ccfa0ae098c6a64"
+      "characters": 11239,
+      "sha256": "0226896a69de9d4237497bf90c7bff391f7a87d44751ac5e35655040f2132361"
     },
     {
       "source": "docs/learning/chapters/05-rag.md",
-      "characters": 7381,
-      "sha256": "704988f862ef480f0d4515a1b701ae8a946a95d6085943163b1860c1c1b60ee0"
+      "characters": 7421,
+      "sha256": "2e2ffb2c92a1be0fac517fe1a02d3911a33199cedbd54dad899da94f85f2b417"
     },
     {
       "source": "docs/learning/chapters/06-retrieval-math.md",
@@ -667,13 +667,13 @@
     },
     {
       "source": "docs/learning/chapters/07-corpus.md",
-      "characters": 4788,
-      "sha256": "5c1079eaa4b5f4c1e363eb68238c476fd89688ce9dae1e1e873eee516de63c21"
+      "characters": 4824,
+      "sha256": "632739c81d0c7a3e9abb3be62870aadb46d88ec559fab87b0f0e0ab4959265a5"
     },
     {
       "source": "docs/learning/chapters/08-verification.md",
-      "characters": 8870,
-      "sha256": "c275b17d33c79f48b2be85245b665b73abb2b90ec517dc1e6ebc72468d6f795a"
+      "characters": 8944,
+      "sha256": "3d83fa3e5fd750c3182d2f791b87b2255703da95598881bf408f68c37bd0bc07"
     },
     {
       "source": "docs/learning/chapters/09-engineering-tools.md",
@@ -692,8 +692,8 @@
     },
     {
       "source": "docs/learning/chapters/12-training-nli.md",
-      "characters": 7056,
-      "sha256": "09e9a75226d25ff138254d1c6e9114ddf90d4a3fc14d3f5d967abaab9281afeb"
+      "characters": 7063,
+      "sha256": "c2bba01bf2c1b338040ebc5f6d8aba4b172ae8a1e78d6b11b5eee8800433deb2"
     },
     {
       "source": "docs/learning/chapters/13-local-nli.md",
@@ -712,8 +712,8 @@
     },
     {
       "source": "docs/learning/chapters/16-performance.md",
-      "characters": 7159,
-      "sha256": "9efedc5b91f9ceddea877154617a49c3038f147c84e82678ae89980c5664e41e"
+      "characters": 7169,
+      "sha256": "c833b0574a7039c5690dd37822dc8cc8f66ac09a48db64329340bcf025dfcac4"
     },
     {
       "source": "docs/learning/chapters/17-interview.md",
@@ -722,8 +722,8 @@
     },
     {
       "source": "docs/learning/chapters/18-operations.md",
-      "characters": 7616,
-      "sha256": "7a7f21b40f03a9b3f0df95b980c657f5923051254749112a114fef11aa912d54"
+      "characters": 7524,
+      "sha256": "98f965f339794ef5797c47bd9def2a701f89f6acd9bbcfad69f59d2e240f6535"
     },
     {
       "source": "docs/learning/chapters/19-glossary.md",
@@ -732,8 +732,8 @@
     },
     {
       "source": "docs/learning/chapters/20-workshops.md",
-      "characters": 6559,
-      "sha256": "eeca4949c2ce919ba2b84483d6a5104dffda12fdc853e9b8fd91e871e09dbfcb"
+      "characters": 6599,
+      "sha256": "f39b7948436d4cc343562cc7020447d3389a1d32876d36e04d650446ec2ca7a8"
     },
     {
       "source": "docs/learning/chapters/21-product-contracts.md",
@@ -752,8 +752,8 @@
     },
     {
       "source": "docs/learning/chapters/24-model-wire.md",
-      "characters": 4905,
-      "sha256": "182be9c9ff7032f4534c8b7beab9cfc86da41c2a065bfc1173175f84735042c9"
+      "characters": 4962,
+      "sha256": "01ce51684b791a26fa7b9495c60e4c70ccbd985331005a7d520f32d9fc032e74"
     },
     {
       "source": "docs/learning/chapters/25-agents-semantics.md",
@@ -946,6 +946,6 @@
       "sha256": "a9f074460d5accd5ef9095f651f98bd351fb2c6cd93200c29f6367ed6b5adb24"
     }
   ],
-  "markdown_characters": 389532,
+  "markdown_characters": 389955,
   "network_dependencies": false
 }

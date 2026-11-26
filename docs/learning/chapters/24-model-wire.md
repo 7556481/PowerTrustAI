@@ -15,7 +15,7 @@ request = ModelRequest(self.settings.model_id, messages,
                        prompt_version, correction, result_tool)
 candidate = await asyncio.wait_for(self.adapter.complete(request), remaining)
 ```
-claim发生在发送前，预算不足不会先请求再补账。`remaining`取配置超时和run deadline剩余时间的较小者。一个方法调用返回的是待执行协程；`await`才把执行控制交给事件循环。超时会取消被等待的协程，未必能取消已开始的线程HTTP。
+claim发生在发送前，预算不足不会先请求再补账。`remaining`取配置超时和run deadline剩余时间的较小者。调用这个async方法返回协程对象；`await`驱动或等待其执行，但不保证立刻让出事件循环。只有遇到尚未完成的异步等待等挂起点，其他任务才有机会运行；协程中的同步阻塞仍会阻塞事件循环。超时会取消被等待的协程，未必能取消已开始的线程HTTP。
 
 [DeepSeekAdapter.complete](../../../model_adapter/deepseek.py)从ModelRequest创建载体：
 ```python

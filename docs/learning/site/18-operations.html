@@ -5,7 +5,7 @@
 <p>只读 <code>http://127.0.0.1:8765/health</code> 可以核对当时的 status、service_lifecycle.accepting_work、managed_factory探针和Store；不可达不等于历史数据丢失，旧ready也不能保证现在可用。不要为了阅读学习站而启动、重启或提交正式任务。学习站8770与问答8765分离。</p>
 <p>下文2026-10-29候选首次验收中的“十题未发送”、旧ready和停服均为当日阶段观察；后续十题、11月发布与退役分别看<a href="history-index.html" rel="noreferrer noopener">历史索引</a>。</p>
 <h2 id="section-3"><span id="十题真实产品案例接续"></span>十题真实产品案例接续</h2>
-<p>十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；客户端轮询发现已保存首稿2.73～12.34秒、终态19.05～95.56秒，不是浏览器首次绘制。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见<a href="https://github.com/7556481/PowerTrustAI/blob/a23bbf9cdfa529a330952006a983981b6fe55252/docs/evaluation/stable-product-baseline-v1/report.md" rel="noreferrer noopener">逐题报告</a>。十题验收后的UI补验使用原合成夹具并通过，旧工具失败保留。</p>
+<p>十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；客户端轮询发现已保存首稿2.73～12.34秒、终态19.05～95.56秒，不是浏览器首次绘制。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/evaluation/stable-product-baseline-v1/report.md" rel="noreferrer noopener">逐题报告</a>。十题验收后的UI补验使用原合成夹具并通过，旧工具失败保留。</p>
 <h2 id="section-4"><span id="最小复现先隔离接口再检查业务"></span>最小复现先隔离接口，再检查业务</h2>
 <p>历史 strict-interface-consistency-v1 用相同请求字节排查客户端差异。该严格工具候选未采用。阅读时关注合成请求成功与复杂业务回归失败为何可以并存。 <a href="history-18-operations.html#最小复现先隔离接口再检查业务" rel="noreferrer noopener">完整历史记录</a>。</p>
 <h2 id="section-5"><span id="上一严格载体批次的停止与回退"></span>上一严格载体批次的停止与回退</h2>
@@ -39,13 +39,13 @@ cd D:\PowerTrustAI
 <p>先定位实际迁移目录，核对restore、manifest、exclusions、failures；大小/SHA相符再复制data，相对结构不变，冲突停止覆盖。数据库检查SQLite integrity，保留迁移目录，不复制旧虚拟环境、旧凭据或旧WAL/SHM。模型revision/配置/快照与索引需匹配。</p>
 <p>路径变化只修改新的启动配置和环境，不批量改写历史冻结请求、task哈希或归档。旧训练环境重装依赖不等于重跑实验；恢复验证仅导入/本地加载。凭据由所有者本机填写，报告仅路径和版本，不显示真实值。</p>
 <h2 id="section-12"><span id="git与命令级网络"></span>Git与命令级网络</h2>
-<p>修改前看status、HEAD和远端，实际有更新接续不回退。代码/Markdown/静态站源码提交，data/原始响应/权重/官方全文不提交。普通push，不强推。代理只在明确需要的Git命令使用已核实127.0.0.1:7897，不能把Git代理盲套到模型API，更不关SSL。</p>
+<p>修改前看status、HEAD和远端，实际有更新接续不回退。代码/Markdown/静态站源码提交，data/原始响应/权重/官方全文不提交。普通push，不强推。代理地址与端口属于本机环境，使用前核对当前代理客户端；仅对需要的Git命令临时指定。历史7897或7890都不是项目固定端口，不能把Git代理盲套到模型API，更不关SSL。</p>
 <pre><code class="language-powershell">
 git status --short
 
 git rev-parse HEAD
 
-git -c http.proxy=http://127.0.0.1:7897 ls-remote origin refs/heads/master
+git ls-remote origin refs/heads/master
 </code></pre>
 <p>本地提交成功不等远端更新，push之后读远端哈希；敏感检查应看实际Git树和blob，不只相信.gitignore。配置说明用空值或名称，不含密钥。</p>
 <h2 id="section-13"><span id="按错误层次排障"></span>按错误层次排障</h2>

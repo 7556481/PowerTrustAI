@@ -41,7 +41,7 @@
 
 
 
-【真实观察】本批同服务Flash/Pro使用相同消息、Schema、Beta工具和非思考设置，只改变model。Pro19请求、Flash22请求；Pro较少纠正，但模型累计114.856秒，高于Flash87.529秒。两路缓存比例和价格不同，账单未知，不能按token更少宣称费用更低。单批已见材料也不证明模型普遍优越。[选型与成本记录](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-review-model-fit-v1/report.md#)。
+【历史真实观察，非当前选型任务】该批同服务Flash/Pro使用相同消息、Schema、Beta工具和非思考设置，只改变model。Pro19请求、Flash22请求；Pro较少纠正，但模型累计114.856秒，高于Flash87.529秒。两路缓存比例和价格不同，账单未知，不能按token更少宣称费用更低。单批已见材料也不证明模型普遍优越。[选型与成本记录](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/fact-review-model-fit-v1/report.md#)。
 
 
 
