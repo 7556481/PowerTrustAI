@@ -202,7 +202,7 @@ Generation用途检索围绕原问题，Verification可围绕冻结主张，Doma
 
 | 实际对象/函数 | 缓存键或范围 | 失效与仍执行的检查 |
 |---|---|---|
-| RetrievalSession.query_cache / retrieve | 同一run；knowledge_version、retriever.cache_identity、query、max_results、实际ContextOptions | 只在fact_query=True查询和写入；新run新字典，知识/模式/profile/查询/上下文变更另键；命中仍validate_result完整确定性重放 |
+| RetrievalSession.query_cache / retrieve | 同一run；knowledge_version、retriever.cache_identity、query、max_results、实际ContextOptions | 只在fact_query=True查询和写入；新run新字典，知识/模式/profile/查询/上下文变更另键；命中仍调用validate_result；大库同请求即时证书匹配时校验完整结果、封印和逐段原文，省去重复排名；无证书时按原路径重放 |
 | retrieve_facts内deliveries | 单次逐组件审核；完整规范查询字符串 | 本次同查询复用Delivery；下一轮重新创建字典，组件映射/回答版本重新绑定 |
 | KnowledgeStore._load_pdf_report | 只读连接局部；SQLite data_version/total_changes、知识、文档、版本、file_hash及缓存版本 | 外部提交改变stamp；可写Store禁用；返回deepcopy；容量达到8清空。不是排名/审核结论缓存 |
 | corpus_index._OPENED / seal | 进程内路径＋knowledge_version；已验证文件size/mtime_ns | stamp变化拒绝；新进程严格sidecar/库内manifest与全文件SHA；字节一致复用发布时SQLite/FTS/成员检查，不在每题全库SHA；逐命中原文和区间继续校验 |

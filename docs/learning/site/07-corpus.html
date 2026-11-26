@@ -2,7 +2,7 @@
 <p>配置、启动与能力边界见<a href="current-status.html" rel="noreferrer noopener">当前状态</a>。读完构建和发布流程，再用<a href="22-corpus-engineering.html" rel="noreferrer noopener">第22章</a>的事务与原文身份练习检查构建结果。</p>
 <h2 id="section-2"><span id="70gb究竟是什么语言比例如何读"></span>70GB究竟是什么、语言比例如何读</h2>
 <p>固定全库FTS文件70,847,647,744字节，24,620,273片段，对应8,630,479去重正文记录；片段不是独立论文数。发布清单共73个分片，其中70个可读并完成处理，另外3个英文Parquet分片的字节身份已核验，但文件不可读，记录为排除。70个分片共处理14,336,177行，其中中文7,373,300行、英文6,962,877行。输入行近似规模不能换算去重正文的语言比例。</p>
-<p>本次小目录12文档674片段，序列化4.05MB是文件大小，不能冒称进程RSS。NERC机构范围含2文档308片段，目标2016指南268片段。小目录支持中文入口按需找英文正文，不代表已完成全库语言鉴定或向量化。<a href="https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#" rel="noreferrer noopener">完整证据</a>。</p>
+<p>历史跨语言实验的小目录含12文档674片段，序列化4.05MB是文件大小，不能冒称进程RSS。NERC机构范围含2文档308片段，目标2016指南268片段。小目录支持中文入口按需找英文正文，不代表已完成全库语言鉴定或向量化。<a href="https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#" rel="noreferrer noopener">完整证据</a>。</p>
 <details class="self-answer"><summary>新增：24,620,273可以叫知识条数吗？</summary><p>只能明确叫片段数。切分会一文多段、输入会重复，去重正文又保留来源谱系。报告语言规模要标明输入行/去重记录/片段/文档口径；该语料报告只能给输入行语言分类，不能算出去重正文中文占比。<a href="https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#" rel="noreferrer noopener">完整证据</a></p></details>
 <h2 id="section-3"><span id="是什么把处理过程当可恢复事务"></span>是什么：把处理过程当可恢复事务</h2>
 <p>IndustryCorpus2不是一个能一次read_json放进内存的小文件。已有73片发布字节约40.64GB，70片Parquet元数据可读、14,336,177行；3片发布文件缺尾部，哈希匹配也不能把它们修造为可读。数据集Apache-2.0卡片不自动证明每条原出处权威。正文扩大概念覆盖，未知机构/URL/日期保持未知，不独自批准规范、设定值或工程保证。</p>
@@ -29,7 +29,7 @@ internal_id = &quot;industrycorpus2:row-v1:&quot; + SHA256(
 <p>历史 <code>prefix-v2</code> 部分快照包含153,088条输入、143,053条唯一正文和326,565个片段，用于早期接入验证。之后项目发布了已核验的完整 SQLite 全文库，并在 2026-10-08 完成日常迁移。旧规模用于理解增量构建；受管服务的配置看<a href="current-status.html" rel="noreferrer noopener">当前状态</a>，具体知识版本以实际运行清单为准。<a href="https://github.com/7556481/PowerTrustAI/blob/master/docs/full-corpus-adoption-v1.md" rel="noreferrer noopener">全库接入记录</a></p>
 <p>学习时先认清计数：manifest分片→已提交输入行→精确去重后的记录→切分片段→全文索引；Dense向量需要另外匹配的构建。输入行不是可直接使用的向量数。构建进度必须附观测时间；发布规模取自相应发布清单。服务采用哪个发布版本，需要另核对运行记录。</p>
 <h2 id="section-9"><span id="验证坑与面试"></span>验证、坑与面试</h2>
-<p>验证应覆盖稳定ID、跨batch、事务回滚、重复来源、断点二次启动不增数、错误分片排除和不可变发布拒绝覆盖。生产当前进度以带时间的build-progress为准，书中历史数字不当实时值。</p>
+<p>验证应覆盖稳定ID、跨batch、事务回滚、重复来源、断点二次启动不增数、错误分片排除和不可变发布拒绝覆盖。建设期间的进度以带时间的build-progress为准；已发布库的规模与身份看发布清单，服务是否采用看运行配置，书中历史数字不当实时值。</p>
 <p>面试说法：“我把原始行身份和正文内容身份分开，精确重复保留谱系，每批数据与断点同事务。构建、发布和服务三阶段分离，未知出处明确标记。”追问为什么不直接从text_hash做内部ID：它会把不同来源行合并为同一来源身份，丢失谱系。</p>
 <h2 id="section-10"><span id="断点实验逐步推演"></span>断点实验逐步推演</h2>
 <p>教学构造分片260行，batch128。事务1成功写0–127，next_row=128；事务2写128–129后在130抛异常，整个128–255批回滚，next_row仍128。恢复从原片读取，前128行跳过，继续绝对行128；最后256–259成功，next_row=260、complete=1。再次启动该片直接跳过。</p>

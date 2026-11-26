@@ -22,7 +22,7 @@
 
 
 
-十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；客户端轮询发现已保存首稿2.73～12.34秒、终态19.05～95.56秒，不是浏览器首次绘制。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](https://github.com/7556481/PowerTrustAI/blob/a23bbf9cdfa529a330952006a983981b6fe55252/docs/evaluation/stable-product-baseline-v1/report.md)。十题验收后的UI补验使用原合成夹具并通过，旧工具失败保留。
+十题通过正式API和独立运行库执行，启动封印200.492秒不计入每题；客户端轮询发现已保存首稿2.73～12.34秒、终态19.05～95.56秒，不是浏览器首次绘制。6完整不等于6可用：Q3把P/S与cosφ无条件等同、相关判断supported却漏正弦条件；Q6/7/8诚实不足却没有回答；Q9缺现场输入判断有帮助但审核合同失败。无真实修订，不能宣称纠错收益。61 Flash、887560可信token、未决0，AI辅助用户监督开发复核，非专家金标准。详见[逐题报告](../../evaluation/stable-product-baseline-v1/report.md)。十题验收后的UI补验使用原合成夹具并通过，旧工具失败保留。
 
 
 
@@ -124,7 +124,7 @@ cd D:\PowerTrustAI
 
 
 
-修改前看status、HEAD和远端，实际有更新接续不回退。代码/Markdown/静态站源码提交，data/原始响应/权重/官方全文不提交。普通push，不强推。代理只在明确需要的Git命令使用已核实127.0.0.1:7897，不能把Git代理盲套到模型API，更不关SSL。
+修改前看status、HEAD和远端，实际有更新接续不回退。代码/Markdown/静态站源码提交，data/原始响应/权重/官方全文不提交。普通push，不强推。代理地址与端口属于本机环境，使用前核对当前代理客户端；仅对需要的Git命令临时指定。历史7897或7890都不是项目固定端口，不能把Git代理盲套到模型API，更不关SSL。
 
 
 
@@ -134,7 +134,7 @@ git status --short
 
 git rev-parse HEAD
 
-git -c http.proxy=http://127.0.0.1:7897 ls-remote origin refs/heads/master
+git ls-remote origin refs/heads/master
 
 ```
 

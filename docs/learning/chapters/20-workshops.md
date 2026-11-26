@@ -66,7 +66,7 @@ N6原中文问运行投切，转换成生命周期commissioning/decommissioning�
 
 
 
-【历史 natural-review-seam-v1，候选未采用】该实验只用Flash。固定机制任务候选4/4完整、原版1/4，但三份自然初稿的两路交付都没有通过：各1复核、2执行不完整，正文未修订。B1有提取组件遗漏原文限定，B2有推荐语气变成“须协调”的异议，不能为了减少误拦一律放行。模型对照和字段完成率只是诊断手段，产品目标仍是有据、完整且处置合理的答案。[完整正文与处置](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-delivery-unblock-v1/report.md#)。
+【历史 review-delivery-unblock-v1，候选未采用】该实验只用Flash。固定机制任务候选4/4完整、原版1/4，但三份自然初稿的两路交付都没有通过：各1复核、2执行不完整，正文未修订。B1有提取组件遗漏原文限定，B2有推荐语气变成“须协调”的异议，不能为了减少误拦一律放行。模型对照和字段完成率只是诊断手段，产品目标仍是有据、完整且处置合理的答案。[完整正文与处置](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/review-delivery-unblock-v1/report.md#)。
 
 
 
@@ -82,7 +82,7 @@ N6原中文问运行投切，转换成生命周期commissioning/decommissioning�
 
 
 
-全部是教学构造，不调用付费模型、不训练、不写日常数据库。每个工作坊给目标、步骤、参考答案和错误思路；可以口头完成或用临时synthetic测试验证。真实实验另看固定报告。
+以下八个工作坊采用教学构造或已明确标注的历史数据复算，不调用付费模型、不训练、不写日常数据库。上方真实案例仍按各自固定报告理解。每个工作坊给目标、步骤、参考答案和错误思路；可以口头完成或用临时synthetic测试验证。真实实验另看固定报告。
 
 
 

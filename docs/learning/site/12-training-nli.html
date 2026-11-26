@@ -22,7 +22,7 @@ backward → clip_grad_norm(1.0) → AdamW.step → zero_grad
 <p>教学构造：正确类模型概率0.5，loss≈0.693；提高到0.9，loss≈0.105。这只解释损失，不把softmax称事实可信概率。概率来自训练分类目标，未校准且数据分布可能变化。</p>
 <h2 id="section-5"><span id="独立cpu环境与冻结配置"></span>独立CPU环境与冻结配置</h2>
 <p>项目.venv用于服务，训练环境独立在new-machine-restoration/training-env；实际Python3.13.2、torch2.8.0+cpu、transformers4.57.1等版本归档。X7-358H/32GB采用CPU，不按NVIDIA CUDA配置。服务启动不自动安装训练依赖或下载模型。</p>
-<p>扩大训练从官方原NLI权重重新加载，不沿旧领域checkpoint刷分。冻结线程4、seed20261005、4epochs、batch1、AdamW lr1e-5、weight_decay0.01、clip1.0。train只用43训练和12验证，验证macro-F1选checkpoint，同分最早。选定epoch1后封存，再独立评SSIAG，不提前看留出。</p>
+<p>扩大训练从官方原NLI权重重新加载，不沿旧领域checkpoint刷分。冻结线程4、seed20261005、4epochs、batch1、AdamW lr1e-5、weight_decay0.01、clip1.0。参数更新只用43条训练样本，另12条仅做验证；按验证macro-F1选checkpoint，同分最早。选定epoch1后封存，再独立评SSIAG，不提前看留出。</p>
 <h2 id="section-6"><span id="首次tiny失败也是真结果"></span>首次Tiny：失败也是真结果</h2>
 <p>19许可材料按11/3/5开发划分，Tiny分类模型4,386,307参数，12epochs、seed固定，第3epoch选中。训练12.505秒、峰值RSS约422MiB。5项已见开发对照accuracy仍2/5，macro-F1 0.190476→0.222222；错误supported 3/3→1/3，但supported召回2/2→0/2，insufficient召回0/1。不能只挑误支持下降宣传“更安全”，它也失去了全部支持召回。</p>
 <h2 id="section-7"><span id="扩大minilm选checkpoint与留出矩阵"></span>扩大MiniLM：选checkpoint与留出矩阵</h2>

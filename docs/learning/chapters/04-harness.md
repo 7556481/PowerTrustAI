@@ -418,7 +418,7 @@ ProductAuditPolicy检查真实执行、适用义务和发现，不给模型最�
 
 
 
-价值是流程更明确、分支更可测试、后续扩展更可控。图不会替我们设计正确的语义边界；真实验证、生产切换和Agent进一步定制留作后续独立决定。
+价值是流程更明确、分支更可测试、后续扩展更可控。图不会替我们设计正确的语义边界；这段开销来自当时的图适配实验；随后受管服务已验收并启用langgraph_v1，见第02章。后续Agent定制仍需独立验证，不能从图已启用推出语义改善。
 
 
 
@@ -512,7 +512,7 @@ A4也说明关系标签并不免费：模型把结论单元自身的缺陷绑定
 
 
 
-源码阅读顺序：先看 [原文结果类型](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/core/literal_review.py#)，再看 [审核与局部拼装](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_review_v1.py#)，最后看 [政策适配](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_policy_v1.py#) 和 [同一Harness的修订终止/重审](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/harness/execution.py#)。完整来源、前后文本、失效响应和成本见 [阶段报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/literal-review-stage1-v1/report.md#)。这些链接绑定实际实现，不把离线替身当模型成绩；账单金额未知，生产8765仍停服，无新增浏览器验收。
+源码阅读顺序：先看 [原文结果类型](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/core/literal_review.py#)，再看 [审核与局部拼装](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_review_v1.py#)，最后看 [政策适配](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/services/literal_policy_v1.py#) 和 [同一Harness的修订终止/重审](https://github.com/7556481/PowerTrustAI/blob/c098b5d48d12c11e4df1eefbf1ee4907f555322a/harness/execution.py#)。完整来源、前后文本、失效响应和成本见 [阶段报告](https://github.com/7556481/PowerTrustAI/blob/1a92d03da49ae25f311e950373003d6ab32d09f5/docs/evaluation/literal-review-stage1-v1/report.md#)。这些链接绑定实际实现，不把离线替身当模型成绩；账单金额未知；该历史批次结束时8765停服、未新增浏览器验收，不表示现在的服务状态。
 
 
 

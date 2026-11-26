@@ -67,7 +67,7 @@ backward → clip_grad_norm(1.0) → AdamW.step → zero_grad
 
 
 
-扩大训练从官方原NLI权重重新加载，不沿旧领域checkpoint刷分。冻结线程4、seed20261005、4epochs、batch1、AdamW lr1e-5、weight_decay0.01、clip1.0。train只用43训练和12验证，验证macro-F1选checkpoint，同分最早。选定epoch1后封存，再独立评SSIAG，不提前看留出。
+扩大训练从官方原NLI权重重新加载，不沿旧领域checkpoint刷分。冻结线程4、seed20261005、4epochs、batch1、AdamW lr1e-5、weight_decay0.01、clip1.0。参数更新只用43条训练样本，另12条仅做验证；按验证macro-F1选checkpoint，同分最早。选定epoch1后封存，再独立评SSIAG，不提前看留出。
 
 
 

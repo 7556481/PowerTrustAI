@@ -10,7 +10,7 @@
 
 
 
-本次小目录12文档674片段，序列化4.05MB是文件大小，不能冒称进程RSS。NERC机构范围含2文档308片段，目标2016指南268片段。小目录支持中文入口按需找英文正文，不代表已完成全库语言鉴定或向量化。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)。
+历史跨语言实验的小目录含12文档674片段，序列化4.05MB是文件大小，不能冒称进程RSS。NERC机构范围含2文档308片段，目标2016指南268片段。小目录支持中文入口按需找英文正文，不代表已完成全库语言鉴定或向量化。[完整证据](https://github.com/7556481/PowerTrustAI/blob/99b93497cb78bf3f040f1874ad07cb525be6d64b/docs/evaluation/chinese-first-cross-language-retrieval-v1/report.md#)。
 
 
 
@@ -112,7 +112,7 @@ WAL使已提交读与单写者协调，不提供多写者并行吞吐。BEGIN IM
 
 
 
-验证应覆盖稳定ID、跨batch、事务回滚、重复来源、断点二次启动不增数、错误分片排除和不可变发布拒绝覆盖。生产当前进度以带时间的build-progress为准，书中历史数字不当实时值。
+验证应覆盖稳定ID、跨batch、事务回滚、重复来源、断点二次启动不增数、错误分片排除和不可变发布拒绝覆盖。建设期间的进度以带时间的build-progress为准；已发布库的规模与身份看发布清单，服务是否采用看运行配置，书中历史数字不当实时值。
 
 
 
